@@ -107,6 +107,12 @@ header:before{
    float:right;
    /*border: 1px solid red;*/
 }
+#fitur {
+    float: left;
+    width: 100%;
+    margin: 20px 0px 0px 0px;
+}	
+/*
 #barat {
    width:60%;
    float:left;
@@ -136,14 +142,14 @@ header:before{
     top: 200px;
     left: 900px;
 }
-
+*/
 #wrapper {
 	overflow: auto;
 	/*border: 1px solid #000000;*/
 	background-color: #ffffff;
 	padding: 0px 0px 20px 0px;
 	box-shadow: #aaa 2px 2px 10px 1px;
-	min-height: 710px;
+	min-height: 600px;
 	margin-top: 10px
 	}
 
@@ -189,9 +195,9 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 /*Dropdown menu*/
 #menu {
 	padding: 0; margin: 0; 
-	background: #333;
-	border-bottom: 4px solid rgba(0,121,185,1);
-	font-family: 'Menu';
+	/*background: #333; */
+	border-bottom: 1px solid rgba(0,121,185,1);
+	font-family: 'Nexa';
 	font-size: 15px; 
 	
 	}
@@ -216,19 +222,20 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 	
     text-transform: none;
     min-width: 190px;
-	visibility: hidden; position: absolute; top: 100%; left: 0; z-index: 598; width: 100%;
+	visibility: hidden; position: absolute; 
+	top: 100%; left: 0; z-index: 598; width: 100%;
 	}
 
 #menu a { 
 	display: block;
 	text-decoration: none; 
-	background: #333;
-    color: #CBCBCB;
+	/*background: #333;
+    color: #CBCBCB;*/
     padding: 0 20px; 
 }
 #menu ul ul a {
-	background: rgba(0,121,185,1);
-    color: #FFF;
+	background: white;
+    /*color: #FFF;*/
     border-top: 1px solid #2f96b4;
     line-height: 100%;
     padding: 10px 20px; 
@@ -244,13 +251,13 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 #menu > ul > li > a { line-height: 48px;  }
 
 #menu ul ul li:first-child > a { border-top: 1px solid #2f96b4; }
-        #menu ul ul li:hover > a { background: #2f96b4; }     
+        #menu ul ul li:hover > a { background: rgba(0,121,185,1); }     
 
 #menu ul li.subnav > a:after {
       content: '+';
       margin-left: 5px; 
 }
-
+/*
 #komponen1, #komponen2, #komponen3 {
 	padding: 10px 0px 15px 20px ;
 	color: #FFFFFF;
@@ -282,7 +289,7 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 .merah {
 	background-color: #E06666;
 }
-
+*/
 .bg {
 	background-color: rgba(238,238,238, 0.5);
 	padding: 20px;
@@ -302,7 +309,7 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 	padding-right: 5px;
 	padding-top: 5px;
 	}	
-
+/*
 .isian2 {
 	float: left;
 	width: 300px;
@@ -345,7 +352,9 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 	background: #f9f9f9;
 	padding-top: 10px;
 	/*border: 1px solid black*/
+/*
 }
+
 .koloms h2 { margin-top: -10px}
 
 .kolomt{
@@ -392,14 +401,14 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 	
 }
 
-/*.koloms fieldset {
+.koloms fieldset {
 	height: 425px;
 }
 
 .kolomt fieldset {
 	height: 200px;
 }
-*/
+
 .kolomu fieldset {
 	height: 325px;
 }
@@ -430,7 +439,7 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 .kolom4 {
 	margin-right: 0%;
 	/*border: 1px solid #5bb75b;*/
-}
+/*}*/
 
 .kolom5 {
 	float:right;
@@ -555,7 +564,8 @@ input[type="button"], a.modal {
 	float: right;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	border: 1px solid #49afcd
+	border: 1px solid #49afcd;
+	text-align: center;
 }
 
 input[type="button"].sukses {
@@ -659,7 +669,7 @@ table.fix {
 .scroll {
 	display: block;
 	border: 1px;
-	height: 500px;
+	height: 400px;
 	overflow-y: scroll;
 }
 
@@ -1350,7 +1360,7 @@ th, td {
 	}
 
 	.modalDialog > div {
-		width: 425px;
+		width: 475px;
 		position: relative;
 		margin: 10% auto;
 		padding: 5px 0px 13px 0px;
@@ -1384,7 +1394,7 @@ th, td {
 	.close:hover { background: #49afcd; }
 
 footer {
-	margin-left: 10px;
+	/*margin-left: 10px;*/
 	background: #333;
 	height: 40px;
 	margin-top: -12px;
