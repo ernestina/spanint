@@ -12,16 +12,20 @@
 		Nama Bank: <br>
 		<select type="text" name="bank" id="bank">
 			<option value=''>- pilih -</option>
-			<option value='MDRI'>Mandiri</option>
-			<option value='BRI'>BRI</option>
-			<option value='BNI'>BNI</option>
-			<option value='BTN'>BTN</option>
+			<option value='MDRI' <?php if ($this->d_bank==MDRI){echo "selected";}?>>Mandiri</option>
+			<option value='BRI' <?php if ($this->d_bank==BRI){echo "selected";}?>>BRI</option>
+			<option value='BNI' <?php if ($this->d_bank==BNI){echo "selected";}?>>BNI</option>
+			<option value='BTN' <?php if ($this->d_bank==BTN){echo "selected";}?>>BTN</option>
+			<option value='5' <?php if ($this->d_bank==5){echo "selected";}?>>SEMUA BANK</option>
 		</select>
 
 		<div id="wtgl" class="error"></div>
 		Tanggal: <br>
 		<ul class="inline">
-		<li style="margin-left: -40px"><input type="text" class="tanggal" name="tgl_awal" id="datepicker"> </li> 
+		<li style="margin-left: -40px"><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
+		</li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker1" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
+		</li>
 		</ul>
 
 		<ul class="inline">
@@ -95,6 +99,9 @@
 		
 		$("#tgl_awal").datepicker({dateFormat: "yy-mm-dd"
 		});
+		
+		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
+		});
     });
 	
     function hideErrorId(){
@@ -110,7 +117,13 @@
         });
 		
 		$('#datepicker').change(function(){
-            if(document.getElementById('datepicker').value !=''){
+            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
+		
+		$('#datepicker1').change(function(){
+            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
                 $('#wtgl').fadeOut(200);
             } 
         });
@@ -121,19 +134,25 @@
 		var pattern = '^[0-9]+$';
 		var v_bank = document.getElementById('bank').value;
 		var v_tglawal = document.getElementById('datepicker').value;
+		var v_tglakhir = document.getElementById('datepicker1').value;
 		
         var jml = 0;
-        if(v_bank=='' || v_tglawal==''){
-			if(v_bank==''){
-				$('#wbank').html('Harap isi parameter');
-				$('#wbank').fadeIn();
-				jml++;
-			}
-			if(v_tglawal==''){
-				$('#wtgl').html('Harap isi parameter');
-				$('#wtgl').fadeIn();
-				jml++;
-			}
+        if(v_bank == '' ){
+			$('#wbank').html('Harap isi parameter');
+			$('#wbank').fadeIn();
+			jml++;		
+        }
+		
+		if(v_tglawal == '' || v_tglakhir == ''){
+			$('#wtgl').html('Harap isi parameter');
+			$('#wtgl').fadeIn();
+			jml++;		
+        }
+		
+		if(v_tglawal>v_tglakhir){
+            $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
+            $('#wtgl').fadeIn(200);
+            jml++;
         }
 		
         if(jml>0){

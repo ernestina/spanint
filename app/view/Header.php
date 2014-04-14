@@ -49,16 +49,54 @@
 						echo '<li class="nav"><a href=' . URL . 'dataKppn/rekapMasalah>Rekap Masalah</a></li>';
                     }
                     if (Session::get('role') == KANWIL) {
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/monitoringSp2d>Cek</a></li>';
-						echo '<li class="subnav"><a href=' . URL . 'dataKppn/harianBO>Laporan</a>';
+						echo '<li class="subnav"><a href=#>Modul PM - blom di masukan</a>';
 						echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/harianBO></i>Harian BO I</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dHariIni></i>SP2D Tanggal hari ini</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dBesok></i>SP2D Tanggal besok</a></li>
+                                <li><a href=#></i>Monitoring Posisi SPM</a></li>
+                                <li><a href=#></i>Hold SPM</a></li>
+                                <li><a href=#></i>Detail Gagal Unggah SPM</a></li>
+                            </ul>
+							</li>';
+						echo '<li class="subnav"><a href=#>Modul SA - blom di masukan</a>';
+						echo '<ul>
+                                <li><a href=#></i>Informasi Tanggal Revisi DIPA</a></li>
+                                <li><a href=#></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+                            </ul>
+                            </li>';
+						
+						echo '<li class="subnav"><a href=#>Modul GR - blom di masukan</a>';
+						echo '<ul>
+                                <li><a href=#></i>Konfirmasi</a></li>
+                                <li><a href=#></i>IJP</a></li>
+								<li><a href=#></i>PFK</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>XICO</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
+                                <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke BO1</a></li>
+								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D tertanggal hari ini</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>Laporan SP2D tertanggal besok</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dHarian></i>Jumlah SP2D Harian ke Bank</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dHarian></i>Total SP2D Harian</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dBelumVoid></i>Belum void</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>Sudah void</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dGajiDobel></i>SP2D Gaji Dobel</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataKppn/Sp2dGajiDobel></i>Terindikasi dobel</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Teridikasi salah Tanggal</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah Rekening</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dCompare></i>Perbandingan Gaji dengan bulan lalu</a></li>
+                            </ul>
+                            </li>';
+                        echo '<li class="subnav"><a href=#>XICO dan BS - belum dimasukan</a>';
+						echo '<ul>
+                                <li><a href=#></i>Rekon harian XICO dan BS</a></li>
+                                <li><a href=#></i>Flag Check</a></li>
+                                <li><a href=#></i>Hasil</a></li>
                             </ul>
                             </li>';
                     }
