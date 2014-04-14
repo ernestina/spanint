@@ -24,6 +24,7 @@ class DataSppm {
 	private $_return_desc;
 	private $_return_code;
 	private $_kdkppn;
+	private $_kdsatker;
 	private $_fl_void;
     private $_error;
     private $_valid = TRUE;
@@ -58,19 +59,19 @@ class DataSppm {
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
-		$sql .= " ORDER BY PAYMENT_DATE DESC";
+		$sql .= " ORDER BY PAYMENT_DATE ASC";
 		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_payment_date($val['PAYMENT_DATE']);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_check_date($val['CHECK_DATE']);
-            $d_data->set_creation_date($val['CREATION_DATE']);
+            $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount($val['CHECK_AMOUNT']);
+            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -98,19 +99,19 @@ class DataSppm {
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
-		$sql .= " ORDER BY PAYMENT_DATE DESC";
+		$sql .= " ORDER BY PAYMENT_DATE ASC";
 		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_payment_date($val['PAYMENT_DATE']);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_check_date($val['CHECK_DATE']);
-            $d_data->set_creation_date($val['CREATION_DATE']);
+            $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount($val['CHECK_AMOUNT']);
+            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -143,13 +144,13 @@ class DataSppm {
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_payment_date($val['PAYMENT_DATE']);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_check_date($val['CHECK_DATE']);
-            $d_data->set_creation_date($val['CREATION_DATE']);
+            $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount($val['CHECK_AMOUNT']);
+            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -178,58 +179,18 @@ class DataSppm {
 			$sql .= " AND ".$filter;
 		}
 		$sql .= " ORDER BY PAYMENT_DATE DESC";
-		var_dump ($sql);
+		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_payment_date($val['PAYMENT_DATE']);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_check_date($val['CHECK_DATE']);
-            $d_data->set_creation_date($val['CREATION_DATE']);
+            $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount($val['CHECK_AMOUNT']);
-            $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
-            $d_data->set_bank_name($val['BANK_NAME']);
-            $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
-            $d_data->set_vendor_name($val['VENDOR_NAME']);
-            $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
-            $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
-            $d_data->set_return_code($val['RETURN_CODE']);
-            $d_data->set_return_desc($val['RETURN_DESC']);
-            $d_data->set_kdkppn($val['KDKPPN']);
-			$data[] = $d_data;
-        }
-        return $data;
-    }
-	
-	public function get_sp2d_backdate($filter) {
-		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
-				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
-				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
-				FROM " . $this->_table . "
-				WHERE KDKPPN = ".Session::get('id_user')." AND FL_VOID <> 1";
-		//SP2D = 140181301002823
-		$no=0;
-		//var_dump($filter);
-		foreach ($filter as $filter) {
-			$sql .= " AND ".$filter;
-		}
-		$sql .= " ORDER BY PAYMENT_DATE DESC";
-		var_dump ($sql);
-        $result = $this->db->select($sql);
-        $data = array();   
-        foreach ($result as $val) {
-            $d_data = new $this($this->registry);
-            $d_data->set_payment_date($val['PAYMENT_DATE']);
-            $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_check_date($val['CHECK_DATE']);
-            $d_data->set_creation_date($val['CREATION_DATE']);
-            $d_data->set_check_number($val['CHECK_NUMBER']);
-            $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount($val['CHECK_AMOUNT']);
+            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -263,13 +224,53 @@ class DataSppm {
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_payment_date($val['PAYMENT_DATE']);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_check_date($val['CHECK_DATE']);
-            $d_data->set_creation_date($val['CREATION_DATE']);
+            $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount($val['CHECK_AMOUNT']);
+            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
+            $d_data->set_bank_name($val['BANK_NAME']);
+            $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
+            $d_data->set_vendor_name($val['VENDOR_NAME']);
+            $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
+            $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
+            $d_data->set_return_code($val['RETURN_CODE']);
+            $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_kdkppn($val['KDKPPN']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_sp2d_backdate($filter) {
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
+				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
+				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				FROM " . $this->_table . "
+				WHERE KDKPPN = ".Session::get('id_user')." AND FL_VOID <> 1";
+		//SP2D = 140181301002823
+		$no=0;
+		//var_dump($filter);
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		$sql .= " ORDER BY PAYMENT_DATE DESC";
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
+            $d_data->set_invoice_num($val['INVOICE_NUM']);
+            $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_check_number($val['CHECK_NUMBER']);
+            $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
+            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -290,7 +291,7 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
 				FROM " . $this->_table . "
-				WHERE KDKPPN = ".Session::get('id_user')." AND FL_VOID <> 1";
+				WHERE KDKPPN = ".Session::get('id_user')." AND FL_VOID = 1";
 		//SP2D = 140181301002823
 		$no=0;
 		//var_dump($filter);
@@ -303,13 +304,13 @@ class DataSppm {
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_payment_date($val['PAYMENT_DATE']);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_check_date($val['CHECK_DATE']);
-            $d_data->set_creation_date($val['CREATION_DATE']);
+            $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount($val['CHECK_AMOUNT']);
+            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -343,13 +344,13 @@ class DataSppm {
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_payment_date($val['PAYMENT_DATE']);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_check_date($val['CHECK_DATE']);
-            $d_data->set_creation_date($val['CREATION_DATE']);
+            $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount($val['CHECK_AMOUNT']);
+            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -359,6 +360,58 @@ class DataSppm {
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_kdkppn($val['KDKPPN']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+
+	public function get_sp2d_gaji_dobel() {
+		$sql = "SELECT DISTINCT SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, INVOICE_DESCRIPTION, KDKPPN FROM 
+				XICO_ALL WHERE CHECK_NUMBER IN (
+				SELECT CHECK_NUMBER FROM TEMP_GAJI_DOBEL
+				WHERE SUBSTR(INVOICE_NUM,8,6) IN (
+				SELECT SATKER FROM (
+				SELECT SUBSTR(INVOICE_NUM,8,6) SATKER, COUNT(*) CEK 
+				FROM TEMP_GAJI_DOBEL
+				GROUP BY SUBSTR(INVOICE_NUM,8,6)
+				HAVING COUNT(*) > 1
+				)))
+				ORDER BY KDKPPN,SUBSTR(INVOICE_NUM,8,6)";
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdkppn($val['KDKPPN']);
+            $d_data->set_kdsatker($val['SATKER']);
+            $d_data->set_invoice_num($val['INVOICE_NUM']);
+            $d_data->set_check_number($val['CHECK_NUMBER']);
+            $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+
+	public function get_sp2d_gaji_tanggal() {
+		$sql = "SELECT DISTINCT SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, INVOICE_DESCRIPTION, KDKPPN FROM 
+				XICO_ALL WHERE CHECK_NUMBER IN (
+				SELECT CHECK_NUMBER FROM TEMP_GAJI_DOBEL
+				WHERE SUBSTR(INVOICE_NUM,8,6) IN (
+				SELECT SATKER FROM (
+				SELECT SUBSTR(INVOICE_NUM,8,6) SATKER, COUNT(*) CEK 
+				FROM TEMP_GAJI_DOBEL
+				GROUP BY SUBSTR(INVOICE_NUM,8,6)
+				HAVING COUNT(*) > 1
+				)))
+				ORDER BY KDKPPN,SUBSTR(INVOICE_NUM,8,6)";
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdkppn($val['KDKPPN']);
+            $d_data->set_kdsatker($val['SATKER']);
+            $d_data->set_invoice_num($val['INVOICE_NUM']);
+            $d_data->set_check_number($val['CHECK_NUMBER']);
+            $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
 			$data[] = $d_data;
         }
         return $data;
@@ -432,6 +485,10 @@ class DataSppm {
         $this->_kdkppn = $kdkppn;
     }
 	
+    public function set_kdsatker($kdsatker) {
+        $this->_kdsatker = $kdsatker;
+    }
+	
     public function set_fl_void($fl_void) {
         $this->_fl_void = $fl_void;
     }
@@ -502,6 +559,10 @@ class DataSppm {
 	
 	public function get_kdkppn() {
         return $this->_kdkppn;
+    }
+	
+	public function get_kdsatker() {
+        return $this->_kdsatker;
     }
 	
 	public function get_fl_void() {

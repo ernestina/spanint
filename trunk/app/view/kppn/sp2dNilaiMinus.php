@@ -1,13 +1,13 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D BELUM VOID<br>
+        <h2>MONITORING SP2D NILAI MINUS DAN 0<br>
 			 <?php echo Session::get('user'); ?>
 		</h2>
     </div>
 </div>
 <div id="top">
 	<div id="kiri">
-	<form method="POST" action="sp2dSudahVoid" enctype="multipart/form-data">
+	<form method="POST" action="sp2dNilaiMinus" enctype="multipart/form-data">
 		<div id="wbank" class="error"></div>
 		Nama Bank: <br>
 		<select type="text" name="bank" id="bank">

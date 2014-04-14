@@ -12,10 +12,11 @@
 		Nama Bank: <br>
 		<select type="text" name="bank" id="bank">
 			<option value=''>- pilih -</option>
-			<option value='MDRI'>Mandiri</option>
-			<option value='BRI'>BRI</option>
-			<option value='BNI'>BNI</option>
-			<option value='BTN'>BTN</option>
+			<option value='MDRI' <?php if ($this->d_bank==MDRI){echo "selected";}?>>Mandiri</option>
+			<option value='BRI' <?php if ($this->d_bank==BRI){echo "selected";}?>>BRI</option>
+			<option value='BNI' <?php if ($this->d_bank==BNI){echo "selected";}?>>BNI</option>
+			<option value='BTN' <?php if ($this->d_bank==BTN){echo "selected";}?>>BTN</option>
+			<option value='5' <?php if ($this->d_bank==5){echo "selected";}?>>SEMUA BANK</option>
 		</select>
 		<ul class="inline">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>

@@ -4,36 +4,24 @@
 			 <?php echo Session::get('user'); ?>
 		</h2>
     </div>
-
-	<a href="#oModal" class="modal">FILTER DATA</a><br><br>
-        <div id="oModal" class="modalDialog" >
-            <div>
-                <!--h2>INPUT MASALAH</h2-->
-                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
-			<a href="<?php $_SERVER['PHP_SELF']; ?>" 
-			title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
-
+</div>
 <div id="top">
-	<!--div id="kiri"-->
+	<div id="kiri">
 	<form method="POST" action="monitoringSp2d" enctype="multipart/form-data">
 		<div id="wsp2d" class="error"></div>
-		<label class="isian">No SP2D: </label>
+		No SP2D: <br>
 		<input type="number" name="nosp2d" id="nosp2d" size="15" value="<?php if (isset($this->d_nosp2d)){echo $this->d_nosp2d;}?>">
 
 		<div id="wbarsp2d" class="error" ></div>
-		<label class="isian">No Transaksi: </label>
+		No Transaksi: <br>
 		<input type="number" name="barsp2d" id="barsp2d" value="<?php if (isset($this->d_barsp2d)){echo $this->d_barsp2d;}?>">
 
 		<div id="winvoice" class="error"></div>
-		<label class="isian">No Invoice: </label>
+		No Invoice: <br>
 		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->d_invoice)){echo $this->d_invoice;}?>">
-		
-		<div id="wfxml" class="error"></div>
-		<label class="isian">Nama file xml: </label>
-		<input type="text" name="fxml" id="fxml" value="<?php if (isset($this->d_fxml)){echo $this->d_fxml;}?>">
 
 		<div id="wbank" class="error"></div>
-		<label class="isian">Nama Bank: </label>
+		Nama Bank: <br>
 		<select type="text" name="bank" id="bank">
 			<option value=''>- pilih -</option>
 			<option value='MDRI' <?php if ($this->d_bank==MDRI){echo "selected";}?>>Mandiri</option>
@@ -44,11 +32,15 @@
 		</select>
 
 		<div id="wtgl" class="error"></div>
-		<label class="isian">Tanggal: </label>
+		Tanggal: <br>
 		<ul class="inline">
 		<li style="margin-left: -40px"><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>"> </li> <li>s/d</li>
 		<li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker1" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
 		</ul>
+
+		<div id="wfxml" class="error"></div>
+		Nama file xml: <br>
+		<input type="text" name="fxml" id="fxml" value="<?php if (isset($this->d_fxml)){echo $this->d_fxml;}?>">
 
 		<ul class="inline">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
@@ -56,14 +48,10 @@
 		</ul>
 	</form>
 </div>
-</div>
-
-				
-				
-</div>
 
 
-<div id="fitur">
+
+<div id="kanan">
 		<table class="table-bordered zebra scroll" width="100%">
             <!--baris pertama-->
 			<thead>
