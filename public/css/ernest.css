@@ -29,8 +29,9 @@ object {
 }
 
 body {
-	width: 1200px;
-	margin: 0px auto;
+	width: 96%;
+	margin-right: auto;
+	margin-left: auto;
 	font-family: "Nexa";
 	font-size: 14px;
 	background-image:url('../img/bg.png');
@@ -1415,14 +1416,13 @@ footer a {
 	text-decoration: none;
 	color: rgba(0,121,185,1);
 }
-
+/*
 .tombolya {
 	background: #70DB70;
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
 	text-decoration: none;
-	/*border: 1px solid black;*/
 	padding: 4px 0px 2px 3px;
 }
 
@@ -1432,6 +1432,6 @@ footer a {
 	height: 30px;
 	border-radius: 50%;
 	text-decoration: none;
-	/*border: 1px solid black;*/
 	padding: 4px 0px 2px 3px;
 }
+*/
