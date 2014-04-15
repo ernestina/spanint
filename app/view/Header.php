@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>.:Aplikasi Persiapan Piloting SPAN:.</title>
-        <script src="<?php echo URL; ?>public/js/Chart.js"></script>
+        <title>.:SPAN Interface:.</title>
         <script src="<?php echo URL; ?>public/js/jquery-2.0.3.min.js"></script>
         <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
         <script src="<?php echo URL; ?>public/js/myjs.js"></script>
@@ -13,7 +12,7 @@
         <script src="<?php echo URL; ?>public/js/paging.js"></script>
         <link href="<?php echo URL; ?>public/js/jquery-ui-1.10.3/themes/base/jquery.ui.all.css" rel="stylesheet">
         <link href="<?php echo URL; ?>public/css/ernest.css" rel="stylesheet">
-        <link href="<?php echo URL; ?>public/css/dialog.css" rel="stylesheet">
+        <!--link href="<?php echo URL; ?>public/css/dialog.css" rel="stylesheet"-->
 
         <script type="text/javascript">
             $(function() {
@@ -49,21 +48,21 @@
 						echo '<li class="nav"><a href=' . URL . 'dataKppn/rekapMasalah>Rekap Masalah</a></li>';
                     }
                     if (Session::get('role') == KANWIL) {
-						echo '<li class="subnav"><a href=#>Modul PM - blom di masukan</a>';
+						echo '<li class="subnav"><a class="menu" href=#>Modul PM - blom jadi</a>';
 						echo '<ul>
-                                <li><a href=#></i>Monitoring Posisi SPM</a></li>
-                                <li><a href=#></i>Hold SPM</a></li>
+                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
+                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
                                 <li><a href=#></i>Detail Gagal Unggah SPM</a></li>
                             </ul>
 							</li>';
-						echo '<li class="subnav"><a href=#>Modul SA - blom di masukan</a>';
+						echo '<li class="subnav"><a href=#>Modul SA -blm jadi</a>';
 						echo '<ul>
                                 <li><a href=#></i>Informasi Tanggal Revisi DIPA</a></li>
                                 <li><a href=#></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
                             </ul>
                             </li>';
 						
-						echo '<li class="subnav"><a href=#>Modul GR - blom di masukan</a>';
+						echo '<li class="subnav"><a href=#>Modul GR -blm jadi</a>';
 						echo '<ul>
                                 <li><a href=#></i>Konfirmasi</a></li>
                                 <li><a href=#></i>IJP</a></li>
@@ -92,7 +91,7 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dCompare></i>Perbandingan Gaji dengan bulan lalu</a></li>
                             </ul>
                             </li>';
-                        echo '<li class="subnav"><a href=#>XICO dan BS - belum dimasukan</a>';
+                        echo '<li class="subnav"><a href=#>XICO dan BS -blm jadi</a>';
 						echo '<ul>
                                 <li><a href=#></i>Rekon harian XICO dan BS</a></li>
                                 <li><a href=#></i>Flag Check</a></li>
@@ -102,11 +101,11 @@
                     }
                     ?>
                     <li class="nav">
-                        <a href="<?php echo URL; ?>auth/logout">Logout</a>
+                        <a href="<?php echo URL; ?>auth/logout"><i class="icon-off"></i></a>
                     </li>
-                    <li class="nav" style="float: right; font-size: 70%">
-                        <a style="color: #F2C45A ">Selamat datang,<?php echo Session::get('user') ?></a>
-                    </li>
+                    <!--li class="nav" style="float: right; font-size: 70%">
+                        <a style="color: #F2C45A ">Selamat datang,<?php //echo Session::get('user') ?></a>
+                    </li-->
                 </ul>
             </div>
 
