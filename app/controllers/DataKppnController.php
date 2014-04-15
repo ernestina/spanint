@@ -251,16 +251,43 @@ class DataKppnController extends BaseController {
 	
 	public function sp2dGajiDobel() {
 		$d_sppm = new DataSppm($this->registry);
-		$this->view->data = $d_sppm->get_sp2d_gaji_dobel();
+		if (isset($_POST['submit_file'])) {
+			if ($_POST['bulan']!=13){
+					$bulan=$_POST['bulan'];
+				}
+			$this->view->d_bank = $_POST['bulan'];
+			$this->view->data = $d_sppm->get_sp2d_gaji_dobel($bulan);
+		}
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiDobel');
 	}
 	
-	public function sp2dGajiTanggal() {
+	public function sp2dSalahTanggal() {
 		$d_sppm = new DataSppm($this->registry);
 		$this->view->data = $d_sppm->get_sp2d_gaji_tanggal();
 		//var_dump($d_sppm->get_sppm_filter($filter));
-		$this->view->render('kppn/sp2dGajiDobel');
+		$this->view->render('kppn/sp2dGajiTanggal');
+	}
+	
+	public function sp2dSalahBank() {
+		$d_sppm = new DataSppm($this->registry);
+		$this->view->data = $d_sppm->get_sp2d_gaji_bank();
+		//var_dump($d_sppm->get_sppm_filter($filter));
+		$this->view->render('kppn/sp2dGajiBank');
+	}
+	
+	public function sp2dSalahRekening() {
+		$d_sppm = new DataSppm($this->registry);
+		$this->view->data = $d_sppm->get_sp2d_gaji_rekening();
+		//var_dump($d_sppm->get_sppm_filter($filter));
+		$this->view->render('kppn/sp2dGajiRekening');
+	}
+	
+	public function sp2dCompareGaji() {
+		$d_sppm = new DataSppm($this->registry);
+		$this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu();
+		//var_dump($d_sppm->get_sppm_filter($filter));
+		$this->view->render('kppn/sp2dGajiBulanLalu');
 	}
 	
     public function __destruct() {
