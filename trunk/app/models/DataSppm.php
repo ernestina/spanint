@@ -26,6 +26,8 @@ class DataSppm {
 	private $_kdkppn;
 	private $_kdsatker;
 	private $_fl_void;
+	private $_bulan;
+	private $_jumlah_sp2d;
     private $_error;
     private $_valid = TRUE;
     private $_table = 'XICO_ALL';
@@ -365,19 +367,14 @@ class DataSppm {
         return $data;
     }
 
-	public function get_sp2d_gaji_dobel() {
-		$sql = "SELECT DISTINCT SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, INVOICE_DESCRIPTION, KDKPPN FROM 
-				XICO_ALL WHERE CHECK_NUMBER IN (
-				SELECT CHECK_NUMBER FROM TEMP_GAJI_DOBEL
-				WHERE SUBSTR(INVOICE_NUM,8,6) IN (
-				SELECT SATKER FROM (
-				SELECT SUBSTR(INVOICE_NUM,8,6) SATKER, COUNT(*) CEK 
-				FROM TEMP_GAJI_DOBEL
-				GROUP BY SUBSTR(INVOICE_NUM,8,6)
-				HAVING COUNT(*) > 1
-				)))
-				ORDER BY KDKPPN,SUBSTR(INVOICE_NUM,8,6)";
+	public function get_sp2d_gaji_dobel($bulan) {
+		$sql = "SELECT DISTINCT KDKPPN, SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, INVOICE_DESCRIPTION
+				FROM XICO_ALL WHERE UPPER(INVOICE_DESCRIPTION) LIKE '%".$bulan."%' AND CHECK_NUMBER IN ( 
+				SELECT CHECK_NUMBER FROM TEMP_GAJI_DOBEL WHERE SUBSTR(INVOICE_NUM,8,6) IN ( SELECT SATKER FROM ( 
+				SELECT SUBSTR(INVOICE_NUM,8,6) SATKER, COUNT(INVOICE_NUM) CEK , INVOICE_NUM FROM TEMP_GAJI_DOBEL 
+				GROUP BY SUBSTR(INVOICE_NUM,8,6), INVOICE_NUM HAVING COUNT(*) > 1 ))) ORDER BY SUBSTR(INVOICE_NUM,8,6)";
         $result = $this->db->select($sql);
+		//var_dump ($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
@@ -388,22 +385,29 @@ class DataSppm {
             $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
 			$data[] = $d_data;
         }
+		//var_dump ($this->db->select($sql));
         return $data;
     }
 
 	public function get_sp2d_gaji_tanggal() {
-		$sql = "SELECT DISTINCT SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, INVOICE_DESCRIPTION, KDKPPN FROM 
-				XICO_ALL WHERE CHECK_NUMBER IN (
-				SELECT CHECK_NUMBER FROM TEMP_GAJI_DOBEL
-				WHERE SUBSTR(INVOICE_NUM,8,6) IN (
-				SELECT SATKER FROM (
-				SELECT SUBSTR(INVOICE_NUM,8,6) SATKER, COUNT(*) CEK 
-				FROM TEMP_GAJI_DOBEL
-				GROUP BY SUBSTR(INVOICE_NUM,8,6)
-				HAVING COUNT(*) > 1
-				)))
-				ORDER BY KDKPPN,SUBSTR(INVOICE_NUM,8,6)";
+		$sql = "SELECT DISTINCT  KDKPPN, SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, PAYMENT_DATE, CREATION_DATE, INVOICE_DESCRIPTION FROM (
+				SELECT KDKPPN,PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME 
+				,BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE
+				FROM XICO_ALL
+				WHERE ( BANK_ACCOUNT_NAME LIKE '%gaji-BNI%' OR 
+						BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
+						BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
+						BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
+					  AND CREATION_DATE BETWEEN TO_DATE('20140102','YYYYMMDD')  AND TO_DATE('20141231','YYYYMMDD')
+					  AND TO_CHAR(CHECK_DATE,'YYYYMMDD') <> '20140401'
+					  AND UPPER(INVOICE_DESCRIPTION) LIKE '%APRIL%' 
+					  AND UPPER(INVOICE_DESCRIPTION) LIKE '%GAJI%' 
+					  AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%RETUR%' 
+					  AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
+				)
+				ORDER BY KDKPPN, SATKER, INVOICE_NUM";
         $result = $this->db->select($sql);
+		//var_dump ($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
@@ -411,7 +415,113 @@ class DataSppm {
             $d_data->set_kdsatker($val['SATKER']);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
+			$d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
             $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_sp2d_gaji_bank() {
+		$sql = "SELECT DISTINCT KDKPPN, SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, PAYMENT_DATE, CREATION_DATE, SUBSTR(BANK_ACCOUNT_NAME,14,4) BANK_ACCOUNT_NAME, BANK_NAME, INVOICE_DESCRIPTION FROM (
+                SELECT KDKPPN, PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE
+                FROM XICO_ALL
+                WHERE ( BANK_ACCOUNT_NAME LIKE '%gaji-BNI%' OR 
+                        BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
+                        BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
+                        BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' 
+                      )
+                      AND CREATION_DATE BETWEEN TO_DATE('20140102','YYYYMMDD')  AND TO_DATE('20141231','YYYYMMDD')
+                      AND UPPER(INVOICE_DESCRIPTION) LIKE '%APRIL%'    
+                      AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%RETUR%' 
+                      AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
+                      AND TRIM(BANK_ACCOUNT_NAME)||'@'||TRIM(BANK_NAME) NOT IN (
+                        'RPKBUNP.GAJI-BTN@BANK TABUNGAN NEGARA',
+                        'RPKBUNP GAJI BRI@BANK RAKYAT INDONESIA',
+                        'RPKBUNP GAJI-MDRI@BANK MANDIRI',
+                        'RPKBUNP.gaji-BNI@BANK NEGARA INDONESIA'
+                        )        
+                )
+                ORDER BY KDKPPN, SATKER, INVOICE_NUM, CHECK_NUMBER DESC";
+        $result = $this->db->select($sql);
+		//var_dump ($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdkppn($val['KDKPPN']);
+            $d_data->set_kdsatker($val['SATKER']);
+            $d_data->set_invoice_num($val['INVOICE_NUM']);
+            $d_data->set_check_number($val['CHECK_NUMBER']);
+            $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
+            $d_data->set_bank_name($val['BANK_NAME']);
+            $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_sp2d_gaji_rekening() {
+		$sql = "SELECT DISTINCT SUBSTR(INVOICE_NUM,8,6) SATKER, KDKPPN, INVOICE_NUM, CHECK_NUMBER_LINE_NUM, PAYMENT_DATE, CREATION_DATE, BANK_ACCOUNT_NAME, INVOICE_DESCRIPTION FROM (
+                SELECT KDKPPN,PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE
+                FROM XICO_ALL
+                WHERE BANK_ACCOUNT_NAME NOT IN ( 'RPKBUNP.gaji-BNI','RPKBUNP.GAJI-BTN','RPKBUNP GAJI-MDRI','RPKBUNP GAJI BRI') 
+                      AND CREATION_DATE BETWEEN TO_DATE('20140102','YYYYMMDD')  AND TO_DATE('20141231','YYYYMMDD')
+                      AND UPPER(INVOICE_DESCRIPTION) LIKE '%APRIL%'
+                      AND UPPER(INVOICE_DESCRIPTION) LIKE '%GAJI%'
+                      AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%KEKURANGAN%'
+                      AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%SUSULAN%'
+                      AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%TERUSAN%'
+                      AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%WARAKAWURI%'
+                      AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'      
+                )
+                ORDER BY KDKPPN, SATKER, CHECK_NUMBER_LINE_NUM DESC ";
+        $result = $this->db->select($sql);
+		//var_dump ($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdkppn($val['KDKPPN']);
+            $d_data->set_kdsatker($val['SATKER']);
+            $d_data->set_invoice_num($val['INVOICE_NUM']);
+            $d_data->set_check_number($val['CHECK_NUMBER_LINE_NUM']);
+            $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
+            $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_sp2d_gaji_bulan_lalu() {
+		$sql = "SELECT SUBSTR(CHECK_NUMBER,3,3) KDKPPN, DECODE(TRIM(BANK_ACCOUNT_NAME),'RPKBUNP GAJI-MDRI','BANK MANDIRI','RPKBUNP.GAJI-BTN','BANK TABUNGAN NEGARA','RPKBUNP.gaji-BNI','BANK NEGARA INDONESIA','RPKBUNP GAJI BRI','BANK RAKYAT INDONESIA','INVALID') BANK, BULAN, COUNT(*) JUMLAH_SP2D 
+				FROM (
+						SELECT DISTINCT INVOICE_NUM, BANK_ACCOUNT_NAME, CHECK_NUMBER, 'MARET' BULAN FROM XICO_ALL 
+						WHERE ( BANK_ACCOUNT_NAME LIKE '%gaji-BNI%' OR 
+								BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
+								BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
+								BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
+						AND UPPER(INVOICE_DESCRIPTION) LIKE '%MARET%'
+						AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
+						UNION
+						SELECT DISTINCT INVOICE_NUM, BANK_ACCOUNT_NAME, CHECK_NUMBER, 'APRIL' BULAN FROM XICO_ALL 
+						WHERE ( BANK_ACCOUNT_NAME LIKE '%gaji-BNI%' OR 
+								BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
+								BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
+								BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
+						AND UPPER(INVOICE_DESCRIPTION) LIKE '%APRIL%'
+						AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
+						)
+				GROUP BY SUBSTR(CHECK_NUMBER,3,3), BANK_ACCOUNT_NAME, BULAN 
+				ORDER BY SUBSTR(CHECK_NUMBER,3,3), BANK_ACCOUNT_NAME, BULAN DESC";
+        $result = $this->db->select($sql);
+		//var_dump ($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdkppn($val['KDKPPN']);
+            $d_data->set_bank_account_name($val['BANK']);
+            $d_data->set_bulan($val['BULAN']);
+			$d_data->set_jumlah_sp2d($val['JUMLAH_SP2D']);
 			$data[] = $d_data;
         }
         return $data;
@@ -492,6 +602,14 @@ class DataSppm {
     public function set_fl_void($fl_void) {
         $this->_fl_void = $fl_void;
     }
+	
+    public function set_bulan($bulan) {
+        $this->_bulan = $bulan;
+    }
+	
+    public function set_jumlah_sp2d($jumlah_sp2d) {
+        $this->_jumlah_sp2d = $jumlah_sp2d;
+    }
 		
 	/*
      * getter
@@ -567,6 +685,14 @@ class DataSppm {
 	
 	public function get_fl_void() {
         return $this->_fl_void;
+    }
+	
+	public function get_bulan() {
+        return $this->_bulan;
+    }
+	
+	public function get_jumlah_sp2d() {
+        return $this->_jumlah_sp2d;
     }
 
     /*
