@@ -68,7 +68,7 @@
 					<th>No.</th>
 					<th>Tanggal SP2D</th>
 					<th>No. SP2D</th>
-					<th>Status</th>
+					<!--th>Status</th-->
 					<th>Tanggal Create</th>
 					<th>No. Transaksi</th>
 					<th>No. Invoice</th>
@@ -93,11 +93,11 @@
 							echo "<td>" . $no++ . "</td>";
 							echo "<td>" . $value->get_payment_date() . "</td>";
 							echo "<td>" . $value->get_check_number() . "</td>";
-							echo "<td>" . $value->get_return_code() . "</td>";
+							//echo "<td>" . $value->get_return_code() . "</td>";
 							echo "<td>" . $value->get_creation_date() . "</td>";
 							echo "<td>" . $value->get_check_number_line_num() . "</td>";
 							echo "<td>" . $value->get_invoice_num() . "</td>";
-							echo "<td>" . $value->get_check_amount() . "</td>";
+							echo "<td style='text-align: right'>" . $value->get_check_amount() . "</td>";
 							echo "<td>" . $value->get_bank_account_name() . "</td>";
 							echo "<td>" . $value->get_vendor_name() . "</td>";
 							echo "<td>" . $value->get_vendor_ext_bank_account_num() . "</td>";
