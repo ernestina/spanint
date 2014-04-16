@@ -1,15 +1,24 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D VOID<br>
+        <h2>MONITORING SP2D BELUM VOID<br>
 			 <?php echo Session::get('user'); ?>
 		</h2>
     </div>
-</div>
+
+<a href="#rModal" class="modal">FILTER DATA</a><br><br>
+        <div id="rModal" class="modalDialog" >
+            <div>
+                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
+				<a href="<?php
+                    $_SERVER['PHP_SELF'];
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
+	
 <div id="top">
-	<div id="kiri">
+
 	<form method="POST" action="sp2dSudahVoid" enctype="multipart/form-data">
 		<div id="wbank" class="error"></div>
-		Nama Bank: <br>
+		<label class="isian">Nama Bank: </label>
 		<select type="text" name="bank" id="bank">
 			<option value=''>- pilih -</option>
 			<option value='MDRI' <?php if ($this->d_bank==MDRI){echo "selected";}?>>Mandiri</option>
@@ -20,24 +29,26 @@
 		</select>
 
 		<div id="wtgl" class="error"></div>
-		Tanggal: <br>
+		<label class="isian">Tanggal: </label>
 		<ul class="inline">
-		<li style="margin-left: -40px"><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
+		<li><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
 		</li> <li>s/d</li>
 		<li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker1" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
 		</li>
 		</ul>
 
-		<ul class="inline">
+		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
 		</ul>
 	</form>
 </div>
+</div>
+</div>
 
 
 
-<div id="kanan">
+<div id="fitur">
 		<table class="table-bordered zebra scroll" width="100%">
             <!--baris pertama-->
 			<thead>

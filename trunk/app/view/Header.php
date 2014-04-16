@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>.:Span Interface:.</title>
-        <script src="<?php echo URL; ?>public/js/Chart.js"></script>
+        <title>.:SPAN Interface:.</title>
         <script src="<?php echo URL; ?>public/js/jquery-2.0.3.min.js"></script>
         <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
         <script src="<?php echo URL; ?>public/js/myjs.js"></script>
@@ -13,7 +12,7 @@
         <script src="<?php echo URL; ?>public/js/paging.js"></script>
         <link href="<?php echo URL; ?>public/js/jquery-ui-1.10.3/themes/base/jquery.ui.all.css" rel="stylesheet">
         <link href="<?php echo URL; ?>public/css/ernest.css" rel="stylesheet">
-        <link href="<?php echo URL; ?>public/css/dialog.css" rel="stylesheet">
+        <!--link href="<?php echo URL; ?>public/css/dialog.css" rel="stylesheet"-->
 
         <script type="text/javascript">
             $(function() {
@@ -21,6 +20,7 @@
                 $('#datepicker1').datepicker();
                 $('#datepicker2').datepicker();
             });
+			
         </script>
     </head>
     <header><img src="<?php echo URL; ?>public/img/span-putih.png" width="40px" height="48px"></header>
@@ -100,12 +100,12 @@
                             </li>';
                     }
                     ?>
-                    <li class="nav">
-                        <a href="<?php echo URL; ?>auth/logout">Logout</a>
+                    <li>
+                        <a href="<?php echo URL; ?>auth/logout"><i class="icon-off"></i></a>
                     </li>
-                    <li class="nav" style="float: right; font-size: 70%">
-                        <a style="color: #F2C45A ">Selamat datang,<?php echo Session::get('user') ?></a>
-                    </li>
+                    <!--li class="nav" style="float: right; font-size: 70%">
+                        <a style="color: #F2C45A ">Selamat datang,<?php //echo Session::get('user') ?></a>
+                    </li-->
                 </ul>
             </div>
 
