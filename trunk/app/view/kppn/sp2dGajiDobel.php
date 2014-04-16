@@ -3,13 +3,21 @@
         <h2>MONITORING SP2D Gaji Terindikasi  Dobel Seluruh KPPN<br>
 		</h2>
     </div>
-</div>
+
+<a href="#rModal" class="modal">FILTER DATA</a><br><br>
+        <div id="rModal" class="modalDialog" >
+            <div>
+                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
+				<a href="<?php
+                    $_SERVER['PHP_SELF'];
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
+	
 <div id="top">
-	<div id="kiri">
 	<form method="POST" action="sp2dGajiDobel" enctype="multipart/form-data">
 		
 		<div id="wbulan" class="error"></div>
-		Bulan: <br>
+		<label class="isian">Bulan: </label>
 		<select type="text" name="bulan" id="bulan">
 			<option value=''>- pilih -</option>
 			<option value='JANUARI' <?php if ($this->d_bank==JANUARI){echo "selected";}?>>Januari</option>
@@ -27,13 +35,16 @@
 			<option value='13' <?php if ($this->d_bank==13){echo "selected";}?>>Semua Bulan</option>
 		</select>
 
-		<ul class="inline">
+		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
 		</ul>
 	</form>
 </div>
-<div id="top">
+</div>
+</div>
+
+<div id="fitur">
 		<table class="table-bordered zebra scroll" width="100%">
             <!--baris pertama-->
 			<thead>
