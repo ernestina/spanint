@@ -84,7 +84,7 @@ class DataSPMController extends BaseController {
 				
 			}	
 		$this->view->data = $d_spm1->get_error_spm_filter ($filter);
-		var_dump($d_spm1->get_error_spm_filter ($filter));
+		//var_dump($d_spm1->get_error_spm_filter ($filter));
 		$this->view->render('kppn/uploadSPM');
 	}
 	
