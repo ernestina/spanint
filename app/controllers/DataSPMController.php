@@ -36,7 +36,7 @@ class DataSPMController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				
 				if ($_POST['invoice']!=''){
-					$filter[$no++]="aia.invoice_num = '".$_POST['invoice']."'";
+					$filter[$no++]="invoice_num = '".$_POST['invoice']."'";
 				}
 				
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_awal']!=''){
@@ -57,7 +57,7 @@ class DataSPMController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				
 				if ($_POST['invoice']!=''){
-					$filter[$no++]="a.invoice_num = '".$_POST['invoice']."'";
+					$filter[$no++]="invoice_num = '".$_POST['invoice']."'";
 				}
 				
 			}	
@@ -74,7 +74,7 @@ class DataSPMController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				
 				if ($_POST['invoice']!=''){
-					$filter[$no++]="aia.invoice_num = '".$_POST['invoice'] . "'";
+					$filter[$no++]="invoice_num = '".$_POST['invoice'] . "'";
 				}
 				
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_awal']!=''){
