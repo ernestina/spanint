@@ -67,23 +67,25 @@
 			<?php 
 			$no=1;
 			//var_dump ($this->data);
-			foreach ($this->data as $value){ 
-				echo "<tr>	";
-					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_invoice_amount() . "</td>";
-					echo "<td>" . $value->get_ou_name() . "</td>";
-					echo "<td>" . $value->get_invoice_num() . "</td>";
-					echo "<td>" . $value->get_invoice_description() . "</td>";
-					echo "<td>" . $value->get_wfapproval_status() . "</td>";
-					echo "<td>" . $value->get_status() . "</td>";
-					echo "<td>" . $value->get_original_recipient() . "</td>";
-					echo "<td>" . $value->get_to_user() . "</td>";
-					echo "<td>" . $value->get_fu_description() . "</td>";
-					echo "<td>" . $value->get_begin_date() . "</td>";
-					echo "<td>" . $value->get_time_begin_date() . "</td>";
-					echo "<td>" . $value->get_end_date() . "</td>";
-					echo "<td>" . $value->get_time_end_date() . "</td>";
-				echo "</tr>	";
+			if (isset($this->data)){
+				foreach ($this->data as $value){ 
+					echo "<tr>	";
+						echo "<td>" . $no++ . "</td>";
+						echo "<td>" . $value->get_invoice_amount() . "</td>";
+						echo "<td>" . $value->get_ou_name() . "</td>";
+						echo "<td>" . $value->get_invoice_num() . "</td>";
+						echo "<td>" . $value->get_invoice_description() . "</td>";
+						echo "<td>" . $value->get_wfapproval_status() . "</td>";
+						echo "<td>" . $value->get_status() . "</td>";
+						echo "<td>" . $value->get_original_recipient() . "</td>";
+						echo "<td>" . $value->get_to_user() . "</td>";
+						echo "<td>" . $value->get_fu_description() . "</td>";
+						echo "<td>" . $value->get_begin_date() . "</td>";
+						echo "<td>" . $value->get_time_begin_date() . "</td>";
+						echo "<td>" . $value->get_end_date() . "</td>";
+						echo "<td>" . $value->get_time_end_date() . "</td>";
+					echo "</tr>	";
+				}
 			}
 			?>
 			</tbody>
