@@ -4,20 +4,12 @@
 			 <?php echo Session::get('user'); ?>
 		</h2>
     </div>
-
-<a href="#xModal" class="modal">FILTER DATA</a><br><br>
-        <div id="xModal" class="modalDialog" >
-            <div>
-                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
-				<a href="<?php
-                    $_SERVER['PHP_SELF'];
-                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
-</a>
-
-	<div id="top">
+</div>
+<div id="top">
+	<div id="kiri">
 	<form method="POST" action="sp2dHariIni" enctype="multipart/form-data">
 		<div id="wbank" class="error"></div>
-		<label class="isian">Nama Bank: </label>
+		Nama Bank: <br>
 		<select type="text" name="bank" id="bank">
 			<option value=''>- pilih -</option>
 			<option value='MDRI' <?php if ($this->d_bank==MDRI){echo "selected";}?>>Mandiri</option>
@@ -26,17 +18,16 @@
 			<option value='BTN' <?php if ($this->d_bank==BTN){echo "selected";}?>>BTN</option>
 			<option value='5' <?php if ($this->d_bank==5){echo "selected";}?>>SEMUA BANK</option>
 		</select>
-		<ul class="inline" style="margin-left: 130px;">
+		<ul class="inline">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
 		</ul>
 	</form>
 </div>
-</div>
-</div>
 
 
-<div id="fitur">
+
+<div id="kanan">
 		<table class="table-bordered zebra scroll" width="100%">
             <!--baris pertama-->
 			<thead>

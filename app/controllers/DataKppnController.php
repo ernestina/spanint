@@ -242,7 +242,7 @@ class DataKppnController extends BaseController {
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
-				$this->view->data = $d_sppm->get_sp2d_backdate($filter);
+				$this->view->data = $d_sppm->get_sp2d_sudah_void($filter);
 			}	
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
