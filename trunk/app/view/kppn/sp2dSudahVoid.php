@@ -49,14 +49,14 @@
 
 
 <div id="fitur">
-		<table class="table-bordered zebra scroll" width="100%">
+		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>Tanggal SP2D</th>
+					<th>Tgl SP2D</th>
 					<th>No. SP2D</th>
-					<th>Status</th>
-					<th>Tanggal Create</th>
+					<!--th>Status</th-->
+					<th>TglSelesai SP2D</th>
 					<th>No. Transaksi</th>
 					<th>No. Invoice</th>
 					<th>Jumlah Rp</th>
@@ -80,7 +80,7 @@
 							echo "<td>" . $no++ . "</td>";
 							echo "<td>" . $value->get_payment_date() . "</td>";
 							echo "<td>" . $value->get_check_number() . "</td>";
-							echo "<td>" . $value->get_return_code() . "</td>";
+							//echo "<td>" . $value->get_return_code() . "</td>";
 							echo "<td>" . $value->get_creation_date() . "</td>";
 							echo "<td>" . $value->get_check_number_line_num() . "</td>";
 							echo "<td>" . $value->get_invoice_num() . "</td>";
