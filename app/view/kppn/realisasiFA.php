@@ -1,12 +1,12 @@
 <div id="top">
 	<div id="header">
-        <h2>HOLD INVOICE <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
+        <h2>REALISASI FA<?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
 			KPPN <?php echo $nama_kppn; ?>
 		</h2>
     </div>
 
-<a href="#xModal" class="modal">FILTER DATA</a><br><br>
-        <div id="xModal" class="modalDialog" >
+<a href="#wModal" class="modal">FILTER DATA</a><br><br>
+        <div id="wModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
 				<a href="<?php
@@ -51,7 +51,7 @@
 
 
 <div id="fitur">
-		<table class="table-bordered zebra scroll" width="100%">
+		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>

@@ -58,9 +58,10 @@ class DataHoldSPM{
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_invoice_amount($val['INVOICE_AMOUNT']);
+            $d_data->set_invoice_amount(number_format($val['INVOICE_AMOUNT']));
             $d_data->set_hold_reason($val['HOLD_REASON']);
-            $d_data->set_hold_date($val['HOLD_DATE']);
+            $d_data->set_hold_date(date("d-m-Y",strtotime($val['HOLD_DATE'])));
+			//$d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
             $d_data->set_release_reason($val['RELEASE_REASON']);
             $d_data->set_invoice_id($val['INVOICE_ID']);
 			$d_data->set_invoice_id_hold($val['INVOICE_ID']);

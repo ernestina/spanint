@@ -40,7 +40,7 @@
 
 
 <div id="fitur">
-		<table class="table-bordered zebra scroll" width="100%">
+		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
@@ -58,7 +58,7 @@
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_invoice_num() . "</td>";
-					echo "<td>" . $value->get_invoice_amount() . "</td>";
+					echo "<td style='text-align: right'>" . $value->get_invoice_amount() . "</td>";
 					echo "<td>" . $value->get_description() . "</td>";
 					echo "<td>" . $value->get_hold_reason() . "</td>";
 					echo "<td>" . $value->get_release_reason() . "</td>";
