@@ -1,34 +1,43 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D - BANK <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			KPPN <?php echo $nama_kppn; ?>
+        <h2>REVISI DIPA <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
+			<?php echo Session::get('user'); ?>
 		</h2>
     </div>
-</div>
-<div id="top">
-	<div id="kiri">
+
+<a href="#yModal" class="modal">FILTER DATA</a><br><br>
+        <div id="yModal" class="modalDialog" >
+            <div>
+                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
+				<a href="<?php
+                    $_SERVER['PHP_SELF'];
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
+	
+	<div id="top">
+
 	<form method="POST" action="RevisiDipa" enctype="multipart/form-data">
 		
 		<div id="winvoice" class="error"></div>
-		Kode Satker: <br>
+		<label class="isian">Kode Satker: </label>
 		<input type="text" name="kd_satker" id="kd_satker">
 		
 		<div id="winvoice" class="error"></div>
-		Akun : <br>
+		<label class="isian">Akun : </label>
 		<input type="text" name="akun" id="akun">
 		
 		<div id="winvoice" class="error"></div>
-		Output : <br>
+		<label class="isian">Output : </label>
 		<input type="text" name="output" id="output">
 		
 		<div id="winvoice" class="error"></div>
-		Program : <br>
+		<label class="isian">Program : </label>
 		<input type="text" name="program" id="program">
 		
 		<div id="wtgl" class="error"></div>
-		Tanggal: <br>
+		<label class="isian">Tanggal: </label>
 		<ul class="inline">
-		<li style="margin-left: -40px"><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="" /> </li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="" /> </li> <li>s/d</li>
 		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir"></li>
 		</ul>
 
@@ -39,18 +48,20 @@
 		<input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
 		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
 
-		<ul class="inline">
+		<ul class="inline"  style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
 </div>
+</div>
+</div>
 
 
 
-<div id="kanan">
-		<table class="table-bordered zebra scroll" width="100%">
+<div id="fitur">
+		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>

@@ -58,8 +58,8 @@
 							</li>';
 						echo '<li class="subnav"><a href=#>Modul SA - blom di masukan</a>';
 						echo '<ul>
-                                <li><a href=#></i>Informasi Tanggal Revisi DIPA</a></li>
-                                <li><a href=#></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+                                <li><a href='  . URL . 'dataDIPA/revisiDIPA></i>Informasi Revisi DIPA</a></li>
+                                <li><a href='  . URL . 'dataDIPA/realisasiFA></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
                             </ul>
                             </li>';
 						

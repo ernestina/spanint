@@ -161,8 +161,8 @@ header:before{
 	background-color: #ffffff;
 	padding: 0px 0px 20px 0px;
 	box-shadow: #aaa 2px 2px 10px 1px;
-	height: 300px;
-	
+	height: 400px;
+	margin-right: 20px;
 	margin-top: 20px
 	}
 	
@@ -522,7 +522,7 @@ select{
 	border: 1px solid #bdbdbd;
 	}
 
-input[type="number"], input[type="text"], select[type="text"]{
+input[type="number"], input[type="text"], select[type="text"], input[type="password"]{
 	width: 250px;
 }
 	
@@ -698,7 +698,7 @@ th, td {
 .table td {
   padding: 8px;
   line-height: 20px;
-  text-align: left;
+  /*text-align: left;*/
   vertical-align: top;
   border-top: 1px solid #dddddd;
 }
@@ -735,13 +735,14 @@ th, td {
 }
 
 .error{
-    border: solid 1px orange;
+    /*border: solid 1px orange;*/
     background-color: red;
     color: white;
     border-radius: 5px;
     padding-left: 5px;
-    padding-left: 5px;
     text-align: center;
+	margin-right: 20px;
+	margin-left: 20px;
 }
 
 /*icon by bootstrap twitter and glyphicon*/

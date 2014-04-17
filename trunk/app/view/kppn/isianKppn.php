@@ -5,14 +5,15 @@
 		</h2>
     </div>
 
-
 <a href="#oModal" class="modal">FILTER DATA</a><br><br>
         <div id="oModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
 				<a href="<?php
                     $_SERVER['PHP_SELF'];
-                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
+	
 	<div id="top">			
 		<form method="POST" action="monitoringSp2d" enctype="multipart/form-data">
 		<div id="wsp2d" class="error"></div>
@@ -62,7 +63,7 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered scroll">
+		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
@@ -110,7 +111,7 @@
 					}
 				} 
 			} else {
-				echo "silahkan masukan filter";
+				echo "Silakan masukan filter";
 			}
 			?>
 			</tbody>

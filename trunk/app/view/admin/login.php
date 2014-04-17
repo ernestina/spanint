@@ -30,15 +30,15 @@
                 <div class="kolom5" style="margin-top: 40px">
                     <h1>Login</h1>
                     <form id="login-form" action="<?php echo URL; ?>auth/login" method="post">	
-
+						<div class="error" id="wuser" style="display:none"></div>
                         <label class="isian">Username</label> 
                         <input name="user" id="nuser" type="text" /> 
-                        <div class="error" id="wuser" style="display:none"></div>	
+                        	
 
-
+						<div class="error" id="wpass" style="display:none"></div>	
                         <label class="isian">Password</label>
-                        <input style="" name="pass" id="pass" type="password" /> 
-                        <div class="error" id="wpass" style="display:none"></div>	
+                        <input name="pass" id="pass" type="password" /> 
+                        
 
 
                         <ul class="inline" style="margin-left: 290px"> 

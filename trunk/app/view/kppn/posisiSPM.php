@@ -1,16 +1,19 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D - BANK <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			KPPN <?php echo $nama_kppn; ?>
+        <h2>MONITORING SPM - SP2D <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
+			<?php echo Session::get('user'); ?>
 		</h2>
     </div>
+
 <a href="#zModal" class="modal">FILTER DATA</a><br><br>
         <div id="zModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
 				<a href="<?php
                     $_SERVER['PHP_SELF'];
-                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
+	
 	<div id="top">
 	<form method="POST" action="posisiSpm" enctype="multipart/form-data">
 		
@@ -45,12 +48,12 @@
 
 
 <div id="fitur">
-		<table class="table-bordered zebra scroll" width="100%">
+		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>Nilai invoce</th>
-					<th>KPPN</th>
+					<th>Nilai invoice</th>
+					<!--th>KPPN</th-->
 					<th>Nomor Invoice</th>
 					<th>Deskripsi Invoice</th>
 					<th>Approval Status</th>
@@ -58,21 +61,24 @@
 					<th>original_recipient</th>
 					<th>To User</th>
 					<th>Posisi User</th>
-					<th>Tanggal Mulai</th>
-					<th>Jam Mulai</th>
-					<th>Tanggal Selesai</th>
-					<th>Jam Selesai</th>
+					<th>Mulai</th>
+					<!--th>Jam Mulai</th-->
+					<th>Selesai</th>
+					<th>Durasi</th>
 			</thead>
 			<tbody>
 			<?php 
 			$no=1;
 			//var_dump ($this->data);
 			if (isset($this->data)){
-				foreach ($this->data as $value){ 
+				if (empty($this->data)){
+					echo "Tidak ada data";
+				} else {
+					foreach ($this->data as $value){ 
 					echo "<tr>	";
 						echo "<td>" . $no++ . "</td>";
 						echo "<td>" . $value->get_invoice_amount() . "</td>";
-						echo "<td>" . $value->get_ou_name() . "</td>";
+						//echo "<td>" . $value->get_ou_name() . "</td>";
 						echo "<td>" . $value->get_invoice_num() . "</td>";
 						echo "<td>" . $value->get_invoice_description() . "</td>";
 						echo "<td>" . $value->get_wfapproval_status() . "</td>";
@@ -80,12 +86,15 @@
 						echo "<td>" . $value->get_original_recipient() . "</td>";
 						echo "<td>" . $value->get_to_user() . "</td>";
 						echo "<td>" . $value->get_fu_description() . "</td>";
-						echo "<td>" . $value->get_begin_date() . "</td>";
-						echo "<td>" . $value->get_time_begin_date() . "</td>";
-						echo "<td>" . $value->get_end_date() . "</td>";
-						echo "<td>" . $value->get_time_end_date() . "</td>";
+						echo "<td>" . $value->get_begin_date() . ' ' . $value->get_time_begin_date() . "</td>";
+						//echo "<td>" . $value->get_time_begin_date() . "</td>";
+						echo "<td>" . $value->get_end_date() . ' ' . $value->get_time_end_date() . "</td>";
+						//echo "<td>" . $value->get_time_end_date() . "</td>";
 					echo "</tr>	";
+					}
 				}
+			} else {
+				echo "Silakan masukan filter";
 			}
 			?>
 			</tbody>

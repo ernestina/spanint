@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D BELUM VOID<br>
+        <h2>MONITORING SP2D VOID<br>
 			 <?php echo Session::get('user'); ?>
 		</h2>
     </div>
