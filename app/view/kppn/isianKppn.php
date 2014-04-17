@@ -62,15 +62,16 @@
 
 
 <div id="fitur">
-		<table class="table-bordered zebra scroll" width="100%">
+		<table width="100%" class="table table-bordered scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>Tanggal SP2D</th>
+					<th>TglSelesai SP2D</th>
+					<th>TglSP2D</th>
 					<th>No. SP2D</th>
 					<!--th>Status</th-->
-					<th>Tanggal Create</th>
-					<th>No. Transaksi</th>
+					
+					<!--th>No. Transaksi</th-->
 					<th>No. Invoice</th>
 					<th>Jumlah Rp</th>
 					<th>Nama Bank</th>
@@ -91,11 +92,12 @@
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
 							echo "<td>" . $no++ . "</td>";
+							echo "<td>" . $value->get_creation_date() . "</td>";
 							echo "<td>" . $value->get_payment_date() . "</td>";
 							echo "<td>" . $value->get_check_number() . "</td>";
 							//echo "<td>" . $value->get_return_code() . "</td>";
-							echo "<td>" . $value->get_creation_date() . "</td>";
-							echo "<td>" . $value->get_check_number_line_num() . "</td>";
+							
+							//echo "<td>" . $value->get_check_number_line_num() . "</td>";
 							echo "<td>" . $value->get_invoice_num() . "</td>";
 							echo "<td style='text-align: right'>" . $value->get_check_amount() . "</td>";
 							echo "<td>" . $value->get_bank_account_name() . "</td>";
@@ -116,7 +118,7 @@
 		</div>
 </div>
 
-<script type="text/javascript">
+<script language="javascript" type="text/javascript">
     $(function(){
         hideErrorId();
         hideWarning();
