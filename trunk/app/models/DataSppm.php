@@ -369,7 +369,7 @@ class DataSppm {
 
 	public function get_sp2d_gaji_dobel($bulan) {
 		$sql = "SELECT DISTINCT KDKPPN, SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, INVOICE_DESCRIPTION
-				FROM XICO_ALL WHERE UPPER(INVOICE_DESCRIPTION) LIKE '%".$bulan."%' AND CHECK_NUMBER IN ( 
+				FROM XICO_ALL WHERE KDKPPN = ".Session::get('id_user')." AND UPPER(INVOICE_DESCRIPTION) LIKE '%".$bulan."%' AND CHECK_NUMBER IN ( 
 				SELECT CHECK_NUMBER FROM TEMP_GAJI_DOBEL WHERE SUBSTR(INVOICE_NUM,8,6) IN ( SELECT SATKER FROM ( 
 				SELECT SUBSTR(INVOICE_NUM,8,6) SATKER, COUNT(INVOICE_NUM) CEK , INVOICE_NUM FROM TEMP_GAJI_DOBEL 
 				GROUP BY SUBSTR(INVOICE_NUM,8,6), INVOICE_NUM HAVING COUNT(*) > 1 ))) ORDER BY SUBSTR(INVOICE_NUM,8,6)";
@@ -404,6 +404,7 @@ class DataSppm {
 					  AND UPPER(INVOICE_DESCRIPTION) LIKE '%GAJI%' 
 					  AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%RETUR%' 
 					  AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
+					  AND KDKPPN = ".Session::get('id_user')."
 				)
 				ORDER BY KDKPPN, SATKER, INVOICE_NUM";
         $result = $this->db->select($sql);
@@ -424,7 +425,7 @@ class DataSppm {
     }
 	
 	public function get_sp2d_gaji_bank() {
-		$sql = "SELECT DISTINCT KDKPPN, SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, PAYMENT_DATE, CREATION_DATE, SUBSTR(BANK_ACCOUNT_NAME,14,4) BANK_ACCOUNT_NAME, BANK_NAME, INVOICE_DESCRIPTION FROM (
+		$sql = "SELECT DISTINCT KDKPPN, SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, PAYMENT_DATE, CREATION_DATE, BANK_ACCOUNT_NAME, BANK_NAME, INVOICE_DESCRIPTION FROM (
                 SELECT KDKPPN, PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE
                 FROM XICO_ALL
                 WHERE ( BANK_ACCOUNT_NAME LIKE '%gaji-BNI%' OR 
@@ -436,6 +437,7 @@ class DataSppm {
                       AND UPPER(INVOICE_DESCRIPTION) LIKE '%APRIL%'    
                       AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%RETUR%' 
                       AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
+					  AND KDKPPN = ".Session::get('id_user')."
                       AND TRIM(BANK_ACCOUNT_NAME)||'@'||TRIM(BANK_NAME) NOT IN (
                         'RPKBUNP.GAJI-BTN@BANK TABUNGAN NEGARA',
                         'RPKBUNP GAJI BRI@BANK RAKYAT INDONESIA',
@@ -445,7 +447,7 @@ class DataSppm {
                 )
                 ORDER BY KDKPPN, SATKER, INVOICE_NUM, CHECK_NUMBER DESC";
         $result = $this->db->select($sql);
-		//var_dump ($sql);
+		// ($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
@@ -473,7 +475,8 @@ class DataSppm {
                       AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%SUSULAN%'
                       AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%TERUSAN%'
                       AND UPPER(INVOICE_DESCRIPTION) NOT LIKE '%WARAKAWURI%'
-                      AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'      
+                      AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'    
+					  AND KDKPPN = ".Session::get('id_user')."
                 )
                 ORDER BY KDKPPN, SATKER, CHECK_NUMBER_LINE_NUM DESC ";
         $result = $this->db->select($sql);
@@ -513,7 +516,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%JANUARI%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '01'
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 							GROUP BY  BANK_ACCOUNT_NAME
@@ -523,7 +526,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%FEBRUARI%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '02' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 							GROUP BY  BANK_ACCOUNT_NAME
@@ -533,7 +536,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%MARET%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '03'
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 							GROUP BY  BANK_ACCOUNT_NAME
@@ -543,7 +546,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%APRIL%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '04'
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 						GROUP BY BANK_ACCOUNT_NAME
@@ -553,7 +556,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%MEI%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '05'
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 						GROUP BY BANK_ACCOUNT_NAME
@@ -563,7 +566,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%JUNI%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '06' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 						GROUP BY BANK_ACCOUNT_NAME
@@ -573,7 +576,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%JULI%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '07' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 						GROUP BY BANK_ACCOUNT_NAME
@@ -583,7 +586,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%AGUSTUS%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '08' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 						GROUP BY BANK_ACCOUNT_NAME
@@ -593,7 +596,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%SEPTEMBER%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '09' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 						GROUP BY BANK_ACCOUNT_NAME
@@ -603,7 +606,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%OKTOBER%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '10' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 						GROUP BY BANK_ACCOUNT_NAME
@@ -613,7 +616,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%NOVEMBER%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '11'
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 						GROUP BY BANK_ACCOUNT_NAME
@@ -623,7 +626,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-BTN%' OR 
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
-							AND UPPER(INVOICE_DESCRIPTION) LIKE '%DESEMBER%' 
+                            AND TO_CHAR(PAYMENT_DATE,'MM') = '12' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
 						GROUP BY BANK_ACCOUNT_NAME
@@ -635,7 +638,6 @@ class DataSppm {
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_kdkppn(Session::get('id_user'));
             $d_data->set_payment_date($val['BANK']);
             $d_data->set_invoice_num($val['JANUARI']);
             $d_data->set_check_date($val['FEBRUARI']);
