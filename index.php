@@ -19,7 +19,7 @@ define('ROOT',$sitepath);
  * define the sitepath url
  */
 
-$base_url = 'http://'.$_SERVER['HTTP_HOST'].'/spanint/';
+$base_url = 'http://'.$_SERVER['HTTP_HOST'].'/spanint_prod/';
 //echo $base_url;
 define('URL',$base_url);
 
