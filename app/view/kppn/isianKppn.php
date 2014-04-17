@@ -23,6 +23,10 @@
 		<div id="wbarsp2d" class="error" ></div>
 		<label class="isian">No Transaksi: </label>
 		<input type="number" name="barsp2d" id="barsp2d" value="<?php if (isset($this->d_barsp2d)){echo $this->d_barsp2d;}?>">
+		
+		<div id="wsatker" class="error"></div>
+		<label class="isian">Kode Satker: </label>
+		<input type="number" name="kdsatker" id="kdsatker" size="15" value="<?php if (isset($this->d_kdsatker)){echo $this->d_kdsatker;}?>">
 
 		<div id="winvoice" class="error"></div>
 		<label class="isian">No Invoice: </label>
@@ -40,7 +44,7 @@
 			<option value='BRI' <?php if ($this->d_bank==BRI){echo "selected";}?>>BRI</option>
 			<option value='BNI' <?php if ($this->d_bank==BNI){echo "selected";}?>>BNI</option>
 			<option value='BTN' <?php if ($this->d_bank==BTN){echo "selected";}?>>BTN</option>
-			<option value='5' <?php if ($this->d_bank==5){echo "selected";}?>>SEMUA BANK</option>
+			<!--<option value='SEMUA_BANK' <?php if ($this->d_bank==SEMUA_BANK){echo "selected";}?>>SEMUA BANK</option>-->
 		</select>
 		
 		<div id="wtgl" class="error"></div>
@@ -148,6 +152,12 @@
             }
         });
 		
+		$('#kdsatker').keyup(function(){
+            if(document.getElementById('kdsatker').value !=''){
+                $('#wsatker').fadeOut(200);
+            }
+        });
+		
 		$('#invoice').keyup(function(){
             if(document.getElementById('invoice').value !=''){
                 $('#winvoice').fadeOut(200);
@@ -184,6 +194,7 @@
 		var pattern = '^[0-9]+$';
 		var v_nosp2d = document.getElementById('nosp2d').value;
 		var v_barsp2d = document.getElementById('barsp2d').value;
+		var v_kdsatker = document.getElementById('kdsatker').value;
 		var v_invoice = document.getElementById('invoice').value;
 		var v_bank = document.getElementById('bank').value;
 		var v_tglawal = document.getElementById('datepicker').value;
@@ -191,11 +202,13 @@
 		var v_fxml = document.getElementById('fxml').value;
 		
         var jml = 0;
-        if(v_nosp2d=='' && v_barsp2d=='' && v_invoice=='' && v_bank=='' && v_tglawal=='' && v_tglakhir=='' && v_fxml==''){
+        if(v_nosp2d=='' && v_barsp2d=='' && v_kdsatker==''&& v_invoice=='' && v_bank=='' && v_tglawal=='' && v_tglakhir=='' && v_fxml==''){
             $('#wsp2d').html('Harap isi salah satu parameter');
             $('#wsp2d').fadeIn();
 			$('#wbarsp2d').html('Harap isi salah satu parameter');
             $('#wbarsp2d').fadeIn();
+			$('#wsatker').html('Harap isi salah satu parameter');
+            $('#wsatker').fadeIn();
 			$('#winvoice').html('Harap isi salah satu parameter');
             $('#winvoice').fadeIn();
 			$('#wbank').html('Harap isi salah satu parameter');
@@ -230,6 +243,19 @@
             var wbarsp2d = 'No Transaksi harus dalam bentuk angka!';
             $('#wbarsp2d').html(wbarsp2d);
             $('#wbarsp2d').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_kdsatker !='' && v_kdsatker.length != 6 ){
+            $('#wsatker').html('Kode Satker harus 6 digit');
+            $('#wsatker').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_kdsatker !='' && !v_kdsatker.match(pattern)){
+            var wsatker = 'No Transaksi harus dalam bentuk angka!';
+            $('#wsatker').html(wbarsp2d);
+            $('#wsatker').fadeIn(200);
             jml++;
         }
 		

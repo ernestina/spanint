@@ -30,7 +30,7 @@ class User {
         foreach ($result as $v) {
            $role = $v['KD_R_JENIS'];
            $kd = $v['NAMA_USER'];
-           $id = $v['KD_D_USER'];
+           $id = $v['KD_D_KPPN'];
 			
         }
 		//$return[] = 1;

@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING Perbandingan SP2D dengan Bulan Lalu Seluruh KPPN<br>
+        <h2>MONITORING Perbandingan SP2D dengan Bulan Lalu <?php echo Session::get('user'); ?><br>
 		</h2>
     </div>
 </div>
@@ -10,7 +10,6 @@
 			<thead>
 				<tr>
 					<th rowspan="2">No.</th>
-					<th rowspan="2">Kode KPPN</th>
 					<th rowspan="2">BANK</th>
 					<th colspan="12">Jumlah. SP2D</th>
 				</tr>
@@ -39,7 +38,6 @@
 					foreach ($this->data as $value){ 
 						echo "<tr> ";
 						echo "<td>" . $no++ . "</td>";
-						if($value->get_kdkppn()!=''){echo "<td>" . $value->get_kdkppn(). "</td>";} else {echo "<td>tidak ada data</td>";} 
 						if($value->get_payment_date()!=''){echo "<td>" . $value->get_payment_date(). "</td>";} else {echo "<td>0</td>";}
 						if($value->get_invoice_num()!=''){echo "<td>" . $value->get_invoice_num(). "</td>";} else {echo "<td>0</td>";}
 						if($value->get_check_date()!=''){echo "<td>" . $value->get_check_date(). "</td>";} else {echo "<td>0</td>";}

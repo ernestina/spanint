@@ -1,7 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>REALISASI FA<?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			KPPN <?php echo $nama_kppn; ?>
+        <h2>REALISASI FA <?php echo Session::get('user'); ?><br>
 		</h2>
     </div>
 
@@ -15,41 +14,37 @@
 	<div id="top">
 	<form method="POST" action="RealisasiFA" enctype="multipart/form-data">
 		
-		<div id="winvoice" class="error"></div>
+		<div id="wkdsatker" class="error"></div>
 		<label class="isian">Satker: </label>
-		<input type="text" name="satker" id="satker" value="<?php if (isset($this->kd_satker)){echo $this->kd_satker;}?>">
+		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->satker_code)){echo $this->satker_code;}?>">
 		
 		<div id="wakun" class="error"></div>
 		<label class="isian">Akun: </label>
-		<input type="text" name="satker" id="satker" value="<?php if (isset($this->akun)){echo $this->akun;}?>">
+		<input type="text" name="akun" id="akun" value="<?php if (isset($this->account_code)){echo $this->account_code;}?>">
+		
+		<div id="woutput" class="error"></div>
+		<label class="isian">Output : </label>
+		<input type="text" name="output" id="output">
+		
+		<div id="wprogram" class="error"></div>
+		<label class="isian">Program : </label>
+		<input type="text" name="program" id="program">
 
-		<div id="wtgl" class="error"></div>
+		<!--<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>
 		<ul class="inline">
-		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>" /> </li> <li>s/d</li>
-		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
-		</ul>
-
-
-		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-		<input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-		<input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-		<input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
-		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
+		<li><input type="text" class="tanggal" name="tgl_awal" id="datepicker2" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>" /> </li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker3" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
+		</ul>-->
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick="return cek_upload();"></li>
-		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
 </div>
 </div>
 </div>
-
-
-
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
@@ -113,24 +108,129 @@
     }
 
     function hideWarning(){
-		$('#invoice').keyup(function(){
-            if(document.getElementById('invoice').value !=''){
-                $('#winvoice').fadeOut(200);
+        $('#kdsatker').change(function(){
+            if(document.getElementById('kdsatker').value !=''){
+                $('#wkdsatker').fadeOut(200);
             }
+        });
+		
+		$('#akun').change(function(){
+            if(document.getElementById('akun').value !=''){
+                $('#wakun').fadeOut(200);
+            }
+        });
+		
+		$('#output').change(function(){
+            if(document.getElementById('output').value !=''){
+                $('#woutput').fadeOut(200);
+            }
+        });
+		
+		$('#program').change(function(){
+            if(document.getElementById('output').value !=''){
+                $('#wprogram').fadeOut(200);
+            }
+        });
+		
+		$('#datepicker2').change(function(){
+            if(document.getElementById('datepicker2').value !='' && document.getElementById('datepicker3').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
+		
+		$('#datepicker3').change(function(){
+            if(document.getElementById('datepicker2').value !='' && document.getElementById('datepicker3').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
         });
 
     }
     
     function cek_upload(){
-		var v_invoice = document.getElementById('invoice').value;
+		var pattern = '^[0-9]+$';
+		var v_kdsatker = document.getElementById('kdsatker').value;
+		var v_akun = document.getElementById('akun').value;
+		var v_tglawal = document.getElementById('datepicker2').value;
+		var v_tglakhir = document.getElementById('datepicker3').value;
 		
         var jml = 0;
-		if(v_invoice==''){
-			$('#winvoice').html('Harap isi no invoice');
-            $('#winvoice').fadeIn();
+        if(v_kdsatker=='' && v_akun=='' && v_output=='' && v_program=='' && v_tglawal=='' && v_tglakhir=='' ){
+            $('#wkdsatker').html('Harap isi salah satu parameter');
+            $('#wkdsatker').fadeIn();
+			$('#wakun').html('Harap isi salah satu parameter');
+            $('#wakun').fadeIn();
+			$('#woutput').html('Harap isi salah satu parameter');
+            $('#woutput').fadeIn();
+			$('#wprogram').html('Harap isi salah satu parameter');
+            $('#wprogram').fadeIn();
+			$('#woutput').html('Harap isi salah satu parameter');
+            $('#woutput').fadeIn();
+			$('#wprogram').html('Harap isi salah satu parameter');
+            $('#wprogram').fadeIn();
+			$('#wtgl').html('Harap isi salah satu parameter');
+            $('#wtgl').fadeIn();
             jml++;
         }
-		if(jml>0){
+		
+		if(v_kdsatker !='' && v_kdsatker.length != 6 ){
+            $('#wkdsatker').html('Kode Satker harus 6 digit');
+            $('#wkdsatker').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_kdsatker !='' && !v_kdsatker.match(pattern)){
+            var wkdsatker = 'Kode Satker harus dalam bentuk angka!';
+            $('#wkdsatker').html(wkdsatker);
+            $('#wkdsatker').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_akun !='' && v_akun.length != 6 ){
+            $('#wakun').html('Kode Akun harus 6 digit');
+            $('#wakun').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_akun !='' && !v_akun.match(pattern)){
+            var wakun = 'Kode Akun harus dalam bentuk angka!';
+            $('#wakun').html(wakun);
+            $('#wakun').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_output !='' && v_output.length != 7 ){
+            $('#woutput').html('Kode Output harus 7 digit');
+            $('#woutput').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_output !='' && !v_output.match(pattern)){
+            var woutput = 'Kode Akun harus dalam bentuk angka!';
+            $('#woutput').html(woutput);
+            $('#woutput').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_program !='' && v_program.length != 7 ){
+            $('#wprogram').html('Kode Akun harus 7 digit');
+            $('#wprogram').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_program !='' && !v_program.match(pattern)){
+            var wprogram = 'Kode Akun harus dalam bentuk angka!';
+            $('#wprogram').html(wprogram);
+            $('#wprogram').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_tglawal>v_tglakhir){
+            $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
+            $('#wtgl').fadeIn(200);
+            jml++;
+        }
+		
+        if(jml>0){
             return false;
         } 
     }
