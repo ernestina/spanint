@@ -20,12 +20,12 @@ class AuthController extends BaseController {
         if (isset($_POST['user'])) {
             $user = $_POST['user'];
             $pass = $_POST['pass'];
-			var_dump($_POST['user']);
-			var_dump($_POST['pass']);
+			//var_dump($_POST['user']);
+			//var_dump($_POST['pass']);
             $pwd = $pass;
             $cuser = new User($this->registry);
             $res = $cuser->login($user, $pwd);
-			var_dump($res[1]);
+			//var_dump($res[1]);
             switch ($res[1]) {
                 case 1:
                     $role = 'admin';

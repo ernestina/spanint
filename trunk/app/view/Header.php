@@ -18,7 +18,8 @@
             $(function() {
                 $('#datepicker').datepicker();
                 $('#datepicker1').datepicker();
-                $('#datepicker2').datepicker();
+                $('#datepicker2').datepicker({dateFormat: "dd-mm-yy"});
+				$('#datepicker3').datepicker({dateFormat: "dd-mm-yy"});
             });
 			
         </script>
@@ -56,7 +57,7 @@
                                 <li><a href=#></i>Detail Gagal Unggah SPM</a></li>
                             </ul>
 							</li>';
-						echo '<li class="subnav"><a href=#>Modul SA - blom di masukan</a>';
+						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
                                 <li><a href='  . URL . 'dataDIPA/revisiDIPA></i>Informasi Revisi DIPA</a></li>
                                 <li><a href='  . URL . 'dataDIPA/realisasiFA></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
@@ -76,7 +77,7 @@
                                 <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke BO1</a></li>
 								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D tertanggal hari ini</a></li>
 								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>Laporan SP2D tertanggal besok</a></li>
-								<li><a href=' . URL . 'dataKppn/Sp2dHarian></i>Jumlah SP2D Harian ke Bank</a></li>
+								<!--<li><a href=' . URL . 'dataKppn/Sp2dHarian></i>Jumlah SP2D Harian ke Bank</a></li>-->
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>

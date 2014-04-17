@@ -134,7 +134,7 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
 				FROM " . $this->_table . "
-				WHERE KDKPPN = '0".Session::get('id_user')."' AND FL_VOID <> 1 ";
+				WHERE KDKPPN = '".Session::get('id_user')."' AND FL_VOID <> 1 ";
 		//SP2D = 140181301002823
 		$no=0;
 		//var_dump($filter);
@@ -142,6 +142,7 @@ class DataSppm {
 			$sql .= " AND ".$filter;
 		}
 		$sql .= " ORDER BY PAYMENT_DATE DESC";
+		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {

@@ -43,7 +43,6 @@ class DataDipa{
      * return array objek Data Tetap*/
     
     public function get_dipa_filter($filter) {
-		Session::get('id_user');
 		$sql = "SELECT *
 				FROM " 
 				. $this->_table1. " 
@@ -56,7 +55,7 @@ class DataDipa{
 			$sql .= " AND ".$filter;
 		}
 		
-		//$sql .= " ORDER BY B.HOLD_DATE DESC";
+		$sql .= " ORDER BY TANGGAL_POSTING_REVISI, SATKER_CODE, ACCOUNT_CODE DESC";
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
@@ -80,7 +79,7 @@ class DataDipa{
 			$d_data->set_budget_type($val['BUDGET_TYPE']);
 			$d_data->set_intraco_code($val['INTRACO_CODE']);
 			$d_data->set_cadangan_code($val['CADANGAN_CODE']);
-			$d_data->set_line_amount($val['LINE_AMOUNT']);
+			$d_data->set_line_amount(number_format($val['LINE_AMOUNT']));
             $data[] = $d_data;
         }
         return $data;

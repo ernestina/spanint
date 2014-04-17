@@ -27,17 +27,25 @@ class DataDIPAController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				
 				if ($_POST['kd_satker']!=''){
-					$filter[$no++]="satker_code = '".$_POST['kd_satker']."'";
+					$filter[$no++]="SATKER_CODE = '".$_POST['kd_satker']."'";
+					$this->view->satker_code = $_POST['satker_code'];
 				}
-				
 				if ($_POST['akun']!=''){
-					$filter[$no++]="account_code = '".$_POST['akun']."'";
+					$filter[$no++]="ACCOUNT_CODE = '".$_POST['akun']."'";
+					$this->view->account_code = $_POST['account_code'];
 				}
 				if ($_POST['output']!=''){
-					$filter[$no++]="output_code = '".$_POST['output']."'";
+					$filter[$no++]="OUTPUT_CODE = '".$_POST['output']."'";
+					$this->view->output_code = $_POST['output_code'];
 				}
 				if ($_POST['program']!=''){
-					$filter[$no++]="program_code = '".$_POST['program']."'";
+					$filter[$no++]="PROGRAM_CODE = '".$_POST['program']."'";
+					$this->view->program_code = $_POST['program_code'];
+				}
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
 			}	
 		$this->view->data = $d_spm1->get_dipa_filter($filter);
@@ -51,18 +59,26 @@ class DataDIPAController extends BaseController {
 		$no=0;
 			if (isset($_POST['submit_file'])) {
 				
-				if ($_POST['kd_satker']!=''){
-					$filter[$no++]="satker_code = '".$_POST['kd_satker']."'";
+				if ($_POST['kdsatker']!=''){
+					$filter[$no++]="SATKER = '".$_POST['kdsatker']."'";
+					$this->view->satker_code = $_POST['satker_code'];
 				}
-				
 				if ($_POST['akun']!=''){
-					$filter[$no++]="account_code = '".$_POST['akun']."'";
+					$filter[$no++]="AKUN = '".$_POST['akun']."'";
+					$this->view->account_code = $_POST['account_code'];
 				}
 				if ($_POST['output']!=''){
-					$filter[$no++]="output_code = '".$_POST['output']."'";
+					$filter[$no++]="OUTPUT = '".$_POST['output']."'";
+					$this->view->output_code = $_POST['output_code'];
 				}
 				if ($_POST['program']!=''){
-					$filter[$no++]="program_code = '".$_POST['program']."'";
+					$filter[$no++]="PROGRAM = '".$_POST['program']."'";
+					$this->view->program_code = $_POST['program_code'];
+				}
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
 			}	
 		$this->view->data = $d_spm1->get_fa_filter($filter);

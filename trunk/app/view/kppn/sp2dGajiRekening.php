@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D Gaji Terindikasi Salah Rekening Seluruh KPPN<br>
+        <h2>MONITORING SP2D Gaji Terindikasi Salah Rekening <?php echo Session::get('user'); ?><br>
 		</h2>
     </div>
 </div>
@@ -9,7 +9,6 @@
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>Kode KPPN</th>
 					<th>Kode Satker</th>
 					<th>No. Invoice</th>
 					<th>No. SP2D 21 Digit</th>
@@ -27,7 +26,6 @@
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
 							echo "<td>" . $no++ . "</td>";
-							echo "<td>" . $value->get_kdkppn() . "</td>";
 							echo "<td>" . $value->get_kdsatker() . "</td>";
 							echo "<td>" . $value->get_invoice_num() . "</td>";
 							echo "<td>" . $value->get_check_number() . "</td>";
