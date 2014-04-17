@@ -17,11 +17,11 @@
 		
 		<div id="winvoice" class="error"></div>
 		<label class="isian">Satker: </label>
-		<input type="text" name="satker" id="satker" value="<?php if (isset($this->d_invoice)){echo $this->d_invoice;}?>">
+		<input type="text" name="satker" id="satker" value="<?php if (isset($this->kd_satker)){echo $this->kd_satker;}?>">
 		
-		<div id="winvoice" class="error"></div>
+		<div id="wakun" class="error"></div>
 		<label class="isian">Akun: </label>
-		<input type="text" name="satker" id="satker" value="<?php if (isset($this->d_invoice)){echo $this->d_invoice;}?>">
+		<input type="text" name="satker" id="satker" value="<?php if (isset($this->akun)){echo $this->akun;}?>">
 
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>

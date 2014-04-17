@@ -38,7 +38,7 @@
 
 
 <div id="fitur">
-		<table class="table-bordered zebra scroll" width="100%">
+		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
