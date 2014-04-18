@@ -42,19 +42,18 @@
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>Nilai invoce</th>
-					<th>KPPN</th>
-					<th>Nomor Invoice</th>
-					<th>Deskripsi Invoice</th>
-					<th>Approval Status</th>
-					<th>Status</th>
-					<th>original_recipient</th>
-					<th>To User</th>
-					<th>Posisi User</th>
-					<th>Tanggal Mulai</th>
-					<th>Jam Mulai</th>
-					<th>Tanggal Selesai</th>
-					<th>Jam Selesai</th>
+					<th>Nomor Invoce</th>
+					<th>Nilai Invoice</th>
+					<th>Tanggal Invoice</th>
+					<th>Nama File</th>
+					<th>Status Code</th>
+					<th>Supplier</th>
+					<th>Site Supplier</th>
+					<th>Uraian Invoice</th>
+					<th>Nama Kolom</th>
+					<th>Nilai Kolom</th>
+					<th>Error Message</th>
+					
 			</thead>
 			<tbody>
 			<?php 
@@ -64,18 +63,17 @@
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_invoice_num() . "</td>";
-					echo "<td>" . $value->get_ou_name() . "</td>";
-					echo "<td>" . $value->get_invoice_num() . "</td>";
-					echo "<td>" . $value->get_invoice_description() . "</td>";
-					echo "<td>" . $value->get_wfapproval_status() . "</td>";
-					echo "<td>" . $value->get_status() . "</td>";
-					echo "<td>" . $value->get_original_recipient() . "</td>";
-					echo "<td>" . $value->get_to_user() . "</td>";
-					echo "<td>" . $value->get_fu_description() . "</td>";
-					echo "<td>" . $value->get_begin_date() . "</td>";
-					echo "<td>" . $value->get_time_begin_date() . "</td>";
-					echo "<td>" . $value->get_end_date() . "</td>";
-					echo "<td>" . $value->get_time_end_date() . "</td>";
+					echo "<td>" . $value->get_invoice_amount() . "</td>";
+					echo "<td>" . $value->get_invoice_date() . "</td>";
+					echo "<td>" . $value->get_file_name() . "</td>";
+					echo "<td>" . $value->get_status_code() . "</td>";
+					echo "<td>" . $value->get_vendor_name() . "</td>";
+					echo "<td>" . $value->get_vendor_site_code() . "</td>";
+					echo "<td>" . $value->get_description() . "</td>";
+					echo "<td>" . $value->get_column_name() . "</td>";
+					echo "<td>" . $value->get_column_value() . "</td>";
+					echo "<td>" . $value->get_error_message() . "</td>";
+					
 				echo "</tr>	";
 			} 
 			?>
