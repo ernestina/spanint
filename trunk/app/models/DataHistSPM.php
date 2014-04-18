@@ -27,10 +27,7 @@ class DataHistSPM{
 	private $_end_date;
 	private $_time_end_date;
 	private $_fu_description;
-    private $_table1 = 'wf_notifications';
-	private $_table2 = 'ap_invoices_all';
-	private $_table3 = 'hr_operating_units';
-	private $_table4 = 'fnd_user';
+    private $_table1 = 'ap_invoices_all_v';
     public $registry;
 	
     /*
@@ -49,45 +46,24 @@ class DataHistSPM{
     
     public function get_hist_spm_filter($filter) {
 	Session::get('id_user');
-		$sql = "SELECT aia.invoice_id
-				, ou.name as ou_name
-				, aia.creation_date
-				, aia.invoice_num
-				, aia.invoice_amount
-				, aia.description  as invoice_description
-				, aia.wfapproval_status
-				, a.status
-				, aia.attribute15 
-				, a.original_recipient  
-				, a.to_user
-				, fu.description as fu_description
-				, to_char(begin_date, 'dd-mm-yyyy') as begin_date
-				, to_char(begin_date, 'hh24:mi:ss') as time_begin_date
-				, to_char(end_date, 'dd-mm-yyyy') as end_date
-				, to_char(end_date, 'hh24:mi:ss') as time_end_date
+		$sql = "SELECT *
 				from "
-				.  $this->_table1 . " a,"
-				.  $this->_table2 . " aia,"
-				.  $this->_table3 . " ou,"
-				.  $this->_table4 . " fu 
-				WHERE a.item_key = trunc(aia.invoice_id) || '_1'
-				AND aia.org_id = ou.organization_id
-				
-				and aia.attribute15 = ".Session::get('id_user').
-				" and a.original_recipient = fu.user_name";
+				. $this->_table1 ."
+				 WHERE SUBSTR(OU_NAME,1,3)= ".Session::get('id_user')
+				;
 				
 				
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
-		
-		//var_dump ($sql);
+		$sql .= " ORDER BY BEGIN_DATE, INVOICE_NUM DESC";
+		var_dump ($sql);
         $result =  $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_invoice_amount($val['INVOICE_AMOUNT']);
+            $d_data->set_invoice_amount(number_format($val['INVOICE_AMOUNT']));
             $d_data->set_ou_name($val['OU_NAME']);
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
