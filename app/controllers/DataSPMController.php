@@ -77,13 +77,14 @@ class DataSPMController extends BaseController {
 					$filter[$no++]="invoice_num = '".$_POST['invoice'] . "'";
 				}
 				
-				if ($_POST['tgl_awal']!='' AND $_POST['tgl_awal']!=''){
-					$filter[$no++]=$_POST['tgl_awal'];
-					$filter[$no++]=$_POST['tgl_akhir'];
-				}
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "INVOICE_DATE BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				
+			$this->view->data = $d_spm1->get_error_spm_filter ($filter);	
 			}	
-		$this->view->data = $d_spm1->get_error_spm_filter ($filter);
+		
 		//var_dump($d_spm1->get_error_spm_filter ($filter));
 		$this->view->render('kppn/uploadSPM');
 	}
