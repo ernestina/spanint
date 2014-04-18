@@ -41,16 +41,15 @@ class DataUploadSPM{
 		$sql = "SELECT *
 				FROM " 
 				. $this->_table1. "
-				WHERE INVOICE_NUM='80061T/119152/2014' 
-				AND SUBSTR(FILE_NAME,5,3) = ".Session::get('id_user').
-				"
-				ORDER BY FILE_NAME "
+				WHERE SUBSTR(FILE_NAME,5,3) = ".Session::get('id_user')
+				
 				;
 				//var_dump ($sql);
 		$no=0;
 		foreach ($filter as $filter) {
-			
+			$sql .= " AND ".$filter;
 		}
+		
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
