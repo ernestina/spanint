@@ -14,6 +14,8 @@
 					<th>No. SP2D</th>
 					<th>BO I</th>
 					<th>Bank Rekening Penerima</th>
+					<th>Nama Supplier</th>
+					<th>Rekening Supplier</th>
 					<th>Deskripsi</th>
 					
 			</thead>
@@ -32,6 +34,8 @@
 							echo "<td>" . $value->get_check_number() . "</td>";
 							echo "<td>" . $value->get_bank_account_name() . "</td>";
 							echo "<td>" . $value->get_bank_name() . "</td>";
+							echo "<td>" . $value->get_vendor_name() . "</td>";
+							echo "<td>" . $value->get_vendor_ext_bank_account_num() . "</td>";
 							echo "<td>" . $value->get_invoice_description() . "</td>";
 						echo "</tr>	";
 					}

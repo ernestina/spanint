@@ -70,7 +70,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -110,7 +110,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -150,7 +150,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -190,7 +190,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -230,7 +230,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -270,7 +270,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -310,7 +310,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -350,7 +350,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -418,7 +418,7 @@ class DataSppm {
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
 			$d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
             $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
 			$data[] = $d_data;
         }
@@ -426,7 +426,7 @@ class DataSppm {
     }
 	
 	public function get_sp2d_gaji_bank() {
-		$sql = "SELECT DISTINCT KDKPPN, SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER, PAYMENT_DATE, CREATION_DATE, BANK_ACCOUNT_NAME, BANK_NAME, INVOICE_DESCRIPTION FROM (
+		$sql = "SELECT DISTINCT KDKPPN, SUBSTR(INVOICE_NUM,8,6) SATKER, INVOICE_NUM, CHECK_NUMBER,VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, PAYMENT_DATE, CREATION_DATE, BANK_ACCOUNT_NAME, BANK_NAME, INVOICE_DESCRIPTION FROM (
                 SELECT KDKPPN, PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE
                 FROM XICO_ALL
                 WHERE ( BANK_ACCOUNT_NAME LIKE '%gaji-BNI%' OR 
@@ -448,7 +448,7 @@ class DataSppm {
                 )
                 ORDER BY KDKPPN, SATKER, INVOICE_NUM, CHECK_NUMBER DESC";
         $result = $this->db->select($sql);
-		// ($sql);
+		//var_dump($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
@@ -456,6 +456,8 @@ class DataSppm {
             $d_data->set_kdsatker($val['SATKER']);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
+            $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
+            $d_data->set_vendor_name($val['VENDOR_NAME']);
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
@@ -465,7 +467,7 @@ class DataSppm {
     }
 	
 	public function get_sp2d_gaji_rekening() {
-		$sql = "SELECT DISTINCT SUBSTR(INVOICE_NUM,8,6) SATKER, KDKPPN, INVOICE_NUM, CHECK_NUMBER_LINE_NUM, PAYMENT_DATE, CREATION_DATE, BANK_ACCOUNT_NAME, INVOICE_DESCRIPTION FROM (
+		$sql = "SELECT DISTINCT SUBSTR(INVOICE_NUM,8,6) SATKER, KDKPPN, INVOICE_NUM, CHECK_NUMBER, PAYMENT_DATE, CREATION_DATE, BANK_ACCOUNT_NAME, INVOICE_DESCRIPTION FROM (
                 SELECT KDKPPN,PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE
                 FROM XICO_ALL
                 WHERE BANK_ACCOUNT_NAME NOT IN ( 'RPKBUNP.gaji-BNI','RPKBUNP.GAJI-BTN','RPKBUNP GAJI-MDRI','RPKBUNP GAJI BRI') 
@@ -479,7 +481,7 @@ class DataSppm {
                       AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'    
 					  AND KDKPPN = ".Session::get('id_user')."
                 )
-                ORDER BY KDKPPN, SATKER, CHECK_NUMBER_LINE_NUM DESC ";
+                ORDER BY KDKPPN, SATKER, CHECK_NUMBER DESC ";
         $result = $this->db->select($sql);
 		//var_dump ($sql);
         $data = array();   
@@ -488,7 +490,7 @@ class DataSppm {
             $d_data->set_kdkppn($val['KDKPPN']);
             $d_data->set_kdsatker($val['SATKER']);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_check_number($val['CHECK_NUMBER_LINE_NUM']);
+            $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
 			$data[] = $d_data;

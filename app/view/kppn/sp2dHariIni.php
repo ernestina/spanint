@@ -44,7 +44,7 @@
 					<th>Tanggal SP2D</th>
 					<th>No. SP2D</th>
 					<!--th>Status</th-->
-					<th>Tanggal Create</th>
+					<th>Tanggal Selesai SP2D</th>
 					<th>No. Transaksi</th>
 					<th>No. Invoice</th>
 					<th>Jumlah Rp</th>
