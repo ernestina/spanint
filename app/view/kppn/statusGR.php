@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
-        <h2>GR STATUS <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			KPPN <?php echo $nama_kppn; ?>
+        <h2>STATUS FILE LHP INTERFACE <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
+			<?php echo Session::get('user'); ?>
 		</h2>
     </div>
 
@@ -20,9 +20,9 @@
 		<label class="isian">Status: </label>
 		<select type="text" name="status" id="status">
 			<option value=''>- pilih -</option>
-			<option value='Validated' <?php if ($this->status==Validated){echo "Validated";}?>>Validated</option>
-			<option value='Error' <?php if ($this->status==Error){echo "Error";}?>>Error</option>
-			<option value='Completed' <?php if ($this->status==Completed){echo "Completed";}?>>Completed</option>
+			<option value='Validated' <?php if ($this->status==Validated){echo "selected";}?>>Validated</option>
+			<option value='Error' <?php if ($this->status==Error){echo "selected";}?>>Error</option>
+			<option value='Completed' <?php if ($this->status==Completed){echo "selected";}?>>Completed</option>
 			
 		</select>
 		
