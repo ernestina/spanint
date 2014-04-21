@@ -1,11 +1,11 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SPM - SP2D <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
+        <h2>MONITORING POSISI SPM <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
 			<?php echo Session::get('user'); ?>
 		</h2>
     </div>
 
-<a href="#zModal" class="modal">FILTER DATA</a><br><br>
+<!--a href="#zModal" class="modal">FILTER DATA</a><br><br>
         <div id="zModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
@@ -35,15 +35,15 @@
 		<input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
 		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
 
-		<ul class="inline" style="margin-left: 130px">
+		<!--ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();"></li>
 		<!--onClick="konfirm(); return false;"-->
-		</ul>
+		<!--/ul>
 	</form>
 </div>
 </div>
-</div>
+</div-->
 
 
 
@@ -62,9 +62,9 @@
 					<th>To User</th>
 					<th>Posisi User</th>
 					<th>Mulai</th>
-					<!--th>Jam Mulai</th-->
+					<!--th>Jam Mulai</th>
 					<th>Selesai</th>
-					<th>Durasi</th>
+					<th>Durasi</th-->
 			</thead>
 			<tbody>
 			<?php 
@@ -72,7 +72,7 @@
 			//var_dump ($this->data);
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "Tidak ada data";
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
 				} else {
 					foreach ($this->data as $value){ 
 					echo "<tr>	";
@@ -88,13 +88,14 @@
 						echo "<td>" . $value->get_fu_description() . "</td>";
 						echo "<td>" . $value->get_begin_date() . ' ' . $value->get_time_begin_date() . "</td>";
 						//echo "<td>" . $value->get_time_begin_date() . "</td>";
-						echo "<td>" . $value->get_end_date() . ' ' . $value->get_time_end_date() . "</td>";
+						//echo "<td>" . $value->get_end_date() . ' ' . $value->get_time_end_date() . "</td>";
 						//echo "<td>" . $value->get_time_end_date() . "</td>";
+						//echo "<td> &nbsp </td>";
 					echo "</tr>	";
 					}
 				}
 			} else {
-				echo "Silakan masukan filter";
+				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
 			}
 			?>
 			</tbody>
@@ -103,6 +104,7 @@
 </div>
 
 <script type="text/javascript">
+	/*
 	$(function(){
         hideErrorId();
         hideWarning();
@@ -157,4 +159,5 @@
             return false;
         } 
     }
+	*/
 </script>

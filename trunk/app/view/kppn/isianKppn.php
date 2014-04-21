@@ -92,7 +92,7 @@
 			$no=1;
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "Tidak ada data";
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
 				} else {
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
@@ -119,7 +119,7 @@
 					}
 				} 
 			} else {
-				echo "Silakan masukan filter";
+				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
 			}
 			?>
 			</tbody>
