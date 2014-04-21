@@ -49,6 +49,7 @@ class DataDIPAController extends BaseController {
 				}
 				$this->view->data = $d_spm1->get_dipa_filter($filter);
 			}	
+
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/revisiDIPA');
 	}
@@ -82,6 +83,7 @@ class DataDIPAController extends BaseController {
 				}
 				$this->view->data = $d_spm1->get_fa_filter($filter);
 			}	
+
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/realisasiFA');
 	}
