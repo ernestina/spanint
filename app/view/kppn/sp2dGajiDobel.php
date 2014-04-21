@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D Gaji Terindikasi  Dobel <?php echo Session::get('user'); ?><br>
+        <h2>MONITORING SP2D Gaji Terindikasi Dobel Seluruh KPPN<br>
 		</h2>
     </div>
 
@@ -45,11 +45,12 @@
 </div>
 </div>
 
-<div id="top">
+<div id="fitur">
 		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
+					<th>Kode KPPN</th>
 					<th>Kode Satker</th>
 					<th>No. Invoice</th>
 					<th>No. SP2D</th>
@@ -66,6 +67,7 @@
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
 							echo "<td>" . $no++ . "</td>";
+							echo "<td>" . $value->get_kdkppn() . "</td>";
 							echo "<td>" . $value->get_kdsatker() . "</td>";
 							echo "<td>" . $value->get_invoice_num() . "</td>";
 							echo "<td>" . $value->get_check_number() . "</td>";
