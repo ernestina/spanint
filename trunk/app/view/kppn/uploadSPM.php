@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>ERROR INVOICE <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			KPPN <?php echo $nama_kppn; ?>
+			<?php echo Session::get('user'); ?>
 		</h2>
     </div>
 
@@ -63,7 +63,7 @@
 			//var_dump ($this->data);
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "Tidak ada data";
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
 				} else {
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
@@ -85,7 +85,7 @@
 			}
 			}
 			else {
-				echo "silahkan masukan filter";
+				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
 			}
 			?>
 			</tbody>
