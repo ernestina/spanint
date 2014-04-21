@@ -3,7 +3,7 @@
 <center><footer><h3>Direktorat Transformasi Perbendaharaan - &copy 2013-2014. <a href="#openModal">Developer.</a><h3></center>
     <div id="openModal" class="modalDialog" >
 		<div><h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">Developer :</h2>
-		<a href="#close" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 4px; margin-top: 0px"></i></a>
+		<a href="#close" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
 			<div id="top">
 				<h3>
 				<a href="mailto:doniebelva@gmail.com" target="_top">Donie Mahaputra</a> - Project Manager</br>
@@ -13,6 +13,7 @@
                 <a href="mailto:nez817@gmail.com" target="_top">Ernestina R</a> - User Interface Designer</br>
 				<a href="mailto:iq84l.dean@gmail.com" target="_top">M. Iqbal Anshori</a> - Database Designer</br>
 				<a href="mailto:boys2641@gmail.com" target="_top">Agus Priyono</a> - Server Administrator</br>
+				<a href="mailto:baygiv@gmail.com" target="_top">Bayu Yudhistira</a> - User Management</br>
 				</h3>
             </div>
         </div>
