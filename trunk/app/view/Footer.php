@@ -7,14 +7,16 @@
 			<div id="top">
 				<h3>
 				<a href="mailto:turbocharge90@gmail.com" target="_top">Rayman Hidayat</a> - Project Coordinator</br>
-				<a href="mailto:doniebelva@gmail.com" target="_top">Donie Mahaputra</a> - Project Manager</br>
+				<a href="mailto:doniebelva@gmail.com" target="_top">Donie Mahaputra</a> - Project Manager and System Analyst</br>
 				<a href="mailto:andi.saputra.jakarta@gmail.com" target="_top">Andi Saputra</a> - Application Engineer</br>
-				<a href="mailto:hkm.lutfi@gmail.com" target="_top">Luthfi Hakim</a> - Application Modeller SA/GR</br>
-				<a href="mailto:baygiv@gmail.com" target="_top">Bayu Yudhistira</a> - Application Modeller UM</br>
-                <a href="mailto:nez817@gmail.com" target="_top">Ernestina R</a> - User Interface Designer</br>
+				<a href="mailto:nez817@gmail.com" target="_top">Ernestina R</a> - User Interface Designer</br>
+				<a href="mailto:hkm.lutfi@gmail.com" target="_top">Luthfi Hakim</a> - App. Designer Module SA/PM</br>
+				<a href="mailto:baygiv@gmail.com" target="_top">Bayu Yudhistira</a> - App. Designer Module UM</br>
+				<a href="mailto:achmadford@gmail.com" target="_top">Achmad Ford</a> - App. Designer Module GR</br>
+				<a href="mailto:hasan.arie@gmail.com" target="_top">Arie Hasan</a> - App. Designer Module XICO</br>
 				<a href="mailto:iq84l.dean@gmail.com" target="_top">M. Iqbal Anshori</a> - Database Designer</br>
-				<a href="mailto:boys2641@gmail.com" target="_top">Agus Priyono</a> - Server Administrator</br>
-				<a href="mailto:cakyus@gmail.com" target="_top">M. Yusuf A</a> - Server Administrator</br>
+				<a href="mailto:boys2641@gmail.com" target="_top">Agus Priyono</a> - Server Developer and Operator</br>
+				<a href="mailto:cakyus@gmail.com" target="_top">Yusuf AB</a> - Server  Developer and Operator</br>
 				</h3>
             </div>
         </div>
