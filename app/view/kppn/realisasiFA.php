@@ -1,6 +1,7 @@
 <div id="top">
 	<div id="header">
-        <h2>REALISASI FA <?php echo Session::get('user'); ?><br>
+        <h2>REALISASI KETERSEDIAAN DANA DIPA SATKER <br>
+		<?php echo Session::get('user'); ?><br>
 		</h2>
     </div>
 
@@ -15,7 +16,7 @@
 	<form method="POST" action="RealisasiFA" enctype="multipart/form-data">
 		
 		<div id="wkdsatker" class="error"></div>
-		<label class="isian">Kode Satker: </label>
+		<label class="isian">Satker: </label>
 		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->satker_code)){echo $this->satker_code;}?>">
 		
 		<div id="wakun" class="error"></div>
@@ -74,31 +75,30 @@
 				if (empty($this->data)){
 					echo "Tidak ada data";
 				} else {
-					foreach ($this->data as $value){ 
-						echo "<tr>	";
-							echo "<td>" . $no++ . "</td>";
-							echo "<td>" . $value->get_satker() . "</td>";
-							echo "<td>" . $value->get_kppn() . "</td>";
-							echo "<td>" . $value->get_akun() . "</td>";
-							echo "<td>" . $value->get_program() . "</td>";
-							echo "<td>" . $value->get_output() . "</td>";
-							echo "<td>" . $value->get_dana() . "</td>";
-							echo "<td>" . $value->get_bank() . "</td>";
-							echo "<td>" . $value->get_kewenangan() . "</td>";
-							echo "<td>" . $value->get_lokasi() . "</td>";
-							echo "<td>" . $value->get_budget_type() . "</td>";
-							echo "<td>" . $value->get_currency_code() . "</td>";
-							echo "<td>" . $value->get_budget_amt() . "</td>";
-							echo "<td>" . $value->get_encumbrance_amt() . "</td>";
-							echo "<td>" . $value->get_actual_amt() . "</td>";
-							echo "<td>" . $value->get_balancing_amt() . "</td>";
-						echo "</tr>	";
-					}
-				} 
-			} else {
-				echo "Silakan masukan filter";
+			foreach ($this->data as $value){ 
+				echo "<tr>	";
+					echo "<td>" . $no++ . "</td>";
+					echo "<td>" . $value->get_satker() . "</td>";
+					echo "<td>" . $value->get_kppn() . "</td>";
+					echo "<td>" . $value->get_akun() . "</td>";
+					echo "<td>" . $value->get_program() . "</td>";
+					echo "<td>" . $value->get_output() . "</td>";
+					echo "<td>" . $value->get_dana() . "</td>";
+					echo "<td>" . $value->get_bank() . "</td>";
+					echo "<td>" . $value->get_kewenangan() . "</td>";
+					echo "<td>" . $value->get_lokasi() . "</td>";
+					echo "<td>" . $value->get_budget_type() . "</td>";
+					echo "<td>" . $value->get_currency_code() . "</td>";
+					echo "<td style='text-align: right'>" . $value->get_budget_amt() . "</td>";
+					echo "<td style='text-align: right'>" . $value->get_encumbrance_amt() . "</td>";
+					echo "<td style='text-align: right'>" . $value->get_actual_amt() . "</td>";
+					echo "<td style='text-align: right'>" . $value->get_balancing_amt() . "</td>";
+				echo "</tr>	";
 			}
-					
+			}
+			} else {
+				echo "silahkan masukan filter";
+			}
 			?>
 			</tbody>
         </table>
@@ -136,9 +136,21 @@
         });
 		
 		$('#program').change(function(){
-            if(document.getElementById('program').value !=''){
+            if(document.getElementById('output').value !=''){
                 $('#wprogram').fadeOut(200);
             }
+        });
+		
+		$('#datepicker2').change(function(){
+            if(document.getElementById('datepicker2').value !='' && document.getElementById('datepicker3').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
+		
+		$('#datepicker3').change(function(){
+            if(document.getElementById('datepicker2').value !='' && document.getElementById('datepicker3').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
         });
 
     }
@@ -147,15 +159,19 @@
 		var pattern = '^[0-9]+$';
 		var v_kdsatker = document.getElementById('kdsatker').value;
 		var v_akun = document.getElementById('akun').value;
-		var v_output = document.getElementById('output').value;
-		var v_program = document.getElementById('program').value;
+		var v_tglawal = document.getElementById('datepicker2').value;
+		var v_tglakhir = document.getElementById('datepicker3').value;
 		
         var jml = 0;
-        if(v_kdsatker=='' && v_akun=='' && v_output=='' && v_program==''){
+        if(v_kdsatker=='' && v_akun=='' && v_output=='' && v_program=='' && v_tglawal=='' && v_tglakhir=='' ){
             $('#wkdsatker').html('Harap isi salah satu parameter');
             $('#wkdsatker').fadeIn();
 			$('#wakun').html('Harap isi salah satu parameter');
             $('#wakun').fadeIn();
+			$('#woutput').html('Harap isi salah satu parameter');
+            $('#woutput').fadeIn();
+			$('#wprogram').html('Harap isi salah satu parameter');
+            $('#wprogram').fadeIn();
 			$('#woutput').html('Harap isi salah satu parameter');
             $('#woutput').fadeIn();
 			$('#wprogram').html('Harap isi salah satu parameter');
@@ -214,6 +230,12 @@
             var wprogram = 'Kode Akun harus dalam bentuk angka!';
             $('#wprogram').html(wprogram);
             $('#wprogram').fadeIn(200);
+            jml++;
+        }
+		
+		if(v_tglawal>v_tglakhir){
+            $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
+            $('#wtgl').fadeIn(200);
             jml++;
         }
 		

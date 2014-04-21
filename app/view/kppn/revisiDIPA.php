@@ -79,30 +79,30 @@
 				if (empty($this->data)){
 					echo "Tidak ada data";
 				} else {
-					foreach ($this->data as $value){ 
-						echo "<tr>	";
-							echo "<td>" . $no++ . "</td>";
-							echo "<td>" . $value->get_dipa_no() . "</td>";
-							echo "<td>" . $value->get_revision_no() . "</td>";
-							echo "<td>" . $value->get_tanggal_posting_revisi() . "</td>";
-							echo "<td>" . $value->get_jam_posting_revisi() . "</td>";
-							echo "<td>" . $value->get_line_amount() . "</td>";
-							echo "<td>" . $value->get_satker_code() . "</td>";
-							echo "<td>" . $value->get_kppn_code() . "</td>";
-							echo "<td>" . $value->get_account_code() . "</td>";
-							echo "<td>" . $value->get_program_code() . "</td>";
-							echo "<td>" . $value->get_output_code() . "</td>";
-							echo "<td>" . $value->get_dana_code() . "</td>";
-							echo "<td>" . $value->get_bank_code() . "</td>";
-							echo "<td>" . $value->get_kewenangan_code() . "</td>";
-							echo "<td>" . $value->get_budget_type() . "</td>";
-							echo "<td>" . $value->get_intraco_code() . "</td>";
-							echo "<td>" . $value->get_cadangan_code() . "</td>";
-						echo "</tr>	";
-					} 
-				} 
+			foreach ($this->data as $value){ 
+				echo "<tr>	";
+					echo "<td>" . $no++ . "</td>";
+					echo "<td>" . $value->get_dipa_no() . "</td>";
+					echo "<td>" . $value->get_revision_no() . "</td>";
+					echo "<td>" . $value->get_tanggal_posting_revisi() . "</td>";
+					echo "<td>" . $value->get_jam_posting_revisi() . "</td>";
+					echo "<td style='text-align: right'>" . $value->get_line_amount() . "</td>";
+					echo "<td>" . $value->get_satker_code() . "</td>";
+					echo "<td>" . $value->get_kppn_code() . "</td>";
+					echo "<td>" . $value->get_account_code() . "</td>";
+					echo "<td>" . $value->get_program_code() . "</td>";
+					echo "<td>" . $value->get_output_code() . "</td>";
+					echo "<td>" . $value->get_dana_code() . "</td>";
+					echo "<td>" . $value->get_bank_code() . "</td>";
+					echo "<td>" . $value->get_kewenangan_code() . "</td>";
+					echo "<td>" . $value->get_budget_type() . "</td>";
+					echo "<td>" . $value->get_intraco_code() . "</td>";
+					echo "<td>" . $value->get_cadangan_code() . "</td>";
+				echo "</tr>	";
+			} 
+			}
 			} else {
-				echo "Silakan masukan filter";
+				echo "silahkan masukan filter";
 			}
 			?>
 			</tbody>
@@ -141,7 +141,7 @@
         });
 		
 		$('#program').change(function(){
-            if(document.getElementById('program').value !=''){
+            if(document.getElementById('output').value !=''){
                 $('#wprogram').fadeOut(200);
             }
         });
