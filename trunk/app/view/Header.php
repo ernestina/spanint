@@ -54,7 +54,7 @@
 						echo '<ul>
                                 <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
                                 <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
-                                <li><a href=#></i>Detail Gagal Unggah SPM</a></li>
+                                <li><a href='. URL . 'dataSPM/errorSPM></i>Detail Gagal Unggah SPM</a></li>
                             </ul>
 							</li>';
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
@@ -66,8 +66,8 @@
 						
 						echo '<li class="subnav"><a href=#>Modul GR</a>';
 						echo '<ul>
-                                <li><a href=#></i>Konfirmasi</a></li>
-                                <li><a href=#></i>IJP</a></li>
+                                <li><a href='. URL .'dataGR/GRstatus></i>Status File LHP (interface)</a></li>
+                                <li><a href='. URL .'dataGR/GR_IJP></i>IJP</a></li>
 								<li><a href=#></i>PFK</a></li>
                             </ul>
                             </li>';
