@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D Gaji Terindikasi Salah Rekening <?php echo Session::get('user'); ?><br>
+        <h2>MONITORING SP2D Gaji Terindikasi Salah PayGroup <?php echo Session::get('user'); ?><br>
 		</h2>
     </div>
 </div>
@@ -11,7 +11,7 @@
 					<th>No.</th>
 					<th>Kode Satker</th>
 					<th>No. Invoice</th>
-					<th>No. SP2D 21 Digit</th>
+					<th>No. SP2D</th>
 					<th>BO I</th>
 					<th>Deskripsi</th>
 					

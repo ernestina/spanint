@@ -49,9 +49,7 @@ class DataFA{
 				FROM " 
 				. $this->_table1. " 
 				WHERE 
-				KPPN = ".Session::get('id_user')
-				
-				;
+				KPPN = '".Session::get('id_user')."'";
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;

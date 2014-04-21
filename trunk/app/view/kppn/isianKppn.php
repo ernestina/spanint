@@ -44,7 +44,7 @@
 			<option value='BRI' <?php if ($this->d_bank==BRI){echo "selected";}?>>BRI</option>
 			<option value='BNI' <?php if ($this->d_bank==BNI){echo "selected";}?>>BNI</option>
 			<option value='BTN' <?php if ($this->d_bank==BTN){echo "selected";}?>>BTN</option>
-			<!--<option value='SEMUA_BANK' <?php if ($this->d_bank==SEMUA_BANK){echo "selected";}?>>SEMUA BANK</option>-->
+			<option value='SEMUA_BANK' <?php if ($this->d_bank==SEMUA_BANK){echo "selected";}?>>SEMUA BANK</option>
 		</select>
 		
 		<div id="wtgl" class="error"></div>
@@ -92,7 +92,7 @@
 			$no=1;
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+					echo "Tidak ada data";
 				} else {
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
@@ -110,12 +110,16 @@
 							echo "<td>" . $value->get_vendor_ext_bank_account_num() . "</td>";
 							echo "<td>" . $value->get_invoice_description() . "</td>";
 							echo "<td>" . $value->get_ftp_file_name() . "</td>";
-							echo "<td>" . $value->get_return_desc() . "</td>";
+							if ($value->get_return_desc()!=''){
+								echo "<td>" . $value->get_return_desc() . "</td>";
+							} else {
+								echo "<td>Belum dikonfirmasi oleh Bank<td>";
+							}
 						echo "</tr>	";
 					}
 				} 
 			} else {
-				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+				echo "Silakan masukan filter";
 			}
 			?>
 			</tbody>
@@ -252,7 +256,7 @@
             jml++;
         }
 		
-		if(v_kdsatker !=''  && !v_kdsatker.match(pattern)){
+		if(v_kdsatker !='' && !v_kdsatker.match(pattern)){
             var wsatker = 'No Transaksi harus dalam bentuk angka!';
             $('#wsatker').html(wbarsp2d);
             $('#wsatker').fadeIn(200);

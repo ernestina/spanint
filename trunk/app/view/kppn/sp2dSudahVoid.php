@@ -56,7 +56,7 @@
 					<th>Tgl SP2D</th>
 					<th>No. SP2D</th>
 					<!--th>Status</th-->
-					<th>TglSelesai SP2D</th>
+					<th>Tgl Selesai SP2D</th>
 					<th>No. Transaksi</th>
 					<th>No. Invoice</th>
 					<th>Jumlah Rp</th>
