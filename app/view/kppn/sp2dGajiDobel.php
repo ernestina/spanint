@@ -45,7 +45,7 @@
 </div>
 </div>
 
-<div id="top">
+<div id="fitur">
 		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
@@ -61,7 +61,7 @@
 			$no=1;
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "Tidak ada data";
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
 				} else {
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
