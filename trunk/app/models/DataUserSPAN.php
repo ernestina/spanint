@@ -37,10 +37,13 @@ class DataUserSPAN {
      * return array objek Data Tetap*/
     
     public function get_user_filter($filter) {
-        $sql = "SELECT * FROM " . $this->_table;
+	Session::get('id_user');
+        $sql = "SELECT * FROM " . $this->_table. "
+		WHERE KDKPPN = ".Session::get('id_user');
 	  	
         foreach ($filter as $filter) {
-			$sql .= " WHERE ".$filter;
+			$sql .= " AND ".$filter;
+			
 		}
 		//var_dump($sql);
 	    $result = $this->db->select($sql);
