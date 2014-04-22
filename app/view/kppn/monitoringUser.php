@@ -1,29 +1,39 @@
 <div id="top">
 	<div id="header">
-        <h2>MANAJEMEN USER <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			KPPN <?php echo $nama_kppn; ?>
+        <h2>MANAJEMEN USER<br>
+			 <?php echo Session::get('user'); ?>
 		</h2>
     </div>
-</div>
+
+<a href="#oModal" class="modal">FILTER DATA</a><br><br>
+        <div id="oModal" class="modalDialog" >
+            <div>
+                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
+				<a href="<?php
+                    $_SERVER['PHP_SELF'];
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
+
 <div id="top">
-	<div id="kiri">
 	<form method="POST" action=" monitoringUserSpan" enctype="multipart/form-data">
-		<div id="wsp2d" class="error"></div>
-		NIP: <br>
+		
+		<div id="wnip" class="error"></div>
+		<label class="isian">NIP: </label>
 		<input type="number" name="nip" id="nip" size="15">
 
 	
-		<ul class="inline">
+		<ul class="inline" style="margin-left: 150px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="Cari" onClick="return cek_upload();"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
 </div>
+</div>
+</div>
 
 
-
-<div id="kanan">
+<div id="fitur">
 		<table class="table-bordered zebra scroll" width="100%">
             <!--baris pertama-->
 			<thead>
@@ -42,6 +52,10 @@
 			<tbody>
 			<?php 
 			$no=1;
+			if (isset($this->data)){
+				if (empty($this->data)){
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+				} else {
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
@@ -55,7 +69,11 @@
 					echo "<td>" . $value->get_start_date() . "</td>";
 					echo "<td>" . $value->get_end_date() . "</td>";
 				echo "</tr>	";
+			}
 			} 
+			} else {
+				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+			}
 			?>
 			</tbody>
         </table>
@@ -74,177 +92,31 @@
     }
 
     function hideWarning(){
-        $('#nosp2d').change(function(){
-            if(document.getElementById('nosp2d').value !=''){
-                $('#wsp2d').fadeOut(200);
-            }
-        });
-		
-		$('#barsp2d').change(function(){
-            if(document.getElementById('barsp2d').value !=''){
-                $('#wbarsp2d').fadeOut(200);
-            }
-        });
-		$('#invoice').change(function(){
-            if(document.getElementById('invoice').value !=''){
-                $('#wpdf2').fadeOut(200);
-            }
-        });
-		$('#bank').change(function(){
-            if(document.getElementById('bank').value !=''){
-                $('#wbank').fadeOut(200);
-            }
-        });
-		$('#fxml').change(function(){
-            if(document.getElementById('fxml').value !=''){
-                $('#wfxml').fadeOut(200);
+        $('#nip').keyup(function(){
+            if(document.getElementById('nip').value !=''){
+                $('#wnip').fadeOut(200);
             }
         });
 
     }
     
     function cek_upload(){
-		var v_nosp2d = document.getElementById('nosp2d').value;
-		var v_barsp2d = document.getElementById('barsp2d').value;
-		var v_invoice = document.getElementById('invoice').value;
-		var v_bank = document.getElementById('bank').value;
-		var v_tglawal = document.getElementById('tgl_awal').value;
-		var v_tglakhir = document.getElementById('tgl_akhir').value;
-		var v_fxml = document.getElementById('fxml').value;
+		var pattern = '^[0-9]+$';
+		var v_nip = document.getElementById('nip').value;
+		
 		
         var jml = 0;
-        if(v_nosp2d=='' && v_barsp2d=='' && v_invoice=='' && v_bank=='' && v_tglawal=='' && v_tglakhir=='' && v_fxml==''){
-            $('#wsp2d').html('Harap isi salah satu parameter');
-            $('#wsp2d').fadeIn();
-			$('#wbarsp2d').html('Harap isi salah satu parameter');
-            $('#wbarsp2d').fadeIn();
-			
-			
+        if(v_nip == ''){
+            $('#wnip').html('Harap isi NIP pegawai');
+            $('#wnip').fadeIn();
             jml++;
-        }else{
-            var fsplit = file_upload.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='spm';
-            if(!cek_file){
-                $('#wspm').html('File harus ber extensi spm, contoh 123456789.spm!');
-                $('#wspm').fadeIn();
-                jml++;
-            } 
         }
 		
-		if(file_upload1==''){
-            $('#wpdf1').html('File belum dipilih!');
-            $('#wpdf1').fadeIn();
+		if(v_nip !='' && v_nip.length != 18 ){
+            $('#wnip').html('NIP harus 18 digit');
+            $('#wnip').fadeIn(200);
             jml++;
-        }else{
-            var fsplit = file_upload1.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf1').html('File harus ber extensi pdf, contoh abcdefghij.pdf!');
-                $('#wpdf1').fadeIn();
-                jml++;
-            } 
         }
-		
-		if(file_upload2!='') {
-			var fsplit = file_upload2.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf2').html('File tidak sesuai dengan format!');
-                $('#wpdf2').fadeIn();
-                jml++;
-			}
-		}
-		
-		if(file_upload3!='') {
-			var fsplit = file_upload3.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf3').html('File tidak sesuai dengan format!');
-                $('#wpdf3').fadeIn();
-                jml++;
-			}
-		}
-		
-		if(file_upload4!='') {
-			var fsplit = file_upload4.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf4').html('File tidak sesuai dengan format!');
-                $('#wpdf4').fadeIn();
-                jml++;
-			}
-		}
-		
-		if(file_upload5!='') {
-			var fsplit = file_upload5.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf5').html('File tidak sesuai dengan format!');
-                $('#wpdf5').fadeIn();
-                jml++;
-			}
-		}
-		
-		if(file_upload6!='') {
-			var fsplit = file_upload6.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf6').html('File tidak sesuai dengan format!');
-                $('#wpdf6').fadeIn();
-                jml++;
-			}
-		}
-		
-		if(file_upload7!='') {
-			var fsplit = file_upload7.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf7').html('File tidak sesuai dengan format!');
-                $('#wpdf7').fadeIn();
-                jml++;
-			}
-		}
-		
-		if(file_upload8!='') {
-			var fsplit = file_upload8.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf8').html('File tidak sesuai dengan format!');
-                $('#wpdf8').fadeIn();
-                jml++;
-			}
-		}
-		
-		if(file_upload9!='') {
-			var fsplit = file_upload9.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf9').html('File tidak sesuai dengan format!');
-                $('#wpdf9').fadeIn();
-                jml++;
-			}
-		}
-		
-		if(file_upload10!='') {
-			var fsplit = file_upload10.split('.');
-            var ext = fsplit[fsplit.length-1];
-            var cek_file = ext=='pdf';
-            if(!cek_file){
-                $('#wpdf10').html('File tidak sesuai dengan format!');
-                $('#wpdf10').fadeIn();
-                jml++;
-			}
-		}
 		
         if(jml>0){
             return false;
