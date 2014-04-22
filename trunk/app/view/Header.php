@@ -105,6 +105,7 @@
                                 <li><a href=#></i>Hasil</a></li>
                             </ul>
                             </li>';
+						echo '<li class="nav"><a href=#>Panduan</a></li>';
 						
                     }
                     ?>
