@@ -71,6 +71,12 @@
 								<li><a href=#></i>PFK</a></li>
                             </ul>
                             </li>';
+						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
+                                <li><a href=#></i>Menu User</a></li>
+                            </ul>
+                            </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>XICO</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
@@ -99,6 +105,7 @@
                                 <li><a href=#></i>Hasil</a></li>
                             </ul>
                             </li>';
+						
                     }
                     ?>
                     <li>

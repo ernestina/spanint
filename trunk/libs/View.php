@@ -59,7 +59,7 @@ class View {
 
     private function get_title() {
         if (is_null($this->title))
-            return 'Scholarsip Information Management System';
+            return 'Monster SPAN';
         return $this->title;
     }
 
