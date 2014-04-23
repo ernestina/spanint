@@ -48,7 +48,7 @@ class DataSppm {
      * return array objek Data Tetap*/
     
     public function get_sppm_filter($filter) {
-		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh:mi:ss') CREATION_DATE, 
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
@@ -70,7 +70,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -89,7 +89,7 @@ class DataSppm {
     }
 	
 	public function get_harian_bo_i($filter) {
-		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
@@ -110,7 +110,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -129,7 +129,7 @@ class DataSppm {
     }
 	
 	public function get_sp2d_hari_ini($filter) {
-		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh:mi:ss') CREATION_DATE, 
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
@@ -150,7 +150,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -169,7 +169,7 @@ class DataSppm {
     }
 	
 	public function get_sp2d_besok($filter) {
-		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
@@ -190,7 +190,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -209,7 +209,7 @@ class DataSppm {
     }
 	
 	public function get_sp2d_harian($filter) {
-		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
@@ -230,7 +230,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -249,7 +249,7 @@ class DataSppm {
     }
 	
 	public function get_sp2d_backdate($filter) {
-		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
@@ -270,7 +270,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -289,7 +289,7 @@ class DataSppm {
     }
 	
 	public function get_sp2d_belum_void($filter) {
-		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
@@ -310,7 +310,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
@@ -329,7 +329,7 @@ class DataSppm {
     }
 	
 	public function get_sp2d_sudah_void($filter) {
-		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, 
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
@@ -350,7 +350,7 @@ class DataSppm {
             $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-            $d_data->set_creation_date(date("d-m-Y h:m:s",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
             $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));

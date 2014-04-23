@@ -71,8 +71,8 @@
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>TglSelesai SP2D</th>
-					<th>TglSP2D</th>
+					<th>Tgl Selesai SP2D</th>
+					<th>Tgl SP2D</th>
 					<th>No. SP2D</th>
 					<!--th>Status</th-->
 					

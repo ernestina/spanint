@@ -124,8 +124,13 @@ class DataKppnController extends BaseController {
 					}
 					$this->view->d_bank = $_POST['bank'];
 				}
-				$filter[$no++]="PAYMENT_DATE = TO_DATE('".date('Ymd')."','YYYYMMDD') 
-								AND TO_CHAR(CREATION_DATE,'YYYYMMDD') = '".date('Ymd')."' ";
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($_POST['tgl_awal'])).",'YYYYMMDD') 
+									AND TO_DATE (".date('Ymd',strtotime($_POST['tgl_akhir'])).",'YYYYMMDD')  ";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}
+				$filter[$no++]=" TO_CHAR(PAYMENT_DATE,'YYYYMMDD') = TO_CHAR(CREATION_DATE,'YYYYMMDD') ";
 				$this->view->data = $d_sppm->get_sp2d_hari_ini($filter);
 			}	
 		
@@ -144,8 +149,14 @@ class DataKppnController extends BaseController {
 					}
 					$this->view->d_bank = $_POST['bank'];
 				}
-				$filter[$no++]="PAYMENT_DATE = TO_DATE('".date('Ymd')."','YYYYMMDD') 
-								AND CREATION_DATE = TO_DATE('".date('Ymd')."1500','YYYYMMDDHH24MISS')";
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($_POST['tgl_awal'])).",'YYYYMMDD') 
+									AND TO_DATE (".date('Ymd',strtotime($_POST['tgl_akhir'])).",'YYYYMMDD')  ";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}
+				$filter[$no++]="( TO_CHAR(PAYMENT_DATE,'YYYYMMDD') = TO_CHAR(CREATION_DATE,'YYYYMMDD') 
+								AND TO_CHAR(CREATION_DATE,'HH24MISS') > '150000' )";
 								
 				$this->view->data = $d_sppm->get_sp2d_besok($filter);
 			}	
