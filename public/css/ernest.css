@@ -217,9 +217,10 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 
 #menu ul li.nav > a { 
 	color: rgba(0,121,185,1);
+	text-decoration: none;
 	}
 
-	#menu ul li:hover > a, #menu ul li:hover li.nav > a { 
+#menu ul li:hover > a, #menu ul li:hover li.nav > a { 
 	background: rgba(0,121,185,1);
     color: #FFF;}
 
