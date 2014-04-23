@@ -13,8 +13,8 @@ class Index extends BaseController {
 
     public function index() {
         
-        if (Session::get('role') == ADMIN || Session::get('role') == LAINYA) {
-			header('location:' . URL . 'dataSatker/upload_file');
+        if (Session::get('role') == ADMIN) {
+			header('location:' . URL . 'dataKppn/monitoringSp2d');
         } elseif (Session::get('role') == KPPN) {
             header('location:' . URL . 'dataKppn/monitoringSp2d');
         } elseif (Session::get('role') == KANWIL) {

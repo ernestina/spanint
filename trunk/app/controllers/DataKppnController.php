@@ -21,33 +21,18 @@ class DataKppnController extends BaseController {
     public function index() {
 		header('location:' . URL . 'dataKppn/download');
     }
-
-    public function download($status=null) {
-		$d_adk = new DataAdk($this->registry);
-		if (isset($_POST['cari'])) {
-			$status=$_POST['filter'];
-		}
-		if (is_null($status)) {
-            $status='0';
-        }
-		$this->view->data = $d_adk->get_adk_list(Session::get('id_user'),$status);
-		$this->view->render('kppn/downloadAdk');
-	}
-	
-	public function download_adk($adk,$status,$file_name) {
-		$d_adk = new DataAdk($this->registry);
-		if ($status==0){
-			$d_adk->set_kd_status('1');
-			$d_adk->update_status($adk);
-		}
-		header('location:' . URL . 'adk/'.$file_name);
-	}
 	
 	public function monitoringSp2d() {
 		$d_sppm = new DataSppm($this->registry);
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				} else {
+					$filter[$no++]="KDKPPN = ".Session::get('id_user');
+				}
 				if ($_POST['nosp2d']!=''){
 					$filter[$no++]="CHECK_NUMBER = ".$_POST['nosp2d'];
 					$this->view->d_nosp2d = $_POST['nosp2d'];
@@ -94,6 +79,12 @@ class DataKppnController extends BaseController {
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				} else {
+					$filter[$no++]="KDKPPN = ".Session::get('id_user');
+				}
 				if ($_POST['bank']!=''){
 					if ($_POST['bank']!=5){
 						$filter[$no++]="BANK_ACCOUNT_NAME LIKE '%".$_POST['bank']."%'";
@@ -118,6 +109,12 @@ class DataKppnController extends BaseController {
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				} else {
+					$filter[$no++]="KDKPPN = ".Session::get('id_user');
+				}
 				if ($_POST['bank']!=''){
 					if ($_POST['bank']!=5){
 						$filter[$no++]="BANK_ACCOUNT_NAME LIKE '%".$_POST['bank']."%'";
@@ -143,6 +140,12 @@ class DataKppnController extends BaseController {
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				} else {
+					$filter[$no++]="KDKPPN = ".Session::get('id_user');
+				}
 				if ($_POST['bank']!=''){
 					if ($_POST['bank']!=5){
 						$filter[$no++]="BANK_ACCOUNT_NAME LIKE '%".$_POST['bank']."%'";
@@ -170,6 +173,12 @@ class DataKppnController extends BaseController {
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				} else {
+					$filter[$no++]="KDKPPN = ".Session::get('id_user');
+				}
 				if ($_POST['bank']!=''){
 					if ($_POST['bank']!=5){
 						$filter[$no++]="BANK_ACCOUNT_NAME LIKE '%".$_POST['bank']."%'";
@@ -219,6 +228,12 @@ class DataKppnController extends BaseController {
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				} else {
+					$filter[$no++]="KDKPPN = ".Session::get('id_user');
+				}
 				if ($_POST['bank']!=''){
 					if ($_POST['bank']!=5){
 						$filter[$no++]="BANK_ACCOUNT_NAME LIKE '%".$_POST['bank']."%'";
@@ -232,7 +247,7 @@ class DataKppnController extends BaseController {
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
 				$filter[$no++] = "CHECK_AMOUNT < 1";
-				$this->view->data = $d_sppm->get_sp2d_backdate($filter);
+				$this->view->data = $d_sppm->get_sp2d_minus($filter);
 			}	
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
@@ -244,6 +259,12 @@ class DataKppnController extends BaseController {
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				} else {
+					$filter[$no++]="KDKPPN = ".Session::get('id_user');
+				}
 				if ($_POST['bank']!=''){
 					if ($_POST['bank']!=5){
 						$filter[$no++]="BANK_ACCOUNT_NAME LIKE '%".$_POST['bank']."%'";
@@ -267,11 +288,17 @@ class DataKppnController extends BaseController {
 	public function sp2dGajiDobel() {
 		$d_sppm = new DataSppm($this->registry);
 		if (isset($_POST['submit_file'])) {
+			if ($_POST['kdkppn']!=''){
+				$kppn="KDKPPN = ".$_POST['kdkppn'];
+				$this->view->d_kdkppn = $_POST['kdkppn'];
+			} else {
+				$kppn="KDKPPN = ".Session::get('id_user');
+			}
 			if ($_POST['bulan']!=13){
-					$bulan=$_POST['bulan'];
-				}
+				$bulan=$_POST['bulan'];
+			}
 			$this->view->d_bank = $_POST['bulan'];
-			$this->view->data = $d_sppm->get_sp2d_gaji_dobel($bulan);
+			$this->view->data = $d_sppm->get_sp2d_gaji_dobel($bulan,$kppn);
 		}
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiDobel');

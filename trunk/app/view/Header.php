@@ -34,20 +34,62 @@
                     <li class="nav"><a href="#"></a></li>
                     <?php
                     if (Session::get('role') == ADMIN) {
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/rekapAll>Beranda</a></li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataKppn/rekapKanwil/2000>Per Kanwil</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/rekapKanwil/2000></i>SUMUT</a></li>
-                                <li><a href=' . URL . 'dataKppn/rekapKanwil/12000></i>JAKARTA</a></li>
-                                <li><a href=' . URL . 'dataKppn/rekapKanwil/13000></i>JABAR</a></li>
-                                <li><a href=' . URL . 'dataKppn/rekapKanwil/15000></i>JOGJA</a></li>
-                                <li><a href=' . URL . 'dataKppn/rekapKanwil/16000></i>JATIM</a></li>
-                                <li><a href=' . URL . 'dataKppn/rekapKanwil/23000></i>NTT</a></li>
-                                <li><a href=' . URL . 'dataKppn/rekapKanwil/24000></i>SULSEL</a></li>
+                        echo '<li class="subnav"><a href=#>Modul PM</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
+                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
+                                <li><a href='. URL . 'dataSPM/errorSPM></i>Detail Gagal Unggah SPM</a></li>
+                            </ul>
+							</li>';
+						echo '<li class="subnav"><a href=#>Modul SA</a>';
+						echo '<ul>
+                                <li><a href='  . URL . 'dataDIPA/revisiDIPA></i>Informasi Revisi DIPA</a></li>
+                                <li><a href='  . URL . 'dataDIPA/realisasiFA></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
                             </ul>
                             </li>';
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/rekapKppn>Per KPPN</a></li>';
-						echo '<li class="nav"><a href=' . URL . 'dataKppn/rekapMasalah>Rekap Masalah</a></li>';
+						
+						echo '<li class="subnav"><a href=#>Modul GR</a>';
+						echo '<ul>
+                                <li><a href='. URL .'dataGR/GRstatus></i>Status File LHP (interface)</a></li>
+                                <li><a href='. URL .'dataGR/GR_IJP></i>IJP</a></li>
+								<li><a href=#></i>PFK</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
+                                <li><a href=#></i>Menu User</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>XICO</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
+                                <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke Bank</a></li>
+								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D terbit dan tertanggal di hari yang sama</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>Laporan SP2D terbit di atas jam 3 tertanggal hari ini</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
+								<li><a href=' . URL . '#></i>Rekap Penerbitan SP2D</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataKppn/Sp2dGajiDobel></i>Terindikasi dobel</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Teridikasi salah Tanggal</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah PayGroup</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji dengan bulan lalu</a></li>
+                            </ul>
+                            </li>';
+                        echo '<li class="subnav"><a href=#>XICO dan BS</a>';
+						echo '<ul>
+                                <li><a href=#></i>Rekon harian XICO dan BS</a></li>
+                                <li><a href=#></i>Flag Check</a></li>
+                                <li><a href=#></i>Hasil</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="nav"><a href=#>Panduan</a></li>';
                     }
                     if (Session::get('role') == KANWIL) {
 						echo '<li class="subnav"><a href=#>Modul PM</a>';
@@ -81,12 +123,12 @@
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
                                 <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke BO1</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D tertanggal hari yang sama</a></li>
-								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>Laporan SP2D tertanggal besok</a></li>
-								<!--<li><a href=' . URL . 'dataKppn/Sp2dHarian></i>Jumlah SP2D Harian ke Bank</a></li>-->
+								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D terbit dan tertanggal di hari yang sama</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>Laporan SP2D terbit di atas jam 3 tertanggal hari ini</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
+								<li><a href=' . URL . '#></i>Rekap penerbitan SP2D</a></li>
                             </ul>
                             </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';

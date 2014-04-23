@@ -25,14 +25,15 @@ class User {
         $sql = "SELECT * FROM " . $this->_table . " WHERE KD_SATKER='" . $username . "' AND PASS_USER='" . $password . "'";
         $result = $this->_db->select($sql);
 		//var_dump($sql);
+		//var_dump($result);
         $role = 0;
         $return = array();
         foreach ($result as $v) {
            $role = $v['KD_R_JENIS'];
            $kd = $v['NAMA_USER'];
            $id = $v['KD_D_KPPN'];
-			
         }
+		
 		//$return[] = 1;
 		//$role = 2;
         //$kd = 'KPPN JAKARTA II';

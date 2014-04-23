@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D Gaji Terindikasi Salah PayGroup <?php echo Session::get('user'); ?><br>
+        <h2>MONITORING SP2D Gaji Terindikasi Salah PayGroup <?php if (Session::get('role') == ADMIN) {echo "Semua KPPN";} else{echo Session::get('user');} ?><br>
 		</h2>
     </div>
 
