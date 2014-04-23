@@ -61,7 +61,7 @@ h1 {
 }
 
 header{
-	position: fixed;
+	position: relative;
     color:#fff;
     background:rgba(0,121,185,1);
     font-size:1.5em;
