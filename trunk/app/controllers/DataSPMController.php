@@ -90,6 +90,26 @@ class DataSPMController extends BaseController {
 	}
 	$this->view->render('kppn/uploadSPM');
 	}
+	
+	public function HistorySpm() {
+		$d_spm1 = new DataHistorySPM($this->registry);
+		$filter = array ();
+		$no=0;
+			if (isset($_POST['submit_file'])) {
+				
+				if ($_POST['invoice']!=''){
+					$filter[$no++]="'".$_POST['invoice']."'";
+				}
+			$this->view->data = $d_spm1->get_history_spm_filter ($filter);
+			}	
+		
+		//var_dump($d_spm->get_hist_spm_filter());
+		$this->view->render('kppn/historySPM');
+	}
+	
+	
+	
+	
     public function __destruct() {
         
     }
