@@ -214,9 +214,15 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 	}
 
 #menu ul li:hover > ul { visibility: visible;}
-#menu ul li:hover > a, #menu ul li:hover li.nav > a { 
+
+#menu ul li.nav > a { 
+	color: rgba(0,121,185,1);
+	}
+
+	#menu ul li:hover > a, #menu ul li:hover li.nav > a { 
 	background: rgba(0,121,185,1);
     color: #FFF;}
+
 #menu ul ul {
 	bottom: 0; left: 0;
 	margin-top: 0; 
@@ -1402,7 +1408,7 @@ th, td {
 	.close:hover { background: #49afcd; }
 
 footer {
-	/*margin-left: 10px;*/
+	margin-left: 10px;
 	background: #003366;
 	z-index:1;
 	height: 30px;
