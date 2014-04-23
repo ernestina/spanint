@@ -38,12 +38,12 @@
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>KPPN</th>
+					<!--th>KPPN</th-->
 					<th>User Name</th>
 					<th>Nama</th>
 					<th>NIP</th>
 					<th>Posisi</th>
-					<th>Responsibility Name</th>
+					<!--th>Responsibility Name</th-->
 					<th>Email Depkeu</th>
 					<th>Tanggal Mulai Aktif</th>
 					<th>Tanggal Berakhir</th>
@@ -59,12 +59,12 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_kdkppn() . "</td>";
+					//echo "<td>" . $value->get_kdkppn() . "</td>";
 					echo "<td>" . $value->get_user_name() . "</td>";
 					echo "<td>" . $value->get_last_name() . "</td>";
 					echo "<td>" . $value->get_attribute1() . "</td>";
 					echo "<td>" . $value->get_name() . "</td>";
-					echo "<td>" . $value->get_responsibility_name() . "</td>";
+					//echo "<td>" . $value->get_responsibility_name() . "</td>";
 					echo "<td>" . $value->get_email_address() . "</td>";
 					echo "<td>" . $value->get_start_date() . "</td>";
 					echo "<td>" . $value->get_end_date() . "</td>";
@@ -106,7 +106,6 @@
 		
 		
         var jml = 0;
-		
         if(v_nip == ''){
             $('#wnip').html('Harap isi NIP pegawai');
             $('#wnip').fadeIn();
