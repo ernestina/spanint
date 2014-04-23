@@ -81,7 +81,7 @@
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
                                 <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke BO1</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D tertanggal hari ini</a></li>
+								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D tertanggal hari yang sama</a></li>
 								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>Laporan SP2D tertanggal besok</a></li>
 								<!--<li><a href=' . URL . 'dataKppn/Sp2dHarian></i>Jumlah SP2D Harian ke Bank</a></li>-->
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
