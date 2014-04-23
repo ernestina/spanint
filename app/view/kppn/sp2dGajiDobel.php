@@ -72,8 +72,10 @@
 							echo "<td>" . $value->get_invoice_description() . "</td>";
 						echo "</tr>	";
 					}
-				} 
-			} 
+				}  
+			} else {
+				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+			}
 			?>
 			</tbody>
         </table>

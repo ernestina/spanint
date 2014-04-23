@@ -3,9 +3,9 @@
         <h2>MONITORING SP2D Gaji Terindikasi Salah Tanggal <?php echo Session::get('user'); ?><br>
 		</h2>
     </div>
-</div>
-<div id="top">
-		<table class="table-bordered zebra scroll" width="100%">
+
+<div id="fitur">
+		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
@@ -22,7 +22,7 @@
 			$no=1;
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "Tidak ada data";
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
 				} else {
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
@@ -36,7 +36,7 @@
 						echo "</tr>	";
 					}
 				} 
-			} 
+			}
 			?>
 			</tbody>
         </table>

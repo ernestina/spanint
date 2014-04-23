@@ -3,38 +3,38 @@
         <h2>MONITORING Perbandingan SP2D dengan Bulan Lalu <?php echo Session::get('user'); ?><br>
 		</h2>
     </div>
-</div>
-<div id="top">
-		<table class="table-bordered zebra scroll" width="100%">
+
+<div id="fitur">
+		<table width="100%" class="table table-bordered zebra scroll">
             <!--baris pertama-->
 			<thead>
 				<tr>
-					<th rowspan="2">No.</th>
-					<th rowspan="2">BANK</th>
-					<th colspan="12">Jumlah. SP2D</th>
+					<th width="5%" rowspan="2" style="halign: center">No.</th>
+					<th width="35%" rowspan="2">BANK</th>
+					<th width="60%" colspan="12">Jumlah SP2D</th>
 				</tr>
 				<tr>
-					<th>Januari</th>
-					<th>Februari</th>
-					<th>Maret</th>
-					<th>April</th>
-					<th>Mei</th>
-					<th>Juni</th>
-					<th>Juli</th>
-					<th>Agustus</th>
-					<th>Sepetember</th>
-					<th>Oktober</th>
-					<th>November</th>
-					<th>Desember</th>
+					<th width="5%">Janu</th>
+					<th width="5%">Febru</th>
+					<th width="5%">Maret</th>
+					<th width="5%">April</th>
+					<th width="5%">Mei</th>
+					<th width="5%">Juni</th>
+					<th width="5%">Juli</th>
+					<th width="5%">Agust</th>
+					<th width="5%">Sept</th>
+					<th width="5%">Okto</th>
+					<th width="5%">Nove</th>
+					<th width="5%">Dese</th>
 				</tr>
 			</thead>
 			<tbody>
 			<?php 
 			$no=1;
 			if (isset($this->data)){
-				if (empty($this->data)){
-					echo "Tidak ada data";
-				} else {
+//				if (empty($this->data)){
+//					echo "Tidak ada data";
+//				} else {
 					foreach ($this->data as $value){ 
 						echo "<tr> ";
 						echo "<td>" . $no++ . "</td>";
@@ -54,7 +54,7 @@
 						echo "</tr> ";
 					}
 				} 
-			} 
+//			} 
 			?>
 			</tbody>
         </table>
