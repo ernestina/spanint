@@ -106,6 +106,7 @@
 		
 		
         var jml = 0;
+		
         if(v_nip == ''){
             $('#wnip').html('Harap isi NIP pegawai');
             $('#wnip').fadeIn();
