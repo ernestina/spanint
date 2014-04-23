@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING SP2D - BANK<br>
-			 <?php echo Session::get('user'); ?>
+			 <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;}else{echo Session::get('user');} ?>
 		</h2>
     </div>
 
@@ -14,8 +14,14 @@
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
 </a>
 	
-	<div id="top">			
+	<div id="top">	
 		<form method="POST" action="monitoringSp2d" enctype="multipart/form-data">
+		<?php if (Session::get('role') == ADMIN) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<input type="number" name="kdkppn" id="kdkppn" size="3" value="<?php if (isset($this->d_kdkppn)){echo $this->d_kdkppn;}?>">
+		<?php } ?>
+		
 		<div id="wsp2d" class="error"></div>
 		<label class="isian">No SP2D: </label>
 		<input type="number" name="nosp2d" id="nosp2d" size="15" value="<?php if (isset($this->d_nosp2d)){echo $this->d_nosp2d;}?>">
@@ -144,6 +150,7 @@
     }
 
     function hideWarning(){
+		
         $('#nosp2d').keyup(function() {
             if (document.getElementById('nosp2d').value != '') {
                 $('#wsp2d').fadeOut(200);

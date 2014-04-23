@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D Gaji Terindikasi  Dobel <?php echo Session::get('user'); ?><br>
+        <h2>MONITORING SP2D Gaji Terindikasi  Dobel <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;}else{echo Session::get('user');} ?><br>
 		</h2>
     </div>
 
@@ -16,6 +16,12 @@
 <div id="top">
 
 	<form method="POST" action="sp2dGajiDobel" enctype="multipart/form-data">
+	
+		<?php if (Session::get('role') == ADMIN) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<input type="number" name="kdkppn" id="kdkppn" size="3" value="<?php if (isset($this->d_kdkppn)){echo $this->d_kdkppn;}?>">
+		<?php } ?>
 		
 		<div id="wbulan" class="error"></div>
 		<label class="isian">Bulan: </label>

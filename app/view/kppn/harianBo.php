@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING HARIAN BO I<br>
-			 <?php echo Session::get('user'); ?>
+        <h2>MONITORING PENERBITAN SP2D HARIAN KE BANK<br>
+			 <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;}else{echo Session::get('user');} ?>
 		</h2>
     </div>
 
@@ -16,6 +16,13 @@
 
 <div id="top">
 	<form method="POST" action="harianBO" enctype="multipart/form-data">
+	
+		<?php if (Session::get('role') == ADMIN) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<input type="number" name="kdkppn" id="kdkppn" size="3" value="<?php if (isset($this->d_kdkppn)){echo $this->d_kdkppn;}?>">
+		<?php } ?>
+		
 		<div id="wbank" class="error"></div>
 		<label class="isian">Nama Bank: </label> 
 		<select type="text" name="bank" id="bank" value="<?phpif (isset($this->bank)){echo $this->bank.MDRI;} ?>">
