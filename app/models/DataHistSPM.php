@@ -79,7 +79,7 @@ class DataHistSPM{
 			$d_data->set_org_id($val['ORG_ID']);
 			$d_data->set_organization_id($val['ORGANIZATION_ID']);
 			$d_data->set_user_name($val['USER_NAME']);
-			$d_data->set_fu_description($val['FU_DESCRIPTION']);
+			$d_data->set_fu_description(substr($val['FU_DESCRIPTION'],11));
 			$d_data->set_begin_date($val['BEGIN_DATE']);
 			$d_data->set_time_begin_date($val['TIME_BEGIN_DATE']);
 			$d_data->set_end_date($val['END_DATE']);

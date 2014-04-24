@@ -60,7 +60,7 @@
 					<th>Status</th>
 					<!--th>original_recipient</th-->
 					<th>User</th>
-					<th>Posisi User</th>
+					<!--th>Posisi User</th-->
 					<th>Mulai</th>
 					<!--th>Jam Mulai</th>
 					<th>Selesai</th>
@@ -85,8 +85,8 @@
 						echo "<td>" . $value->get_wfapproval_status() . "</td>";
 						echo "<td>" . $value->get_status() . "</td>";
 						//echo "<td>" . $value->get_original_recipient() . "</td>";
-						echo "<td>" . $value->get_to_user() . ' ' . $value->get_original_recipient() . "</td>";
-						echo "<td>" . $value->get_fu_description() . "</td>";
+						echo "<td>" . $value->get_to_user() . ' ' . $value->get_fu_description() . "</td>";
+						//echo "<td>" . $value->get_fu_description() . "</td>";
 						echo "<td>" . $value->get_begin_date() . ' ' . $value->get_time_begin_date() . "</td>";
 						//echo "<td>" . $value->get_time_begin_date() . "</td>";
 						//echo "<td>" . $value->get_end_date() . ' ' . $value->get_time_end_date() . "</td>";

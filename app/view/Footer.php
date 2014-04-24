@@ -1,6 +1,6 @@
 </div>
 </body>
-<center><footer><h3>Direktorat Transformasi Perbendaharaan - &copy 2013-2014. <a href="#openModal">Developer.</a><h3></center>
+<center><footer><h3>Direktorat Transformasi Perbendaharaan &copy 2014. <a href="#openModal">Developer.</a><h3></center>
     <div id="openModal" class="modalDialog" >
 		<div><h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">Developer :</h2>
 		<a href="#close" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
@@ -10,6 +10,7 @@
 				<a href="mailto:doniebelva@gmail.com" target="_top">Donie Mahaputra</a> - Project Manager and System Analyst</br>
 				<a href="mailto:andi.saputra.jakarta@gmail.com" target="_top">Andi Saputra</a> - Application Engineer</br>
 				<a href="mailto:nez817@gmail.com" target="_top">Ernestina R</a> - User Interface Designer</br>
+				<a href="mailto:@gmail.com" target="_top">Alifiyan R</a> - User Interface Designer</br>
 				<a href="mailto:hkm.lutfi@gmail.com" target="_top">Luthfi Hakim</a> - App. Designer Module SA/PM</br>
 				<a href="mailto:baygiv@gmail.com" target="_top">Bayu Yudhistira</a> - App. Designer Module UM</br>
 				<a href="mailto:achmadford@gmail.com" target="_top">Achmad Ford</a> - App. Designer Module GR</br>
