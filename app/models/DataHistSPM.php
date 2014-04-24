@@ -49,17 +49,18 @@ class DataHistSPM{
 		$sql = "SELECT *
 				from "
 				. $this->_table1 ."
-				  WHERE SUBSTR(OU_NAME,1,3)= ".Session::get('id_user'). "
-				  AND STATUS = 'OPEN' ";
-				;
+				  WHERE SUBSTR(OU_NAME,1,3)= ".Session::get('id_user')
+				  ;
 				
 				
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
-		$sql .= " ORDER BY BEGIN_DATE, INVOICE_NUM DESC";
-		//var_dump ($sql);
+		
+		$sql .= " AND STATUS = 'OPEN'";
+		$sql .= " ORDER BY BEGIN_DATE, TIME_BEGIN_DATE, INVOICE_NUM DESC";
+		var_dump ($sql);
         $result =  $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
