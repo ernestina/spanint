@@ -1,9 +1,11 @@
 <div id="top">
 	<div id="header">
-        <h2>HISTORY INVOICE <?php echo Session::get('user'); ?></h2>
+        <h2>Imbalan Jasa Perbankan <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
+			<?php echo Session::get('user'); ?>
+		</h2>
     </div>
 
-<a href="#xModal" class="modal">FILTER DATA</a><br><br>
+<!--a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
@@ -11,11 +13,19 @@
                     $_SERVER['PHP_SELF'];
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
 	<div id="top">
-	<form method="POST" action="HistorySpm" enctype="multipart/form-data">
-		<div id="winvoice" class="error"></div>
+	<form method="POST" action="GR_IJP" enctype="multipart/form-data">
+		<div id="wstatus" class="error"></div>
+		<!--div id="wbank" class="status"></div-->
+		<!--label class="isian">Status: </label>
+		<select type="text" name="status" id="status">
+			<option value=''>- pilih -</option>
+			<option value='Validated' <?php if ($this->status==Validated){echo "selected";}?>>Validated</option>
+			<option value='Error' <?php if ($this->status==Error){echo "selected";}?>>Error</option>
+			
+		</select>
 		
-		<label class="isian">No INVOICE: </label>
-		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->d_invoice)){echo $this->d_invoice;}?>">
+		<label class="isian">Nama File: </label>
+		<input type="text" name="nama_file" id="nama_file" value="<?php if (isset($this->nama_file)){echo $this->nama_file;}?>">
 
 
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
@@ -25,15 +35,15 @@
 		<input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
 		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
 
-		<ul class="inline" style="margin-left: 130px">
+		<!--ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick="return cek_upload();"></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();"></li>
 		<!--onClick="konfirm(); return false;"-->
-		</ul>
+		<!--/ul>
 	</form>
 </div>
 </div>
-</div>
+</div-->
 
 
 
@@ -42,39 +52,29 @@
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>Nomor Invoce</th>
-					<th>Reponse</th>
-					<th>Nama User</th>
-					<th>Posisi</th>
-					<th>Waktu Mulai</th>
-					<th>Nomor SP2D</th>
-								
+					<th>KPPN</th>
+					<th>Tanggal</th>
+					<th>Kode Bank</th>
+					<th>Kode Cabang Bank</th>
+					<th>Nomor Rekening</th>
+					<th>Transaksi</th>
+					<th>Baris</th>
 			</thead>
 			<tbody>
 			<?php 
 			$no=1;
-			//var_dump ($this->data);
-			if (isset($this->data)){
-				if (empty($this->data)){
-					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
-				} else {
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_invoice_num() . "</td>";
-					echo "<td>" . $value->get_response() . "</td>";
-					echo "<td>" . $value->get_user_name() . "</td>";
-					echo "<td>" . $value->get_posisi() . "</td>";
-					echo "<td>" . $value->get_creation_date() . "</td>";
-					echo "<td>" . $value->get_check_number() . "</td>";
-					
+					echo "<td>" . $value->get_kppn() . "</td>";
+					echo "<td>" . $value->get_gl_date_char() . "</td>";
+					echo "<td>" . $value->get_bank_code() . "</td>";
+					echo "<td>" . $value->get_bank_branch_code() . "</td>";
+					echo "<td>" . $value->get_bank_account_num() . "</td>";
+					echo "<td>" . $value->get_transaksi() . "</td>";
+					echo "<td>" . $value->get_baris() . "</td>";
 				echo "</tr>	";
 			} 
-			}
-			}
-			else {
-				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
-			}
 			?>
 			</tbody>
         </table>
@@ -93,21 +93,21 @@
     }
 
     function hideWarning(){
-		$('#invoice').keyup(function(){
-            if(document.getElementById('invoice').value !=''){
-                $('#winvoice').fadeOut(200);
+		$('#status').change(function(){
+            if(document.getElementById('status').value !=''){
+                $('#wstatus').fadeOut(200);
             }
         });
 
     }
     
     function cek_upload(){
-		var v_invoice = document.getElementById('invoice').value;
+		var v_status = document.getElementById('status').value;
 		
         var jml = 0;
-		if(v_invoice==''){
-			$('#winvoice').html('Harap isi no invoice');
-            $('#winvoice').fadeIn();
+		if(v_status==''){
+			$('#wstatus').html('Harap pilih');
+            $('#wstatus').fadeIn();
             jml++;
         }
 		if(jml>0){

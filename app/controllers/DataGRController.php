@@ -44,16 +44,18 @@ class DataGRController extends BaseController {
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+				if ($_POST['bulan']!=''){
+					//if ($_POST['bulan']!='SEMUA_BULAN'){
+						$filter[$no++]="BULAN = '".$_POST['bulan']."'";
+					//}
+					$this->view->d_bulan = $_POST['bulan'];
+				} 
 				
-				if ($_POST['status']!=''){
-					$filter[$no++]="status = '" .$_POST['status']."'";
+			} else {
+					$filter[$no++]="BULAN = '".date('m', time())."'";
+					$this->view->d_bulan = date('m', time());
 				}
-				
-				if ($_POST['nama_file']!=''){
-					$filter[$no++]=" file_name = '".$_POST['nama_file']."'";
-				}
-				
-			}
+			
 		$this->view->data = $d_spm1->get_gr_ijp_filter($filter);
 		//var_dump($d_spm->get_gr_status_filter($filter));
 		$this->view->render('kppn/GR_IJP');
