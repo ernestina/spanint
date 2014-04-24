@@ -60,7 +60,7 @@ class DataHistSPM{
 		
 		$sql .= " AND STATUS = 'OPEN'";
 		$sql .= " ORDER BY BEGIN_DATE, TIME_BEGIN_DATE, INVOICE_NUM DESC";
-		var_dump ($sql);
+		//var_dump ($sql);
         $result =  $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {

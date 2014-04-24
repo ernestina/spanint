@@ -52,14 +52,14 @@
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>Nilai invoice</th>
 					<!--th>KPPN</th-->
 					<th>Nomor Invoice</th>
+					<th>Nilai Invoice Rp</th>
 					<th>Deskripsi Invoice</th>
 					<th>Approval Status</th>
 					<th>Status</th>
-					<th>original_recipient</th>
-					<th>To User</th>
+					<!--th>original_recipient</th-->
+					<th>User</th>
 					<th>Posisi User</th>
 					<th>Mulai</th>
 					<!--th>Jam Mulai</th>
@@ -77,14 +77,15 @@
 					foreach ($this->data as $value){ 
 					echo "<tr>	";
 						echo "<td>" . $no++ . "</td>";
-						echo "<td>" . $value->get_invoice_amount() . "</td>";
+						
 						//echo "<td>" . $value->get_ou_name() . "</td>";
-						echo "<td>" . $value->get_invoice_num() . "</td>";
+						echo "<td><a href=''>" . $value->get_invoice_num() . "</a></td>";
+						echo "<td class='ratakanan'>" . $value->get_invoice_amount() . "</td>";
 						echo "<td>" . $value->get_invoice_description() . "</td>";
 						echo "<td>" . $value->get_wfapproval_status() . "</td>";
 						echo "<td>" . $value->get_status() . "</td>";
-						echo "<td>" . $value->get_original_recipient() . "</td>";
-						echo "<td>" . $value->get_to_user() . "</td>";
+						//echo "<td>" . $value->get_original_recipient() . "</td>";
+						echo "<td>" . $value->get_to_user() . ' ' . $value->get_original_recipient() . "</td>";
 						echo "<td>" . $value->get_fu_description() . "</td>";
 						echo "<td>" . $value->get_begin_date() . ' ' . $value->get_time_begin_date() . "</td>";
 						//echo "<td>" . $value->get_time_begin_date() . "</td>";
