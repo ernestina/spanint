@@ -4,7 +4,23 @@
 			<?php echo Session::get('user'); ?>
 		</h2>
     </div>
-
+<select type="text" name="bulan" id="bulan">
+			<option value=''>Januari</option>
+			<option value=''>Februari</option>
+			<option value=''>Maret</option>
+			<option value=''>April</option>
+			<option value=''>Mei</option>
+			<option value=''>Juni</option>
+			<option value=''>Juli</option>
+			<option value=''>Agustus</option>
+			<option value=''>September</option>
+			<option value=''>Oktober</option>
+			<option value=''>November</option>
+			<option value=''>Desember</option>
+			<!--option value='Validated' <?php //if ($this->status==Validated){echo "selected";}?>>Validated</option>
+			<option value='Error' <?php //if ($this->status==Error){echo "selected";}?>>Error</option-->
+			
+		</select>
 <!--a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
             <div>
@@ -52,13 +68,42 @@
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>KPPN</th>
-					<th>Tanggal</th>
-					<th>Kode Bank</th>
-					<th>Kode Cabang Bank</th>
-					<th>Nomor Rekening</th>
-					<th>Transaksi</th>
-					<th>Baris</th>
+					<!--th>KPPN</th-->
+					<!--th>Tanggal</th-->
+					<th>Bank, No Rek</th>
+					<!--th>Kode Cabang Bank</th-->
+					<th>1</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+					<th>8</th>
+					<th>9</th>
+					<th>10</th>
+					<th>11</th>
+					<th>12</th>
+					<th>13</th>
+					<th>14</th>
+					<th>15</th>
+					<th>16</th>
+					<th>17</th>
+					<th>18</th>
+					<th>19</th>
+					<th>20</th>
+					<th>21</th>
+					<th>22</th>
+					<th>23</th>
+					<th>24</th>
+					<th>25</th>
+					<th>26</th>
+					<th>27</th>
+					<th>28</th>
+					<th>29</th>
+					<th>30</th>
+					<th>31</th>
+					<th>Total</th>
 			</thead>
 			<tbody>
 			<?php 
@@ -66,13 +111,14 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_kppn() . "</td>";
-					echo "<td>" . $value->get_gl_date_char() . "</td>";
-					echo "<td>" . $value->get_bank_code() . "</td>";
-					echo "<td>" . $value->get_bank_branch_code() . "</td>";
-					echo "<td>" . $value->get_bank_account_num() . "</td>";
+					//echo "<td>" . $value->get_kppn() . "</td>";
+					//echo "<td>" . $value->get_gl_date_char() . "</td>";
+					echo "<td>" . $value->get_bank_code() . '-'. $value->get_bank_account_num() . "</td>";
+					//echo "<td>" . $value->get_bank_branch_code() . "</td>";
+					//echo "<td>" . $value->get_bank_account_num() . "</td>";
 					echo "<td>" . $value->get_transaksi() . "</td>";
-					echo "<td>" . $value->get_baris() . "</td>";
+					//echo "<td>" . $value->get_baris() . "</td>";
+					
 				echo "</tr>	";
 			} 
 			?>
