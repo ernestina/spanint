@@ -1,12 +1,12 @@
 <div id="top">
 	<div id="header">
-        <h2>Monitoring Imbalan Jasa Perbankan <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			<?php echo Session::get('user'); ?>
+        <h2>Monitoring Imbalan Jasa Perbankan <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?>
+			<?php //echo Session::get('user'); ?>
 		</h2>
     </div>
-<table><tr><td>
+<table><tr><td width="90%">
 <form method="POST" action="GR_IJP" enctype="multipart/form-data">
-	<select type="text" name="bulan" id="bulan" style="margin-top: 10px; margin-left: 800px; padding-top: 7px;">
+	<select type="text" name="bulan" id="bulan" style="margin-top: 10px; padding-top: 7px; float: right">
 			<option value='01' <?php if ($this->d_bulan=='01'){echo "selected";}?> >Januari</option>
 			<option value='02' <?php if ($this->d_bulan=='02'){echo "selected";}?> >Februari</option>
 			<option value='03' <?php if ($this->d_bulan=='03'){echo "selected";}?> >Maret</option>
@@ -31,46 +31,52 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra scroll" style="font-size: 80%">
             <!--baris pertama-->
 			<thead>
-					<th>No.</th>
+				<tr>
+					<th rowspan=2 width="10px">No.</th>
 					<!--th>KPPN</th-->
 					<!--th>Tanggal</th-->
-					<th>Bank, No Rek</th>
+					<th rowspan=2 width="70px">Bank - No Rek</th>
 					<!--th>Kode Cabang Bank</th-->
-					<th>1</th>
-					<th>2</th>
-					<th>3</th>
-					<th>4</th>
-					<th>5</th>
-					<th>6</th>
-					<th>7</th>
-					<th>8</th>
-					<th>9</th>
-					<th>10</th>
-					<th>11</th>
-					<th>12</th>
-					<th>13</th>
-					<th>14</th>
-					<th>15</th>
-					<th>16</th>
-					<th>17</th>
-					<th>18</th>
-					<th>19</th>
-					<th>20</th>
-					<th>21</th>
-					<th>22</th>
-					<th>23</th>
-					<th>24</th>
-					<th>25</th>
-					<th>26</th>
-					<th>27</th>
-					<th>28</th>
-					<th>29</th>
-					<th>30</th>
-					<th>31</th>
-					<th>Total</th>
+					<th colspan=20>Tanggal Penerimaan</th>
+					<!--th rowspan=2>Total</th-->
+				</tr>
+				<tr>
+					<th width="30px">1</th>
+					<th width="30px">2</th>
+					<th width="30px">3</th>
+					<th width="30px">4</th>
+					<th width="30px">5</th>
+					<th width="30px">6</th>
+					<th width="30px">7</th>
+					<th width="30px">8</th>
+					<th width="30px">9</th>
+					<th width="30px">10</th>
+					<th width="30px">11</th>
+					<th width="30px">12</th>
+					<th width="30px">13</th>
+					<th width="30px">14</th>
+					<th width="30px">15</th>
+					<th width="30px">16</th>
+					<th width="30px">17</th>
+					<th width="30px">18</th>
+					<th width="30px">19</th>
+					<th width="30px">20</th>
+					<th width="30px">21</th>
+					<th width="30px">22</th>
+					<th width="30px">23</th>
+					<th width="30px">24</th>
+					<th width="30px">25</th>
+					<th width="30px">26</th>
+					<th width="30px">27</th>
+					<th width="30px">28</th>
+					<th width="30px">29</th>
+					<th width="30px">30</th>
+					<th width="30px">31</th-->
+				</tr>
+					
 			</thead>
 			<tbody>
 		<?php 

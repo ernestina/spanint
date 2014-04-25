@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
-        <h2>MANAJEMEN USER<br>
-			 <?php echo Session::get('user'); ?>
+        <h2>MANAJEMEN USER
+			 <?php //echo Session::get('user'); ?>
 		</h2>
     </div>
 

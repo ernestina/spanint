@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D Gaji Terindikasi  Dobel <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;}else{echo Session::get('user');} ?><br>
+        <h2>MONITORING SP2D Gaji Terindikasi  Dobel <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?><br>
 		</h2>
     </div>
 

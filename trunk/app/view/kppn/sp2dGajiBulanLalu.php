@@ -1,11 +1,11 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING Perbandingan SP2D dengan Bulan Lalu <?php echo Session::get('user'); ?><br>
+        <h2>MONITORING Perbandingan SP2D dengan Bulan Lalu <?php //echo Session::get('user'); ?><br>
 		</h2>
     </div>
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra">
             <!--baris pertama-->
 			<thead>
 				<tr>
@@ -14,18 +14,18 @@
 					<th width="60%" colspan="12">Jumlah SP2D</th>
 				</tr>
 				<tr>
-					<th width="5%">Janu</th>
-					<th width="5%">Febru</th>
-					<th width="5%">Maret</th>
-					<th width="5%">April</th>
+					<th width="5%">Jan</th>
+					<th width="5%">Feb</th>
+					<th width="5%">Mar</th>
+					<th width="5%">Apr</th>
 					<th width="5%">Mei</th>
-					<th width="5%">Juni</th>
-					<th width="5%">Juli</th>
-					<th width="5%">Agust</th>
-					<th width="5%">Sept</th>
-					<th width="5%">Okto</th>
-					<th width="5%">Nove</th>
-					<th width="5%">Dese</th>
+					<th width="5%">Jun</th>
+					<th width="5%">Jul</th>
+					<th width="5%">Ags</th>
+					<th width="5%">Sep</th>
+					<th width="5%">Okt</th>
+					<th width="5%">Nov</th>
+					<th width="5%">Des</th>
 				</tr>
 			</thead>
 			<tbody>

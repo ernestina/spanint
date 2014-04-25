@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING SP2D NILAI MINUS DAN 0<br>
-			 <?php echo Session::get('user'); ?>
+			 <?php //echo Session::get('user'); ?>
 		</h2>
     </div>
 </div>
