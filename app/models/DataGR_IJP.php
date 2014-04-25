@@ -54,6 +54,7 @@ class DataGR_IJP{
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
+		$sql .= " ORDER BY BANK_CODE, BANK_ACCOUNT_NUM ";
 		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   

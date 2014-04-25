@@ -32,9 +32,18 @@
 			<?php 
 			$no=1;
 			if (isset($this->data)){
-//				if (empty($this->data)){
-//					echo "Tidak ada data";
-//				} else {
+				$jan=0;
+				$feb=0;
+				$mar=0;
+				$apr=0;
+				$mei=0;
+				$jun=0;
+				$jul=0;
+				$ags=0;
+				$sep=0;
+				$okt=0;
+				$nop=0;
+				$des=0;
 					foreach ($this->data as $value){ 
 						echo "<tr> ";
 						echo "<td>" . $no++ . "</td>";
@@ -52,7 +61,34 @@
 						if($value->get_invoice_description()!=''){echo "<td>" . $value->get_invoice_description(). "</td>";} else {echo "<td>0</td>";}
 						if($value->get_ftp_file_name()!=''){echo "<td>" . $value->get_ftp_file_name(). "</td>";} else {echo "<td>0</td>";}
 						echo "</tr> ";
+						$jan+=$value->get_invoice_num();
+						$feb+=$value->get_check_date();
+						$mar+=$value->get_creation_date();
+						$apr+=$value->get_check_number();
+						$mei+=$value->get_check_number_line_num();
+						$jun+=$value->get_check_amount();
+						$jul+=$value->get_bank_account_name();
+						$ags+=$value->get_bank_name();
+						$sep+=$value->get_vendor_ext_bank_account_num();
+						$okt+=$value->get_vendor_name();
+						$nop+=$value->get_invoice_description();
+						$des+=$value->get_ftp_file_name();
 					}
+					echo "<tr> ";
+					echo "<td></td>";
+					echo "<td><b>TOTAL</b></td>";
+					echo "<td><b>".$jan."</b></td>";
+					echo "<td><b>".$feb."</b></td>";
+					echo "<td><b>".$mar."</b></td>";
+					echo "<td><b>".$apr."</b></td>";
+					echo "<td><b>".$mei."</b></td>";
+					echo "<td><b>".$jun."</b></td>";
+					echo "<td><b>".$jul."</b></td>";
+					echo "<td><b>".$ags."</b></td>";
+					echo "<td><b>".$sep."</b></td>";
+					echo "<td><b>".$okt."</b></td>";
+					echo "<td><b>".$nop."</b></td>";
+					echo "<td><b>".$des."</b></td>";
 				} 
 //			} 
 			?>
