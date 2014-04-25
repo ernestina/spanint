@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>REALISASI KETERSEDIAAN DANA DIPA SATKER <br>
-		<?php echo Session::get('user'); ?><br>
+		<?php //echo Session::get('user'); ?><br>
 		</h2>
     </div>
 

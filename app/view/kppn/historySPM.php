@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>HISTORY INVOICE <?php echo Session::get('user'); ?></h2>
+        <h2>HISTORY INVOICE <?php //echo Session::get('user'); ?></h2>
     </div>
 
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>

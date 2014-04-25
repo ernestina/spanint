@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING SP2D BACKDATE<br>
-			<?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;}else{echo Session::get('user');} ?>
+			<?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?>
 		</h2>
     </div>
 

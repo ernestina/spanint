@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING PENERBITAN SP2D HARIAN KE BANK<br>
-			 <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;}else{echo Session::get('user');} ?>
+			 <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?>
 		</h2>
     </div>
 

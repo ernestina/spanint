@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D HARIAN<br>
-			 <?php echo Session::get('user'); ?>
+        <h2>MONITORING SP2D HARIAN
+			 <?php //echo Session::get('user'); ?>
 		</h2>
     </div>
 	

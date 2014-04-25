@@ -165,9 +165,9 @@
                     <li>
                         <a href="<?php echo URL; ?>auth/logout"><i class="icon-off"></i></a>
                     </li>
-                    <!--li class="nav" style="float: right; font-size: 70%">
-                        <a style="color: #F2C45A ">Selamat datang,<?php //echo Session::get('user') ?></a>
-                    </li-->
+                    <li class="nav" style="float: right;">
+                        <h3 style="margin-top: 13px"><a style="color: rgba(0,121,185,1); "><?php echo Session::get('user') ?></a></h3>
+                    </li>
                 </ul>
             </div>
 

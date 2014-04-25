@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
-        <h2>STATUS FILE LHP INTERFACE <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			<?php echo Session::get('user'); ?>
+        <h2>STATUS FILE LHP INTERFACE <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?>
+			<?php //echo Session::get('user'); ?>
 		</h2>
     </div>
 
