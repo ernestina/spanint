@@ -35,8 +35,8 @@
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>
 		<ul class="inline">
-		<li><input type="text" class="tanggal" name="tgl_awal" id="datepicker2" value="" /> </li> <li>s/d</li>
-		<li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker3"></li>
+		<li><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>"> </li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker1" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
 		</ul>
 
 		<ul class="inline"  style="margin-left: 130px">

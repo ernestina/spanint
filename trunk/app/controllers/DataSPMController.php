@@ -99,6 +99,7 @@ class DataSPMController extends BaseController {
 				
 				if ($_POST['invoice']!=''){
 					$filter[$no++]="'".$_POST['invoice']."'";
+					$this->view->d_invoice = $_POST['invoice'];
 				}
 			$this->view->data = $d_spm1->get_history_spm_filter ($filter);
 			}	

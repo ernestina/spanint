@@ -55,7 +55,7 @@ class DataDipa{
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " ORDER BY TANGGAL_POSTING_REVISI, SATKER_CODE, ACCOUNT_CODE DESC";
+		$sql .= " ORDER BY SATKER_CODE ASC, REVISION_NO DESC, ACCOUNT_CODE ASC, TANGGAL_POSTING_REVISI DESC, JAM_POSTING_REVISI DESC ";
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);

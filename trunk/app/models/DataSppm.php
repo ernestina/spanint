@@ -415,7 +415,7 @@ class DataSppm {
 				SELECT SUBSTR(INVOICE_NUM,8,6) SATKER, COUNT(INVOICE_NUM) CEK , INVOICE_NUM FROM TEMP_GAJI_DOBEL 
 				GROUP BY SUBSTR(INVOICE_NUM,8,6), INVOICE_NUM HAVING COUNT(*) > 1 ))) ORDER BY SUBSTR(INVOICE_NUM,8,6)";
         $result = $this->db->select($sql);
-		var_dump ($sql);
+		//var_dump ($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);

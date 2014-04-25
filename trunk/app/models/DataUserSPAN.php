@@ -38,14 +38,14 @@ class DataUserSPAN {
     
     public function get_user_filter($filter) {
 	Session::get('id_user');
-        /*$sql = "SELECT * FROM " . $this->_table. "
-		WHERE KDKPPN = ".Session::get('id_user'); */
-	  	$sql = "SELECT DISTINCT user_name, last_name, attribute1, name, email_address, start_date, end_date FROM " . $this->_table. "
+        $sql = "SELECT KDKPPN, USER_NAME, LAST_NAME, ATTRIBUTE1, substr(NAME,12,30) NAME, EMAIL_ADDRESS, START_DATE, END_DATE FROM " . $this->_table. "
 		WHERE KDKPPN = ".Session::get('id_user');
+	  	
         foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 			
 		}
+		$sql .= "  GROUP BY KDKPPN, USER_NAME, LAST_NAME, ATTRIBUTE1,NAME, EMAIL_ADDRESS, START_DATE, END_DATE";
 		//var_dump($sql);
 	    $result = $this->db->select($sql);
       	$data = array();   

@@ -49,7 +49,7 @@ class DataHistorySPM{
 				AIIA.status_code RESPONSE, 
 				pap.last_name nama_user, 
 				case when fu.user_name like '19%' then fu.description else fu.user_name end as POSISI, 
-				to_char(AIIA.creation_date, 'yyyymmdd hh24:mi:ss') waktu_mulai, 
+				to_char(AIIA.creation_date, 'dd-mm-yyyy hh24:mi:ss') waktu_mulai, 
 				'-' NO_SP2D
 				from "	. $this->_table1 .	" AIIA," 
 						. $this->_table4 . 	" FU," 
@@ -66,7 +66,7 @@ class DataHistorySPM{
 				,ah.response response
 				,pap.last_name nama_user
 				,case when fu.user_name like '19%' then fu.description else fu.user_name end as Posisi
-				,to_char(ah.creation_date, 'yyyymmdd hh24:mi:ss') waktu_mulai
+				,to_char(ah.creation_date, 'dd-mm-yyyy hh24:mi:ss') waktu_mulai
 				,'-' as no_sp2d 
 				from "	. $this->_table2 . " ah, "
 						. $this->_table3 . " ai, "
@@ -88,7 +88,7 @@ class DataHistorySPM{
 				,aap.transaction_type response
 				,case when pap.last_name is null then fu.user_name else pap.last_name end as nama_user
 				, fu.description  Posisi
-				,to_char(aap.creation_date, 'yyyymmdd hh24:mi:ss') waktu_mulai
+				,to_char(aap.creation_date, 'dd-mm-yyyy hh24:mi:ss') waktu_mulai
 				,to_char(aca.check_number) no_sp2d
 				from " . $this->_table3 . " aia
 						
