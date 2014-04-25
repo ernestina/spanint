@@ -40,8 +40,8 @@
 					<!--th>Tanggal</th-->
 					<th rowspan=2 width="70px">Bank - No Rek</th>
 					<!--th>Kode Cabang Bank</th-->
-					<th colspan=20>Tanggal Penerimaan</th>
-					<!--th rowspan=2>Total</th-->
+					<th colspan=31>Tanggal Penerimaan</th>
+					<th rowspan=2>Total</th>
 				</tr>
 				<tr>
 					<th width="30px">1</th>
@@ -74,7 +74,7 @@
 					<th width="30px">28</th>
 					<th width="30px">29</th>
 					<th width="30px">30</th>
-					<th width="30px">31</th-->
+					<th width="30px">31</th>
 				</tr>
 					
 			</thead>
