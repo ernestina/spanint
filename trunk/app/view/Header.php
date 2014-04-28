@@ -74,7 +74,7 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
-								<li><a href=' . URL . '#></i>Rekap Penerbitan SP2D</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap Penerbitan SP2D</a></li>
                             </ul>
                             </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
@@ -147,7 +147,7 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
-								<li><a href=' . URL . '#></i>Rekap penerbitan SP2D</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap penerbitan SP2D</a></li>
                             </ul>
                             </li>';
 						
