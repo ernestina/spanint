@@ -332,6 +332,46 @@ class DataKppnController extends BaseController {
 		$this->view->render('kppn/sp2dGajiBulanLalu');
 	}
 	
+	public function sp2dRekap() {
+		$d_sppm = new DataSppm($this->registry);
+		if (isset($_POST['submit_file'])) {
+			if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+				$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE ('".date('Ymd',strtotime($_POST['tgl_awal']))."','YYYYMMDD') 
+									AND TO_DATE ('".date('Ymd',strtotime($_POST['tgl_akhir']))."','YYYYMMDD')  ";
+				$this->view->d_tgl_awal = $_POST['tgl_awal'];
+				$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+			}
+			$this->view->data = $d_sppm->get_sp2d_rekap($filter);
+		}
+		//var_dump($d_sppm->get_sppm_filter($filter));
+		$this->view->render('kppn/sp2dRekap');
+	}
+	
+	public function detailSp2dGaji($bank=null,$bulan=null) {
+		$d_sppm = new DataSppm($this->registry);
+		$filter = array ();
+		if ($bank=='BNI'){
+			$bank1 = 'gaji-BNI%';
+		} else if ($bank == 'BRI') {
+			$bank1 = 'GAJI BRI';
+		} else if ($bank == 'BTN') {
+			$bank1 = 'GAJI-BTN';
+		} else if ($bank == 'MANDIRI') {
+			$bank1 = 'GAJI-MDRI';
+		}
+		if (!is_null($bank)){
+			$filter[$no++]="BANK_ACCOUNT_NAME LIKE '%".$bank1."%'";
+			$this->view->d_bank = $bank;
+		} 
+		if (!is_null($bulan)){
+			$filter[$no++]="to_char(PAYMENT_DATE,'mm') = '".$bulan."'";
+			$this->view->d_bulan = $bulan;
+		}
+		$this->view->data = $d_sppm->get_detail_sp2d_gaji($filter);
+		//var_dump($d_sppm->get_sppm_filter($filter));
+		$this->view->render('kppn/detailSp2dGaji');
+	}
+	
     public function __destruct() {
         
     }

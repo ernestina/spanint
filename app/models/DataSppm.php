@@ -548,8 +548,8 @@ class DataSppm {
     }
 	
 	public function get_sp2d_gaji_bulan_lalu() {
-		$sql = "SELECT DECODE(TRIM(BANK_ACCOUNT_NAME),'RPKBUNP GAJI-MDRI','BANK MANDIRI',
-					'RPKBUNP.GAJI-BTN','BANK TABUNGAN NEGARA','RPKBUNP.gaji-BNI','BANK NEGARA INDONESIA','RPKBUNP GAJI BRI','BANK RAKYAT INDONESIA','INVALID') BANK
+		$sql = "SELECT DECODE(TRIM(BANK_ACCOUNT_NAME),'RPKBUNP GAJI-MDRI','MANDIRI',
+					'RPKBUNP.GAJI-BTN','BTN','RPKBUNP.gaji-BNI','BNI','RPKBUNP GAJI BRI','BRI','INVALID') BANK
 					, MAX(JANUARI) JANUARI
 					, MAX(FEBRUARI) FEBRUARI
 					, MAX(MARET) MARET
@@ -591,7 +591,7 @@ class DataSppm {
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '03'
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							AND KDKPPN = ".Session::get('id_user')."
-							GROUP BY  BANK_ACCOUNT_NAME
+							GROUP BY BANK_ACCOUNT_NAME
 							UNION 
 					SELECT NULL JANUARI, NULL FEBRUARI,  NULL MARET, COUNT(DISTINCT (INVOICE_NUM)) as APRIL, NULL MEI, NULL JUNI, NULL JULI, NULL AGUSTUS, NULL SEPTEMBER, NULL OKTOBER, NULL NOVEMBER, NULL DESEMBER,BANK_ACCOUNT_NAME FROM XICO_ALL 
 							WHERE ( BANK_ACCOUNT_NAME LIKE '%gaji-BNI%' OR 
@@ -706,6 +706,76 @@ class DataSppm {
 			$data[] = $d_data;
         }
 		//var_dump($data);
+        return $data;
+    }
+	
+	public function get_sp2d_rekap($filter) {
+		$kppn = 'ADMIN';
+		if (Session::get('role')!= ADMIN){
+			$kppn = Session::get('id_user');
+		}
+		foreach ($filter as $filter) {
+			$sql_tgl .= " AND ".$filter;
+		}
+		$sql = "SELECT BANK_ACCOUNT_NAME, MAX (GAJI) GAJI, MAX (NON_GAJI) NON_GAJI, MAX (RETUR) RETUR, MAX (VOID) VOID FROM (
+				SELECT BANK_ACCOUNT_NAME, SUM(JUMLAH_SP2D) GAJI, NULL NON_GAJI, NULL RETUR, NULL VOID FROM REKAPITULASI_SP2D WHERE KDKPPN = '".$kppn."' AND JENIS_SP2D = 'GAJI' ".$sql_tgl." GROUP BY BANK_ACCOUNT_NAME, JENIS_SP2D  
+				UNION
+				SELECT BANK_ACCOUNT_NAME, NULL GAJI, SUM(JUMLAH_SP2D) NON_GAJI, NULL RETUR, NULL VOID FROM REKAPITULASI_SP2D WHERE KDKPPN = '".$kppn."' AND JENIS_SP2D = 'NONGAJI' ".$sql_tgl." GROUP BY BANK_ACCOUNT_NAME, JENIS_SP2D 
+				UNION
+				SELECT BANK_ACCOUNT_NAME, NULL GAJI, NULL NON_GAJI, SUM(JUMLAH_SP2D) RETUR, NULL VOID FROM REKAPITULASI_SP2D WHERE KDKPPN = '".$kppn."' AND JENIS_SP2D = 'RETUR' ".$sql_tgl." GROUP BY BANK_ACCOUNT_NAME, JENIS_SP2D 
+				UNION
+				SELECT BANK_ACCOUNT_NAME, NULL GAJI, NULL NON_GAJI, NULL RETUR, SUM(JUMLAH_SP2D) VOID FROM REKAPITULASI_SP2D WHERE KDKPPN = '".$kppn."' AND JENIS_SP2D = 'VOID' ".$sql_tgl." GROUP BY BANK_ACCOUNT_NAME, JENIS_SP2D
+				)GROUP BY BANK_ACCOUNT_NAME ORDER BY BANK_ACCOUNT_NAME";
+        $result = $this->db->select($sql);
+		//var_dump ($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdkppn($kppn);
+            $d_data->set_payment_date($val['BANK_ACCOUNT_NAME']); 
+            $d_data->set_invoice_num($val['GAJI']);
+            $d_data->set_check_date($val['NON_GAJI']);
+            $d_data->set_check_number($val['RETUR']);
+            $d_data->set_check_number_line_num($val['VOID']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_detail_sp2d_gaji($filter) {
+		$kppn = 'ADMIN';
+		if (Session::get('role')!= ADMIN){
+			$kppn = Session::get('id_user');
+		}
+		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE, 
+				CHECK_NUMBER, sum(CHECK_AMOUNT) CHECK_AMOUNT, BANK_ACCOUNT_NAME , MIN(INVOICE_DESCRIPTION) INVOICE_DESCRIPTION, MIN(RETURN_CODE) RETURN_CODE, KDKPPN
+				from XICO_ALL 
+				WHERE BANK_ACCOUNT_NAME NOT LIKE '%RETUR%' AND KDKPPN = '".$kppn."'
+				";
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		$sql .= " GROUP BY BANK_ACCOUNT_NAME, CHECK_NUMBER, CHECK_DATE, CREATION_DATE,CHECK_NUMBER, PAYMENT_DATE, INVOICE_NUM, KDKPPN 
+				ORDER BY PAYMENT_DATE DESC,CREATION_DATE, INVOICE_NUM DESC";
+        $result = $this->db->select($sql);
+		//var_dump ($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdkppn($val['KDKPPN']);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
+            $d_data->set_invoice_num($val['INVOICE_NUM']);
+            $d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
+            $d_data->set_check_number($val['CHECK_NUMBER']);
+            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
+            $d_data->set_bank_name($val['BANK_NAME']);
+            $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
+            $d_data->set_return_code($val['RETURN_CODE']);
+            $d_data->set_kdkppn($val['KDKPPN']);
+			$data[] = $d_data;
+        }
         return $data;
     }
 	
