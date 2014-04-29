@@ -38,17 +38,17 @@ class DataDurasiSPM{
 		$sql = "SELECT DISTINCT * FROM " 
 				. $this->_table1 . " 
 				WHERE 
-				SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user')
-				
+				SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user')."
+				 and durasi2 > 0 "
 				;
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " ORDER BY TANGGAL_UPLOAD DESC";
+		$sql .= " order by to_date(tanggal_upload, 'dd-mm-yyyy') desc, jam_selesai_sp2d DESC";
 		
-		var_dump ($sql);
+		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
