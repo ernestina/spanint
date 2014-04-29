@@ -141,7 +141,7 @@ class DataSPMController extends BaseController {
 			$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);	
 			}
 		ELSE {	
-		$filter[$no++] = " ROWNUM <= '100' ";
+		$filter[$no++] = " tanggal_upload in (select max(to_date(tanggal_upload,'dd-mm-yyyy'))from DURATION_INV_ALL_V) ";
 		$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
 		//var_dump($d_spm1->get_error_spm_filter ($filter));
 		}
