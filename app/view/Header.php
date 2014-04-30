@@ -34,38 +34,7 @@
                     <li class="nav"><a href="#"></a></li>
                     <?php
                     if (Session::get('role') == ADMIN) {
-                        echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
-						echo '<ul>
-                                <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
-                                <li><a href=#></i>Menu User</a></li>
-                            </ul>
-                            </li>';
-							
-						echo '<li class="subnav"><a href=#>Modul SA</a>';
-						echo '<ul>
-                                <li><a href='  . URL . 'dataDIPA/revisiDIPA></i>Informasi Revisi DIPA</a></li>
-                                <li><a href='  . URL . 'dataDIPA/realisasiFA></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
-                            </ul>
-                            </li>';
-						
-						echo '<li class="subnav"><a href=#>Modul PM</a>';
-						echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
-                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
-                                <li><a href='. URL . 'dataSPM/errorSPM></i>Detail Gagal Unggah SPM</a></li>
-								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
-                            </ul>
-							</li>';
-						
-						echo '<li class="subnav"><a href=#>Modul GR</a>';
-						echo '<ul>
-                                <li><a href='. URL .'dataGR/GRstatus></i>Status File LHP (interface)</a></li>
-                                <li><a href='. URL .'dataGR/GR_IJP></i>IJP</a></li>
-								<li><a href=#></i>PFK</a></li>
-                            </ul>
-                            </li>';
-						
-						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
+                        echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
                                 <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke Bank</a></li>
@@ -84,13 +53,6 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah PayGroup</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji dengan bulan lalu</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=#>XICO dan BS</a>';
-						echo '<ul>
-                                <li><a href=#></i>Rekon harian XICO dan BS</a></li>
-                                <li><a href=#></i>Flag Check</a></li>
-                                <li><a href=#></i>Hasil</a></li>
                             </ul>
                             </li>';
 						echo '<li class="nav"><a href=#>Panduan</a></li>';
@@ -116,6 +78,7 @@
                                 <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
                                 <li><a href='. URL . 'dataSPM/errorSPM></i>Detail Gagal Unggah SPM</a></li>
 								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
+								<li><a href='. URL . 'dataSPM/durasiSPM></i>Penyelesaian SP2D</a></li>
                             </ul>
 							</li>';
 						
@@ -123,6 +86,7 @@
 						echo '<li class="subnav"><a href=#>Modul GR</a>';
 						echo '<ul>
                                 <li><a href='. URL .'dataGR/GRstatus></i>Status File LHP (interface)</a></li>
+                                <li><a href='. URL .'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
                                 <li><a href='. URL .'dataGR/GR_IJP></i>Monitoring IJP</a></li>
 								<li><a href=#></i>Monitoring PFK</a></li>
                             </ul>

@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING Rekap SP2D Harian <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} ?><br>
-		<?php echo "Tanggal : ".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir; ?>
+		<?php echo "Tanggal : ".date("d-m-Y",strtotime($this->d_tgl_awal))." s.d ".date("d-m-Y",strtotime($this->d_tgl_akhir)); ?>
 		</h2>
     </div>
 
@@ -26,7 +26,7 @@
 		
 		<ul class="inline" style="margin-left: 150px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload()"></li>
 		</ul>
 	</form>
 </div>
@@ -60,12 +60,12 @@
 						echo "<tr> ";
 						echo "<td>" . $no++ . "</td>";
 						if($value->get_payment_date()!=''){echo "<td>" . $value->get_payment_date(). "</td>";} else {echo "<td>???</td>";}
-						if($value->get_invoice_num()!=''){echo "<td>" . $value->get_invoice_num(). "</td>";} else {echo "<td>0</td>";}
-						if($value->get_check_date()!=''){echo "<td>" . $value->get_check_date(). "</td>";} else {echo "<td>0</td>";}
+						if($value->get_invoice_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/1/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_invoice_num(). "</a></td>";} else {echo "<td>0</td>";}
+						if($value->get_check_date()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/2/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_date(). "</a></td>";} else {echo "<td>0</td>";}
 						$tot = $value->get_invoice_num() + $value->get_check_date();
 						if($tot!=''){echo "<td>" . $tot. "</td>";} else {echo "<td>0</td>";}
-						if($value->get_check_number()!=''){echo "<td>" . $value->get_check_number(). "</td>";} else {echo "<td>0</td>";}
-						if($value->get_check_number_line_num()!=''){echo "<td>" . $value->get_check_number_line_num(). "</td>";} else {echo "<td>0</td>";}
+						if($value->get_check_number()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_number(). "</a></td>";} else {echo "<td>0</td>";}
+						if($value->get_check_number_line_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_number_line_num(). "</a></td>";} else {echo "<td>0</td>";}
 						echo "</tr> ";
 						$gaji+=$value->get_invoice_num();
 						$non_gaji+=$value->get_check_date();
@@ -90,5 +90,56 @@
 </div>
 
 <script type="text/javascript">
-    
+    $(function(){
+        hideErrorId();
+        hideWarning();
+		
+		$("#datepicker").datepicker({dateFormat: "dd-mm-yy"
+		});
+		
+		$("#datepicker1").datepicker({dateFormat: "dd-mm-yy"
+		});
+    });
+	
+    function hideErrorId(){
+        $('.error').fadeOut(0);
+    }
+	
+	function hideWarning(){
+		
+		$('#datepicker').change(function(){
+            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
+		
+		$('#datepicker1').change(function(){
+            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
+		
+    }
+	
+	function cek_upload(){
+		var v_tglawal = document.getElementById('datepicker').value;
+		var v_tglakhir = document.getElementById('datepicker1').value;
+		var jml = 0;
+		
+		if(v_tglawal=='' || v_tglakhir==''){
+			$('#wtgl').html('Harap isi kolom tanggal ');
+            $('#wtgl').fadeIn();
+            jml++;
+        }
+		
+		if(v_tglawal>v_tglakhir){
+            $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
+            $('#wtgl').fadeIn(200);
+            jml++;
+        }
+		
+        if(jml>0){
+            return false;
+        } 
+    }
 </script>

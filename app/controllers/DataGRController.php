@@ -61,8 +61,11 @@ class DataGRController extends BaseController {
 		$this->view->render('kppn/GR_IJP');
 	}
 	
-	
-	
+	public function grStatusHarian() {
+		$d_spm1 = new DataGR_IJP($this->registry);			
+		$this->view->data = $d_spm1->get_gr_status_harian($filter);
+		$this->view->render('kppn/GR_Status_harian');
+	}
 	
     public function __destruct() {
         
