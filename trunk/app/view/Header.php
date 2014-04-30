@@ -85,7 +85,7 @@
 						
 						echo '<li class="subnav"><a href=#>Modul GR</a>';
 						echo '<ul>
-                                <li><a href='. URL .'dataGR/GRstatus></i>Status File LHP (interface)</a></li>
+                                <!--<li><a href='. URL .'dataGR/GRstatus></i>Status File LHP (interface)</a></li>-->
                                 <li><a href='. URL .'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
                                 <li><a href='. URL .'dataGR/GR_IJP></i>Monitoring IJP</a></li>
 								<li><a href=#></i>Monitoring PFK</a></li>

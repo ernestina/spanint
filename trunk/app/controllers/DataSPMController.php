@@ -118,7 +118,7 @@ class DataSPMController extends BaseController {
 		$d_spm1 = new DataDurasiSPM($this->registry);
 		$filter = array ();
 		$no=0;
-			if (isset($_POST['submit_file'])) {
+		if (isset($_POST['submit_file'])) {
 				
 				if ($_POST['invoice']!=''){
 					$filter[$no++]="invoice_num = '".$_POST['invoice'] . "'";
@@ -139,9 +139,8 @@ class DataSPMController extends BaseController {
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
 			$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);	
-			}
-		ELSE {	
-		$filter[$no++] = " tanggal_upload in (select max(to_date(tanggal_upload,'dd-mm-yyyy'))from DURATION_INV_ALL_V) ";
+		} ELSE {	
+		$filter[$no++] = " to_date(tanggal_upload,'dd-mm-yyyy') in (select max(to_date(tanggal_upload,'dd-mm-yyyy'))from DURATION_INV_ALL_V) ";
 		$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
 		//var_dump($d_spm1->get_error_spm_filter ($filter));
 		}
