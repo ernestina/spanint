@@ -24,6 +24,7 @@ class DataGR_IJP{
 	private $_n26; private $_n27; private $_n28; private $_n29; private $_n30;
 	private $_n31;
 	private $_jumlah;
+    private $_table = 'SPGR_MPN_RECEIPTS_ALL_LEVEL1';
     private $_table1 = 'SPGR_MPN_RECEIPTS_ALL_V_RIJP';
     public $registry;
 
@@ -100,6 +101,63 @@ class DataGR_IJP{
 			$d_data->set_n30(number_format($val['30']));
 			$d_data->set_n31(number_format($val['31']));
 			$d_data->set_jumlah(number_format($val['JUMLAH']));
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_gr_status_harian($filter) {
+		Session::get('id_user');
+		$sql = "SELECT *
+				FROM " 
+				. $this->_table. " 
+				 WHERE 
+				KPPN = '".Session::get('id_user')."'"
+				
+				;
+		$no=0;
+		//foreach ($filter as $filter) {
+			//$sql .= " AND ".$filter;
+		//}
+		$sql .= " ORDER BY BULAN ";
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kppn($val['KPPN']);
+			$d_data->set_bulan($val['BULAN']);
+			$d_data->set_n01(number_format($val['01']));
+			$d_data->set_n02(number_format($val['02']));
+			$d_data->set_n03(number_format($val['03']));
+			$d_data->set_n04(number_format($val['04']));
+			$d_data->set_n05(number_format($val['05']));
+			$d_data->set_n06(number_format($val['06']));
+			$d_data->set_n07(number_format($val['07']));
+			$d_data->set_n08(number_format($val['08']));
+			$d_data->set_n09(number_format($val['09']));
+			$d_data->set_n10(number_format($val['10']));
+			$d_data->set_n11(number_format($val['11']));
+			$d_data->set_n12(number_format($val['12']));
+			$d_data->set_n13(number_format($val['13']));
+			$d_data->set_n14(number_format($val['14']));
+			$d_data->set_n15(number_format($val['15']));
+			$d_data->set_n16(number_format($val['16']));
+			$d_data->set_n17(number_format($val['17']));
+			$d_data->set_n18(number_format($val['18']));
+			$d_data->set_n19(number_format($val['19']));
+			$d_data->set_n20(number_format($val['20']));
+			$d_data->set_n21(number_format($val['21']));
+			$d_data->set_n22(number_format($val['22']));
+			$d_data->set_n23(number_format($val['23']));
+			$d_data->set_n24(number_format($val['24']));
+			$d_data->set_n25(number_format($val['25']));
+			$d_data->set_n26(number_format($val['26']));
+			$d_data->set_n27(number_format($val['27']));
+			$d_data->set_n28(number_format($val['28']));
+			$d_data->set_n29(number_format($val['29']));
+			$d_data->set_n30(number_format($val['30']));
+			$d_data->set_n31(number_format($val['31']));
 			$data[] = $d_data;
         }
         return $data;

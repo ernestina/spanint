@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>Detail SP2D Gaji <?php echo $this->d_bank." ".Tanggal::bulan_indo($this->d_bulan)?><br>
+        <h2>Detail SP2D <?php echo $this->d_bank." ".$this->d_bulan?><br>
 			 <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?>
 		</h2>
     </div>

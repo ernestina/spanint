@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>Monitoring Imbalan Jasa Perbankan Bulan <?php echo $this->d_bulan; ?> <?php //echo $kode_satker; ?>
+        <h2>Monitoring Imbalan Jasa Perbankan Bulan <?php echo Tanggal::bulan_indo($this->d_bulan); ?> <?php //echo $kode_satker; ?>
 			<?php //echo Session::get('user'); ?>
 		</h2>
     </div>

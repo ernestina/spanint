@@ -343,7 +343,7 @@ class DataKppnController extends BaseController {
 			}
 			$this->view->data = $d_sppm->get_sp2d_rekap($filter);
 		}
-		//var_dump($d_sppm->get_sppm_filter($filter));
+		//var_dump($d_sppm->get_sp2d_rekap($filter));
 		$this->view->render('kppn/sp2dRekap');
 	}
 	
@@ -351,7 +351,7 @@ class DataKppnController extends BaseController {
 		$d_sppm = new DataSppm($this->registry);
 		$filter = array ();
 		if ($bank=='BNI'){
-			$bank1 = 'gaji-BNI%';
+			$bank1 = 'gaji-BNI';
 		} else if ($bank == 'BRI') {
 			$bank1 = 'GAJI BRI';
 		} else if ($bank == 'BTN') {
@@ -370,6 +370,37 @@ class DataKppnController extends BaseController {
 		$this->view->data = $d_sppm->get_detail_sp2d_gaji($filter);
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/detailSp2dGaji');
+	}
+	
+	public function detailRekapSP2D($bank=null,$jendok=null,$tgl_awal=null,$tgl_akhir=null) {
+		$d_sppm = new DataSppm($this->registry);
+		$filter = array ();
+		if ($bank=='BNI'){
+			$bank1 = 'BNI';
+		} else if ($bank == 'BRI') {
+			$bank1 = 'BRI';
+		} else if ($bank == 'BTN') {
+			$bank1 = 'BTN';
+		} else if ($bank == 'MANDIRI') {
+			$bank1 = 'MDRI';
+		}
+		if (!is_null($bank)){
+			$filter[$no++] = "BANK_ACCOUNT_NAME LIKE '".$bank1."'";
+			$this->view->d_bank = $bank;
+		} 
+		if (!is_null($jendok)){
+			$filter[$no++] = "JENDOK = '".$jendok."'";
+			$this->view->d_jendok = $jendok;
+		}
+		if ((!is_null($tgl_awal)) AND (!is_null($tgl_akhir))){
+			$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE ('".date('Ymd',strtotime($tgl_awal))."','YYYYMMDD') 
+									AND TO_DATE ('".date('Ymd',strtotime($tgl_awal))."','YYYYMMDD')  ";
+			$this->view->d_tgl_awal = $tgl_awal;
+			$this->view->d_tgl_akhir = $tgl_akhir;
+		}
+		$this->view->data = $d_sppm->get_detail_sp2d_rekap($filter);
+		//var_dump($d_sppm->get_sppm_filter($filter));
+		$this->view->render('kppn/detailSp2dRekap');
 	}
 	
     public function __destruct() {
