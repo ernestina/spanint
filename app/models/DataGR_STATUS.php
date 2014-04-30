@@ -69,6 +69,63 @@ class DataGR_STATUS{
         return $data;
     }
 	
+    public function get_detail_lhp_rekap($filter) {
+		$sql = "select status,cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,
+				file_name,resp_name, sum(RECEIPT_DIST_AMOUNT) as RPH  
+				from spgr_mpn_receipts_all 
+				where Status<>'Reversed' AND substr(RESP_NAME,1,3) = '".Session::get('id_user')."'";
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		$sql .= " group by status,cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,file_name,resp_name 
+				order by status DESC";
+			
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_status($val['STATUS']);
+            $d_data->set_gl_date(substr($val['CONT_GL_DATE'], 6, 2)."-".substr($val['CONT_GL_DATE'], 4, 2)."-".substr($val['CONT_GL_DATE'], 0, 4));
+			$d_data->set_bank_code($val['BANK_CODE']);
+			$d_data->set_bank_account_num($val['CONT_BANK_ACCOUNT_NUM']);
+            $d_data->set_file_name($val['FILE_NAME']);
+            $d_data->set_resp_name($val['RESP_NAME']);
+			$d_data->set_keterangan(number_format($val['RPH']));
+			
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+    public function get_detail_penerimaan($filter) {
+		$sql = "select NTPN,NTB, cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,
+				RECEIPT_DIST_SEGMENT1, RECEIPT_DIST_SEGMENT2, RECEIPT_DIST_SEGMENT3,RECEIPT_DIST_AMOUNT as RPH  
+				from spgr_mpn_receipts_all 
+				where ";
+		foreach ($filter as $filter) {
+			$sql .= $filter;
+		}
+		$sql .= " order by CONT_GL_DATE, NTPN";
+			
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_status($val['NTPN']);
+            $d_data->set_file_name($val['NTB']);
+            $d_data->set_gl_date(substr($val['CONT_GL_DATE'], 6, 2)."-".substr($val['CONT_GL_DATE'], 4, 2)."-".substr($val['CONT_GL_DATE'], 0, 4));
+			$d_data->set_bank_code($val['BANK_CODE']);
+			$d_data->set_bank_account_num($val['CONT_BANK_ACCOUNT_NUM']);
+            $d_data->set_resp_name($val['RECEIPT_DIST_SEGMENT1']."/".$val['RECEIPT_DIST_SEGMENT2']."/".$val['RECEIPT_DIST_SEGMENT3']);
+			$d_data->set_keterangan(number_format($val['RPH']));
+			
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
     /*
      * setter
      */

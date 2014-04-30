@@ -9,6 +9,7 @@ class DataGR_IJP{
 
     private $db;
 	private $_kppn;
+    private $_tahun;
     private $_bulan;
 	//private $_gl_date_char;
     private $_bank_code;
@@ -126,38 +127,39 @@ class DataGR_IJP{
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_kppn($val['KPPN']);
+			$d_data->set_tahun($val['TAHUN']);
 			$d_data->set_bulan($val['BULAN']);
-			$d_data->set_n01(number_format($val['01']));
-			$d_data->set_n02(number_format($val['02']));
-			$d_data->set_n03(number_format($val['03']));
-			$d_data->set_n04(number_format($val['04']));
-			$d_data->set_n05(number_format($val['05']));
-			$d_data->set_n06(number_format($val['06']));
-			$d_data->set_n07(number_format($val['07']));
-			$d_data->set_n08(number_format($val['08']));
-			$d_data->set_n09(number_format($val['09']));
-			$d_data->set_n10(number_format($val['10']));
-			$d_data->set_n11(number_format($val['11']));
-			$d_data->set_n12(number_format($val['12']));
-			$d_data->set_n13(number_format($val['13']));
-			$d_data->set_n14(number_format($val['14']));
-			$d_data->set_n15(number_format($val['15']));
-			$d_data->set_n16(number_format($val['16']));
-			$d_data->set_n17(number_format($val['17']));
-			$d_data->set_n18(number_format($val['18']));
-			$d_data->set_n19(number_format($val['19']));
-			$d_data->set_n20(number_format($val['20']));
-			$d_data->set_n21(number_format($val['21']));
-			$d_data->set_n22(number_format($val['22']));
-			$d_data->set_n23(number_format($val['23']));
-			$d_data->set_n24(number_format($val['24']));
-			$d_data->set_n25(number_format($val['25']));
-			$d_data->set_n26(number_format($val['26']));
-			$d_data->set_n27(number_format($val['27']));
-			$d_data->set_n28(number_format($val['28']));
-			$d_data->set_n29(number_format($val['29']));
-			$d_data->set_n30(number_format($val['30']));
-			$d_data->set_n31(number_format($val['31']));
+			$d_data->set_n01(number_format($val['LHP01']));
+			$d_data->set_n02(number_format($val['LHP02']));
+			$d_data->set_n03(number_format($val['LHP03']));
+			$d_data->set_n04(number_format($val['LHP04']));
+			$d_data->set_n05(number_format($val['LHP05']));
+			$d_data->set_n06(number_format($val['LHP06']));
+			$d_data->set_n07(number_format($val['LHP07']));
+			$d_data->set_n08(number_format($val['LHP08']));
+			$d_data->set_n09(number_format($val['LHP09']));
+			$d_data->set_n10(number_format($val['LHP10']));
+			$d_data->set_n11(number_format($val['LHP11']));
+			$d_data->set_n12(number_format($val['LHP12']));
+			$d_data->set_n13(number_format($val['LHP13']));
+			$d_data->set_n14(number_format($val['LHP14']));
+			$d_data->set_n15(number_format($val['LHP15']));
+			$d_data->set_n16(number_format($val['LHP16']));
+			$d_data->set_n17(number_format($val['LHP17']));
+			$d_data->set_n18(number_format($val['LHP18']));
+			$d_data->set_n19(number_format($val['LHP19']));
+			$d_data->set_n20(number_format($val['LHP20']));
+			$d_data->set_n21(number_format($val['LHP21']));
+			$d_data->set_n22(number_format($val['LHP22']));
+			$d_data->set_n23(number_format($val['LHP23']));
+			$d_data->set_n24(number_format($val['LHP24']));
+			$d_data->set_n25(number_format($val['LHP25']));
+			$d_data->set_n26(number_format($val['LHP26']));
+			$d_data->set_n27(number_format($val['LHP27']));
+			$d_data->set_n28(number_format($val['LHP28']));
+			$d_data->set_n29(number_format($val['LHP29']));
+			$d_data->set_n30(number_format($val['LHP30']));
+			$d_data->set_n31(number_format($val['LHP31']));
 			$data[] = $d_data;
         }
         return $data;
@@ -169,6 +171,9 @@ class DataGR_IJP{
 
     public function set_kppn($kppn) {
         $this->_kppn = $kppn;
+    }
+	public function set_tahun($tahun) {
+        $this->_tahun = $tahun;
     }
 	public function set_bulan($bulan) {
         $this->_bulan = $bulan;
@@ -282,6 +287,11 @@ class DataGR_IJP{
 	public function get_kppn() {
         return $this->_kppn;
     }
+	
+	public function get_tahun() {
+        return $this->_tahun;
+    }
+	
 	public function get_bulan() {
         return $this->_bulan;
     }

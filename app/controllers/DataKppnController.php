@@ -394,7 +394,7 @@ class DataKppnController extends BaseController {
 		}
 		if ((!is_null($tgl_awal)) AND (!is_null($tgl_akhir))){
 			$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE ('".date('Ymd',strtotime($tgl_awal))."','YYYYMMDD') 
-									AND TO_DATE ('".date('Ymd',strtotime($tgl_awal))."','YYYYMMDD')  ";
+									AND TO_DATE ('".date('Ymd',strtotime($tgl_akhir))."','YYYYMMDD')  ";
 			$this->view->d_tgl_awal = $tgl_awal;
 			$this->view->d_tgl_akhir = $tgl_akhir;
 		}

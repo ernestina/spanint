@@ -64,7 +64,33 @@ class DataGRController extends BaseController {
 	public function grStatusHarian() {
 		$d_spm1 = new DataGR_IJP($this->registry);			
 		$this->view->data = $d_spm1->get_gr_status_harian($filter);
-		$this->view->render('kppn/GR_Status_harian');
+		$this->view->render('kppn/GRStatusHarian');
+	}
+	
+	public function detailLhpRekap($tgl=null) {
+		$d_spm1 = new DataGR_STATUS($this->registry);
+		$filter = array ();
+		$no=0;
+			if (!is_null($tgl)) {
+				$filter[$no++]="CONT_GL_DATE =  '" .$tgl."'";
+				$this->view->d_tgl = substr($tgl, 6, 2)."-".substr($tgl, 4, 2)."-".substr($tgl, 0, 4);
+			}
+		$this->view->data = $d_spm1->get_detail_lhp_rekap($filter);
+		//var_dump($d_spm->get_gr_status_filter($filter));
+		$this->view->render('kppn/detailLhpRekap');
+	}
+	
+	public function detailPenerimaan($file_name=null) {
+		$d_spm1 = new DataGR_STATUS($this->registry);
+		$filter = array ();
+		$no=0;
+			if (!is_null($file_name)) {
+				$filter[$no++]="FILE_NAME =  '" .$file_name."'";
+				$this->view->d_tgl = $file_name;
+			}
+		$this->view->data = $d_spm1->get_detail_penerimaan($filter);
+		//var_dump($d_spm->get_gr_status_filter($filter));
+		$this->view->render('kppn/detailPenerimaan');
 	}
 	
     public function __destruct() {
