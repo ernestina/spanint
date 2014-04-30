@@ -1,3 +1,4 @@
+
 <div id="top">
 	<div id="header">
         <h2>Monitoring Imbalan Jasa Perbankan Bulan <?php echo Tanggal::bulan_indo($this->d_bulan); ?> <?php //echo $kode_satker; ?>
@@ -29,9 +30,30 @@
 </table>
 
 
+<!--table cellpadding="0" cellspacing="0" border="0" class="display KeyTable" id="example">
+	<thead>
+		<tr>
+			<th>Rendering engine</th>
+			<th>Browser</th>
+			<th>Platform(s)</th>
+			<th>Engine version</th>
+			<th>CSS grade</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="gradeX">
+			<td>Trident</td>
+			<td>Internet
+				 Explorer 4.0</td>
+			<td>Win 95+</td>
+			<td class="center">4</td>
+			<td class="center">X</td>
+		</tr-->
+
+
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll" style="font-size: 80%">
+		<table width="100%" class="table table-bordered zebra" style="font-size: 80%" id="example">
             <!--baris pertama-->
 			<thead>
 				<tr>
@@ -135,7 +157,9 @@
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();
@@ -168,4 +192,21 @@
             return false;
         } 
     }
+	
+	$(document).ready( function () {
+		var oTable = $('#example').dataTable( {
+			"sScrollY": "300px",
+			"sScrollX": "100%",
+			"sScrollXInner": "110%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('example'),
+			"datatable": oTable
+		} );
+	} );
 </script>

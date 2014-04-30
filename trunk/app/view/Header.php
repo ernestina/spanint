@@ -2,18 +2,20 @@
 <html>
     <head>
         <title>.:SPAN Interface:.</title>
-        <script src="<?php echo URL; ?>public/js/jquery-2.0.3.min.js"></script>
+       	<!--javascript-nya-->			
+		<script src="<?php echo URL; ?>public/js/jquery-2.0.3.min.js"></script>
         <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
         <script src="<?php echo URL; ?>public/js/myjs.js"></script>
         <script src="<?php echo URL; ?>public/js/teamdf-jquery-number/jquery.number.js"></script>
         <script src="<?php echo URL; ?>public/js/gaugejs/raphael.2.1.0.min.js"></script>
         <script src="<?php echo URL; ?>public/js/gaugejs/justgage.1.0.1.min.js"></script>
         <script src="<?php echo URL; ?>public/js/Chart.js"></script>
-        <script src="<?php echo URL; ?>public/js/paging.js"></script>
-        <link href="<?php echo URL; ?>public/js/jquery-ui-1.10.3/themes/base/jquery.ui.all.css" rel="stylesheet">
+        <script src="<?php echo URL; ?>public/js/paging.js"></script>		
+        <!--css-nya-->
+		<link href="<?php echo URL; ?>public/js/jquery-ui-1.10.3/themes/base/jquery.ui.all.css" rel="stylesheet">
         <link href="<?php echo URL; ?>public/css/ernest.css" rel="stylesheet">
-        <!--link href="<?php echo URL; ?>public/css/dialog.css" rel="stylesheet"-->
-
+		
+		
         <script type="text/javascript">
             $(function() {
                 $('#datepicker').datepicker();

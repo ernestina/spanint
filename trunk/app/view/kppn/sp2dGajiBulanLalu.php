@@ -9,7 +9,7 @@
             <!--baris pertama-->
 			<thead>
 				<tr>
-					<th width="5%" rowspan="2" style="halign: center">No.</th>
+					<th width="5%" rowspan="2" valign: "middle">No.</th>
 					<th width="35%" rowspan="2">BANK</th>
 					<th width="60%" colspan="12">Jumlah SP2D</th>
 				</tr>
