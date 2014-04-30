@@ -72,7 +72,7 @@ class GantiUserSpanController extends BaseController {
             }
         }
         $this->view->data = $d_data->get_d_user();
-        $this->view->render('admin/gantiUserSpan'); //view di folder admin
+        $this->view->render('kppn/gantiUserSpan'); //view di folder admin
     }
 	
 	/*
@@ -80,7 +80,7 @@ class GantiUserSpanController extends BaseController {
      */
 
     public function updDataUserSpan() {
-        $d_user = new DataGantiUserSpan($this->registry);
+        $d_data = new DataGantiUserSpan($this->registry);
         if (isset($_POST['upd_d_user'])) {
 		 	$nama_unit = $_POST['nama_unit'];
             $no_surat = $_POST['no_surat'];
@@ -126,7 +126,7 @@ class GantiUserSpanController extends BaseController {
                 $this->view->d_ubah = $d_user;
                 $this->view->error = $d_user->get_error();
                 $this->view->data = $d_user->get_d_user();
-                $this->view->render('admin/gantiUserSpan');
+                $this->view->render('kppn/gantiUserSpan');
             } 
         }
     }
