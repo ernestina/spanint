@@ -58,7 +58,7 @@ class DataHistSPM{
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " AND STATUS = 'OPEN'";
+		//$sql .= " AND STATUS = 'OPEN'";
 		$sql .= " ORDER BY BEGIN_DATE, TIME_BEGIN_DATE, INVOICE_NUM DESC";
 		//var_dump ($sql);
         $result =  $this->db->select($sql);
@@ -88,6 +88,8 @@ class DataHistSPM{
         }
         return $data;
     }
+	
+	
 	
     /*
      * setter

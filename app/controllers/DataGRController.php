@@ -61,11 +61,35 @@ class DataGRController extends BaseController {
 		$this->view->render('kppn/GR_IJP');
 	}
 	
+<<<<<<< .mine
+	public function GR_STATUS_LHP() {
+		$d_spm1 = new DataGR_STATUS_LHP($this->registry);
+		$filter = array ();
+		$no=0;
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['bulan']!=''){
+					if ($_POST['bulan']!='SEMUA_BULAN'){
+						$filter[$no++]="BULAN = '".$_POST['bulan']."'";
+					}
+					$this->view->d_bulan = $_POST['bulan'];
+				} 
+				
+			} else {
+					$filter[$no++]="BULAN = '".date('m', time())."'";
+					$this->view->d_bulan = date('m', time());
+				}
+			
+		$this->view->data = $d_spm1->get_gr_status_lhp_filter($filter);
+		//var_dump($d_spm->get_gr_status_filter($filter));
+		$this->view->render('kppn/statusGR_LHP');
+	}
+=======
 	public function grStatusHarian() {
 		$d_spm1 = new DataGR_IJP($this->registry);			
 		$this->view->data = $d_spm1->get_gr_status_harian($filter);
 		$this->view->render('kppn/GRStatusHarian');
 	}
+>>>>>>> .r84
 	
 	public function detailLhpRekap($tgl=null) {
 		$d_spm1 = new DataGR_STATUS($this->registry);

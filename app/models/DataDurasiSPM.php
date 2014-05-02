@@ -48,7 +48,7 @@ class DataDurasiSPM{
 		
 		$sql .= " order by to_date(tanggal_upload, 'dd-mm-yyyy') desc, jam_selesai_sp2d DESC";
 		
-		//var_dump ($sql);
+		var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
