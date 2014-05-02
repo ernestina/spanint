@@ -5,21 +5,19 @@
  * and open the template in the editor.
  */
 
-class DataUploadSPM{
+class DataValidasiUploadSPM{
 
     private $db;
+	private $_file_name;
+	private $_creation_date;
 	private $_invoice_num;
-    private $_invoice_amount;
+    private $_status_code;
 	private $_invoice_date;
-    private $_file_name;
-	private $_status_code;
+	private $_invoice_amount;
 	private $_vendor_name;
 	private $_vendor_site_code;
 	private $_description;
-	private $_column_name;
-	private $_column_value;
-	private $_error_message;
-    private $_table1 = 'sppm_upload_errors_v';
+	private $_table1 = 'SPPM_AP_INV_INT_ALL';
     public $registry;
 
     /*
@@ -36,12 +34,13 @@ class DataUploadSPM{
      * @param limit batas default null
      * return array objek Data Tetap*/
     
-    public function get_error_spm_filter($filter) {
+    public function get_validasi_spm_filter($filter) {
 		Session::get('id_user');
-		$sql = "SELECT *
+		$sql = "SELECT DISTINCT *
 				FROM " 
 				. $this->_table1. "
-				WHERE SUBSTR(FILE_NAME,5,3) = ".Session::get('id_user')
+				WHERE STATUS_CODE = 'Validasi gagal' 
+				AND SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user')
 				
 				;
 				
@@ -50,11 +49,13 @@ class DataUploadSPM{
 			$sql .= " AND ".$filter;
 		}
 		//var_dump ($sql);
+		
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
+			$d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_invoice_amount(number_format($val['INVOICE_AMOUNT']));
 			$d_data->set_invoice_date($val['INVOICE_DATE']);
             $d_data->set_file_name($val['FILE_NAME']);
@@ -62,9 +63,6 @@ class DataUploadSPM{
 			$d_data->set_vendor_name($val['VENDOR_NAME']);
 			$d_data->set_vendor_site_code($val['VENDOR_SITE_CODE']);
 			$d_data->set_description($val['DESCRIPTION']);
-			$d_data->set_column_name($val['COLUMN_NAME']);
-			$d_data->set_column_value($val['COLUMN_VALUE']);
-			$d_data->set_error_message($val['ERROR_MESSAGE']);
             $data[] = $d_data;
         }
         return $data;
@@ -101,19 +99,10 @@ class DataUploadSPM{
 	public function set_description($description) {
         $this->_description = $description;
     }
-	public function set_attribute1($attribute1) {
-        $this->_attribute1 = $attribute1;
+	public function set_creation_date($creation_date) {
+        $this->_creation_date = $creation_date;
     }
-
-	public function set_column_value($column_value) {
-        $this->_column_value = $column_value;
-    }	
-	public function set_column_name($column_name) {
-        $this->_column_name = $column_name;
-    }	
-	public function set_error_message($error_message) {
-        $this->_error_message = $error_message;
-    }	
+	
 	/*
      * getter
      */
@@ -146,16 +135,9 @@ class DataUploadSPM{
 	public function get_description() {
         return $this->_description;
     }
-	public function get_column_name() {
-        return $this->_column_name;
+	public function get_creation_date() {
+        return $this->_creation_date;
     }
-	public function get_column_value() {
-        return $this->_column_value;
-    }
-	public function get_error_message() {
-        return $this->_error_message;
-    }
-
     /*
      * destruktor
      */
