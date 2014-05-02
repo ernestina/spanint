@@ -38,7 +38,7 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id='fixheader'>
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
@@ -50,7 +50,7 @@
 					<th>Nomor SP2D</th>
 								
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			//var_dump ($this->data);
@@ -81,7 +81,10 @@
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();
@@ -114,4 +117,25 @@
             return false;
         } 
     }
+	
+	$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('example'),
+			"datatable": oTable
+		} );
+	} );
 </script>

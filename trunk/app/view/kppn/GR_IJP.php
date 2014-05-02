@@ -202,7 +202,10 @@
 			"bPaginate": false,
 			"bInfo": null,
 			"bFilter": false,
-			} );
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			},
+		} );
 				
 		var keys = new KeyTable( {
 			"table": document.getElementById('example'),

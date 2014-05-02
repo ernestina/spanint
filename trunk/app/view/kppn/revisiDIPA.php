@@ -49,29 +49,29 @@
 </div>
 </div>
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id="example" style="font-size: 90%">
             <!--baris pertama-->
 			<thead>
-					<th>No.</th>
-					<th>Nomor DIPA</th>
+					<th class='mid'>No.</th>
+					<th class='mid'>Nomor DIPA</th>
 					<th>Revisi Ke</th>
 					<th>Tanggal Post Revisi</th>
-					<th>Jam Post Revisi</th>
-					<th>Pagu</th>
-					<th>Kode Satker</th>
-					<th>Kode KPPN</th>
-					<th>Kode Akun</th>
-					<th>Kode Program</th>
-					<th>Kode Output</th>
-					<th>Kode Dana</th>
-					<th>Kode Bank</th>
-					<th>Kode Kewenangan</th>
-					<th>Type Anggaran</th>
-					<th>Kololari</th>
+					<!--th>Jam Post Revisi</th-->
+					<th class='mid'>Pagu</th>
+					<th class='mid'>Satker</th>
+					<!--th>Kode KPPN</th-->
+					<th class='mid'>Akun</th>
+					<th class='mid'>Program</th>
+					<th class='mid'>Output</th>
+					<th class='mid'>Dana</th>
+					<th class='mid'>Bank</th>
+					<th>Kewe-nangan</th>
+					<th>Tipe Anggaran</th>
+					<th class='mid'>Kololari</th>
 					<th>Kode Cadangan</th>
 					
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			//var_dump ($this->data);
@@ -82,13 +82,13 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_dipa_no() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_dipa_no() . "</td>";
 					echo "<td>" . $value->get_revision_no() . "</td>";
-					echo "<td>" . $value->get_tanggal_posting_revisi() . "</td>";
-					echo "<td>" . $value->get_jam_posting_revisi() . "</td>";
-					echo "<td style='text-align: right'>" . $value->get_line_amount() . "</td>";
+					echo "<td>" . $value->get_tanggal_posting_revisi() . ' ' . $value->get_jam_posting_revisi() ."</td>";
+					//echo "<td>" . $value->get_jam_posting_revisi() . "</td>";
+					echo "<td class='ratakanan'>" . $value->get_line_amount() . "</td>";
 					echo "<td>" . $value->get_satker_code() . "</td>";
-					echo "<td>" . $value->get_kppn_code() . "</td>";
+					//echo "<td>" . $value->get_kppn_code() . "</td>";
 					echo "<td>" . $value->get_account_code() . "</td>";
 					echo "<td>" . $value->get_program_code() . "</td>";
 					echo "<td>" . $value->get_output_code() . "</td>";
@@ -109,8 +109,10 @@
         </table>
 		</div>
 </div>
-
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();
@@ -246,4 +248,24 @@
             return false;
         } 
     }
+		$(document).ready( function () {
+		var oTable = $('#example').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('example'),
+			"datatable": oTable
+		} );
+	} );
 </script>

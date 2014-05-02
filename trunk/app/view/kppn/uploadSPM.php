@@ -29,7 +29,7 @@
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick="return cek_upload();"></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
@@ -40,24 +40,25 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id='fixheader' style="font-size: 80%">
             <!--baris pertama-->
 			<thead>
-					<th>No.</th>
-					<th>Nomor Invoce</th>
+					<th class='mid'>No.</th>
+					<th>Nomor, Tanggal Invoice</th>
 					<th>Nilai Invoice</th>
-					<th>Tanggal Invoice</th>
-					<th>Nama File</th>
+					<!--th>Tanggal Invoice</th-->
+					<th class='mid'>Uraian Invoice</th>
+					<th class='mid'>Nama File</th>
 					<th>Status Code</th>
-					<th>Supplier</th>
+					<th class='mid'>Supplier</th>
 					<th>Site Supplier</th>
-					<th>Uraian Invoice</th>
-					<th>Nama Kolom</th>
-					<th>Nilai Kolom</th>
-					<th>Error Message</th>
+					
+					<th class='mid'>Nama Kolom</th>
+					<th class='mid'>Nilai Kolom</th>
+					<th class='mid'>Error Message</th>
 					
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			//var_dump ($this->data);
@@ -68,14 +69,15 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_invoice_num() . "</td>";
-					echo "<td>" . $value->get_invoice_amount() . "</td>";
-					echo "<td>" . $value->get_invoice_date() . "</td>";
+					echo "<td>" . $value->get_invoice_num() . '<br>' . $value->get_invoice_date() . "</td>";
+					echo "<td class='ratakanan'>" . $value->get_invoice_amount() . "</td>";
+					//echo "<td>" . $value->get_invoice_date() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
 					echo "<td>" . $value->get_file_name() . "</td>";
 					echo "<td>" . $value->get_status_code() . "</td>";
 					echo "<td>" . $value->get_vendor_name() . "</td>";
 					echo "<td>" . $value->get_vendor_site_code() . "</td>";
-					echo "<td>" . $value->get_description() . "</td>";
+					
 					echo "<td>" . $value->get_column_name() . "</td>";
 					echo "<td>" . $value->get_column_value() . "</td>";
 					echo "<td>" . $value->get_error_message() . "</td>";
@@ -93,7 +95,10 @@
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();
@@ -126,4 +131,25 @@
             return false;
         } 
     }
+	
+		$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('example'),
+			"datatable": oTable
+		} );
+	} );
 </script>

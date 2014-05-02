@@ -40,7 +40,7 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id='fixheader'>
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
@@ -51,17 +51,17 @@
 					<th>Status Release</th>
 					<th>Tanggal Hold</th>
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_invoice_num() . "</td>";
-					echo "<td style='text-align: right'>" . $value->get_invoice_amount() . "</td>";
-					echo "<td>" . $value->get_description() . "</td>";
-					echo "<td>" . $value->get_hold_reason() . "</td>";
-					echo "<td>" . $value->get_release_reason() . "</td>";
+					echo "<td class='ratakanan'>" . $value->get_invoice_amount() . "</td>";
+					echo "<td width='350px' class='ratakiri'>" . $value->get_description() . "</td>";
+					echo "<td width='200px' class='ratakiri'>" . $value->get_hold_reason() . "</td>";
+					echo "<td width='200px' class='ratakiri'>" . $value->get_release_reason() . "</td>";
 					echo "<td>" . $value->get_hold_date() . "</td>";
 				echo "</tr>	";
 			} 
@@ -71,7 +71,10 @@
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();
@@ -104,4 +107,25 @@
             return false;
         } 
     }
+	
+		$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('example'),
+			"datatable": oTable
+		} );
+	} );
 </script>

@@ -40,34 +40,34 @@
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick="return cek_upload();"></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();"></li>
 		</ul>
 	</form>
 </div>
 </div>
 </div>
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id="fixheader" style="font-size: 90%">
             <!--baris pertama-->
 			<thead>
-					<th>No.</th>
-					<th>Satker</th>
-					<th>KPPN</th>
-					<th>Akun</th>
-					<th>Program</th>
-					<th>Output</th>
-					<th>Dana</th>
-					<th>Bank</th>
-					<th>Kewenangan</th>
-					<th>Lokasi</th>
-					<th>Budget Type</th>
-					<th>Currency_code</th>
+					<th class='mid'>No.</th>
+					<th class='mid'>Satker</th>
+					<!--th class='mid'>KPPN</th-->
+					<th class='mid'>Akun</th>
+					<th class='mid'>Program</th>
+					<th class='mid'>Output</th>
+					<th class='mid'>Dana</th>
+					<th class='mid'>Bank</th>
+					<th>Kewe-nangan</th>
+					<th class='mid'>Lokasi</th>
+					<th class='mid'>Budget Type</th>
+					<th>Currency code</th>
 					<th>Budget Amount</th>
 					<th>Encumbrance Amount</th>
 					<th>Actual Amount</th>
 					<th>Balancing Amount</th>
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			//var_dump ($this->data);
@@ -79,7 +79,7 @@
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_satker() . "</td>";
-					echo "<td>" . $value->get_kppn() . "</td>";
+					//echo "<td>" . $value->get_kppn() . "</td>";
 					echo "<td>" . $value->get_akun() . "</td>";
 					echo "<td>" . $value->get_program() . "</td>";
 					echo "<td>" . $value->get_output() . "</td>";
@@ -105,7 +105,10 @@
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();
@@ -243,4 +246,24 @@
             return false;
         } 
     }
+	$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('example'),
+			"datatable": oTable
+		} );
+	} );
 </script>

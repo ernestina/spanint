@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>DURASI PEMROSESAN SPM - SP2D <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			<?php echo Session::get('user'); ?>
+			<?php //echo Session::get('user'); ?>
 		</h2>
     </div>
 
@@ -73,46 +73,46 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id='fixheader'>
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
 					<th>Nomor Invoice</th>
+					<th>Nomor SP2D</th>
 					<!--th>KPPN</th-->
 					<th>Jenis SPM</th>
 					<th>Tanggal Upload</th>
-					<th>Jam Upload</th>
-					<th>Nomor SP2D</th>
+					<!--th>Jam Upload</th-->
 					<th>Tanggal Selesai SP2D</th>
-					<th>Jam Selesai SP2D</th>
+					<!--th>Jam Selesai SP2D</th-->
 					<th>Durasi</th>
 					
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			//var_dump ($this->data);
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "Tidak ada data";
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
 				} else {
 					foreach ($this->data as $value){ 
 					echo "<tr>	";
 						echo "<td>" . $no++ . "</td>";
 						echo "<td>" . $value->get_invoice_num() . "</td>";
-						echo "<td>" . $value->get_attribute1() . "</td>";
-						echo "<td>" . $value->get_aia_creation_date() . "</td>";
-						echo "<td>" . $value->get_jam_upload() . "</td>";
 						echo "<td>" . $value->get_check_number() . "</td>";
-						echo "<td>" . $value->get_aca_creation_date() . "</td>";
-						echo "<td>" . $value->get_jam_selesai_sp2d() . "</td>";
+						echo "<td>" . $value->get_attribute1() . "</td>";
+						echo "<td>" . $value->get_aia_creation_date() . ' '  . $value->get_jam_upload() . "</td>";
+						//echo "<td>" . $value->get_jam_upload() . "</td>";
+						echo "<td>" . $value->get_aca_creation_date() . ' ' . $value->get_jam_selesai_sp2d() .  "</td>";
+						//echo "<td>" . $value->get_jam_selesai_sp2d() . "</td>";
 						echo "<td>" . $value->get_durasi() . "</td>";
 						
 					echo "</tr>	";
 					}
 				}
 			} else {
-				echo "Silakan masukan filter";
+				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
 			}
 			?>
 			</tbody>
@@ -120,7 +120,10 @@
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8">
 	$(function(){
         hideErrorId();
         hideWarning();
@@ -175,4 +178,25 @@
             return false;
         } 
     }
+
+	$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('example'),
+			"datatable": oTable
+		} );
+	} );
 </script>
