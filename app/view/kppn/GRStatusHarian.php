@@ -30,7 +30,7 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered scroll" style="font-size: 80%">
+		<table width="100%" class="table table-bordered" style="font-size: 80%">
             <!--baris pertama-->
 			<thead>
 				<tr>
@@ -155,54 +155,55 @@
 			?>
 			</tbody>
         </table>
+		<br>
 		<b><i>* Klik pada kolom warna untuk melihat detail transaksi </i></b></br>
 		<b>Keterangan : </b>
 		<table style="font-size: 80%">
 			<tr>
-				<th width="5%" >Warna</th>
-				<th width="15%" >Keterangan</th>
-				<th width="15%" >Tindakan</th>
-				<th width="5%" >Warna</th>
-				<th width="15%" >Keterangan</th>
-				<th width="15%" >Tindakan</th>
+				<th width="10px" >Warna</th>
+				<th width="70px" >Keterangan</th>
+				<th width="70px" >Tindakan</th>
+				<th width="10px" >Warna</th>
+				<th width="70px" >Keterangan</th>
+				<th width="70px" >Tindakan</th>
 			</tr>
 			<tr>
-				<td width="90px"  bgcolor='#F5F5F5'></td>
-				<td width="90px"  >Data belum masuk</td>
-				<td width="90px"  >Konfirmasi ke Bank dan Upload</td>
-				<td width="90px"  bgcolor='#B2BEB5'></td>
-				<td width="90px"  >Ada data belum pengecekan</td>
-				<td width="90px"  >Lakukan pengecekan</td>
+				<td bgcolor='#F5F5F5'></td>
+				<td>Data belum masuk</td>
+				<td>Konfirmasi ke Bank dan Upload</td>
+				<td bgcolor='#B2BEB5'></td>
+				<td>Ada data belum pengecekan</td>
+				<td>Lakukan pengecekan</td>
 			</tr>
 			<tr>
-				<td width="90px"  bgcolor='#A4C639'></td>
-				<td width="90px"  >Semua Data Completed</td>
-				<td width="90px"  >Tidak ada</td>
-				<td width="90px"  bgcolor='#99666CC'></td>
-				<td width="90px"  >Ada data yang belum oke</td>
-				<td width="90px"  >Lakukan pengecekan</td>
+				<td bgcolor='#A4C639'></td>
+				<td>Semua Data Completed</td>
+				<td>Tidak ada</td>
+				<td bgcolor='#99666CC'></td>
+				<td>Ada data yang belum oke</td>
+				<td>Lakukan pengecekan</td>
 			</tr>
 			<tr>
-				<td width="90px"  bgcolor='#FFBF00'></td>
-				<td width="90px"   >Ada yang belum diinterface</td>
-				<td width="90px"  >Lakukan interface</td>
-				<td width="90px"  bgcolor='#C19A6B'></td>
-				<td width="90px"  >Hari Libur</td>
-				<td width="90px"  >Tidak ada</td>
+				<td bgcolor='#FFBF00'></td>
+				<td>Ada yang belum diinterface</td>
+				<td>Lakukan interface</td>
+				<td bgcolor='#C19A6B'></td>
+				<td>Hari Libur</td>
+				<td>Tidak ada</td>
 			</tr>
 			<tr>
-				<td width="90px"  bgcolor='#FF2800'></td>
-				<td width="90px"  >Data error</td>
-				<td width="90px"  >upload ulang ADK</td>
-				<td width="90px"  bgcolor='#000000'></td>
-				<td width="90px"  >Tidak Terdefenisi</td>
-				<td width="90px"  >Belum tahu</td>
+				<td bgcolor='#FF2800'></td>
+				<td>Data error</td>
+				<td>upload ulang ADK</td>
+				<td bgcolor='#000000'></td>
+				<td>Tidak Terdefenisi</td>
+				<td>Belum tahu</td>
 			</tr>
 		</table>
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();

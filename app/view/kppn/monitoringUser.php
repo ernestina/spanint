@@ -34,13 +34,13 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id="example">
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
 					<!--th>KPPN</th-->
-					<th>User Name</th>
 					<th>Nama</th>
+					<th>User Name</th>
 					<th>NIP</th>
 					<th>Posisi</th>
 					<!--th>Responsibility Name</th-->
@@ -49,7 +49,7 @@
 					<th>Tanggal Berakhir</th>
 
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			if (isset($this->data)){
@@ -60,12 +60,12 @@
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					//echo "<td>" . $value->get_kdkppn() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_last_name() . "</td>";
 					echo "<td>" . $value->get_user_name() . "</td>";
-					echo "<td>" . $value->get_last_name() . "</td>";
 					echo "<td>" . $value->get_attribute1() . "</td>";
-					echo "<td>" . $value->get_name() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_name() . "</td>";
 					//echo "<td>" . $value->get_responsibility_name() . "</td>";
-					echo "<td>" . $value->get_email_address() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_email_address() . "</td>";
 					echo "<td>" . $value->get_start_date() . "</td>";
 					echo "<td>" . $value->get_end_date() . "</td>";
 				echo "</tr>	";
@@ -80,7 +80,9 @@
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();
@@ -122,4 +124,23 @@
             return false;
         } 
     }
+	$(document).ready( function () {
+		var oTable = $('#example').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('example'),
+			"datatable": oTable
+		} );
+	} );
 </script>
