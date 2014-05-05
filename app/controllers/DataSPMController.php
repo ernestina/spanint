@@ -211,6 +211,7 @@ class DataSPMController extends BaseController {
 				//$this->view->invoice_num = $invoice_num;
 				
 			}
+
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
 		//var_dump($d_spm1->get_satker_filter($filter));
 		$this->view->render('kppn/SP2DSatker');

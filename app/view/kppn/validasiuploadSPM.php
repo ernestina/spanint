@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>PENOLAKAN UPLOAD PMRT <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?>
-			<?php echo Session::get('user'); ?>
+			<?php //echo Session::get('user'); ?>
 		</h2>
     </div>
 
@@ -14,8 +14,7 @@
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
 	<div id="top">
 	<form method="POST" action="ValidasiSpm" enctype="multipart/form-data">
-		<div id="winvoice" class="error"></div>
-		
+		<div id="wsatker" class="error"></div>
 		<label class="isian">Kode Satker: </label>
 		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
 
@@ -49,7 +48,7 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id='fixheader'>
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
@@ -60,7 +59,7 @@
 					
 					
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			//var_dump ($this->data);
@@ -89,11 +88,19 @@
 		</div>
 </div>
 
-<script type="text/javascript">
-    $(function(){
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8">
+     $(function(){
         hideErrorId();
         hideWarning();
-        
+		
+		$("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
+		});
+		
+		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
+		});
     });
     
     function hideErrorId(){
@@ -101,25 +108,58 @@
     }
 
     function hideWarning(){
-		$('#invoice').keyup(function(){
-            if(document.getElementById('invoice').value !=''){
-                $('#winvoice').fadeOut(200);
+				
+		$('#kdsatker').change(function(){
+            if(document.getElementById('kdsatker').value !=''){
+                $('#wsatker').fadeOut(200);
             }
         });
-
+		
+		$('#datepicker').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
+		
+		$('#datepicker1').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
     }
     
     function cek_upload(){
-		var v_invoice = document.getElementById('invoice').value;
+		var v_invoice = document.getElementById('kdsatker').value;
 		
         var jml = 0;
 		if(v_invoice==''){
-			$('#winvoice').html('Harap isi no invoice');
-            $('#winvoice').fadeIn();
+			$('#wsatker').html('Harap isi no invoice');
+            $('#wsatker').fadeIn();
             jml++;
         }
 		if(jml>0){
             return false;
         } 
     }
+	
+		$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('fixheader'),
+			"datatable": oTable
+		} );
+	} );
 </script>

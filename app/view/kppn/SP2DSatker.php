@@ -13,7 +13,7 @@
                     $_SERVER['PHP_SELF'];
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
 	<div id="top">
-	<form method="POST" action="ValidasiSpm" enctype="multipart/form-data">
+	<form method="POST" action="daftarsp2d" enctype="multipart/form-data">
 		<div id="winvoice" class="error"></div>
 		
 		<label class="isian">No INVOICE: </label>
@@ -38,7 +38,7 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id='fixheader'>
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
@@ -91,7 +91,10 @@
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();
@@ -124,4 +127,25 @@
             return false;
         } 
     }
+	
+		$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('fixheader'),
+			"datatable": oTable
+		} );
+	} );
 </script>

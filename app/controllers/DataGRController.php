@@ -61,7 +61,6 @@ class DataGRController extends BaseController {
 		$this->view->render('kppn/GR_IJP');
 	}
 	
-<<<<<<< .mine
 	public function GR_STATUS_LHP() {
 		$d_spm1 = new DataGR_STATUS_LHP($this->registry);
 		$filter = array ();
@@ -83,13 +82,12 @@ class DataGRController extends BaseController {
 		//var_dump($d_spm->get_gr_status_filter($filter));
 		$this->view->render('kppn/statusGR_LHP');
 	}
-=======
+
 	public function grStatusHarian() {
 		$d_spm1 = new DataGR_IJP($this->registry);			
 		$this->view->data = $d_spm1->get_gr_status_harian($filter);
 		$this->view->render('kppn/GRStatusHarian');
 	}
->>>>>>> .r84
 	
 	public function detailLhpRekap($tgl=null) {
 		$d_spm1 = new DataGR_STATUS($this->registry);
