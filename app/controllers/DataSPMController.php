@@ -80,8 +80,8 @@ class DataSPMController extends BaseController {
 		$no=0;
 			if (isset($_POST['submit_file'])) {
 				
-				if ($_POST['invoice']!=''){
-					$filter[$no++]="invoice_num = '".$_POST['invoice'] . "'";
+				if ($_POST['kdsatker']!=''){
+					$filter[$no++]="substr(invoice_num,8,6) = '".$_POST['kdsatker'] . "'";
 				}
 				if ($_POST['file_name']!=''){
 					$filter[$no++]=" upper(file_name) = upper('".$_POST['file_name'] . "')";
