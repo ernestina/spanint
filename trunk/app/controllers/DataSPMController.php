@@ -86,6 +86,13 @@ class DataSPMController extends BaseController {
 				if ($_POST['file_name']!=''){
 					$filter[$no++]=" upper(file_name) = upper('".$_POST['file_name'] . "')";
 				}
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "CREATION_DATE BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}
+				
+				
 			$this->view->data = $d_spm1->get_validasi_spm_filter($filter);	
 			}	
 		
@@ -202,6 +209,7 @@ class DataSPMController extends BaseController {
 		//var_dump($d_spm1->get_satker_filter($filter));
 		$this->view->render('kppn/SP2DSatker');
 	}	
+	//author by jhon
 	
     public function __destruct() {
         
