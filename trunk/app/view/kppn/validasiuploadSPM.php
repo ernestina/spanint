@@ -16,8 +16,8 @@
 	<form method="POST" action="ValidasiSpm" enctype="multipart/form-data">
 		<div id="winvoice" class="error"></div>
 		
-		<label class="isian">No INVOICE: </label>
-		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->invoice)){echo $this->invoice;}?>">
+		<label class="isian">Kode Satker: </label>
+		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
 
 		<label class="isian">Nama File: </label>
 		<input type="text" name="file_name" id="file_name" value="<?php if (isset($this->file_name)){echo $this->file_name;}?>">
@@ -48,13 +48,9 @@
 					<th>No.</th>
 					<th>Tanggal Upload</th>
 					<th>Nama File</th>
-					<th>Nomor Invoce</th>
-					<th>Nilai Invoice</th>
-					<th>Tanggal Invoice</th>
+					<th>Kode Satker</th>
 					<th>Status Code</th>
-					<th>Supplier</th>
-					<th>Site Supplier</th>
-					<!--th>Uraian Invoice</th-->
+					
 					
 			</thead>
 			<tbody>
@@ -70,14 +66,8 @@
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_creation_date() . "</td>";
 					echo "<td><a href=".URL."dataSPM/errorSpm/".$value->get_file_name()." target='_blank' '>" . $value->get_file_name() . "</a></td>";
-					echo "<td>" . $value->get_invoice_num() . "</td>";
-					echo "<td>" . $value->get_invoice_amount() . "</td>";
-					echo "<td>" . $value->get_invoice_date() . "</td>";
+					echo "<td>" . $value->get_satker_code() . "</td>";
 					echo "<td>" . $value->get_status_code() . "</td>";
-					echo "<td>" . $value->get_vendor_name() . "</td>";
-					echo "<td>" . $value->get_vendor_site_code() . "</td>";
-					//echo "<td>" . $value->get_description() . "</td>";
-					
 					
 				echo "</tr>	";
 			} 
