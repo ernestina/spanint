@@ -170,7 +170,7 @@ class DataSPMController extends BaseController {
 				
 			$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);	
 		} ELSE {	
-		$filter[$no++] = " to_date(tanggal_upload,'yy-MON-yyyy') in (select max(to_date(tanggal_upload,'yy-MON-yyyy'))
+		$filter[$no++] = " to_date(tanggal_upload,'dd-MON-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
 		from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user').")" ;
 		
 		$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
