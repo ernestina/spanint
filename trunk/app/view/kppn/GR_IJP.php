@@ -1,13 +1,14 @@
-
 <div id="top">
 	<div id="header">
         <h2>Monitoring Imbalan Jasa Perbankan Bulan <?php echo Tanggal::bulan_indo($this->d_bulan); ?> <?php //echo $kode_satker; ?>
 			<?php //echo Session::get('user'); ?>
 		</h2>
-    </div>
+    
 <table><tr><td width="90%">
+</div>
+
 <form method="POST" action="GR_IJP" enctype="multipart/form-data">
-	<select type="text" name="bulan" id="bulan" style="margin-top: 10px; padding-top: 7px; float: right">
+	<select type="text" name="bulan" id="bulan" style="margin-top: 10px; padding-top: 5px; float: right">
 			<option value='01' <?php if ($this->d_bulan=='01'){echo "selected";}?> >Januari</option>
 			<option value='02' <?php if ($this->d_bulan=='02'){echo "selected";}?> >Februari</option>
 			<option value='03' <?php if ($this->d_bulan=='03'){echo "selected";}?> >Maret</option>
@@ -53,14 +54,14 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra" style="font-size: 80%" id="example">
+		<table width="90%" class="table table-bordered zebra" style="font-size: 80%" id="example">
             <!--baris pertama-->
 			<thead>
 				<tr>
 					<th rowspan=2 width="10px" class='mid'>No.</th>
 					<!--th>KPPN</th-->
 					<!--th>Tanggal</th-->
-					<th rowspan=2 width="70px" class='mid'>Bank - No Rek</th>
+					<th rowspan=2 class='mid'>Bank - No Rek</th>
 					<!--th>Kode Cabang Bank</th-->
 					<th colspan=31>Tanggal Penerimaan</th>
 					<th rowspan=2 class='mid'>Total</th>
@@ -112,7 +113,7 @@
 					echo "<td>" . $no++ . "</td>";
 					//echo "<td>" . $value->get_kppn() . "</td>";
 					//echo "<td>" . $value->get_gl_date_char() . "</td>";
-					echo "<td style='text-align: left'>" . $value->get_bank_code() . ' -<br>'. $value->get_bank_account_num() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_bank_code() . ' -<br>'. $value->get_bank_account_num() . "</td>";
 					echo "<td>" . $value->get_n01() . "</td>";
 					echo "<td>" . $value->get_n02() . "</td>";
 					echo "<td>" . $value->get_n03() . "</td>";
@@ -156,7 +157,7 @@
         </table>
 		</div>
 </div>
-
+</div>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf-8">
