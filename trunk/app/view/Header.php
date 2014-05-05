@@ -84,6 +84,7 @@
                                 <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
 								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
 								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
+								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
                             </ul>
 							</li>';
 						
