@@ -21,6 +21,13 @@
 
 		<label class="isian">Nama File: </label>
 		<input type="text" name="file_name" id="file_name" value="<?php if (isset($this->file_name)){echo $this->file_name;}?>">
+		
+		<div id="wtgl" class="error"></div>
+		<label class="isian">Tanggal: </label>
+		<ul class="inline">
+		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->tgl_awal)){echo $this->tgl_awal;}?>" /> </li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->tgl_akhir)){echo $this->tgl_akhir;}?>"></li>
+		</ul>
 
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
 		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
