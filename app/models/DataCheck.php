@@ -131,7 +131,7 @@ class DataCheck{
         return $this->_check_date;
     }
 	public function get_attribute6() {
-        return $this->_atribute6;
+        return $this->_attribute6;
     }
 	public function get_status_lookup_code() {
         return $this->_status_lookup_code;

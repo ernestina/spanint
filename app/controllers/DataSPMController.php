@@ -167,9 +167,10 @@ class DataSPMController extends BaseController {
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
+				
 			$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);	
 		} ELSE {	
-		$filter[$no++] = " to_date(tanggal_upload,'dd-mm-yyyy') in (select max(to_date(tanggal_upload,'dd-mm-yyyy'))
+		$filter[$no++] = " to_date(tanggal_upload,'yy-MON-yyyy') in (select max(to_date(tanggal_upload,'yy-MON-yyyy'))
 		from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user').")" ;
 		
 		$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
@@ -188,6 +189,11 @@ class DataSPMController extends BaseController {
 					$filter[$no++]="KDSATKER = '".$_POST['kdsatker']."'";
 					$this->view->d_invoice = $_POST['kdsatker'];
 				}
+				if ($_POST['nmsatker']!=''){
+					$filter[$no++]=" UPPER(NMSATKER) LIKE UPPER('%".$_POST['nmsatker']."%')";
+					$this->view->d_invoice = $_POST['nmsatker'];
+				}
+				
 			$this->view->data = $d_spm1->get_satker_filter($filter);	
 			}	
 			
