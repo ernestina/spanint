@@ -81,9 +81,9 @@
 						echo '<ul>
                                 <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
                                 <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
-                                <li><a href='. URL . 'dataSPM/errorSPM></i>Detail Gagal Unggah SPM</a></li>
+                                <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
 								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
-								<li><a href='. URL . 'dataSPM/durasiSPM></i>Penyelesaian SP2D</a></li>
+								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
                             </ul>
 							</li>';
 						
