@@ -38,7 +38,7 @@
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick=""></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>

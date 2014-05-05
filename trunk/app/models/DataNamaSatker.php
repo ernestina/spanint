@@ -30,7 +30,7 @@ class DataNamaSatker{
     
     public function get_satker_filter($filter) {
 		Session::get('id_user');
-		$sql = "SELECT *
+		$sql = "SELECT KDSATKER, UPPER(NMSATKER) NMSATKER , KPPN
 				FROM " 
 				. $this->_table1. "
 				WHERE  
@@ -44,7 +44,7 @@ class DataNamaSatker{
 		}
 		
 		
-		$sql .= " ORDER BY KDSATKER";
+		$sql .= " ORDER BY NMSATKER";
 				//var_dump ($sql);
 
         $result = $this->db->select($sql);

@@ -18,6 +18,9 @@
 		
 		<label class="isian">Kode Satker: </label>
 		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
+		
+		<label class="isian">Nama Satker: </label>
+		<input type="text" name="nmsatker" id="nmsatker" value="<?php if (isset($this->nmsatker)){echo $this->nmsatker;}?>">
 
 
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
@@ -29,7 +32,7 @@
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick="return cek_upload();"></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
