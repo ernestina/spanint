@@ -28,7 +28,7 @@
 					<th width="5%">Des</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			if (isset($this->data)){
