@@ -47,7 +47,7 @@
 					<th >VOID</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			if (isset($this->data)){
@@ -56,6 +56,9 @@
 				$total=0;
 				$retur=0;
 				$void=0;
+				if (empty($this->data)){
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+				} else {
 					foreach ($this->data as $value){ 
 						echo "<tr> ";
 						echo "<td>" . $no++ . "</td>";
@@ -82,7 +85,7 @@
 					echo "<td><b>".$retur."</b></td>";
 					echo "<td><b>".$void."</b></td>";
 				} 
-//			} 
+			} 
 			?>
 			</tbody>
         </table>
