@@ -87,7 +87,7 @@ class DataSPMController extends BaseController {
 					$filter[$no++]=" upper(file_name) = upper('".$_POST['file_name'] . "')";
 				}
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
-					$filter[$no++] = "CREATION_DATE BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$filter[$no++] = "CREATION_DATE BETWEEN TO_DATE('".$_POST['tgl_awal']."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$_POST['tgl_akhir']."','DD/MM/YYYY hh:mi:ss')";
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
@@ -163,7 +163,7 @@ class DataSPMController extends BaseController {
 				}
 				
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
-					$filter[$no++] = "TANGGAL_UPLOAD BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$filter[$no++] = "TANGGAL_UPLOAD BETWEEN to_date('".$_POST['tgl_awal']."','dd-mm-yyyy') AND to_date('".$_POST['tgl_akhir']."' ,'dd-mm-yyyy')";
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
