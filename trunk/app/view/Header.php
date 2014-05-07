@@ -26,7 +26,12 @@
                 $('#datepicker2').datepicker({dateFormat: "dd-mm-yy"});
 				$('#datepicker3').datepicker({dateFormat: "dd-mm-yy"});
             });
-			
+			$(document).ready(function() {
+				$('#wrapper').css('min-height', window.innerHeight-90);
+			});
+			$(window).resize(function() {
+				$('#wrapper').css('min-height', window.innerHeight-90);
+			});
         </script>
     </head>
     <header><img src="<?php echo URL; ?>public/img/span-putih.png" width="40px" height="48px"></header>
