@@ -128,7 +128,11 @@
                                 <li><a href=#></i>Hasil</a></li>
                             </ul>
                             </li>'; */
-						echo '<li class="nav"><a href=#>Panduan</a></li>';
+						echo '<li class="subnav"><a href=#>Panduan</a>';
+						echo '<ul>
+								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
+							</ul>
+							</li>';
 						
                     }
                     ?>

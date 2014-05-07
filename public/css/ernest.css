@@ -204,16 +204,16 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 	}
 #menu ul, #menu li {list-style: none; margin: 0; padding: 0;}
 #menu ul {position: relative; z-index: 597; }
-#menu ul li { float: left; min-height: 1px; vertical-align: middle;}
+#menu ul li { float: left; min-height: 1px; vertical-align: middle; }
 #menu ul li.hover,
-#menu ul li:hover {position: relative; z-index: 599; cursor: default;}
+#menu ul li:hover {position: relative; z-index: 599; cursor: default; }
 
 #menu ul ul li {
 	float: none;
 	font-weight: normal; position: relative
 	}
 
-#menu ul li:hover > ul { visibility: visible;}
+#menu ul li:hover > ul { visibility: visible; }
 
 #menu ul li.nav > a { 
 	color: rgba(0,121,185,1);
@@ -242,7 +242,7 @@ a #g2:hover, a #g3:hover, a #g4:hover {
     padding: 0 20px; 
 }
 #menu ul ul a {
-	background: white;
+	background: #f9f9f9;
     /*color: #FFF;*/
     border-top: 1px solid #2f96b4;
     line-height: 100%;
