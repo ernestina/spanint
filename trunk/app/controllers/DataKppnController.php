@@ -403,6 +403,10 @@ class DataKppnController extends BaseController {
 		$this->view->render('kppn/detailSp2dRekap');
 	}
 	
+	public function lihatPanduan1() {
+        $this->view->render('kppn/panduan1');
+    }
+	
     public function __destruct() {
         
     }
