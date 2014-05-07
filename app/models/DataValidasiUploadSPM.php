@@ -47,7 +47,7 @@ class DataValidasiUploadSPM{
 			$sql .= " AND ".$filter;
 		}
 		//var_dump ($sql);
-		
+		$sql .= " ORDER BY CREATION_DATE DESC";
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
