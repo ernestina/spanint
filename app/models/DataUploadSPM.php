@@ -49,6 +49,7 @@ class DataUploadSPM{
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
+		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   

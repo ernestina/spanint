@@ -90,8 +90,7 @@ class DataSPMController extends BaseController {
 					$filter[$no++] = "CREATION_DATE BETWEEN TO_DATE('".$_POST['tgl_awal']."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$_POST['tgl_akhir']."','DD/MM/YYYY hh:mi:ss')";
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
-				}
-				
+				}	
 				
 			$this->view->data = $d_spm1->get_validasi_spm_filter($filter);	
 			}	
@@ -206,12 +205,30 @@ class DataSPMController extends BaseController {
 		$d_spm1 = new DataCheck($this->registry);
 		$filter = array ();
 		$no=0;
-			if (!is_null($kdsatker)) {
+			if ($kdsatker != '') {
 				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
-				//$this->view->invoice_num = $invoice_num;
-				
+				//$this->view->invoice_num = $invoice_num;	
 			}
+			
+			if ($_POST['check_number']!=''){
+					$filter[$no++]="check_number = '".$_POST['check_number']."'";
+					$this->view->d_invoice = $_POST['check_number'];
+				}
 
+			if ($_POST['invoice']!=''){
+					$filter[$no++]="invoice_num = '".$_POST['invoice']."'";
+					$this->view->invoice = $_POST['invoice'];
+				}
+			if ($_POST['JenisSP2D']!=''){
+					$filter[$no++]="JENIS_SP2D = '".$_POST['JenisSP2D']."'";
+					$this->view->JenisSP2D = $_POST['JenisSP2D'];
+				}
+
+			if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "TO_DATE(CHECK_DATE, 'DD-MM-YYYY') BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
 		//var_dump($d_spm1->get_satker_filter($filter));
 		$this->view->render('kppn/SP2DSatker');

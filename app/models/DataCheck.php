@@ -8,14 +8,16 @@
 class DataCheck{
 
     private $db;
-	private $_vendor_name;
-	private $_amoount;
+	private $_jenis_sp2d;
+	private $_amount;
 	private $_invoice_num;
 	private $_invoice_date;
 	private $_description;
 	private $_check_number;
 	private $_check_date;
 	private $_attribute6;
+	private $_nmsatker;
+	private $_creation_date;
 	private $_status_lookup_code;
 	private $_table1 = 'AP_CHECKS_ALL_V';
     public $registry;
@@ -40,7 +42,8 @@ class DataCheck{
 				FROM " 
 				. $this->_table1. "
 				WHERE 
-				ATTRIBUTE15 = '".Session::get('id_user')."'"
+				STATUS_LOOKUP_CODE <> 'VOIDED' AND 
+				SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'"
 				
 				;
 				
@@ -57,7 +60,7 @@ class DataCheck{
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_vendor_name($val['VENDOR_NAME']);
+            $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
 			$d_data->set_amount(NUMBER_FORMAT($val['AMOUNT']));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
 			$d_data->set_invoice_date($val['INVOICE_DATE']);
@@ -65,6 +68,8 @@ class DataCheck{
 			$d_data->set_check_number($val['CHECK_NUMBER']);
 			$d_data->set_check_date($val['CHECK_DATE']);
 			$d_data->set_attribute6($val['ATTRIBUTE6']);
+			$d_data->set_nmsatker($val['NMSATKER']);
+			$d_data->set_creation_date($val['CREATION_DATE']);
 			$d_data->set_status_lookup_code($val['STATUS_LOOKUP_CODE']);
             $data[] = $d_data;
         }
@@ -75,8 +80,8 @@ class DataCheck{
      * setter
      */
 
-    public function set_vendor_name($vendor_name) {
-        $this->_vendor_name = $vendor_name;
+    public function set_jenis_sp2d($jenis_sp2d) {
+        $this->_jenis_sp2d = $jenis_sp2d;
     }
 	public function set_amount($amount) {
         $this->_amount = $amount;
@@ -102,15 +107,22 @@ class DataCheck{
 	public function set_status_lookup_code($status_lookup_code) {
         $this->_status_lookup_code = $status_lookup_code;
     }
-	
+	public function set_nmsatker($nmsatker) {
+        $this->_nmsatker = $nmsatker;
+    }
+	public function set_creation_date($creation_date) {
+        $this->_creation_date = $creation_date;
+    }
 	/*
      * getter
      */
 	
-	public function get_vendor_name() {
-        return $this->_vendor_name;
+	public function get_jenis_sp2d() {
+        return $this->_jenis_sp2d;
     }
-	
+	public function get_creation_date() {
+        return $this->_creation_date;
+    }
 	public function get_amount() {
         return $this->_amount;
     }
@@ -135,6 +147,9 @@ class DataCheck{
     }
 	public function get_status_lookup_code() {
         return $this->_status_lookup_code;
+    }
+	public function get_nmsatker() {
+        return $this->_nmsatker;
     }
 		
     /*

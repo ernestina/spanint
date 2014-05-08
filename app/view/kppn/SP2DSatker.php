@@ -1,7 +1,11 @@
 <div id="top">
 	<div id="header">
-        <h2>DAFTAR SP2D PER SATKER <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?>
-			<?php echo Session::get('user'); ?>
+        <h2>DAFTAR SP2D SATKER <br> 
+		<?php $nmsatker='';
+		foreach ($this->data as $value) {$nmsatker=$value->get_nmsatker();} 
+		echo $nmsatker;
+		?>
+			
 		</h2>
     </div>
 
@@ -13,11 +17,31 @@
                     $_SERVER['PHP_SELF'];
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
 	<div id="top">
-	<form method="POST" action="daftarsp2d" enctype="multipart/form-data">
+	<form method="POST" action="#" enctype="multipart/form-data">
 		<div id="winvoice" class="error"></div>
 		
-		<label class="isian">No INVOICE: </label>
+		<label class="isian">No SP2D: </label>
+		<input type="text" name="check_number" id="check_number" value="<?php if (isset($this->check_number)){echo $this->check_number;}?>">
+		
+		<label class="isian">Nomor Invoice: </label>
 		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->invoice)){echo $this->invoice;}?>">
+		
+		<label class="isian">Jenis SP2D: </label>
+		<select type="text" name="JenisSP2D" id="JenisSP2D">
+			<option value=''>- pilih -</option>
+			<option value='GAJI' <?php if ($this->status=="GAJI"){echo "GAJI";}?>>GAJI</option>
+			<option value='NON GAJI' <?php if ($this->status=="NON GAJI"){echo "NON GAJI";}?>>NON GAJI</option>
+			<option value='RETUR' <?php if ($this->status=="RETUR"){echo "RETUR";}?>>RETUR</option>	
+			<option value='LAINNYA' <?php if ($this->status=="LAINNYA"){echo "LAINNYA";}?>>LAINNYA</option>	
+		</select>
+		
+		<div id="wtgl" class="error"></div>
+		<label class="isian">Tanggal SP2D: </label>
+		<ul class="inline">
+		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->tgl_awal)){echo $this->tgl_awal;}?>" /> </li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->tgl_akhir)){echo $this->tgl_akhir;}?>"></li>
+		</ul>
+		
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
 		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
 		<input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
@@ -43,16 +67,14 @@
 			<thead>
 					<th>No.</th>
 					<th>Nomor SP2D</th>
+					<th>Tanggal Selesai SP2D</th>
 					<th>Tanggal SP2D</th>
 					<th>Nilai SP2D </th>
 					<th>Bank </th>
 					<th>Nomor Invoice</th>
 					<th>Tanggal Invoice</th>
-					<th>Nama Supplier</th>
+					<th>Jenis SP2D</th>
 					<th>Description</th>
-					<th>Status</th>
-					<!--th>Uraian Invoice</th-->
-					
 			</thead>
 			<tbody>
 			<?php 
@@ -66,16 +88,15 @@
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_check_number() . "</td>";
-					//echo "<td><a href=".URL."dataSPM/errorSpm/".$value->get_file_name()." target='_blank' '>" . $value->get_file_name() . "</a></td>";
+					echo "<td>" . $value->get_creation_date() . "</td>";
 					echo "<td>" . $value->get_check_date() . "</td>";
 					echo "<td>" . $value->get_amount() . "</td>";
 					echo "<td>" . $value->get_attribute6() . "</td>";
 					echo "<td>" . $value->get_invoice_num() . "</td>";
 					echo "<td>" . $value->get_invoice_date() . "</td>";
-					echo "<td>" . $value->get_vendor_name() . "</td>";
+					echo "<td>" . $value->get_jenis_sp2d() . "</td>";
 					echo "<td>" . $value->get_description() . "</td>";
-					echo "<td>" . $value->get_status_lookup_code() . "</td>";
-					//echo "<td>" . $value->get_description() . "</td>";
+					
 					
 					
 				echo "</tr>	";

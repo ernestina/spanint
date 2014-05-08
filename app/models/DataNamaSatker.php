@@ -11,7 +11,9 @@ class DataNamaSatker{
 	private $_kdsatker;
 	private $_nmsatker;
 	private $_kppn;
+	private $_total_sp2d;
 	private $_table1 = 'T_SATKER';
+	private $_table2 = 'AP_CHECKS_ALL_V';
     public $registry;
 
     /*
@@ -30,11 +32,15 @@ class DataNamaSatker{
     
     public function get_satker_filter($filter) {
 		Session::get('id_user');
-		$sql = "SELECT KDSATKER, UPPER(NMSATKER) NMSATKER , KPPN
+		$sql = "SELECT TS.KDSATKER, UPPER(TS.NMSATKER) NMSATKER, KPPN, 
+				count(aca.check_number) TOTAL_SP2D 
 				FROM " 
-				. $this->_table1. "
+				. $this->_table1. " TS, "
+				. $this->_table2. " ACA 
 				WHERE  
-				KPPN = '".Session::get('id_user')."'"
+				ts.kdsatker=substr(aca.invoice_num, 8,6)
+				AND aca.status_lookup_code <> 'VOIDED' AND 
+				TS.KPPN = '".Session::get('id_user')."'"
 				
 				;
 				
@@ -43,7 +49,8 @@ class DataNamaSatker{
 			$sql .= " AND ".$filter;
 		}
 		
-		
+		$sql .= " GROUP BY TS.KDSATKER, UPPER(TS.NMSATKER), KPPN, 
+				substr(aca.invoice_num, 8,6)";
 		$sql .= " ORDER BY NMSATKER";
 				//var_dump ($sql);
 
@@ -54,6 +61,7 @@ class DataNamaSatker{
             $d_data->set_kdsatker($val['KDSATKER']);
 			$d_data->set_nmsatker($val['NMSATKER']);
             $d_data->set_kppn($val['KPPN']);
+			$d_data->set_total_sp2d($val['TOTAL_SP2D']);
             $data[] = $d_data;
         }
         return $data;
@@ -72,7 +80,9 @@ class DataNamaSatker{
 	public function set_kppn($kppn) {
         $this->_kppn = $kppn;
     }
-	
+	public function set_total_sp2d($total_sp2d) {
+        $this->_total_sp2d = $total_sp2d;
+    }
 	/*
      * getter
      */
@@ -88,7 +98,9 @@ class DataNamaSatker{
 	public function get_kppn() {
         return $this->_kppn;
     }
-		
+	public function get_total_sp2d() {
+        return $this->_total_sp2d;
+    }
     /*
      * destruktor
      */

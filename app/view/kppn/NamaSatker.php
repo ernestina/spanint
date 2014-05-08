@@ -49,7 +49,8 @@
 					<th>No.</th>
 					<th>Kode Satker</th>
 					<th>Nama Satker</th>
-					<th>KPPN</th>
+					<th>Total SP2D</th>
+					<!--th>KPPN</th-->
 			</thead>
 			<tbody>
 			<?php 
@@ -65,7 +66,8 @@
 					echo "<td><a href=".URL."dataSPM/daftarsp2d/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
 					//echo "<td>" . $value->get_kdsatker() . "</td>";
 					echo "<td>" . $value->get_nmsatker() . "</td>";
-					echo "<td>" . $value->get_kppn() . "</td>";
+					//echo "<td>" . $value->get_kppn() . "</td>";
+					echo "<td>" . $value->get_total_sp2d() . "</td>";
 				echo "</tr>	";
 			} 
 			}
