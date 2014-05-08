@@ -1,6 +1,7 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D terbit di atas jam 3 tertanggal hari ini<br>
+        <h2>MONITORING SP2D terbit di atas jam 3 <br> 
+		tertanggal di hari yang sama<br>
 			<?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?>
 		</h2>
     </div>
