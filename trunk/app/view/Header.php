@@ -117,8 +117,8 @@
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
                                 <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke BO1</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D terbit dan tertanggal di hari yang sama</a></li>
-								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>Laporan SP2D terbit di atas jam 3 tertanggal hari ini</a></li>
+								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>SP2D terbit dan tertanggal di hari yang sama</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>SP2D terbit diatas jam 3 tertanggal hari yang sama</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>

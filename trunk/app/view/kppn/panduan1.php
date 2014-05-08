@@ -1,7 +1,7 @@
 <?
 //echo "hello world";
 ?>
-<object data="<?php echo URL; ?>files/Petunjuk_pencetakan_ format_xls.pdf" type="application/pdf" width="100%" height="650px">
+<object data="<?php echo URL; ?>files/Petunjuk_pencetakan_ format_xls.pdf" type="application/pdf" width="100%" height="550px">
  
   <p>Anda tidak memiliki plugin PDF untuk peramban/browser ini.
   Silakan <a href="<?php echo URL; ?>files/PANDUAN_SETUP_PERANGKAT_SPAN.pdf"> klik disini untuk

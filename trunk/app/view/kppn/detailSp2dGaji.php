@@ -63,7 +63,7 @@
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>Tgl Selesai SP2D</th>
+					<th width='100px'>Tgl Selesai SP2D</th>
 					<th>Tgl SP2D</th>
 					<th>No. SP2D</th>
 					<!--th>Status</th-->
@@ -72,7 +72,7 @@
 					<th>No. Invoice</th>
 					<th>Jumlah Rp</th>
 					<th>Nama Bank</th>
-					<th width='500px'>Deskripsi</th>
+					<th width='400px'>Deskripsi</th>
 					
 			</thead>
 			<tbody class='ratatengah'>
