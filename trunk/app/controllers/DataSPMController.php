@@ -225,7 +225,7 @@ class DataSPMController extends BaseController {
 				}
 
 			if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
-					$filter[$no++] = "TO_DATE(CHECK_DATE, 'DD-MM-YYYY') BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$_POST['tgl_awal']."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$_POST['tgl_akhir']."','DD/MM/YYYY hh:mi:ss')";
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
