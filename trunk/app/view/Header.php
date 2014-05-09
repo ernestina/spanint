@@ -89,7 +89,7 @@
                                 <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
 								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
 								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
-								<!--li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li-->
+								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
                             </ul>
 							</li>';
 						
@@ -116,7 +116,7 @@
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
-                                <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke BO1</a></li>
+                                <li><a href=' . URL . 'dataKppn/harianBO></i>SP2D Harian ke BO1</a></li>
 								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>SP2D terbit dan tertanggal di hari yang sama</a></li>
 								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>SP2D terbit diatas jam 3 tertanggal hari yang sama</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
