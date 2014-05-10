@@ -189,7 +189,7 @@ class DataSPMController extends BaseController {
 					$this->view->d_invoice = $_POST['kdsatker'];
 				}
 				if ($_POST['nmsatker']!=''){
-					$filter[$no++]=" UPPER(NMSATKER) LIKE UPPER('%".$_POST['nmsatker']."%')";
+					$filter[$no++]=" UPPER(TS.NMSATKER) LIKE UPPER('%".$_POST['nmsatker']."%')";
 					$this->view->d_invoice = $_POST['nmsatker'];
 				}
 				
