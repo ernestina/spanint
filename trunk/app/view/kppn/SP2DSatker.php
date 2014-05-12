@@ -62,7 +62,7 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra" id='fixheader'>
+		<table width="100%" class="table table-bordered zebra" id='fixheader' style='font-size: 90%'>
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
@@ -73,10 +73,10 @@
 					<th>Bank </th>
 					<th>Nomor Invoice</th>
 					<th>Tanggal Invoice</th>
-					<th>Jenis SP2D</th>
-					<th>Description</th>
+					<th width='70px'>Jenis SP2D</th>
+					<th width='500px'>Description</th>
 			</thead>
-			<tbody>
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			//var_dump ($this->data);
@@ -90,12 +90,12 @@
 					echo "<td>" . $value->get_check_number() . "</td>";
 					echo "<td>" . $value->get_creation_date() . "</td>";
 					echo "<td>" . $value->get_check_date() . "</td>";
-					echo "<td>" . $value->get_amount() . "</td>";
+					echo "<td class='ratakanan'>" . $value->get_amount() . "</td>";
 					echo "<td>" . $value->get_attribute6() . "</td>";
 					echo "<td>" . $value->get_invoice_num() . "</td>";
 					echo "<td>" . $value->get_invoice_date() . "</td>";
 					echo "<td>" . $value->get_jenis_sp2d() . "</td>";
-					echo "<td>" . $value->get_description() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
 					
 					
 					
@@ -119,7 +119,12 @@
     $(function(){
         hideErrorId();
         hideWarning();
-        
+		
+		$("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
+		});
+		
+		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
+		});
     });
     
     function hideErrorId(){

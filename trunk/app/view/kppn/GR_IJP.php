@@ -61,7 +61,7 @@
 					<th rowspan=2 width="10px" class='mid'>No.</th>
 					<!--th>KPPN</th-->
 					<!--th>Tanggal</th-->
-					<th rowspan=2 class='mid'>Bank - No Rek</th>
+					<th rowspan=2 class='mid'>Bank - Cabang - No Rek</th>
 					<!--th>Kode Cabang Bank</th-->
 					<th colspan=31>Tanggal Penerimaan</th>
 					<th rowspan=2 class='mid'>Total</th>
@@ -113,7 +113,7 @@
 					echo "<td>" . $no++ . "</td>";
 					//echo "<td>" . $value->get_kppn() . "</td>";
 					//echo "<td>" . $value->get_gl_date_char() . "</td>";
-					echo "<td class='ratakiri'>" . $value->get_bank_code() . ' -<br>'. $value->get_bank_account_num() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_bank_code() . ' - ' . $value->get_bank_branch_code() . '<br>'. $value->get_bank_account_num() . "</td>";
 					echo "<td>" . $value->get_n01() . "</td>";
 					echo "<td>" . $value->get_n02() . "</td>";
 					echo "<td>" . $value->get_n03() . "</td>";
