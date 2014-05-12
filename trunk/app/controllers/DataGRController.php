@@ -19,24 +19,26 @@ class DataGRController extends BaseController {
      */
 
 	
-	public function GRstatus() {
-		$d_spm1 = new DataGR_STATUS($this->registry);
+	public function GR_PFK() {
+		$d_spm1 = new DataPFK($this->registry);
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+				if ($_POST['bulan']!=''){
+					//if ($_POST['bulan']!='SEMUA_BULAN'){
+						$filter[$no++]= $_POST['bulan'];
+					//}
+					$this->view->d_bulan = $_POST['bulan'];
+				} 
 				
-				if ($_POST['status']!=''){
-					$filter[$no++]="status = '" .$_POST['status']."'";
+			} else {
+					$filter[$no++]= "MEI";
+					$this->view->d_bulan = "MEI";
 				}
-				
-				if ($_POST['nama_file']!=''){
-					$filter[$no++]=" file_name = '".$_POST['nama_file']."'";
-				}
-				
-			}
-		$this->view->data = $d_spm1->get_gr_status_filter($filter);
+			
+		$this->view->data = $d_spm1->get_gr_pfk_filter($filter);
 		//var_dump($d_spm->get_gr_status_filter($filter));
-		$this->view->render('kppn/statusGR');
+		$this->view->render('kppn/test');
 	}
 	
 	public function GR_IJP() {
