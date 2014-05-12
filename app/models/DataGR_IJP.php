@@ -13,7 +13,7 @@ class DataGR_IJP{
     private $_bulan;
 	//private $_gl_date_char;
     private $_bank_code;
-    //private $_bank_branch_code;
+    private $_bank_branch_code;
 	private $_bank_account_num;
 	//private $_transaksi;
 	//private $_baris;
@@ -57,7 +57,7 @@ class DataGR_IJP{
 			$sql .= " AND ".$filter;
 		}
 		$sql .= " ORDER BY BANK_CODE, BANK_ACCOUNT_NUM ";
-		//var_dump ($sql);
+		var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
@@ -66,7 +66,7 @@ class DataGR_IJP{
 			$d_data->set_bulan($val['BULAN']);
             //$d_data->set_gl_date_char($val['GL_DATE_CHAR']);
 			$d_data->set_bank_code($val['BANK_CODE']);
-            //$d_data->set_bank_branch_code($val['BANK_BRANCH_CODE']);
+            $d_data->set_bank_branch_code($val['BANK_BRANCH_CODE']);
             $d_data->set_bank_account_num($val['BANK_ACCOUNT_NUM']);
 			//$d_data->set_transaksi($val['TRANSAKSI']);
 			//$d_data->set_baris($val['BARIS']);
@@ -180,6 +180,9 @@ class DataGR_IJP{
     }
     public function set_bank_code($bank_code) {
         $this->_bank_code = $bank_code;
+    }
+	public function set_bank_branch_code($bank_branch_code) {
+        $this->_bank_branch_code = $bank_branch_code;
     }
     public function set_bank_account_num($bank_account_num) {
         $this->_bank_account_num = $bank_account_num;
@@ -297,6 +300,9 @@ class DataGR_IJP{
     }
 	public function get_bank_code() {
         return $this->_bank_code;
+    }
+	public function get_bank_branch_code() {
+        return $this->_bank_branch_code;
     }
 	public function get_bank_account_num() {
         return $this->_bank_account_num;

@@ -1,7 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING SP2D terbit di atas jam 3 <br> 
-		tertanggal di hari yang sama<br>
+		tertanggal hari yang sama<br>
 			<?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?>
 		</h2>
     </div>
@@ -64,15 +64,9 @@
 					<th width='70px'>Tgl Selesai SP2D</th>
 					<!--th width='70px'>Tgl SP2D</th-->
 					<th>No, Tanggal SP2D</th>
-					<!--th>Status</th-->
-					<!--th>Tanggal Selesai SP2D</th>
-					<th>No. Transaksi</th-->
-					<th>No. Invoice</th>
-					<th>Jumlah Rp</th>
+					<th>No. Invoice, <br>Jumlah Rp</th>
 					<th>Nama Bank</th>
-					<!--th>Nama Supplier</th>
-					<th>No. Rekening Supplier</th-->
-					<th>Nama, No. Rek Supplier</th>
+					<th width='200px'>Bank, Nama, No. Rek Supplier</th>
 					<th width='300px'>Deskripsi</th>
 					<th>File Transaksi</th>
 					<th>Keterangan</th>
@@ -94,10 +88,10 @@
 							//echo "<td>" . $value->get_return_code() . "</td>";
 							
 							//echo "<td>" . $value->get_check_number_line_num() . "</td>";
-							echo "<td>" . $value->get_invoice_num() . "</td>";
-							echo "<td class='ratakanan'>" . $value->get_check_amount() . "</td>";
+							//echo "<td>" . $value->get_invoice_num() . "</td>";
+							echo "<td class='ratakanan'>" . $value->get_invoice_num() . '<br>Rp ' . $value->get_check_amount() . "</td>";
 							echo "<td>" . $value->get_bank_account_name() . "</td>";
-							echo "<td class='ratakiri'>" . $value->get_vendor_name() . '<br>No. Rek: ' . $value->get_vendor_ext_bank_account_num() . "</td>";
+							echo "<td class='ratakiri'>". $value->get_bank_name() . '<br>Penerima: '. $value->get_vendor_name() . '<br>No. Rek: '  . $value->get_vendor_ext_bank_account_num() . "</td>";
 							//echo "<td>" . $value->get_vendor_ext_bank_account_num() . "</td>";
 							echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
 							echo "<td>". $value->get_ftp_file_name() . "</td>";
