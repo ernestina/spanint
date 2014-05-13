@@ -71,32 +71,30 @@
 					echo "<td>" . $value->get_ntpn() . "</td>";
 					echo "<td align='right'>" . number_format($value->get_rupiah()) . "</td>";
 				echo "</tr>	";
-				$tot_pot = $tot_pot  + $value->get_rupiah() ;
-				
-			}
-				echo "<tr>	";
-					echo "<td></td>";
-					echo "<td></td>";
-					echo "<td></td>";
-					echo "<td></td>";
-					echo "<td></td>";
-					echo "<td><b>GRAND TOTAL</td>";
-					echo "<td align='right'><b>" . number_format($tot_pot) . "</td>";
-					
-				echo "</tr>	";
+				$tot_pot = $tot_pot  + $value->get_rupiah() ;	
+				}
 			}
 			}
-			else {
-				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
-			}
+			
 			?>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan='5'></td>
+					<td class='ratatengah'><b>GRAND TOTAL</td>
+					<td align='right'><b><?php
+						echo number_format($tot_pot); ?>
+					</td>
+					
+				</tr>
+			</tfoot>
         </table>
 		</div>
 </div>
 </div>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
 <script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
@@ -132,21 +130,22 @@
     }
 	
 	$(document).ready( function () {
-		var oTable = $('#example').dataTable( {
-			"sScrollY": "300px",
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
 			"sScrollX": "100%",
-			"sScrollXInner": "110%",
+			"sScrollXInner": "100%",
 			"bSort": false,
 			"bPaginate": false,
 			"bInfo": null,
 			"bFilter": false,
 			"oLanguage": {
 			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
 			},
 		} );
 				
 		var keys = new KeyTable( {
-			"table": document.getElementById('example'),
+			"table": document.getElementById('fixheader'),
 			"datatable": oTable
 		} );
 	} );
