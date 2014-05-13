@@ -69,6 +69,15 @@ class DataKppnController extends BaseController {
 				}
 				$this->view->data = $d_sppm->get_sppm_filter($filter);
 			}	
+			
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/isianKppn');

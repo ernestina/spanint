@@ -68,6 +68,36 @@
 						echo '<li class="nav"><a href=#>Panduan</a></li>';
                     }
                     if (Session::get('role') == KANWIL) {
+						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataKppn/Sp2dGajiDobel></i>Terindikasi dobel</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Teridikasi salah Tanggal</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah PayGroup</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji dengan bulan lalu</a></li>
+                            </ul>
+                            </li>';
+						
+						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
+                                <li><a href=' . URL . 'dataKppn/harianBO></i>SP2D Harian ke BO1</a></li>
+								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>SP2D terbit dan tertanggal di hari yang sama</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>SP2D terbit diatas jam 3 tertanggal hari yang sama</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap penerbitan SP2D</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="subnav"><a href=#>Panduan</a>';
+						echo '<ul>
+								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
+							</ul>
+							</li>';
+						
+                    }
+                    if (Session::get('role') == KPPN) {
 						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
@@ -99,7 +129,7 @@
                                 <!--<li><a href='. URL .'dataGR/GRstatus></i>Status File LHP (interface)</a></li>-->
                                 <li><a href='. URL .'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
                                 <li><a href='. URL .'dataGR/GR_IJP></i>Monitoring IJP</a></li>
-								<li><a href=#></i>Monitoring PFK</a></li>
+								<li><a href='. URL .'dataGR/GR_PFK></i>Monitoring PFK</a></li>
                             </ul>
                             </li>';
 						
@@ -125,14 +155,6 @@
 								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap penerbitan SP2D</a></li>
                             </ul>
                             </li>';
-						
-                        //echo '<li class="subnav"><a href=#>XICO dan BS</a>';
-						/*echo '<ul>
-                                <li><a href=#></i>Rekon harian XICO dan BS</a></li>
-                                <li><a href=#></i>Flag Check</a></li>
-                                <li><a href=#></i>Hasil</a></li>
-                            </ul>
-                            </li>'; */
 						echo '<li class="subnav"><a href=#>Panduan</a>';
 						echo '<ul>
 								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>

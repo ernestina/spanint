@@ -31,16 +31,16 @@ class AuthController extends BaseController {
                     $role = 'admin';
                     break;
                 case 2:
-                    $role = 'kppn';
+                    $role = 'satker';
                     break;
                 case 3:
-                    $role = 'kanwil';
+                    $role = 'kppn';
                     break;
                 case 4:
                     $role = 'ba';
                     break;
                 case 5:
-                    $role = 'pkn';
+                    $role = 'kanwil';
                     break;
                 case 9:
                     $role = 'lainya';
