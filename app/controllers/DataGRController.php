@@ -41,6 +41,36 @@ class DataGRController extends BaseController {
 		$this->view->render('kppn/test');
 	}
 	
+	/*public function GR_PFK_DETAIL($akun=null) {
+		$d_spm1 = new DataPFK_DETAIL($this->registry);
+		$filter = array ();
+		$no=0;
+		/*if (!is_null($akun)) {
+				$filter[$no++]="AKUN = '" .$akun."'";
+				$this->view->akun = $akun;
+			}
+		$filter[$no++]="AKUN = '811131'";
+		$this->view->data = $d_spm1->get_gr_pfk_detail_filter($filter);
+		//var_dump($d_spm->get_gr_status_filter($filter));
+		$this->view->render('kppn/GR_PFK');
+	}*/
+	
+	public function GR_PFK_DETAIL($akun=null, $bulan=null) {
+		$d_spm1 = new DataPFK_DETAIL($this->registry);
+		$filter = array ();
+		$no=0;
+			if (!is_null($akun)) {
+				$filter[$no++]="akun =  '" .$akun."'";
+				$this->view->d_tgl = $akun;
+			}
+			if (!is_null($bulan)) {
+				$filter[$no++]="TRIM(to_char(tanggal_buku,'month')) =  '" .$bulan."'";
+				$this->view->bulan = $bulan;
+			}
+		$this->view->data = $d_spm1->get_gr_pfk_detail_filter($filter);
+		//var_dump($d_spm->get_gr_status_filter($filter));
+		$this->view->render('kppn/GR_PFK');
+	}
 	public function GR_IJP() {
 		$d_spm1 = new DataGR_IJP($this->registry);
 		$filter = array ();
