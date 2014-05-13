@@ -122,6 +122,7 @@
 </div>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
 <script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
@@ -157,21 +158,22 @@
     }
 	
 	$(document).ready( function () {
-		var oTable = $('#example').dataTable( {
-			"sScrollY": "300px",
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
 			"sScrollX": "100%",
-			"sScrollXInner": "110%",
+			"sScrollXInner": "100%",
 			"bSort": false,
 			"bPaginate": false,
 			"bInfo": null,
 			"bFilter": false,
 			"oLanguage": {
 			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
 			},
 		} );
 				
 		var keys = new KeyTable( {
-			"table": document.getElementById('example'),
+			"table": document.getElementById('fixheader'),
 			"datatable": oTable
 		} );
 	} );
