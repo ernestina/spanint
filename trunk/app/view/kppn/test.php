@@ -59,6 +59,7 @@
 			<thead>
 					<th>No.</th>
 					<th>Akun</th>
+					<th>Uraian Akun</th>
 					<th>Potongan SPM</th>
 					<th>Setoran MPN</th>
 					<th>Total</th>
@@ -77,7 +78,9 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_akun() . "</td>";
+					//echo "<td>" . $value->get_akun() . "</td>";
+					echo "<td><a href=".URL."dataGR/GR_PFK_DETAIL/".$value->get_akun()."/".$this->d_bulan." target='_blank' '>" . $value->get_akun() . "</a></td>";
+					echo "<td align='left' >" . $value->get_uraian_akun() . "</td>";
 					echo "<td align='right'>" . number_format($value->get_potongan_spm()) . "</td>";
 					echo "<td align='right'>" . number_format($value->get_setoran_mpn()) . "</td>";
 					echo "<td align='right'>" . number_format($value->get_total()) . "</td>";
@@ -87,6 +90,7 @@
 				$tot_total 	= $tot_total  + $value->get_total() ;
 			}
 				echo "<tr>	";
+					echo "<td></td>";
 					echo "<td></td>";
 					echo "<td><b>GRAND TOTAL</td>";
 					echo "<td align='right'><b>" . number_format($tot_pot_spm) . "</td>";

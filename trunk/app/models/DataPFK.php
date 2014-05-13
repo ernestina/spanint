@@ -11,6 +11,7 @@ class DataPFK{
 	private $_akun;
 	private $_potongan_spm;
 	private $_setoran_mpn;
+	private $_uraian_akun;
 	private $_total;
 	private $_table1 = 'PFK_SPAN_PVT';
     public $registry;
@@ -35,6 +36,7 @@ class DataPFK{
 		foreach ($filter as $filter);
 		$sql = "select 
 				akun,
+				uraian_akun,
 				case when trx = 1 then ".$filter." * (-1) end potongan_spm,
 				case when trx = 2 then ".$filter." * (-1) end setoran_mpn
 				from " 
@@ -57,6 +59,7 @@ class DataPFK{
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_akun($val['AKUN']);
+			$d_data->set_uraian_akun($val['URAIAN_AKUN']);
 			$d_data->set_potongan_spm($val['POTONGAN_SPM']);
             $d_data->set_setoran_mpn($val['SETORAN_MPN']);
 			$d_data->set_total($val['SETORAN_MPN']+$val['POTONGAN_SPM']);
@@ -83,6 +86,9 @@ class DataPFK{
 	public function set_total($total) {
         $this->_total = $total;
     }
+	public function set_uraian_akun($uraian_akun) {
+        $this->_uraian_akun = $uraian_akun;
+    }
 	
 	/*
      * getter
@@ -101,6 +107,9 @@ class DataPFK{
     }
 	public function get_total() {
         return $this->_total;
+    }
+	public function get_uraian_akun() {
+        return $this->_uraian_akun;
     }
     /*
      * destruktor
