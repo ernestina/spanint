@@ -71,6 +71,18 @@
 			$tot_set_mpn=0;
 			$tot_total=0;
 			//var_dump ($this->data);
+			if ($this->d_bulan=='januari'){ $bulan = 'january'; }
+			if ($this->d_bulan=='februari'){ $bulan = 'february'; }
+			if ($this->d_bulan=='maret'){ $bulan = 'march'; }
+			if ($this->d_bulan=='april'){ $bulan = 'april'; }
+			if ($this->d_bulan=='mei'){ $bulan = 'may'; }
+			if ($this->d_bulan=='juni'){ $bulan = 'june'; }
+			if ($this->d_bulan=='juli'){ $bulan = 'july'; }
+			if ($this->d_bulan=='agustus'){ $bulan = 'august'; }
+			if ($this->d_bulan=='september'){ $bulan = 'september'; }
+			if ($this->d_bulan=='oktober'){ $bulan = 'october'; }
+			if ($this->d_bulan=='november'){ $bulan = 'november'; }
+			if ($this->d_bulan=='desember'){ $bulan = 'december'; }
 			if (isset($this->data)){
 				if (empty($this->data)){
 					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
@@ -79,7 +91,7 @@
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					//echo "<td>" . $value->get_akun() . "</td>";
-					echo "<td><a href=".URL."dataGR/GR_PFK_DETAIL/".$value->get_akun()."/".$this->d_bulan." target='_blank' '>" . $value->get_akun() . "</a></td>";
+					echo "<td><a href=".URL."dataGR/GR_PFK_DETAIL/".$value->get_akun()."/".$bulan." target='_blank' '>" . $value->get_akun() . "</a></td>";
 					echo "<td align='left' >" . $value->get_uraian_akun() . "</td>";
 					echo "<td align='right'>" . number_format($value->get_potongan_spm()) . "</td>";
 					echo "<td align='right'>" . number_format($value->get_setoran_mpn()) . "</td>";
