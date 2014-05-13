@@ -30,12 +30,6 @@ class DataUser {
         $this->registry = $registry;
     }
 
-    /*
-     * mendapatkan data dari tabel Data Tetap
-     * @param limit batas default null
-     * return array objek Data Tetap
-     */
-
     public function get_d_user($limit = null, $batas = null) {
         $sql = "SELECT * FROM " . $this->_table . " ORDER BY kd_d_kppn";
         if (!is_null($limit) AND !is_null($batas)) {
@@ -59,12 +53,26 @@ class DataUser {
 
         return $data;
     }
+	
+	public function get_kppn_kanwil($kd_kanwil = null) {
+        $sql = "SELECT * FROM " . $this->_table." WHERE  "; 
+		if (!is_null($kd_kanwil)){
+			$sql .= " kd_kanwil=" . $kd_kanwil." AND";
+		}
+		$sql .= " KD_R_JENIS = 3 ORDER BY KD_D_KPPN";
+        $result = $this->db->select($sql);
+        $data = array();
+		//var_dump($sql);
+        foreach ($result as $val) {
+            $d_user = new $this($this->registry);
+            $d_user->set_kd_d_kppn($val['KD_D_KPPN']);
+            $d_user->set_nama_user(substr($val['NAMA_USER'],5,20));
 
-    /*
-     * mendapatkan Data Tetap sesuai id
-     * @param objek Data Tetap
-     * return objek Data Tetap
-     */
+            $data[] = $d_user;
+        }
+		//var_dump($data);
+        return $data;
+    }
 
     public function get_d_user_by_id($id) {
         $sql = "SELECT * FROM " . $this->_table . " WHERE kd_d_user=" . $id;
@@ -107,11 +115,6 @@ class DataUser {
         return $this->db->insert($this->_table, $data);
     }
 
-    /*
-     * update Data Tetap, id harus di set terlebih dahulu
-     * param data array
-     */
-
     public function update_d_user() {
         $data = array(
             'kd_d_user' => $this->get_kd_d_user(),
@@ -133,10 +136,6 @@ class DataUser {
         $where = ' kd_d_user=' . $this->get_kd_d_user();
         return $this->db->update($this->_table, $data, $where);
     }
-
-    /*
-     * hapus Data Tetap, id harus di set terlebih dahulu
-     */
 
     public function delete_d_user() {
         $where = ' kd_d_user=' . $this->get_kd_d_user();
