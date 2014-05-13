@@ -61,8 +61,8 @@
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>
 		<ul class="inline">
-		<li><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>"> </li> <li>s/d</li>
-		<li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker1" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
+		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>"> </li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
 		</ul>
 
 
@@ -146,13 +146,37 @@
     $(function(){
         hideErrorId();
         hideWarning();
-		
-		$("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
+		/*
+		$("#tgl_awal").datepicker({
+			dateFormat: "dd-mm-yy"
 		});
 		
-		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
+		$("#tgl_akhir").datepicker({
+			dateFormat: "dd-mm-yy"
 		});
+		*/	
+	    $("#tgl_awal").datepicker({
+        maxDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate, instance) {
+            if (selectedDate != '') {
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                var date = $.datepicker.parseDate(instance.settings.dateFormat, selectedDate, instance.settings);
+                date.setMonth(date.getMonth() + 1);
+                console.log(selectedDate, date);
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                $("#tgl_akhir").datepicker("option", "maxDate", date);
+            }
+        }
     });
+    $("#tgl_akhir").datepicker({
+        maxDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate) {
+            $("#tgl_awal").datepicker("option", "maxDate", selectedDate);
+			}
+		});		
+	});
 	
     function hideErrorId(){
         $('.error').fadeOut(0);
