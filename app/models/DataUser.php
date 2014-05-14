@@ -95,6 +95,21 @@ class DataUser {
         return $data;
     }
 
+    public function get_d_user_kppn($kppn) {
+        $sql = "SELECT * FROM " . $this->_table . " WHERE KD_SATKER = '" . $kppn."'";
+        $result = $this->db->select($sql);
+		//var_dump($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_user = new $this($this->registry);
+            $d_user->set_nama_user($val['NAMA_USER']);
+			$d_user->set_kd_satker($val['KD_SATKER']);
+
+            $data[] = $d_user;
+        }
+        return $data;
+    }
+
     public function add_d_user() {
         $data = array(
             'kd_r_jenis' => $this->get_kd_r_jenis(),
