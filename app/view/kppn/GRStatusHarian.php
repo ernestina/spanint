@@ -1,6 +1,14 @@
 <div id="top">
 	<div id="header">
         <h2>Monitoring Status LHP <?php //echo $this->d_bulan; ?> <?php //echo $kode_satker; ?>
+		KPPN 
+		<?php if ($_POST['kdkppn']!='') { ?>
+		<?php $nmkppn='';
+		foreach ($this->data as $value) {$nmkppn=$value->get_ou_name();} 
+		echo $nmkppn;
+		?>
+			<?php  } 
+		else{echo Session::get('user');}?>
 		</h2>
     </div>
 <!--<table><tr><td width="90%">
@@ -26,8 +34,40 @@
 </tr>
 </form>
 </table>-->
+<?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
+<a href="#oModal" class="modal">FILTER DATA</a><br><br>
+        <div id="oModal" class="modalDialog" >
+            <div>
+                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
+				<a href="<?php
+                    $_SERVER['PHP_SELF'];
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
 
-
+	<div id="top">	
+	
+		<form method="POST" action="grStatusHarian" enctype="multipart/form-data">
+		
+		<?php if (isset($this->kppn_list)) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<select type="text" name="kdkppn" id="kdkppn">
+		<?php foreach ($this->kppn_list as $value1){ 
+			echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";
+		} ?>
+		</select>
+		<?php } ?>
+		
+		<ul class="inline" style="margin-left: 150px">
+		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
+		</ul>
+	</form>
+	
+</div>
+</div>
+</div>
+<?php } ?>
 
 <div id="fitur">
 		<table width="100%" class="table table-bordered" style="font-size: 80%">
