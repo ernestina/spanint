@@ -118,7 +118,7 @@
 							echo "<td class='ratakiri'>". $value->get_bank_name() . '<br>Penerima: '. $value->get_vendor_name() . '<br>No. Rek: '  . $value->get_vendor_ext_bank_account_num() . "</td>";
 							echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
 							echo "<td>". $value->get_ftp_file_name() . "</td>";
-							echo "<td>" . $value->get_return_desc() . "</td>";
+							echo "<td>" . $value->get_return_desc() . '<br>'. $value->get_payment_method() ."</td>";
 						echo "</tr>	";
 					}
 				} 
