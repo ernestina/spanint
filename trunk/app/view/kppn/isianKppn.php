@@ -214,14 +214,14 @@
             }
         });
 		
-		$('#datepicker').change(function(){
-            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
+		$('#tgl_awal').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
                 $('#wtgl').fadeOut(200);
             } 
         });
 		
-		$('#datepicker1').change(function(){
-            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
+		$('#tgl_akhir').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
                 $('#wtgl').fadeOut(200);
             } 
         });
@@ -241,8 +241,8 @@
 		var v_kdsatker = document.getElementById('kdsatker').value;
 		var v_invoice = document.getElementById('invoice').value;
 		var v_bank = document.getElementById('bank').value;
-		var v_tglawal = document.getElementById('datepicker').value;
-		var v_tglakhir = document.getElementById('datepicker1').value;
+		var v_tglawal = document.getElementById('tgl_awal').value;
+		var v_tglakhir = document.getElementById('tgl_akhir').value;
 		var v_fxml = document.getElementById('fxml').value;
 		
         var jml = 0;

@@ -1,6 +1,20 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING SP2D Gaji Terindikasi  Dobel <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?><br>
+        <h2>MONITORING SP2D Gaji Terindikasi  Dobel 
+		<?php if (isset($this->d_nama_kppn)) {
+			foreach($this->d_nama_kppn as $kppn){
+				echo "<br>".$kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+				$kode_kppn=$kppn->get_kd_satker();
+			}
+		}?>
+		<?php if (isset($this->d_bank)) {
+				if ($this->d_bank == 13 ) {
+					echo "<br> Semua Bank";
+				} else {
+					echo "<br>".$this->d_bank;
+				}
+		}?>
+		<br>
 		</h2>
     </div>
 
@@ -17,10 +31,16 @@
 
 	<form method="POST" action="sp2dGajiDobel" enctype="multipart/form-data">
 	
-		<?php if (Session::get('role') == ADMIN) { ?>
+		<?php if (isset($this->kppn_list)) { ?>
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
-		<input type="number" name="kdkppn" id="kdkppn" size="3" value="<?php if (isset($this->d_kdkppn)){echo $this->d_kdkppn;}?>">
+		<select type="text" name="kdkppn" id="kdkppn">
+		<?php foreach ($this->kppn_list as $value1){ 
+				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
+		} ?>
+		</select>
 		<?php } ?>
 		
 		<div id="wbulan" class="error"></div>

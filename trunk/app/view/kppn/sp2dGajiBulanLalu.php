@@ -1,8 +1,49 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING Perbandingan SP2D dengan Bulan Lalu <?php //echo Session::get('user'); ?><br>
+        <h2>MONITORING Perbandingan SP2D Gaji
+		<?php if (isset($this->d_nama_kppn)) {
+			foreach($this->d_nama_kppn as $kppn){
+				echo "<br>".$kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+				$kode_kppn=$kppn->get_kd_satker();
+			}
+		}?><br>
 		</h2>
     </div>
+	
+<?php if (isset($this->kppn_list)) { ?>	
+<a href="#bModal" class="modal">FILTER DATA</a><br><br>
+        <div id="bModal" class="modalDialog" >
+            <div>
+                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
+				<a href="<?php
+                    $_SERVER['PHP_SELF'];
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
+	
+<div id="top">
+
+	<form method="POST" action="sp2dCompareGaji" enctype="multipart/form-data">
+	
+		
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<select type="text" name="kdkppn" id="kdkppn">
+		<?php foreach ($this->kppn_list as $value1){ 
+				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
+		} ?>
+		</select>
+
+		<ul class="inline" style="margin-left: 130px">
+		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
+		</ul>
+	</form>
+</div>
+</div>
+</div>
+<?php } ?>
 
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra">
