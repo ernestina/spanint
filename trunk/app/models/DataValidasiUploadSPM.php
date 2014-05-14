@@ -38,7 +38,7 @@ class DataValidasiUploadSPM{
 				FROM " 
 				. $this->_table1. "
 				WHERE STATUS_CODE = 'Validasi gagal' 
-				AND SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user')
+				"
 				
 				;
 				

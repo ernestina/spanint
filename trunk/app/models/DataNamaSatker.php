@@ -39,8 +39,7 @@ class DataNamaSatker{
 				. $this->_table2. " ACA 
 				WHERE  
 				ts.kdsatker=substr(aca.invoice_num, 8,6)
-				AND aca.status_lookup_code <> 'VOIDED' AND 
-				TS.KPPN = '".Session::get('id_user')."'"
+				AND aca.status_lookup_code <> 'VOIDED'"
 				
 				;
 				

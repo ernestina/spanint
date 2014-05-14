@@ -1,7 +1,15 @@
 <div id="top">
 	<div id="header">
-        <h2>DURASI PEMROSESAN SPM - SP2D <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?><br>
-			<?php //echo Session::get('user'); ?>
+        <h2>DURASI PEMROSESAN SPM - SP2D 
+		<?php if (isset($this->d_nama_kppn)) {
+				foreach($this->d_nama_kppn as $kppn){
+					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+					$kode_kppn=$kppn->get_kd_satker();
+				}
+			}
+		
+		else{ echo Session::get('user');
+		} ?>
 		</h2>
     </div>
 
@@ -17,13 +25,17 @@
 	<div id="top">
 	<form method="POST" action="DurasiSpm" enctype="multipart/form-data">
 		
-		<div id="winvoice" class="error"></div>
-		<label class="isian">No Invoice: </label>
-		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->invoice)){echo $this->invoice;}?>">
+		<?php if (isset($this->kppn_list)) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<select type="text" name="kdkppn" id="kdkppn">
+		<?php foreach ($this->kppn_list as $value1){ 
+			echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";
+		} ?>
+		</select>
+		<?php } ?>
 		
-		<div id="winvoice" class="error"></div>
-		<label class="isian">Kode Satker: </label>
-		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
+		
 		
 		<label class="isian">Jenis SPM: </label>
 		<select type="text" name="JenisSPM" id="JenisSPM">
@@ -45,6 +57,14 @@
 			<option value="> '24" <?php if ($this->durasi=="> 24"){echo "Lebih dari 1 hari";}?>>Lebih dari satu hari</option>
 			
 		</select>
+		
+		<div id="winvoice" class="error"></div>
+		<label class="isian">No Invoice: </label>
+		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->invoice)){echo $this->invoice;}?>">
+		
+		<div id="winvoice" class="error"></div>
+		<label class="isian">Kode Satker: </label>
+		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
 
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>
@@ -62,7 +82,7 @@
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick=""></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick=""></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
@@ -102,7 +122,7 @@
 						echo "<td>" . $value->get_invoice_num() . "</td>";
 						echo "<td>" . $value->get_check_number() . "</td>";
 						echo "<td>" . $value->get_attribute1() . "</td>";
-						echo "<td>" . $value->get_aia_creation_date() . ' '  . $value->get_jam_upload() . "</td>";
+						echo "<td>" . strtoupper($value->get_aia_creation_date()) . ' '  . $value->get_jam_upload() . "</td>";
 						//echo "<td>" . $value->get_jam_upload() . "</td>";
 						echo "<td>" . $value->get_aca_creation_date() . ' ' . $value->get_jam_selesai_sp2d() .  "</td>";
 						//echo "<td>" . $value->get_jam_selesai_sp2d() . "</td>";

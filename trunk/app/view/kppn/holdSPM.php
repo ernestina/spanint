@@ -1,7 +1,13 @@
 <div id="top">
 	<div id="header">
         <h2>HOLD INVOICE 
-			<?php //echo Session::get('user'); ?>
+			 <?php if (isset($this->d_nama_kppn)) {
+				foreach($this->d_nama_kppn as $kppn){
+					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+					$kode_kppn=$kppn->get_kd_satker();
+				}
+			}
+			else {echo Session::get('user');}?>
 		</h2>
     </div>
 
@@ -16,9 +22,29 @@
 	<form method="POST" action="HoldSpm" enctype="multipart/form-data">
 		<div id="winvoice" class="error"></div>
 		
-		<label class="isian">No INVOICE: </label>
+		
+		<?php if (isset($this->kppn_list)) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<select type="text" name="kdkppn" id="kdkppn">
+		<?php foreach ($this->kppn_list as $value1){ 
+			echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";
+		} ?>
+		</select>
+		<?php } ?>
+		
+		<div id="wbank" class="error"></div>
+		<label class="isian">Status Invoice: </label>
+		<select type="text" name="STATUS" id="STATUS">
+			<option value=''>- pilih -</option>
+			<option value="IS NULL" <?php if ($this->status=="IS NULL"){echo "selected";}?>>Invoice Belum Di Cancel</option>
+			<option value="IS NOT NULL" <?php if ($this->status=="IS NOT NULL"){echo "selected";}?>>Invoice Sudah Di Cancel</option>
+		</select>
+		
+		<label class="isian">No Invoice: </label>
 		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->d_invoice)){echo $this->d_invoice;}?>">
 
+		
 
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
 		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
@@ -29,7 +55,7 @@
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick="return cek_upload();"></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return ();"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
@@ -50,6 +76,7 @@
 					<th>Alasan Hold</th>
 					<th>Status Release</th>
 					<th>Tanggal Hold</th>
+					<th>Status Invoice</th>
 			</thead>
 			<tbody class='ratatengah'>
 			<?php 
@@ -63,6 +90,7 @@
 					echo "<td width='200px' class='ratakiri'>" . $value->get_hold_reason() . "</td>";
 					echo "<td width='200px' class='ratakiri'>" . $value->get_release_reason() . "</td>";
 					echo "<td>" . $value->get_hold_date() . "</td>";
+					echo "<td width='200px' class='ratakiri'>" . $value->get_keterangan() . "</td>";
 				echo "</tr>	";
 			} 
 			?>

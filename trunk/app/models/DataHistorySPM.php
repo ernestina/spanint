@@ -38,12 +38,12 @@ class DataHistorySPM{
      * @param limit batas default null
      * return array objek Data Tetap*/
     
-    public function get_history_spm_filter($filter) {
+    public function get_history_spm_filter($filter,$invoice) {
 	Session::get('id_user');
 	$no=0;
-		foreach ($filter as $filter) {
-			//$sql .= " AND ".$filter;
-		}
+		foreach ($filter as $filter) 
+		{}
+		
 		$sql = "select 
 				AIIA.invoice_num NOMOR_DOKUMEN, 
 				AIIA.status_code RESPONSE, 
@@ -56,8 +56,8 @@ class DataHistorySPM{
 						. $this->_table5 .  " PAP 
 				WHERE FU.USER_ID = AIIA.created_by
 				and pap.person_id = fu.employee_id
-				and substr(fu.description,1,3) = '".Session::get('id_user').
-				"' and AIIA.invoice_num = " . $filter . " 
+				and substr(fu.description,1,3) = '".$filter.
+				"' and AIIA.invoice_num = " . $invoice . " 
 				
 				union all
 
@@ -76,9 +76,9 @@ class DataHistorySPM{
 				and ah.created_by=fu.user_id
 				and ah.last_updated_by=fu.user_id
 				and pap.person_id = fu.employee_id
-				and substr(fu.description,1,3) = '".Session::get('id_user').
+				and substr(fu.description,1,3) = '".$filter.
 				"' 
-				and ai.invoice_num = ". $filter ." 
+				and ai.invoice_num = ". $invoice ." 
 				
 
 				union all
@@ -108,14 +108,14 @@ class DataHistorySPM{
 						. $this->_table5 .  " PAP
 				on pap.person_id = fu.employee_id
 				where
-				substr(fu.description,1,3) = '".Session::get('id_user').
+				substr(fu.description,1,3) = '".$filter.
 				"' 
-				 and aia.invoice_num = ". $filter ."  
+				 and aia.invoice_num = ". $invoice ."  
 				order by waktu_mulai"
 				  
 				;
 				
-				
+			
 		/*$no=0;
 		foreach ($filter as $filter) {
 			//$sql .= " AND ".$filter;

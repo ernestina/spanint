@@ -1,6 +1,16 @@
 <div id="top">
 	<div id="header">
-        <h2>HISTORY INVOICE <?php echo Session::get('user'); ?></h2>
+        <h2>HISTORY INVOICE 
+		<?php if (isset($this->d_nama_kppn)) {
+				foreach($this->d_nama_kppn as $kppn){
+					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+					$kode_kppn=$kppn->get_kd_satker();
+				}
+			}
+		
+		else{ echo Session::get('user');
+		} ?>
+		</h2>
     </div>
 
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
@@ -13,6 +23,17 @@
 	<div id="top">
 	<form method="POST" action="HistorySpm" enctype="multipart/form-data">
 		<div id="winvoice" class="error"></div>
+		
+		<?php if (isset($this->kppn_list)) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<select type="text" name="kdkppn" id="kdkppn">
+		<?php foreach ($this->kppn_list as $value1){ 
+			echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";
+		} ?>
+		</select>
+		<?php } ?>
+		
 		
 		<label class="isian">No INVOICE: </label>
 		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->d_invoice)){echo $this->d_invoice;}?>">
