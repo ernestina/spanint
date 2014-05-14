@@ -28,6 +28,7 @@ class DataSppm {
 	private $_fl_void;
 	private $_bulan;
 	private $_jumlah_sp2d;
+	private $_payment_method;
     private $_error;
     private $_valid = TRUE;
     private $_table = 'XICO_ALL';
@@ -51,7 +52,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE, 
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -82,6 +83,7 @@ class DataSppm {
             $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
 			$data[] = $d_data;
         }
@@ -92,7 +94,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -122,6 +124,7 @@ class DataSppm {
             $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
 			$data[] = $d_data;
         }
@@ -132,7 +135,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE, 
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1 ";
 		//SP2D = 140181301002823
@@ -162,6 +165,7 @@ class DataSppm {
             $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
 			$data[] = $d_data;
         }
@@ -172,7 +176,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -202,6 +206,7 @@ class DataSppm {
             $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
 			$data[] = $d_data;
         }
@@ -212,7 +217,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
 				FROM " . $this->_table . "
 				WHERE KDKPPN = ".Session::get('id_user')." AND FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -242,6 +247,7 @@ class DataSppm {
             $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
 			$data[] = $d_data;
         }
@@ -252,7 +258,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -282,6 +288,7 @@ class DataSppm {
             $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
 			$data[] = $d_data;
         }
@@ -292,7 +299,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -322,6 +329,7 @@ class DataSppm {
             $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
 			$data[] = $d_data;
         }
@@ -332,7 +340,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
 				FROM " . $this->_table . "
 				WHERE KDKPPN = ".Session::get('id_user')." AND FL_VOID = 1";
 		//SP2D = 140181301002823
@@ -362,6 +370,7 @@ class DataSppm {
             $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
 			$data[] = $d_data;
         }
@@ -372,7 +381,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
 				FROM " . $this->_table . "
 				WHERE FL_VOID = 1";
 		//SP2D = 140181301002823
@@ -402,6 +411,7 @@ class DataSppm {
             $d_data->set_ftp_file_name($val['FTP_FILE_NAME']);
             $d_data->set_return_code($val['RETURN_CODE']);
             $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
 			$data[] = $d_data;
         }
@@ -894,6 +904,10 @@ class DataSppm {
     public function set_jumlah_sp2d($jumlah_sp2d) {
         $this->_jumlah_sp2d = $jumlah_sp2d;
     }
+	
+    public function set_payment_method($payment_method) {
+        $this->_payment_method = $payment_method;
+    }
 		
 	/*
      * getter
@@ -977,6 +991,10 @@ class DataSppm {
 	
 	public function get_jumlah_sp2d() {
         return $this->_jumlah_sp2d;
+    }
+	
+	public function get_payment_method() {
+        return $this->_payment_method;
     }
 
     /*
