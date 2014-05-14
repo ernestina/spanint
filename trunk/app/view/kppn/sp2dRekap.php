@@ -1,7 +1,26 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING Rekap SP2D Harian <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} ?><br>
-		<?php echo "Tanggal : ".date("d-m-Y",strtotime($this->d_tgl_awal))." s.d ".date("d-m-Y",strtotime($this->d_tgl_akhir)); ?>
+        <h2>MONITORING Rekap SP2D Harian
+		<?php if (isset($this->d_nama_kppn)) {
+				foreach($this->d_nama_kppn as $kppn){
+					echo "<br>".$kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+					$kode_kppn=$kppn->get_kd_satker();
+				}
+			}?>
+			<?php if (isset($this->d_bank)) {
+					if($this->d_bank=="MDRI"){
+						echo "<br> Mandiri" ;
+					}elseif($this->d_bank=="5"){
+						echo "<br> Semua Bank" ;
+					} else {
+						echo "<br> ".$this->d_bank;
+					}
+			}
+			?>
+			<?php if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
+					echo "<br>".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
+			}
+			?>
 		</h2>
     </div>
 
@@ -16,12 +35,25 @@
 	
 <div id="top">	
 	<form method="POST" action="Sp2dRekap" enctype="multipart/form-data">
+	
+		<?php if (isset($this->kppn_list)) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<select type="text" name="kdkppn" id="kdkppn">
+		<option value=''>- pilih -</option>
+		<?php foreach ($this->kppn_list as $value1){ 
+				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
+		} ?>
+		</select>
+		<?php } ?>
 		
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>
 		<ul class="inline">
-		<li><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>"> </li> <li>s/d</li>
-		<li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker1" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
+		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>"> </li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
 		</ul>
 		
 		<ul class="inline" style="margin-left: 150px">
@@ -97,10 +129,10 @@
         hideErrorId();
         hideWarning();
 		
-		$("#datepicker").datepicker({dateFormat: "dd-mm-yy"
+		$("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
 		});
 		
-		$("#datepicker1").datepicker({dateFormat: "dd-mm-yy"
+		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
 		});
     });
 	
