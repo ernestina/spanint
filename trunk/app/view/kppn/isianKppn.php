@@ -1,7 +1,12 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING SP2D - BANK<br>
-			 <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?>
+			<?php if (isset($this->d_nama_kppn)) {
+				foreach($this->d_nama_kppn as $kppn){
+					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+					$kode_kppn=$kppn->get_kd_satker();
+				}
+			}?>
 		</h2>
     </div>
 
@@ -22,7 +27,9 @@
 		<select type="text" name="kdkppn" id="kdkppn">
 		<option value=''>- pilih -</option>
 		<?php foreach ($this->kppn_list as $value1){ 
-			echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";
+				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
 		} ?>
 		</select>
 		<?php } ?>

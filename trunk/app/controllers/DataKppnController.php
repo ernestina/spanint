@@ -29,7 +29,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
 					$filter[$no++]="KDKPPN = ".Session::get('id_user');
 				}
