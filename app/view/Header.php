@@ -44,6 +44,16 @@
                     <li class="nav"><a href="#"></a></li>
                     <?php
                     if (Session::get('role') == ADMIN) {
+						echo '<li class="subnav"><a href=#>Modul PM</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
+                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
+                                <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
+								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
+								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
+								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
+                            </ul>
+							</li>';
                         echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
@@ -68,6 +78,16 @@
 						echo '<li class="nav"><a href=#>Panduan</a></li>';
                     }
                     if (Session::get('role') == KANWIL) {
+						echo '<li class="subnav"><a href=#>Modul PM</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
+                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
+                                <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
+								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
+								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
+								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
+                            </ul>
+							</li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/Sp2dGajiDobel></i>Terindikasi dobel</a></li>

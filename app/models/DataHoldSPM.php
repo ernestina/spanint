@@ -17,6 +17,7 @@ class DataHoldSPM{
 	private $_release_reason;
 	private $_attribute15;
 	private $_description;
+	private $_keterangan;
     private $_table1 = 'ap_invoices_all';
 	private $_table2 = 'ap_holds_all';
     public $registry;
@@ -37,13 +38,13 @@ class DataHoldSPM{
     
     public function get_hold_spm_filter($filter) {
 		Session::get('id_user');
-		$sql = "SELECT A.INVOICE_NUM, A.INVOICE_AMOUNT, A.DESCRIPTION, B.HOLD_REASON, B.HOLD_DATE, B.RELEASE_REASON
+		$sql = "SELECT A.INVOICE_NUM, A.INVOICE_AMOUNT, A.DESCRIPTION, B.HOLD_REASON, B.HOLD_DATE, B.RELEASE_REASON,
+				CASE WHEN A.CANCELLED_DATE IS NULL THEN 'Invoice Belum Di Cancel' ELSE 'Invoice Sudah Di Cancel' END AS KETERANGAN
 				FROM " 
 				. $this->_table1 . " A, "
 				. $this->_table2 . " B  
 				WHERE 
-				A.ATTRIBUTE15 = ".Session::get('id_user').
-				" and A.INVOICE_ID=B.INVOICE_ID"
+				A.INVOICE_ID=B.INVOICE_ID"
 				;
 		$no=0;
 		foreach ($filter as $filter) {
@@ -66,6 +67,7 @@ class DataHoldSPM{
 			$d_data->set_invoice_id_hold($val['INVOICE_ID']);
 			$d_data->set_attribute15($val['ATTRIBUTE15']);
 			$d_data->set_description($val['DESCRIPTION']);
+			$d_data->set_keterangan($val['KETERANGAN']);
             $data[] = $d_data;
         }
         return $data;
@@ -107,6 +109,9 @@ class DataHoldSPM{
 	public function set_description($description) {
         $this->_description = $description;
     }
+	public function set_keterangan($keterangan) {
+        $this->_keterangan = $keterangan;
+    }
 		
 	/*
      * getter
@@ -146,7 +151,9 @@ class DataHoldSPM{
 	public function get_description() {
          return $this->_description ;
     }
-	
+	public function get_keterangan() {
+         return $this->_keterangan ;
+    }
 
     /*
      * destruktor

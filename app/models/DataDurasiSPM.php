@@ -38,7 +38,7 @@ class DataDurasiSPM{
 		$sql = "SELECT DISTINCT * FROM " 
 				. $this->_table1 . " 
 				WHERE 
-				SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user')
+				1=1 "
 				;
 		$no=0;
 		foreach ($filter as $filter) {

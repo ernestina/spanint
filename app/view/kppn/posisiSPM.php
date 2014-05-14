@@ -1,51 +1,51 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING POSISI SPM <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?>
-			<?php //echo Session::get('user'); ?>
+			<?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} else{echo Session::get('user');} ?>
+		<br>
+		KPPN 
+		<?php if ($_POST['kdkppn']!='') { ?>
+		<?php $nmkppn='';
+		foreach ($this->data as $value) {$nmkppn=$value->get_ou_name();} 
+		echo $nmkppn;
+		?>
+			<?php  } ?>
 		</h2>
     </div>
-
-<!--a href="#zModal" class="modal">FILTER DATA</a><br><br>
-        <div id="zModal" class="modalDialog" >
+<?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
+<a href="#oModal" class="modal">FILTER DATA</a><br><br>
+        <div id="oModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
 				<a href="<?php
                     $_SERVER['PHP_SELF'];
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
 </a>
+
+	<div id="top">	
 	
-	<div id="top">
-	<form method="POST" action="posisiSpm" enctype="multipart/form-data">
+		<form method="POST" action="posisiSpm" enctype="multipart/form-data">
 		
-		<div id="winvoice" class="error"></div>
-		<label class="isian">No Invoice: </label>
-		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->d_invoice)){echo $this->d_invoice;}?>">
-
-		<div id="wtgl" class="error"></div>
-		<label class="isian">Tanggal: </label>
-		<ul class="inline">
-		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>" /> </li> <li>s/d</li>
-		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
-		</ul>
-
-		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-		<input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-		<input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-		<input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
-		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
-
-		<!--ul class="inline" style="margin-left: 130px">
+		<?php if (isset($this->kppn_list)) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<select type="text" name="kdkppn" id="kdkppn">
+		<?php foreach ($this->kppn_list as $value1){ 
+			echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";
+		} ?>
+		</select>
+		<?php } ?>
+		
+		<ul class="inline" style="margin-left: 150px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();"></li>
-		<!--onClick="konfirm(); return false;"-->
-		<!--/ul>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
+		</ul>
 	</form>
+	
 </div>
 </div>
-</div-->
-
-
+</div>
+<?php } ?>
 
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra ratatengah" id="fixheader">
@@ -128,7 +128,7 @@
 			"datatable": oTable
 		} );
 	} );
-	/*
+	
 	$(function(){
         hideErrorId();
         hideWarning();

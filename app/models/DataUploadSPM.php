@@ -41,7 +41,7 @@ class DataUploadSPM{
 		$sql = "SELECT *
 				FROM " 
 				. $this->_table1. "
-				WHERE SUBSTR(FILE_NAME,5,3) = ".Session::get('id_user')
+				WHERE 1=1 "
 				
 				;
 				

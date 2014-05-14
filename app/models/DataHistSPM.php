@@ -49,7 +49,7 @@ class DataHistSPM{
 		$sql = "SELECT *
 				from "
 				. $this->_table1 ."
-				  WHERE SUBSTR(OU_NAME,1,3)= ".Session::get('id_user')
+				  WHERE 1=1 "
 				  ;
 				
 				

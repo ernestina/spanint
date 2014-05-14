@@ -42,8 +42,7 @@ class DataCheck{
 				FROM " 
 				. $this->_table1. "
 				WHERE 
-				STATUS_LOOKUP_CODE <> 'VOIDED' AND 
-				SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'"
+				STATUS_LOOKUP_CODE <> 'VOIDED'"
 				
 				;
 				
