@@ -113,13 +113,13 @@ class DataGR_IJP{
 				FROM " 
 				. $this->_table. " 
 				 WHERE 
-				KPPN = '".Session::get('id_user')."'"
+				1=1"
 				
 				;
 		$no=0;
-		//foreach ($filter as $filter) {
-			//$sql .= " AND ".$filter;
-		//}
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
 		$sql .= " ORDER BY BULAN ";
 		//var_dump ($sql);
         $result = $this->db->select($sql);

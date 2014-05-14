@@ -35,25 +35,13 @@ class DataGRController extends BaseController {
 					$filter[$no++]= "MEI";
 					$this->view->d_bulan = "MEI";
 				}
+				
 			
 		$this->view->data = $d_spm1->get_gr_pfk_filter($filter);
 		//var_dump($d_spm->get_gr_status_filter($filter));
 		$this->view->render('kppn/test');
 	}
 	
-	/*public function GR_PFK_DETAIL($akun=null) {
-		$d_spm1 = new DataPFK_DETAIL($this->registry);
-		$filter = array ();
-		$no=0;
-		/*if (!is_null($akun)) {
-				$filter[$no++]="AKUN = '" .$akun."'";
-				$this->view->akun = $akun;
-			}
-		$filter[$no++]="AKUN = '811131'";
-		$this->view->data = $d_spm1->get_gr_pfk_detail_filter($filter);
-		//var_dump($d_spm->get_gr_status_filter($filter));
-		$this->view->render('kppn/GR_PFK');
-	}*/
 	
 	public function GR_PFK_DETAIL($akun=null, $bulan=null) {
 		$d_spm1 = new DataPFK_DETAIL($this->registry);
@@ -116,8 +104,33 @@ class DataGRController extends BaseController {
 	}
 
 	public function grStatusHarian() {
-		$d_spm1 = new DataGR_IJP($this->registry);			
-		$this->view->data = $d_spm1->get_gr_status_harian($filter);
+	$d_spm1 = new DataGR_IJP($this->registry);
+	$filter = array ();
+	$no=0;
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";	
+			$this->view->data = $d_spm1->get_gr_status_harian($filter);
+			}
+			if (isset($_POST['submit_file'])) {
+			
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				} else {
+					$filter[$no++]="KPPN = '".Session::get('id_user')."'";
+				}
+			$this->view->data = $d_spm1->get_gr_status_harian($filter);	
+			}	
+					
+		
 		$this->view->render('kppn/GRStatusHarian');
 	}
 	
