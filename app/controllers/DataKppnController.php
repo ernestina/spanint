@@ -353,7 +353,8 @@ class DataKppnController extends BaseController {
 		if (isset($_POST['submit_file'])) {
 			if ($_POST['kdkppn']!=''){
 				$kppn="KDKPPN = '".$_POST['kdkppn']."'";
-				$this->view->d_kdkppn = $_POST['kdkppn'];
+				$d_kppn = new DataUser($this->registry);
+				$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 			} else {
 				$kppn="KDKPPN = '".Session::get('id_user')."'";
 			}
@@ -381,7 +382,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				}
 				$this->view->data = $d_sppm->get_sp2d_gaji_tanggal($kppn);
 			}
@@ -392,7 +394,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				}
 				$this->view->data = $d_sppm->get_sp2d_gaji_tanggal($kppn);
 			}
@@ -413,7 +416,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				}
 				$this->view->data = $d_sppm->get_sp2d_gaji_bank($kppn);
 			}
@@ -424,7 +428,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				}
 				$this->view->data = $d_sppm->get_sp2d_gaji_bank($kppn);
 			}
@@ -445,7 +450,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				}
 				$this->view->data = $d_sppm->get_sp2d_gaji_rekening($kppn);
 			}
@@ -456,7 +462,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				}
 				$this->view->data = $d_sppm->get_sp2d_gaji_rekening($kppn);
 			}
@@ -477,7 +484,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				}
 				$this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
 			}
@@ -488,7 +496,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				}
 				$this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
 			}
