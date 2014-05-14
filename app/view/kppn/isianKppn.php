@@ -153,15 +153,6 @@
     $(function(){
         hideErrorId();
         hideWarning();
-		/*
-		$("#tgl_awal").datepicker({
-			dateFormat: "dd-mm-yy"
-		});
-		
-		$("#tgl_akhir").datepicker({
-			dateFormat: "dd-mm-yy"
-		});
-		*/	
 	    $("#tgl_awal").datepicker({
         maxDate: "dateToday",
         dateFormat: 'dd-mm-yy',
@@ -184,6 +175,8 @@
 			}
 		});		
 	});
+	
+    
 	
     function hideErrorId(){
         $('.error').fadeOut(0);

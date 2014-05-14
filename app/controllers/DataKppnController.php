@@ -70,14 +70,13 @@ class DataKppnController extends BaseController {
 				}
 				$this->view->data = $d_sppm->get_sppm_filter($filter);
 			}	
-			
-			if (Session::get('role')==KANWIL){
-				$d_kppn_list = new DataUser($this->registry);
-				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			}
 			if (Session::get('role')==ADMIN){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
@@ -91,7 +90,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
 					$filter[$no++]="KDKPPN = ".Session::get('id_user');
 				}
@@ -109,6 +109,14 @@ class DataKppnController extends BaseController {
 				}
 				$this->view->data = $d_sppm->get_harian_bo_i($filter);
 			}	
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}	
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/harianBo');
@@ -121,7 +129,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
 					$filter[$no++]="KDKPPN = ".Session::get('id_user');
 				}
@@ -140,6 +149,14 @@ class DataKppnController extends BaseController {
 				$filter[$no++]=" TO_CHAR(PAYMENT_DATE,'YYYYMMDD') = TO_CHAR(CREATION_DATE,'YYYYMMDD') ";
 				$this->view->data = $d_sppm->get_sp2d_hari_ini($filter);
 			}	
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}	
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}	
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dHariIni');
@@ -152,7 +169,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
 					$filter[$no++]="KDKPPN = ".Session::get('id_user');
 				}
@@ -172,7 +190,15 @@ class DataKppnController extends BaseController {
 								AND TO_CHAR(CREATION_DATE,'HH24MISS') > '150000' )";
 								
 				$this->view->data = $d_sppm->get_sp2d_besok($filter);
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}	
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}		
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dBesok');
@@ -185,7 +211,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
 					$filter[$no++]="KDKPPN = ".Session::get('id_user');
 				}
@@ -203,6 +230,14 @@ class DataKppnController extends BaseController {
 				}
 				$filter[$no++]="TO_CHAR(CREATION_DATE,'YYYYMMDD')  > TO_CHAR(CHECK_DATE,'YYYYMMDD')";
 				$this->view->data = $d_sppm->get_sp2d_backdate($filter);
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}	
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}	
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
@@ -240,7 +275,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
 					$filter[$no++]="KDKPPN = ".Session::get('id_user');
 				}
@@ -258,7 +294,15 @@ class DataKppnController extends BaseController {
 				}
 				$filter[$no++] = "CHECK_AMOUNT < 1";
 				$this->view->data = $d_sppm->get_sp2d_minus($filter);
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}	
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}		
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dNilaiMinus');
@@ -271,7 +315,8 @@ class DataKppnController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
-					$this->view->d_kdkppn = $_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
 					$filter[$no++]="KDKPPN = ".Session::get('id_user');
 				}
@@ -289,7 +334,15 @@ class DataKppnController extends BaseController {
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
 				$this->view->data = $d_sppm->get_sp2d_sudah_void($filter);
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}	
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dSudahVoid');
@@ -299,10 +352,10 @@ class DataKppnController extends BaseController {
 		$d_sppm = new DataSppm($this->registry);
 		if (isset($_POST['submit_file'])) {
 			if ($_POST['kdkppn']!=''){
-				$kppn="KDKPPN = ".$_POST['kdkppn'];
+				$kppn="KDKPPN = '".$_POST['kdkppn']."'";
 				$this->view->d_kdkppn = $_POST['kdkppn'];
 			} else {
-				$kppn="KDKPPN = ".Session::get('id_user');
+				$kppn="KDKPPN = '".Session::get('id_user')."'";
 			}
 			if ($_POST['bulan']!=13){
 				$bulan=$_POST['bulan'];
@@ -310,34 +363,142 @@ class DataKppnController extends BaseController {
 			$this->view->d_bank = $_POST['bulan'];
 			$this->view->data = $d_sppm->get_sp2d_gaji_dobel($bulan,$kppn);
 		}
+		if (Session::get('role')==ADMIN){
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+		}	
+		if (Session::get('role')==KANWIL){
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+		}
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiDobel');
 	}
 	
 	public function sp2dSalahTanggal() {
 		$d_sppm = new DataSppm($this->registry);
-		$this->view->data = $d_sppm->get_sp2d_gaji_tanggal();
+		if (Session::get('role')==ADMIN){
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				}
+				$this->view->data = $d_sppm->get_sp2d_gaji_tanggal($kppn);
+			}
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+		}	
+		if (Session::get('role')==KANWIL){
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				}
+				$this->view->data = $d_sppm->get_sp2d_gaji_tanggal($kppn);
+			}
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+		}
+		if (session::get('role')==KPPN){
+			$kppn=" AND KDKPPN = '".Session::get('id_user')."'";
+			$this->view->data = $d_sppm->get_sp2d_gaji_tanggal($kppn);
+		}
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiTanggal');
 	}
 	
 	public function sp2dSalahBank() {
 		$d_sppm = new DataSppm($this->registry);
-		$this->view->data = $d_sppm->get_sp2d_gaji_bank();
+		if (Session::get('role')==ADMIN){
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				}
+				$this->view->data = $d_sppm->get_sp2d_gaji_bank($kppn);
+			}
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+		}	
+		if (Session::get('role')==KANWIL){
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				}
+				$this->view->data = $d_sppm->get_sp2d_gaji_bank($kppn);
+			}
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+		}
+		if (session::get('role')==KPPN){
+			$kppn=" AND KDKPPN = '".Session::get('id_user')."'";
+			$this->view->data = $d_sppm->get_sp2d_gaji_bank($kppn);
+		}
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiBank');
 	}
 	
 	public function sp2dSalahRekening() {
 		$d_sppm = new DataSppm($this->registry);
-		$this->view->data = $d_sppm->get_sp2d_gaji_rekening();
+		if (Session::get('role')==ADMIN){
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				}
+				$this->view->data = $d_sppm->get_sp2d_gaji_rekening($kppn);
+			}
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+		}	
+		if (Session::get('role')==KANWIL){
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				}
+				$this->view->data = $d_sppm->get_sp2d_gaji_rekening($kppn);
+			}
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+		}
+		if (session::get('role')==KPPN){
+			$kppn=" AND KDKPPN = '".Session::get('id_user')."'";
+			$this->view->data = $d_sppm->get_sp2d_gaji_rekening($kppn);
+		}
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiRekening');
 	}
 	
 	public function sp2dCompareGaji() {
 		$d_sppm = new DataSppm($this->registry);
-		$this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu();
+		if (Session::get('role')==ADMIN){
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				}
+				$this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
+			}
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+		}	
+		if (Session::get('role')==KANWIL){
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$kppn=" AND KDKPPN = '".$_POST['kdkppn']."'";
+					$this->view->d_kdkppn = $_POST['kdkppn'];
+				}
+				$this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
+			}
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+		}
+		if (session::get('role')==KPPN){
+			$kppn=" AND KDKPPN = '".Session::get('id_user')."'";
+			$this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
+		}
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiBulanLalu');
 	}
@@ -345,6 +506,13 @@ class DataKppnController extends BaseController {
 	public function sp2dRekap() {
 		$d_sppm = new DataSppm($this->registry);
 		if (isset($_POST['submit_file'])) {
+			if ($_POST['kdkppn']!=''){
+				$filter[$no++]=" KDKPPN = ".$_POST['kdkppn'];
+				$d_kppn = new DataUser($this->registry);
+				$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+			} else {
+				$filter[$no++]=" KDKPPN = ".Session::get('id_user');
+			}
 			if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
 				$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE ('".date('Ymd',strtotime($_POST['tgl_awal']))."','YYYYMMDD') 
 									AND TO_DATE ('".date('Ymd',strtotime($_POST['tgl_akhir']))."','YYYYMMDD')  ";
@@ -352,6 +520,14 @@ class DataKppnController extends BaseController {
 				$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 			}
 			$this->view->data = $d_sppm->get_sp2d_rekap($filter);
+		}
+		if (Session::get('role')==ADMIN){
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+		}	
+		if (Session::get('role')==KANWIL){
+			$d_kppn_list = new DataUser($this->registry);
+			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 		}
 		//var_dump($d_sppm->get_sp2d_rekap($filter));
 		$this->view->render('kppn/sp2dRekap');

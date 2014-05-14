@@ -1,7 +1,26 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING PENERBITAN SP2D HARIAN KE BANK<br>
-			 <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?>
+			 <?php if (isset($this->d_nama_kppn)) {
+				foreach($this->d_nama_kppn as $kppn){
+					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+					$kode_kppn=$kppn->get_kd_satker();
+				}
+			}?>
+			<?php if (isset($this->d_bank)) {
+					if($this->d_bank=="MDRI"){
+						echo "<br> Mandiri" ;
+					} elseif($this->d_bank=="5"){
+						echo "<br> Semua Bank" ;
+					}else {
+						echo "<br> ".$this->d_bank;
+					}
+			}
+			?>
+			<?php if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
+					echo $this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
+			}
+			?>
 		</h2>
     </div>
 
@@ -17,10 +36,17 @@
 <div id="top">
 	<form method="POST" action="harianBO" enctype="multipart/form-data">
 	
-		<?php if (Session::get('role') == ADMIN) { ?>
+		<?php if (isset($this->kppn_list)) { ?>
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
-		<input type="number" name="kdkppn" id="kdkppn" size="3" value="<?php if (isset($this->d_kdkppn)){echo $this->d_kdkppn;}?>">
+		<select type="text" name="kdkppn" id="kdkppn">
+		<option value=''>- pilih -</option>
+		<?php foreach ($this->kppn_list as $value1){ 
+				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
+		} ?>
+		</select>
 		<?php } ?>
 		
 		<div id="wbank" class="error"></div>
@@ -37,10 +63,8 @@
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>
 		<ul class="inline">
-		<li><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
-		</li> <li>s/d</li>
-		<li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker1" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
-		</li>
+		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>"> </li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
 		</ul>
 
 		<ul class="inline" style="margin-left: 130px">
@@ -116,13 +140,28 @@
     $(function(){
         hideErrorId();
         hideWarning();
-		
-		$("#tgl_awal").datepicker({dateFormat: "yy-mm-dd"
-		});
-		
-		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
-		});
+	    $("#tgl_awal").datepicker({
+        maxDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate, instance) {
+            if (selectedDate != '') {
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                var date = $.datepicker.parseDate(instance.settings.dateFormat, selectedDate, instance.settings);
+                date.setMonth(date.getMonth() + 1);
+                console.log(selectedDate, date);
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                $("#tgl_akhir").datepicker("option", "maxDate", date);
+            }
+        }
     });
+    $("#tgl_akhir").datepicker({
+        maxDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate) {
+            $("#tgl_awal").datepicker("option", "maxDate", selectedDate);
+			}
+		});		
+	});
 	
     function hideErrorId(){
         $('.error').fadeOut(0);
