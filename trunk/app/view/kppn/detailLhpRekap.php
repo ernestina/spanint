@@ -15,7 +15,7 @@
 					<th>Kode Bank</th>
 					<th>Nomor Rekening Persepsi</th>
 					<th>Jumlah Rupiah</th>
-					<th>Responsibilty User</th>
+					<th>Nomor Batch</th>
 					<th>Nama File</th>
 					<th>Tindakan</th>
 					
@@ -31,7 +31,7 @@
 					echo "<td>" . $value->get_bank_code() . "</td>";
 					echo "<td>" . $value->get_bank_account_num() . "</td>";
 					echo "<td class='ratakanan'>" . $value->get_keterangan() . "</td>";
-					echo "<td>" . $value->get_resp_name() . "</td>";
+					echo "<td>" . $value->get_gr_batch_num() . "</td>";
 					echo "<td class='ratakiri'><a href=".URL."dataGR/detailPenerimaan/".$value->get_file_name()." target='_blank' >" . $value->get_file_name() . "</a></td>";
 					if ($value->get_status()=='Validated'){
 						echo "<td>Lakukan interface ulang</td>";
