@@ -26,7 +26,9 @@ class DataFA{
 	private $_encumbrance_amt;
 	private $_actual_amt;
 	private $_balancing_amt;
+	private $_nm_satker;
     private $_table1 = 'gl_balances_v';
+	private $_table2 = 't_satker';
     public $registry;
 
     /*
@@ -45,17 +47,18 @@ class DataFA{
     
     public function get_fa_filter($filter) {
 		Session::get('id_user');
-		$sql = "SELECT *
+		$sql = "SELECT A.*, B.NMSATKER
 				FROM " 
-				. $this->_table1. " 
-				WHERE 
-				KPPN = '".Session::get('id_user')."'";
+				. $this->_table1. " A, "
+				. $this->_table2. " B 
+				WHERE BANK = '00000' AND  
+				A.SATKER=B.KDSATKER ";
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
 		
-		//$sql .= " ORDER BY B.HOLD_DATE DESC";
+		
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
@@ -77,6 +80,7 @@ class DataFA{
 			$d_data->set_encumbrance_amt(number_format($val['ENCUMBRANCE_AMT']));
 			$d_data->set_actual_amt(number_format($val['ACTUAL_AMT']));
 			$d_data->set_balancing_amt(number_format($val['BALANCING_AMT']));
+			$d_data->set_nm_satker($val['NMSATKER']);
             $data[] = $d_data;
         }
         return $data;
@@ -91,6 +95,9 @@ class DataFA{
     }
 	public function set_kppn($kppn) {
         $this->_kppn = $kppn;
+    }
+	public function set_nm_satker($nm_satker) {
+        $this->_nm_satker = $nm_satker;
     }
 	
     public function set_akun($akun) {
@@ -140,7 +147,9 @@ class DataFA{
 	/*
      * getter
      */
-	
+	public function get_nm_satker() {
+        return $this->_nm_satker;
+    }
 	public function get_satker() {
         return $this->_satker;
     }

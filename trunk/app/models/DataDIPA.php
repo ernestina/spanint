@@ -25,7 +25,9 @@ class DataDipa{
 	private $_intraco_code;
 	private $_cadangan_code;
 	private $_line_amount;
+	private $_nm_satker;
     private $_table1 = 'spsa_bt_dipa_v';
+	private $_table2 = 't_satker';
     public $registry;
 
     /*
@@ -43,11 +45,12 @@ class DataDipa{
      * return array objek Data Tetap*/
     
     public function get_dipa_filter($filter) {
-		$sql = "SELECT *
+		$sql = "SELECT A.*, B.NMSATKER
 				FROM " 
-				. $this->_table1. " 
+				. $this->_table1. " A, " 
+				. $this->_table2. " B  
 				WHERE 
-				KPPN_CODE = ".Session::get('id_user')
+				A.SATKER_CODE=B.KDSATKER"
 				
 				;
 		$no=0;
@@ -55,7 +58,7 @@ class DataDipa{
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " ORDER BY SATKER_CODE ASC, REVISION_NO DESC, ACCOUNT_CODE ASC, TANGGAL_POSTING_REVISI DESC, JAM_POSTING_REVISI DESC ";
+		$sql .= " ORDER BY A.SATKER_CODE ASC, A.REVISION_NO DESC, A.ACCOUNT_CODE ASC, A.TANGGAL_POSTING_REVISI DESC, A.JAM_POSTING_REVISI DESC ";
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
@@ -79,6 +82,7 @@ class DataDipa{
 			$d_data->set_budget_type($val['BUDGET_TYPE']);
 			$d_data->set_intraco_code($val['INTRACO_CODE']);
 			$d_data->set_cadangan_code($val['CADANGAN_CODE']);
+			$d_data->set_nm_satker($val['NMSATKER']);
 			$d_data->set_line_amount(number_format($val['LINE_AMOUNT']));
             $data[] = $d_data;
         }
@@ -94,6 +98,9 @@ class DataDipa{
     }
 	public function set_revision_no($revision_no) {
         $this->_revision_no = $revision_no;
+    }
+	public function set_nm_satker($nm_satker) {
+        $this->_nm_satker = $nm_satker;
     }
 	
     public function set_tanggal_posting_revisi($tanggal_posting_revisi) {
@@ -152,6 +159,9 @@ class DataDipa{
 	
 	public function get_dipa_no() {
         return $this->_dipa_no;
+    }
+	public function get_nm_satker() {
+        return $this->_nm_satker;
     }
 	
 	public function get_revision_no() {
