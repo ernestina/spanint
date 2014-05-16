@@ -40,7 +40,6 @@
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
 		<select type="text" name="kdkppn" id="kdkppn">
-		<option value=''>- pilih -</option>
 		<?php foreach ($this->kppn_list as $value1){ 
 				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
 				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
@@ -95,12 +94,32 @@
 						echo "<tr> ";
 						echo "<td>" . $no++ . "</td>";
 						if($value->get_payment_date()!=''){echo "<td>" . $value->get_payment_date(). "</td>";} else {echo "<td>???</td>";}
-						if($value->get_invoice_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/1/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_invoice_num(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_check_date()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/2/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_date(). "</a></td>";} else {echo "<td>0</td>";}
+						//filter gaji
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_invoice_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/1/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ."/".$kode_kppn." target='_blank'>" . $value->get_invoice_num(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_invoice_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/1/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_invoice_num(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter non-gaji
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_check_date()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/2/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ."/".$kode_kppn." target='_blank'>" . $value->get_check_date(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_check_date()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/2/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_date(). "</a></td>";} else {echo "<td>0</td>";}
+						}
 						$tot = $value->get_invoice_num() + $value->get_check_date();
 						if($tot!=''){echo "<td>" . $tot. "</td>";} else {echo "<td>0</td>";}
-						if($value->get_check_number()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_number(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_check_number_line_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_number_line_num(). "</a></td>";} else {echo "<td>0</td>";}
+						//filter retur
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_check_number()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ."/".$kode_kppn." target='_blank'>" . $value->get_check_number(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_check_number()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_number(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter void
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_check_number_line_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ."/".$kode_kppn." target='_blank'>" . $value->get_check_number_line_num(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_check_number_line_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_number_line_num(). "</a></td>";} else {echo "<td>0</td>";}
+						}
 						echo "</tr> ";
 						$gaji+=$value->get_invoice_num();
 						$non_gaji+=$value->get_check_date();

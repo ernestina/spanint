@@ -12,65 +12,20 @@
 		} else {
 			echo "";
 		}
-		echo $this->d_bank;?><br>
-			<?php echo "Tanggal : ".date("d-m-Y",strtotime($this->d_tgl_awal))." s.d ".date("d-m-Y",strtotime($this->d_tgl_akhir)); ?>
-			 <?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} //else{echo Session::get('user');} ?>
+		echo $this->d_bank;?>
+		<?php 
+		if (isset($this->d_nama_kppn)) {
+			foreach($this->d_nama_kppn as $kppn){
+				echo "<br>".$kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+				$kode_kppn=$kppn->get_kd_satker();
+			}
+		}
+		?>
+		<?php echo "<br>".date("d-m-Y",strtotime($this->d_tgl_awal))." s.d ".date("d-m-Y",strtotime($this->d_tgl_akhir)); ?>
+			 
 		</h2>
     </div>
-
-<!--<a href="#oModal" class="modal">FILTER DATA</a><br><br>
-        <div id="oModal" class="modalDialog" >
-            <div>
-                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
-				<a href="<?php
-                    $_SERVER['PHP_SELF'];
-                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
-</a>
 	
-	<div id="top">	
-		<form method="POST" action="detailSp2dGaji" enctype="multipart/form-data">
-		<?php if (Session::get('role') == ADMIN) { ?>
-		<div id="wkdkppn" class="error"></div>
-		<label class="isian">Kode KPPN: </label>
-		<input type="number" name="kdkppn" id="kdkppn" size="3" value="<?php if (isset($this->d_kdkppn)){echo $this->d_kdkppn;}?>">
-		<?php } ?>
-		
-		<div id="wbulan" class="error"></div>
-		<label class="isian">Bulan: </label>
-		<select type="text" name="bulan" id="bulan" style="margin-top: 10px; padding-top: 7px; float: right">
-			<option value='01' <?php if ($this->d_bulan=='01'){echo "selected";}?> >Januari</option>
-			<option value='02' <?php if ($this->d_bulan=='02'){echo "selected";}?> >Februari</option>
-			<option value='03' <?php if ($this->d_bulan=='03'){echo "selected";}?> >Maret</option>
-			<option value='04' <?php if ($this->d_bulan=='04'){echo "selected";}?> >April</option>
-			<option value='05' <?php if ($this->d_bulan=='05'){echo "selected";}?> >Mei</option>
-			<option value='06' <?php if ($this->d_bulan=='06'){echo "selected";}?> >Juni</option>
-			<option value='07' <?php if ($this->d_bulan=='07'){echo "selected";}?> >Juli</option>
-			<option value='08' <?php if ($this->d_bulan=='08'){echo "selected";}?> >Agustus</option>
-			<option value='09' <?php if ($this->d_bulan=='09'){echo "selected";}?> >September</option>
-			<option value='10' <?php if ($this->d_bulan=='10'){echo "selected";}?> >Oktober</option>
-			<option value='11' <?php if ($this->d_bulan=='11'){echo "selected";}?> >November</option>
-			<option value='12' <?php if ($this->d_bulan=='12'){echo "selected";}?> >Desember</option>
-		</select>
-		
-		<div id="wbank" class="error"></div>
-		<label class="isian">Nama Bank: </label>
-		<select type="text" name="bank" id="bank">
-			<option value=''>- pilih -</option>
-			<option value='MDRI' <?php if ($this->d_bank==MDRI){echo "selected";}?>>Mandiri</option>
-			<option value='BRI' <?php if ($this->d_bank==BRI){echo "selected";}?>>BRI</option>
-			<option value='BNI' <?php if ($this->d_bank==BNI){echo "selected";}?>>BNI</option>
-			<option value='BTN' <?php if ($this->d_bank==BTN){echo "selected";}?>>BTN</option>
-			<option value='SEMUA_BANK' <?php if ($this->d_bank==SEMUA_BANK){echo "selected";}?>>SEMUA BANK</option>
-		</select>
-
-		<ul class="inline" style="margin-left: 150px">
-		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
-		</ul>
-	</form>
-</div>
-</div>
-</div>-->
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id='fixheader'>
             <!--baris pertama-->

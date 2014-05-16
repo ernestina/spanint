@@ -749,14 +749,10 @@ class DataSppm {
     }
 	
 	public function get_detail_sp2d_gaji($filter) {
-		$kppn = 'ADMIN';
-		if (Session::get('role')!= ADMIN){
-			$kppn = Session::get('id_user');
-		}
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE, 
 				CHECK_NUMBER, sum(CHECK_AMOUNT) CHECK_AMOUNT, BANK_ACCOUNT_NAME , MIN(INVOICE_DESCRIPTION) INVOICE_DESCRIPTION, MIN(RETURN_CODE) RETURN_CODE, KDKPPN
 				from XICO_ALL 
-				WHERE BANK_ACCOUNT_NAME NOT LIKE '%RETUR%' AND KDKPPN = '".$kppn."'
+				WHERE BANK_ACCOUNT_NAME NOT LIKE '%RETUR%' 
 				";
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
@@ -786,14 +782,10 @@ class DataSppm {
     }
 	
 	public function get_detail_sp2d_rekap($filter) {
-		$kppn = 'ADMIN';
-		if (Session::get('role')!= ADMIN){
-			$kppn = Session::get('id_user');
-		}
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE, 
 				CHECK_NUMBER, CHECK_AMOUNT, BANK_ACCOUNT_NAME , INVOICE_DESCRIPTION, KDKPPN
-				from REKAPITULASI_SP2D_DETAIL
-				WHERE KDKPPN = '".$kppn."'
+				FROM REKAPITULASI_SP2D_DETAIL
+				WHERE (CHECK_AMOUNT > 0 OR CHECK_AMOUNT < 1)
 				";
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;

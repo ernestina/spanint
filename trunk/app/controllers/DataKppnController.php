@@ -542,7 +542,7 @@ class DataKppnController extends BaseController {
 		$this->view->render('kppn/sp2dRekap');
 	}
 	
-	public function detailSp2dGaji($bank=null,$bulan=null) {
+	public function detailSp2dGaji($bank=null,$bulan=null,$kdkppn=null) {
 		$d_sppm = new DataSppm($this->registry);
 		$filter = array ();
 		if ($bank=='BNI'){
@@ -559,15 +559,24 @@ class DataKppnController extends BaseController {
 			$this->view->d_bank = $bank;
 		} 
 		if (!is_null($bulan)){
-			$filter[$no++]="to_char(PAYMENT_DATE,'mm') = '".$bulan."'";
-			$this->view->d_bulan = $bulan;
+			if ($bulan!='all'){
+				$filter[$no++]="to_char(PAYMENT_DATE,'mm') = '".$bulan."'";
+				$this->view->d_bulan = $bulan;
+			}
+		} 
+		if (!is_null($kdkppn)){
+			$filter[$no++]=" KDKPPN = '".$kdkppn."'";
+				$d_kppn = new DataUser($this->registry);
+				$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+		} else {
+			$filter[$no++]=" KDKPPN = ".Session::get('id_user');
 		}
 		$this->view->data = $d_sppm->get_detail_sp2d_gaji($filter);
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/detailSp2dGaji');
 	}
 	
-	public function detailRekapSP2D($bank=null,$jendok=null,$tgl_awal=null,$tgl_akhir=null) {
+	public function detailRekapSP2D($bank=null,$jendok=null,$tgl_awal=null,$tgl_akhir=null,$kdkppn=null) {
 		$d_sppm = new DataSppm($this->registry);
 		$filter = array ();
 		if ($bank=='BNI'){
@@ -592,6 +601,13 @@ class DataKppnController extends BaseController {
 									AND TO_DATE ('".date('Ymd',strtotime($tgl_akhir))."','YYYYMMDD')  ";
 			$this->view->d_tgl_awal = $tgl_awal;
 			$this->view->d_tgl_akhir = $tgl_akhir;
+		}
+		if (!is_null($kdkppn)){
+			$filter[$no++]=" KDKPPN = '".$kdkppn."'";
+			$d_kppn = new DataUser($this->registry);
+			$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+		} else {
+			$filter[$no++]=" KDKPPN = ".Session::get('id_user');
 		}
 		$this->view->data = $d_sppm->get_detail_sp2d_rekap($filter);
 		//var_dump($d_sppm->get_sppm_filter($filter));
