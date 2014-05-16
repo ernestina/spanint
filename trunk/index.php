@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
  * error reporting on
@@ -19,8 +19,8 @@ define('ROOT',$sitepath);
  * define the sitepath url
  */
 
-$base_url = 'http://'.$_SERVER['HTTP_HOST'].'/spanint/';
-//echo $base_url;
+$base_url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/';
+
 define('URL',$base_url);
 
 /*
