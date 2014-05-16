@@ -137,16 +137,31 @@
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
 <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
 <script type="text/javascript" charset="utf-8">
-     $(function(){
+    $(function(){
         hideErrorId();
         hideWarning();
-		
-		$("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
-		});
-		
-		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
-		});
+	    $("#tgl_awal").datepicker({
+        maxDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate, instance) {
+            if (selectedDate != '') {
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                var date = $.datepicker.parseDate(instance.settings.dateFormat, selectedDate, instance.settings);
+                date.setMonth(date.getMonth() + 1);
+                console.log(selectedDate, date);
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                $("#tgl_akhir").datepicker("option", "maxDate", date);
+            }
+        }
     });
+    $("#tgl_akhir").datepicker({
+        maxDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate) {
+            $("#tgl_awal").datepicker("option", "maxDate", selectedDate);
+			}
+		});		
+	});
 	
     function hideErrorId(){
         $('.error').fadeOut(0);
@@ -160,14 +175,14 @@
             }
         });
 		
-		$('#datepicker').change(function(){
-            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
+		$('#tgl_awal').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
                 $('#wtgl').fadeOut(200);
             } 
         });
 		
-		$('#datepicker1').change(function(){
-            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
+		$('#tgl_akhir').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
                 $('#wtgl').fadeOut(200);
             } 
         });
@@ -176,8 +191,8 @@
     function cek_upload(){
 		var pattern = '^[0-9]+$';
 		var v_bank = document.getElementById('bank').value;
-		var v_tglawal = document.getElementById('datepicker').value;
-		var v_tglakhir = document.getElementById('datepicker1').value;
+		var v_tglawal = document.getElementById('tgl_awal').value;
+		var v_tglakhir = document.getElementById('tgl_akhir').value;
 		
         var jml = 0;
         if(v_bank == '' ){
@@ -186,10 +201,10 @@
 			jml++;		
         }
 		
-		if(v_tglawal == '' || v_tglakhir == ''){
-			$('#wtgl').html('Harap isi parameter');
-			$('#wtgl').fadeIn();
-			jml++;		
+		if(v_tglawal=='' || v_tglakhir==''){
+			$('#wtgl').html('Harap isi kolom tanggal ');
+            $('#wtgl').fadeIn();
+            jml++;
         }
 		
 		if(v_tglawal>v_tglakhir){
