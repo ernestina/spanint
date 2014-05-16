@@ -15,6 +15,7 @@ class DataGR_STATUS{
 	private $_bank_account_num;
     private $_resp_name;
 	private $_keterangan;
+	private $_gr_batch_num;
     private $_table1 = 'spgr_mpn_receipts_all';
     public $registry;
 
@@ -64,6 +65,7 @@ class DataGR_STATUS{
             $d_data->set_resp_name($val['RESP_NAME']);
 			$d_data->set_keterangan($val['KETERANGAN']);
 			
+			
             $data[] = $d_data;
         }
         return $data;
@@ -71,13 +73,13 @@ class DataGR_STATUS{
 	
     public function get_detail_lhp_rekap($filter) {
 		$sql = "select status,cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,
-				file_name,resp_name, sum(RECEIPT_DIST_AMOUNT) as RPH  
+				file_name,resp_name, sum(RECEIPT_DIST_AMOUNT) as RPH ,GR_BATCH_NUM
 				from spgr_mpn_receipts_all 
 				where Status<>'Reversed'";
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
-		$sql .= " group by status,cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,file_name,resp_name 
+		$sql .= " group by status,cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,file_name,resp_name ,GR_BATCH_NUM
 				order by status DESC";
 			
 		//var_dump ($sql);
@@ -92,6 +94,7 @@ class DataGR_STATUS{
             $d_data->set_file_name($val['FILE_NAME']);
             $d_data->set_resp_name($val['RESP_NAME']);
 			$d_data->set_keterangan(number_format($val['RPH']));
+			$d_data->set_gr_batch_num($val['GR_BATCH_NUM']);
 			
             $data[] = $d_data;
         }
@@ -148,6 +151,9 @@ class DataGR_STATUS{
     public function set_gl_date($gl_date) {
         $this->_gl_date = $gl_date;
     }
+	public function set_gr_batch_num($gr_batch_num) {
+        $this->_gr_batch_num = $gr_batch_num;
+    }
 	
     public function set_resp_name($resp_name) {
         $this->_resp_name = $resp_name;
@@ -168,6 +174,10 @@ class DataGR_STATUS{
 	public function get_file_name() {
         return $this->_file_name;
     }
+	public function get_gr_batch_num() {
+        return $this->_gr_batch_num;
+    }
+	
 	
 	public function get_gl_date() {
         return $this->_gl_date;

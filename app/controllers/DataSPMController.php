@@ -118,9 +118,11 @@ class DataSPMController extends BaseController {
 					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'];
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-					$filter[$no++]=" creation_date in 
-									(select max(creation_date) from SPPM_AP_INV_INT_ALL where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn']."
-									and STATUS_CODE = 'Validasi gagal') ";
+					
+					//$filter[$no++]=" creation_date in 
+									//(select max(creation_date) from SPPM_AP_INV_INT_ALL where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn']."
+									//and STATUS_CODE = 'Validasi gagal') ";
+								
 				} else {
 					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user');
 				}
@@ -149,10 +151,13 @@ class DataSPMController extends BaseController {
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
 			if (Session::get('role')==KPPN){
-				$filter[$no++]=" creation_date in 
-				(select max(creation_date) from SPPM_AP_INV_INT_ALL where SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user')."
-				 and STATUS_CODE = 'Validasi gagal') ";
-			$this->view->data = $d_spm1->get_validasi_spm_filter($filter);
+				$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user');
+				if (!isset($_POST['submit_file'])) {
+							$filter[$no++]=" creation_date in 
+							(select max(creation_date) from SPPM_AP_INV_INT_ALL where SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user')."
+							and STATUS_CODE = 'Validasi gagal') ";
+				}
+				$this->view->data = $d_spm1->get_validasi_spm_filter($filter);
 			}
 			
 			$this->view->render('kppn/validasiuploadSPM');
@@ -268,9 +273,10 @@ class DataSPMController extends BaseController {
 		}		
 		if (Session::get('role')==KPPN) {	
 				$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user');
-				$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
+				if (!isset($_POST['submit_file'])){
+					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
 								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user').")" ;
-		
+				}
 		$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
 		//var_dump($d_spm1->get_error_spm_filter ($filter));
 		}

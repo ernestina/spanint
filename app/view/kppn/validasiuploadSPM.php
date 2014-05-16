@@ -26,7 +26,9 @@
 		<label class="isian">Kode KPPN: </label>
 		<select type="text" name="kdkppn" id="kdkppn">
 		<?php foreach ($this->kppn_list as $value1){ 
-			echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";
+				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
 		} ?>
 		</select>
 		<?php } ?>
