@@ -147,13 +147,28 @@
     $(function(){
         hideErrorId();
         hideWarning();
-		
-		$("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
-		});
-		
-		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
-		});
+	    $("#tgl_awal").datepicker({
+        maxDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate, instance) {
+            if (selectedDate != '') {
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                var date = $.datepicker.parseDate(instance.settings.dateFormat, selectedDate, instance.settings);
+                date.setMonth(date.getMonth() + 1);
+                console.log(selectedDate, date);
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                $("#tgl_akhir").datepicker("option", "maxDate", date);
+            }
+        }
     });
+    $("#tgl_akhir").datepicker({
+        maxDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate) {
+            $("#tgl_awal").datepicker("option", "maxDate", selectedDate);
+			}
+		});		
+	});
 	
     function hideErrorId(){
         $('.error').fadeOut(0);
@@ -161,14 +176,14 @@
 	
 	function hideWarning(){
 		
-		$('#datepicker').change(function(){
-            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
+		$('#tgl_awal').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
                 $('#wtgl').fadeOut(200);
             } 
         });
 		
-		$('#datepicker1').change(function(){
-            if(document.getElementById('datepicker').value !='' && document.getElementById('datepicker1').value !=''){
+		$('#tgl_akhir').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
                 $('#wtgl').fadeOut(200);
             } 
         });
@@ -176,8 +191,8 @@
     }
 	
 	function cek_upload(){
-		var v_tglawal = document.getElementById('datepicker').value;
-		var v_tglakhir = document.getElementById('datepicker1').value;
+		var v_tglawal = document.getElementById('tgl_awal').value;
+		var v_tglakhir = document.getElementById('tgl_akhir').value;
 		var jml = 0;
 		
 		if(v_tglawal=='' || v_tglakhir==''){
@@ -196,4 +211,25 @@
             return false;
         } 
     }
+	
+	$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('fixheader'),
+			"datatable": oTable
+		} );
+	} );
 </script>
