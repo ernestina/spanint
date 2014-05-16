@@ -21,6 +21,7 @@
 	
 	<div id="top">	
 		<form method="POST" action="monitoringSp2d" enctype="multipart/form-data">
+		
 		<?php if (isset($this->kppn_list)) { ?>
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>

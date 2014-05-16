@@ -39,10 +39,10 @@ class DataUserSPAN {
     public function get_user_filter($filter) {
 	Session::get('id_user');
         $sql = "SELECT KDKPPN, USER_NAME, LAST_NAME, ATTRIBUTE1, substr(NAME,12,30) NAME, EMAIL_ADDRESS, START_DATE, END_DATE FROM " . $this->_table. "
-		WHERE KDKPPN = ".Session::get('id_user');
+		WHERE ";
 	  	
         foreach ($filter as $filter) {
-			$sql .= " AND ".$filter;
+			$sql .= $filter;
 			
 		}
 		$sql .= "  GROUP BY KDKPPN, USER_NAME, LAST_NAME, ATTRIBUTE1,NAME, EMAIL_ADDRESS, START_DATE, END_DATE";
