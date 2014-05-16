@@ -88,19 +88,84 @@
 					foreach ($this->data as $value){ 
 						echo "<tr> ";
 						echo "<td>" . $no++ . "</td>";
-						if($value->get_payment_date()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). " target='_blank'>" . $value->get_payment_date(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_invoice_num()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/01 target='_blank'>" . $value->get_invoice_num(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_check_date()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/02 target='_blank'>" . $value->get_check_date(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_creation_date()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/03 target='_blank'>" . $value->get_creation_date(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_check_number()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/04 target='_blank'>" . $value->get_check_number(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_check_number_line_num()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/05 target='_blank'>" . $value->get_check_number_line_num(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_check_amount()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/06 target='_blank'>" . $value->get_check_amount(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_bank_account_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/07 target='_blank'>" . $value->get_bank_account_name(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_bank_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/08 target='_blank'>" . $value->get_bank_name(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_vendor_ext_bank_account_num()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/09 target='_blank'>" . $value->get_vendor_ext_bank_account_num(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_vendor_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/10 target='_blank'>" . $value->get_vendor_name(). "</td>";} else {echo "</a><td>0</td>";}
-						if($value->get_invoice_description()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/11 target='_blank'>" . $value->get_invoice_description(). "</a></td>";} else {echo "<td>0</td>";}
-						if($value->get_ftp_file_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/12 target='_blank'>" . $value->get_ftp_file_name(). "</a></td>";} else {echo "<td>0</td>";}
+						//filter bank
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_payment_date()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/all/".$kode_kppn." target='_blank'>" . $value->get_payment_date(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_payment_date()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). " target='_blank'>" . $value->get_payment_date(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter januari
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_invoice_num()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/01/".$kode_kppn." target='_blank'>" . $value->get_invoice_num(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_invoice_num()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/01 target='_blank'>" . $value->get_invoice_num(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter februari
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_check_date()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/02/".$kode_kppn." target='_blank'>" . $value->get_check_date(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_check_date()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/02 target='_blank'>" . $value->get_check_date(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter maret
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_creation_date()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/03/".$kode_kppn." target='_blank'>" . $value->get_creation_date(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_creation_date()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/03 target='_blank'>" . $value->get_creation_date(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter april
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_check_number()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/04/".$kode_kppn." target='_blank'>" . $value->get_check_number(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_check_number()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/04 target='_blank'>" . $value->get_check_number(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter mei
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_check_number_line_num()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/05/".$kode_kppn." target='_blank'>" . $value->get_check_number_line_num(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_check_number_line_num()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/05 target='_blank'>" . $value->get_check_number_line_num(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter juni
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_check_amount()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/06/".$kode_kppn." target='_blank'>" . $value->get_check_amount(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_check_amount()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/06 target='_blank'>" . $value->get_check_amount(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter juli
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_bank_account_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/07/".$kode_kppn." target='_blank'>" . $value->get_bank_account_name(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_bank_account_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/07 target='_blank'>" . $value->get_bank_account_name(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter agustus
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_bank_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/08/".$kode_kppn." target='_blank'>" . $value->get_bank_name(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_bank_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/08 target='_blank'>" . $value->get_bank_name(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter september
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_vendor_ext_bank_account_num()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/09/".$kode_kppn." target='_blank'>" . $value->get_vendor_ext_bank_account_num(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_vendor_ext_bank_account_num()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/09 target='_blank'>" . $value->get_vendor_ext_bank_account_num(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter oktober
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_vendor_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/10/".$kode_kppn." target='_blank'>" . $value->get_vendor_name(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_vendor_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/10 target='_blank'>" . $value->get_vendor_name(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter nopember
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_invoice_description()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/11/".$kode_kppn." target='_blank'>" . $value->get_invoice_description(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_invoice_description()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/11 target='_blank'>" . $value->get_invoice_description(). "</a></td>";} else {echo "<td>0</td>";}
+						}
+						//filter desember
+						if (isset($this->d_nama_kppn)) {
+							if($value->get_ftp_file_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/12/".$kode_kppn." target='_blank'>" . $value->get_ftp_file_name(). "</a></td>";} else {echo "<td>0</td>";}
+						} else {
+							if($value->get_ftp_file_name()!=''){echo "<td><a href=".URL."dataKppn/detailSp2dGaji/" . $value->get_payment_date(). "/12 target='_blank'>" .$value->get_ftp_file_name(). "</a></td>";} else {echo "<td>0</td>";}
+						}
 						echo "</tr> ";
 						$jan+=$value->get_invoice_num();
 						$feb+=$value->get_check_date();
