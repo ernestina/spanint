@@ -29,10 +29,7 @@ define('URL',$base_url);
 define('KPPN','kppn');
 define('KANWIL','kanwil');
 define('ADMIN','admin');
-define('PKN','pkn');
-define('BA999','ba');
-define('LAINYA','lainya');
-define('JARINGAN','jaringan');
+define('SATKER','satker');
 
 $path = array(
     ROOT.'/libs/',
