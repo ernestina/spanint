@@ -73,7 +73,7 @@ class DataGR_STATUS{
 		$sql = "select status,cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,
 				file_name,resp_name, sum(RECEIPT_DIST_AMOUNT) as RPH  
 				from spgr_mpn_receipts_all 
-				where Status<>'Reversed' AND substr(RESP_NAME,1,3) = '".Session::get('id_user')."'";
+				where Status<>'Reversed'";
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
