@@ -1,7 +1,10 @@
 <div id="top">
 	<div id="header">
         <h2>REALISASI KETERSEDIAAN DANA DIPA SATKER <br>
-		<?php //echo Session::get('user'); ?><br>
+		<?php $nmsatker='';
+		foreach ($this->data as $value) {$nmsatker=$value->get_nm_satker();} 
+		echo $nmsatker;
+		?>
 		</h2>
     </div>
 
@@ -13,7 +16,7 @@
                     $_SERVER['PHP_SELF'];
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
 	<div id="top">
-	<form method="POST" action="RealisasiFA" enctype="multipart/form-data">
+	<form method="POST" action="#" enctype="multipart/form-data">
 		
 		<div id="wkdsatker" class="error"></div>
 		<label class="isian">Satker: </label>
@@ -102,6 +105,10 @@
 			?>
 			</tbody>
         </table>
+		<br>
+		<br>
+		<b><i>* Data Merupakan Data Per Tanggal Sebelumnya Pukul 19.00 </i></b></br>
+		
 		</div>
 </div>
 

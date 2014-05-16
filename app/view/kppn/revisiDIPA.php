@@ -1,6 +1,12 @@
 <div id="top">
 	<div id="header">
-        <h2>REVISI DIPA <?php //echo Session::get('user'); ?></h2>
+        <h2>DATA REVISI DIPA <?php //echo Session::get('user'); ?>
+		<?php $nmsatker='';
+		foreach ($this->data as $value) {$nmsatker=$value->get_nm_satker();} 
+		echo $nmsatker;
+		?>
+		
+		</h2>
     </div>
 
 <a href="#yModal" class="modal">FILTER DATA</a><br><br>
@@ -14,11 +20,8 @@
 	
 	<div id="top">
 
-	<form method="POST" action="RevisiDipa" enctype="multipart/form-data">
+	<form method="POST" action="#" enctype="multipart/form-data">
 		
-		<div id="wkdsatker" class="error"></div>
-		<label class="isian">Kode Satker: </label>
-		<input type="text" name="kd_satker" id="kd_satker">
 		
 		<div id="wakun" class="error"></div>
 		<label class="isian">Akun : </label>
@@ -107,6 +110,10 @@
 			?>
 			</tbody>
         </table>
+		<br>
+		<br>
+		<b><i>* Nilai Pagu Merupakan Pagu Awal DIPA, Untuk Melihat Sisa Pagu Tersedia Gunakan Menu Sisa Pagu Belanja Realisasi dan Encumbrance </i></b></br>
+		<b><i>* Data Merupakan Data Per Tanggal Sebelumnya Pukul 19.00 </i></b></br>
 		</div>
 </div>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
