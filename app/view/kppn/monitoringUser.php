@@ -1,7 +1,12 @@
 <div id="top">
 	<div id="header">
         <h2>MANAJEMEN USER
-			 <?php //echo Session::get('user'); ?>
+			<?php if (isset($this->d_nama_kppn)) {
+				foreach($this->d_nama_kppn as $kppn){
+					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+					$kode_kppn=$kppn->get_kd_satker();
+				}
+			}?>
 		</h2>
     </div>
 
@@ -16,10 +21,22 @@
 
 <div id="top">
 	<form method="POST" action=" monitoringUserSpan" enctype="multipart/form-data">
+	
+		<?php if (isset($this->kppn_list)) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<select type="text" name="kdkppn" id="kdkppn">
+		<?php foreach ($this->kppn_list as $value1){ 
+				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
+		} ?>
+		</select>
+		<?php } ?>
 		
 		<div id="wnip" class="error"></div>
 		<label class="isian">NIP: </label>
-		<input type="number" name="nip" id="nip" size="15">
+		<input type="number" name="nip" id="nip" size="15" value="<?php if (isset($this->d_nip)){echo $this->d_nip;}?>">
 
 	
 		<ul class="inline" style="margin-left: 150px">
@@ -105,20 +122,6 @@
     function cek_upload(){
 		var pattern = '^[0-9]+$';
 		var v_nip = document.getElementById('nip').value;
-		
-		
-        var jml = 0;
-        if(v_nip == ''){
-            $('#wnip').html('Harap isi NIP pegawai');
-            $('#wnip').fadeIn();
-            jml++;
-        }
-		
-		if(v_nip !='' && v_nip.length != 18 ){
-            $('#wnip').html('NIP harus 18 digit');
-            $('#wnip').fadeIn(200);
-            jml++;
-        }
 		
         if(jml>0){
             return false;

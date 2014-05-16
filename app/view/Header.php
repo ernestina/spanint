@@ -44,7 +44,12 @@
                     <li class="nav"><a href="#"></a></li>
                     <?php
                     if (Session::get('role') == ADMIN) {
-						echo '<li class="subnav"><a href=#>Modul PM</a>';
+						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="subnav"><a href=' . URL . 'dataSPM/posisiSPM></i>Modul PM</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
                                 <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
@@ -54,7 +59,7 @@
 								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
                             </ul>
 							</li>';
-						echo '<li class="subnav"><a href=#>Modul GR</a>';
+						echo '<li class="subnav"><a href='. URL .'dataGR/grStatusHarian>Modul GR</a>';
 						echo '<ul>
                                 <li><a href='. URL .'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
                             </ul>
@@ -80,9 +85,18 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji dengan bulan lalu</a></li>
                             </ul>
                             </li>';
-						echo '<li class="nav"><a href=#>Panduan</a></li>';
+						echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
+						echo '<ul>
+								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
+							</ul>
+							</li>';
                     }
                     if (Session::get('role') == KANWIL) {
+						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
+                            </ul>
+                            </li>';
 						echo '<li class="subnav"><a href=#>Modul PM</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
@@ -120,7 +134,7 @@
 								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap penerbitan SP2D</a></li>
                             </ul>
                             </li>';
-						echo '<li class="subnav"><a href=#>Panduan</a>';
+						echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
 						echo '<ul>
 								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
 							</ul>
@@ -131,7 +145,6 @@
 						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
-                                <li><a href=#></i>Menu User</a></li>
                             </ul>
                             </li>';
 						
@@ -184,7 +197,7 @@
 								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap penerbitan SP2D</a></li>
                             </ul>
                             </li>';
-						echo '<li class="subnav"><a href=#>Panduan</a>';
+						echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
 						echo '<ul>
 								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
 							</ul>
