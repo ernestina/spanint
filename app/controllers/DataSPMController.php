@@ -330,10 +330,12 @@ class DataSPMController extends BaseController {
 		$d_spm1 = new DataCheck($this->registry);
 		$filter = array ();
 		$no=0;
-			if ($kdsatker != '') {
+		if ($kdsatker != '') {
 				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
 				//$this->view->invoice_num = $invoice_num;	
 			}
+		if (isset($_POST['submit_file'])) {
+			
 			
 			if ($_POST['check_number']!=''){
 					$filter[$no++]="check_number = '".$_POST['check_number']."'";
@@ -348,6 +350,8 @@ class DataSPMController extends BaseController {
 					$filter[$no++]="JENIS_SP2D = '".$_POST['JenisSP2D']."'";
 					$this->view->JenisSP2D = $_POST['JenisSP2D'];
 				}
+			
+			}	
 
 			if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
 					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$_POST['tgl_awal']."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$_POST['tgl_akhir']."','DD/MM/YYYY hh:mi:ss')";
@@ -355,7 +359,7 @@ class DataSPMController extends BaseController {
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
 			if (Session::get('role')==KPPN) {$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";	
-				$this->view->data = $d_spm1->get_satker_filter($filter);	
+					
 			}
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
 		//var_dump($d_spm1->get_satker_filter($filter));
