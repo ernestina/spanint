@@ -38,8 +38,8 @@
 		<label class="isian">Kode Satker: </label>
 		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
 		
-		<label class="isian">Nama Satker: </label>
-		<input type="text" name="nmsatker" id="nmsatker" value="<?php if (isset($this->nmsatker)){echo $this->nmsatker;}?>">
+		<!--label class="isian">Nama Satker: </label>
+		<input type="text" name="nmsatker" id="nmsatker" value="<?php //if (isset($this->nmsatker)){echo $this->nmsatker;}?>"-->
 
 
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">

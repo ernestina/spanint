@@ -68,17 +68,17 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra" id='fixheader'>
+		<table width="100%" class="table table-bordered zebra" id='fixheader' style='font-size: 90%'>
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
 					<th>Nomor Invoice</th>
 					<th>Nilai Invoice</th>
-					<th>Uraian</th>
-					<th>Alasan Hold</th>
-					<th>Status Release</th>
-					<th>Tanggal Hold</th>
-					<th>Status Invoice</th>
+					<th width='350px'>Uraian</th>
+					<th width='200px'>Alasan Hold</th>
+					<th width='200px' >Status Release</th>
+					<th width='100px'>Tanggal Hold</th>
+					<th width='200px'>Status Invoice</th>
 			</thead>
 			<tbody class='ratatengah'>
 			<?php 
@@ -88,11 +88,11 @@
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_invoice_num() . "</td>";
 					echo "<td class='ratakanan'>" . $value->get_invoice_amount() . "</td>";
-					echo "<td width='350px' class='ratakiri'>" . $value->get_description() . "</td>";
-					echo "<td width='200px' class='ratakiri'>" . $value->get_hold_reason() . "</td>";
-					echo "<td width='200px' class='ratakiri'>" . $value->get_release_reason() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_hold_reason() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_release_reason() . "</td>";
 					echo "<td>" . $value->get_hold_date() . "</td>";
-					echo "<td width='200px' class='ratakiri'>" . $value->get_keterangan() . "</td>";
+					echo "<td  class='ratakiri'>" . $value->get_keterangan() . "</td>";
 				echo "</tr>	";
 			} 
 			?>
