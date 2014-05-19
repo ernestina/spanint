@@ -3,12 +3,21 @@
         <h2>Monitoring PFK Bulan <?php echo ($this->d_bulan); ?> <?php //echo $kode_satker; ?>
 			<?php //echo Session::get('user'); ?>
 		</h2>
-    
-<table><tr><td width="90%">
 </div>
 
+<a href="#oModal" class="modal">FILTER DATA</a><br><br>
+        <div id="oModal" class="modalDialog" >
+            <div>
+                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
+				<a href="<?php
+                    $_SERVER['PHP_SELF'];
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
+
+<div id="top">	
 <form method="POST" action="GR_PFK" enctype="multipart/form-data">
-	<select type="text" name="bulan" id="bulan" style="margin-top: 10px; padding-top: 5px; float: right">
+	<label class="isian">Pilih bulan: </label>
+	<select type="text" name="bulan" id="bulan">
 			<option value='januari' <?php if ($this->d_bulan=='januari'){echo "selected";}?> >Januari</option>
 			<option value='februari' <?php if ($this->d_bulan=='februari'){echo "selected";}?> >Februari</option>
 			<option value='maret' <?php if ($this->d_bulan=='maret'){echo "selected";}?> >Maret</option>
@@ -23,35 +32,15 @@
 			<option value='desember' <?php if ($this->d_bulan=='desember'){echo "selected";}?> >Desember</option>
 			<!--option value='Validated' <?php //if ($this->status==Validated){echo "selected";}?>>Validated</option>
 			<option value='Error' <?php //if ($this->status==Error){echo "selected";}?>>Error</option-->
-			
-		</select></td>
-<td><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();"></td>
-</tr>
+	</select>
+	<!--input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();" style='margin-top: -50px'-->
+	<ul class="inline" style="margin-left: 250px">
+	<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
+	</ul>
 </form>
-</table>
-
-
-<!--table cellpadding="0" cellspacing="0" border="0" class="display KeyTable" id="example">
-	<thead>
-		<tr>
-			<th>Rendering engine</th>
-			<th>Browser</th>
-			<th>Platform(s)</th>
-			<th>Engine version</th>
-			<th>CSS grade</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr class="gradeX">
-			<td>Trident</td>
-			<td>Internet
-				 Explorer 4.0</td>
-			<td>Win 95+</td>
-			<td class="center">4</td>
-			<td class="center">X</td>
-		</tr-->
-
-
+</div>
+</div>
+</div>
 
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id='fixheader'>
@@ -119,7 +108,7 @@
         </table>
 		</div>
 </div>
-</div>
+
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
 <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>

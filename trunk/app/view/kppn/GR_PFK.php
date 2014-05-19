@@ -17,28 +17,6 @@
 </table>
 
 
-<!--table cellpadding="0" cellspacing="0" border="0" class="display KeyTable" id="example">
-	<thead>
-		<tr>
-			<th>Rendering engine</th>
-			<th>Browser</th>
-			<th>Platform(s)</th>
-			<th>Engine version</th>
-			<th>CSS grade</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr class="gradeX">
-			<td>Trident</td>
-			<td>Internet
-				 Explorer 4.0</td>
-			<td>Win 95+</td>
-			<td class="center">4</td>
-			<td class="center">X</td>
-		</tr-->
-
-
-
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id='fixheader'>
             <!--baris pertama-->
