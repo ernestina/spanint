@@ -110,27 +110,6 @@
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
 <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
 <script type="text/javascript" charset="utf-8">
-	$(document).ready( function () {
-		var oTable = $('#fixheader').dataTable( {
-			"sScrollY": 400,
-			"sScrollX": "100%",
-			"sScrollXInner": "100%",
-			"bSort": false,
-			"bPaginate": false,
-			"bInfo": null,
-			"bFilter": false,
-			"oLanguage": {
-			"sEmptyTable": "Tidak ada data di dalam tabel ini."
-			
-			},
-		} );
-				
-		var keys = new KeyTable( {
-			"table": document.getElementById('example'),
-			"datatable": oTable
-		} );
-	} );
-	
 	$(function(){
         hideErrorId();
         hideWarning();
@@ -185,5 +164,25 @@
             return false;
         } 
     }
-	*/
+	
+	$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('example'),
+			"datatable": oTable
+		} );
+	} );
 </script>

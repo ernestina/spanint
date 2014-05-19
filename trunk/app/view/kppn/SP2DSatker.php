@@ -67,14 +67,14 @@
 			<thead>
 					<th>No.</th>
 					<th>Nomor SP2D</th>
-					<th>Tanggal Selesai SP2D</th>
-					<th>Tanggal SP2D</th>
+					<th width='70px'>Tanggal Selesai SP2D</th>
+					<th width='70px'>Tanggal SP2D</th>
 					<th>Nilai SP2D </th>
 					<th>Bank </th>
 					<th>Nomor Invoice</th>
-					<th>Tanggal Invoice</th>
+					<th width='70px'>Tanggal Invoice</th>
 					<th width='70px'>Jenis SP2D</th>
-					<th width='500px'>Description</th>
+					<th width='300px'>Description</th>
 			</thead>
 			<tbody class='ratatengah'>
 			<?php 

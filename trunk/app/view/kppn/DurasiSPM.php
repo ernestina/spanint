@@ -123,7 +123,7 @@
 						echo "<td>" . $no++ . "</td>";
 						echo "<td>" . $value->get_invoice_num() . "</td>";
 						echo "<td>" . $value->get_check_number() . "</td>";
-						echo "<td>" . $value->get_attribute1() . "</td>";
+						echo "<td class='ratakiri'>" . $value->get_attribute1() . "</td>";
 						echo "<td>" . strtoupper($value->get_aia_creation_date()) . ' '  . $value->get_jam_upload() . "</td>";
 						//echo "<td>" . $value->get_jam_upload() . "</td>";
 						echo "<td>" . $value->get_aca_creation_date() . ' ' . $value->get_jam_selesai_sp2d() .  "</td>";
