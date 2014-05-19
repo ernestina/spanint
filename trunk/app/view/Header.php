@@ -49,6 +49,13 @@
                                 <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
                             </ul>
                             </li>';
+						echo '<li class="subnav"><a href=#>Modul SA</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
+								<li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+                            </ul>
+                            </li>';
+							
 						echo '<li class="subnav"><a href=' . URL . 'dataSPM/posisiSPM></i>Modul PM</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
@@ -97,6 +104,14 @@
                                 <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
                             </ul>
                             </li>';
+							
+						echo '<li class="subnav"><a href=#>Modul SA</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
+								<li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+                            </ul>
+                            </li>';
+							
 						echo '<li class="subnav"><a href=#>Modul PM</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
@@ -150,8 +165,8 @@
 						
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
-                                <li><a href='  . URL . 'dataDIPA/revisiDIPA></i>Informasi Revisi DIPA</a></li>
-                                <li><a href='  . URL . 'dataDIPA/realisasiFA></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+                                <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
+								<li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
                             </ul>
                             </li>';
 						
