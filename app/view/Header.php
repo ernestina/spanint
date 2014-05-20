@@ -89,7 +89,7 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Teridikasi salah Tanggal</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah PayGroup</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji dengan bulan lalu</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
                             </ul>
                             </li>';
 						echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
@@ -133,7 +133,7 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Teridikasi salah Tanggal</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah PayGroup</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji dengan bulan lalu</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
                             </ul>
                             </li>';
 						
@@ -196,7 +196,7 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Teridikasi salah Tanggal</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah PayGroup</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji dengan bulan lalu</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
                             </ul>
                             </li>';
 						

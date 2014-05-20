@@ -11,29 +11,6 @@
 		else{echo Session::get('user');}?>
 		</h2>
     </div>
-<!--<table><tr><td width="90%">
-<form method="POST" action="GR_IJP" enctype="multipart/form-data">
-	<select type="text" name="bulan" id="bulan" style="margin-top: 10px; padding-top: 7px; float: right">
-			<option value='01' <?php if ($this->d_bulan=='01'){echo "selected";}?> >Januari</option>
-			<option value='02' <?php if ($this->d_bulan=='02'){echo "selected";}?> >Februari</option>
-			<option value='03' <?php if ($this->d_bulan=='03'){echo "selected";}?> >Maret</option>
-			<option value='04' <?php if ($this->d_bulan=='04'){echo "selected";}?> >April</option>
-			<option value='05' <?php if ($this->d_bulan=='05'){echo "selected";}?> >Mei</option>
-			<option value='06' <?php if ($this->d_bulan=='06'){echo "selected";}?> >Juni</option>
-			<option value='07' <?php if ($this->d_bulan=='07'){echo "selected";}?> >Juli</option>
-			<option value='08' <?php if ($this->d_bulan=='08'){echo "selected";}?> >Agustus</option>
-			<option value='09' <?php if ($this->d_bulan=='09'){echo "selected";}?> >September</option>
-			<option value='10' <?php if ($this->d_bulan=='10'){echo "selected";}?> >Oktober</option>
-			<option value='11' <?php if ($this->d_bulan=='11'){echo "selected";}?> >November</option>
-			<option value='12' <?php if ($this->d_bulan=='12'){echo "selected";}?> >Desember</option>
-			option value='Validated' <?php //if ($this->status==Validated){echo "selected";}?>>Validated</option>
-			<option value='Error' <?php //if ($this->status==Error){echo "selected";}?>>Error</option
-			
-		</select></td>
-<td><input id="submit" class="sukses" type="submit" name="submit_file" value="CARI" onClick="return cek_upload();"></td>
-</tr>
-</form>
-</table>-->
 <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
 <a href="#oModal" class="modal">FILTER DATA</a><br><br>
         <div id="oModal" class="modalDialog" >
@@ -53,7 +30,9 @@
 		<label class="isian">Kode KPPN: </label>
 		<select type="text" name="kdkppn" id="kdkppn">
 		<?php foreach ($this->kppn_list as $value1){ 
-			echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";
+				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
 		} ?>
 		</select>
 		<?php } ?>
@@ -155,37 +134,37 @@
 					echo "<tr class='ratakanan'>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td style='text-align: left' >" . Tanggal::bulan_indo($value->get_bulan()) . "</td>";
-					echo "<td bgcolor='#". $warna01 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."01/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna02 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."02/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna03 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."03/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna04 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."04/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna05 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."05/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna06 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."06/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna07 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."07/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna08 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."08/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna09 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."09/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna10 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."10/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna11 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."11/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna12 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."12/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna13 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."13/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna14 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."14/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna15 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."15/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna16 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."16/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna17 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."17/".$_POST['kdkppn']."target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna18 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."18/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna19 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."19/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna20 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."20/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna21 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."21/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna22 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."22/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna23 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."23/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna24 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."24/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna25 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."25/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna26 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."26/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna27 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."27/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna28 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."28/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna29 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."29/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna30 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."30/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
-					echo "<td bgcolor='#". $warna31 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."31/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>&nbsp</center></a></td>";
+					echo "<td bgcolor='#". $warna01 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."01/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r01()."</center></a></td>";
+					echo "<td bgcolor='#". $warna02 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."02/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r02()."</center></a></td>";
+					echo "<td bgcolor='#". $warna03 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."03/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r03()."</center></a></td>";
+					echo "<td bgcolor='#". $warna04 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."04/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r04()."</center></a></td>";
+					echo "<td bgcolor='#". $warna05 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."05/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r05()."</center></a></td>";
+					echo "<td bgcolor='#". $warna06 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."06/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r06()."</center></a></td>";
+					echo "<td bgcolor='#". $warna07 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."07/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r07()."</center></a></td>";
+					echo "<td bgcolor='#". $warna08 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."08/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r08()."</center></a></td>";
+					echo "<td bgcolor='#". $warna09 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."09/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r09()."</center></a></td>";
+					echo "<td bgcolor='#". $warna10 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."10/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r10()."</center></a></td>";
+					echo "<td bgcolor='#". $warna11 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."11/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r11()."</center></a></td>";
+					echo "<td bgcolor='#". $warna12 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."12/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r12()."</center></a></td>";
+					echo "<td bgcolor='#". $warna13 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."13/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r13()."</center></a></td>";
+					echo "<td bgcolor='#". $warna14 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."14/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r14()."</center></a></td>";
+					echo "<td bgcolor='#". $warna15 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."15/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r15()."</center></a></td>";
+					echo "<td bgcolor='#". $warna16 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."16/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r16()."</center></a></td>";
+					echo "<td bgcolor='#". $warna17 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."17/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r17()."</center></a></td>";
+					echo "<td bgcolor='#". $warna18 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."18/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r18()."</center></a></td>";
+					echo "<td bgcolor='#". $warna19 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."19/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r19()."</center></a></td>";
+					echo "<td bgcolor='#". $warna20 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."20/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r20()."</center></a></td>";
+					echo "<td bgcolor='#". $warna21 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."21/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r21()."</center></a></td>";
+					echo "<td bgcolor='#". $warna22 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."22/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r22()."</center></a></td>";
+					echo "<td bgcolor='#". $warna23 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."23/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r23()."</center></a></td>";
+					echo "<td bgcolor='#". $warna24 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."24/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r24()."</center></a></td>";
+					echo "<td bgcolor='#". $warna25 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."25/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r25()."</center></a></td>";
+					echo "<td bgcolor='#". $warna26 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."26/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r26()."</center></a></td>";
+					echo "<td bgcolor='#". $warna27 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."27/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r27()."</center></a></td>";
+					echo "<td bgcolor='#". $warna28 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."28/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r28()."</center></a></td>";
+					echo "<td bgcolor='#". $warna29 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."29/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r29()."</center></a></td>";
+					echo "<td bgcolor='#". $warna30 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."30/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r30()."</center></a></td>";
+					echo "<td bgcolor='#". $warna31 ."'><a href=".URL."dataGR/detailLhpRekap/".$value->get_tahun()."".$value->get_bulan()."31/".$_POST['kdkppn']." target='_blank' style='text-decoration:none'><center>".$value->get_r31()."</center></a></td>";
 				echo "</tr>	";
 					}
 				} 
@@ -197,7 +176,9 @@
         </table>
 		<br>
 		<b><i>* Klik pada kolom warna untuk melihat detail transaksi </i></b></br>
-		<b>Keterangan : </b>
+		<b>Keterangan : </br>
+		Angka didalam kotak adalah jumlah LHP<br>
+		Jumlah Rekening Persepsi yang terdaftar sebanyak <?php echo $this->jml_rek;?> Rekening</b>
 		<table style="font-size: 80%">
 			<tr>
 				<th width="10px" >Warna</th>
