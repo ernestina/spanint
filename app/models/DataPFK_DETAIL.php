@@ -46,7 +46,7 @@ class DataPFK_DETAIL{
 				,NAMA_WAJIB_BAYAR_SETOR
 				FROM " 
 				. $this->_table1. "
-				WHERE kppn = ".Session::get('id_user')
+				WHERE 1=1"
 				
 				;
 				

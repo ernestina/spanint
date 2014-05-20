@@ -54,11 +54,11 @@
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
-	</form>
+	
 </div>
 </div>
 </div>
-
+</form>
 
 
 <div id="fitur">

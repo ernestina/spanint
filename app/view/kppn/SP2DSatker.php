@@ -93,6 +93,7 @@
 					echo "<td class='ratakanan'>" . $value->get_amount() . "</td>";
 					echo "<td>" . $value->get_attribute6() . "</td>";
 					echo "<td>" . $value->get_invoice_num() . "</td>";
+					echo "<td><a href=".URL."dataSPM/HistorySpm/".$value->get_invoice_num()."/".$value->get_check_number()." target='_blank' '>" . $value->get_invoice_num(). "</a></td>";
 					echo "<td>" . $value->get_invoice_date() . "</td>";
 					echo "<td>" . $value->get_jenis_sp2d() . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_description() . "</td>";

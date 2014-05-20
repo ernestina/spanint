@@ -12,6 +12,7 @@ class DataPFK{
 	private $_potongan_spm;
 	private $_setoran_mpn;
 	private $_uraian_akun;
+	private $_kppn;
 	private $_total;
 	private $_table1 = 'PFK_SPAN_PVT';
     public $registry;
@@ -30,25 +31,26 @@ class DataPFK{
      * @param limit batas default null
      * return array objek Data Tetap*/
     
-    public function get_gr_pfk_filter($filter) {
+    public function get_gr_pfk_filter($filter, $bulan) {
 		Session::get('id_user');
 		$no=0;
-		foreach ($filter as $filter);
+		//foreach ($filter as $filter);
 		$sql = "select 
 				akun,
+				kppn,
 				uraian_akun,
-				case when trx = 1 then ".$filter." * (-1) end potongan_spm,
-				case when trx = 2 then ".$filter." * (-1) end setoran_mpn
+				case when trx = 1 then ".$bulan." * (-1) end potongan_spm,
+				case when trx = 2 then ".$bulan." * (-1) end setoran_mpn
 				from " 
 				. $this->_table1. "
-				WHERE kppn = ".Session::get('id_user')
+				WHERE 1=1"
 				
 				;
 				
-		/*$no=0;
+		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
-		}*/
+		}
 		//var_dump ($sql);
 		$sql .= " ORDER BY akun";
 		
@@ -62,6 +64,7 @@ class DataPFK{
 			$d_data->set_uraian_akun($val['URAIAN_AKUN']);
 			$d_data->set_potongan_spm($val['POTONGAN_SPM']);
             $d_data->set_setoran_mpn($val['SETORAN_MPN']);
+			$d_data->set_kppn($val['KPPN']);
 			$d_data->set_total($val['SETORAN_MPN']+$val['POTONGAN_SPM']);
             $data[] = $d_data;
         }
@@ -78,6 +81,9 @@ class DataPFK{
 	
     public function set_potongan_spm($potongan_spm) {
         $this->_potongan_spm = $potongan_spm;
+    }
+	public function set_kppn($kppn) {
+        $this->_kppn = $kppn;
     }
 	
     public function set_setoran_mpn($setoran_mpn) {
@@ -97,7 +103,9 @@ class DataPFK{
 	public function get_akun() {
         return $this->_akun;
     }
-		
+	public function get_kppn() {
+        return $this->_kppn;
+    }
 	public function get_potongan_spm() {
         return $this->_potongan_spm;
     }

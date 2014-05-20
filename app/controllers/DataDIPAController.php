@@ -120,7 +120,7 @@ class DataDIPAController extends BaseController {
 					$this->view->d_invoice = $_POST['nmsatker'];
 				}
 				
-			$this->view->data = $d_spm1->get_satker_filter($filter);
+			$this->view->data = $d_spm1->get_satker_dipa_filter($filter);
 			//$this->view->render('kppn/NamaSatker');			
 			}
 			if (Session::get('role')==KANWIL){
@@ -132,7 +132,7 @@ class DataDIPAController extends BaseController {
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
 			if (Session::get('role')==KPPN) {$filter[$no++]="TS.KPPN = '".Session::get('id_user')."'";	
-			$this->view->data = $d_spm1->get_satker_filter($filter);	
+			$this->view->data = $d_spm1->get_satker_dipa_filter($filter);	
 			}
 					
 		

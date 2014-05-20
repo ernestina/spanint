@@ -38,7 +38,7 @@
 		<label class="isian">Kode Satker: </label>
 		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
 		
-		<!--label class="isian">Nama Satker: </label>
+		<label class="isian">Nama Satker: </label>
 		<input type="text" name="nmsatker" id="nmsatker" value="<?php //if (isset($this->nmsatker)){echo $this->nmsatker;}?>"-->
 
 

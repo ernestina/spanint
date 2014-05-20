@@ -57,7 +57,7 @@ class DataGR_IJP{
 				FROM " 
 				. $this->_table1. " 
 				 WHERE 
-				KPPN = '".Session::get('id_user')."'"
+				1=1"
 				
 				;
 		$no=0;
