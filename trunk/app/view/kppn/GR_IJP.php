@@ -9,7 +9,7 @@
 					$kode_kppn=$kppn->get_kd_satker();
 				}
 			}
-			else {echo 'Seluruh KPPN';
+			if (Session::get('role')==ADMIN){echo 'Seluruh KPPN';
 			}?>
 		</h2>
 

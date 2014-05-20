@@ -243,8 +243,6 @@ class DataSPMController extends BaseController {
 					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'];
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
-								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'].")" ;
 				} else {
 					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user');
 				}
@@ -267,9 +265,13 @@ class DataSPMController extends BaseController {
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
+				else {
+					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
+								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'].")" ;}
 				
 			$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);	
 		}
+		
 		if (Session::get('role')==KANWIL){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
