@@ -62,13 +62,13 @@ class DataCheck{
             $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
 			$d_data->set_amount(NUMBER_FORMAT($val['AMOUNT']));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-			$d_data->set_invoice_date($val['INVOICE_DATE']);
+			$d_data->set_invoice_date(date("d-m-Y",strtotime($val['INVOICE_DATE'])));
 			$d_data->set_description($val['DESCRIPTION']);
 			$d_data->set_check_number($val['CHECK_NUMBER']);
-			$d_data->set_check_date($val['CHECK_DATE']);
+			$d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
 			$d_data->set_attribute6($val['ATTRIBUTE6']);
 			$d_data->set_nmsatker($val['NMSATKER']);
-			$d_data->set_creation_date($val['CREATION_DATE']);
+			$d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
 			$d_data->set_status_lookup_code($val['STATUS_LOOKUP_CODE']);
             $data[] = $d_data;
         }

@@ -53,9 +53,13 @@ class DataDurasiSPM{
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_aia_creation_date($val['TANGGAL_UPLOAD']);
+            $d_data->set_aia_creation_date(date("d-m-Y",strtotime($val['TANGGAL_UPLOAD'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
-            $d_data->set_aca_creation_date($val['TANGAL_SELESAI_SP2D']);
+			if($val['TANGAL_SELESAI_SP2D']!=''){
+				$d_data->set_aca_creation_date(date("d-m-Y",strtotime($val['TANGAL_SELESAI_SP2D'])));
+			} else {
+				$d_data->set_aca_creation_date($val['TANGAL_SELESAI_SP2D']);
+			}
             $d_data->set_durasi($val['DURASI']);
 			$d_data->set_attribute1($val['JENDOK']);
 			$d_data->set_jam_upload($val['JAM_UPLOAD']);
