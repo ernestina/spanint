@@ -44,7 +44,9 @@
                     <li class="nav"><a href="#"></a></li>
                     <?php
                     if (Session::get('role') == ADMIN) {
+
 						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
+
 						echo '<ul>
                                 <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
                             </ul>
@@ -58,10 +60,10 @@
 							
 						echo '<li class="subnav"><a href=' . URL . 'dataSPM/posisiSPM></i>Modul PM</a>';
 						echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
-                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
+                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold Invoice</a></li>
                                 <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
-								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
+								<li><a href='. URL . 'dataSPM/historySPM></i>Histori Invoice</a></li>
 								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
 								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
                             </ul>
@@ -69,6 +71,8 @@
 						echo '<li class="subnav"><a href='. URL .'dataGR/grStatusHarian>Modul GR</a>';
 						echo '<ul>
                                 <li><a href='. URL .'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
+								<li><a href='. URL .'dataGR/GR_IJP></i>Monitoring IJP</a></li>
+								<li><a href='. URL .'dataGR/GR_PFK></i>Monitoring PFK</a></li>
                             </ul>
                             </li>';
                         echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
@@ -99,12 +103,14 @@
 							</li>';
                     }
                     if (Session::get('role') == KANWIL) {
+
+
 						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
                             </ul>
                             </li>';
-							
+
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
@@ -112,12 +118,13 @@
                             </ul>
                             </li>';
 							
+
 						echo '<li class="subnav"><a href=#>Modul PM</a>';
 						echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
-                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
+                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold Invoice</a></li>
                                 <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
-								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
+								<li><a href='. URL . 'dataSPM/historySPM></i>Histori Invoice</a></li>
 								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
 								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
                             </ul>
@@ -125,6 +132,8 @@
 						echo '<li class="subnav"><a href=#>Modul GR</a>';
 						echo '<ul>
                                 <li><a href='. URL .'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
+								 <li><a href='. URL .'dataGR/GR_IJP></i>Monitoring IJP</a></li>
+								<li><a href='. URL .'dataGR/GR_PFK></i>Monitoring PFK</a></li>
                             </ul>
                             </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
@@ -165,17 +174,22 @@
 						
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
+
+                                <li><a href='  . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
+                                <li><a href='  . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+
                                 <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
 								<li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+
                             </ul>
                             </li>';
 						
 						echo '<li class="subnav"><a href=#>Modul PM</a>';
 						echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi SPM</a></li>
-                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold SPM</a></li>
+                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold Invoice</a></li>
                                 <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
-								<li><a href='. URL . 'dataSPM/historySPM></i>Histori SPM</a></li>
+								<li><a href='. URL . 'dataSPM/historySPM></i>Histori Invoice</a></li>
 								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
 								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
                             </ul>

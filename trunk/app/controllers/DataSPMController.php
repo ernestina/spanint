@@ -183,7 +183,7 @@ class DataSPMController extends BaseController {
 	
 	
 	
-	public function HistorySpm() {
+	public function HistorySpm ($invoice_num1=null, $invoice_num2=null, $invoice_num3=null, $sp2d=null ) {
 		$d_spm1 = new DataHistorySPM($this->registry);
 		$filter = array ();
 		$invoice = '';
@@ -201,6 +201,13 @@ class DataSPMController extends BaseController {
 				$filter[$no++]= Session::get('id_user')
 				 ;
 			//$this->view->data = $d_spm1->get_history_spm_filter ($filter);
+			}
+			if (!is_null($invoice_num1)) {
+				$invoice="'".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
+				$kppn=substr($sp2d,2,3);
+				$filter[$no++]= $kppn;
+				//$this->view->invoice_num = $invoice_num;
+				$this->view->data = $d_spm1->get_history_spm_filter ($filter, $invoice);
 			}
 			if (isset($_POST['submit_file'])) {
 				

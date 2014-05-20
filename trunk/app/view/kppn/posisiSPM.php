@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING POSISI SPM <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?>
+        <h2>MONITORING POSISI INVOICE <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?>
 			<?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} else{echo Session::get('user');} ?>
 		<br>
 		KPPN 
