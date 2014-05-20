@@ -25,7 +25,7 @@
 		</h2>
     </div>
 
-<a href="#nModal" class="modal">FILTER DATA</a><br><br>
+<a href="#nModal" class="modal">FILTER DATA</a>
         <div id="nModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
@@ -90,8 +90,8 @@
 					<!--th width='70px'>Tgl SP2D</th-->
 					<th>No, Tanggal SP2D</th>
 					<th>No. Invoice, <br>Jumlah Rp</th>
-					<th>Nama Bank</th>
-					<th width='200px'>Bank, Nama, No. Rek Supplier</th>
+					<th>Bank Pembayar</th>
+					<th width='200px'>Bank Penerima, Nama,<br> No. Rekening Penerima</th>
 					<th width='300px'>Deskripsi</th>
 					<th>File Transaksi</th>
 					<th>Keterangan</th>
@@ -130,6 +130,9 @@
 			?>
 			</tbody>
         </table>
+		<b>Keterangan : </b></br>
+		Sukses Overbooking = Dana sudah masuk ke Rekening Penerima </br>
+		Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima	
 		</div>
 </div>
 

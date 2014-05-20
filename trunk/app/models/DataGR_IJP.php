@@ -24,6 +24,14 @@ class DataGR_IJP{
 	private $_n21; private $_n22; private $_n23; private $_n24; private $_n25;
 	private $_n26; private $_n27; private $_n28; private $_n29; private $_n30;
 	private $_n31;
+	private $_r01; private $_r02; private $_r03; private $_r04; private $_r05;
+	private $_r06; private $_r07; private $_r08; private $_r09; private $_r10; 
+	private $_r11; private $_r12; private $_r13; private $_r14; private $_r15;
+	private $_r16; private $_r17; private $_r18; private $_r19; private $_r20;
+	private $_r21; private $_r22; private $_r23; private $_r24; private $_r25;
+	private $_r26; private $_r27; private $_r28; private $_r29; private $_r30;
+	private $_r31;
+	private $_jml_rek;
 	private $_jumlah;
     private $_table = 'SPGR_MPN_RECEIPTS_ALL_LEVEL1';
     private $_table1 = 'SPGR_MPN_RECEIPTS_ALL_V_RIJP';
@@ -160,7 +168,58 @@ class DataGR_IJP{
 			$d_data->set_n29($val['LHP29']);
 			$d_data->set_n30($val['LHP30']);
 			$d_data->set_n31($val['LHP31']);
+			$d_data->set_r01($val['R01']);
+			$d_data->set_r02($val['R02']);
+			$d_data->set_r03($val['R03']);
+			$d_data->set_r04($val['R04']);
+			$d_data->set_r05($val['R05']);
+			$d_data->set_r06($val['R06']);
+			$d_data->set_r07($val['R07']);
+			$d_data->set_r08($val['R08']);
+			$d_data->set_r09($val['R09']);
+			$d_data->set_r10($val['R10']);
+			$d_data->set_r11($val['R11']);
+			$d_data->set_r12($val['R12']);
+			$d_data->set_r13($val['R13']);
+			$d_data->set_r14($val['R14']);
+			$d_data->set_r15($val['R15']);
+			$d_data->set_r16($val['R16']);
+			$d_data->set_r17($val['R17']);
+			$d_data->set_r18($val['R18']);
+			$d_data->set_r19($val['R19']);
+			$d_data->set_r20($val['R20']);
+			$d_data->set_r21($val['R21']);
+			$d_data->set_r22($val['R22']);
+			$d_data->set_r23($val['R23']);
+			$d_data->set_r24($val['R24']);
+			$d_data->set_r25($val['R25']);
+			$d_data->set_r26($val['R26']);
+			$d_data->set_r27($val['R27']);
+			$d_data->set_r28($val['R28']);
+			$d_data->set_r29($val['R29']);
+			$d_data->set_r30($val['R30']);
+			$d_data->set_r31($val['R31']);
+			$d_data->set_jml_rek($val['JML_REK']);
 			$data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_jml_rek_dep($kppn) {
+		Session::get('id_user');
+		$sql = "SELECT JML_REK
+				FROM " 
+				. $this->_table. " 
+				 WHERE 
+				KPPN = '".$kppn."'"
+				
+				;
+		$no=0;
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = 0;   
+        foreach ($result as $val) {
+            $data = ($val['JML_REK']);
         }
         return $data;
     }
@@ -279,6 +338,102 @@ class DataGR_IJP{
     }
 	public function set_n31($n31) {
         $this->_n31 = $n31;
+    }
+	public function set_r01($r01) {
+        $this->_r01 = $r01;
+    }
+	public function set_r02($r02) {
+        $this->_r02 = $r02;
+    }
+	public function set_r03($r03) {
+        $this->_r03 = $r03;
+    }
+	public function set_r04($r04) {
+        $this->_r04 = $r04;
+    }
+	public function set_r05($r05) {
+        $this->_r05 = $r05;
+    }
+	public function set_r06($r06) {
+        $this->_r06 = $r06;
+    }
+	public function set_r07($r07) {
+        $this->_r07 = $r07;
+    }
+	public function set_r08($r08) {
+        $this->_r08 = $r08;
+    }
+	public function set_r09($r09) {
+        $this->_r09 = $r09;
+    }
+	public function set_r10($r10) {
+        $this->_r10 = $r10;
+    }
+	public function set_r11($r11) {
+        $this->_r11 = $r11;
+    }
+	public function set_r12($r12) {
+        $this->_r12 = $r12;
+    }
+	public function set_r13($r13) {
+        $this->_r13 = $r13;
+    }
+	public function set_r14($r14) {
+        $this->_r14 = $r14;
+    }
+	public function set_r15($r15) {
+        $this->_r15 = $r15;
+    }
+	public function set_r16($r16) {
+        $this->_r16 = $r16;
+    }
+	public function set_r17($r17) {
+        $this->_r17 = $r17;
+    }
+	public function set_r18($r18) {
+        $this->_r18 = $r18;
+    }
+	public function set_r19($r19) {
+        $this->_r19 = $r19;
+    }
+	public function set_r20($r20) {
+        $this->_r20 = $r20;
+    }
+	public function set_r21($r21) {
+        $this->_r21 = $r21;
+    }
+	public function set_r22($r22) {
+        $this->_r22 = $r22;
+    }
+	public function set_r23($r23) {
+        $this->_r23 = $r23;
+    }
+	public function set_r24($r24) {
+        $this->_r24 = $r24;
+    }
+	public function set_r25($r25) {
+        $this->_r25 = $r25;
+    }
+	public function set_r26($r26) {
+        $this->_r26 = $r26;
+    }
+	public function set_r27($r27) {
+        $this->_r27 = $r27;
+    }
+	public function set_r28($r28) {
+        $this->_r28 = $r28;
+    }
+	public function set_r29($r29) {
+        $this->_r29 = $r29;
+    }
+	public function set_r30($r30) {
+        $this->_r30 = $r30;
+    }
+	public function set_r31($r31) {
+        $this->_r31 = $r31;
+    }
+	public function set_jml_rek($jml_rek) {
+        $this->_jml_rek = $jml_rek;
     }
 	public function set_jumlah($jumlah) {
         $this->_jumlah = $jumlah;
@@ -399,6 +554,102 @@ class DataGR_IJP{
     }
 	public function get_n31() {
         return $this->_n31;
+    }
+	public function get_r01() {
+        return $this->_r01;
+    }
+	public function get_r02() {
+        return $this->_r02;
+    }
+	public function get_r03() {
+        return $this->_r03;
+    }
+	public function get_r04() {
+        return $this->_r04;
+    }
+	public function get_r05() {
+        return $this->_r05;
+    }
+	public function get_r06() {
+        return $this->_r06;
+    }
+	public function get_r07() {
+        return $this->_r07;
+    }
+	public function get_r08() {
+        return $this->_r08;
+    }
+	public function get_r09() {
+        return $this->_r09;
+    }
+	public function get_r10() {
+        return $this->_r10;
+    }
+	public function get_r11() {
+        return $this->_r11;
+    }
+	public function get_r12() {
+        return $this->_r12;
+    }
+	public function get_r13() {
+        return $this->_r13;
+    }
+	public function get_r14() {
+        return $this->_r14;
+    }
+	public function get_r15() {
+        return $this->_r15;
+    }
+	public function get_r16() {
+        return $this->_r16;
+    }
+	public function get_r17() {
+        return $this->_r17;
+    }
+	public function get_r18() {
+        return $this->_r18;
+    }
+	public function get_r19() {
+        return $this->_r19;
+    }
+	public function get_r20() {
+        return $this->_r20;
+    }
+	public function get_r21() {
+        return $this->_r21;
+    }
+	public function get_r22() {
+        return $this->_r22;
+    }
+	public function get_r23() {
+        return $this->_r23;
+    }
+	public function get_r24() {
+        return $this->_r24;
+    }
+	public function get_r25() {
+        return $this->_r25;
+    }
+	public function get_r26() {
+        return $this->_r26;
+    }
+	public function get_r27() {
+        return $this->_r27;
+    }
+	public function get_r28() {
+        return $this->_r28;
+    }
+	public function get_r29() {
+        return $this->_r29;
+    }
+	public function get_r30() {
+        return $this->_r30;
+    }
+	public function get_r31() {
+        return $this->_r31;
+    }
+	public function get_jml_rek() {
+        return $this->_jml_rek;
     }
 	public function get_jumlah() {
         return $this->_jumlah;

@@ -115,11 +115,12 @@ class DataGRController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
-			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";	
-			$this->view->data = $d_spm1->get_gr_status_harian($filter);
+			if (Session::get('role')==KPPN) {
+				$filter[$no++]="KPPN = '".Session::get('id_user')."'";	
+				$this->view->jml_rek = $d_spm1->get_jml_rek_dep(Session::get('id_user'));
+				$this->view->data = $d_spm1->get_gr_status_harian($filter);
 			}
 			if (isset($_POST['submit_file'])) {
-			
 				if ($_POST['kdkppn']!=''){
 					$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
 					$d_kppn = new DataUser($this->registry);
@@ -127,7 +128,8 @@ class DataGRController extends BaseController {
 				} else {
 					$filter[$no++]="KPPN = '".Session::get('id_user')."'";
 				}
-			$this->view->data = $d_spm1->get_gr_status_harian($filter);	
+				$this->view->jml_rek = $d_spm1->get_jml_rek_dep($_POST['kdkppn']);
+				$this->view->data = $d_spm1->get_gr_status_harian($filter);	
 			}	
 					
 		
