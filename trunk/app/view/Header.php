@@ -90,9 +90,9 @@
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/Sp2dGajiDobel></i>Terindikasi dobel</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Teridikasi salah Tanggal</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Terindikasi salah Tanggal</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah PayGroup</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Terindikasi salah PayGroup</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
                             </ul>
                             </li>';
@@ -139,9 +139,9 @@
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/Sp2dGajiDobel></i>Terindikasi dobel</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Teridikasi salah Tanggal</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Terindikasi salah Tanggal</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah PayGroup</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Terindikasi salah PayGroup</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
                             </ul>
                             </li>';
@@ -206,9 +206,9 @@
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/Sp2dGajiDobel></i>Terindikasi dobel</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Teridikasi salah Tanggal</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Terindikasi salah Tanggal</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Teridikasi salah PayGroup</a></li>
+                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Terindikasi salah PayGroup</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
                             </ul>
                             </li>';
