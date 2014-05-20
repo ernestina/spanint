@@ -53,7 +53,7 @@ class DataValidasiUploadSPM{
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_satker_code($val['SATKER_CODE']);
-			$d_data->set_creation_date($val['CREATION_DATE']);
+			$d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
             $d_data->set_file_name($val['FILE_NAME']);
             $d_data->set_status_code($val['STATUS_CODE']);
             $data[] = $d_data;

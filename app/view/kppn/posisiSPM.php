@@ -1,15 +1,12 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING POSISI INVOICE <?php //echo $nama_satker; ?> <?php //echo $kode_satker; ?>
-			<?php if (Session::get('role') == ADMIN) {echo "KPPN ".$this->d_kdkppn;} else{echo Session::get('user');} ?>
-		<br>
-		KPPN 
-		<?php if ($_POST['kdkppn']!='') { ?>
-		<?php $nmkppn='';
-		foreach ($this->data as $value) {$nmkppn=$value->get_ou_name();} 
-		echo $nmkppn;
-		?>
-			<?php  } ?>
+        <h2>MONITORING POSISI INVOICE 
+		<?php if (isset($this->d_nama_kppn)) {
+				foreach($this->d_nama_kppn as $kppn){
+					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+					$kode_kppn=$kppn->get_kd_satker();
+				}
+			} ?>
 		</h2>
     </div>
 <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>

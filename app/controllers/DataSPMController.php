@@ -35,9 +35,10 @@ class DataSPMController extends BaseController {
 		$no=0;
 		if (isset($_POST['submit_file'])) {
 			if ($_POST['kdkppn']!=''){
-					$filter[$no++]=" SUBSTR(OU_NAME,1,3)= ".$_POST['kdkppn'];
-					$this->view->d_kdkppn = $_POST['kdkppn'];
-			} 
+					$filter[$no++]="ATTRIBUTE15 = ".$_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+			}
 		}
 		else {
 			$filter[$no++]="SUBSTR(OU_NAME,1,3) = ".Session::get('id_user');
