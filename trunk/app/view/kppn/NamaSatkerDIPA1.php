@@ -85,7 +85,7 @@
 					echo "<td><a href=".URL."dataDIPA/RevisiDipa/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
 					//echo "<td>" . $value->get_kdsatker() . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
-					echo "<td class='ratakanan'>" . $value->get_rev() . "</td>";
+					echo "<td>" . $value->get_rev() . "</td>";
 					//echo "<td class='ratakanan'>" . $value->get_total_sp2d() . "</td>";
 				echo "</tr>	";
 			} 
