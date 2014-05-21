@@ -29,6 +29,8 @@ class DataSppm {
 	private $_bulan;
 	private $_jumlah_sp2d;
 	private $_payment_method;
+	private $_sorbor_number;
+	private $_sorbor_date;
     private $_error;
     private $_valid = TRUE;
     private $_table = 'XICO_ALL';
@@ -52,7 +54,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE, 
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -85,6 +87,16 @@ class DataSppm {
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
+			if (is_null($val['SORBOR_NUMBER'])){
+				$d_data->set_sorbor_number('-');
+			} else {
+				$d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			}
+			if (is_null($val['SORBOR_DATE'])){
+				$d_data->set_sorbor_date('-');
+			} else {
+				$d_data->set_sorbor_date(date("d-m-Y",strtotime($val['SORBOR_DATE'])));
+			}
 			$data[] = $d_data;
         }
         return $data;
@@ -94,7 +106,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -126,6 +138,16 @@ class DataSppm {
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
+			if (is_null($val['SORBOR_NUMBER'])){
+				$d_data->set_sorbor_number('-');
+			} else {
+				$d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			}
+			if (is_null($val['SORBOR_DATE'])){
+				$d_data->set_sorbor_date('-');
+			} else {
+				$d_data->set_sorbor_date(date("d-m-Y",strtotime($val['SORBOR_DATE'])));
+			}
 			$data[] = $d_data;
         }
         return $data;
@@ -135,7 +157,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE, 
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1 ";
 		//SP2D = 140181301002823
@@ -167,6 +189,16 @@ class DataSppm {
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
+			if (is_null($val['SORBOR_NUMBER'])){
+				$d_data->set_sorbor_number('-');
+			} else {
+				$d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			}
+			if (is_null($val['SORBOR_DATE'])){
+				$d_data->set_sorbor_date('-');
+			} else {
+				$d_data->set_sorbor_date(date("d-m-Y",strtotime($val['SORBOR_DATE'])));
+			}
 			$data[] = $d_data;
         }
         return $data;
@@ -176,7 +208,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -208,6 +240,16 @@ class DataSppm {
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
+			if (is_null($val['SORBOR_NUMBER'])){
+				$d_data->set_sorbor_number('-');
+			} else {
+				$d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			}
+			if (is_null($val['SORBOR_DATE'])){
+				$d_data->set_sorbor_date('-');
+			} else {
+				$d_data->set_sorbor_date(date("d-m-Y",strtotime($val['SORBOR_DATE'])));
+			}
 			$data[] = $d_data;
         }
         return $data;
@@ -217,7 +259,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
 				WHERE KDKPPN = ".Session::get('id_user')." AND FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -249,6 +291,16 @@ class DataSppm {
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
+			if (is_null($val['SORBOR_NUMBER'])){
+				$d_data->set_sorbor_number('-');
+			} else {
+				$d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			}
+			if (is_null($val['SORBOR_DATE'])){
+				$d_data->set_sorbor_date('-');
+			} else {
+				$d_data->set_sorbor_date(date("d-m-Y",strtotime($val['SORBOR_DATE'])));
+			}
 			$data[] = $d_data;
         }
         return $data;
@@ -258,7 +310,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -290,6 +342,16 @@ class DataSppm {
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
+			if (is_null($val['SORBOR_NUMBER'])){
+				$d_data->set_sorbor_number('-');
+			} else {
+				$d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			}
+			if (is_null($val['SORBOR_DATE'])){
+				$d_data->set_sorbor_date('-');
+			} else {
+				$d_data->set_sorbor_date(date("d-m-Y",strtotime($val['SORBOR_DATE'])));
+			}
 			$data[] = $d_data;
         }
         return $data;
@@ -299,7 +361,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
 				WHERE FL_VOID <> 1";
 		//SP2D = 140181301002823
@@ -331,6 +393,17 @@ class DataSppm {
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
+            $d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			if (is_null($val['SORBOR_NUMBER'])){
+				$d_data->set_sorbor_number('-');
+			} else {
+				$d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			}
+			if (is_null($val['SORBOR_DATE'])){
+				$d_data->set_sorbor_date('-');
+			} else {
+				$d_data->set_sorbor_date(date("d-m-Y",strtotime($val['SORBOR_DATE'])));
+			}
 			$data[] = $d_data;
         }
         return $data;
@@ -340,7 +413,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
 				WHERE KDKPPN = ".Session::get('id_user')." AND FL_VOID = 1";
 		//SP2D = 140181301002823
@@ -372,6 +445,16 @@ class DataSppm {
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
+			if (is_null($val['SORBOR_NUMBER'])){
+				$d_data->set_sorbor_number('-');
+			} else {
+				$d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			}
+			if (is_null($val['SORBOR_DATE'])){
+				$d_data->set_sorbor_date('-');
+			} else {
+				$d_data->set_sorbor_date(date("d-m-Y",strtotime($val['SORBOR_DATE'])));
+			}
 			$data[] = $d_data;
         }
         return $data;
@@ -381,7 +464,7 @@ class DataSppm {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyy hh24:mi:ss') CREATION_DATE,
 				CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
-				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD
+				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
 				WHERE FL_VOID = 1";
 		//SP2D = 140181301002823
@@ -413,6 +496,16 @@ class DataSppm {
             $d_data->set_return_desc($val['RETURN_DESC']);
             $d_data->set_payment_method($val['PAYMENT_METHOD']);
             $d_data->set_kdkppn($val['KDKPPN']);
+			if (is_null($val['SORBOR_NUMBER'])){
+				$d_data->set_sorbor_number('-');
+			} else {
+				$d_data->set_sorbor_number($val['SORBOR_NUMBER']);
+			}
+			if (is_null($val['SORBOR_DATE'])){
+				$d_data->set_sorbor_date('-');
+			} else {
+				$d_data->set_sorbor_date(date("d-m-Y",strtotime($val['SORBOR_DATE'])));
+			}
 			$data[] = $d_data;
         }
         return $data;
@@ -900,6 +993,14 @@ class DataSppm {
     public function set_payment_method($payment_method) {
         $this->_payment_method = $payment_method;
     }
+	
+    public function set_sorbor_number($sorbor_number) {
+        $this->_sorbor_number = $sorbor_number;
+    }
+	
+    public function set_sorbor_date($sorbor_date) {
+        $this->_sorbor_date = $sorbor_date;
+    }
 		
 	/*
      * getter
@@ -987,6 +1088,14 @@ class DataSppm {
 	
 	public function get_payment_method() {
         return $this->_payment_method;
+    }
+	
+	public function get_sorbor_number() {
+        return $this->_sorbor_number;
+    }
+	
+	public function get_sorbor_date() {
+        return $this->_sorbor_date;
     }
 
     /*

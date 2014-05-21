@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING PENERBITAN SP2D HARIAN KE BANK<br>
+        <h2>MONITORING PENERBITAN SP2D HARIAN KE BANK
 			 <?php if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
@@ -118,8 +118,18 @@
 							echo "<td class='ratakiri'>". $value->get_bank_name() . '<br>Penerima: '. $value->get_vendor_name() . '<br>No. Rek: '  . $value->get_vendor_ext_bank_account_num() . "</td>";
 							//echo "<td>" . $value->get_vendor_ext_bank_account_num() . "</td>";
 							echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
-							echo "<td>". $value->get_ftp_file_name() . "</td>";
-							echo "<td>" . $value->get_return_desc() .'<br>'. $value->get_payment_method() . "</td>";
+							echo "<td>". $value->get_ftp_file_name() . "</td>";echo "<td>" . $value->get_return_desc() . '<br>'. $value->get_payment_method();
+							if ($value->get_payment_method() == 'OVERBOOKING'){
+								echo "<br>Ref No: ".$value->get_sorbor_number()."<br>Tanggal: ".$value->get_sorbor_date()."</td>";
+							} elseif ($value->get_payment_method() == 'SKN'){
+								echo "<br>SOR No: ".$value->get_sorbor_number()."<br>Tanggal: ".$value->get_sorbor_date()."</td>";
+							} elseif ($value->get_payment_method() == 'RTGS'){
+								echo "<br>BOR No: ".$value->get_sorbor_number()."<br>Tanggal: ".$value->get_sorbor_date()."</td>";
+							} elseif ($value->get_payment_method() == 'SWIFT'){
+								echo "<br>Swift No: ".$value->get_sorbor_number()."<br>Tanggal: ".$value->get_sorbor_date()."</td>";
+							} else {
+								echo "<br>Metode Pembayaran tidak terdaftar</td>";
+							}
 						echo "</tr>	";
 					}
 				} 
