@@ -1,14 +1,14 @@
 <div id="top">
 	<div id="header">
         <h2>Monitoring Status LHP <?php //echo $this->d_bulan; ?> <?php //echo $kode_satker; ?>
-		KPPN 
+		
 		<?php if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
 					$kode_kppn=$kppn->get_kd_satker();
 				}
 			}
-		else{echo Session::get('user');}?>
+		else{echo 'KPPN ' .Session::get('user');}?>
 		</h2>
     </div>
 <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
