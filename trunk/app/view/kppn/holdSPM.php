@@ -97,7 +97,12 @@
 			} 
 			?>
 			</tbody>
-        </table>
+        </table></br>
+		<b>Keterangan : </b></br>
+		Hold invoice adalah invoice yang sukses di FO tapi tidak muncul di MO</br>
+		Disebabkan pagu dipa tidak mencukupi, atau tagihan (bruto) melebihi termin
+		
+		
 		</div>
 </div>
 
