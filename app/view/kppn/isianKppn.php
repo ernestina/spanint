@@ -128,7 +128,18 @@
 							//echo "<td>" . $value->get_vendor_ext_bank_account_num() . "</td>";
 							echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
 							//echo "<td>" . $value->get_ftp_file_name() . "</td>";
-							echo "<td>" . $value->get_return_desc() . '<br>'. $value->get_payment_method() ."</td>";
+							echo "<td>" . $value->get_return_desc() . '<br>'. $value->get_payment_method();
+							if ($value->get_payment_method() == 'OVERBOOKING'){
+								echo "<br>Ref No: ".$value->get_sorbor_number()."<br>Tanggal: ".$value->get_sorbor_date()."</td>";
+							} elseif ($value->get_payment_method() == 'SKN'){
+								echo "<br>SOR No: ".$value->get_sorbor_number()."<br>Tanggal: ".$value->get_sorbor_date()."</td>";
+							} elseif ($value->get_payment_method() == 'RTGS'){
+								echo "<br>BOR No: ".$value->get_sorbor_number()."<br>Tanggal: ".$value->get_sorbor_date()."</td>";
+							} elseif ($value->get_payment_method() == 'SWIFT'){
+								echo "<br>Swift No: ".$value->get_sorbor_number()."<br>Tanggal: ".$value->get_sorbor_date()."</td>";
+							} else {
+								echo "<br>Metode Pembayaran tidak terdaftar</td>";
+							}
 							/*if ($value->get_return_desc()!=''){
 								echo "<td>" . $value->get_return_desc() . "</td>";
 							} else {
@@ -145,7 +156,7 @@
         </table>
 		<b>Keterangan : </b></br>
 		Sukses Overbooking = Dana sudah masuk ke Rekening Penerima </br>
-		Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima
+		Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima, mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima
 		</div>
 </div>
 
