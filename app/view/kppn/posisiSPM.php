@@ -99,7 +99,9 @@
 			}
 			?>
 			</tbody>
-        </table>
+        </table></br>
+		<b>Keterangan : </b></br>
+		Daftar Diatas Meunjukkan Invoice Yang Sedang Dalam Proses Oleh User
 		</div>
 </div>
 
