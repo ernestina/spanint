@@ -68,7 +68,7 @@
 					<th>Nomor Invoce</th>
 					<th>Reponse</th>
 					<th>Nama User</th>
-					<th>Posisi</th>
+					<!--th>Posisi</th-->
 					<th>Waktu Mulai</th>
 					<th>Nomor SP2D</th>
 								
@@ -87,7 +87,7 @@
 					echo "<td>" . $value->get_invoice_num() . "</td>";
 					echo "<td>" . $value->get_response() . "</td>";
 					echo "<td>" . $value->get_user_name() . "</td>";
-					echo "<td>" . $value->get_posisi() . "</td>";
+					//echo "<td>" . $value->get_posisi() . "</td>";
 					echo "<td>" . $value->get_creation_date() . "</td>";
 					echo "<td>" . $value->get_check_number() . "</td>";
 					
