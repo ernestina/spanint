@@ -64,6 +64,12 @@ class DataKppnController extends BaseController {
 					}
 					$this->view->d_status = $_POST['status'];
 				}
+				if ($_POST['bayar'] != ''){
+					if ($_POST['bayar'] != 'SEMUA' ){
+						$filter[$no++] = "PAYMENT_METHOD = '".$_POST['bayar']."'";
+					} 
+					$this->view->d_bayar = $_POST['bayar'];
+				}
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
 					$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($_POST['tgl_awal'])).",'YYYYMMDD') 
 									AND TO_DATE (".date('Ymd',strtotime($_POST['tgl_akhir'])).",'YYYYMMDD')  ";

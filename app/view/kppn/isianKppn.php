@@ -74,6 +74,17 @@
 			<option value='SEMUA' <?php if ($this->d_status == SEMUA){echo "selected";}?>>SEMUA</option>
 		</select>
 		
+		<div id="wbayar" class="error"></div>
+		<label class="isian">Cara Bayar: </label>
+		<select type="text" name="bayar" id="bayar">
+			<option value=''>- pilih -</option>
+			<option value='OVERBOOKING' <?php if ($this->d_bayar == OVERBOOKING){echo "selected";}?>>OVERBOOKING</option>
+			<option value='SKN' <?php if ($this->d_bayar == SKN){echo "selected";}?>>SKN</option>
+			<option value='RTGS' <?php if ($this->d_bayar == RTGS){echo "selected";}?>>RTGS</option>
+			<option value='SWIFT' <?php if ($this->d_bayar == SWIFT){echo "selected";}?>>SWIFT</option>
+			<option value='SEMUA' <?php if ($this->d_bayar == SEMUA){echo "selected";}?>>SEMUA</option>
+		</select>
+		
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>
 		<ul class="inline">
