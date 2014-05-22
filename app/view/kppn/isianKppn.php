@@ -65,6 +65,15 @@
 			<option value='SEMUA_BANK' <?php if ($this->d_bank==SEMUA_BANK){echo "selected";}?>>SEMUA BANK</option>
 		</select>
 		
+		<div id="wstatus" class="error"></div>
+		<label class="isian">Status: </label>
+		<select type="text" name="status" id="status">
+			<option value=''>- pilih -</option>
+			<option value='SUKSES' <?php if ($this->d_status == SUKSES){echo "selected";}?>>SUKSES</option>
+			<option value='TIDAK' <?php if ($this->d_status == TIDAK){echo "selected";}?>>TIDAK SUKSES</option>
+			<option value='SEMUA' <?php if ($this->d_status == SEMUA){echo "selected";}?>>SEMUA</option>
+		</select>
+		
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>
 		<ul class="inline">
@@ -101,7 +110,7 @@
 					<th width='200px'>Bank Penerima, Nama,<br> No. Rekening Penerima</th>
 					<th width='300px'>Deskripsi</th>
 					<!--th>File Transaksi</th-->
-					<th>Keterangan</th>
+					<th>Status</th>
 					
 			</thead>
 			<tbody class='ratatengah'>
@@ -156,7 +165,8 @@
         </table>
 		<b>Keterangan : </b></br>
 		Sukses Overbooking = Dana sudah masuk ke Rekening Penerima </br>
-		Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima, mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima
+		Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima, mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima</br>
+		Nomor Ref/SOR/BOR = Nomor bukti transaksi pada perbankan yang dapat digunakan untuk konfirmasi ke bank penerima
 		</div>
 </div>
 
@@ -228,6 +238,12 @@
             }
         });
 		
+		$('#status').change(function(){
+            if(document.getElementById('status').value !=''){
+                $('#wstatus').fadeOut(200);
+            }
+        });
+		
 		$('#tgl_awal').change(function(){
             if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
                 $('#wtgl').fadeOut(200);
@@ -255,12 +271,13 @@
 		var v_kdsatker = document.getElementById('kdsatker').value;
 		var v_invoice = document.getElementById('invoice').value;
 		var v_bank = document.getElementById('bank').value;
+		var v_status = document.getElementById('status').value;
 		var v_tglawal = document.getElementById('tgl_awal').value;
 		var v_tglakhir = document.getElementById('tgl_akhir').value;
 		var v_fxml = document.getElementById('fxml').value;
 		
         var jml = 0;
-        if(v_nosp2d=='' && v_barsp2d=='' && v_kdsatker==''&& v_invoice=='' && v_bank=='' && v_tglawal=='' && v_tglakhir=='' && v_fxml==''){
+        if(v_nosp2d=='' && v_barsp2d=='' && v_kdsatker==''&& v_invoice=='' && v_bank=='' && v_status=='' && v_tglawal=='' && v_tglakhir=='' && v_fxml==''){
             $('#wsp2d').html('Harap isi salah satu parameter');
             $('#wsp2d').fadeIn();
 			$('#wbarsp2d').html('Harap isi salah satu parameter');
@@ -271,6 +288,8 @@
             $('#winvoice').fadeIn();
 			$('#wbank').html('Harap isi salah satu parameter');
             $('#wbank').fadeIn();
+			$('#wstatus').html('Harap isi salah satu parameter');
+            $('#wstatus').fadeIn();
 			$('#wtgl').html('Harap isi salah satu parameter');
             $('#wtgl').fadeIn();
 			$('#wfxml').html('Harap isi salah satu parameter');

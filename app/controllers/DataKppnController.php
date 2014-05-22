@@ -56,6 +56,14 @@ class DataKppnController extends BaseController {
 					}
 					$this->view->d_bank = $_POST['bank'];
 				}
+				if ($_POST['status'] != ''){
+					if ($_POST['status'] == 'SUKSES' ){
+						$filter[$no++] = "RETURN_CODE = '0000'";
+					} elseif ($_POST['status'] == 'TIDAK' ) {
+						$filter[$no++] = "RETURN_CODE != '0000'";
+					}
+					$this->view->d_status = $_POST['status'];
+				}
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
 					$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($_POST['tgl_awal'])).",'YYYYMMDD') 
 									AND TO_DATE (".date('Ymd',strtotime($_POST['tgl_akhir'])).",'YYYYMMDD')  ";
