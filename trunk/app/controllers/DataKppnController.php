@@ -58,9 +58,9 @@ class DataKppnController extends BaseController {
 				}
 				if ($_POST['status'] != ''){
 					if ($_POST['status'] == 'SUKSES' ){
-						$filter[$no++] = "RETURN_CODE = '0000'";
+						$filter[$no++] = "RETURN_DESC = 'SUKSES'";
 					} elseif ($_POST['status'] == 'TIDAK' ) {
-						$filter[$no++] = "RETURN_CODE != '0000'";
+						$filter[$no++] = "RETURN_DESC != 'SUKSES'";
 					}
 					$this->view->d_status = $_POST['status'];
 				}
@@ -81,6 +81,10 @@ class DataKppnController extends BaseController {
 					$fxml = $_POST['fxml'];
 					$filter[$no++]="UPPER(FTP_FILE_NAME) = '".strtoupper($fxml)."'";
 					$this->view->d_fxml = $_POST['fxml'];
+				}
+				if (Session::get('role')==SATKER){
+					$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
+					$this->view->d_satker = Session::get('kd_satker');
 				}
 				$this->view->data = $d_sppm->get_sppm_filter($filter);
 			}	

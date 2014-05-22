@@ -42,28 +42,37 @@
 		<label class="isian">No Transaksi: </label>
 		<input type="number" name="barsp2d" id="barsp2d" value="<?php if (isset($this->d_barsp2d)){echo $this->d_barsp2d;}?>">
 		
-		<div id="wsatker" class="error"></div>
-		<label class="isian">Kode Satker: </label>
-		<input type="number" name="kdsatker" id="kdsatker" size="15" value="<?php if (isset($this->d_kdsatker)){echo $this->d_kdsatker;}?>">
+		
+		<?php  if (Session::get('role')!=SATKER) {
+		echo "<div id='wsatker' class='error'></div>";
+		echo "<label class='isian'>Kode Satker: </label>";
+		} ?>
+		<input type="<?php if (Session::get('role')==SATKER) {echo "hidden";} else {echo "number";}?>" name="kdsatker" id="kdsatker" size="15" value="<?php if (isset($this->d_kdsatker)){echo $this->d_kdsatker;}?>">
 
 		<div id="winvoice" class="error"></div>
 		<label class="isian">No Invoice: </label>
 		<input type="text" name="invoice" id="invoice" value="<?php if (isset($this->d_invoice)){echo $this->d_invoice;}?>">
 
-		<div id="wfxml" class="error"></div>
-		<label class="isian">Nama file xml: </label>
-		<input type="text" name="fxml" id="fxml" value="<?php if (isset($this->d_fxml)){echo $this->d_fxml;}?>">
+		<?php  if (Session::get('role')!=SATKER) {
+		echo "<div id='wfxml' class='error'></div>";
+		echo "<label class='isian'>Nama file xml: </label>";
+		} ?>
+		<input type="<?php if (Session::get('role')==SATKER) {echo "hidden";} else {echo "text";}?>" name="fxml" id="fxml" value="<?php if (isset($this->d_fxml)){echo $this->d_fxml;}?>">
 		
-		<div id="wbank" class="error"></div>
-		<label class="isian">Nama Bank: </label>
-		<select type="text" name="bank" id="bank">
-			<option value=''>- pilih -</option>
+		<?php  if (Session::get('role')!=SATKER) {
+		echo "<div id='wbank' class='error'></div>";
+		echo "<label class='isian'>Nama Bank: </label>";
+		echo "<select type='text' name='bank' id='bank'>";
+		?>  <option value=''>- pilih -</option>
 			<option value='MDRI' <?php if ($this->d_bank==MDRI){echo "selected";}?>>Mandiri</option>
 			<option value='BRI' <?php if ($this->d_bank==BRI){echo "selected";}?>>BRI</option>
 			<option value='BNI' <?php if ($this->d_bank==BNI){echo "selected";}?>>BNI</option>
 			<option value='BTN' <?php if ($this->d_bank==BTN){echo "selected";}?>>BTN</option>
 			<option value='SEMUA_BANK' <?php if ($this->d_bank==SEMUA_BANK){echo "selected";}?>>SEMUA BANK</option>
 		</select>
+		<?php } else {
+			echo "<input type='hidden' name='bank' id='bank' value=''>";
+		} ?>
 		
 		<div id="wstatus" class="error"></div>
 		<label class="isian">Status: </label>
@@ -255,6 +264,12 @@
             }
         });
 		
+		$('#bayar').change(function(){
+            if(document.getElementById('bayar').value !=''){
+                $('#wbayar').fadeOut(200);
+            }
+        });
+		
 		$('#tgl_awal').change(function(){
             if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
                 $('#wtgl').fadeOut(200);
@@ -283,12 +298,13 @@
 		var v_invoice = document.getElementById('invoice').value;
 		var v_bank = document.getElementById('bank').value;
 		var v_status = document.getElementById('status').value;
+		var v_bayar = document.getElementById('bayar').value;
 		var v_tglawal = document.getElementById('tgl_awal').value;
 		var v_tglakhir = document.getElementById('tgl_akhir').value;
 		var v_fxml = document.getElementById('fxml').value;
 		
         var jml = 0;
-        if(v_nosp2d=='' && v_barsp2d=='' && v_kdsatker==''&& v_invoice=='' && v_bank=='' && v_status=='' && v_tglawal=='' && v_tglakhir=='' && v_fxml==''){
+        if(v_nosp2d=='' && v_barsp2d=='' && v_kdsatker==''&& v_invoice=='' && v_bank=='' && v_status=='' && v_bayar=='' && v_tglawal=='' && v_tglakhir=='' && v_fxml==''){
             $('#wsp2d').html('Harap isi salah satu parameter');
             $('#wsp2d').fadeIn();
 			$('#wbarsp2d').html('Harap isi salah satu parameter');
@@ -301,6 +317,8 @@
             $('#wbank').fadeIn();
 			$('#wstatus').html('Harap isi salah satu parameter');
             $('#wstatus').fadeIn();
+			$('#wbayar').html('Harap isi salah satu parameter');
+            $('#wbayar').fadeIn();
 			$('#wtgl').html('Harap isi salah satu parameter');
             $('#wtgl').fadeIn();
 			$('#wfxml').html('Harap isi salah satu parameter');
