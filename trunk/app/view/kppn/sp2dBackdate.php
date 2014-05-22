@@ -92,7 +92,7 @@
 					<th width='200px'>Bank, Nama, No. Rek Supplier</th>
 					<th width='300px'>Deskripsi</th>
 					<th>File Transaksi</th>
-					<th>Keterangan</th>		
+					<th>Status</th>		
 			</thead>
 			<tbody class='ratatengah'>
 			<?php 
@@ -138,6 +138,10 @@
 			?>
 			</tbody>
         </table>
+		<b>Keterangan : </b></br>
+		Sukses Overbooking = Dana sudah masuk ke Rekening Penerima </br>
+		Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima, mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima</br>
+		Nomor Ref/SOR/BOR = Nomor bukti transaksi pada perbankan yang dapat digunakan untuk konfirmasi ke bank penerima
 		</div>
 </div>
 
