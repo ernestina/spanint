@@ -58,6 +58,7 @@ class AuthController extends BaseController {
                 Session::set('user', $res[2]);
                 Session::set('role', $role);
                 Session::set('id_user', $res[3]); 
+                Session::set('kd_satker', $res[4]); 
 				print_r($_SESSION);
                 header('location:' . URL); 
             } else if ((int) $res[0] == 0) {

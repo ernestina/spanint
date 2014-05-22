@@ -19,7 +19,9 @@ class Index extends BaseController {
             header('location:' . URL . 'dataKppn/monitoringSp2d');
         } elseif (Session::get('role') == KANWIL) {
             header('location:' . URL . 'dataKppn/monitoringSp2d');
-        } else {
+        } elseif (Session::get('role') == SATKER) {
+            header('location:' . URL . 'dataKppn/monitoringSp2d');
+        }else {
             header('location:' . URL . 'auth/login');
         }
     }

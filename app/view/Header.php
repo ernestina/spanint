@@ -232,6 +232,18 @@
 							</li>';
 						
                     }
+                    if (Session::get('role') == SATKER) {
+						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
+						echo '<ul>
+								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
+							</ul>
+							</li>';
+					}
                     ?>
                     <li>
                         <a href="<?php echo URL; ?>auth/logout"><i class="icon-off"></i></a>

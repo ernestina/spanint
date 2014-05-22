@@ -32,6 +32,7 @@ class User {
            $role = $v['KD_R_JENIS'];
            $kd = $v['NAMA_USER'];
            $id = $v['KD_D_KPPN'];
+           $satker = $v['KD_SATKER'];
         }
 		
 		//$return[] = 1;
@@ -43,6 +44,7 @@ class User {
         $return[] = $role;
         $return[] = $kd;
         $return[] = $id;
+        $return[] = $satker;
         return $return;
     }
 
