@@ -49,7 +49,7 @@ class DataHistSPM{
 		$sql = "SELECT *
 				from "
 				. $this->_table1 ."
-				  WHERE 1=1 "
+				  WHERE STATUS = 'OPEN' "
 				  ;
 				
 				

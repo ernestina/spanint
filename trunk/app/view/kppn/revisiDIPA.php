@@ -68,7 +68,7 @@
 					<th class='mid'>Output</th>
 					<th class='mid'>Dana</th>
 					<th class='mid'>Bank</th>
-					<th>Kewe-nangan</th>
+					<th>Kewenangan</th>
 					<th>Tipe Anggaran</th>
 					<th class='mid'>Kololari</th>
 					<th>Kode Cadangan</th>
