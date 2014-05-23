@@ -174,12 +174,8 @@
 						
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
-
                                 <li><a href='  . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
                                 <li><a href='  . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
-
-                               
-
                             </ul>
                             </li>';
 						
@@ -233,6 +229,19 @@
 						
                     }
                     if (Session::get('role') == SATKER) {
+						echo '<li class="subnav"><a href=#>Modul SA</a>';
+						echo '<ul>
+                                <li><a href='  . URL . 'dataDIPA/RevisiDipa/'.Session::get('kd_satker').'></i>Informasi DIPA</a></li>
+                                <li><a href='  . URL . 'dataDIPA/RealisasiFA/'.Session::get('kd_satker').'></i>Sisa Pagu</a></li>
+                            </ul>
+                            </li>';echo '<li class="subnav"><a href=#>Modul PM</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold Invoice</a></li>
+                                <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
+                                <li><a href='. URL . 'dataSPM/daftarsp2d/'.Session::get('kd_satker').'></i>Daftar SP2D</a></li>
+                            </ul>
+							</li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>

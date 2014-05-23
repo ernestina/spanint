@@ -39,20 +39,22 @@ class DataSPMController extends BaseController {
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 			}
-		}
-		else {
+		} else {
 			$filter[$no++]="SUBSTR(OU_NAME,1,3) = ".Session::get('id_user');
 		}
 		if (Session::get('role')==KANWIL){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			}
+		}
 		if (Session::get('role')==ADMIN){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-			}
-			$filter[$no++]=" STATUS = 'OPEN'";
-			$this->view->data = $d_spm1->get_hist_spm_filter ($filter);
+		}
+		if (Session::get('role')==SATKER){
+			$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
+			$this->view->d_satker = Session::get('kd_satker');
+		}
+		$this->view->data = $d_spm1->get_hist_spm_filter ($filter);
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/posisiSPM');
 	}
@@ -92,16 +94,20 @@ class DataSPMController extends BaseController {
 			
 		}	
 		else {
-					$filter[$no++]="ATTRIBUTE15 = ".Session::get('id_user');
-				}
+			$filter[$no++]="ATTRIBUTE15 = ".Session::get('id_user');
+		}
 		if (Session::get('role')==KANWIL){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			}
+		}
 		if (Session::get('role')==ADMIN){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-			}
+		}
+		if (Session::get('role')==SATKER){
+			$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
+			$this->view->d_satker = Session::get('kd_satker');
+		}
 		$this->view->data = $d_spm1->get_hold_spm_filter($filter);
 		//var_dump($d_spm1->get_hold_spm_filter ($filter));
 		
@@ -160,7 +166,11 @@ class DataSPMController extends BaseController {
 				}
 				$this->view->data = $d_spm1->get_validasi_spm_filter($filter);
 			}
-			
+			if (Session::get('role')==SATKER){
+				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
+				$this->view->d_satker = Session::get('kd_satker');
+				$this->view->data = $d_spm1->get_validasi_spm_filter($filter);
+			}
 			$this->view->render('kppn/validasiuploadSPM');
 		}
 	

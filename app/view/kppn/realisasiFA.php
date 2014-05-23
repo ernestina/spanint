@@ -18,9 +18,11 @@
 	<div id="top">
 	<form method="POST" action="#" enctype="multipart/form-data">
 		
-		<div id="wkdsatker" class="error"></div>
-		<label class="isian">Satker: </label>
-		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->satker_code)){echo $this->satker_code;}?>">
+		<?php  if (Session::get('role')!=SATKER) {
+		echo "<div id='wkdsatker' class='error'></div>";
+		echo "<label class='isian'>Satker: </label>";
+		} ?>
+		<input type="<?php if (Session::get('role')==SATKER) {echo "hidden";} else {echo "text";}?>" name="kdsatker" id="kdsatker" value="<?php if (isset($this->satker_code)){echo $this->satker_code;}?>">
 		
 		<div id="wakun" class="error"></div>
 		<label class="isian">Akun: </label>
@@ -61,14 +63,14 @@
 					<th class='mid'>Output</th>
 					<th class='mid'>Dana</th>
 					<th class='mid'>Bank</th>
-					<th>Kewe-nangan</th>
+					<th>Kewenangan</th>
 					<th class='mid'>Lokasi</th>
-					<th class='mid'>Budget Type</th>
-					<th>Currency code</th>
-					<th>Budget Amount</th>
-					<th>Encumbrance Amount</th>
-					<th>Actual Amount</th>
-					<th>Balancing Amount</th>
+					<th class='mid'>Tipe Anggaran</th>
+					<th>Mata Uang</th>
+					<th>Pagu</th>
+					<th>Pencadangan</th>
+					<th>Realisasi</th>
+					<th>Sisa pagu</th>
 			</thead>
 			<tbody class='ratatengah'>
 			<?php 
