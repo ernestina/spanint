@@ -315,6 +315,8 @@ class DataSPMController extends BaseController {
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
 					$filter[$no++]="TS.KPPN = '".Session::get('id_user')."'";
+					$filter[$no++]="SUBSTR(ACA.CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";
+					
 				}
 				
 				if ($_POST['kdsatker']!=''){
@@ -337,7 +339,9 @@ class DataSPMController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
-			if (Session::get('role')==KPPN) {$filter[$no++]="TS.KPPN = '".Session::get('id_user')."'";	
+			if (Session::get('role')==KPPN) {
+			$filter[$no++]="TS.KPPN = '".Session::get('id_user')."'";
+			$filter[$no++]="SUBSTR(ACA.CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
 			$this->view->data = $d_spm1->get_satker_filter($filter);	
 			}
 					
@@ -351,7 +355,8 @@ class DataSPMController extends BaseController {
 		$filter = array ();
 		$no=0;
 		if ($kdsatker != '') {
-				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
+				$filter[$no++]=" SEGMENT1 =  '".$kdsatker."'";
+				//$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
 				//$this->view->invoice_num = $invoice_num;	
 			}
 		if (isset($_POST['submit_file'])) {
@@ -381,9 +386,15 @@ class DataSPMController extends BaseController {
 			if (Session::get('role')==KPPN) {$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";	
 					
 			}
+			
+			
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
+		
 		//var_dump($d_spm1->get_satker_filter($filter));
-		$this->view->render('kppn/SP2DSatker');
+		if( Session::get('id_user') == 140 ){$this->view->render('kppn/SP2DSatker140');
+		}
+		else {$this->view->render('kppn/SP2DSatker');
+		}
 	}	
 	//author by jhon
 	
