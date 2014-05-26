@@ -18,6 +18,9 @@ class DataCheck{
 	private $_attribute6;
 	private $_nmsatker;
 	private $_creation_date;
+	private $_currency_code;
+	private $_exchange_date;
+	private $_exchange_rate;
 	private $_status_lookup_code;
 	private $_table1 = 'AP_CHECKS_ALL_V';
     public $registry;
@@ -68,6 +71,9 @@ class DataCheck{
 			$d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
 			$d_data->set_attribute6($val['ATTRIBUTE6']);
 			$d_data->set_nmsatker($val['NMSATKER']);
+			$d_data->set_currency_code($val['CURRENCY_CODE']);
+			$d_data->set_exchange_date (date("d-m-Y",strtotime($val['EXCHANGE_DATE'])));
+			$d_data->set_exchange_rate($val['EXCHANGE_RATE']);
 			$d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
 			$d_data->set_status_lookup_code($val['STATUS_LOOKUP_CODE']);
             $data[] = $d_data;
@@ -87,6 +93,15 @@ class DataCheck{
     }
 	public function set_invoice_num($invoice_num) {
         $this->_invoice_num = $invoice_num;
+    }
+	public function set_currency_code($currency_code) {
+        $this->_currency_code = $currency_code;
+    }
+	public function set_exchange_date($exchange_date) {
+        $this->_exchange_date = $exchange_date;
+    }
+	public function set_exchange_rate($exchange_rate) {
+        $this->_exchange_rate = $exchange_rate;
     }
 	public function set_invoice_date($invoice_date) {
         $this->_invoice_date = $invoice_date;
@@ -124,6 +139,15 @@ class DataCheck{
     }
 	public function get_amount() {
         return $this->_amount;
+    }
+	public function get_currency_code() {
+        return $this->_currency_code;
+    }
+	public function get_exchange_rate() {
+        return $this->_exchange_rate;
+    }
+	public function get_exchange_date() {
+        return $this->_exchange_date;
     }
 	
 	public function get_invoice_num() {
