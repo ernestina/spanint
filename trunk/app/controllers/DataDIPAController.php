@@ -67,6 +67,9 @@ class DataDIPAController extends BaseController {
 					$filter[$no++]=" A.SATKER =  '".$kdsatker."'";
 				//$this->view->invoice_num = $invoice_num;	
 				}
+		if (Session::get('role')==KPPN) {
+					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
+			}		
 			if (isset($_POST['submit_file'])) {
 				
 				if ($_POST['kdsatker']!=''){

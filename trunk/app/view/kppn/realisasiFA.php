@@ -57,7 +57,7 @@
 			<thead>
 					<th class='mid'>No.</th>
 					<th class='mid'>Satker</th>
-					<!--th class='mid'>KPPN</th-->
+					<th class='mid'>KPPN</th>
 					<th class='mid'>Akun</th>
 					<th class='mid'>Program</th>
 					<th class='mid'>Output</th>
@@ -84,7 +84,7 @@
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_satker() . "</td>";
-					//echo "<td>" . $value->get_kppn() . "</td>";
+					echo "<td>" . $value->get_kppn() . "</td>";
 					echo "<td>" . $value->get_akun() . "</td>";
 					echo "<td>" . $value->get_program() . "</td>";
 					echo "<td>" . $value->get_output() . "</td>";
