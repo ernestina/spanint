@@ -11,7 +11,7 @@ define('DB_HOST', '10.100.244.253');
 define('DB_NAME', 'DEVSPANDB');
 define('DB_TNS', '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.100.244.253)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=DEVSPANDB)(INSTANCE_NAME= DEVSPANDB)))');
 define('DB_USER', 'USRAPL14');
-define('DB_PASS', 'Aplikasi2014');
+define('DB_PASS', 'K3b!aSa4nL4ma');
 
 //end setting database
 
