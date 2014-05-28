@@ -93,7 +93,7 @@ class DataSPMController extends BaseController {
 			}
 			
 		}	
-		else {
+		if (Session::get('role')==KPPN) {
 			$filter[$no++]="ATTRIBUTE15 = ".Session::get('id_user');
 		}
 		if (Session::get('role')==KANWIL){
