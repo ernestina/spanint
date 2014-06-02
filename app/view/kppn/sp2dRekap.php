@@ -98,39 +98,39 @@
 					foreach ($this->data as $value){ 
 						echo "<tr> ";
 						echo "<td>" . $no++ . "</td>";
-						if($value->get_payment_date()!=''){echo "<td>" . $value->get_payment_date(). "</td>";} else {echo "<td>???</td>";}
+						if($value->get_payment_date()!=''){echo "<td align='left'>" . $value->get_payment_date(). "</td>";} else {echo "<td>???</td>";}
 						//filter gaji
 						if (isset($this->d_nama_kppn)) {
 							if($value->get_invoice_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/1/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ."/".$kode_kppn." target='_blank'>" . $value->get_invoice_num(). "</a></td>";} else {echo "<td>0</td>";}
 						} else {
 							if($value->get_invoice_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/1/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_invoice_num(). "</a></td>";} else {echo "<td>0</td>";}
 						}
-						echo "<td>" . $value->get_check_amount(). "</a></td>";
+						echo "<td align='right'>" . number_format($value->get_check_amount()). "</a></td>";
 						//filter non-gaji
 						if (isset($this->d_nama_kppn)) {
 							if($value->get_check_date()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/2/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ."/".$kode_kppn." target='_blank'>" . $value->get_check_date(). "</a></td>";} else {echo "<td>0</td>";}
 						} else {
 							if($value->get_check_date()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/2/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_date(). "</a></td>";} else {echo "<td>0</td>";}
 						}
-						echo "<td>" . $value->get_bank_account_name(). "</a></td>";
+						echo "<td align='right'> " . number_format($value->get_bank_account_name()). "</a></td>";
 						$tot = $value->get_invoice_num() + $value->get_check_date();
 						$nil_tot = $value->get_check_amount() + $value->get_bank_name();
 						if($tot!=''){echo "<td>" . $tot. "</td>";} else {echo "<td>0</td>";}
-						echo "<td>" . $value->get_vendor_name(). "</a></td>";
+						echo "<td align='right'>" . number_format($value->get_vendor_name()). "</a></td>";
 						//filter retur
 						if (isset($this->d_nama_kppn)) {
 							if($value->get_check_number()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ."/".$kode_kppn." target='_blank'>" . $value->get_check_number(). "</a></td>";} else {echo "<td>0</td>";}
 						} else {
 							if($value->get_check_number()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_number(). "</a></td>";} else {echo "<td>0</td>";}
 						}
-						echo "<td>" . $value->get_bank_name(). "</a></td>";
+						echo "<td align='right'>" . number_format($value->get_bank_name()). "</a></td>";
 						//filter void
 						if (isset($this->d_nama_kppn)) {
 							if($value->get_check_number_line_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ."/".$kode_kppn." target='_blank'>" . $value->get_check_number_line_num(). "</a></td>";} else {echo "<td>0</td>";}
 						} else {
 							if($value->get_check_number_line_num()!=''){echo "<td><a href=".URL."dataKppn/detailRekapSP2D/" . $value->get_payment_date() . "/3/" . date('d-m-Y',strtotime($this->d_tgl_awal)) . "/" .  date('d-m-Y',strtotime($this->d_tgl_akhir)) ." target='_blank'>" . $value->get_check_number_line_num(). "</a></td>";} else {echo "<td>0</td>";}
 						}
-						echo "<td>" . $value->get_vendor_ext_bank_account_num(). "</a></td>";
+						echo "<td align='right'>" . number_format($value->get_vendor_ext_bank_account_num()). "</a></td>";
 						echo "</tr> ";
 						$gaji+=$value->get_invoice_num();
 						$nil_gaji+=$value->get_check_amount();
@@ -146,17 +146,17 @@
 					}
 					echo "<tr> ";
 					echo "<td></td>";
-					echo "<td><b>TOTAL</b></td>";
+					echo "<td><b>GRAND TOTAL</b></td>";
 					echo "<td><b>".$gaji."</b></td>";
-					echo "<td><b><!--".$nil_gaji."--></b></td>";
+					echo "<td align='right'><b>".number_format($nil_gaji)."</b></td>";
 					echo "<td><b>".$non_gaji."</b></td>";
-					echo "<td><b><!--".$nil_non_gaji."--></b></td>";
+					echo "<td align='right'><b>".number_format($nil_non_gaji)."</b></td>";
 					echo "<td><b>".$total."</b></td>";
-					echo "<td><b><!--".$nil_tot."--></b></td>";
+					echo "<td align='right'><b>".number_format($nil_tot)."</b></td>";
 					echo "<td><b>".$retur."</b></td>";
-					echo "<td><b><!--".$nil_retur."--></b></td>";
+					echo "<td align='right'><b>".number_format($nil_retur)."</b></td>";
 					echo "<td><b>".$void."</b></td>";
-					echo "<td><b><!--".$nil_void."--></b></td>";
+					echo "<td align='right'><b>".number_format($nil_void)."</b></td>";
 				} 
 			} 
 			?>
