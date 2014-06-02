@@ -88,20 +88,20 @@
             <!--baris pertama-->
 			<thead>
 				<tr>
-					<th rowspan="2" valign: "middle">No.</th>
-					<th rowspan="2">Kode Satker <br> Nama Satker</th>
+					<th rowspan="2" width='3%' class='mid'>No.</th>
+					<th rowspan="2" width='10%' class='mid'>Kode Satker <br> Nama Satker</th>
 					<th colspan="4">SP2D Retur</th>
 					<th colspan="3">SP2D Pengganti</th>
 					<th rowspan="2">Bank Pembayar <br> Status Retur</th>
 				</tr>
 				<tr>
-					<th >Tgl. SP2D<br>No. SP2D<br>No. Transaksi</th>
-					<th >Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
-					<th >Uraian SP2D</th>
-					<th >Alasan Retur</th>
-					<th>Tgl Proses <br>SP2D Pengganti</th>
-					<th >Tgl. SP2D<br>No. SP2D</th>
-					<th >Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
+					<th width='10%' class='mid'>Tgl. SP2D<br>No. SP2D<br>No. Transaksi</th>
+					<th width='10%' class='mid'>Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
+					<th width='20%' class='mid'>Uraian SP2D</th>
+					<th width='10%' class='mid'>Alasan Retur</th>
+					<th width='10%' class='mid'>Tgl Proses <br>SP2D Pengganti</th>
+					<th width='10%' class='mid'>Tgl. SP2D<br>No. SP2D</th>
+					<th width='10%' class='mid'>Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
 				</tr>
 			</thead>
 			<tbody class='ratatengah'>
