@@ -295,10 +295,10 @@ class DataGantiUserSpan {
     public function set_posisi_pelapor($posisi_pelapor) {
         $this->_posisi_pelapor = $posisi_pelapor;
 	}
-	public function set_email_pelaporan($email_pelapor) {
+	public function set_email_pelapor($email_pelapor) {
         $this->_email_pelapor = $email_pelapor;
     }
-	public function set_tlp_pelaporan($tlp_pelapor) {
+	public function set_tlp_pelapor($tlp_pelapor) {
         $this->_tlp_pelapor = $tlp_pelapor;
     }
 	public function set_status_persetujuan($status_persetujuan) {
