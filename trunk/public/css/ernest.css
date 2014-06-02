@@ -512,6 +512,9 @@ input.keterangan{
 
 textarea.midi {
 	width: 430px;
+}
+textarea.mini {
+	width: 250px;
 }	
 select {
 	padding: 5px 2px 0px 2px;
@@ -1389,6 +1392,11 @@ thead th.mid {
 		/*background: -moz-linear-gradient(#fff, #999);
 		background: -webkit-linear-gradient(#fff, #999);
 		background: -o-linear-gradient(#fff, #999);*/
+	}
+	
+	.modalDialog > div > div {
+		overflow-y: auto;
+		max-height: 400px;
 	}
 
 	.close {
