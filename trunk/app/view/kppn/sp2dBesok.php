@@ -222,12 +222,6 @@
             jml++;
         }
 		
-		if(v_tglawal>v_tglakhir){
-            $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
-            $('#wtgl').fadeIn(200);
-            jml++;
-        }
-		
         if(jml>0){
             return false;
         } 

@@ -159,6 +159,7 @@
             }
         }
     });
+	
     $("#tgl_akhir").datepicker({
         maxDate: "dateToday",
         dateFormat: 'dd-mm-yy',
@@ -167,8 +168,6 @@
 			}
 		});		
 	});
-	
-    
 	
     function hideErrorId(){
         $('.error').fadeOut(0);
@@ -276,12 +275,6 @@
             var wsatker = 'No Transaksi harus dalam bentuk angka!';
             $('#wsatker').html(wbarsp2d);
             $('#wsatker').fadeIn(200);
-            jml++;
-        }
-		
-		if(v_tglawal>v_tglakhir){
-            $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
-            $('#wtgl').fadeIn(200);
             jml++;
         }
 		

@@ -205,8 +205,8 @@
     function cek_upload(){
 		var pattern = '^[0-9]+$';
 		var v_bank = document.getElementById('bank').value;
-		var v_tglawal = document.getElementById('datepicker').value;
-		var v_tglakhir = document.getElementById('datepicker1').value;
+		var v_tglawal = document.getElementById('tgl_awal').value;
+		var v_tglakhir = document.getElementById('tgl_akhir').value;
 		
         var jml = 0;
         if(v_bank == '' ){
@@ -219,12 +219,6 @@
 			$('#wtgl').html('Harap isi parameter');
 			$('#wtgl').fadeIn();
 			jml++;		
-        }
-		
-		if(v_tglawal>v_tglakhir){
-            $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
-            $('#wtgl').fadeIn(200);
-            jml++;
         }
 		
         if(jml>0){
