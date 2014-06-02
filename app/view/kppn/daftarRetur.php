@@ -7,6 +7,9 @@
 					$kode_kppn=$kppn->get_kd_satker();
 				}
 			}?>
+		</h2>
+    </div>
+<div style='display: block; float: left; font-weight: bold'>
 			<?php if (isset($this->d_status)) {
 					echo "Status : ".$this->d_status."<br>";
 				}
@@ -15,9 +18,7 @@
 					echo "Tanggal : ".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
 				}
 			?>
-		</h2>
-    </div>
-
+</div>
 <a href="#oModal" class="modal">FILTER DATA</a>
         <div id="oModal" class="modalDialog" >
             <div>
