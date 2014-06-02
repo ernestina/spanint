@@ -836,11 +836,11 @@ class DataSppm {
             $d_data->set_check_date($val['NON_GAJI']);
             $d_data->set_check_number($val['RETUR']);
             $d_data->set_check_number_line_num($val['VOID']);
-            $d_data->set_check_amount(number_format($val['NILAI_GAJI']));
-            $d_data->set_bank_account_name(number_format($val['NILAI_NON_GAJI']));
-            $d_data->set_bank_name(number_format($val['NILAI_RETUR']));
-            $d_data->set_vendor_ext_bank_account_num(number_format($val['NILAI_VOID']));
-            $d_data->set_vendor_name(number_format($val['NILAI_GAJI']+$val['NILAI_NON_GAJI']));
+            $d_data->set_check_amount($val['NILAI_GAJI']);
+            $d_data->set_bank_account_name($val['NILAI_NON_GAJI']);
+            $d_data->set_bank_name($val['NILAI_RETUR']);
+            $d_data->set_vendor_ext_bank_account_num($val['NILAI_VOID']);
+            $d_data->set_vendor_name($val['NILAI_GAJI']+$val['NILAI_NON_GAJI']);
 			$data[] = $d_data;
         }
         return $data;
