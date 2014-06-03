@@ -39,10 +39,10 @@ class DataUserSPAN {
     public function get_user_filter($filter) {
 	Session::get('id_user');
         $sql = "SELECT KDKPPN, USER_NAME, LAST_NAME, ATTRIBUTE1, substr(NAME,12,30) NAME, EMAIL_ADDRESS, START_DATE, END_DATE FROM " . $this->_table. "
-		WHERE ";
+		WHERE 1=1 ";
 	  	
         foreach ($filter as $filter) {
-			$sql .= $filter;
+			$sql .= " AND " . $filter;
 			
 		}
 		$sql .= "  GROUP BY KDKPPN, USER_NAME, LAST_NAME, ATTRIBUTE1,NAME, EMAIL_ADDRESS, START_DATE, END_DATE";
@@ -58,8 +58,12 @@ class DataUserSPAN {
             	$d_data->set_name($val['NAME']);
             	$d_data->set_responsibility_name($val['RESPONSIBILITY_NAME']);
             	$d_data->set_email_address($val['EMAIL_ADDRESS']);
-            	$d_data->set_start_date($val['START_DATE']);
-            	$d_data->set_end_date($val['END_DATE']);
+            	$d_data->set_start_date(date("d-m-Y",strtotime($val['START_DATE'])));
+				if (is_null($val['END_DATE'])){
+					$d_data->set_end_date('-');
+				} else {
+					$d_data->set_end_date(date("d-m-Y",strtotime($val['END_DATE'])));
+				} 
 		 $data[] = $d_data;
         }
         return $data;

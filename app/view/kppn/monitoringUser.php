@@ -36,7 +36,7 @@
 		
 		<div id="wnip" class="error"></div>
 		<label class="isian">NIP: </label>
-		<input type="number" name="nip" id="nip" size="15" value="<?php if (isset($this->d_nip)){echo $this->d_nip;}?>">
+		<input type="number" name="nip" id="nip" size="18" value="<?php if (isset($this->d_nip)){echo $this->d_nip;}?>">
 
 	
 		<ul class="inline" style="margin-left: 150px">
@@ -103,7 +103,6 @@
     $(function(){
         hideErrorId();
         hideWarning();
-        
     });
     
     function hideErrorId(){
@@ -122,6 +121,9 @@
     function cek_upload(){
 		var pattern = '^[0-9]+$';
 		var v_nip = document.getElementById('nip').value;
+
+		var jml = 0;
+		
 		
         if(jml>0){
             return false;
