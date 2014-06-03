@@ -69,7 +69,7 @@ class DataGRController extends BaseController {
 				$this->view->d_tgl = $akun;
 			}
 			if (!is_null($bulan)) {
-				$filter[$no++]="TRIM(to_char(tanggal_buku,'month')) =  '" .$bulan."'";
+				$filter[$no++]="TRIM(to_char(tanggal_bayar,'month')) =  '" .$bulan."'";
 				$this->view->bulan = $bulan;
 			}
 			if (!is_null($kppn)) {

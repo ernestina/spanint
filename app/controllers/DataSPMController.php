@@ -216,7 +216,7 @@ class DataSPMController extends BaseController {
 				$invoice="'".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
 				$kppn=substr($sp2d,2,3);
 				$filter[$no++]= $kppn;
-				//$this->view->invoice_num = $invoice_num;
+				$this->view->invoice_num = $invoice_num;
 				$this->view->data = $d_spm1->get_history_spm_filter ($filter, $invoice);
 			}
 			if (isset($_POST['submit_file'])) {
@@ -249,13 +249,22 @@ class DataSPMController extends BaseController {
 		$no=0;
 		if (isset($_POST['submit_file'])) {
 		
-				if ($_POST['kdkppn']!=''){
+				if ($_POST['kdkppn']!='' AND ($_POST['invoice'] !='' or $_POST['JenisSPM']!='' or $_POST['kdsatker']!='' or $_POST['JenisSPM']!='' or $_POST['durasi']!='' or $_POST['tgl_awal']!='')){
+					
 					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'];
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-				} else {
-					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user');
-				}
+				} 
+				
+				elseif ($_POST['kdkppn']!='') {
+					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
+								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'].")" ;
+					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				} 
+				else { $filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user');
+				} 
 				
 				if ($_POST['invoice']!=''){
 					$filter[$no++]="invoice_num = '".$_POST['invoice'] . "'";
@@ -269,15 +278,14 @@ class DataSPMController extends BaseController {
 				if ($_POST['durasi']!=''){
 					$filter[$no++]="durasi2 ".$_POST['durasi'] . "'";
 				}
-				
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
 					$filter[$no++] = "TANGGAL_UPLOAD BETWEEN to_date('".$_POST['tgl_awal']."','dd-mm-yyyy') AND to_date('".$_POST['tgl_akhir']."' ,'dd-mm-yyyy')";
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
-				else {
-					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
-								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'].")" ;}
+				//else {
+					//$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
+								//from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'].")" ;}
 				
 			$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);	
 		}

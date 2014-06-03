@@ -38,7 +38,8 @@ class DataDurasiSPM{
 		$sql = "SELECT DISTINCT * FROM " 
 				. $this->_table1 . " 
 				WHERE 
-				1=1 "
+				durasi2 > 0
+				"
 				;
 		$no=0;
 		foreach ($filter as $filter) {
