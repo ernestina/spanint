@@ -118,7 +118,6 @@ class DataSPMController extends BaseController {
 	public function ValidasiSpm() {
 		$d_spm1 = new DataValidasiUploadSPM($this->registry);
 		$filter = array ();
-		Session::get('id_user');
 		$no=0;
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){

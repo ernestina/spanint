@@ -70,8 +70,8 @@ class DataPFK_DETAIL{
 			$d_data->set_keterangan($val['KETERANGAN']);
 			$d_data->set_rupiah($val['RUPIAH']);
             $d_data->set_ntpn($val['NTPN']);
-			$d_data->set_tanggal_buku($val['TANGGAL_BUKU']);
-			$d_data->set_tanggal_bayar($val['TANGGAL_BAYAR']);
+			$d_data->set_tanggal_buku(date("d-m-Y",strtotime($val['TANGGAL_BUKU'])));
+			$d_data->set_tanggal_bayar(date("d-m-Y",strtotime($val['TANGGAL_BAYAR'])));
 			$d_data->set_nama_wajib_bayar_setor($val['NAMA_WAJIB_BAYAR_SETOR']);
 			$d_data->set_kppn($val['KPPN']);
             $data[] = $d_data;
