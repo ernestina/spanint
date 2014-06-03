@@ -12,6 +12,8 @@
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
 	<div id="top">
 	<form method="POST" action="#" enctype="multipart/form-data">
+		<div class='error' id='wall'></div>
+		
 		<div id="wnosurat" class="error"></div>
 		<label class="isian">No. Surat: </label>
 		<input type="text" name="no_surat" id="no_surat" value="<?php if (isset($this->no_surat)){echo $this->no_surat;}?>">
@@ -125,13 +127,9 @@
 			<option value='MOPD' <?php if ($this->posisi_pelapor == MOPD){echo "selected";}?>>MO Pencairan Dana</option>
 			<option value='STAFFPD' <?php if ($this->posisi_pelapor == STAFFPD){echo "selected";}?>>Staff Pencairan Dana</option>
 		</select>
-
-		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-		<input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-		<input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-		<input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
-		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
+		
+		<!--nama unit ini ambil dari kode kppn login-->
+		<input type="hidden" name="nama_unit" id="nama_unit" value="<?php echo $nama_unit; ?>">
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
@@ -146,17 +144,25 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra scroll">
+		<table width="100%" class="table table-bordered zebra" id='fixheader' >
             <!--baris pertama-->
 			<thead>
-					<th>No.</th>
-					<th>Nama Unit</th>
-					<th>No. Surat</th>
-					<th>Tgl Surat</th>
-					<th>Nama User</th>
-					<th>NIP User</th>
-					<th>Email User</th>
-								
+				<tr>
+					<th rowspan='2' class='mid'>No.</th>
+					<th rowspan='2' class='mid'>No. Surat</th>
+					<th rowspan='2' class='mid'>Tgl Surat</th>
+					<th colspan='2'>Pegawai yang berhalangan</th>
+					<th colspan='2'>Pegawai yang menggantikan</th>
+					<th rowspan='2' class='mid'>Tanggal mulai</th>
+					<th rowspan='2' class='mid'>Tanggal selesai</th>
+					<th rowspan='2' class='mid'>Persetujuan</th></th>
+				</tr>
+				<tr>
+					<th>Nama/NIP</th>
+					<th>Posisi</th>
+					<th>Nama/NIP</th>
+					<th>Posisi</th>
+				</tr>
 			</thead>
 			<tbody>
 			<?php 
@@ -169,21 +175,20 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_nama_unit() . "</td>";
-					echo "<td>" . $value->get_no_surat() . "</td>";
+					echo "<td><a href='#'>" . $value->get_no_surat() . "</a></td>";
 					echo "<td>" . $value->get_tgl_surat() . "</td>";
-					echo "<td>" . $value->get_nama_user1() . "</td>";
-					echo "<td>" . $value->get_nip_user1() . "</td>";
-					echo "<td>" . $value->get_email_user1() . "</td>";
-					/*echo "<td>" . $value->get_posisi_user1() . "</td>";
+					echo "<td>" . $value->get_nama_user1() . "<br>" .$value->get_nip_user1() . "</td>";
 					echo "<td>" . $value->get_posisi_user1() . "</td>";
-					echo "<td>" . $value->get_posisi_user1() . "</td>";
-					echo "<td>" . $value->get_posisi_user1() . "</td>";
-					echo "<td>" . $value->get_posisi_user1() . "</td>";
-					echo "<td>" . $value->get_posisi_user1() . "</td>";
-					echo "<td>" . $value->get_posisi_user1() . "</td>";
-					echo "<td>" . $value->get_posisi_user1() . "</td>";
-					echo "<td>" . $value->get_posisi_user1() . "</td>";*/
+					echo "<td>" . $value->get_nama_user2() . "<br>" .$value->get_nip_user2() . "</td>";
+					echo "<td>" . $value->get_posisi_user2() . "</td>";
+					echo "<td>" . $value->get_tgl_mulai() . "</td>";
+					echo "<td>" . $value->get_tgl_akhir() . "</td>";
+					echo "<td>
+						<ul class='inline'>
+							<li><button class='sukses'>SETUJU</button></li>
+							<li><button class='normal'>TIDAK SETUJU</button></li>
+						</ul>
+					</td>";
 					
 				echo "</tr>	";
 			} 
@@ -203,6 +208,34 @@
     $(function(){
         hideErrorId();
         hideWarning();
+		$("#tgl_mulai").datepicker({
+        minDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate, instance) {
+            if (selectedDate != '') {
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                var date = $.datepicker.parseDate(instance.settings.dateFormat, selectedDate, instance.settings);
+                date.setMonth(date.getMonth() + 1);
+                console.log(selectedDate, date);
+                $("#tgl_akhir").datepicker("option", "minDate", selectedDate);
+                $("#tgl_akhir").datepicker("option", "maxDate", date);
+            }
+        }
+    });
+    $("#tgl_akhir").datepicker({
+        maxDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate) {
+            $("#tgl_awal").datepicker("option", "maxDate", selectedDate);
+			}
+		});	
+	$("#tgl_surat").datepicker({
+        minDate: "dateToday",
+        dateFormat: 'dd-mm-yy',
+        onClose: function (selectedDate) {
+            $("#tgl_surat").datepicker("option", "maxDate", selectedDate);
+			}
+		});
         
     });
     
@@ -211,25 +244,157 @@
     }
 
     function hideWarning(){
-		$('#invoice').keyup(function(){
-            if(document.getElementById('invoice').value !=''){
-                $('#winvoice').fadeOut(200);
+		$('#no_surat').keyup(function(){
+            if(document.getElementById('no_surat').value !=''){
+                $('#wnosurat').fadeOut(200);
+            }
+        });
+		$('#tgl_surat').keyup(function(){
+            if(document.getElementById('tgl_surat').value !=''){
+                $('#wtglsurat').fadeOut(200);
+            }
+        });
+		$('#status_persetujuan').change(function(){
+            if(document.getElementById('status_persetujuan').value !=''){
+                $('#wsetuju').fadeOut(200);
+            }
+        });
+		$('#alasan').keyup(function(){
+            if(document.getElementById('alasan').value !=''){
+                $('#walasan').fadeOut(200);
+            }
+        });
+		$('#tgl_mulai').change(function(){
+            if(document.getElementById('tgl_mulai').value !='' && document.getElementById('tgl_akhir').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
+		
+		$('#tgl_akhir').change(function(){
+            if(document.getElementById('tgl_mulai').value !='' && document.getElementById('tgl_akhir').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
+		$('#nama_user1').keyup(function(){
+            if(document.getElementById('nama_user1').value !=''){
+                $('#wnama').fadeOut(200);
+            }
+        });
+		$('#nama_user2').keyup(function(){
+            if(document.getElementById('nama_user2').value !=''){
+                $('#wnama2').fadeOut(200);
+            }
+        });
+		$('#nama_pelapor').keyup(function(){
+            if(document.getElementById('nama_pelapor').value !=''){
+                $('#wnama3').fadeOut(200);
+            }
+        });
+		$('#nip_user1').keyup(function(){
+            if(document.getElementById('nip_user1').value !=''){
+                $('#wnip').fadeOut(200);
+            }
+        });
+		$('#nip_user2').keyup(function(){
+            if(document.getElementById('nip_user2').value !=''){
+                $('#wnip2').fadeOut(200);
+            }
+        });
+		$('#nip_pelapor').keyup(function(){
+            if(document.getElementById('nip_pelapor').value !=''){
+                $('#wnip3').fadeOut(200);
+            }
+        });
+		$('#email_user1').keyup(function(){
+            if(document.getElementById('email_user1').value !=''){
+                $('#wemail').fadeOut(200);
+            }
+        });
+		$('#email_user2').keyup(function(){
+            if(document.getElementById('email_user2').value !=''){
+                $('#wemail2').fadeOut(200);
+            }
+        });
+		$('#email_pelapor').keyup(function(){
+            if(document.getElementById('email_pelapor').value !=''){
+                $('#wemail3').fadeOut(200);
+            }
+        });
+		$('#posisi_user1').change(function(){
+            if(document.getElementById('posisi_user1').value !=''){
+                $('#wposisi').fadeOut(200);
+            }
+        });
+		$('#posisi_user2').change(function(){
+            if(document.getElementById('posisi_user2').value !=''){
+                $('#wposisi2').fadeOut(200);
+            }
+        });
+		$('#posisi_pelapor').change(function(){
+            if(document.getElementById('posisi_pelapor').value !=''){
+                $('#wposisi3').fadeOut(200);
+            }
+        });
+		$('#tlp_pelapor').keyup(function(){
+            if(document.getElementById('tlp_pelapor').value !=''){
+                $('#wtlp').fadeOut(200);
             }
         });
 
     }
     
     function cek_upload(){
-		var v_invoice = document.getElementById('invoice').value;
+		var pattern = '^[0-9]+$';
+		var v_nosurat = document.getElementById('no_surat').value;
+		var v_tglsurat = document.getElementById('tgl_surat').value;
+		var v_setuju = document.getElementById('status_persetujuan').value;
+		var v_alasan = document.getElementById('alasan').value;
+		var v_tglmulai = document.getElementById('tgl_mulai').value;
+		var v_tglakhir = document.getElementById('tgl_akhir').value;
+		var v_nama = document.getElementById('nama_user1').value;
+		var v_nama2 = document.getElementById('nama_user2').value;
+		var v_nama3 = document.getElementById('nama_pelapor').value;
+		var v_nip = document.getElementById('nip_user1').value;
+		var v_nip2 = document.getElementById('nip_user2').value;
+		var v_nip3 = document.getElementById('nip_pelapor').value;
+		var v_posisi = document.getElementById('posisi_user1').value;
+		var v_posisi2 = document.getElementById('posisi_user2').value;
+		var v_posisi3 = document.getElementById('posisi_pelapor').value;
+		var v_email = document.getElementById('email_user1').value;
+		var v_email2 = document.getElementById('email_user2').value;
+		var v_email3 = document.getElementById('email_pelapor').value;
+		var v_tlp = document.getElementById('tlp_pelapor').value;
 		
         var jml = 0;
-		if(v_invoice==''){
-			$('#winvoice').html('Harap isi no invoice');
-            $('#winvoice').fadeIn();
+		if(v_nosurat=='' && v_tglsurat=='' && v_setuju==''&& v_alasan=='' && v_tglmulai=='' && v_tglakhir=='' && v_nama=='' && v_nama2=='' && v_nama3=='' && v_nip=='' && v_nip2=='' && v_nip3=='' && v_posisi=='' && v_posisi2=='' && v_posisi3=='' && v_email=='' && v_email2=='' && v_email3=='' && v_tlp==''){
+            $('#wnosurat').html('Harap isi salah satu parameter');
+            $('#wnosurat').fadeIn();
             jml++;
         }
+		
 		if(jml>0){
             return false;
         } 
     }
+	
+	$(document).ready( function () {
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
+			"sScrollX": "100%",
+			"sScrollXInner": "100%",
+			"bSort": false,
+			"bPaginate": false,
+			"bInfo": null,
+			"bFilter": false,
+			"oLanguage": {
+			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
+			},
+		} );
+				
+		var keys = new KeyTable( {
+			"table": document.getElementById('fixheader'),
+			"datatable": oTable
+		} );
+	} );
 </script>
