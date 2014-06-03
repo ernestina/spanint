@@ -53,6 +53,7 @@ class DataFA{
 				. $this->_table2. " B 
 				WHERE BANK = '00000' AND
 				SUBSTR(A.AKUN,1,1) = '5' AND
+				SUBSTR(A.PERIOD_NAME,5,2) = '14' AND
 				A.BUDGET_TYPE = '2' AND
 				A.SATKER=B.KDSATKER ";
 		$no=0;
