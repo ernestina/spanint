@@ -567,7 +567,7 @@ input[type="checkbox"] {
 	
 }
 
-input[type="button"], a.modal {
+input[type="button"], button, a.modal {
 	color: #ffffff;
 	background-color: #49afcd;
 	width: 100px;
@@ -579,7 +579,7 @@ input[type="button"], a.modal {
 	text-align: center;
 }
 
-input[type="button"].sukses {
+input[type="button"].sukses, button.sukses {
 	border: 1px solid #5bb75b;
 	background-color: #5bb75b;
 }
