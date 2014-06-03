@@ -340,18 +340,31 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 .tengah1 {
 	padding-left: 40px;
 }
-
+*/
 .kolom1, .kolom2 {
-	width: 50%;
+	width: 47%;
 	float: left;
-	margin: 20px 0px 0px 0px;
+	margin: 40px 20px 20px 20px;
+	/*border: 1px solid black;*/
+	text-align: center;
+}
+
+.kolom1 {
+	margin-top: 90px;
+	margin-left: 35px;
+	background: #49afcd;
+	color: #f9f9f9;
+	border-radius: 5px;
+}
+
+.kolom1 p {
+	margin: 10px;
 }
 
 .kolom2 {
 	margin-right: 0%;
-	
 }
-
+/*
 .koloms{
 	width: 33%;
 	float: left;
@@ -453,7 +466,6 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 	float:right;
 	width: 50%;
 	margin: 0px 0px 10px 10px;
-	
 }
 
 .sukses {
