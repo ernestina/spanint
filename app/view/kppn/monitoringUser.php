@@ -41,7 +41,7 @@
 	
 		<ul class="inline" style="margin-left: 150px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="Cari" onClick="return cek_upload();"></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
