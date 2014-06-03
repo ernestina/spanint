@@ -54,8 +54,8 @@
 		<label class="isian">Durasi: </label>	
 		<select type="text" name="durasi" id="durasi">
 			<option value=''>- pilih -</option>
-			<option value="> 0 and durasi2 < '1" <?php if ($this->durasi=="< 1"){echo "Kurang dari 1 jam";}?>>Kurang dari satu jam</option>
-			<option value="> '1" <?php if ($this->durasi=="> 1"){echo "Lebih dari 1 jam";}?>>Lebih dari satu jam</option>
+			<option value="< '1" <?php if ($this->durasi=="< 1"){echo "Kurang dari 1 jam";}?>>Kurang dari satu jam</option>
+			<option value="> 1 and durasi2 < '24" <?php if ($this->durasi=="> 1"){echo "Lebih dari 1 jam";}?>>Lebih dari satu jam</option>
 			<option value="> '24" <?php if ($this->durasi=="> 24"){echo "Lebih dari 1 hari";}?>>Lebih dari satu hari</option>
 			
 		</select>
