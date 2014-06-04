@@ -96,7 +96,8 @@
 					echo "<td>" . $value->get_currency_code() . "</td>";
 					echo "<td style='text-align: right'>" . $value->get_budget_amt() . "</td>";
 					echo "<td style='text-align: right'>" . $value->get_encumbrance_amt() . "</td>";
-					echo "<td style='text-align: right'>" . $value->get_actual_amt() . "</td>";
+					echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailRealisasiFA/".$value->get_code_id()." target='_blank' '>" . $value->get_actual_amt() . "</td>";
+					//echo "<td><a href=".URL."dataDIPA/RevisiDipa/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
 					echo "<td style='text-align: right'>" . $value->get_balancing_amt() . "</td>";
 				echo "</tr>	";
 			}
