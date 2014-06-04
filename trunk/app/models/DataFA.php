@@ -12,6 +12,7 @@ class DataFA{
 	
 	
     private $_satker;
+	private $_code_id;
     private $_kppn;
 	private $_akun;
     private $_program;
@@ -69,6 +70,7 @@ class DataFA{
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_satker($val['SATKER']);
+			$d_data->set_code_id($val['CODE_COMBINATION_ID']);
             $d_data->set_kppn($val['KPPN']);
             $d_data->set_akun($val['AKUN']);
             $d_data->set_program($val['PROGRAM']);
@@ -101,6 +103,9 @@ class DataFA{
     }
 	public function set_nm_satker($nm_satker) {
         $this->_nm_satker = $nm_satker;
+    }
+	public function set_code_id($code_id) {
+        $this->_code_id = $code_id;
     }
 	
     public function set_akun($akun) {
@@ -156,7 +161,9 @@ class DataFA{
 	public function get_satker() {
         return $this->_satker;
     }
-	
+	public function get_code_id() {
+        return $this->_code_id;
+    }
 	public function get_kppn() {
         return $this->_kppn;
     }
