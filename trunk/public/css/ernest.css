@@ -1553,3 +1553,23 @@ strong {
 .ratatengah {
 	text-align: center;
 }
+
+/*
+For Home
+*/
+
+.dashboard-container {
+    width: 100%;
+}
+.dashboard-block {
+    display: block;
+    float: left;
+    padding: 20px;
+}
+.graph-title {
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    font-size: 20px;
+    line-height: 36px;
+    margin-bottom: 10px;
+}
