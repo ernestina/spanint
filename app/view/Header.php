@@ -11,7 +11,7 @@
         <script src="<?php echo URL; ?>public/js/teamdf-jquery-number/jquery.number.js"></script>
         <script src="<?php echo URL; ?>public/js/gaugejs/raphael.2.1.0.min.js"></script>
         <script src="<?php echo URL; ?>public/js/gaugejs/justgage.1.0.1.min.js"></script>
-        <script src="<?php echo URL; ?>public/js/Chart.js"></script>
+        <script src="<?php echo URL; ?>public/js/canvasjs.min.js"></script>
         <script src="<?php echo URL; ?>public/js/paging.js"></script>
 		
         <!--css-nya-->
