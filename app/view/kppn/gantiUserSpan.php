@@ -6,7 +6,7 @@
 <a href="#xModal" class="modal">FORM ISIAN</a><br><br>
         <div id="xModal" class="modalDialog" >
             <div>
-                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
+                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FORM PENGGANTIAN USER</h2>
 				<a href="<?php
                     $_SERVER['PHP_SELF'];
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>

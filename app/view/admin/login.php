@@ -28,17 +28,17 @@
                 ?>
 
                 <div class="kolom1">
-					<div class="pengumuman">
+					<!--div class="pengumuman">
 						<h4>Pengumuman</h4>
-						<p>Telah ada sub-menu baru yaitu Daftar SP2D Retur dalam menu Bank yang berfungsi untuk melihat SP2D Retur dan SP2D pengganti dari SP2D Retur tersebut. <br>
+						<p align='left'>Telah ada sub-menu baru yaitu Daftar SP2D Retur dalam menu Bank yang berfungsi untuk melihat SP2D Retur dan SP2D pengganti dari SP2D Retur tersebut. <br>
 						User dimohon untuk mencoba sub-menu tersebut. Jika ada kesalahan pada data yang ditampilkan agar menghubungi kami di Command Center SPAN untuk dilakukan perbaikan. <br>
 						Terima kasih. <br><br>
 						</p>
-					</div>
+					</div-->
 				</div>
 				<div class="kolom2">
                     <h1>Login</h1>
-                    <form id="login-form" action="<?php echo URL; ?>auth/login" method="post">	
+                    <form id="login-form" action="<?php echo URL; ?>auth/login" method="post" style="margin-left: 150px">	
 						<div class="error" id="wuser" style="display:none"></div>
                         <label class="isian">Username</label> 
                         <input name="user" id="nuser" type="text" /> 
@@ -50,7 +50,7 @@
                         
 
 
-                        <ul class="inline" style="margin-left: 290px"> 
+                        <ul class="inline" style="margin-left: 100px"> 
                             <li><input id="button" type="submit" class="sukses" name="yt0" value="Login" onClick="return cek()"/> 
                             </li>
                         </ul>
