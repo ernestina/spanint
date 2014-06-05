@@ -101,6 +101,33 @@ class DataSppm {
         }
         return $data;
     }
+    
+    public function get_sppm_status_home($filter) {
+		$sql = "SELECT PAYMENT_DATE,
+				RETURN_DESC, RETURN_CODE, KDKPPN
+				FROM " . $this->_table . "
+				WHERE FL_VOID <> 1";
+		//SP2D = 140181301002823
+		//xml = 520002000990_SP2D_O_20140408_101509_367.xml
+		$no=0;
+		//var_dump($filter);
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		$sql .= " ORDER BY PAYMENT_DATE DESC, CREATION_DATE DESC";
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_payment_date(date("d-m-Y",strtotime($val['PAYMENT_DATE'])));
+            $d_data->set_return_code($val['RETURN_CODE']);
+            $d_data->set_return_desc($val['RETURN_DESC']);
+            $d_data->set_kdkppn($val['KDKPPN']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
 	
 	public function get_harian_bo_i($filter) {
 		$sql = "SELECT PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, to_char(CREATION_DATE,'dd-mm-yyyy hh24:mi:ss') CREATION_DATE,
