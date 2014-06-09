@@ -117,20 +117,20 @@
 		<table width="100%" class="table table-bordered zebra" id='fixheader' style="font-size: 80%">
             <!--baris pertama-->
 			<thead>
-					<th>No.</th>
-					<th width='70px'>Tgl Selesai SP2D</th>
-					<th width='70px'>Tgl SP2D</th>
-					<th>No. SP2D</th>
+					<th class='mid'>No.</th>
+					<th width='70px' class='mid'>Tgl Selesai SP2D</th>
+					<th width='70px' class='mid'>Tgl SP2D</th>
+					<th class='mid'>No. SP2D</th>
 					<!--th>Status</th-->
 					
 					<!--th>No. Transaksi</th-->
 					<th>No. Invoice, <br>Jumlah Rp</th>
 					<!--th>Jumlah Rp</th-->
-					<th>Bank Pembayar</th>
+					<th class='mid'>Bank Pembayar</th>
 					<th width='200px'>Bank Penerima, Nama,<br> No. Rekening Penerima</th>
-					<th width='300px'>Deskripsi</th>
+					<th width='300px' class='mid'>Deskripsi</th>
 					<!--th>File Transaksi</th-->
-					<th>Status</th>
+					<th class='mid'>Status</th>
 					
 			</thead>
 			<tbody class='ratatengah'>
