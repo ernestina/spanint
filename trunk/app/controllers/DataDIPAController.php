@@ -165,7 +165,7 @@ class DataDIPAController extends BaseController {
 					$this->view->d_invoice = $_POST['nmsatker'];
 				}
 				
-			$this->view->data = $d_spm1->get_satker_filter($filter);
+			$this->view->data = $d_spm1->get_satker_dipa_filter($filter);
 			//$this->view->render('kppn/NamaSatker');			
 			}
 			if (Session::get('role')==KANWIL){
@@ -177,7 +177,7 @@ class DataDIPAController extends BaseController {
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
 			if (Session::get('role')==KPPN) {$filter[$no++]="TS.KPPN = '".Session::get('id_user')."'";	
-			$this->view->data = $d_spm1->get_satker_filter($filter);	
+			$this->view->data = $d_spm1->get_satker_dipa_filter($filter);	
 			}
 					
 		
@@ -197,7 +197,16 @@ class DataDIPAController extends BaseController {
 		$this->view->data = $d_spm1->get_realisasi_fa_filter($filter);
 		$this->view->render('kppn/DetailRealisasiFA');
 	}
-	
+	public function DataRealisasi() {
+		$d_spm1 = new DataRealisasi($this->registry);
+		$filter = array ();
+		$no=0;
+			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";		
+			}
+		//var_dump($d_spm->get_hist_spm_filter());
+		$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+		$this->view->render('kppn/DataRealisasi');
+	}
 	
 	
 	
