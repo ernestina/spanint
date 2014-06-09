@@ -56,7 +56,7 @@ class DataCheck{
 		
 		
 		$sql .= " ORDER BY CHECK_DATE DESC";
-				//var_dump ($sql);
+		//var_dump ($sql);
 
         $result = $this->db->select($sql);
         $data = array();   
