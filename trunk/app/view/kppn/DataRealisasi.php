@@ -9,20 +9,21 @@
 			}
 			else {echo Session::get('user');}?>
 		</h2>
-    
-<table><tr><td width="90%">
 </div>
+
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
 				<a href="<?php
                     $_SERVER['PHP_SELF'];
-                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
+</a>
 	<div id="top">
+
 	<form method="POST" action="DataRealisasi" enctype="multipart/form-data">
 		<div id="winvoice" class="error"></div>
-		
+
 		
 		<?php if (isset($this->kppn_list)) { ?>
 		<div id="wkdkppn" class="error"></div>
@@ -54,8 +55,8 @@
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
-</table>
-
+</div></div>
+</div>
 
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id="fixheader" style="font-size: 72%">
@@ -66,10 +67,10 @@
 					<!--th>KPPN</th-->
 					<!--th>Tanggal</th-->
 					<th rowspan=2 class='mid'>Satker</th>
-					<th rowspan=2 class='mid'> Nomor Dipa </th>
-					<th rowspan=2 class='mid'> Pagu </th>
+					<th rowspan=2 class='mid'>Nomor DIPA </th>
+					<th rowspan=2 class='mid'>Pagu </th>
 					<th colspan=9 class='mid'>Jenis Belanja</th>
-					<th rowspan=2 class='mid' >Sisa Pagu</th>
+					<th rowspan=2 class='mid'>Sisa Pagu</th>
 			</tr>
 			<tr >
 					<th >Pegawai</th>
@@ -175,21 +176,22 @@
     }
 	
 	$(document).ready( function () {
-		var oTable = $('#example').dataTable( {
-			"sScrollY": "300px",
+		var oTable = $('#fixheader').dataTable( {
+			"sScrollY": 400,
 			"sScrollX": "100%",
-			"sScrollXInner": "110%",
+			"sScrollXInner": "100%",
 			"bSort": false,
 			"bPaginate": false,
 			"bInfo": null,
 			"bFilter": false,
 			"oLanguage": {
 			"sEmptyTable": "Tidak ada data di dalam tabel ini."
+			
 			},
 		} );
 				
 		var keys = new KeyTable( {
-			"table": document.getElementById('example'),
+			"table": document.getElementById('fixheader'),
 			"datatable": oTable
 		} );
 	} );
