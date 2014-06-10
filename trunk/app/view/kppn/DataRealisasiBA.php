@@ -83,15 +83,15 @@
 <?php } ?>
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra" id="fixheader" style="font-size: 72%">
+		<table width="100%" class="table table-bordered zebra" id="fixheader">
             <!--baris pertama-->
-			<thead>
+			<thead style="font-size: 80%">
 			<tr>
 					<th rowspan=2 width="10px" class='mid'>No.</th>
 					<!--th>KPPN</th-->
 					<!--th>Tanggal</th-->
 					<th rowspan=2 class='mid'>Kode BA</th>
-					<th rowspan=2 class='mid'> Nama BA </th>
+					<th rowspan=2 class='mid' width='150px'> Nama BA </th>
 					<th rowspan=2 class='mid'> Pagu </th>
 					<th colspan=9 class='mid'>Jenis Belanja</th>
 					<th rowspan=2 class='mid' >Sisa Pagu</th>
@@ -110,7 +110,7 @@
 					
 			</tr>
 			</thead>
-			<tbody class='ratatengah'>
+			<tbody class='ratatengah' style="font-size: 72%">
 			<?php 
 			$no=1;
 			$tot_pot=0;
