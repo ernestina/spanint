@@ -25,9 +25,9 @@
 			?>
 		</h2>
     
-
+<?php if (isset($this->kppn_list)) { ?>
 </div>
-<!--a href="#xModal" class="modal">FILTER DATA</a><br><br>
+<a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
@@ -39,19 +39,19 @@
 		<div id="winvoice" class="error"></div>
 		
 		
-		<?php if (isset($this->kppn_list)) { ?>
+		
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
 		<select type="text" name="kdkppn" id="kdkppn">
-		<?php foreach ($this->kppn_list as $value1){ 
+		<?php foreach ($this->kppn_list as $value1)
 				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
 				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
 			
-		} ?>
-		</select>
-		<?php } ?>
+		?>
+		<!--/select>
 		
-		<!--div id="wkdkppn" class="error"></div>
+		
+		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode Lokasi: </label>
 		<select type="text" name="kdlokasi" id="kdlokasi">
 		<option value='' selected>- pilih -</option>
@@ -61,7 +61,7 @@
 				//else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
 			
 		?>
-		</select> 
+		</select--> 
 
 		
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
@@ -71,16 +71,16 @@
 		<input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
 		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
 
-		<!--ul class="inline" style="margin-left: 130px">
+		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return ();"></li>
 		<!--onClick="konfirm(); return false;"-->
-		<!--/ul>
+		</ul>
 	</form>
 </div>
 </div>
-</div-->
-
+</div>
+<?php } ?>
 
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id="fixheader" style="font-size: 72%">

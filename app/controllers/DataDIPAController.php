@@ -203,7 +203,7 @@ class DataDIPAController extends BaseController {
 		$no=0;
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
-					$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
+					$filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
