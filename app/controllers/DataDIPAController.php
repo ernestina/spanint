@@ -201,11 +201,71 @@ class DataDIPAController extends BaseController {
 		$d_spm1 = new DataRealisasi($this->registry);
 		$filter = array ();
 		$no=0;
-			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";		
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				} else {
+					$filter[$no++]="KPPN = '".Session::get('id_user')."'";
+				}
+				
+				if ($_POST['kdsatker']!=''){
+					$filter[$no++]="SATKER = '".$_POST['kdsatker']."'";
+					$this->view->satker_code = $_POST['kdsatker'];
+				}
+			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+			}
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+		
+			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";
+			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 			}
 		//var_dump($d_spm->get_hist_spm_filter());
-		$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		$this->view->render('kppn/DataRealisasi');
+	}
+	public function DataRealisasiBA() {
+		$d_spm1 = new DataRealisasi($this->registry);
+		$filter = array ();
+		$no=0;
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				} else {
+					$filter[$no++]="KPPN = '".Session::get('id_user')."'";
+				}
+				
+				if ($_POST['kdba']!=''){
+					$filter[$no++]="substr(a.program,1,3) = '".$_POST['kdba']."'";
+					$this->view->satker_code = $_POST['kdsatker'];
+				}
+			$this->view->data = $d_spm1->get_realisasi_fa_global_ba_filter($filter);
+			}
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+		
+			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";
+			$this->view->data = $d_spm1->get_realisasi_fa_global_ba_filter($filter);
+			}
+		//var_dump($d_spm->get_hist_spm_filter());
+		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+		$this->view->render('kppn/DataRealisasiBA');
 	}
 	
 	
