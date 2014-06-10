@@ -19,13 +19,15 @@
 
 		$date = new DateTime(Tanggal::getTglSekarang());
 		$date->sub(new DateInterval('P1D'));
-		echo Tanggal::tgl_indo($date->format('Y-m-d') ). "\n";			
+		echo Tanggal::tgl_indo($date->format('Y-m-d') ). "\n";
+
+		
 			?>
 		</h2>
     
 
 </div>
-<a href="#xModal" class="modal">FILTER DATA</a><br><br>
+<!--a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
@@ -49,7 +51,17 @@
 		</select>
 		<?php } ?>
 		
-
+		<!--div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode Lokasi: </label>
+		<select type="text" name="kdlokasi" id="kdlokasi">
+		<option value='' selected>- pilih -</option>
+		<?php //foreach ($this->data2 as $value1) 
+				//echo "<option value = '".$value1->get_lokasi()."'>".$value1->get_lokasi()."</option>";
+				//if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				//else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
+		?>
+		</select> 
 
 		
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
@@ -59,14 +71,15 @@
 		<input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
 		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
 
-		<ul class="inline" style="margin-left: 130px">
+		<!--ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return ();"></li>
 		<!--onClick="konfirm(); return false;"-->
-		</ul>
+		<!--/ul>
 	</form>
-</div></div>
 </div>
+</div>
+</div-->
 
 
 <div id="fitur">

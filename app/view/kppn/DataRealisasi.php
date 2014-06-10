@@ -8,6 +8,19 @@
 				}
 			}
 			else {echo Session::get('user');}?>
+		<br>
+			Sampai Dengan
+			
+			<?php 
+			//echo 
+			//Tanggal::tgl_indo(Tanggal::getTglSekarang()) ;
+			//echo (date('d-m-y'));
+			
+
+		$date = new DateTime(Tanggal::getTglSekarang());
+		$date->sub(new DateInterval('P1D'));
+		echo Tanggal::tgl_indo($date->format('Y-m-d') ). "\n";
+		?>
 		</h2>
 </div>
 
@@ -36,6 +49,7 @@
 		} ?>
 		</select>
 		<?php } ?>
+		
 		
 	
 		<label class="isian">Kode Satker: </label>
@@ -67,8 +81,11 @@
 					<!--th>KPPN</th-->
 					<!--th>Tanggal</th-->
 					<th rowspan=2 class='mid'>Satker</th>
-					<th rowspan=2 class='mid'>Nomor DIPA </th>
-					<th rowspan=2 class='mid'>Pagu </th>
+
+					<th rowspan=2 class='mid'> Nama Satker </th>
+					<th rowspan=2 class='mid'> Pagu </th>
+
+					
 					<th colspan=9 class='mid'>Jenis Belanja</th>
 					<th rowspan=2 class='mid'>Sisa Pagu</th>
 			</tr>
@@ -100,7 +117,7 @@
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_satker() . "</td>";
-					echo "<td>" . $value->get_dipa() . "</td>";
+					echo "<td align='left'>" . $value->get_dipa() . "</td>";
 					echo "<td align='right'>" . number_format($value->get_Pagu()) . "</td>";
 					echo "<td align='right'>" . number_format($value->get_belanja_51()) . "</td>";
 					echo "<td align='right'>" . number_format($value->get_belanja_52()) . "</td>";
