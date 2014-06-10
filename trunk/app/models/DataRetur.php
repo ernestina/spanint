@@ -97,7 +97,7 @@ class DataRetur {
 			} else {
 				$d_data->set_tgl_proses_sp2d_pengganti('');
 			}
-            $d_data->set_nilai_sp2d_pengganti($val['NILAI_SP2D_PENGGANTI']);
+            $d_data->set_nilai_sp2d_pengganti(number_format($val['NILAI_SP2D_PENGGANTI']));
             $d_data->set_bank_name_pengganti($val['BANK_NAME_PENGGANTI']);
             $d_data->set_vendor_name_pengganti($val['VENDOR_NAME_PENGGANTI']);
             $d_data->set_vendor_account_num_pengganti($val['VENDOR_ACCOUNT_NUM_PENGGANTI']);
