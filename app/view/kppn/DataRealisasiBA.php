@@ -83,34 +83,34 @@
 <?php } ?>
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra" id="fixheader">
+		<table width="100%" class="table table-bordered zebra" id="fixheader" style="font-size: 72%">
             <!--baris pertama-->
-			<thead style="font-size: 80%">
+			<thead>
 			<tr>
 					<th rowspan=2 width="10px" class='mid'>No.</th>
 					<!--th>KPPN</th-->
 					<!--th>Tanggal</th-->
-					<th rowspan=2 class='mid'>Kode BA</th>
+					<!--th rowspan=2 class='mid'>Kode BA</th-->
 					<th rowspan=2 class='mid' width='150px'> Nama BA </th>
 					<th rowspan=2 class='mid'> Pagu </th>
 					<th colspan=9 class='mid'>Jenis Belanja</th>
-					<th rowspan=2 class='mid' >Sisa Pagu</th>
+					<th rowspan=2 class='mid'>Sisa Pagu</th>
 			</tr>
 			<tr >
-					<th >Pegawai</th>
-					<th >Barang</th>
-					<th >Modal</th>
-					<th >Beban Bunga</th>
-					<th >Subsidi</th>
-					<th >Hibah</th>
-					<th >BanSos</th>
-					<th >Lain lain</th>
+					<th class='mid'>Pegawai</th>
+					<th class='mid' >Barang</th>
+					<th class='mid' >Modal</th>
+					<th class='mid' >Beban Bunga</th>
+					<th class='mid' >Subsidi</th>
+					<th class='mid' >Hibah</th>
+					<th class='mid' >BanSos</th>
+					<th class='mid' >Lain lain</th>
 					<!--th >Pencadangan Dana</th-->
-					<th >Total</th>
+					<th class='mid' >Total</th>
 					
 			</tr>
 			</thead>
-			<tbody class='ratatengah' style="font-size: 72%">
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			$tot_pot=0;
@@ -123,8 +123,8 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_ba() . "</td>";
-					echo "<td align='left'>" . $value->get_nmba() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_ba() . " "  . $value->get_nmba() . "</td>";
+					//echo "<td align='left'>" . $value->get_nmba() . "</td>";
 					echo "<td align='right'>" . number_format($value->get_Pagu()) . "</td>";
 					echo "<td align='right'>" . number_format($value->get_belanja_51()) . "</td>";
 					echo "<td align='right'>" . number_format($value->get_belanja_52()) . "</td>";
