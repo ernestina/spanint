@@ -525,7 +525,7 @@ input.keterangan{
 textarea.midi {
 	width: 430px;
 }
-textarea.mini {
+textarea.mini, input[type="file"].mini{
 	width: 250px;
 }	
 select {

@@ -35,12 +35,18 @@
 		<label class="isian">Alasan: </label>
 		<textarea class="mini" name="alasan" id="alasan" value="<?php if (isset($this->alasan)){echo $this->alasan;}?>"></textarea>
 		
+		<div id="wupload" class="error"></div>
+		<label class="isian">Upload file ST: </label>
+		<input type="file" style='margin-left: 145px; width: 240px'>
+		
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tgl Penggantian: </label>
 		<ul class="inline">
 		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_mulai" value="<?php if (isset($this->tgl_mulai)){echo $this->tgl_mulai;}?>"> </li> <li>s/d</li>
 		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->tgl_akhir;}?>"></li>
 		</ul>
+		
+		
 
 		<br>(pegawai yang berhalangan)
 		<div id="wnama" class="error"></div>
