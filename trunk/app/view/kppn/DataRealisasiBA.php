@@ -23,7 +23,7 @@
 			?>
 		</h2>
     
-<table><tr><td width="90%">
+
 </div>
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
@@ -65,8 +65,8 @@
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
-</table>
-
+</div></div>
+</div>
 
 
 <div id="fitur">
@@ -187,7 +187,7 @@
     }
 	
 	$(document).ready( function () {
-		var oTable = $('#example').dataTable( {
+		var oTable = $('#fixheader').dataTable( {
 			"sScrollY": "300px",
 			"sScrollX": "100%",
 			"sScrollXInner": "110%",
@@ -201,7 +201,7 @@
 		} );
 				
 		var keys = new KeyTable( {
-			"table": document.getElementById('example'),
+			"table": document.getElementById('fixheader'),
 			"datatable": oTable
 		} );
 	} );
