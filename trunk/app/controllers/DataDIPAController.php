@@ -207,11 +207,11 @@ class DataDIPAController extends BaseController {
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
-					$filter[$no++]="KPPN = '".Session::get('id_user')."'";
+					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
 				}
 				
 				if ($_POST['kdsatker']!=''){
-					$filter[$no++]="SATKER = '".$_POST['kdsatker']."'";
+					$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
 					$this->view->satker_code = $_POST['kdsatker'];
 				}
 			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
@@ -225,7 +225,7 @@ class DataDIPAController extends BaseController {
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
 		
-			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";
+			if (Session::get('role')==KPPN) {$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
 			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 			}
 		//var_dump($d_spm->get_hist_spm_filter());
@@ -241,13 +241,14 @@ class DataDIPAController extends BaseController {
 					$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+					//$this->view->data2 = $d_spm1->get_realisasi_lokasi($_POST['kdkppn']);
 				} else {
 					$filter[$no++]="KPPN = '".Session::get('id_user')."'";
 				}
 				
-				if ($_POST['kdba']!=''){
-					$filter[$no++]="substr(a.program,1,3) = '".$_POST['kdba']."'";
-					$this->view->satker_code = $_POST['kdsatker'];
+				if ($_POST['kdlokasi']!=''){
+					$filter[$no++]="a.lokasi = '".$_POST['kdlokasi']."'";
+					$this->view->lokasi = $_POST['kdlokasi'];
 				}
 			$this->view->data = $d_spm1->get_realisasi_fa_global_ba_filter($filter);
 			}
@@ -261,7 +262,10 @@ class DataDIPAController extends BaseController {
 			}
 		
 			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";
+			//$this->view->data2 = $d_spm1->get_realisasi_lokasi(Session::get('id_user'));
 			$this->view->data = $d_spm1->get_realisasi_fa_global_ba_filter($filter);
+			
+			
 			}
 		//var_dump($d_spm->get_hist_spm_filter());
 		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
