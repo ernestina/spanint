@@ -201,7 +201,7 @@
 	
 	$(document).ready( function () {
 		var oTable = $('#fixheader').dataTable( {
-			"sScrollY": "300px",
+			"sScrollY": "400px",
 			"sScrollX": "100%",
 			"sScrollXInner": "110%",
 			"bSort": false,
