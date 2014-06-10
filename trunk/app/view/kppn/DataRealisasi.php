@@ -73,16 +73,16 @@
 </div>
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra" id="fixheader">
+		<table width="100%" class="table table-bordered zebra" id="fixheader" style="font-size: 72%">
             <!--baris pertama-->
-			<thead style="font-size: 80%">
+			<thead>
 			<tr>
 					<th rowspan=2 width="10px" class='mid'>No.</th>
 					<!--th>KPPN</th-->
 					<!--th>Tanggal</th-->
 					<th rowspan=2 class='mid'>Satker</th>
 
-					<th rowspan=2 class='mid'> Nama Satker </th>
+					<th rowspan=2 class='mid' width='200px'> Nama Satker </th>
 					<th rowspan=2 class='mid'> Pagu </th>
 
 					
@@ -90,20 +90,20 @@
 					<th rowspan=2 class='mid'>Sisa Pagu</th>
 			</tr>
 			<tr >
-					<th >Pegawai</th>
-					<th >Barang</th>
-					<th >Modal</th>
-					<th >Beban Bunga</th>
-					<th >Subsidi</th>
-					<th >Hibah</th>
-					<th >BanSos</th>
-					<th >Lain lain</th>
+					<th class='mid' >Pegawai</th>
+					<th class='mid' >Barang</th>
+					<th class='mid' >Modal</th>
+					<th class='mid' >Beban Bunga</th>
+					<th class='mid' >Subsidi</th>
+					<th class='mid' >Hibah</th>
+					<th class='mid' >BanSos</th>
+					<th class='mid' >Lain lain</th>
 					<!--th >Pencadangan Dana</th-->
-					<th >Total</th>
+					<th class='mid' >Total</th>
 					
 			</tr>
 			</thead>
-			<tbody class='ratatengah' style="font-size: 72%">
+			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
 			$tot_pot=0;
