@@ -25,8 +25,48 @@
     
 <table><tr><td width="90%">
 </div>
+<a href="#xModal" class="modal">FILTER DATA</a><br><br>
+        <div id="xModal" class="modalDialog" >
+            <div>
+                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
+				<a href="<?php
+                    $_SERVER['PHP_SELF'];
+                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
+	<div id="top">
+	<form method="POST" action="DataRealisasiBA" enctype="multipart/form-data">
+		<div id="winvoice" class="error"></div>
+		
+		
+		<?php if (isset($this->kppn_list)) { ?>
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Kode KPPN: </label>
+		<select type="text" name="kdkppn" id="kdkppn">
+		<?php foreach ($this->kppn_list as $value1){ 
+				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
+		} ?>
+		</select>
+		<?php } ?>
+		
 
+
+		
+		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
+		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
+		<input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
+		<input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
+		<input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
+		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
+
+		<ul class="inline" style="margin-left: 130px">
+		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return ();"></li>
+		<!--onClick="konfirm(); return false;"-->
+		</ul>
+	</form>
 </table>
+
 
 
 <div id="fitur">
