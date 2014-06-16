@@ -62,7 +62,7 @@
 
 
 <div id="fitur">
-		<table width="100%" class="table table-bordered zebra" id='fixheader' style='font-size: 90%'>
+		<table width="100%" class="table table-bordered zebra" id='fixheader' style='font-size: 72%'>
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
@@ -73,6 +73,7 @@
 					<th>Mata Uang </th>
 					<th>Rate </th>
 					<th>Tanggal Rate </th>
+					<th>Nilai SP2D Ekuivalen </th>
 					<th>Bank </th>
 					<th>Nomor Invoice</th>
 					<th width='70px'>Tanggal Invoice</th>
@@ -97,6 +98,7 @@
 					echo "<td>" . $value->get_currency_code() . "</td>";
 					echo "<td>" . $value->get_exchange_rate() . "</td>";
 					echo "<td>" . $value->get_exchange_date() . "</td>";
+					echo "<td>" . $value->get_base_amount() . "</td>";
 					echo "<td>" . $value->get_attribute6() . "</td>";
 					echo "<td><a href=".URL."dataSPM/HistorySpm/".$value->get_invoice_num()."/".$value->get_check_number()." target='_blank' '>" . $value->get_invoice_num(). "</a></td>";
 					echo "<td>" . $value->get_invoice_date() . "</td>";

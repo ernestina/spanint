@@ -10,6 +10,7 @@ class DataCheck{
     private $db;
 	private $_jenis_sp2d;
 	private $_amount;
+	private $_base_amount;
 	private $_invoice_num;
 	private $_invoice_date;
 	private $_description;
@@ -64,6 +65,7 @@ class DataCheck{
             $d_data = new $this($this->registry);
             $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
 			$d_data->set_amount(NUMBER_FORMAT($val['AMOUNT']));
+			$d_data->set_base_amount(NUMBER_FORMAT($val['BASE_AMOUNT']));
             $d_data->set_invoice_num($val['INVOICE_NUM']);
 			$d_data->set_invoice_date(date("d-m-Y",strtotime($val['INVOICE_DATE'])));
 			$d_data->set_description($val['DESCRIPTION']);
@@ -73,7 +75,7 @@ class DataCheck{
 			$d_data->set_nmsatker($val['NMSATKER']);
 			$d_data->set_currency_code($val['CURRENCY_CODE']);
 			$d_data->set_exchange_date (date("d-m-Y",strtotime($val['EXCHANGE_DATE'])));
-			$d_data->set_exchange_rate($val['EXCHANGE_RATE']);
+			$d_data->set_exchange_rate(NUMBER_FORMAT($val['EXCHANGE_RATE']));
 			$d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
 			$d_data->set_status_lookup_code($val['STATUS_LOOKUP_CODE']);
             $data[] = $d_data;
@@ -90,6 +92,9 @@ class DataCheck{
     }
 	public function set_amount($amount) {
         $this->_amount = $amount;
+    }
+	public function set_base_amount($base_amount) {
+        $this->_base_amount = $base_amount;
     }
 	public function set_invoice_num($invoice_num) {
         $this->_invoice_num = $invoice_num;
@@ -139,6 +144,9 @@ class DataCheck{
     }
 	public function get_amount() {
         return $this->_amount;
+    }
+	public function get_base_amount() {
+        return $this->_base_amount;
     }
 	public function get_currency_code() {
         return $this->_currency_code;
