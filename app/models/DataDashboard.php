@@ -67,6 +67,7 @@ class DataDashboard {
                 }
             }
             $data[$i] = $d_data;
+			//var_dump($sql);
         }
         return $data;
     }
