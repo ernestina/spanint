@@ -362,7 +362,7 @@
         //wait before resizing so the resizing is executed only once
         window.setTimeout(function() {
             if (!redrawExecuted) {
-                if (!redrawExecuted) {
+                redrawExecuted = true; 
                 calculateWidth();
             }
         }, 500);
