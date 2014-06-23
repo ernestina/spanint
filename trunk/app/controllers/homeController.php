@@ -14,36 +14,52 @@ class homeController extends BaseController {
      */
     
     public function index() {
-        //Rekap Jenis SP2D
-		$d_sppm_jenis = new DataSppm($this->registry);
-        $filter_jenis = array ();
-        $filter_jenis[$no++]=" KDKPPN = ".Session::get('id_user');
-        $filter_jenis[$no++] = "PAYMENT_DATE BETWEEN TO_DATE ('".date('Ymd',(time()-(6*24*60*60)))."','YYYYMMDD') AND TO_DATE ('".date('Ymd',time())."','YYYYMMDD')  ";
-        $this->view->dataJenisSP2D = $d_sppm_jenis->get_sp2d_rekap($filter_jenis);
+        $this->view->render('kppn/homeDashboardDailySE');
+    }
+    
+    public function mingguan() {
+        $this->view->render('kppn/homeDashboardWeeklySE');
+    }
+    
+    public function bulanan() {
+        $this->view->render('kppn/homeDashboardMonthlySE');
+    }
+    
+    public function harianJSON() {
+        $d_dashboard = new DataDashboard($this->registry);
         
-        //Rekap Status SP2D
-        $d_sppm_status = new DataSppm($this->registry);
-        $filter_status = array ();
-        $filter_status[$no++]="KDKPPN = ".Session::get('id_user');
-        $filter_status[$no++] = "PAYMENT_DATE BETWEEN TO_DATE ('".date('Ymd',(time()-(6*24*60*60)))."','YYYYMMDD') AND TO_DATE ('".date('Ymd',time())."','YYYYMMDD')  ";
-        $this->view->dataStatusSP2D = $d_sppm_status->get_sppm_status_home($filter_status);
+        $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap(1);
+        $this->view->data_lhp_rekap = $d_dashboard->get_lhp_rekap(1);
+		$filter_pos_spm = array ();
+        $filter_pos_spm[1]="SUBSTR(OU_NAME,1,3) = ".Session::get('id_user');
+		$this->view->data_pos_spm = $d_dashboard->get_hist_spm_filter($filter_pos_spm);
+        $this->view->data_list_sp2d = $d_dashboard->get_list_sp2d_selesai();
         
-        //Posisi SPM Open
-        $d_hist_spm = new DataHistSPM($this->registry);
-		$filter_hist_spm = array ();
-		$no=0;
-        $filter_hist_spm[$no++]="SUBSTR(OU_NAME,1,3) = ".Session::get('id_user');
-		$this->view->dataHistSPM = $d_hist_spm->get_hist_spm_filter($filter_hist_spm);
+        $this->view->load('kppn/homeDashboardDailyJSON');
+    }
+    
+    public function mingguanJSON() {
+        $d_dashboard = new DataDashboard($this->registry);
         
-        //Rekap Status LHP
-        $d_rekap_lhp = new DataGR_STATUS($this->registry);
-		$filter_rekap_lhp = array ();
-		$no=0;
-        $filter_rekap_lhp[$no++]="(CONT_GL_DATE =  '".date('Ymd',time())."' OR CONT_GL_DATE = '".date('Ymd',time()-(1*24*60*60))."' OR CONT_GL_DATE = '".date('Ymd',time()-(2*24*60*60))."' OR CONT_GL_DATE = '".date('Ymd',time()-(3*24*60*60))."' OR CONT_GL_DATE = '".date('Ymd',time()-(4*24*60*60))."' OR CONT_GL_DATE = '".date('Ymd',time()-(5*24*60*60))."' OR CONT_GL_DATE = '".date('Ymd',time()-(6*24*60*60))."')";
-		$filter_rekap_lhp[$no++]="substr(RESP_NAME,1,3) = '".Session::get('id_user')."'";
-		$this->view->dataLHP = $d_rekap_lhp->get_detail_lhp_rekap($filter_rekap_lhp);
+        $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap(7);
+        $this->view->data_lhp_rekap  = $d_dashboard->get_lhp_rekap(7);
+		$filter_pos_spm = array ();
+        $filter_pos_spm[1]="SUBSTR(OU_NAME,1,3) = ".Session::get('id_user');
+		$this->view->data_pos_spm = $d_dashboard->get_hist_spm_filter($filter_pos_spm);
         
-        $this->view->render('kppn/homeDashboard');
+        $this->view->load('kppn/homeDashboardWeeklyJSON');
+    }
+    
+    public function bulananJSON() {
+        $d_dashboard = new DataDashboard($this->registry);
+        
+        $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap(30);
+        $this->view->data_lhp_rekap  = $d_dashboard->get_lhp_rekap(30);
+		$filter_pos_spm = array ();
+        $filter_pos_spm[1]="SUBSTR(OU_NAME,1,3) = ".Session::get('id_user');
+		$this->view->data_pos_spm = $d_dashboard->get_hist_spm_filter($filter_pos_spm);
+        
+        $this->view->load('kppn/homeDashboardMonthlyJSON');
     }
 }
 
