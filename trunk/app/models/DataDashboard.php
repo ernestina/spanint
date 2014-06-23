@@ -48,7 +48,7 @@ class DataDashboard {
         
         $data = array();
         for ($i=0; $i<$hari; $i++) {
-            $sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd') group by jenis_sp2d";
+            $sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from (select distinct(check_number), jenis_sp2d, amount from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by jenis_sp2d";
             $result =  $this->db->select($sql);
             $d_data = new $this($this->registry);
             foreach ($result as $val) {
@@ -67,7 +67,6 @@ class DataDashboard {
                 }
             }
             $data[$i] = $d_data;
-			//var_dump($sql);
         }
         return $data;
     }
@@ -77,23 +76,29 @@ class DataDashboard {
         
         $data = array();
         
-        $sql = "select jenis_sp2d, check_number, amount from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
+        $sql = "select distinct(check_number), jenis_sp2d, amount from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
         $result =  $this->db->select($sql);
-        $d_data = new $this($this->registry);
+        
         foreach ($result as $val) {
+            $d_data = new $this($this->registry);
             $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_nominal_sp2d($val['AMOUNT']);
+            //var_dump($val['AMOUNT']);
             $data[] = $d_data;
         }
-        
+        //var_dump($data);
         return $data;
     }
     
     public function get_lhp_rekap($hari) {
         $data = array();
         for ($i=0; $i<$hari; $i++) {
-            $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
+            if ($hari == 1) {
+                $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal=(select max(tanggal) from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."')";
+            } else {
+                $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
+            }
             $result =  $this->db->select($sql);
             $d_data = new $this($this->registry);
             //var_dump($result);
