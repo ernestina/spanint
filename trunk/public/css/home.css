@@ -1,0 +1,215 @@
+/* For Home */
+
+/* DOM */
+body {
+    overflow: hidden;
+}
+
+/* Layout */
+#fitur {
+    color: #666;
+}
+.full {
+    width: 100%;
+}
+.half {
+    width: 50%;
+}
+#pie-container, #ticker-container, #line-container, #bottom-status-bar {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    
+    width:100%;
+    display: block;
+    float: left;
+    padding: 10px;
+}
+#bottom-status-bar {
+    padding: 20px;
+}
+#bottom-status-bar > div {
+    padding-top: 10px;
+    border-top: 1px solid #dedede;
+    display: block;
+    float: left;
+    width: 100%;
+}
+#bottom-status-bar a {
+    display: inline-block;
+    padding: 4px;
+    width: 64px;
+    margin-left: 10px;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ccc;
+    font-size: 12px;
+    text-align: center;
+}
+#bottom-status-bar a:hover {
+    border: 1px solid #409ACA;
+    color: #409ACA;
+}
+#bottom-status-bar .active {
+    border: 1px solid #666;
+    background: #666;
+    color: #fff;
+}
+#pie-container > div, #ticker-container > div, #line-container > div {
+    display: block;
+    float: left;
+}
+#pie-container > div {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    
+    width: 25%;
+    padding: 10px;
+}
+#pie-container > div > div {
+    display: block;
+    float: left;
+    
+    padding: 10px;
+    border: 1px solid #dedede;
+}
+#ticker-container > div {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    
+    width: 50%;
+    padding: 10px;
+}
+#line-container > div {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    
+    width: 100%;
+    padding: 10px;
+}
+#pie-container canvas, .pie-info {
+    width: 50%;
+    display: block;
+    float: left;
+}
+#pie-container canvas {
+    margin-top: 5px;
+}
+.pie-info {
+    padding-bottom: 10px;
+}
+
+/* Charting */
+.sphere {
+    display: block;
+    float: left;
+    width: 8px;
+    height: 28px;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+.pie-info-content, .pie-info-title {
+    display: block;
+    float: left;
+}
+.pie-info-title {
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dedede;
+    font-size: 20px;
+}
+.pie-info-content {
+    line-height: 10px;
+    padding-top: 10px;
+}
+.info-number {
+    font-size: 16px;
+    line-height: 16px;
+    margin: 0; padding: 0;
+}
+.info-text {
+    text-transform: uppercase;
+    font-size: 10px;
+    line-height: 10px;
+    margin: 0; padding: 0;
+}
+.ticker-content {
+    overflow-y: scroll;
+}
+
+/* Tickering */
+.ticker-title {
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dedede;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.ticker-item {
+    display: block;
+    float: left;
+    width: 100%;
+    padding: 2px 0px 2px 0px;
+    margin: 3px 0px 3px 0px;
+}
+.ticker-item div {
+    display: block;
+}
+.kanan {
+    float: right;
+}
+.kiri {
+    float: left;
+}
+.spaced-left {
+    margin-left: 20px;
+}
+.spaced-right {
+    margin-right: 20px;
+}
+
+/* Branding */
+.red {
+    background: #DA2626;
+}
+.blue {
+    background: #0079B8;
+}
+.yellow {
+    background: #F3BE00;
+}
+.purple {
+    background: #691E73;
+}
+
+/* Tooltip */
+.ui-tooltip-content {
+    font-family: "Segoe UI";
+    font-size: 12px;
+    line-height: 20px;
+}
+.ui-tooltip-content .chart-legend-colorcode {
+    position: relative;
+    top: 2px;
+}
+
+/* Low-Res */
+#pie-container > .low-res > div {
+    padding: 0;
+    border: 0;
+}
+.low-res .pie-info-title {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.low-res .sphere {
+    margin-top: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 0px;
+}
+.low-res .low-res-hidden {
+    display: none;
+}
