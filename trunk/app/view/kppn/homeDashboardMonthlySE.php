@@ -9,7 +9,7 @@
                 <div id="pie-status-container">
                     <canvas id="pie-status-canvas"></canvas>
                     <div id="pie-status-info" class="pie-info">
-                        <div class="pie-info-title">Status SP2D</div>
+                        <div class="pie-info-title">Status SPM</div>
                         <div class="pie-info-content full">
                             <div class="sphere yellow"></div>
                             <span id="number-sp2d-in-progress" class="info-number">999</span><br/>
@@ -100,7 +100,20 @@
         </div>
         <div id="line-container">
             <div id="line-chart-container">
-                <div class="ticker-title">Histori Jumlah SP2D</div>
+                <div class="ticker-title">Histori Jumlah SP2D
+                    <div class="line-legend">
+                        <span class="sphere blue"></span>Gaji
+                    </div>
+                    <div class="line-legend">
+                        <span class="sphere purple"></span>Non Gaji
+                    </div>
+                    <div class="line-legend">
+                        <span class="sphere yellow"></span>Retur
+                    </div>
+                    <div class="line-legend">
+                        <span class="sphere red"></span>Void
+                    </div>
+                </div>
                 <canvas id="line-sp2d-canvas"></canvas>
             </div>
         </div>
@@ -349,9 +362,10 @@
         //wait before resizing so the resizing is executed only once
         window.setTimeout(function() {
             if (!redrawExecuted) {
+                if (!redrawExecuted) {
                 calculateWidth();
             }
-        }, 100);
+        }, 500);
     }
     
     function homeDisplayProcessing() {

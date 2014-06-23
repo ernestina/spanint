@@ -38,7 +38,7 @@ echo '"jumlahSPMRetur":"'.$total_retur.'"'; echo ' , ';
 echo '"jumlahSPMVoid":"'.$total_void.'"'; echo ' , ';
 
 echo '"volumeSPMGaji":"'.round($total_vol_gaji/1000000000).'"'; echo ' , ';
-echo '"volumeSPMNonGaji":"'.round($total_vol_non_gaji/1000000000).'"'; echo ' , ';
+echo '"volumeSPMNonGaji":"'.number_format(round($total_vol_non_gaji/1000000000)).'"'; echo ' , ';
 
 echo '"jumlahLHPCompleted":"'.$total_lhp_completed.'"'; echo ' , ';
 echo '"jumlahLHPValidated":"'.$total_lhp_validated.'"'; echo ' , ';
@@ -51,7 +51,7 @@ for ($i=6; $i>=0; $i--) {
     if ($i < 6) {
         echo ' , ';
     }
-    echo '"'.date("m-d",time()-($i*24*60*60)).'"';
+    echo '"'.date("d-m",time()-($i*24*60*60)).'"';
 }
 
 echo '] , ';
