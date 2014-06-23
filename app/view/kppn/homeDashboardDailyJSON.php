@@ -38,7 +38,7 @@ echo '"jumlahSPMRetur":"'.$total_retur.'"'; echo ' , ';
 echo '"jumlahSPMVoid":"'.$total_void.'"'; echo ' , ';
 
 echo '"volumeSPMGaji":"'.round($total_vol_gaji/1000000000).'"'; echo ' , ';
-echo '"volumeSPMNonGaji":"'.round($total_vol_non_gaji/1000000000).'"'; echo ' , ';
+echo '"volumeSPMNonGaji":"'.number_format(round($total_vol_non_gaji/1000000000)).'"'; echo ' , ';
 
 echo '"jumlahLHPCompleted":"'.$total_lhp_completed.'"'; echo ' , ';
 echo '"jumlahLHPValidated":"'.$total_lhp_validated.'"'; echo ' , ';
@@ -70,7 +70,7 @@ foreach ($this->data_list_sp2d as $value) {
         echo ' , ';
     }
     echo '{';
-    echo '"nomorSP2D":"'.$value->get_check_number().'" , "jenisSP2D":"'.$value->get_jenis_sp2d().'" , "nominalSP2D":"'.$value->get_nominal_sp2d().'"';
+    echo '"nomorSP2D":"'.$value->get_check_number().'" , "jenisSP2D":"'.$value->get_jenis_sp2d().'" , "nominalSP2D":"'.number_format($value->get_nominal_sp2d()).'"';
     echo '}';
     $pos_count_com++;
 }

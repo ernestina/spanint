@@ -9,7 +9,7 @@
                 <div id="pie-status-container">
                     <canvas id="pie-status-canvas"></canvas>
                     <div id="pie-status-info" class="pie-info">
-                        <div class="pie-info-title">Status SP2D</div>
+                        <div class="pie-info-title">Status SPM</div>
                         <div class="pie-info-content full">
                             <div class="sphere yellow"></div>
                             <span id="number-sp2d-in-progress" class="info-number">999</span><br/>
@@ -325,30 +325,32 @@
             'dataType': "json",
             'success': function (data) {
                 homeDataJSON = data;
-                
-                tickerOngoingTotal = homeDataJSON.spmDalamProses.length;
-                for (i=0; i<homeDataJSON.spmDalamProses.length; i++) {
-                    tickerOngoingContents += "<div id='ticker-item-" + i + "' class='ticker-item'>";
-                    tickerOngoingContents +=   "<div class='kiri'>" + homeDataJSON.spmDalamProses[i].nomorSPM + "</div>";
-                    tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].userSPM + "</div>";
-                    tickerOngoingContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.spmDalamProses[i].mulaiSPM + "</div>";
-                    tickerOngoingContents += "</div>";
-                }
-                $("#ticker-ongoing-container > .ticker-content").html(tickerOngoingContents);
-                
-                tickerCompletedTotal = homeDataJSON.sp2dSelesai.length;
-                if (homeDataJSON.sp2dSelesai.length > 0) {
-                    for (j=0; j<homeDataJSON.sp2dSelesai.length; j++) {
-                        tickerCompletedContents += "<div id='ticker-item-" + j + "' class='ticker-item'>";
-                        tickerCompletedContents +=   "<div class='kiri'>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</div>";
-                        tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</div>";
-                        tickerCompletedContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.sp2dSelesai[j].nominalSP2D + "</div>";
-                        tickerCompletedContents += "</div>";
-                    }
-                    $("#ticker-completed-container > .ticker-content").html(tickerCompletedContents);
-                }
             }
         });
+        
+        tickerOngoingTotal = homeDataJSON.spmDalamProses.length;
+        for (i=0; i<homeDataJSON.spmDalamProses.length; i++) {
+            tickerOngoingContents += "<div id='ticker-item-" + i + "' class='ticker-item'>";
+            tickerOngoingContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (i+1) + "</div>";
+            tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].nomorSPM + "</div>";
+            tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].userSPM + "</div>";
+            tickerOngoingContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.spmDalamProses[i].mulaiSPM + "</div>";
+            tickerOngoingContents += "</div>";
+        }
+        $("#ticker-ongoing-container > .ticker-content").html(tickerOngoingContents);
+
+        tickerCompletedTotal = homeDataJSON.sp2dSelesai.length;
+        if (homeDataJSON.sp2dSelesai.length > 0) {
+            for (j=0; j<homeDataJSON.sp2dSelesai.length; j++) {
+                tickerCompletedContents += "<div id='ticker-item-" + j + "' class='ticker-item'>";
+                tickerCompletedContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (j+1) + "</div>";
+                tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</div>";
+                tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</div>";
+                tickerCompletedContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.sp2dSelesai[j].nominalSP2D + "</div>";
+                tickerCompletedContents += "</div>";
+            }
+            $("#ticker-completed-container > .ticker-content").html(tickerCompletedContents);
+        }
         
         //prepare to draw
         redrawExecuted = false;
@@ -365,8 +367,7 @@
                     }
                 }
             }
-        ); 
-        homeDisplayProcessing();
+        );
         window.setInterval(homeDisplayProcessing(),20*60*1000);
     });
     
