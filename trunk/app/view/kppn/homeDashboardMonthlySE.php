@@ -360,7 +360,7 @@
         $.ajax({
             'async': false,
             'global': false,
-            'url': '<?php echo URL; ?>home/mingguanJSON',
+            'url': '<?php echo URL; ?>home/bulananJSON',
             'dataType': "json",
             'success': function (data) {
                 homeDataJSON = data;
