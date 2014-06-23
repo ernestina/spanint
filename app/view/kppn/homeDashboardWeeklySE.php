@@ -402,7 +402,7 @@
     });
     
     $(window).resize(function() {
-        redrawExecuted = false;s
+        redrawExecuted = false; 
         setWindowMode();
     }); 
 </script>
