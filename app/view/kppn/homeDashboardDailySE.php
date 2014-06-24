@@ -57,13 +57,13 @@
                     <div id="pie-retur-info" class="pie-info">
                         <div class="pie-info-title">Status Retur</div>
                         <div class="pie-info-content full">
-                            <div class="sphere red"></div>
-                            <span id="retur-sp2d-in-progress" class="info-number">0</span><br/>
+                            <div class="sphere yellow"></div>
+                            <span id="number-retur-in-progress" class="info-number">0</span><br/>
                             <span class="info-text">Belum Diproses</span>
                         </div>
                         <div class="pie-info-content full">
                             <div class="sphere blue"></div>
-                            <span id="retur-sp2d-completed" class="info-number">0</span><br/>
+                            <span id="number-retur-completed" class="info-number">0</span><br/>
                             <span class="info-text">Sudah Diproses</span>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                 <div id="pie-lhp-container">
                     <canvas id="pie-lhp-canvas"></canvas>
                     <div id="pie-lhp-info" class="pie-info">
-                        <div class="pie-info-title">Status LHP</div>
+                        <div class="pie-info-title">LHP <span id="tgl-lhp-last"></span></div>
                         <div class="pie-info-content half">
                             <div class="sphere blue"></div>
                             <span id="number-lhp-completed" class="info-number">0</span><br/>
@@ -100,11 +100,11 @@
         </div>
         <div id="ticker-container">
             <div id="ticker-ongoing-container">
-                <div class="ticker-title">SPM Dalam Proses</div>
+                <div class="ticker-title">SPM Dalam Proses<div class="ticker-total">0</div></div>
                 <div class="ticker-content">Tidak ada data.</div>
             </div>
             <div id="ticker-completed-container">
-                <div class="ticker-title">SP2D Selesai</div>
+                <div class="ticker-title">SP2D Selesai<div class="ticker-total">0</div></div>
                 <div class="ticker-content">Tidak ada data.</div>
             </div>
         </div>
@@ -140,19 +140,22 @@
     heightThreshold = 720;
     
     function renderChart() {
-        dataStatusSPM = [
+        if (homeDataJSON.jumlahReturSudahProses == 0) { homeDataJSON.jumlahReturSudahProses = 0; }
+        if (homeDataJSON.jumlahReturBelumProses == 0) { homeDataJSON.jumlahReturBelumProses = 0; }
+        
+        dataRetur = [
             {
-                value: parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid),
+                value: parseInt(homeDataJSON.jumlahReturSudahProses),
                 color: "#409ACA"
             },
             {
-                value : parseInt(homeDataJSON.jumlahSPMOngoing),
+                value : parseInt(homeDataJSON.jumlahReturBelumProses),
                 color : "#F6CE40"
             }
         ];
         
-        if (((parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid)) == 0) && (parseInt(homeDataJSON.jumlahSPMOngoing) == 0)) {
-            dataStatusSPM = [
+        if ((parseInt(homeDataJSON.jumlahReturSudahProses) == 0) && (parseInt(homeDataJSON.jumlahReturBelumProses) == 0)) {
+            dataRetur = [
                 {
                     value: 100,
                     color: "#DEDEDE"
@@ -236,8 +239,8 @@
             ];
         }
         
-        var canvasStatusSPM = $("#pie-status-canvas").get(0).getContext("2d");
-        var chartStatusSPM = new Chart(canvasStatusSPM).Doughnut(dataStatusSPM);
+        var canvasRetur = $("#pie-retur-canvas").get(0).getContext("2d");
+        var chartRetur = new Chart(canvasRetur).Doughnut(dataRetur);
         var canvasJumlahSPM = $("#pie-jenis-canvas").get(0).getContext("2d");
         var chartJumlahSPM = new Chart(canvasJumlahSPM).Doughnut(dataJumlahSPM);
         var canvasVolumeSPM = $("#pie-nominal-canvas").get(0).getContext("2d");
@@ -245,13 +248,18 @@
         var canvasStatusLHP = $("#pie-lhp-canvas").get(0).getContext("2d");
         var chartStatusLHP = new Chart(canvasStatusLHP).Doughnut(dataStatusLHP);
         
-        $("#number-sp2d-completed").html("" + (parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid)));
-        $("#number-sp2d-in-progress").html(homeDataJSON.jumlahSPMOngoing);
+        $("#number-retur-completed").html(homeDataJSON.jumlahReturSudahProses);
+        $("#number-retur-in-progress").html(homeDataJSON.jumlahReturBelumProses);
         
         $("#number-sp2d-gaji").html(homeDataJSON.jumlahSPMGaji);
         $("#number-sp2d-non-gaji").html(homeDataJSON.jumlahSPMNonGaji);
         $("#number-sp2d-retur").html(homeDataJSON.jumlahSPMLainnya);
         $("#number-sp2d-void").html(homeDataJSON.jumlahSPMVoid);
+        
+        $("#tgl-lhp-last").html(homeDataJSON.tanggalLHPTerakhir);
+        
+        $("#ticker-ongoing-container .ticker-total").html(homeDataJSON.jumlahSPMOngoing + " SPM");
+        $("#ticker-completed-container .ticker-total").html(parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid) + " SP2D");
         
         $("#number-sp2d-nominal-gaji").html(homeDataJSON.volumeSPMGaji + " M<span class='low-res-hidden'>ILYAR</span>");
         $("#number-sp2d-nominal-non-gaji").html(homeDataJSON.volumeSPMNonGaji + " M<span class='low-res-hidden'>ILYAR</span>");
@@ -264,8 +272,8 @@
     
     function calculateWidth() {
         //use this function and draw the chart automatically after, so the graph is drawn with the correct size
-        $("#pie-status-canvas").attr("width",$("#pie-status-canvas").width()-1);
-        $("#pie-status-canvas").attr("height",$("#pie-status-info").height());
+        $("#pie-retur-canvas").attr("width",$("#pie-retur-canvas").width()-1);
+        $("#pie-retur-canvas").attr("height",$("#pie-retur-info").height());
         
         $("#pie-jenis-canvas").attr("width",$("#pie-jenis-canvas").width()-1);
         $("#pie-jenis-canvas").attr("height",$("#pie-jenis-info").height());
@@ -291,9 +299,9 @@
             $("#pie-container > div").removeClass("low-res");
         }
         
-        $("#pie-status-canvas").removeAttr("width");
-        $("#pie-status-canvas").removeAttr("height");
-        $("#pie-status-canvas").removeAttr("style");
+        $("#pie-retur-canvas").removeAttr("width");
+        $("#pie-retur-canvas").removeAttr("height");
+        $("#pie-retur-canvas").removeAttr("style");
         
         $("#pie-jenis-canvas").removeAttr("width");
         $("#pie-jenis-canvas").removeAttr("height");
@@ -329,15 +337,17 @@
         });
         
         tickerOngoingTotal = homeDataJSON.spmDalamProses.length;
-        for (i=0; i<homeDataJSON.spmDalamProses.length; i++) {
-            tickerOngoingContents += "<div id='ticker-item-" + i + "' class='ticker-item'>";
-            tickerOngoingContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (i+1) + "</div>";
-            tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].nomorSPM + "</div>";
-            tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].userSPM + "</div>";
-            tickerOngoingContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.spmDalamProses[i].mulaiSPM + "</div>";
-            tickerOngoingContents += "</div>";
+        if (homeDataJSON.spmDalamProses.length > 0) {
+            for (i=0; i<homeDataJSON.spmDalamProses.length; i++) {
+                tickerOngoingContents += "<div id='ticker-item-" + i + "' class='ticker-item'>";
+                tickerOngoingContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (i+1) + "</div>";
+                tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].nomorSPM + "</div>";
+                tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].userSPM + "</div>";
+                tickerOngoingContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.spmDalamProses[i].mulaiSPM + "</div>";
+                tickerOngoingContents += "</div>";
+            }
+            $("#ticker-ongoing-container > .ticker-content").html(tickerOngoingContents);
         }
-        $("#ticker-ongoing-container > .ticker-content").html(tickerOngoingContents);
 
         tickerCompletedTotal = homeDataJSON.sp2dSelesai.length;
         if (homeDataJSON.sp2dSelesai.length > 0) {

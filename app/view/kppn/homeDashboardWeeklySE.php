@@ -6,24 +6,6 @@
     <div id="fitur">
         <div id="pie-container">
             <div>
-                <div id="pie-status-container">
-                    <canvas id="pie-status-canvas"></canvas>
-                    <div id="pie-status-info" class="pie-info">
-                        <div class="pie-info-title">Status SPM</div>
-                        <div class="pie-info-content full">
-                            <div class="sphere yellow"></div>
-                            <span id="number-sp2d-in-progress" class="info-number">0</span><br/>
-                            <span class="info-text">Dalam Proses</span>
-                        </div>
-                        <div class="pie-info-content full">
-                            <div class="sphere blue"></div>
-                            <span id="number-sp2d-completed" class="info-number">0</span><br/>
-                            <span class="info-text">Selesai</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
                 <div id="pie-jenis-container">
                     <canvas id="pie-jenis-canvas"></canvas>
                     <div id="pie-jenis-info" class="pie-info">
@@ -65,6 +47,24 @@
                             <div class="sphere purple"></div>
                             <span id="number-sp2d-nominal-non-gaji" class="info-number">0</span><br/>
                             <span class="info-text">Non Gaji</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="pie-retur-container">
+                    <canvas id="pie-retur-canvas"></canvas>
+                    <div id="pie-retur-info" class="pie-info">
+                        <div class="pie-info-title">Status Retur</div>
+                        <div class="pie-info-content full">
+                            <div class="sphere yellow"></div>
+                            <span id="number-retur-in-progress" class="info-number">0</span><br/>
+                            <span class="info-text">Belum Diproses</span>
+                        </div>
+                        <div class="pie-info-content full">
+                            <div class="sphere blue"></div>
+                            <span id="number-retur-completed" class="info-number">0</span><br/>
+                            <span class="info-text">Sudah Diproses</span>
                         </div>
                     </div>
                 </div>
@@ -208,19 +208,22 @@
     }
     
     function renderChart() {
-        dataStatusSPM = [
+        if (homeDataJSON.jumlahReturSudahProses == 0) { homeDataJSON.jumlahReturSudahProses = 0; }
+        if (homeDataJSON.jumlahReturBelumProses == 0) { homeDataJSON.jumlahReturBelumProses = 0; }
+        
+        dataRetur = [
             {
-                value: parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid),
+                value: parseInt(homeDataJSON.jumlahReturSudahProses),
                 color: "#409ACA"
             },
             {
-                value : parseInt(homeDataJSON.jumlahSPMOngoing),
+                value : parseInt(homeDataJSON.jumlahReturBelumProses),
                 color : "#F6CE40"
             }
         ];
         
-        if (((parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid)) == 0) && (parseInt(homeDataJSON.jumlahSPMOngoing) == 0)) {
-            dataStatusSPM = [
+        if ((parseInt(homeDataJSON.jumlahReturSudahProses) == 0) && (parseInt(homeDataJSON.jumlahReturBelumProses) == 0)) {
+            dataRetur = [
                 {
                     value: 100,
                     color: "#DEDEDE"
@@ -304,8 +307,8 @@
             ];
         }
         
-        var canvasStatusSPM = $("#pie-status-canvas").get(0).getContext("2d");
-        var chartStatusSPM = new Chart(canvasStatusSPM).Doughnut(dataStatusSPM);
+        var canvasRetur = $("#pie-retur-canvas").get(0).getContext("2d");
+        var chartRetur = new Chart(canvasRetur).Doughnut(dataRetur);
         var canvasJumlahSPM = $("#pie-jenis-canvas").get(0).getContext("2d");
         var chartJumlahSPM = new Chart(canvasJumlahSPM).Doughnut(dataJumlahSPM);
         var canvasVolumeSPM = $("#pie-nominal-canvas").get(0).getContext("2d");
@@ -313,8 +316,8 @@
         var canvasStatusLHP = $("#pie-lhp-canvas").get(0).getContext("2d");
         var chartStatusLHP = new Chart(canvasStatusLHP).Doughnut(dataStatusLHP);
         
-        $("#number-sp2d-completed").html("" + (parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid)));
-        $("#number-sp2d-in-progress").html(homeDataJSON.jumlahSPMOngoing);
+        $("#number-retur-completed").html(homeDataJSON.jumlahReturSudahProses);
+        $("#number-retur-in-progress").html(homeDataJSON.jumlahReturBelumProses);
         
         $("#number-sp2d-gaji").html(homeDataJSON.jumlahSPMGaji);
         $("#number-sp2d-non-gaji").html(homeDataJSON.jumlahSPMNonGaji);
@@ -334,8 +337,8 @@
     
     function calculateWidth() {
         //use this function and draw the chart automatically after, so the graph is drawn with the correct size
-        $("#pie-status-canvas").attr("width",$("#pie-status-canvas").width()-1);
-        $("#pie-status-canvas").attr("height",$("#pie-status-info").height());
+        $("#pie-retur-canvas").attr("width",$("#pie-retur-canvas").width()-1);
+        $("#pie-retur-canvas").attr("height",$("#pie-retur-info").height());
         
         $("#pie-jenis-canvas").attr("width",$("#pie-jenis-canvas").width()-1);
         $("#pie-jenis-canvas").attr("height",$("#pie-jenis-info").height());
@@ -361,9 +364,9 @@
             $("#pie-container > div").removeClass("low-res");
         }
         
-        $("#pie-status-canvas").removeAttr("width");
-        $("#pie-status-canvas").removeAttr("height");
-        $("#pie-status-canvas").removeAttr("style");
+        $("#pie-retur-canvas").removeAttr("width");
+        $("#pie-retur-canvas").removeAttr("height");
+        $("#pie-retur-canvas").removeAttr("style");
         
         $("#pie-jenis-canvas").removeAttr("width");
         $("#pie-jenis-canvas").removeAttr("height");
