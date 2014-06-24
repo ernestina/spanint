@@ -116,7 +116,7 @@
 <?php
 if (isset($this->last_update)){
 	foreach ($this->last_update as $last_update){ 
-		echo "<td>Tarikan Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB </td>";
+		echo "<td>Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB </td>";
 	}
 }
 ?>

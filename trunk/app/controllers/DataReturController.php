@@ -84,6 +84,40 @@ class DataReturController extends BaseController {
 		$this->view->render('kppn/daftarRetur');
 	}
 	
+	public function monitoringReturPkn() {
+		$d_retur = new DataRetur($this->registry);
+		$d_kppn_list = new DataUser($this->registry);
+		$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+		$filter = array ();
+		$no=0;
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				} else {
+					$filter[$no++]="KDKPPN = ".Session::get('id_user');
+				}
+				if ($_POST['bank']!=''){
+					if ($_POST['bank']!='SEMUA_BANK'){
+						$filter[$no++]="BANK_ACCOUNT_NAME LIKE '%".$_POST['bank']."%'";
+					}
+					$this->view->d_bank = $_POST['bank'];
+				}
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "STATEMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($_POST['tgl_awal'])).",'YYYYMMDD') 
+									AND TO_DATE (".date('Ymd',strtotime($_POST['tgl_akhir'])).",'YYYYMMDD')  ";
+					
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}
+				$this->view->data = $d_retur->get_retur_pkn_filter($filter);
+			}	
+		
+		//var_dump($d_sppm->get_sppm_filter($filter));
+		$this->view->render('kppn/daftarReturPKN');
+	}
+	
     public function __destruct() {
         
     }
