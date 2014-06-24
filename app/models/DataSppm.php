@@ -1129,6 +1129,10 @@ class DataSppm {
 	public function get_sorbor_date() {
         return $this->_sorbor_date;
     }
+	
+	public function get_table() {
+        return $this->_table;
+    }
 
     /*
      * destruktor
