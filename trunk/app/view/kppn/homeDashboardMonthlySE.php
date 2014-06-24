@@ -12,12 +12,12 @@
                         <div class="pie-info-title">Status SPM</div>
                         <div class="pie-info-content full">
                             <div class="sphere yellow"></div>
-                            <span id="number-sp2d-in-progress" class="info-number">999</span><br/>
+                            <span id="number-sp2d-in-progress" class="info-number">0</span><br/>
                             <span class="info-text">Dalam Proses</span>
                         </div>
                         <div class="pie-info-content full">
                             <div class="sphere blue"></div>
-                            <span id="number-sp2d-completed" class="info-number">999</span><br/>
+                            <span id="number-sp2d-completed" class="info-number">0</span><br/>
                             <span class="info-text">Selesai</span>
                         </div>
                     </div>
@@ -30,22 +30,22 @@
                         <div class="pie-info-title">Jenis SP2D</div>
                         <div class="pie-info-content half">
                             <div class="sphere blue"></div>
-                            <span id="number-sp2d-gaji" class="info-number">999</span><br/>
+                            <span id="number-sp2d-gaji" class="info-number">0</span><br/>
                             <span class="info-text">Gaji</span>
                         </div>
                         <div class="pie-info-content half">
                             <div class="sphere purple"></div>
-                            <span id="number-sp2d-non-gaji" class="info-number">999</span><br/>
+                            <span id="number-sp2d-non-gaji" class="info-number">0</span><br/>
                             <span class="info-text">Non Gaji</span>
                         </div>
                         <div class="pie-info-content half">
                             <div class="sphere yellow"></div>
-                            <span id="number-sp2d-retur" class="info-number">999</span><br/>
-                            <span class="info-text">Retur</span>
+                            <span id="number-sp2d-retur" class="info-number">0</span><br/>
+                            <span class="info-text">Lainnya</span>
                         </div>
                         <div class="pie-info-content half">
                             <div class="sphere red"></div>
-                            <span id="number-sp2d-void" class="info-number">999</span><br/>
+                            <span id="number-sp2d-void" class="info-number">0</span><br/>
                             <span class="info-text">Void</span>
                         </div>
                     </div>
@@ -58,12 +58,12 @@
                         <div class="pie-info-title">Nominal SP2D</div>
                         <div class="pie-info-content full">
                             <div class="sphere blue"></div>
-                            <span id="number-sp2d-nominal-gaji" class="info-number">999</span><br/>
+                            <span id="number-sp2d-nominal-gaji" class="info-number">0</span><br/>
                             <span class="info-text">Gaji</span>
                         </div>
                         <div class="pie-info-content full">
                             <div class="sphere purple"></div>
-                            <span id="number-sp2d-nominal-non-gaji" class="info-number">999</span><br/>
+                            <span id="number-sp2d-nominal-non-gaji" class="info-number">0</span><br/>
                             <span class="info-text">Non Gaji</span>
                         </div>
                     </div>
@@ -76,22 +76,22 @@
                         <div class="pie-info-title">Status LHP</div>
                         <div class="pie-info-content half">
                             <div class="sphere blue"></div>
-                            <span id="number-lhp-completed" class="info-number">999</span><br/>
+                            <span id="number-lhp-completed" class="info-number">0</span><br/>
                             <span class="info-text">Completed</span>
                         </div>
                         <div class="pie-info-content half">
                             <div class="sphere purple"></div>
-                            <span id="number-lhp-validated" class="info-number">999</span><br/>
+                            <span id="number-lhp-validated" class="info-number">0</span><br/>
                             <span class="info-text">Validated</span>
                         </div>
                         <div class="pie-info-content half">
                             <div class="sphere red"></div>
-                            <span id="number-lhp-error" class="info-number">999</span><br/>
+                            <span id="number-lhp-error" class="info-number">0</span><br/>
                             <span class="info-text">Error</span>
                         </div>
                         <div class="pie-info-content half">
                             <div class="sphere yellow"></div>
-                            <span id="number-lhp-lainnya" class="info-number">999</span><br/>
+                            <span id="number-lhp-lainnya" class="info-number">0</span><br/>
                             <span class="info-text">Lainnya</span>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         <span class="sphere purple"></span>Non Gaji
                     </div>
                     <div class="line-legend">
-                        <span class="sphere yellow"></span>Retur
+                        <span class="sphere yellow"></span>Lainnya
                     </div>
                     <div class="line-legend">
                         <span class="sphere red"></span>Void
@@ -150,6 +150,25 @@
     
     function renderLineChart() {
         //prepare the data
+        for (i=0; i<30; i++) {
+            if (homeDataJSON.spmNonGajiDetail[i] == "") {
+                homeDataJSON.spmNonGajiDetail[i] = 0;
+            }
+            if (homeDataJSON.spmGajiDetail[i] == "") {
+                homeDataJSON.spmGajiDetail[i] = 0;
+            }
+            if (homeDataJSON.spmLainnyaDetail[i] == "") {
+                homeDataJSON.spmLainnyaDetail[i] = 0;
+            }
+            if (homeDataJSON.spmVoidDetail[i] == "") {
+                homeDataJSON.spmVoidDetail[i] = 0;
+            }
+            
+            homeDataJSON.spmNonGajiDetail[i] = parseInt(homeDataJSON.spmNonGajiDetail[i]);
+            homeDataJSON.spmGajiDetail[i] = parseInt(homeDataJSON.spmGajiDetail[i]);
+            homeDataJSON.spmLainnyaDetail[i] = parseInt(homeDataJSON.spmLainnyaDetail[i]);
+            homeDataJSON.spmVoidDetail[i] = parseInt(homeDataJSON.spmVoidDetail[i]);
+        }
         dataHistoriSP2D = {
             labels : homeDataJSON.tanggalPeriode,
             datasets : [
@@ -172,7 +191,7 @@
                     strokeColor : "rgba(246,206,64,1)",
                     pointColor : "rgba(246,206,64,1)",
                     pointStrokeColor : "#fff",
-                    data : homeDataJSON.spmReturDetail
+                    data : homeDataJSON.spmLainnyaDetail
                 },
                 {
                     fillColor : "rgba(227,92,92,0.5)",
@@ -192,7 +211,7 @@
     function renderChart() {
         dataStatusSPM = [
             {
-                value: parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMRetur) + parseInt(homeDataJSON.jumlahSPMVoid),
+                value: parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid),
                 color: "#409ACA"
             },
             {
@@ -201,7 +220,7 @@
             }
         ];
         
-        if (((parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMRetur) + parseInt(homeDataJSON.jumlahSPMVoid)) == 0) && (parseInt(homeDataJSON.jumlahSPMOngoing) == 0)) {
+        if (((parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid)) == 0) && (parseInt(homeDataJSON.jumlahSPMOngoing) == 0)) {
             dataStatusSPM = [
                 {
                     value: 100,
@@ -220,7 +239,7 @@
                 color : "#8E5696"
             },
             {
-                value : parseInt(homeDataJSON.jumlahSPMRetur),
+                value : parseInt(homeDataJSON.jumlahSPMLainnya),
                 color : "#F6CE40"
             },
             {
@@ -229,7 +248,7 @@
             }
         ];
         
-        if ((parseInt(homeDataJSON.jumlahSPMGaji) == 0) && (parseInt(homeDataJSON.jumlahSPMNonGaji) == 0) && (parseInt(homeDataJSON.jumlahSPMRetur) == 0) && (parseInt(homeDataJSON.jumlahSPMVoid) == 0)) {
+        if ((parseInt(homeDataJSON.jumlahSPMGaji) == 0) && (parseInt(homeDataJSON.jumlahSPMNonGaji) == 0) && (parseInt(homeDataJSON.jumlahSPMLainnya) == 0) && (parseInt(homeDataJSON.jumlahSPMVoid) == 0)) {
             dataJumlahSPM = [
                 {
                     value: 100,
@@ -295,12 +314,12 @@
         var canvasStatusLHP = $("#pie-lhp-canvas").get(0).getContext("2d");
         var chartStatusLHP = new Chart(canvasStatusLHP).Doughnut(dataStatusLHP);
         
-        $("#number-sp2d-completed").html("" + (parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMRetur) + parseInt(homeDataJSON.jumlahSPMVoid)));
+        $("#number-sp2d-completed").html("" + (parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid)));
         $("#number-sp2d-in-progress").html(homeDataJSON.jumlahSPMOngoing);
         
         $("#number-sp2d-gaji").html(homeDataJSON.jumlahSPMGaji);
         $("#number-sp2d-non-gaji").html(homeDataJSON.jumlahSPMNonGaji);
-        $("#number-sp2d-retur").html(homeDataJSON.jumlahSPMRetur);
+        $("#number-sp2d-retur").html(homeDataJSON.jumlahSPMLainnya);
         $("#number-sp2d-void").html(homeDataJSON.jumlahSPMVoid);
         
         $("#number-sp2d-nominal-gaji").html(homeDataJSON.volumeSPMGaji + " M<span class='low-res-hidden'>ILYAR</span>");

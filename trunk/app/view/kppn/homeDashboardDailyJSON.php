@@ -2,7 +2,7 @@
 
 $total_gaji = 0;
 $total_non_gaji = 0;
-$total_retur = 0;
+$total_lainnya = 0;
 $total_void = 0;
 
 $total_vol_gaji = 0;
@@ -16,8 +16,8 @@ $total_lhp_etc = 0;
 foreach ($this->data_sp2d_rekap as $sp2d_rekap_harian) {
     $total_gaji += $sp2d_rekap_harian->get_gaji();
     $total_non_gaji += $sp2d_rekap_harian->get_non_gaji();
-    $total_retur += $sp2d_rekap_harian->get_retur();
     $total_void += $sp2d_rekap_harian->get_void();
+    $total_lainnya += $sp2d_rekap_harian->get_lainnya();
     
     $total_vol_gaji += $sp2d_rekap_harian->get_vol_gaji();
     $total_vol_non_gaji += $sp2d_rekap_harian->get_vol_non_gaji();
@@ -34,7 +34,7 @@ echo '{';
 
 echo '"jumlahSPMGaji":"'.$total_gaji.'"'; echo ' , ';
 echo '"jumlahSPMNonGaji":"'.$total_non_gaji.'"'; echo ' , ';
-echo '"jumlahSPMRetur":"'.$total_retur.'"'; echo ' , ';
+echo '"jumlahSPMLainnya":"'.$total_lainnya.'"'; echo ' , ';
 echo '"jumlahSPMVoid":"'.$total_void.'"'; echo ' , ';
 
 echo '"volumeSPMGaji":"'.round($total_vol_gaji/1000000000).'"'; echo ' , ';
@@ -76,6 +76,9 @@ foreach ($this->data_list_sp2d as $value) {
 }
 
 echo '] , ';
+
+echo '"jumlahReturSudahProses":"'.$this->data_retur->get_retur_sudah_proses().'"'; echo ' , ';
+echo '"jumlahReturBelumProses":"'.$this->data_retur->get_retur_belum_proses().'"'; echo ' , ';
 
 echo '"jumlahSPMOngoing":"'.$pos_count.'"';
 
