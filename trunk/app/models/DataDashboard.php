@@ -79,10 +79,8 @@ class DataDashboard {
     }
     
     public function get_sp2d_retur($hari) {
-        $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH from RETUR_SPAN_V where KDKPPN='".Session::get('id_user')."' and TGL_RETUR between to_date('".date("Ymd",time()-(($hari-1)*24*60*60))."','yyyymmdd') and to_date('".date("Ymd",time())."','yyyymmdd') group by STATUS_RETUR;";
-        var_dump($sql);
+        $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH from RETUR_SPAN_V where KDKPPN='".Session::get('id_user')."' and STATEMENT_DATE between to_date('".date("Ymd",time()-(($hari-1)*24*60*60))."','yyyymmdd') and to_date('".date("Ymd",time())."','yyyymmdd') group by STATUS_RETUR";
         $result =  $this->db->select($sql);
-        var_dump($result);
         $d_data = new $this($this->registry);
         foreach ($result as $val) {
             if ($val['STATUS_RETUR']=='SUDAH PROSES') {
@@ -91,7 +89,6 @@ class DataDashboard {
                 $d_data->set_retur_belum_proses($d_data->get_retur_belum_proses() + $val['JUMLAH']);
             }
         }
-        var_dump($d_data);
         return $d_data;
     }
     
@@ -127,6 +124,7 @@ class DataDashboard {
             $d_data = new $this($this->registry);
             //var_dump($result);
             foreach ($result as $val) {
+                $d_data->set_tgl_lhp($val['TANGGAL']);
                 if ($val['STATUS']=='Completed') {
                     $d_data->set_lhp_completed($val['JUMLAH']);
                     $d_data->set_vol_lhp_completed($val['NOMINAL']);
@@ -148,12 +146,12 @@ class DataDashboard {
     
     public function get_hist_spm_filter($filter) {
         Session::get('id_user');
-		$sql = "SELECT OU_NAME, INVOICE_NUM, TO_USER, FU_DESCRIPTION, TIME_BEGIN_DATE from ap_invoices_all_v WHERE STATUS = 'OPEN' ";		
+		$sql = "SELECT OU_NAME, INVOICE_NUM, TO_USER, FU_DESCRIPTION, BEGIN_DATE, TIME_BEGIN_DATE from ap_invoices_all_v WHERE STATUS = 'OPEN' ";		
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
-		$sql .= " ORDER BY TIME_BEGIN_DATE DESC, INVOICE_NUM";
+		$sql .= " ORDER BY BEGIN_DATE DESC, TIME_BEGIN_DATE DESC, INVOICE_NUM";
         $result =  $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
@@ -162,6 +160,7 @@ class DataDashboard {
             $d_data->set_invoice_num($val['INVOICE_NUM']);
 			$d_data->set_to_user($val['TO_USER']);
 			$d_data->set_fu_description(substr($val['FU_DESCRIPTION'],11));
+            $d_data->set_begin_date($val['BEGIN_DATE']);
 			$d_data->set_time_begin_date($val['TIME_BEGIN_DATE']);
             $data[] = $d_data;
         }
@@ -214,6 +213,9 @@ class DataDashboard {
     public function set_time_begin_date($time_begin_date) {
         $this->_time_begin_date = $time_begin_date;
     }
+    public function set_begin_date($begin_date) {
+        $this->_begin_date = $begin_date;
+    }
     
     //Rekap LHP
     public function set_lhp_completed($lhp_completed) {
@@ -256,6 +258,10 @@ class DataDashboard {
     }
     public function set_retur_belum_proses($retur_belum_proses) {
         $this->_retur_belum_proses = $retur_belum_proses;
+    }
+    
+    public function set_tgl_lhp($tgl_lhp) {
+        $this->_tgl_lhp = $tgl_lhp;
     }
 		
 	/*
@@ -304,6 +310,9 @@ class DataDashboard {
     public function get_time_begin_date() {
         return $this->_time_begin_date;
     }
+    public function get_begin_date() {
+        return $this->_begin_date;
+    }
     
     //Rekap LHP
     public function get_lhp_completed() {
@@ -346,6 +355,10 @@ class DataDashboard {
     }
     public function get_retur_belum_proses() {
         return $this->_retur_belum_proses;
+    }
+    
+    public function get_tgl_lhp() {
+        return $this->_tgl_lhp;
     }
     
     /*
