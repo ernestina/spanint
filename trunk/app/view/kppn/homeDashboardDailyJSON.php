@@ -54,7 +54,7 @@ foreach ($this->data_pos_spm as $value) {
         echo ' , ';
     }
     echo '{';
-    echo '"nomorSPM":"'.$value->get_invoice_num().'" , "userSPM":"'.$value->get_to_user().' ('.$value->get_fu_description() .')" , "mulaiSPM":"'.$value->get_time_begin_date().'"';
+    echo '"nomorSPM":"'.$value->get_invoice_num().'" , "userSPM":"'.$value->get_to_user().' ('.$value->get_fu_description() .')" , "mulaiSPM":"'.$value->get_begin_date().' '.$value->get_time_begin_date().'"';
     echo '}';
     $pos_count++;
 }
@@ -79,6 +79,7 @@ echo '] , ';
 
 echo '"jumlahReturSudahProses":"'.$this->data_retur->get_retur_sudah_proses().'"'; echo ' , ';
 echo '"jumlahReturBelumProses":"'.$this->data_retur->get_retur_belum_proses().'"'; echo ' , ';
+echo '"tanggalLHPTerakhir":"'.$this->data_lhp_rekap[0]->get_tgl_lhp().'"'; echo ' , ';
 
 echo '"jumlahSPMOngoing":"'.$pos_count.'"';
 
