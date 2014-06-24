@@ -107,6 +107,39 @@ class DataRetur {
         return $data;
     }
 	
+	public function get_retur_pkn_filter($filter) {
+		$sql = "SELECT STATEMENT_DATE, RECEIPT_NUMBER, TGSP2D_PENGGANTI ,NOSP2D_PENGGANTI, 
+				AMOUNT, NILAI_SP2D_PENGGANTI, (AMOUNT-NILAI_SP2D_PENGGANTI) SALDO  
+				FROM " . $this->_table . "
+				WHERE 1=1 ";
+		//SP2D = 140181301002823
+		//xml = 520002000990_SP2D_O_20140408_101509_367.xml
+		$no=0;
+		//var_dump($filter);
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		$sql .= " ORDER BY STATEMENT_DATE";
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_statement_date(date("d-m-Y",strtotime($val['STATEMENT_DATE'])));
+            $d_data->set_receipt_number($val['RECEIPT_NUMBER']);
+            $d_data->set_nosp2d_pengganti($val['NOSP2D_PENGGANTI']);
+			if ($val['TGSP2D_PENGGANTI']!=''){
+				$d_data->set_tgsp2d_pengganti(date("d-m-Y",strtotime($val['TGSP2D_PENGGANTI'])));
+			} else {
+				$d_data->set_tgsp2d_pengganti('');
+			}
+            $d_data->set_amount($val['AMOUNT']);
+            $d_data->set_nilai_sp2d_pengganti($val['NILAI_SP2D_PENGGANTI']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+	
     /*
      * setter
      */
