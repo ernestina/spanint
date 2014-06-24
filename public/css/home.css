@@ -135,7 +135,7 @@ body {
     margin: 0; padding: 0;
 }
 .ticker-content {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .line-legend {
     box-sizing: border-box;
@@ -191,6 +191,13 @@ body {
 }
 .spaced-right {
     margin-right: 20px;
+}
+.ticker-total {
+    padding: 0px 14px 4px 14px;
+    border-radius: 5px 5px 0px 0px;
+    float: right;
+    color: #409ACA;
+    border: 1px solid #dedede;
 }
 
 /* Branding */
