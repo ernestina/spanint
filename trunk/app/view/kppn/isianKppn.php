@@ -112,15 +112,15 @@
 </div>
 </div>
 
+<div id="fitur">
 
 <?php
 if (isset($this->last_update)){
 	foreach ($this->last_update as $last_update){ 
-		echo "<td>Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB </td>";
+		echo "<h4>Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB </h4>";
 	}
 }
 ?>
-<div id="fitur">
 
 		<table width="100%" class="table table-bordered zebra" id='fixheader' style="font-size: 80%">
             <!--baris pertama-->
