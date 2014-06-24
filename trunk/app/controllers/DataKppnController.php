@@ -24,6 +24,7 @@ class DataKppnController extends BaseController {
 	
 	public function monitoringSp2d() {
 		$d_sppm = new DataSppm($this->registry);
+		$d_last_update = new DataLastUpdate($this->registry);
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
@@ -96,6 +97,7 @@ class DataKppnController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
+			$this->view->last_update = $d_last_update->get_last_updatenya('XICO_ALL');
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/isianKppn');

@@ -7,6 +7,7 @@
 					$kode_kppn=$kppn->get_kd_satker();
 				}
 			}?>
+			
 		</h2>
     </div>
 
@@ -18,7 +19,7 @@
                     $_SERVER['PHP_SELF'];
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
 </a>
-	
+
 	<div id="top">	
 		<form method="POST" action="monitoringSp2d" enctype="multipart/form-data">
 		
@@ -112,8 +113,15 @@
 </div>
 
 
-
+<?php
+if (isset($this->last_update)){
+	foreach ($this->last_update as $last_update){ 
+		echo "<td>Tarikan Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB </td>";
+	}
+}
+?>
 <div id="fitur">
+
 		<table width="100%" class="table table-bordered zebra" id='fixheader' style="font-size: 80%">
             <!--baris pertama-->
 			<thead>
