@@ -34,6 +34,7 @@ class homeController extends BaseController {
         $filter_pos_spm[1]="SUBSTR(OU_NAME,1,3) = ".Session::get('id_user');
 		$this->view->data_pos_spm = $d_dashboard->get_hist_spm_filter($filter_pos_spm);
         $this->view->data_list_sp2d = $d_dashboard->get_list_sp2d_selesai();
+        $this->view->data_retur = $d_dashboard->get_sp2d_retur(1);
         
         $this->view->load('kppn/homeDashboardDailyJSON');
     }
@@ -46,6 +47,7 @@ class homeController extends BaseController {
 		$filter_pos_spm = array ();
         $filter_pos_spm[1]="SUBSTR(OU_NAME,1,3) = ".Session::get('id_user');
 		$this->view->data_pos_spm = $d_dashboard->get_hist_spm_filter($filter_pos_spm);
+        $this->view->data_retur = $d_dashboard->get_sp2d_retur(7);
         
         $this->view->load('kppn/homeDashboardWeeklyJSON');
     }
@@ -58,6 +60,7 @@ class homeController extends BaseController {
 		$filter_pos_spm = array ();
         $filter_pos_spm[1]="SUBSTR(OU_NAME,1,3) = ".Session::get('id_user');
 		$this->view->data_pos_spm = $d_dashboard->get_hist_spm_filter($filter_pos_spm);
+        $this->view->data_retur = $d_dashboard->get_sp2d_retur(30);
         
         $this->view->load('kppn/homeDashboardMonthlyJSON');
     }
