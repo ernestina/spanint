@@ -137,7 +137,7 @@
 						$non_gaji+=$value->get_check_date();
 						$nil_non_gaji+=$value->get_bank_account_name();
 						$total+=$tot;
-						$nil_tot+=$value->get_vendor_name();
+						$nilai_tot+=$value->get_vendor_name();
 						$retur+=$value->get_check_number();
 						$nil_retur+=$value->get_bank_name();
 						$void+=$value->get_check_number_line_num();
@@ -152,7 +152,7 @@
 					echo "<td><b>".$non_gaji."</b></td>";
 					echo "<td align='right'><b>".number_format($nil_non_gaji)."</b></td>";
 					echo "<td><b>".$total."</b></td>";
-					echo "<td align='right'><b>".number_format($nil_tot)."</b></td>";
+					echo "<td align='right'><b>".number_format($nilai_tot)."</b></td>";
 					echo "<td><b>".$retur."</b></td>";
 					echo "<td align='right'><b>".number_format($nil_retur)."</b></td>";
 					echo "<td><b>".$void."</b></td>";
