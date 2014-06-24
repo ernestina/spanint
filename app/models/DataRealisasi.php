@@ -15,7 +15,9 @@ class DataRealisasi{
 	private $_nmba;
 	private $_pagu;
 	private $_lokasi;
+	private $_nmlokasi;
 	private $_encumbrance;
+	private $_realisasi;
     private $_belanja_51;
 	private $_belanja_52;
     private $_belanja_53;
@@ -28,6 +30,7 @@ class DataRealisasi{
 	private $_table1 = 'gl_balances_v';
 	private $_table2 = 't_satker';
 	private $_table3 = 't_ba';
+	private $_table4 = 't_lokasi';
 	public $registry;
 
     /*
@@ -66,9 +69,7 @@ class DataRealisasi{
 				. $this->_table2. " b 
 				where 
 				substr(a.akun,1,1) in ('5','6')
-				and a.bank = '00000'
 				and a.budget_type = '2' 
-				and a.budget_amt > 0
 				and a.satker=b.kdsatker
 				"
 				;
@@ -104,6 +105,66 @@ class DataRealisasi{
         }
         return $data;
     }
+	
+	public function get_realisasi_fa_lokasi_global_filter($filter) {
+		Session::get('id_user');
+		$sql = "select a.satker
+				, a.lokasi
+				, a.kppn
+				, b.nmsatker
+				, sum(a.budget_amt) Pagu
+				, sum(decode(substr(a.akun,1,2),'51',a.actual_amt,0)) belanja_51
+				, sum(decode(substr(a.akun,1,2),'52',a.actual_amt,0)) belanja_52
+				, sum(decode(substr(a.akun,1,2),'53',a.actual_amt,0)) belanja_53
+				, sum(decode(substr(a.akun,1,2),'54',a.actual_amt,0)) belanja_54
+				, sum(decode(substr(a.akun,1,2),'55',a.actual_amt,0)) belanja_55
+				, sum(decode(substr(a.akun,1,2),'56',a.actual_amt,0)) belanja_56
+				, sum(decode(substr(a.akun,1,2),'57',a.actual_amt,0)) belanja_57
+				, sum(decode(substr(a.akun,1,2),'58',a.actual_amt,0)) belanja_58
+				, sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
+				, sum(ENCUMBRANCE_AMT) encumbrance 
+				FROM " 
+				. $this->_table1. " a," 
+				. $this->_table2. " b 
+				where 
+				substr(a.akun,1,1) in ('5','6')
+				and a.budget_type = '2' 
+				and a.satker=b.kdsatker
+				"
+				;
+		$no=0;
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		
+		$sql .= " group by a.satker ,b.nmsatker, a.kppn, a.lokasi " ;
+		$sql .= " ORDER by a.lokasi, a.satker " ;
+		
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['SATKER']);
+			$d_data->set_kppn($val['KPPN']);
+            $d_data->set_lokasi($val['LOKASI']);
+            $d_data->set_pagu($val['PAGU']);
+			$d_data->set_dipa($val['NMSATKER']);
+			$d_data->set_encumbrance($val['ENCUMBRANCE']);
+            $d_data->set_belanja_51($val['BELANJA_51']);
+			$d_data->set_belanja_52($val['BELANJA_52']);
+			$d_data->set_belanja_53($val['BELANJA_53']);
+			$d_data->set_belanja_54($val['BELANJA_54']);
+			$d_data->set_belanja_55($val['BELANJA_55']);
+			$d_data->set_belanja_56($val['BELANJA_56']);
+			$d_data->set_belanja_57($val['BELANJA_57']);
+			$d_data->set_belanja_58($val['BELANJA_58']);
+			$d_data->set_belanja_59($val['BELANJA_59']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
 	public function get_realisasi_fa_global_ba_filter($filter) {
 		Session::get('id_user');
 		$sql = "select 
@@ -125,9 +186,7 @@ class DataRealisasi{
 				. $this->_table3. " b 
 				where 
 				substr(a.akun,1,1) in ('5','6')
-				and a.bank = '00000'
-				and a.budget_type = '2'
-				and a.budget_amt > 0				
+				and a.budget_type = '2'			
 				and substr(a.program,1,3)=b.kdba
 				"
 				;
@@ -164,15 +223,16 @@ class DataRealisasi{
 	public function get_realisasi_lokasi($kppn = null) {
 		Session::get('id_user');
 		$sql = "select distinct
-				lokasi 
+				a.lokasi , b.nmlokasi 
 				FROM " 
-				. $this->_table1. "   
+				. $this->_table1. " a ,"
+				. $this->_table4. " b 
+				
 				where 
-				substr(akun,1,1) in ('5','6')
-				and bank = '00000'
-				and budget_type = '2'
-				and budget_amt > 0
-				and kppn = '".$kppn."' 				
+				substr(a.akun,1,1) in ('5','6')
+				and a.lokasi=b.kdlokasi
+				and a.budget_type = '2'
+				and a.kppn = '".$kppn."' 				
 				"
 				;
 		//$no=0;
@@ -181,7 +241,7 @@ class DataRealisasi{
 		//}
 		
 		//$sql .= " group by substr(a.program,1,3), b.nmba " ;
-		//$sql .= " ORDER by substr(a.program,1,3) " ;
+		$sql .= " ORDER by a.lokasi " ;
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
@@ -189,6 +249,198 @@ class DataRealisasi{
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
 			$d_data->set_lokasi($val['LOKASI']);
+			$d_data->set_nmlokasi($val['NMLOKASI']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_realisasi_lokasi_kanwil($kanwil = null) {
+		Session::get('id_user');
+		$sql = "select distinct
+				a.lokasi , b.nmlokasi 
+				FROM " 
+				. $this->_table1. " a ,"
+				. $this->_table4. " b 
+				
+				where 
+				substr(a.akun,1,1) in ('5','6')
+				and a.lokasi=b.kdlokasi
+				and a.budget_type = '2'
+				and a.kanwil = '".$kanwil."' 				
+				"
+				;
+		//$no=0;
+		//foreach ($filter as $filter) {
+			//$sql .= " AND ".$filter;
+		//}
+		
+		//$sql .= " group by substr(a.program,1,3), b.nmba " ;
+		$sql .= " ORDER by a.lokasi " ;
+		
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+			$d_data->set_lokasi($val['LOKASI']);
+			$d_data->set_nmlokasi($val['NMLOKASI']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_realisasi_satker_transfer($transfer = null) {
+		Session::get('id_user');
+		$sql = "select distinct
+				b.kdsatker , b.nmsatker, b.kppn 
+				FROM " 
+				. $this->_table1. " a ,"
+				. $this->_table2. " b 
+				
+				where 
+				substr(a.program,1,5)='99905'
+				and substr(a.akun,1,1) in ('6')
+				and a.satker=b.kdsatker
+				and a.budget_type = '2'
+				and b.kppn = '".$transfer."' 				
+				"
+				;
+		//$no=0;
+		//foreach ($filter as $filter) {
+			//$sql .= " AND ".$filter;
+		//}
+		
+		//$sql .= " group by substr(a.program,1,3), b.nmba " ;
+		$sql .= " ORDER by b.kdsatker " ;
+		
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+			$d_data->set_satker($val['KDSATKER']);
+			$d_data->set_dipa($val['NMSATKER']);
+			$d_data->set_kppn($val['KPPN']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	public function get_realisasi_satker_transfer_kanwil($transfer = null) {
+		Session::get('id_user');
+		$sql = "select distinct
+				b.kdsatker , b.nmsatker, b.kppn 
+				FROM " 
+				. $this->_table1. " a ,"
+				. $this->_table2. " b 
+				
+				where 
+				substr(a.program,1,5)='99905'
+				and substr(a.akun,1,1) in ('6')
+				and a.satker=b.kdsatker
+				and a.budget_type = '2'
+				and substr(b.kanwil_djpb,2,2) = '".$transfer."' 				
+				"
+				;
+		//$no=0;
+		//foreach ($filter as $filter) {
+			//$sql .= " AND ".$filter;
+		//}
+		
+		//$sql .= " group by substr(a.program,1,3), b.nmba " ;
+		$sql .= " ORDER by b.kdsatker " ;
+		
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+			$d_data->set_satker($val['KDSATKER']);
+			$d_data->set_dipa($val['NMSATKER']);
+			$d_data->set_kppn($val['KPPN']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	public function get_realisasi_nmsatker_transfer($satker = null) {
+		Session::get('id_user');
+		$sql = "select distinct
+				b.kdsatker , b.nmsatker, b.kppn 
+				FROM " 
+				. $this->_table1. " a ,"
+				. $this->_table2. " b 
+				
+				where 
+				substr(a.program,1,5)='99905'
+				and substr(a.akun,1,1) in ('6')
+				and a.satker=b.kdsatker
+				and a.budget_type = '2'
+				and a.satker = '".$satker."' 				
+				"
+				;
+		//$no=0;
+		//foreach ($filter as $filter) {
+			//$sql .= " AND ".$filter;
+		//}
+		
+		//$sql .= " group by substr(a.program,1,3), b.nmba " ;
+		$sql .= " ORDER by b.kdsatker " ;
+		
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+			$d_data->set_satker($val['KDSATKER']);
+			$d_data->set_dipa($val['NMSATKER']);
+			$d_data->set_kppn($val['KPPN']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_realisasi_transfer_global_filter($filter) {
+		Session::get('id_user');
+		$sql = "select 
+				 a.kppn
+				, a.lokasi
+				, c.nmlokasi
+				, sum(a.budget_amt) Pagu
+				, sum(a.actual_amt) Realisasi
+				, sum(ENCUMBRANCE_AMT) encumbrance 
+				FROM " 
+				. $this->_table1. " a," 
+				. $this->_table2. " b, "
+				. $this->_table4. " c 
+				where 
+				substr(a.akun,1,1) in ('6')
+				and substr(program,1,5) = '99905'
+				and a.budget_type = '2' 
+				and a.satker=b.kdsatker
+				and a.lokasi=c.kdlokasi
+				"
+				;
+		$no=0;
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		
+		$sql .= " group by a.kppn, a.lokasi, c.nmlokasi " ;
+		$sql .= " ORDER by a.lokasi " ;
+		
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['SATKER']);
+			$d_data->set_kppn($val['KPPN']);
+			$d_data->set_lokasi($val['LOKASI']);
+			$d_data->set_nmlokasi($val['NMLOKASI']);
+            $d_data->set_pagu($val['PAGU']);
+			$d_data->set_dipa($val['NMSATKER']);
+			$d_data->set_encumbrance($val['ENCUMBRANCE']);
+            $d_data->set_realisasi($val['REALISASI']);
             $data[] = $d_data;
         }
         return $data;
@@ -196,11 +448,17 @@ class DataRealisasi{
     /*
      * setter
      */
+	public function set_nmlokasi($nmlokasi) {
+        $this->_nmlokasi = $nmlokasi;
+    }  
 	public function set_lokasi($lokasi) {
         $this->_lokasi = $lokasi;
     } 
 	public function set_pagu($pagu) {
         $this->_pagu = $pagu;
+    }
+	public function set_realisasi($realisasi) {
+        $this->_realisasi = $realisasi;
     }
 	public function set_nmba($nmba) {
         $this->_nmba = $nmba;
@@ -252,7 +510,13 @@ class DataRealisasi{
 	/*
      * getter
      */
-	
+	 
+	public function get_realisasi() {
+        return $this->_realisasi;
+    }
+	public function get_nmlokasi() {
+        return $this->_nmlokasi;
+    }
 	public function get_lokasi() {
         return $this->_lokasi;
     }
