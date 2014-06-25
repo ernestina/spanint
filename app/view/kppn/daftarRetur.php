@@ -1,6 +1,7 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING Retur SP2D<br>
+			
 			<?php if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().") <br>"; 
@@ -9,7 +10,16 @@
 			}?>
 		</h2>
     </div>
+<?php
+// untuk menampilkan last_update
+if (isset($this->last_update)){
+	foreach ($this->last_update as $last_update){ 
+		echo "Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB <br>";
+	}
+}
+?>
 <div style='display: block; float: left; font-weight: bold'>
+			
 			<?php if (isset($this->d_status)) {
 					echo "Status : ".$this->d_status."<br>";
 				}

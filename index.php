@@ -26,10 +26,11 @@ define('URL',$base_url);
 /*
  * define role
  */
-define('KPPN','kppn');
-define('KANWIL','kanwil');
 define('ADMIN','admin');
 define('SATKER','satker');
+define('KPPN','kppn');
+define('PKN','pkn');
+define('KANWIL','kanwil');
 
 $path = array(
     ROOT.'/libs/',
