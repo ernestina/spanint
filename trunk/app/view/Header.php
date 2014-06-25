@@ -82,6 +82,7 @@
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
                                 <li><a href=' . URL . 'dataRetur/monitoringRetur></i>Daftar SP2D Retur</a></li>
+								<li><a href=' . URL . 'dataRetur/monitoringReturPKN>Monitoring Penyelesaian Retur</a></li>
                                 <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke Bank</a></li>
 								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D terbit dan tertanggal di hari yang sama</a></li>
 								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>Laporan SP2D terbit di atas jam 3 tertanggal hari ini</a></li>
@@ -261,8 +262,9 @@
 								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
 							</ul>
 							</li>';
-					}if (Session::get('role') == PKN) {
-					echo '<li class="nav"><a href=' . URL . 'dataRetur/monitoringReturPKN>Retur</a>';
+					}
+					if (Session::get('role') == PKN) {
+						echo '<li class="nav"><a href=' . URL . 'dataRetur/monitoringReturPKN>Retur</a>';
 						echo '<ul>
 								<li><a href=' . URL . 'dataRetur/monitoringReturPKN>Monitoring Penyelesaian Retur</a></li>
 							</ul>
