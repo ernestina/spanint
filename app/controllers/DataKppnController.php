@@ -24,7 +24,6 @@ class DataKppnController extends BaseController {
 	
 	public function monitoringSp2d() {
 		$d_sppm = new DataSppm($this->registry);
-		$d_last_update = new DataLastUpdate($this->registry);
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
@@ -97,7 +96,9 @@ class DataKppnController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
-			$this->view->last_update = $d_last_update->get_last_updatenya('XICO_ALL');
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/isianKppn');
@@ -137,6 +138,10 @@ class DataKppnController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
+			
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/harianBo');
@@ -177,6 +182,10 @@ class DataKppnController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}	
+			
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dHariIni');
@@ -219,6 +228,10 @@ class DataKppnController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}		
+			
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dBesok');
@@ -259,6 +272,10 @@ class DataKppnController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}	
+			
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dBackdate');
@@ -283,6 +300,10 @@ class DataKppnController extends BaseController {
 				}
 				$this->view->data = $d_sppm->get_sp2d_harian($filter);
 			}	
+			
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dHarian');
@@ -323,6 +344,10 @@ class DataKppnController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}		
+			
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dNilaiMinus');
@@ -363,6 +388,10 @@ class DataKppnController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
+			
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dSudahVoid');
@@ -392,6 +421,11 @@ class DataKppnController extends BaseController {
 			$d_kppn_list = new DataUser($this->registry);
 			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 		}
+			
+		// untuk mengambil data last update 
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiDobel');
 	}
@@ -426,6 +460,11 @@ class DataKppnController extends BaseController {
 			$kppn=" AND KDKPPN = '".Session::get('id_user')."'";
 			$this->view->data = $d_sppm->get_sp2d_gaji_tanggal($kppn);
 		}
+			
+		// untuk mengambil data last update 
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiTanggal');
 	}
@@ -460,6 +499,11 @@ class DataKppnController extends BaseController {
 			$kppn=" AND KDKPPN = '".Session::get('id_user')."'";
 			$this->view->data = $d_sppm->get_sp2d_gaji_bank($kppn);
 		}
+			
+		// untuk mengambil data last update 
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiBank');
 	}
@@ -494,6 +538,11 @@ class DataKppnController extends BaseController {
 			$kppn=" AND KDKPPN = '".Session::get('id_user')."'";
 			$this->view->data = $d_sppm->get_sp2d_gaji_rekening($kppn);
 		}
+			
+		// untuk mengambil data last update 
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiRekening');
 	}
@@ -528,6 +577,11 @@ class DataKppnController extends BaseController {
 			$kppn=" AND KDKPPN = '".Session::get('id_user')."'";
 			$this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
 		}
+			
+		// untuk mengambil data last update 
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/sp2dGajiBulanLalu');
 	}
@@ -558,6 +612,11 @@ class DataKppnController extends BaseController {
 			$d_kppn_list = new DataUser($this->registry);
 			$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 		}
+			
+		// untuk mengambil data last update 
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
 		//var_dump($d_sppm->get_sp2d_rekap($filter));
 		$this->view->render('kppn/sp2dRekap');
 	}
@@ -591,6 +650,11 @@ class DataKppnController extends BaseController {
 		} else {
 			$filter[$no++]=" KDKPPN = ".Session::get('id_user');
 		}
+			
+		// untuk mengambil data last update 
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
 		$this->view->data = $d_sppm->get_detail_sp2d_gaji($filter);
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/detailSp2dGaji');
@@ -630,6 +694,11 @@ class DataKppnController extends BaseController {
 			$filter[$no++]=" KDKPPN = ".Session::get('id_user');
 		}
 		$this->view->data = $d_sppm->get_detail_sp2d_rekap($filter);
+			
+		// untuk mengambil data last update 
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/detailSp2dRekap');
 	}

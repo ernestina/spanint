@@ -45,6 +45,15 @@
 </div>
 <?php } ?>
 
+<?php
+// untuk menampilkan last_update
+if (isset($this->last_update)){
+	foreach ($this->last_update as $last_update){ 
+		echo "<td>Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB </td>";
+	}
+}
+?>
+
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra">
             <!--baris pertama-->
@@ -195,7 +204,9 @@
 					echo "<td><b>".$okt."</b></td>";
 					echo "<td><b>".$nop."</b></td>";
 					echo "<td><b>".$des."</b></td>";
-				} 
+				} else {
+				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+			}
 //			} 
 			?>
 			</tbody>
