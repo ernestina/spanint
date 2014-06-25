@@ -113,9 +113,9 @@
 							echo "<td>" . $value->get_receipt_number() ."</td>";
 							echo "<td> " . $value->get_tgsp2d_pengganti() . " </td>";
 							echo "<td> ". $value->get_nosp2d_pengganti(). "</td>";
-							echo "<td>" . number_format($value->get_nilai_sp2d_pengganti()). "</td>";
-							echo "<td> " . number_format($value->get_amount()) . " </td>";
-							echo "<td>" .number_format($saldo+=($value->get_amount()-$value->get_nilai_sp2d_pengganti())). "</td>";
+							echo "<td align='right'>" . number_format($value->get_nilai_sp2d_pengganti()). "</td>";
+							echo "<td align='right'> " . number_format($value->get_amount()) . " </td>";
+							echo "<td align='right'>" .number_format($saldo+=($value->get_amount()-$value->get_nilai_sp2d_pengganti())). "</td>";
 						echo "</tr>	";
 					}
 				} 
