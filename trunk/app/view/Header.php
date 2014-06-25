@@ -172,7 +172,7 @@
 						
                     }
                     if (Session::get('role') == KPPN) {
-                        //echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
+                        echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
 						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
