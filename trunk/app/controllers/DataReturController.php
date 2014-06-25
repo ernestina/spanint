@@ -79,6 +79,10 @@ class DataReturController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
+			
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_retur->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/daftarRetur');
@@ -111,6 +115,11 @@ class DataReturController extends BaseController {
 				}
 				$this->view->data = $d_retur->get_retur_pkn_filter($filter);
 			}	
+			
+			
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_retur->get_table());
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/daftarReturPKN');

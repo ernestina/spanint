@@ -261,6 +261,17 @@
 								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
 							</ul>
 							</li>';
+					}if (Session::get('role') == PKN) {
+					echo '<li class="nav"><a href=' . URL . 'dataRetur/monitoringReturPKN>Retur</a>';
+						echo '<ul>
+								<li><a href=' . URL . 'dataRetur/monitoringReturPKN>Monitoring Penyelesaian Retur</a></li>
+							</ul>
+							</li>';
+						echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
+						echo '<ul>
+								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
+							</ul>
+							</li>';
 					}
                     ?>
                     <li>

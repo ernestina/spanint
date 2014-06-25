@@ -4,10 +4,19 @@
 		</h2>
     </div>
 <div style='display: block; float: left; font-weight: bold'>
-			Saldo Awal : 0 <br>
+			<?php
+			// untuk menampilkan last_update
+			if (isset($this->last_update)){
+				foreach ($this->last_update as $last_update){ 
+					echo "<br> Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB <br>";
+				}
+			}
+			?>
+			Saldo Awal = 0 | Saldo Akhir = 0<br>
 			<?php if (isset($this->d_nama_kppn)) {
 					foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().") <br>"; 
+					$kode_kppn = $kppn->get_kd_satker();
 				}
 				}
 			?>
@@ -16,7 +25,7 @@
 				}
 			?>
 			<?php if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
-					echo "Tanggal : ".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
+					echo "Tanggal : ".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir." <br>";
 				}
 			?>
 </div>
@@ -104,8 +113,8 @@
 							echo "<td>" . $value->get_receipt_number() ."</td>";
 							echo "<td> " . $value->get_tgsp2d_pengganti() . " </td>";
 							echo "<td> ". $value->get_nosp2d_pengganti(). "</td>";
-							echo "<td> " . number_format($value->get_amount()) . " </td>";
 							echo "<td>" . number_format($value->get_nilai_sp2d_pengganti()). "</td>";
+							echo "<td> " . number_format($value->get_amount()) . " </td>";
 							echo "<td>" .number_format($saldo+=($value->get_amount()-$value->get_nilai_sp2d_pengganti())). "</td>";
 						echo "</tr>	";
 					}

@@ -323,6 +323,10 @@ class DataRetur {
 	public function get_status_retur() {
         return $this->_status_retur;
     }
+	
+	public function get_table() {
+        return $this->_table;
+    }
 
     /*
      * destruktor
