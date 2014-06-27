@@ -108,10 +108,28 @@
                 <div class="ticker-content">Tidak ada data.</div>
             </div>
         </div>
+        <div id="summary-container" style="display: none">
+            <div>
+                <div class="ticker-title">Rekapitulasi</div>
+                <div class="ticker-content">Tidak ada data.</div>
+            </div>
+        </div>
         <div id="bottom-status-bar">
             <div>
-                <div id="refresh-time"></div>
-                <div style="float: right;">Tampilkan data: <a href="<?php echo URL; ?>home/harian" class="active">Hari Ini</a><a href="<?php echo URL; ?>home/mingguan">7 Hari</a><a href="<?php echo URL; ?>home/bulanan">30 Hari</a></div>
+                <div id="kppn-select" style="float: left;">
+                    <?php
+                        if (Session::get('role')==KANWIL) {
+                            
+                            echo "Tampilkan data: <select id='kppn-list'>";
+                            echo "<option value='ALL'>SEMUA KPPN</option>";
+                            foreach ($this->kppn_list as $val) {
+                                echo "<option value='".$val->get_kd_d_kppn()."'>".$val->get_nama_user()."</option>";
+                            }
+                            echo "</select>";
+                        }
+                    ?>
+                </div>
+                <div style="float: right;">Periode: <a href="<?php echo URL; ?>home/harian" class="active">Hari Ini</a><a href="<?php echo URL; ?>home/mingguan">7 Hari</a><a href="<?php echo URL; ?>home/bulanan">30 Hari</a></div>
             </div>
         </div>
     </div>
@@ -256,10 +274,13 @@
         $("#number-sp2d-retur").html(homeDataJSON.jumlahSPMLainnya);
         $("#number-sp2d-void").html(homeDataJSON.jumlahSPMVoid);
         
-        $("#tgl-lhp-last").html(homeDataJSON.tanggalLHPTerakhir);
-        
-        $("#ticker-ongoing-container .ticker-total").html(homeDataJSON.jumlahSPMOngoing + " SPM");
-        $("#ticker-completed-container .ticker-total").html(parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid) + " SP2D");
+        if (homeDataJSON.displayMode == "REKAP") {
+            $("#tgl-lhp-last").html("");
+        } else {
+            $("#tgl-lhp-last").html(homeDataJSON.tanggalLHPTerakhir);
+            $("#ticker-ongoing-container .ticker-total").html(homeDataJSON.jumlahSPMOngoing + " SPM");
+            $("#ticker-completed-container .ticker-total").html(parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid) + " SP2D");
+        }
         
         $("#number-sp2d-nominal-gaji").html(homeDataJSON.volumeSPMGaji + " M<span class='low-res-hidden'>ILYAR</span>");
         $("#number-sp2d-nominal-non-gaji").html(homeDataJSON.volumeSPMNonGaji + " M<span class='low-res-hidden'>ILYAR</span>");
@@ -284,8 +305,12 @@
         $("#pie-lhp-canvas").attr("width",$("#pie-lhp-canvas").width()-1);
         $("#pie-lhp-canvas").attr("height",$("#pie-lhp-info").height());
         
-        $("#ticker-ongoing-container > .ticker-content").height($(window).innerHeight()-620);
-        $("#ticker-completed-container > .ticker-content").height($(window).innerHeight()-620);
+        if (homeDataJSON.displayMode == "REKAP") {
+            
+        } else {
+            $("#ticker-ongoing-container > .ticker-content").height($(window).innerHeight()-620);
+            $("#ticker-completed-container > .ticker-content").height($(window).innerHeight()-620);
+        }
         
         redrawExecuted = true;
         window.setTimeout(renderChart(), 500);
@@ -326,46 +351,145 @@
     function homeDisplayProcessing() {
         
         //load the data via ajax
+        urlAddon = "";
+        
+        <?php
+            if (Session::get('role')==KANWIL) {
+                
+                echo "if ($('#kppn-list').val() != 'ALL') {"; 
+                echo "  urlAddon = '/'+$('#kppn-list').val();";
+                echo "}"; 
+            }
+        ?>
+        
+        $("#ticker-ongoing-container > .ticker-content").html("Tidak ada data.");
+        $("#ticker-completed-container > .ticker-content").html("Tidak ada data.");
+        
         $.ajax({
             'async': false,
             'global': false,
-            'url': '<?php echo URL; ?>home/harianJSON',
+            'url': '<?php echo URL; ?>home/harianJSON'+urlAddon,
             'dataType': "json",
             'success': function (data) {
                 homeDataJSON = data;
             }
         });
         
-        tickerOngoingTotal = homeDataJSON.spmDalamProses.length;
-        if (homeDataJSON.spmDalamProses.length > 0) {
-            for (i=0; i<homeDataJSON.spmDalamProses.length; i++) {
-                tickerOngoingContents += "<div id='ticker-item-" + i + "' class='ticker-item'>";
-                tickerOngoingContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (i+1) + "</div>";
-                tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].nomorSPM + "</div>";
-                tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].userSPM + "</div>";
-                tickerOngoingContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.spmDalamProses[i].mulaiSPM + "</div>";
-                tickerOngoingContents += "</div>";
-            }
-            $("#ticker-ongoing-container > .ticker-content").html(tickerOngoingContents);
-        }
+        if (homeDataJSON.displayMode == "REKAP") {
+            
+            $("#summary-container").show();
+            $("#ticker-container").hide();
+            
+            tableSummaryContents = '';
+                
+            tableSummaryContents  += "<table>";
 
-        tickerCompletedTotal = homeDataJSON.sp2dSelesai.length;
-        if (homeDataJSON.sp2dSelesai.length > 0) {
-            for (j=0; j<homeDataJSON.sp2dSelesai.length; j++) {
-                tickerCompletedContents += "<div id='ticker-item-" + j + "' class='ticker-item'>";
-                tickerCompletedContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (j+1) + "</div>";
-                tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</div>";
-                tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</div>";
-                tickerCompletedContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.sp2dSelesai[j].nominalSP2D + "</div>";
-                tickerCompletedContents += "</div>";
+            tableSummaryContents  += "<tr class='bold'>";
+            tableSummaryContents  +=   "<td rowspan=2 style='text-align: left'>Nama KPPN</td>";
+            tableSummaryContents  +=   "<td colspan=4>SP2D</td>";
+            tableSummaryContents  +=   "<td colspan=2>Retur</td>";
+            tableSummaryContents  +=   "<td colspan=4>LHP</td>";
+            tableSummaryContents  += "</tr>";
+            
+            tableSummaryContents  += "<tr class='bold'>";
+            tableSummaryContents  +=   "<td>Gaji</td>";
+            tableSummaryContents  +=   "<td>Non Gaji</td>";
+            tableSummaryContents  +=   "<td>Lainnya</td>";
+            tableSummaryContents  +=   "<td>Void</td>";
+            tableSummaryContents  +=   "<td>Sudah Proses</td>";
+            tableSummaryContents  +=   "<td>Belum Proses</td>";
+            tableSummaryContents  +=   "<td>Completed</td>";
+            tableSummaryContents  +=   "<td>Validated</td>";
+            tableSummaryContents  +=   "<td>Error</td>";
+            tableSummaryContents  +=   "<td>Lainnya</td>";
+            tableSummaryContents  += "</tr>";
+            
+            for (j=0; j<homeDataJSON.listKPPN.length; j++) {
+                tableSummaryContents  += "<tr>";
+                tableSummaryContents  +=   "<td style='text-align: left'>" + homeDataJSON.listKPPN[j] + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.sp2dKPPN[j].gaji + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.sp2dKPPN[j].nonGaji + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.sp2dKPPN[j].lainnya + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.sp2dKPPN[j].void + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.returKPPN[j].sudahProses + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.returKPPN[j].belumProses + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.lhpKPPN[j].completed + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.lhpKPPN[j].validated + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.lhpKPPN[j].error + "</td>";
+                tableSummaryContents  +=   "<td>" + homeDataJSON.lhpKPPN[j].etc + "</td>";
+                tableSummaryContents  += "</tr>";
             }
-            $("#ticker-completed-container > .ticker-content").html(tickerCompletedContents);
+            
+            tableSummaryContents  += "<tr class='bold'>";
+            tableSummaryContents  +=   "<td style='text-align: left'>" + homeDataJSON.listKPPN[j] + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMGaji + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMNonGaji + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMLainnya + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMVoid + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahReturSudahProses + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahReturBelumProses + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPCompleted + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPValidated + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPError + "</td>";
+            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPLainnya + "</td>";
+            tableSummaryContents  += "</tr>";
+
+            tableSummaryContents  += "</table>";
+
+            $("#summary-container .ticker-content").html(tableSummaryContents);
+            
+        } else {
+            
+            tickerOngoingContents = '';
+            tickerCompletedContents = '';
+            
+            $("#summary-container").hide();
+            $("#ticker-container").show();
+            
+            $("#ticker-ongoing-container > .ticker-content").html("Tidak ada data.");
+            $("#ticker-completed-container > .ticker-content").html("Tidak ada data.");
+            
+            tickerOngoingTotal = homeDataJSON.spmDalamProses.length;
+            if (homeDataJSON.spmDalamProses.length > 0) {
+                for (i=0; i<homeDataJSON.spmDalamProses.length; i++) {
+                    tickerOngoingContents += "<div id='ticker-item-" + i + "' class='ticker-item'>";
+                    tickerOngoingContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (i+1) + "</div>";
+                    tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].nomorSPM + "</div>";
+                    tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].userSPM + "</div>";
+                    tickerOngoingContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.spmDalamProses[i].mulaiSPM + "</div>";
+                    tickerOngoingContents += "</div>";
+                }
+                $("#ticker-ongoing-container > .ticker-content").html(tickerOngoingContents);
+            }
+
+            tickerCompletedTotal = homeDataJSON.sp2dSelesai.length;
+            if (homeDataJSON.sp2dSelesai.length > 0) {
+                for (j=0; j<homeDataJSON.sp2dSelesai.length; j++) {
+                    tickerCompletedContents += "<div id='ticker-item-" + j + "' class='ticker-item'>";
+                    tickerCompletedContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (j+1) + "</div>";
+                    tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</div>";
+                    tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</div>";
+                    tickerCompletedContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.sp2dSelesai[j].nominalSP2D + "</div>";
+                    tickerCompletedContents += "</div>";
+                }
+                $("#ticker-completed-container > .ticker-content").html(tickerCompletedContents);
+            }
+            
         }
         
         //prepare to draw
         redrawExecuted = false;
         setWindowMode();
     }
+    
+    $('#kppn-list').change(function() {
+        
+        $("#ticker-ongoing-container > .ticker-content").empty();
+        $("#ticker-completed-container > .ticker-content").empty();
+        
+        homeDisplayProcessing();
+        
+    });
     
     $(document).ready(function() {
         $( document ).tooltip(
