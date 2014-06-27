@@ -35,6 +35,8 @@ class DataDashboard {
     private $_retur_belum_proses;
     private $_retur_sudah_proses;
     
+    private $_last_update;
+    
     public $registry;
 
     /*
@@ -46,12 +48,28 @@ class DataDashboard {
         $this->registry = $registry;
     }
     
-    public function get_sp2d_rekap($hari) {
+    public function get_last_update_all() {
+		$sql = "SELECT to_char(MIN(LAST_UPDATE),'dd-mm-yyyy hh24:mi:ss') LAST_UPDATE FROM T_LAST_UPDATE";
+        $result = $this->db->select($sql);
+		//var_dump ($result);  
+        foreach ($result as $val) {
+            $d_data = $val['LAST_UPDATE'];
+        }
+        return $d_data;
+    }
+    
+    public function get_sp2d_rekap($hari, $unitfilter=null) {
         //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
         
         $data = array();
         for ($i=0; $i<$hari; $i++) {
-            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount from AP_CHECKS_ALL_V where substr(check_number,3,3) = '".Session::get('id_user')."' and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            if (!isset($unitfilter)) {
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount from AP_CHECKS_ALL_V where substr(check_number,3,3) = '".Session::get('id_user')."' and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            } else {
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount from AP_CHECKS_ALL_V where ".$unitfilter." and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            }
+            
+            //var_dump($sql);
             $result =  $this->db->select($sql);
             //var_dump($result);
             $d_data = new $this($this->registry);
@@ -78,8 +96,13 @@ class DataDashboard {
         return $data;
     }
     
-    public function get_sp2d_retur($hari) {
-        $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH from RETUR_SPAN_V where KDKPPN='".Session::get('id_user')."' and STATEMENT_DATE between to_date('".date("Ymd",time()-(($hari-1)*24*60*60))."','yyyymmdd') and to_date('".date("Ymd",time())."','yyyymmdd') group by STATUS_RETUR";
+    public function get_sp2d_retur($unitfilter=null) {
+        if (!isset($unitfilter)) {
+            $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH from RETUR_SPAN_V where KDKPPN='".Session::get('id_user')."' group by STATUS_RETUR";
+        } else {
+            $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH from RETUR_SPAN_V where ".$unitfilter." group by STATUS_RETUR";
+        }
+        
         $result =  $this->db->select($sql);
         $d_data = new $this($this->registry);
         foreach ($result as $val) {
@@ -92,12 +115,16 @@ class DataDashboard {
         return $d_data;
     }
     
-    public function get_list_sp2d_selesai() {
+    public function get_list_sp2d_selesai($unitfilter=null) {
         //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
         
         $data = array();
         
-        $sql = "select distinct(check_number), jenis_sp2d, amount from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
+        if (!isset($unitfilter)) {
+            $sql = "select distinct(check_number), jenis_sp2d, amount from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
+        } else {
+            $sql = "select distinct(check_number), jenis_sp2d, amount from AP_CHECKS_ALL_V where ".$unitfilter." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
+        }
         $result =  $this->db->select($sql);
         
         foreach ($result as $val) {
@@ -112,14 +139,24 @@ class DataDashboard {
         return $data;
     }
     
-    public function get_lhp_rekap($hari) {
+    public function get_lhp_rekap($hari, $unitfilter=null) {
         $data = array();
         for ($i=0; $i<$hari; $i++) {
-            if ($hari == 1) {
-                $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal=(select max(tanggal) from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."')";
+            
+            if (!isset($unitfilter)) {
+                if ($hari == 1) {
+                    $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal=(select max(tanggal) from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."')";
+                } else {
+                    $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
+                }
             } else {
-                $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
+                if ($hari == 1) {
+                    $sql = "select * from spgr_mpn_dashboard where ".$unitfilter." and tanggal=(select max(tanggal) from spgr_mpn_dashboard where ".$unitfilter.")";
+                } else {
+                    $sql = "select * from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
+                }
             }
+            
             $result =  $this->db->select($sql);
             $d_data = new $this($this->registry);
             //var_dump($result);
@@ -145,7 +182,6 @@ class DataDashboard {
     }
     
     public function get_hist_spm_filter($filter) {
-        Session::get('id_user');
 		$sql = "SELECT OU_NAME, INVOICE_NUM, TO_USER, FU_DESCRIPTION, BEGIN_DATE, TIME_BEGIN_DATE from ap_invoices_all_v WHERE STATUS = 'OPEN' ";		
 		$no=0;
 		foreach ($filter as $filter) {
