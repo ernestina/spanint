@@ -119,8 +119,20 @@
         </div>
         <div id="bottom-status-bar">
             <div>
-                <div id="refresh-time"></div>
-                <div style="float: right;">Tampilkan data: <a href="<?php echo URL; ?>home/harian">Hari Ini</a><a href="<?php echo URL; ?>home/mingguan" class="active">7 Hari</a><a href="<?php echo URL; ?>home/bulanan">30 Hari</a></div>
+                <div id="kppn-select" style="float: left;">
+                    <?php
+                        if (Session::get('role')==KANWIL) {
+                            
+                            echo "Tampilkan data: <select id='kppn-list'>";
+                            echo "<option value='ALL'>SEMUA KPPN</option>";
+                            foreach ($this->kppn_list as $val) {
+                                echo "<option value='".$val->get_kd_d_kppn()."'>".$val->get_nama_user()."</option>";
+                            }
+                            echo "</select>";
+                        }
+                    ?>
+                </div>
+                <div style="float: right;">Periode: <a href="<?php echo URL; ?>home/harian">Hari Ini</a><a href="<?php echo URL; ?>home/mingguan" class="active">7 Hari</a><a href="<?php echo URL; ?>home/bulanan">30 Hari</a></div>
             </div>
         </div>
     </div>
@@ -392,10 +404,21 @@
     function homeDisplayProcessing() {
         
         //load the data via ajax
+        urlAddon = "";
+        
+        <?php
+            if (Session::get('role')==KANWIL) {
+                
+                echo "if ($('#kppn-list').val() != 'ALL') {"; 
+                echo "  urlAddon = '/'+$('#kppn-list').val();";
+                echo "}"; 
+            }
+        ?>
+        
         $.ajax({
             'async': false,
             'global': false,
-            'url': '<?php echo URL; ?>home/mingguanJSON',
+            'url': '<?php echo URL; ?>home/mingguanJSON'+urlAddon,
             'dataType': "json",
             'success': function (data) {
                 homeDataJSON = data;
@@ -406,6 +429,10 @@
         redrawExecuted = false;
         setWindowMode();
     }
+    
+    $('#kppn-list').change(function() {
+        homeDisplayProcessing();
+    });
     
     $(document).ready(function() {
         $( document ).tooltip(

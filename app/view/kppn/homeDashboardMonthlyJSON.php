@@ -38,7 +38,7 @@ echo '"jumlahSPMLainnya":"'.$total_lainnya.'"'; echo ' , ';
 echo '"jumlahSPMVoid":"'.$total_void.'"'; echo ' , ';
 
 echo '"volumeSPMGaji":"'.round($total_vol_gaji/1000000000).'"'; echo ' , ';
-echo '"volumeSPMNonGaji":"'.number_format(round($total_vol_non_gaji/1000000000)).'"'; echo ' , ';
+echo '"volumeSPMNonGaji":"'.round($total_vol_non_gaji/1000000000).'"'; echo ' , ';
 
 echo '"jumlahLHPCompleted":"'.$total_lhp_completed.'"'; echo ' , ';
 echo '"jumlahLHPValidated":"'.$total_lhp_validated.'"'; echo ' , ';
@@ -99,12 +99,6 @@ for ($i=29; $i>=0; $i--) {
 }
 
 echo '] , ';
-
-$pos_count = 0;
-
-foreach ($this->data_pos_spm as $value) {
-    $pos_count++;
-}
 
 echo '"jumlahReturSudahProses":"'.$this->data_retur->get_retur_sudah_proses().'"'; echo ' , ';
 echo '"jumlahReturBelumProses":"'.$this->data_retur->get_retur_belum_proses().'"'; echo ' , ';
