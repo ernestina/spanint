@@ -110,7 +110,7 @@
         </div>
         <div id="summary-container" style="display: none">
             <div>
-                <div class="ticker-title">Rekapitulasi</div>
+                <div class="ticker-title" style="height:0px; overflow-y: hidden; border: 0px; margin: 0px;">Rekapitulasi</div>
                 <div class="ticker-content">Tidak ada data.</div>
             </div>
         </div>
@@ -421,7 +421,7 @@
             }
             
             tableSummaryContents  += "<tr class='bold'>";
-            tableSummaryContents  +=   "<td style='text-align: left'>" + homeDataJSON.listKPPN[j] + "</td>";
+            tableSummaryContents  +=   "<td style='text-align: left'>Total</td>";
             tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMGaji + "</td>";
             tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMNonGaji + "</td>";
             tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMLainnya + "</td>";
