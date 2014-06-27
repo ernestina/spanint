@@ -79,6 +79,13 @@
     width: 50%;
     padding: 10px;
 }
+#summary-container > div {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    
+    width: 100%;
+    padding: 20px;
+}
 #line-container > div {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -96,6 +103,21 @@
 }
 .pie-info {
     padding-bottom: 10px;
+}
+.hide {
+    display: none;
+}
+.ticker-content table {
+    width: 100%;
+}
+.ticker-content table td {
+    text-align: center;
+    margin: 5px;
+    border: 1px solid #dedede;
+    vertical-align: middle;
+}
+.bold {
+    font-weight: bold;
 }
 
 /* Charting */
@@ -241,4 +263,12 @@
 }
 .low-res .low-res-hidden {
     display: none;
+}
+
+#kppn-select select {
+    display: inline-block;
+    border-radius: 4px;
+    height: auto;
+    padding: 2px;
+    border: 1px solid #dedede;
 }
