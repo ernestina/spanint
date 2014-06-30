@@ -386,6 +386,7 @@
 
             tableSummaryContents  += "<tr class='bold'>";
             tableSummaryContents  +=   "<td rowspan=2 style='text-align: left'>Nama KPPN</td>";
+            tableSummaryContents  +=   "<td rowspan=2>SPM dalam Proses</td>";
             tableSummaryContents  +=   "<td colspan=4>SP2D</td>";
             tableSummaryContents  +=   "<td colspan=2>Retur</td>";
             tableSummaryContents  +=   "<td colspan=4>LHP</td>";
@@ -404,9 +405,12 @@
             tableSummaryContents  +=   "<td>Lainnya</td>";
             tableSummaryContents  += "</tr>";
             
+            totalSPMOngoing = 0;
+            
             for (j=0; j<homeDataJSON.listKPPN.length; j++) {
                 tableSummaryContents  += "<tr>";
                 tableSummaryContents  +=   "<td style='text-align: left'>" + homeDataJSON.listKPPN[j] + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.spmOngoingKPPN[j]) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].gaji) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].nonGaji) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].lainnya) + "</td>";
@@ -418,10 +422,13 @@
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].error) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].etc) + "</td>";
                 tableSummaryContents  += "</tr>";
+                
+                totalSPMOngoing += parseInt(homeDataJSON.spmOngoingKPPN[j]);
             }
             
             tableSummaryContents  += "<tr class='bold'>";
             tableSummaryContents  +=   "<td style='text-align: left'>Total</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(totalSPMOngoing) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMGaji) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMNonGaji) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMLainnya) + "</td>";
@@ -451,14 +458,19 @@
             
             tickerOngoingTotal = homeDataJSON.spmDalamProses.length;
             if (homeDataJSON.spmDalamProses.length > 0) {
+                
+                tickerOngoingContents += "<table>";
+                
                 for (i=0; i<homeDataJSON.spmDalamProses.length; i++) {
-                    tickerOngoingContents += "<div id='ticker-item-" + i + "' class='ticker-item'>";
-                    tickerOngoingContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (i+1) + "</div>";
-                    tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].nomorSPM + "</div>";
-                    tickerOngoingContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.spmDalamProses[i].userSPM + "</div>";
-                    tickerOngoingContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.spmDalamProses[i].mulaiSPM + "</div>";
-                    tickerOngoingContents += "</div>";
+                    tickerOngoingContents += "<tr>";
+                    tickerOngoingContents +=   "<td>" + (i+1) + "</td>";
+                    tickerOngoingContents +=   "<td>" + homeDataJSON.spmDalamProses[i].nomorSPM + "</td>";
+                    tickerOngoingContents +=   "<td>" + homeDataJSON.spmDalamProses[i].userSPM + "</td>";
+                    tickerOngoingContents +=   "<td>" + homeDataJSON.spmDalamProses[i].mulaiSPM + "</td>";
+                    tickerOngoingContents += "</tr>";
                 }
+                
+                tickerOngoingContents += "</table>";
                 
                 $("#ticker-ongoing-container > .ticker-content").html(tickerOngoingContents);
             }
@@ -468,20 +480,25 @@
                 
                 totalNominalSP2D = 0;
                 
+                tickerCompletedContents += "<table>";
+                
                 for (j=0; j<homeDataJSON.sp2dSelesai.length; j++) {
-                    tickerCompletedContents += "<div id='ticker-item-" + j + "' class='ticker-item'>";
-                    tickerCompletedContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (j+1) + "</div>";
-                    tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</div>";
-                    tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</div>";
-                    tickerCompletedContents +=   "<div class='kanan spaced-right'>" + accounting.formatMoney(homeDataJSON.sp2dSelesai[j].nominalSP2D, "Rp", 0, ",", ".") + "</div>";
-                    tickerCompletedContents += "</div>";
+                    tickerCompletedContents += "<tr>";
+                    tickerCompletedContents +=   "<td>" + (j+1) + "</td>";
+                    tickerCompletedContents +=   "<td>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</td>";
+                    tickerCompletedContents +=   "<td>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</td>";
+                    tickerCompletedContents +=   "<td style='text-align: right'>" + accounting.formatMoney(homeDataJSON.sp2dSelesai[j].nominalSP2D, "Rp ", 2, ",", ".") + "</td>";
+                    tickerCompletedContents += "</tr>";
                     
-                    totalNominalSP2D += homeDataJSON.sp2dSelesai[j].nominalSP2D;
+                    totalNominalSP2D += parseInt(homeDataJSON.sp2dSelesai[j].nominalSP2D);
                 }
                 
-                tickerCompletedContents += "<div id='ticker-item-" + j + "' class='ticker-item'>";
-                tickerCompletedContents +=   "<div class='kanan spaced-right'>" + totalNominalSP2D + "</div>";
-                tickerCompletedContents += "</div>";
+                tickerCompletedContents += "<tr class='bold'>";
+                tickerCompletedContents += "<td colspan=3>Total ";
+                tickerCompletedContents +=   "<td style='text-align: right'>" + accounting.formatMoney(totalNominalSP2D, "Rp ", 2, ",", ".") + "</td>";
+                tickerCompletedContents += "</tr>";
+                
+                tickerCompletedContents += "</table>";
                 
                 $("#ticker-completed-container > .ticker-content").html(tickerCompletedContents);
             }
