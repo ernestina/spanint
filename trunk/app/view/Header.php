@@ -13,6 +13,7 @@
         <script src="<?php echo URL; ?>public/js/gaugejs/justgage.1.0.1.min.js"></script>
         <script src="<?php echo URL; ?>public/js/Chart.js"></script>
         <script src="<?php echo URL; ?>public/js/paging.js"></script>
+        <script src="<?php echo URL; ?>public/js/Accounting.min.js"></script>
 		
         <!--css-nya-->
 		<link href="<?php echo URL; ?>public/js/jquery-ui-1.10.3/themes/base/jquery.ui.all.css" rel="stylesheet">
@@ -109,7 +110,7 @@
                     }
                     if (Session::get('role') == KANWIL) {
 
-
+                        echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
 						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
