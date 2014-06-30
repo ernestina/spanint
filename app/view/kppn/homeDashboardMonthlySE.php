@@ -329,21 +329,21 @@
         var canvasStatusLHP = $("#pie-lhp-canvas").get(0).getContext("2d");
         var chartStatusLHP = new Chart(canvasStatusLHP).Doughnut(dataStatusLHP);
         
-        $("#number-retur-completed").html(homeDataJSON.jumlahReturSudahProses);
-        $("#number-retur-in-progress").html(homeDataJSON.jumlahReturBelumProses);
+        $("#number-retur-completed").html(accounting.formatNumber(homeDataJSON.jumlahReturSudahProses));
+        $("#number-retur-in-progress").html(accounting.formatNumber(homeDataJSON.jumlahReturBelumProses));
         
-        $("#number-sp2d-gaji").html(homeDataJSON.jumlahSPMGaji);
-        $("#number-sp2d-non-gaji").html(homeDataJSON.jumlahSPMNonGaji);
-        $("#number-sp2d-retur").html(homeDataJSON.jumlahSPMLainnya);
-        $("#number-sp2d-void").html(homeDataJSON.jumlahSPMVoid);
+        $("#number-sp2d-gaji").html(accounting.formatNumber(homeDataJSON.jumlahSPMGaji));
+        $("#number-sp2d-non-gaji").html(accounting.formatNumber(homeDataJSON.jumlahSPMNonGaji));
+        $("#number-sp2d-retur").html(accounting.formatNumber(homeDataJSON.jumlahSPMLainnya));
+        $("#number-sp2d-void").html(accounting.formatNumber(homeDataJSON.jumlahSPMVoid));
         
-        $("#number-sp2d-nominal-gaji").html(homeDataJSON.volumeSPMGaji + " M<span class='low-res-hidden'>ILYAR</span>");
-        $("#number-sp2d-nominal-non-gaji").html(homeDataJSON.volumeSPMNonGaji + " M<span class='low-res-hidden'>ILYAR</span>");
+        $("#number-sp2d-nominal-gaji").html(accounting.formatNumber(homeDataJSON.volumeSPMGaji) + " M<span class='low-res-hidden'>ILYAR</span>");
+        $("#number-sp2d-nominal-non-gaji").html(accounting.formatNumber(homeDataJSON.volumeSPMNonGaji) + " M<span class='low-res-hidden'>ILYAR</span>");
         
-        $("#number-lhp-completed").html(homeDataJSON.jumlahLHPCompleted);
-        $("#number-lhp-validated").html(homeDataJSON.jumlahLHPValidated);
-        $("#number-lhp-error").html(homeDataJSON.jumlahLHPError);
-        $("#number-lhp-lainnya").html(homeDataJSON.jumlahLHPLainnya);
+        $("#number-lhp-completed").html(accounting.formatNumber(homeDataJSON.jumlahLHPCompleted));
+        $("#number-lhp-validated").html(accounting.formatNumber(homeDataJSON.jumlahLHPValidated));
+        $("#number-lhp-error").html(accounting.formatNumber(homeDataJSON.jumlahLHPError));
+        $("#number-lhp-lainnya").html(accounting.formatNumber(homeDataJSON.jumlahLHPLainnya));
         
         renderLineChart();
     }

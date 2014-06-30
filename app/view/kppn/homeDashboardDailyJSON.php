@@ -98,10 +98,10 @@ if ((Session::get('role') == KANWIL) and ($this->is_rekap)) {
             echo ' , ';
         }
         
-        $total_lhp_completed_kppn += 0;
-        $total_lhp_validated_kppn += 0;
-        $total_lhp_error_kppn += 0;
-        $total_lhp_etc_kppn += 0;
+        $total_lhp_completed_kppn = 0;
+        $total_lhp_validated_kppn = 0;
+        $total_lhp_error_kppn = 0;
+        $total_lhp_etc_kppn = 0;
         
         foreach ($lhp_rekap_kppn as $lhp_rekap_harian) {
             
