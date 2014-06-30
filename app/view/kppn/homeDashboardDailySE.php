@@ -421,7 +421,6 @@
             }
             
             tableSummaryContents  += "<tr class='bold'>";
-<<<<<<< .mine
             tableSummaryContents  +=   "<td style='text-align: left'>Total</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMGaji) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMNonGaji) + "</td>";
@@ -433,19 +432,6 @@
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPValidated) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPError) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPLainnya) + "</td>";
-=======
-            tableSummaryContents  +=   "<td style='text-align: left'>Total</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMGaji + "</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMNonGaji + "</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMLainnya + "</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMVoid + "</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahReturSudahProses + "</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahReturBelumProses + "</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPCompleted + "</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPValidated + "</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPError + "</td>";
-            tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPLainnya + "</td>";
->>>>>>> .r244
             tableSummaryContents  += "</tr>";
 
             tableSummaryContents  += "</table>";
