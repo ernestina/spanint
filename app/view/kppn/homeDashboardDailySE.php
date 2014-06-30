@@ -266,29 +266,29 @@
         var canvasStatusLHP = $("#pie-lhp-canvas").get(0).getContext("2d");
         var chartStatusLHP = new Chart(canvasStatusLHP).Doughnut(dataStatusLHP);
         
-        $("#number-retur-completed").html(homeDataJSON.jumlahReturSudahProses);
-        $("#number-retur-in-progress").html(homeDataJSON.jumlahReturBelumProses);
+        $("#number-retur-completed").html(accounting.formatNumber(homeDataJSON.jumlahReturSudahProses));
+        $("#number-retur-in-progress").html(accounting.formatNumber(homeDataJSON.jumlahReturBelumProses));
         
-        $("#number-sp2d-gaji").html(homeDataJSON.jumlahSPMGaji);
-        $("#number-sp2d-non-gaji").html(homeDataJSON.jumlahSPMNonGaji);
-        $("#number-sp2d-retur").html(homeDataJSON.jumlahSPMLainnya);
-        $("#number-sp2d-void").html(homeDataJSON.jumlahSPMVoid);
+        $("#number-sp2d-gaji").html(accounting.formatNumber(homeDataJSON.jumlahSPMGaji));
+        $("#number-sp2d-non-gaji").html(accounting.formatNumber(homeDataJSON.jumlahSPMNonGaji));
+        $("#number-sp2d-retur").html(accounting.formatNumber(homeDataJSON.jumlahSPMLainnya));
+        $("#number-sp2d-void").html(accounting.formatNumber(homeDataJSON.jumlahSPMVoid));
         
         if (homeDataJSON.displayMode == "REKAP") {
             $("#tgl-lhp-last").html("");
         } else {
             $("#tgl-lhp-last").html(homeDataJSON.tanggalLHPTerakhir);
-            $("#ticker-ongoing-container .ticker-total").html(homeDataJSON.jumlahSPMOngoing + " SPM");
-            $("#ticker-completed-container .ticker-total").html(parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid) + " SP2D");
+            $("#ticker-ongoing-container .ticker-total").html(accounting.formatNumber(homeDataJSON.jumlahSPMOngoing) + " SPM");
+            $("#ticker-completed-container .ticker-total").html(accounting.formatNumber(parseInt(homeDataJSON.jumlahSPMGaji) + parseInt(homeDataJSON.jumlahSPMNonGaji) + parseInt(homeDataJSON.jumlahSPMLainnya) + parseInt(homeDataJSON.jumlahSPMVoid)) + " SP2D");
         }
         
-        $("#number-sp2d-nominal-gaji").html(homeDataJSON.volumeSPMGaji + " M<span class='low-res-hidden'>ILYAR</span>");
-        $("#number-sp2d-nominal-non-gaji").html(homeDataJSON.volumeSPMNonGaji + " M<span class='low-res-hidden'>ILYAR</span>");
+        $("#number-sp2d-nominal-gaji").html(accounting.formatNumber(homeDataJSON.volumeSPMGaji) + " M<span class='low-res-hidden'>ILYAR</span>");
+        $("#number-sp2d-nominal-non-gaji").html(accounting.formatNumber(homeDataJSON.volumeSPMNonGaji) + " M<span class='low-res-hidden'>ILYAR</span>");
         
-        $("#number-lhp-completed").html(homeDataJSON.jumlahLHPCompleted);
-        $("#number-lhp-validated").html(homeDataJSON.jumlahLHPValidated);
-        $("#number-lhp-error").html(homeDataJSON.jumlahLHPError);
-        $("#number-lhp-lainnya").html(homeDataJSON.jumlahLHPLainnya);
+        $("#number-lhp-completed").html(accounting.formatNumber(homeDataJSON.jumlahLHPCompleted));
+        $("#number-lhp-validated").html(accounting.formatNumber(homeDataJSON.jumlahLHPValidated));
+        $("#number-lhp-error").html(accounting.formatNumber(homeDataJSON.jumlahLHPError));
+        $("#number-lhp-lainnya").html(accounting.formatNumber(homeDataJSON.jumlahLHPLainnya));
     }
     
     function calculateWidth() {
@@ -407,20 +407,33 @@
             for (j=0; j<homeDataJSON.listKPPN.length; j++) {
                 tableSummaryContents  += "<tr>";
                 tableSummaryContents  +=   "<td style='text-align: left'>" + homeDataJSON.listKPPN[j] + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.sp2dKPPN[j].gaji + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.sp2dKPPN[j].nonGaji + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.sp2dKPPN[j].lainnya + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.sp2dKPPN[j].void + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.returKPPN[j].sudahProses + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.returKPPN[j].belumProses + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.lhpKPPN[j].completed + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.lhpKPPN[j].validated + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.lhpKPPN[j].error + "</td>";
-                tableSummaryContents  +=   "<td>" + homeDataJSON.lhpKPPN[j].etc + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].gaji) + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].nonGaji) + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].lainnya) + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].void) + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.returKPPN[j].sudahProses) + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.returKPPN[j].belumProses) + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].completed) + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].validated) + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].error) + "</td>";
+                tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].etc) + "</td>";
                 tableSummaryContents  += "</tr>";
             }
             
             tableSummaryContents  += "<tr class='bold'>";
+<<<<<<< .mine
+            tableSummaryContents  +=   "<td style='text-align: left'>Total</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMGaji) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMNonGaji) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMLainnya) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMVoid) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahReturSudahProses) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahReturBelumProses) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPCompleted) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPValidated) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPError) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPLainnya) + "</td>";
+=======
             tableSummaryContents  +=   "<td style='text-align: left'>Total</td>";
             tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMGaji + "</td>";
             tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahSPMNonGaji + "</td>";
@@ -432,6 +445,7 @@
             tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPValidated + "</td>";
             tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPError + "</td>";
             tableSummaryContents  +=   "<td>" + homeDataJSON.jumlahLHPLainnya + "</td>";
+>>>>>>> .r244
             tableSummaryContents  += "</tr>";
 
             tableSummaryContents  += "</table>";
@@ -459,19 +473,30 @@
                     tickerOngoingContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.spmDalamProses[i].mulaiSPM + "</div>";
                     tickerOngoingContents += "</div>";
                 }
+                
                 $("#ticker-ongoing-container > .ticker-content").html(tickerOngoingContents);
             }
 
             tickerCompletedTotal = homeDataJSON.sp2dSelesai.length;
             if (homeDataJSON.sp2dSelesai.length > 0) {
+                
+                totalNominalSP2D = 0;
+                
                 for (j=0; j<homeDataJSON.sp2dSelesai.length; j++) {
                     tickerCompletedContents += "<div id='ticker-item-" + j + "' class='ticker-item'>";
                     tickerCompletedContents +=   "<div class='kiri' style='width: 40px; text-align:right;'>" + (j+1) + "</div>";
                     tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</div>";
                     tickerCompletedContents +=   "<div class='kiri spaced-left'>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</div>";
-                    tickerCompletedContents +=   "<div class='kanan spaced-right'>" + homeDataJSON.sp2dSelesai[j].nominalSP2D + "</div>";
+                    tickerCompletedContents +=   "<div class='kanan spaced-right'>" + accounting.formatMoney(homeDataJSON.sp2dSelesai[j].nominalSP2D, "Rp", 0, ",", ".") + "</div>";
                     tickerCompletedContents += "</div>";
+                    
+                    totalNominalSP2D += homeDataJSON.sp2dSelesai[j].nominalSP2D;
                 }
+                
+                tickerCompletedContents += "<div id='ticker-item-" + j + "' class='ticker-item'>";
+                tickerCompletedContents +=   "<div class='kanan spaced-right'>" + totalNominalSP2D + "</div>";
+                tickerCompletedContents += "</div>";
+                
                 $("#ticker-completed-container > .ticker-content").html(tickerCompletedContents);
             }
             
