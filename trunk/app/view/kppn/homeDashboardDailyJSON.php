@@ -149,6 +149,29 @@ if ((Session::get('role') == KANWIL) and ($this->is_rekap)) {
     
     echo '] , ';
     
+    echo '"spmOngoingKPPN": [';
+    
+    $pos_count = 0;
+    
+    foreach ($this->data_pos_spm as $pos_spm_kppn) {
+        
+        $ongoing = 0;
+        
+        foreach ($pos_spm_kppn as $value) {
+            $ongoing++;
+        }
+        
+        if ($pos_count > 0) {
+            echo ' , ';
+        }
+        
+        echo '"'.$ongoing.'"';
+        
+        $pos_count++;
+    }
+    
+    echo '] , ';
+    
     echo '"jumlahSPMGaji":"'.$total_gaji.'"'; echo ' , ';
     echo '"jumlahSPMNonGaji":"'.$total_non_gaji.'"'; echo ' , ';
     echo '"jumlahSPMLainnya":"'.$total_lainnya.'"'; echo ' , ';
