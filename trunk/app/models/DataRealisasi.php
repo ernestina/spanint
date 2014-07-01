@@ -70,7 +70,8 @@ class DataRealisasi{
 				where 
 				substr(a.akun,1,1) in ('5','6')
 				and a.budget_type = '2' 
-				and a.satker=b.kdsatker
+				and a.satker=b.kdsatker 
+				and substr(a.bank,1,1)  <= '9' 
 				"
 				;
 		$no=0;
@@ -81,7 +82,7 @@ class DataRealisasi{
 		$sql .= " group by a.satker ,b.nmsatker, a.kppn, substr(a.program,1,3) " ;
 		$sql .= " ORDER by a.satker " ;
 		
-		//var_dump ($sql);
+		var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
@@ -130,6 +131,7 @@ class DataRealisasi{
 				substr(a.akun,1,1) in ('5','6')
 				and a.budget_type = '2' 
 				and a.satker=b.kdsatker
+				and substr(a.bank,1,1)  <= '9'
 				"
 				;
 		$no=0;
@@ -188,6 +190,7 @@ class DataRealisasi{
 				substr(a.akun,1,1) in ('5','6')
 				and a.budget_type = '2'			
 				and substr(a.program,1,3)=b.kdba
+				and substr(a.bank,1,1)  <= '9'
 				"
 				;
 		$no=0;

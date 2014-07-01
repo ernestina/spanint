@@ -52,10 +52,11 @@ class DataFA{
 				FROM " 
 				. $this->_table1. " A, "
 				. $this->_table2. " B 
-				WHERE BANK = '00000' AND
+				WHERE
 				SUBSTR(A.AKUN,1,1) = '5' AND
 				SUBSTR(A.PERIOD_NAME,5,2) = '14' AND
 				A.BUDGET_TYPE = '2' AND
+				substr(a.bank,1,1)  <= '9'  and
 				A.SATKER=B.KDSATKER ";
 		$no=0;
 		foreach ($filter as $filter) {
