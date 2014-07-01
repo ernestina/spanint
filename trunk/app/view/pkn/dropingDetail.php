@@ -46,6 +46,7 @@ if (isset($this->last_update)){
 				if (empty($this->data)){
 					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
 				} else {
+					$total = 0;
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
 							echo "<td>" . $no++ . "</td>";
@@ -53,6 +54,7 @@ if (isset($this->last_update)){
 							echo "<td>" . $value->get_payment_currency_code() . "</td>";
 							echo "<td>" . $value->get_bank_trxn_number() . "</td>";
 							echo "<td align = 'right'>" . number_format($value->get_payment_amount()) . "</td>";
+							$total+=$value->get_payment_amount();
 							echo "<td>" . $value->get_attribute4() . "</td>";
 						echo "</tr>	";
 					}
@@ -61,6 +63,9 @@ if (isset($this->last_update)){
 				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
 			}
 			?>
+			<td colspan="4"><b>TOTAL</b></td>
+			<td align = 'right'><b><?php echo number_format($total) ?></b></td>
+			<td > </td>
 			</tbody>
         </table></div>
 </div>

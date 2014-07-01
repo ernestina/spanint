@@ -54,7 +54,7 @@ class DataDroping {
 			$sql .= " AND ".$filter;
 		}
 		$sql .= "  GROUP BY CREATION_DATE ORDER BY CREATION_DATE";
-		//var_dump ($sql);
+		var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
@@ -71,9 +71,9 @@ class DataDroping {
     }
     
     public function get_droping_detail_filter($filter) {
-		$sql = "select ID_DETAIL, CREATION_DATE, PAYMENT_CURRENCY_CODE, BANK_TRXN_NUMBER, PAYMENT_AMOUNT, ATTRIBUTE4 
+		$sql = "select DISTINCT(BANK_TRXN_NUMBER), to_char(CREATION_DATE,'dd-mm-yyyy hh24:mi:ss') CREATION_DATE, PAYMENT_CURRENCY_CODE,  PAYMENT_AMOUNT, ATTRIBUTE4 
 				FROM " . $this->_table1 . "
-				WHERE 1=1";
+				WHERE TRXN_STATUS_CODE = 'SETTLED' AND BANK <> 'KPH' ";
 		$no=0;
 		//var_dump($filter);
 		foreach ($filter as $filter) {
@@ -86,7 +86,7 @@ class DataDroping {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_id($val['ID_DETAIL']);
-            $d_data->set_creation_date(date("d-m-Y hh24:mi:ss",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_payment_currency_code($val['PAYMENT_CURRENCY_CODE']);
             $d_data->set_bank_trxn_number($val['BANK_TRXN_NUMBER']);
             $d_data->set_payment_amount($val['PAYMENT_AMOUNT']);

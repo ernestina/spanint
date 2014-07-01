@@ -95,11 +95,11 @@ if (isset($this->last_update)){
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
 							echo "<td>" . $no++ . "</td>";
-							echo "<td><a href=".URL."dataDroping/detailDroping/" . $this->d_bank."/".$value->get_creation_date()." target='_blank'>" . $value->get_creation_date() . "</a></td>";
+							echo "<td>" . $value->get_creation_date() . "</td>";
 							echo "<td>" . number_format($value->get_jumlah_ftp_file_name()) . "</td>";
 							echo "<td>" . number_format($value->get_jumlah_check_number_line_num()) . "</td>";
 							echo "<td align = 'right'>" . number_format($value->get_jumlah_check_amount()) . "</td>";
-							echo "<td align = 'right'>" . number_format($value->get_payment_amount()) . "</td>";
+							echo "<td align = 'right'><a href=".URL."dataDroping/detailDroping/" . $this->d_bank."/".$value->get_creation_date()." target='_blank'>" . number_format($value->get_payment_amount()) . "</a></td>";
 							$selisih = $value->get_payment_amount()-$value->get_jumlah_check_amount();
 							echo "<td align = 'right'>" . number_format($selisih) . "</td>";
 							if ($selisih<0) { echo "<td>Kurang Droping</td>"; } else if ($selisih > 0) {echo "<td>Lebih Droping</td>";} else { echo "<td></td>";};
