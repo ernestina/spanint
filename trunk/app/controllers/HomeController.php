@@ -37,7 +37,7 @@ class homeController extends BaseController {
         $this->view->render('kppn/homeDashboardMonthlySE');
     }
     
-    public function harianJSON($kodeunit=null) {
+    public function harianJSON($kodeunit=null) {   
         	
         if (Session::get('role')==KANWIL){
             
@@ -79,6 +79,8 @@ class homeController extends BaseController {
                 
             } else {
                 
+                $this->view->data_kode_unit = $kodeunit;
+                
                 $this->view->is_rekap = false;
                 
                 $unitfilter .= " substr(CHECK_NUMBER,3,3)='".$kodeunit."' ";
@@ -100,6 +102,8 @@ class homeController extends BaseController {
             }
             
         } else {
+            
+            $this->view->data_kode_unit = Session::get('id_user');
         
             $d_dashboard = new DataDashboard($this->registry);
 
