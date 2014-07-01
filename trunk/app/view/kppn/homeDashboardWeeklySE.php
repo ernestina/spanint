@@ -328,8 +328,8 @@
         var canvasStatusLHP = $("#pie-lhp-canvas").get(0).getContext("2d");
         var chartStatusLHP = new Chart(canvasStatusLHP).Doughnut(dataStatusLHP);
         
-        $("#number-retur-completed").html(accounting.formatNumber(homeDataJSON.jumlahReturSudahProses));
-        $("#number-retur-in-progress").html(accounting.formatNumber(homeDataJSON.jumlahReturBelumProses));
+        $("#number-retur-completed").html(accounting.formatNumber(homeDataJSON.jumlahReturSudahProses) + " (" + accounting.formatNumber(parseInt(homeDataJSON.nominalReturSudahProses) / 1000000000) + " M<span class='low-res-hidden'>ILYAR</span>)");
+        $("#number-retur-in-progress").html(accounting.formatNumber(homeDataJSON.jumlahReturBelumProses) + " (" + accounting.formatNumber(parseInt(homeDataJSON.nominalReturBelumProses) / 1000000000) + " M<span class='low-res-hidden'>ILYAR</span>)");
         
         $("#number-sp2d-gaji").html(accounting.formatNumber(homeDataJSON.jumlahSPMGaji));
         $("#number-sp2d-non-gaji").html(accounting.formatNumber(homeDataJSON.jumlahSPMNonGaji));

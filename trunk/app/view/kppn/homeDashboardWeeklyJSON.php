@@ -102,7 +102,9 @@ echo '] , ';
 
 echo '"jumlahReturSudahProses":"'.$this->data_retur->get_retur_sudah_proses().'"'; echo ' , ';
 echo '"jumlahReturBelumProses":"'.$this->data_retur->get_retur_belum_proses().'"'; echo ' , ';
-
+echo '"nominalReturSudahProses":"'.$this->data_retur->get_vol_retur_sudah_proses().'"'; echo ' , ';
+echo '"nominalReturBelumProses":"'.$this->data_retur->get_vol_retur_belum_proses().'"'; echo ' , ';
+echo '"tanggalUpdate":"'.$this->data_last_update.'"'; echo ' , ';
 echo '"jumlahSPMOngoing":"'.$pos_count.'"';
 
 echo '}';

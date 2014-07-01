@@ -22,6 +22,8 @@ if ((Session::get('role') == KANWIL) and ($this->is_rekap)) {
     
     $total_retur_sudah_proses = 0;
     $total_retur_belum_proses = 0;
+    $total_vol_retur_sudah_proses = 0;
+    $total_vol_retur_belum_proses = 0;
     
     $pos_count = 0;
     
@@ -138,11 +140,14 @@ if ((Session::get('role') == KANWIL) and ($this->is_rekap)) {
         }
         
         echo '{';
-        echo '"sudahProses":"'.$retur_kppn->get_retur_sudah_proses().'" , "belumProses":"'.$retur_kppn->get_retur_belum_proses().'"';
+        echo '"sudahProses":"'.$retur_kppn->get_retur_sudah_proses().'" , "belumProses":"'.$retur_kppn->get_retur_belum_proses().'" , "volSudahProses":"'.$retur_kppn->get_vol_retur_sudah_proses().'" , "volBelumProses":"'.$retur_kppn->get_vol_retur_belum_proses().'"';
         echo '}';
         
         $total_retur_sudah_proses += $retur_kppn->get_retur_sudah_proses();
         $total_retur_belum_proses += $retur_kppn->get_retur_belum_proses();
+        
+        $total_vol_retur_sudah_proses += $retur_kppn->get_vol_retur_sudah_proses();
+        $total_vol_retur_belum_proses += $retur_kppn->get_vol_retur_belum_proses();
         
         $pos_count++;
     }
@@ -186,7 +191,10 @@ if ((Session::get('role') == KANWIL) and ($this->is_rekap)) {
     echo '"jumlahLHPLainnya":"'.$total_lhp_etc.'"'; echo ' , ';
     
     echo '"jumlahReturSudahProses":"'.$total_retur_sudah_proses.'"'; echo ' , ';
-    echo '"jumlahReturBelumProses":"'.$total_retur_belum_proses.'"';
+    echo '"jumlahReturBelumProses":"'.$total_retur_belum_proses.'"'; echo ' , ';
+    echo '"nominalReturSudahProses":"'.$total_vol_retur_sudah_proses.'"'; echo ' , ';
+    echo '"nominalReturBelumProses":"'.$total_vol_retur_belum_proses.'"'; echo ' , ';
+    echo '"tanggalUpdate":"'.$this->data_last_update.'"';
     
 } else {
     
@@ -258,7 +266,7 @@ if ((Session::get('role') == KANWIL) and ($this->is_rekap)) {
             echo ' , ';
         }
         echo '{';
-        echo '"nomorSP2D":"'.$value->get_check_number().'" , "jenisSP2D":"'.$value->get_jenis_sp2d().'" , "nominalSP2D":"'.$value->get_nominal_sp2d().'"';
+        echo '"nomorSP2D":"'.$value->get_check_number().'" , "jenisSP2D":"'.$value->get_jenis_sp2d().'" , "nominalSP2D":"'.$value->get_nominal_sp2d().'" , "mataUangSP2D":"'.$value->get_currency_sp2d().'" , "nominalKotorSP2D":"'.$value->get_gross_nominal_sp2d().'"';
         echo '}';
         $pos_count_com++;
     }
@@ -267,9 +275,16 @@ if ((Session::get('role') == KANWIL) and ($this->is_rekap)) {
     
     echo '"jumlahReturSudahProses":"'.$this->data_retur->get_retur_sudah_proses().'"'; echo ' , ';
     echo '"jumlahReturBelumProses":"'.$this->data_retur->get_retur_belum_proses().'"'; echo ' , ';
+    echo '"nominalReturSudahProses":"'.$this->data_retur->get_vol_retur_sudah_proses().'"'; echo ' , ';
+    echo '"nominalReturBelumProses":"'.$this->data_retur->get_vol_retur_belum_proses().'"'; echo ' , ';
     echo '"tanggalLHPTerakhir":"'.$this->data_lhp_rekap[0]->get_tgl_lhp().'"'; echo ' , ';
-
-    echo '"jumlahSPMOngoing":"'.$pos_count.'"';
+    echo '"jumlahSPMOngoing":"'.$pos_count.'"'; echo ' , ';
+    if (isset($this->data_kode_unit)) {
+        echo '"kodeUnit":"'.$this->data_kode_unit.'"'; echo ' , ';
+    } else {
+        echo '"kodeUnit":"undefined"'; echo ' , ';
+    }
+    echo '"tanggalUpdate":"'.$this->data_last_update.'"';
     
 }
 
