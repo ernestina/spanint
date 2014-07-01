@@ -19,7 +19,6 @@ class DataKppnController extends BaseController {
      */
 
     public function index() {
-		header('location:' . URL . 'dataKppn/download');
     }
 	
 	public function monitoringSp2d() {
@@ -88,7 +87,7 @@ class DataKppnController extends BaseController {
 				}
 				$this->view->data = $d_sppm->get_sppm_filter($filter);
 			}	
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN OR Session::get('role')==PKN){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
@@ -648,6 +647,7 @@ class DataKppnController extends BaseController {
 				$d_kppn = new DataUser($this->registry);
 				$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
 		} else {
+			if (Session::get('id_user')!='')
 			$filter[$no++]=" KDKPPN = ".Session::get('id_user');
 		}
 			

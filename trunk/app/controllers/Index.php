@@ -22,7 +22,7 @@ class Index extends BaseController {
 		} elseif (Session::get('role') == PKN) {
             header('location:' . URL . 'dataRetur/monitoringReturPKN');
         } elseif (Session::get('role') == KANWIL) {
-            header('location:' . URL . 'dataKppn/monitoringSp2d');
+            header('location:' . URL . 'home');
         }else {
             header('location:' . URL . 'auth/login');
         }
