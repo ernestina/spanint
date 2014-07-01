@@ -272,3 +272,13 @@
     padding: 2px;
     border: 1px solid #dedede;
 }
+
+#warning-container {
+    float: left;
+    margin-left: 20px;
+}
+
+#warning-container div {
+    margin-top: 1px;
+    padding: 4px 10px 4px 10px;
+}
