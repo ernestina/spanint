@@ -49,9 +49,8 @@ class DataDashboard {
     }
     
     public function get_last_update_all() {
-		$sql = "SELECT to_char(MIN(LAST_UPDATE),'dd-mm-yyyy hh24:mi:ss') LAST_UPDATE FROM T_LAST_UPDATE";
-        $result = $this->db->select($sql);
-		//var_dump ($result);  
+		$sql = "SELECT to_char(MAX(LAST_UPDATE),'dd-mm-yyyy hh24:mi:ss') LAST_UPDATE FROM T_LAST_UPDATE";
+        $result = $this->db->select($sql); 
         foreach ($result as $val) {
             $d_data = $val['LAST_UPDATE'];
         }
@@ -64,9 +63,9 @@ class DataDashboard {
         $data = array();
         for ($i=0; $i<$hari; $i++) {
             if (!isset($unitfilter)) {
-                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount from AP_CHECKS_ALL_V where substr(check_number,3,3) = '".Session::get('id_user')."' and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select * from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '".Session::get('id_user')."' and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             } else {
-                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount from AP_CHECKS_ALL_V where ".$unitfilter." and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select * from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where ".$unitfilter." and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             }
             
             //var_dump($sql);
@@ -98,9 +97,9 @@ class DataDashboard {
     
     public function get_sp2d_retur($unitfilter=null) {
         if (!isset($unitfilter)) {
-            $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH from RETUR_SPAN_V where KDKPPN='".Session::get('id_user')."' group by STATUS_RETUR";
+            $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH, sum(AMOUNT) NOMINAL from RETUR_SPAN_V where KDKPPN='".Session::get('id_user')."' group by STATUS_RETUR";
         } else {
-            $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH from RETUR_SPAN_V where ".$unitfilter." group by STATUS_RETUR";
+            $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH, sum(AMOUNT) NOMINAL from RETUR_SPAN_V where ".$unitfilter." group by STATUS_RETUR";
         }
         
         $result =  $this->db->select($sql);
@@ -108,8 +107,10 @@ class DataDashboard {
         foreach ($result as $val) {
             if ($val['STATUS_RETUR']=='SUDAH PROSES') {
                 $d_data->set_retur_sudah_proses($d_data->get_retur_sudah_proses() + $val['JUMLAH']);
+                $d_data->set_vol_retur_sudah_proses($d_data->get_vol_retur_sudah_proses() + $val['NOMINAL']);
             } else {
                 $d_data->set_retur_belum_proses($d_data->get_retur_belum_proses() + $val['JUMLAH']);
+                $d_data->set_vol_retur_belum_proses($d_data->get_vol_retur_belum_proses() + $val['NOMINAL']);
             }
         }
         return $d_data;
@@ -121,17 +122,22 @@ class DataDashboard {
         $data = array();
         
         if (!isset($unitfilter)) {
-            $sql = "select distinct(check_number), jenis_sp2d, amount from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
+            $sql = "select distinct(check_number), jenis_sp2d, currency_code, exchange_rate, amount, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
         } else {
-            $sql = "select distinct(check_number), jenis_sp2d, amount from AP_CHECKS_ALL_V where ".$unitfilter." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
+            $sql = "select distinct(check_number), jenis_sp2d, currency_code, exchange_rate, amount, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where ".$unitfilter." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
         }
         $result =  $this->db->select($sql);
+        
+        //select distinct(check_number), jenis_sp2d, exchange_rate, amount, currency_code, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where  substr(CHECK_NUMBER,3,3)='140' and check_date = to_date('20140630','yyyymmdd');
         
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
-            $d_data->set_nominal_sp2d($val['AMOUNT']);
+            $d_data->set_nominal_sp2d($val['AMOUNT_RPH']);
+            $d_data->set_rate_sp2d($val['EXCHANGE_RATE']);
+            $d_data->set_currency_sp2d($val['CURRENCY_CODE']);
+            $d_data->set_gross_nominal_sp2d($val['AMOUNT']);
             //var_dump($val['AMOUNT']);
             $data[] = $d_data;
         }
@@ -299,6 +305,24 @@ class DataDashboard {
     public function set_tgl_lhp($tgl_lhp) {
         $this->_tgl_lhp = $tgl_lhp;
     }
+    
+    public function set_rate_sp2d($rate_sp2d) {
+        $this->_rate_sp2d = $rate_sp2d;
+    }
+    
+    public function set_vol_retur_belum_proses($vol_retur_belum_proses) {
+        $this->_vol_retur_belum_proses = $vol_retur_belum_proses;
+    }
+    public function set_vol_retur_sudah_proses($vol_retur_sudah_proses) {
+        $this->_vol_retur_sudah_proses = $vol_retur_sudah_proses;
+    }
+    
+    public function set_currency_sp2d($currency_sp2d) {
+        $this->_currency_sp2d = $currency_sp2d;
+    }
+    public function set_gross_nominal_sp2d($gross_nominal_sp2ds) {
+        $this->_gross_nominal_sp2d = $gross_nominal_sp2d;
+    }
 		
 	/*
      * getter
@@ -395,6 +419,24 @@ class DataDashboard {
     
     public function get_tgl_lhp() {
         return $this->_tgl_lhp;
+    }
+    
+    public function get_rate_sp2d() {
+        return $this->_rate_sp2d;
+    }
+    
+    public function get_vol_retur_belum_proses() {
+        return $this->_vol_retur_belum_proses;
+    }
+    public function get_vol_retur_sudah_proses() {
+        return $this->_vol_retur_sudah_proses;
+    }
+    
+    public function get_currency_sp2d() {
+        return $this->_currency_sp2d;
+    }
+    public function get_gross_nominal_sp2d() {
+        return $this->_gross_nominal_sp2d;
     }
     
     /*
