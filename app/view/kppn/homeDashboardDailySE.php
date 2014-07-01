@@ -116,11 +116,12 @@
         </div>
         <div id="bottom-status-bar">
             <div>
+                <div id="last-update" style="float: left; margin-right: 20px; padding: 6px 20px 6px 0px; border-right: 1px solid #e5e5e5; "></div>
                 <div id="kppn-select" style="float: left;">
                     <?php
                         if (Session::get('role')==KANWIL) {
                             
-                            echo "Tampilkan data: <select id='kppn-list'>";
+                            echo "Tampilkan: <select id='kppn-list'>";
                             echo "<option value='ALL'>SEMUA KPPN</option>";
                             foreach ($this->kppn_list as $val) {
                                 echo "<option value='".$val->get_kd_d_kppn()."'>".$val->get_nama_user()."</option>";
@@ -129,7 +130,8 @@
                         }
                     ?>
                 </div>
-                <div style="float: right;">Periode: <a href="<?php echo URL; ?>home/harian" class="active">Hari Ini</a><a href="<?php echo URL; ?>home/mingguan">7 Hari</a><a href="<?php echo URL; ?>home/bulanan">30 Hari</a></div>
+                <div id="warning-container"></div>
+                <div style="float: right; padding-top: 3px;">Periode: <a href="<?php echo URL; ?>home/harian" class="active">Hari Ini</a><a href="<?php echo URL; ?>home/mingguan">7 Hari</a><a href="<?php echo URL; ?>home/bulanan">30 Hari</a></div>
             </div>
         </div>
     </div>
@@ -266,8 +268,8 @@
         var canvasStatusLHP = $("#pie-lhp-canvas").get(0).getContext("2d");
         var chartStatusLHP = new Chart(canvasStatusLHP).Doughnut(dataStatusLHP);
         
-        $("#number-retur-completed").html(accounting.formatNumber(homeDataJSON.jumlahReturSudahProses));
-        $("#number-retur-in-progress").html(accounting.formatNumber(homeDataJSON.jumlahReturBelumProses));
+        $("#number-retur-completed").html(accounting.formatNumber(homeDataJSON.jumlahReturSudahProses) + " (" + accounting.formatNumber(parseInt(homeDataJSON.nominalReturSudahProses) / 1000000000) + " M<span class='low-res-hidden'>ILYAR</span>)");
+        $("#number-retur-in-progress").html(accounting.formatNumber(homeDataJSON.jumlahReturBelumProses) + " (" + accounting.formatNumber(parseInt(homeDataJSON.nominalReturBelumProses) / 1000000000) + " M<span class='low-res-hidden'>ILYAR</span>)");
         
         $("#number-sp2d-gaji").html(accounting.formatNumber(homeDataJSON.jumlahSPMGaji));
         $("#number-sp2d-non-gaji").html(accounting.formatNumber(homeDataJSON.jumlahSPMNonGaji));
@@ -289,6 +291,8 @@
         $("#number-lhp-validated").html(accounting.formatNumber(homeDataJSON.jumlahLHPValidated));
         $("#number-lhp-error").html(accounting.formatNumber(homeDataJSON.jumlahLHPError));
         $("#number-lhp-lainnya").html(accounting.formatNumber(homeDataJSON.jumlahLHPLainnya));
+        
+        $("#last-update").html("Data diperbarui pada " + homeDataJSON.tanggalUpdate);
     }
     
     function calculateWidth() {
@@ -387,9 +391,9 @@
             tableSummaryContents  += "<tr class='bold'>";
             tableSummaryContents  +=   "<td rowspan=2 style='text-align: left'>Nama KPPN</td>";
             tableSummaryContents  +=   "<td rowspan=2>SPM dalam Proses</td>";
-            tableSummaryContents  +=   "<td colspan=4>SP2D</td>";
-            tableSummaryContents  +=   "<td colspan=2>Retur</td>";
-            tableSummaryContents  +=   "<td colspan=4>LHP</td>";
+            tableSummaryContents  +=   "<td colspan=5>SP2D</td>";
+            tableSummaryContents  +=   "<td colspan=2>Proses Retur</td>";
+            tableSummaryContents  +=   "<td colspan=5>LHP</td>";
             tableSummaryContents  += "</tr>";
             
             tableSummaryContents  += "<tr class='bold'>";
@@ -397,17 +401,25 @@
             tableSummaryContents  +=   "<td>Non Gaji</td>";
             tableSummaryContents  +=   "<td>Lainnya</td>";
             tableSummaryContents  +=   "<td>Void</td>";
-            tableSummaryContents  +=   "<td>Sudah Proses</td>";
-            tableSummaryContents  +=   "<td>Belum Proses</td>";
+            tableSummaryContents  +=   "<td>Jumlah</td>";
+            tableSummaryContents  +=   "<td>Sudah</td>";
+            tableSummaryContents  +=   "<td>Belum</td>";
             tableSummaryContents  +=   "<td>Completed</td>";
             tableSummaryContents  +=   "<td>Validated</td>";
             tableSummaryContents  +=   "<td>Error</td>";
             tableSummaryContents  +=   "<td>Lainnya</td>";
+            tableSummaryContents  +=   "<td>Jumlah</td>";
             tableSummaryContents  += "</tr>";
             
             totalSPMOngoing = 0;
+            totalSP2DSemuaKPPN = 0;
+            totalLHPSemuaKPPN = 0;
             
             for (j=0; j<homeDataJSON.listKPPN.length; j++) {
+                
+                totalSP2DSemuaKPPN += parseInt(homeDataJSON.sp2dKPPN[j].gaji) + parseInt(homeDataJSON.sp2dKPPN[j].nonGaji) + parseInt(homeDataJSON.sp2dKPPN[j].lainnya) + parseInt(homeDataJSON.sp2dKPPN[j].void);
+                totalLHPSemuaKPPN += parseInt(homeDataJSON.lhpKPPN[j].etc) + parseInt(homeDataJSON.lhpKPPN[j].error) + parseInt(homeDataJSON.lhpKPPN[j].validated) + parseInt(homeDataJSON.lhpKPPN[j].completed);
+                
                 tableSummaryContents  += "<tr>";
                 tableSummaryContents  +=   "<td style='text-align: left'>" + homeDataJSON.listKPPN[j] + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.spmOngoingKPPN[j]) + "</td>";
@@ -415,12 +427,14 @@
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].nonGaji) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].lainnya) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.sp2dKPPN[j].void) + "</td>";
+                tableSummaryContents  +=   "<td class='bold'>" + accounting.formatNumber(parseInt(homeDataJSON.sp2dKPPN[j].gaji) + parseInt(homeDataJSON.sp2dKPPN[j].nonGaji) + parseInt(homeDataJSON.sp2dKPPN[j].lainnya) + parseInt(homeDataJSON.sp2dKPPN[j].void)) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.returKPPN[j].sudahProses) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.returKPPN[j].belumProses) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].completed) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].validated) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].error) + "</td>";
                 tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.lhpKPPN[j].etc) + "</td>";
+                tableSummaryContents  +=   "<td class='bold'>" + accounting.formatNumber(parseInt(homeDataJSON.lhpKPPN[j].etc) + parseInt(homeDataJSON.lhpKPPN[j].error) + parseInt(homeDataJSON.lhpKPPN[j].validated) + parseInt(homeDataJSON.lhpKPPN[j].completed)) + "</td>";
                 tableSummaryContents  += "</tr>";
                 
                 totalSPMOngoing += parseInt(homeDataJSON.spmOngoingKPPN[j]);
@@ -433,17 +447,20 @@
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMNonGaji) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMLainnya) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahSPMVoid) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(totalSP2DSemuaKPPN) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahReturSudahProses) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahReturBelumProses) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPCompleted) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPValidated) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPError) + "</td>";
             tableSummaryContents  +=   "<td>" + accounting.formatNumber(homeDataJSON.jumlahLHPLainnya) + "</td>";
+            tableSummaryContents  +=   "<td>" + accounting.formatNumber(totalLHPSemuaKPPN) + "</td>";
             tableSummaryContents  += "</tr>";
 
             tableSummaryContents  += "</table>";
 
             $("#summary-container .ticker-content").html(tableSummaryContents);
+            $("#warning-container").html("");
             
         } else {
             
@@ -474,33 +491,63 @@
                 
                 $("#ticker-ongoing-container > .ticker-content").html(tickerOngoingContents);
             }
+            
+            if (homeDataJSON.kodeUnit == "140") {
+                
+                tickerCompletedTotal = homeDataJSON.sp2dSelesai.length;
+                if (homeDataJSON.sp2dSelesai.length > 0) {
 
-            tickerCompletedTotal = homeDataJSON.sp2dSelesai.length;
-            if (homeDataJSON.sp2dSelesai.length > 0) {
-                
-                totalNominalSP2D = 0;
-                
-                tickerCompletedContents += "<table>";
-                
-                for (j=0; j<homeDataJSON.sp2dSelesai.length; j++) {
-                    tickerCompletedContents += "<tr>";
-                    tickerCompletedContents +=   "<td>" + (j+1) + "</td>";
-                    tickerCompletedContents +=   "<td>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</td>";
-                    tickerCompletedContents +=   "<td>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</td>";
-                    tickerCompletedContents +=   "<td style='text-align: right'>" + accounting.formatMoney(homeDataJSON.sp2dSelesai[j].nominalSP2D, "Rp ", 2, ",", ".") + "</td>";
-                    tickerCompletedContents += "</tr>";
-                    
-                    totalNominalSP2D += parseInt(homeDataJSON.sp2dSelesai[j].nominalSP2D);
+                    totalNominalSP2D = 0;
+
+                    tickerCompletedContents += "<table>";
+
+                    for (j=0; j<homeDataJSON.sp2dSelesai.length; j++) {
+                        tickerCompletedContents += "<tr>";
+                        tickerCompletedContents +=   "<td>" + (j+1) + "</td>";
+                        tickerCompletedContents +=   "<td>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</td>";
+                        tickerCompletedContents +=   "<td>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</td>";
+                        tickerCompletedContents +=   "<td style='text-align: right'>" + accounting.formatMoney(homeDataJSON.sp2dSelesai[j].nominalSP2D, homeDataJSON.sp2dSelesai[j].mataUangSP2D + " ", 2, ",", ".") + "</td>";
+                        tickerCompletedContents += "</tr>";
+
+                        totalNominalSP2D += parseInt(homeDataJSON.sp2dSelesai[j].nominalSP2D);
+                    }
+
+                    tickerCompletedContents += "</table>";
+
+                    $("#ticker-completed-container > .ticker-content").html(tickerCompletedContents);
+                    $("#warning-container").html("<div class='alert alert-warning'>SP2D valas tanpa data nilai tukar tidak dihitung.</div>");
                 }
                 
-                tickerCompletedContents += "<tr class='bold'>";
-                tickerCompletedContents += "<td colspan=3>Total ";
-                tickerCompletedContents +=   "<td style='text-align: right'>" + accounting.formatMoney(totalNominalSP2D, "Rp ", 2, ",", ".") + "</td>";
-                tickerCompletedContents += "</tr>";
-                
-                tickerCompletedContents += "</table>";
-                
-                $("#ticker-completed-container > .ticker-content").html(tickerCompletedContents);
+            } else {
+
+                tickerCompletedTotal = homeDataJSON.sp2dSelesai.length;
+                if (homeDataJSON.sp2dSelesai.length > 0) {
+
+                    totalNominalSP2D = 0;
+
+                    tickerCompletedContents += "<table>";
+
+                    for (j=0; j<homeDataJSON.sp2dSelesai.length; j++) {
+                        tickerCompletedContents += "<tr>";
+                        tickerCompletedContents +=   "<td>" + (j+1) + "</td>";
+                        tickerCompletedContents +=   "<td>" + homeDataJSON.sp2dSelesai[j].nomorSP2D + "</td>";
+                        tickerCompletedContents +=   "<td>" + homeDataJSON.sp2dSelesai[j].jenisSP2D + "</td>";
+                        tickerCompletedContents +=   "<td style='text-align: right'>" + accounting.formatMoney(homeDataJSON.sp2dSelesai[j].nominalSP2D, "Rp ", 2, ",", ".") + "</td>";
+                        tickerCompletedContents += "</tr>";
+
+                        totalNominalSP2D += parseInt(homeDataJSON.sp2dSelesai[j].nominalSP2D);
+                    }
+
+                    tickerCompletedContents += "<tr class='bold'>";
+                    tickerCompletedContents += "<td colspan=3>Total ";
+                    tickerCompletedContents +=   "<td style='text-align: right'>" + accounting.formatMoney(totalNominalSP2D, "Rp ", 2, ",", ".") + "</td>";
+                    tickerCompletedContents += "</tr>";
+
+                    tickerCompletedContents += "</table>";
+
+                    $("#ticker-completed-container > .ticker-content").html(tickerCompletedContents);
+                    $("#warning-container").html("");
+                }
             }
             
         }
