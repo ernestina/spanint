@@ -71,7 +71,7 @@ class DataReturController extends BaseController {
 				}
 				$this->view->data = $d_retur->get_retur_filter($filter);
 			}	
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN OR Session::get('role')==PKN){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}

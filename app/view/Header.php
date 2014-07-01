@@ -13,7 +13,7 @@
         <script src="<?php echo URL; ?>public/js/gaugejs/justgage.1.0.1.min.js"></script>
         <script src="<?php echo URL; ?>public/js/Chart.js"></script>
         <script src="<?php echo URL; ?>public/js/paging.js"></script>
-        <script src="<?php echo URL; ?>public/js/Accounting.min.js"></script>
+		<script src="<?php echo URL; ?>public/js/Accounting.min.js"></script>
 		
         <!--css-nya-->
 		<link href="<?php echo URL; ?>public/js/jquery-ui-1.10.3/themes/base/jquery.ui.all.css" rel="stylesheet">
@@ -110,7 +110,7 @@
                     }
                     if (Session::get('role') == KANWIL) {
 
-                        echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
+						echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
 						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
@@ -265,11 +265,22 @@
 							</li>';
 					}
 					if (Session::get('role') == PKN) {
-						echo '<li class="nav"><a href=' . URL . 'dataRetur/monitoringReturPKN>Retur</a>';
+						echo '<li class="subnav"><a href=' . URL . 'dataRetur/monitoringReturPKN>Retur</a>';
 						echo '<ul>
 								<li><a href=' . URL . 'dataRetur/monitoringReturPKN>Monitoring Penyelesaian Retur</a></li>
+                                <li><a href=' . URL . 'dataRetur/monitoringRetur></i>Daftar SP2D Retur</a></li>
 							</ul>
 							</li>';
+						echo '<li class="nav"><a href=' . URL . 'dataDroping/monitoringDroping>Droping</a>';
+						echo '<ul>
+								<li><a href=' . URL . 'dataDroping/monitoringDroping>Monitoring Penyaluran & Droping Dana SP2D</a></li>
+							</ul>
+							</li>';
+						echo '<li class="nav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
+                            </ul>
+                            </li>';
 						echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
 						echo '<ul>
 								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
