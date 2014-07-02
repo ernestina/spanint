@@ -9,8 +9,6 @@ class DataFA{
 
     private $db;
 	private $_period_name;
-	
-	
     private $_satker;
 	private $_code_id;
     private $_kppn;
