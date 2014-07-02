@@ -82,7 +82,7 @@ class DataRealisasi{
 		$sql .= " group by a.satker ,b.nmsatker, a.kppn, substr(a.program,1,3) " ;
 		$sql .= " ORDER by a.satker " ;
 		
-		var_dump ($sql);
+		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {

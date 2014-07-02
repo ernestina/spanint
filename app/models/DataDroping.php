@@ -54,7 +54,7 @@ class DataDroping {
 			$sql .= " AND ".$filter;
 		}
 		$sql .= "  GROUP BY CREATION_DATE ORDER BY CREATION_DATE";
-		var_dump ($sql);
+		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
