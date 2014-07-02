@@ -9,6 +9,8 @@ class DataFA{
 
     private $db;
 	private $_period_name;
+	
+	
     private $_satker;
 	private $_code_id;
     private $_kppn;
@@ -46,7 +48,22 @@ class DataFA{
     
     public function get_fa_filter($filter) {
 		Session::get('id_user');
-		$sql = "SELECT Distinct A.*, B.NMSATKER
+		$sql = "SELECT Distinct A.SATKER,
+				A.KPPN,
+				A.AKUN,
+				A.PROGRAM,
+				A.OUTPUT,
+				A.DANA,
+				A.DANA,
+				A.KEWENANGAN,
+				A.LOKASI,
+				A.BUDGET_TYPE,
+				A.CURRENCY_CODE,
+				SUM(A.BUDGET_AMT) BUDGET_AMT,
+				SUM(A.ACTUAL_AMT) ACTUAL_AMT,
+				SUM(A.BALANCING_AMT) BALANCING_AMT,
+				SUM(A.ENCUMBRANCE_AMT) ENCUMBRANCE_AMT,
+				B.NMSATKER
 				FROM " 
 				. $this->_table1. " A, "
 				. $this->_table2. " B 
@@ -54,13 +71,26 @@ class DataFA{
 				SUBSTR(A.AKUN,1,1) = '5' AND
 				SUBSTR(A.PERIOD_NAME,5,2) = '14' AND
 				A.BUDGET_TYPE = '2' AND
-				substr(a.bank,1,1)  <= '9'  and
+				A.KPPN=B.KPPN AND
+				substr(a.bank,1,1)  <= '9' and
 				A.SATKER=B.KDSATKER ";
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
-		
+		$sql .= " GROUP BY   A.SATKER,
+					A.KPPN,
+					A.AKUN,
+					A.PROGRAM,
+					A.OUTPUT,
+					A.DANA,
+					A.DANA,
+					A.KEWENANGAN,
+					A.LOKASI,
+					A.BUDGET_TYPE,
+					A.CURRENCY_CODE,
+					B.NMSATKER
+					HAVING SUM(A.BUDGET_AMT) > 0 ";
 		$sql .= " ORDER BY A.AKUN " ;
 		
 		//var_dump ($sql);
