@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>REALISASI KETERSEDIAAN DANA DIPA SATKER <br>
+        <h2>INFORMASI SISA PAGU PER AKUN DIPA SATKER <br>
 		<?php $nmsatker='';
 		foreach ($this->data as $value) {$nmsatker=$value->get_nm_satker();} 
 		echo $nmsatker;
@@ -18,11 +18,12 @@
 	<div id="top">
 	<form method="POST" action="#" enctype="multipart/form-data">
 		
-		<?php  if (Session::get('role')!=SATKER) {
-		echo "<div id='wkdsatker' class='error'></div>";
-		echo "<label class='isian'>Satker: </label>";
-		} ?>
-		<input type="<?php if (Session::get('role')==SATKER) {echo "hidden";} else {echo "text";}?>" name="kdsatker" id="kdsatker" value="<?php if (isset($this->satker_code)){echo $this->satker_code;}?>">
+		<?php  //if (Session::get('role')!=SATKER) {
+		//echo "<div id='wkdsatker' class='error'></div>";
+		//echo "<label class='isian'>Satker: </label>";
+		//} ?>
+		<!--input type="<?php 
+		//if (Session::get('role')==SATKER) {echo "hidden";} else {echo "text";}?>" name="kdsatker" id="kdsatker" value="<?php //if (isset($this->satker_code)){echo $this->satker_code;}?>"-->
 		
 		<div id="wakun" class="error"></div>
 		<label class="isian">Akun: </label>
@@ -62,7 +63,7 @@
 					<th class='mid'>Program</th>
 					<th class='mid'>Output</th>
 					<th class='mid'>Dana</th>
-					<th class='mid'>Bank</th>
+					<!--th class='mid'>Bank</th-->
 					<th>Kewenangan</th>
 					<th class='mid'>Lokasi</th>
 					<th class='mid'>Tipe Anggaran</th>
@@ -75,6 +76,10 @@
 			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
+			//$tot_budget=0;
+			//$tot_actual=0;
+			//$tot_encumbrance=0;
+			//$tot_balancing=0;
 			//var_dump ($this->data);
 			if (isset($this->data)){
 				if (empty($this->data)){
@@ -89,7 +94,7 @@
 					echo "<td>" . $value->get_program() . "</td>";
 					echo "<td>" . $value->get_output() . "</td>";
 					echo "<td>" . $value->get_dana() . "</td>";
-					echo "<td>" . $value->get_bank() . "</td>";
+					//echo "<td>" . $value->get_bank() . "</td>";
 					echo "<td>" . $value->get_kewenangan() . "</td>";
 					echo "<td>" . $value->get_lokasi() . "</td>";
 					echo "<td>" . $value->get_budget_type() . "</td>";
@@ -100,6 +105,10 @@
 					//echo "<td><a href=".URL."dataDIPA/RevisiDipa/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
 					echo "<td style='text-align: right'>" . $value->get_balancing_amt() . "</td>";
 				echo "</tr>	";
+				//$tot_budget = $tot_budget  + $value->get_budget_amt() ;
+				//$tot_encumbrance = $tot_encumbrance + $value->get_encumbrance_amt() ;
+				//$tot_actual = $tot_actual + $value->get_actual_amt();
+				//$tot_balancing = $tot_balancing + $value->get_balancing_amt();
 			}
 			}
 			} else {
@@ -107,6 +116,21 @@
 			}
 			?>
 			</tbody>
+			<!--tfoot>
+				<tr>
+					<td colspan='4'></td>.
+					<td class='ratatengah'><b>GRAND TOTAL</td>
+					<td align='right'><b>
+					<?php
+						//echo number_format($tot_budget); 
+						//echo number_format($tot_encumbrance);
+						//echo number_format($tot_actual);
+						//echo number_format($tot_balancing);
+					?>
+					</td>
+					
+				</tr>
+			</tfoot-->
         </table>
 		<br>
 		<br>
