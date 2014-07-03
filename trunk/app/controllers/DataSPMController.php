@@ -304,8 +304,9 @@ class DataSPMController extends BaseController {
 					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
 								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user').")" ;
 				}
+		$this->view->data2 = $d_spm1->get_jendok_spm_filter($filter);
 		$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
-		//var_dump($d_spm1->get_error_spm_filter ($filter));
+		//var_dump($d_spm1->get_durasi_spm_filter ($filter));
 		}
 		$this->view->render('kppn/DurasiSPM');
 	}

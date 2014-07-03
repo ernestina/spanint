@@ -37,19 +37,20 @@
 		</select>
 		<?php } ?>
 		
-		
-		
+		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Jenis SPM: </label>
 		<select type="text" name="JenisSPM" id="JenisSPM">
-			<option value=''>- pilih -</option>
-			<option value='GAJI INDUK' <?php if ($this->status=="GAJI INDUK"){echo "GAJI INDUK";}?>>GAJI INDUK</option>
-			<option value='GAJI SUSULAN' <?php if ($this->status=="GAJI SUSULAN"){echo "GAJI SUSULAN";}?>>GAJI SUSULAN</option>
-			<option value='GAJI LAINNYA' <?php if ($this->status=="GAJI LAINNYA"){echo "GAJI LAINNYA";}?>>GAJI LAINNYA</option>	
-			<option value='LANGSUNG' <?php if ($this->status=="GAJI LAINNYA"){echo "GAJI LAINNYA";}?>>LANGSUNG</option>	
-			<option value='LS-KONTRAKTUAL' <?php if ($this->status=="LS-KONTRAKTUAL"){echo "LS-KONTRAKTUAL";}?>>LS-KONTRAKTUAL</option>
-			<option value='DANA UP (UYHD)' <?php if ($this->status=="DANA UP (UYHD)"){echo "DANA UP (UYHD)";}?>>DANA UP (UYHD)</option>
-			<option value='GANTI UP' <?php if ($this->status=="GANTI UP"){echo "GANTI UP";}?>>GANTI UP</option>
+		<option value='' selected>- pilih -</option>
+		<?php foreach ($this->data2 as $value1) 
+				echo "<option value = '".$value1->get_attribute1()."'>".$value1->get_attribute1(). "</option>";
+				//if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				//else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
+		?>
 		</select>
+		
+		
+		
 		
 		<label class="isian">Durasi: </label>	
 		<select type="text" name="durasi" id="durasi">
