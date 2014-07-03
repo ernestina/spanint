@@ -55,6 +55,7 @@ class DataFA{
 				A.OUTPUT,
 				A.DANA,
 				A.DANA,
+				A.CODE_COMBINATION_ID,
 				A.KEWENANGAN,
 				A.LOKASI,
 				A.BUDGET_TYPE,
@@ -88,6 +89,7 @@ class DataFA{
 					A.KEWENANGAN,
 					A.LOKASI,
 					A.BUDGET_TYPE,
+					A.CODE_COMBINATION_ID,
 					A.CURRENCY_CODE,
 					B.NMSATKER
 					HAVING SUM(A.BUDGET_AMT+A.ACTUAL_AMT) > 0 ";
