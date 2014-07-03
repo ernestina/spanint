@@ -70,6 +70,32 @@ class DataDurasiSPM{
         return $data;
     }
 	
+	public function get_jendok_spm_filter($filter) {
+		Session::get('id_user');
+		$sql = "SELECT DISTINCT JENDOK FROM " 
+				. $this->_table1. 
+				" where jendok is not null "
+				
+				;
+		$no=0;
+		//foreach ($filter as $filter) {
+			//$sql .= " AND ".$filter;
+		//}
+		
+		$sql .= " order by jendok";
+		
+		//var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+			$d_data->set_attribute1($val['JENDOK']);
+			
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
     /*
      * setter
      */
