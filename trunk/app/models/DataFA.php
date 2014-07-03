@@ -90,7 +90,7 @@ class DataFA{
 					A.BUDGET_TYPE,
 					A.CURRENCY_CODE,
 					B.NMSATKER
-					HAVING SUM(A.BUDGET_AMT) > 0 ";
+					HAVING SUM(A.BUDGET_AMT+A.ACTUAL_AMT) > 0 ";
 		$sql .= " ORDER BY A.AKUN " ;
 		
 		//var_dump ($sql);
