@@ -1,6 +1,6 @@
 </div>
 </body>
-<center><footer><h3>Direktorat Transformasi Perbendaharaan &copy 2014. <a href="#openModal">Developer.</a><h3></center>
+<center><footer><h3>TIm Direktorat Transformasi Perbendaharaan &copy 2014. <a href="#openModal">Developer.</a><h3></center>
     <div id="openModal" class="modalDialog" >
 		<div><h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">Developer :</h2>
 		<a href="#close" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
