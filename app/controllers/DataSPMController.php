@@ -318,12 +318,12 @@ class DataSPMController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 			
 				if ($_POST['kdkppn']!=''){
-					$filter[$no++]="TS.KPPN = '".$_POST['kdkppn']."'";
+					$filter[$no++]="substr(check_number,3,3) = '".$_POST['kdkppn']."'";
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} else {
-					$filter[$no++]="TS.KPPN = '".Session::get('id_user')."'";
-					$filter[$no++]="SUBSTR(ACA.CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";
+					$filter[$no++]="substr(check_number,3,3) = '".Session::get('id_user')."'";
+					$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";
 					
 				}
 				
@@ -332,7 +332,7 @@ class DataSPMController extends BaseController {
 					$this->view->d_invoice = $_POST['kdsatker'];
 				}
 				if ($_POST['nmsatker']!=''){
-					$filter[$no++]=" UPPER(TS.NMSATKER) LIKE UPPER('%".$_POST['nmsatker']."%')";
+					$filter[$no++]=" UPPER(NMSATKER) LIKE UPPER('%".$_POST['nmsatker']."%')";
 					$this->view->d_invoice = $_POST['nmsatker'];
 				}
 				
@@ -348,8 +348,8 @@ class DataSPMController extends BaseController {
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
 			if (Session::get('role')==KPPN) {
-			$filter[$no++]="TS.KPPN = '".Session::get('id_user')."'";
-			$filter[$no++]="SUBSTR(ACA.CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
+			$filter[$no++]="substr(check_number,3,3) = '".Session::get('id_user')."'";
+			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
 			$this->view->data = $d_spm1->get_satker_filter($filter);	
 			}
 					
@@ -362,10 +362,13 @@ class DataSPMController extends BaseController {
 		$d_spm1 = new DataCheck($this->registry);
 		$filter = array ();
 		$no=0;
-		if ($kdsatker != '') {
+		if ($kdsatker != '' AND Session::get('id_user') == 140) {
 				$filter[$no++]=" SEGMENT1 =  '".$kdsatker."'";
 				//$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
 				//$this->view->invoice_num = $invoice_num;	
+			}
+		elseif($kdsatker != '') {
+				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
 			}
 		if (isset($_POST['submit_file'])) {
 			

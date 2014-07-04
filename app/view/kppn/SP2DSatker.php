@@ -70,9 +70,9 @@
 					<th width='70px'>Tanggal Selesai SP2D</th>
 					<th width='70px'>Tanggal SP2D</th>
 					<th>Nilai SP2D </th>
-					<th>Bank </th>
 					<th>Nomor Invoice</th>
 					<th width='70px'>Tanggal Invoice</th>
+					<th>Jenis SPM </th>
 					<th width='70px'>Jenis SP2D</th>
 					<th width='300px'>Description</th>
 			</thead>
@@ -91,9 +91,10 @@
 					echo "<td>" . $value->get_creation_date() . "</td>";
 					echo "<td>" . $value->get_check_date() . "</td>";
 					echo "<td class='ratakanan'>" . $value->get_amount() . "</td>";
-					echo "<td>" . $value->get_attribute6() . "</td>";
+					
 					echo "<td><a href=".URL."dataSPM/HistorySpm/".$value->get_invoice_num()."/".$value->get_check_number()." target='_blank' '>" . $value->get_invoice_num(). "</a></td>";
 					echo "<td>" . $value->get_invoice_date() . "</td>";
+					echo "<td>" . $value->get_attribute6() . "</td>";
 					echo "<td>" . $value->get_jenis_sp2d() . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
 					

@@ -71,7 +71,7 @@ class DataCheck{
 			$d_data->set_description($val['DESCRIPTION']);
 			$d_data->set_check_number($val['CHECK_NUMBER']);
 			$d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
-			$d_data->set_attribute6($val['ATTRIBUTE6']);
+			$d_data->set_attribute6($val['JENIS_SPM']);
 			$d_data->set_nmsatker($val['NMSATKER']);
 			$d_data->set_currency_code($val['CURRENCY_CODE']);
 			$d_data->set_exchange_date (date("d-m-Y",strtotime($val['EXCHANGE_DATE'])));
