@@ -34,14 +34,15 @@ class DataNamaSatker{
     
     public function get_satker_filter($filter) {
 		Session::get('id_user');
-		$sql = "SELECT TS.KDSATKER, UPPER(TS.NMSATKER) NMSATKER, KPPN, 
-				count(aca.check_number) TOTAL_SP2D 
+		$sql = " SELECT SEGMENT1 KDSATKER
+				, UPPER(NMSATKER) NMSATKER
+				, substr(check_number,3,3) KPPN
+				, count(check_number) TOTAL_SP2D 
 				FROM " 
-				. $this->_table1. " TS, "
-				. $this->_table2. " ACA 
+				. $this->_table2. " 
 				WHERE  
-				ts.kdsatker=substr(aca.invoice_num, 8,6)
-				AND aca.status_lookup_code <> 'VOIDED'"
+				status_lookup_code <> 'VOIDED'
+				AND NMSATKER IS NOT NULL"
 				
 				;
 				
@@ -50,8 +51,7 @@ class DataNamaSatker{
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " GROUP BY TS.KDSATKER, UPPER(TS.NMSATKER), KPPN, 
-				substr(aca.invoice_num, 8,6)";
+		$sql .= " GROUP BY SEGMENT1, NMSATKER, SUBSTR(CHECK_NUMBER,3,3)";
 		$sql .= " ORDER BY NMSATKER";
 				//var_dump ($sql);
 
