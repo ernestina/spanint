@@ -192,7 +192,6 @@ class DataRealisasi{
 				substr(a.akun,1,1) in ('5','6')
 				and a.budget_type = '2'			
 				and substr(a.program,1,3)=b.kdba
-				and a.kppn=b.kppn
 				and substr(a.bank,1,1)  <= '9'
 				"
 				;
