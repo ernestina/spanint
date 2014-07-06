@@ -67,7 +67,7 @@
 					<th>Kewenangan</th>
 					<th class='mid'>Lokasi</th>
 					<th class='mid'>Tipe Anggaran</th>
-					<th>Mata Uang</th>
+					<!--th>Mata Uang</th-->
 					<th>Pagu</th>
 					<th>Pencadangan</th>
 					<th>Realisasi</th>
@@ -98,7 +98,7 @@
 					echo "<td>" . $value->get_kewenangan() . "</td>";
 					echo "<td>" . $value->get_lokasi() . "</td>";
 					echo "<td>" . $value->get_budget_type() . "</td>";
-					echo "<td>" . $value->get_currency_code() . "</td>";
+					//echo "<td>" . $value->get_currency_code() . "</td>";
 					echo "<td style='text-align: right'>" . $value->get_budget_amt() . "</td>";
 					echo "<td style='text-align: right'>" . $value->get_encumbrance_amt() . "</td>";
 					echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailRealisasiFA/".$value->get_code_id()." target='_blank' '>" . $value->get_actual_amt() . "</td>";

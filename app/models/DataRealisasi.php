@@ -67,12 +67,11 @@ class DataRealisasi{
 				FROM " 
 				. $this->_table1. " a," 
 				. $this->_table2. " b 
-				where 
-				substr(a.akun,1,1) in ('5','6')
+				where 1=1
 				and a.budget_type = '2' 
 				and a.satker=b.kdsatker 
 				and a.kppn=b.kppn
-				and substr(a.bank,1,1)  <= '9' 
+				
 				"
 				;
 		$no=0;
@@ -128,12 +127,10 @@ class DataRealisasi{
 				FROM " 
 				. $this->_table1. " a," 
 				. $this->_table2. " b 
-				where 
-				substr(a.akun,1,1) in ('5','6')
+				where 1=1
 				and a.budget_type = '2' 
 				and a.satker=b.kdsatker
 				and a.kppn=b.kppn
-				and substr(a.bank,1,1)  <= '9'
 				"
 				;
 		$no=0;
@@ -188,8 +185,7 @@ class DataRealisasi{
 				FROM " 
 				. $this->_table1. " a," 
 				. $this->_table3. " b 
-				where 
-				substr(a.akun,1,1) in ('5','6')
+				where 1=1
 				and a.budget_type = '2'			
 				and substr(a.program,1,3)=b.kdba
 				and substr(a.bank,1,1)  <= '9'
