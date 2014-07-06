@@ -238,12 +238,14 @@ class DataDIPAController extends BaseController {
 		$no=0;
 			if (isset($_POST['submit_file'])) {
 				if ($_POST['kdkppn']!=''){
+					
 					$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 					//$this->view->data2 = $d_spm1->get_realisasi_lokasi($_POST['kdkppn']);
-				} else {
-					$filter[$no++]="KPPN = '".Session::get('id_user')."'";
+				} 
+				elseif (Session::get('role')==KANWIL) {
+					$filter[$no++]="KANWIL = '".Session::get('id_user')."'";
 				}
 				
 				if ($_POST['kdlokasi']!=''){
@@ -272,7 +274,94 @@ class DataDIPAController extends BaseController {
 		$this->view->render('kppn/DataRealisasiBA');
 	}
 	
+	public function DataRealisasiLokasi() {
+		$d_spm1 = new DataRealisasi($this->registry);
+		$filter = array ();
+		$no=0;
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+					$this->view->data2 = $d_spm1->get_realisasi_lokasi($_POST['kdkppn']);
+				} elseif (Session::get('role')==KANWIL){
+					$filter[$no++]="A.KANWIL = '".Session::get('id_user')."'";
+					$this->view->data2 = $d_spm1->get_realisasi_lokasi_kanwil(Session::get('id_user'));
+				}
+				
+				if ($_POST['kdlokasi']!=''){
+					$filter[$no++]="a.lokasi = '".$_POST['kdlokasi']."'";
+					$this->view->lokasi = $_POST['kdlokasi'];
+				}
+				if ($_POST['kdsatker']!=''){
+					$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
+					$this->view->satker_code = $_POST['kdsatker'];
+				}
+			$this->view->data = $d_spm1->get_realisasi_fa_lokasi_global_filter($filter);
+			}
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+		
+			if (Session::get('role')==KPPN) {$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
+			$this->view->data2 = $d_spm1->get_realisasi_lokasi(Session::get('id_user'));
+			$this->view->data = $d_spm1->get_realisasi_fa_lokasi_global_filter($filter);
+			
+			}
+		//var_dump($d_spm->get_hist_spm_filter());
+		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+		$this->view->render('kppn/DataRealisasiLokasi');
+	}
 	
+	public function DataRealisasiTransfer() {
+		$d_spm1 = new DataRealisasi($this->registry);
+		$filter = array ();
+		$no=0;
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+					$this->view->data2 = $d_spm1->get_realisasi_satker_transfer($_POST['kdkppn']);
+				} 
+				elseif (Session::get('role')==KANWIL){
+					$filter[$no++]="A.KANWIL = '".Session::get('id_user')."'";
+					$this->view->data2 = $d_spm1->get_realisasi_satker_transfer_kanwil(Session::get('id_user'));
+				}
+				
+				if ($_POST['kdlokasi']!=''){
+					$filter[$no++]="a.lokasi = '".$_POST['kdlokasi']."'";
+					$this->view->lokasi = $_POST['kdlokasi'];
+				}
+				if ($_POST['kdsatker']!=''){
+					$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
+					$this->view->data3 = $d_spm1->get_realisasi_nmsatker_transfer($_POST['kdsatker']);
+				}
+			$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
+			}
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+		
+			if (Session::get('role')==KPPN) {$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
+			$this->view->data2 = $d_spm1->get_realisasi_satker_transfer(Session::get('id_user'));
+			//$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
+			
+			}
+		//var_dump($d_spm->get_hist_spm_filter());
+		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+		$this->view->render('kppn/DataRealisasiTransfer');
+	}
 	
     public function __destruct() {
         
