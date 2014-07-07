@@ -328,7 +328,7 @@ class DataSPMController extends BaseController {
 				}
 				
 				if ($_POST['kdsatker']!=''){
-					$filter[$no++]="KDSATKER = '".$_POST['kdsatker']."'";
+					$filter[$no++]="SEGMENT1 = '".$_POST['kdsatker']."'";
 					$this->view->d_invoice = $_POST['kdsatker'];
 				}
 				if ($_POST['nmsatker']!=''){
@@ -386,7 +386,10 @@ class DataSPMController extends BaseController {
 					$filter[$no++]="JENIS_SP2D = '".$_POST['JenisSP2D']."'";
 					$this->view->JenisSP2D = $_POST['JenisSP2D'];
 				}
-			
+			if ($_POST['JenisSPM']!=''){
+					$filter[$no++]="JENIS_SPM = '".$_POST['JenisSPM']."'";
+					$this->view->JenisSP2D = $_POST['JenisSPM'];
+				}
 			}	
 
 			if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
@@ -398,7 +401,7 @@ class DataSPMController extends BaseController {
 					
 			}
 			
-			
+		$this->view->data2 = $d_spm1->get_jenis_spm_filter($kdsatker);	
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
 		
 		//var_dump($d_spm1->get_satker_filter($filter));

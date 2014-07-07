@@ -59,6 +59,102 @@ class DataDIPAController extends BaseController {
 		$this->view->render('kppn/revisiDIPA');
 	}
 	
+	public function Fund_fail() {
+		$d_spm1 = new DataFundFail($this->registry);
+		$filter = array ();
+		$no=0;
+			if (isset($_POST['submit_file'])) {
+				
+				if ($_POST['kd_satker']!=''){
+					$filter[$no++]="KDSATKER = '".$_POST['kd_satker']."'";
+					$this->view->satker_code = $_POST['satker_code'];
+				}
+				/*if ($_POST['akun']!=''){
+					$filter[$no++]="A.ACCOUNT_CODE = '".$_POST['akun']."'";
+					$this->view->account_code = $_POST['account_code'];
+				}
+				if ($_POST['output']!=''){
+					$filter[$no++]="A.OUTPUT_CODE = '".$_POST['output']."'";
+					$this->view->output_code = $_POST['output_code'];
+				}
+				if ($_POST['program']!=''){
+					$filter[$no++]="A.PROGRAM_CODE = '".$_POST['program']."'";
+					$this->view->program_code = $_POST['program_code'];
+				}
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}*/
+				
+			}	
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN_CODE = '".Session::get('id_user')."'";	
+			
+			}
+
+		//var_dump($d_spm->get_hist_spm_filter());
+		$this->view->data = $d_spm1->get_fun_fail_filter($filter);
+		$this->view->render('kppn/fund_fail');
+	}
+	
+	public function Detail_Fund_fail($kdsatker = null) {
+		$d_spm1 = new DataFundFail($this->registry);
+		$filter = array ();
+		$no=0;
+			if ($kdsatker != '') {
+					$filter[$no++]=" KDSATKER =  '".$kdsatker."'";
+				//$this->view->invoice_num = $invoice_num;	
+				}
+			if (isset($_POST['submit_file'])) {
+				
+				if ($_POST['kd_satker']!=''){
+					$filter[$no++]="KDSATKER = '".$_POST['kd_satker']."'";
+					$this->view->satker_code = $_POST['satker_code'];
+				}
+				/*if ($_POST['akun']!=''){
+					$filter[$no++]="A.ACCOUNT_CODE = '".$_POST['akun']."'";
+					$this->view->account_code = $_POST['account_code'];
+				}
+				if ($_POST['output']!=''){
+					$filter[$no++]="A.OUTPUT_CODE = '".$_POST['output']."'";
+					$this->view->output_code = $_POST['output_code'];
+				}
+				if ($_POST['program']!=''){
+					$filter[$no++]="A.PROGRAM_CODE = '".$_POST['program']."'";
+					$this->view->program_code = $_POST['program_code'];
+				}
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}*/
+				
+			}	
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+			if (Session::get('role')==KPPN) {$filter[$no++]="KDKPPN = '".Session::get('id_user')."'";	
+			
+			}
+
+		//var_dump($d_spm->get_hist_spm_filter());
+		$this->view->data = $d_spm1->get_detail_fun_fail_filter($filter);
+		$this->view->render('kppn/detail_fund_fail');
+	}
+	
 	public function RealisasiFA($kdsatker=null) {
 		$d_spm1 = new DataFA($this->registry);
 		$filter = array ();
