@@ -35,6 +35,18 @@
 			<option value='LAINNYA' <?php if ($this->status=="LAINNYA"){echo "LAINNYA";}?>>LAINNYA</option>	
 		</select>
 		
+		<div id="wkdkppn" class="error"></div>
+		<label class="isian">Jenis SPM: </label>
+		<select type="text" name="JenisSPM" id="JenisSPM">
+		<option value='' selected>- pilih -</option>
+		<?php foreach ($this->data2 as $value1) 
+				echo "<option value = '".$value1->get_attribute6()."'>".$value1->get_attribute6()."</option>";
+				//if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				//else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+			
+		?>
+		</select>
+		
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal SP2D: </label>
 		<ul class="inline">

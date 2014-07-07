@@ -82,7 +82,37 @@ class DataCheck{
         }
         return $data;
     }
-	
+	public function get_jenis_spm_filter($satker=null) {
+		Session::get('id_user');
+		
+		$sql = "SELECT DISTINCT JENIS_SPM 
+				FROM " 
+				. $this->_table1. "
+				WHERE 
+				STATUS_LOOKUP_CODE <> 'VOIDED'
+				AND SEGMENT1 = '".$satker."'"
+				
+				;
+				
+		$no=0;
+		//foreach ($filter as $filter) {
+			//$sql .= " AND ".$filter;
+		//}
+		
+		
+		$sql .= " ORDER BY JENIS_SPM DESC";
+		//var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+			$d_data = new $this($this->registry);
+			$d_data->set_attribute6($val['JENIS_SPM']);
+			
+            $data[] = $d_data;
+        }
+        return $data;
+    }
     /*
      * setter
      */
