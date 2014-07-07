@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING Penyaluran & Droping Dana SP2D<br>
+        <h2>MONITORING Penyaluran & Droping Dana SP2D
 		<?php if (isset($this->d_bank)) {
 					if($this->d_bank=="MDRI"){
 						echo "<br> Mandiri" ;
@@ -99,7 +99,7 @@ if (isset($this->last_update)){
 							echo "<td>" . number_format($value->get_jumlah_ftp_file_name()) . "</td>";
 							echo "<td>" . number_format($value->get_jumlah_check_number_line_num()) . "</td>";
 							echo "<td align = 'right'>" . number_format($value->get_jumlah_check_amount()) . "</td>";
-							echo "<td align = 'right'><a href=".URL."dataDroping/detailDroping/" . $this->d_bank."/".$value->get_creation_date()." target='_blank'>" . number_format($value->get_payment_amount()) . "</a></td>";
+							echo "<td align = 'right'><a href=".URL."dataDroping/detailDroping/" . $value->get_id()."/".$this->d_bank."/".$value->get_creation_date()." target='_blank'>" . number_format($value->get_payment_amount()) . "</a></td>";
 							$selisih = $value->get_payment_amount()-$value->get_jumlah_check_amount();
 							echo "<td align = 'right'>" . number_format($selisih) . "</td>";
 							if ($selisih<0) { echo "<td>Kurang Droping</td>"; } else if ($selisih > 0) {echo "<td>Lebih Droping</td>";} else { echo "<td></td>";};

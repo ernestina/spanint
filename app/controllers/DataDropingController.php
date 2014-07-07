@@ -33,7 +33,7 @@ class DataDropingController extends BaseController {
 					$this->view->d_bank = $_POST['bank'];
 				}
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
-					$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($_POST['tgl_awal'])).",'YYYYMMDD') 
+					$filter[$no++] = "CREATION_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($_POST['tgl_awal'])).",'YYYYMMDD') 
 									AND TO_DATE (".date('Ymd',strtotime($_POST['tgl_akhir'])).",'YYYYMMDD')  ";
 					
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
@@ -56,10 +56,14 @@ class DataDropingController extends BaseController {
 		$this->view->render('pkn/droping');
 	}
 	
-	public function detailDroping($bank=null, $tanggal=null) {
+	public function detailDroping($id=null,$bank=null, $tanggal=null) {
 		$d_sppm = new DataDroping($this->registry);
 		$filter = array ();
 		$no=0;
+		if (!is_null($id)){
+			$filter[$no++]="ID_DETAIL = '".$id."'";
+			$this->view->d_id = $id;
+		} 
 		if (!is_null($bank)){
 			if ($bank != "SEMUA_BANK"){
 				$filter[$no++]="BANK = '".$bank."'";
