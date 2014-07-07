@@ -43,24 +43,30 @@ class DataDroping {
      * return array objek Data Droping*/
     
     public function get_droping_filter($filter) {
-		$sql = "SELECT MAX(ID) ID, to_char(CREATION_DATE,'dd-mm-yyyy') CREATION_DATE, sum(JUMLAH_FTP_FILE_NAME) JUMLAH_FTP_FILE_NAME, 
-				sum(JUMLAH_CHECK_NUMBER_LINE_NUM) JUMLAH_CHECK_NUMBER_LINE_NUM, sum(JUMLAH_CHECK_AMOUNT) JUMLAH_CHECK_AMOUNT, 
-				sum(PAYMENT_AMOUNT) PAYMENT_AMOUNT
-				FROM " . $this->_table . "
-				WHERE TRXN_STATUS_CODE = 'SETTLED'";
+		$sql = "select 
+				id
+				, to_char(CREATION_DATE,'dd-mm-yyyy') CREATION_DATEX
+				, JUMLAH_FTP_FILE_NAME
+				,JUMLAH_CHECK_NUMBER_LINE_NUM
+				, JUMLAH_CHECK_AMOUNT
+				,PAYMENT_AMOUNT
+				from " . $this->_table . "
+				where jumlah_check_number_line_num is not null
+				and  id in (select max(id) id from " . $this->_table . " 
+				where 1=1 ";
 		$no=0;
 		//var_dump($filter);
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
-		$sql .= "  GROUP BY CREATION_DATE ORDER BY CREATION_DATE";
+		$sql .= "GROUP BY BANK,CREATION_DATE ) ORDER BY CREATION_DATE DESC";
 		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_id($val['ID']);
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATE'])));
+            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATEX'])));
             $d_data->set_jumlah_ftp_file_name($val['JUMLAH_FTP_FILE_NAME']);
             $d_data->set_jumlah_check_number_line_num($val['JUMLAH_CHECK_NUMBER_LINE_NUM']);
             $d_data->set_jumlah_check_amount($val['JUMLAH_CHECK_AMOUNT']);
@@ -71,9 +77,9 @@ class DataDroping {
     }
     
     public function get_droping_detail_filter($filter) {
-		$sql = "select DISTINCT(BANK_TRXN_NUMBER), to_char(CREATION_DATE,'dd-mm-yyyy hh24:mi:ss') CREATION_DATE, PAYMENT_CURRENCY_CODE,  PAYMENT_AMOUNT, ATTRIBUTE4 
+		$sql = "select BANK_TRXN_NUMBER, to_char(CREATION_DATE,'dd-mm-yyyy hh24:mi:ss') CREATION_DATE, PAYMENT_CURRENCY_CODE,  PAYMENT_AMOUNT, ATTRIBUTE4 
 				FROM " . $this->_table1 . "
-				WHERE TRXN_STATUS_CODE = 'SETTLED' AND BANK <> 'KPH' ";
+				WHERE 1=1 ";
 		$no=0;
 		//var_dump($filter);
 		foreach ($filter as $filter) {
