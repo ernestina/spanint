@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>MONITORING Penyaluran & Droping Dana SP2D - DETAIL<br>
+        <h2>MONITORING Penyaluran & Droping Dana SP2D - DETAIL
 		<?php if (isset($this->d_bank)) {
 					if($this->d_bank=="MDRI"){
 						echo "<br> Mandiri" ;
