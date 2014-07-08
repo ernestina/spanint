@@ -45,6 +45,7 @@ class DataDroping {
     public function get_droping_filter($filter) {
 		$sql = "select 
 				id
+				, BANK
 				, to_char(CREATION_DATE,'dd-mm-yyyy') CREATION_DATEX
 				, JUMLAH_FTP_FILE_NAME
 				,JUMLAH_CHECK_NUMBER_LINE_NUM
@@ -66,6 +67,7 @@ class DataDroping {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_id($val['ID']);
+            $d_data->set_bank($val['BANK']);
             $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATEX'])));
             $d_data->set_jumlah_ftp_file_name($val['JUMLAH_FTP_FILE_NAME']);
             $d_data->set_jumlah_check_number_line_num($val['JUMLAH_CHECK_NUMBER_LINE_NUM']);
