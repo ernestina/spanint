@@ -294,6 +294,22 @@
 							</ul>
 							</li>';
 					}
+					if (Session::get('role') == DJA) {
+						echo '<li class="subnav"><a href=#>Modul SA</a>';
+						echo '<ul>
+                                <li><a href='  . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
+                                <li><a href='  . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus</a></li>
+								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
+								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
+                            </ul>
+                            </li>';
+						echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
+						echo '<ul>
+								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
+							</ul>
+							</li>';
+					}
                     ?>
                     <li>
                         <a href="<?php echo URL; ?>auth/logout"><i class="icon-off"></i></a>

@@ -42,11 +42,8 @@ class AuthController extends BaseController {
                 case 5:
                     $role = 'kanwil';
                     break;
-                case 9:
-                    $role = 'lainya';
-                    break;
-                case 10:
-                    $role = 'jaringan';
+                case 6:
+                    $role = 'dja';
                     break;
                 default:
                     $role = 'guest';

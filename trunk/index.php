@@ -31,6 +31,7 @@ define('SATKER','satker');
 define('KPPN','kppn');
 define('PKN','pkn');
 define('KANWIL','kanwil');
+define('DJA','dja');
 
 $path = array(
     ROOT.'/libs/',

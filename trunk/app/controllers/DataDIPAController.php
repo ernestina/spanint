@@ -100,7 +100,7 @@ class DataDIPAController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 				$this->view->data = $d_spm1->get_fun_fail_filter($filter);
@@ -151,7 +151,7 @@ class DataDIPAController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
@@ -235,7 +235,7 @@ class DataDIPAController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
@@ -277,7 +277,7 @@ class DataDIPAController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN|| Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
@@ -325,7 +325,7 @@ class DataDIPAController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
@@ -363,7 +363,7 @@ class DataDIPAController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
@@ -408,7 +408,7 @@ class DataDIPAController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
@@ -453,7 +453,7 @@ class DataDIPAController extends BaseController {
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			}
-			if (Session::get('role')==ADMIN){
+			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
