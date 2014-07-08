@@ -62,7 +62,11 @@
 								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
                             </ul>
                             </li>';
-							
+						echo '<li class="subnav"><a href=' . URL . 'dataDroping/monitoringDroping></i>Modul CM</a>';
+						echo '<ul>
+								<li><a href=' . URL . 'dataDroping/monitoringDroping>Monitoring Penyaluran & Droping Dana SP2D</a></li>
+                            </ul>
+							</li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataSPM/posisiSPM></i>Modul PM</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi Invoice</a></li>
