@@ -23,6 +23,8 @@ class Index extends BaseController {
             header('location:' . URL . 'dataRetur/monitoringReturPKN');
         } elseif (Session::get('role') == KANWIL) {
             header('location:' . URL . 'home');
+        } elseif (Session::get('role') == DJA) {
+            header('location:' . URL . 'dataDIPA/nmsatker');
         }else {
             header('location:' . URL . 'auth/login');
         }
