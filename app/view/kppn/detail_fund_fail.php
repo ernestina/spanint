@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>DETAIL KEKURANGAN DATA FUND FAIL <?php //echo Session::get('user'); ?>
+        <h2>DETAIL DATA PAGU MINUS (FUND FAIL) <?php //echo Session::get('user'); ?>
 		<?php if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 

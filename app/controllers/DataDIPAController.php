@@ -64,6 +64,14 @@ class DataDIPAController extends BaseController {
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
+			
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="KPPN_CODE = '".$_POST['kdkppn']."'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				} else {
+					$filter[$no++]="KPPN_CODE = '".Session::get('id_user')."'";
+				}
 				
 				if ($_POST['kd_satker']!=''){
 					$filter[$no++]="KDSATKER = '".$_POST['kd_satker']."'";
@@ -86,7 +94,7 @@ class DataDIPAController extends BaseController {
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}*/
-				
+				$this->view->data = $d_spm1->get_fun_fail_filter($filter);
 			}	
 			if (Session::get('role')==KANWIL){
 				$d_kppn_list = new DataUser($this->registry);
@@ -95,13 +103,14 @@ class DataDIPAController extends BaseController {
 			if (Session::get('role')==ADMIN){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+				$this->view->data = $d_spm1->get_fun_fail_filter($filter);
 			}
 			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN_CODE = '".Session::get('id_user')."'";	
-			
+			$this->view->data = $d_spm1->get_fun_fail_filter($filter);
 			}
 
 		//var_dump($d_spm->get_hist_spm_filter());
-		$this->view->data = $d_spm1->get_fun_fail_filter($filter);
+		//$this->view->data = $d_spm1->get_fun_fail_filter($filter);
 		$this->view->render('kppn/fund_fail');
 	}
 	

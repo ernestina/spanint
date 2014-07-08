@@ -51,7 +51,7 @@ class DataFundFail{
 			$sql .= " AND ".$filter;
 		}
 		
-		//$sql .= " ORDER BY A.SATKER_CODE ASC, A.REVISION_NO DESC, A.ACCOUNT_CODE ASC, A.TANGGAL_POSTING_REVISI DESC, A.JAM_POSTING_REVISI DESC ";
+		$sql .= " ORDER BY KPPN_CODE, KDSATKER ";
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
