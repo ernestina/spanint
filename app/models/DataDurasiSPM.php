@@ -163,7 +163,9 @@ class DataDurasiSPM{
 	public function get_jam_selesai_sp2d() {
         return $this->_jam_selesai_sp2d;
     }
-
+	public function get_table1() {
+        return $this->_table1;
+    }
 	
 
     /*

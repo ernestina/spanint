@@ -26,7 +26,7 @@ class DataDipa{
 	private $_cadangan_code;
 	private $_line_amount;
 	private $_nm_satker;
-    private $_table1 = 'spsa_bt_dipa_v';
+    private $_table1 = 'SPSA_BT_DIPA_V';
 	private $_table2 = 't_satker';
     public $registry;
 
@@ -217,6 +217,9 @@ class DataDipa{
     }
 	public function get_kppn_code() {
          return $this->_kppn_code ;
+    }
+	public function get_table1() {
+        return $this->_table1;
     }
     /*
      * destruktor

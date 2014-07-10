@@ -19,7 +19,7 @@ class DataUploadSPM{
 	private $_column_name;
 	private $_column_value;
 	private $_error_message;
-    private $_table1 = 'sppm_upload_errors_v';
+    private $_table = 'sppm_upload_errors_v';
     public $registry;
 
     /*
@@ -40,7 +40,7 @@ class DataUploadSPM{
 		Session::get('id_user');
 		$sql = "SELECT *
 				FROM " 
-				. $this->_table1. "
+				. $this->_table. "
 				WHERE 1=1 "
 				
 				;
@@ -156,7 +156,7 @@ class DataUploadSPM{
 	public function get_error_message() {
         return $this->_error_message;
     }
-
+	
     /*
      * destruktor
      */

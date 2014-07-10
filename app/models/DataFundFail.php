@@ -186,6 +186,7 @@ class DataFundFail{
 	public function get_kppn_code() {
          return $this->_kppn_code ;
     }
+	
     /*
      * destruktor
      */

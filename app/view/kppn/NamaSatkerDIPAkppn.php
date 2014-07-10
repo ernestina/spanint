@@ -1,12 +1,14 @@
 <div id="top">
 	<div id="header">
-        <h2>PENOLAKAN UPLOAD PMRT <?php if (isset($this->d_nama_kppn)) {
+        <h2>CEK REVISI DIPA SATKER PADA <?php if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
 					$kode_kppn=$kppn->get_kd_satker();
 				}
 			}
-			else {echo Session::get('user');}?>
+		
+		else{ echo Session::get('user');
+		} ?>
 		</h2>
     </div>
 
@@ -18,13 +20,14 @@
                     $_SERVER['PHP_SELF'];
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
 	<div id="top">
-	<form method="POST" action="ValidasiSpm" enctype="multipart/form-data">
+	<form method="POST" action="nmsatker" enctype="multipart/form-data">
+		<div id="winvoice" class="error"></div>
 	
-		
 		<?php if (isset($this->kppn_list)) { ?>
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
 		<select type="text" name="kdkppn" id="kdkppn">
+		<option value='' selected>- pilih -</option>
 		<?php foreach ($this->kppn_list as $value1){ 
 				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
 				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
@@ -32,20 +35,21 @@
 		} ?>
 		</select>
 		<?php } ?>
-	
-		<div id="wsatker" class="error"></div>
+		
+		<label class="isian">Status Revisi: </label>
+		<select type="text" name="revisi" id="revisi">
+			<option value=''>- pilih -</option>
+			<option value='= 0' <?php if ($this->status=="BELUM REVISI"){echo "BELUM REVISI";}?>>BELUM REVISI</option>
+			<option value='> 0' <?php if ($this->status=="SUDAH REVISI"){echo "NON GAJI";}?>>SUDAH REVISI</option>
+				
+		</select>
+		
 		<label class="isian">Kode Satker: </label>
 		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
-
-		<label class="isian">Nama File: </label>
-		<input type="text" name="file_name" id="file_name" value="<?php if (isset($this->file_name)){echo $this->file_name;}?>">
 		
-		<div id="wtgl" class="error"></div>
-		<label class="isian">Tanggal: </label>
-		<ul class="inline">
-		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->tgl_awal)){echo $this->tgl_awal;}?>" /> </li> <li>s/d</li>
-		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->tgl_akhir)){echo $this->tgl_akhir;}?>"></li>
-		</ul>
+		<label class="isian">Nama Satker: </label>
+		<input type="text" name="nmsatker" id="nmsatker" value="<?php if (isset($this->nmsatker)){echo $this->nmsatker;}?>">
+
 
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
 		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
@@ -56,7 +60,7 @@
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick=""></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
@@ -64,15 +68,6 @@
 </div>
 </div>
 
-<?php
-                   // untuk menampilkan last_update
-                   if (isset($this->last_update)){
-foreach ($this->last_update as $last_update){ 
-echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
- <?php echo $last_update->get_last_update() . " WIB";
-}
-                    }
-                    ?>
 
 
 <div id="fitur">
@@ -80,12 +75,11 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
-					<th>Tanggal Upload</th>
-					<th>Nama File</th>
 					<th>Kode Satker</th>
-					<th>Status Code</th>
-					
-					
+					<th>Nama Satker</th>
+					<th>Tanggal Posting Revisi</th>
+					<th>No. Revisi Terakhir</th>
+					<!--th>KPPN</th-->
 			</thead>
 			<tbody class='ratatengah'>
 			<?php 
@@ -98,11 +92,13 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_creation_date() . "</td>";
-					echo "<td><a href=".URL."dataSPM/errorSpm/".$value->get_file_name()." target='_blank' '>" . $value->get_file_name() . "</a></td>";
-					echo "<td>" . $value->get_satker_code() . "</td>";
-					echo "<td>" . $value->get_status_code() . "</td>";
-					
+					//echo "<td>" . $value->get_kppn() . "</td>";
+					echo "<td><a href=".URL."dataDIPA/RevisiDipa/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
+					//echo "<td>" . $value->get_kdsatker() . "</td>";
+					echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
+					echo "<td>" . $value->get_tgl_rev() . "</td>";
+					echo "<td>" . $value->get_rev() . "</td>";
+					//echo "<td class='ratakanan'>" . $value->get_total_sp2d() . "</td>";
 				echo "</tr>	";
 			} 
 			}
@@ -120,15 +116,10 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
 <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
 <script type="text/javascript" charset="utf-8">
-     $(function(){
+    $(function(){
         hideErrorId();
         hideWarning();
-		
-		$("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
-		});
-		
-		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
-		});
+        
     });
     
     function hideErrorId(){
@@ -136,33 +127,21 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
     }
 
     function hideWarning(){
-				
-		$('#kdsatker').change(function(){
-            if(document.getElementById('kdsatker').value !=''){
-                $('#wsatker').fadeOut(200);
+		$('#invoice').keyup(function(){
+            if(document.getElementById('invoice').value !=''){
+                $('#winvoice').fadeOut(200);
             }
         });
-		
-		$('#datepicker').change(function(){
-            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
-                $('#wtgl').fadeOut(200);
-            } 
-        });
-		
-		$('#datepicker1').change(function(){
-            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
-                $('#wtgl').fadeOut(200);
-            } 
-        });
+
     }
     
     function cek_upload(){
-		var v_invoice = document.getElementById('kdsatker').value;
+		var v_invoice = document.getElementById('invoice').value;
 		
         var jml = 0;
 		if(v_invoice==''){
-			$('#wsatker').html('Harap isi no invoice');
-            $('#wsatker').fadeIn();
+			$('#winvoice').html('Harap isi no invoice');
+            $('#winvoice').fadeIn();
             jml++;
         }
 		if(jml>0){
@@ -170,7 +149,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
         } 
     }
 	
-		$(document).ready( function () {
+	$(document).ready( function () {
 		var oTable = $('#fixheader').dataTable( {
 			"sScrollY": 400,
 			"sScrollX": "100%",

@@ -43,6 +43,7 @@
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
 		<select type="text" name="kdkppn" id="kdkppn">
+		<option value='' selected>- Semua KPPN -</option>
 		<?php foreach ($this->kppn_list as $value1)
 				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
 				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
@@ -82,6 +83,17 @@
 </div>
 <?php } ?>
 
+
+<?php
+                   // untuk menampilkan last_update
+                   if (isset($this->last_update)){
+foreach ($this->last_update as $last_update){ 
+echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
+ <?php echo $last_update->get_last_update() . " WIB";
+}
+                    }
+                    ?>
+					
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id="fixheader" style="font-size: 72%">
             <!--baris pertama-->

@@ -28,7 +28,7 @@ class DataFA{
 	private $_actual_amt;
 	private $_balancing_amt;
 	private $_nm_satker;
-    private $_table1 = 'gl_balances_v';
+    private $_table1 = 'GL_BALANCES_V';
 	private $_table2 = 't_satker';
     public $registry;
 
@@ -209,7 +209,9 @@ class DataFA{
 	public function get_balancing_amt() {
          return $this->_balancing_amt ;
     }
-	
+	public function get_table1() {
+        return $this->_table1;
+    }
     /*
      * destruktor
      */

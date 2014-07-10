@@ -27,7 +27,7 @@ class DataRealisasi{
 	private $_belanja_57;
 	private $_belanja_58;
 	private $_belanja_59;
-	private $_table1 = 'gl_balances_v';
+	private $_table1 = 'GL_BALANCES_V';
 	private $_table2 = 't_satker';
 	private $_table3 = 't_ba';
 	private $_table4 = 't_lokasi';
@@ -569,7 +569,9 @@ class DataRealisasi{
 	public function get_belanja_59() {
         return $this->_belanja_59;
     }
-	
+	public function get_table1() {
+        return $this->_table1;
+    }
     /*
      * destruktor
      */
