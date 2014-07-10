@@ -42,18 +42,16 @@ class DataGRController extends BaseController {
 					//}
 					$this->view->d_bulan = $_POST['bulan'];
 				} 
-				if ($_POST['kdkppn']!=''){
-					$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
-					$d_kppn = new DataUser($this->registry);
-					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				if ($_POST['kdkppn'] != ''){
+					if ($_POST['kdkppn'] != 'SEMUA KPPN'){
+						$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
+						$d_kppn = new DataUser($this->registry);
+						$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+					}
 				} else {
 					$filter[$no++]="KPPN = '".Session::get('id_user')."'";
 				}
-				
 			} 
-			
-				
-			
 		$this->view->data = $d_spm1->get_gr_pfk_filter($filter, $bulan);
 		//var_dump($d_spm->get_gr_status_filter($filter));
 		$this->view->render('kppn/test');
@@ -73,8 +71,10 @@ class DataGRController extends BaseController {
 				$this->view->bulan = $bulan;
 			}
 			if (!is_null($kppn)) {
-				$filter[$no++]="KPPN =  '" .$kppn."'";
-				$this->view->kppn = $kppn;
+				if ($kppn != 'SEMUA'){
+					$filter[$no++]="KPPN =  '" .$kppn."'";
+					$this->view->kppn = $kppn;
+				}
 			}
 			if (Session::get('role')==KPPN) {
 				$filter[$no++]="KPPN = '".Session::get('id_user')."'";	
