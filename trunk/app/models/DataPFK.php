@@ -37,10 +37,9 @@ class DataPFK{
 		//foreach ($filter as $filter);
 		$sql = "select 
 				akun,
-				kppn,
-				uraian_akun,
-				case when trx = 1 then ".$bulan." * (-1) end potongan_spm,
-				case when trx = 2 then ".$bulan." * (-1) end setoran_mpn
+				max(uraian_akun) uraian_akun,
+				sum(case when trx = 1 then ".$bulan." * (-1) end) potongan_spm,
+				sum(case when trx = 2 then ".$bulan." * (-1) end) setoran_mpn
 				from " 
 				. $this->_table1. "
 				WHERE 1=1"
@@ -52,7 +51,7 @@ class DataPFK{
 			$sql .= " AND ".$filter;
 		}
 		//var_dump ($sql);
-		$sql .= " ORDER BY akun";
+		$sql .= " GROUP BY akun ORDER BY akun";
 		
 		
 		
@@ -64,7 +63,6 @@ class DataPFK{
 			$d_data->set_uraian_akun($val['URAIAN_AKUN']);
 			$d_data->set_potongan_spm($val['POTONGAN_SPM']);
             $d_data->set_setoran_mpn($val['SETORAN_MPN']);
-			$d_data->set_kppn($val['KPPN']);
 			$d_data->set_total($val['SETORAN_MPN']+$val['POTONGAN_SPM']);
             $data[] = $d_data;
         }
