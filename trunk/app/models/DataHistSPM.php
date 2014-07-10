@@ -27,7 +27,7 @@ class DataHistSPM{
 	private $_end_date;
 	private $_time_end_date;
 	private $_fu_description;
-    private $_table1 = 'ap_invoices_all_v';
+    private $_table1 = 'AP_INVOICES_ALL_V';
     public $registry;
 	
     /*
@@ -215,7 +215,9 @@ class DataHistSPM{
 	public function get_time_end_date() {
          return $this->_time_end_date ;
     }
-
+	public function get_table1() {
+        return $this->_table1;
+    }
 
     /*
      * destruktor

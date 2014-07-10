@@ -54,6 +54,9 @@ class DataSPMController extends BaseController {
 			$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
 			$this->view->d_satker = Session::get('kd_satker');
 		}
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
 		$this->view->data = $d_spm1->get_hist_spm_filter ($filter);
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/posisiSPM');
@@ -110,6 +113,9 @@ class DataSPMController extends BaseController {
 		}
 		$this->view->data = $d_spm1->get_hold_spm_filter($filter);
 		//var_dump($d_spm1->get_hold_spm_filter ($filter));
+		
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 		
 		$this->view->render('kppn/holdSPM');
 	}
@@ -170,6 +176,9 @@ class DataSPMController extends BaseController {
 				$this->view->d_satker = Session::get('kd_satker');
 				$this->view->data = $d_spm1->get_validasi_spm_filter($filter);
 			}
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+			
 			$this->view->render('kppn/validasiuploadSPM');
 		}
 	
@@ -308,6 +317,8 @@ class DataSPMController extends BaseController {
 		$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
 		//var_dump($d_spm1->get_durasi_spm_filter ($filter));
 		}
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		$this->view->render('kppn/DurasiSPM');
 	}
 	
@@ -403,7 +414,9 @@ class DataSPMController extends BaseController {
 			
 		$this->view->data2 = $d_spm1->get_jenis_spm_filter($kdsatker);	
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
-		
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
 		//var_dump($d_spm1->get_satker_filter($filter));
 		if( Session::get('id_user') == 140 ){$this->view->render('kppn/SP2DSatker140');
 		}

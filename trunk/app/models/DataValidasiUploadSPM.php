@@ -100,6 +100,9 @@ class DataValidasiUploadSPM{
 	public function get_creation_date() {
         return $this->_creation_date;
     }
+	public function get_table1() {
+        return $this->_table1;
+    }
     /*
      * destruktor
      */

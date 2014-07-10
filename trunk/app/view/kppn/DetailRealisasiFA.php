@@ -36,12 +36,13 @@
 			//var_dump ($this->data);
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+					echo "<div class='alert alert-danger'><strong>Info!  </strong>Tidak ada data.</div>";
 				} else {
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td>" . $value->get_invoice_num() . "</td>";
+					//echo "<td>" . $value->get_status() . "</td>";
 					echo "<td>" . $value->get_invoice_date() . "</td>";
 					echo "<td>" . $value->get_check_number() . "</td>";
 					echo "<td>" . $value->get_check_date() . "</td>";

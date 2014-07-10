@@ -19,7 +19,7 @@ class DataHoldSPM{
 	private $_description;
 	private $_keterangan;
     private $_table1 = 'ap_invoices_all';
-	private $_table2 = 'ap_holds_all';
+	private $_table2 = 'AP_HOLDS_ALL';
     public $registry;
 
     /*
@@ -153,6 +153,9 @@ class DataHoldSPM{
     }
 	public function get_keterangan() {
          return $this->_keterangan ;
+    }
+	public function get_table2() {
+        return $this->_table2;
     }
 
     /*

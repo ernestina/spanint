@@ -212,7 +212,9 @@ class DataCheck{
 	public function get_nmsatker() {
         return $this->_nmsatker;
     }
-		
+	public function get_table1() {
+        return $this->_table1;
+    }	
     /*
      * destruktor
      */

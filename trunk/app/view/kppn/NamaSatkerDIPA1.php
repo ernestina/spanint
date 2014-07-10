@@ -27,6 +27,7 @@
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
 		<select type="text" name="kdkppn" id="kdkppn">
+		<option value='' selected>- pilih -</option>
 		<?php foreach ($this->kppn_list as $value1){ 
 				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
 				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
@@ -34,6 +35,14 @@
 		} ?>
 		</select>
 		<?php } ?>
+		
+		<label class="isian">Status Revisi: </label>
+		<select type="text" name="revisi" id="revisi">
+			<option value=''>- pilih -</option>
+			<option value='= 0' <?php if ($this->status=="BELUM REVISI"){echo "BELUM REVISI";}?>>BELUM REVISI</option>
+			<option value='> 0' <?php if ($this->status=="SUDAH REVISI"){echo "NON GAJI";}?>>SUDAH REVISI</option>
+				
+		</select>
 		
 		<label class="isian">Kode Satker: </label>
 		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
@@ -66,8 +75,10 @@
             <!--baris pertama-->
 			<thead>
 					<th>No.</th>
+					<th>KPPN</th>
 					<th>Kode Satker</th>
 					<th>Nama Satker</th>
+					<th>Tanggal Posting Revisi</th>
 					<th>No. Revisi Terakhir</th>
 					<!--th>KPPN</th-->
 			</thead>
@@ -82,9 +93,11 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
+					echo "<td>" . $value->get_kppn() . "</td>";
 					echo "<td><a href=".URL."dataDIPA/RevisiDipa/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
 					//echo "<td>" . $value->get_kdsatker() . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
+					echo "<td>" . $value->get_tgl_rev() . "</td>";
 					echo "<td>" . $value->get_rev() . "</td>";
 					//echo "<td class='ratakanan'>" . $value->get_total_sp2d() . "</td>";
 				echo "</tr>	";

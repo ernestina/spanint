@@ -15,11 +15,11 @@
 			//echo 
 			//Tanggal::tgl_indo(Tanggal::getTglSekarang()) ;
 			//echo (date('d-m-y'));
-			
+		echo $this->d_bulan;
 
-		$date = new DateTime(Tanggal::getTglSekarang());
-		$date->sub(new DateInterval('P1D'));
-		echo Tanggal::tgl_indo($date->format('Y-m-d') ). "\n";
+		//$date = new DateTime(Tanggal::getTglSekarang());
+		//$date->sub(new DateInterval('P1D'));
+		//echo Tanggal::tgl_indo($date->format('Y-m-d') ). "\n";
 		?>
 		</h2>
 </div>
@@ -50,11 +50,28 @@
 		</select>
 		<?php } ?>
 		
-		
-	
 		<label class="isian">Kode Satker: </label>
 		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
-
+		
+		<label class="isian">Pilih Periode: </label>
+		<select type="text" name="bulan" id="bulan">
+			<option value='JAN' <?php if ($this->d_bulan=='01'){echo "selected";}?> >Januari</option>
+			<option value='FEB' <?php if ($this->d_bulan=='02'){echo "selected";}?> >Februari</option>
+			<option value='MAR' <?php if ($this->d_bulan=='03'){echo "selected";}?> >Maret</option>
+			<option value='APR' <?php if ($this->d_bulan=='04'){echo "selected";}?> >April</option>
+			<option value='MAY' <?php if ($this->d_bulan=='05'){echo "selected";}?> >Mei</option>
+			<option value='JUN' <?php if ($this->d_bulan=='06'){echo "selected";}?> >Juni</option>
+			<option value='JUL' <?php if ($this->d_bulan=='07'){echo "selected";}?> >Juli</option>
+			<option value='AGT' <?php if ($this->d_bulan=='08'){echo "selected";}?> >Agustus</option>
+			<option value='SEP' <?php if ($this->d_bulan=='09'){echo "selected";}?> >September</option>
+			<option value='OCT' <?php if ($this->d_bulan=='10'){echo "selected";}?> >Oktober</option>
+			<option value='NOV' <?php if ($this->d_bulan=='11'){echo "selected";}?> >November</option>
+			<option value='DEC' <?php if ($this->d_bulan=='12'){echo "selected";}?> >Desember</option>
+			<!--option value='Validated' <?php //if ($this->status==Validated){echo "selected";}?>>Validated</option>
+			<option value='Error' <?php //if ($this->status==Error){echo "selected";}?>>Error</option-->
+			
+		</select>
+		
 		
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
 		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
@@ -71,7 +88,15 @@
 	</form>
 </div></div>
 </div>
-
+<?php
+                   // untuk menampilkan last_update
+                   if (isset($this->last_update)){
+foreach ($this->last_update as $last_update){ 
+echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
+ <?php echo $last_update->get_last_update() . " WIB";
+}
+                    }
+                    ?>
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id="fixheader" style="font-size: 72%">
             <!--baris pertama-->

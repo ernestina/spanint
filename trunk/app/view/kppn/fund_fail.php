@@ -65,6 +65,9 @@
 </div>
 </div>
 </div>
+
+
+
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id="example" style="font-size: 90%">
             <!--baris pertama-->
@@ -102,8 +105,8 @@
 					echo "<td>" . $value->get_output_code() . "</td>";
 					echo "<td>" . $value->get_dana_code() . "</td>";
 					echo "<td>" . $value->get_description() . "</td>";
-					echo "<td>" . number_format($value->get_blokir_kontrak()) . "</td>";
-					echo "<td>" . number_format($value->get_blokir_realisasi()) . "</td>";
+					echo "<td class='ratakanan'>" . number_format($value->get_blokir_kontrak()) . "</td>";
+					echo "<td class='ratakanan'>" . number_format($value->get_blokir_realisasi()) . "</td>";
 				echo "</tr>	";
 			} 
 			}
