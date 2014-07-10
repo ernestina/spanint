@@ -73,7 +73,8 @@ class DataGRController extends BaseController {
 			if (!is_null($kppn)) {
 				if ($kppn != 'SEMUA'){
 					$filter[$no++]="KPPN =  '" .$kppn."'";
-					$this->view->kppn = $kppn;
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
 				}
 			}
 			if (Session::get('role')==KPPN) {
