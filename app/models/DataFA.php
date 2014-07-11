@@ -53,7 +53,7 @@ class DataFA{
 				. $this->_table1. " A, "
 				. $this->_table2. " B 
 				WHERE
-				
+				A.BUDGET_TYPE='2' AND
 				A.SATKER=B.KDSATKER ";
 		$no=0;
 		foreach ($filter as $filter) {
