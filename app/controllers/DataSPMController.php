@@ -359,7 +359,6 @@ class DataSPMController extends BaseController {
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
 			if (Session::get('role')==KPPN) {
-			$filter[$no++]="substr(check_number,3,3) = '".Session::get('id_user')."'";
 			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
 			$this->view->data = $d_spm1->get_satker_filter($filter);	
 			}
@@ -422,6 +421,91 @@ class DataSPMController extends BaseController {
 		}
 		else {$this->view->render('kppn/SP2DSatker');
 		}
+	}	
+	
+	
+	public function RekapSp2d() {
+		$d_spm1 = new DataCheck($this->registry);
+		$filter = array ();
+		$no=0;
+			if (isset($_POST['submit_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = ".$_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+					
+								
+				} else {
+					$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = ".Session::get('id_user');
+				}
+				
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					/*$filter[$no++] = "CREATION_DATE BETWEEN TO_DATE ('".date('Ymd',strtotime($_POST['tgl_awal']))."','YYYYMMDD') 
+									AND TO_DATE ('".date('Ymd',strtotime($_POST['tgl_akhir']))."','YYYYMMDD')  ";
+				
+					$filter[$no++] = "CREATION_DATE BETWEEN TO_DATE('".$_POST['tgl_awal']."','DD/MM/YYYY') AND TO_DATE('".$_POST['tgl_akhir']."','DD/MM/YYYY')";
+					*/
+					$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '".date('Ymd',strtotime($_POST['tgl_awal']))."' AND '".date('Ymd', strtotime($_POST['tgl_akhir']))."'";
+					
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}	
+				$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);	
+			//$this->view->data = $d_spm1->get_validasi_spm_filter($filter);	
+			}
+			
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+			if (Session::get('role')==KPPN) {
+			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
+			$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);	
+			}
+		//$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);
+		//var_dump($d_spm1->get_error_spm_filter ($filter));
+		$this->view->render('kppn/RekapSP2D');
+	}
+	
+	public function detailrekapsp2d($jenis_spm=null, $kppn=null, $tgl_awal=null, $tgl_akhir=null) {
+		$d_spm1 = new DataCheck($this->registry);
+		$filter = array ();
+		$no=0;
+		if ($jenis_spm != '') {
+				$filter[$no++]=" JENDOK =  '".$jenis_spm."'";
+				
+			}
+		if ($kppn != '') {
+			$filter[$no++]=" SUBSTR(CHECK_NUMBER,3,3) =  '".$kppn."'";
+				
+			}
+		if ($tgl_awal != '' AND $tgl_akhir !=''){
+					/*$filter[$no++] = "CREATION_DATE BETWEEN TO_DATE ('".date('Ymd',strtotime($_POST['tgl_awal']))."','YYYYMMDD') 
+									AND TO_DATE ('".date('Ymd',strtotime($_POST['tgl_akhir']))."','YYYYMMDD')  ";
+				
+					$filter[$no++] = "CREATION_DATE BETWEEN TO_DATE('".$_POST['tgl_awal']."','DD/MM/YYYY') AND TO_DATE('".$_POST['tgl_akhir']."','DD/MM/YYYY')";
+					*/
+					$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '".date('Ymd',strtotime($tgl_awal))."' AND '".date('Ymd', strtotime($tgl_akhir))."'";
+					
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}	
+		
+		/*if (Session::get('role')==KPPN) {
+			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
+				
+			}*/
+				
+		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+		$this->view->render('kppn/Rekap');
+		
 	}	
 	//author by jhon
 	

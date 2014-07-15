@@ -18,10 +18,13 @@ class DataCheck{
 	private $_check_date;
 	private $_attribute6;
 	private $_nmsatker;
+	private $_jendok;
 	private $_creation_date;
 	private $_currency_code;
 	private $_exchange_date;
 	private $_exchange_rate;
+	private $_jumlah_sp2d;
+	private $_total_sp2d;
 	private $_status_lookup_code;
 	private $_table1 = 'AP_CHECKS_ALL_V';
     public $registry;
@@ -113,6 +116,39 @@ class DataCheck{
         }
         return $data;
     }
+	
+	public function get_sp2d_rekap_filter($filter) {
+		Session::get('id_user');
+		$sql = "SELECT SUBSTR(CHECK_NUMBER,3,3) KPPN, UPPER(JENIS_SPM) JENIS_SPM, JENDOK, JENIS_SP2D, COUNT(CHECK_NUMBER) JUMLAH_SP2D, SUM(AMOUNT) TOTAL_SP2D 
+				FROM " 
+				. $this->_table1. "
+				WHERE 
+				STATUS_LOOKUP_CODE <> 'VOIDED'"
+				
+				;
+				
+		$no=0;
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		
+		$sql .= " GROUP BY SUBSTR(CHECK_NUMBER,3,3), JENIS_SPM, JENDOK, JENIS_SP2D ";
+		$sql .= " ORDER BY SUBSTR(CHECK_NUMBER,3,3), COUNT(CHECK_NUMBER) DESC, JENIS_SPM";
+		//var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_jumlah_sp2d($val['JUMLAH_SP2D']);
+			$d_data->set_jendok($val['JENDOK']);
+			$d_data->set_jenis_sp2d($val['JENIS_SP2D']);
+			$d_data->set_total_sp2d(NUMBER_FORMAT($val['TOTAL_SP2D']));
+			$d_data->set_attribute6($val['JENIS_SPM']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
     /*
      * setter
      */
@@ -120,8 +156,17 @@ class DataCheck{
     public function set_jenis_sp2d($jenis_sp2d) {
         $this->_jenis_sp2d = $jenis_sp2d;
     }
+	public function set_jumlah_sp2d($jumlah_sp2d) {
+        $this->_jumlah_sp2d = $jumlah_sp2d;
+    }
+	public function set_total_sp2d($total_sp2d) {
+        $this->_total_sp2d = $total_sp2d;
+    }
 	public function set_amount($amount) {
         $this->_amount = $amount;
+    }
+	public function set_jendok($jendok) {
+        $this->_jendok = $jendok;
     }
 	public function set_base_amount($base_amount) {
         $this->_base_amount = $base_amount;
@@ -168,6 +213,15 @@ class DataCheck{
 	
 	public function get_jenis_sp2d() {
         return $this->_jenis_sp2d;
+    }
+	public function get_jendok() {
+        return $this->_jendok;
+    }
+	public function get_jumlah_sp2d() {
+        return $this->_jumlah_sp2d;
+    }
+	public function get_total_sp2d() {
+        return $this->_total_sp2d;
     }
 	public function get_creation_date() {
         return $this->_creation_date;
