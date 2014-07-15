@@ -35,12 +35,17 @@ class DataRealisasiFA{
     
     public function get_realisasi_fa_filter($filter) {
 		Session::get('id_user');
-		$sql = "SELECT *
+		$sql = "SELECT INVOICE_NUM, DIST_CODE_COMBINATION_ID, INVOICE_DATE, AMOUNT, CHECK_NUMBER, CHECK_DATE, 
+				CASE WHEN WFAPPROVAL_STATUS = 'WFAPPROVED' THEN 'SUDAH DISETUJUI' 
+				WHEN WFAPPROVAL_STATUS = 'REJECTED' THEN 'DITOLAK (BELUM DIBATALKAN)'
+				WHEN WFAPPROVAL_STATUS = 'NOT REQUIRED' THEN 'TIDAK DIMINTAKAN PERSETUJUAN' END WFAPPROVAL_STATUS 
 				FROM " 
 				. $this->_table1. " 
 				where 1=1
 				and (status_lookup_code <> 'VOIDED' 
-				or status_lookup_code is null) ";
+				or status_lookup_code is null) 
+				and WFAPPROVAL_STATUS <> 'NOT REQUIRED'
+				";
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
