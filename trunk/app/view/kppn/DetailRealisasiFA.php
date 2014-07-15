@@ -24,6 +24,7 @@
 					<th>No.</th>
 					<th>Nomor Invoice</th>
 					<th>Tanggal Invoice</th>
+					<th>Status Invoice</th>
 					<th>Nomor SP2D</th>
 					<th>Tanggal SP2D</th>
 					<th>Nilai Realisasi</th>
@@ -44,6 +45,7 @@
 					echo "<td>" . $value->get_invoice_num() . "</td>";
 					//echo "<td>" . $value->get_status() . "</td>";
 					echo "<td>" . $value->get_invoice_date() . "</td>";
+					echo "<td>" . $value->get_status() . "</td>";
 					echo "<td>" . $value->get_check_number() . "</td>";
 					echo "<td>" . $value->get_check_date() . "</td>";
 					echo "<td align='right'>" . number_format($value->get_amount()) . "</td>";
@@ -67,6 +69,11 @@
 				</tr>
 			</tfoot>
         </table>
+		<br>
+		<b><i>Keterangan Status:  </i></b></br>
+		<b><i>WFAPPROVED : Sudah Disetujui</i></b></br>
+		<b><i>NOT REQUIRED : Belum Dimintakan Persetujuan</i></b></br>
+		<b><i>REJECTED : Reject (TIdak mengembalikan Pagu, sebaiknya di batalkan)</i></b></br>
 		</div>
 </div>
 </div>

@@ -29,6 +29,7 @@
 				$('#datepicker3').datepicker({dateFormat: "dd-mm-yy"});
             });
 			$(document).ready(function() {
+			$.fn.dataTableExt.sErrMode = 'throw';
 				$('#wrapper').css('min-height', window.innerHeight-90);
 			});
 			$(window).resize(function() {
@@ -75,6 +76,7 @@
 								<li><a href='. URL . 'dataSPM/historySPM></i>Histori Invoice</a></li>
 								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
 								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
+								<li><a href='. URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
                             </ul>
 							</li>';
 						echo '<li class="subnav"><a href='. URL .'dataGR/grStatusHarian>Modul GR</a>';
@@ -95,7 +97,7 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
-								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap Penerbitan SP2D</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap SP2D BO Pusat</a></li>
                             </ul>
                             </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
@@ -141,6 +143,7 @@
 								<li><a href='. URL . 'dataSPM/historySPM></i>Histori Invoice</a></li>
 								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
 								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
+								<li><a href='. URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
                             </ul>
 							</li>';
 						echo '<li class="subnav"><a href=#>Modul GR</a>';
@@ -160,7 +163,7 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
-								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap penerbitan SP2D</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap SP2D BO Pusat</a></li>
                             </ul>
                             </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
@@ -205,6 +208,7 @@
 								<li><a href='. URL . 'dataSPM/historySPM></i>Histori Invoice</a></li>
 								<li><a href='. URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
 								<li><a href='. URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
+								<li><a href='. URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
                             </ul>
 							</li>';
 						
@@ -226,7 +230,7 @@
                                 <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
                                 <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
-								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap penerbitan SP2D</a></li>
+								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap SP2D BO Pusat</a></li>
                             </ul>
                             </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';

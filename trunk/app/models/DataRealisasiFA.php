@@ -39,13 +39,14 @@ class DataRealisasiFA{
 				FROM " 
 				. $this->_table1. " 
 				where 1=1
-				and status_lookup_code <> 'VOIDED'";
+				and (status_lookup_code <> 'VOIDED' 
+				or status_lookup_code is null) ";
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
 		
-		//$sql .= " ORDER BY A.AKUN " ;
+		$sql .= " ORDER BY INVOICE_NUM, INVOICE_DATE ASC " ;
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
