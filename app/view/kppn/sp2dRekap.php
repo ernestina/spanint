@@ -176,7 +176,10 @@ if (isset($this->last_update)){
 		</div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
+<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+<script type="text/javascript" charset="utf-8">
     $(function(){
         hideErrorId();
         hideWarning();
