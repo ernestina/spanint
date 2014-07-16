@@ -28,12 +28,12 @@
                 ?>
 
                 <div class="kolom1">
-					<div class="pengumuman">
+					<!--div class="pengumuman">
 						<h2>Pengumuman</h4>
 						<h3><p align='left'><b>[RALAT] [INFO] Maintenance SPAN, Minggu 13-07-2014.</b><br> Dikarenakan akan adanya maintenance untuk Interkoneksi Perbankan, yang rencananya akan diadakan pada hari Minggu, 13-07-2014 (Sehari Penuh).
 						Maka dari hal diatas, agar KPPN tidak melakukan pemrosesan SP2D pada waktu maintenance tersebut, karena resiko yang terjadi jika dilakukan proses SP2D pada saat maintenance adalah data dapat tidak terkirim ke perbankan. Terimakasih <br><br>
 						</p></h3>
-					</div>
+					</div-->
 				</div>
 				<div class="kolom2">
                     <h1>Login</h1>

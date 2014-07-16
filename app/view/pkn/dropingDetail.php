@@ -35,7 +35,7 @@ if (isset($this->last_update)){
 					<th class='mid'>No.</th>
 					<th >Tanggal - Jam</th>
 					<th >Mata Uang</th>
-					<th >Nomor Transaksi SP2D</th>
+					<th >Nomor Transaksi BAT</th>
 					<th >Nilai Transaksi</th>
 					<th >Nama Rekening</th>
 			</thead>
