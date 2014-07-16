@@ -69,11 +69,9 @@
 				</tr>
 			</tfoot>
         </table>
-		<br>
+		<!--br>
 		<b><i>Keterangan Status:  </i></b></br>
-		<b><i>WFAPPROVED : Sudah Disetujui</i></b></br>
-		<b><i>NOT REQUIRED : Belum Dimintakan Persetujuan</i></b></br>
-		<b><i>REJECTED : Reject (TIdak mengembalikan Pagu, sebaiknya di batalkan)</i></b></br>
+		<b><i>REJECTED : Reject (Tidak mengembalikan Pagu, Harus di Batalkan)</i></b></br-->
 		</div>
 </div>
 </div>
