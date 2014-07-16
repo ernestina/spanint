@@ -64,7 +64,11 @@ class DataRealisasiFA{
             $d_data->set_amount($val['AMOUNT']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
 			$d_data->set_status($val['WFAPPROVAL_STATUS']);
-			$d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+			if (is_null($val['CHECK_DATE'])){
+				$d_data->set_check_date("-");
+			} else {
+				$d_data->set_check_date(date("d-m-Y",strtotime($val['CHECK_DATE'])));
+			}
 			$d_data->set_cancelled_date(date("d-m-Y",strtotime($val['CANCELLED_DATE'])));
             $data[] = $d_data;
         }
