@@ -60,7 +60,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan='4'></td>
+					<td colspan='5'></td>
 					<td class='ratatengah'><b>GRAND TOTAL</td>
 					<td align='right'><b><?php
 						echo number_format($tot_pot); ?>

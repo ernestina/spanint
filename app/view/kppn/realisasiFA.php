@@ -112,15 +112,12 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 					echo "<td>" . $value->get_budget_type() . "</td>";
 					//echo "<td>" . $value->get_currency_code() . "</td>";
 					echo "<td style='text-align: right'>" . $value->get_budget_amt() . "</td>";
-					echo "<td style='text-align: right'>" . $value->get_encumbrance_amt() . "</td>";
+					echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailEncumbrances/".$value->get_code_id()." target='_blank' '>" . $value->get_encumbrance_amt() . "</td>";
 					echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailRealisasiFA/".$value->get_code_id()." target='_blank' '>" . $value->get_actual_amt() . "</td>";
-					//echo "<td><a href=".URL."dataDIPA/RevisiDipa/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
+					
 					echo "<td style='text-align: right'>" . $value->get_balancing_amt() . "</td>";
 				echo "</tr>	";
-				//$tot_budget = $tot_budget  + $value->get_budget_amt() ;
-				//$tot_encumbrance = $tot_encumbrance + $value->get_encumbrance_amt() ;
-				//$tot_actual = $tot_actual + $value->get_actual_amt();
-				//$tot_balancing = $tot_balancing + $value->get_balancing_amt();
+				
 			}
 			}
 			} else {

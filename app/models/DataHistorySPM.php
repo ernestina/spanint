@@ -61,7 +61,27 @@ class DataHistorySPM{
 				and AIIA.invoice_num = " . $invoice . " 
 				
 				union all
+				select
+				ai.invoice_num nomor_dukumen
+				,'Cancelled' response
+				,pap.full_name nama_user
+				,case when fu.user_name like '19%' then fu.description else fu.user_name end as Posisi
+				,to_char(ai.last_update_date, 'dd-mm-yyyy hh24:mi:ss') waktu_mulai
+				,'-' as no_sp2d
+				from 
+				ap_invoices_all ai,
+				fnd_user fu,
+				per_all_people_f pap
+				where
+				ai.cancelled_by=fu.user_id
+				and pap.person_id = fu.employee_id
+				and ai.cancelled_date is not null
+				and ai.invoice_num
+				= " . $invoice . " 
 
+				
+				union all
+				
 				select
 				ai.invoice_num nomor_dokumen
 				,ah.response response
