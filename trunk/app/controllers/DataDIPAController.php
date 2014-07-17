@@ -323,6 +323,7 @@ class DataDIPAController extends BaseController {
 		$this->view->data = $d_spm1->get_realisasi_fa_filter($filter);
 		$this->view->render('kppn/DetailRealisasiFA');
 	}
+	
 	public function DataRealisasi() {
 		$d_spm1 = new DataRealisasi($this->registry);
 		$filter = array ();
@@ -494,7 +495,18 @@ class DataDIPAController extends BaseController {
 		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		$this->view->render('kppn/DataRealisasiTransfer');
 	}
-	
+	public function DetailEncumbrances($code_id=null) {
+		$d_spm1 = new encumbrances($this->registry);
+		$filter = array ();
+		$no=0;
+			if ($code_id != '') {
+					$filter[$no++]=" CODE_COMBINATION_ID =  '".$code_id."'";
+				//$this->view->invoice_num = $invoice_num;	
+				}
+		//var_dump($d_spm->get_hist_spm_filter());
+		$this->view->data = $d_spm1->get_encumbrances($filter);
+		$this->view->render('kppn/encumbrances');
+	}
     public function __destruct() {
         
     }
