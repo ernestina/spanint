@@ -323,7 +323,6 @@ class DataDIPAController extends BaseController {
 		$this->view->data = $d_spm1->get_realisasi_fa_filter($filter);
 		$this->view->render('kppn/DetailRealisasiFA');
 	}
-	
 	public function DataRealisasi() {
 		$d_spm1 = new DataRealisasi($this->registry);
 		$filter = array ();
@@ -342,7 +341,33 @@ class DataDIPAController extends BaseController {
 					$this->view->satker_code = $_POST['kdsatker'];
 				}
 			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : \spanint\app\controllers\DataDIPAController.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+			
+			}elseif (isset($_POST['cetak_file'])) {
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				} else {
+					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
+				}
+				
+				if ($_POST['kdsatker']!=''){
+					$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
+					$this->view->satker_code = $_POST['kdsatker'];
+				}
+			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+			$this->view->render('kppn/DataRealisasi_PDF');
+
 			}
+			//----------------------------------------------------
 			if (Session::get('role')==KANWIL){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
@@ -358,10 +383,10 @@ class DataDIPAController extends BaseController {
 			
 			$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		//var_dump($d_spm->get_hist_spm_filter());
-		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		$this->view->render('kppn/DataRealisasi');
 	}
+	
+
 	public function DataRealisasiBA() {
 		$d_spm1 = new DataRealisasi($this->registry);
 		$filter = array ();
@@ -495,18 +520,7 @@ class DataDIPAController extends BaseController {
 		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		$this->view->render('kppn/DataRealisasiTransfer');
 	}
-	public function DetailEncumbrances($code_id=null) {
-		$d_spm1 = new encumbrances($this->registry);
-		$filter = array ();
-		$no=0;
-			if ($code_id != '') {
-					$filter[$no++]=" CODE_COMBINATION_ID =  '".$code_id."'";
-				//$this->view->invoice_num = $invoice_num;	
-				}
-		//var_dump($d_spm->get_hist_spm_filter());
-		$this->view->data = $d_spm1->get_encumbrances($filter);
-		$this->view->render('kppn/encumbrances');
-	}
+	
     public function __destruct() {
         
     }
