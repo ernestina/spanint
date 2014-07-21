@@ -31,6 +31,7 @@ class DataRealisasi{
 	private $_table2 = 't_satker';
 	private $_table3 = 't_ba';
 	private $_table4 = 't_lokasi';
+	private $_table5 = 'gl_balances_transfer';
 	public $registry;
 
     /*
@@ -256,7 +257,7 @@ class DataRealisasi{
         return $data;
     }
 	
-	public function get_realisasi_lokasi_kanwil($kanwil = null) {
+	public function get_realisasi_lokasi_kanwil() {
 		Session::get('id_user');
 		$sql = "select distinct
 				a.lokasi , b.nmlokasi 
@@ -267,8 +268,7 @@ class DataRealisasi{
 				where 
 				substr(a.akun,1,1) in ('5','6')
 				and a.lokasi=b.kdlokasi
-				and a.budget_type = '2'
-				and a.kanwil = '".$kanwil."' 				
+				and a.budget_type = '2' 				
 				"
 				;
 		//$no=0;
@@ -294,25 +294,28 @@ class DataRealisasi{
 	public function get_realisasi_satker_transfer($transfer = null) {
 		Session::get('id_user');
 		$sql = "select distinct
-				b.kdsatker , b.nmsatker, b.kppn 
+				b.kdsatker , b.nmsatker
 				FROM " 
-				. $this->_table1. " a ,"
+				. $this->_table5. " a ,"
 				. $this->_table2. " b 
 				
 				where 
-				substr(a.program,1,5)='99905'
-				and substr(a.akun,1,1) in ('6')
+				substr(a.akun,1,1) in ('6')
 				and a.satker=b.kdsatker
 				and a.budget_type = '2'
-				and b.kppn = '".$transfer."' 				
+				 				
 				"
 				;
-		//$no=0;
-		//foreach ($filter as $filter) {
-			//$sql .= " AND ".$filter;
-		//}
+		/*		
+		if ($transfer != '') {
+			$sql .= " AND b.kppn ='".$transfer."'";
+		}
+		$no=0;
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
 		
-		//$sql .= " group by substr(a.program,1,3), b.nmba " ;
+		$sql .= " group by substr(a.program,1,3), b.nmba "*/ ;
 		$sql .= " ORDER by b.kdsatker " ;
 		
 		//var_dump ($sql);
@@ -322,7 +325,6 @@ class DataRealisasi{
             $d_data = new $this($this->registry);
 			$d_data->set_satker($val['KDSATKER']);
 			$d_data->set_dipa($val['NMSATKER']);
-			$d_data->set_kppn($val['KPPN']);
             $data[] = $d_data;
         }
         return $data;
@@ -332,12 +334,11 @@ class DataRealisasi{
 		$sql = "select distinct
 				b.kdsatker , b.nmsatker, b.kppn 
 				FROM " 
-				. $this->_table1. " a ,"
+				. $this->_table5. " a ,"
 				. $this->_table2. " b 
 				
 				where 
-				substr(a.program,1,5)='99905'
-				and substr(a.akun,1,1) in ('6')
+				substr(a.akun,1,1) in ('6')
 				and a.satker=b.kdsatker
 				and a.budget_type = '2'
 				and substr(b.kanwil_djpb,2,2) = '".$transfer."' 				
@@ -351,7 +352,7 @@ class DataRealisasi{
 		//$sql .= " group by substr(a.program,1,3), b.nmba " ;
 		$sql .= " ORDER by b.kdsatker " ;
 		
-		//var_dump ($sql);
+		var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
@@ -368,17 +369,20 @@ class DataRealisasi{
 		$sql = "select distinct
 				b.kdsatker , b.nmsatker, b.kppn 
 				FROM " 
-				. $this->_table1. " a ,"
+				. $this->_table5. " a ,"
 				. $this->_table2. " b 
 				
 				where 
-				substr(a.program,1,5)='99905'
-				and substr(a.akun,1,1) in ('6')
+				substr(a.akun,1,1) in ('6')
 				and a.satker=b.kdsatker
 				and a.budget_type = '2'
-				and a.satker = '".$satker."' 				
+				 				
 				"
 				;
+		
+		if($satker !='') {
+		$sql .= " AND A.SATKER = '".$satker. "'" ;
+		}
 		//$no=0;
 		//foreach ($filter as $filter) {
 			//$sql .= " AND ".$filter;
@@ -406,11 +410,9 @@ class DataRealisasi{
 				 a.kppn
 				, a.lokasi
 				, c.nmlokasi
-				, sum(a.budget_amt) Pagu
 				, sum(a.actual_amt) Realisasi
-				, sum(ENCUMBRANCE_AMT) encumbrance 
 				FROM " 
-				. $this->_table1. " a," 
+				. $this->_table5. " a," 
 				. $this->_table2. " b, "
 				. $this->_table4. " c 
 				where 

@@ -61,6 +61,7 @@
 								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
+								<li><a href=' . URL . 'dataDIPA/DataRealisasiTransfer></i>Realisasi Belanja Transfer Daerah</a></li>
                             </ul>
                             </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataDroping/monitoringDroping></i>Modul CM</a>';
@@ -131,6 +132,7 @@
 								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
+								<li><a href=' . URL . 'dataDIPA/DataRealisasiTransfer></i>Realisasi Belanja Transfer Daerah</a></li>
                             </ul>
                             </li>';
 							
@@ -197,6 +199,7 @@
 								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
+								<li><a href=' . URL . 'dataDIPA/DataRealisasiTransfer></i>Realisasi Belanja Transfer Daerah</a></li>
                             </ul>
                             </li>';
 						
