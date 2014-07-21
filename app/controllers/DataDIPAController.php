@@ -460,6 +460,7 @@ class DataDIPAController extends BaseController {
 			if (Session::get('role')==KANWIL){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+				
 			}
 			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
@@ -481,7 +482,7 @@ class DataDIPAController extends BaseController {
 		$filter = array ();
 		$no=0;
 			if (isset($_POST['submit_file'])) {
-				if ($_POST['kdkppn']!=''){
+				/*if ($_POST['kdkppn']!=''){
 					$filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
@@ -490,7 +491,7 @@ class DataDIPAController extends BaseController {
 				elseif (Session::get('role')==KANWIL){
 					$filter[$no++]="A.KANWIL = '".Session::get('id_user')."'";
 					$this->view->data2 = $d_spm1->get_realisasi_satker_transfer_kanwil(Session::get('id_user'));
-				}
+				}*/
 				
 				if ($_POST['kdlokasi']!=''){
 					$filter[$no++]="a.lokasi = '".$_POST['kdlokasi']."'";
@@ -500,18 +501,36 @@ class DataDIPAController extends BaseController {
 					$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
 					$this->view->data3 = $d_spm1->get_realisasi_nmsatker_transfer($_POST['kdsatker']);
 				}
+				
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					
+					$filter[$no++] = "TO_CHAR(ACCOUNTING_DATE,'YYYYMMDD') BETWEEN '".date('Ymd',strtotime($_POST['tgl_awal']))."' AND '".date('Ymd', strtotime($_POST['tgl_akhir']))."'";
+					
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}	
 			$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
 			}
+			
 			if (Session::get('role')==KANWIL){
 				$d_kppn_list = new DataUser($this->registry);
-				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+				//$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+				$this->view->data4 = $d_spm1->get_realisasi_lokasi_kanwil(Session::get('id_user'));
+				$this->view->data2 = $d_spm1->get_realisasi_satker_transfer();
+				//$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
 			}
 			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
-				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+				//$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+				$this->view->data4 = $d_spm1->get_realisasi_lokasi_kanwil(Session::get('id_user'));
+				$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
+				$this->view->data2 = $d_spm1->get_realisasi_satker_transfer();
+				//$this->view->data2 = $d_spm1->get_realisasi_satker_transfer($_POST['kdkppn']);
 			}
 		
-			if (Session::get('role')==KPPN) {$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
+			if (Session::get('role')==KPPN) {
+			//$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
+			$this->view->data4 = $d_spm1->get_realisasi_lokasi(Session::get('id_user'));
 			$this->view->data2 = $d_spm1->get_realisasi_satker_transfer(Session::get('id_user'));
 			//$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
 			
@@ -520,7 +539,22 @@ class DataDIPAController extends BaseController {
 		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		$this->view->render('kppn/DataRealisasiTransfer');
 	}
+
 	
+	
+	public function DetailEncumbrances($code_id=null) {
+		$d_spm1 = new encumbrances($this->registry);
+		$filter = array ();
+		$no=0;
+			if ($code_id != '') {
+					$filter[$no++]=" CODE_COMBINATION_ID =  '".$code_id."'";
+				//$this->view->invoice_num = $invoice_num;	
+				}
+		//var_dump($d_spm->get_hist_spm_filter());
+		$this->view->data = $d_spm1->get_encumbrances($filter);
+		$this->view->render('kppn/encumbrances');
+	}
+
     public function __destruct() {
         
     }
