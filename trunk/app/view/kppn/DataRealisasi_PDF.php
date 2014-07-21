@@ -1,13 +1,13 @@
 <?php
-	//----------------------------------------------------
+	/* //----------------------------------------------------
 	//Development history
 	//Revisi : 0
 	//Kegiatan :1.mencetak hasil filter ke dalam pdf
-	//File yang ditambah : \spanint\app\view\kppn\DataRealisasi_PDF.php
+	//File yang ditambah : DataRealisasi_PDF.php
 	//Dibuat oleh : Rifan Abdul Rachman
 	//Tanggal dibuat : 18-07-2014
 	//----------------------------------------------------
-
+ */
  ob_start();
 //-------------------------------------
     require_once("./././public/fpdf17/fpdf.php");
@@ -37,54 +37,57 @@
      
     //header
     $this->SetFont("", "B", 12);
-    $this->MultiCell(0, 12, 'Aplikasi Online Monitoring SPAN');
+    $this->MultiCell(0, 12, 'Laporan Detail Realisasi Belanja Per Satker');
     $this->Cell(0, 1, " ", "B");
     $this->Ln(10);
     $this->SetFont("", "B", 8);
-    $this->SetX($left); $this->Cell(0, 10, 'Laporan Detail Realisasi Belanja Per Satker', 0, 1,'C');
+    //$this->SetX($left); $this->Cell(0, 10, 'Laporan Detail Realisasi Belanja Per Satker', 0, 1,'C');
     $this->Ln(10);
      
     $h = 40;
     $left = 10;
     $top = 80;	
     #tableheader
-    $this->SetFont('Arial','B',6);
+    $this->SetFont('Arial','B',9);
+	$ukuran_kolom_pagu_total_sisa=70;
+	$ukuran_kolom_jenis_belanja=65;	
 
     $this->SetFillColor(200,200,200);	
     $left = $this->GetX();
     $this->Cell(20,$h,'No',1,0,'L',true);
     $this->SetX($left += 20); $this->Cell(40, $h, 'Satker', 1, 0, 'C',true);
-     $this->SetX($left += 40); $this->Cell(70, $h, 'Nama Satker', 1, 0, 'C',true);  
-	$this->SetX($left += 70); $this->Cell(70, $h, 'Pagu', 1, 0, 'C',true);
+     $this->SetX($left += 40); $this->Cell(80, $h, 'Nama Satker', 1, 0, 'C',true);  
+	$this->SetX($left += 80); $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Pagu', 1, 0, 'C',true);
 	$px1 = $this->GetX();
-	$this->SetX($left += 70); $this->Cell(630, $h/2, 'Jenis Belanja', 1, 0, 'C',true);
+	$this->SetX($left += $ukuran_kolom_pagu_total_sisa); $this->Cell(590, $h/2, 'Jenis Belanja', 1, 0, 'C',true);
 	$py1 = $this->GetY();
 	$px2 = $px1;
 	$py2 = $py1+20;
 	$this->SetXY($px2,$py2);
-	$this->Cell(70, $h/2, 'Pegawai', 1, 0, 'C',true);
-	$this->SetX($px2 += 70);
-	$this->Cell(70, $h/2, 'Barang', 1, 0, 'C',true);
-	$this->SetX($px2 += 70);
-	$this->Cell(70, $h/2, 'Modal', 1, 0, 'C',true);
-	$this->SetX($px2 += 70);
-	$this->Cell(70, $h/2, 'Beban Bunga', 1, 0, 'C',true);
-	$this->SetX($px2 += 70);
-	$this->Cell(70, $h/2, 'Subsidi', 1, 0, 'C',true);
-	$this->SetX($px2 += 70);
-	$this->Cell(70, $h/2, 'Hibah', 1, 0, 'C',true);
-	$this->SetX($px2 += 70);
-	$this->Cell(70, $h/2, 'Bansos', 1, 0, 'C',true);
-	$this->SetX($px2 += 70);
-	$this->Cell(70, $h/2, 'Lain-lain', 1, 0, 'C',true);
-	$this->SetX($px2 += 70);
-	$this->Cell(70, $h/2, 'Total', 1, 0, 'C',true);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h/2, 'Pegawai', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h/2, 'Barang', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h/2, 'Modal', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h/2, 'Beban Bunga', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h/2, 'Subsidi', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h/2, 'Hibah', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h/2, 'Bansos', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h/2, 'Lain-lain', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_pagu_total_sisa, $h/2, 'Total', 1, 0, 'C',true);
 	$py3 = $this->GetY();
 	$this->SetY($py3 -= 20);
-    $this->SetX($left += 630); $this->Cell(70, $h, 'Sisa Pagu', 1, 1, 'C',true);
-$this->Ln(3);  
-    $this->SetFont('Arial','',7);
-    $this->SetWidths(array(20,40,70,70,70,70,70,70,70,70,70,70,70,70));
+    $this->SetX($left += 590); $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Sisa Pagu', 1, 1, 'C',true);
+	$this->Ln(3);  
+	
+    $this->SetFont('Arial','',7);	
+    $this->SetWidths(array(20,40,80,$ukuran_kolom_pagu_total_sisa,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_pagu_total_sisa,$ukuran_kolom_pagu_total_sisa));
     $this->SetAligns(array('C','c','L','R','R','R','R','R','R','R','R','R','R','R','R'));
     $no = 1; $this->SetFillColor(255);
     foreach ($this->data as $value) {
@@ -111,7 +114,21 @@ $this->Ln(3);
     }
      
     }
-     
+    
+	//footer
+	function Footer()
+	{
+		// Go to 1.5 cm from bottom
+		$this->SetY(-15);
+		// Select Arial italic 8
+		$this->SetFont('Arial','I',8);
+		// Print centered page number
+		//$this->Cell(0,10,'Page '.$this->PageNo(),0,0,'R');
+		$hari_ini=date("d-m-Y");
+		$this->Cell(0,10,'Dicetak : '.$hari_ini,0,0,'R');
+	}
+
+	
     public function printPDF () {
      
     if ($this->options['paper_size'] == "F4") {
@@ -128,7 +145,7 @@ $this->Ln(3);
     //$this->AddPage(); //coba
      
     $this->rptDetailData();
-     
+    $this->Footer();
     $this->Output($this->options['filename'],$this->options['destinationfile']);
     }
      
@@ -247,23 +264,21 @@ $this->Ln(3);
     } */
 //-----------------------
 
-//echo $this->data;
-if (is_array($this->data))
-{
-    
-    $data=$this->data;
-
-}else{
-echo 'bukan array';
-}
+//mengambil array data dari controller
+	if (is_array($this->data))
+	{
+		$data=$this->data;
+	}else{
+		//echo 'bukan array';
+	}
  
 
 //--------------------------
  //Laporan_Detail_Realisasi_Belanja_Per_Satker
     //pilihan
     $options = array(
-    'filename' => 'Laporan_Detail_Realisasi_Belanja_Per_Satker.PDF', //nama file penyimpanan, kosongkan jika output ke browser
-    'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
+    'filename' => '.PDF', //nama file penyimpanan, kosongkan jika output ke browser
+    'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
     'paper_size'=>'F4',	//paper size: F4, A3, A4, A5, Letter, Legal
     'orientation'=>'L' //orientation: P=portrait, L=landscape
     );
@@ -273,8 +288,6 @@ echo 'bukan array';
 
 
 //-------------------------------------
-
-
   ob_flush();
 
 ?>
