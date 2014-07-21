@@ -29,7 +29,6 @@
 				$('#datepicker3').datepicker({dateFormat: "dd-mm-yy"});
             });
 			$(document).ready(function() {
-			$.fn.dataTableExt.sErrMode = 'throw';
 				$('#wrapper').css('min-height', window.innerHeight-90);
 			});
 			$(window).resize(function() {
