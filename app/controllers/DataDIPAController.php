@@ -345,7 +345,7 @@ class DataDIPAController extends BaseController {
 			//Development history
 			//Revisi : 0
 			//Kegiatan :1.mencetak hasil filter ke dalam pdf
-			//File yang diubah : \spanint\app\controllers\DataDIPAController.php
+			//File yang diubah : DataDIPAController.php
 			//Dibuat oleh : Rifan Abdul Rachman
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------

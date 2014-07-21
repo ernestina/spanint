@@ -23,16 +23,7 @@
 		?>
 		</h2>
 </div>
-<?php
-	//----------------------------------------------------
-	//Development history
-	//Revisi : 0
-	//Kegiatan :1.mencetak hasil filter ke dalam pdf
-	//File yang ditambah : \spanint\app\view\kppn\DataRealisasi.php
-	//Dibuat oleh : Rifan Abdul Rachman
-	//Tanggal dibuat : 18-07-2014
-	//----------------------------------------------------
-?>
+
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
             <div>
@@ -90,9 +81,9 @@
 		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
 
 		<ul class="inline" style="margin-left: 130px">
-		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return ();"></li>
-		<li><input id="submit" class="sukses" type="submit" name="cetak_file" value="CETAK" onClick="return ();"></li>
+		<!--<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>-->
+ 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="PREVIEW" onClick="return ();"></li>
+		<li><input id="submit" class="suksespdf" type="submit" name="cetak_file" value="PDF" onClick="return ();"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>

@@ -48,6 +48,7 @@ h3 {
 h2, header {
 	font-size: 24px;
 	text-align: center;
+	color: #2A3F00;
 }
 
 h0 {
@@ -473,6 +474,11 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 	background-color: #5bb75b;
 }
 
+.suksespdf {
+	border: 1px solid #5bb75b;
+	background-color: #2A00FF;
+}
+
 .warning {
 	border: 1px solid #faa732;
 	background-color: #faa732;
@@ -738,7 +744,8 @@ thead th.mid {
 
 .table thead:first-child tr:first-child th,
 .table thead:first-child tr:first-child td {
-  border-top: 0;
+	border-top: 0;
+	color: #2A3F55;
 }
 
 .table-bordered {
@@ -1391,8 +1398,9 @@ thead th.mid {
 	}
 
 	.modalDialog:target {
-		opacity:1;
-		pointer-events: auto;
+	opacity:1;
+	pointer-events: auto;
+	color: #2A3F00;
 	}
 
 	.modalDialog > div {
