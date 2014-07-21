@@ -25,7 +25,6 @@
 			else {echo Session::get('user');}
 		}	
 			?>
-			 <br>
 			Per Tanggal
 			
 			<?php 
