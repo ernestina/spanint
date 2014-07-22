@@ -8,7 +8,12 @@
 			}
 		
 		else{ echo Session::get('user');
-		} ?>
+		}
+
+		if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
+			echo "<br>".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
+			}
+			?>
 		</h2>
     </div>
 
@@ -41,6 +46,12 @@
 		<label class="isian">Nama Satker: </label>
 		<input type="text" name="nmsatker" id="nmsatker" value="<?php //if (isset($this->nmsatker)){echo $this->nmsatker;}?>"-->
 
+		<div id="wtgl" class="error"></div>
+		<label class="isian">Tanggal: </label>
+		<ul class="inline">
+		<li><input type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>" /> </li> <li>s/d</li>
+		<li><input type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>"></li>
+		</ul>
 
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
 		<input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
@@ -104,11 +115,17 @@
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
 <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
 <script type="text/javascript" charset="utf-8">
-    $(function(){
+   $(function(){
         hideErrorId();
         hideWarning();
-        
+		
+		$("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
+		});
+		
+		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
+		});
     });
+
     
     function hideErrorId(){
         $('.error').fadeOut(0);
@@ -120,23 +137,39 @@
                 $('#winvoice').fadeOut(200);
             }
         });
+		$('#tgl_awal').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
+		
+		$('#tgl_akhir').change(function(){
+            if(document.getElementById('tgl_awal').value !='' && document.getElementById('tgl_akhir').value !=''){
+                $('#wtgl').fadeOut(200);
+            } 
+        });
 
     }
     
     function cek_upload(){
 		var v_invoice = document.getElementById('invoice').value;
+		var v_tglawal = document.getElementById('tgl_awal').value;
+		var v_tglakhir = document.getElementById('tgl_akhir').value;
 		
         var jml = 0;
-		if(v_invoice==''){
-			$('#winvoice').html('Harap isi no invoice');
+        if(v_invoice=='' && v_tglawal=='' && v_tglakhir==''){
+            $('#winvoice').html('Harap isi no invoice');
             $('#winvoice').fadeIn();
+			$('#wtgl').html('Harap isi tanggal');
+            $('#wtgl').fadeIn();
             jml++;
         }
-		if(jml>0){
+		
+        if(jml>0){
             return false;
         } 
     }
-	
+
 	$(document).ready( function () {
 		var oTable = $('#fixheader').dataTable( {
 			"sScrollY": 400,
@@ -153,7 +186,7 @@
 		} );
 				
 		var keys = new KeyTable( {
-			"table": document.getElementById('fixheader'),
+			"table": document.getElementById('example'),
 			"datatable": oTable
 		} );
 	} );
