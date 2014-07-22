@@ -13,7 +13,7 @@
 .half {
     width: 50%;
 }
-#pie-container, #ticker-container, #line-container, #bottom-status-bar {
+#pie-container, #ticker-container, #summary-container, #line-container, #top-status-bar {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     
@@ -22,20 +22,21 @@
     float: left;
     padding: 10px;
 }
-#bottom-status-bar {
-    padding: 20px;
+#summary-container {
+    padding: 0px 20px 0px 20px;
 }
-#bottom-status-bar > div {
-    padding-top: 10px;
-    border-top: 1px solid #dedede;
+#top-status-bar {
+    padding: 10px 20px;
+}
+#top-status-bar > div {
     display: block;
     float: left;
     width: 100%;
 }
-#bottom-status-bar a {
+#top-status-bar a {
     display: inline-block;
     padding: 4px;
-    width: 64px;
+    min-width: 64px;
     margin-left: 10px;
     border: 1px solid #dedede;
     border-radius: 4px;
@@ -45,11 +46,15 @@
     font-size: 12px;
     text-align: center;
 }
-#bottom-status-bar a:hover {
+#nav-period a {
+    width: 64px;
+}
+#top-status-bar a:hover {
     border: 1px solid #409ACA;
     color: #409ACA;
+    background: #fff !important;
 }
-#bottom-status-bar .active {
+#top-status-bar .active {
     border: 1px solid #666;
     background: #666;
     color: #fff;
@@ -84,7 +89,6 @@
     -webkit-box-sizing: border-box;
     
     width: 100%;
-    padding: 20px;
 }
 #line-container > div {
     box-sizing: border-box;
@@ -107,6 +111,11 @@
 .hide {
     display: none;
 }
+.ticker-content {
+    border-bottom: 1px solid #dedede;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 .ticker-content table {
     width: 100%;
 }
@@ -116,8 +125,30 @@
     border: 1px solid #dedede;
     vertical-align: middle;
 }
+.ticker-header table td {
+    text-align: center;
+	padding: 3px;
+    border: 1px solid #dedede;
+    vertical-align: middle;
+}
+.ticker-header {
+    text-align: left;
+    overflow-x: visible;
+}
+.ticker-summary {
+    overflow-x: visible;
+}
+.ticker-summary table td {
+    text-align: center;
+	padding: 3px;
+    border: 1px solid #dedede;
+    vertical-align: middle;
+}
 .bold {
     font-weight: bold;
+}
+#loading-animation {
+    background: rgba(0,0,0,0.5);
 }
 
 /* Charting */
@@ -148,14 +179,16 @@
     line-height: 16px;
     margin: 0; padding: 0;
 }
+.info-number .small {
+    font-size: 10px;
+    line-height: 10px;
+    margin: 0; padding: 0;
+}
 .info-text {
     text-transform: uppercase;
     font-size: 10px;
     line-height: 10px;
     margin: 0; padding: 0;
-}
-.ticker-content {
-    overflow-y: auto;
 }
 .line-legend {
     box-sizing: border-box;
@@ -269,8 +302,27 @@
     display: inline-block;
     border-radius: 4px;
     height: auto;
-    padding: 2px;
+    padding: 3px 6px;
+    font-size: 12px;
     border: 1px solid #dedede;
+}
+
+.unitswitch {
+    display: inline-block;
+    border-radius: 4px;
+    height: auto;
+    padding: 4px 8px;
+    border: 1px solid #dedede;
+    color: #ccc;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.unitswitch:hover {
+    border-color: #409ACA;
+    color: #409ACA;
 }
 
 #warning-container {

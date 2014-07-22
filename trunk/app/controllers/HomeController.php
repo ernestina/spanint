@@ -14,28 +14,155 @@ class homeController extends BaseController {
      */
     
     public function index() {
-        if (Session::get('role')==KANWIL){
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-        }
-        $this->view->render('kppn/homeDashboardDailySE');
+        
+        header('location:' . URL . 'home/harian');
     }
     
-    public function mingguan() {
-        if (Session::get('role')==KANWIL){
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+    public function harian($kodeunit=null) {
+        
+        if (!isset($kodeunit)) {
+            
+            if (Session::get('role')==KPPN){
+
+                $this->view->render('kppn/homeDashboardHarianKPPN');
+
+            } else {
+
+                if (Session::get('role')==KANWIL) {
+                    $d_kppn_list = new DataUser($this->registry);
+                    $this->view->unit_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+                } else {
+                    $d_kanwil_list = new DataDashboard($this->registry);
+                    $this->view->unit_list = $d_kanwil_list->get_kanwil();
+                }
+
+                $this->view->render('kppn/homeDashboardHarianRekap');
+
+            }
+            
+        } else {
+            
+            $d_dashboard = new DataDashboard($this->registry);
+            
+            $this->view->kodeunit = $kodeunit;
+            $this->view->namaunit = $d_dashboard->get_nama_unit($kodeunit);
+            
+            if ($kodeunit[0] != 'K') {
+                
+                $this->view->kodekanwil = "K".$d_dashboard->get_kanwil_kppn($kodeunit);
+                $this->view->namakanwil = $d_dashboard->get_nama_unit($this->view->kodekanwil);
+
+                $this->view->render('kppn/homeDashboardHarianKPPN');
+
+            } else {
+
+                $d_kppn_list = new DataUser($this->registry);
+                $this->view->unit_list = $d_kppn_list->get_kppn_kanwil(substr($kodeunit,1,2));
+
+                $this->view->render('kppn/homeDashboardHarianRekap');
+
+            }
+            
         }
-        $this->view->render('kppn/homeDashboardWeeklySE');
     }
     
-    public function bulanan() {
-        if (Session::get('role')==KANWIL){
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+    public function mingguan($kodeunit=null) {
+        $this->view->mode = "Mingguan";
+        if (!isset($kodeunit)) {
+            
+            if (Session::get('role')==KPPN){
+
+                $this->view->render('kppn/homeDashboardPeriodeKPPN');
+
+            } else {
+
+                if (Session::get('role')==KANWIL) {
+                    $d_kppn_list = new DataUser($this->registry);
+                    $this->view->unit_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+                } else {
+                    $d_kanwil_list = new DataDashboard($this->registry);
+                    $this->view->unit_list = $d_kanwil_list->get_kanwil();
+                }
+
+                $this->view->render('kppn/homeDashboardPeriodeRekap');
+
+            }
+            
+        } else {
+            
+            $d_dashboard = new DataDashboard($this->registry);
+            
+            $this->view->kodeunit = $kodeunit;
+            $this->view->namaunit = $d_dashboard->get_nama_unit($kodeunit);
+            
+            if ($kodeunit[0] != 'K') {
+                
+                $this->view->kodekanwil = "K".$d_dashboard->get_kanwil_kppn($kodeunit);
+                $this->view->namakanwil = $d_dashboard->get_nama_unit($this->view->kodekanwil);
+
+                $this->view->render('kppn/homeDashboardPeriodeKPPN');
+
+            } else {
+
+                $d_kppn_list = new DataUser($this->registry);
+                $this->view->unit_list = $d_kppn_list->get_kppn_kanwil(substr($kodeunit,1,2));
+
+                $this->view->render('kppn/homeDashboardPeriodeRekap');
+
+            }
+            
         }
-        $this->view->render('kppn/homeDashboardMonthlySE');
     }
+    
+    public function bulanan($kodeunit=null) {
+        $this->view->mode = "Bulanan";
+        if (!isset($kodeunit)) {
+            
+            if (Session::get('role')==KPPN){
+
+                $this->view->render('kppn/homeDashboardPeriodeKPPN');
+
+            } else {
+
+                if (Session::get('role')==KANWIL) {
+                    $d_kppn_list = new DataUser($this->registry);
+                    $this->view->unit_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+                } else {
+                    $d_kanwil_list = new DataDashboard($this->registry);
+                    $this->view->unit_list = $d_kanwil_list->get_kanwil();
+                }
+
+                $this->view->render('kppn/homeDashboardPeriodeRekap');
+
+            }
+            
+        } else {
+            
+            $d_dashboard = new DataDashboard($this->registry);
+            
+            $this->view->kodeunit = $kodeunit;
+            $this->view->namaunit = $d_dashboard->get_nama_unit($kodeunit);
+            
+            if ($kodeunit[0] != 'K') {
+                
+                $this->view->kodekanwil = "K".$d_dashboard->get_kanwil_kppn($kodeunit);
+                $this->view->namakanwil = $d_dashboard->get_nama_unit($this->view->kodekanwil);
+
+                $this->view->render('kppn/homeDashboardPeriodeKPPN');
+
+            } else {
+
+                $d_kppn_list = new DataUser($this->registry);
+                $this->view->unit_list = $d_kppn_list->get_kppn_kanwil(substr($kodeunit,1,2));
+
+                $this->view->render('kppn/homeDashboardPeriodeRekap');
+
+            }
+            
+        }
+    }
+    
+    //DELETE FROM THIS POINT
     
     public function harianJSON($kodeunit=null) {   
         	
