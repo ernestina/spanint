@@ -106,7 +106,7 @@
         //Pie
         $.ajax({
             'global': false,
-            'url': serverUrl + 'DataJSON/pieJenisSP2D/1<?php echo $this->kodeunit; ?>',
+            'url': serverUrl + 'DataJSON/pieJenisSP2D/1/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieJenisSP2D = data;
