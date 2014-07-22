@@ -46,7 +46,7 @@
                     <li class="nav"><a href="#"></a></li>
                     <?php
                     if (Session::get('role') == ADMIN) {
-
+						echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
 						echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
 
 						echo '<ul>

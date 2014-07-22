@@ -14,9 +14,9 @@ class Index extends BaseController {
     public function index() {
         
         if (Session::get('role') == ADMIN) {
-			header('location:' . URL . 'dataKppn/monitoringSp2d');
+			header('location:' . URL . 'home/harian');
         } elseif (Session::get('role') == SATKER) {
-            header('location:' . URL . 'dataDIPA/RevisiDipa/'.Session::get('kd_satker'));
+            header('location:' . URL . 'dataDIPA/RealisasiFA/'.Session::get('kd_satker'));
         } elseif (Session::get('role') == KPPN) {
             header('location:' . URL . 'home'); 
 		} elseif (Session::get('role') == PKN) {
