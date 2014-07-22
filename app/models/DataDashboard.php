@@ -72,6 +72,16 @@ class DataDashboard {
             $result =  $this->db->select($sql);
             //var_dump($result);
             $d_data = new $this($this->registry);
+            
+            $d_data->set_void(0);
+            $d_data->set_vol_void(0);
+            $d_data->set_gaji(0);
+            $d_data->set_vol_gaji(0);
+            $d_data->set_non_gaji(0);
+            $d_data->set_vol_non_gaji(0);
+            $d_data->set_lainnya(0);
+            $d_data->set_vol_lainnya(0);
+            
             foreach ($result as $val) {
                 if ($val['STATUS_LOOKUP_CODE']=='VOIDED') {
                     $d_data->set_void($d_data->get_void() + $val['JUMLAH']);
@@ -101,9 +111,13 @@ class DataDashboard {
         } else {
             $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH, sum(AMOUNT) NOMINAL from RETUR_SPAN_V where ".$unitfilter." group by STATUS_RETUR";
         }
-        
+        //var_dump($sql);
         $result =  $this->db->select($sql);
         $d_data = new $this($this->registry);
+        $d_data->set_retur_sudah_proses(0);
+        $d_data->set_vol_retur_sudah_proses(0);
+        $d_data->set_retur_belum_proses(0);
+        $d_data->set_vol_retur_belum_proses(0);
         foreach ($result as $val) {
             if ($val['STATUS_RETUR']=='SUDAH PROSES') {
                 $d_data->set_retur_sudah_proses($d_data->get_retur_sudah_proses() + $val['JUMLAH']);
@@ -145,6 +159,55 @@ class DataDashboard {
         return $data;
     }
     
+    public function get_lhp_rekap_tanggal($tanggal, $unitfilter=null) {
+        
+        $data = array();
+            
+        if (!isset($unitfilter)) {
+            $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".$tanggal."','ddmmyyyy')";
+        } else {
+            $sql = "select * from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".$tanggal."','ddmmyyyy')";
+        }
+            
+        //var_dump($sql);
+
+        $result =  $this->db->select($sql);
+        $d_data = new $this($this->registry);
+        
+        //var_dump($result);
+        
+        $d_data->set_tgl_lhp($tanggal);
+        $d_data->set_lhp_completed(0);
+        $d_data->set_vol_lhp_completed(0);
+        $d_data->set_lhp_validated(0);
+        $d_data->set_vol_lhp_validated(0);
+        $d_data->set_lhp_error(0);
+        $d_data->set_vol_lhp_error(0);
+        $d_data->set_lhp_etc(0);
+        $d_data->set_vol_lhp_etc(0);
+
+        foreach ($result as $val) {
+            $d_data->set_tgl_lhp($val['TANGGAL']);
+            if ($val['STATUS']=='Completed') {
+                $d_data->set_lhp_completed($d_data->get_lhp_completed() + $val['JUMLAH']);
+                $d_data->set_vol_lhp_completed($d_data->get_vol_lhp_completed() + $val['NOMINAL']);
+            } else if ($val['STATUS']=='Validated') {
+                $d_data->set_lhp_validated($d_data->get_lhp_validated() + $val['JUMLAH']);
+                $d_data->set_vol_lhp_validated($d_data->get_vol_lhp_validated() + $val['NOMINAL']);
+            } else if ($val['STATUS']=='Error') {
+                $d_data->set_lhp_error($d_data->get_lhp_error() + $val['JUMLAH']);
+                $d_data->set_vol_lhp_error($d_data->get_vol_lhp_error() + $val['NOMINAL']);
+            } else {
+                $d_data->set_lhp_etc($d_data->get_lhp_etc() + $val['JUMLAH']);
+                $d_data->set_vol_lhp_etc($d_data->get_vol_lhp_etc() + $val['NOMINAL']);
+            }
+        }
+
+        $data[0] = $d_data;
+        
+        return $data;
+    }
+    
     public function get_lhp_rekap($hari, $unitfilter=null) {
         $data = array();
         for ($i=0; $i<$hari; $i++) {
@@ -163,23 +226,36 @@ class DataDashboard {
                 }
             }
             
+            //var_dump($sql);
+            
             $result =  $this->db->select($sql);
             $d_data = new $this($this->registry);
             //var_dump($result);
+            
+            $d_data->set_tgl_lhp(0);
+            $d_data->set_lhp_completed(0);
+            $d_data->set_vol_lhp_completed(0);
+            $d_data->set_lhp_validated(0);
+            $d_data->set_vol_lhp_validated(0);
+            $d_data->set_lhp_error(0);
+            $d_data->set_vol_lhp_error(0);
+            $d_data->set_lhp_etc(0);
+            $d_data->set_vol_lhp_etc(0);
+            
             foreach ($result as $val) {
                 $d_data->set_tgl_lhp($val['TANGGAL']);
                 if ($val['STATUS']=='Completed') {
-                    $d_data->set_lhp_completed($val['JUMLAH']);
-                    $d_data->set_vol_lhp_completed($val['NOMINAL']);
+                    $d_data->set_lhp_completed($d_data->get_lhp_completed() + $val['JUMLAH']);
+                    $d_data->set_vol_lhp_completed($d_data->get_vol_lhp_completed() + $val['NOMINAL']);
                 } else if ($val['STATUS']=='Validated') {
-                    $d_data->set_lhp_validated($val['JUMLAH']);
-                    $d_data->set_vol_lhp_validated($val['NOMINAL']);
+                    $d_data->set_lhp_validated($d_data->get_lhp_validated() + $val['JUMLAH']);
+                    $d_data->set_vol_lhp_validated($d_data->get_vol_lhp_validated() + $val['NOMINAL']);
                 } else if ($val['STATUS']=='Error') {
-                    $d_data->set_lhp_error($val['JUMLAH']);
-                    $d_data->set_vol_lhp_error($val['NOMINAL']);
+                    $d_data->set_lhp_error($d_data->get_lhp_error() + $val['JUMLAH']);
+                    $d_data->set_vol_lhp_error($d_data->get_vol_lhp_error() + $val['NOMINAL']);
                 } else {
-                    $d_data->set_lhp_etc($val['JUMLAH']);
-                    $d_data->set_vol_lhp_etc($val['NOMINAL']);
+                    $d_data->set_lhp_etc($d_data->get_lhp_etc() + $val['JUMLAH']);
+                    $d_data->set_vol_lhp_etc($d_data->get_vol_lhp_etc() + $val['NOMINAL']);
                 }
             }
             $data[$i] = $d_data;
@@ -206,6 +282,44 @@ class DataDashboard {
 			$d_data->set_time_begin_date($val['TIME_BEGIN_DATE']);
             $data[] = $d_data;
         }
+        return $data;
+    }
+    
+    public function get_kanwil() {
+        $sql = "SELECT KDKANWIL, NMKANWIL FROM T_KANWIL"; 
+        $result = $this->db->select($sql);
+        $data = array();
+		//var_dump($sql);
+        foreach ($result as $val) {
+            $d_user = new $this($this->registry);
+            $d_user->set_kd_d_kanwil("K".$val['KDKANWIL']);
+            $d_user->set_nama_user($val['NMKANWIL']);
+
+            $data[] = $d_user;
+        }
+		//var_dump($data);
+        return $data;
+    }
+    
+    public function get_nama_unit($kdsatker) {
+        $sql = "SELECT NAMA_USER FROM D_USER WHERE KD_SATKER='".$kdsatker."'"; 
+        $result = $this->db->select($sql);
+		//var_dump($sql);
+        foreach ($result as $val) {
+            $data = $val['NAMA_USER'];
+        }
+		//var_dump($data);
+        return $data;
+    }
+    
+    public function get_kanwil_kppn($kdkppn) {
+        $sql = "SELECT KD_KANWIL FROM D_USER WHERE KD_SATKER='".$kdkppn."'"; 
+        $result = $this->db->select($sql);
+		//var_dump($sql);
+        foreach ($result as $val) {
+            $data = $val['KD_KANWIL'];
+        }
+		//var_dump($data);
         return $data;
     }
 	
@@ -323,6 +437,14 @@ class DataDashboard {
     public function set_gross_nominal_sp2d($gross_nominal_sp2ds) {
         $this->_gross_nominal_sp2d = $gross_nominal_sp2d;
     }
+    
+    public function set_kd_d_kanwil($unit) {
+        $this->_kd_d_kppn = $unit;
+    }
+
+    public function set_nama_user($nama) {
+        $this->_nama_user = $nama;
+    }
 		
 	/*
      * getter
@@ -437,6 +559,14 @@ class DataDashboard {
     }
     public function get_gross_nominal_sp2d() {
         return $this->_gross_nominal_sp2d;
+    }
+    
+    public function get_kd_d_kanwil() {
+        return $this->_kd_d_kppn;
+    }
+
+    public function get_nama_user() {
+        return $this->_nama_user;
     }
     
     /*
