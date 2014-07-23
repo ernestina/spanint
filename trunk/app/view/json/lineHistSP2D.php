@@ -20,9 +20,9 @@
 
         "datasets" : [
             {
-                "fillColor" : "rgba(142,86,150,0.5)",
-                "strokeColor" : "rgba(142,86,150,1)",
-                "pointColor" : "rgba(142,86,150,1)",
+                "fillColor" : "rgba(64,154,202,0.5)",
+                "strokeColor" : "rgba(64,154,202,1)",
+                "pointColor" : "rgba(64,154,202,1)",
                 "pointStrokeColor" : "#fff",
                 "data" : [
                 
@@ -36,9 +36,9 @@
                 ]
             },
             {
-                "fillColor" : "rgba(64,154,202,0.5)",
-                "strokeColor" : "rgba(64,154,202,1)",
-                "pointColor" : "rgba(64,154,202,1)",
+                "fillColor" : "rgba(142,86,150,0.5)",
+                "strokeColor" : "rgba(142,86,150,1)",
+                "pointColor" : "rgba(142,86,150,1)",
                 "pointStrokeColor" : "#fff",
                 "data" : [
 

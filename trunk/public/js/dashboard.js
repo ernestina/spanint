@@ -91,7 +91,7 @@ function prependSummaryItem(data,target) {
     
     if (displayRow) {
         rowData = "<tr>";
-        rowData += "<td class='col-0'><a href='" + data.rowLink + "'>" + data.rowHeader + "</a></td>";
+        rowData += "<td class='col-0' style='text-align: left;'><a href='" + data.rowLink + "'>" + data.rowHeader + "</a></td>";
         dataCount = 0;
         colCount = 0;
 
@@ -162,7 +162,7 @@ function renderSummary(data,target) {
     if (data.listHeader.length > 0) {
         
         summaryContent += "<tr class='bold'>";
-        summaryContent += "<td class='col-0' rowspan=2>" + data.rowHeader + "</td>";
+        summaryContent += "<td class='col-0' rowspan=2 style='text-align: left;'>" + data.rowHeader + "</td>";
         
         colCount = 0;
         
@@ -205,7 +205,7 @@ function renderSummary(data,target) {
     summaryContent += "</table></div><div class='ticker-content'><table></table></div><div class='ticker-summary'><table>";
     
     summaryContent += "<tr class='total bold'>";
-    summaryContent += "<td class='col-0' rowspan=2>Total</td>";
+    summaryContent += "<td class='col-0' rowspan=2 style='text-align: left;'>Total</td>";
     colCount = 0;
         
     for (i=0; i<data.listHeader.length; i++) {
