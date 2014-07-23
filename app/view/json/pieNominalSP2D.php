@@ -18,13 +18,13 @@ foreach ($this->data_sp2d_rekap as $sp2d_rekap_harian) {
 
         {
             "value" : <?php echo $total_vol_gaji; ?>,
-            "index" : "<?php echo (number_format(round(($total_vol_gaji / 1000000000), 2), 2)." M<span class='low-res-hidden'>ILYAR</span>"); ?>",
+            "index" : "<?php echo (number_format(round(($total_vol_gaji / 1000000000), 2), 2)." M"); ?>",
             "label" : "Gaji",
             "color" : "#409ACA"
         },
         {
             "value" : <?php echo $total_vol_non_gaji; ?>,
-            "index" : "<?php echo (number_format(round(($total_vol_non_gaji / 1000000000), 2), 2)." M<span class='low-res-hidden'>ILYAR</span>"); ?>",
+            "index" : "<?php echo (number_format(round(($total_vol_non_gaji / 1000000000), 2), 2)." M"); ?>",
             "label" : "Non Gaji",
             "color" : "#8E5696"
         }
