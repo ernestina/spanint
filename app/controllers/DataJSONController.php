@@ -15,7 +15,19 @@ class DataJSONController extends BaseController {
     
     public function pieJenisSP2D($periode, $kodeunit=null) {
         
-        if ((Session::get('role')==KPPN) or (isset($kodeunit) and ($kodeunit[0] != 'K'))) {
+        if ((Session::get('role')==SATKER) or (isset($kodeunit) and (strlen($kodeunit) >= 6))) {
+            
+            if (!isset($kodeunit)) {
+                $kodeunit = Session::get('kd_satker');
+            }
+
+            $unitfilter = " SEGMENT1='".$kodeunit."' ";
+
+            $d_dashboard = new DataDashboard($this->registry);
+
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            
+        } else if ((Session::get('role')==KPPN) or (isset($kodeunit) and ($kodeunit[0] != 'K'))) {
             
             if (!isset($kodeunit)) {
                 $kodeunit = Session::get('id_user');
@@ -54,7 +66,19 @@ class DataJSONController extends BaseController {
     
     public function pieNominalSP2D($periode, $kodeunit=null) {
         
-        if ((Session::get('role')==KPPN) or (isset($kodeunit) and ($kodeunit[0] != 'K'))) {
+        if ((Session::get('role')==SATKER) or (isset($kodeunit) and (strlen($kodeunit) >= 6))) {
+            
+            if (!isset($kodeunit)) {
+                $kodeunit = Session::get('kd_satker');
+            }
+
+            $unitfilter = " SEGMENT1='".$kodeunit."' ";
+
+            $d_dashboard = new DataDashboard($this->registry);
+
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            
+        } else if ((Session::get('role')==KPPN) or (isset($kodeunit) and ($kodeunit[0] != 'K'))) {
             
             if (!isset($kodeunit)) {
                 $kodeunit = Session::get('id_user');
@@ -94,7 +118,19 @@ class DataJSONController extends BaseController {
     
     public function pieReturSP2D($kodeunit=null) {
         
-        if ((Session::get('role')==KPPN) or (isset($kodeunit) and ($kodeunit[0] != 'K'))) {
+        if ((Session::get('role')==SATKER) or (isset($kodeunit) and (strlen($kodeunit) >= 6))) {
+            
+            if (!isset($kodeunit)) {
+                $kodeunit = Session::get('kd_satker');
+            }
+
+            $returfilter = " KDSATKER='".$kodeunit."' ";
+
+            $d_dashboard = new DataDashboard($this->registry);
+
+            $this->view->data_retur = $d_dashboard->get_sp2d_retur($returfilter);
+            
+        } else if ((Session::get('role')==KPPN) or (isset($kodeunit) and ($kodeunit[0] != 'K'))) {
             
             if (!isset($kodeunit)) {
                 $kodeunit = Session::get('id_user');
@@ -174,9 +210,27 @@ class DataJSONController extends BaseController {
         
     }
     
-    public function listSPMOngoing($kodeunit=null) {
+    public function pieStatusDIPA($kodeunit=null) {
         
-        if ((Session::get('role')==KPPN) or (isset($kodeunit))) {
+        $d_dashboard = new DataDashboard($this->registry);
+        
+        if (isset($kodeunit)) {
+
+            $this->view->data_summary_dipa = $d_dashboard->get_summary_dipa_unit($kodeunit);
+            
+        } else {
+            
+            $this->view->data_summary_dipa = $d_dashboard->get_summary_dipa_unit();
+            
+        }
+        
+        $this->view->load('json/pieStatusDIPA');
+        
+    }
+    
+    public function listSPMOngoing($hari, $kodeunit=null) {
+        
+        if ((Session::get('role')==KPPN) or (isset($kodeunit) and (strlen($kodeunit) >= 6))) {
             
             if (!isset($kodeunit)) {
                 $kodeunit = Session::get('id_user');
@@ -185,10 +239,20 @@ class DataJSONController extends BaseController {
             $d_dashboard = new DataDashboard($this->registry);
 
             $filter_pos_spm = array ();
-            $filter_pos_spm[1]="SUBSTR(OU_NAME,1,3) = '".$kodeunit."'";
+            $filter_pos_spm[1]="SUBSTR(INVOICE_NUM,7,6) = '".$kodeunit."'";
             $this->view->data_pos_spm = $d_dashboard->get_hist_spm_filter($filter_pos_spm);
             
         } else {
+            
+            if (!isset($kodeunit)) {
+                $kodeunit = Session::get('kd_satker');
+            }
+
+            $d_dashboard = new DataDashboard($this->registry);
+
+            $filter_pos_spm = array ();
+            $filter_pos_spm[1]="SUBSTR(INVOICE_NUM,7,6) = '".$kodeunit."'";
+            $this->view->data_pos_spm = $d_dashboard->get_hist_spm_filter($filter_pos_spm);
             
         }
         
@@ -196,25 +260,41 @@ class DataJSONController extends BaseController {
         
     }
     
-    public function listSP2DFinished($kodeunit=null) {
+    public function listSP2DFinished($hari, $kodeunit=null) {
         
-        if ((Session::get('role')==KPPN) or (isset($kodeunit))) {
+        if ((Session::get('role')==KPPN) or (isset($kodeunit) and (strlen($kodeunit) >= 6))) {
             
             if (!isset($kodeunit)) {
                 $kodeunit = Session::get('id_user');
             }
 
             $unitfilter = " substr(CHECK_NUMBER,3,3)='".$kodeunit."' ";
+            
+            $unitfilter .=  "and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
 
             $d_dashboard = new DataDashboard($this->registry);
 
             $this->view->data_list_sp2d = $d_dashboard->get_list_sp2d_selesai($unitfilter);
             
+            $this->view->load('json/listSP2DFinished');
+            
         } else {
             
+            if (!isset($kodeunit)) {
+                $kodeunit = Session::get('kd_satker');
+            }
+
+            $unitfilter = " SEGMENT1='".$kodeunit."' ";
+            
+            $unitfilter .=  "and (check_date between to_date('".date("Ymd",time()-($hari-1)*24*60*60)."','yyyymmdd') and to_date('".date("Ymd",time())."','yyyymmdd'))";
+
+            $d_dashboard = new DataDashboard($this->registry);
+
+            $this->view->data_list_sp2d = $d_dashboard->get_list_sp2d_selesai($unitfilter);
+            
+            $this->view->load('json/listSP2DFinishedSatker');
+            
         }
-        
-        $this->view->load('json/listSP2DFinished');
         
     }
     

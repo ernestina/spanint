@@ -3,9 +3,9 @@
         <?php 
 
         if ($this->mode == "Mingguan") {
-            echo "<h2>Minggu ini di ";
+            echo "<h2>7 hari terakhir di ";
         } else {
-            echo "<h2>Bulan ini di ";
+            echo "<h2>30 hari terakhir di ";
         }
 
         if (!isset($this->kodeunit)) {

@@ -131,6 +131,10 @@
     border: 1px solid #dedede;
     vertical-align: middle;
 }
+.ticker-footer {
+    box-sizing: border-box;
+    border: 1px solid #dedede;
+}
 .ticker-header {
     text-align: left;
     overflow-x: visible;
