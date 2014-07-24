@@ -473,6 +473,11 @@ class DataSPMController extends BaseController {
 			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
 			$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);	
 			}
+			if (Session::get('role')==SATKER) {			
+			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";		
+			$filter[$no++]="SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
+			$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);	
+			}
 		//$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);
 		//var_dump($d_spm1->get_error_spm_filter ($filter));
 		$this->view->render('kppn/RekapSP2D');
@@ -506,7 +511,10 @@ class DataSPMController extends BaseController {
 			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
 				
 			}*/
-				
+		if (Session::get('role')==SATKER) {				
+			$filter[$no++]="SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
+			$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);	
+		}		
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());

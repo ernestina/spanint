@@ -263,6 +263,7 @@
                                 <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold Invoice</a></li>
                                 <li><a href='. URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
                                 <li><a href='. URL . 'dataSPM/daftarsp2d/'.Session::get('kd_satker').'></i>Daftar SP2D</a></li>
+								<li><a href='. URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
                             </ul>
 							</li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
