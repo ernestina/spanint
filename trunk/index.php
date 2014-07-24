@@ -7,7 +7,7 @@
 error_reporting(E_ALL ^ E_NOTICE);
 
 /*
- * define the sitepath beasiswa/
+ * define the sitepath OM SPAN/
  */
 
 $sitepath = realpath(dirname(__FILE__));

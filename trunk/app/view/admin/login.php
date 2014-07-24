@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php header( 'Location: http://10.242.43.59/' ) ;?>
 <html>
     <head>
         <title>.:LOGIN:.</title>
