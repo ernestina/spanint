@@ -105,6 +105,22 @@ class DataDashboard {
         return $data;
     }
     
+    public function get_summary_dipa_unit($kodeunit=null) {
+        if (!isset($unitfilter)) {
+            $sql = "select sum(ACTUAL_AMT) TERPAKAI , sum(BALANCING_AMT) SISA from GL_BALANCES_V where SATKER='".Session::get('kd_satker')."'";
+        } else {
+            $sql = "select sum(ACTUAL_AMT) TERPAKAI , sum(BALANCING_AMT) SISA from GL_BALANCES_V where SATKER='".$kodeunit."'";
+        }
+        //var_dump($sql);
+        $result =  $this->db->select($sql);
+        $data = new $this($this->registry);
+        foreach ($result as $val) {
+             $data->set_dipa_terpakai($val['TERPAKAI']);
+             $data->set_dipa_sisa($val['SISA']);
+        }
+        return $data;
+    }
+    
     public function get_sp2d_retur($unitfilter=null) {
         if (!isset($unitfilter)) {
             $sql = "select STATUS_RETUR, count(STATUS_RETUR) JUMLAH, sum(AMOUNT) NOMINAL from RETUR_SPAN_V where KDKPPN='".Session::get('id_user')."' group by STATUS_RETUR";
@@ -136,9 +152,9 @@ class DataDashboard {
         $data = array();
         
         if (!isset($unitfilter)) {
-            $sql = "select distinct(check_number), jenis_sp2d, currency_code, exchange_rate, amount, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
+            $sql = "select distinct(check_number), check_date, jenis_sp2d, currency_code, exchange_rate, amount, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where substr(check_number,3,3) = ".Session::get('id_user')." and check_date = to_date('".date("Ymd",time())."','yyyymmdd') order by check_date desc";
         } else {
-            $sql = "select distinct(check_number), jenis_sp2d, currency_code, exchange_rate, amount, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where ".$unitfilter." and check_date = to_date('".date("Ymd",time())."','yyyymmdd')";
+            $sql = "select distinct(check_number), check_date, jenis_sp2d, currency_code, exchange_rate, amount, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where ".$unitfilter." order by check_date desc";
         }
         $result =  $this->db->select($sql);
         
@@ -146,6 +162,7 @@ class DataDashboard {
         
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
+            $d_data->set_tanggal_sp2d($val['CHECK_DATE']);
             $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_nominal_sp2d($val['AMOUNT_RPH']);
@@ -445,6 +462,18 @@ class DataDashboard {
     public function set_nama_user($nama) {
         $this->_nama_user = $nama;
     }
+    
+    public function set_dipa_terpakai($dipa_terpakai) {
+        $this->_dipa_terpakai = $dipa_terpakai;
+    }
+    
+    public function set_dipa_sisa($dipa_sisa) {
+        $this->_dipa_sisa = $dipa_sisa;
+    }
+    
+    public function set_tanggal_sp2d($tanggal_sp2d) {
+        $this->_tanggal_sp2d = $tanggal_sp2d;
+    }
 		
 	/*
      * getter
@@ -567,6 +596,18 @@ class DataDashboard {
 
     public function get_nama_user() {
         return $this->_nama_user;
+    }
+    
+    public function get_dipa_terpakai() {
+        return $this->_dipa_terpakai;
+    }
+    
+    public function get_dipa_sisa() {
+        return $this->_dipa_sisa;
+    }
+    
+    public function get_tanggal_sp2d() {
+        return $this->_tanggal_sp2d;
     }
     
     /*

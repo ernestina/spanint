@@ -322,6 +322,9 @@ function renderList(data,target) {
     listContainerContent += "<div class='ticker-title'>" + data.title + "<div class='ticker-total'>" + data.listRow.length + "</div></div>";
     listContainerContent += "<div class='ticker-header'></div>";
     listContainerContent += "<div class='ticker-content'></div>";
+    if ((data.sumList != undefined) && (data.sumList == 1)) {
+        listContainerContent += "<div class='ticker-footer'></div>";    
+    }
     
     $("#" + target).html(listContainerContent);
     
@@ -354,6 +357,11 @@ function renderList(data,target) {
         $("#" + target + " > .ticker-header").html(listContents);
     }
     
+    sumCol = new Array();
+    for (j=0; j<data.listHeader.length+1; j++) {
+        sumCol[j] = 0;
+    }
+    
     if (data.listRow.length > 0) {
         
         listContents = "<table>";
@@ -368,6 +376,7 @@ function renderList(data,target) {
                 if (data.listType[j] == "Number") {
                     listContents += "<td class='col-" + (j+1) + "' style='text-align: right'>";
                     listContents += accounting.formatNumber(data.listRow[i].listCol[j]);
+                    sumCol[j+1] += data.listRow[i].listCol[j];
                 } else {
                     listContents += "<td class='col-" + (j+1) + "' style='text-align: center'>";
                     listContents += data.listRow[i].listCol[j];
@@ -384,13 +393,45 @@ function renderList(data,target) {
         
         $("#" + target + " > .ticker-content").append(listContents);
         
+        console.log(sumCol);
+        
+        if ((data.sumList != undefined) && (data.sumList == 1)) {
+            listSumContents = "<table><tr class='bold'><td colspan=";
+            
+            colSpan = 0;
+            
+            for (i=0; i<data.listType.length; i++) {
+                if (data.listType[i] == "String") {
+                    colSpan++;
+                }
+            }
+            
+            listSumContents += colSpan +">Total</td>";
+            for (i=(colSpan-1); i<data.listType.length; i++) {
+                if (data.listType[i] == "Number") {
+                    listSumContents += "<td class='col-" + (i+1) + "' style='text-align: right'>" + accounting.formatNumber(sumCol[i+1]) + "</td>";
+                }
+            }
+            listSumContents += "</tr></table>";
+            
+            $("#" + target + " > .ticker-footer").append(listSumContents);
+            
+        }
+        
     }
     
-    $("#" + target + " > .ticker-content").height($(window).innerHeight()-600);
+    footerHeight = 0;
     
-    if ($("#" + target + " > .ticker-content").height() < 200) {
+    if ($("#" + target + " > .ticker-footer").html() != undefined) {
+        footerHeight = $("#" + target + " > .ticker-footer").outerHeight();
+        console.log(footerHeight);
+    }
+    
+    $("#" + target + " > .ticker-content").height($(window).innerHeight()-600-footerHeight);
+    
+    if ($("#" + target + " > .ticker-content").height() < (200-footerHeight)) {
         
-        $("#" + target + " > .ticker-content").height(200);
+        $("#" + target + " > .ticker-content").height(200-footerHeight);
         
     }
     
@@ -405,17 +446,23 @@ function renderList(data,target) {
     $("#" + target + " > .ticker-header > table .col-" + data.listHeader.length).css("width", "auto");
     $("#" + target + " > .ticker-header > table").css("width", "100%");
     
+    resizeList(target);
+    
     dataLoaded();
 
 }
 
 function resizeList(target) {
     
-    $("#" + target + " > .ticker-content").height($(window).innerHeight()-600);
+    if ($("#" + target + " > .ticker-footer").html() != undefined) {
+        footerHeight = $("#" + target + " > .ticker-footer").outerHeight();
+    }
     
-    if ($("#" + target + " > .ticker-content").height() < 200) {
+    $("#" + target + " > .ticker-content").height($(window).innerHeight()-600-footerHeight);
+    
+    if ($("#" + target + " > .ticker-content").height() < 200-footerHeight) {
         
-        $("#" + target + " > .ticker-content").height(200);
+        $("#" + target + " > .ticker-content").height(200-footerHeight);
         
     }
     

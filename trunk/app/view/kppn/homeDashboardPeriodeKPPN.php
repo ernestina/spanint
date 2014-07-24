@@ -3,9 +3,9 @@
         <?php if (Session::get('role')==KPPN) {
             
             if ($this->mode == "Mingguan") {
-                echo "<h2>Minggu ini di ".Session::get('user')."</h2>";
+                echo "<h2>7 hari terakhir di ".Session::get('user')."</h2>";
             } else {
-                echo "<h2>Bulan ini di ".Session::get('user')."</h2>";
+                echo "<h2>30 hari terakhir di ".Session::get('user')."</h2>";
             }
     
         } else {
