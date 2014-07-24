@@ -12,7 +12,9 @@
 		
 		
 			if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
-			echo "<br>".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
+			echo "<br> Periode : ".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
+			} else {
+			echo "<br> Periode : s.d ".date("d-m-Y") ;
 			}
 			
 		 ?>
