@@ -119,7 +119,7 @@ class DataCheck{
 	
 	public function get_sp2d_rekap_filter($filter) {
 		Session::get('id_user');
-		$sql = "SELECT SUBSTR(CHECK_NUMBER,3,3) KPPN, UPPER(JENIS_SPM) JENIS_SPM, JENDOK, JENIS_SP2D, COUNT(CHECK_NUMBER) JUMLAH_SP2D, SUM(AMOUNT) TOTAL_SP2D 
+		$sql = "SELECT SUBSTR(CHECK_NUMBER,3,3) KPPN, UPPER(JENIS_SPM) JENIS_SPM, JENDOK, COUNT(CHECK_NUMBER) JUMLAH_SP2D, SUM(AMOUNT) TOTAL_SP2D 
 				FROM " 
 				. $this->_table1. "
 				WHERE 
@@ -132,8 +132,74 @@ class DataCheck{
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " GROUP BY SUBSTR(CHECK_NUMBER,3,3), JENIS_SPM, JENDOK, JENIS_SP2D ";
+		$sql .= " GROUP BY SUBSTR(CHECK_NUMBER,3,3), JENIS_SPM, JENDOK";
 		$sql .= " ORDER BY SUBSTR(CHECK_NUMBER,3,3), COUNT(CHECK_NUMBER) DESC, JENIS_SPM";
+		//var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_jumlah_sp2d($val['JUMLAH_SP2D']);
+			$d_data->set_jendok($val['JENDOK']);
+			$d_data->set_jenis_sp2d($val['JENIS_SP2D']);
+			$d_data->set_total_sp2d(NUMBER_FORMAT($val['TOTAL_SP2D']));
+			$d_data->set_attribute6($val['JENIS_SPM']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_sp2d_rekap_kanwil_filter($filter) {
+		Session::get('id_user');
+		$sql = "SELECT UPPER(JENIS_SPM) JENIS_SPM, JENDOK, COUNT(CHECK_NUMBER) JUMLAH_SP2D, SUM(AMOUNT) TOTAL_SP2D 
+				FROM " 
+				. $this->_table1. "
+				WHERE 
+				STATUS_LOOKUP_CODE <> 'VOIDED'
+				AND SUBSTR(CHECK_NUMBER,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" .Session::get('id_user')."')"
+				;
+				
+		$no=0;
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		
+		$sql .= " GROUP BY JENIS_SPM, JENDOK ";
+		$sql .= " ORDER BY COUNT(CHECK_NUMBER) DESC, JENIS_SPM";
+		//var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_jumlah_sp2d($val['JUMLAH_SP2D']);
+			$d_data->set_jendok($val['JENDOK']);
+			$d_data->set_jenis_sp2d($val['JENIS_SP2D']);
+			$d_data->set_total_sp2d(NUMBER_FORMAT($val['TOTAL_SP2D']));
+			$d_data->set_attribute6($val['JENIS_SPM']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_sp2d_rekap_admin_filter($filter) {
+		Session::get('id_user');
+		$sql = "SELECT  UPPER(JENIS_SPM) JENIS_SPM, JENDOK, COUNT(CHECK_NUMBER) JUMLAH_SP2D, SUM(AMOUNT) TOTAL_SP2D 
+				FROM " 
+				. $this->_table1. "
+				WHERE 
+				STATUS_LOOKUP_CODE <> 'VOIDED'"
+				
+				;
+				
+		$no=0;
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		
+		$sql .= " GROUP BY JENIS_SPM, JENDOK ";
+		$sql .= " ORDER BY COUNT(CHECK_NUMBER) DESC, JENIS_SPM";
 		//var_dump ($sql);
 
         $result = $this->db->select($sql);
