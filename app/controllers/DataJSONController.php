@@ -230,7 +230,7 @@ class DataJSONController extends BaseController {
     
     public function listSPMOngoing($hari, $kodeunit=null) {
         
-        if ((Session::get('role')==KPPN) or (isset($kodeunit) and (strlen($kodeunit) >= 6))) {
+        if ((Session::get('role')==KPPN) or (isset($kodeunit) and (strlen($kodeunit) < 6))) {
             
             if (!isset($kodeunit)) {
                 $kodeunit = Session::get('id_user');
@@ -239,7 +239,7 @@ class DataJSONController extends BaseController {
             $d_dashboard = new DataDashboard($this->registry);
 
             $filter_pos_spm = array ();
-            $filter_pos_spm[1]="SUBSTR(INVOICE_NUM,7,6) = '".$kodeunit."'";
+            $filter_pos_spm[1]="SUBSTR(OU_NAME,1,3) = '".$kodeunit."'";
             $this->view->data_pos_spm = $d_dashboard->get_hist_spm_filter($filter_pos_spm);
             
         } else {
@@ -262,7 +262,7 @@ class DataJSONController extends BaseController {
     
     public function listSP2DFinished($hari, $kodeunit=null) {
         
-        if ((Session::get('role')==KPPN) or (isset($kodeunit) and (strlen($kodeunit) >= 6))) {
+        if ((Session::get('role')==KPPN) or (isset($kodeunit) and (strlen($kodeunit) < 6))) {
             
             if (!isset($kodeunit)) {
                 $kodeunit = Session::get('id_user');
