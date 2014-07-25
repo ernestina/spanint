@@ -37,13 +37,16 @@
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
 		<select type="text" name="kdkppn" id="kdkppn">
+		<option value='' selected>- Semua KPPN-</option>
 		<?php foreach ($this->kppn_list as $value1){ 
 				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
 				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
-			
+				
 		} ?>
 		</select>
-		<?php } ?>
+		<?php } 
+		
+		?>
 
 		<div id="wtgl" class="error"></div>
 		<label class="isian">Tanggal: </label>
@@ -85,7 +88,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 			<thead>
 					<th>No.</th>
 					<th>Jenis SPM</th>
-					<th>Jenis SP2D</th-->
+					<!--th>Jenis SP2D</th-->
 					<th>Total Nilai</th>
 					<th>Total SP2D</th>
 					
@@ -104,7 +107,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 					echo "<tr>	";
 						echo "<td>" . $no++ . "</td>";
 						echo "<td>" . $value->get_attribute6() . "</td>";
-						echo "<td>" . $value->get_jenis_sp2d() . "</td>";
+						//echo "<td>" . $value->get_jenis_sp2d() . "</td>";
 						echo "<td align='right'>" . $value->get_total_sp2d(). "</td>";
 						//echo "<td>" . $value->get_jumlah_sp2d() . "</td>";
 						
@@ -125,7 +128,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 			</tbody>
 			<tfoot>
 			<tr>
-					<td colspan='3'></td>
+					<td colspan='2'></td>
 					<td class='ratatengah'><b>GRAND TOTAL</td>
 					<td align='right'><b><?php
 						echo number_format($jum_sp2d); ?>

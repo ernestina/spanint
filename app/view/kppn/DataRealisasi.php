@@ -53,7 +53,7 @@
 		<label class="isian">Kode Satker: </label>
 		<input type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
 		
-		<label class="isian">Pilih Periode: </label>
+		<!--label class="isian">Pilih Periode: </label>
 		<select type="text" name="bulan" id="bulan">
 			<option value='JAN' <?php if ($this->d_bulan=='01'){echo "selected";}?> >Januari</option>
 			<option value='FEB' <?php if ($this->d_bulan=='02'){echo "selected";}?> >Februari</option>
@@ -68,9 +68,9 @@
 			<option value='NOV' <?php if ($this->d_bulan=='11'){echo "selected";}?> >November</option>
 			<option value='DEC' <?php if ($this->d_bulan=='12'){echo "selected";}?> >Desember</option>
 			<!--option value='Validated' <?php //if ($this->status==Validated){echo "selected";}?>>Validated</option>
-			<option value='Error' <?php //if ($this->status==Error){echo "selected";}?>>Error</option-->
+			<option value='Error' <?php //if ($this->status==Error){echo "selected";}?>>Error</option>
 			
-		</select>
+		</select-->
 		
 		
 		<input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
