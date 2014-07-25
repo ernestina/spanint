@@ -364,7 +364,7 @@ class DataDIPAController extends BaseController {
 					$this->view->satker_code = $_POST['kdsatker'];
 				}
 			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
-			$this->view->render('kppn/DataRealisasi_PDF');
+			$this->view->load('kppn/DataRealisasi_PDF');
 
 			}
 			//----------------------------------------------------
