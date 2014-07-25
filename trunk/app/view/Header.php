@@ -252,6 +252,7 @@
 						
                     }
                     if (Session::get('role') == SATKER) {
+						echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
                                 <li><a href='  . URL . 'dataDIPA/RevisiDipa/'.Session::get('kd_satker').'></i>Informasi DIPA</a></li>
