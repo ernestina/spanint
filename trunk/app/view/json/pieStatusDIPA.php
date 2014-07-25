@@ -1,6 +1,6 @@
 {
 
-    "title" : "Pagu DIPA (<?php echo (number_format(round((($this->data_summary_dipa->get_dipa_terpakai() + $this->data_summary_dipa->get_dipa_sisa()) / 1000000000), 2), 2)." M"); ?>)",
+    "title" : "Pagu (<?php echo (number_format(round((($this->data_summary_dipa->get_dipa_terpakai() + $this->data_summary_dipa->get_dipa_sisa()) / 1000000000), 2), 2)." M"); ?>)",
 
     "pieData" : [
 
