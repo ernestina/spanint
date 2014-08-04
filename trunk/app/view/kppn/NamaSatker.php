@@ -12,7 +12,8 @@
 
 		if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
 			echo "<br>".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
-			}
+			$tgl_filter = $this->d_tgl_awal."/".$this->d_tgl_akhir;
+		}
 			?>
 		</h2>
     </div>
@@ -93,7 +94,7 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td><a href=".URL."dataSPM/daftarsp2d/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
+					echo "<td><a href=".URL."dataSPM/daftarsp2d/".$value->get_kdsatker()."/".$tgl_filter." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
 					//echo "<td>" . $value->get_kdsatker() . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
 					//echo "<td>" . $value->get_kppn() . "</td>";
