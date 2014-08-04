@@ -243,10 +243,10 @@ class DataDIPAController extends BaseController {
 			$this->view->data = $d_spm1->get_satker_dipa_filter($filter);
 			//$this->view->render('kppn/NamaSatker');			
 			}
-			elseif (Session::get('role')==ADMIN){
+			/*elseif (Session::get('role')==ADMIN){
 				$filter[$no++]="(SELECT MAX(A.REVISION_NO) FROM SPSA_BT_DIPA_V) > '0'";
 				$this->view->data = $d_spm1->get_satker_dipa_filter($filter);
-			}
+			}*/
 			
 			if (Session::get('role')==KANWIL){
 				$d_kppn_list = new DataUser($this->registry);
@@ -255,7 +255,7 @@ class DataDIPAController extends BaseController {
 			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-				$this->view->data = $d_spm1->get_satker_dipa_filter($filter);	
+				//$this->view->data = $d_spm1->get_satker_dipa_filter($filter);	
 			}
 			if (Session::get('role')==KPPN) {$filter[$no++]="TS.KPPN = '".Session::get('id_user')."'";	
 			$this->view->data = $d_spm1->get_satker_dipa_filter($filter);	
@@ -266,7 +266,7 @@ class DataDIPAController extends BaseController {
 		else {$this->view->render('kppn/NamaSatkerDIPAkppn');
 		}
 		//var_dump($d_spm1->get_satker_filter($filter));
-		$this->view->render('kppn/NamaSatkerDIPA1');
+		//$this->view->render('kppn/NamaSatkerDIPA1');
 	}
 	public function nmsatker1() {
 		$d_spm1 = new DataNamaSatker($this->registry);
