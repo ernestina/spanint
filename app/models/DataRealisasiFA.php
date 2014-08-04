@@ -51,9 +51,9 @@ class DataRealisasiFA{
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " ORDER BY INVOICE_NUM, INVOICE_DATE ASC " ;
+		$sql .= " ORDER BY CHECK_DATE,INVOICE_NUM, INVOICE_DATE ASC " ;
 		
-		//var_dump ($sql);
+		//var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {

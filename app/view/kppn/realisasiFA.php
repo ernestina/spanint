@@ -97,49 +97,48 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 				if (empty($this->data)){
 					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
 				} else {
-			foreach ($this->data as $value){ 
-				echo "<tr>	";
-					echo "<td>" . $no++ . "</td>";
-					echo "<td>" . $value->get_satker() . "</td>";
-					echo "<td>" . $value->get_kppn() . "</td>";
-					echo "<td>" . $value->get_akun() . "</td>";
-					echo "<td>" . $value->get_program() . "</td>";
-					echo "<td>" . $value->get_output() . "</td>";
-					echo "<td>" . $value->get_dana() . "</td>";
-					//echo "<td>" . $value->get_bank() . "</td>";
-					echo "<td>" . $value->get_kewenangan() . "</td>";
-					echo "<td>" . $value->get_lokasi() . "</td>";
-					echo "<td>" . $value->get_budget_type() . "</td>";
-					//echo "<td>" . $value->get_currency_code() . "</td>";
-					echo "<td style='text-align: right'>" . $value->get_budget_amt() . "</td>";
-					echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailEncumbrances/".$value->get_code_id()." target='_blank' '>" . $value->get_encumbrance_amt() . "</td>";
-					echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailRealisasiFA/".$value->get_code_id()." target='_blank' '>" . $value->get_actual_amt() . "</td>";
+				$tot_budget=0;$tot_encumbrance=0;$tot_actual=0;$tot_balancing=0;
+					foreach ($this->data as $value){ 
+						echo "<tr>	";
+						echo "<td>" . $no++ . "</td>";
+						echo "<td>" . $value->get_satker() . "</td>";
+						echo "<td>" . $value->get_kppn() . "</td>";
+						echo "<td>" . $value->get_akun() . "</td>";
+						echo "<td>" . $value->get_program() . "</td>";
+						echo "<td>" . $value->get_output() . "</td>";
+						echo "<td>" . $value->get_dana() . "</td>";
+						//echo "<td>" . $value->get_bank() . "</td>";
+						echo "<td>" . $value->get_kewenangan() . "</td>";
+						echo "<td>" . $value->get_lokasi() . "</td>";
+						echo "<td>" . $value->get_budget_type() . "</td>";
+						//echo "<td>" . $value->get_currency_code() . "</td>";
+						echo "<td style='text-align: right'>" . number_format($value->get_budget_amt()) . "</td>";
+						echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailEncumbrances/".$value->get_code_id()." target='_blank' '>" . number_format($value->get_encumbrance_amt()) . "</td>";
+						echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailRealisasiFA/".$value->get_code_id()." target='_blank' '>" . number_format($value->get_actual_amt()) . "</td>";
+						
+						echo "<td style='text-align: right'>" . number_format($value->get_balancing_amt()) . "</td>";
+						echo "</tr>	";
+						$tot_budget+=$value->get_budget_amt();
+						$tot_encumbrance+=$value->get_encumbrance_amt();
+						$tot_actual+=$value->get_actual_amt();
+						$tot_balancing+=$value->get_balancing_amt();
 					
-					echo "<td style='text-align: right'>" . $value->get_balancing_amt() . "</td>";
-				echo "</tr>	";
-				
-			}
-			}
+					}
+				}
 			} else {
 				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
 			}
 			?>
 			</tbody>
-			<!--tfoot>
+			<tfoot>
 				<tr>
-					<td colspan='4'></td>.
-					<td class='ratatengah'><b>GRAND TOTAL</td>
-					<td align='right'><b>
-					<?php
-						//echo number_format($tot_budget); 
-						//echo number_format($tot_encumbrance);
-						//echo number_format($tot_actual);
-						//echo number_format($tot_balancing);
-					?>
-					</td>
-					
+					<td colspan='10' class='ratatengah'><b>GRAND TOTAL<b></td>
+					<td class='ratakanan'><?php echo number_format($tot_budget); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_encumbrance); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_actual); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_balancing); ?></td>
 				</tr>
-			</tfoot-->
+			</tfoot>
         </table>
 		<br>
 		<br>

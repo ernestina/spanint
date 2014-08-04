@@ -62,7 +62,7 @@ class DataFA{
 		
 		$sql .= " ORDER BY A.AKUN " ;
 		
-		//var_dump ($sql);
+		//var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
@@ -79,10 +79,10 @@ class DataFA{
 			$d_data->set_lokasi($val['LOKASI']);
 			$d_data->set_budget_type($val['BUDGET_TYPE']);
 			$d_data->set_currency_code($val['CURRENCY_CODE']);
-			$d_data->set_budget_amt(number_format($val['BUDGET_AMT']));
-			$d_data->set_encumbrance_amt(number_format($val['ENCUMBRANCE_AMT']));
-			$d_data->set_actual_amt(number_format($val['ACTUAL_AMT']));
-			$d_data->set_balancing_amt(number_format($val['BALANCING_AMT']));
+			$d_data->set_budget_amt($val['BUDGET_AMT']);
+			$d_data->set_encumbrance_amt($val['ENCUMBRANCE_AMT']);
+			$d_data->set_actual_amt($val['ACTUAL_AMT']);
+			$d_data->set_balancing_amt($val['BALANCING_AMT']);
 			$d_data->set_nm_satker($val['NMSATKER']);
             $data[] = $d_data;
         }

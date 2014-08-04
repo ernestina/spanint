@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<?php if ($_SERVER['HTTP_HOST']!='localhost'){
-		header( 'Location: http://10.242.43.59/' );
-	  }?>
 <html>
     <head>
         <title>.:LOGIN:.</title>

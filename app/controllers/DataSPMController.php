@@ -375,7 +375,7 @@ class DataSPMController extends BaseController {
 		$this->view->render('kppn/NamaSatker');
 	}
 	
-	public function daftarsp2d($kdsatker=null) {
+	public function daftarsp2d($kdsatker=null,$tgl1=null,$tgl2=null) {
 		$d_spm1 = new DataCheck($this->registry);
 		$filter = array ();
 		$no=0;
@@ -387,6 +387,11 @@ class DataSPMController extends BaseController {
 		elseif($kdsatker != '') {
 				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
 			}
+		if ($tgl1!='' AND $tgl2!=''){
+					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
+					$this->view->d_tgl_awal = $tgl1;
+					$this->view->d_tgl_akhir = $tgl2;
+				}
 		if (isset($_POST['submit_file'])) {
 			
 			
