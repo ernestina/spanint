@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>CEK SUPPLIER <br>
+        <h2>CEK DATA SUPPLIER <br>
 			
 		</h2>
     </div>
@@ -70,6 +70,15 @@
 </div>
 </div>
 
+<?php
+// untuk menampilkan last_update
+if (isset($this->last_update)){
+	foreach ($this->last_update as $last_update){ 
+		echo "Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB";
+	}
+}
+?>
+
 <div id="fitur">
 
 		<table width="100%" class="table table-bordered zebra" id='fixheader' style="font-size: 80%">
@@ -78,13 +87,11 @@
 					<th>No.</th>
 					<th>Kode KPPN</th>
 					<th>NRS / Tipe Kode Pos</th>
-					<th>Nama Supplier</th>
-					<th>NPWP Supplier</th>
+					<th>Nama Supplier<br>NPWP Supplier</th>
 					<th>Nama Bank</th>
 					<th>KD NAB - Kode Valas</th>
 					<th>Nama Penerima</th>
-					<th>Nama pemilik Rekening</th>
-					<th>Nomor Rekening</th>
+					<th>Nama pemilik Rekening<br>Nomor Rekening</th>
 					<th>SWIFT / IBAN</th>
 					<th>NPWP Penerima</th>
 					<th>NIP Penerima</th>
@@ -103,13 +110,11 @@
 							echo "<td>" . $no++ . "</td>";
 							echo "<td>" . $value->get_kppn_code() . "</td>";
 							echo "<td>" . $value->get_v_supplier_number()." / ". $value->get_tipe_supp() . "</td>";
-							echo "<td>" . $value->get_nama_supplier() . "</td>";
-							echo "<td>" . $value->get_npwp_supplier() . "</td>";
-							echo "<td>" . $value->get_nm_bank() . "</td>";
+							echo "<td class='ratakiri'>" . $value->get_nama_supplier() . "<br>". $value->get_npwp_supplier() . "</td>";
+							echo "<td class='ratakiri'>" . $value->get_nm_bank() . "</td>";
 							echo "<td>" . $value->get_asal_bank()." - ".$value->get_kdvalas(). "</td>";
-							echo "<td>" . $value->get_nm_penerima() . "</td>";
-							echo "<td>" . $value->get_nm_pemilik_rek() . "</td>";
-							echo "<td>" . $value->get_norek_penerima() . "</td>";
+							echo "<td class='ratakiri'>" . $value->get_nm_penerima() . "</td>";
+							echo "<td class='ratakiri'>" . $value->get_nm_pemilik_rek() . "<br>" . $value->get_norek_penerima() . "</td>";
 							echo "<td>" . $value->get_kd_swift()." / ".$value->get_iban() . "</td>";
 							echo "<td>" . $value->get_npwp_penerima() . "</td>";
 							echo "<td>" . $value->get_nip_penerima() . "</td>";
@@ -124,10 +129,10 @@
 			?>
 			</tbody>
         </table>
-		<b>Keterangan : </b></br>
+		<!--b>Keterangan : </b></br>
 		Sukses Overbooking = Dana sudah masuk ke Rekening Penerima </br>
 		Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima, mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima</br>
-		Nomor Ref/SOR/BOR = Nomor bukti transaksi pada perbankan yang dapat digunakan untuk konfirmasi ke bank penerima
+		Nomor Ref/SOR/BOR = Nomor bukti transaksi pada perbankan yang dapat digunakan untuk konfirmasi ke bank penerima-->
 		</div>
 </div>
 
