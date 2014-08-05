@@ -13,10 +13,10 @@
 				<a href="mailto:hello.rchan@gmail.com" target="_top">Alifiyan R</a> - User Interface Designer</br>
 				<a href="mailto:creativehardbeat1@gmail.com" target="_top">Rifan A. Rahman</a> - Reporting Designer</br>
 				<a href="mailto:hkm.lutfi@gmail.com" target="_top">Lutfi Hakim</a> - App. Designer Module SA/PM</br>
-				<a href="mailto:baygiv@gmail.com" target="_top">Bayu Yudhistira</a> - App. Designer Module UM</br>
+				<a href="mailto:baygiv@gmail.com" target="_top">Bayu Yudhistira</a> - App. Designer Module MU</br>
 				<a href="mailto:achmadford@gmail.com" target="_top">Achmad Ford</a> - App. Designer Module GR</br>
 				<a href="mailto:kakanda.mister.x@gmail.com" target="_top">Ali Nasrun</a> - App. Designer Module Supplier</br>
-				<a href="mailto:hasan.arie@gmail.com" target="_top">Arie Hasan</a> - App. Designer Module XICO</br>
+				<a href="mailto:hasan.arie@gmail.com" target="_top">Arie Hasan</a> - App. Designer Module Bank</br>
 				<a href="mailto:iq84l.dean@gmail.com" target="_top">M. Iqbal Anshori</a> - Database Administrator</br>
 				<a href="mailto:boys2641@gmail.com" target="_top">Agus Priyono</a> - System Administrator</br>
 				<a href="mailto:cakyus@gmail.com" target="_top">Yusuf AB</a> - System Administrator</br>
