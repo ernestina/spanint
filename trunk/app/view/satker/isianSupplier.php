@@ -71,7 +71,7 @@
 </div>
 </div>
 <?php if(isset($this->d_tipesup)){
-echo "<input id='submit' class='sukses' type='submit' name='submit_file' value='UNDUH' onClick=''>";
+echo "<a href=".URL."dataSupplier/downloadSupplier ><input id='submit' class='sukses' type='submit' name='submit_file' value='UNDUH' onClick=''></a>";
 }?>
 
 <?php
