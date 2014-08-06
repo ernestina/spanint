@@ -25,6 +25,7 @@
 	<div id="top">
 	<form method="POST" action="DurasiSpm" enctype="multipart/form-data">
 		
+		<br>
 		<?php if (isset($this->kppn_list)) { ?>
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
@@ -37,7 +38,7 @@
 		</select>
 		<?php } ?>
 		
-		<div id="wkdkppn" class="error"></div>
+		<div id="winvoice" class="error"></div>
 		<label class="isian">Jenis SPM: </label>
 		<select type="text" name="JenisSPM" id="JenisSPM">
 		<option value='' selected>- pilih -</option>
@@ -49,9 +50,7 @@
 		?>
 		</select>
 		
-		
-		
-		
+		<div id="winvoice" class="error"></div>
 		<label class="isian">Durasi: </label>	
 		<select type="text" name="durasi" id="durasi">
 			<option value=''>- pilih -</option>
@@ -85,7 +84,7 @@
 
 		<ul class="inline" style="margin-left: 130px">
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick=""></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload()"></li>
 		<!--onClick="konfirm(); return false;"-->
 		</ul>
 	</form>
@@ -195,12 +194,16 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 		var v_invoice = document.getElementById('invoice').value;
 		var v_tglawal = document.getElementById('tgl_awal').value;
 		var v_tglakhir = document.getElementById('tgl_akhir').value;
+		var v_JenisSPM = document.getElementById('JenisSPM').value;
+		var v_durasi = document.getElementById('durasi').value;
+		var v_kdsatker = document.getElementById('kdsatker').value;
+		
 		
         var jml = 0;
-        if(v_invoice=='' && v_tglawal=='' && v_tglakhir==''){
-            $('#winvoice').html('Harap isi no invoice');
+        if(v_invoice=='' && v_tglawal=='' && v_tglakhir=='' && v_JenisSPM=='' && v_durasi=='' && v_kdsatker==''){
+            $('#winvoice').html('Harap isi salah satu parameter');
             $('#winvoice').fadeIn();
-			$('#wtgl').html('Harap isi tanggal');
+			$('#wtgl').html('Harap isi salah satu parameter');
             $('#wtgl').fadeIn();
             jml++;
         }

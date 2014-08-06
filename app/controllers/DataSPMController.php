@@ -258,16 +258,11 @@ class DataSPMController extends BaseController {
 		$no=0;
 		if (isset($_POST['submit_file'])) {
 		
-				if ($_POST['kdkppn']!='' AND ($_POST['invoice'] !='' or $_POST['JenisSPM']!='' or $_POST['kdsatker']!='' or $_POST['JenisSPM']!='' or $_POST['durasi']!='' or $_POST['tgl_awal']!='')){
+				if ($_POST['kdkppn']!='') {
 					
-					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'];
-					$d_kppn = new DataUser($this->registry);
-					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-				} 
-				
-				elseif ($_POST['kdkppn']!='') {
-					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
-								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'].")" ;
+					/*$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
+								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'].")" ;*/
+											
 					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'];
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
@@ -309,16 +304,18 @@ class DataSPMController extends BaseController {
 		}		
 		if (Session::get('role')==KPPN) {	
 				$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user');
-				if (!isset($_POST['submit_file'])){
+				/*if (!isset($_POST['submit_file'])){
 					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
 								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user').")" ;
-				}
-		$this->view->data2 = $d_spm1->get_jendok_spm_filter($filter);
-		$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
+				}*/
+		
+		//$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
+		
 		//var_dump($d_spm1->get_durasi_spm_filter ($filter));
 		}
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		$this->view->data2 = $d_spm1->get_jendok_spm_filter($filter);
 		$this->view->render('kppn/DurasiSPM');
 	}
 	
