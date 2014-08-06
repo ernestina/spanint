@@ -89,6 +89,83 @@ class DataFA{
         return $data;
     }
 	
+	public function get_global_fa_filter($filter) {
+		Session::get('id_user');
+		$sql = "select  
+				b.nmsatker,
+				a.satker,
+				a.kppn,
+				substr(a.AKUN,1,2) akun,
+				a.program,
+				a.output,
+				a.dana,
+				a.kewenangan,
+				a.lokasi,
+				sum(a.budget_amt) budget_amt,
+				sum(a.encumbrance_amt) encumbrance_amt,
+				sum(a.actual_amt) actual_amt,
+				sum(a.balancing_amt) balancing_amt 
+				FROM  " 
+				. $this->_table1. " A, "
+				. $this->_table2. " B 
+				WHERE
+				A.BUDGET_TYPE='2' AND
+				A.SATKER=B.KDSATKER ";
+		$no=0;
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		
+		$sql .= " GROUP BY
+				b.nmsatker,
+				a.satker,
+				a.kppn,
+				substr(a.AKUN,1,2),
+				a.program,
+				a.output,
+				a.dana,
+				a.kewenangan,
+				a.lokasi
+		
+				order BY
+				b.nmsatker,
+				a.satker,
+				a.kppn,
+				substr(a.AKUN,1,2),
+				a.program,
+				a.output,
+				a.dana,
+				a.kewenangan,
+				a.lokasi
+		
+		" ;
+		
+		//var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['SATKER']);
+			//$d_data->set_code_id($val['CODE_COMBINATION_ID']);
+            $d_data->set_kppn($val['KPPN']);
+            $d_data->set_akun($val['AKUN']);
+            $d_data->set_program($val['PROGRAM']);
+            $d_data->set_output($val['OUTPUT']);
+            $d_data->set_dana($val['DANA']);
+			//$d_data->set_bank($val['BANK']);
+			$d_data->set_kewenangan($val['KEWENANGAN']);
+			$d_data->set_lokasi($val['LOKASI']);
+			//$d_data->set_budget_type($val['BUDGET_TYPE']);
+			//$d_data->set_currency_code($val['CURRENCY_CODE']);
+			$d_data->set_budget_amt($val['BUDGET_AMT']);
+			$d_data->set_encumbrance_amt($val['ENCUMBRANCE_AMT']);
+			$d_data->set_actual_amt($val['ACTUAL_AMT']);
+			$d_data->set_balancing_amt($val['BALANCING_AMT']);
+			$d_data->set_nm_satker($val['NMSATKER']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
     /*
      * setter
      */
