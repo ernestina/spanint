@@ -168,6 +168,92 @@ class DataDIPAController extends BaseController {
 		$this->view->render('kppn/detail_fund_fail');
 	}
 	
+	public function Detail_Fund_fail_kd($kdsatker = null, $output=null) {
+		$d_spm1 = new DataFundFail($this->registry);
+		$filter = array ();
+		$no=0;
+			if ($kdsatker != '') {
+					$filter[$no++]=" SATKER =  '".$kdsatker."'";
+				//$this->view->invoice_num = $invoice_num;	
+				}
+			if ($output != '') {
+					$filter[$no++]=" OUTPUT =  '".$output."'";
+				//$this->view->invoice_num = $invoice_num;	
+				}
+			if (isset($_POST['submit_file'])) {
+				
+				if ($_POST['kd_satker']!=''){
+					$filter[$no++]="KDSATKER = '".$_POST['kd_satker']."'";
+					$this->view->satker_code = $_POST['satker_code'];
+				}
+				
+			}	
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";	
+			
+			}
+
+		//var_dump($d_spm->get_hist_spm_filter());
+		$this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
+		$this->view->render('kppn/detail_fund_fail_kd');
+	}
+	
+	
+	
+	
+	
+	public function RealisasiFA_1($kdsatker=null) {
+		$d_spm1 = new DataFA($this->registry);
+		$filter = array ();
+		$no=0;
+		if ($kdsatker != '') {
+					$filter[$no++]=" A.SATKER =  '".$kdsatker."'";
+				//$this->view->invoice_num = $invoice_num;	
+				}
+		if (Session::get('role')==KPPN) {
+					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
+			}		
+			if (isset($_POST['submit_file'])) {
+				
+				if ($_POST['kdsatker']!=''){
+					$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
+					$this->view->satker_code = $_POST['satker_code'];
+				}
+				if ($_POST['akun']!=''){
+					$filter[$no++]="A.AKUN = '".$_POST['akun']."'";
+					$this->view->account_code = $_POST['account_code'];
+				}
+				if ($_POST['output']!=''){
+					$filter[$no++]="A.OUTPUT = '".$_POST['output']."'";
+					$this->view->output_code = $_POST['output_code'];
+				}
+				if ($_POST['program']!=''){
+					$filter[$no++]="A.PROGRAM = '".$_POST['program']."'";
+					$this->view->program_code = $_POST['program_code'];
+				}
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+					$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+					$this->view->d_tgl_awal = $_POST['tgl_awal'];
+					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+				}
+				
+			}	
+			
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
+		$this->view->data = $d_spm1->get_fa_filter($filter);
+		//var_dump($d_spm->get_hist_spm_filter());
+		$this->view->render('kppn/realisasiFA_1');
+	}
+	
 	public function RealisasiFA($kdsatker=null) {
 		$d_spm1 = new DataFA($this->registry);
 		$filter = array ();
@@ -212,6 +298,7 @@ class DataDIPAController extends BaseController {
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/realisasiFA');
 	}
+	
 	
 	public function nmsatker() {
 		$d_spm1 = new DataNamaSatker($this->registry);

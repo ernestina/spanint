@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>DATA PAGU MINUS (FUND FAIL) <?php //echo Session::get('user'); ?>
+        <h2>DETAIL DATA PAGU MINUS (FUND FAIL) <?php //echo Session::get('user'); ?>
 		<?php if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
@@ -25,17 +25,6 @@
 
 	<form method="POST" action="#" enctype="multipart/form-data">
 		
-		<?php if (isset($this->kppn_list)) { ?>
-		<div id="wkdkppn" class="error"></div>
-		<label class="isian">Kode KPPN: </label>
-		<select type="text" name="kdkppn" id="kdkppn">
-		<?php foreach ($this->kppn_list as $value1){ 
-				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
-				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
-			
-		} ?>
-		</select>
-		<?php } ?>
 		
 		<div id="wakun" class="error"></div>
 		<label class="isian">Satker : </label>
@@ -65,9 +54,6 @@
 </div>
 </div>
 </div>
-
-
-
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id="example" style="font-size: 90%">
             <!--baris pertama-->
@@ -80,9 +66,13 @@
 					<th class='mid'>Program</th>
 					<th class='mid'>Output</th>
 					<th class='mid'>Dana</th>
-					<th class='mid'>Description</th>
-					<th>Blokir/Kontrak</th>
+					<!--th class='mid'>Description</th-->
+					<th>Pagu Saat Ini</th>
+					<th>Pagu Usulan Revisi</th>
+					<th>Total Kontrak</th>
+					<th>Blokir</th>
 					<th>Realisasi</th>
+					<th>Sisa/kurang</th>
 					
 			</thead>
 			<tbody class='ratatengah'>
@@ -91,35 +81,54 @@
 			//var_dump ($this->data);
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Data Tidak ada karena akun sebelumnya menjadi hilang padahal sudah ada realisasi/kontrak .</div>";
 				} else {
+			$tot_budget=0;$tot_encumbrance=0;$tot_actual=0;$tot_blokir=0;
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_error_date() . "</td>";
-					//echo "<td>" . $value->get_satker_code() . "</td>";
-					echo "<td><a href=".URL."dataDIPA/Detail_Fund_fail_kd/".$value->get_satker_code()."/".$value->get_output_code()." target='_blank' '>" . $value->get_satker_code() . "</td>";
+					echo "<td>" . $value->get_satker_code() . "</td>";
 					echo "<td>" . $value->get_kppn_code() . "</td>";
 					echo "<td>" . $value->get_account_code() . "</td>";
 					echo "<td>" . $value->get_program_code() . "</td>";
 					echo "<td>" . $value->get_output_code() . "</td>";
 					echo "<td>" . $value->get_dana_code() . "</td>";
-					echo "<td>" . $value->get_description() . "</td>";
+					//echo "<td>" . $value->get_description() . "</td>";
+					echo "<td class='ratakanan'>" . number_format($value->get_pagu_semula()) . "</td>";
+					echo "<td class='ratakanan'>" . number_format($value->get_pagu_revisi()) . "</td>";
 					echo "<td class='ratakanan'>" . number_format($value->get_blokir_kontrak()) . "</td>";
+					echo "<td class='ratakanan'>" . number_format($value->get_blokir()) . "</td>";
 					echo "<td class='ratakanan'>" . number_format($value->get_blokir_realisasi()) . "</td>";
+					echo "<td class='ratakanan'>" . number_format($value->get_pagu_revisi()-$value->get_blokir_kontrak()-$value->get_blokir()-$value->get_blokir_realisasi()) . "</td>";
 				echo "</tr>	";
+				$tot_budget+=$value->get_pagu_revisi();
+				$tot_encumbrance+=$value->get_blokir_kontrak();
+				$tot_blokir+=$value->get_blokir();
+				$tot_actual+=$value->get_blokir_realisasi();
 			} 
 			}
-			} else {
-				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
-			}
+			
+			} 
 			?>
+			
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan='9' class='ratatengah'><b>GRAND TOTAL<b></td>
+					<td class='ratakanan'><b><?php echo number_format($tot_budget); ?></td>
+					<td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></td>
+					<td class='ratakanan'><b><?php echo number_format($tot_blokir); ?></td>
+					<td class='ratakanan'><b><?php echo number_format($tot_actual); ?></td>
+					<td class='ratakanan'><b><?php echo number_format($tot_budget-$tot_encumbrance-$tot_blokir-$tot_actual); ?></td>
+				</tr>
+			</tfoot>
+			
         </table>
 		<br>
 		<br>
-		<b><i>* Keterangan : Fund Fail disebabkan akun yang sebelumnya ada menjadi hilang padahal sudah ada realisasi/kontrak </i></b></br>
-		<b><i>* Kekurangan disebabkan pagu revisi lebih kecil daripada realisasi/kontrak (klik di detail) </i></b></br>
+		<!--b><i>* Nilai Pagu Merupakan Pagu Awal DIPA, Untuk Melihat Sisa Pagu Tersedia Gunakan Menu Sisa Pagu Belanja Realisasi dan Encumbrance </i></b></br>
+		<b><i>* Data Merupakan Data Per Tanggal Sebelumnya Pukul 19.00 </i></b></br-->
 		</div>
 </div>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
