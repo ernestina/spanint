@@ -5,6 +5,7 @@
 		</h2>
     </div>
 
+
 <a href="#oModal" class="modal">FILTER DATA</a>
         <div id="oModal" class="modalDialog" >
             <div>
@@ -69,6 +70,9 @@
 </div>
 </div>
 </div>
+<?php if(isset($this->d_tipesup)){
+echo "<input id='submit' class='sukses' type='submit' name='submit_file' value='UNDUH' onClick=''>";
+}?>
 
 <?php
 // untuk menampilkan last_update
@@ -95,7 +99,7 @@ if (isset($this->last_update)){
 					<th>SWIFT / IBAN</th>
 					<th>NPWP Penerima</th>
 					<th>NIP Penerima</th>
-					<th>pilih</th>
+					<th>pilih <input type="checkbox" onClick="toggle(this)" /> </th>
 					
 			</thead>
 			<tbody class='ratatengah'>
@@ -118,7 +122,7 @@ if (isset($this->last_update)){
 							echo "<td>" . $value->get_kd_swift()." / ".$value->get_iban() . "</td>";
 							echo "<td>" . $value->get_npwp_penerima() . "</td>";
 							echo "<td>" . $value->get_nip_penerima() . "</td>";
-							echo "<td><input type='checkbox' name='>".$value->get_v_supplier_number()."'> </td>";
+							echo "<td><input type='checkbox' name='checks' value='>".$value->get_v_supplier_number()."'> </td>";
 							
 						echo "</tr>	";
 					}
@@ -149,6 +153,13 @@ if (isset($this->last_update)){
     function hideErrorId(){
         $('.error').fadeOut(0);
     }
+	
+	function toggle(source) {
+		checkboxes = document.getElementsByName('checks');
+		for(var i=0, n=checkboxes.length;i<n;i++) {
+			checkboxes[i].checked = source.checked;
+		}
+	}
 
     function hideWarning(){
 		
