@@ -57,7 +57,7 @@ class DataFundFail{
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " ORDER BY KPPN_CODE, KDSATKER ";
+		$sql .= " ORDER BY ERROR_DATE DESC, KPPN_CODE, KDSATKER ";
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
