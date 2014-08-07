@@ -111,10 +111,8 @@
 			
 			} 
 			?>
-			
-			</tbody>
-			<tfoot>
-				<tr>
+			<!--footernya ditaruh disini-->		
+					<tr>
 					<td colspan='9' class='ratatengah'><b>GRAND TOTAL<b></td>
 					<td class='ratakanan'><b><?php echo number_format($tot_budget); ?></td>
 					<td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></td>
@@ -122,6 +120,10 @@
 					<td class='ratakanan'><b><?php echo number_format($tot_actual); ?></td>
 					<td class='ratakanan'><b><?php echo number_format($tot_budget-$tot_encumbrance-$tot_blokir-$tot_actual); ?></td>
 				</tr>
+			<!--end footernya-->
+			</tbody>
+			<tfoot>
+
 			</tfoot>
 			
         </table>
@@ -281,7 +283,7 @@
 			"bFilter": false,
 			"oLanguage": {
 			"sEmptyTable": "Tidak ada data di dalam tabel ini."
-			
+			"fnServerData":getRows,
 			},
 		} );
 				
