@@ -258,7 +258,8 @@
                                 <li><a href='  . URL . 'dataDIPA/RevisiDipa/'.Session::get('kd_satker').'></i>Informasi DIPA</a></li>
                                 <li><a href='  . URL . 'dataDIPA/RealisasiFA/'.Session::get('kd_satker').'></i>Sisa Pagu</a></li>
                             </ul>
-                            </li>';echo '<li class="subnav"><a href=#>Modul PM</a>';
+                            </li>';
+						echo '<li class="subnav"><a href=#>Modul PM</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi Invoice</a></li>
                                 <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold Invoice</a></li>
@@ -267,6 +268,11 @@
 								<li><a href='. URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
                             </ul>
 							</li>';
+						echo '<li class="subnav"><a href=' . URL . 'dataSupplier/cekSupplier>SUPPLIER</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataSupplier/cekSupplier></i>Cek Supplier</a></li>
+                            </ul>
+                            </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
