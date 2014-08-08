@@ -25,6 +25,7 @@ class DataSupplierController extends BaseController {
 		$d_supp = new DataSupplier($this->registry);
 		$filter = array ();
 		$no=0;
+		
 		if (isset($_POST['submit_file'])) {
 		
 			if ($_POST['tipesup']!=''){
@@ -85,12 +86,16 @@ class DataSupplierController extends BaseController {
 		$d_supp = new DataSupplier($this->registry);
 		$filter = array ();
 		$no=0;
+		//var_dump($_POST['checkbox']);
 		if(count($_POST['checkbox']) !=0){
-			$array = array("checkbox" => $_POST['checkbox']);
-			$ids = implode("','", $array['checkbox']);
+			$filter[$no++] =  $_POST['checkbox'];
+			//var_dump($filter);
 		} else {
 			echo "<script>alert ('Belum ada yang dipilih (centang/checkmark), silakan tekan tombol BACK di browser Anda')</script>";
 		} 
+		
+		$this->view->data = $d_supp->get_download_supp_filter($_POST['checkbox']);
+		$this->view->ids = $filter;
 		
 		$fdonlot=$nama_supplier.$norek_bank.$nm_pemilik_rek.$npwp_penerima.$nip_penerima.$nm_penerima.$nrs.$tipe_supplier.'.txt';
 		$fdonlot= str_replace(' ', '_', $fdonlot);
@@ -104,8 +109,12 @@ class DataSupplierController extends BaseController {
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_supp->get_table());
 		
-		$this->view->render('satker/isianSupplier');		
+		$this->view->load('satker/print3');		
     }
+	
+	public function downloadSupplierx() {
+		$this->view->load('satker/print3');		
+	}
 	
     public function __destruct() {
         

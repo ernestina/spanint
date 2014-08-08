@@ -36,6 +36,7 @@ class DataSupplier {
 	private $_phone;
 	private $_update_date;
 	private $_ids;
+	private $_kode_sandi;
     private $_error;
     private $_valid = TRUE;
     private $_table = 'SUPP';
@@ -51,9 +52,14 @@ class DataSupplier {
     }
     
     public function get_supp_filter($filter) {
-		$sql = "SELECT NAMA_SUPPLIER, NPWP_SUPPLIER, KDVALAS, NM_BANK, CABANG, KD_BANK
-				, KD_SWIFT, IBAN, ASAL_BANK, NOREK_BANK, NOREK_PENERIMA, NM_PEMILIK_REK
-				, NPWP_PENERIMA, NIP_PENERIMA, NM_PENERIMA, TIPE_SUPP
+		$sql = "SELECT NAMA_SUPPLIER
+				, CONCAT(CONCAT(CONCAT('xx',substr(NPWP_SUPPLIER,3,5)), 'xxx'), substr(NPWP_SUPPLIER,11)) NPWP_SUPPLIER
+				, KDVALAS, NM_BANK, CABANG, KD_BANK
+				, KD_SWIFT, IBAN, ASAL_BANK, NOREK_BANK
+				, CONCAT(CONCAT(substr(NOREK_PENERIMA,1,3),'xxxxxx'), substr(NOREK_PENERIMA,10)) NOREK_PENERIMA
+				, NM_PEMILIK_REK
+				, CONCAT(CONCAT(CONCAT('xx',substr(NPWP_PENERIMA,3,5)), 'xxx'), substr(NPWP_PENERIMA,11)) NPWP_PENERIMA
+				, NIP_PENERIMA, NM_PENERIMA, TIPE_SUPP
 				, SATKER, V_SUPPLIER_NUMBER, KPPN_CODE, EMAIL, ALAMAT
 				, CITY, PROVINSI, NEGARA, ZIP, PHONE, UPDATE_DATE, IDS
 				FROM " . $this->_table . "
@@ -83,6 +89,59 @@ class DataSupplier {
             $d_data->set_iban($val['IBAN']);
             $d_data->set_npwp_penerima($val['NPWP_PENERIMA']);
             $d_data->set_nip_penerima($val['NIP_PENERIMA']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+    
+    public function get_download_supp_filter($filter) {
+		$sql = "SELECT nama_supplier,npwp_supplier,kdvalas,nm_bank,cabang,kd_bank,kd_swift,iban,asal_bank,norek_bank,norek_penerima, 
+				nm_pemilik_rek,npwp_penerima,nip_penerima,nm_penerima,tipe_supp,satker,v_supplier_number,kppn_code,email,
+				alamat,city,provinsi,negara,zip,phone,update_date,
+				CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(nama_supplier,kdvalas), nm_bank),
+				  kd_bank), asal_bank),nm_pemilik_rek), nm_penerima), tipe_supp),
+				  v_supplier_number) kode_sandi 
+				FROM supp
+				where v_supplier_number in ('0'";
+		$no=0;
+		//var_dump($filter);
+		foreach ($filter as $filter) {
+			$sql .= ",'".$filter."'";
+		}
+		$sql .= ") order by nama_supplier,nm_penerima,nip_penerima";
+		var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_nama_supplier($val['NAMA_SUPPLIER']);
+            $d_data->set_npwp_supplier($val['NPWP_SUPPLIER']);
+            $d_data->set_kdvalas($val['KDVALAS']);
+            $d_data->set_nm_bank($val['NM_BANK']);
+            $d_data->set_cabang($val['CABANG']);
+            $d_data->set_KD_bank($val['KD_BANK']);
+            $d_data->set_kd_swift($val['KD_SWIFT']);
+            $d_data->set_iban($val['IBAN']);
+            $d_data->set_asal_bank($val['ASAL_BANK']);
+            $d_data->set_norek_bank($val['NOREK_BANK']);
+            $d_data->set_norek_penerima($val['NOREK_PENERIMA']);
+            $d_data->set_nm_pemilik_rek($val['NM_PEMILIK_REK']);
+            $d_data->set_npwp_penerima($val['NPWP_PENERIMA']);
+            $d_data->set_nip_penerima($val['NIP_PENERIMA']);
+            $d_data->set_nm_penerima($val['NM_PENERIMA']);
+            $d_data->set_tipe_supp($val['TIPE_SUPP']);
+            $d_data->set_satker($val['SATKER']);
+            $d_data->set_v_supplier_number($val['V_SUPPLIER_NUMBER']);
+            $d_data->set_kppn_code($val['KPPN_CODE']);
+            $d_data->set_email($val['EMAIL']);
+            $d_data->set_alamat($val['ALAMAT']);
+            $d_data->set_city($val['CITY']);
+            $d_data->set_provinsi($val['PROVINSI']);
+            $d_data->set_negara($val['NEGARA']);
+            $d_data->set_zip($val['ZIP']);
+            $d_data->set_phone($val['PHONE']);
+            $d_data->set_update_date($val['UPDATE_DATE']);
+            $d_data->set_kode_sandi($val['KODE_SANDI']);
 			$data[] = $d_data;
         }
         return $data;
@@ -203,6 +262,10 @@ class DataSupplier {
     public function set_ids($ids) {
         $this->_ids = $ids;
     }
+
+    public function set_kode_sandi($kode_sandi) {
+        $this->_kode_sandi = $kode_sandi;
+    }
 	
 		
 	/*
@@ -319,6 +382,10 @@ class DataSupplier {
 	
 	public function get_ids() {
         return $this->_ids;
+    }
+	
+	public function get_kode_sandi() {
+        return $this->_kode_sandi;
     }
 	
 	public function get_table() {

@@ -70,8 +70,13 @@
 </div>
 </div>
 </div>
-<?php if(isset($this->d_tipesup)){
-echo "<a href=".URL."dataSupplier/downloadSupplier ><input id='submit' class='sukses' type='submit' name='submit_file' value='UNDUH' onClick=''></a>";
+<?php 
+if(isset($this->d_tipesup)){
+echo "<form method='POST' action='downloadSupplierx' enctype='multipart/form-data'>";
+echo "<input type='hidden' name='checkbox[]' id='checkbox' value='13925'>";
+echo "<input type='hidden' name='checkbox[]' id='checkbox' value='2991'>";
+echo "<input id='submit' class='sukses' type='submit' name='submit_file' value='UNDUH' onClick=''>";
+echo "</form>";
 }?>
 
 <?php
@@ -122,7 +127,7 @@ if (isset($this->last_update)){
 							echo "<td>" . $value->get_kd_swift()." / ".$value->get_iban() . "</td>";
 							echo "<td>" . $value->get_npwp_penerima() . "</td>";
 							echo "<td>" . $value->get_nip_penerima() . "</td>";
-							echo "<td><input type='checkbox' name='checks' value='>".$value->get_v_supplier_number()."'> </td>";
+							echo "<td><input name='checkbox[]' type='checkbox' id='checkbox[]' value='>".$value->get_v_supplier_number()."'> </td>";
 							
 						echo "</tr>	";
 					}
@@ -155,7 +160,7 @@ if (isset($this->last_update)){
     }
 	
 	function toggle(source) {
-		checkboxes = document.getElementsByName('checks');
+		checkboxes = document.getElementsByName('checks[]');
 		for(var i=0, n=checkboxes.length;i<n;i++) {
 			checkboxes[i].checked = source.checked;
 		}
