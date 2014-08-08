@@ -70,14 +70,6 @@
 </div>
 </div>
 </div>
-<?php 
-if(isset($this->d_tipesup)){
-echo "<form method='POST' action='downloadSupplierx' enctype='multipart/form-data'>";
-echo "<input type='hidden' name='checkbox[]' id='checkbox' value='13925'>";
-echo "<input type='hidden' name='checkbox[]' id='checkbox' value='2991'>";
-echo "<input id='submit' class='sukses' type='submit' name='submit_file' value='UNDUH' onClick=''>";
-echo "</form>";
-}?>
 
 <?php
 // untuk menampilkan last_update
@@ -89,7 +81,7 @@ if (isset($this->last_update)){
 ?>
 
 <div id="fitur">
-
+		<form method='POST' action='downloadSupplier' enctype='multipart/form-data'>
 		<table width="100%" class="table table-bordered zebra" id='fixheader' style="font-size: 80%">
             <!--baris pertama-->
 			<thead>
@@ -110,6 +102,7 @@ if (isset($this->last_update)){
 			<tbody class='ratatengah'>
 			<?php 
 			$no=1;
+			
 			if (isset($this->data)){
 				if (empty($this->data)){
 					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
@@ -127,8 +120,7 @@ if (isset($this->last_update)){
 							echo "<td>" . $value->get_kd_swift()." / ".$value->get_iban() . "</td>";
 							echo "<td>" . $value->get_npwp_penerima() . "</td>";
 							echo "<td>" . $value->get_nip_penerima() . "</td>";
-							echo "<td><input name='checkbox[]' type='checkbox' id='checkbox[]' value='>".$value->get_v_supplier_number()."'> </td>";
-							
+							echo "<td><input name='checkbox[]' type='checkbox' id='checkbox' value='".$value->get_ids()."'> </td>";
 						echo "</tr>	";
 					}
 				} 
@@ -136,12 +128,11 @@ if (isset($this->last_update)){
 				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
 			}
 			?>
+			
 			</tbody>
         </table>
-		<!--b>Keterangan : </b></br>
-		Sukses Overbooking = Dana sudah masuk ke Rekening Penerima </br>
-		Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima, mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima</br>
-		Nomor Ref/SOR/BOR = Nomor bukti transaksi pada perbankan yang dapat digunakan untuk konfirmasi ke bank penerima-->
+		<input id='submit' class='sukses' type='submit' name='submit_file2' value='UNDUH' onClick=''>
+		</form>
 		</div>
 </div>
 
@@ -160,7 +151,7 @@ if (isset($this->last_update)){
     }
 	
 	function toggle(source) {
-		checkboxes = document.getElementsByName('checks[]');
+		checkboxes = document.getElementsByName('checkbox[]');
 		for(var i=0, n=checkboxes.length;i<n;i++) {
 			checkboxes[i].checked = source.checked;
 		}
