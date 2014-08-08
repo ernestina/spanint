@@ -1,7 +1,7 @@
 <?php
 $filename = "019".".txt";
 
-header("Content-Type: application/csv");
+header("Content-Type: application/octet-stream");
 header("Content-Disposition: attachment;Filename=".$filename);
 
 if (isset($this->data)){
