@@ -89,27 +89,82 @@ class DataSupplier {
             $d_data->set_iban($val['IBAN']);
             $d_data->set_npwp_penerima($val['NPWP_PENERIMA']);
             $d_data->set_nip_penerima($val['NIP_PENERIMA']);
+            $d_data->set_ids($val['IDS']);
 			$data[] = $d_data;
         }
         return $data;
     }
     
     public function get_download_supp_filter($filter) {
-		$sql = "SELECT nama_supplier,npwp_supplier,kdvalas,nm_bank,cabang,kd_bank,kd_swift,iban,asal_bank,norek_bank,norek_penerima, 
-				nm_pemilik_rek,npwp_penerima,nip_penerima,nm_penerima,tipe_supp,satker,v_supplier_number,kppn_code,email,
-				alamat,city,provinsi,negara,zip,phone,update_date,
-				CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(nama_supplier,kdvalas), nm_bank),
-				  kd_bank), asal_bank),nm_pemilik_rek), nm_penerima), tipe_supp),
-				  v_supplier_number) kode_sandi 
-				FROM supp
-				where v_supplier_number in ('0'";
+		$sql = "SELECT 
+				nama_supplier,
+				concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(
+				TRANSLATE( substr(npwp_supplier,9,1),'0123456789','7890123456'),
+				TRANSLATE( substr(npwp_supplier,13,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_supplier,5,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_supplier,8,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_supplier,10,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_supplier,15,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_supplier,7,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_supplier,1,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_supplier,3,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_supplier,14,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_supplier,4,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_supplier,12,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_supplier,2,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_supplier,11,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_supplier,6,1),'0123456789','7890123456')
+				) npwp_supplier,
+				kdvalas,
+				nm_bank,
+				cabang,
+				kd_bank,
+				kd_swift,
+				iban,
+				asal_bank,
+				TRANSLATE(upper(norek_bank),'ABCDEFGHIJKLMNOPQRSTUVWXYZ5678901234','MNOPQRSTUVWXYZABCDEFGHIJKL!)@(#*$&%^') norek_bank,
+				TRANSLATE(upper(norek_penerima),'ABCDEFGHIJKLMNOPQRSTUVWXYZ5678901234','MNOPQRSTUVWXYZABCDEFGHIJKL!)@(#*$&%^') norek_penerima, 
+				nm_pemilik_rek,
+				concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(
+				TRANSLATE( substr(npwp_penerima,9,1),'0123456789','7890123456'),
+				TRANSLATE( substr(npwp_penerima,13,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_penerima,5,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_penerima,8,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_penerima,10,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_penerima,15,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_penerima,7,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_penerima,1,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_penerima,3,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_penerima,14,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_penerima,4,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_penerima,12,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_penerima,2,1),'0123456789','7890123456')),
+				TRANSLATE( substr(npwp_penerima,11,1),'0123456789','5678901234')),
+				TRANSLATE( substr(npwp_penerima,6,1),'0123456789','7890123456')
+				) npwp_penerima,
+				nip_penerima,
+				nm_penerima,
+				tipe_supp,
+				TRANSLATE(upper(satker),'ABCDEFGHIJKLMNOPQRSTUVWXYZ5678901234','MNOPQRSTUVWXYZABCDEFGHIJKL!)@(#*$&%^') satker,
+				v_supplier_number,
+				kppn_code,email, 
+				alamat,
+				city,
+				provinsi,
+				negara,
+				zip,
+				phone,
+				update_date, 
+				CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(nama_supplier,kdvalas), nm_bank), kd_bank), asal_bank),nm_pemilik_rek), nm_penerima), tipe_supp), v_supplier_number) kode_sandi 
+				FROM supp 
+				where ids in ('".$filter;
 		$no=0;
 		//var_dump($filter);
-		foreach ($filter as $filter) {
-			$sql .= ",'".$filter."'";
-		}
-		$sql .= ") order by nama_supplier,nm_penerima,nip_penerima";
-		var_dump ($sql);
+		/*foreach ($filter as $filter) {
+			$sql .= ",'".$filter[checkbox]."'";
+		}*/
+		$sql .= "') order by nama_supplier,nm_penerima,nip_penerima";
+		//var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {
@@ -119,7 +174,7 @@ class DataSupplier {
             $d_data->set_kdvalas($val['KDVALAS']);
             $d_data->set_nm_bank($val['NM_BANK']);
             $d_data->set_cabang($val['CABANG']);
-            $d_data->set_KD_bank($val['KD_BANK']);
+            $d_data->set_kd_bank($val['KD_BANK']);
             $d_data->set_kd_swift($val['KD_SWIFT']);
             $d_data->set_iban($val['IBAN']);
             $d_data->set_asal_bank($val['ASAL_BANK']);

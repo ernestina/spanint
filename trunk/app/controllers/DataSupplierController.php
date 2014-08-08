@@ -86,30 +86,15 @@ class DataSupplierController extends BaseController {
 		$d_supp = new DataSupplier($this->registry);
 		$filter = array ();
 		$no=0;
-		//var_dump($_POST['checkbox']);
 		if(count($_POST['checkbox']) !=0){
-			$filter[$no++] =  $_POST['checkbox'];
-			//var_dump($filter);
+			$array = array("checkbox" => $_POST['checkbox']);
+			$ids = implode("','", $array['checkbox']);
 		} else {
-			echo "<script>alert ('Belum ada yang dipilih (centang/checkmark), silakan tekan tombol BACK di browser Anda')</script>";
+			echo "<script>alert ('Belum ada yang dipilih (centang/checkmark))</script>";
+			header('location:' . URL . 'dataSupplier/cekSupplier');
 		} 
-		
-		$this->view->data = $d_supp->get_download_supp_filter($_POST['checkbox']);
-		$this->view->ids = $filter;
-		
-		$fdonlot=$nama_supplier.$norek_bank.$nm_pemilik_rek.$npwp_penerima.$nip_penerima.$nm_penerima.$nrs.$tipe_supplier.'.txt';
-		$fdonlot= str_replace(' ', '_', $fdonlot);
-		$fdonlot="ftp://10.100.244.1/".$fdonlot;
-		//xml
-		$fdonlot2=$nama_supplier.$norek_bank.$nm_pemilik_rek.$npwp_penerima.$nip_penerima.$nm_penerima.$nrs.$tipe_supplier;
-		$fdonlot2= str_replace(' ', '_', $fdonlot2);
-		$fdonlotx="ftp://10.100.244.1/".$fdonlot2.'.xml';
-		
-		// untuk mengambil data last update 
-		$d_last_update = new DataLastUpdate($this->registry);
-		$this->view->last_update = $d_last_update->get_last_updatenya($d_supp->get_table());
-		
-		$this->view->load('satker/print3');		
+		$this->view->data = $d_supp->get_download_supp_filter($ids);
+		$this->view->load('satker/downloadSupplier');		
     }
 	
 	public function downloadSupplierx() {
