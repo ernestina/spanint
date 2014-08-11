@@ -1,5 +1,8 @@
 <?php
-$filename = "019".".txt";
+if (isset($this->ekstensi)){
+	$ekstensi = $this->ekstensi;
+}
+$filename = Session::get('kd_satker').date("dmYHis").$ekstensi;
 
 header("Content-Type: application/octet-stream");
 header("Content-Disposition: attachment;Filename=".$filename);

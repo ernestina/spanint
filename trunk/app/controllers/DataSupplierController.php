@@ -86,6 +86,12 @@ class DataSupplierController extends BaseController {
 		$d_supp = new DataSupplier($this->registry);
 		$filter = array ();
 		$no=0;
+		if (isset($_POST['submit_txt'])) {
+			$this->view->ekstensi=".txt";
+		}
+		if (isset($_POST['submit_xml'])) {
+			$this->view->ekstensi=".xml";
+		}
 		if(count($_POST['checkbox']) !=0){
 			$array = array("checkbox" => $_POST['checkbox']);
 			$ids = implode("','", $array['checkbox']);
