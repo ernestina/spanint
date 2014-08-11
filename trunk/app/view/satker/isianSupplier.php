@@ -81,7 +81,7 @@ if (isset($this->last_update)){
 ?>
 
 <div id="fitur">
-		<form method='POST' action='downloadSupplier' enctype='multipart/form-data'>
+		<form name='listSupplier' method='POST' action='downloadSupplier' enctype='multipart/form-data'>
 		<table width="100%" class="table table-bordered zebra" id='fixheader' style="font-size: 80%">
             <!--baris pertama-->
 			<thead>
@@ -131,15 +131,52 @@ if (isset($this->last_update)){
 			
 			</tbody>
         </table>
-		<input id='submit' class='sukses' type='submit' name='submit_file2' value='UNDUH' onClick=''>
+            <br/>
+		<input class='sukses' type='button' name='submit_file2' value='UNDUH' onclick='downloadSupplier();'>
 		</form>
 		</div>
+</div>
+
+<div id="checkFirst" class="modalDialog" >
+    <div><h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">Perhatian</h2>
+    <a href="#close" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
+        <div id="top">
+            <h3 style="text-align: center">Centang terlebih dahulu data yang akan diunduh.</h3>
+        </div>
+    </div>
+</div>
+
+<div id="checkMax" class="modalDialog" >
+    <div><h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">Perhatian</h2>
+    <a href="#close" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
+        <div id="top">
+            <h3 style="text-align: center">Data yang dipilih maksimal 1000.</h3>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
 <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
 <script type="text/javascript" charset="utf-8">
+    
+    function downloadSupplier() {
+        
+        $("#alert-nocheck").hide();
+        $("#alert-toomanycheck").hide();
+        
+        var countChecked = $("#checkbox:checked").length;
+        
+        if (countChecked == 0) {
+            window.location = "#checkFirst";
+        } else if (countChecked > 1000) {
+            window.location = "#checkMax";
+        } else {
+            document.listSupplier.submit();
+        }
+        
+    }
+    
     $(function(){
         hideErrorId();
         hideWarning();
