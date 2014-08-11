@@ -196,7 +196,7 @@ class DataSupplier {
             $d_data->set_zip($val['ZIP']);
             $d_data->set_phone($val['PHONE']);
             $d_data->set_update_date($val['UPDATE_DATE']);
-            $d_data->set_kode_sandi($val['KODE_SANDI']);
+            $d_data->set_kode_sandi(md5(trim($val['NAMA_SUPPLIER']).trim($val['KDVALAS']).trim($val['NM_BANK']).trim($val['KD_BANK']).trim($val['ASAL_BANK']).trim($val['NM_PEMILIK_REK']).trim($val['NM_PENERIMA']).trim($val['TIPE_SUPP']).trim($val['V_SUPPLIER_NUMBER'])));
 			$data[] = $d_data;
         }
         return $data;
