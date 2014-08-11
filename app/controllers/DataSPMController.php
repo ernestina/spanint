@@ -382,13 +382,22 @@ class DataSPMController extends BaseController {
 				//$this->view->invoice_num = $invoice_num;	
 			}
 		elseif($kdsatker != '') {
+			if (Session::get('role') == SATKER) {
+				if (Session::get('kd_satker') != $kdsatker ){
+					header('location:' . URL . 'auth/logout');
+					exit();
+				} else {
+					$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".Session::get('kd_satker')."'";
+				}
+			} else {
 				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
 			}
+		}
 		if ($tgl1!='' AND $tgl2!=''){
-					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
-					$this->view->d_tgl_awal = $tgl1;
-					$this->view->d_tgl_akhir = $tgl2;
-				}
+			$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
+			$this->view->d_tgl_awal = $tgl1;
+			$this->view->d_tgl_akhir = $tgl2;
+		}
 		if (isset($_POST['submit_file'])) {
 			
 			

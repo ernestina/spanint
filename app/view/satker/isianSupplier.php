@@ -132,7 +132,8 @@ if (isset($this->last_update)){
 			</tbody>
         </table>
             <br/>
-		<input class='sukses' type='button' name='submit_file2' value='UNDUH' onclick='downloadSupplier();'>
+		<input class='sukses' type='submit' name='submit_txt' value='UNDUH .txt' onclick='downloadSupplier();'>
+		<input class='sukses' type='submit' name='submit_xml' value='UNDUH .xml' onclick='downloadSupplier();'>
 		</form>
 		</div>
 </div>
