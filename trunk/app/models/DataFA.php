@@ -28,6 +28,11 @@ class DataFA{
 	private $_actual_amt;
 	private $_balancing_amt;
 	private $_nm_satker;
+	private $_obligation;
+	private $_block_amount;
+	private $_temp_block;
+	private $_cash_limit;
+	private $_invoice;
     private $_table1 = 'GL_BALANCES_V';
 	private $_table2 = 't_satker';
     public $registry;
@@ -84,6 +89,11 @@ class DataFA{
 			$d_data->set_actual_amt($val['ACTUAL_AMT']);
 			$d_data->set_balancing_amt($val['BALANCING_AMT']);
 			$d_data->set_nm_satker($val['NMSATKER']);
+			$d_data->set_obligation($val['OBLIGATION']);
+			$d_data->set_block_amount($val['BLOCK_AMOUNT']);
+			$d_data->set_temp_block($val['TEMP_BLOCKED_AMOUNT']);
+			$d_data->set_cash_limit($val['CASH_LIMIT']);
+			$d_data->set_invoice($val['INVOICE']);
             $data[] = $d_data;
         }
         return $data;
@@ -169,7 +179,21 @@ class DataFA{
     /*
      * setter
      */
-
+	public function set_obligation($obligation) {
+        $this->_obligation = $obligation;
+    }
+	public function set_block_amount($block_amont) {
+        $this->_block_amount = $block_amont;
+    }
+	public function set_temp_block($temp_block) {
+        $this->_temp_block= $temp_block;
+    }
+	public function set_cash_limit($cash_limit) {
+        $this->_cash_limit = $cash_limit;
+    }
+	public function set_invoice($invoice) {
+        $this->_invoice = $invoice;
+    }
     public function set_satker($satker) {
         $this->_satker = $satker;
     }
@@ -230,6 +254,22 @@ class DataFA{
 	/*
      * getter
      */
+	 
+	public function get_obligation() {
+        return $this->_obligation;
+    }
+	public function get_block_amount() {
+        return $this->_block_amount;
+    }
+	public function get_temp_block() {
+        return $this->_temp_block;
+    }
+	public function get_cash_limit() {
+        return $this->_cash_limit;
+    }
+	public function get_invoice() {
+        return $this->_invoice;
+    }
 	public function get_nm_satker() {
         return $this->_nm_satker;
     }

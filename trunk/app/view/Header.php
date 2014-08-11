@@ -56,6 +56,7 @@
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
+								<li><a href=' . URL . 'dataDIPA/ProsesRevisi></i>Informasi Proses Revisi DIPA</a></li>
 								<li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
 								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
@@ -127,6 +128,7 @@
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
+								<li><a href=' . URL . 'dataDIPA/ProsesRevisi></i>Informasi Proses Revisi DIPA</a></li>
 								<li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
 								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
@@ -194,6 +196,7 @@
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
                                 <li><a href='  . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
+								<li><a href=' . URL . 'dataDIPA/ProsesRevisi></i>Informasi Proses Revisi DIPA</a></li>
                                 <li><a href='  . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
 								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>

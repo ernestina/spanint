@@ -630,7 +630,7 @@ class DataDIPAController extends BaseController {
 	
 	
 	public function DetailEncumbrances($code_id=null) {
-		$d_spm1 = new encumbrances($this->registry);
+		$d_spm1 = new DataFA($this->registry);
 		$filter = array ();
 		$no=0;
 			if ($code_id != '') {
@@ -638,10 +638,64 @@ class DataDIPAController extends BaseController {
 				//$this->view->invoice_num = $invoice_num;	
 				}
 		//var_dump($d_spm->get_hist_spm_filter());
-		$this->view->data = $d_spm1->get_encumbrances($filter);
+		$this->view->data = $d_spm1->get_fa_filter($filter);
 		$this->view->render('kppn/encumbrances');
 	}
-
+	
+	public function ProsesRevisi() {
+		$d_spm1 = new proses_revisi($this->registry);
+		$filter = array ();
+		$no=0;
+			if (isset($_POST['submit_file'])) {
+			
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]="B.KPPN = '".$_POST['kdkppn']."'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				} 
+				/*else {
+					$filter[$no++]="TS.KPPN = '".Session::get('id_user')."'";
+				}*/
+				
+				if ($_POST['satker']!=''){
+					$filter[$no++]="A.SATKER_CODE = '".$_POST['satker']."'";
+					$this->view->d_invoice = $_POST['satker'];
+				}
+				if ($_POST['nmsatker']!=''){
+					$filter[$no++]=" UPPER(B.NMSATKER) LIKE UPPER('%".$_POST['nmsatker']."%')";
+					$this->view->d_invoice = $_POST['nmsatker'];
+				}
+				$this->view->data = $d_spm1->get_revisi_dipa($filter);
+			}
+			if (Session::get('role')==KPPN) {
+				$filter[$no++]="B.KPPN = '".Session::get('id_user')."'";
+				$this->view->data = $d_spm1->get_revisi_dipa($filter);
+			}
+			
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+				$this->view->data = $d_spm1->get_revisi_dipa($filter);
+			}
+		//$this->view->data = $d_spm1->get_revisi_dipa($filter);
+		$this->view->render('kppn/proses_revisi');
+	}
+	public function DetailRevisi($satker=null) {
+		$d_spm1 = new proses_revisi($this->registry);
+		$filter = array ();
+		$no=0;
+			if ($satker != '') {
+					$filter[$no++]=" KDSATKER =  '".$satker."'";
+				//$this->view->invoice_num = $invoice_num;	
+				}
+		//var_dump($d_spm->get_hist_spm_filter());
+		$this->view->data = $d_spm1->detail_revisi($filter);
+		$this->view->render('kppn/detail_revisi');
+	}
     public function __destruct() {
         
     }
