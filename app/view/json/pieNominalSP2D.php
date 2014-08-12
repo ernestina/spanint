@@ -5,10 +5,8 @@
 $total_vol_gaji = 0;
 $total_vol_non_gaji = 0;
 
-foreach ($this->data_sp2d_rekap as $sp2d_rekap_harian) {
-    $total_vol_gaji += $sp2d_rekap_harian->get_vol_gaji();
-    $total_vol_non_gaji += $sp2d_rekap_harian->get_vol_non_gaji();
-}
+$total_vol_gaji += $this->data_sp2d_rekap->get_vol_gaji();
+$total_vol_non_gaji += $this->data_sp2d_rekap->get_vol_non_gaji();
 
 ?>
 

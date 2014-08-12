@@ -7,12 +7,10 @@ $total_non_gaji = 0;
 $total_lainnya = 0;
 $total_void = 0;
 
-foreach ($this->data_sp2d_rekap as $sp2d_rekap_harian) {
-    $total_gaji += $sp2d_rekap_harian->get_gaji();
-    $total_non_gaji += $sp2d_rekap_harian->get_non_gaji();
-    $total_void += $sp2d_rekap_harian->get_void();
-    $total_lainnya += $sp2d_rekap_harian->get_lainnya();
-}
+$total_gaji += $this->data_sp2d_rekap->get_gaji();
+$total_non_gaji += $this->data_sp2d_rekap->get_non_gaji();
+$total_void += $this->data_sp2d_rekap->get_void();
+$total_lainnya += $this->data_sp2d_rekap->get_lainnya();
 
 ?>
 
