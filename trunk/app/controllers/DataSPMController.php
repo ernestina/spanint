@@ -426,8 +426,12 @@ class DataSPMController extends BaseController {
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
 			if (Session::get('role')==KPPN) {$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";	
-					
+				
 			}
+			if (Session::get('role')==SATKER) {$filter[$no++]="SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";	
+				
+			}
+			
 			
 		$this->view->data2 = $d_spm1->get_jenis_spm_filter($kdsatker);	
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
@@ -437,10 +441,26 @@ class DataSPMController extends BaseController {
 		//var_dump($d_spm1->get_satker_filter($filter));
 		if( Session::get('id_user') == 140 ){$this->view->render('kppn/SP2DSatker140');
 		}
+		
 		else {$this->view->render('kppn/SP2DSatker');
 		}
 	}	
 	
+	public function downloadSP2D() {
+		$d_supp = new DataCheck($this->registry);
+		$filter = array ();
+		$no=0;
+		if(count($_POST['checkbox']) !=0){
+			$array = array("checkbox" => $_POST['checkbox']);
+			$ids = implode("','", $array['checkbox']);
+		} else {
+			echo "<script>alert ('Belum ada yang dipilih (centang/checkmark))</script>";
+			header('location:' . URL . 'dataSPM/daftarsp2d');
+		} 
+		$this->view->data = $d_supp->get_download_sp2d($ids);
+		$this->view->data2 = $d_supp->get_tgl_download_sp2d($ids);
+		$this->view->load('kppn/downloadSP2D');		
+    }
 	
 	public function RekapSp2d() {
 		$d_spm1 = new DataCheck($this->registry);

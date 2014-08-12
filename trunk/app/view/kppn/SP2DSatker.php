@@ -70,6 +70,8 @@
 </div>
 </div>
 </div>
+
+
 <?php
                    // untuk menampilkan last_update
                    if (isset($this->last_update)){
@@ -82,6 +84,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 
 
 <div id="fitur">
+		<form method='POST' action='../../downloadSP2D' enctype='multipart/form-data'>
 		<table width="100%" class="table table-bordered zebra" id='fixheader' style='font-size: 90%'>
             <!--baris pertama-->
 			<thead>
@@ -95,6 +98,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 					<th>Jenis SPM </th>
 					<th width='70px'>Jenis SP2D</th>
 					<th width='300px'>Description</th>
+					<th>Pilih <input type="checkbox" onClick="toggle(this)" /> </th>
 			</thead>
 			<tbody class='ratatengah'>
 			<?php 
@@ -117,8 +121,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 					echo "<td>" . $value->get_attribute6() . "</td>";
 					echo "<td>" . $value->get_jenis_sp2d() . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
-					
-					
+					echo "<td><input name='checkbox[]' type='checkbox' id='checkbox' value='".$value->get_check_number()."'> </td>";
 					
 				echo "</tr>	";
 			} 
@@ -130,6 +133,8 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 			?>
 			</tbody>
         </table>
+		<input id='submit' class='sukses' type='submit' name='submit_file2' value='UNDUH' onClick=''>
+		</form>
 		</div>
 </div>
 
@@ -147,7 +152,12 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
 		});
     });
-    
+    function toggle(source) {
+		checkboxes = document.getElementsByName('checkbox[]');
+		for(var i=0, n=checkboxes.length;i<n;i++) {
+			checkboxes[i].checked = source.checked;
+		}
+	}
     function hideErrorId(){
         $('.error').fadeOut(0);
     }

@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>Daftar Locked Akun Dalam Proses Revisi  
+        <h2>Daftar Akun Yang di Kunci Karena Proses Revisi  
 		<?php if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
@@ -43,8 +43,8 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 					<th>Output</th>
 					<th>Akun</th>
 					<th>Revisi Ke</th>
-					<th>Ususlan Revisi</th>
-					<th>Tanggal</th>
+					<th>Usulan Revisi</th>
+					<!--th>Tanggal</th-->
 					
 			</thead>
 			<tbody class='ratatengah'>
@@ -68,7 +68,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 						echo "<td>" . $value->get_akun() . "</td>";
 						echo "<td>" . $value->get_revision_no() . "</td>";
 						echo "<td align='right'>" . number_format($value->get_usulan_revisi()) . "</td>";
-						echo "<td>" . $value->get_last_update_date(). "</td>";
+						//echo "<td>" . $value->get_last_update_date(). "</td>";
 						
 						
 					}

@@ -26,6 +26,11 @@ class DataCheck{
 	private $_jumlah_sp2d;
 	private $_total_sp2d;
 	private $_status_lookup_code;
+	private $_thang;
+	private $_kdbankpos;
+	private $_pilih;
+	private $_tgl1;
+	private $_tgl2;
 	private $_table1 = 'AP_CHECKS_ALL_V';
     public $registry;
 
@@ -215,10 +220,93 @@ class DataCheck{
         }
         return $data;
     }
+	
+	
+	public function get_download_sp2d($filter) {
+		Session::get('id_user');
+		$sql = "SELECT  TO_CHAR(SYSDATE,'YYYY') THANG, SEGMENT1 KDSATKER, SUBSTR(INVOICE_NUM,1,5) NOSPM, TO_CHAR(INVOICE_DATE, 'DD-MM-YYYY') TGSPM,
+			CHECK_NUMBER NOSP2D, TO_CHAR(CHECK_DATE, 'DD-MM-YYYY') TGSP2D, '' KDBANKPOS, 1 PILIH
+				FROM " 
+				. $this->_table1. "
+				WHERE 
+				STATUS_LOOKUP_CODE <> 'VOIDED'
+				and check_number in ('".$filter;
+				
+				
+				
+				
+		//$no=0;
+		//foreach ($filter as $filter) {
+			//$sql .= " AND ".$filter;
+		//}
+		
+		//$sql .= " GROUP BY JENIS_SPM, JENDOK ";
+		$sql .= " ') ORDER BY SUBSTR(INVOICE_NUM,1,5) DESC";
+		//var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_invoice_num($val['NOSPM']);
+			$d_data->set_invoice_date($val['TGSPM']);
+			$d_data->set_check_number($val['NOSP2D']);
+			$d_data->set_check_date($val['TGSP2D']);
+			$d_data->set_nmsatker($val['KDSATKER']);
+			$d_data->set_thang($val['THANG']);
+			$d_data->set_kdbankpos($val['KDBANKPOS']);
+			$d_data->set_pilih($val['PILIH']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_tgl_download_sp2d($filter) {
+		Session::get('id_user');
+		$sql = "SELECT TO_CHAR(MAX(INVOICE_DATE),'DDMMYYYY') TGL1, TO_CHAR(MIN(INVOICE_DATE),'DDMMYYYY') TGL2 
+				FROM " 
+				. $this->_table1. "
+				WHERE 
+				STATUS_LOOKUP_CODE <> 'VOIDED'
+				and check_number in ('".$filter."')";
+				
+		//$no=0;
+		//foreach ($filter as $filter) {
+			//$sql .= " AND ".$filter;
+		//}
+		
+		//$sql .= " GROUP BY JENIS_SPM, JENDOK ";
+		//$sql .= " ') ORDER BY SUBSTR(INVOICE_NUM,1,5) DESC";
+		//var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_tgl1($val['TGL1']);
+			$d_data->set_tgl2($val['TGL2']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
     /*
      * setter
      */
-
+	public function set_thang($thang) {
+        $this->_thang = $thang;
+    }
+	public function set_tgl1($tgl1) {
+        $this->_tgl1 = $tgl1;
+    }
+	public function set_tgl2($tgl2) {
+        $this->_tgl2 = $tgl2;
+    }
+	public function set_pilih($pilih) {
+        $this->_pilih = $pilih;
+    }
+	public function set_kdbankpos($kdbankpos) {
+        $this->_kdbankpos = $kdbankpos;
+    }
     public function set_jenis_sp2d($jenis_sp2d) {
         $this->_jenis_sp2d = $jenis_sp2d;
     }
@@ -276,9 +364,23 @@ class DataCheck{
 	/*
      * getter
      */
-	
+	public function get_tgl2() {
+        return $this->_tgl2;
+    }
+	public function get_tgl1() {
+        return $this->_tgl1;
+    }
 	public function get_jenis_sp2d() {
         return $this->_jenis_sp2d;
+    }
+	public function get_thang() {
+        return $this->_thang;
+    }
+	public function get_kdbankpos() {
+        return $this->_kdbankpos;
+    }
+	public function get_pilih() {
+        return $this->_pilih;
     }
 	public function get_jendok() {
         return $this->_jendok;

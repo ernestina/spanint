@@ -40,7 +40,7 @@ class proses_revisi{
     
     public function get_revisi_dipa($filter) {
 		Session::get('id_user');
-		$sql = "SELECT A.* , B.NMSATKER 
+		$sql = "SELECT DISTINCT A.* , B.NMSATKER 
 				FROM " 
 				. $this->_table1. " A, "
 				. $this->_table2. " B 
@@ -52,7 +52,7 @@ class proses_revisi{
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " ORDER BY A.LAST_UPDATE_DATE DESC, A.SATKER_CODE DESC " ;
+		$sql .= " ORDER BY A.LAST_UPDATE_DATE DESC, A.SATKER_CODE ASC " ;
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
@@ -81,7 +81,7 @@ class proses_revisi{
 			$sql .= " AND ".$filter;
 		}
 		
-		$sql .= " ORDER BY LAST_UPDATE_DATE DESC, KDSATKER DESC " ;
+		$sql .= " ORDER BY LAST_UPDATE_DATE DESC, KDSATKER DESC, PROGRAM_CODE, OUTPUT_CODE, KDAKUN  " ;
 		
 		//var_dump ($sql);
         $result = $this->db->select($sql);
