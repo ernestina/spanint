@@ -57,15 +57,188 @@ class DataDashboard {
         return $d_data;
     }
     
+    public function get_sp2d_rekap_vol_pie($hari, $unitfilter=null) {
+        if (!isset($unitfilter)) {
+            $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '".Session::get('id_user')."' and (check_date between to_date('".date("Ymd",time()-(($hari-1)*24*60*60))."','yyyymmdd') and to_date('".date("Ymd",time())."','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+        } else {
+            $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where ".$unitfilter." and (check_date between to_date('".date("Ymd",time()-(($hari-1)*24*60*60))."','yyyymmdd') and to_date('".date("Ymd",time())."','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+        }
+
+        //echo $sql;
+        $result =  $this->db->select($sql);
+        //var_dump($result);            
+        $d_data = new $this($this->registry);
+
+        $d_data->set_void(0);
+        $d_data->set_vol_void(0);
+        $d_data->set_gaji(0);
+        $d_data->set_vol_gaji(0);
+        $d_data->set_non_gaji(0);
+        $d_data->set_vol_non_gaji(0);
+        $d_data->set_lainnya(0);
+        $d_data->set_vol_lainnya(0);
+
+        foreach ($result as $val) {
+            if ($val['STATUS_LOOKUP_CODE']=='VOIDED') {
+                $d_data->set_vol_void($d_data->get_vol_void() + $val['NOMINAL']);
+            } else {
+                if ($val['JENIS_SP2D']=='GAJI') {
+                    $d_data->set_vol_gaji($d_data->get_vol_gaji() + $val['NOMINAL']);
+                } else if ($val['JENIS_SP2D']=='NON GAJI') {
+                    $d_data->set_vol_non_gaji($d_data->get_vol_non_gaji() + $val['NOMINAL']);
+                } else if ($val['JENIS_SP2D']=='LAINNYA') {
+                    $d_data->set_vol_lainnya($d_data->get_vol_lainnya() + $val['NOMINAL']);
+                }
+            }
+        }
+        //var_dump($d_data);
+        return $d_data;
+    }
+    
+    public function get_sp2d_rekap_vol($hari, $unitfilter=null) {
+        //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
+        
+        $data = array();
+        for ($i=0; $i<$hari; $i++) {
+            if (!isset($unitfilter)) {
+                $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '".Session::get('id_user')."' and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            } else {
+                $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where ".$unitfilter." and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            }
+            
+            //var_dump($sql);
+            $result =  $this->db->select($sql);
+            //var_dump($result);
+            $d_data = new $this($this->registry);
+            
+            $d_data->set_void(0);
+            $d_data->set_vol_void(0);
+            $d_data->set_gaji(0);
+            $d_data->set_vol_gaji(0);
+            $d_data->set_non_gaji(0);
+            $d_data->set_vol_non_gaji(0);
+            $d_data->set_lainnya(0);
+            $d_data->set_vol_lainnya(0);
+            
+            foreach ($result as $val) {
+                if ($val['STATUS_LOOKUP_CODE']=='VOIDED') {
+                    $d_data->set_vol_void($d_data->get_vol_void() + $val['NOMINAL']);
+                } else {
+                    if ($val['JENIS_SP2D']=='GAJI') {
+                        $d_data->set_vol_gaji($d_data->get_vol_gaji() + $val['NOMINAL']);
+                    } else if ($val['JENIS_SP2D']=='NON GAJI') {
+                        $d_data->set_vol_non_gaji($d_data->get_vol_non_gaji() + $val['NOMINAL']);
+                    } else if ($val['JENIS_SP2D']=='LAINNYA') {
+                        $d_data->set_vol_lainnya($d_data->get_vol_lainnya() + $val['NOMINAL']);
+                    }
+                }
+            }
+            $data[$i] = $d_data;
+        }
+        //var_dump($data);
+        return $data;
+    }
+    
+    public function get_sp2d_rekap_num_pie($hari, $unitfilter=null) {
+        
+        if (!isset($unitfilter)) {
+            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d from (select check_number, status_lookup_code, jenis_sp2d, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '".Session::get('id_user')."' and (check_date between to_date('".date("Ymd",time()-(($hari-1)*24*60*60))."','yyyymmdd') and to_date('".date("Ymd",time())."','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+        } else {
+            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d from (select check_number, status_lookup_code, jenis_sp2d, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where ".$unitfilter." and (check_date between to_date('".date("Ymd",time()-(($hari-1)*24*60*60))."','yyyymmdd') and to_date('".date("Ymd",time())."','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+        }
+
+        //var_dump($sql);
+        $result =  $this->db->select($sql);
+        //var_dump($result);
+        $d_data = new $this($this->registry);
+
+        $d_data->set_void(0);
+        $d_data->set_vol_void(0);
+        $d_data->set_gaji(0);
+        $d_data->set_vol_gaji(0);
+        $d_data->set_non_gaji(0);
+        $d_data->set_vol_non_gaji(0);
+        $d_data->set_lainnya(0);
+        $d_data->set_vol_lainnya(0);
+
+        foreach ($result as $val) {
+            if ($val['STATUS_LOOKUP_CODE']=='VOIDED') {
+                $d_data->set_void($d_data->get_void() + $val['JUMLAH']);
+                $d_data->set_vol_void($d_data->get_vol_void() + $val['NOMINAL']);
+            } else {
+                if ($val['JENIS_SP2D']=='GAJI') {
+                    $d_data->set_gaji($d_data->get_gaji() + $val['JUMLAH']);
+                    $d_data->set_vol_gaji($d_data->get_vol_gaji() + $val['NOMINAL']);
+                } else if ($val['JENIS_SP2D']=='NON GAJI') {
+                    $d_data->set_non_gaji($d_data->get_non_gaji() + $val['JUMLAH']);
+                    $d_data->set_vol_non_gaji($d_data->get_vol_non_gaji() + $val['NOMINAL']);
+                } else if ($val['JENIS_SP2D']=='LAINNYA') {
+                    $d_data->set_lainnya($d_data->get_lainnya() + $val['JUMLAH']);
+                    $d_data->set_vol_lainnya($d_data->get_vol_lainnya() + $val['NOMINAL']);
+                }
+            }
+        }
+        //var_dump($data);
+        return $d_data;
+    }
+    
+    public function get_sp2d_rekap_num($hari, $unitfilter=null) {
+        //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
+        
+        $data = array();
+        for ($i=0; $i<$hari; $i++) {
+            if (!isset($unitfilter)) {
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d from (select check_number, status_lookup_code, jenis_sp2d, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '".Session::get('id_user')."' and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            } else {
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d from (select check_number, status_lookup_code, jenis_sp2d, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where ".$unitfilter." and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            }
+            
+            //var_dump($sql);
+            $result =  $this->db->select($sql);
+            //var_dump($result);
+            $d_data = new $this($this->registry);
+            
+            $d_data->set_void(0);
+            $d_data->set_vol_void(0);
+            $d_data->set_gaji(0);
+            $d_data->set_vol_gaji(0);
+            $d_data->set_non_gaji(0);
+            $d_data->set_vol_non_gaji(0);
+            $d_data->set_lainnya(0);
+            $d_data->set_vol_lainnya(0);
+            
+            foreach ($result as $val) {
+                if ($val['STATUS_LOOKUP_CODE']=='VOIDED') {
+                    $d_data->set_void($d_data->get_void() + $val['JUMLAH']);
+                    $d_data->set_vol_void($d_data->get_vol_void() + $val['NOMINAL']);
+                } else {
+                    if ($val['JENIS_SP2D']=='GAJI') {
+                        $d_data->set_gaji($d_data->get_gaji() + $val['JUMLAH']);
+                        $d_data->set_vol_gaji($d_data->get_vol_gaji() + $val['NOMINAL']);
+                    } else if ($val['JENIS_SP2D']=='NON GAJI') {
+                        $d_data->set_non_gaji($d_data->get_non_gaji() + $val['JUMLAH']);
+                        $d_data->set_vol_non_gaji($d_data->get_vol_non_gaji() + $val['NOMINAL']);
+                    } else if ($val['JENIS_SP2D']=='LAINNYA') {
+                        $d_data->set_lainnya($d_data->get_lainnya() + $val['JUMLAH']);
+                        $d_data->set_vol_lainnya($d_data->get_vol_lainnya() + $val['NOMINAL']);
+                    }
+                }
+            }
+            $data[$i] = $d_data;
+        }
+        //var_dump($data);
+        return $data;
+    }
+    
     public function get_sp2d_rekap($hari, $unitfilter=null) {
         //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
         
         $data = array();
         for ($i=0; $i<$hari; $i++) {
             if (!isset($unitfilter)) {
-                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select * from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '".Session::get('id_user')."' and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '".Session::get('id_user')."' and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             } else {
-                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select * from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where ".$unitfilter." and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where ".$unitfilter." and check_date = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             }
             
             //var_dump($sql);
@@ -181,9 +354,9 @@ class DataDashboard {
         $data = array();
             
         if (!isset($unitfilter)) {
-            $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".$tanggal."','ddmmyyyy')";
+            $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".$tanggal."','ddmmyyyy')";
         } else {
-            $sql = "select * from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".$tanggal."','ddmmyyyy')";
+            $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".$tanggal."','ddmmyyyy')";
         }
             
         //var_dump($sql);
@@ -231,15 +404,15 @@ class DataDashboard {
             
             if (!isset($unitfilter)) {
                 if ($hari == 1) {
-                    $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal=(select max(tanggal) from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."')";
+                    $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal=(select max(tanggal) from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."')";
                 } else {
-                    $sql = "select * from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
+                    $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
                 }
             } else {
                 if ($hari == 1) {
-                    $sql = "select * from spgr_mpn_dashboard where ".$unitfilter." and tanggal=(select max(tanggal) from spgr_mpn_dashboard where ".$unitfilter.")";
+                    $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where ".$unitfilter." and tanggal=(select max(tanggal) from spgr_mpn_dashboard where ".$unitfilter.")";
                 } else {
-                    $sql = "select * from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
+                    $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
                 }
             }
             
