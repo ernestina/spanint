@@ -25,7 +25,7 @@ class DataJSONController extends BaseController {
 
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_num_pie($periode, $unitfilter);
             
         } else if ((Session::get('role')==KPPN) or (isset($kodeunit) and ($kodeunit[0] != 'K'))) {
             
@@ -37,7 +37,7 @@ class DataJSONController extends BaseController {
 
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_num_pie($periode, $unitfilter);
             
         } else if ((Session::get('role')==KANWIL) or (isset($kodeunit) and ($kodeunit[0] == 'K'))) {
             
@@ -49,7 +49,7 @@ class DataJSONController extends BaseController {
             
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_num_pie($periode, $unitfilter);
             
         } else {
             
@@ -57,7 +57,7 @@ class DataJSONController extends BaseController {
             
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_num_pie($periode, $unitfilter);
             
         }
         
@@ -76,7 +76,7 @@ class DataJSONController extends BaseController {
 
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_vol_pie($periode, $unitfilter);
             
         } else if ((Session::get('role')==KPPN) or (isset($kodeunit) and ($kodeunit[0] != 'K'))) {
             
@@ -88,7 +88,7 @@ class DataJSONController extends BaseController {
 
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_vol_pie($periode, $unitfilter);
             
         } else if ((Session::get('role')==KANWIL) or (isset($kodeunit) and ($kodeunit[0] == 'K'))) {
             
@@ -100,7 +100,7 @@ class DataJSONController extends BaseController {
             
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_vol_pie($periode, $unitfilter);
             
         } else {
             
@@ -108,7 +108,7 @@ class DataJSONController extends BaseController {
             
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_vol_pie($periode, $unitfilter);
             
         }
         
@@ -369,7 +369,7 @@ class DataJSONController extends BaseController {
 
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_num($periode, $unitfilter);
             
         } else if ((Session::get('role')==KANWIL) or (isset($kodeunit) and ($kodeunit[0] == 'K'))) {
             
@@ -381,7 +381,7 @@ class DataJSONController extends BaseController {
             
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_num($periode, $unitfilter);
             
         } else {
             
@@ -389,7 +389,7 @@ class DataJSONController extends BaseController {
             
             $d_dashboard = new DataDashboard($this->registry);
 
-            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap($periode, $unitfilter);
+            $this->view->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap_num($periode, $unitfilter);
             
         }
         
