@@ -152,7 +152,7 @@ if (isset($this->last_update)){
     <div><h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">Perhatian</h2>
     <a href="#close" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
         <div id="top">
-            <h3 style="text-align: center">Data yang dipilih maksimal 1000.</h3>
+            <h3 style="text-align: center">Data yang dipilih maksimal 1000 record. Silahkan mengirimkan email ke datasupplierdtp@gmail.com jika ingin mengubah lebih dari 1000 record.</h3>
         </div>
     </div>
 </div>
