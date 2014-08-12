@@ -24,9 +24,12 @@ class DataDIPAController extends BaseController {
 		$d_spm1 = new DataDIPA($this->registry);
 		$filter = array ();
 		$no=0;
-			if ($kdsatker != '') {
+			if ($kdsatker != '' and Session::get('role')!=SATKER) {
 					$filter[$no++]=" A.SATKER_CODE =  '".$kdsatker."'";
 				//$this->view->invoice_num = $invoice_num;	
+				}
+			else{
+				$filter[$no++]=" A.SATKER_CODE =  '".Session::get('kd_satker')."'";
 				}
 			if (isset($_POST['submit_file'])) {
 				
@@ -118,7 +121,7 @@ class DataDIPAController extends BaseController {
 		$this->view->render('kppn/fund_fail');
 	}
 	
-	public function Detail_Fund_fail($kdsatker = null) {
+	public function Detail_Fund_fail() {
 		$d_spm1 = new DataFundFail($this->registry);
 		$filter = array ();
 		$no=0;
@@ -129,7 +132,7 @@ class DataDIPAController extends BaseController {
 			if (isset($_POST['submit_file'])) {
 				
 				if ($_POST['kd_satker']!=''){
-					$filter[$no++]="KDSATKER = '".$_POST['kd_satker']."'";
+					$filter[$no++]="SATKER = '".$_POST['kd_satker']."'";
 					$this->view->satker_code = $_POST['satker_code'];
 				}
 				/*if ($_POST['akun']!=''){
@@ -148,7 +151,7 @@ class DataDIPAController extends BaseController {
 					$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
-				}*/
+				}
 				
 			}	
 			if (Session::get('role')==KANWIL){
@@ -160,12 +163,13 @@ class DataDIPAController extends BaseController {
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 			}
 			if (Session::get('role')==KPPN) {$filter[$no++]="KDKPPN = '".Session::get('id_user')."'";	
-			
+			*/
 			}
 
 		//var_dump($d_spm->get_hist_spm_filter());
-		$this->view->data = $d_spm1->get_detail_fun_fail_filter($filter);
-		$this->view->render('kppn/detail_fund_fail');
+		//$this->view->data = $d_spm1->get_detail_fun_fail_filter($filter);
+		$this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
+		$this->view->render('kppn/detail_fund_fail_kd');
 	}
 	
 	public function Detail_Fund_fail_kd($kdsatker = null, $output=null) {
@@ -213,9 +217,12 @@ class DataDIPAController extends BaseController {
 		$d_spm1 = new DataFA($this->registry);
 		$filter = array ();
 		$no=0;
-		if ($kdsatker != '') {
+		if ($kdsatker != '' and Session::get('role')!=SATKER) {
 					$filter[$no++]=" A.SATKER =  '".$kdsatker."'";
 				//$this->view->invoice_num = $invoice_num;	
+				}
+			else{
+				$filter[$no++]=" A.SATKER =  '".Session::get('kd_satker')."'";
 				}
 		if (Session::get('role')==KPPN) {
 					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
@@ -258,9 +265,12 @@ class DataDIPAController extends BaseController {
 		$d_spm1 = new DataFA($this->registry);
 		$filter = array ();
 		$no=0;
-		if ($kdsatker != '') {
+		if ($kdsatker != '' and Session::get('role')!=SATKER) {
 					$filter[$no++]=" A.SATKER =  '".$kdsatker."'";
 				//$this->view->invoice_num = $invoice_num;	
+				}
+			else{
+				$filter[$no++]=" A.SATKER =  '".Session::get('kd_satker')."'";
 				}
 		if (Session::get('role')==KPPN) {
 					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
