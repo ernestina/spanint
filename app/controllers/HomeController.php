@@ -54,6 +54,35 @@ class homeController extends BaseController {
             $this->view->kodeunit = $kodeunit;
             $this->view->namaunit = $d_dashboard->get_nama_unit($kodeunit);
             
+            if (Session::get('role')==SATKER) {
+                
+                header('location:' . URL . 'home/mingguan');
+                
+            } else if (Session::get('role')==KPPN) {
+                
+                header('location:' . URL . 'home/harian');
+                
+            } else if (Session::get('role')==KANWIL) {
+                
+                if ($kodeunit != Session::get('id_user')) {
+                    $d_kppn_list = new DataUser($this->registry);
+                    $unit_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+                    
+                    $inList = false;
+                    foreach ($unit_list as $list) {
+                        if ($list->get_kd_d_kppn() == $kodeunit) {
+                            $inList = true;
+                        }
+                    }
+                    
+                    if ($inList == false) {
+                        header('location:' . URL . 'home/harian');
+                    }
+                    
+                }
+                
+            }
+            
             if ($kodeunit[0] != 'K') {
                 
                 $this->view->kodekanwil = "K".$d_dashboard->get_kanwil_kppn($kodeunit);
@@ -106,6 +135,35 @@ class homeController extends BaseController {
             $this->view->kodeunit = $kodeunit;
             $this->view->namaunit = $d_dashboard->get_nama_unit($kodeunit);
             
+            if (Session::get('role')==SATKER) {
+                
+                header('location:' . URL . 'home/mingguan');
+                
+            } else if (Session::get('role')==KPPN) {
+                
+                header('location:' . URL . 'home/mingguan');
+                
+            } else if (Session::get('role')==KANWIL) {
+                
+                if ($kodeunit != Session::get('id_user')) {
+                    $d_kppn_list = new DataUser($this->registry);
+                    $unit_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+                    
+                    $inList = false;
+                    foreach ($unit_list as $list) {
+                        if ($list->get_kd_d_kppn() == $kodeunit) {
+                            $inList = true;
+                        }
+                    }
+                    
+                    if ($inList == false) {
+                        header('location:' . URL . 'home/mingguan');
+                    }
+                    
+                }
+                
+            }
+            
             if ($kodeunit[0] != 'K') {
                 
                 $this->view->kodekanwil = "K".$d_dashboard->get_kanwil_kppn($kodeunit);
@@ -152,6 +210,35 @@ class homeController extends BaseController {
             }
             
         } else {
+            
+            if (Session::get('role')==SATKER) {
+                
+                header('location:' . URL . 'home/bulanan');
+                
+            } else if (Session::get('role')==KPPN) {
+                
+                header('location:' . URL . 'home/bulanan');
+                
+            } else if (Session::get('role')==KANWIL) {
+                
+                if ($kodeunit != Session::get('id_user')) {
+                    $d_kppn_list = new DataUser($this->registry);
+                    $unit_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+                    
+                    $inList = false;
+                    foreach ($unit_list as $list) {
+                        if ($list->get_kd_d_kppn() == $kodeunit) {
+                            $inList = true;
+                        }
+                    }
+                    
+                    if ($inList == false) {
+                        header('location:' . URL . 'home/bulanan');
+                    }
+                    
+                }
+                
+            }
             
             $d_dashboard = new DataDashboard($this->registry);
             
@@ -209,6 +296,20 @@ class homeController extends BaseController {
             
             $this->view->kodeunit = $kodeunit;
             $this->view->namaunit = $d_dashboard->get_nama_unit($kodeunit);
+            
+            if (Session::get('role')==SATKER) {
+                
+                header('location:' . URL . 'home/triwulanan');
+                
+            } else if (Session::get('role')==KPPN) {
+                
+                header('location:' . URL . 'home/bulanan');
+                
+            } else if (Session::get('role')==KANWIL) {
+                
+                header('location:' . URL . 'home/bulanan');
+                
+            }
             
             if ($kodeunit[0] != 'K') {
                 
