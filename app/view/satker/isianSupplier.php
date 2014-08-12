@@ -132,8 +132,9 @@ if (isset($this->last_update)){
 			</tbody>
         </table>
             <br/>
-		<input class='sukses' type='submit' name='submit_txt' value='UNDUH .txt' onclick='downloadSupplier();'>
-		<input class='sukses' type='submit' name='submit_xml' value='UNDUH .xml' onclick='downloadSupplier();'>
+			<input id='download_ext' type='hidden' name='download_ext' value='txt'>
+		<input class='sukses' type='button' name='submit_txt' value='UNDUH .txt' onclick='downloadSupplier("txt");'>
+		<input class='sukses' type='button' name='submit_xml' value='UNDUH .xml' onclick='downloadSupplier("xml");'>
 		</form>
 		</div>
 </div>
@@ -161,10 +162,16 @@ if (isset($this->last_update)){
 <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
 <script type="text/javascript" charset="utf-8">
     
-    function downloadSupplier() {
+    function downloadSupplier(type) {
         
         $("#alert-nocheck").hide();
         $("#alert-toomanycheck").hide();
+		
+		if (type == "txt") {
+			$("#download_ext").val("txt");
+		} else {
+			$("#download_ext").val("xml");
+		}
         
         var countChecked = $("#checkbox:checked").length;
         

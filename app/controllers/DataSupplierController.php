@@ -34,12 +34,12 @@ class DataSupplierController extends BaseController {
 			}
 		
 			if ($_POST['nrs']!=''){
-				$filter[$no++]=" upper(v_supplier_number) like '%upper(".$_POST['nrs']."%')";
+				$filter[$no++]=" upper(v_supplier_number) like 'upper(%".$_POST['nrs']."%')";
 				$this->view->d_nrs = $_POST['nrs'];
 			}
 		
 			if ($_POST['namasupplier']!=''){
-				$filter[$no++]=" upper(nama_supplier) like upper('".$_POST['namasupplier']."%')";
+				$filter[$no++]=" upper(nama_supplier) like upper('%".$_POST['namasupplier']."%')";
 				$this->view->d_namasupplier = $_POST['namasupplier'];
 			}
 		
@@ -94,13 +94,13 @@ class DataSupplierController extends BaseController {
 			header('location:' . URL . 'dataSupplier/cekSupplier');
 		} 
 		$this->view->data = $d_supp->get_download_supp_filter($ids);
-		if (isset($_POST['submit_txt'])) {
+		if ($_POST['download_ext'] == 'txt') {
 			$this->view->ekstensi=".txt";
-		$this->view->load('satker/downloadSuppliertxt');
+			$this->view->load('satker/downloadSuppliertxt');
 		}
-		if (isset($_POST['submit_xml'])) {
+		if ($_POST['download_ext'] == 'xml') {
 			$this->view->ekstensi=".xml";
-		$this->view->load('satker/downloadSupplierxml');
+			$this->view->load('satker/downloadSupplierxml');
 		}		
     }
 	
