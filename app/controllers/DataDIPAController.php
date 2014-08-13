@@ -26,7 +26,7 @@ class DataDIPAController extends BaseController {
 		$no=0;
 			if ($kdsatker != '' and Session::get('role')!=SATKER) {
 					$filter[$no++]=" A.SATKER_CODE =  '".$kdsatker."'";
-				//$this->view->invoice_num = $invoice_num;	
+					$this->view->satker_code = $kdsatker;
 				}
 			else{
 				$filter[$no++]=" A.SATKER_CODE =  '".Session::get('kd_satker')."'";
@@ -65,7 +65,48 @@ class DataDIPAController extends BaseController {
 		$this->view->data = $d_spm1->get_dipa_filter($filter);
 		$this->view->render('kppn/revisiDIPA');
 	}
+				//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : DataDIPAController.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+
+	public function RevisiDipa_PDF($kdsatker=null,$kdakun=null,$kdoutput=null,$kdprogram=null,$kdtgl_awal=null,$kdtgl_akhir=null) {
 	
+		$d_spm1 = new DataDIPA($this->registry);
+		$filter = array ();
+		$no=0;
+			if ($kdsatker != 'null') {
+				$filter[$no++]=" A.SATKER_CODE =  '".$kdsatker."'";
+			}						
+			if ($kdakun !='null'){
+				$filter[$no++]=" A.ACCOUNT_CODE = '".$kdakun."'";
+			}
+			if ($kdoutput !='null'){
+				$filter[$no++]=" A.OUTPUT_CODE = '".$kdoutput."'";
+			}
+			if ($kdprogram !='null'){
+				$filter[$no++]=" A.PROGRAM_CODE = '".$kdprogram."'";
+			}
+			if ($kdtgl_awal !='null' OR $kdtgl_akhir !='null'){
+				list($bln,$tgl,$thn)=explode('-',$kdtgl_awal);
+				$kdtgl_awal=$bln."/".$tgl."/".$thn;
+				
+				list($bln,$tgl,$thn)=explode('-',$kdtgl_akhir);				
+				$kdtgl_akhir=$bln."/".$tgl."/".$thn;			
+				$filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '".$kdtgl_awal."' AND '".$kdtgl_akhir."'";
+			}
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
+		$this->view->data = $d_spm1->get_dipa_filter($filter);
+		$this->view->load('kppn/revisiDIPA_PDF');
+	}
+			//----------------------------------------------------
+
 	public function Fund_fail() {
 		$d_spm1 = new DataFundFail($this->registry);
 		$filter = array ();
