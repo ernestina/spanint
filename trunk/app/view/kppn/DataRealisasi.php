@@ -37,12 +37,12 @@
 				$kdsatker=$this->satker_code;
 			}
 			?>
-		<a href="<?php echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php echo $kdsatker; ?>" class="modal">PDF</a>
-			
-		<?php
-			//----------------------------------------------------		
-		?>
-<a href="#xModal" class="modal">FILTER DATA</a><br><br>
+	<ul class="inline" style="float: right"><li>
+		<a href="<?php echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php echo $kdsatker; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+
+		<li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
+	
+	<br><br>
         <div id="xModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>

@@ -597,6 +597,21 @@ input[type="button"], button, a.modal {
 	text-align: center;
 }
 
+a.warning {
+	color: #ffffff;
+	background-color: #f89406;
+	width: 50px;
+	cursor: pointer;
+	float: right;
+	padding: 6px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 1px solid #f89406;
+	text-align: center;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
 input[type="button"].sukses, button.sukses {
 	border: 1px solid #5bb75b;
 	background-color: #5bb75b;
@@ -787,7 +802,7 @@ thead th.mid {
   display: inline-block;
   width: 14px;
   height: 14px;
-  margin-top: -1px;
+  margin-top: 4px;
   margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
