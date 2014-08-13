@@ -473,7 +473,7 @@ class DataSPMController extends BaseController {
 		if (isset($_POST['submit_file'])) {
 			
 			
-			if ($_POST['check_number']!='null'){
+			if ($_POST['check_number']!=''){
 					$filter[$no++]="check_number = '".$_POST['check_number']."'";
 					$this->view->d_invoice = $_POST['check_number'];
 					
@@ -527,11 +527,11 @@ class DataSPMController extends BaseController {
 		$d_spm1 = new DataCheck($this->registry);
 		$filter = array ();
 		$no=0;
-		if ($kdsatker != '' AND Session::get('id_user') == 140) {
-				$filter[$no++]=" SEGMENT1 =  '".$kdsatker."'";
+		if ($satker != '' AND Session::get('id_user') == 140) {
+				$filter[$no++]=" SEGMENT1 =  '".$satker."'";
 			}
-		elseif($kdsatker != '') {
-				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
+		elseif($satker != '') {
+				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$satker."'";
 			}
 		if ($tgl1!='' AND $tgl2!=''){
 					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
