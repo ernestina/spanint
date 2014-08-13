@@ -11,6 +11,31 @@
 		
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : fund_fail.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				$kdkppn='null';
+				$kdsatker='null';
+			if (isset($this->d_nama_kppn)) {
+				$kdkppn=$this->d_nama_kppn;
+			}
+			if (isset($this->satker_code)) {
+				$kdsatker=$this->satker_code;
+			}
+			
+				
+				?>
+			<a href="<?php echo URL; ?>dataDIPA/Fund_fail_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="modal">PDF</a>
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <a href="#yModal" class="modal">FILTER DATA</a><br><br>
         <div id="yModal" class="modalDialog" >
@@ -98,7 +123,7 @@
 					echo "<td>" . $no++ . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_error_date() . "</td>";
 					//echo "<td>" . $value->get_satker_code() . "</td>";
-					echo "<td><a href=".URL."dataDIPA/Detail_Fund_fail_kd/".$value->get_satker_code()."/".$value->get_output_code()." target='_blank' '>" . $value->get_satker_code() . "</td>";
+					echo "<td><a href=".URL."dataDIPA/Detail_Fund_fail/".$value->get_satker_code()." target='_blank' '>" . $value->get_satker_code() . "</td>";
 					echo "<td>" . $value->get_kppn_code() . "</td>";
 					echo "<td>" . $value->get_account_code() . "</td>";
 					echo "<td>" . $value->get_program_code() . "</td>";

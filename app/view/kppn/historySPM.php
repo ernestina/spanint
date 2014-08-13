@@ -12,7 +12,34 @@
 		} ?>
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : SP2DSatker.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+			foreach ($this->data as $value) {
+			$satker=substr($value->get_invoice_num(),7,6);
+			$check_number=$value->get_invoice_num();
+			
+			}
+			
+			if (isset($this->d_invoice)) {
+				$check_number=$this->d_invoice;
+				
+				}
 
+			 
+				?>
+			<a href="<?php echo URL; ?>dataSPM/HistorySpm_PDF/<?php echo $check_number;?>" class="modal">PDF</a>
+
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
             <div>

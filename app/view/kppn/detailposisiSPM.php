@@ -4,7 +4,25 @@
 			<?php //echo Session::get('user'); ?>
 		</h2>
     </div>
-
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : detailposisiSPM.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+			foreach ($this->data as $value) {
+				$kdnum=$value->get_invoice_num();
+		
+			} 
+				?>
+			<a href="<?php echo URL; ?>dataSPM/detailposisiSPM_PDF/<?php echo $kdnum;?>" class="modal">PDF</a>
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id='fixheader'>
             <!--baris pertama-->

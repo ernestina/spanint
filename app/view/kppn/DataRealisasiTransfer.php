@@ -43,6 +43,43 @@
 		?>
 		</h2>
 </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : DataRealisasiTransfer.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				
+				$kdlokasi='null';
+				$kdsatker='null';
+				$kdtgl_awal='null';
+				$kdtgl_akhir='null';	
+			if (isset($this->lokasi)) {
+				$kdlokasi=$this->lokasi;
+			}
+			if (isset($this->data3)) {
+				$kdsatker=$this->data3;
+			}
+			
+			if (isset($this->d_tgl_awal)) {
+				$kdtgl_awal=$this->d_tgl_awal;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
+				$kdtgl_awal=$bln."-".$tgl."-".$thn;
+			}
+			if (isset($this->d_tgl_akhir)) {
+				$kdtgl_akhir=$this->d_tgl_akhir;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
+				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
+			}	
+				?>
+			<a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="modal">PDF</a>
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >

@@ -10,6 +10,21 @@
 			else {echo Session::get('user');}?>
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : holdSPM.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				?>
+			<a href="<?php echo URL; ?>dataSPM/holdSPM_PDF" class="modal">PDF</a>
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >

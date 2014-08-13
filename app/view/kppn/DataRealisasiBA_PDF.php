@@ -3,7 +3,7 @@
 	//Development history
 	//Revisi : 0
 	//Kegiatan :1.mencetak hasil filter ke dalam pdf
-	//File yang ditambah : DataRealisasi_PDF.php
+	//File yang ditambah : DataRealisasiBA_PDF.php
 	//Dibuat oleh : Rifan Abdul Rachman
 	//Tanggal dibuat : 18-07-2014
 	//----------------------------------------------------
@@ -28,8 +28,7 @@
     }
      
     public function rptDetailData () {
-	
-	
+    //
     $border = 0;
     $h = 40;
     $left = 10;
@@ -40,7 +39,7 @@
 	$this->Image("./././public/img/depkeu.png",30,30,30,40);
 	$px1 = $this->GetX();
 	$this->SetX($left+50); 
-	$this->MultiCell(0, $h/2, 'Laporan Detail Realisasi Belanja Per Satker');
+	$this->MultiCell(0, $h/2, 'Laporan Detail Realisasi Belanja Per Bagian Anggaran');
 	$py1 = $this->GetY();
 	$px2 = $px1;
 	$py2 = $py1;
@@ -61,8 +60,9 @@
     $this->SetFillColor(200,200,200);	
     $left = $this->GetX();
     $this->Cell(20,$h,'No',1,0,'L',true);
-    $this->SetX($left += 20); $this->Cell(40, $h, 'Satker', 1, 0, 'C',true);
-     $this->SetX($left += 40); $this->Cell(80, $h, 'Nama Satker', 1, 0, 'C',true);  
+
+    $this->SetX($left += 20); $this->Cell(40, $h, 'Kode BA', 1, 0, 'C',true);
+     $this->SetX($left += 40); $this->Cell(80, $h, 'Nama BA', 1, 0, 'C',true);  
 	$this->SetX($left += 80); $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Pagu', 1, 0, 'C',true);
 	$px1 = $this->GetX();
 	$this->SetX($left += $ukuran_kolom_pagu_total_sisa); $this->Cell(590, $h/2, 'Jenis Belanja', 1, 0, 'C',true);
@@ -99,8 +99,8 @@
     foreach ($this->data as $value) {
 	$this->Row(
     array($no++,
-	$value->get_satker(),
-	strtoupper($value->get_dipa()),
+	$value->get_ba(),
+	strtoupper($value->get_nmba()),
 	number_format($value->get_Pagu()),
 	number_format($value->get_belanja_51()),
 	number_format($value->get_belanja_52()),
@@ -326,10 +326,9 @@
  
 
 //--------------------------
- //Laporan_Detail_Realisasi_Belanja_Per_Satker
     //pilihan
     $options = array(
-    'filename' => 'Detail_Realisasi_Belanja_Per_Satker.PDF', //nama file penyimpanan, kosongkan jika output ke browser
+    'filename' => 'Detail_Realisasi_Belanja_Per_BA.PDF', //nama file penyimpanan, kosongkan jika output ke browser
     'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
     'paper_size'=>'F4',	//paper size: F4, A3, A4, A5, Letter, Legal
     'orientation'=>'L' //orientation: P=portrait, L=landscape

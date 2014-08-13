@@ -8,7 +8,55 @@
 		
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : revisiDIPA.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				
+				
+				$kdakun='null';
+				$kdsatker='null';
+				$kdoutput='null';
+				$kdprogram='null';
+				$kdtgl_awal='null';
+				$kdtgl_akhir='null';
+			if (isset($this->account_code)) {
+				$kdakun=$this->account_code;
+				}
 
+			if (isset($this->satker_code)) {
+				$kdsatker=$this->satker_code;
+				}
+			
+			if (isset($this->output_code)) {
+				$kdoutput=$this->output_code;
+			}
+			if (isset($this->program_code)) {
+				$kdprogram=$this->program_code;
+			}
+			if (isset($this->d_tgl_awal)) {
+				$kdtgl_awal=$this->d_tgl_awal;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
+				$kdtgl_awal=$bln."-".$tgl."-".$thn;
+			}
+			if (isset($this->d_tgl_akhir)) {
+				$kdtgl_akhir=$this->d_tgl_akhir;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
+				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
+			}
+			
+				?>
+			<a href="<?php echo URL; ?>DataDIPA/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="modal">PDF</a>
+				
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 <a href="#yModal" class="modal">FILTER DATA</a><br><br>
         <div id="yModal" class="modalDialog" >
             <div>
@@ -69,10 +117,8 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 					<th class='mid'>Nomor DIPA</th>
 					<th>Revisi Ke</th>
 					<th>Tanggal Post Revisi</th>
-					<!--th>Jam Post Revisi</th-->
 					<th class='mid'>Pagu</th>
 					<th class='mid'>Satker</th>
-					<!--th>Kode KPPN</th-->
 					<th class='mid'>Akun</th>
 					<th class='mid'>Program</th>
 					<th class='mid'>Output</th>

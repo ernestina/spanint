@@ -204,6 +204,24 @@ class DataGRController extends BaseController {
 		//var_dump($d_spm->get_gr_status_filter($filter));
 		$this->view->render('kppn/detailLhpRekap');
 	}
+
+	public function detailLhpRekap_PDF($tgl=null, $kppn=null) {
+		$d_spm1 = new DataGR_STATUS($this->registry);
+		$filter = array ();
+		$no=0;
+			if (!is_null($tgl)) {
+				$filter[$no++]="CONT_GL_DATE =  '" .$tgl."'";
+				$this->view->d_tgl = substr($tgl, 6, 2)."-".substr($tgl, 4, 2)."-".substr($tgl, 0, 4);
+			}
+			if (!is_null($kppn)) {
+				$filter[$no++]="substr(RESP_NAME,1,3) = '".$kppn."'";
+			}
+			else { $filter[$no++]="substr(RESP_NAME,1,3) = '".Session::get('id_user')."'";
+			}
+		$this->view->data = $d_spm1->get_detail_lhp_rekap($filter);
+		$this->view->render('kppn/detailLhpRekap_PDF');
+	}
+
 	
 	public function detailPenerimaan($file_name=null) {
 		$d_spm1 = new DataGR_STATUS($this->registry);
