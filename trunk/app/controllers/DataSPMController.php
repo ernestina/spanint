@@ -17,7 +17,9 @@ class DataSPMController extends BaseController {
     /*
      * Index
      */
-
+	public function index() {
+        
+    }
    
 	/*
 	public function infoSP2D() {
@@ -76,7 +78,28 @@ class DataSPMController extends BaseController {
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/detailposisiSPM');
 	}
-	
+		//----------------------------------------------------
+		//Development history
+		//Revisi : 0
+		//Kegiatan :1.mencetak hasil filter ke dalam pdf
+		//File yang diubah : DataSPMController.php
+		//Dibuat oleh : Rifan Abdul Rachman
+		//Tanggal dibuat : 18-07-2014
+		//----------------------------------------------------
+
+	public function detailposisiSpm_PDF($invoice_num1=null, $invoice_num2=null, $invoice_num3=null ) {
+		$d_spm1 = new DataHistSPM($this->registry);
+		$filter = array ();
+		$no=0;
+			if (!is_null($invoice_num1)) {
+				$filter[$no++]="INVOICE_NUM =  '".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
+
+			}
+		
+		$this->view->data = $d_spm1->get_hist_spm_filter($filter);
+			
+		$this->view->load('kppn/detailposisiSPM_PDF');
+	}
 	public function HoldSpm() {
 		$d_spm1 = new DataHoldSPM($this->registry);
 		$filter = array ();
@@ -118,6 +141,26 @@ class DataSPMController extends BaseController {
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 		
 		$this->view->render('kppn/holdSPM');
+	}
+			//----------------------------------------------------
+		//Development history
+		//Revisi : 0
+		//Kegiatan :1.mencetak hasil filter ke dalam pdf
+		//File yang diubah : DataSPMController.php
+		//Dibuat oleh : Rifan Abdul Rachman
+		//Tanggal dibuat : 18-07-2014
+		//----------------------------------------------------
+
+	public function HoldSpm_PDF() {
+		$d_spm1 = new DataHoldSPM($this->registry);
+		$filter = array ();
+		$no=0;
+		$this->view->data = $d_spm1->get_hold_spm_filter($filter);
+		
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
+		
+		$this->view->load('kppn/holdSPM_PDF');
 	}
 	
 	
@@ -219,7 +262,6 @@ class DataSPMController extends BaseController {
 			if (Session::get('role')==KPPN){
 				$filter[$no++]= Session::get('id_user')
 				 ;
-			//$this->view->data = $d_spm1->get_history_spm_filter ($filter);
 			}
 			if (!is_null($invoice_num1)) {
 				$invoice="'".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
@@ -250,7 +292,42 @@ class DataSPMController extends BaseController {
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/historySPM');
 	}
-	
+			//----------------------------------------------------
+		//Development history
+		//Revisi : 0
+		//Kegiatan :1.mencetak hasil filter ke dalam pdf
+		//File yang diubah : DataSPMController.php
+		//Dibuat oleh : Rifan Abdul Rachman
+		//Tanggal dibuat : 18-07-2014
+		//----------------------------------------------------
+
+	public function HistorySpm_PDF ($invoice_num1=null, $invoice_num2=null, $invoice_num3=null, $sp2d=null ) {
+		$d_spm1 = new DataHistorySPM($this->registry);
+		$filter = array ();
+		$invoice = '';
+		$no=0;
+			
+			if (!is_null($invoice_num1)) {
+				$invoice="'".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
+				$kppn=substr($sp2d,2,3);
+				$filter[$no++]= $kppn;
+			}
+			
+				
+				if ($_POST['kdkppn']!=''){
+					$filter[$no++]=$_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+				} 
+				else {
+					$filter[$no++]= Session::get('id_user');
+				}
+				
+				if ($check_number!=''){
+					$invoice ="'".$check_number."'";
+				}
+		$this->view->data = $d_spm1->get_history_spm_filter ($filter, $invoice);			
+		$this->view->load('kppn/historySPM_PDF');
+	}
 	
 	public function DurasiSpm() {
 		$d_spm1 = new DataDurasiSPM($this->registry);
@@ -258,11 +335,16 @@ class DataSPMController extends BaseController {
 		$no=0;
 		if (isset($_POST['submit_file'])) {
 		
-				if ($_POST['kdkppn']!='') {
+				if ($_POST['kdkppn']!='' AND ($_POST['invoice'] !='' or $_POST['JenisSPM']!='' or $_POST['kdsatker']!='' or $_POST['JenisSPM']!='' or $_POST['durasi']!='' or $_POST['tgl_awal']!='')){
 					
-					/*$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
-								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'].")" ;*/
-											
+					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'];
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				} 
+				
+				elseif ($_POST['kdkppn']!='') {
+					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
+								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'].")" ;
 					$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn'];
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
@@ -304,18 +386,16 @@ class DataSPMController extends BaseController {
 		}		
 		if (Session::get('role')==KPPN) {	
 				$filter[$no++]="SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user');
-				/*if (!isset($_POST['submit_file'])){
+				if (!isset($_POST['submit_file'])){
 					$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
 								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = ".Session::get('id_user').")" ;
-				}*/
-		
-		//$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
-		
+				}
+		$this->view->data2 = $d_spm1->get_jendok_spm_filter($filter);
+		$this->view->data = $d_spm1->get_durasi_spm_filter ($filter);
 		//var_dump($d_spm1->get_durasi_spm_filter ($filter));
 		}
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		$this->view->data2 = $d_spm1->get_jendok_spm_filter($filter);
 		$this->view->render('kppn/DurasiSPM');
 	}
 	
@@ -382,30 +462,23 @@ class DataSPMController extends BaseController {
 				//$this->view->invoice_num = $invoice_num;	
 			}
 		elseif($kdsatker != '') {
-			if (Session::get('role') == SATKER) {
-				if (Session::get('kd_satker') != $kdsatker ){
-					header('location:' . URL . 'auth/logout');
-					exit();
-				} else {
-					$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".Session::get('kd_satker')."'";
-				}
-			} else {
 				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
+				
 			}
-		}
 		if ($tgl1!='' AND $tgl2!=''){
-			$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
-			$this->view->d_tgl_awal = $tgl1;
-			$this->view->d_tgl_akhir = $tgl2;
-		}
+					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
+					$this->view->d_tgl_awal = $tgl1;
+					$this->view->d_tgl_akhir = $tgl2;
+				}
 		if (isset($_POST['submit_file'])) {
 			
 			
-			if ($_POST['check_number']!=''){
+			if ($_POST['check_number']!='null'){
 					$filter[$no++]="check_number = '".$_POST['check_number']."'";
 					$this->view->d_invoice = $_POST['check_number'];
+					
 				}
-
+	
 			if ($_POST['invoice']!=''){
 					$filter[$no++]="invoice_num = '".$_POST['invoice']."'";
 					$this->view->invoice = $_POST['invoice'];
@@ -413,10 +486,11 @@ class DataSPMController extends BaseController {
 			if ($_POST['JenisSP2D']!=''){
 					$filter[$no++]="JENIS_SP2D = '".$_POST['JenisSP2D']."'";
 					$this->view->JenisSP2D = $_POST['JenisSP2D'];
+					var_dump($_POST['JenisSP2D']);
 				}
 			if ($_POST['JenisSPM']!=''){
 					$filter[$no++]="JENIS_SPM = '".$_POST['JenisSPM']."'";
-					$this->view->JenisSP2D = $_POST['JenisSPM'];
+					$this->view->JenisSPM = $_POST['JenisSPM'];
 				}
 			}	
 
@@ -426,12 +500,8 @@ class DataSPMController extends BaseController {
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
 			if (Session::get('role')==KPPN) {$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";	
-				
+					
 			}
-			if (Session::get('role')==SATKER) {$filter[$no++]="SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";	
-				
-			}
-			
 			
 		$this->view->data2 = $d_spm1->get_jenis_spm_filter($kdsatker);	
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
@@ -441,26 +511,65 @@ class DataSPMController extends BaseController {
 		//var_dump($d_spm1->get_satker_filter($filter));
 		if( Session::get('id_user') == 140 ){$this->view->render('kppn/SP2DSatker140');
 		}
-		
 		else {$this->view->render('kppn/SP2DSatker');
 		}
 	}	
-	
-	public function downloadSP2D() {
-		$d_supp = new DataCheck($this->registry);
+			//----------------------------------------------------
+		//Development history
+		//Revisi : 0
+		//Kegiatan :1.mencetak hasil filter ke dalam pdf
+		//File yang diubah : DataSPMController.php
+		//Dibuat oleh : Rifan Abdul Rachman
+		//Tanggal dibuat : 18-07-2014
+		//----------------------------------------------------
+
+	public function daftarsp2d_PDF($satker=null,$check_number=null,$invoice=null,$JenisSP2D=null,$JenisSPM=null,$kdtgl_awal=null,$kdtgl_akhir=null) {
+		$d_spm1 = new DataCheck($this->registry);
 		$filter = array ();
 		$no=0;
-		if(count($_POST['checkbox']) !=0){
-			$array = array("checkbox" => $_POST['checkbox']);
-			$ids = implode("','", $array['checkbox']);
-		} else {
-			echo "<script>alert ('Belum ada yang dipilih (centang/checkmark))</script>";
-			header('location:' . URL . 'dataSPM/daftarsp2d');
-		} 
-		$this->view->data = $d_supp->get_download_sp2d($ids);
-		$this->view->data2 = $d_supp->get_tgl_download_sp2d($ids);
-		$this->view->load('kppn/downloadSP2D');		
-    }
+		if ($kdsatker != '' AND Session::get('id_user') == 140) {
+				$filter[$no++]=" SEGMENT1 =  '".$kdsatker."'";
+			}
+		elseif($kdsatker != '') {
+				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
+			}
+		if ($tgl1!='' AND $tgl2!=''){
+					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
+				}
+			
+			if ($check_number!='null'){
+					$filter[$no++]="check_number = '".$check_number."'";
+				}
+
+			if ($invoice!='null'){
+					$filter[$no++]="invoice_num = '".$invoice."'";
+				}
+			if ($JenisSP2D!='null'){
+					$filter[$no++]="JENIS_SP2D = '".$JenisSP2D."'";
+				}
+			if ($JenisSPM!='null'){
+					$filter[$no++]="JENIS_SPM = '".$JenisSPM."'";
+				}
+
+			if ($kdtgl_awal!='null' AND $kdtgl_akhir!='null'){
+					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$kdtgl_awal."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$kdtgl_akhir."','DD/MM/YYYY hh:mi:ss')";
+				}
+			if (Session::get('role')==KPPN) {$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";	
+					
+			}
+			
+		$this->view->data2 = $d_spm1->get_jenis_spm_filter($kdsatker);	
+		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+		if( Session::get('id_user') == 140 ){
+		$this->view->load('kppn/SP2DSatker140_PDF');
+		}
+		else {
+		$this->view->load('kppn/SP2DSatker_PDF');
+		}
+	}	
 	
 	public function RekapSp2d() {
 		$d_spm1 = new DataCheck($this->registry);
@@ -553,6 +662,49 @@ class DataSPMController extends BaseController {
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
 		$this->view->render('kppn/Rekap');
+		
+	}
+			//----------------------------------------------------
+		//Development history
+		//Revisi : 0
+		//Kegiatan :1.mencetak hasil filter ke dalam pdf
+		//File yang diubah : DataSPMController.php
+		//Dibuat oleh : Rifan Abdul Rachman
+		//Tanggal dibuat : 18-07-2014
+		//----------------------------------------------------
+
+	public function detailrekapsp2d_PDF($jenis_spm=null, $kppn=null, $tgl_awal=null, $tgl_akhir=null) {
+		$d_spm1 = new DataCheck($this->registry);
+		$filter = array ();
+		$no=0;
+		if ($jenis_spm != '') {
+				$filter[$no++]=" JENDOK =  '".$jenis_spm."'";
+			}
+		if ($kppn != '' AND Session::get('role')==KANWIL AND $_POST['kdkppn']!='') {
+			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '".Session::get('id_user')."')";
+			}
+		elseif ($kppn != '') {
+			$filter[$no++]=" SUBSTR(CHECK_NUMBER,3,3) =  '".$kppn."'";
+			}
+		if ($tgl_awal != '' AND $tgl_akhir !=''){
+					
+			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '".date('Ymd',strtotime($tgl_awal))."' AND '".date('Ymd', strtotime($tgl_akhir))."'";
+					
+			}	
+		
+		if (Session::get('role')==KPPN) {
+			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
+				
+			}
+		if (Session::get('role')==SATKER) {				
+			$filter[$no++]="SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
+		}		
+		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
+		
+		$d_last_update = new DataLastUpdate($this->registry);
+		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+		$this->view->load('kppn/Rekap_PDF');
 		
 	}	
 	//author by jhon

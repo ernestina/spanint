@@ -2,11 +2,46 @@
 	<div id="header">
         <h2>INFORMASI SISA PAGU PER AKUN DIPA SATKER <br>
 		<?php $nmsatker='';
-		foreach ($this->data as $value) {$nmsatker=$value->get_nm_satker();} 
+		
+		foreach ($this->data as $value) {
+			$nmsatker=$value->get_nm_satker();
+			$kdsatker = $value->get_satker();
+		} 
+		
 		echo $nmsatker;
 		?>
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : realisasiFA.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				$kdakun='null';
+				$kdprogram='null';
+				$kdoutput='null';
+			if (isset($this->account_code)) {
+				$kdakun=$this->account_code;
+			}
+			if (isset($this->program_code)) {
+				$kdprogram=$this->program_code;
+			}
+			
+			if (isset($this->output_code)) {
+				$kdoutput=$this->output_code;
+			}
+						
+ 
+				?>
+			<a href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="modal">PDF</a>
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <a href="#wModal" class="modal">FILTER DATA</a><br><br>
         <div id="wModal" class="modalDialog" >

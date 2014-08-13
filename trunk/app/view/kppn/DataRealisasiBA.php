@@ -24,9 +24,30 @@
 		
 			?>
 		</h2>
-    
+
+		<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : DataRealisasiBA.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 05-08-2014
+			//----------------------------------------------------
+			if (isset($this->$kppn_code)) {
+				$kdkppn=$this->$kppn_code;
+			}
+			?>
+		<a href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="modal">PDF</a>
+		<?php
+			//----------------------------------------------------		
+		?>
+
+		
 <?php if (isset($this->kppn_list)) { ?>
+
 </div>
+
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
             <div>
@@ -85,8 +106,8 @@
 
 
 <?php
-                   // untuk menampilkan last_update
-                   if (isset($this->last_update)){
+  // untuk menampilkan last_update
+       if (isset($this->last_update)){
 foreach ($this->last_update as $last_update){ 
 echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
  <?php echo $last_update->get_last_update() . " WIB";
@@ -127,7 +148,6 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 			$no=1;
 			$tot_pot=0;
 			
-			//var_dump ($this->data);
 			if (isset($this->data)){
 				if (empty($this->data)){
 					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
@@ -136,7 +156,6 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_ba() . " "  . $value->get_nmba() . "</td>";
-					//echo "<td align='left'>" . $value->get_nmba() . "</td>";
 					echo "<td align='right'>" . number_format($value->get_Pagu()) . "</td>";
 					echo "<td align='right'>" . number_format($value->get_belanja_51()) . "</td>";
 					echo "<td align='right'>" . number_format($value->get_belanja_52()) . "</td>";
