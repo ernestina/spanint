@@ -315,6 +315,7 @@
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
                                 <li><a href='  . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
+								<li><a href=' . URL . 'dataDIPA/ProsesRevisi></i>Informasi Proses Revisi DIPA</a></li>
                                 <li><a href='  . URL . 'dataDIPA/nmsatker1></i>Ketersediaan dana (Sisa Pagu), Realisasi, dan Encumbrance</a></li>
 								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus Per Satker</a></li>
 								<li><a href='  . URL . 'dataDIPA/Detail_Fund_fail></i>Data Pagu Minus Seluruh Satker</a></li>
