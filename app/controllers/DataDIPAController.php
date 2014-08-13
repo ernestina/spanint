@@ -24,30 +24,23 @@ class DataDIPAController extends BaseController {
 		$d_spm1 = new DataDIPA($this->registry);
 		$filter = array ();
 		$no=0;
-			if ($kdsatker != '' and Session::get('role')!=SATKER) {
-					$filter[$no++]=" A.SATKER_CODE =  '".$kdsatker."'";
+			if ($kdsatker != '') {
+					$filter[$no++]=" A.SATKER_CODE =  '".$kdsatker."'";				
 					$this->view->satker_code = $kdsatker;
-				}
-			else{
-				$filter[$no++]=" A.SATKER_CODE =  '".Session::get('kd_satker')."'";
 				}
 			if (isset($_POST['submit_file'])) {
 				
-				if ($_POST['kd_satker']!=''){
-					$filter[$no++]="SATKER_CODE = '".$_POST['kd_satker']."'";
-					$this->view->satker_code = $_POST['satker_code'];
-				}
 				if ($_POST['akun']!=''){
 					$filter[$no++]="A.ACCOUNT_CODE = '".$_POST['akun']."'";
-					$this->view->account_code = $_POST['account_code'];
+					$this->view->account_code = $_POST['akun'];
 				}
 				if ($_POST['output']!=''){
 					$filter[$no++]="A.OUTPUT_CODE = '".$_POST['output']."'";
-					$this->view->output_code = $_POST['output_code'];
+					$this->view->output_code = $_POST['output'];
 				}
 				if ($_POST['program']!=''){
 					$filter[$no++]="A.PROGRAM_CODE = '".$_POST['program']."'";
-					$this->view->program_code = $_POST['program_code'];
+					$this->view->program_code = $_POST['program'];
 				}
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
 					$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
@@ -57,7 +50,6 @@ class DataDIPAController extends BaseController {
 				
 			}	
 			
-		//var_dump($d_spm->get_hist_spm_filter());
 		
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
