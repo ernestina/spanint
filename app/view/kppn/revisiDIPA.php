@@ -20,7 +20,7 @@
 				
 				
 				$kdakun='null';
-				$kdsatker='null';
+				//$kdsatker='null';
 				$kdoutput='null';
 				$kdprogram='null';
 				$kdtgl_awal='null';
