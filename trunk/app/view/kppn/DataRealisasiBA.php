@@ -34,8 +34,8 @@
 			//Dibuat oleh : Rifan Abdul Rachman
 			//Tanggal dibuat : 05-08-2014
 			//----------------------------------------------------
-			if (isset($this->$kppn_code)) {
-				$kdkppn=$this->$kppn_code;
+			if (isset($this->kppn_code)) {
+				$kdkppn=$this->kppn_code;
 			}
 			?>
 		<a href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="modal">PDF</a>
