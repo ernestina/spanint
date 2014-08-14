@@ -11,6 +11,61 @@
 		
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : fund_fail.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				$kdkppn='null';
+				$kdsatker='null';
+				//$kdprogram='null';
+				//$kdoutput='null';
+				//$kdakun='null';
+				//$kdtgl_awal='null';
+				//$kdtgl_akhir='null';	
+			if (isset($this->d_nama_kppn)) {
+				$kdkppn=$this->d_nama_kppn;
+			}
+			if (isset($this->satker_code)) {
+				$kdsatker=$this->satker_code;
+			}
+			
+				
+ /*
+			if (isset($this->account_code)) {
+				$kdakun=$this->account_code;
+			}
+			if (isset($this->program_code)) {
+				$kdprogram=$this->program_code;
+			}
+			
+			if (isset($this->output_code)) {
+				$kdoutput=$this->output_code;
+			}
+
+ if (isset($this->d_tgl_awal)) {
+				$kdtgl_awal=$this->d_tgl_awal;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
+				//tgl awal 13-01-2014 --> 01/13/2014 (mm/dd/yyyy)
+				$kdtgl_awal=$bln."-".$tgl."-".$thn;
+			}
+			if (isset($this->d_tgl_akhir)) {
+				$kdtgl_akhir=$this->d_tgl_akhir;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
+				//tglakhir 13-08-2014 --> 08/13/2014 (mm/dd/yyyy)				
+				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
+			}
+ */			
+				?>
+			<a href="<?php echo URL; ?>dataDIPA/Fund_fail_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="modal">PDF</a>
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <a href="#yModal" class="modal">FILTER DATA</a><br><br>
         <div id="yModal" class="modalDialog" >
