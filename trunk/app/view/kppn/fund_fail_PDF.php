@@ -37,7 +37,7 @@
     $this->SetFont("", "B", 12);
 	
 	$this->SetX($left+20); 
-	$this->Image("./././public/img/depkeu.png",30,30,30,40);
+	$this->Image("./././public/img/depkeu.png",30,30,30,30);
 	$px1 = $this->GetX();
 	$this->SetX($left+50); 
 	$this->MultiCell(0, $h/2, 'Laporan Data Pagu Minus (Fund Fail) ');
@@ -60,12 +60,13 @@
 	$ukuran_kolom_satker=40;	
 	$ukuran_kolom_akun=40;
 	$ukuran_kolom_dana=60;	
+	$ukuran_kolom_deskripsi=200;
 
     $this->SetFillColor(200,200,200);	
     $left = $this->GetX();
     $this->Cell(30,$h,'No',1,0,'L',true);
-    $this->SetX($left += 30); $this->Cell(40, $h, 'Tanggal Error', 1, 0, 'C',true);
-     $this->SetX($left += 40); $this->Cell(40, $h, 'Satker', 1, 0, 'C',true);  
+    $this->SetX($left += 30); $this->Cell(60, $h, 'Tanggal Error', 1, 0, 'C',true);
+     $this->SetX($left += 60); $this->Cell(40, $h, 'Satker', 1, 0, 'C',true);  
 	$this->SetX($left += 40); $this->Cell(50, $h, 'Kode KPPN', 1, 0, 'C',true);
 	$px1 = $this->GetX();
 	$this->SetX($left += 50); 
@@ -81,8 +82,8 @@
 	$this->SetX($px2 += $ukuran_kolom_dana);
 	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Dana', 1, 0, 'C',true);
 	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Description', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_deskripsi, $h, 'Description', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_deskripsi);
 	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Blokir/Kontrak', 1, 0, 'C',true);
 	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Realisasi', 1, 1, 'C',true);
@@ -90,8 +91,12 @@
 	$this->Ln(8);  
 	
     $this->SetFont('Arial','',7);	
-    $this->SetWidths(array(30,40,40,50,$ukuran_kolom_jenis_belanja,$ukuran_kolom_satker,$ukuran_kolom_dana,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja));
-    $this->SetAligns(array('C','C','C','C','C','C','C','R','R','R'));
+    $this->SetWidths(array(30,60,
+	40,50,
+	$ukuran_kolom_jenis_belanja,$ukuran_kolom_satker,
+	$ukuran_kolom_dana,$ukuran_kolom_jenis_belanja,
+	$ukuran_kolom_deskripsi,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja));
+    $this->SetAligns(array('C','C','C','C','C','C','C','R','R','R','R'));
     $no = 1; $this->SetFillColor(255);
     foreach ($this->data as $value) {
 	$this->Row(

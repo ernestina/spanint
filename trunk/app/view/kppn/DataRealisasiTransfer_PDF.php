@@ -37,7 +37,7 @@
     $this->SetFont("", "B", 12);
 	
 	$this->SetX($left+20); 
-	$this->Image("./././public/img/depkeu.png",30,30,30,40);
+	$this->Image("./././public/img/depkeu.png",30,30,30,30);
 	$px1 = $this->GetX();
 	$this->SetX($left+50); 
 	$this->MultiCell(0, $h/2, 'Laporan Data Pagu Minus (Fund Fail) ');
@@ -64,8 +64,7 @@
     $this->SetFillColor(200,200,200);	
     $left = $this->GetX();
     $this->Cell(30,$h,'No',1,0,'L',true);
-    $this->SetX($left += 30); $this->Cell(40, $h, 'Pagu', 1, 0, 'C',true);
-     $this->SetX($left += 40); $this->Cell(40, $h, 'Lokasi', 1, 0, 'C',true);  
+    $this->SetX($left += 30);$this->Cell(40, $h, 'Lokasi', 1, 0, 'C',true);  
 	$this->SetX($left += 40); $this->Cell(50, $h, 'Nama Lokasi', 1, 0, 'C',true);
 	$px1 = $this->GetX();
 	$this->SetX($left += 50); 
@@ -73,18 +72,6 @@
 	$px2 = $px1;
 	$py2 = $py1;
 	$this->SetXY($px2,$py2);
-	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Realisasi', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-	$this->Cell($ukuran_kolom_satker, $h, 'Program', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_satker);
-	$this->Cell($ukuran_kolom_dana, $h, 'Output', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_dana);
-	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Dana', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Description', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Blokir/Kontrak', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Realisasi', 1, 1, 'C',true);
 	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 	$this->Ln(8);  
@@ -99,13 +86,8 @@
 	$value->get_pagu(),
 	$value->get_lokasi(),
 	$value->get_nmlokasi(),
-	$value->get_realisasi(),
-	$value->get_program_code(),
-	$value->get_output_code(),
-	$value->get_dana_code(),
-	$value->get_description(),
-	$value->get_blokir_kontrak(),
-	$value->get_blokir_realisasi())
+	$value->get_realisasi()
+)
 	);
 
     }

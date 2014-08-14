@@ -36,7 +36,7 @@
     $this->SetFont("", "B", 12);
 	
 	$this->SetX($left+20); 
-	$this->Image("./././public/img/depkeu.png",30,30,30,40);
+	$this->Image("./././public/img/depkeu.png",30,30,30,30);
 	$px1 = $this->GetX();
 	$this->SetX($left+50); 
 	$this->MultiCell(0, $h/2, 'Laporan Detail Realisasi Belanja Per Bagian Anggaran');

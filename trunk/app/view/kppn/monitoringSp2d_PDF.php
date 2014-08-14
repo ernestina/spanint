@@ -3,7 +3,7 @@
 	//Development history
 	//Revisi : 0
 	//Kegiatan :1.mencetak hasil filter ke dalam pdf
-	//File yang ditambah : detailposisiSPM_PDF.php
+	//File yang ditambah : monitoringSp2d_PDF.php
 	//Dibuat oleh : Rifan Abdul Rachman
 	//Tanggal dibuat : 18-07-2014
 	//----------------------------------------------------
@@ -40,7 +40,7 @@
 	$this->Image("./././public/img/depkeu.png",30,30,30,30);
 	$px1 = $this->GetX();
 	$this->SetX($left+50); 
-	$this->MultiCell(0, $h/2, 'Laporan Monitoring Posisi Invoice');
+	$this->MultiCell(0, $h/2, 'Laporan Monitoring PFK ');
 	$py1 = $this->GetY();
 	$px2 = $px1;
 	$py2 = $py1;
@@ -55,8 +55,7 @@
      
     #tableheader
     $this->SetFont('Arial','B',7);
-	$ukuran_kolom_pagu_total_sisa=80;
-	$ukuran_kolom_pagu_total=130;
+	$ukuran_kolom_pagu_total_sisa=70;
 	$ukuran_kolom_jenis_belanja=65;	
 	$ukuran_kolom_satker=40;	
 	$ukuran_kolom_akun=40;
@@ -65,39 +64,56 @@
     $this->SetFillColor(200,200,200);	
     $left = $this->GetX();
     $this->Cell(30,$h,'No',1,0,'L',true);
-    $this->SetX($left += 30); $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Nomor Invoice', 1, 0, 'C',true);
-     $this->SetX($left += $ukuran_kolom_pagu_total_sisa); $this->Cell($ukuran_kolom_dana, $h, 'Nilai Invoice', 1, 0, 'C',true);  
-	$this->SetX($left += $ukuran_kolom_dana); $this->Cell($ukuran_kolom_pagu_total, $h, 'Deskripsi Invoice', 1, 0, 'C',true);
+    $this->SetX($left += 30);$this->Cell(50, $h, 'Tgl Selesai SP2D', 1, 0, 'C',true);
 	$px1 = $this->GetX();
-	$this->SetX($left += $ukuran_kolom_pagu_total_sisa); 
+	$this->SetX($left += 50); 
 	$py1 = $this->GetY();
 	$px2 = $px1;
 	$py2 = $py1;
 	$this->SetXY($px2,$py2);
-	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Approval Status', 1, 0, 'C',true);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Tgl SP2D', 1, 0, 'C',true);
 	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-	$this->Cell($ukuran_kolom_satker, $h, 'Status', 1, 0, 'C',true);
+	$this->Cell($ukuran_kolom_satker, $h, 'No. SP2D', 1, 0, 'C',true);
 	$this->SetX($px2 += $ukuran_kolom_satker);
-	$this->Cell($ukuran_kolom_dana, $h, 'User', 1, 0, 'C',true);
+	$this->Cell($ukuran_kolom_dana, $h, 'No. Invoice', 1, 0, 'C',true);
 	$this->SetX($px2 += $ukuran_kolom_dana);
-	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Mulai', 1, 1, 'C',true);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Jumlah Rp', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_satker, $h, 'Bank Pembayar', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_satker);
+	$this->Cell($ukuran_kolom_dana, $h, 'Bank Penerima', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_dana);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Nama', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+	$this->Cell($ukuran_kolom_satker, $h, 'No. Rekening Penerima', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_satker);
+	$this->Cell($ukuran_kolom_dana, $h, 'Deskripsi', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_dana);
+	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Status', 1, 1, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 	$this->Ln(8);  
 	
     $this->SetFont('Arial','',7);	
-    $this->SetWidths(array(30,$ukuran_kolom_pagu_total_sisa,$ukuran_kolom_dana,$ukuran_kolom_pagu_total,$ukuran_kolom_jenis_belanja,$ukuran_kolom_satker,$ukuran_kolom_dana,$ukuran_kolom_jenis_belanja));
-    $this->SetAligns(array('C','C','C','C','C','C','C','C'));
+    $this->SetWidths(array(30,50,$ukuran_kolom_jenis_belanja,$ukuran_kolom_satker,$ukuran_kolom_dana,$ukuran_kolom_jenis_belanja));
+    $this->SetAligns(array('C','C','C','R','R','R'));
     $no = 1; $this->SetFillColor(255);
     foreach ($this->data as $value) {
 	$this->Row(
     array($no++,
+	$value->get_creation_date(),
+	$value->get_payment_date(),
+	$value->get_check_number(),
 	$value->get_invoice_num(),
-	$value->get_invoice_amount(),
+	$value->get_bank_account_name(),
+	$value->get_bank_name(),
 	$value->get_invoice_description(),
-	$value->get_wfapproval_status(),
-	$value->get_status(),
-	$value->get_to_user().'	'.$value->get_fu_description(),
-	$value->get_begin_date().'	'.$value->get_time_begin_date()
-)
+	$value->get_return_desc(),
+	$value->get_payment_method(),
+	$value->get_sorbor_number(),
+	$value->get_sorbor_date()
+	
+	
+	)
 	);
 
     }
@@ -267,7 +283,7 @@
  //Laporan Data Revisi DIPA
     //pilihan
     $options = array(
-    'filename' => 'Laporan Monitoring Posisi Invoice.PDF', //nama file penyimpanan, kosongkan jika output ke browser
+    'filename' => 'Laporan Monitoring PFK.PDF', //nama file penyimpanan, kosongkan jika output ke browser
     'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
     'paper_size'=>'F4',	//paper size: F4, A3, A4, A5, Letter, Legal
     'orientation'=>'L' //orientation: P=portrait, L=landscape

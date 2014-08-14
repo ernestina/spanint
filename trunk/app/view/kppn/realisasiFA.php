@@ -24,9 +24,11 @@
 				$kdakun='null';
 				$kdprogram='null';
 				$kdoutput='null';
+				//var_dump($this->account_code);
 			if (isset($this->account_code)) {
 				$kdakun=$this->account_code;
 			}
+			//var_dump($this->program_code);
 			if (isset($this->program_code)) {
 				$kdprogram=$this->program_code;
 			}
@@ -37,7 +39,12 @@
 						
  
 				?>
-			<!--<a href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="modal">PDF</a>-->
+	<a href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="modal">PDF</a>
+			
+	
+<!-- 	<ul class="inline" style="float: right"><li>
+	<a  href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+ -->
 			
 		<?php
 			//----------------------------------------------------		

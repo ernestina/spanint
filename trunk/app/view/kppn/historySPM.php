@@ -24,7 +24,6 @@
 			if (isset($this->data)){
 				foreach ($this->data as $value) {
 					$satker=substr($value->get_invoice_num(),7,6);
-					$check_number=$value->get_invoice_num();
 				}
 			}
 			
@@ -33,9 +32,13 @@
 				
 				}
 
-			 
 				?>
-			<a href="<?php echo URL; ?>dataSPM/HistorySpm_PDF/<?php echo $check_number;?>" class="modal">PDF</a>
+<a href="<?php echo URL; ?>dataSPM/HistorySpm_PDF/<?php echo $check_number;?>" class="modal">PDF</a>
+
+				
+<!-- 	<ul class="inline" style="float: right"><li>
+	<a  href="<?php echo URL; ?>dataSPM/HistorySpm_PDF/<?php echo $check_number;?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+ -->				
 
 			
 		<?php

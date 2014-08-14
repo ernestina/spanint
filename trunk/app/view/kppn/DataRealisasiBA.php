@@ -38,7 +38,11 @@
 				$kdkppn=$this->kppn_code;
 			}
 			?>
-		<!--<a href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="modal">PDF</a>-->
+			<a href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="modal">PDF</a>
+
+<!-- 				<ul class="inline" style="float: right"><li>
+	<a  href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+ -->			
 		<?php
 			//----------------------------------------------------		
 		?>
