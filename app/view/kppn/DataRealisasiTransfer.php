@@ -75,7 +75,7 @@
 				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
 			}	
 				?>
-			<a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="modal">PDF</a>
+			<!--<a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="modal">PDF</a>-->
 			
 		<?php
 			//----------------------------------------------------		

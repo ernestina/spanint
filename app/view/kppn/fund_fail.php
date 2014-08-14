@@ -31,7 +31,7 @@
 			
 				
 				?>
-			<a href="<?php echo URL; ?>dataDIPA/Fund_fail_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="modal">PDF</a>
+			<!--<a href="<?php echo URL; ?>dataDIPA/Fund_fail_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="modal">PDF</a>-->
 			
 		<?php
 			//----------------------------------------------------		

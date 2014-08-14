@@ -1,13 +1,32 @@
 <div id="top">
 	<div id="header">
         <h2>HOLD INVOICE 
-			 <?php if (isset($this->d_nama_kppn)) {
+			 <?php 
+			 if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
 					$kode_kppn=$kppn->get_kd_satker();
 				}
 			}
-			else {echo Session::get('user');}?>
+			else {
+				echo Session::get('user');
+			}
+			if (isset($this->d_kppn)) {
+				$kd_kppn =$this->d_kppn;
+			} else {
+				$kd_kppn ="null";
+			}
+			if (isset($this->d_invoice)) {
+				$invoice =$this->d_invoice;
+			} else {
+				$invoice ="null/null/null";
+			}
+			if (isset($this->d_status)) {
+				$status =$this->d_status;
+			} else {
+				$status ="null";
+			}
+			?>
 		</h2>
     </div>
 <?php
@@ -20,7 +39,7 @@
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
 				?>
-			<a href="<?php echo URL; ?>dataSPM/holdSPM_PDF" class="modal">PDF</a>
+			<a href="<?php echo URL; ?>dataSPM/holdSPM_PDF/<?php echo $kd_kppn."/".$invoice."/".$status; ?>" class="modal">PDF</a>
 			
 		<?php
 			//----------------------------------------------------		

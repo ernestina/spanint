@@ -18,6 +18,8 @@ class DataDIPAController extends BaseController {
      * Index
      */
 
+    public function index() {
+    }
    
     
 	public function RevisiDipa($kdsatker=null) {
@@ -241,10 +243,6 @@ class DataDIPAController extends BaseController {
 		$this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
 		$this->view->render('kppn/detail_fund_fail_kd');
 	}
-	
-	
-	
-	
 	
 	public function RealisasiFA_1($kdsatker=null) {
 		$d_spm1 = new DataFA($this->registry);
@@ -480,7 +478,8 @@ class DataDIPAController extends BaseController {
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
 			
-			}elseif (isset($_POST['cetak_file'])) {
+			}
+			elseif (isset($_POST['cetak_file'])) {
 				if ($_POST['kdkppn']!=''){
 					$filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
 					$d_kppn = new DataUser($this->registry);

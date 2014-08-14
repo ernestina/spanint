@@ -38,7 +38,7 @@
 			}
 			?>
 	<ul class="inline" style="float: right"><li>
-		<a href="<?php echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php echo $kdsatker; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+		<!--<a  href="<?php echo URL; ?>DataDIPA/DataRealisasi/<?php echo $kdsatker; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>-->
 
 		<li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
 	
