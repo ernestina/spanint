@@ -21,7 +21,7 @@ if (isset($this->data)){
 			echo trim($value->get_check_number())."\t";
 			echo trim($value->get_check_date())."\t";
 			echo trim($value->get_kdbankpos())."\t";
-			echo trim($value->get_pilih())."\r \n";
+			echo trim($value->get_pilih())." \r\n";
 	}
 }
 ?>
