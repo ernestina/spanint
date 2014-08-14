@@ -43,7 +43,12 @@
 			}
 			
 				?>
-			<a href="<?php echo URL; ?>dataSPM/detailrekapsp2d_PDF/<?php echo $jendok."/". $kppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>
+	<a href="<?php echo URL; ?>dataSPM/detailrekapsp2d_PDF/<?php echo $jendok."/". $kppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>
+	
+	
+<!-- 	<ul class="inline" style="float: right"><li>
+	<a  href="<?php echo URL; ?>dataSPM/detailrekapsp2d_PDF/<?php echo $jendok."/". $kppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+ -->
 
 			
 		<?php

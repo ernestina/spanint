@@ -8,6 +8,58 @@
 			
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : SP2DSatker.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+			foreach ($this->data as $value) {
+			$satker=substr($value->get_invoice_num(),7,6);
+			
+			} 
+				$check_number='null';
+				$invoice='null';
+				$JenisSP2D='null';
+				$JenisSPM='null';
+				$kdtgl_awal='null';
+				$kdtgl_akhir='null';
+			if (isset($this->d_invoice)) {
+				$check_number=$this->d_invoice;
+				
+				}
+
+			if (isset($this->invoice)) {
+				$invoice=$this->invoice;
+				}
+			
+			if (isset($this->JenisSP2D)) {
+				$JenisSP2D=$this->JenisSP2D;
+			}
+			if (isset($this->JenisSPM)) {
+				$JenisSPM=$this->JenisSPM;
+			}
+			if (isset($this->d_tgl_awal)) {
+				$kdtgl_awal=$this->d_tgl_awal;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
+				$kdtgl_awal=$bln."-".$tgl."-".$thn;
+			}
+			if (isset($this->d_tgl_akhir)) {
+				$kdtgl_akhir=$this->d_tgl_akhir;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
+				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
+			}
+			
+				?>
+			<a href="<?php echo URL; ?>dataSPM/daftarsp2d_PDF/<?php echo $satker."/".$check_number."/".$invoice."/".$JenisSP2D."/".$JenisSPM."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>
+
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >

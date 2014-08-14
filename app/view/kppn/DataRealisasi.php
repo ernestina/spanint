@@ -12,7 +12,7 @@
 			Sampai Dengan
 			
 			<?php 
-			//echo 
+			echo $kode_kppn;
 			//Tanggal::tgl_indo(Tanggal::getTglSekarang()) ;
 			echo (date('d-m-Y'));
 		//echo $this->d_bulan;
@@ -32,14 +32,19 @@
 			//Dibuat oleh : Rifan Abdul Rachman
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
-		
-			if (isset($this->satker_code)) {
-				$kdsatker=$this->satker_code;
+			$kdsatkerku=null;
+			if (isset($this->satker_code1)) {
+				$kdsatkerku=$this->satker_code1;
 			}
 			?>
-	<ul class="inline" style="float: right"><li>
-		<!--<a  href="<?php echo URL; ?>DataDIPA/DataRealisasi/<?php echo $kdsatker; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>-->
+				<a href="<?php echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php echo $kdsatkerku; ?>" class="modal">PDF</a>
 
+<!-- 	<ul class="inline" style="float: right"><li>
+	<a  href="<?php //echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php //echo $kdsatker; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+ -->
+ <?php
+		//---------------------------------------------------------------------
+?>
 		<li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
 	
 	<br><br>

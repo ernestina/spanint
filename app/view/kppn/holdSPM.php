@@ -39,7 +39,11 @@
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
 				?>
-			<a href="<?php echo URL; ?>dataSPM/holdSPM_PDF/<?php echo $kd_kppn."/".$invoice."/".$status; ?>" class="modal">PDF</a>
+	<a href="<?php echo URL; ?>dataSPM/holdSPM_PDF/<?php echo $kd_kppn."/".$invoice."/".$status; ?>" class="modal">PDF</a>
+			
+	<!-- <ul class="inline" style="float: right"><li>
+	<a  href="<?php echo URL; ?>dataSPM/holdSPM_PDF/<?php echo $kd_kppn."/".$invoice."/".$status; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+ -->
 			
 		<?php
 			//----------------------------------------------------		

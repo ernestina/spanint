@@ -30,9 +30,12 @@ class DataKppnController extends BaseController {
 					$filter[$no++]="KDKPPN = ".$_POST['kdkppn'];
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+					$this->view->d_kd_kppn = $_POST['kdkppn'];
+					
 				} else {
 					$filter[$no++]="KDKPPN = ".Session::get('id_user');
-				}
+
+					}
 				if ($_POST['nosp2d']!=''){
 					$filter[$no++]="CHECK_NUMBER = ".$_POST['nosp2d'];
 					$this->view->d_nosp2d = $_POST['nosp2d'];
@@ -99,8 +102,72 @@ class DataKppnController extends BaseController {
 			$d_last_update = new DataLastUpdate($this->registry);
 			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
-		//var_dump($d_sppm->get_sppm_filter($filter));
 		$this->view->render('kppn/isianKppn');
+	}
+	public function monitoringSp2d_PDF() {
+		$d_sppm = new DataSppm($this->registry);
+		$filter = array ();
+		$no=0;
+				if ($kdkppn!=''){
+					$filter[$no++]="KDKPPN = ".$kdkppn;
+				} 
+				if ($kdnosp2d!=''){
+					$filter[$no++]="CHECK_NUMBER = ".$kdnosp2d;
+				}
+				if ($kdbarsp2d!=''){
+					$filter[$no++]="CHECK_NUMBER_LINE_NUM = ".$kdbarsp2d;
+				}
+				if ($kdsatker!=''){
+					$filter[$no++]="SUBSTR(INVOICE_NUM,8,6) = '".$kdsatker."'";
+				}
+				if ($kdnoinvoice!=''){
+					$filter[$no++]="INVOICE_NUM = UPPER('".$kdnoinvoice."')";
+				}
+				if ($kdbank!=''){
+					if ($_POST['bank']!='SEMUA_BANK'){
+						$filter[$no++]="BANK_ACCOUNT_NAME LIKE '%".$kdbank."%'";
+					}
+				}
+				if ($kdstatus != ''){
+					if ($kdstatus == 'SUKSES' ){
+						$filter[$no++] = "RETURN_DESC = 'SUKSES'";
+					} elseif ($_POST['status'] == 'TIDAK' ) {
+						$filter[$no++] = "RETURN_DESC != 'SUKSES'";
+					}
+				}
+				if ($kdbayar != ''){
+					if ($kdbayar != 'SEMUA' ){
+						$filter[$no++] = "PAYMENT_METHOD = '".$kdbayar."'";
+					} 
+				}
+				if ($kdtgl_awal!='' AND $kdtgl_akhir!=''){
+					$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($kdtgl_awal)).",'YYYYMMDD') 
+									AND TO_DATE (".date('Ymd',strtotime($kdtgl_akhir)).",'YYYYMMDD')  ";
+					
+				}
+				if ($kdfxml!=''){
+					$fxml = $kdfxml;
+					$filter[$no++]="UPPER(FTP_FILE_NAME) = '".strtoupper($fxml)."'";
+					
+				}
+				if (Session::get('role')==SATKER){
+					$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
+				}
+				$this->view->data = $d_sppm->get_sppm_filter($filter);
+				
+			if (Session::get('role')==ADMIN OR Session::get('role')==PKN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			}
+			if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			}
+			// untuk mengambil data last update 
+			$d_last_update = new DataLastUpdate($this->registry);
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
+		$this->view->load('kppn/isianKppn_PDF');
 	}
 	
 	public function harianBO() {

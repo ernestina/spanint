@@ -18,7 +18,12 @@
 		
 			} 
 				?>
-			<a href="<?php echo URL; ?>dataSPM/detailposisiSPM_PDF/<?php echo $kdnum;?>" class="modal">PDF</a>
+		<a href="<?php echo URL; ?>dataSPM/detailposisiSPM_PDF/<?php echo $kdnum;?>" class="modal">PDF</a>
+		
+<!--  	<ul class="inline" style="float: right"><li>
+	<a  href="<?php echo URL; ?>dataSPM/detailposisiSPM_PDF/<?php echo $kdnum;?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+ --> 
+ 
 			
 		<?php
 			//----------------------------------------------------		
