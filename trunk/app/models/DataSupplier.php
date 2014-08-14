@@ -202,6 +202,55 @@ class DataSupplier {
         return $data;
     }
 	
+	public function get_download_supp_filter_xls($filter) {
+		$sql = "SELECT 
+				nama_supplier,
+				npwp_supplier,
+				kdvalas,
+				nm_bank,
+				kd_bank,
+				kd_swift,
+				iban,
+				asal_bank,
+				norek_bank,
+				norek_penerima, 
+				nm_pemilik_rek,
+				npwp_penerima,
+				nip_penerima,
+				nm_penerima,
+				tipe_supp,
+				satker,
+				v_supplier_number,
+				kppn_code
+				FROM supp 
+				where kppn_code = '".$filter."'";
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_nama_supplier($val['NAMA_SUPPLIER']);
+            $d_data->set_npwp_supplier($val['NPWP_SUPPLIER']);
+            $d_data->set_kdvalas($val['KDVALAS']);
+            $d_data->set_nm_bank($val['NM_BANK']);
+            $d_data->set_kd_bank($val['KD_BANK']);
+            $d_data->set_kd_swift($val['KD_SWIFT']);
+            $d_data->set_iban($val['IBAN']);
+            $d_data->set_asal_bank($val['ASAL_BANK']);
+            $d_data->set_norek_bank($val['NOREK_BANK']);
+            $d_data->set_norek_penerima($val['NOREK_PENERIMA']);
+            $d_data->set_nm_pemilik_rek($val['NM_PEMILIK_REK']);
+            $d_data->set_npwp_penerima($val['NPWP_PENERIMA']);
+            $d_data->set_nip_penerima($val['NIP_PENERIMA']);
+            $d_data->set_nm_penerima($val['NM_PENERIMA']);
+            $d_data->set_tipe_supp($val['TIPE_SUPP']);
+            $d_data->set_satker($val['SATKER']);
+            $d_data->set_v_supplier_number($val['V_SUPPLIER_NUMBER']);
+            $d_data->set_kppn_code($val['KPPN_CODE']);
+			$data[] = $d_data;
+        }
+        return $data;
+    }
+	
     /*
      * setter
      */

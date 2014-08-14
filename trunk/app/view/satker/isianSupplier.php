@@ -169,7 +169,8 @@ if (isset($this->last_update)){
 		
 		if (type == "txt") {
 			$("#download_ext").val("txt");
-		} else {
+		} 
+		if (type == "xml"){
 			$("#download_ext").val("xml");
 		}
         

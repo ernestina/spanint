@@ -225,6 +225,11 @@
 								<li><a href='. URL .'dataGR/GR_PFK></i>Monitoring PFK</a></li>
                             </ul>
                             </li>';
+						echo '<li class="subnav"><a href=' . URL . 'dataSupplier/cekSupplier>Supplier</a>';
+						echo '<ul>
+                                <li><a href=' . URL . 'dataSupplier/downloadSupplierXls></i>Download Supplier</a></li>
+                            </ul>
+                            </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
@@ -271,7 +276,7 @@
 								<li><a href='. URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
                             </ul>
 							</li>';
-						echo '<li class="subnav"><a href=' . URL . 'dataSupplier/cekSupplier>SUPPLIER</a>';
+						echo '<li class="subnav"><a href=' . URL . 'dataSupplier/cekSupplier>Supplier</a>';
 						echo '<ul>
                                 <li><a href=' . URL . 'dataSupplier/cekSupplier></i>Cek Supplier</a></li>
                             </ul>
