@@ -93,15 +93,29 @@ class DataSupplierController extends BaseController {
 			echo "<script>alert ('Belum ada yang dipilih (centang/checkmark))</script>";
 			header('location:' . URL . 'dataSupplier/cekSupplier');
 		} 
-		$this->view->data = $d_supp->get_download_supp_filter($ids);
 		if ($_POST['download_ext'] == 'txt') {
+			$this->view->data = $d_supp->get_download_supp_filter($ids);
 			$this->view->ekstensi=".txt";
 			$this->view->load('satker/downloadSuppliertxt');
-		}
-		if ($_POST['download_ext'] == 'xml') {
+		}elseif ($_POST['download_ext'] == 'xml') {
+			$this->view->data = $d_supp->get_download_supp_filter($ids);
 			$this->view->ekstensi=".xml";
 			$this->view->load('satker/downloadSupplierxml');
-		}		
+		}elseif ($_POST['download_ext'] == 'xlsx') {
+			$this->view->data = $d_supp->get_download_supp_filter_xls();
+			$this->view->ekstensi=".xls";
+			$this->view->load('satker/downloadSupplierxls');
+		}	
+    }
+	
+	public function downloadSupplierXls() {
+		$d_supp = new DataSupplier($this->registry);
+		$filter = array ();
+		$no=0;
+		$this->view->data = $d_supp->get_download_supp_filter_xls(Session::get('kd_satker'));
+		$this->view->ekstensi=".txt";
+		$this->view->kppn_code=Session::get('kd_satker');
+		$this->view->load('satker/downloadSupplierxls');
     }
 	
 	public function downloadSupplierx() {
