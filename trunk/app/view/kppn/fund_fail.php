@@ -123,7 +123,7 @@
 					echo "<td>" . $no++ . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_error_date() . "</td>";
 					//echo "<td>" . $value->get_satker_code() . "</td>";
-					echo "<td><a href=".URL."dataDIPA/Detail_Fund_fail/".$value->get_satker_code()." target='_blank' '>" . $value->get_satker_code() . "</td>";
+					echo "<td><a href=".URL."dataDIPA/Detail_Fund_fail_kd/".$value->get_satker_code()." target='_blank' '>" . $value->get_satker_code() . "</td>";
 					echo "<td>" . $value->get_kppn_code() . "</td>";
 					echo "<td>" . $value->get_account_code() . "</td>";
 					echo "<td>" . $value->get_program_code() . "</td>";
