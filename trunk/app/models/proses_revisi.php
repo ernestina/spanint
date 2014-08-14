@@ -40,11 +40,12 @@ class proses_revisi{
     
     public function get_revisi_dipa($filter) {
 		Session::get('id_user');
-		$sql = "SELECT DISTINCT A.* , B.NMSATKER 
+		$sql = "SELECT DISTINCT A.SATKER_CODE ,A.REVISION_NO, A.MEANING, A.LAST_UPDATE_DATE, B.NMSATKER 
 				FROM " 
 				. $this->_table1. " A, "
 				. $this->_table2. " B 
 				where 1=1
+				AND A.MEANING IS NOT NULL
 				AND A.SATKER_CODE=B.KDSATKER
 				";
 		$no=0;
