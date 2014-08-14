@@ -108,19 +108,23 @@ class DataSPMController extends BaseController {
 				
 			if ($_POST['invoice']!=''){
 					$filter[$no++]="invoice_num = '".$_POST['invoice']."'";
+					$this->view->d_invoice = $_POST['invoice'];
 			}
 			if ($_POST['kdkppn']!=''){
 					$filter[$no++]="ATTRIBUTE15 = ".$_POST['kdkppn'];
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+					$this->view->d_kppn = $_POST['kdkppn'];
 			}
 			if ($_POST['STATUS']!=''){
 					$filter[$no++]="A.CANCELLED_DATE " .$_POST['STATUS'];
+					$this->view->d_status = $_POST['STATUS'];
 			}
 			
 		}	
 		if (Session::get('role')==KPPN) {
 			$filter[$no++]="ATTRIBUTE15 = ".Session::get('id_user');
+					$this->view->d_kppn = Session::get('id_user');
 		}
 		if (Session::get('role')==KANWIL){
 				$d_kppn_list = new DataUser($this->registry);
@@ -151,10 +155,38 @@ class DataSPMController extends BaseController {
 		//Tanggal dibuat : 18-07-2014
 		//----------------------------------------------------
 
-	public function HoldSpm_PDF() {
+	public function HoldSpm_PDF($kdkppn = null, $invoice_depan=null,$invoice_tengah=null,$invoice_belakang=null, $status=null) {
 		$d_spm1 = new DataHoldSPM($this->registry);
 		$filter = array ();
 		$no=0;
+		if ($kdkppn!='null'){
+			$filter[$no++]=" ATTRIBUTE15 = '".$kdkppn."'";
+			$this->view->d_invoice = $kdkppn;
+		}
+		if ($invoice_depan!='null' && $invoice_tengah!='null' && $invoice_belakang!='null'){
+			$filter[$no++]="invoice_num = '".$invoice_depan."/".$invoice_tengah."/".$invoice_belakang."'";
+			$this->view->d_invoice = $invoice;
+		}
+		if ($status!='null'){
+			$filter[$no++]="A.CANCELLED_DATE " .$status;
+			$this->view->d_status = $status;
+		}
+		
+		if (Session::get('role')==KPPN) {
+			$filter[$no++]="ATTRIBUTE15 = ".Session::get('id_user');
+		}
+		if (Session::get('role')==KANWIL){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+		}
+		if (Session::get('role')==ADMIN){
+				$d_kppn_list = new DataUser($this->registry);
+				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+		}
+		if (Session::get('role')==SATKER){
+			$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
+			$this->view->d_satker = Session::get('kd_satker');
+		}
 		$this->view->data = $d_spm1->get_hold_spm_filter($filter);
 		
 		$d_last_update = new DataLastUpdate($this->registry);
@@ -486,7 +518,6 @@ class DataSPMController extends BaseController {
 			if ($_POST['JenisSP2D']!=''){
 					$filter[$no++]="JENIS_SP2D = '".$_POST['JenisSP2D']."'";
 					$this->view->JenisSP2D = $_POST['JenisSP2D'];
-					var_dump($_POST['JenisSP2D']);
 				}
 			if ($_POST['JenisSPM']!=''){
 					$filter[$no++]="JENIS_SPM = '".$_POST['JenisSPM']."'";
@@ -523,7 +554,7 @@ class DataSPMController extends BaseController {
 		//Tanggal dibuat : 18-07-2014
 		//----------------------------------------------------
 
-	public function daftarsp2d_PDF($satker=null,$check_number=null,$invoice=null,$JenisSP2D=null,$JenisSPM=null,$kdtgl_awal=null,$kdtgl_akhir=null) {
+	public function daftarsp2d_PDF($satker=null,$check_number=null,$invoice_depan=null,$invoice_tengah=null,$invoice_belakang=null,$JenisSP2D=null,$JenisSPM=null,$kdtgl_awal=null,$kdtgl_akhir=null) {
 		$d_spm1 = new DataCheck($this->registry);
 		$filter = array ();
 		$no=0;
@@ -534,15 +565,15 @@ class DataSPMController extends BaseController {
 				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$satker."'";
 			}
 		if ($tgl1!='' AND $tgl2!=''){
-					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
+					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD-MM-YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD-MM-YYYY hh:mi:ss')";
 				}
 			
 			if ($check_number!='null'){
 					$filter[$no++]="check_number = '".$check_number."'";
 				}
 
-			if ($invoice!='null'){
-					$filter[$no++]="invoice_num = '".$invoice."'";
+			if ($invoice_depan!='null'){
+					$filter[$no++]="invoice_num = '".$invoice_depan."/".$invoice_tengah."/".$invoice_belakang."'";
 				}
 			if ($JenisSP2D!='null'){
 					$filter[$no++]="JENIS_SP2D = '".$JenisSP2D."'";
@@ -633,19 +664,21 @@ class DataSPMController extends BaseController {
 		$no=0;
 		if ($jenis_spm != '') {
 				$filter[$no++]=" JENDOK =  '".$jenis_spm."'";
+				$this->view->jendok = $jenis_spm;
 			}
 		if ($kppn != '' AND Session::get('role')==KANWIL AND $_POST['kdkppn']!='') {
 			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '".Session::get('id_user')."')";
 			}
 		elseif ($kppn != '') {
 			$filter[$no++]=" SUBSTR(CHECK_NUMBER,3,3) =  '".$kppn."'";
+			$this->view->kppn = $kppn;
 			}
 		if ($tgl_awal != '' AND $tgl_akhir !=''){
 					
 					$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '".date('Ymd',strtotime($tgl_awal))."' AND '".date('Ymd', strtotime($tgl_akhir))."'";
 					
-					$this->view->d_tgl_awal = $_POST['tgl_awal'];
-					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+					$this->view->d_tgl_awal = $tgl_awal;
+					$this->view->d_tgl_akhir = $tgl_akhir;
 				}	
 		
 		/*if (Session::get('role')==KPPN) {
@@ -677,16 +710,16 @@ class DataSPMController extends BaseController {
 		$d_spm1 = new DataCheck($this->registry);
 		$filter = array ();
 		$no=0;
-		if ($jenis_spm != '') {
+		if ($jenis_spm != 'null') {
 				$filter[$no++]=" JENDOK =  '".$jenis_spm."'";
 			}
 		if ($kppn != '' AND Session::get('role')==KANWIL AND $_POST['kdkppn']!='') {
 			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '".Session::get('id_user')."')";
 			}
-		elseif ($kppn != '') {
+		elseif ($kppn != 'null') {
 			$filter[$no++]=" SUBSTR(CHECK_NUMBER,3,3) =  '".$kppn."'";
 			}
-		if ($tgl_awal != '' AND $tgl_akhir !=''){
+		if ($tgl_awal != 'null' AND $tgl_akhir !='null'){
 					
 			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '".date('Ymd',strtotime($tgl_awal))."' AND '".date('Ymd', strtotime($tgl_akhir))."'";
 					

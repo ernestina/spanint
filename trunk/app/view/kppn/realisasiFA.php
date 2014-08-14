@@ -37,7 +37,7 @@
 						
  
 				?>
-			<a href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="modal">PDF</a>
+			<!--<a href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="modal">PDF</a>-->
 			
 		<?php
 			//----------------------------------------------------		

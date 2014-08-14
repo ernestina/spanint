@@ -26,7 +26,7 @@
 			
 			} 
 				$check_number='null';
-				$invoice='null';
+				$invoice='null/null/null';
 				$JenisSP2D='null';
 				$JenisSPM='null';
 				$kdtgl_awal='null';
@@ -49,12 +49,12 @@
 			if (isset($this->d_tgl_awal)) {
 				$kdtgl_awal=$this->d_tgl_awal;
 				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
-				$kdtgl_awal=$bln."-".$tgl."-".$thn;
+				$kdtgl_awal=$bln.$tgl.$thn;
 			}
 			if (isset($this->d_tgl_akhir)) {
 				$kdtgl_akhir=$this->d_tgl_akhir;
 				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
-				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
+				$kdtgl_akhir=$bln.$tgl.$thn;
 			}
 			
 				?>

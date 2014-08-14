@@ -21,10 +21,11 @@
 			//Dibuat oleh : Rifan Abdul Rachman
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
-			foreach ($this->data as $value) {
-			$satker=substr($value->get_invoice_num(),7,6);
-			$check_number=$value->get_invoice_num();
-			
+			if (isset($this->data)){
+				foreach ($this->data as $value) {
+					$satker=substr($value->get_invoice_num(),7,6);
+					$check_number=$value->get_invoice_num();
+				}
 			}
 			
 			if (isset($this->d_invoice)) {
