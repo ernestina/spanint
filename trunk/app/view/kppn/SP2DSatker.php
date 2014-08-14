@@ -2,68 +2,12 @@
 	<div id="header">
         <h2>DAFTAR SP2D SATKER <br> 
 		<?php $nmsatker='';
-		foreach ($this->data as $value) 
-		{
-		$nmsatker=$value->get_nmsatker();
-		
-		} 
+		foreach ($this->data as $value) {$nmsatker=$value->get_nmsatker();} 
 		echo $nmsatker;
 		?>
 			
 		</h2>
     </div>
-<?php
-			//----------------------------------------------------
-			//Development history
-			//Revisi : 0
-			//Kegiatan :1.mencetak hasil filter ke dalam pdf
-			//File yang diubah : SP2DSatker.php
-			//Dibuat oleh : Rifan Abdul Rachman
-			//Tanggal dibuat : 18-07-2014
-			//----------------------------------------------------
-			foreach ($this->data as $value) {
-			$satker=substr($value->get_invoice_num(),7,6);
-			
-			} 
-				$check_number='null';
-				$invoice='null/null/null';
-				$JenisSP2D='null';
-				$JenisSPM='null';
-				$kdtgl_awal='null';
-				$kdtgl_akhir='null';
-			if (isset($this->d_invoice)) {
-				$check_number=$this->d_invoice;
-				
-				}
-
-			if (isset($this->invoice)) {
-				$invoice=$this->invoice;
-				}
-			
-			if (isset($this->JenisSP2D)) {
-				$JenisSP2D=$this->JenisSP2D;
-			}
-			if (isset($this->JenisSPM)) {
-				$JenisSPM=$this->JenisSPM;
-			}
-			if (isset($this->d_tgl_awal)) {
-				$kdtgl_awal=$this->d_tgl_awal;
-				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
-				$kdtgl_awal=$bln.$tgl.$thn;
-			}
-			if (isset($this->d_tgl_akhir)) {
-				$kdtgl_akhir=$this->d_tgl_akhir;
-				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
-				$kdtgl_akhir=$bln.$tgl.$thn;
-			}
-			
-				?>
-			<a href="<?php echo URL; ?>dataSPM/daftarsp2d_PDF/<?php echo $satker."/".$check_number."/".$invoice."/".$JenisSP2D."/".$JenisSPM."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>
-
-			
-		<?php
-			//----------------------------------------------------		
-		?>
 
 <a href="#xModal" class="modal">FILTER DATA</a><br><br>
         <div id="xModal" class="modalDialog" >
@@ -91,14 +35,14 @@
 			<option value='LAINNYA' <?php if ($this->status=="LAINNYA"){echo "LAINNYA";}?>>LAINNYA</option>	
 		</select>
 		
-
-		
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Jenis SPM: </label>
 		<select type="text" name="JenisSPM" id="JenisSPM">
 		<option value='' selected>- pilih -</option>
 		<?php foreach ($this->data2 as $value1) 
 				echo "<option value = '".$value1->get_attribute6()."'>".$value1->get_attribute6()."</option>";
+				//if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+				//else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
 			
 		?>
 		</select>
@@ -126,6 +70,8 @@
 </div>
 </div>
 </div>
+
+
 <?php
                    // untuk menampilkan last_update
                    if (isset($this->last_update)){
@@ -138,6 +84,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 
 
 <div id="fitur">
+		<form method='POST' action='../../downloadSP2D' enctype='multipart/form-data'>
 		<table width="100%" class="table table-bordered zebra" id='fixheader' style='font-size: 90%'>
             <!--baris pertama-->
 			<thead>
@@ -151,6 +98,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 					<th>Jenis SPM </th>
 					<th width='70px'>Jenis SP2D</th>
 					<th width='300px'>Description</th>
+					<th>Pilih <input type="checkbox" onClick="toggle(this)" /> </th>
 			</thead>
 			<tbody class='ratatengah'>
 			<?php 
@@ -173,8 +121,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 					echo "<td>" . $value->get_attribute6() . "</td>";
 					echo "<td>" . $value->get_jenis_sp2d() . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
-					
-					
+					echo "<td><input name='checkbox[]' type='checkbox' id='checkbox' value='".$value->get_check_number()."'> </td>";
 					
 				echo "</tr>	";
 			} 
@@ -186,6 +133,8 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 			?>
 			</tbody>
         </table>
+		<input id='submit' class='sukses' type='submit' name='submit_file2' value='UNDUH' onClick=''>
+		</form>
 		</div>
 </div>
 
@@ -203,7 +152,12 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 		$("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
 		});
     });
-    
+    function toggle(source) {
+		checkboxes = document.getElementsByName('checkbox[]');
+		for(var i=0, n=checkboxes.length;i<n;i++) {
+			checkboxes[i].checked = source.checked;
+		}
+	}
     function hideErrorId(){
         $('.error').fadeOut(0);
     }
