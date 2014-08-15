@@ -64,6 +64,22 @@ class DataSPMController extends BaseController {
 		$this->view->render('kppn/posisiSPM');
 	}
 	
+	public function downloadSP2D() {
+                $d_supp = new DataCheck($this->registry);
+                $filter = array ();
+                $no=0;
+                if(count($_POST['checkbox']) !=0){
+                        $array = array("checkbox" => $_POST['checkbox']);
+                        $ids = implode("','", $array['checkbox']);
+                } else {
+                        echo "<script>alert ('Belum ada yang dipilih (centang/checkmark))</script>";
+                        header('location:' . URL . 'dataSPM/daftarsp2d');
+                } 
+                $this->view->data = $d_supp->get_download_sp2d($ids);
+                $this->view->data2 = $d_supp->get_tgl_download_sp2d($ids);
+                $this->view->load('kppn/downloadSP2D');         
+    }
+	
 	public function detailposisiSpm($invoice_num1=null, $invoice_num2=null, $invoice_num3=null ) {
 		$d_spm1 = new DataHistSPM($this->registry);
 		$filter = array ();
