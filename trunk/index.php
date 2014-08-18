@@ -52,25 +52,84 @@ $registry = new Registry();
 $registry->view = new View();
 $registry->db = new Database();
 $registry->auth = new Auth();
+
+
+//menambahkan level user 
 $registry->auth->add_roles('admin'); //admin
-$registry->auth->add_access('dataTetap','admin',$akses['DataTetap']);
-$registry->auth->add_access('dataUser','admin',$akses['DataUser']);
-$registry->auth->add_access('dataBobot','admin',$akses['DataBobot']);
-$registry->auth->add_access('dataKppn','admin',$akses['DataKppn']);
-$registry->auth->add_access('auth','admin','logout');
+$registry->auth->add_roles('satker'); //satker
 $registry->auth->add_roles('kppn'); //kppn
-$registry->auth->add_access('dataKppn','kppn',$akses['DataKppn']);
-$registry->auth->add_access('auth','kppn','logout');
-$registry->auth->add_roles('ba'); //ba 999
-$registry->auth->add_access('dataBa','ba',$akses['DataBa']);
-$registry->auth->add_access('auth','ba','logout');
+$registry->auth->add_roles('kanwil'); //kanwil
 $registry->auth->add_roles('pkn'); //pkn
-$registry->auth->add_access('dataPkn','pkn',$akses['DataPkn']);
-$registry->auth->add_access('auth','pkn','logout');
-$registry->auth->add_access('auth','guest',$akses['Auth']);
-$registry->auth->add_roles('lainya'); //lainya
-$registry->auth->add_roles('jaringan'); //jaringan
-$registry->auth->add_access('dataKppn','jaringan',$akses['DataKppn']);
+$registry->auth->add_roles('dja'); //dja
+$registry->auth->add_roles('guest'); //guest
+
+//menambahkan akses ke level user
+//level admin
+$registry->auth->add_access('auth','admin',$akses['AuthAdmin']);
+$registry->auth->add_access('home','admin',$akses['HomeAdmin']);
+$registry->auth->add_access('dataDIPA','admin',$akses['DataDIPAAdmin']);
+$registry->auth->add_access('dataDroping','admin',$akses['DataDropingAdmin']);
+$registry->auth->add_access('dataGR','admin',$akses['DataGRAdmin']);
+$registry->auth->add_access('dataJSON','admin',$akses['DataJSONAdmin']);
+$registry->auth->add_access('dataKppn','admin',$akses['DataKppnAdmin']);
+$registry->auth->add_access('dataRetur','admin',$akses['DataReturAdmin']);
+$registry->auth->add_access('dataRetur','admin',$akses['DataSatkerAdmin']);
+$registry->auth->add_access('dataSPM','admin',$akses['DataSPMAdmin']);
+$registry->auth->add_access('dataUser','admin',$akses['DataUserAdmin']);
+$registry->auth->add_access('userSpan','admin',$akses['UserSpanAdmin']);
+
+//level satker
+$registry->auth->add_access('auth','satker',$akses['AuthSatker']);
+$registry->auth->add_access('home','satker',$akses['HomeSatker']);
+$registry->auth->add_access('dataDIPA','satker',$akses['DataDIPASatker']);
+$registry->auth->add_access('dataJSON','satker',$akses['DataJSONSatker']);
+$registry->auth->add_access('dataKppn','satker',$akses['DataKppnSatker']);
+$registry->auth->add_access('dataRetur','satker',$akses['DataReturSatker']);
+$registry->auth->add_access('dataSPM','satker',$akses['DataSPMSatker']);
+$registry->auth->add_access('dataSupplier','satker',$akses['DataSupplierSatker']);
+
+
+//level kppn
+$registry->auth->add_access('auth','kppn',$akses['AuthKPPN']);
+$registry->auth->add_access('home','kppn',$akses['HomeKPPN']);
+$registry->auth->add_access('dataDIPA','kppn',$akses['DataDIPAKPPN']);
+$registry->auth->add_access('dataGR','kppn',$akses['DataGRKPPN']);
+$registry->auth->add_access('dataJSON','kppn',$akses['DataJSONKPPN']);
+$registry->auth->add_access('dataKppn','kppn',$akses['DataKppnKPPN']);
+$registry->auth->add_access('dataRetur','kppn',$akses['DataReturKPPN']);
+$registry->auth->add_access('dataSPM','kppn',$akses['DataSPMKPPN']);
+$registry->auth->add_access('dataSupplier','kppn',$akses['DataSupplierKPPN']);
+$registry->auth->add_access('userSpan','kppn',$akses['UserSpanKPPN']);
+
+//level pkn
+$registry->auth->add_access('auth','pkn',$akses['AuthPKN']);
+$registry->auth->add_access('dataKppn','pkn',$akses['DataKppnPKN']);
+$registry->auth->add_access('dataDroping','pkn',$akses['DataDropingPKN']);
+$registry->auth->add_access('dataRetur','pkn',$akses['DataReturPKN']);
+
+
+//level kanwil
+$registry->auth->add_access('auth','kanwil',$akses['AuthKanwil']);
+$registry->auth->add_access('home','kanwil',$akses['HomeKanwil']);
+$registry->auth->add_access('dataDIPA','kanwil',$akses['DataDIPAKanwil']);
+$registry->auth->add_access('dataGR','kanwil',$akses['DataGRKanwil']);
+$registry->auth->add_access('dataJSON','kanwil',$akses['DataJSONKanwil']);
+$registry->auth->add_access('dataKppn','kanwil',$akses['DataKppnKanwil']);
+$registry->auth->add_access('dataSPM','kanwil',$akses['DataSPMKanwil']);
+$registry->auth->add_access('userSpan','kanwil',$akses['UserSpanKanwil']);
+
+//level dja
+$registry->auth->add_access('auth','dja',$akses['AuthDJA']);
+$registry->auth->add_access('dataDIPA','dja',$akses['DataDIPADJA']);
+$registry->auth->add_access('dataSPM','dja',$akses['DataSPMDJA']);
+$registry->auth->add_access('userSpan','dja',$akses['UserSpanDJA']);
+
+//levelguest
+$registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
+
+
+
+
 $registry->exception = new ClassException();
 $registry->bootstrap = new Bootstrap($registry);
 
