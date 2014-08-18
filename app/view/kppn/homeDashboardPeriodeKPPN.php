@@ -114,7 +114,7 @@
         //Pie
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/pieJenisSP2D/' + periode + '/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/pieJenisSP2D/' + periode + '/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieJenisSP2D = data;
@@ -123,7 +123,7 @@
         });
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/pieNominalSP2D/' + periode + '/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/pieNominalSP2D/' + periode + '/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieNominalSP2D = data;
@@ -132,7 +132,7 @@
         });
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/pieReturSP2D/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/pieReturSP2D/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieReturSP2D = data;
@@ -141,7 +141,7 @@
         });
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/pieStatusLHP/' + periode + '/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/pieStatusLHP/' + periode + '/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieStatusLHP = data;
@@ -152,7 +152,7 @@
         //List
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/lineHistSP2D/' + periode + '/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/lineHistSP2D/' + periode + '/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 lineHistSP2D = data;
@@ -166,7 +166,7 @@
         //Status
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/lastUpdate',
+            'url': '<?php echo URL; ?>dataJSON/lastUpdate',
             'dataType': 'json',
             'success': function (data) {
                 $("#last-update").html("Data server diperbarui pada " + data.lastUpdate);

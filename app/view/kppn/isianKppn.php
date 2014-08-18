@@ -369,6 +369,9 @@ if (isset($this->last_update)){
     }
 	
     function cek_upload(){
+	
+		document.getElementById('invoice').value = document.getElementById('invoice').value.replace(/</g,'').replace(/>/g,'');
+	
 		var pattern = '^[0-9]+$';
 		var v_nosp2d = document.getElementById('nosp2d').value;
 		var v_barsp2d = document.getElementById('barsp2d').value;
@@ -448,6 +451,8 @@ if (isset($this->last_update)){
             $('#winvoice').fadeIn(200);
             jml++;
         }
+		
+		
 		
         if(jml>0){
             return false;

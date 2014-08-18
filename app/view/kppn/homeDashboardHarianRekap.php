@@ -106,7 +106,7 @@
         //Pie
         $.ajax({
             'global': false,
-            'url': serverUrl + 'DataJSON/pieJenisSP2D/1/<?php echo $this->kodeunit; ?>',
+            'url': serverUrl + 'dataJSON/pieJenisSP2D/1/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieJenisSP2D = data;
@@ -115,7 +115,7 @@
         });
         $.ajax({
             'global': false,
-            'url': serverUrl + 'DataJSON/pieNominalSP2D/1/<?php echo $this->kodeunit; ?>',
+            'url': serverUrl + 'dataJSON/pieNominalSP2D/1/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieNominalSP2D = data;
@@ -124,7 +124,7 @@
         });
         $.ajax({
             'global': false,
-            'url': serverUrl + 'DataJSON/pieReturSP2D/<?php echo $this->kodeunit; ?>',
+            'url': serverUrl + 'dataJSON/pieReturSP2D/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieReturSP2D = data;
@@ -133,7 +133,7 @@
         });
         $.ajax({
             'global': false,
-            'url': serverUrl + 'DataJSON/pieStatusLHP/1/<?php echo $this->kodeunit; ?>',
+            'url': serverUrl + 'dataJSON/pieStatusLHP/1/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieStatusLHP = data;
@@ -142,7 +142,7 @@
                 //Summary
                 $.ajax({
                     'global': false,
-                    'url': serverUrl + 'DataJSON/summaryUnit',
+                    'url': serverUrl + 'dataJSON/summaryUnit',
                     'dataType': 'json',
                     'success': function (data) {
                         summaryHeader = data;
@@ -156,7 +156,7 @@
         //Status
         $.ajax({
             'global': false,
-            'url': serverUrl + 'DataJSON/lastUpdate',
+            'url': serverUrl + 'dataJSON/lastUpdate',
             'dataType': 'json',
             'success': function (data) {
                 $("#last-update").html("Data server diperbarui pada " + data.lastUpdate);
