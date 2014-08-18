@@ -89,7 +89,7 @@
         //Pie
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/pieJenisSP2D/1/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/pieJenisSP2D/1/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieJenisSP2D = data;
@@ -98,7 +98,7 @@
         });
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/pieNominalSP2D/1/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/pieNominalSP2D/1/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieNominalSP2D = data;
@@ -107,7 +107,7 @@
         });
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/pieReturSP2D/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/pieReturSP2D/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieReturSP2D = data;
@@ -116,7 +116,7 @@
         });
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/pieStatusLHP/1/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/pieStatusLHP/1/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 pieStatusLHP = data;
@@ -127,7 +127,7 @@
         //List
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/listSPMOngoing/1/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/listSPMOngoing/1/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 listSPMOngoing = data;
@@ -136,7 +136,7 @@
         });  
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/listSP2DFinished/1/<?php echo $this->kodeunit; ?>',
+            'url': '<?php echo URL; ?>dataJSON/listSP2DFinished/1/<?php echo $this->kodeunit; ?>',
             'dataType': 'json',
             'success': function (data) {
                 listSP2DFinished = data;
@@ -147,7 +147,7 @@
         //Status
         $.ajax({
             'global': false,
-            'url': '<?php echo URL; ?>DataJSON/lastUpdate',
+            'url': '<?php echo URL; ?>dataJSON/lastUpdate',
             'dataType': 'json',
             'success': function (data) {
                 $("#last-update").html("Data server diperbarui pada " + data.lastUpdate);
