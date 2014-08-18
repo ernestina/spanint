@@ -132,13 +132,13 @@ function streamSummaryData() {
         for (i=0; i<unit_list.length; i++) {
             $.ajax({
                 'global': false,
-                'url': serverUrl + 'DataJSON/summaryUnit/' + unit_list[i] + '/' + $("#pie-status-lhp .pie-info-title").html().substring(5,15).replace('-','').replace('-',''),
+                'url': serverUrl + 'dataJSON/summaryUnit/' + unit_list[i] + '/' + $("#pie-status-lhp .pie-info-title").html().substring(5,15).replace('-','').replace('-',''),
                 'dataType': 'json',
                 'success': function (data) {
                     prependSummaryItem(data,"summary-container");
                 }
             });
-            console.log(serverUrl + 'DataJSON/summaryUnit/' + unit_list[i] + '/' + $("#pie-status-lhp .pie-info-title").html().substring(5,15).replace('-','').replace('-',''));
+            console.log(serverUrl + 'dataJSON/summaryUnit/' + unit_list[i] + '/' + $("#pie-status-lhp .pie-info-title").html().substring(5,15).replace('-','').replace('-',''));
         }
         
     }

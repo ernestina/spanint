@@ -6,12 +6,14 @@
  */
 
 //setting database
+
 define('DB_TYPE', '');
 define('DB_HOST', '10.100.244.253');
 define('DB_NAME', 'DEVSPANDB');
 define('DB_TNS', '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.100.244.253)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=DEVSPANDB)(INSTANCE_NAME= DEVSPANDB)))');
 define('DB_USER', 'USRAPL14');
 define('DB_PASS', 'K3b!aSa4nL4ma');
+
 
 //end setting database
 
@@ -24,6 +26,8 @@ define('DIR_UPLOAD', 'upload/');
 
 
 date_default_timezone_set('Asia/Jakarta');
+
+define('MAX_SESSION', 600); //dalam detik
 
 define('HASH_GENERAL_KEY', 'MixitUp200');
 

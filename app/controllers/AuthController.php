@@ -55,8 +55,7 @@ class AuthController extends BaseController {
                 Session::set('user', $res[2]);
                 Session::set('role', $role);
                 Session::set('id_user', $res[3]); 
-                Session::set('kd_satker', $res[4]); 
-				print_r($_SESSION);
+                Session::set('kd_satker', $res[4]);
                 header('location:' . URL); 
             } else if ((int) $res[0] == 0) {
                 $this->view->error = "user tidak ditemukan!";
@@ -73,6 +72,7 @@ class AuthController extends BaseController {
     public function logout() {
         Session::createSession();
         Session::destroySession();
+        Session::unsetAll();
         $this->view->load('admin/login');
     }
 

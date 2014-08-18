@@ -14,7 +14,7 @@ class Bootstrap {
         $this->registry = $registry;
         Session::createSession();
         $logged = Session::get('loggedin');
-        $this->role = ($logged) ? (Session::get('role') == ADMIN ? 'admin' : (Session::get('role') == KPPN ? 'kppn' : (Session::get('role') == BA999 ? 'ba' : (Session::get('role') == JARINGAN ? 'jaringan' : 'pkn')))) : 'guest';
+        $this->role = ($logged) ? (Session::get('role') == ADMIN ? 'admin' : (Session::get('role') == KPPN ? 'kppn' : (Session::get('role') == PKN ? 'pkn' : (Session::get('role') == KANWIL ? 'kanwil' : (Session::get('role') == DJA ? 'dja' : (Session::get('role') == SATKER ? 'satker' : 'guest')))))) : 'guest';
     }
 
     /*
@@ -63,21 +63,24 @@ class Bootstrap {
 
         $this->getAction();
 
-        $loggedin = $this->cek_session();
+        $loggedin = $this->cek_session(); 
         if ((!$loggedin && !($this->controller instanceof AuthController) && $this->method != 'index')) {
+            Session::createSession();
+            Session::destroySession();
+            Session::unsetAll();
             $this->controller = new AuthController($this->registry);
             $this->method = 'index';
         }
         //echo $this->role.",".$this->url[0].",".$this->method;
         //var_dump($this->registry->auth->is_allowed($this->role,$this->url[0],$this->method));
-        /*
-          if(!$this->registry->auth->is_allowed($this->role,$this->url[0],$this->method) && $this->role!='guest'){
+        
+        if(!$this->registry->auth->is_allowed($this->role,$this->url[0],$this->method) && $this->role!='guest'){
           $this->controller = new Index($this->registry);
           $this->method = 'index';
-          }else if(!$this->registry->auth->is_allowed($this->role,$this->url[0],$this->method) && $this->role=='guest'){
+        }else if(!$this->registry->auth->is_allowed($this->role,$this->url[0],$this->method) && $this->role=='guest'){
           $this->controller = new AuthController($this->registry);
           $this->method = 'index';
-          }
+        }
 
           /*         * * check if the action is callable ** */
         if (is_callable(array($this->controller, $this->method)) == false) {
@@ -98,6 +101,8 @@ class Bootstrap {
             }
             $i++;
         }
+
+        Session::sessionUpdated();
         if ($i > 1)
             call_user_func_array(array($this->controller, $action), $arguments);
         else
@@ -107,7 +112,11 @@ class Bootstrap {
     private function cek_session() {
         @Session::createSession();
         if (isset($_SESSION) && Session::get('loggedin') == TRUE && Session::get('user') != '' && Session::get('role') != '') {
-            return true;
+            $now = date('Y-m-d H:i:s');
+            $upd = Session::get('updated');
+            $diff = strtotime($now) - strtotime($upd); //echo $diff;
+            if($diff<MAX_SESSION) return true;
+            //return true;
         }
         return false;
     }

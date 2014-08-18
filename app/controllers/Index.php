@@ -16,11 +16,11 @@ class Index extends BaseController {
         if (Session::get('role') == ADMIN) {
 			header('location:' . URL . 'home/harian');
         } elseif (Session::get('role') == SATKER) {
-            header('location:' . URL . 'home');
+            header('location:' . URL . 'home/mingguan');
         } elseif (Session::get('role') == KPPN) {
             header('location:' . URL . 'home'); 
 		} elseif (Session::get('role') == PKN) {
-            header('location:' . URL . 'dataRetur/monitoringReturPKN');
+            header('location:' . URL . 'dataRetur/monitoringReturPkn');
         } elseif (Session::get('role') == KANWIL) {
             header('location:' . URL . 'home');
         } elseif (Session::get('role') == DJA) {

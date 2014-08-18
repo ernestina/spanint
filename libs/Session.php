@@ -12,7 +12,17 @@ class Session {
     }
 
     public static function set($name, $value) {
+        $now = date('Y-m-d H:i:s');
         $_SESSION[$name] = $value;
+        if(!isset($_SESSION['created'])) {
+            $_SESSION['created'] = $now;
+            $_SESSION['updated'] = $now;
+        }
+    }
+
+    public static function sessionUpdated(){
+        $now = date('Y-m-d H:i:s');
+        if(isset($_SESSION['updated'])) $_SESSION['updated'] = $now;
     }
 
     public static function get($name) {
@@ -21,7 +31,7 @@ class Session {
     }
 
     public static function destroySession() {
-        session_destroy();
+        @session_destroy();
     }
 
     public static function unsetAll() {
