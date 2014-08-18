@@ -354,9 +354,9 @@ class DataDashboard {
         $data = array();
             
         if (!isset($unitfilter)) {
-            $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".$tanggal."','ddmmyyyy')";
+            $sql = "select tanggal, jumlah, nominal, status from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".$tanggal."','ddmmyyyy')";
         } else {
-            $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".$tanggal."','ddmmyyyy')";
+            $sql = "select tanggal, jumlah, nominal, status from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".$tanggal."','ddmmyyyy')";
         }
             
         //var_dump($sql);
@@ -404,15 +404,15 @@ class DataDashboard {
             
             if (!isset($unitfilter)) {
                 if ($hari == 1) {
-                    $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal=(select max(tanggal) from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."')";
+                    $sql = "select tanggal, jumlah, nominal, status from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal=(select max(tanggal) from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."')";
                 } else {
-                    $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
+                    $sql = "select tanggal, jumlah, nominal, status from spgr_mpn_dashboard where kppn = '".Session::get('id_user')."' and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
                 }
             } else {
                 if ($hari == 1) {
-                    $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where ".$unitfilter." and tanggal=(select max(tanggal) from spgr_mpn_dashboard where ".$unitfilter.")";
+                    $sql = "select tanggal, jumlah, nominal, status from spgr_mpn_dashboard where ".$unitfilter." and tanggal=(select max(tanggal) from spgr_mpn_dashboard where ".$unitfilter.")";
                 } else {
-                    $sql = "select tanggal, jumlah, nominal from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
+                    $sql = "select tanggal, jumlah, nominal, status from spgr_mpn_dashboard where ".$unitfilter." and tanggal = to_date('".date("Ymd",time()-($i*24*60*60))."','yyyymmdd')";
                 }
             }
             
