@@ -51,7 +51,8 @@
 			}
 			
 				?>
-	<a href="<?php echo URL; ?>DataDIPA/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="modal">PDF</a>
+	<ul class="inline" style="float: right"><li>
+	<a href="<?php echo URL; ?>DataDIPA/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
 
 <!-- 	<ul class="inline" style="float: right"><li>
 	<a  href="<?php echo URL; ?>DataDIPA/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
@@ -62,7 +63,7 @@
 		<?php
 			//----------------------------------------------------		
 		?>
-<a href="#yModal" class="modal">FILTER DATA</a><br><br>
+	<li><a href="#yModal" class="modal">FILTER DATA</a></li></ul>
         <div id="yModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>

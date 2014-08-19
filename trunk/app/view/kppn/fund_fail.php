@@ -61,20 +61,21 @@
 			}
  */			
 				?>
-			<a href="<?php echo URL; ?>dataDIPA/Fund_fail_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="modal">PDF</a>
+			<ul class="inline" style="float: right"><li>
+			<a href="<?php echo URL; ?>dataDIPA/Fund_fail_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 			
 		<?php
 			//----------------------------------------------------		
 		?>
 
-<a href="#yModal" class="modal">FILTER DATA</a><br><br>
+	<li><a href="#yModal" class="modal">FILTER DATA</a></li></ul>
         <div id="yModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
 				<a href="<?php
                     $_SERVER['PHP_SELF'];
                 ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
-</a>
+	</a>
 	
 	<div id="top">
 

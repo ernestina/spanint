@@ -39,18 +39,10 @@
 						
  
 				?>
-	<a href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="modal">PDF</a>
-			
-	
-<!-- 	<ul class="inline" style="float: right"><li>
-	<a  href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
- -->
-			
-		<?php
-			//----------------------------------------------------		
-		?>
+	<ul class="inline" style="float: right"><li>
+	<a href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
-<a href="#wModal" class="modal">FILTER DATA</a><br><br>
+	<li><a href="#wModal" class="modal">FILTER DATA</a></li></ul>
         <div id="wModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
@@ -174,11 +166,11 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan='10' class='ratatengah'><b>GRAND TOTAL<b></td>
-					<td class='ratakanan'><?php echo number_format($tot_budget); ?></td>
-					<td class='ratakanan'><?php echo number_format($tot_encumbrance); ?></td>
-					<td class='ratakanan'><?php echo number_format($tot_actual); ?></td>
-					<td class='ratakanan'><?php echo number_format($tot_balancing); ?></td>
+					<td colspan='10' class='ratatengah'><b>GRAND TOTAL</b></td>
+					<td class='ratakanan'><b><?php echo number_format($tot_budget); ?></b></td>
+					<td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></b></td>
+					<td class='ratakanan'><b><?php echo number_format($tot_actual); ?></b></td>
+					<td class='ratakanan'><b><?php echo number_format($tot_balancing); ?></b></td>
 				</tr>
 			</tfoot>
         </table>
