@@ -34,6 +34,13 @@ $akses['DataDIPADJA'] = array(
     'DetailEncumbrances',
     'ProsesRevisi',
     'DetailRevisi',
+    'RevisiDipa_PDF',
+    'Fund_fail_PDF',
+    'RealisasiFA_PDF',
+    'DataRealisasi_PDF',
+    'DataRealisasiBA_PDF',
+    'DataRealisasiTransfer_PDF',
+    'DetailRevisi_PDF',
     '__destruct'
 );
 
@@ -46,6 +53,8 @@ $akses['DataSPMDJA'] = array(
     'daftarsp2d',
     'RekapSp2d',
     'detailrekapsp2d',
+    'daftarsp2d_PDF',
+    'RekapSp2d_PDF',
     '__destruct'
 );
 

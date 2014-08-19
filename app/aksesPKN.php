@@ -35,6 +35,7 @@ $akses['DataDropingPKN'] = array(
     'index',
     'monitoringDroping',
     'detailDroping',
+    'detailDroping_PDF',
     '__destruct'
 );
 
