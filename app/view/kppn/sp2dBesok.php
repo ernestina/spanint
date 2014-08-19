@@ -24,6 +24,47 @@
 			?>
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : sp2dBesok.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				/*
+ 				$kdkppn='null';				
+				$kdbank='null';
+				$kdtgl_awal='null';
+				$kdtgl_akhir='null'; 
+ */		
+
+
+				$kdkppn=Session::get('id_user');
+			
+			if (isset($this->d_nmbank)) {
+				$kdbank=$this->d_nmbank;
+			}
+			
+			if (isset($this->d_tgl_awal)) {
+				$kdtgl_awal1=$this->d_tgl_awal;
+				list($bln,$tgl,$thn)=explode('-',$kdtgl_awal1);
+				$kdtgl_awal=$thn.$tgl.$bln;
+			}
+			if (isset($this->d_tgl_akhir)) {
+				$kdtgl_akhir1=$this->d_tgl_akhir;
+				list($bln,$tgl,$thn)=explode('-',$kdtgl_akhir1);	
+				$kdtgl_akhir=$thn.$tgl.$bln;
+			}
+						
+				?>
+			 
+				<a href="<?php echo URL; ?>DataKppn/sp2dBesok_PDF/<?php echo $kdkppn."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdbank; ?>" class="modal">PDF</a>
+							
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <a href="#nModal" class="modal">FILTER DATA</a>
         <div id="nModal" class="modalDialog" >

@@ -31,18 +31,23 @@ class DataDIPAController extends BaseController {
 					$this->view->satker_code = $kdsatker;
 				}
 			if (isset($_POST['submit_file'])) {
-				
-				if ($_POST['akun']!=''){
-					$filter[$no++]="A.ACCOUNT_CODE = '".$_POST['akun']."'";
-					$this->view->account_code = $_POST['akun'];
+				$akun1=$_POST['akun'];
+				$akun1=rtrim($akun1);
+				if ($akun1!=''){
+					$filter[$no++]="A.ACCOUNT_CODE =  '".$akun1."'";
+					$this->view->account_code = $akun1;
 				}
+				$output1=$_POST['output'];
+				$output1=rtrim($output1);
 				if ($_POST['output']!=''){
 					$filter[$no++]="A.OUTPUT_CODE = '".$_POST['output']."'";
 					$this->view->output_code = $_POST['output'];
 				}
-				if ($_POST['program']!=''){
-					$filter[$no++]="A.PROGRAM_CODE = '".$_POST['program']."'";
-					$this->view->program_code = $_POST['program'];
+				$program1=$_POST['program'];
+				$program1=rtrim($program1);
+				if ($program1!=''){
+					$filter[$no++]="A.PROGRAM_CODE =  '".$program1."'";
+					$this->view->program_code = $program1;
 				}
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
 					$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
@@ -77,13 +82,13 @@ class DataDIPAController extends BaseController {
 				$filter[$no++]=" A.SATKER_CODE =  '".$kdsatker."'";
 			}						
 			if ($kdakun !='null'){
-				$filter[$no++]=" A.ACCOUNT_CODE = '".$kdakun."'";
+				$filter[$no++]=" A.ACCOUNT_CODE =  '".$kdakun."'";
 			}
 			if ($kdoutput !='null'){
 				$filter[$no++]=" A.OUTPUT_CODE = '".$kdoutput."'";
 			}
 			if ($kdprogram !='null'){
-				$filter[$no++]=" A.PROGRAM_CODE = '".$kdprogram."'";
+				$filter[$no++]=" A.PROGRAM_CODE =  '".$kdprogram."'";
 			}
 			if ($kdtgl_awal !='null' OR $kdtgl_akhir !='null'){
 				list($bln,$tgl,$thn)=explode('-',$kdtgl_awal);
@@ -580,22 +585,21 @@ class DataDIPAController extends BaseController {
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
 
-	public function DataRealisasi_PDF($kdsatkerku=null) {
+	public function DataRealisasi_PDF($kdkppn=null,$kdsatkerku=null) {
 		$d_spm1 = new DataRealisasi($this->registry);
 		$filter = array ();
 		$no=0;
-				if ($_POST['kdkppn']!=''){
-					$filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
+				if ($kdkppn!=''){
+					$filter[$no++]="A.KPPN = '".$kdkppn."'";
 					$d_kppn = new DataUser($this->registry);
-					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-					$this->view->d_kd_kppn = $_POST['kdkppn'];
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+					$this->view->d_kd_kppn = $kdkppn;
 				} else {
 					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
 				}
 				
-				if ($_POST['kdsatker']!=''){
-					$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
-					$this->view->satker_code1 = $_POST['kdsatker'];
+				if ($kdsatkerku!=''){
+					$filter[$no++]="A.SATKER = '".$kdsatkerku."'";
 				}
 			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 
@@ -893,9 +897,22 @@ class DataDIPAController extends BaseController {
 					$filter[$no++]=" KDSATKER =  '".$satker."'";
 				
 				}
-		
+		$this->view->d_kdsatker =$satker;
 		$this->view->data = $d_spm1->detail_revisi($filter);
 		$this->view->render('kppn/detail_revisi');
+	}
+	public function DetailRevisi_PDF($kdsatker=null) {
+		$d_spm1 = new proses_revisi($this->registry);
+		$filter = array ();
+		$no=0;
+			if ($kdsatker != '') {
+					$filter[$no++]=" KDSATKER =  '".$kdsatker."'";
+				
+				}
+		
+		$this->view->data = $d_spm1->detail_revisi($filter);
+		//$this->view->render('kppn/detail_revisi');
+		$this->view->load('kppn/detail_revisi_PDF');
 	}
     public function __destruct() {
         

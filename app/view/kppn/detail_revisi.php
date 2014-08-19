@@ -30,7 +30,38 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 }
                     }
                     ?>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : detail_revisi.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				
+				
+				/* $kdakun='null';
+				//$kdsatker='null';
+				$kdoutput='null';
+				$kdprogram='null';
+				$kdtgl_awal='null';
+				$kdtgl_akhir='null'; */
+				
+				$kdkppn=Session::get('id_user');
+			if (isset($this->d_kdsatker)) {
+				$kdsatker=$this->d_kdsatker;
+			}
+			
+				?>
+	<a href="<?php echo URL; ?>DataDIPA/DetailRevisi_PDF/<?php echo $kdsatker; ?>" class="modal">PDF</a>
 
+			
+		<?php
+			//----------------------------------------------------		
+		?>
+
+					
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id='fixheader'>
             <!--baris pertama-->

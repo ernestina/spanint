@@ -1,7 +1,8 @@
 <div id="top">
 	<div id="header">
         <h2>MONITORING SP2D - BANK<br>
-			<?php if (isset($this->d_nama_kppn)) {
+			<?php 
+			if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
 					$kode_kppn=$kppn->get_kd_satker();
@@ -19,61 +20,88 @@
 			//Dibuat oleh : Rifan Abdul Rachman
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
-				
-				
-				/* $kdakun='null';
-				//$kdsatker='null';
-				$kdoutput='null';
-				$kdprogram='null';
+				/*
+ 				$kdkppn='null';				
+				$kdnosp2d='null';
+				$kdbarsp2d='null';
+				$kdsatker='null';
+				$kdnoinvoice='null';			
+				$kdbank='null';
+				$kdstatus='null';
+				$kdbayar='null';			
+				$kdfxml='null';				
 				$kdtgl_awal='null';
-				$kdtgl_akhir='null'; */
-			if (isset($this->d_kd_kppn)) {
-				$kdkppn=$this->d_kd_kppn;
-				}
+				$kdtgl_akhir='null'; 
+ */		
 
+
+				$kdkppn=Session::get('id_user');
+				echo '$kdkppn:'.$kdkppn;
+				
 			if (isset($this->d_nosp2d)) {
 				$kdnosp2d=$this->d_nosp2d;
+				echo '$kdnosp2d:'.$kdnosp2d;
 				}
 			
 			if (isset($this->d_barsp2d)) {
 				$kdbarsp2d=$this->d_barsp2d;
+				echo '$kdbarsp2d:'.$kdbarsp2d;
 			}
-			if (isset($this->d_kdsatker)) {
-				$kdsatker=$this->d_kdsatker;
+			if (isset($this->d_kdsatker1)) {
+				$kdsatker1=$this->d_kdsatker1;
+				echo 'kdsatker:'.$kdsatker1;
 				}
 
 			if (isset($this->d_invoice)) {
-				$kdnoinvoice=$this->d_invoice;
+				$kdnoinvoice1=$this->d_invoice;
+				$kdnoinvoice=substr($kdnoinvoice1,0,6).'-'.substr($kdnoinvoice1,7,6).'-'.substr($kdnoinvoice1,14,4);
+				$kdsatker1=substr($kdnoinvoice1,7,6);
 				}
 			
-			if (isset($this->d_bank)) {
-				$kdbank=$this->d_bank;
+			if (isset($this->d_nmbank)) {
+				$kdbank=$this->d_nmbank;
+				echo '$kdbank:'.$kdbank;
 			}
 			if (isset($this->d_status)) {
 				$kdstatus=$this->d_status;
+				echo '$kdstatus:'.$kdstatus;
 			}
 			
 			if (isset($this->d_bayar)) {
 				$kdbayar=$this->d_bayar;
+				echo '$kdbayar:'.$kdbayar;
 			}
 			
 			if (isset($this->d_fxml)) {
 				$kdfxml=$this->d_fxml;
+				echo '$kdfxml:'.$kdfxml;
 			}
 			
 			if (isset($this->d_tgl_awal)) {
-				$kdtgl_awal=$this->d_tgl_awal;
-				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
-				$kdtgl_awal=$bln."-".$tgl."-".$thn;
+				$kdtgl_awal1=$this->d_tgl_awal;
+				echo '$kdtgl_awal nilai:'.$kdtgl_awal1;
+				list($bln,$tgl,$thn)=explode('-',$kdtgl_awal1);
+				//20140804
+				//$kdtgl_awal=$bln."-".$tgl."-".$thn;
+				$kdtgl_awal=$thn.$tgl.$bln;
+				echo '$kdtgl_awal:'.$kdtgl_awal;
 			}
 			if (isset($this->d_tgl_akhir)) {
-				$kdtgl_akhir=$this->d_tgl_akhir;
-				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
-				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
+				$kdtgl_akhir1=$this->d_tgl_akhir;
+				echo '$kdtgl_akhir nilai:'.$kdtgl_akhir1;
+				list($bln,$tgl,$thn)=explode('-',$kdtgl_akhir1);				
+				//$kdtgl_akhir=$bln."-".$tgl."-".$thn;
+				$kdtgl_akhir=$thn.$tgl.$bln;
+				echo '$kdtgl_akhir:'.$kdtgl_akhir;
 			}
-			
+
+						
 				?>
-			<a href="<?php echo URL; ?>DataKPPN/monitoringSp2d_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="modal">PDF</a>
+				
+ 
+<!-- 				<a href="<?php echo URL; ?>DataKppn/monitoringSp2d_PDF/<?php echo $kdkppn."/".$kdnosp2d."/".$kdbarsp2d."/".$kdsatker1."/".$kdnoinvoice."/".$kdbank."/".$kdstatus."/".$kdbayar."/".$kdfxml."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="modal">PDF</a>
+ -->
+				<a href="<?php echo URL; ?>DataKppn/monitoringSp2d_PDF/<?php echo $kdkppn."/".$kdsatker1."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdnosp2d."/".$kdnoinvoice."/".$kdbarsp2d."/".$kdstatus."/".$kdbayar."/".$kdfxml."/".$kdbank; ?>" class="modal">PDF</a>
 				
 			
 		<?php
@@ -138,7 +166,7 @@
 			<option value='BRI' <?php if ($this->d_bank==BRI){echo "selected";}?>>BRI</option>
 			<option value='BNI' <?php if ($this->d_bank==BNI){echo "selected";}?>>BNI</option>
 			<option value='BTN' <?php if ($this->d_bank==BTN){echo "selected";}?>>BTN</option>
-			<option value='SEMUA_BANK' <?php if ($this->d_bank==SEMUA_BANK){echo "selected";}?>>SEMUA BANK</option>
+			<option value='5' <?php if ($this->d_bank==5){echo "selected";}?>>SEMUA BANK</option>
 		</select>
 		<?php } else {
 			echo "<input type='hidden' name='bank' id='bank' value=''>";

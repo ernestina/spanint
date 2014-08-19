@@ -17,7 +17,7 @@
 			//Dibuat oleh : Rifan Abdul Rachman
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
-				
+			
 				
 				$kdakun='null';
 				//$kdsatker='null';
@@ -27,17 +27,21 @@
 				$kdtgl_akhir='null';
 			if (isset($this->account_code)) {
 				$kdakun=$this->account_code;
+				$kdakun=rtrim($kdakun);
 				}
 
 			if (isset($this->satker_code)) {
 				$kdsatker=$this->satker_code;
+				$kdsatker=rtrim($kdsatker);
 				}
 			
 			if (isset($this->output_code)) {
 				$kdoutput=$this->output_code;
+				$kdoutput=rtrim($kdoutput);
 			}
 			if (isset($this->program_code)) {
 				$kdprogram=$this->program_code;
+				$kdprogram=rtrim($kdprogram);
 			}
 			if (isset($this->d_tgl_awal)) {
 				$kdtgl_awal=$this->d_tgl_awal;

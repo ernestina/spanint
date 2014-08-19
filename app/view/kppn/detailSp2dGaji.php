@@ -18,6 +18,40 @@ if (isset($this->last_update)){
 	}
 }
 ?>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : detailSp2dGaji.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				/*
+ 				$kdkppn='null';				
+				$kdbank='null';
+				$kdtgl_awal='null';
+				$kdtgl_akhir='null'; 
+ */		
+
+
+				$kdkppn=Session::get('id_user');
+			
+			if (isset($this->d_bank)) {
+				$kdbank=$this->d_bank;
+			}
+			if (isset($this->d_bulan)) {
+				$kdbulan=$this->d_bulan;
+			}
+			
+						
+				?>
+			 
+				<a href="<?php echo URL; ?>DataKppn/detailSp2dGaji_PDF/<?php echo $kdbank."/".$kdbulan."/".$kdkppn; ?>" class="modal">PDF</a>
+							
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id='fixheader'>
