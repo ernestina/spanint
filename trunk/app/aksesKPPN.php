@@ -46,6 +46,13 @@ $akses['DataDIPAKPPN'] = array(
     'DetailEncumbrances',
     'ProsesRevisi',
     'DetailRevisi',
+    'RevisiDipa_PDF',
+    'Fund_fail_PDF',
+    'RealisasiFA_PDF',
+    'DataRealisasi_PDF',
+    'DataRealisasiBA_PDF',
+    'DataRealisasiTransfer_PDF',
+    'DetailRevisi_PDF',
     '__destruct'
 );
 
@@ -61,6 +68,9 @@ $akses['DataGRKPPN'] = array(
     'grStatusHarian',
     'detailLhpRekap',
     'detailPenerimaan',
+    'GR_PFK_PDF',
+    'GR_IJP_PDF',
+    'detailLhpRekap_PDF',
     '__destruct'
 );
 
@@ -105,6 +115,18 @@ $akses['DataKppnKPPN'] = array(
     'detailSp2dGaji',
     'detailRekapSP2D',
     'lihatPanduan1',
+    'monitoringSp2d_PDF',
+    'harianBO_PDF',
+    'sp2dHariIni_PDF',
+    'sp2dBesok_PDF',
+    'sp2dBackdate_PDF',
+    'sp2dSudahVoid_PDF',
+    'sp2dGajiDobel_PDF',
+    'sp2dSalahTanggal_PDF',
+    'sp2dSalahBank_PDF',
+    'sp2dSalahRekening_PDF',
+    'detailSp2dGaji_PDF',
+    'detailRekapSP2D_PDF',
     '__destruct'
 );
 
@@ -116,6 +138,7 @@ $akses['DataReturKPPN'] = array(
     'index',
     'monitoringRetur',
     'monitoringReturPkn',
+    'monitoringRetur_PDF',
     '__destruct'
 );
 
@@ -136,6 +159,11 @@ $akses['DataSPMKPPN'] = array(
     'daftarsp2d',
     'RekapSp2d',
     'detailrekapsp2d',
+    'detailposisiSpm_PDF',
+    'HoldSpm_PDF',
+    'HistorySpm_PDF',
+    'daftarsp2d_PDF',
+    'RekapSp2d_PDF',
     '__destruct'
 );
 

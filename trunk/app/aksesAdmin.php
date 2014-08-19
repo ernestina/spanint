@@ -46,6 +46,13 @@ $akses['DataDIPAAdmin'] = array(
     'DetailEncumbrances',
     'ProsesRevisi',
     'DetailRevisi',
+    'RevisiDipa_PDF',
+    'Fund_fail_PDF',
+    'RealisasiFA_PDF',
+    'DataRealisasi_PDF',
+    'DataRealisasiBA_PDF',
+    'DataRealisasiTransfer_PDF',
+    'DetailRevisi_PDF',
     '__destruct'
 );
 
@@ -57,6 +64,7 @@ $akses['DataDropingAdmin'] = array(
     'index',
     'monitoringDroping',
     'detailDroping',
+    'detailDroping_PDF',
     '__destruct'
 );
 
@@ -147,6 +155,11 @@ $akses['DataSPMAdmin'] = array(
     'daftarsp2d',
     'RekapSp2d',
     'detailrekapsp2d',
+    'detailposisiSpm_PDF',
+    'HoldSpm_PDF',
+    'HistorySpm_PDF',
+    'daftarsp2d_PDF',
+    'RekapSp2d_PDF',
     '__destruct'
 );
 
@@ -168,6 +181,7 @@ $akses['DataUserAdmin'] = array(
 $akses['UserSpanAdmin'] = array(
     '__construct',
     'monitoringUserSpan',
+    'monitoringUserSpan_PDF',
     '__destruct'
 );
 
