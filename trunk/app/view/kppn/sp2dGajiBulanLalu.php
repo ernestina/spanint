@@ -28,7 +28,6 @@
 		<div id="wkdkppn" class="error"></div>
 		<label class="isian">Kode KPPN: </label>
 		<select type="text" name="kdkppn" id="kdkppn">
-		<option value='SEMUA KPPN'>Semua KPPN</option>
 		<?php foreach ($this->kppn_list as $value1){ 
 				if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
 				else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
