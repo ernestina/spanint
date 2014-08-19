@@ -32,13 +32,17 @@
 			//Dibuat oleh : Rifan Abdul Rachman
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
-			$kdsatkerku=null;
+			if (isset($this->d_kd_kppn)) {
+				$kdkppn=$this->d_kd_kppn;
+			}else{
+				$kdkppn=Session::get('id_user');
+			}		
 			if (isset($this->satker_code1)) {
 				$kdsatkerku=$this->satker_code1;
 			}
 			?>
 				<ul class="inline" style="float: right"><li>
-				<a href="<?php echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php echo $kdsatkerku; ?>"class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+				<a href="<?php echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php echo $kdkppn."/".$kdsatkerku; ?>"class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
 		<li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
 	
