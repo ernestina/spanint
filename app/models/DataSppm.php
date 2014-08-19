@@ -671,7 +671,7 @@ class DataSppm {
         return $data;
     }
 	
-	public function get_sp2d_gaji_bulan_lalu($kppn) {
+	public function get_sp2d_gaji_bulan_lalu($kppn=null) {
 		$sql = "SELECT DECODE(TRIM(BANK_ACCOUNT_NAME),'RPKBUNP GAJI-MDRI','MANDIRI',
 					'RPKBUNP.GAJI-BTN','BTN','RPKBUNP.gaji-BNI','BNI','RPKBUNP GAJI BRI','BRI','INVALID') BANK
 					, MAX(JANUARI) JANUARI

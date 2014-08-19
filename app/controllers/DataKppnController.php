@@ -719,12 +719,14 @@ class DataKppnController extends BaseController {
 			//do nothing karena untuk menu ini, PKN tidak bisa mengakses menu ini, if untuk pkn bisa dihilangkan
 		}
 		if (Session::get('role')==KANWIL){
+			 //untuk menlist kppn di wilayah kanwil nya
 			$d_kppn_list = new DataUser($this->registry);
 			$kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			$kppn_list2='0';
 			foreach ($kppn_list as $value1){
 				$kppn_list2 .= ",".$value1->get_kd_d_kppn();
 			}
+			
 			$filter[$no++]=" KDKPPN in ( ".$kppn_list2.") ";
 			$this->view->kppn_list = $kppn_list;
 		}
