@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>Data Realisasi <br>
+        <h2>Data Realisasi Belanja Transfer Daerah<br>
 		<?php 
 			
 			if (isset($this->data3)){
@@ -12,20 +12,19 @@
 			echo $satker." ";
 		if(Session::get('role')!=ADMIN){
 		?>
-		 <br>
-		Pada
+<!--		Pada
 		<?php
-			
+		
 			if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
 					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
 					$kode_kppn=$kppn->get_kd_satker();
 				}
 			}
-			else {echo Session::get('user');}
+			else { echo Session::get('user');}
 		}	
-			?>
-			Per Tanggal
+		?>
+!-->			Per Tanggal
 			
 			<?php 
 			//echo 
@@ -76,7 +75,8 @@
 			}	
 				?>
 	
-		<a href="<?php echo URL; ?>DataDIPA/DataRealisasiTransfer_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="modal">PDF</a>
+		<ul class="inline" style="float: right"><li>
+		<a href="<?php echo URL; ?>DataDIPA/DataRealisasiTransfer_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
 <!-- 	<ul class="inline" style="float: right"><li>
 	<a  href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
@@ -87,7 +87,7 @@
 			//----------------------------------------------------		
 		?>
 
-<a href="#xModal" class="modal">FILTER DATA</a><br><br>
+	<li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
         <div id="xModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>

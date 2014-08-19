@@ -37,14 +37,9 @@
 				$kdsatkerku=$this->satker_code1;
 			}
 			?>
-				<a href="<?php echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php echo $kdsatkerku; ?>" class="modal">PDF</a>
+				<ul class="inline" style="float: right"><li>
+				<a href="<?php echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php echo $kdsatkerku; ?>"class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
-<!-- 	<ul class="inline" style="float: right"><li>
-	<a  href="<?php //echo URL; ?>DataDIPA/DataRealisasi_PDF/<?php //echo $kdsatker; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
- -->
- <?php
-		//---------------------------------------------------------------------
-?>
 		<li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
 	
 	<br><br>
@@ -104,8 +99,8 @@
 		<!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
 
 		<ul class="inline" style="margin-left: 130px">
- 		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="PREVIEW" onClick="return ();"></li>
 		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
+		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return ();"></li>
 		</ul>
 	</form>
 </div></div>

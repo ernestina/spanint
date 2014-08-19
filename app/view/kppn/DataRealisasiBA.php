@@ -38,7 +38,8 @@
 				$kdkppn=$this->kppn_code;
 			}
 			?>
-			<a href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="modal">PDF</a>
+			<ul class="inline" style="float: right"><li>
+			<a href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li></ul>
 
 <!-- 				<ul class="inline" style="float: right"><li>
 	<a  href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
@@ -50,9 +51,9 @@
 		
 <?php if (isset($this->kppn_list)) { ?>
 
-</div>
 
-<a href="#xModal" class="modal">FILTER DATA</a><br><br>
+
+	<li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
         <div id="xModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
