@@ -34,7 +34,7 @@
 </a>
 	
 <div id="top">	
-	<form method="POST" action="Sp2dRekap" enctype="multipart/form-data">
+	<form method="POST" action="sp2dRekap" enctype="multipart/form-data">
 	
 		<?php if (isset($this->kppn_list)) { ?>
 		<div id="wkdkppn" class="error"></div>

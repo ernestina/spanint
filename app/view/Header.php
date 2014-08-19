@@ -162,20 +162,20 @@
                                 <li><a href=' . URL . 'dataRetur/monitoringRetur></i>Daftar SP2D Retur</a></li>
                                 <li><a href=' . URL . 'dataKppn/harianBO></i>SP2D Harian ke BO1</a></li>
 								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>SP2D terbit dan tertanggal di hari yang sama</a></li>
-								<li><a href=' . URL . 'dataKppn/Sp2dBesok></i>SP2D terbit diatas jam 3 tertanggal hari yang sama</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dBackdate></i>SP2D Backdate</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSudahVoid></i>SP2D Void</a></li>
-								<li><a href=' . URL . 'dataKppn/Sp2dRekap></i>Rekap SP2D BO Pusat</a></li>
+								<li><a href=' . URL . 'dataKppn/sp2dBesok></i>SP2D terbit diatas jam 3 tertanggal hari yang sama</a></li>
+                                <li><a href=' . URL . 'dataKppn/sp2dBackdate></i>SP2D Backdate</a></li>
+                                <li><a href=' . URL . 'dataKppn/sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
+                                <li><a href=' . URL . 'dataKppn/sp2dSudahVoid></i>SP2D Void</a></li>
+								<li><a href=' . URL . 'dataKppn/sp2dRekap></i>Rekap SP2D BO Pusat</a></li>
                             </ul>
                             </li>';
 						echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
 						echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/Sp2dGajiDobel></i>Terindikasi dobel</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSalahTanggal></i>Terindikasi salah Tanggal</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSalahBank></i>Terindikasi salah Bank</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dSalahRekening></i>Terindikasi salah PayGroup</a></li>
-                                <li><a href=' . URL . 'dataKppn/Sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
+                                <li><a href=' . URL . 'dataKppn/sp2dGajiDobel></i>Terindikasi dobel</a></li>
+                                <li><a href=' . URL . 'dataKppn/sp2dSalahTanggal></i>Terindikasi salah Tanggal</a></li>
+                                <li><a href=' . URL . 'dataKppn/sp2dSalahBank></i>Terindikasi salah Bank</a></li>
+                                <li><a href=' . URL . 'dataKppn/sp2dSalahRekening></i>Terindikasi salah PayGroup</a></li>
+                                <li><a href=' . URL . 'dataKppn/sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
                             </ul>
                             </li>';
 						echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
