@@ -9,6 +9,36 @@
 			}?>
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : monitoringUser.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				/*
+ 				$kdkppn='null';				
+				$kdnip='null';
+ */		
+			if (isset($this->d_kd_kppn)) {
+				$kdkppn=$this->d_kd_kppn;
+			}else{
+				$kdkppn=Session::get('id_user');
+			}							
+			if (isset($this->d_nip)) {
+				$kdnip=$this->d_nip;
+				
+			}
+						
+				?>
+			 
+				<a href="<?php echo URL; ?>UserSpan/monitoringUserSpan_PDF/<?php echo $kdkppn."/".$kdnip; ?>" class="modal">PDF</a>
+							
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <a href="#oModal" class="modal">FILTER DATA</a><br><br>
         <div id="oModal" class="modalDialog" >

@@ -3,7 +3,7 @@
 	//Development history
 	//Revisi : 0
 	//Kegiatan :1.mencetak hasil filter ke dalam pdf
-	//File yang ditambah : revisiDIPA_PDF.php
+	//File yang ditambah : DataRealisasiBA_PDF.php
 	//Dibuat oleh : Rifan Abdul Rachman
 	//Tanggal dibuat : 18-07-2014
 	//----------------------------------------------------
@@ -28,8 +28,7 @@
     }
      
     public function rptDetailData () {
-	
-	
+    //
     $border = 0;
     $h = 40;
     $left = 10;
@@ -40,7 +39,7 @@
 	$this->Image("./././public/img/depkeu.png",30,30,30,30);
 	$px1 = $this->GetX();
 	$this->SetX($left+50); 
-	$this->MultiCell(0, $h/2, 'Laporan Data Revisi DIPA');
+	$this->MultiCell(0, $h/2, 'Laporan Retur SP2D');
 	$py1 = $this->GetY();
 	$px2 = $px1;
 	$py2 = $py1;
@@ -56,98 +55,86 @@
     #tableheader
     $this->SetFont('Arial','B',7);
 	$ukuran_kolom_pagu_total_sisa=70;
-	$ukuran_kolom_jenis_belanja=65;	
-	$ukuran_kolom_satker=40;	
-	$ukuran_kolom_akun=40;
-	$ukuran_kolom_program=35;
-	$ukuran_kolom_output=35;
-	$ukuran_kolom_dana=50;
-	$ukuran_kolom_bank=35;
-	$ukuran_kolom_kewenangan=50;
-	$ukuran_kolom_kolorari=50;
-	$jumlah_kolom=$ukuran_kolom_jenis_belanja*2+$ukuran_kolom_program+
-	$ukuran_kolom_output+$ukuran_kolom_dana+
-	$ukuran_kolom_satker+$ukuran_kolom_akun+
-	$ukuran_kolom_bank+$ukuran_kolom_kewenangan+
-	$ukuran_kolom_kolorari;
+	$ukuran_kolom_pagu_total=120;
+	$ukuran_kolom_jenis_belanja=60;	
+	$ukuran_kolom_1a=100;
+	$ukuran_kolom_2a=140;
+	$ukuran_kolom_3a=60;
+	$ukuran_kolom_4a=60;
+	$ukuran_kolom_a=$ukuran_kolom_1a+$ukuran_kolom_2a+$ukuran_kolom_3a+$ukuran_kolom_4a;
+	$ukuran_kolom_1b=95;
+	$ukuran_kolom_2b=60;
+	$ukuran_kolom_3b=160;
+	$ukuran_kolom_b=$ukuran_kolom_1b+$ukuran_kolom_2b+$ukuran_kolom_3b;
 
     $this->SetFillColor(200,200,200);	
     $left = $this->GetX();
-    $this->Cell(30,$h,'No',1,0,'L',true);
-    $this->SetX($left += 30); $this->Cell(120, $h, 'Nomor DIPA', 1, 0, 'L',true);
-     $this->SetX($left += 120); $this->Cell(40, $h, 'Revisi Ke', 1, 0, 'C',true);  
-	$this->SetX($left += 40); $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Tanggal Post Revisi', 1, 0, 'C',true);
+    $this->Cell(20,$h,'No',1,0,'L',true);
+
+    $this->SetX($left += 20);$this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Kode/Nama Satker', 1, 0, 'C',true);
 	$px1 = $this->GetX();
-	$this->SetX($left += $ukuran_kolom_pagu_total_sisa); 
-	//$this->Cell(590, $h/2, 'Jenis Belanja', 1, 0, 'C',true);
+	$this->SetX($left += $ukuran_kolom_pagu_total_sisa); $this->Cell($ukuran_kolom_a, $h/2, 'SP2D Retur', 1, 0, 'C',true);
 	$py1 = $this->GetY();
 	$px2 = $px1;
-	//$py2 = $py1+20;
-	$py2 = $py1;
+	$py2 = $py1+20;
 	$this->SetXY($px2,$py2);
-	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Pagu', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-	$this->Cell($ukuran_kolom_satker, $h, 'Satker', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_satker);
-	$this->Cell($ukuran_kolom_akun, $h, 'Akun', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_akun);
-	$this->Cell($ukuran_kolom_program, $h, 'Program', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_program);
-	$this->Cell($ukuran_kolom_output, $h, 'Output', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_output);
-	$this->Cell($ukuran_kolom_dana, $h, 'Dana', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_dana);
-	$this->Cell($ukuran_kolom_bank, $h, 'Bank', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_bank);
-	$this->Cell($ukuran_kolom_kewenangan, $h, 'Kewenangan', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_kewenangan);
-	$this->Cell($ukuran_kolom_jenis_belanja,$h, 'Tipe Anggaran', 1, 0, 'C',true);
-	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-	$this->Cell($ukuran_kolom_kolorari,$h, 'Kolorari', 1, 0, 'C',true);
+	$this->Cell($ukuran_kolom_1a, $h/2, 'No/Tgl.SP2D-No.Transaksi', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_1a);
+	$this->Cell($ukuran_kolom_2a, $h/2, 'Bank/Nama/No.Rek. Penerima-Jumlah', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_2a);
+	$this->Cell($ukuran_kolom_3a, $h/2, 'Uraian SP2D', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_3a);
+	$this->Cell($ukuran_kolom_4a, $h/2, 'Alasan Retur', 1, 0, 'C',true);
 	$py3 = $this->GetY();
-    $this->SetX($left += $jumlah_kolom); 
-	$this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Kode Cadangan', 1, 1, 'C',true);
-	$this->Ln(8);  
+	$this->SetY($py3 -= 20);
+    $this->SetX($left += $ukuran_kolom_a); $this->Cell($ukuran_kolom_b, $h/2, 'SP2D Pengganti', 1, 0, 'C',true);
+	$py1 = $this->GetY();
+	$px2 = $px1+$ukuran_kolom_a;
+	$py2 = $py1+20;
+	$this->SetXY($px2,$py2);
 	
-    $this->SetFont('Arial','',7);	
-    $this->SetWidths(array(30,120,
-	40,$ukuran_kolom_pagu_total_sisa,
-	$ukuran_kolom_jenis_belanja,$ukuran_kolom_satker,
-	$ukuran_kolom_akun,$ukuran_kolom_program,
-	$ukuran_kolom_output,$ukuran_kolom_dana,
-	$ukuran_kolom_bank,$ukuran_kolom_kewenangan,
-	$ukuran_kolom_jenis_belanja,$ukuran_kolom_kolorari,
-	$ukuran_kolom_pagu_total_sisa));
-    $this->SetAligns(array('C','L',
-	'C','R',
-	'R','C',
-	'C','C',
-	'C','C',
-	'C','C',
-	'C','C',
-	'C','C'));
+	$this->Cell($ukuran_kolom_1b, $h/2, 'Tgl/No.SP2D Pengganti', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_1b);
+	
+	$this->Cell($ukuran_kolom_2b, $h/2, 'Tgl/No. SP2D', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_2b);
+
+	$this->Cell($ukuran_kolom_3b, $h/2, 'Bank/Nama/No.Rek/Jumlah Penerima', 1, 0, 'C',true);
+	$this->SetX($px2 += $ukuran_kolom_3b); 
+	
+	$py3 = $this->GetY();
+	$this->SetY($py3 -= 20);
+    $this->SetX($left += $ukuran_kolom_b); 
+	$this->Cell($ukuran_kolom_pagu_total, $h, 'Bank Pembayar-Status Retur', 1, 1, 'C',true);
+	$this->Ln(3);  
+	
+    $this->SetFont('Arial','',6);	
+    $this->SetWidths(array(20,80,
+	$ukuran_kolom_pagu_total_sisa,$ukuran_kolom_a,
+	$ukuran_kolom_1a,$ukuran_kolom_2a,
+	$ukuran_kolom_3a,$ukuran_kolom_4a,
+	$ukuran_kolom_b,$ukuran_kolom_1b,
+	$ukuran_kolom_2b,$ukuran_kolom_3b,$ukuran_kolom_pagu_total
+	));
+    $this->SetAligns(array('C','C','L','R','R','R','R','R','R','R','R','R'));
     $no = 1; $this->SetFillColor(255);
     foreach ($this->data as $value) {
 	$this->Row(
     array($no++,
-	$value->get_dipa_no(),
-	$value->get_revision_no(),
-	$value->get_tanggal_posting_revisi(),
-	$value->get_line_amount(),
-	$value->get_satker_code(),
-	$value->get_account_code(),
-	$value->get_program_code(),
-	$value->get_output_code(),
-	$value->get_dana_code(),
-	$value->get_bank_code(),
-	$value->get_kewenangan_code(),
-	$value->get_budget_type(),
-	$value->get_intraco_code(),
-	$value->get_cadangan_code())
-	);
-
+	$value->get_kdsatker().'-'.$value->get_nmsatker(),
+	$value->get_statement_date().'-'.$value->get_sp2d_number().'-'.$value->get_receipt_number(),
+	$value->get_bank_name().'-'.$value->get_vendor_name().'-'.$value->get_vendor_ext_bank_account_num().'-'.$value->get_amount(),
+	$value->get_invoice_description(),
+	$value->get_keterangan_retur(),
+	$value->get_tgl_proses_sp2d_pengganti(),
+	$value->get_tgsp2d_pengganti().'-'.$value->get_nosp2d_pengganti(),
+	$value->get_bank_name_pengganti().'-'.$value->get_vendor_name_pengganti().'-'.$value->get_vendor_account_num_pengganti().'-'.$value->get_nilai_sp2d_pengganti(),
+	$value->get_bank_account_name().'-'.$value->get_status_retur()
+	
+	));
     }
-	 $this->Ln(3);  
+	$this->Ln(3);  
+	 
     }
     
 	//footer
@@ -310,10 +297,9 @@
  
 
 //--------------------------
- //Laporan Data Revisi DIPA
     //pilihan
     $options = array(
-    'filename' => 'Laporan Data Revisi DIPA.PDF', //nama file penyimpanan, kosongkan jika output ke browser
+    'filename' => 'Laporan Retur SP2D.PDF', //nama file penyimpanan, kosongkan jika output ke browser
     'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
     'paper_size'=>'F4',	//paper size: F4, A3, A4, A5, Letter, Legal
     'orientation'=>'L' //orientation: P=portrait, L=landscape

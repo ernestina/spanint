@@ -17,6 +17,37 @@
 		<br>
 		</h2>
     </div>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : sp2dGajiDobel.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				/*
+ 				$kdkppn='null';				
+				$kdbank='null';
+				$kdtgl_awal='null';
+				$kdtgl_akhir='null'; 
+ */		
+
+
+				$kdkppn=Session::get('id_user');
+			
+			if (isset($this->d_bank)) {
+				$kdbulan=$this->d_bank;
+			}
+			
+						
+				?>
+			 
+				<a href="<?php echo URL; ?>DataKppn/sp2dGajiDobel_PDF/<?php echo $kdbulan; ?>" class="modal">PDF</a>
+							
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <a href="#bModal" class="modal">FILTER DATA</a><br><br>
         <div id="bModal" class="modalDialog" >

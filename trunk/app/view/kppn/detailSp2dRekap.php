@@ -34,6 +34,51 @@ if (isset($this->last_update)){
 	}
 }
 ?>
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : detailSp2dRekap.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				/*
+ 				$kdkppn='null';				
+				$kdbank='null';
+				$kdtgl_awal='null';
+				$kdtgl_akhir='null'; 
+ */		
+
+
+				$kdkppn=Session::get('id_user');
+			
+			if (isset($this->d_bank)) {
+				$kdbank=$this->d_bank;
+				echo '$kdbank:'.$kdbank;
+			}
+			if (isset($this->d_jendok)) {
+				$kdjendok=$this->d_jendok;
+				echo '$kdjendok:'.$kdjendok;
+			}
+			if (isset($this->d_tgl_awal)) {
+				$kdtgl_awal1=$this->d_tgl_awal;
+				list($bln,$tgl,$thn)=explode('-',$kdtgl_awal1);
+				$kdtgl_awal=$thn.$tgl.$bln;
+			}
+			if (isset($this->d_tgl_akhir)) {
+				$kdtgl_akhir1=$this->d_tgl_akhir;
+				list($bln,$tgl,$thn)=explode('-',$kdtgl_akhir1);	
+				$kdtgl_akhir=$thn.$tgl.$bln;
+			}
+						
+				?>
+			 
+				<a href="<?php echo URL; ?>DataKppn/detailRekapSP2D_PDF/<?php echo $kdbank."/".$kdjendok."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdkppn; ?>" class="modal">PDF</a>
+							
+		<?php
+			//----------------------------------------------------		
+		?>
 
 <div id="fitur">
 		<table width="100%" class="table table-bordered zebra" id='fixheader'>

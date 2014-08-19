@@ -78,9 +78,6 @@
 		<ul class="inline" style="float: right"><li>
 		<a href="<?php echo URL; ?>DataDIPA/DataRealisasiTransfer_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
-<!-- 	<ul class="inline" style="float: right"><li>
-	<a  href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
- -->
 				
 			
 		<?php

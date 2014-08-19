@@ -40,7 +40,7 @@
 	$this->Image("./././public/img/depkeu.png",30,30,30,30);
 	$px1 = $this->GetX();
 	$this->SetX($left+50); 
-	$this->MultiCell(0, $h/2, 'Laporan Iinformasi Sisa Pagu Per Akun DIPA Satker ');
+	$this->MultiCell(0, $h/2, 'Laporan Informasi Sisa Pagu Per Akun DIPA Satker ');
 	$py1 = $this->GetY();
 	$px2 = $px1;
 	$py2 = $py1;
@@ -96,7 +96,7 @@
 	
     $this->SetFont('Arial','',7);	
     $this->SetWidths(array(30,40,40,50,$ukuran_kolom_jenis_belanja,$ukuran_kolom_satker,$ukuran_kolom_dana,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja));
-    $this->SetAligns(array('C','C','C','C','C','C','C','R','R','R','R','R','R','R','R'));
+    $this->SetAligns(array('C','C','C','C','C','C','C','C','C','C','R','R','R','R'));
     $no = 1; $this->SetFillColor(255);
     foreach ($this->data as $value) {
 	$this->Row(
@@ -110,10 +110,11 @@
 	$value->get_kewenangan(),
 	$value->get_lokasi(),
 	$value->get_budget_type(),
-	$value->get_budget_amt(),
-	$value->get_encumbrance_amt(),
-	$value->get_actual_amt(),
-	$value->get_balancing_amt())
+	number_format($value->get_budget_amt()),
+	number_format($value->get_encumbrance_amt()),
+	number_format($value->get_actual_amt()),
+	number_format($value->get_balancing_amt())
+	)
 	);
 
     }

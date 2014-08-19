@@ -28,7 +28,65 @@ if (isset($this->last_update)){
 					echo "Tanggal : ".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
 				}
 			?>
-</div>
+			
+			</div>
+
+<?php
+			//----------------------------------------------------
+			//Development history
+			//Revisi : 0
+			//Kegiatan :1.mencetak hasil filter ke dalam pdf
+			//File yang diubah : daftarretur.php
+			//Dibuat oleh : Rifan Abdul Rachman
+			//Tanggal dibuat : 18-07-2014
+			//----------------------------------------------------
+				
+				
+				/* $kdakun='null';
+				//$kdsatker='null';
+				$kdoutput='null';
+				$kdprogram='null';
+				$kdtgl_awal='null';
+				$kdtgl_akhir='null'; */
+				
+				$kdkppn=Session::get('id_user');
+			if (isset($this->d_nosp2d)) {
+				$kdnosp2d=$this->d_nosp2d;
+				}
+
+			if (isset($this->d_barsp2d)) {
+				$kdbarsp2d=$this->d_barsp2d;
+				}
+			
+			if (isset($this->d_kdsatker)) {
+				$kdsatker=$this->d_kdsatker;
+			}
+			if (isset($this->d_bank)) {
+				$kdbank=$this->d_bank;
+			}
+			
+			if (isset($this->d_status)) {
+				$kdstatus=$this->d_status;
+			}
+			
+			if (isset($this->d_tgl_awal)) {
+				$kdtgl_awal=$this->d_tgl_awal;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
+				$kdtgl_awal=$bln."-".$tgl."-".$thn;
+			}
+			if (isset($this->d_tgl_akhir)) {
+				$kdtgl_akhir=$this->d_tgl_akhir;
+				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
+				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
+			}
+			
+				?>
+	<a href="<?php echo URL; ?>DataRetur/monitoringRetur_PDF/<?php echo $kdkppn."/".$kdnosp2d."/".$kdbarsp2d."/".$kdsatker."/".$kdbank."/".$kdstatus."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="modal">PDF</a>
+
+			
+		<?php
+			//----------------------------------------------------		
+		?>
 <a href="#oModal" class="modal">FILTER DATA</a>
         <div id="oModal" class="modalDialog" >
             <div>
