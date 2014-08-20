@@ -92,15 +92,19 @@ class Bootstrap {
         /*         * * load arguments for action ** */
         $arguments = array();
         $i = 0;
-//        var_dump($this->url);
+
         foreach ($this->url as $key => $val) {
             if ($i > 1) {
                 $arguments[] = $val;
-//                var_dump($arguments);
-//                $i++;
             }
             $i++;
         }
+
+        $_POST = $this->clean_input_data($_POST);
+        $_GET = $this->clean_input_data($_GET);
+        $_REQUEST = $this->clean_input_data($_REQUEST);
+        
+        $arguments = $this->clean_input_data($arguments);
 
         Session::sessionUpdated();
         if ($i > 1)
@@ -133,4 +137,45 @@ class Bootstrap {
         ;
     }
 
+	/**
+	 * Clean Input Data
+	 *
+	 * Taken from commit db4f429fdbc3e3cdca53f5d9ab1daf5811c5ac19
+	 * Not implemented (yet ?), these should be handled by application's logic:
+	 *  - clean input keys
+	 *  - clean UTF-8 characters
+	 *  - clean control characters
+	 *  - standardize newlines
+	 *
+	 * @access	private
+	 * @param	string
+	 * @return	string
+	 **/
+	
+	private function clean_input_data($str) {
+		
+		if (is_array($str)) {
+			$new_array = array();
+			foreach ($str as $key => $val) {
+				$new_array[$key] = $this->clean_input_data($val);
+			}
+			return $new_array;
+		}
+
+		// quote string with slashes
+		// ie. single quote, double quote, backslash, and NULL
+		$str = addslashes($str);
+		// strip HTML and PHP tags from a string
+		$str = strip_tags($str);
+		
+		/**
+		 * Use rawurldecode() so it does not remove plus signs
+		 * URL Decode, Just in case stuff like this is submitted:
+		 *
+		 * <a href="http://%77%77%77%2E%67%6F%6F%67%6C%65%2E%63%6F%6D">Google</a>
+		 ***/
+		$str = rawurldecode($str);
+
+		return $str;
+	}
 }
