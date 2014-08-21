@@ -130,7 +130,7 @@
                                 <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
 								<li><a href=' . URL . 'dataDIPA/ProsesRevisi></i>Informasi Proses Revisi DIPA</a></li>
 								<li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
-								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus</a></li>
+								<li><a href='  . URL . 'dataDIPA/Fund_fail></i>Data Pagu Minus</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasiTransfer></i>Realisasi Belanja Transfer Daerah</a></li>
@@ -321,7 +321,7 @@
 						echo '<ul>
                                 <li><a href='  . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
                                 <li><a href='  . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
-								<li><a href='  . URL . 'dataDIPA/fund_fail></i>Data Pagu Minus</a></li>
+								<li><a href='  . URL . 'dataDIPA/Fund_fail></i>Data Pagu Minus</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
 								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
                             </ul>
