@@ -106,7 +106,7 @@ class Bootstrap {
         
         $arguments = $this->clean_input_data($arguments);
 
-        //Session::sessionUpdated();
+        Session::sessionUpdated();
         if ($i > 1)
             call_user_func_array(array($this->controller, $action), $arguments);
         else
