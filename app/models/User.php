@@ -22,7 +22,7 @@ class User {
     }
 
     public function login($username, $password) {
-        $sql = "SELECT * FROM " . $this->_table . " WHERE KD_SATKER='" . $username . "' AND PASS_USER='" . $password . "'";
+        $sql = "SELECT * FROM " . $this->_table . " WHERE KD_SATKER = '" . $username . "' AND PASS_USER = '" . $password . "'";
         $result = $this->_db->select($sql);
 		//var_dump($sql);
 		//var_dump($result);
