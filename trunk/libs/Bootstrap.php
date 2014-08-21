@@ -106,7 +106,7 @@ class Bootstrap {
         
         $arguments = $this->clean_input_data($arguments);
 
-        Session::sessionUpdated();
+        //Session::sessionUpdated();
         if ($i > 1)
             call_user_func_array(array($this->controller, $action), $arguments);
         else
@@ -162,12 +162,6 @@ class Bootstrap {
 			return $new_array;
 		}
 
-		// quote string with slashes
-		// ie. single quote, double quote, backslash, and NULL
-		$str = addslashes($str);
-		// strip HTML and PHP tags from a string
-		$str = strip_tags($str);
-		
 		/**
 		 * Use rawurldecode() so it does not remove plus signs
 		 * URL Decode, Just in case stuff like this is submitted:
@@ -175,7 +169,87 @@ class Bootstrap {
 		 * <a href="http://%77%77%77%2E%67%6F%6F%67%6C%65%2E%63%6F%6D">Google</a>
 		 ***/
 		$str = rawurldecode($str);
+		
+		// quote string with slashes
+		// ie. single quote, double quote, backslash, and NULL
+		$str = addslashes($str);
+		// strip HTML and PHP tags from a string
+		$str = strip_tags($str);
+
+		// escape string, specific to oracle database
+		$str = $this->oci_escape_string($str);
+		
+		return $str;
+	}
+
+	/**
+	 * Remove Invisible Characters
+	 *
+	 * This prevents sandwiching null characters
+	 * between ascii characters, like Java\0script.
+	 *
+	 * @access	private
+	 * @param	string
+	 * @return	string
+	 **/
+
+	private function remove_invisible_characters($str, $url_encoded = TRUE) {
+		
+		$non_displayables = array();
+		
+		// every control character except newline (dec 10)
+		// carriage return (dec 13), and horizontal tab (dec 09)
+		
+		if ($url_encoded) {
+			$non_displayables[] = '/%0[0-8bcef]/';	// url encoded 00-08, 11, 12, 14, 15
+			$non_displayables[] = '/%1[0-9a-f]/';	// url encoded 16-31
+		}
+		
+		// 00-08, 11, 12, 14-31, 127		
+		$non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';	
+
+		do {
+			$str = preg_replace($non_displayables, '', $str, -1, $count);
+		}
+		
+		while ($count);
 
 		return $str;
 	}
+	
+	/**
+	 * Escape String
+	 *
+	 * @access  private
+	 * @param   string
+	 * @param	bool	whether or not the string will be used in a LIKE condition
+	 * @link    http://stackoverflow.com/a/4949307/82126
+	 * @link    https://github.com/doctrine/dbal/pull/438
+	 * @return  string
+	 **/
+	
+	private function oci_escape_string($str, $like = TRUE) {
+		
+		if (is_array($str)) {
+			foreach ($str as $key => $val) {
+				$str[$key] = $this->oci_escape_string($val, $like);
+			}
+			return $str;
+		}
+
+		$str = $this->remove_invisible_characters($str);
+		
+		// rollback addslashes
+		$str = str_replace('\\\'', '\'', $str);
+		// escape "'"	
+		$str = strtr($str, array("'" => "''"));
+		$str = addcslashes($str, "\000\n\r\032");
+
+		if ($like) {
+			
+		}
+		
+
+		return $str;
+	}	
 }
