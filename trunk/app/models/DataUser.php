@@ -19,6 +19,7 @@ class DataUser {
     private $_error;
     private $_valid = TRUE;
     private $_table = 'd_user';
+    private $_table1 = 't_satker';
     public $registry;
 
     /*
@@ -72,6 +73,36 @@ class DataUser {
         }
 		//var_dump($data);
         return $data;
+    }
+	
+	public function get_akses_kppn_satker($kolom,$nilai) {
+		$session_check = "GUEST = '000'";
+		if (Session::get('role') == ADMIN){
+			$session_check = "";
+		}
+		if (Session::get('role') == SATKER){
+			$session_check = "AND KDSATKER = '".Session::get('kd_satker')."'";
+		}
+		if (Session::get('role') == KPPN){
+			$session_check = "AND KPPN = '".Session::get('kd_satker')."'";
+		}
+		if (Session::get('role') == PKN){
+			$session_check = "";
+		}
+		if (Session::get('role') == KANWIL){
+			$session_check = "AND KANWIL_DJPB = '".Session::get('kd_satker')."'";
+		}
+		if (Session::get('role') == DJA){
+			$session_check = "";
+		}
+        $sql = "SELECT * FROM " . $this->_table1." WHERE  ".$kolom." = '".$nilai."'".$session_check; 
+        $result = $this->db->select($sql);
+		var_dump($sql);
+        if (count($result)>=1){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
     }
 
     public function get_d_user_by_id($id) {

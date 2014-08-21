@@ -173,7 +173,7 @@ $akses['DataSPMKPPN'] = array(
 $akses['DataSupplierKPPN'] = array(
     '__construct',
     'index',
-    'downloadSupplierx',
+    'downloadSupplierXls',
     '__destruct'
 );
 

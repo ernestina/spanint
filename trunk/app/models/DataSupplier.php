@@ -223,7 +223,7 @@ class DataSupplier {
 				v_supplier_number,
 				kppn_code
 				FROM supp 
-				where kppn_code = '".$filter."'";
+				where kppn_code = '".$filter."' ";
         $result = $this->db->select($sql);
         $data = array();   
         foreach ($result as $val) {

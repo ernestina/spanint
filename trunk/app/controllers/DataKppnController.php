@@ -1098,10 +1098,11 @@ class DataKppnController extends BaseController {
 		$d_sppm = new DataSppm($this->registry);
 		$filter = array ();
 		$no=0;
+		$d_kppn_list = new DataUser($this->registry);
 		
 		/*pembatasan akses dari session, karena yang dibatasi hanya variabel $kdkppn, 
 		  maka pembatasan data dibawah hanya membatasi kolom KDKPPN di database */
-		if (Session::get('role')==ADMIN){
+		/*if (Session::get('role')==ADMIN){
 			//do nothing karena untuk menu ini, ADMIN tidak dibatasi untuk mengambil data
 		}
 		if (Session::get('role')==SATKER){
@@ -1114,8 +1115,7 @@ class DataKppnController extends BaseController {
 			//do nothing karena untuk menu ini, PKN tidak bisa mengakses menu ini, if untuk pkn bisa dihilangkan
 		}
 		if (Session::get('role')==KANWIL){
-			 //untuk menlist kppn di wilayah kanwil nya
-			$d_kppn_list = new DataUser($this->registry);
+			//untuk menlist kppn di wilayah kanwil nya
 			$kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			$kppn_list2='0';
 			foreach ($kppn_list as $value1){
@@ -1127,7 +1127,7 @@ class DataKppnController extends BaseController {
 		}
 		if (Session::get('role')==DJA){
 			//do nothing karena untuk menu ini, DJA tidak bisa mengakses menu ini, if untuk dja bisa dihilangkan
-		}
+		}*/
 		
 		//handle filter dari UI
 		if ($bank=='BNI'){
@@ -1151,15 +1151,23 @@ class DataKppnController extends BaseController {
 		} 
 		if (!is_null($kdkppn)){
 			$filter[$no++]=" KDKPPN = '".$kdkppn."'";
-				$d_kppn = new DataUser($this->registry);
-				$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+			$d_kppn = new DataUser($this->registry);
+			$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+		} else {
+			$kdkppn = Session::get('kd_satker');
 		}
 			
 		// untuk mengambil data last update 
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
-		$this->view->data = $d_sppm->get_detail_sp2d_gaji($filter);
+		/*pembatasan akses dari session, inputan adalah nama kolom dan isi kolom yang ingin dibatasi.
+		  contoh : disini yang dibatasi adalah kolom KPPN dalam tabel t_satker dengan isian sesuai dengan variabel input $kdkppn*/
+		if ($d_kppn_list->get_akses_kppn_satker("KPPN",$kdkppn)){
+			$this->view->data = $d_sppm->get_detail_sp2d_gaji($filter);
+		} else {
+			$this->view->data = '';
+		}
 		$this->view->render('kppn/detailSp2dGaji');
 	}
 		public function detailSp2dGaji_PDF($kdbank=null,$kdbulan=null,$kdkppn=null) {
