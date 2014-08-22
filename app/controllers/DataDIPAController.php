@@ -106,10 +106,14 @@ class DataDIPAController extends BaseController {
 	}
 			//----------------------------------------------------
 
-	public function Fund_fail() {
+	public function Fund_fail($satker=null) {
 		$d_spm1 = new DataFundFail($this->registry);
 		$filter = array ();
 		$no=0;
+			if ($satker != '') {
+					$filter[$no++]=" KDSATKER =  '".$satker."'";				
+					$this->view->satker_code = $satker;
+				}
 			if (isset($_POST['submit_file'])) {
 			
 				if ($_POST['kdkppn']!=''){
@@ -155,6 +159,9 @@ class DataDIPAController extends BaseController {
 			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN_CODE = '".Session::get('id_user')."'";	
 			$this->view->data = $d_spm1->get_fun_fail_filter($filter);
 			}
+			if (Session::get('role')==SATKER) {$filter[$no++]="KDSATKER = '".Session::get('kd_satker')."'";	
+			$this->view->data = $d_spm1->get_fun_fail_filter($filter);
+			}
 	
 		//var_dump($d_spm->get_hist_spm_filter());
 		//$this->view->data = $d_spm1->get_fun_fail_filter($filter);
@@ -165,7 +172,7 @@ class DataDIPAController extends BaseController {
 		$d_spm1 = new DataFundFail($this->registry);
 		$filter = array ();
 		$no=0;
-			
+				
 				if ($kdkppn!=''){
 					$filter[$no++]="KPPN_CODE = '".$kdkppn."'";
 					$d_kppn = new DataUser($this->registry);
@@ -277,6 +284,9 @@ class DataDIPAController extends BaseController {
 			if (Session::get('role')==KPPN) {$filter[$no++]="KPPN = '".Session::get('id_user')."'";	
 			
 			}
+			if (Session::get('role')==SATKER) {$filter[$no++]=" SATKER = '".Session::get('kd_satker')."'";	
+			$this->view->data = $d_spm1->get_fun_fail_filter($filter);
+			}
 
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
@@ -326,12 +336,12 @@ class DataDIPAController extends BaseController {
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
-		$this->view->data = $d_spm1->get_fa_filter($filter);
+		$this->view->data = $d_spm1->get_fa_summary_filter($filter);
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/realisasiFA_1');
 	}
 	
-	public function RealisasiFA($kdsatker=null) {
+	public function RealisasiFA($kdsatker=null, $program=null, $output=null, $akun=null) {
 		$d_spm1 = new DataFA($this->registry);
 		$filter = array ();
 		$no=0;
@@ -342,10 +352,24 @@ class DataDIPAController extends BaseController {
 			else{
 				$filter[$no++]=" A.SATKER =  '".Session::get('kd_satker')."'";
 				}
+		if ($program != '') {
+					$filter[$no++]=" A.PROGRAM =  '".$program."'";
+				//$this->view->invoice_num = $invoice_num;	
+				}
+		if ($output != '') {
+					$filter[$no++]=" A.OUTPUT =  '".$output."'";
+				//$this->view->invoice_num = $invoice_num;	
+				}
+		if ($akun != '') {
+					$filter[$no++]=" A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '".$akun. "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '".$akun. "')";
+				//$this->view->invoice_num = $invoice_num;	
+				
+				}
+			
 		if (Session::get('role')==KPPN) {
 					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
 			}		
-			if (isset($_POST['submit_file'])) {
+		if (isset($_POST['submit_file'])) {
 				
 				if ($_POST['kdsatker']!=''){
 					$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
@@ -847,14 +871,18 @@ class DataDIPAController extends BaseController {
 		$this->view->render('kppn/encumbrances');
 	}
 	
-	public function ProsesRevisi() {
+	public function ProsesRevisi($satker=NULL) {
 		$d_spm1 = new proses_revisi($this->registry);
 		$filter = array ();
 		$no=0;
+			if ($satker != '') {
+					$filter[$no++]=" A.SATKER_CODE =  '".$satker."'";				
+					$this->view->satker_code = $satker;
+				}
 			if (isset($_POST['submit_file'])) {
-			
+				
 				if ($_POST['kdkppn']!=''){
-					$filter[$no++]="B.KPPN = '".$_POST['kdkppn']."'";
+					$filter[$no++]="A.KPPN_CODE = '".$_POST['kdkppn']."'";
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 				} 
@@ -870,11 +898,11 @@ class DataDIPAController extends BaseController {
 					$filter[$no++]=" UPPER(B.NMSATKER) LIKE UPPER('%".$_POST['nmsatker']."%')";
 					$this->view->d_invoice = $_POST['nmsatker'];
 				}
-				$this->view->data = $d_spm1->get_revisi_dipa($filter);
+				//$this->view->data = $d_spm1->get_revisi_dipa($filter);
 			}
 			if (Session::get('role')==KPPN) {
-				$filter[$no++]="B.KPPN = '".Session::get('id_user')."'";
-				$this->view->data = $d_spm1->get_revisi_dipa($filter);
+				$filter[$no++]="A.KPPN_CODE = '".Session::get('id_user')."'";
+				//$this->view->data = $d_spm1->get_revisi_dipa($filter);
 			}
 			
 			if (Session::get('role')==KANWIL){
@@ -884,9 +912,13 @@ class DataDIPAController extends BaseController {
 			if (Session::get('role')==ADMIN || Session::get('role')==DJA){
 				$d_kppn_list = new DataUser($this->registry);
 				$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-				$this->view->data = $d_spm1->get_revisi_dipa($filter);
+				//$this->view->data = $d_spm1->get_revisi_dipa($filter);
 			}
-		//$this->view->data = $d_spm1->get_revisi_dipa($filter);
+			if (Session::get('role')==SATKER) {
+				$filter[$no++]="A.SATKER_CODE = '".Session::get('kd_satker')."'";	
+				//$this->view->data = $d_spm1->get_revisi_dipa($filter);
+			}
+		$this->view->data = $d_spm1->get_revisi_dipa($filter);
 		$this->view->render('kppn/proses_revisi');
 	}
 	public function DetailRevisi($satker=null) {
@@ -897,6 +929,14 @@ class DataDIPAController extends BaseController {
 					$filter[$no++]=" KDSATKER =  '".$satker."'";
 				
 				}
+			if (Session::get('role')==KPPN) {
+				$filter[$no++]="KDKPPN = '".Session::get('id_user')."'";
+				//$this->view->data = $d_spm1->detail_revisi($filter);
+			}
+			if (Session::get('role')==SATKER) {
+				$filter[$no++]="KDSATKER = '".Session::get('kd_satker')."'";	
+				//$this->view->data = $d_spm1->detail_revisi($filter);
+			}
 		$this->view->d_kdsatker =$satker;
 		$this->view->data = $d_spm1->detail_revisi($filter);
 		$this->view->render('kppn/detail_revisi');

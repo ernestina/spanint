@@ -9,8 +9,6 @@ class DataFA{
 
     private $db;
 	private $_period_name;
-	
-	
     private $_satker;
 	private $_code_id;
     private $_kppn;
@@ -57,9 +55,12 @@ class DataFA{
 				FROM " 
 				. $this->_table1. " A, "
 				. $this->_table2. " B 
-				WHERE
+				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' AND
-				A.SATKER=B.KDSATKER ";
+				A.SATKER=B.KDSATKER
+				AND A.SUMMARY_FLAG = 'N' 
+				AND A.BUDGET_AMT + A.ENCUMBRANCE_AMT + A.ACTUAL_AMT <> 0 
+				";
 		$no=0;
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
@@ -98,6 +99,59 @@ class DataFA{
         }
         return $data;
     }
+	
+	public function get_fa_summary_filter($filter) {
+		Session::get('id_user');
+		$sql = "SELECT Distinct A.*, B.NMSATKER
+				FROM " 
+				. $this->_table1. " A, "
+				. $this->_table2. " B 
+				WHERE 1=1
+				AND
+				A.SATKER=B.KDSATKER 
+				AND A.SUMMARY_FLAG = 'Y' 
+				AND A.BUDGET_AMT + A.ENCUMBRANCE_AMT + A.ACTUAL_AMT <> 0
+				";
+		$no=0;
+		foreach ($filter as $filter) {
+			$sql .= " AND ".$filter;
+		}
+		
+		$sql .= " ORDER BY A.OUTPUT, A.AKUN " ;
+		
+		//var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['SATKER']);
+			$d_data->set_code_id($val['CODE_COMBINATION_ID']);
+            $d_data->set_kppn($val['KPPN']);
+            $d_data->set_akun($val['AKUN']);
+            $d_data->set_program($val['PROGRAM']);
+            $d_data->set_output($val['OUTPUT']);
+            $d_data->set_dana($val['DANA']);
+			$d_data->set_bank($val['BANK']);
+			$d_data->set_kewenangan($val['KEWENANGAN']);
+			$d_data->set_lokasi($val['LOKASI']);
+			$d_data->set_budget_type($val['BUDGET_TYPE']);
+			$d_data->set_currency_code($val['CURRENCY_CODE']);
+			$d_data->set_budget_amt($val['BUDGET_AMT']);
+			$d_data->set_encumbrance_amt($val['ENCUMBRANCE_AMT']);
+			$d_data->set_actual_amt($val['ACTUAL_AMT']);
+			$d_data->set_balancing_amt($val['BALANCING_AMT']);
+			$d_data->set_nm_satker($val['NMSATKER']);
+			$d_data->set_obligation($val['OBLIGATION']);
+			$d_data->set_block_amount($val['BLOCK_AMOUNT']);
+			$d_data->set_temp_block($val['TEMP_BLOCKED_AMOUNT']);
+			$d_data->set_cash_limit($val['CASH_LIMIT']);
+			$d_data->set_invoice($val['INVOICE']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	
 	
 	public function get_global_fa_filter($filter) {
 		Session::get('id_user');

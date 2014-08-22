@@ -82,7 +82,7 @@
 			foreach ($this->data as $value){ 
 				echo "<tr>	";
 					echo "<td>" . $no++ . "</td>";
-					echo "<td><a href=".URL."dataDIPA/RealisasiFA/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
+					echo "<td><a href=".URL."dataDIPA/RealisasiFA_1/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
 					//echo "<td>" . $value->get_kdsatker() . "</td>";
 					echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
 					//echo "<td>" . $value->get_kppn() . "</td>";

@@ -264,7 +264,9 @@
 						echo '<li class="subnav"><a href=#>Modul SA</a>';
 						echo '<ul>
                                 <li><a href='  . URL . 'dataDIPA/RevisiDipa/'.Session::get('kd_satker').'></i>Informasi DIPA</a></li>
-                                <li><a href='  . URL . 'dataDIPA/RealisasiFA/'.Session::get('kd_satker').'></i>Sisa Pagu</a></li>
+								<li><a href=' . URL . 'dataDIPA/ProsesRevisi/'.Session::get('kd_satker').'></i>Informasi Proses Revisi DIPA</a></li>
+                                <li><a href='  . URL . 'dataDIPA/RealisasiFA_1/'.Session::get('kd_satker').'></i>Sisa Pagu</a></li>
+								<li><a href='  . URL . 'dataDIPA/Fund_fail/'.Session::get('kd_satker').'></i>Data Pagu Minus</a></li>
                             </ul>
                             </li>';
 						echo '<li class="subnav"><a href=#>Modul PM</a>';

@@ -23,7 +23,7 @@ $akses['DataDIPADJA'] = array(
     'RevisiDipa',
     'Fund_fail',
     'Detail_Fund_Fail',
-    'Detail_Fund_Fail_kd',
+    'Detail_Fund_fail_kd',
     'RealisasiFA',
     'nmsatker',
     'nmsatker1',
