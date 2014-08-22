@@ -39,17 +39,16 @@
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
 				?>
-	<a href="<?php echo URL; ?>dataSPM/holdSPM_PDF/<?php echo $kd_kppn."/".$invoice."/".$status; ?>" class="modal">PDF</a>
-			
-	<!-- <ul class="inline" style="float: right"><li>
-	<a  href="<?php echo URL; ?>dataSPM/holdSPM_PDF/<?php echo $kd_kppn."/".$invoice."/".$status; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
- -->
-			
-		<?php
-			//----------------------------------------------------		
-		?>
+	<ul class="inline" style="float: right">
+		<li>
+			<a href="<?php echo URL; ?>dataSPM/holdSPM_PDF/<?php echo $kd_kppn."/".$invoice."/".$status; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a>
+		</li>
 
-<a href="#xModal" class="modal">FILTER DATA</a><br><br>
+		<li>
+			<a href="#xModal" class="modal"><i class="fa fa-filter"></i>&nbsp; FILTER DATA</a>
+		</li>
+	</ul>
+	
         <div id="xModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>

@@ -114,37 +114,22 @@ header:before{
     width: 100%;
     margin: 20px 0px 0px 0px;
 }	
-/*
-#barat {
-   width:60%;
-   float:left;
-   
-}
-#timur {
-   width:30%;
-   float:left;
-   margin-left: 60px;
-}
-#barata {
-   width:65%;
-   margin-left: 320px;
-   margin-top: -40px;
-}
-#sidebar {
-      position: fixed;
-	  background: #f9f9f9;
-	  height: 500px;
-	  width: 300px;
-	  text-align: center;
-	  font-size: 16px;
-	  padding-top: 20px;  
-}
 
-#sidebar .level2 {
-    top: 200px;
-    left: 900px;
+#log {
+	width:400px; height:400px;
+	margin:100px auto;
+	background-color:#fff;
+	padding:10px;
+	box-shadow: #aaa 2px 2px 10px 1px;
+	border-radius: 5px;
+	text-align: center;
+	}
+	
+#login-form {
+	/*border: 1px solid black;*/
+	padding: 0px 70px;
+	margin: 50px auto;
 }
-*/
 #wrapper {
 	overflow: auto;
 	/*border: 1px solid #000000;*/
@@ -155,19 +140,6 @@ header:before{
 	margin-top: 10px
 	}
 
-
-#log {
-	overflow: auto;
-	/*border: 1px solid #000000;*/
-	background-color: #ffffff;
-	/*padding: 0px 0px 20px 0px;*/
-	box-shadow: #aaa 2px 2px 10px 1px;
-	height: 400px;
-	/*margin-right: 20px;*/
-	margin-top: 20px
-	}
-	
-	
 #top {
 	padding: 0px 20px 0px 20px;
 }
@@ -346,7 +318,7 @@ a #g2:hover, a #g3:hover, a #g4:hover {
 	width: 47%;
 	float: left;
 	margin: 40px 20px 20px 20px;
-	/*border: 1px solid black;*/
+	border: 1px solid black;
 	text-align: center;
 }
 
@@ -520,14 +492,31 @@ input, select, textarea{
 	}
 
 button {
+	font-family: Nexa;
 	cursor: pointer; 
-	
+	padding: 5px; 
+	border-radius: 5px;
+	text-decoration: none;
 	}
+
+button.logi{
+	border: 1px solid #2f96b4;
+	background-color: #2f96b4;
+	float: left;
+	width: 262px; height: 40px;
+	font-size: 110%;
+}
+button.logi:hover{
 	
+}	
+
 input.keterangan{
 	width: 210px;
 	}
-
+	
+input[type="text"].logi, input[type="password"].logi {
+	width: 250px; height: 30px;
+}
 textarea.midi {
 	width: 430px;
 }
@@ -561,6 +550,9 @@ input[type="number"] :focus, input[type="number"]:hover {
 	border: 1px solid #2f96b4;}
 
 input[type="email"] :focus, input[type="email"]:hover {
+	border: 1px solid #2f96b4;}
+
+input[type="password"] :focus, input[type="password"]:hover {
 	border: 1px solid #2f96b4;}
 
 select[type="text"] :focus, select[type="text"]:hover {
@@ -791,8 +783,6 @@ thead th.mid {
     border-radius: 5px;
     padding-left: 5px;
     text-align: center;
-	margin-right: 20px;
-	margin-left: 20px;
 }
 
 /*icon by bootstrap twitter and glyphicon*/

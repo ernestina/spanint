@@ -9,53 +9,38 @@
         <script src="<?php echo URL; ?>public/js/myjs.js"></script>
         <script src="<?php echo URL; ?>public/js/teamdf-jquery-number/jquery.number.js"></script>
         <link href="<?php echo URL; ?>public/css/ernest.css" rel="stylesheet">
+		<link href="<?php echo URL; ?>public/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo URL; ?>public/css/form.css" rel="stylesheet">
     </head>
-    <header><img src="<?php echo URL; ?>public/img/span-putih.png" width="40px" height="48px"></header>
-    <body>
+    <!--header><img src="<?php echo URL; ?>public/img/span-putih.png" width="40px" height="48px"></header>
+    <body-->
         <?php
         //if (isset($this->error)) {
         //echo "<div style='color:red' id=notfound><h2>" . $this->error . "<h2></div>";
         //}
         ?>
         <div id="log">
-            <div id="fitur">
                 <?php
                 if (isset($this->error)) {
                     echo "<div style='color:red' id=notfound><h2>" . $this->error . "<h2></div>";
                 }
                 ?>
 
-                <div class="kolom1">
-					<!--div class="pengumuman">
-						<h2>Pengumuman</h4>
-						<h3><p align='left'><b>[RALAT] [INFO] Maintenance SPAN, Minggu 13-07-2014.</b><br> Dikarenakan akan adanya maintenance untuk Interkoneksi Perbankan, yang rencananya akan diadakan pada hari Minggu, 13-07-2014 (Sehari Penuh).
-						Maka dari hal diatas, agar KPPN tidak melakukan pemrosesan SP2D pada waktu maintenance tersebut, karena resiko yang terjadi jika dilakukan proses SP2D pada saat maintenance adalah data dapat tidak terkirim ke perbankan. Terimakasih <br><br>
-						</p></h3>
-					</div-->
-				</div>
-				<div class="kolom2">
-                    <h1>Login</h1>
-                    <form id="login-form" action="<?php echo URL; ?>auth/login" method="post" style="margin-left: 150px">	
+                    <h1>Online Monitoring</h1>
+                    <form id="login-form" action="<?php echo URL; ?>auth/login" method="post" >	
+					
 						<div class="error" id="wuser" style="display:none"></div>
-                        <label class="isian">Username</label> 
-                        <input name="user" id="nuser" type="text" /> 
+                        <!--label class="isian">Username</label--> 
+                        <input class="logi" name="user" id="nuser" type="text" placeholder="Nama user" />
                         	
 
 						<div class="error" id="wpass" style="display:none"></div>	
-                        <label class="isian">Password</label>
-                        <input name="pass" id="pass" type="password" /> 
+                        <!--label class="isian">Password</label-->
+                        <input class="logi" name="pass" id="pass" type="password" placeholder="Password" />
                         
-
-
-                        <ul class="inline" style="margin-left: 100px"> 
-                            <li><input id="button" type="submit" class="sukses" name="yt0" value="Login" onClick="return cek()"/> 
-                            </li>
-                        </ul>
+                        <button id="button" type="submit" class="logi" name="yt0" value="Login" onClick="return cek()"/><i class="fa fa-paper-plane"></i>&nbsp; LOGIN</button> 
                     </form>
-                </div>
-            </div>
-        </div>
+                </div><!--end div kolom2-->
 
     </body>
 </html>
