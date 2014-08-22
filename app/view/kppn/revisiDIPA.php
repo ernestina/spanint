@@ -56,7 +56,7 @@
 			
 				?>
 	<ul class="inline" style="float: right"><li>
-	<a href="<?php echo URL; ?>DataDIPA/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+	<a href="<?php echo URL; ?>DataDIPA/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
 <!-- 	<ul class="inline" style="float: right"><li>
 	<a  href="<?php echo URL; ?>DataDIPA/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
