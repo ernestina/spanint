@@ -49,5 +49,4 @@ $akses['DataReturPKN'] = array(
     'monitoringReturPkn',
     '__destruct'
 );
-
 ?>

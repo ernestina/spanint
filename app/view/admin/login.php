@@ -9,40 +9,40 @@
         <script src="<?php echo URL; ?>public/js/myjs.js"></script>
         <script src="<?php echo URL; ?>public/js/teamdf-jquery-number/jquery.number.js"></script>
         <link href="<?php echo URL; ?>public/css/ernest.css" rel="stylesheet">
-		<link href="<?php echo URL; ?>public/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<?php echo URL; ?>public/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo URL; ?>public/css/form.css" rel="stylesheet">
     </head>
     <!--header><img src="<?php echo URL; ?>public/img/span-putih.png" width="40px" height="48px"></header>
     <body-->
+    <?php
+    //if (isset($this->error)) {
+    //echo "<div style='color:red' id=notfound><h2>" . $this->error . "<h2></div>";
+    //}
+    ?>
+    <div id="log">
         <?php
-        //if (isset($this->error)) {
-        //echo "<div style='color:red' id=notfound><h2>" . $this->error . "<h2></div>";
-        //}
+        if (isset($this->error)) {
+            echo "<div style='color:red' id=notfound><h2>" . $this->error . "<h2></div>";
+        }
         ?>
-        <div id="log">
-                <?php
-                if (isset($this->error)) {
-                    echo "<div style='color:red' id=notfound><h2>" . $this->error . "<h2></div>";
-                }
-                ?>
 
-                    <h1>Online Monitoring</h1>
-                    <form id="login-form" action="<?php echo URL; ?>auth/login" method="post" >	
-					
-						<div class="error" id="wuser" style="display:none"></div>
-                        <!--label class="isian">Username</label--> 
-                        <input class="logi" name="user" id="nuser" type="text" placeholder="Nama user" />
-                        	
+        <h1>Online Monitoring</h1>
+        <form id="login-form" action="<?php echo URL; ?>auth/login" method="post" >	
 
-						<div class="error" id="wpass" style="display:none"></div>	
-                        <!--label class="isian">Password</label-->
-                        <input class="logi" name="pass" id="pass" type="password" placeholder="Password" />
-                        
-                        <button id="button" type="submit" class="logi" name="yt0" value="Login" onClick="return cek()"/><i class="fa fa-paper-plane"></i>&nbsp; LOGIN</button> 
-                    </form>
-                </div><!--end div kolom2-->
+            <div class="error" id="wuser" style="display:none"></div>
+            <!--label class="isian">Username</label--> 
+            <input class="logi" name="user" id="nuser" type="text" placeholder="Nama user" />
 
-    </body>
+
+            <div class="error" id="wpass" style="display:none"></div>	
+            <!--label class="isian">Password</label-->
+            <input class="logi" name="pass" id="pass" type="password" placeholder="Password" />
+
+            <button id="button" type="submit" class="logi" name="yt0" value="Login" onClick="return cek()"/><i class="fa fa-paper-plane"></i>&nbsp; LOGIN</button> 
+        </form>
+    </div><!--end div kolom2-->
+
+</body>
 </html>
 
 <script type="text/javascript">

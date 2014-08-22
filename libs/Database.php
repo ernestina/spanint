@@ -12,12 +12,12 @@ class Database extends PDO {
     protected $_fetchMode = PDO::FETCH_ASSOC;
 
     public function __construct() {
-		try {
-			parent::__construct("oci:dbname=".DB_TNS,DB_USER,DB_PASS);
-		} catch ( PDOException $e )  {
-			echo " tidak bisa mengakses database";
-		}
-	}
+        try {
+            parent::__construct("oci:dbname=" . DB_TNS, DB_USER, DB_PASS);
+        } catch (PDOException $e) {
+            echo " tidak bisa mengakses database";
+        }
+    }
 
     public function select($sql, $array = array()) {
         $sth = $this->prepare($sql);

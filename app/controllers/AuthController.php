@@ -16,16 +16,16 @@ class AuthController extends BaseController {
     }
 
     public function login() {
-		
+
         if (isset($_POST['user'])) {
             $user = $_POST['user'];
             $pass = $_POST['pass'];
-			//var_dump($_POST['user']);
-			//var_dump($_POST['pass']);
+            //var_dump($_POST['user']);
+            //var_dump($_POST['pass']);
             $pwd = $pass;
             $cuser = new User($this->registry);
             $res = $cuser->login($user, $pwd);
-			//var_dump($res);
+            //var_dump($res);
             switch ($res[1]) {
                 case 1:
                     $role = 'admin';
@@ -54,9 +54,9 @@ class AuthController extends BaseController {
                 Session::set('loggedin', TRUE);
                 Session::set('user', $res[2]);
                 Session::set('role', $role);
-                Session::set('id_user', $res[3]); 
+                Session::set('id_user', $res[3]);
                 Session::set('kd_satker', $res[4]);
-                header('location:' . URL); 
+                header('location:' . URL);
             } else if ((int) $res[0] == 0) {
                 $this->view->error = "user tidak ditemukan!";
                 $this->view->load('admin/login');
@@ -79,4 +79,5 @@ class AuthController extends BaseController {
     public function __destruct() {
         parent::__destruct();
     }
+
 }

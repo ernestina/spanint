@@ -8,35 +8,35 @@
 class DataSupplier {
 
     private $db;
-	private $_nama_supplier;
-	private $_npwp_supplier;
-	private $_kdvalas;
-	private $_nm_bank;
-	private $_cabang;
-	private $_kd_bank;
-	private $_kd_swift;
-	private $_iban;
-	private $_asal_bank;
-	private $_norek_bank;
-	private $_norek_penerima;
-	private $_nm_pemilik_rek;
-	private $_npwp_penerima;
-	private $_nip_penerima;
-	private $_nm_penerima;
-	private $_tipe_supp;
-	private $_satker;
-	private $_v_supplier_number;
-	private $_kppn_code;
-	private $_email;
-	private $_alamat;
-	private $_city;
-	private $_provinsi;
-	private $_negawa;
-	private $_zip;
-	private $_phone;
-	private $_update_date;
-	private $_ids;
-	private $_kode_sandi;
+    private $_nama_supplier;
+    private $_npwp_supplier;
+    private $_kdvalas;
+    private $_nm_bank;
+    private $_cabang;
+    private $_kd_bank;
+    private $_kd_swift;
+    private $_iban;
+    private $_asal_bank;
+    private $_norek_bank;
+    private $_norek_penerima;
+    private $_nm_pemilik_rek;
+    private $_npwp_penerima;
+    private $_nip_penerima;
+    private $_nm_penerima;
+    private $_tipe_supp;
+    private $_satker;
+    private $_v_supplier_number;
+    private $_kppn_code;
+    private $_email;
+    private $_alamat;
+    private $_city;
+    private $_provinsi;
+    private $_negawa;
+    private $_zip;
+    private $_phone;
+    private $_update_date;
+    private $_ids;
+    private $_kode_sandi;
     private $_error;
     private $_valid = TRUE;
     private $_table = 'SUPP';
@@ -50,9 +50,9 @@ class DataSupplier {
         $this->db = $registry->db;
         $this->registry = $registry;
     }
-    
+
     public function get_supp_filter($filter) {
-		$sql = "SELECT NAMA_SUPPLIER
+        $sql = "SELECT NAMA_SUPPLIER
 				, CONCAT(CONCAT(CONCAT('xx',substr(NPWP_SUPPLIER,3,5)), 'xxx'), substr(NPWP_SUPPLIER,11)) NPWP_SUPPLIER
 				, KDVALAS, NM_BANK, CABANG, KD_BANK
 				, KD_SWIFT, IBAN, ASAL_BANK, NOREK_BANK
@@ -64,14 +64,14 @@ class DataSupplier {
 				, CITY, PROVINSI, NEGARA, ZIP, PHONE, UPDATE_DATE, IDS
 				FROM " . $this->_table . "
 				WHERE 1 = 1";
-		$no=0;
-		//var_dump($filter);
-		foreach ($filter as $filter) {
-			$sql .= " AND ".$filter;
-		}
-		//var_dump ($sql);
+        $no = 0;
+        //var_dump($filter);
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        //var_dump ($sql);
         $result = $this->db->select($sql);
-        $data = array();   
+        $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_kppn_code($val['KPPN_CODE']);
@@ -90,13 +90,13 @@ class DataSupplier {
             $d_data->set_npwp_penerima($val['NPWP_PENERIMA']);
             $d_data->set_nip_penerima($val['NIP_PENERIMA']);
             $d_data->set_ids($val['IDS']);
-			$data[] = $d_data;
+            $data[] = $d_data;
         }
         return $data;
     }
-    
+
     public function get_download_supp_filter($filter) {
-		$sql = "SELECT 
+        $sql = "SELECT 
 				nama_supplier,
 				concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(concat(
 				TRANSLATE( substr(npwp_supplier,9,1),'0123456789','7890123456'),
@@ -157,16 +157,16 @@ class DataSupplier {
 				update_date, 
 				CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(nama_supplier,kdvalas), nm_bank), kd_bank), asal_bank),nm_pemilik_rek), nm_penerima), tipe_supp), v_supplier_number) kode_sandi 
 				FROM supp 
-				where ids in ('".$filter;
-		$no=0;
-		//var_dump($filter);
-		/*foreach ($filter as $filter) {
-			$sql .= ",'".$filter[checkbox]."'";
-		}*/
-		$sql .= "') order by nama_supplier,nm_penerima,nip_penerima";
-		//var_dump ($sql);
+				where ids in ('" . $filter;
+        $no = 0;
+        //var_dump($filter);
+        /* foreach ($filter as $filter) {
+          $sql .= ",'".$filter[checkbox]."'";
+          } */
+        $sql .= "') order by nama_supplier,nm_penerima,nip_penerima";
+        //var_dump ($sql);
         $result = $this->db->select($sql);
-        $data = array();   
+        $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_nama_supplier($val['NAMA_SUPPLIER']);
@@ -196,14 +196,14 @@ class DataSupplier {
             $d_data->set_zip($val['ZIP']);
             $d_data->set_phone($val['PHONE']);
             $d_data->set_update_date($val['UPDATE_DATE']);
-            $d_data->set_kode_sandi(md5(trim($val['NAMA_SUPPLIER']).trim($val['KDVALAS']).trim($val['NM_BANK']).trim($val['KD_BANK']).trim($val['ASAL_BANK']).trim($val['NM_PEMILIK_REK']).trim($val['NM_PENERIMA']).trim($val['TIPE_SUPP']).trim($val['V_SUPPLIER_NUMBER'])));
-			$data[] = $d_data;
+            $d_data->set_kode_sandi(md5(trim($val['NAMA_SUPPLIER']) . trim($val['KDVALAS']) . trim($val['NM_BANK']) . trim($val['KD_BANK']) . trim($val['ASAL_BANK']) . trim($val['NM_PEMILIK_REK']) . trim($val['NM_PENERIMA']) . trim($val['TIPE_SUPP']) . trim($val['V_SUPPLIER_NUMBER'])));
+            $data[] = $d_data;
         }
         return $data;
     }
-	
-	public function get_download_supp_filter_xls($filter) {
-		$sql = "SELECT 
+
+    public function get_download_supp_filter_xls($filter) {
+        $sql = "SELECT 
 				trim(nama_supplier) nama_supplier,
 				trim(npwp_supplier) npwp_supplier,
 				trim(kdvalas) kdvalas,
@@ -223,9 +223,9 @@ class DataSupplier {
 				trim(v_supplier_number) v_supplier_number,
 				trim(kppn_code) kppn_code
 				FROM supp 
-				where kppn_code = '".$filter."' ";
+				where kppn_code = '" . $filter . "' ";
         $result = $this->db->select($sql);
-        $data = array();   
+        $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_nama_supplier($val['NAMA_SUPPLIER']);
@@ -246,11 +246,11 @@ class DataSupplier {
             $d_data->set_satker($val['SATKER']);
             $d_data->set_v_supplier_number($val['V_SUPPLIER_NUMBER']);
             $d_data->set_kppn_code($val['KPPN_CODE']);
-			$data[] = $d_data;
+            $data[] = $d_data;
         }
         return $data;
     }
-	
+
     /*
      * setter
      */
@@ -370,129 +370,128 @@ class DataSupplier {
     public function set_kode_sandi($kode_sandi) {
         $this->_kode_sandi = $kode_sandi;
     }
-	
-		
-	/*
+
+    /*
      * getter
      */
-	
-	public function get_nama_supplier() {
+
+    public function get_nama_supplier() {
         return $this->_nama_supplier;
     }
-	
-	public function get_npwp_supplier() {
+
+    public function get_npwp_supplier() {
         return $this->_npwp_supplier;
     }
-	
-	public function get_kdvalas() {
+
+    public function get_kdvalas() {
         return $this->_kdvalas;
     }
-	
-	public function get_nm_bank() {
+
+    public function get_nm_bank() {
         return $this->_nm_bank;
     }
-	
-	public function get_cabang() {
+
+    public function get_cabang() {
         return $this->_cabang;
     }
-	
-	public function get_kd_bank() {
+
+    public function get_kd_bank() {
         return $this->_kd_bank;
     }
-	
-	public function get_kd_swift() {
+
+    public function get_kd_swift() {
         return $this->_kd_swift;
     }
-	
-	public function get_iban() {
+
+    public function get_iban() {
         return $this->_iban;
     }
-	
-	public function get_asal_bank() {
+
+    public function get_asal_bank() {
         return $this->_asal_bank;
     }
-	
-	public function get_norek_bank() {
+
+    public function get_norek_bank() {
         return $this->_norek_bank;
     }
-	
-	public function get_norek_penerima() {
+
+    public function get_norek_penerima() {
         return $this->_norek_penerima;
     }
-	
-	public function get_nm_pemilik_rek() {
+
+    public function get_nm_pemilik_rek() {
         return $this->_nm_pemilik_rek;
     }
-	
-	public function get_npwp_penerima() {
+
+    public function get_npwp_penerima() {
         return $this->_npwp_penerima;
     }
-	
-	public function get_nip_penerima() {
+
+    public function get_nip_penerima() {
         return $this->_nip_penerima;
     }
-	
-	public function get_nm_penerima() {
+
+    public function get_nm_penerima() {
         return $this->_nm_penerima;
     }
-	
-	public function get_tipe_supp() {
+
+    public function get_tipe_supp() {
         return $this->_tipe_supp;
     }
-	
-	public function get_satker() {
+
+    public function get_satker() {
         return $this->_satker;
     }
-	
-	public function get_v_supplier_number() {
+
+    public function get_v_supplier_number() {
         return $this->_v_supplier_number;
     }
-	
-	public function get_kppn_code() {
+
+    public function get_kppn_code() {
         return $this->_kppn_code;
     }
-	
-	public function get_email() {
+
+    public function get_email() {
         return $this->_email;
     }
-	
-	public function get_alamat() {
+
+    public function get_alamat() {
         return $this->_alamat;
     }
-	
-	public function get_city() {
+
+    public function get_city() {
         return $this->_city;
     }
-	
-	public function get_provinsi() {
+
+    public function get_provinsi() {
         return $this->_provinsi;
     }
-	
-	public function get_negara() {
+
+    public function get_negara() {
         return $this->_negara;
     }
-	
-	public function get_zip() {
+
+    public function get_zip() {
         return $this->_zip;
     }
-	
-	public function get_phone() {
+
+    public function get_phone() {
         return $this->_phone;
     }
-	
-	public function get_update_date() {
+
+    public function get_update_date() {
         return $this->_update_date;
     }
-	
-	public function get_ids() {
+
+    public function get_ids() {
         return $this->_ids;
     }
-	
-	public function get_kode_sandi() {
+
+    public function get_kode_sandi() {
         return $this->_kode_sandi;
     }
-	
-	public function get_table() {
+
+    public function get_table() {
         return $this->_table;
     }
 

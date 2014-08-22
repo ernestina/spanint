@@ -37,7 +37,7 @@ $akses['DataDIPAKPPN'] = array(
     'Fund_fail',
     'Detail_Fund_Fail_kd',
     'RealisasiFA',
-	'RealisasiFA_1',
+    'RealisasiFA_1',
     'nmsatker',
     'nmsatker1',
     'DetailRealisasiFA',
@@ -165,7 +165,7 @@ $akses['DataSPMKPPN'] = array(
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
     'RekapSp2d_PDF',
-	'downloadSP2D',
+    'downloadSP2D',
     '__destruct'
 );
 
@@ -187,5 +187,4 @@ $akses['UserSpanKPPN'] = array(
     'monitoringUserSpan',
     '__destruct'
 );
-
 ?>

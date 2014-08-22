@@ -66,5 +66,4 @@ $akses['UserSpanDJA'] = array(
     'monitoringUserSpan',
     '__destruct'
 );
-
 ?>

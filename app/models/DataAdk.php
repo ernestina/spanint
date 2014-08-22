@@ -8,12 +8,12 @@
 class DataAdk {
 
     private $db;
-	private $_kd_d_adk;
+    private $_kd_d_adk;
     private $_kd_kppn;
     private $_kd_satker;
     private $_kd_tgl;
-	private $_kd_adk_name;
-	private $_kd_jml_pdf;
+    private $_kd_adk_name;
+    private $_kd_jml_pdf;
     private $_kd_file_name;
     private $_kd_status;
     private $_file;
@@ -34,57 +34,57 @@ class DataAdk {
     /*
      * mendapatkan data dari tabel Data Tetap
      * @param limit batas default null
-     * return array objek Data Tetap*/
-    
-    public function get_adk_list($kd_kppn=null,$status=null, $limit = null, $batas = null) {
-        $sql = "SELECT * FROM " . $this->_table . " where kd_kppn = ". $kd_kppn;
-		if (!is_null($status)) {
+     * return array objek Data Tetap */
+
+    public function get_adk_list($kd_kppn = null, $status = null, $limit = null, $batas = null) {
+        $sql = "SELECT * FROM " . $this->_table . " where kd_kppn = " . $kd_kppn;
+        if (!is_null($status)) {
             $sql .= " AND kd_status =" . $status;
-        } 
-		$sql .= " ORDER BY kd_tgl desc";
-        if (!is_null($limit) AND !is_null($batas)) {
+        }
+        $sql .= " ORDER BY kd_tgl desc";
+        if (!is_null($limit) AND ! is_null($batas)) {
             $sql .= " LIMIT " . $limit . "," . $batas;
         }
         $result = $this->db->select($sql);
-        $data = array();   
+        $data = array();
         foreach ($result as $val) {
             $d_adk = new $this($this->registry);
             $d_adk->set_kd_d_adk($val['kd_d_adk']);
             $d_adk->set_kd_kppn($val['kd_kppn']);
-			$d_adk->set_kd_satker($val['kd_satker']);
+            $d_adk->set_kd_satker($val['kd_satker']);
             $d_adk->set_kd_tgl(date("d/m/y", strtotime($val['kd_tgl'])));
             $d_adk->set_kd_adk_name($val['kd_adk_name']);
-			$d_adk->set_kd_jml_pdf($val['kd_jml_pdf']);
-			$d_adk->set_kd_file_name($val['kd_file_name']);
-			$d_adk->set_kd_status($val['kd_status']);
-			$data[] = $d_adk;
+            $d_adk->set_kd_jml_pdf($val['kd_jml_pdf']);
+            $d_adk->set_kd_file_name($val['kd_file_name']);
+            $d_adk->set_kd_status($val['kd_status']);
+            $data[] = $d_adk;
         }
         return $data;
     }
-	
-	public function get_adk_by_id($adk) {
-        $sql = "SELECT * FROM " . $this->_table . " where kd_d_adk = ". $adk;
-        if (!is_null($limit) AND !is_null($batas)) {
+
+    public function get_adk_by_id($adk) {
+        $sql = "SELECT * FROM " . $this->_table . " where kd_d_adk = " . $adk;
+        if (!is_null($limit) AND ! is_null($batas)) {
             $sql .= " LIMIT " . $limit . "," . $batas;
         }
         $result = $this->db->select($sql);
-        $data = array();   
+        $data = array();
         foreach ($result as $val) {
             $d_adk = new $this($this->registry);
             $d_adk->set_kd_d_adk($val['kd_d_adk']);
             $d_adk->set_kd_kppn($val['kd_kppn']);
-			$d_adk->set_kd_satker($val['kd_satker']);
+            $d_adk->set_kd_satker($val['kd_satker']);
             $d_adk->set_kd_tgl($val['kd_tgl']);
             $d_adk->set_kd_adk_name($val['kd_adk_name']);
-			$d_adk->set_kd_jml_pdf($val['kd_jml_pdf']);
-			$d_adk->set_kd_file_name($val['kd_file_name']);
-			$d_adk->set_kd_status($val['kd_status']);
-			$data[] = $d_adk;
+            $d_adk->set_kd_jml_pdf($val['kd_jml_pdf']);
+            $d_adk->set_kd_file_name($val['kd_file_name']);
+            $d_adk->set_kd_status($val['kd_status']);
+            $data[] = $d_adk;
         }
         return $data;
     }
-	
-	public function add_adk() {
+
+    public function add_adk() {
         $data = array(
             'kd_kppn' => $this->get_kd_kppn(),
             'kd_satker' => $this->get_kd_satker(),
@@ -103,37 +103,37 @@ class DataAdk {
         }
         return $this->db->insert($this->_table, $data);
     }
-	
-	public function upload_adk($kd_kppn=null, $limit = null, $batas = null) {
-        $sql = "SELECT * FROM " . $this->_table . " where kd_kppn = ". $kd_kppn. " ORDER BY kd_tgl desc";
-        if (!is_null($limit) AND !is_null($batas)) {
+
+    public function upload_adk($kd_kppn = null, $limit = null, $batas = null) {
+        $sql = "SELECT * FROM " . $this->_table . " where kd_kppn = " . $kd_kppn . " ORDER BY kd_tgl desc";
+        if (!is_null($limit) AND ! is_null($batas)) {
             $sql .= " LIMIT " . $limit . "," . $batas;
         }
         $result = $this->db->select($sql);
-        $data = array();   
+        $data = array();
         foreach ($result as $val) {
             $d_adk = new $this($this->registry);
             $d_adk->set_kd_d_adk($val['kd_d_adk']);
             $d_adk->set_kd_kppn($val['kd_kppn']);
-			$d_adk->set_kd_satker($val['kd_satker']);
+            $d_adk->set_kd_satker($val['kd_satker']);
             $d_adk->set_kd_tgl(date("d/m/y", strtotime($val['kd_tgl'])));
             $d_adk->set_kd_adk_name($val['kd_adk_name']);
-			$d_adk->set_kd_jml_pdf($val['kd_jml_pdf']);
-			$d_adk->set_kd_file_name($val['kd_file_name']);
-			$d_adk->set_kd_status($val['kd_status']);
-			$data[] = $d_adk;
+            $d_adk->set_kd_jml_pdf($val['kd_jml_pdf']);
+            $d_adk->set_kd_file_name($val['kd_file_name']);
+            $d_adk->set_kd_status($val['kd_status']);
+            $data[] = $d_adk;
         }
         return $data;
     }
-	
-	public function update_status($adk) {
-		 $data = array(
+
+    public function update_status($adk) {
+        $data = array(
             'kd_status' => $this->get_kd_status()
         );
-		$where = ' kd_d_adk=' . $adk;
+        $where = ' kd_d_adk=' . $adk;
         return $this->db->update($this->_table, $data, $where);
     }
-	
+
     /*
      * setter
      */
@@ -163,18 +163,18 @@ class DataAdk {
     }
 
     public function set_kd_file_name($file_name) {
-        $this->_kd_file_name= $file_name;
+        $this->_kd_file_name = $file_name;
     }
 
     public function set_kd_status($status) {
         $this->_kd_status = $status;
-	}
-	
-    public function set_file($file){
+    }
+
+    public function set_file($file) {
         $this->_file = $file;
     }
-		
-	/*
+
+    /*
      * getter
      */
 
@@ -188,8 +188,8 @@ class DataAdk {
         }
         return $this->_kd_d_adk;
     }
-	
-	public function get_kd_kppn() {
+
+    public function get_kd_kppn() {
         return $this->_kd_kppn;
     }
 
