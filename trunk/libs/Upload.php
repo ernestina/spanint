@@ -28,7 +28,7 @@ class Upload {
     public function init($fupload) {
         $this->setDirFrom($_FILES[$fupload]['tmp_name']);
         $this->setFileExt($_FILES[$fupload]['type']);
-        $this->setFileName($_FILES[$fupload]['name']);       
+        $this->setFileName($_FILES[$fupload]['name']);
     }
 
     public function cekFileExist() {
@@ -71,7 +71,7 @@ class Upload {
         }
         $tmp = explode(".", $filename);
         $len = count($tmp);
-        $ekst = $tmp[$len-1];
+        $ekst = $tmp[$len - 1];
         $nama = rtrim($nama, "_");
         $nama .= "." . $ekst;
         $nama = str_replace('/', '_', $nama);
@@ -86,9 +86,9 @@ class Upload {
      * 
      */
 
-    public function uploadFile($dir_to, $nama=array()) {
+    public function uploadFile($dir_to, $nama = array()) {
         $this->setDirTo($dir_to);
-        $this->changeFileName($this->getFileName(),$nama);
+        $this->changeFileName($this->getFileName(), $nama);
         if ($this->cekFileExist()) {
             move_uploaded_file($this->getDirFrom(), $this->getDirTo() . $this->getFileTo());
             return true;

@@ -184,5 +184,4 @@ $akses['UserSpanAdmin'] = array(
     'monitoringUserSpan_PDF',
     '__destruct'
 );
-
 ?>

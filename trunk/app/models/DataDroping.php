@@ -8,20 +8,20 @@
 class DataDroping {
 
     private $db;
-	private $_id;
-	private $_id_detail;
-	private $_bank;
-	private $_creation_date;
-	private $_payment_currency_code;
-	private $_payment_amount;
-	private $_trxn_status_code;
-	private $_jumlah_ftp_file_name;
-	private $_jumlah_check_number_line_num;
-	private $_jumlah_check_amount;
-	private $_tgl_tarik;
-	private $_payment_date;
-	private $_bank_trxn_number;
-	private $_attribute4;
+    private $_id;
+    private $_id_detail;
+    private $_bank;
+    private $_creation_date;
+    private $_payment_currency_code;
+    private $_payment_amount;
+    private $_trxn_status_code;
+    private $_jumlah_ftp_file_name;
+    private $_jumlah_check_number_line_num;
+    private $_jumlah_check_amount;
+    private $_tgl_tarik;
+    private $_payment_date;
+    private $_bank_trxn_number;
+    private $_attribute4;
     private $_error;
     private $_valid = TRUE;
     private $_table = 'T_DROPING';
@@ -40,10 +40,10 @@ class DataDroping {
     /*
      * mendapatkan data dari tabel Data Droping
      * @param filter
-     * return array objek Data Droping*/
-    
+     * return array objek Data Droping */
+
     public function get_droping_filter($filter) {
-		$sql = "select 
+        $sql = "select 
 				id
 				, BANK
 				, to_char(CREATION_DATE,'dd-mm-yyyy') CREATION_DATEX
@@ -55,42 +55,42 @@ class DataDroping {
 				where jumlah_check_number_line_num is not null
 				and  id in (select max(id) id from " . $this->_table . " 
 				where 1=1 ";
-		$no=0;
-		//var_dump($filter);
-		foreach ($filter as $filter) {
-			$sql .= " AND ".$filter;
-		}
-		$sql .= "GROUP BY BANK,CREATION_DATE ) ORDER BY CREATION_DATE DESC";
-		//var_dump ($sql);
+        $no = 0;
+        //var_dump($filter);
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= "GROUP BY BANK,CREATION_DATE ) ORDER BY CREATION_DATE DESC";
+        //var_dump ($sql);
         $result = $this->db->select($sql);
-        $data = array();   
+        $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_id($val['ID']);
             $d_data->set_bank($val['BANK']);
-            $d_data->set_creation_date(date("d-m-Y",strtotime($val['CREATION_DATEX'])));
+            $d_data->set_creation_date(date("d-m-Y", strtotime($val['CREATION_DATEX'])));
             $d_data->set_jumlah_ftp_file_name($val['JUMLAH_FTP_FILE_NAME']);
             $d_data->set_jumlah_check_number_line_num($val['JUMLAH_CHECK_NUMBER_LINE_NUM']);
             $d_data->set_jumlah_check_amount($val['JUMLAH_CHECK_AMOUNT']);
             $d_data->set_payment_amount($val['PAYMENT_AMOUNT']);
-			$data[] = $d_data;
+            $data[] = $d_data;
         }
         return $data;
     }
-    
+
     public function get_droping_detail_filter($filter) {
-		$sql = "select BANK_TRXN_NUMBER, to_char(CREATION_DATE,'dd-mm-yyyy hh24:mi:ss') CREATION_DATE, PAYMENT_CURRENCY_CODE,  PAYMENT_AMOUNT, ATTRIBUTE4 
+        $sql = "select BANK_TRXN_NUMBER, to_char(CREATION_DATE,'dd-mm-yyyy hh24:mi:ss') CREATION_DATE, PAYMENT_CURRENCY_CODE,  PAYMENT_AMOUNT, ATTRIBUTE4 
 				FROM " . $this->_table1 . "
 				WHERE 1=1 ";
-		$no=0;
-		//var_dump($filter);
-		foreach ($filter as $filter) {
-			$sql .= " AND ".$filter;
-		}
-		$sql .= " ORDER BY CREATION_DATE";
-		//var_dump ($sql);
+        $no = 0;
+        //var_dump($filter);
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " ORDER BY CREATION_DATE";
+        //var_dump ($sql);
         $result = $this->db->select($sql);
-        $data = array();   
+        $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_id($val['ID_DETAIL']);
@@ -99,11 +99,11 @@ class DataDroping {
             $d_data->set_bank_trxn_number($val['BANK_TRXN_NUMBER']);
             $d_data->set_payment_amount($val['PAYMENT_AMOUNT']);
             $d_data->set_attribute4($val['ATTRIBUTE4']);
-			$data[] = $d_data;
+            $data[] = $d_data;
         }
         return $data;
     }
-	
+
     /*
      * setter
      */
@@ -119,116 +119,116 @@ class DataDroping {
     public function set_bank($bank) {
         $this->_bank = $bank;
     }
-	
+
     public function set_creation_date($creation_date) {
         $this->_creation_date = $creation_date;
     }
-	
+
     public function set_payment_currency_code($payment_currency_code) {
         $this->_payment_currency_code = $payment_currency_code;
     }
-	
+
     public function set_payment_amount($payment_amount) {
         $this->_payment_amount = $payment_amount;
     }
-	
+
     public function set_trxn_status_code($trxn_status_code) {
         $this->_trxn_status_code = $trxn_status_code;
     }
-	
+
     public function set_jumlah_ftp_file_name($jumlah_ftp_file_name) {
         $this->_jumlah_ftp_file_name = $jumlah_ftp_file_name;
     }
-	
+
     public function set_jumlah_check_number_line_num($jumlah_check_number_line_num) {
         $this->_jumlah_check_number_line_num = $jumlah_check_number_line_num;
     }
-	
+
     public function set_jumlah_check_amount($jumlah_check_amount) {
         $this->_jumlah_check_amount = $jumlah_check_amount;
     }
-	
+
     public function set_tgl_tarik($tgl_tarik) {
         $this->_tgl_tarik = $tgl_tarik;
     }
-	
+
     public function set_payment_date($payment_date) {
         $this->_payment_date = $payment_date;
     }
-	
+
     public function set_bank_trxn_number($bank_trxn_number) {
         $this->_bank_trxn_number = $bank_trxn_number;
     }
-	
+
     public function set_attribute4($attribute4) {
         $this->_attribute4 = $attribute4;
     }
-		
-	/*
+
+    /*
      * getter
      */
-	
-	public function get_id() {
+
+    public function get_id() {
         return $this->_id;
     }
-	
-	public function get_id_detail() {
+
+    public function get_id_detail() {
         return $this->_id_detail;
     }
-	
-	public function get_bank() {
+
+    public function get_bank() {
         return $this->_bank;
     }
-	
-	public function get_creation_date() {
+
+    public function get_creation_date() {
         return $this->_creation_date;
     }
-	
-	public function get_payment_currency_code() {
+
+    public function get_payment_currency_code() {
         return $this->_payment_currency_code;
     }
-	
-	public function get_payment_amount() {
+
+    public function get_payment_amount() {
         return $this->_payment_amount;
     }
-	
-	public function get_trxn_status_code() {
+
+    public function get_trxn_status_code() {
         return $this->_trxn_status_code;
     }
-	
-	public function get_jumlah_ftp_file_name() {
+
+    public function get_jumlah_ftp_file_name() {
         return $this->_jumlah_ftp_file_name;
     }
-	
-	public function get_jumlah_check_number_line_num() {
+
+    public function get_jumlah_check_number_line_num() {
         return $this->_jumlah_check_number_line_num;
     }
-	
-	public function get_jumlah_check_amount() {
+
+    public function get_jumlah_check_amount() {
         return $this->_jumlah_check_amount;
     }
-	
-	public function get_tgl_tarik() {
+
+    public function get_tgl_tarik() {
         return $this->_tgl_tarik;
     }
-	
-	public function get_payment_date() {
+
+    public function get_payment_date() {
         return $this->_payment_date;
     }
-	
-	public function get_attribute4() {
+
+    public function get_attribute4() {
         return $this->_attribute4;
     }
-	
-	public function get_bank_trxn_number() {
+
+    public function get_bank_trxn_number() {
         return $this->_bank_trxn_number;
     }
-	
-	public function get_table() {
+
+    public function get_table() {
         return $this->_table;
     }
-	
-	public function get_table1() {
+
+    public function get_table1() {
         return $this->_table1;
     }
 

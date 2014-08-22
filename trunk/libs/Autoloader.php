@@ -24,12 +24,10 @@
  * @version 2008-09-22
  *
  */
-
 class Autoloader {
 
     protected static $classPaths = array();
     protected static $classFileSuffix = '.php';
-
     // @depreciated
     protected static $cacheFilePath = null;
     protected static $cachedPaths = null;
@@ -93,9 +91,9 @@ class Autoloader {
     public static function loadClass($className) {
         foreach (self::$classPaths as $classPath) {
             $file = $classPath
-                .str_replace('\\', DIRECTORY_SEPARATOR , $className)
-                .self::$classFileSuffix
-                ;
+                    . str_replace('\\', DIRECTORY_SEPARATOR, $className)
+                    . self::$classFileSuffix
+            ;
             if (is_file($file)) {
                 require_once($file);
                 return TRUE;
@@ -107,7 +105,6 @@ class Autoloader {
     /**
      * @depreciated
      */
-
     protected static function getCachedPath($className) {
         return FALSE;
     }
@@ -115,7 +112,6 @@ class Autoloader {
     /**
      * @depreciated
      */
-
     protected static function loadCachedPaths() {
         return FALSE;
     }
@@ -130,7 +126,6 @@ class Autoloader {
     /**
      * @deprecated
      */
-
     protected static function searchForClassFile($className, $directory) {
         return FALSE;
     }

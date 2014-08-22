@@ -148,5 +148,4 @@ $akses['UserSpanKanwil'] = array(
     'monitoringUserSpan',
     '__destruct'
 );
-
 ?>

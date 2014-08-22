@@ -24,22 +24,22 @@ class User {
     public function login($username, $password) {
         $sql = "SELECT * FROM " . $this->_table . " WHERE KD_SATKER = '" . $username . "' AND PASS_USER = '" . $password . "'";
         $result = $this->_db->select($sql);
-		//var_dump($sql);
-		//var_dump($result);
+        //var_dump($sql);
+        //var_dump($result);
         $role = 0;
         $return = array();
         foreach ($result as $v) {
-           $role = $v['KD_R_JENIS'];
-           $kd = $v['NAMA_USER'];
-           $id = $v['KD_D_KPPN'];
-           $satker = $v['KD_SATKER'];
+            $role = $v['KD_R_JENIS'];
+            $kd = $v['NAMA_USER'];
+            $id = $v['KD_D_KPPN'];
+            $satker = $v['KD_SATKER'];
         }
-		
-		//$return[] = 1;
-		//$role = 2;
+
+        //$return[] = 1;
+        //$role = 2;
         //$kd = 'KPPN JAKARTA II';
         //$id = '018';
-		
+
         $return[] = count($result);
         $return[] = $role;
         $return[] = $kd;
