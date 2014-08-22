@@ -30,7 +30,7 @@
 				$kdkppn=$this->d_kd_kppn;
 			}
 			?>
-		<a href="<?php echo URL; ?>DataGR/GR_IJP_PDF/<?php echo $kdbulan; ?>" class="modal">PDF</a>
+		<a href="<?php echo URL; ?>PDF/GR_IJP_PDF/<?php echo $kdbulan; ?>" class="modal">PDF</a>
 		<?php
 			//----------------------------------------------------		
 		?>

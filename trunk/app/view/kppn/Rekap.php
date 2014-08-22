@@ -43,7 +43,7 @@
 			}
 			
 				?>
-	<a href="<?php echo URL; ?>dataSPM/detailrekapsp2d_PDF/<?php echo $jendok."/". $kppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>
+	<a href="<?php echo URL; ?>PDF/detailrekapsp2d_PDF/<?php echo $jendok."/". $kppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>
 	
 	
 <!-- 	<ul class="inline" style="float: right"><li>

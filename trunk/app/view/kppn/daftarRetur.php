@@ -81,7 +81,7 @@ if (isset($this->last_update)){
 			}
 			
 				?>
-	<a href="<?php echo URL; ?>DataRetur/monitoringRetur_PDF/<?php echo $kdkppn."/".$kdnosp2d."/".$kdbarsp2d."/".$kdsatker."/".$kdbank."/".$kdstatus."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="modal">PDF</a>
+	<a href="<?php echo URL; ?>PDF/monitoringRetur_PDF/<?php echo $kdkppn."/".$kdnosp2d."/".$kdbarsp2d."/".$kdsatker."/".$kdbank."/".$kdstatus."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="modal">PDF</a>
 
 			
 		<?php

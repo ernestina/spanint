@@ -3,8 +3,9 @@
         <h2>MONITORING SP2D VOID<br>
 			<?php if (isset($this->d_nama_kppn)) {
 				foreach($this->d_nama_kppn as $kppn){
-					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+					echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")";
 					$kode_kppn=$kppn->get_kd_satker();
+					
 				}
 			}?>
 			<?php if (isset($this->d_bank)) {
@@ -42,24 +43,25 @@
 
 			$kdkppn=Session::get('id_user');
 			
-			if (isset($this->d_nmbank)) {
-				$kdbank=$this->d_nmbank;
+			if (isset($this->d_bank)) {
+				$kdbank=$this->d_bank;
 			}
-			
-			if (isset($this->d_tgl_awal)) {
-				$kdtgl_awal1=$this->d_tgl_awal;
-				list($bln,$tgl,$thn)=explode('-',$kdtgl_awal1);
-				$kdtgl_awal=$thn.$tgl.$bln;
+			if (isset($this->d_kdtgl_awal1)) {
+				$kdtgl_awal1=$this->d_kdtgl_awal1;
+				list($tgl,$bln,$thn)=explode('-',$kdtgl_awal1);
+				$kdtgl_awal2=$thn.$bln.$tgl;
+				
+				
 			}
-			if (isset($this->d_tgl_akhir)) {
-				$kdtgl_akhir1=$this->d_tgl_akhir;
-				list($bln,$tgl,$thn)=explode('-',$kdtgl_akhir1);	
-				$kdtgl_akhir=$thn.$tgl.$bln;
+			if (isset($this->d_kdtgl_akhir1)) {
+				$kdtgl_akhir1=$this->d_kdtgl_akhir1;
+				list($tgl,$bln,$thn)=explode('-',$kdtgl_akhir1);	
+				$kdtgl_akhir2=$thn.$bln.$tgl;
 			}
 						
 				?>
 			 
-				<a href="<?php echo URL; ?>DataKppn/sp2dSudahVoid_PDF/<?php echo $kdkppn."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdbank; ?>" class="modal">PDF</a>
+				<a href="<?php echo URL; ?>PDF/sp2dSudahVoid_PDF/<?php echo $kdkppn."/".$kdtgl_awal2."/".$kdtgl_akhir2."/".$kdbank; ?>" class="modal">PDF</a>
 							
 		<?php
 			//----------------------------------------------------		

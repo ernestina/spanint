@@ -43,7 +43,7 @@
 						
 				?>
 			 
-				<a href="<?php echo URL; ?>DataKppn/sp2dGajiDobel_PDF/<?php echo $kdbulan; ?>" class="modal">PDF</a>
+				<a href="<?php echo URL; ?>PDF/sp2dGajiDobel_PDF/<?php echo $kdbulan; ?>" class="modal">PDF</a>
 							
 		<?php
 			//----------------------------------------------------		

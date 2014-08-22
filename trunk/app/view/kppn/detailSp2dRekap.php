@@ -74,7 +74,7 @@ if (isset($this->last_update)){
 						
 				?>
 			 
-				<a href="<?php echo URL; ?>DataKppn/detailRekapSP2D_PDF/<?php echo $kdbank."/".$kdjendok."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdkppn; ?>" class="modal">PDF</a>
+				<a href="<?php echo URL; ?>PDF/detailRekapSP2D_PDF/<?php echo $kdbank."/".$kdjendok."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdkppn; ?>" class="modal">PDF</a>
 							
 		<?php
 			//----------------------------------------------------		

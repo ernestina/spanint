@@ -18,55 +18,49 @@
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
 			
-				
-				$kdakun='null';
-				//$kdsatker='null';
-				$kdoutput='null';
-				$kdprogram='null';
-				$kdtgl_awal='null';
-				$kdtgl_akhir='null';
 			if (isset($this->account_code)) {
 				$kdakun=$this->account_code;
 				$kdakun=rtrim($kdakun);
-				}
+			}else{
+				$kdakun='null';
+			}
 
 			if (isset($this->satker_code)) {
 				$kdsatker=$this->satker_code;
 				$kdsatker=rtrim($kdsatker);
-				}
+			}else{
+				$kdsatker='null';				
+			}
 			
 			if (isset($this->output_code)) {
 				$kdoutput=$this->output_code;
 				$kdoutput=rtrim($kdoutput);
+			}else{
+				$kdoutput='null';
 			}
 			if (isset($this->program_code)) {
 				$kdprogram=$this->program_code;
 				$kdprogram=rtrim($kdprogram);
+			}else{
+				$kdprogram='null';
 			}
 			if (isset($this->d_tgl_awal)) {
 				$kdtgl_awal=$this->d_tgl_awal;
-				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
-				$kdtgl_awal=$bln."-".$tgl."-".$thn;
+			}else{
+				$kdtgl_awal='null';
 			}
 			if (isset($this->d_tgl_akhir)) {
 				$kdtgl_akhir=$this->d_tgl_akhir;
-				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
-				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
+			}else{
+				$kdtgl_akhir='null';			
 			}
 			
-				?>
+?>
 	<ul class="inline" style="float: right"><li>
-	<a href="<?php echo URL; ?>DataDIPA/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
-
-<!-- 	<ul class="inline" style="float: right"><li>
-	<a  href="<?php echo URL; ?>DataDIPA/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
- -->
-				
-				
-			
-		<?php
-			//----------------------------------------------------		
-		?>
+	<a href="<?php echo URL; ?>PDF/revisiDIPA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdoutput."/".$kdprogram."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
+<?php
+//----------------------------------------------------		
+?>
 	<li><a href="#yModal" class="modal">FILTER DATA</a></li></ul>
         <div id="yModal" class="modalDialog" >
             <div>

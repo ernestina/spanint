@@ -60,7 +60,7 @@
 						
 				?>
 			 
-				<a href="<?php echo URL; ?>DataKppn/sp2dBesok_PDF/<?php echo $kdkppn."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdbank; ?>" class="modal">PDF</a>
+				<a href="<?php echo URL; ?>PDF/sp2dBesok_PDF/<?php echo $kdkppn."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdbank; ?>" class="modal">PDF</a>
 							
 		<?php
 			//----------------------------------------------------		

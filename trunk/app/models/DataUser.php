@@ -12,13 +12,15 @@ class DataUser {
     private $_kd_r_jenis;
     private $_kd_d_kppn;
     private $_nama_user;
+	private $_nama_kppn;
     private $_pass_user;
 	private $_kd_satker;
 	private $_kd_dept;
 	private $_kd_unit;
     private $_error;
     private $_valid = TRUE;
-    private $_table = 'd_user';
+    private $_table = 'USRAPL14.d_user';
+	private $_table2 = 'MASTERAPL.t_kppn';
     private $_table1 = 't_satker';
     public $registry;
 
@@ -125,6 +127,27 @@ class DataUser {
 
         return $data;
     }
+	    public function get_d_user_nmkppn($kdsatker) {
+		$sql = "SELECT A.*, B.NMKPPN NMKPPN
+				FROM " 
+				. $this->_table. " A, "
+				. $this->_table2. " B 
+				WHERE
+				A.KD_D_KPPN=B.KDKPPN 
+				AND A.KD_R_JENIS='2' 
+				AND A.KD_SATKER = '" . $kdsatker."'";
+		
+		//var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();   
+        foreach ($result as $val) {
+            $d_user = new $this($this->registry);
+			$d_user->set_nama_kppn($val['NMKPPN']);
+
+            $data[] = $d_user;
+        }
+        return $data;
+    }
 
     public function get_d_user_kppn($kppn) {
         $sql = "SELECT * FROM " . $this->_table . " WHERE KD_SATKER = '" . $kppn."'";
@@ -141,6 +164,7 @@ class DataUser {
         return $data;
     }
 
+	
     public function add_d_user() {
         $data = array(
             'kd_r_jenis' => $this->get_kd_r_jenis(),
@@ -227,6 +251,10 @@ class DataUser {
         $this->_nama_user = $nama;
     }
 
+	public function set_nama_kppn($kppn) {
+        $this->_nama_kppn = $kppn;
+    }
+
     public function set_pass_user($pass) {
         $this->_pass_user = $pass;
     }
@@ -273,6 +301,11 @@ class DataUser {
     public function get_nama_user() {
         return $this->_nama_user;
     }
+
+	public function get_nama_kppn() {
+		return $this->_nama_kppn;
+    }
+	
 
     public function get_pass_user() {
         return $this->_pass_user;

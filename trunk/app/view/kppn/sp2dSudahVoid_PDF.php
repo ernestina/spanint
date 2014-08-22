@@ -14,18 +14,25 @@
      
     class FPDF_AutoWrapTable extends FPDF {
     private $data = array();
+
     private $options = array(
     'filename' => '',
     'destinationfile' => '',
     'paper_size'=>'F4',
     'orientation'=>'L'
     );
+	private $kdtgl_awal= array();
+	private $kdtgl_akhir= array();
      
-    function __construct($data = array(), $options = array()) {
+    function __construct($data = array(), $options = array(),$kdtgl_awal= array(),$kdtgl_akhir= array()) {
     parent::__construct();
     $this->data = $data;
-    $this->options = $options;
+    $this->options = $options;	
+	$this->kdtgl_awal = $kdtgl_awal;
+	$this->kdtgl_akhir = $kdtgl_akhir;
+
     }
+	
      
     public function rptDetailData () {
 	
@@ -40,22 +47,36 @@
 	$this->Image("./././public/img/depkeu.png",30,30,30,30);
 	$px1 = $this->GetX();
 	$this->SetX($left+50); 
-	$this->MultiCell(0, $h/2, 'Laporan Monitoring SP2D Void');
+	$this->MultiCell(0, $h/2, 'Kementerian Keuangan Republik Indonesia');
 	$py1 = $this->GetY();
 	$px2 = $px1;
 	$py2 = $py1;
 	$this->SetXY($px2,$py2);
 	$this->SetX($left+50); 
-	//$this->MultiCell(0, $h/2, 'Sampai Dengan  '.date('d-m-Y'));
-	//$tgl_awal=(".date('Ymd',strtotime($kdtgl_awal)).",'YYYYMMDD');
-	//$tgl_akhir=(".date('Ymd',strtotime($kdtgl_akhir)).",'YYYYMMDD');
-	
-	$this->MultiCell(0, $h/2, '');
+ 	$this->MultiCell(0, $h/2, 'Dari tanggal:'.$kdtgl_awal.' s/d '.$kdtgl_akhir);
 	
     $this->Cell(0, 1, " ", "B");
     $this->Ln(10);
+    $this->Cell(0,20,'Laporan Monitoring SP2D Void',0,0,'C',false);
+	$this->Ln(15);
+//tanggal	
+	$kdtgl_awal1=$this->kdtgl_awal;
+	$thn1=substr($kdtgl_awal1,0,4);
+	$bln1=substr($kdtgl_awal1,4,2);
+	$tgl1=substr($kdtgl_awal1,6,2);
+	$kdtgl_awal=$tgl1.'-'.$bln1.'-'.$thn1;
+	$kdtgl_akhir1=$this->kdtgl_akhir;
+	$thn2=substr($kdtgl_akhir1,0,4);
+	$bln2=substr($kdtgl_akhir1,4,2);
+	$tgl2=substr($kdtgl_akhir1,6,2);
+	$kdtgl_akhir=$tgl2.'-'.$bln2.'-'.$thn2;
+
+	$this->Cell(0, 20,'Dari tanggal:'.$kdtgl_awal.' s/d '.$kdtgl_akhir,0,0,'C',false);
+    $this->Ln(20);
     $this->SetFont("", "B", 8);
     $this->Ln(10);
+	
+	
      
     #tableheader
     $this->SetFont('Arial','B',7);
@@ -137,6 +158,7 @@
     }
 	 $this->Ln(3);  
     }
+	
     
 	//footer
 	function Footer()
@@ -154,7 +176,11 @@
 
 	
     public function printPDF () {
+	
      
+	 
+	 
+	 
     if ($this->options['paper_size'] == "F4") {
     $a = 8.3 * 72; //1 inch = 72 pt
     $b = 13.0 * 72;
@@ -296,9 +322,39 @@
 		//echo 'bukan array';
 	}
  
+ //mengambil array tanggal awal dari controller
+	if (is_array($this->kdtgl_awal))
+	{
+		foreach ($this->kdtgl_awal as $kdtgl_awal) {
+			//echo '$kdtgl_awal:'.$kdtgl_awal;
+		}
+	}else{
+		//echo 'bukan array';
+	}
+	
+	//mengambil array tanggal akhir dari controller
+	if (is_array($this->kdtgl_akhir))
+	{
+		foreach ($this->kdtgl_akhir as $kdtgl_akhir) {
+			//echo '$kdtgl_akhir:'.$kdtgl_akhir;
+		}
+
+	}else{
+		//echo 'bukan array';
+	}
+
+		//mengambil array nama satker-kppn akhir dari controller
+	if (is_array($this->kdtgl_akhir))
+	{
+		foreach ($this->kdtgl_akhir as $kdtgl_akhir) {
+			//echo '$kdtgl_akhir:'.$kdtgl_akhir;
+		}
+
+	}else{
+		//echo 'bukan array';
+	}
 
 //--------------------------
- //Laporan Data Revisi DIPA
     //pilihan
     $options = array(
     'filename' => 'Laporan Monitoring SP2D Void.PDF', //nama file penyimpanan, kosongkan jika output ke browser
@@ -307,7 +363,7 @@
     'orientation'=>'L' //orientation: P=portrait, L=landscape
     );
      
-    $tabel = new FPDF_AutoWrapTable($data, $options);
+    $tabel = new FPDF_AutoWrapTable($data, $options,$kdtgl_awal,$kdtgl_akhir);
    $tabel->printPDF();
 
 

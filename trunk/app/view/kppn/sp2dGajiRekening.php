@@ -30,7 +30,7 @@
 						
 				?>
 			 
-				<a href="<?php echo URL; ?>DataKppn/sp2dSalahRekening_PDF" class="modal">PDF</a>
+				<a href="<?php echo URL; ?>PDF/sp2dSalahRekening_PDF" class="modal">PDF</a>
 							
 		<?php
 			//----------------------------------------------------		

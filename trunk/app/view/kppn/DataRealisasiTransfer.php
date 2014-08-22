@@ -52,31 +52,36 @@
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
 				
-				$kdlokasi='null';
-				$kdsatker='null';
-				$kdtgl_awal='null';
-				$kdtgl_akhir='null';	
+				
+				
 			if (isset($this->lokasi)) {
 				$kdlokasi=$this->lokasi;
+				echo '$kdlokasi:'.$kdlokasi;
+			}else{
+				$kdlokasi='null';
 			}
-			if (isset($this->data3)) {
-				$kdsatker=$this->data3;
+			
+			
+			if (isset($this->satkerku)) {
+				$kdsatkerku=$this->satkerku;
+			}else{
+				$kdsatkerku='null';
 			}
 			
 			if (isset($this->d_tgl_awal)) {
 				$kdtgl_awal=$this->d_tgl_awal;
-				list($bln,$tgl,$thn)=explode('/',$kdtgl_awal);
-				$kdtgl_awal=$bln."-".$tgl."-".$thn;
+			}else{
+				$kdtgl_awal='null';
 			}
 			if (isset($this->d_tgl_akhir)) {
 				$kdtgl_akhir=$this->d_tgl_akhir;
-				list($bln,$tgl,$thn)=explode('/',$kdtgl_akhir);				
-				$kdtgl_akhir=$bln."-".$tgl."-".$thn;
-			}	
+			}else{
+				$kdtgl_akhir='null';			
+			}
 				?>
 	
 		<ul class="inline" style="float: right"><li>
-		<a href="<?php echo URL; ?>DataDIPA/DataRealisasiTransfer_PDF/<?php echo $kdsatker."/".$kdkppn;?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+		<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatkerku."/".$kdlokasi."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
 				
 			

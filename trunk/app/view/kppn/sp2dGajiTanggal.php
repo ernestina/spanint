@@ -23,7 +23,7 @@
  */		
 				$kdkppn=Session::get('id_user');	
 				?>	 
-				<a href="<?php echo URL; ?>DataKppn/sp2dSalahTanggal_PDF" class="modal">PDF</a>
+				<a href="<?php echo URL; ?>PDF/sp2dSalahTanggal_PDF" class="modal">PDF</a>
 							
 		<?php
 			//----------------------------------------------------		

@@ -101,7 +101,7 @@
  
 <!-- 				<a href="<?php echo URL; ?>DataKppn/monitoringSp2d_PDF/<?php echo $kdkppn."/".$kdnosp2d."/".$kdbarsp2d."/".$kdsatker1."/".$kdnoinvoice."/".$kdbank."/".$kdstatus."/".$kdbayar."/".$kdfxml."/".$kdtgl_awal."/".$kdtgl_akhir; ?>" class="modal">PDF</a>
  -->
-				<a href="<?php echo URL; ?>DataKppn/monitoringSp2d_PDF/<?php echo $kdkppn."/".$kdsatker1."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdnosp2d."/".$kdnoinvoice."/".$kdbarsp2d."/".$kdstatus."/".$kdbayar."/".$kdfxml."/".$kdbank; ?>" class="modal">PDF</a>
+				<a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn."/".$kdsatker1."/".$kdtgl_awal."/".$kdtgl_akhir."/".$kdnosp2d."/".$kdnoinvoice."/".$kdbarsp2d."/".$kdstatus."/".$kdbayar."/".$kdfxml."/".$kdbank; ?>" class="modal">PDF</a>
 				
 			
 		<?php
