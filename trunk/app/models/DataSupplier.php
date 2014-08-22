@@ -204,24 +204,24 @@ class DataSupplier {
 	
 	public function get_download_supp_filter_xls($filter) {
 		$sql = "SELECT 
-				nama_supplier,
-				npwp_supplier,
-				kdvalas,
-				nm_bank,
-				kd_bank,
-				kd_swift,
-				iban,
-				asal_bank,
-				norek_bank,
-				norek_penerima, 
-				nm_pemilik_rek,
-				npwp_penerima,
-				nip_penerima,
-				nm_penerima,
-				tipe_supp,
-				satker,
-				v_supplier_number,
-				kppn_code
+				trim(nama_supplier) nama_supplier,
+				trim(npwp_supplier) npwp_supplier,
+				trim(kdvalas) kdvalas,
+				trim(nm_bank) nm_bank,
+				trim(kd_bank) kd_bank,
+				trim(kd_swift) kd_swift,
+				trim(iban) iban,
+				trim(asal_bank) asal_bank,
+				trim(norek_bank) norek_bank,
+				trim(norek_penerima) norek_penerima, 
+				trim(nm_pemilik_rek) nm_pemilik_rek,
+				trim(npwp_penerima) npwp_penerima,
+				trim(nip_penerima) nip_penerima,
+				trim(nm_penerima) nm_penerima,
+				trim(tipe_supp) tipe_supp,
+				trim(satker) satker,
+				trim(v_supplier_number) v_supplier_number,
+				trim(kppn_code) kppn_code
 				FROM supp 
 				where kppn_code = '".$filter."' ";
         $result = $this->db->select($sql);
