@@ -1,6 +1,6 @@
 <div id="top">
 	<div id="header">
-        <h2>INFORMASI SISA PAGU PER AKUN DIPA SATKER <br>
+        <h2>INFORMASI SISA DANA DIPA SATKER <br>
 		<?php $nmsatker='';
 		foreach ($this->data as $value) {$nmsatker=$value->get_nm_satker();} 
 		echo $nmsatker;
@@ -71,15 +71,15 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 					<th class='mid'>No.</th>
 					<th class='mid'>Satker</th>
 					<th class='mid'>KPPN</th>
-					<th class='mid'>Akun</th>
+					<th class='mid'>Akun Summary</th>
 					<th class='mid'>Program</th>
 					<th class='mid'>Output</th>
 					<th class='mid'>Dana</th>
 					<!--th class='mid'>Bank</th-->
 					<th>Kewenangan</th>
-					<th class='mid'>Lokasi</th>
+					<!--th class='mid'>Lokasi</th>
 					<th class='mid'>Tipe Anggaran</th>
-					<!--th>Mata Uang</th-->
+					<th>Mata Uang</th-->
 					<th>Pagu</th>
 					<th>Pencadangan</th>
 					<th>Realisasi</th>
@@ -103,18 +103,18 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 						echo "<td>" . $no++ . "</td>";
 						echo "<td>" . $value->get_satker() . "</td>";
 						echo "<td>" . $value->get_kppn() . "</td>";
-						echo "<td>" . $value->get_akun() . "</td>";
+						echo "<td style='text-align: right'><a href=".URL."dataDIPA/RealisasiFA/".$value->get_satker()."/".$value->get_program()."/".$value->get_output()."/".$value->get_akun(). " target='_blank' '>" . $value->get_akun() . "</td>";
 						echo "<td>" . $value->get_program() . "</td>";
 						echo "<td>" . $value->get_output() . "</td>";
 						echo "<td>" . $value->get_dana() . "</td>";
 						//echo "<td>" . $value->get_bank() . "</td>";
 						echo "<td>" . $value->get_kewenangan() . "</td>";
-						echo "<td>" . $value->get_lokasi() . "</td>";
-						echo "<td>" . $value->get_budget_type() . "</td>";
+						//echo "<td>" . $value->get_lokasi() . "</td>";
+						//echo "<td>" . $value->get_budget_type() . "</td>";
 						//echo "<td>" . $value->get_currency_code() . "</td>";
 						echo "<td style='text-align: right'>" . number_format($value->get_budget_amt()) . "</td>";
-						echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailEncumbrances/".$value->get_code_id()." target='_blank' '>" . number_format($value->get_encumbrance_amt()) . "</td>";
-						echo "<td style='text-align: right'><a href=".URL."dataDIPA/DetailRealisasiFA/".$value->get_code_id()." target='_blank' '>" . number_format($value->get_actual_amt()) . "</td>";
+						echo "<td style='text-align: right'> " . number_format($value->get_encumbrance_amt()) . "</td>";
+						echo "<td style='text-align: right'> " . number_format($value->get_actual_amt()) . "</td>";
 						
 						echo "<td style='text-align: right'>" . number_format($value->get_balancing_amt()) . "</td>";
 						echo "</tr>	";
@@ -132,7 +132,7 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan='10' class='ratatengah'><b>GRAND TOTAL<b></td>
+					<td colspan='8' class='ratatengah'><b>GRAND TOTAL<b></td>
 					<td class='ratakanan'><?php echo number_format($tot_budget); ?></td>
 					<td class='ratakanan'><?php echo number_format($tot_encumbrance); ?></td>
 					<td class='ratakanan'><?php echo number_format($tot_actual); ?></td>
@@ -142,7 +142,8 @@ echo "Update Data Terakhir (Waktu Server)  " ?> <br/>
         </table>
 		<br>
 		<br>
-		<b><i>* Data Merupakan Data Per Tanggal Sebelumnya Pukul 19.00 </i></b></br>
+		<b><i>* kode B merupakan pengganti kode 5 (akun belanja) contoh B2 berarti 52, B3 berarti 53 </i></b></br>
+		<b><i>* Akun summary merupakan penjumlahan dari satu atau lebih akun yang dananya dikontrol secara bersamaan </i></b></br>
 		
 		</div>
 </div>

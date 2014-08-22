@@ -167,12 +167,13 @@
             $('#winvoice').fadeIn();
             jml++;
         }
-		
+		/*
 		if(v_invoice !='' && v_invoice.length != 18 ){
             $('#winvoice').html('No. invoice harus 18 digit');
             $('#winvoice').fadeIn(200);
             jml++;
         }
+		*/
 		
 		if(jml>0){
             return false;

@@ -79,7 +79,7 @@ class DataSPMController extends BaseController {
                 $this->view->data2 = $d_supp->get_tgl_download_sp2d($ids);
                 $this->view->load('kppn/downloadSP2D');         
     }
-	
+	/*
 	public function detailposisiSpm($invoice_num1=null, $invoice_num2=null, $invoice_num3=null ) {
 		$d_spm1 = new DataHistSPM($this->registry);
 		$filter = array ();
@@ -93,7 +93,7 @@ class DataSPMController extends BaseController {
 			
 		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/detailposisiSPM');
-	}
+	}*/
 		//----------------------------------------------------
 		//Development history
 		//Revisi : 0
@@ -285,7 +285,9 @@ class DataSPMController extends BaseController {
 			if (Session::get('role')==KPPN){
 				$filter[$no++]="SUBSTR(FILE_NAME,5,3) = ".Session::get('id_user');
 			}
-			
+			if (Session::get('role')==SATKER){
+				$filter[$no++]="SUBSTR(FILE_NAME,8,6) = ".Session::get('kd_satker');
+			}
 		$this->view->data = $d_spm1->get_error_spm_filter ($filter);
 		//var_dump($d_spm1->get_error_spm_filter ($filter));
 		$this->view->render('kppn/uploadSPM');
@@ -311,6 +313,7 @@ class DataSPMController extends BaseController {
 				$filter[$no++]= Session::get('id_user')
 				 ;
 			}
+			/*
 			if (!is_null($invoice_num1)) {
 				$invoice="'".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
 				$kppn=substr($sp2d,2,3);
@@ -318,6 +321,30 @@ class DataSPMController extends BaseController {
 				$this->view->invoice_num = $invoice_num;
 				$this->view->data = $d_spm1->get_history_spm_filter ($filter, $invoice);
 			}
+			*/
+			if (!is_null($invoice_num1) and Session::get('role')==KPPN) {
+				$invoice="'".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
+				$kppn= Session::get('id_user');
+				$filter[$no++]= $kppn;
+				$this->view->invoice_num = $invoice_num;
+				$this->view->data = $d_spm1->get_history_spm_filter ($filter, $invoice);
+			}
+			elseif (!is_null($invoice_num1) and Session::get('role')==SATKER) {
+				$satker = Session::get('kd_satker');
+				$invoice="'".$invoice_num1."/".$satker."/".$invoice_num3."'";
+				$kppn= Session::get('id_user');
+				$filter[$no++]= $kppn;
+				$this->view->invoice_num = $invoice_num;
+				$this->view->data = $d_spm1->get_history_spm_filter ($filter, $invoice);
+			}
+			elseif (!is_null($invoice_num1)) {
+				$invoice="'".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
+				$kppn=substr($sp2d,2,3);
+				$filter[$no++]= $kppn;
+				$this->view->invoice_num = $invoice_num;
+				$this->view->data = $d_spm1->get_history_spm_filter ($filter, $invoice);
+			}
+			
 			if (isset($_POST['submit_file'])) {
 				
 				if ($_POST['kdkppn']!=''){
@@ -510,23 +537,30 @@ class DataSPMController extends BaseController {
 				//$this->view->invoice_num = $invoice_num;	
 			}
 		elseif($kdsatker != '') {
-				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
-				
-			}
-		if ($tgl1!='' AND $tgl2!=''){
-					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
-					$this->view->d_tgl_awal = $tgl1;
-					$this->view->d_tgl_akhir = $tgl2;
+			if (Session::get('role') == SATKER) {
+				if (Session::get('kd_satker') != $kdsatker ){
+					header('location:' . URL . 'auth/logout');
+					exit();
+				} else {
+					$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".Session::get('kd_satker')."'";
 				}
+			} else {
+				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$kdsatker."'";
+			}
+		}
+		if ($tgl1!='' AND $tgl2!=''){
+			$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD/MM/YYYY hh:mi:ss')";
+			$this->view->d_tgl_awal = $tgl1;
+			$this->view->d_tgl_akhir = $tgl2;
+		}
 		if (isset($_POST['submit_file'])) {
 			
 			
 			if ($_POST['check_number']!=''){
 					$filter[$no++]="check_number = '".$_POST['check_number']."'";
 					$this->view->d_invoice = $_POST['check_number'];
-					
 				}
-	
+
 			if ($_POST['invoice']!=''){
 					$filter[$no++]="invoice_num = '".$_POST['invoice']."'";
 					$this->view->invoice = $_POST['invoice'];
@@ -537,7 +571,7 @@ class DataSPMController extends BaseController {
 				}
 			if ($_POST['JenisSPM']!=''){
 					$filter[$no++]="JENIS_SPM = '".$_POST['JenisSPM']."'";
-					$this->view->JenisSPM = $_POST['JenisSPM'];
+					$this->view->JenisSP2D = $_POST['JenisSPM'];
 				}
 			}	
 
@@ -547,8 +581,12 @@ class DataSPMController extends BaseController {
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}
 			if (Session::get('role')==KPPN) {$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";	
-					
+				
 			}
+			if (Session::get('role')==SATKER) {$filter[$no++]="SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";	
+				
+			}
+			
 			
 		$this->view->data2 = $d_spm1->get_jenis_spm_filter($kdsatker);	
 		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
@@ -558,63 +596,8 @@ class DataSPMController extends BaseController {
 		//var_dump($d_spm1->get_satker_filter($filter));
 		if( Session::get('id_user') == 140 ){$this->view->render('kppn/SP2DSatker140');
 		}
+		
 		else {$this->view->render('kppn/SP2DSatker');
-		}
-	}	
-			//----------------------------------------------------
-		//Development history
-		//Revisi : 0
-		//Kegiatan :1.mencetak hasil filter ke dalam pdf
-		//File yang diubah : DataSPMController.php
-		//Dibuat oleh : Rifan Abdul Rachman
-		//Tanggal dibuat : 18-07-2014
-		//----------------------------------------------------
-
-	public function daftarsp2d_PDF($satker=null,$check_number=null,$invoice_depan=null,$invoice_tengah=null,$invoice_belakang=null,$JenisSP2D=null,$JenisSPM=null,$kdtgl_awal=null,$kdtgl_akhir=null) {
-		$d_spm1 = new DataCheck($this->registry);
-		$filter = array ();
-		$no=0;
-		if ($satker != '' AND Session::get('id_user') == 140) {
-				$filter[$no++]=" SEGMENT1 =  '".$satker."'";
-			}
-		elseif($satker != '') {
-				$filter[$no++]=" SUBSTR(INVOICE_NUM,8,6) =  '".$satker."'";
-			}
-		if ($tgl1!='' AND $tgl2!=''){
-					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$tgl1."','DD-MM-YYYY hh:mi:ss') AND TO_DATE('".$tgl2."','DD-MM-YYYY hh:mi:ss')";
-				}
-			
-			if ($check_number!='null'){
-					$filter[$no++]="check_number = '".$check_number."'";
-				}
-
-			if ($invoice_depan!='null'){
-					$filter[$no++]="invoice_num = '".$invoice_depan."/".$invoice_tengah."/".$invoice_belakang."'";
-				}
-			if ($JenisSP2D!='null'){
-					$filter[$no++]="JENIS_SP2D = '".$JenisSP2D."'";
-				}
-			if ($JenisSPM!='null'){
-					$filter[$no++]="JENIS_SPM = '".$JenisSPM."'";
-				}
-
-			if ($kdtgl_awal!='null' AND $kdtgl_akhir!='null'){
-					$filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('".$kdtgl_awal."','DD/MM/YYYY hh:mi:ss') AND TO_DATE('".$kdtgl_akhir."','DD/MM/YYYY hh:mi:ss')";
-				}
-			if (Session::get('role')==KPPN) {$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";	
-					
-			}
-			
-		$this->view->data2 = $d_spm1->get_jenis_spm_filter($kdsatker);	
-		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
-		$d_last_update = new DataLastUpdate($this->registry);
-		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-
-		if( Session::get('id_user') == 140 ){
-		$this->view->load('kppn/SP2DSatker140_PDF');
-		}
-		else {
-		$this->view->load('kppn/SP2DSatker_PDF');
 		}
 	}	
 	
@@ -697,10 +680,10 @@ class DataSPMController extends BaseController {
 					$this->view->d_tgl_akhir = $tgl_akhir;
 				}	
 		
-		/*if (Session::get('role')==KPPN) {
+		if (Session::get('role')==KPPN) {
 			$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = '".Session::get('id_user')."'";			
 				
-			}*/
+			}
 		if (Session::get('role')==SATKER) {				
 			$filter[$no++]="SUBSTR(INVOICE_NUM,8,6) = '".Session::get('kd_satker')."'";
 			$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);	
@@ -756,6 +739,8 @@ class DataSPMController extends BaseController {
 		$this->view->load('kppn/Rekap_PDF');
 		
 	}	
+	
+	
 	//author by jhon
 	
     public function __destruct() {
