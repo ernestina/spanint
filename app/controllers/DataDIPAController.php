@@ -50,9 +50,15 @@ class DataDIPAController extends BaseController {
 					$this->view->program_code = $program1;
 				}
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
-					$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
-					$this->view->d_tgl_awal = $_POST['tgl_awal'];
-					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+					list($bln,$tgl,$thn)=explode('/',$_POST['tgl_awal']);
+					$kdtgl_awal=$tgl."-".$bln."-".$thn;
+					
+					list($bln,$tgl,$thn)=explode('/',$_POST['tgl_akhir']);				
+					$kdtgl_akhir=$tgl."-".$bln."-".$thn;
+
+					$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$kdtgl_awal."' AND '".$kdtgl_akhir."'";
+					$this->view->d_tgl_awal = $kdtgl_awal;
+					$this->view->d_tgl_akhir = $kdtgl_akhir;
 				}
 				
 			}	
@@ -91,20 +97,27 @@ class DataDIPAController extends BaseController {
 				$filter[$no++]=" A.PROGRAM_CODE =  '".$kdprogram."'";
 			}
 			if ($kdtgl_awal !='null' OR $kdtgl_akhir !='null'){
-				list($bln,$tgl,$thn)=explode('-',$kdtgl_awal);
-				$kdtgl_awal=$bln."/".$tgl."/".$thn;
-				
-				list($bln,$tgl,$thn)=explode('-',$kdtgl_akhir);				
-				$kdtgl_akhir=$bln."/".$tgl."/".$thn;			
 				$filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '".$kdtgl_awal."' AND '".$kdtgl_akhir."'";
+				$tglawal=array("$kdtgl_awal");
+				$tglakhir=array("$kdtgl_akhir"); 
+					
+				$this->view->kdtgl_awal = $tglawal;
+				$this->view->kdtgl_akhir = $tglakhir;	
 			}
+
+		if (Session::get('role')==SATKER){
+			$d_nm_kppn1 = new DataUser($this->registry);
+			$this->view->nm_kppn2= $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+		}else{
+			$this->view->nm_kppn2=Session::get('user');
+		}
+
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
 		$this->view->data = $d_spm1->get_dipa_filter($filter);
 		$this->view->load('kppn/revisiDIPA_PDF');
 	}
-			//----------------------------------------------------
 
 	public function Fund_fail($satker=null) {
 		$d_spm1 = new DataFundFail($this->registry);
@@ -168,7 +181,37 @@ class DataDIPAController extends BaseController {
 		$this->view->render('kppn/fund_fail');
 	}
 	
-		public function Fund_fail_PDF() {
+<<<<<<< .mine	public function Fund_fail_PDF() {
+	$d_spm1 = new DataFundFail($this->registry);
+	$filter = array ();
+	$no=0;
+		
+		if ($kdkppn!=''){
+			$filter[$no++]="KPPN_CODE = '".$kdkppn."'";
+			$d_kppn = new DataUser($this->registry);
+			$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+		} else {
+			$filter[$no++]="KPPN_CODE = '".Session::get('id_user')."'";
+		}
+		
+		if ($kdsatker!=''){
+			$filter[$no++]="KDSATKER = '".$kdsatker."'";
+		}
+		/*if ($kdakun!=''){
+			$filter[$no++]="A.ACCOUNT_CODE = '".$kdakun."'";
+		}
+		if ($kdoutput!=''){
+			$filter[$no++]="A.OUTPUT_CODE = '".$kdoutput."'";
+		}
+		if ($kdprogram!=''){
+			$filter[$no++]="A.PROGRAM_CODE = '".$kdprogram."'";
+		}
+		
+		if ($kdtgl_awal !='null' OR $kdtgl_akhir !='null'){
+			//$filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '".$kdtgl_awal."' AND '".$kdtgl_akhir."'";
+			$tglawal=array("$kdtgl_awal");
+			$tglakhir=array("$kdtgl_akhir"); 
+=======		public function Fund_fail_PDF() {
 		$d_spm1 = new DataFundFail($this->registry);
 		$filter = array ();
 		$no=0;
@@ -180,25 +223,19 @@ class DataDIPAController extends BaseController {
 				} else {
 					$filter[$no++]="KPPN_CODE = '".Session::get('id_user')."'";
 				}
-				
-				if ($kdsatker!=''){
-					$filter[$no++]="KDSATKER = '".$kdsatker."'";
-				}
-				/*if ($kdakun!=''){
-					$filter[$no++]="A.ACCOUNT_CODE = '".$kdakun."'";
-				}
-				if ($kdoutput!=''){
-					$filter[$no++]="A.OUTPUT_CODE = '".$kdoutput."'";
-				}
-				if ($kdprogram!=''){
-					$filter[$no++]="A.PROGRAM_CODE = '".$kdprogram."'";
-				}
-				if ($kdtgl_awal!='' AND $kdtgl_akhir!=''){
-					$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
-				}*/
-				$this->view->data = $d_spm1->get_fun_fail_filter($filter);
-			
-	
+>>>>>>> .theirs				
+			$this->view->kdtgl_awal = $tglawal;
+			$this->view->kdtgl_akhir = $tglakhir;	
+		}
+
+		*/
+		$this->view->data = $d_spm1->get_fun_fail_filter($filter);
+		if (Session::get('role')==SATKER){
+			$d_nm_kppn1 = new DataUser($this->registry);
+			$this->view->nm_kppn2= $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+		}else{
+			$this->view->nm_kppn2=Session::get('user');
+		}
 		$this->view->load('kppn/fund_fail_PDF');
 	}
 
@@ -346,12 +383,10 @@ class DataDIPAController extends BaseController {
 		$filter = array ();
 		$no=0;
 		if ($kdsatker != '' and Session::get('role')!=SATKER) {
-					$filter[$no++]=" A.SATKER =  '".$kdsatker."'";
-				//$this->view->invoice_num = $invoice_num;	
-				}
-			else{
-				$filter[$no++]=" A.SATKER =  '".Session::get('kd_satker')."'";
-				}
+			$filter[$no++]=" A.SATKER =  '".$kdsatker."'";
+		}else{
+			$filter[$no++]=" A.SATKER =  '".Session::get('kd_satker')."'";
+		}
 		if ($program != '') {
 					$filter[$no++]=" A.PROGRAM =  '".$program."'";
 				//$this->view->invoice_num = $invoice_num;	
@@ -367,7 +402,10 @@ class DataDIPAController extends BaseController {
 				}
 			
 		if (Session::get('role')==KPPN) {
-					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
+<<<<<<< .mine			$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
+		}		
+		if (isset($_POST['submit_file'])) {
+=======					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
 			}		
 		if (isset($_POST['submit_file'])) {
 				
@@ -394,58 +432,89 @@ class DataDIPAController extends BaseController {
 				}
 				
 			}	
+>>>>>>> .theirs			
+			if ($_POST['kdsatker']!=''){
+				$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
+				$this->view->satker_code = $_POST['satker_code'];
+			}
+			if ($_POST['akun']!=''){
+				$filter[$no++]="A.AKUN = '".$_POST['akun']."'";
+				$this->view->account_code = $_POST['akun'];
+			}
+			if ($_POST['output']!=''){
+				$filter[$no++]="A.OUTPUT = '".$_POST['output']."'";
+				$this->view->output_code = $_POST['output'];
+			}
+			if ($_POST['program']!=''){
+				$filter[$no++]="A.PROGRAM = '".$_POST['program']."'";
+				$this->view->program_code = $_POST['program'];
+			}
+			if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
+				$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
+				$this->view->d_tgl_awal = $_POST['tgl_awal'];
+				$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+			}
+			
+		}	
 			
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
 		$this->view->data = $d_spm1->get_fa_filter($filter);
-		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/realisasiFA');
 	}
 	
-				//----------------------------------------------------
-			//Development history
-			//Revisi : 0
-			//Kegiatan :1.mencetak hasil filter ke dalam pdf
-			//File yang diubah : DataDIPAController.php
-			//Dibuat oleh : Rifan Abdul Rachman
-			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
+		//Development history
+		//Revisi : 0
+		//Kegiatan :1.mencetak hasil filter ke dalam pdf
+		//File yang diubah : DataDIPAController.php
+		//Dibuat oleh : Rifan Abdul Rachman
+		//Tanggal dibuat : 18-07-2014
+		//----------------------------------------------------
 
 		public function RealisasiFA_PDF($kdsatker=null,$kdakun=null,$kdprogram=null,$kdoutput=null) {
 		$d_spm1 = new DataFA($this->registry);
 		$filter = array ();
 		$no=0;
 		if ($kdsatker != '') {
-					$filter[$no++]=" A.SATKER =  '".$kdsatker."'";
+			$filter[$no++]=" A.SATKER =  '".$kdsatker."'";
 				}
 		if (Session::get('role')==KPPN) {
-					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
-			}		
+			$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";			
+		}		
 
+		if ($kdtgl_awal !='null' OR $kdtgl_akhir !='null'){
+			//$filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '".$kdtgl_awal."' AND '".$kdtgl_akhir."'";
+			$tglawal=array("$kdtgl_awal");
+			$tglakhir=array("$kdtgl_akhir"); 
+				
+			$this->view->kdtgl_awal = $tglawal;
+			$this->view->kdtgl_akhir = $tglakhir;	
+		}
 
-/* 			if ($kdsatker!='null'){
-					$filter[$no++]=" A.SATKER = '".$kdsatker."'";
-				}
-				if ($kdtgl_awal!='' AND $kdtgl_akhir!=''){
-					$filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
-				}
- */ 				
-				if ($kdakun!='null'){
-					$filter[$no++]=" A.AKUN = '".$kdakun."'";
-				}
-				if ($kdprogram!='null'){
-					$filter[$no++]=" A.PROGRAM = '".$kdprogram."'";
-				}
-				if ($kdoutput!='null'){
-					$filter[$no++]=" A.OUTPUT = '".$kdoutput."'";
-				}
-			
+		if ($kdakun!='null'){
+			$filter[$no++]=" A.AKUN = '".$kdakun."'";
+		}
+		if ($kdprogram!='null'){
+			$filter[$no++]=" A.PROGRAM = '".$kdprogram."'";
+		}
+		if ($kdoutput!='null'){
+			$filter[$no++]=" A.OUTPUT = '".$kdoutput."'";
+		}
+		if (Session::get('role')==SATKER){
+			$d_nm_kppn1 = new DataUser($this->registry);
+			$this->view->nm_kppn2= $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+		}else{
+			$this->view->nm_kppn2=Session::get('user');
+		}
+
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
 		$this->view->data = $d_spm1->get_fa_filter($filter);
-		$this->view->load('kppn/realisasiFA_PDF');
+		$this->view->load('kppn/realisasiFA
+		');
 	}
 
 	public function nmsatker() {
@@ -578,7 +647,6 @@ class DataDIPAController extends BaseController {
 				}
 			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		
-			
 			}
 			
 			//----------------------------------------------------
@@ -596,8 +664,8 @@ class DataDIPAController extends BaseController {
 			}
 			
 			$d_last_update = new DataLastUpdate($this->registry);
-		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		$this->view->render('kppn/DataRealisasi');
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+			$this->view->render('kppn/DataRealisasi');
 	}
 	
 			//----------------------------------------------------
@@ -613,18 +681,35 @@ class DataDIPAController extends BaseController {
 		$d_spm1 = new DataRealisasi($this->registry);
 		$filter = array ();
 		$no=0;
-				if ($kdkppn!=''){
-					$filter[$no++]="A.KPPN = '".$kdkppn."'";
-					$d_kppn = new DataUser($this->registry);
-					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
-					$this->view->d_kd_kppn = $kdkppn;
-				} else {
-					$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
-				}
-				
-				if ($kdsatkerku!=''){
-					$filter[$no++]="A.SATKER = '".$kdsatkerku."'";
-				}
+			if ($kdkppn!=''){
+				$filter[$no++]="A.KPPN = '".$kdkppn."'";
+				$d_kppn = new DataUser($this->registry);
+				$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+				$this->view->d_kd_kppn = $kdkppn;
+			} else {
+				$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
+			}
+			
+			if ($kdsatkerku!=''){
+				$filter[$no++]="A.SATKER = '".$kdsatkerku."'";
+			}
+			
+			if ($kdtgl_awal !='null' OR $kdtgl_akhir !='null'){
+				//$filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '".$kdtgl_awal."' AND '".$kdtgl_akhir."'";
+				$tglawal=array("$kdtgl_awal");
+				$tglakhir=array("$kdtgl_akhir"); 
+					
+				$this->view->kdtgl_awal = $tglawal;
+				$this->view->kdtgl_akhir = $tglakhir;	
+			}
+
+			if (Session::get('role')==SATKER){
+				$d_nm_kppn1 = new DataUser($this->registry);
+				$this->view->nm_kppn2= $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+			}else{
+				$this->view->nm_kppn2=Session::get('user');
+			}
+
 			$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 
 			if (Session::get('role')==KANWIL){
@@ -642,7 +727,7 @@ class DataDIPAController extends BaseController {
 
 			
 			$d_last_update = new DataLastUpdate($this->registry);
-		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+			$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 			$this->view->load('kppn/DataRealisasi_PDF');
 	}
 			//----------------------------------------------------
@@ -657,7 +742,6 @@ class DataDIPAController extends BaseController {
 					$filter[$no++]="KPPN = '".$_POST['kdkppn']."'";
 					$d_kppn = new DataUser($this->registry);
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-					//$this->view->data2 = $d_spm1->get_realisasi_lokasi($_POST['kdkppn']);
 				} 
 				elseif (Session::get('role')==KANWIL) {
 					$filter[$no++]="KANWIL = '".Session::get('id_user')."'";
@@ -687,8 +771,6 @@ class DataDIPAController extends BaseController {
 			
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		//var_dump($d_spm->get_hist_spm_filter());
-		//$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		$this->view->render('kppn/DataRealisasiBA');
 	}
 		//----------------------------------------------------
@@ -704,9 +786,15 @@ class DataDIPAController extends BaseController {
 		$filter = array ();
 		$no=0;
 			
-			$this->view->data = $d_spm1->get_realisasi_fa_global_ba_filter($filter);
+		$this->view->data = $d_spm1->get_realisasi_fa_global_ba_filter($filter);
 			
-			
+		if (Session::get('role')==SATKER){
+			$d_nm_kppn1 = new DataUser($this->registry);
+			$this->view->nm_kppn2= $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+		}else{
+			$this->view->nm_kppn2=Session::get('user');
+		}
+	
 		$d_last_update = new DataLastUpdate($this->registry);
 		$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		$this->view->load('kppn/DataRealisasiBA_PDF');
@@ -777,16 +865,16 @@ class DataDIPAController extends BaseController {
 				if ($_POST['kdlokasi']!=''){
 					$filter[$no++]="a.lokasi = '".$_POST['kdlokasi']."'";
 					$this->view->lokasi = $_POST['kdlokasi'];
+					var_dump($this->view->lokasi);
 				}
 				if ($_POST['kdsatker']!=''){
 					$filter[$no++]="A.SATKER = '".$_POST['kdsatker']."'";
 					$this->view->data3 = $d_spm1->get_realisasi_nmsatker_transfer($_POST['kdsatker']);
+					$this->view->satkerku = $_POST['kdsatker'];
 				}
 				
-				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
-					
+				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){					
 					$filter[$no++] = "TO_CHAR(ACCOUNTING_DATE,'YYYYMMDD') BETWEEN '".date('Ymd',strtotime($_POST['tgl_awal']))."' AND '".date('Ymd', strtotime($_POST['tgl_akhir']))."'";
-					
 					$this->view->d_tgl_awal = $_POST['tgl_awal'];
 					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
 				}	
@@ -829,7 +917,7 @@ class DataDIPAController extends BaseController {
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
 
-		public function DataRealisasiTransfer_PDF() {
+		public function DataRealisasiTransfer_PDF($kdsatkerku=null,$kdlokasi=null,$kdtgl_awal=null,$kdtgl_akhir=null) {
 		$d_spm1 = new DataRealisasi($this->registry);
 		$filter = array ();
 		$no=0;
@@ -840,18 +928,30 @@ class DataDIPAController extends BaseController {
 					$filter[$no++]="A.KANWIL = '".Session::get('id_user')."'";
 				}*/
 				
-				if ($kdlokasi!=''){
+				if ($kdlokasi!='null'){
 					$filter[$no++]="a.lokasi = '".$kdlokasi."'";
 				}
-				if ($kdsatker!=''){
-					$filter[$no++]="A.SATKER = '".$kdsatker."'";
+				if ($kdsatkerku!='null'){
+					$filter[$no++]="A.SATKER = '".$kdsatkerku."'";
 				}
 				
-				if ($kdtgl_awal!='' AND $kdtgl_akhir!=''){
+				if ($kdtgl_awal!='null' AND $kdtgl_akhir!='null'){
 					
-					$filter[$no++] = "TO_CHAR(ACCOUNTING_DATE,'YYYYMMDD') BETWEEN '".date('Ymd',strtotime($kdtgl_awal))."' AND '".date('Ymd', strtotime($kdtgl_akhir))."'";
-					
+					$filter[$no++] = "TO_CHAR(ACCOUNTING_DATE,'YYYYMMDD') BETWEEN '".date('Ymd',strtotime($kdtgl_awal))."' AND '".date('Ymd', strtotime($kdtgl_akhir))."'";		
+					$tglawal=array("$kdtgl_awal");
+					$tglakhir=array("$kdtgl_akhir"); 
+				
+					$this->view->kdtgl_awal = $tglawal;
+					$this->view->kdtgl_akhir = $tglakhir;	
 				}	
+				
+				if (Session::get('role')==SATKER){
+					$d_nm_kppn1 = new DataUser($this->registry);
+					$this->view->nm_kppn2= $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+				}else{
+					$this->view->nm_kppn2=Session::get('user');
+				}
+
 			$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
 			
 		$this->view->load('kppn/DataRealisasiTransfer_PDF');
@@ -945,11 +1045,27 @@ class DataDIPAController extends BaseController {
 		$d_spm1 = new proses_revisi($this->registry);
 		$filter = array ();
 		$no=0;
-			if ($kdsatker != '') {
-					$filter[$no++]=" KDSATKER =  '".$kdsatker."'";
+		if ($kdsatker != '') {
+			$filter[$no++]=" KDSATKER =  '".$kdsatker."'";
 				
-				}
-		
+		}
+		if ($kdtgl_awal !='null' OR $kdtgl_akhir !='null'){
+ 			//$filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '".$kdtgl_awal."' AND '".$kdtgl_akhir."'";
+			$tglawal=array("$kdtgl_awal");
+			$tglakhir=array("$kdtgl_akhir"); 
+				
+			$this->view->kdtgl_awal = $tglawal;
+			$this->view->kdtgl_akhir = $tglakhir;	
+		}
+
+		if (Session::get('role')==SATKER){
+			$d_nm_kppn1 = new DataUser($this->registry);
+			$this->view->nm_kppn2= $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+
+		}else{
+			$this->view->nm_kppn2=Session::get('user');
+		}
+
 		$this->view->data = $d_spm1->detail_revisi($filter);
 		//$this->view->render('kppn/detail_revisi');
 		$this->view->load('kppn/detail_revisi_PDF');

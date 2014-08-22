@@ -663,8 +663,8 @@ class DataKppnController extends BaseController {
 				if ($_POST['tgl_awal']!='' AND $_POST['tgl_akhir']!=''){
 					$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($_POST['tgl_awal'])).",'YYYYMMDD') 
 									AND TO_DATE (".date('Ymd',strtotime($_POST['tgl_akhir'])).",'YYYYMMDD')  ";
-					$this->view->d_tgl_awal = $_POST['tgl_awal'];
-					$this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+					$this->view->d_kdtgl_awal1 = $_POST['tgl_awal'];
+					$this->view->d_kdtgl_akhir1 = $_POST['tgl_akhir'];
 				}
 				$this->view->data = $d_sppm->get_sp2d_sudah_void($filter);
 			}
@@ -685,7 +685,7 @@ class DataKppnController extends BaseController {
 		$this->view->render('kppn/sp2dSudahVoid');
 	}
 	
-		public function sp2dSudahVoid_PDF() {
+		public function sp2dSudahVoid_PDF($kdkppn=null,$kdtgl_awal2=null,$kdtgl_akhir2=null,$kdbank=null) {
 		$d_sppm = new DataSppm($this->registry);
 		$filter = array ();
 		$no=0;
@@ -696,6 +696,8 @@ class DataKppnController extends BaseController {
 					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
 				} else {
 					$filter[$no++]="KDKPPN = '".Session::get('id_user')."'";
+					
+					
 				}
 				if ($kdbank!=''){
 					if ($kdbank!=5){
@@ -703,9 +705,17 @@ class DataKppnController extends BaseController {
 					}
 				}
 				
-				if ($kdtgl_awal!='' AND $kdtgl_akhir!=''){
-					$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($kdtgl_awal)).",'YYYYMMDD') 
-									AND TO_DATE (".date('Ymd',strtotime($kdtgl_akhir)).",'YYYYMMDD')  ";
+				if ($kdtgl_awal2!='' AND $kdtgl_akhir2!=''){
+					$filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (".date('Ymd',strtotime($kdtgl_awal2)).",'YYYYMMDD') 
+									AND TO_DATE (".date('Ymd',strtotime($kdtgl_akhir2)).",'YYYYMMDD')  ";
+					
+					$tglawal=array("$kdtgl_awal2");
+					$tglakhir=array("$kdtgl_akhir2"); 
+					
+					$this->view->kdtgl_awal = $tglawal;
+					$this->view->kdtgl_akhir = $tglakhir;
+					
+										
 				}
 				$this->view->data = $d_sppm->get_sp2d_sudah_void($filter);
 			
@@ -722,8 +732,8 @@ class DataKppnController extends BaseController {
 			$d_last_update = new DataLastUpdate($this->registry);
 			$this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 		
-		//$this->view->render('kppn/sp2dSudahVoid');
-		$this->view->load('kppn/sp2dSudahVoid_PDF');
+		$this->view->render('kppn/sp2dSudahVoid');
+		//$this->view->load('kppn/sp2dSudahVoid_PDF');
 	}
 
 	public function sp2dGajiDobel() {

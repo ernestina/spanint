@@ -33,18 +33,19 @@
 				}
 
 				?>
-	<ul class="inline" style="float: right">
-		<li>
-			<a href="<?php echo URL; ?>dataSPM/HistorySpm_PDF/<?php echo $check_number;?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a>
-		</li>
+<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $check_number;?>" class="modal">PDF</a>
 
+				
+<!-- 	<ul class="inline" style="float: right"><li>
+	<a  href="<?php echo URL; ?>dataSPM/HistorySpm_PDF/<?php echo $check_number;?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+ -->				
 
-		<li>
-			<a href="#xModal" class="modal">FILTER DATA</a>
-		</li>
-	</ul>
-        
-	<div id="xModal" class="modalDialog" >
+			
+		<?php
+			//----------------------------------------------------		
+		?>
+<a href="#xModal" class="modal">FILTER DATA</a><br><br>
+        <div id="xModal" class="modalDialog" >
             <div>
                 <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
 				<a href="<?php
@@ -166,13 +167,12 @@
             $('#winvoice').fadeIn();
             jml++;
         }
-		/*
+		
 		if(v_invoice !='' && v_invoice.length != 18 ){
             $('#winvoice').html('No. invoice harus 18 digit');
             $('#winvoice').fadeIn(200);
             jml++;
         }
-		*/
 		
 		if(jml>0){
             return false;

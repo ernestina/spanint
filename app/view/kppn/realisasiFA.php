@@ -40,7 +40,7 @@
  
 				?>
 	<ul class="inline" style="float: right"><li>
-	<a href="<?php echo URL; ?>dataDIPA/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+	<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker."/".$kdakun."/".$kdprogram."/".$kdoutput;?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
 	<li><a href="#wModal" class="modal">FILTER DATA</a></li></ul>
         <div id="wModal" class="modalDialog" >

@@ -91,7 +91,6 @@ class DataSPMController extends BaseController {
 		
 		$this->view->data = $d_spm1->get_hist_spm_filter($filter);
 			
-		//var_dump($d_spm->get_hist_spm_filter());
 		$this->view->render('kppn/detailposisiSPM');
 	}*/
 		//----------------------------------------------------
@@ -107,10 +106,16 @@ class DataSPMController extends BaseController {
 		$d_spm1 = new DataHistSPM($this->registry);
 		$filter = array ();
 		$no=0;
-			if (!is_null($invoice_num1)) {
-				$filter[$no++]="INVOICE_NUM =  '".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
+		if (!is_null($invoice_num1)) {
+			$filter[$no++]="INVOICE_NUM =  '".$invoice_num1."/".$invoice_num2."/".$invoice_num3."'";
+		}
+		if (Session::get('role')==SATKER){
+			$d_nm_kppn1 = new DataUser($this->registry);
+			$this->view->nm_kppn2= $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+		}else{
+			$this->view->nm_kppn2=Session::get('user');
+		}
 
-			}
 		
 		$this->view->data = $d_spm1->get_hist_spm_filter($filter);
 			

@@ -54,7 +54,7 @@
 			}
 			
 				?>
-			<!--<a href="<?php echo URL; ?>dataSPM/daftarsp2d_PDF/<?php echo $satker."/".$check_number."/".$invoice."/".$JenisSP2D."/".$JenisSPM."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>-->
+			<!--<a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker."/".$check_number."/".$invoice."/".$JenisSP2D."/".$JenisSPM."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>-->
 
 			
 		<?php

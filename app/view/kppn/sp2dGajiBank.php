@@ -28,7 +28,7 @@
 									
 				?>
 			 
-				<a href="<?php echo URL; ?>DataKppn/sp2dSalahBank_PDF" class="modal">PDF</a>
+				<a href="<?php echo URL; ?>PDF/sp2dSalahBank_PDF" class="modal">PDF</a>
 							
 		<?php
 			//----------------------------------------------------		

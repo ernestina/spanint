@@ -88,7 +88,7 @@ class DataDipa{
         }
         return $data;
     }
-	
+
     /*
      * setter
      */

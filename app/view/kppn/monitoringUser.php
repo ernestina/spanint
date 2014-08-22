@@ -34,7 +34,7 @@
 						
 				?>
 			 
-				<a href="<?php echo URL; ?>UserSpan/monitoringUserSpan_PDF/<?php echo $kdkppn."/".$kdnip; ?>" class="modal">PDF</a>
+				<a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn."/".$kdnip; ?>" class="modal">PDF</a>
 							
 		<?php
 			//----------------------------------------------------		
