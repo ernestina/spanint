@@ -56,7 +56,7 @@
     $_SERVER['PHP_SELF'];
     ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
             <div id="top">
-                <form method="POST" action="HoldSpm" enctype="multipart/form-data">
+                <form method="POST" action="HoldSPM" enctype="multipart/form-data">
                     <div id="winvoice" class="error"></div>
 
 

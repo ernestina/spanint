@@ -40,7 +40,7 @@ class proses_revisi {
 
     public function get_revisi_dipa($filter) {
         Session::get('id_user');
-        $sql = "SELECT DISTINCT A.SATKER_CODE ,A.REVISION_NO, A.MEANING, A.LAST_UPDATE_DATE, B.NMSATKER 
+        $sql = "SELECT DISTINCT A.SATKER_CODE ,A.KPPN_CODE, A.REVISION_NO, A.MEANING, A.LAST_UPDATE_DATE, B.NMSATKER 
 				FROM "
                 . $this->_table1 . " A, "
                 . $this->_table2 . " B 
@@ -53,7 +53,7 @@ class proses_revisi {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " ORDER BY A.LAST_UPDATE_DATE DESC, A.SATKER_CODE ASC ";
+        $sql .= " ORDER BY A.LAST_UPDATE_DATE DESC, A.KPPN_CODE, A.SATKER_CODE ASC ";
 
         //var_dump ($sql);
         $result = $this->db->select($sql);
@@ -62,6 +62,7 @@ class proses_revisi {
             $d_data = new $this($this->registry);
             $d_data->set_satker_code($val['SATKER_CODE']);
             $d_data->set_nmsatker($val['NMSATKER']);
+			$d_data->set_kppn($val['KPPN_CODE']);
             $d_data->set_revision_no($val['REVISION_NO']);
             $d_data->set_meaning($val['MEANING']);
             $d_data->set_last_update_date($val['LAST_UPDATE_DATE']);
