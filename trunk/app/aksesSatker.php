@@ -116,8 +116,9 @@ $akses['DataReturSatker'] = array(
 /*
  * akses Data SPM
  */
-$akses['DataSPMKPPN'] = array(
+$akses['DataSPMSatker'] = array(
     '__construct',
+	'PosisiSPM',
     'HoldSPM',
     'detailHoldSPM',
     'HoldSpm',

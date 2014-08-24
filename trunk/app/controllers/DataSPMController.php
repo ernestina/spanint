@@ -249,12 +249,13 @@ class DataSPMController extends BaseController {
             $filter[$no++] = $kppn;
             $this->view->invoice_num = $invoice_num;
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
-        } elseif (!is_null($invoice_num1)) {
+        } elseif (!is_null($invoice_num1) and Session::get('role') == KANWIL) {
             $invoice = "'" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "'";
             $kppn = substr($sp2d, 2, 3);
             $filter[$no++] = $kppn;
+			//$filter_kanwil = "SUBSTR(NO_SP2D,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
             $this->view->invoice_num = $invoice_num;
-            $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
+            $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice );
         }
 
         if (isset($_POST['submit_file'])) {
@@ -357,11 +358,10 @@ class DataSPMController extends BaseController {
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "substr(check_number,3,3) = '" . $_POST['kdkppn'] . "'";
+                $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) = '" . $_POST['kdkppn'] . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
-                $filter[$no++] = "substr(check_number,3,3) = '" . Session::get('id_user') . "'";
                 $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) = '" . Session::get('id_user') . "'";
             }
 
@@ -407,20 +407,16 @@ class DataSPMController extends BaseController {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
-        if ($kdsatker != '' AND Session::get('id_user') == 140) {
-            $filter[$no++] = " SEGMENT1 =  '" . $kdsatker . "'";
-            //$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);	
-            //$this->view->invoice_num = $invoice_num;	
-        } elseif ($kdsatker != '') {
+        if ($kdsatker != '') {
             if (Session::get('role') == SATKER) {
                 if (Session::get('kd_satker') != $kdsatker) {
                     header('location:' . URL . 'auth/logout');
                     exit();
                 } else {
-                    $filter[$no++] = " SUBSTR(INVOICE_NUM,8,6) =  '" . Session::get('kd_satker') . "'";
+                    $filter[$no++] = " SEGMENT1 =  '" . Session::get('kd_satker') . "'";
                 }
             } else {
-                $filter[$no++] = " SUBSTR(INVOICE_NUM,8,6) =  '" . $kdsatker . "'";
+                $filter[$no++] = " SEGMENT1 =  '" . $kdsatker . "'";
             }
         }
         if ($tgl1 != '' AND $tgl2 != '') {
@@ -459,10 +455,10 @@ class DataSPMController extends BaseController {
             $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) = '" . Session::get('id_user') . "'";
         }
         if (Session::get('role') == SATKER) {
-            $filter[$no++] = "SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
+            $filter[$no++] = "SEGMENT1 = '" . Session::get('kd_satker') . "'";
         }
 		 if (Session::get('role') == KANWIL) {
-            $filter[$no++] = "SUBSTR(CHECK_NUMBER,8,6) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";;
+            $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";;
         }
 		
 		if (kdsatker != '' ) {
