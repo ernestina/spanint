@@ -45,7 +45,9 @@ class DataHistorySPM {
             
         }
 
-        $sql = "select 
+        $sql = "select distinct * from (
+		
+				select 
 				AIIA.invoice_num NOMOR_DOKUMEN, 
 				AIIA.status_code RESPONSE, 
 				pap.last_name nama_user, 
@@ -133,18 +135,18 @@ class DataHistorySPM {
 				where
 				substr(aca.check_number,3,3) = '" . $filter .
                 "' 
-				
 				 and aia.invoice_num = " . $invoice . "
-				 
-				order by waktu_mulai "
+				 ) 
+				 where 1=1 
+				 "
 
         ;
 
 
-        /* $no=0;
-          foreach ($filter as $filter) {
-          //$sql .= " AND ".$filter;
-          } */
+        $no=0;
+          //foreach ($filter_kanwil as $filter_kanwil) {
+          $sql .=  " ORDER BY WAKTU_MULAI ";
+          //}
         //var_dump ($sql);
 
 
