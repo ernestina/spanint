@@ -98,6 +98,7 @@ class DataSppm {
                 $d_data->set_sorbor_date(date("d-m-Y", strtotime($val['SORBOR_DATE'])));
             }
             $data[] = $d_data;
+			//var_dump($d_data);
         }
         return $data;
     }

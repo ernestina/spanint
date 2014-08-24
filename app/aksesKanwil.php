@@ -148,4 +148,13 @@ $akses['UserSpanKanwil'] = array(
     'monitoringUserSpan',
     '__destruct'
 );
+
+/*
+ * akses DataPelimpahan
+ */
+$akses['DataPelimpahanKanwil'] = array(
+    '__construct',
+    'monitoringPelimpahan',
+    '__destruct'
+);
 ?>

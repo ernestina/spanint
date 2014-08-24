@@ -97,9 +97,9 @@ class DataUser {
         if (Session::get('role') == DJA) {
             $session_check = "";
         }
-        $sql = "SELECT * FROM " . $this->_table1 . " WHERE  " . $kolom . " = '" . $nilai . "'" . $session_check;
+        $sql = "SELECT * FROM " . $this->_table1 . " WHERE  " . $kolom . " = '" . $nilai . "' " . $session_check;
         $result = $this->db->select($sql);
-        var_dump($sql);
+        //var_dump($sql);
         if (count($result) >= 1) {
             return TRUE;
         } else {

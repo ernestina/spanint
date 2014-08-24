@@ -224,6 +224,11 @@
 								<li><a href=' . URL . 'dataGR/GR_PFK></i>Monitoring PFK</a></li>
                             </ul>
                             </li>';
+                        echo '<li class="subnav"><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan>Pelimpahan</a>';
+                        echo '<ul>
+                                <li><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan></i>Pelimpahan</a></li>
+                            </ul>
+                            </li>';
                         echo '<li class="subnav"><a href=' . URL . 'dataSupplier/cekSupplier>Supplier</a>';
                         echo '<ul>
                                 <li><a href=' . URL . 'dataSupplier/downloadSupplierXls></i>Download Supplier</a></li>

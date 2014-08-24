@@ -187,4 +187,15 @@ $akses['UserSpanKPPN'] = array(
     'monitoringUserSpan',
     '__destruct'
 );
+
+/*
+ * akses DataPelimpahan
+ */
+$akses['DataPelimpahanKPPN'] = array(
+    '__construct',
+    'monitoringPelimpahan',
+    '__destruct'
+);
+
+
 ?>

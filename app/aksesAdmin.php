@@ -184,4 +184,15 @@ $akses['UserSpanAdmin'] = array(
     'monitoringUserSpan_PDF',
     '__destruct'
 );
+
+/*
+ * akses DataPelimpahan
+ */
+$akses['DataPelimpahanAdmin'] = array(
+    '__construct',
+    'monitoringPelimpahan',
+    '__destruct'
+);
+
+
 ?>
