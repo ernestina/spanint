@@ -44,33 +44,32 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-    /*
-      $kdkppn='null';
-      $kdbank='null';
-      $kdtgl_awal='null';
-      $kdtgl_akhir='null';
-     */
+    
 
 
     $kdkppn = Session::get('id_user');
 
+
     if (isset($this->d_bank)) {
         $kdbank = $this->d_bank;
-        //echo '$kdbank:' . $kdbank;
-    }
+     }else{
+		$kdbank='null';
+	}
     if (isset($this->d_jendok)) {
         $kdjendok = $this->d_jendok;
-        //echo '$kdjendok:' . $kdjendok;
-    }
-    if (isset($this->d_tgl_awal)) {
-        $kdtgl_awal1 = $this->d_tgl_awal;
-        list($bln, $tgl, $thn) = explode('-', $kdtgl_awal1);
-        $kdtgl_awal = $thn . $tgl . $bln;
+       
+    }else{
+		$kdjendok='null';
+	}
+     if (isset($this->d_tgl_awal)) {
+        $kdtgl_awal = $this->d_tgl_awal;
+    } else {
+        $kdtgl_awal = 'null';
     }
     if (isset($this->d_tgl_akhir)) {
-        $kdtgl_akhir1 = $this->d_tgl_akhir;
-        list($bln, $tgl, $thn) = explode('-', $kdtgl_akhir1);
-        $kdtgl_akhir = $thn . $tgl . $bln;
+        $kdtgl_akhir = $this->d_tgl_akhir;
+    } else {
+        $kdtgl_akhir = 'null';
     }
     ?>
 
