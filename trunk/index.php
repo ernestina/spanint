@@ -77,6 +77,7 @@ $registry->auth->add_access('dataRetur','admin',$akses['DataSatkerAdmin']);
 $registry->auth->add_access('dataSPM','admin',$akses['DataSPMAdmin']);
 $registry->auth->add_access('dataUser','admin',$akses['DataUserAdmin']);
 $registry->auth->add_access('userSpan','admin',$akses['UserSpanAdmin']);
+$registry->auth->add_access('dataPelimpahan','admin',$akses['DataPelimpahanAdmin']);
 
 //level satker
 $registry->auth->add_access('auth','satker',$akses['AuthSatker']);
@@ -99,7 +100,8 @@ $registry->auth->add_access('dataKppn','kppn',$akses['DataKppnKPPN']);
 $registry->auth->add_access('dataRetur','kppn',$akses['DataReturKPPN']);
 $registry->auth->add_access('dataSPM','kppn',$akses['DataSPMKPPN']);
 $registry->auth->add_access('dataSupplier','kppn',$akses['DataSupplierKPPN']);
-$registry->auth->add_access('userSpan','kppn',$akses['UserSpanKPPN']);
+$registry->auth->add_access('userSpan','kppn',$akses['UserSpanAdmin']);
+$registry->auth->add_access('dataPelimpahan','kppn',$akses['DataPelimpahanKPPN']);
 
 //level pkn
 $registry->auth->add_access('auth','pkn',$akses['AuthPKN']);
@@ -117,6 +119,7 @@ $registry->auth->add_access('dataJSON','kanwil',$akses['DataJSONKanwil']);
 $registry->auth->add_access('dataKppn','kanwil',$akses['DataKppnKanwil']);
 $registry->auth->add_access('dataSPM','kanwil',$akses['DataSPMKanwil']);
 $registry->auth->add_access('userSpan','kanwil',$akses['UserSpanKanwil']);
+$registry->auth->add_access('dataPelimpahan','kanwil',$akses['DataPelimpahanKanwil']);
 
 //level dja
 $registry->auth->add_access('auth','dja',$akses['AuthDJA']);

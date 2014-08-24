@@ -56,11 +56,11 @@
 
     if (isset($this->d_bank)) {
         $kdbank = $this->d_bank;
-        echo '$kdbank:' . $kdbank;
+        //echo '$kdbank:' . $kdbank;
     }
     if (isset($this->d_jendok)) {
         $kdjendok = $this->d_jendok;
-        echo '$kdjendok:' . $kdjendok;
+        //echo '$kdjendok:' . $kdjendok;
     }
     if (isset($this->d_tgl_awal)) {
         $kdtgl_awal1 = $this->d_tgl_awal;

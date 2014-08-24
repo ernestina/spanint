@@ -47,14 +47,14 @@ class DataKppnController extends BaseController {
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
             } else {
-                $filter[$no++] = "KDKPPN = " . Session::get('id_user');
+                $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
             }
             if ($_POST['nosp2d'] != '') {
-                $filter[$no++] = "CHECK_NUMBER = " . $_POST['nosp2d'] . "'";
+                $filter[$no++] = "CHECK_NUMBER = '" . $_POST['nosp2d'] . "'";
                 $this->view->d_nosp2d = $_POST['nosp2d'];
             }
             if ($_POST['barsp2d'] != '') {
-                $filter[$no++] = "CHECK_NUMBER_LINE_NUM = " . $_POST['barsp2d'] . "'";
+                $filter[$no++] = "CHECK_NUMBER_LINE_NUM = '" . $_POST['barsp2d'] . "'";
                 $this->view->d_barsp2d = $_POST['barsp2d'];
             }
             if ($_POST['kdsatker'] != '') {
@@ -193,7 +193,7 @@ class DataKppnController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
-                $filter[$no++] = "KDKPPN = " . Session::get('id_user');
+                $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
             }
             if ($_POST['bank'] != '') {
                 if ($_POST['bank'] != 5) {
@@ -276,7 +276,7 @@ class DataKppnController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
-                $filter[$no++] = "KDKPPN = " . Session::get('id_user');
+                $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
             }
             if ($_POST['bank'] != '') {
                 if ($_POST['bank'] != 5) {
@@ -360,7 +360,7 @@ class DataKppnController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
-                $filter[$no++] = "KDKPPN = " . Session::get('id_user');
+                $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
             }
             if ($_POST['bank'] != '') {
                 if ($_POST['bank'] != 5) {
@@ -562,7 +562,7 @@ class DataKppnController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
-                $filter[$no++] = "KDKPPN = " . Session::get('id_user');
+                $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
             }
             if ($_POST['bank'] != '') {
                 if ($_POST['bank'] != 5) {
@@ -1067,11 +1067,11 @@ class DataKppnController extends BaseController {
         $d_sppm = new DataSppm($this->registry);
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = " KDKPPN = " . $_POST['kdkppn'];
+                $filter[$no++] = " KDKPPN = '" . $_POST['kdkppn']."'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
-                $filter[$no++] = " KDKPPN = " . Session::get('id_user');
+                $filter[$no++] = " KDKPPN = '" . Session::get('id_user')."'";
             }
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
                 $filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') 
@@ -1103,35 +1103,6 @@ class DataKppnController extends BaseController {
         $filter = array();
         $no = 0;
         $d_kppn_list = new DataUser($this->registry);
-
-        /* pembatasan akses dari session, karena yang dibatasi hanya variabel $kdkppn, 
-          maka pembatasan data dibawah hanya membatasi kolom KDKPPN di database */
-        /* if (Session::get('role')==ADMIN){
-          //do nothing karena untuk menu ini, ADMIN tidak dibatasi untuk mengambil data
-          }
-          if (Session::get('role')==SATKER){
-          //do nothing karena untuk menu ini, SATKER tidak bisa mengakses menu ini, if untuk satker bisa dihilangkan
-          }
-          if (Session::get('role')==KPPN){
-          $filter[$no++]=" KDKPPN = ".Session::get('id_user');
-          }
-          if (Session::get('role')==PKN){
-          //do nothing karena untuk menu ini, PKN tidak bisa mengakses menu ini, if untuk pkn bisa dihilangkan
-          }
-          if (Session::get('role')==KANWIL){
-          //untuk menlist kppn di wilayah kanwil nya
-          $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-          $kppn_list2='0';
-          foreach ($kppn_list as $value1){
-          $kppn_list2 .= ",".$value1->get_kd_d_kppn();
-          }
-
-          $filter[$no++]=" KDKPPN in ( ".$kppn_list2.") ";
-          $this->view->kppn_list = $kppn_list;
-          }
-          if (Session::get('role')==DJA){
-          //do nothing karena untuk menu ini, DJA tidak bisa mengakses menu ini, if untuk dja bisa dihilangkan
-          } */
 
         //handle filter dari UI
         if ($bank == 'BNI') {
@@ -1216,35 +1187,7 @@ class DataKppnController extends BaseController {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
-
-
-        /* pembatasan akses dari session, karena yang dibatasi hanya variabel $kdkppn, 
-          maka pembatasan data dibawah hanya membatasi kolom KDKPPN di database */
-        if (Session::get('role') == ADMIN) {
-            //do nothing karena untuk menu ini, ADMIN tidak dibatasi untuk mengambil data
-        }
-        if (Session::get('role') == SATKER) {
-            //do nothing karena untuk menu ini, SATKER tidak bisa mengakses menu ini, if untuk satker bisa dihilangkan
-        }
-        if (Session::get('role') == KPPN) {
-            $filter[$no++] = " KDKPPN = " . Session::get('id_user');
-        }
-        if (Session::get('role') == PKN) {
-            //do nothing karena untuk menu ini, PKN tidak bisa mengakses menu ini, if untuk pkn bisa dihilangkan
-        }
-        if (Session::get('role') == KANWIL) {
-            $d_kppn_list = new DataUser($this->registry);
-            $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-            $kppn_list2 = '0';
-            foreach ($kppn_list as $value1) {
-                $kppn_list2 .= "," . $value1->get_kd_d_kppn();
-            }
-            $filter[$no++] = " KDKPPN in ( " . $kppn_list2 . ") ";
-            $this->view->kppn_list = $kppn_list;
-        }
-        if (Session::get('role') == DJA) {
-            //do nothing karena untuk menu ini, DJA tidak bisa mengakses menu ini, if untuk dja bisa dihilangkan
-        }
+        $d_kppn_list = new DataUser($this->registry);
 
         //handle filter dari UI
         if ($bank == 'BNI') {
@@ -1274,13 +1217,21 @@ class DataKppnController extends BaseController {
             $filter[$no++] = " KDKPPN = '" . $kdkppn . "'";
             $d_kppn = new DataUser($this->registry);
             $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+        }else {
+            $kdkppn = Session::get('kd_satker');
         }
-
-        $this->view->data = $d_sppm->get_detail_sp2d_rekap($filter);
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
+		/* pembatasan akses dari session, inputan adalah nama kolom dan isi kolom yang ingin dibatasi.
+          contoh : disini yang dibatasi adalah kolom KPPN dalam tabel t_satker dengan isian sesuai dengan variabel input $kdkppn */
+        if ($d_kppn_list->get_akses_kppn_satker("KPPN", $kdkppn)) {
+            $this->view->data = $d_sppm->get_detail_sp2d_rekap($filter);
+        } else {
+            $this->view->data = '';
+        }
 
         //var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/detailSp2dRekap');
