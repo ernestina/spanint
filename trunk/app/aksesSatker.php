@@ -34,7 +34,7 @@ $akses['AuthSatker'] = array(
 $akses['DataDIPASatker'] = array(
     '__construct',
     'RevisiDipa',
-    'Detail_Fund_fail_kd',
+    'Detail_Fund_Fail_KD',
     'RealisasiFA',
     'RealisasiFA_1',
     'nmsatker',
@@ -116,10 +116,10 @@ $akses['DataReturSatker'] = array(
 /*
  * akses Data SPM
  */
-$akses['DataSPMSatker'] = array(
+$akses['DataSPMKPPN'] = array(
     '__construct',
-    'posisiSpm',
-    'detailposisiSpm',
+    'HoldSPM',
+    'detailHoldSPM',
     'HoldSpm',
     'ValidasiSpm',
     'errorSpm',
@@ -127,7 +127,7 @@ $akses['DataSPMSatker'] = array(
     'daftarsp2d',
     'RekapSp2d',
     'detailrekapsp2d',
-    'detailposisiSpm_PDF',
+    'detailHoldSPM_PDF',
     'HoldSpm_PDF',
     'HistorySpm_PDF',
     'daftarsp2d_PDF',

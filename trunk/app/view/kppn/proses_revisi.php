@@ -104,6 +104,7 @@
             <th>No.</th>
             <th>Kode Satker</th>
             <th>Nama Satker</th>
+			<th>KPPN</th>
             <th>Revisi Ke</th>
             <th>Tahapan Proses</th>
             <th>Tanggal</th>
@@ -125,6 +126,7 @@
                             echo "<td>" . $no++ . "</td>";
                             echo "<td>" . $value->get_satker_code() . "</td>";
                             echo "<td align='left'>" . $value->get_nmsatker() . "</td>";
+							echo "<td align='left'>" . $value->get_kppn() . "</td>";
                             echo "<td>" . $value->get_revision_no() . "</td>";
                             echo "<td align ='left'>" . $value->get_meaning() . "</td>";
                             echo "<td>" . $value->get_last_update_date() . "</td>";

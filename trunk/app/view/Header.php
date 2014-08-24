@@ -69,10 +69,10 @@
 								<li><a href=' . URL . 'dataDroping/monitoringDroping>Monitoring Penyaluran & Droping Dana SP2D</a></li>
                             </ul>
 							</li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataSPM/posisiSpm></i>Modul PM</a>';
+                        echo '<li class="subnav"><a href=' . URL . 'dataSPM/PosisiSPM></i>Modul PM</a>';
                         echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/posisiSpm></i>Monitoring Posisi Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/HoldSpm></i>Hold Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/PosisiSPM></i>Monitoring Posisi Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/HoldSPM></i>Hold Invoice</a></li>
                                 <li><a href=' . URL . 'dataSPM/ValidasiSpm></i>Daftar Penolakan PMRT</a></li>
 								<li><a href=' . URL . 'dataSPM/HistorySpm></i>Histori Invoice</a></li>
 								<li><a href=' . URL . 'dataSPM/DurasiSpm></i>Durasi Penyelesaian SP2D</a></li>
@@ -140,12 +140,12 @@
 
                         echo '<li class="subnav"><a href=#>Modul PM</a>';
                         echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/posisiSPM></i>Monitoring Posisi Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/holdSPM></i>Hold Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/PosisiSPM></i>Monitoring Posisi Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/HoldSPM></i>Hold Invoice</a></li>
                                 <li><a href=' . URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
-								<li><a href=' . URL . 'dataSPM/historySPM></i>Histori Invoice</a></li>
-								<li><a href=' . URL . 'dataSPM/durasiSPM></i>Durasi Penyelesaian SP2D</a></li>
-								<li><a href=' . URL . 'dataSPM/nmSatker></i>Daftar SP2D per Satker</a></li>
+								<li><a href=' . URL . 'dataSPM/HistorySpm></i>Histori Invoice</a></li>
+								<li><a href=' . URL . 'dataSPM/DurasiSpm></i>Durasi Penyelesaian SP2D</a></li>
+								<li><a href=' . URL . 'dataSPM/nmsatker></i>Daftar SP2D per Satker</a></li>
 								<li><a href=' . URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
                             </ul>
 							</li>';
@@ -206,8 +206,8 @@
 
                         echo '<li class="subnav"><a href=#>Modul PM</a>';
                         echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/posisiSpm></i>Monitoring Posisi Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/HoldSpm></i>Hold Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/PosisiSPM></i>Monitoring Posisi Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/HoldSPM></i>Hold Invoice</a></li>
                                 <li><a href=' . URL . 'dataSPM/ValidasiSpm></i>Daftar Penolakan PMRT</a></li>
 								<li><a href=' . URL . 'dataSPM/HistorySpm></i>Histori Invoice</a></li>
 								<li><a href=' . URL . 'dataSPM/DurasiSpm></i>Durasi Penyelesaian SP2D</a></li>
@@ -274,8 +274,8 @@
                             </li>';
                         echo '<li class="subnav"><a href=#>Modul PM</a>';
                         echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/posisiSpm></i>Monitoring Posisi Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/HoldSpm></i>Hold Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/PosisiSPM></i>Monitoring Posisi Invoice</a></li>
+                                <li><a href=' . URL . 'dataSPM/HoldSPM></i>Hold Invoice</a></li>
                                 <li><a href=' . URL . 'dataSPM/ValidasiSpm></i>Daftar Penolakan PMRT</a></li>
                                 <li><a href=' . URL . 'dataSPM/daftarsp2d/' . Session::get('kd_satker') . '></i>Daftar SP2D</a></li>
 								<li><a href=' . URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
