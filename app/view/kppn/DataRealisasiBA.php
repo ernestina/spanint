@@ -35,18 +35,20 @@
         //Dibuat oleh : Rifan Abdul Rachman
         //Tanggal dibuat : 05-08-2014
         //----------------------------------------------------
-        if (isset($this->kppn_code)) {
+       
             $kdkppn = $this->kppn_code;
-        }
-        ?>
-        <ul class="inline" style="float: right"><li>
-                <a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li></ul>
+			?>
+			<ul class="inline" style="float: right"><li>
+					<a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li></ul>
 
-        <!-- 				<ul class="inline" style="float: right"><li>
-                <a  href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
-        -->			
-        <?php
-        //----------------------------------------------------		
+			<!-- 				<ul class="inline" style="float: right"><li>
+					<a  href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
+			-->			
+			<?php
+			//----------------------------------------------------		
+			
+			
+        
         ?>
 
 

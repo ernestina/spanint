@@ -13,19 +13,17 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-    foreach ($this->data as $value) {
-        $kdnum = $value->get_invoice_num();
-    }
+    if($this->data as $value){
+		foreach ($this->data as $value) {
+			$kdnum = $value->get_invoice_num();
+		}
     ?>
-    <<<<<<< .mine		<a href="<?php echo URL; ?>PDF/detailposisiSPM_PDF/<?php echo $kdnum; ?>" class="modal">PDF</a>
-    =======		<a href="<?php echo URL; ?>dataSPM/detailposisiSPM_PDF/<?php echo $kdnum; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a>
-    >>>>>>> .theirs		
-    <!--  	<ul class="inline" style="float: right"><li>
-            <a  href="<?php echo URL; ?>dataSPM/detailposisiSPM_PDF/<?php echo $kdnum; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
-    --> 
+    <a href="<?php echo URL; ?>PDF/detailposisiSPM_PDF/<?php echo $kdnum; ?>" class="modal">PDF</a>
 
 
     <?php
+
+	}
     //----------------------------------------------------		
     ?>
     <div id="fitur">

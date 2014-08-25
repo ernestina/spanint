@@ -22,24 +22,34 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-    $kdakun = 'null';
-    $kdprogram = 'null';
-    $kdoutput = 'null';
-    //var_dump($this->account_code);
-    if (isset($this->account_code)) {
+   
+    if( isset($this->account_code) || isset($this->program_code) || isset($this->output_code)
+	
+	
+	){
+	  if (isset($this->account_code)) {
         $kdakun = $this->account_code;
-    }
-    //var_dump($this->program_code);
+    }else{
+		 $kdakun = 'null';
+	}
     if (isset($this->program_code)) {
         $kdprogram = $this->program_code;
-    }
+    }else{
+		$kdprogram = 'null';
+	}
 
     if (isset($this->output_code)) {
         $kdoutput = $this->output_code;
-    }
+    }else{
+		 $kdoutput = 'null';
+	}
     ?>
     <ul class="inline" style="float: right"><li>
             <a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+	<?php
+	}
+?>   
+  
 
         <li><a href="#wModal" class="modal">FILTER DATA</a></li></ul>
     <div id="wModal" class="modalDialog" >

@@ -4,7 +4,7 @@
   //Development history
   //Revisi : 0
   //Kegiatan :1.mencetak hasil filter ke dalam pdf
-  //File yang ditambah : sp2dSudahVoid_PDF.php
+  //File yang ditambah : revisiDIPA_PDF.php
   //Dibuat oleh : Rifan Abdul Rachman
   //Tanggal dibuat : 18-07-2014
   //----------------------------------------------------
@@ -87,7 +87,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
         //tanggal
-        /* $kdtgl_awal = 'null';
+       /*  $kdtgl_awal = 'null';
         $kdtgl_akhir = 'null'; */
 
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
@@ -109,109 +109,84 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont("", "B", 8);
         $this->Ln(10);
         //----------------------------------------------- 
-
-
-
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 65;
-        $ukuran_kolom_satker = 80;
-        $ukuran_kolom_akun = 40;
-        $ukuran_kolom_dana = 80;
-        $ukuran_kolom_file = 85;
-        $ukuran_kolom_bank_pembayar = 60;
-        $ukuran_kolom_norek_penerima = 80;
-        $ukuran_kolom_tgl_selsp2d = 60;
-        $ukuran_kolom_tgl_sp2d = 45;
+        $ukuran_kolom_pagu_total_sisa = 60;
+        $ukuran_kolom_jenis_belanja = 90;
+        $ukuran_kolom_satker = 60;
+        $ukuran_kolom_akun = 60;
+        $ukuran_kolom_program = 35;
+        $ukuran_kolom_output = 35;
+        $ukuran_kolom_dana = 50;
+        $ukuran_kolom_bank = 35;
+        $ukuran_kolom_kewenangan = 50;
+        $ukuran_kolom_kolorari = 50;
+        $jumlah_kolom = $ukuran_kolom_jenis_belanja +
+                $ukuran_kolom_satker + $ukuran_kolom_akun;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(30, $h, 'No', 1, 0, 'L', true);
+        $this->Cell(30, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += 30);
-        $this->Cell($ukuran_kolom_tgl_selsp2d, $h, 'Tgl Selesai SP2D', 1, 0, 'C', true);
+        $this->Cell(60, $h, 'Tgl SP2D', 1, 0, 'C', true);
+        $this->SetX($left += 60);
+        $this->Cell(100, $h, 'No. SP2D', 1, 0, 'C', true);
+        $this->SetX($left += 100);
+        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Tgl SP2D-R', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += $ukuran_kolom_tgl_selsp2d);
+        $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_tgl_sp2d, $h, 'Tgl SP2D', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_tgl_sp2d);
-        $this->Cell($ukuran_kolom_satker, $h, 'No. SP2D', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'No SP2D-R', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_satker, $h, 'Debet', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_satker);
-        $this->Cell($ukuran_kolom_dana, $h, 'No. Invoice', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Jumlah Rp', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_bank_pembayar, $h, 'Bank Pembayar', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_bank_pembayar);
-        $this->Cell($ukuran_kolom_dana, $h, 'Bank Penerima', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Nama', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_norek_penerima, $h, 'No. Rekening Penerima', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_norek_penerima);
-        $this->Cell($ukuran_kolom_dana, $h, 'Deskripsi', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_file, $h, 'File Transaksi', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_file);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Status', 1, 1, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_akun, $h, 'Kredit', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_akun);
+        $py3 = $this->GetY();
+        $this->SetX($left += $jumlah_kolom);
+        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Saldo', 1, 1, 'C', true);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(
-            30, $ukuran_kolom_tgl_selsp2d,
-            $ukuran_kolom_tgl_sp2d, $ukuran_kolom_satker,
-            $ukuran_kolom_dana, $ukuran_kolom_jenis_belanja,
-            $ukuran_kolom_bank_pembayar, $ukuran_kolom_dana,
-            $ukuran_kolom_jenis_belanja, $ukuran_kolom_norek_penerima,
-            $ukuran_kolom_dana, $ukuran_kolom_file,
-            $ukuran_kolom_jenis_belanja
-        ));
-        $this->SetAligns(array('C', 'C', 'C', 'R', 'R', 'R', 'L', 'L', 'L', 'L', 'L', 'L', 'R'));
-        
-		if (count($this->data) == 0) {
-			$this->Row(
+        $this->SetWidths(array(30, 60,
+            100, $ukuran_kolom_pagu_total_sisa,
+            $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker,
+            $ukuran_kolom_akun, $ukuran_kolom_pagu_total_sisa));
+        $this->SetAligns(array('C', 'C',
+            'C', 'C',
+            'R', 'R',
+            'R', 'R'));
+        if (count($this->data) == 0) {
+            $this->Row(
                     array('',
                         'N I H I L',
                         '',
                         '',
                         '',
                         '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        ''
-                    )
+						'',
+                        '')
             );
-		}else{
-			$no = 1;
-        $this->SetFillColor(255);
-        foreach ($this->data as $value) {
-            $this->Row(
-                    array($no++,
-                        $value->get_creation_date(),
-                        $value->get_payment_date(),
-                        $value->get_check_number(),
-                        $value->get_invoice_num(),
-                        $value->get_check_amount(),
-                        $value->get_bank_account_name(),
-                        $value->get_bank_name(),
-                        $value->get_vendor_name(),
-                        $value->get_vendor_ext_bank_account_num(),
-                        $value->get_invoice_description(),
-                        $value->get_ftp_file_name(),
-                        $value->get_return_desc() . ' ' . $value->get_payment_method() . ' ' . $value->get_sorbor_number() . ' ' . $value->get_sorbor_date()
-                    )
-            );
+        } else {
+            $no = 1;
+            $this->SetFillColor(255);
+            foreach ($this->data as $value) {
+                $this->Row(
+                        array($no++,
+                            $value->get_statement_date(),
+                            $value->get_receipt_number(),
+                            $value->get_tgsp2d_pengganti(),
+                            $value->get_nosp2d_pengganti(),
+                            number_format($value->get_nilai_sp2d_pengganti()),
+                            number_format($value->get_amount()),
+                            number_format($saldo+=($value->get_amount() - $value->get_nilai_sp2d_pengganti()))
+							)
+                );
+            }
         }
-		}
-		
         $this->Ln(3);
     }
 
@@ -378,7 +353,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring SP2D Void'; //judul file laporan
+$judul = 'Laporan Monitoring Retur SP2D PKN'; //judul file laporan
 $tipefile = '.PDF';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
@@ -386,16 +361,14 @@ $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
     'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
-    'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
-    'orientation' => 'L' //orientation: P=portrait, L=landscape
+    'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
+    'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
 $tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();
 ?>
-
-
 
 
 

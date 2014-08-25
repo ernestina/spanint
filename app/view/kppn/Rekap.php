@@ -25,32 +25,41 @@
 			//Tanggal dibuat : 18-07-2014
 			//----------------------------------------------------
 			
-				$kppn='null';
-				$jendok='null';
-				$kdtgl_awal='null';
-				$kdtgl_akhir='null';
-			if (isset($this->kppn)) {
-				$kppn=$this->kppn;
+			if( isset($this->d_bank) || isset($this->jendok) || isset($this->d_tgl_awal) ||
+			isset($this->d_tgl_akhir)
+			){
+							$kdkppn=Session::get('id_user');
+			
+			if (isset($this->d_bank)) {
+				$kdbank=$this->d_bank;
+			}else{
+				$kdbank='null';
 			}
+			
 			if (isset($this->jendok)) {
-				$jendok=$this->jendok;
+				$jenis_spm=$this->jendok;
+			}else{
+				$jenis_spm='null';
 			}
+			
 			if (isset($this->d_tgl_awal)) {
 				$kdtgl_awal=$this->d_tgl_awal;
+			}else{
+				$kdtgl_awal='null';
 			}
 			if (isset($this->d_tgl_akhir)) {
 				$kdtgl_akhir=$this->d_tgl_akhir;
+			}else{
+				$kdtgl_akhir='null';
 			}
 			
 				?>
-	<a href="<?php echo URL; ?>PDF/detailrekapsp2d_PDF/<?php echo $jendok."/". $kppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>
-	
-	
-<!-- 	<ul class="inline" style="float: right"><li>
-	<a  href="<?php echo URL; ?>dataSPM/detailrekapsp2d_PDF/<?php echo $jendok."/". $kppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
- -->
+	<a href="<?php echo URL; ?>PDF/detailrekapsp2d1_PDF/<?php echo $jenis_spm."/". $kdkppn."/". $kdbank."/".$kdtgl_awal."/".$kdtgl_akhir;?>" class="modal">PDF</a>
 
-			
+<?php			
+			}		
+		?>		
+				
 		<?php
 			//----------------------------------------------------		
 		?>

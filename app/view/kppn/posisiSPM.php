@@ -11,6 +11,24 @@
             ?>
         </h2>
     </div>
+	    <?php
+    //----------------------------------------------------
+    //Development history
+    //Revisi : 0
+    //Kegiatan :1.mencetak hasil filter ke dalam pdf
+    //File yang diubah : posisiSPM.php
+    //Dibuat oleh : Rifan Abdul Rachman
+    //Tanggal dibuat : 18-07-2014
+    //----------------------------------------------------
+
+	$kdkppn = Session::get('id_user');
+
+    ?>
+    <ul class="inline" style="float: right"><li>
+            <a href="<?php echo URL; ?>PDF/posisiSpm_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
+        <?php
+//----------------------------------------------------		
+?>
 <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
         <a href="#oModal" class="modal">FILTER DATA</a><br><br>
         <div id="oModal" class="modalDialog" >

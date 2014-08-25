@@ -34,7 +34,51 @@
         ?>
 
     </div>
+    <?php
+    //----------------------------------------------------
+    //Development history
+    //Revisi : 0
+    //Kegiatan :1.mencetak hasil filter ke dalam pdf
+    //File yang diubah : revisiDIPA.php
+    //Dibuat oleh : Rifan Abdul Rachman
+    //Tanggal dibuat : 18-07-2014
+    //----------------------------------------------------
+	
+	
+	if(isset($this->d_status) || isset($this->d_satker) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
+	$kdkppn=Session::get('id_user');
+		if (isset($this->d_status)) {
+			$kdstatus = $this->d_status;
+		} else {
+			$kdstatus = 'null';
+		}
 
+		if (isset($this->d_satker)) {
+			$kdsatker = $this->d_satker;
+		} else {
+			$kdsatker = Session::get('kd_satker');
+		}
+
+		if (isset($this->d_tgl_awal)) {
+			$kdtgl_awal = $this->d_tgl_awal;
+		} else {
+			$kdtgl_awal = 'null';
+		}
+		if (isset($this->d_tgl_akhir)) {
+			$kdtgl_akhir = $this->d_tgl_akhir;
+		} else {
+			$kdtgl_akhir = 'null';
+		}
+    ?>
+    <ul class="inline" style="float: right"><li>
+            <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdsatker . "/" . $kdkppn. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
+        <?php
+	
+	
+	}
+	
+//----------------------------------------------------		
+?>
     <a href="#oModal" class="modal">FILTER DATA</a>
     <div id="oModal" class="modalDialog" >
         <div>

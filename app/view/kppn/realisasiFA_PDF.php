@@ -20,8 +20,8 @@ class FPDF_AutoWrapTable extends FPDF {
         'judul' => '',
         'filename' => '',
         'destinationfile' => '',
-        'paper_size' => 'F4',
-        'orientation' => 'L'
+        'paper_size' => '',
+        'orientation' => ''
     );
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
@@ -158,20 +158,20 @@ class FPDF_AutoWrapTable extends FPDF {
 
         if (count($this->data) == 0) {
             $this->Row(
-                    array($no++,
-                        $value->get_satker(),
-                        $value->get_kppn(),
-                        $value->get_akun(),
-                        $value->get_program(),
-                        $value->get_output(),
-                        $value->get_dana(),
-                        $value->get_kewenangan(),
-                        $value->get_lokasi(),
-                        $value->get_budget_type(),
-                        number_format($value->get_budget_amt()),
-                        number_format($value->get_encumbrance_amt()),
-                        number_format($value->get_actual_amt()),
-                        number_format($value->get_balancing_amt())
+                    array('',
+                        'N I H I L',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        ''
                     )
             );
         } else {
@@ -369,7 +369,7 @@ $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke 
 $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
-    'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
+    'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
     'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );

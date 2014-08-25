@@ -20,7 +20,10 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-
+	
+	if( isset($this->account_code) ||
+	isset($this->output_code) || isset($this->program_code) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
+	){
     if (isset($this->account_code)) {
         $kdakun = $this->account_code;
         $kdakun = rtrim($kdakun);
@@ -62,6 +65,11 @@
             <a href="<?php echo URL; ?>PDF/revisiDIPA_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
         <?php
 //----------------------------------------------------		
+	
+	
+	
+	}
+
         ?>
         <li><a href="#yModal" class="modal">FILTER DATA</a></li></ul>
     <div id="yModal" class="modalDialog" >

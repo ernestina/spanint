@@ -10,21 +10,7 @@
             } else {
                 echo Session::get('user');
             }
-            if (isset($this->d_kppn)) {
-                $kd_kppn = $this->d_kppn;
-            } else {
-                $kd_kppn = "null";
-            }
-            if (isset($this->d_invoice)) {
-                $invoice = $this->d_invoice;
-            } else {
-                $invoice = "null/null/null";
-            }
-            if (isset($this->d_status)) {
-                $status = $this->d_status;
-            } else {
-                $status = "null";
-            }
+           
             ?>
         </h2>
     </div>
@@ -37,14 +23,27 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
+	if( isset($invoice) || isset($status)){
+		if (isset($this->d_kppn)) {
+			$kd_kppn = $this->d_kppn;
+		} else {
+			$kd_kppn = "null";
+		}
+		if (isset($this->d_invoice)) {
+			$invoice = $this->d_invoice;
+		} else {
+			$invoice = "null/null/null";
+		}
+		if (isset($this->d_status)) {
+			$status = $this->d_status;
+		} else {
+			$status = "null";
+		}
     ?>
     <a href="<?php echo URL; ?>PDF/holdSPM_PDF/<?php echo $kd_kppn . "/" . $invoice . "/" . $status; ?>" class="modal">PDF</a>
 
-    <!-- <ul class="inline" style="float: right"><li>
-    <a  href="<?php echo URL; ?>dataSPM/holdSPM_PDF/<?php echo $kd_kppn . "/" . $invoice . "/" . $status; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
-    -->
-
     <?php
+}
     //----------------------------------------------------		
     ?>
 

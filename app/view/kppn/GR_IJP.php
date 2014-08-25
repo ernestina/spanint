@@ -25,16 +25,19 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 05-08-2014
     //----------------------------------------------------
-    if (isset($this->d_bulan)) {
-        $kdbulan = $this->d_bulan;
-    }
-    if (isset($this->d_kd_kppn)) {
-        $kdkppn = $this->d_kd_kppn;
-    }
+	if( isset($this->d_kd_kppn)){
+		if (isset($this->d_bulan)) {
+			$kdbulan = $this->d_bulan;
+		}
+		if (isset($this->d_kd_kppn)) {
+			$kdkppn = $this->d_kd_kppn;
+		}
     ?>
     <a href="<?php echo URL; ?>PDF/GR_IJP_PDF/<?php echo $kdbulan; ?>" class="modal">PDF</a>
     <?php
     //----------------------------------------------------		
+
+	}
     ?>
     <a href="#oModal" class="modal">FILTER DATA</a><br><br>
     <div id="oModal" class="modalDialog" >

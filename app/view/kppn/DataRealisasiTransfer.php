@@ -50,32 +50,32 @@
 //Tanggal dibuat : 18-07-2014
 //----------------------------------------------------
 
+if(isset($this->lokasi) || isset($this->satkerku) ||
+isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
+){
+	if (isset($this->lokasi)) {
+		$kdlokasi = $this->lokasi;
+	} else {
+		$kdlokasi = 'null';
+	}
 
 
-if (isset($this->lokasi)) {
-    $kdlokasi = $this->lokasi;
-    echo '$kdlokasi:' . $kdlokasi;
-} else {
-    $kdlokasi = 'null';
-}
+	if (isset($this->satkerku)) {
+		$kdsatkerku = $this->satkerku;
+	} else {
+		$kdsatkerku = 'null';
+	}
 
-
-if (isset($this->satkerku)) {
-    $kdsatkerku = $this->satkerku;
-} else {
-    $kdsatkerku = 'null';
-}
-
-if (isset($this->d_tgl_awal)) {
-    $kdtgl_awal = $this->d_tgl_awal;
-} else {
-    $kdtgl_awal = 'null';
-}
-if (isset($this->d_tgl_akhir)) {
-    $kdtgl_akhir = $this->d_tgl_akhir;
-} else {
-    $kdtgl_akhir = 'null';
-}
+	if (isset($this->d_tgl_awal)) {
+		$kdtgl_awal = $this->d_tgl_awal;
+	} else {
+		$kdtgl_awal = 'null';
+	}
+	if (isset($this->d_tgl_akhir)) {
+		$kdtgl_akhir = $this->d_tgl_akhir;
+	} else {
+		$kdtgl_akhir = 'null';
+	}
 ?>
 
     <ul class="inline" style="float: right"><li>
@@ -85,6 +85,9 @@ if (isset($this->d_tgl_akhir)) {
 
 <?php
 //----------------------------------------------------		
+
+
+}
 ?>
 
         <li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>

@@ -10,7 +10,56 @@
             ?>
         </h2>
     </div>
+ <?php
+    //----------------------------------------------------
+    //Development history
+    //Revisi : 0
+    //Kegiatan :1.mencetak hasil filter ke dalam pdf
+    //File yang diubah : realisasiFA_1.php
+    //Dibuat oleh : Rifan Abdul Rachman
+    //Tanggal dibuat : 18-07-2014
+    //----------------------------------------------------
+    
+    
+    if( isset($this->account_code) || isset($this->program_code) ||
+	isset($this->output_code) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
+	
+	
+	){
+	
+    if (isset($this->account_code)) {
+        $kdakun = $this->account_code;
+    }else{
+		$kdakun = 'null';
+	}
+    if (isset($this->program_code)) {
+        $kdprogram = $this->program_code;
+    }else{
+		$kdprogram = 'null';
+	}
 
+    if (isset($this->output_code)) {
+        $kdoutput = $this->output_code;
+    }else{
+		$kdoutput = 'null';
+	}
+	if (isset($this->d_tgl_awal)) {
+        $kdtgl_awal = $this->d_tgl_awal;
+    } else {
+        $kdtgl_awal = 'null';
+    }
+    if (isset($this->d_tgl_akhir)) {
+        $kdtgl_akhir = $this->d_tgl_akhir;
+    } else {
+        $kdtgl_akhir = 'null';
+    }
+    ?>
+    <ul class="inline" style="float: right"><li>
+            <a href="<?php echo URL; ?>PDF/RealisasiFA_1_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+	
+		<?php
+	}
+?>
     <a href="#wModal" class="modal">FILTER DATA</a><br><br>
     <div id="wModal" class="modalDialog" >
         <div>

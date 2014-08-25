@@ -60,7 +60,7 @@ class DataPelimpahan {
             $sql .= " AND " . $filter;
         }
         $sql .= " ORDER BY TGL_LIMPAH DESC";
-        var_dump ($sql);
+        //var_dump ($sql);
         $result = $this->db->select($sql);
 		//var_dump ($result);
         $data = array();
