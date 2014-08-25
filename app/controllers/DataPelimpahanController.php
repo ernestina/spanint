@@ -86,6 +86,10 @@ class DataPelimpahanController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_limpah->get_table());
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         //var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/daftarPelimpahan');

@@ -109,7 +109,7 @@ class DataKppnController extends BaseController {
 		
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/isianKppn');
     }
@@ -185,7 +185,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//$this->view->render('kppn/isianKppn');
         $this->view->load('kppn/isianKppn_PDF');
@@ -232,7 +232,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/harianBo');
@@ -276,7 +276,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//$this->view->render('kppn/harianBo');
         $this->view->load('kppn/harianBo_PDF');
@@ -324,7 +324,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dHariIni');
@@ -368,7 +368,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//$this->view->render('kppn/sp2dHariIni');
         $this->view->load('kppn/sp2dHariIni_PDF');
@@ -418,7 +418,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dBesok');
@@ -465,7 +465,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//$this->view->render('kppn/sp2dBesok');
         $this->view->load('kppn/sp2dBesok_PDF');
@@ -513,7 +513,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dBackdate');
@@ -557,7 +557,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//$this->view->render('kppn/sp2dBackdate');
         $this->view->load('kppn/sp2dBackdate_PDF');
@@ -589,7 +589,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dHarian');
@@ -638,7 +638,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dNilaiMinus');
@@ -683,7 +683,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//$this->view->render('kppn/sp2dNilaiMinus');
         $this->view->load('kppn/sp2dNilaiMinus_PDF');
@@ -731,7 +731,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dSudahVoid');
@@ -782,7 +782,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		$this->view->render('kppn/sp2dSudahVoid');
         //$this->view->load('kppn/sp2dSudahVoid_PDF');
@@ -819,7 +819,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dGajiDobel');
@@ -853,7 +853,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->load('kppn/sp2dGajiDobel_PDF');
@@ -896,7 +896,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dGajiTanggal');
@@ -939,7 +939,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->load('kppn/sp2dGajiTanggal_PDF');
@@ -982,7 +982,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dGajiBank');
@@ -1025,7 +1025,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		$this->view->load('kppn/sp2dGajiBank_PDF');
     }
@@ -1067,7 +1067,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dGajiRekening');
@@ -1110,7 +1110,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->load('kppn/sp2dGajiRekening_PDF');
@@ -1153,7 +1153,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/sp2dGajiBulanLalu');
@@ -1192,7 +1192,7 @@ class DataKppnController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		//var_dump($d_sppm->get_sp2d_rekap($filter));
         $this->view->render('kppn/sp2dRekap');
@@ -1245,7 +1245,7 @@ class DataKppnController extends BaseController {
         }
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		$this->view->render('kppn/detailSp2dGaji');
     }
@@ -1287,7 +1287,7 @@ class DataKppnController extends BaseController {
         
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		$this->view->load('kppn/detailSp2dGaji_PDF');
     }
@@ -1344,7 +1344,7 @@ class DataKppnController extends BaseController {
 		
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		
         //var_dump($d_sppm->get_sppm_filter($filter));
@@ -1354,7 +1354,7 @@ class DataKppnController extends BaseController {
     public function lihatPanduan1() {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",Session::get('id_user'),"Sukses");
+		$d_log->tambah_log("Sukses");
 		
 		
         $this->view->render('kppn/panduan1');

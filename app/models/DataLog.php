@@ -47,10 +47,10 @@ class DataLog {
         return $this->db->insert($this->_table, $data);
     }
 	
-    public function tambah_log($activity,$kd_d_user,$status) {
+    public function tambah_log($status) {
         //$this->set_kd_log('');
-		$this->set_kd_d_user($kd_d_user);
-		$this->set_activity($activity);
+		$this->set_kd_d_user(Session::get('kd_satker'));
+		$this->set_activity("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 		$this->set_activity_time(date("d-m-Y h:i:s"));
 		$this->set_ip_client($this->getIp());
 		$this->set_status($status);
