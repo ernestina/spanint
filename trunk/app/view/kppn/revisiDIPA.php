@@ -43,12 +43,21 @@ if( isset($this->account_code) ||
         $kdprogram = 'null';
     }
     if (isset($this->d_tgl_awal)) {
-        $kdtgl_awal = $this->d_tgl_awal;
+        $kdtgl_awal = $this->d_tgl_awal; //"01/25/2014"
+		
+ 		list($bln,$tgl,$tahun)= explode("/",$kdtgl_awal);
+		$kdtgl_awal=$bln.'-'.$tgl.'-'.$tahun; //01-25-2014
+ 
     } else {
         $kdtgl_awal = 'null';
     }
     if (isset($this->d_tgl_akhir)) {
-        $kdtgl_akhir = $this->d_tgl_akhir;
+        $kdtgl_akhir = $this->d_tgl_akhir; //08/25/2014
+		
+	list($bln,$tgl,$tahun)= explode("/",$kdtgl_akhir);
+		$kdtgl_akhir=$bln.'-'.$tgl.'-'.$tahun; //08-25-2014
+		
+ 
     } else {
         $kdtgl_akhir = 'null';
     }
