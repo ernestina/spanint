@@ -200,7 +200,14 @@ class proses_revisi {
     public function get_last_update_date() {
         return $this->_last_update_date;
     }
+	
+	public function get_table1() {
+        return $this->_table1;
+    }
 
+	public function get_table3() {
+        return $this->_table3;
+    }
     /*
      * destruktor
      */

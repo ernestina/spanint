@@ -23,9 +23,9 @@ class DataFundFail {
     private $_description;
     private $_blokir_kontrak;
     private $_blokir_realisasi;
-    private $_table1 = 'fund_fail_v';
+    private $_table1 = 'FUND_FAIL_V';
     private $_table2 = 'detail_fund_fail';
-    private $_table3 = 'detail_fund_fail_kd';
+    private $_table3 = 'DETAIL_FUND_FAIL_KD';
     public $registry;
 
     /*
@@ -48,6 +48,7 @@ class DataFundFail {
                 . $this->_table1 . "
 				where 1=1 
 				and realisasi > 0
+				and description is not null
 				"
 
 
@@ -280,7 +281,13 @@ class DataFundFail {
     public function get_kppn_code() {
         return $this->_kppn_code;
     }
+	public function get_table1() {
+        return $this->_table1;
+    }
 
+	public function get_table3() {
+        return $this->_table3;
+    }
     /*
      * destruktor
      */
