@@ -29,12 +29,17 @@
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
 	if(isset($this->data)){
-	if (isset($this->data)) {
-          foreach ($this->data as $value) {}
-			$id=$value->get_id();
-			$bank=$value->get_bank();
-			$tanggal=$value->get_creation_date();
-	}
+		if($this->d_id){
+			$id=$this->d_id;
+		}
+		
+		if($this->d_bank){
+			$bank=$this->d_bank;
+		}
+	
+		if (isset($this->d_tanggal)) {
+			$tanggal=$this->d_tanggal;
+		}
 
 	
     ?>

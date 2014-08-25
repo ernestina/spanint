@@ -134,7 +134,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(20, 80, 
 		80,100,100,100));
-        $this->SetAligns(array('C', 'C', 'L', 'R', 'R','R'));
+        $this->SetAligns(array('C', 'C', 'C', 'C', 'R','L'));
         $no = 1;
         $j1 = 0;
         $j2 = 0;
@@ -349,9 +349,9 @@ $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke 
 $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
-    'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
-    'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
-    'orientation' => 'L' //orientation: P=portrait, L=landscape
+    'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
+    'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
+    'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
 $tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
 $tabel->printPDF();
