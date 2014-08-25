@@ -52,10 +52,13 @@ class PDFController extends BaseController {
             $filter[$no++] = " A.PROGRAM_CODE =  '" . $kdprogram . "'";
         }
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
-			list($tgl,$bln,$tahun)= explode(/,$kdtgl_awal)
-			$kdtgl_awal=$bln.'-'.$tgl.'-'.$tahun;
-			list($tgl,$bln,$tahun)= explode(/,$kdtgl_akhir)
-			$kdtgl_akhir=$bln.'-'.$tgl.'-'.$tahun;
+		
+		list($bln,$tgl,$tahun)= explode("-",$kdtgl_awal);
+		$kdtgl_awal=$bln.'/'.$tgl.'/'.$tahun;
+		
+		list($bln,$tgl,$tahun)= explode("-",$kdtgl_akhir);
+		$kdtgl_akhir=$bln.'/'.$tgl.'/'.$tahun;
+		
 
             $filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '" . $kdtgl_awal . "' AND '" . $kdtgl_akhir . "'";
             $tglawal = array("$kdtgl_awal");
@@ -81,7 +84,8 @@ class PDFController extends BaseController {
         $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/revisiDIPA_PDF');
+        //$this->view->render('kppn/revisiDIPA');
+       $this->view->load('kppn/revisiDIPA_PDF');
     }
 
     public function Fund_fail_PDF() {
