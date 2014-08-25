@@ -15,37 +15,31 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : holdSPM.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
-	if( isset($invoice) || isset($status)){
-		if (isset($this->d_kppn)) {
-			$kd_kppn = $this->d_kppn;
-		} else {
-			$kd_kppn = "null";
-		}
-		if (isset($this->d_invoice)) {
-			$invoice = $this->d_invoice;
-		} else {
-			$invoice = "null/null/null";
-		}
-		if (isset($this->d_status)) {
-			$status = $this->d_status;
-		} else {
-			$status = "null";
-		}
-    ?>
-    <a href="<?php echo URL; ?>PDF/holdSPM_PDF/<?php echo $kd_kppn . "/" . $invoice . "/" . $status; ?>" class="modal">PDF</a>
+	//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : holdSPM.php  
+if( isset($invoice) || isset($status)){
+	if (isset($this->d_kppn)) {
+		$kd_kppn = $this->d_kppn;
+	} else {
+		$kd_kppn = "null";
+	}
+	if (isset($this->d_invoice)) {
+		$invoice = $this->d_invoice;
+	} else {
+		$invoice = "null/null/null";
+	}
+	if (isset($this->d_status)) {
+		$status = $this->d_status;
+	} else {
+		$status = "null";
+	}
+?>
+<a href="<?php echo URL; ?>PDF/holdSPM_PDF/<?php echo $kd_kppn . "/" . $invoice . "/" . $status; ?>" class="modal">PDF</a>
 
-    <?php
+<?php
 }
-    //----------------------------------------------------		
-    ?>
+//----------------------------------------------------		
+?>
 
     <a href="#xModal" class="modal">FILTER DATA</a><br><br>
     <div id="xModal" class="modalDialog" >

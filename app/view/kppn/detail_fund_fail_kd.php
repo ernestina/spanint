@@ -15,39 +15,29 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : fund_fail.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------	
-	if(
-	isset($this->data) || isset($this->d_nama_kppn)
-	){
-		if (isset($this->data)) {
-			foreach ($this->data as $value1) {
-			 $kdsatker=$value1->get_satker_code();
-			$kdoutput=$value1->get_output_code();
-			}
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
+if( isset($this->data) || isset($this->d_nama_kppn)
+){
+	if (isset($this->data)) {
+		foreach ($this->data as $value1) {
+		 $kdsatker=$value1->get_satker_code();
+		$kdoutput=$value1->get_output_code();
 		}
-	
-		if (isset($this->d_nama_kppn)) {
-			$kdkppn = $this->d_nama_kppn;
-		} else {
-			$kdkppn = Session::get('id_user');
-		}
+	}
+	if (isset($this->d_nama_kppn)) {
+		$kdkppn = $this->d_nama_kppn;
+	} else {
+		$kdkppn = Session::get('id_user');
+	}
 
-    ?>
-    <ul class="inline" style="float: right"><li>
-    <a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kdsatker . "/" . $kdoutput. "/" . $kdkppn; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+?>
+<ul class="inline" style="float: right"><li>
+<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kdsatker . "/" . $kdoutput. "/" . $kdkppn; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
 <?php
 //----------------------------------------------------		
-
-	
-	}
+}
 ?>
 
     <a href="#yModal" class="modal">FILTER DATA</a><br><br>

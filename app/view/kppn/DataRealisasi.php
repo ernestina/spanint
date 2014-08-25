@@ -26,32 +26,25 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : DataRealisasi.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
-	
-	if(isset($this->d_kd_kppn) || isset($this->satker_code1) ){
-		if (isset($this->d_kd_kppn)) {
-			$kdkppn = $this->d_kd_kppn;
-		} else {
-			$kdkppn = Session::get('id_user');
-		}
-		if (isset($this->satker_code1)) {
-			$kdsatkerku = $this->satker_code1;
-		}
-		?>
-		<ul class="inline" style="float: right"><li>
-				<a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatkerku; ?>"class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : DataRealisasi.php  
 
-	<?php	
-	
+if(isset($this->d_kd_kppn) || isset($this->satker_code1) ){
+	if (isset($this->d_kd_kppn)) {
+		$kdkppn = $this->d_kd_kppn;
+	} else {
+		$kdkppn = Session::get('id_user');
+	}
+	if (isset($this->satker_code1)) {
+		$kdsatkerku = $this->satker_code1;
 	}
 	?>
+	<ul class="inline" style="float: right"><li>
+			<a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatkerku; ?>"class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+
+<?php	
+}
+?>
 	<li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
 
     <br><br>

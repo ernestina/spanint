@@ -22,14 +22,8 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : sp2dGajiDobel.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : sp2dGajiDobel.php  
     
 if (isset($this->d_bank)){
 	   $kdkppn = Session::get('id_user');
@@ -41,11 +35,9 @@ if (isset($this->d_bank)){
 	}
     ?>
 
-    <a href="<?php echo URL; ?>PDF/sp2dGajiDobel_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" class="modal">PDF</a>
+<a href="<?php echo URL; ?>PDF/sp2dGajiDobel_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" class="modal">PDF</a>
 
     <?php
- 
-
 }
 
     //----------------------------------------------------		

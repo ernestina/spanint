@@ -12,14 +12,8 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : SP2DSatker.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : SP2DSatker.php  
 if(
 isset($this->d_invoice) || isset($this->invoice) || isset($this->JenisSP2D) ||
 isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
@@ -28,20 +22,17 @@ isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 
    foreach ($this->data as $value) {
         $satker = substr($value->get_invoice_num(), 7, 6);
-    }
-       
+    }       
     if (isset($this->d_invoice)) {
         $check_number = $this->d_invoice;
     }else{
 		$check_number = 'null';
 	}
-
     if (isset($this->invoice)) {
         $invoice = $this->invoice;
     }else{
 		$invoice = 'null';
 	}
-
     if (isset($this->JenisSP2D)) {
         $JenisSP2D = $this->JenisSP2D;
     }else{
@@ -64,7 +55,6 @@ isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 	}
    ?>
    <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="modal">PDF</a>-->
-
 
     <?php
     //----------------------------------------------------		

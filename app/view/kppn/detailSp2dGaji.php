@@ -21,19 +21,11 @@
     }
     ?>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : detailSp2dGaji.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : detailSp2dGaji.php  
 
 if( isset($this->d_bank) || isset($this->d_bulan)){
-
     $kdkppn = Session::get('id_user');
-
     if (isset($this->d_bank)) {
         $kdbank = $this->d_bank;
     }
@@ -41,12 +33,10 @@ if( isset($this->d_bank) || isset($this->d_bulan)){
         $kdbulan = $this->d_bulan;
     }
     ?>
-
-    <a href="<?php echo URL; ?>PDF/detailSp2dGaji_PDF/<?php echo $kdbank . "/" . $kdbulan . "/" . $kdkppn; ?>" class="modal">PDF</a>
+<a href="<?php echo URL; ?>PDF/detailSp2dGaji_PDF/<?php echo $kdbank . "/" . $kdbulan . "/" . $kdkppn; ?>" class="modal">PDF</a>
 
     <?php
     //----------------------------------------------------		
-
 }
     ?>
 

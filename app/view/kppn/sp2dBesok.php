@@ -29,20 +29,13 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : sp2dBesok.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : sp2dBesok.php  
     
 if(
 isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
-
 ){
-$kdkppn = Session::get('id_user');
+	$kdkppn = Session::get('id_user');
 
     if (isset($this->d_bank)) {
         $kdbank = $this->d_bank;
@@ -62,13 +55,10 @@ $kdkppn = Session::get('id_user');
     }
     ?>
 
-    <a href="<?php echo URL; ?>PDF/sp2dBesok_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdbank; ?>" class="modal">PDF</a>
-
+<a href="<?php echo URL; ?>PDF/sp2dBesok_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdbank; ?>" class="modal">PDF</a>
 <?php
 //----------------------------------------------------		
 }
-
-   
 ?>
 
     <a href="#nModal" class="modal">FILTER DATA</a>

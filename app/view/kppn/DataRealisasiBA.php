@@ -26,30 +26,18 @@
             ?>
         </h2>
 
-        <?php
-        //----------------------------------------------------
-        //Development history
-        //Revisi : 0
-        //Kegiatan :1.mencetak hasil filter ke dalam pdf
-        //File yang diubah : DataRealisasiBA.php
-        //Dibuat oleh : Rifan Abdul Rachman
-        //Tanggal dibuat : 05-08-2014
-        //----------------------------------------------------
-       
-            $kdkppn = $this->kppn_code;
-			?>
-			<ul class="inline" style="float: right"><li>
-					<a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li></ul>
+<?php
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : DataRealisasiBA.php  
 
-			<!-- 				<ul class="inline" style="float: right"><li>
-					<a  href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
-			-->			
-			<?php
-			//----------------------------------------------------		
-			
-			
-        
-        ?>
+$kdkppn = $this->kppn_code;
+?>
+<ul class="inline" style="float: right"><li>
+<a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li></ul>
+
+<?php
+//----------------------------------------------------		       
+?>
 
 
 <?php if (isset($this->kppn_list)) { ?>
