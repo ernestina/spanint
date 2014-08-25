@@ -23,52 +23,27 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------	
-    if (isset($this->d_nama_kppn)) {
-        $kdkppn = $this->d_nama_kppn;
-    } else {
-        $kdkppn = 'null';
-    }
-    if (isset($this->satker_code)) {
-        $kdsatker = $this->satker_code;
-    } else {
-        $kdsatker = 'null';
-    }
+	if(isset($this->d_nama_kppn) || isset($this->satker_code)){
+		if (isset($this->d_nama_kppn)) {
+			$kdkppn = $this->d_nama_kppn;
+		} else {
+			$kdkppn = Session::get('id_user');
+		}
+		if (isset($this->satker_code)) {
+			$kdsatker = $this->satker_code;
+		} else {
+			$kdsatker = 'null';
+		}
 
-    /*
-      if (isset($this->account_code)) {
-      $kdakun=$this->account_code;
-      }else{
-      $kdakun='null';
-      }
-      if (isset($this->program_code)) {
-      $kdprogram=$this->program_code;
-      }else{
-      $kdprogram='null';
-      }
-
-      if (isset($this->output_code)) {
-      $kdoutput=$this->output_code;
-      }else{
-      $kdoutput='null';
-      }
-
-      if (isset($this->d_tgl_awal)) {
-      $kdtgl_awal=$this->d_tgl_awal;
-      }else{
-      $kdtgl_awal='null';
-      }
-      if (isset($this->d_tgl_akhir)) {
-      $kdtgl_akhir=$this->d_tgl_akhir;
-      }else{
-      $kdtgl_akhir='null';
-      }
-     */
     ?>
     <ul class="inline" style="float: right"><li>
             <a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
 <?php
-//----------------------------------------------------		
+//----------------------------------------------------	
+	
+	}
+    	
 ?>
 
         <li><a href="#yModal" class="modal">FILTER DATA</a></li></ul>

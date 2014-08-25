@@ -21,90 +21,83 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-    /*
-      $kdkppn='null';
-      $kdnosp2d='null';
-      $kdbarsp2d='null';
-      $kdsatker='null';
-      $kdnoinvoice='null';
-      $kdbank='null';
-      $kdstatus='null';
-      $kdbayar='null';
-      $kdfxml='null';
-      $kdtgl_awal='null';
-      $kdtgl_akhir='null';
-     */
-
-
+	if( isset($this->d_nosp2d) || isset($this->d_barsp2d) || 
+	isset($this->d_kdsatker) || isset($this->d_invoice) || 
+	isset($this->d_bank) || isset($this->d_bank) || isset($this->d_status) ||
+	isset($this->d_bayar) || isset($this->d_fxml) || isset($this->d_tgl_awal) ||
+	isset($this->d_tgl_akhir)
+	
+	){
+	
     $kdkppn = Session::get('id_user');
-    echo '$kdkppn:' . $kdkppn;
-
+  
     if (isset($this->d_nosp2d)) {
         $kdnosp2d = $this->d_nosp2d;
-        echo '$kdnosp2d:' . $kdnosp2d;
-    }
+    }else{
+		$kdnosp2d='null';
+	}
 
     if (isset($this->d_barsp2d)) {
         $kdbarsp2d = $this->d_barsp2d;
-        echo '$kdbarsp2d:' . $kdbarsp2d;
-    }
-    if (isset($this->d_kdsatker1)) {
-        $kdsatker1 = $this->d_kdsatker1;
-        echo 'kdsatker:' . $kdsatker1;
-    }
+    }else{
+		$kdbarsp2d='null';
+	}
+    if (isset($this->d_kdsatker)) {
+        $kdsatker = $this->d_kdsatker;
+    }else{
+		$kdsatker='null';
+	}
 
     if (isset($this->d_invoice)) {
-        $kdnoinvoice1 = $this->d_invoice;
-        $kdnoinvoice = substr($kdnoinvoice1, 0, 6) . '-' . substr($kdnoinvoice1, 7, 6) . '-' . substr($kdnoinvoice1, 14, 4);
-        $kdsatker1 = substr($kdnoinvoice1, 7, 6);
-    }
+        $kdnoinvoice = $this->d_invoice;
+	}else{
+		$kdnoinvoice='null';
+	}      
 
-    if (isset($this->d_nmbank)) {
-        $kdbank = $this->d_nmbank;
-        echo '$kdbank:' . $kdbank;
-    }
+    if (isset($this->d_bank)) {
+        $kdbank = $this->d_bank;
+    }else{
+		$kdbank='null';
+	}
     if (isset($this->d_status)) {
         $kdstatus = $this->d_status;
-        echo '$kdstatus:' . $kdstatus;
-    }
+    }else{
+		$kdstatus='null';
+	}
 
     if (isset($this->d_bayar)) {
         $kdbayar = $this->d_bayar;
-        echo '$kdbayar:' . $kdbayar;
-    }
+    }else{
+		$kdbayar='null';
+	}
 
     if (isset($this->d_fxml)) {
         $kdfxml = $this->d_fxml;
-        echo '$kdfxml:' . $kdfxml;
-    }
+    }else{
+		$kdfxml='null';
+	}
 
     if (isset($this->d_tgl_awal)) {
-        $kdtgl_awal1 = $this->d_tgl_awal;
-        echo '$kdtgl_awal nilai:' . $kdtgl_awal1;
-        list($bln, $tgl, $thn) = explode('-', $kdtgl_awal1);
-        //20140804
-        //$kdtgl_awal=$bln."-".$tgl."-".$thn;
-        $kdtgl_awal = $thn . $tgl . $bln;
-        echo '$kdtgl_awal:' . $kdtgl_awal;
+        $kdtgl_awal = $this->d_tgl_awal;
+    } else {
+        $kdtgl_awal = 'null';
     }
     if (isset($this->d_tgl_akhir)) {
-        $kdtgl_akhir1 = $this->d_tgl_akhir;
-        echo '$kdtgl_akhir nilai:' . $kdtgl_akhir1;
-        list($bln, $tgl, $thn) = explode('-', $kdtgl_akhir1);
-        //$kdtgl_akhir=$bln."-".$tgl."-".$thn;
-        $kdtgl_akhir = $thn . $tgl . $bln;
-        echo '$kdtgl_akhir:' . $kdtgl_akhir;
+        $kdtgl_akhir = $this->d_tgl_akhir;
+    } else {
+        $kdtgl_akhir = 'null';
     }
     ?>
 
-
-<!-- 				<a href="<?php echo URL; ?>DataKppn/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdnosp2d . "/" . $kdbarsp2d . "/" . $kdsatker1 . "/" . $kdnoinvoice . "/" . $kdbank . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdfxml . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="modal">PDF</a>
-    -->
-    <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker1 . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdfxml . "/" . $kdbank; ?>" class="modal">PDF</a>
+    <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdfxml . "/" . $kdbank; ?>" class="modal">PDF</a>
 
 
     <?php
     //----------------------------------------------------		
+	
+	
+	}
+  
     ?>
 
     <a href="#oModal" class="modal">FILTER DATA</a>

@@ -34,19 +34,25 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-    if (isset($this->d_kd_kppn)) {
-        $kdkppn = $this->d_kd_kppn;
-    } else {
-        $kdkppn = Session::get('id_user');
-    }
-    if (isset($this->satker_code1)) {
-        $kdsatkerku = $this->satker_code1;
-    }
-    ?>
-    <ul class="inline" style="float: right"><li>
-            <a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatkerku; ?>"class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+	
+	if(isset($this->d_kd_kppn) || isset($this->satker_code1) ){
+		if (isset($this->d_kd_kppn)) {
+			$kdkppn = $this->d_kd_kppn;
+		} else {
+			$kdkppn = Session::get('id_user');
+		}
+		if (isset($this->satker_code1)) {
+			$kdsatkerku = $this->satker_code1;
+		}
+		?>
+		<ul class="inline" style="float: right"><li>
+				<a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatkerku; ?>"class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 
-        <li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
+	<?php	
+	
+	}
+	?>
+	<li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>
 
     <br><br>
     <div id="xModal" class="modalDialog" >

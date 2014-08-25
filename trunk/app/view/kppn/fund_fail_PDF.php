@@ -20,8 +20,8 @@ class FPDF_AutoWrapTable extends FPDF {
         'judul' => '',
         'filename' => '',
         'destinationfile' => '',
-        'paper_size' => 'F4',
-        'orientation' => 'L'
+        'paper_size' => '',
+        'orientation' => ''
     );
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
@@ -155,7 +155,7 @@ class FPDF_AutoWrapTable extends FPDF {
             $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker,
             $ukuran_kolom_dana, $ukuran_kolom_jenis_belanja,
             $ukuran_kolom_deskripsi, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja));
-        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'R', 'R', 'R', 'R'));
+        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'L', 'R', 'R'));
 
         if (count($this->data) == 0) {
             $this->Row(
@@ -186,8 +186,8 @@ class FPDF_AutoWrapTable extends FPDF {
                             $value->get_output_code(),
                             $value->get_dana_code(),
                             $value->get_description(),
-                            $value->get_blokir_kontrak(),
-                            $value->get_blokir_realisasi())
+                            number_format($value->get_blokir_kontrak()),
+                            number_format($value->get_blokir_realisasi()))
                 );
             }
         }
@@ -364,7 +364,7 @@ $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke 
 $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
-    'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
+    'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
     'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );

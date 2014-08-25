@@ -29,13 +29,8 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-    /*
-      $kdkppn='null';
-      $kdbank='null';
-      $kdtgl_awal='null';
-      $kdtgl_akhir='null';
-     */
 
+if( isset($this->d_bank) || isset($this->d_bulan)){
 
     $kdkppn = Session::get('id_user');
 
@@ -51,6 +46,8 @@
 
     <?php
     //----------------------------------------------------		
+
+}
     ?>
 
     <div id="fitur">

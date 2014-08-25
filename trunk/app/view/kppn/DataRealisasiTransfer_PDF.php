@@ -20,8 +20,8 @@ class FPDF_AutoWrapTable extends FPDF {
         'judul' => '',
         'filename' => '',
         'destinationfile' => '',
-        'paper_size' => 'F4',
-        'orientation' => 'P'
+        'paper_size' => '',
+        'orientation' => ''
     );
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
@@ -111,9 +111,9 @@ class FPDF_AutoWrapTable extends FPDF {
         //----------------------------------------------- 
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_jenis_belanja = 300;
-        $ukuran_kolom_akun = 300;
-        $ukuran_kolom_dana = 200;
+        $ukuran_kolom_jenis_belanja = 200;
+        $ukuran_kolom_akun = 200;
+        $ukuran_kolom_dana = 80;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -331,9 +331,9 @@ $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke 
 $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
-    'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
-    'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
-    'orientation' => 'L' //orientation: P=portrait, L=landscape
+    'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
+    'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
+    'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
 $tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
 $tabel->printPDF();

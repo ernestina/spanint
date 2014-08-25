@@ -30,24 +30,24 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-    /*
-      $kdkppn='null';
-      $kdbank='null';
-      $kdtgl_awal='null';
-      $kdtgl_akhir='null';
-     */
-
-
-    $kdkppn = Session::get('id_user');
+    
+if (isset($this->d_bank)){
+	   $kdkppn = Session::get('id_user');
 
     if (isset($this->d_bank)) {
         $kdbulan = $this->d_bank;
-    }
+    }else{
+		$kdbulan='null';
+	}
     ?>
 
-    <a href="<?php echo URL; ?>PDF/sp2dGajiDobel_PDF/<?php echo $kdbulan; ?>" class="modal">PDF</a>
+    <a href="<?php echo URL; ?>PDF/sp2dGajiDobel_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" class="modal">PDF</a>
 
     <?php
+ 
+
+}
+
     //----------------------------------------------------		
     ?>
 

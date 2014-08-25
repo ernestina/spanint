@@ -23,16 +23,26 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 05-08-2014
     //----------------------------------------------------
-    if (isset($this->d_bulan)) {
-        $kdbulan = $this->d_bulan;
-    }
+	if( isset($this->d_bulan) || isset($this->d_kd_kppn)	
+	){
+		if (isset($this->d_bulan)) {
+			$kdbulan = $this->d_bulan;
+		}else{
+			$kdbulan =null;
+		}
     if (isset($this->d_kd_kppn)) {
-        $kdkppn = $this->d_kd_kppn;
-    }
+			$kdkppn = $this->d_kd_kppn;
+		}else{
+			$kdkppn=Session::get('id_user');
+		}
+	
     ?>
-    <a href="<?php echo URL; ?>DataGR/GR_PFK_PDF/<?php echo $kdbulan; ?>" class="modal">PDF</a>
+    <a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan. "/" . $kdkppn; ?>" class="modal">PDF</a>
     <?php
     //----------------------------------------------------		
+
+	
+	}
     ?>
 
 

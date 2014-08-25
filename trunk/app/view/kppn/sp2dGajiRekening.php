@@ -20,19 +20,19 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-    /*
-      $kdkppn='null';
+   
 
-     */
+	if(isset($kdkppn)){
+		$kdkppn = Session::get('id_user');
+		?>
 
+		<a href="<?php echo URL; ?>PDF/sp2dSalahRekening_PDF/<?php echo $kdkppn; ?>" class="modal">PDF</a>
 
-    $kdkppn = Session::get('id_user');
-    ?>
-
-    <a href="<?php echo URL; ?>PDF/sp2dSalahRekening_PDF" class="modal">PDF</a>
-
-    <?php
-    //----------------------------------------------------		
+		<?php
+		//----------------------------------------------------		
+	
+	
+	}
     ?>
 
 

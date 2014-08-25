@@ -45,43 +45,49 @@
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
 
-
-    /* $kdakun='null';
-      //$kdsatker='null';
-      $kdoutput='null';
-      $kdprogram='null';
-      $kdtgl_awal='null';
-      $kdtgl_akhir='null'; */
-
+if(isset($this->d_nosp2d) || isset($this->d_barsp2d) ||
+ isset($this->d_kdsatker) || isset($this->d_bank) || 
+ isset($this->d_status) || isset($this->d_tgl_awal) ||
+ isset($this->d_tgl_akhir))
+{
     $kdkppn = Session::get('id_user');
     if (isset($this->d_nosp2d)) {
         $kdnosp2d = $this->d_nosp2d;
-    }
+    }else{
+		$kdnosp2d='null';
+	}
 
     if (isset($this->d_barsp2d)) {
         $kdbarsp2d = $this->d_barsp2d;
-    }
-
+    }else{
+		$kdbarsp2d='null';
+	}
     if (isset($this->d_kdsatker)) {
         $kdsatker = $this->d_kdsatker;
-    }
+    }else{
+		$kdsatker='null';
+	}
+	
+	
     if (isset($this->d_bank)) {
         $kdbank = $this->d_bank;
-    }
-
+    }else{
+		$kdbank='null';
+	}
     if (isset($this->d_status)) {
         $kdstatus = $this->d_status;
-    }
-
+    }else{
+		$kdstatus='null';
+	}
     if (isset($this->d_tgl_awal)) {
         $kdtgl_awal = $this->d_tgl_awal;
-        list($bln, $tgl, $thn) = explode('/', $kdtgl_awal);
-        $kdtgl_awal = $bln . "-" . $tgl . "-" . $thn;
+    } else {
+        $kdtgl_awal = 'null';
     }
     if (isset($this->d_tgl_akhir)) {
         $kdtgl_akhir = $this->d_tgl_akhir;
-        list($bln, $tgl, $thn) = explode('/', $kdtgl_akhir);
-        $kdtgl_akhir = $bln . "-" . $tgl . "-" . $thn;
+    } else {
+        $kdtgl_akhir = 'null';
     }
     ?>
     <a href="<?php echo URL; ?>PDF/monitoringRetur_PDF/<?php echo $kdkppn . "/" . $kdnosp2d . "/" . $kdbarsp2d . "/" . $kdsatker . "/" . $kdbank . "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="modal">PDF</a>
@@ -89,6 +95,12 @@
 
 <?php
 //----------------------------------------------------		
+
+
+
+}
+
+
 ?>
     <a href="#oModal" class="modal">FILTER DATA</a>
     <div id="oModal" class="modalDialog" >

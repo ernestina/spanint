@@ -32,6 +32,54 @@
         }
         ?>
     </div>
+	    <?php
+    //----------------------------------------------------
+    //Development history
+    //Revisi : 0
+    //Kegiatan :1.mencetak hasil filter ke dalam pdf
+    //File yang diubah : revisiDIPA.php
+    //Dibuat oleh : Rifan Abdul Rachman
+    //Tanggal dibuat : 18-07-2014
+    //----------------------------------------------------
+	if(isset($this->d_nama_kppn) || isset($this->d_bank) ||
+	isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
+	){	
+		if (isset($this->d_nama_kppn)) {
+			foreach ($this->d_nama_kppn as $kppn) {
+				$kdkppn = $kppn->get_kd_satker();
+			}
+		}else{
+			$kdkppn = 'null';		
+		 }
+		
+		if (isset($this->d_bank)) {
+			$kdbank = $this->d_bank;
+		} else {
+			$kdbank = 'null';
+		}
+
+		if (isset($this->d_tgl_awal)) {
+			$kdtgl_awal = $this->d_tgl_awal;
+		} else {
+			$kdtgl_awal = 'null';
+		}
+		if (isset($this->d_tgl_akhir)) {
+			$kdtgl_akhir = $this->d_tgl_akhir;
+		} else {
+			$kdtgl_akhir = 'null';
+		}
+    ?>
+    <ul class="inline" style="float: right"><li>
+            <a href="<?php echo URL; ?>PDF/monitoringReturPkn_PDF/<?php echo $kdkppn. "/" . $kdbank . "/" .$kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
+        <?php
+	
+	
+	}
+	
+//----------------------------------------------------		
+?>
+
+	
     <a href="#oModal" class="modal">FILTER DATA</a>
     <div id="oModal" class="modalDialog" >
         <div>

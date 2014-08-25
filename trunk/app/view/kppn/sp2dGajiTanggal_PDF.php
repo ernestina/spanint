@@ -272,7 +272,7 @@ if (is_array($this->data)) {
 //pilihan
 $options = array(
     'filename' => 'Laporan Monitoring SP2D Gaji Terindikasi Salah Tanggal.PDF', //nama file penyimpanan, kosongkan jika output ke browser
-    'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
+    'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
     'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );

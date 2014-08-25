@@ -43,23 +43,18 @@
     //----------------------------------------------------
 
 
-    /* $kdakun='null';
-      //$kdsatker='null';
-      $kdoutput='null';
-      $kdprogram='null';
-      $kdtgl_awal='null';
-      $kdtgl_akhir='null'; */
-
-    $kdkppn = Session::get('id_user');
-    if (isset($this->d_kdsatker)) {
-        $kdsatker = $this->d_kdsatker;
-    }
-    ?>
-    <a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker; ?>" class="modal">PDF</a>
-
-
+   if(isset($this->d_kdsatker)){
+		$kdkppn = Session::get('id_user');
+		if (isset($this->d_kdsatker)) {
+			$kdsatker = $this->d_kdsatker;
+		}
+		?>
+		<a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker; ?>" class="modal">PDF</a>
     <?php
     //----------------------------------------------------		
+  
+   }
+
     ?>
 
 

@@ -20,45 +20,60 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-    foreach ($this->data as $value) {
+if(
+isset($this->d_invoice) || isset($this->invoice) || isset($this->JenisSP2D) ||
+isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
+
+){
+
+   foreach ($this->data as $value) {
         $satker = substr($value->get_invoice_num(), 7, 6);
     }
-    $check_number = 'null';
-    $invoice = 'null';
-    $JenisSP2D = 'null';
-    $JenisSPM = 'null';
-    $kdtgl_awal = 'null';
-    $kdtgl_akhir = 'null';
+       
     if (isset($this->d_invoice)) {
         $check_number = $this->d_invoice;
-    }
+    }else{
+		$check_number = 'null';
+	}
 
     if (isset($this->invoice)) {
         $invoice = $this->invoice;
-    }
+    }else{
+		$invoice = 'null';
+	}
 
     if (isset($this->JenisSP2D)) {
         $JenisSP2D = $this->JenisSP2D;
-    }
+    }else{
+		$JenisSP2D = 'null';
+	}
     if (isset($this->JenisSPM)) {
         $JenisSPM = $this->JenisSPM;
-    }
+    }else{
+		$JenisSPM = 'null';
+	}
     if (isset($this->d_tgl_awal)) {
         $kdtgl_awal = $this->d_tgl_awal;
-        list($bln, $tgl, $thn) = explode('/', $kdtgl_awal);
-        $kdtgl_awal = $bln . "-" . $tgl . "-" . $thn;
-    }
+    }else{
+		$kdtgl_awal = 'null';
+	}
     if (isset($this->d_tgl_akhir)) {
         $kdtgl_akhir = $this->d_tgl_akhir;
-        list($bln, $tgl, $thn) = explode('/', $kdtgl_akhir);
-        $kdtgl_akhir = $bln . "-" . $tgl . "-" . $thn;
-    }
-    ?>
-                        <!--<a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="modal">PDF</a>-->
+    }else{
+		 $kdtgl_akhir = 'null';
+	}
+   ?>
+   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="modal">PDF</a>-->
 
 
     <?php
     //----------------------------------------------------		
+
+
+}	
+   
+
+
     ?>
 
     <a href="#xModal" class="modal">FILTER DATA</a><br><br>
