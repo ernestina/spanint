@@ -42,13 +42,7 @@
     </div>
 <?php
 //----------------------------------------------------
-//Development history
-//Revisi : 0
-//Kegiatan :1.mencetak hasil filter ke dalam pdf
-//File yang diubah : DataRealisasiTransfer.php
-//Dibuat oleh : Rifan Abdul Rachman
-//Tanggal dibuat : 18-07-2014
-//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : DataRealisasiTransfer.php  
 
 if(isset($this->lokasi) || isset($this->satkerku) ||
 isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
@@ -58,14 +52,11 @@ isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 	} else {
 		$kdlokasi = 'null';
 	}
-
-
 	if (isset($this->satkerku)) {
 		$kdsatkerku = $this->satkerku;
 	} else {
 		$kdsatkerku = 'null';
 	}
-
 	if (isset($this->d_tgl_awal)) {
 		$kdtgl_awal = $this->d_tgl_awal;
 	} else {
@@ -78,15 +69,10 @@ isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 	}
 ?>
 
-    <ul class="inline" style="float: right"><li>
-            <a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatkerku . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
-
-
-
+<ul class="inline" style="float: right"><li>
+<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatkerku . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 <?php
 //----------------------------------------------------		
-
-
 }
 ?>
 

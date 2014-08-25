@@ -14,18 +14,11 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : realisasiFA.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA.php  
    
-    if( isset($this->account_code) || isset($this->program_code) || isset($this->output_code)
-	
-	
+  if( isset($this->account_code) || isset($this->program_code) || isset($this->output_code)
+		
 	){
 	  if (isset($this->account_code)) {
         $kdakun = $this->account_code;
@@ -37,15 +30,14 @@
     }else{
 		$kdprogram = 'null';
 	}
-
     if (isset($this->output_code)) {
         $kdoutput = $this->output_code;
     }else{
 		 $kdoutput = 'null';
 	}
     ?>
-    <ul class="inline" style="float: right"><li>
-            <a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+<ul class="inline" style="float: right"><li>
+<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 	<?php
 	}
 ?>   

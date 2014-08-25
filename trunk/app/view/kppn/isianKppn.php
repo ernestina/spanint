@@ -13,30 +13,22 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : isianKppn.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+		//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : isianKppn.php  
 	if( isset($this->d_nosp2d) || isset($this->d_barsp2d) || 
-	isset($this->d_kdsatker) || isset($this->d_invoice) || 
-	isset($this->d_bank) || isset($this->d_bank) || isset($this->d_status) ||
-	isset($this->d_bayar) || isset($this->d_fxml) || isset($this->d_tgl_awal) ||
-	isset($this->d_tgl_akhir)
+		isset($this->d_kdsatker) || isset($this->d_invoice) || 
+		isset($this->d_bank) || isset($this->d_bank) || isset($this->d_status) ||
+		isset($this->d_bayar) || isset($this->d_fxml) || isset($this->d_tgl_awal) ||
+		isset($this->d_tgl_akhir)
 	
 	){
 	
     $kdkppn = Session::get('id_user');
-  
     if (isset($this->d_nosp2d)) {
         $kdnosp2d = $this->d_nosp2d;
     }else{
 		$kdnosp2d='null';
 	}
-
     if (isset($this->d_barsp2d)) {
         $kdbarsp2d = $this->d_barsp2d;
     }else{
@@ -47,13 +39,11 @@
     }else{
 		$kdsatker='null';
 	}
-
     if (isset($this->d_invoice)) {
         $kdnoinvoice = $this->d_invoice;
 	}else{
 		$kdnoinvoice='null';
 	}      
-
     if (isset($this->d_bank)) {
         $kdbank = $this->d_bank;
     }else{
@@ -64,19 +54,16 @@
     }else{
 		$kdstatus='null';
 	}
-
     if (isset($this->d_bayar)) {
         $kdbayar = $this->d_bayar;
     }else{
 		$kdbayar='null';
 	}
-
     if (isset($this->d_fxml)) {
         $kdfxml = $this->d_fxml;
     }else{
 		$kdfxml='null';
 	}
-
     if (isset($this->d_tgl_awal)) {
         $kdtgl_awal = $this->d_tgl_awal;
     } else {
@@ -88,16 +75,10 @@
         $kdtgl_akhir = 'null';
     }
     ?>
-
     <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdfxml . "/" . $kdbank; ?>" class="modal">PDF</a>
-
-
     <?php
     //----------------------------------------------------		
-	
-	
-	}
-  
+	}  
     ?>
 
     <a href="#oModal" class="modal">FILTER DATA</a>

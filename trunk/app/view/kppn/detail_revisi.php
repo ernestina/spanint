@@ -33,29 +33,22 @@
     }
     ?>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : detail_revisi.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : detail_revisi.php  
 
+if(isset($this->d_kdsatker)){
+	$kdkppn = Session::get('id_user');
+	if (isset($this->d_kdsatker)) {
+		$kdsatker = $this->d_kdsatker;
+	}
+	?>
+<a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker; ?>" class="modal">PDF</a>
+<?php
+//----------------------------------------------------		
 
-   if(isset($this->d_kdsatker)){
-		$kdkppn = Session::get('id_user');
-		if (isset($this->d_kdsatker)) {
-			$kdsatker = $this->d_kdsatker;
-		}
-		?>
-		<a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker; ?>" class="modal">PDF</a>
-    <?php
-    //----------------------------------------------------		
-  
-   }
+}
 
-    ?>
+?>
 
 
     <div id="fitur">

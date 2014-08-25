@@ -11,20 +11,10 @@
         </h2>
     </div>
  <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : realisasiFA_1.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
-    
-    
-    if( isset($this->account_code) || isset($this->program_code) ||
+ //----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA_1.php  
+  if( isset($this->account_code) || isset($this->program_code) ||
 	isset($this->output_code) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
-	
-	
 	){
 	
     if (isset($this->account_code)) {
@@ -54,8 +44,8 @@
         $kdtgl_akhir = 'null';
     }
     ?>
-    <ul class="inline" style="float: right"><li>
-            <a href="<?php echo URL; ?>PDF/RealisasiFA_1_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+<ul class="inline" style="float: right"><li>
+<a href="<?php echo URL; ?>PDF/RealisasiFA_1_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 	
 		<?php
 	}

@@ -12,16 +12,10 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : revisiDIPA.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+	 //----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : revisiDIPA.php  
 	
-	if( isset($this->account_code) ||
+if( isset($this->account_code) ||
 	isset($this->output_code) || isset($this->program_code) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 	){
     if (isset($this->account_code)) {
@@ -30,14 +24,12 @@
     } else {
         $kdakun = 'null';
     }
-
     if (isset($this->satker_code)) {
         $kdsatker = $this->satker_code;
         $kdsatker = rtrim($kdsatker);
     } else {
         $kdsatker = 'null';
     }
-
     if (isset($this->output_code)) {
         $kdoutput = $this->output_code;
         $kdoutput = rtrim($kdoutput);
@@ -61,8 +53,8 @@
         $kdtgl_akhir = 'null';
     }
     ?>
-    <ul class="inline" style="float: right"><li>
-            <a href="<?php echo URL; ?>PDF/revisiDIPA_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
+<ul class="inline" style="float: right"><li>
+<a href="<?php echo URL; ?>PDF/revisiDIPA_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
         <?php
 //----------------------------------------------------		
 	

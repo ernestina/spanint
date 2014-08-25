@@ -15,35 +15,30 @@
         </h2>
     </div>
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : test.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 05-08-2014
-    //----------------------------------------------------
-	if( isset($this->d_bulan) || isset($this->d_kd_kppn)	
-	){
-		if (isset($this->d_bulan)) {
-			$kdbulan = $this->d_bulan;
-		}else{
-			$kdbulan =null;
-		}
-    if (isset($this->d_kd_kppn)) {
-			$kdkppn = $this->d_kd_kppn;
-		}else{
-			$kdkppn=Session::get('id_user');
-		}
-	
-    ?>
-    <a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan. "/" . $kdkppn; ?>" class="modal">PDF</a>
-    <?php
-    //----------------------------------------------------		
+		//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : test.php  
 
-	
+if( isset($this->d_bulan) || isset($this->d_kd_kppn)	
+){
+	if (isset($this->d_bulan)) {
+		$kdbulan = $this->d_bulan;
+	}else{
+		$kdbulan =null;
 	}
-    ?>
+if (isset($this->d_kd_kppn)) {
+		$kdkppn = $this->d_kd_kppn;
+	}else{
+		$kdkppn=Session::get('id_user');
+	}
+
+?>
+<a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan. "/" . $kdkppn; ?>" class="modal">PDF</a>
+<?php
+//----------------------------------------------------		
+
+
+}
+?>
 
 
     <a href="#oModal" class="modal">FILTER DATA</a><br><br>

@@ -36,19 +36,13 @@
     </div>
 
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : daftarretur.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : daftarretur.php  
 
 if(isset($this->d_nosp2d) || isset($this->d_barsp2d) ||
- isset($this->d_kdsatker) || isset($this->d_bank) || 
- isset($this->d_status) || isset($this->d_tgl_awal) ||
- isset($this->d_tgl_akhir))
+	 isset($this->d_kdsatker) || isset($this->d_bank) || 
+	 isset($this->d_status) || isset($this->d_tgl_awal) ||
+	 isset($this->d_tgl_akhir))
 {
     $kdkppn = Session::get('id_user');
     if (isset($this->d_nosp2d)) {
@@ -67,8 +61,6 @@ if(isset($this->d_nosp2d) || isset($this->d_barsp2d) ||
     }else{
 		$kdsatker='null';
 	}
-	
-	
     if (isset($this->d_bank)) {
         $kdbank = $this->d_bank;
     }else{
@@ -95,11 +87,7 @@ if(isset($this->d_nosp2d) || isset($this->d_barsp2d) ||
 
 <?php
 //----------------------------------------------------		
-
-
-
 }
-
 
 ?>
     <a href="#oModal" class="modal">FILTER DATA</a>
