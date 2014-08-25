@@ -52,6 +52,11 @@ class PDFController extends BaseController {
             $filter[$no++] = " A.PROGRAM_CODE =  '" . $kdprogram . "'";
         }
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
+			list($tgl,$bln,$tahun)= explode(/,$kdtgl_awal)
+			$kdtgl_awal=$bln.'-'.$tgl.'-'.$tahun;
+			list($tgl,$bln,$tahun)= explode(/,$kdtgl_akhir)
+			$kdtgl_akhir=$bln.'-'.$tgl.'-'.$tahun;
+
             $filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '" . $kdtgl_awal . "' AND '" . $kdtgl_akhir . "'";
             $tglawal = array("$kdtgl_awal");
             $tglakhir = array("$kdtgl_akhir");
@@ -1899,6 +1904,13 @@ class PDFController extends BaseController {
             $filter[$no++] = " KDKPPN = " . Session::get('id_user');
             $this->view->data = $d_user->get_user_filter($filter);
         }
+		if (Session::get('role') == SATKER) {
+			$d_nm_kppn1 = new DataUser($this->registry);
+			$this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+		} else {
+			$this->view->nm_kppn2 = Session::get('user');
+		}
+
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
