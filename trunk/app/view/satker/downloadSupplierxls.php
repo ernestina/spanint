@@ -6,34 +6,29 @@ if (!ini_get('safe_mode')) {
     ini_set('memory_limit', -1);
     ini_set('max_execution_time', -1);
 }
+	$filename = "datasupplier_" . $this->kppn_code . $this->ekstensi;
+	header("Content-Type: application/octet-stream");
+	header("Content-Disposition: ,Filename=" . $filename);
+	header('Content-Transfer-Encoding: binary');
+	ob_end_clean();
+	
+	$server_ftp ='192.168.1.5';
+	$user_ftp ='';
+	$direktori='tes_download';
+	$filename='datasupplier_'.$this->kppn_code;
+	
+	$file = "\\\\".$user_ftp.$server_ftp."\\".$direktori."\\".$filename.$this->ekstensi;
+	
+	
 
-$filename = "datasupplier_" . $this->kppn_code . $this->ekstensi;
-
-header("Content-Type: application/octet-stream");
-header("Content-Disposition: ,Filename=" . $filename);
-header('Content-Transfer-Encoding: binary');
-ob_end_clean();
-
-if (isset($this->data)) {
-    foreach ($this->data as $value) {
-        echo $value->get_nama_supplier() . "|";
-        echo $value->get_npwp_supplier() . "|";
-        echo $value->get_kdvalas() . "|";
-        echo $value->get_nm_bank() . "|";
-        echo $value->get_kd_bank() . "|";
-        echo $value->get_kd_swift() . "|";
-        echo $value->get_iban() . "|";
-        echo $value->get_asal_bank() . "|";
-        echo $value->get_norek_bank() . "|";
-        echo $value->get_norek_penerima() . "|";
-        echo $value->get_nm_pemilik_rek() . "|";
-        echo $value->get_npwp_penerima() . "|";
-        echo $value->get_nip_penerima() . "|";
-        echo $value->get_nm_penerima() . "|";
-        echo $value->get_tipe_supp() . "|";
-        echo $value->get_satker() . "|";
-        echo $value->get_v_supplier_number() . "|";
-        echo $value->get_kppn_code() . " \r\n";
-    }
-}
+	//$file = "\\\\192.168.1.5\\tes_download\\datasupplier_004.txt";
+	$fd=fopen($file,"r");
+	
+	while (!feof($fd)){
+		$buffer=fread($fd,1028);
+		echo $buffer;
+	}
+	fclose($fd);
+	exit;
+	
 ?>

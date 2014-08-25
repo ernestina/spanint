@@ -26,14 +26,46 @@ class DataPelimpahanController extends BaseController {
         $d_limpah = new DataPelimpahan($this->registry);
         $filter = array();
         $no = 0;
+		
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_anak = $d_kppn_list->get_kppn_kanwil();
+            $this->view->kppn_induk = $d_kppn_list->get_induk_limpah();
+        }
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            //$this->view->kppn_anak = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+            //$this->view->kppn_induk = $d_kppn_list->get_induk_limpah(Session::get('id_user'));
+            $this->view->kppn_anak = $d_kppn_list->get_kppn_kanwil("02");
+            $this->view->kppn_induk = $d_kppn_list->get_induk_limpah("02");
+        }
+        if (Session::get('role') == KPPN) {
+            $d_kppn_list = new DataUser($this->registry);
+			$kppn_list = $d_kppn_list->get_induk_limpah_kppn(Session::get('id_user'));
+			if (count($kppn_list)>0){
+				$filter[$no++] = "KPPN_INDUK= '" . Session::get('id_user')."'";
+			}
+            $this->view->kppn_anak = $kppn_list;
+        }
+		
         if (isset($_POST['submit_file'])) {
-            if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "KPPN_ANAK = '" . $_POST['kdkppn'] . "'";
-                $d_kppn = new DataUser($this->registry);
-                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+            if ($_POST['kppn_anak'] != '') {
+				if ($_POST['kppn_anak'] != 'SEMUA') {
+					$filter[$no++] = "KPPN_ANAK = '" . $_POST['kppn_anak'] . "'";
+				} /*else if ($_POST['kppn_anak'] == Session::get('kd_satker')){
+					$filter[$no++] = "KPPN_ANAK= '" . Session::get('id_user')."'";
+				}*/
+				$this->view->d_kppn_anak = $_POST['kppn_anak'];
             } else {
-                $filter[$no++] = "KPPN_ANAK= '" . Session::get('id_user')."'";
-            }
+				$filter[$no++] = "KPPN_ANAK= '" . Session::get('id_user')."'";
+			}
+			
+			if ($_POST['kppn_induk'] != '') {
+				if ($_POST['kppn_induk'] != 'SEMUA') {
+					$filter[$no++] = "KPPN_INDUK = '" . $_POST['kppn_induk'] . "'";
+				} 
+				$this->view->d_kppn_induk = $_POST['kppn_induk'];
+            } 
            
             if ($_POST['status'] != '') {
                 if ($_POST['status'] != 'SEMUA') {
@@ -48,19 +80,7 @@ class DataPelimpahanController extends BaseController {
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
-            if (Session::get('role') == SATKER) {
-                $filter[$no++] = " KDSATKER = '" . Session::get('kd_satker') . "'";
-                $this->view->d_satker = Session::get('kd_satker');
-            }
             $this->view->data = $d_limpah->get_limpah_filter($filter);
-        }
-        if (Session::get('role') == ADMIN OR Session::get('role') == PKN) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-        }
-        if (Session::get('role') == KANWIL) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
         }
 
         // untuk mengambil data last update 

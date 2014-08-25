@@ -113,10 +113,14 @@ class DataSupplierController extends BaseController {
         $d_supp = new DataSupplier($this->registry);
         $filter = array();
         $no = 0;
-        $this->view->data = $d_supp->get_download_supp_filter_xls(Session::get('kd_satker'));
         $this->view->ekstensi = ".txt";
         $this->view->kppn_code = Session::get('kd_satker');
-        $this->view->load('satker/downloadSupplierxls');
+		if (Session::get('kd_satker')=='004'){
+			$this->view->load('satker/downloadSupplierxls');
+		} else {
+			$this->view->data = $d_supp->get_download_supp_filter_xls(Session::get('kd_satker'));
+			$this->view->load('satker/downloadSupplierxls2');
+		}
     }
 
     public function downloadSupplierx() {
