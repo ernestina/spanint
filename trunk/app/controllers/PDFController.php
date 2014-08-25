@@ -71,6 +71,11 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->data = $d_spm1->get_dipa_filter($filter);
+
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
         $this->view->load('kppn/revisiDIPA_PDF');
     }
 
@@ -118,6 +123,10 @@ class PDFController extends BaseController {
             $this->view->nm_kppn2 = Session::get('user');
         }
 		
+		 //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
         $this->view->load('kppn/fund_fail_PDF');
     }
 
@@ -162,6 +171,11 @@ class PDFController extends BaseController {
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
         //$this->view->render('kppn/detail_fund_fail_kd');
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
 		$this->view->load('kppn/detail_fund_fail_kd_PDF');
     }
 
@@ -205,6 +219,10 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->data = $d_spm1->get_fa_filter($filter);
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
         $this->view->load('kppn/realisasiFA_PDF');
     }
 
@@ -260,6 +278,10 @@ class PDFController extends BaseController {
         $this->view->data = $d_spm1->get_fa_summary_filter($filter);
         
         //$this->view->render('kppn/realisasiFA_1');
+		 //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
 		 $this->view->load('kppn/realisasiFA_1_PDF');
     }
 
@@ -316,7 +338,11 @@ class PDFController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-        $this->view->load('kppn/DataRealisasi_PDF');
+         //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
+		$this->view->load('kppn/DataRealisasi_PDF');
     }
 
     public function DataRealisasiBA_PDF($kdkppn = null) {
@@ -335,7 +361,11 @@ class PDFController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-        $this->view->load('kppn/DataRealisasiBA_PDF');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
+		$this->view->load('kppn/DataRealisasiBA_PDF');
     }
 
     public function DataRealisasiTransfer_PDF($kdsatkerku = null, $kdlokasi = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
@@ -374,6 +404,9 @@ class PDFController extends BaseController {
         }
 
         $this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->load('kppn/DataRealisasiTransfer_PDF');
     }
@@ -402,7 +435,11 @@ class PDFController extends BaseController {
         }
 
         $this->view->data = $d_spm1->detail_revisi($filter);
-        $this->view->load('kppn/detail_revisi_PDF');
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
+		$this->view->load('kppn/detail_revisi_PDF');
     }
 
 //------------------------------------------------------
@@ -437,6 +474,9 @@ class PDFController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table1());
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->render('pkn/dropingDetail_PDF');
     }
@@ -478,6 +518,9 @@ class PDFController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->load('pkn/droping_PDF');
     }
@@ -521,6 +564,9 @@ class PDFController extends BaseController {
         }
 		
         $this->view->data = $d_spm1->get_gr_pfk_filter($filter, $bulan);
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/GR_PFK_GLOBAL_PDF');
 		
     }
@@ -558,6 +604,9 @@ class PDFController extends BaseController {
 
 
         $this->view->data = $d_spm1->get_gr_ijp_filter($filter);
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/GR_IJP_PDF');
     }
 
@@ -575,6 +624,9 @@ class PDFController extends BaseController {
             $filter[$no++] = "substr(RESP_NAME,1,3) = '" . Session::get('id_user') . "'";
         }
         $this->view->data = $d_spm1->get_detail_lhp_rekap($filter);
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->render('kppn/detailLhpRekap_PDF');
     }
 
@@ -658,6 +710,9 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //$this->view->render('kppn/isianKppn');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/isianKppn_PDF');
     }
 
@@ -710,6 +765,9 @@ class PDFController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->load('kppn/harianBo_PDF');
     }
@@ -763,6 +821,10 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //$this->view->render('kppn/sp2dHariIni');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
         $this->view->load('kppn/sp2dHariIni_PDF');
     }
 
@@ -818,6 +880,10 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //$this->view->render('kppn/sp2dBesok');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
         $this->view->load('kppn/sp2dBesok_PDF');
     }
 
@@ -870,6 +936,10 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //$this->view->render('kppn/sp2dBackdate');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
         $this->view->load('kppn/sp2dBackdate_PDF');
     }
 
@@ -923,6 +993,9 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //$this->view->render('kppn/sp2dNilaiMinus');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/sp2dNilaiMinus_PDF');
     }
 
@@ -976,6 +1049,9 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //$this->view->render('kppn/sp2dSudahVoid');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/sp2dSudahVoid_PDF');
     }
 
@@ -1013,6 +1089,9 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //var_dump($d_sppm->get_sppm_filter($filter));
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/sp2dGajiDobel_PDF');
     }
 
@@ -1057,6 +1136,9 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //var_dump($d_sppm->get_sppm_filter($filter));
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/sp2dGajiTanggal_PDF');
     }
 
@@ -1099,6 +1181,9 @@ class PDFController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->load('kppn/sp2dGajiBank_PDF');
     }
@@ -1144,6 +1229,9 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //var_dump($d_sppm->get_sppm_filter($filter));
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/sp2dGajiRekening_PDF');
     }
 
@@ -1221,9 +1309,11 @@ class PDFController extends BaseController {
             $this->view->data = '';
         }
         //$this->view->render('kppn/detailSp2dGaji');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/detailSp2dGaji_PDF');
     }
-//BARU
 	    public function detailRekapSP2D2_PDF($kdbank = null, $kdjendok = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdkppn = null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
@@ -1305,6 +1395,10 @@ class PDFController extends BaseController {
 
         //var_dump($d_sppm->get_sppm_filter($filter));
         //$this->view->render('kppn/detailSp2dRekap');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
 		$this->view->load('kppn/detailSp2dRekap_PDF');
     }
 //------------------------------------------------------
@@ -1377,7 +1471,11 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_retur->get_table());
 
         //var_dump($d_sppm->get_sppm_filter($filter));
-        $this->view->load('kppn/daftarRetur_PDF');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+      
+	  $this->view->load('kppn/daftarRetur_PDF');
 		//$this->view->render('kppn/daftarRetur');
     }
 
@@ -1425,6 +1523,10 @@ class PDFController extends BaseController {
 
         //var_dump($d_sppm->get_sppm_filter($filter));
         //$this->view->render('kppn/daftarReturPKN');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
 		$this->view->load('kppn/daftarReturPKN_PDF');
 
     }
@@ -1467,6 +1569,9 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->data = $d_spm1->get_hist_spm_filter($filter);
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->load('kppn/posisiSPM_PDF');
     }
@@ -1487,6 +1592,9 @@ class PDFController extends BaseController {
 
 
         $this->view->data = $d_spm1->get_hist_spm_filter($filter);
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->load('kppn/detailposisiSPM_PDF');
     }
@@ -1534,6 +1642,9 @@ class PDFController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->load('kppn/holdSPM_PDF');
     }
@@ -1569,6 +1680,10 @@ class PDFController extends BaseController {
         }
 		
         $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+
         $this->view->load('kppn/historySPM_PDF');
 		//$this->view->render('kppn/historySPM');
     }
@@ -1624,9 +1739,17 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         if (Session::get('id_user') == 140) {
-            $this->view->load('kppn/SP2DSatker140_PDF');
+			//untuk mencatat log user
+			$d_log = new DataLog($this->registry);
+			$d_log->tambah_log("Sukses");
+
+			$this->view->load('kppn/SP2DSatker140_PDF');
         } else {
-            $this->view->load('kppn/SP2DSatker_PDF');
+			//untuk mencatat log user
+			$d_log = new DataLog($this->registry);
+			$d_log->tambah_log("Sukses");
+
+			$this->view->load('kppn/SP2DSatker_PDF');
         }
     }
 
@@ -1669,6 +1792,9 @@ class PDFController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->load('kppn/Rekap_PDF');
 		//$this->view->render('kppn/Rekap');
@@ -1729,6 +1855,9 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_limpah->get_table());
 
         //$this->view->render('kppn/daftarPelimpahan_PDF');
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 		$this->view->load('kppn/daftarPelimpahan_PDF');
     }
 
@@ -1770,6 +1899,9 @@ class PDFController extends BaseController {
             $filter[$no++] = " KDKPPN = " . Session::get('id_user');
             $this->view->data = $d_user->get_user_filter($filter);
         }
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->load('kppn/monitoringUser_PDF');
     }
 
