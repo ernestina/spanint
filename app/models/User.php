@@ -9,6 +9,7 @@ class User {
 
     public $registry;
     private $_table = "d_user";
+    private $_table2 = "d_user2";
     public $_db;
     private $_kd_d_user;
     private $_kd_r_jenis;
@@ -22,7 +23,7 @@ class User {
     }
 
     public function login($username, $password) {
-        $sql = "SELECT * FROM " . $this->_table . " WHERE KD_SATKER = '" . $username . "' AND PASS_USER = '" . $password . "'";
+        $sql = "SELECT * FROM " . $this->_table2 . " WHERE KD_SATKER = '" . $username . "' AND SHA256 = '" . $password . "'";
         $result = $this->_db->select($sql);
         //var_dump($sql);
         //var_dump($result);

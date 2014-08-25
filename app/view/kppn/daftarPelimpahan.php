@@ -23,6 +23,16 @@
     <div style='display: block; float: left; font-weight: bold'>
 
         <?php
+        if (isset($this->d_kppn_induk)) {
+            echo "Kppn Induk : " . $this->d_kppn_induk . "<br>";
+        }
+        ?>
+		<?php
+        if (isset($this->d_kppn_anak)) {
+            echo "Kppn Anak : " . $this->d_kppn_anak . "<br>";
+        }
+        ?>
+		<?php
         if (isset($this->d_status)) {
             echo "Status : " . $this->d_status . "<br>";
         }
@@ -33,52 +43,8 @@
         }
         ?>
 
-    </div>
-    <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : revisiDIPA.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+    </div>	
 	
-	
-	if(isset($this->d_status) || isset($this->d_satker) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
-	$kdkppn=Session::get('id_user');
-		if (isset($this->d_status)) {
-			$kdstatus = $this->d_status;
-		} else {
-			$kdstatus = 'null';
-		}
-
-		if (isset($this->d_satker)) {
-			$kdsatker = $this->d_satker;
-		} else {
-			$kdsatker = Session::get('kd_satker');
-		}
-
-		if (isset($this->d_tgl_awal)) {
-			$kdtgl_awal = $this->d_tgl_awal;
-		} else {
-			$kdtgl_awal = 'null';
-		}
-		if (isset($this->d_tgl_akhir)) {
-			$kdtgl_akhir = $this->d_tgl_akhir;
-		} else {
-			$kdtgl_akhir = 'null';
-		}
-    ?>
-    <ul class="inline" style="float: right"><li>
-            <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdsatker . "/" . $kdkppn. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
-        <?php
-	
-	
-	}
-	
-//----------------------------------------------------		
-?>
     <a href="#oModal" class="modal">FILTER DATA</a>
     <div id="oModal" class="modalDialog" >
         <div>
@@ -88,30 +54,47 @@
 
             <div id="top">	
                 <form method="POST" action="monitoringPelimpahan" enctype="multipart/form-data">
-
-                        <?php if (isset($this->kppn_list)) { ?>
-                        <div id="wkdkppn" class="error"></div>
-                        <label class="isian">Kode KPPN: </label>
-                        <select type="text" name="kdkppn" id="kdkppn">
-                            <?php
-                            foreach ($this->kppn_list as $value1) {
-                                if ($kode_kppn == $value1->get_kd_d_kppn()) {
-                                    echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+				<?php if (count($this->kppn_anak)>1){ ?>
+					<div id="wkppn_anak" class="error"></div>
+                    <label class="isian">KPPN Anak: </label>
+                    <select type="text" name="kppn_anak" id="kppn_anak">                        
+						<option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option>
+						<?php
+                            foreach ($this->kppn_anak as $value2) {
+                                if ($this->d_kppn_anak == $value2->get_kd_d_kppn()) {
+                                    echo "<option value='" . $value2->get_kd_d_kppn() . "' selected>" . $value2->get_kd_d_kppn() . " | " . $value2->get_nama_user() . "</option>";
                                 } else {
-                                    echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+                                    echo "<option value='" . $value2->get_kd_d_kppn() . "'>" . $value2->get_kd_d_kppn() . " | " . $value2->get_nama_user() . "</option>";
                                 }
                             }
                             ?>
-                        </select>
-<?php } ?>
-
+                    </select>  
+				<?php }?>
+					
+					<?php if (isset($this->kppn_induk)) { ?>
+        
+					<div id="wkppn_induk" class="error"></div>
+                    <label class="isian">KPPN Induk: </label>
+                    <select type="text" name="kppn_induk" id="kppn_induk">
+                        <option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option><?php
+                            foreach ($this->kppn_induk as $value3) {
+                                if ($this->d_kppn_induk == $value3->get_kd_d_kppn()) {
+                                    echo "<option value='" . $value3->get_kd_d_kppn() . "' selected>" . $value3->get_kd_d_kppn() . " | " . $value3->get_nama_user() . "</option>";
+                                } else {
+                                    echo "<option value='" . $value3->get_kd_d_kppn() . "'>" . $value3->get_kd_d_kppn() . " | " . $value3->get_nama_user() . "</option>";
+                                }
+                            }
+                            ?>
+                    </select>  
+					<?php } ?>
+					
+					
                     <div id="wstatus" class="error"></div>
                     <label class="isian">Status: </label>
                     <select type="text" name="status" id="status">
-                        <option value=''>- pilih -</option>
+                        <option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option>
                         <option value='RECONCILED' <?php if ($this->d_status == 'RECONCILED') {echo "selected";} ?>>RECONCILED</option>
                         <option value='UNRECONCILED' <?php if ($this->d_status == 'UNRECONCILED') {echo "selected";} ?>>UNRECONCILED</option>
-                        <option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option>
                     </select>                    
 
                     <div id="wtgl" class="error"></div>
@@ -138,21 +121,23 @@
             <thead>
                 <tr>
                     <th rowspan="2" width='3%' class='mid'>No.</th>
-                    <th colspan="5">Pelimpahan</th>
-                    <th colspan="5">Penerimaan 501</th>
+                    <th colspan="6">Pelimpahan</th>
+                    <th colspan="6">Penerimaan 501</th>
                     <th rowspan="2">Status Limpah</th>
                 </tr>
                 <tr>
+                    <th width='10%' class='mid'>Tanggal</th>
                     <th width='10%' class='mid'>No. Rekening<br>Nama Rekening</th>
                     <th width='10%' class='mid'>No. Sakti</th>
-                    <th width='20%' class='mid'>Nilai</th>
                     <th width='10%' class='mid'>Akun</th>
                     <th width='10%' class='mid'>Kode KPPN </th>
+                    <th width='20%' class='mid'>Nilai</th>
+                    <th width='10%' class='mid'>Tanggal</th>
                     <th width='10%' class='mid'>No. Rekening<br>Nama Rekening</th>
                     <th width='10%' class='mid'>No. Sakti</th>
-                    <th width='20%' class='mid'>Nilai</th>
                     <th width='10%' class='mid'>Akun</th>
                     <th width='10%' class='mid'>Kode KPPN </th>
+                    <th width='20%' class='mid'>Nilai</th>
                 </tr>
             </thead>
             <tbody class='ratatengah'>
@@ -163,22 +148,36 @@ if (isset($this->data)) {
     if (empty($this->data)) {
         echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
     } else {
+		$jml_terima=0;
+		$jml_limpah=0;
         foreach ($this->data as $value) {
             echo "<tr>	";
             echo "<td>" . $no++ . "</td>";
+            echo "<td>" . $value->get_tgl_limpah() . "</td>";
             echo "<td class='ratakiri'>" . $value->get_norek_persepsi() . "<br>" . $value->get_nmrek_persepsi() . "</td>";
-            echo "<td>" . $value->get_nosakti_limpah . "</td>";
-            echo "<td class='ratakanan'> " . $value->get_jml_terima()  . "</td>";
+            echo "<td>" . $value->get_nosakti_limpah() . "</td>";
             echo "<td> " . $value->get_akun_terima() . " </td>";
             echo "<td> " . $value->get_kppn_anak() . " </td>";
+            echo "<td class='ratakanan'> " . number_format($value->get_jml_terima())  . "</td>";
+            echo "<td>" . $value->get_tgl_terima() . "</td>";
             echo "<td>" . $value->get_norek_501() . "<br>" . $value->get_nmrek_501() . "</td>";
-            echo "<td>" . $value->get_nosakti_bs . "</td>";
-            echo "<td class='ratakanan'> " . $value->get_jml_limpah()  . "</td>";
+            echo "<td>" . $value->get_nosakti_bs() . "</td>";
             echo "<td> " . $value->get_akun_limpah() . " </td>";
             echo "<td> " . $value->get_kppn_induk() . " </td>";
+            echo "<td class='ratakanan'> " . number_format($value->get_jml_limpah())  . "</td>";
             echo "<td>" .$value->get_status() . "</td>";
             echo "</tr>	";
+			$jml_terima = $jml_terima + $value->get_jml_terima();
+			$jml_limpah = $jml_limpah + $value->get_jml_limpah();
         }
+        echo "<tr>	";
+		echo "<td></td>";
+		echo "<td colspan='5'>TOTAL</td>";
+		echo "<td class='ratakanan'>".number_format($jml_terima)."</td>";
+		echo "<td colspan='5'>TOTAL</td>";
+		echo "<td class='ratakanan'>".number_format($jml_limpah)."</td>";
+		echo "<td></td>";
+        echo "</tr>	";
     }
 } else {
     echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";

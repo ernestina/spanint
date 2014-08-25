@@ -21,6 +21,7 @@ class DataUser {
     private $_valid = TRUE;
     private $_table = 'USRAPL14.d_user';
     private $_table2 = 'MASTERAPL.t_kppn';
+    private $_table3 = 'USRAPL14.t_limpah';
     private $_table1 = 't_satker';
     public $registry;
 
@@ -69,6 +70,65 @@ class DataUser {
         foreach ($result as $val) {
             $d_user = new $this($this->registry);
             $d_user->set_kd_d_kppn($val['KD_D_KPPN']);
+            $d_user->set_nama_user(substr($val['NAMA_USER'], 5, 20));
+
+            $data[] = $d_user;
+        }
+        //var_dump($data);
+        return $data;
+    }
+
+	//untuk mengambil kppn induk dari t_limpah
+    public function get_induk_limpah($kd_kanwil=null) {
+		if ($kd_kanwil!=''){
+			$sql = " select distinct a.KPPN_INDUK KPPN_INDUK , b.NAMA_USER 
+					 from " . $this->_table3 . " a 
+					 INNER JOIN (select distinct kd_d_kppn kd_d_kppn, NAMA_USER  
+					 from  " . $this->_table . " 
+					 where kd_r_jenis = '3' and 
+					 kd_kanwil = '".$kd_kanwil."' 
+					 ) b
+					 ON b.kd_d_kppn = a.kppn_induk
+					 ORDER BY KPPN_INDUK";
+		} else {
+			$sql = " select distinct a.KPPN_INDUK KPPN_INDUK , b.NAMA_USER 
+					 from " . $this->_table3 . " a 
+					 INNER JOIN (select distinct kd_d_kppn kd_d_kppn, NAMA_USER  
+					 from  " . $this->_table . " 
+					 where kd_r_jenis = '3' 
+					 ) b
+					 ON b.kd_d_kppn = a.kppn_induk
+					 ORDER BY KPPN_INDUK";
+		}
+        $result = $this->db->select($sql);
+        $data = array();
+        //var_dump($sql);
+        foreach ($result as $val) {
+            $d_user = new $this($this->registry);
+            $d_user->set_kd_d_kppn($val['KPPN_INDUK']);
+            $d_user->set_nama_user(substr($val['NAMA_USER'], 5, 20));
+
+            $data[] = $d_user;
+        }
+        //var_dump($data);
+        return $data;
+    }
+	
+	//untuk mengambil kppn induk dari t_limpah
+    public function get_induk_limpah_kppn($kd_kppn=null) {
+			$sql = "  select distinct a.KPPN_ANAK KPPN_ANAK, b.NAMA_USER 
+					 from " . $this->_table3 . " a 
+					 INNER JOIN (select distinct kd_d_kppn kd_d_kppn, NAMA_USER  
+					 from  " . $this->_table . " where kd_r_jenis = '3') b
+					 ON b.kd_d_kppn = a.kppn_anak
+					 where kppn_induk ='".$kd_kppn."'
+					 ORDER BY KPPN_ANAK";
+        $result = $this->db->select($sql);
+        $data = array();
+        //var_dump($sql);
+        foreach ($result as $val) {
+            $d_user = new $this($this->registry);
+            $d_user->set_kd_d_kppn($val['KPPN_ANAK']);
             $d_user->set_nama_user(substr($val['NAMA_USER'], 5, 20));
 
             $data[] = $d_user;

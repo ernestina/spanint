@@ -87,6 +87,11 @@
 								<li><a href=' . URL . 'dataGR/GR_PFK></i>Monitoring PFK</a></li>
                             </ul>
                             </li>';
+                        echo '<li class="subnav"><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan>Pelimpahan</a>';
+                        echo '<ul>
+                                <li><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan></i>Pelimpahan</a></li>
+                            </ul>
+                            </li>';
                         echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
                         echo '<ul>
                                 <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
@@ -154,6 +159,11 @@
                                 <li><a href=' . URL . 'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
 								 <li><a href=' . URL . 'dataGR/GR_IJP></i>Monitoring IJP</a></li>
 								<li><a href=' . URL . 'dataGR/GR_PFK></i>Monitoring PFK</a></li>
+                            </ul>
+                            </li>';
+                        echo '<li class="subnav"><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan>Pelimpahan</a>';
+                        echo '<ul>
+                                <li><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan></i>Pelimpahan</a></li>
                             </ul>
                             </li>';
                         echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';

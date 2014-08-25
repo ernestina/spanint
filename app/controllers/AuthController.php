@@ -19,7 +19,7 @@ class AuthController extends BaseController {
 
         if (isset($_POST['user'])) {
             $user = $_POST['user'];
-            $pass = $_POST['pass'];
+            $pass = hash('sha256',$_POST['pass']);
             //var_dump($_POST['user']);
             //var_dump($_POST['pass']);
             $pwd = $pass;

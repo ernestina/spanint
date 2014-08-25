@@ -46,9 +46,9 @@ class DataPelimpahan {
 
     public function get_limpah_filter($filter) {
         $sql = "SELECT 
-				KPPN_ANAK, AKUN_LIMPAH, JML_LIMPAH, NOSAKTI_LIMPAH,
+				TGL_LIMPAH,KPPN_ANAK, AKUN_LIMPAH, JML_LIMPAH, NOSAKTI_LIMPAH,
 				NOREK_PERSEPSI, NMREK_PERSEPSI,
-				KPPN_INDUK, NOREK_501, NMREK_501, AKUN_TERIMA, JML_TERIMA,
+				TGL_TERIMA,KPPN_INDUK, NOREK_501, NMREK_501, AKUN_TERIMA, JML_TERIMA,
 				NOSAKTI_BS, STATUS
 				FROM  " . $this->_table . "
 				WHERE 1=1 ";
@@ -59,24 +59,26 @@ class DataPelimpahan {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= " ORDER BY TGL_LIMPAH DESC";
+        $sql .= " ORDER BY TGL_LIMPAH, KPPN_ANAK";
         //var_dump ($sql);
         $result = $this->db->select($sql);
 		//var_dump ($result);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
+            $d_data->set_tgl_limpah(date("d-m-Y", strtotime($val['TGL_LIMPAH'])));
             $d_data->set_kppn_anak($val['KPPN_ANAK']);
             $d_data->set_akun_limpah($val['AKUN_LIMPAH']);
-            $d_data->set_jml_limpah(number_format($val['JML_LIMPAH']));
+            $d_data->set_jml_limpah($val['JML_LIMPAH']);
             $d_data->set_nosakti_limpah($val['NOSAKTI_LIMPAH']);
             $d_data->set_norek_persepsi($val['NOREK_PERSEPSI']);
             $d_data->set_nmrek_persepsi($val['NMREK_PERSEPSI']);
+            $d_data->set_tgl_terima(date("d-m-Y", strtotime($val['TGL_TERIMA'])));
             $d_data->set_kppn_induk($val['KPPN_INDUK']);
             $d_data->set_norek_501($val['NOREK_501']);
             $d_data->set_nmrek_501($val['NMREK_501']);
             $d_data->set_akun_terima($val['AKUN_TERIMA']);
-            $d_data->set_jml_terima(number_format($val['JML_TERIMA']));
+            $d_data->set_jml_terima($val['JML_TERIMA']);
             $d_data->set_nosakti_bs($val['NOSAKTI_BS']);
             $d_data->set_status($val['STATUS']);
             $data[] = $d_data;
