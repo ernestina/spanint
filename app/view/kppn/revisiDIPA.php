@@ -119,7 +119,7 @@ if( isset($this->account_code) ||
         <?php
         echo $last_update->get_last_update() . " WIB";
     }
-}
+	}
 ?>
     <div id="fitur">
         <table width="100%" class="table table-bordered zebra" id="example" style="font-size: 90%">

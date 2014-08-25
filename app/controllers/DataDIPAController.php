@@ -134,6 +134,9 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = "KDSATKER = '" . Session::get('kd_satker') . "'";
             $this->view->data = $d_spm1->get_fun_fail_filter($filter);
         }
+		
+		$d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_fun_fail_filter($filter);
@@ -228,7 +231,9 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = " SATKER = '" . Session::get('kd_satker') . "'";
             $this->view->data = $d_spm1->get_fun_fail_filter($filter);
         }
-
+		
+		$d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table3());
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
         $this->view->render('kppn/detail_fund_fail_kd');
@@ -297,7 +302,9 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = " A.OUTPUT =  '" . $output . "'";
         }
         if ($akun != '') {
-            $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "')";
+            $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
+			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')"
+			;
         }
 
         if (Session::get('role') == KPPN) {
@@ -716,7 +723,9 @@ class DataDIPAController extends BaseController {
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
             //$this->view->data = $d_spm1->get_revisi_dipa($filter);
         }
-        
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
         $this->view->data = $d_spm1->get_revisi_dipa($filter);
         $this->view->render('kppn/proses_revisi');
     }
@@ -740,6 +749,10 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = "KDSATKER = '" . Session::get('kd_satker') . "'";
             //$this->view->data = $d_spm1->detail_revisi($filter);
         }
+		
+		$d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table3());
+		
         $this->view->d_kdsatker = $satker;
         $this->view->data = $d_spm1->detail_revisi($filter);
         $this->view->render('kppn/detail_revisi');

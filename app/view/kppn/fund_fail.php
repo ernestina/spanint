@@ -101,7 +101,19 @@ $_SERVER['PHP_SELF'];
             </div>
         </div>
     </div>
-
+	
+	  <?php
+    // untuk menampilkan last_update
+    if (isset($this->last_update)) {
+        foreach ($this->last_update as $last_update) {
+            echo "Update Data Terakhir (Waktu Server)  "
+            ?> <br/>
+            <?php
+            echo $last_update->get_last_update() . " WIB";
+        }
+    }
+    ?>
+    
 
 
     <div id="fitur">
