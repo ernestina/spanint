@@ -41,7 +41,7 @@
 
                 <div id="top">	
 
-                    <form method="POST" action="posisiSpm" enctype="multipart/form-data">
+                    <form method="POST" action="PosisiSPM" enctype="multipart/form-data">
 
     <?php if (isset($this->kppn_list)) { ?>
                             <div id="wkdkppn" class="error"></div>

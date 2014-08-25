@@ -37,17 +37,17 @@ class DataSPMController extends BaseController {
         $no = 0;
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "ATTRIBUTE15 = '" . $_POST['kdkppn']."'";
+                $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn']."'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             }
         } else {
-            $filter[$no++] = "SUBSTR(OU_NAME,1,3) = '" . Session::get('id_user')."'";
+            $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
         }
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			$filter[$no++] = "SUBSTR(OU_NAME,1,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
+			$filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
         }
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
@@ -106,6 +106,7 @@ class DataSPMController extends BaseController {
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "ATTRIBUTE15 = '" . Session::get('id_user')."'";
             $this->view->d_kppn = Session::get('id_user');
+			$this->view->data = $d_spm1->get_hold_spm_filter($filter);
         }
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
@@ -120,7 +121,9 @@ class DataSPMController extends BaseController {
             $filter[$no++] = " SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
             $this->view->d_satker = Session::get('kd_satker');
         }
+		if ($_POST['kdkppn'] != ''){
         $this->view->data = $d_spm1->get_hold_spm_filter($filter);
+		}
         //var_dump($d_spm1->get_hold_spm_filter ($filter));
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -135,7 +138,7 @@ class DataSPMController extends BaseController {
         $no = 0;
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "SUBSTR(OPERATING_UNIT,1,3) = '" . $_POST['kdkppn']."'";
+                $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn']."'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
 
@@ -143,7 +146,7 @@ class DataSPMController extends BaseController {
                 //(select max(creation_date) from SPPM_AP_INV_INT_ALL where SUBSTR(OPERATING_UNIT,1,3) = ".$_POST['kdkppn']."
                 //and STATUS_CODE = 'Validasi gagal') ";
             } else {
-                $filter[$no++] = "SUBSTR(OPERATING_UNIT,1,3) = '" . Session::get('id_user')."'";
+                $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
             }
 
             if ($_POST['kdsatker'] != '') {
@@ -164,17 +167,17 @@ class DataSPMController extends BaseController {
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			$filter[$no++] = "SUBSTR(OPERATING_UNIT,1,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
+			$filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
         }
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "SUBSTR(OPERATING_UNIT,1,3) = '" . Session::get('id_user')."'";
+            $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
             if (!isset($_POST['submit_file'])) {
                 $filter[$no++] = " creation_date in 
-							(select max(creation_date) from SPPM_AP_INV_INT_ALL where SUBSTR(OPERATING_UNIT,1,3) = '" . Session::get('id_user') . "'
+							(select max(creation_date) from SPPM_AP_INV_INT_ALL where KDKPPN = '" . Session::get('id_user') . "'
 							and STATUS_CODE = 'Validasi gagal') ";
             }
             $this->view->data = $d_spm1->get_validasi_spm_filter($filter);
@@ -290,17 +293,17 @@ class DataSPMController extends BaseController {
 
             if ($_POST['kdkppn'] != '' AND ( $_POST['invoice'] != '' or $_POST['JenisSPM'] != '' or $_POST['kdsatker'] != '' or $_POST['JenisSPM'] != '' or $_POST['durasi'] != '' or $_POST['tgl_awal'] != '')) {
 
-                $filter[$no++] = "SUBSTR(OPERATING_UNIT,1,3) = " . $_POST['kdkppn'];
+                $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn']."'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } elseif ($_POST['kdkppn'] != '') {
                 $filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
 								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = '" . $_POST['kdkppn'] . "')";
-                $filter[$no++] = "SUBSTR(OPERATING_UNIT,1,3) = '" . $_POST['kdkppn']."'";
+                $filter[$no++] = "SUBSTR KDKPPN = '" . $_POST['kdkppn']."'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
-                $filter[$no++] = "SUBSTR(OPERATING_UNIT,1,3) = '" . Session::get('id_user')."'";
+                $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
             }
 
             if ($_POST['invoice'] != '') {
@@ -330,20 +333,21 @@ class DataSPMController extends BaseController {
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			$filter[$no++] = "SUBSTR(OPERATING_UNIT,1,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
+			//$filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
         }
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "SUBSTR(OPERATING_UNIT,1,3) = " . Session::get('id_user');
+            $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
             if (!isset($_POST['submit_file'])) {
                 $filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
-								from DURATION_INV_ALL_V where SUBSTR(OPERATING_UNIT,1,3) = " . Session::get('id_user') . ")";
+								from DURATION_INV_ALL_V where KDKPPN = '" . Session::get('id_user') . "')";
+				$this->view->data = $d_spm1->get_durasi_spm_filter($filter);
             }
             $this->view->data2 = $d_spm1->get_jendok_spm_filter($filter);
-            $this->view->data = $d_spm1->get_durasi_spm_filter($filter);
+            
             //var_dump($d_spm1->get_durasi_spm_filter ($filter));
         }
         $d_last_update = new DataLastUpdate($this->registry);
