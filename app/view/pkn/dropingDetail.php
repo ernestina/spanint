@@ -20,38 +20,28 @@
         </h2>
     </div>
 	    <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : dropingDetail.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
-	if(isset($this->data)){
-		if($this->d_id){
-			$id=$this->d_id;
-		}
-		
-		if($this->d_bank){
-			$bank=$this->d_bank;
-		}
-	
-		if (isset($this->d_tanggal)) {
-			$tanggal=$this->d_tanggal;
-		}
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : dropingDetail.php  
 
-	
+if(isset($this->data)){
+	if($this->d_id){
+		$id=$this->d_id;
+	}		
+	if($this->d_bank){
+		$bank=$this->d_bank;
+	}
+	if (isset($this->d_tanggal)) {
+		$tanggal=$this->d_tanggal;
+	}
     ?>
-    <ul class="inline" style="float: right"><li>
-            <a href="<?php echo URL; ?>PDF/detailDroping_PDF/<?php echo $id . "/" .$bank . "/" . $tanggal; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
-        <?php
-//----------------------------------------------------		
-	
+ <ul class="inline" style="float: right"><li>
+ <a href="<?php echo URL; ?>PDF/detailDroping_PDF/<?php echo $id . "/" .$bank . "/" . $tanggal; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
+   <?php
+//----------------------------------------------------			
 	}
 ?>
 
-    <?php
+ <?php
 // untuk menampilkan last_update
     if (isset($this->last_update)) {
         foreach ($this->last_update as $last_update) {
