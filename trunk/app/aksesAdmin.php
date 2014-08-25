@@ -37,6 +37,7 @@ $akses['DataDIPAAdmin'] = array(
     'Fund_fail',
     'Detail_Fund_Fail_kd',
     'RealisasiFA',
+	'RealisasiFA_1',
     'nmsatker',
     'nmsatker1',
     'DetailRealisasiFA',
@@ -144,9 +145,9 @@ $akses['DataReturAdmin'] = array(
  */
 $akses['DataSPMAdmin'] = array(
     '__construct',
-    'posisiSpm',
+    'PosisiSPM',
     'detailposisiSpm',
-    'HoldSpm',
+    'HoldSPM',
     'ValidasiSpm',
     'errorSpm',
     'HistorySpm',

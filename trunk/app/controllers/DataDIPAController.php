@@ -389,7 +389,7 @@ class DataDIPAController extends BaseController {
             //$this->view->data = $d_spm1->get_satker_dipa_filter($filter);	
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "TS.KPPN = '" . Session::get('id_user') . "'";
+            $filter[$no++] = "A.KPPN_CODE = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
         }
 

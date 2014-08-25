@@ -139,6 +139,10 @@ if (isset($this->last_update)) {
             <tbody class='ratatengah'>
                 <?php
                 $no = 1;
+			if (isset($this->data)) {
+				if (empty($this->data)) {
+					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+				} else {	
                 foreach ($this->data as $value) {
                     echo "<tr>	";
                     echo "<td>" . $no++ . "</td>";
@@ -151,6 +155,10 @@ if (isset($this->last_update)) {
                     echo "<td  class='ratakiri'>" . $value->get_keterangan() . "</td>";
                     echo "</tr>	";
                 }
+			} 
+			}		else {
+					echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+			}
                 ?>
             </tbody>
         </table></br>
