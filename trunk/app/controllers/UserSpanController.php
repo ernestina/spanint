@@ -48,6 +48,10 @@ class UserSpanController extends BaseController {
             $filter[$no++] = " KDKPPN = " . Session::get('id_user');
             $this->view->data = $d_user->get_user_filter($filter);
         }
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         $this->view->render('kppn/monitoringUser');
     }
 

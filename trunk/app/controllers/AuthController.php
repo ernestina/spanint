@@ -56,23 +56,38 @@ class AuthController extends BaseController {
                 Session::set('role', $role);
                 Session::set('id_user', $res[3]);
                 Session::set('kd_satker', $res[4]);
+				//untuk mencatat log user
+				$d_log = new DataLog($this->registry);
+				$d_log->tambah_log("Sukses");
                 header('location:' . URL);
             } else if ((int) $res[0] == 0) {
                 $this->view->error = "user tidak ditemukan!";
+				//untuk mencatat log user
+				$d_log = new DataLog($this->registry);
+				$d_log->tambah_log("Sukses");
                 $this->view->load('admin/login');
             } else {
                 $this->view->error = "database tidak valid!";
+				//untuk mencatat log user
+				$d_log = new DataLog($this->registry);
+				$d_log->tambah_log("Sukses");
                 $this->view->load('admin/login');
             }
         } else {
+			//untuk mencatat log user
+			$d_log = new DataLog($this->registry);
+			$d_log->tambah_log("Sukses");
             $this->view->load('admin/login');
         }
     }
 
     public function logout() {
+		$d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
         Session::createSession();
         Session::destroySession();
         Session::unsetAll();
+		//untuk mencatat log user
         $this->view->load('admin/login');
     }
 

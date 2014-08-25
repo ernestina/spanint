@@ -53,6 +53,10 @@ class DataDropingController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->render('pkn/droping');
     }
@@ -80,6 +84,10 @@ class DataDropingController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table1());
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->render('pkn/dropingDetail');
     }
@@ -107,6 +115,10 @@ class DataDropingController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table1());
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->render('pkn/dropingDetail');
     }

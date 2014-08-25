@@ -79,6 +79,10 @@ class DataSupplierController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_supp->get_table());
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->render('satker/isianSupplier');
     }
@@ -96,15 +100,24 @@ class DataSupplierController extends BaseController {
         }
         if ($_POST['download_ext'] == 'txt') {
             $this->view->data = $d_supp->get_download_supp_filter($ids);
-            $this->view->ekstensi = ".txt";
+            $this->view->ekstensi = ".txt";		
+			//untuk mencatat log user
+			$d_log = new DataLog($this->registry);
+			$d_log->tambah_log("Sukses");
             $this->view->load('satker/downloadSuppliertxt');
         } elseif ($_POST['download_ext'] == 'xml') {
             $this->view->data = $d_supp->get_download_supp_filter($ids);
-            $this->view->ekstensi = ".xml";
+            $this->view->ekstensi = ".xml";		
+			//untuk mencatat log user
+			$d_log = new DataLog($this->registry);
+			$d_log->tambah_log("Sukses");
             $this->view->load('satker/downloadSupplierxml');
         } elseif ($_POST['download_ext'] == 'xlsx') {
             $this->view->data = $d_supp->get_download_supp_filter_xls();
-            $this->view->ekstensi = ".xls";
+            $this->view->ekstensi = ".xls";		
+			//untuk mencatat log user
+			$d_log = new DataLog($this->registry);
+			$d_log->tambah_log("Sukses");
             $this->view->load('satker/downloadSupplierxls');
         }
     }
@@ -116,15 +129,17 @@ class DataSupplierController extends BaseController {
         $this->view->ekstensi = ".txt";
         $this->view->kppn_code = Session::get('kd_satker');
 		if (Session::get('kd_satker')=='004'){
+			//untuk mencatat log user
+			$d_log = new DataLog($this->registry);
+			$d_log->tambah_log("Sukses");
 			$this->view->load('satker/downloadSupplierxls');
 		} else {
 			$this->view->data = $d_supp->get_download_supp_filter_xls(Session::get('kd_satker'));
+			//untuk mencatat log user
+			$d_log = new DataLog($this->registry);
+			$d_log->tambah_log("Sukses");
 			$this->view->load('satker/downloadSupplierxls2');
 		}
-    }
-
-    public function downloadSupplierx() {
-        $this->view->load('satker/print3');
     }
 
     public function __destruct() {
