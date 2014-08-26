@@ -11,7 +11,7 @@
             echo $satker . " ";
             if (Session::get('role') != ADMIN) {
                 ?>
-                <!--		Pada
+                		Pada 
                 <?php
                 if (isset($this->d_nama_kppn)) {
                     foreach ($this->d_nama_kppn as $kppn) {
@@ -23,7 +23,7 @@
                 }
             }
             ?>
-            !-->			Per Tanggal
+            			Per Tanggal
 
             <?php
             //echo 

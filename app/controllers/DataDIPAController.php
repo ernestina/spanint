@@ -68,6 +68,10 @@ class DataDIPAController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
 
         $this->view->data = $d_spm1->get_dipa_filter($filter);
         $this->view->render('kppn/revisiDIPA');
@@ -140,6 +144,13 @@ class DataDIPAController extends BaseController {
 
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_fun_fail_filter($filter);
+		
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
+		
         $this->view->render('kppn/fund_fail');
     }
 
@@ -236,6 +247,12 @@ class DataDIPAController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table3());
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
+		
         $this->view->render('kppn/detail_fund_fail_kd');
     }
 
@@ -285,6 +302,12 @@ class DataDIPAController extends BaseController {
 
         $this->view->data = $d_spm1->get_fa_summary_filter($filter);
         //var_dump($d_spm->get_hist_spm_filter());
+		
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/realisasiFA_1');
     }
 
@@ -347,6 +370,11 @@ class DataDIPAController extends BaseController {
 
         $this->view->data = $d_spm1->get_fa_filter($filter);
         //var_dump($d_spm->get_hist_spm_filter());
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/realisasiFA');
     }
     
@@ -399,7 +427,12 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = "A.KPPN_CODE = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
         }
-
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
+		
         if (Session::get('role') == ADMIN) {
             $this->view->render('kppn/NamaSatkerDIPA1');
         } else {
@@ -448,7 +481,10 @@ class DataDIPAController extends BaseController {
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
         }
 
-
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         //var_dump($d_spm1->get_satker_filter($filter));
         $this->view->render('kppn/NamaSatkerDIPA2');
     }
@@ -463,6 +499,11 @@ class DataDIPAController extends BaseController {
         }
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_realisasi_fa_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/DetailRealisasiFA');
     }
 
@@ -504,6 +545,11 @@ class DataDIPAController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/DataRealisasi');
     }
 
@@ -549,6 +595,11 @@ class DataDIPAController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/DataRealisasiBA');
     }
 
@@ -594,6 +645,11 @@ class DataDIPAController extends BaseController {
         }
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/DataRealisasiLokasi');
     }
 
@@ -656,6 +712,11 @@ class DataDIPAController extends BaseController {
         }
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/DataRealisasiTransfer');
     }
 
@@ -671,6 +732,11 @@ class DataDIPAController extends BaseController {
         }
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_fa_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/encumbrances');
     }
 
@@ -727,6 +793,12 @@ class DataDIPAController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
         $this->view->data = $d_spm1->get_revisi_dipa($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
+		
         $this->view->render('kppn/proses_revisi');
     }
 
@@ -755,6 +827,12 @@ class DataDIPAController extends BaseController {
 		
         $this->view->d_kdsatker = $satker;
         $this->view->data = $d_spm1->detail_revisi($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
+		
         $this->view->render('kppn/detail_revisi');
     }
 

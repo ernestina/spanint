@@ -197,5 +197,15 @@ $akses['DataPelimpahanKPPN'] = array(
     '__destruct'
 );
 
-
+/*
+ * akses modul DataPNBP User
+ */
+$akses['DataPNBPKPPN'] = array(
+    '__construct',
+    'DetailDipaPNBP',
+	'DetailGRPNBP',
+	'DetailUPPNBP',
+	'DetailBelanjaPNBP',
+    '__destruct'
+);
 ?>
