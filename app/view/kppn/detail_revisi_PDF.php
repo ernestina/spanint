@@ -348,7 +348,7 @@ if (is_array($this->kdtgl_akhir)) {
 //--------------------------
 //pilihan
 $judul = 'Laporan Akun Yang di Kunci Karena Proses Revisi'; //judul file laporan
-$tipefile = '.PDF';
+$tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(

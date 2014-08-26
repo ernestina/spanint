@@ -17,7 +17,6 @@
     <?php
 	//----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : holdSPM.php  
-if( isset($invoice) || isset($status)){
 	if (isset($this->d_kppn)) {
 		$kd_kppn = $this->d_kppn;
 	} else {
@@ -37,7 +36,6 @@ if( isset($invoice) || isset($status)){
 <a href="<?php echo URL; ?>PDF/holdSPM_PDF/<?php echo $kd_kppn . "/" . $invoice . "/" . $status; ?>" class="modal">PDF</a>
 
 <?php
-}
 //----------------------------------------------------		
 ?>
 

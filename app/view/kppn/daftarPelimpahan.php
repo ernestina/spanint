@@ -44,7 +44,31 @@
         ?>
 
     </div>	
-	
+	    <?php
+	//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : holdSPM.php  
+	if (isset($this->d_kppn)) {
+		$kd_kppn = $this->d_kppn;
+	} else {
+		$kd_kppn = "null";
+	}
+	if (isset($this->d_invoice)) {
+		$invoice = $this->d_invoice;
+	} else {
+		$invoice = "null/null/null";
+	}
+	if (isset($this->d_status)) {
+		$status = $this->d_status;
+	} else {
+		$status = "null";
+	}
+?>
+<a href="<?php echo URL; ?>PDF/holdSPM_PDF/<?php echo $kd_kppn . "/" . $invoice . "/" . $status; ?>" class="modal">PDF</a>
+
+<?php
+//----------------------------------------------------		
+?>
+
     <a href="#oModal" class="modal">FILTER DATA</a>
     <div id="oModal" class="modalDialog" >
         <div>
