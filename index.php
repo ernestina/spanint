@@ -102,6 +102,7 @@ $registry->auth->add_access('dataSPM','kppn',$akses['DataSPMKPPN']);
 $registry->auth->add_access('dataSupplier','kppn',$akses['DataSupplierKPPN']);
 $registry->auth->add_access('userSpan','kppn',$akses['UserSpanAdmin']);
 $registry->auth->add_access('dataPelimpahan','kppn',$akses['DataPelimpahanKPPN']);
+$registry->auth->add_access('dataPNBP','kppn',$akses['DataPNBPKPPN']);
 
 //level pkn
 $registry->auth->add_access('auth','pkn',$akses['AuthPKN']);
