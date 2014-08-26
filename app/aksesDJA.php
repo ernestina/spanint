@@ -34,7 +34,6 @@ $akses['DataDIPADJA'] = array(
     'DetailEncumbrances',
     'ProsesRevisi',
     'DetailRevisi',
-    'RevisiDipa_PDF',
     'Fund_fail_PDF',
     'RealisasiFA_PDF',
     'DataRealisasi_PDF',
@@ -64,6 +63,25 @@ $akses['DataSPMDJA'] = array(
 $akses['UserSpanDJA'] = array(
     '__construct',
     'monitoringUserSpan',
+    '__destruct'
+);
+
+/*
+ * akses modul PDF
+ */
+$akses['PDFDJA'] = array(
+    '__construct',
+    'index',
+    'RevisiDipa_PDF',
+    'Fund_fail_PDF',
+    'RealisasiFA_PDF',
+    'DataRealisasi_PDF',
+    'DataRealisasiBA_PDF',
+    'DataRealisasiTransfer_PDF',
+    'DetailRevisi_PDF',
+	'daftarsp2d_PDF',
+	'detailrekapsp2d_PDF',
+	'monitoringUserSpan_PDF',
     '__destruct'
 );
 ?>

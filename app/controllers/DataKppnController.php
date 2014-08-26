@@ -1230,6 +1230,7 @@ class DataKppnController extends BaseController {
             $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
         } else {
             $kdkppn = Session::get('kd_satker');
+            $filter[$no++] = " KDKPPN = '" . $kdkppn . "'";
         }
 
         // untuk mengambil data last update 
@@ -1248,48 +1249,6 @@ class DataKppnController extends BaseController {
 		$d_log->tambah_log("Sukses");
 		
 		$this->view->render('kppn/detailSp2dGaji');
-    }
-
-    public function detailSp2dGaji_PDF($kdbank = null, $kdbulan = null, $kdkppn = null) {
-        $d_sppm = new DataSppm($this->registry);
-        $filter = array();
-        if ($bank == 'BNI') {
-            $bank1 = 'gaji-BNI';
-        } else if ($bank == 'BRI') {
-            $bank1 = 'GAJI BRI';
-        } else if ($bank == 'BTN') {
-            $bank1 = 'GAJI-BTN';
-        } else if ($bank == 'MANDIRI') {
-            $bank1 = 'GAJI-MDRI';
-        }
-        if (!is_null($bank)) {
-            $filter[$no++] = "BANK_ACCOUNT_NAME LIKE '%" . $kdbank . "%'";
-        }
-        if (!is_null($bulan)) {
-            if ($bulan != 'all') {
-                $filter[$no++] = "to_char(PAYMENT_DATE,'mm') = '" . $kdbulan . "'";
-            }
-        }
-        if (!is_null($kdkppn)) {
-            $filter[$no++] = " KDKPPN = '" . $kdkppn . "'";
-            $d_kppn = new DataUser($this->registry);
-            $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
-        } else {
-            if (Session::get('id_user') != '')
-                $filter[$no++] = " KDKPPN = " . Session::get('id_user');
-        }
-
-        // untuk mengambil data last update 
-        $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
-
-        $this->view->data = $d_sppm->get_detail_sp2d_gaji($filter);
-        
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
-		
-		$this->view->load('kppn/detailSp2dGaji_PDF');
     }
 
     public function detailRekapSP2D($bank = null, $jendok = null, $tgl_awal = null, $tgl_akhir = null, $kdkppn = null) {
@@ -1328,6 +1287,7 @@ class DataKppnController extends BaseController {
             $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
         }else {
             $kdkppn = Session::get('kd_satker');
+            $filter[$no++] = " KDKPPN = '" . $kdkppn . "'";
         }
 
         // untuk mengambil data last update 

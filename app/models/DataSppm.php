@@ -289,7 +289,7 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE KDKPPN = " . Session::get('id_user') . " AND FL_VOID <> 1";
+				WHERE KDKPPN = '" . Session::get('id_user') . "' AND FL_VOID <> 1";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -443,7 +443,7 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE KDKPPN = " . Session::get('id_user') . " AND FL_VOID = 1";
+				WHERE KDKPPN = '" . Session::get('id_user') . "' AND FL_VOID = 1";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -639,7 +639,7 @@ class DataSppm {
 
     public function get_sp2d_gaji_rekening() {
         if (Session::get('role') != ADMIN) {
-            $kppn = "AND KDKPPN = " . Session::get('id_user');
+            $kppn = "AND KDKPPN = '" . Session::get('id_user')."'";
         }
         $sql = "SELECT DISTINCT SUBSTR(INVOICE_NUM,8,6) SATKER, KDKPPN, INVOICE_NUM, CHECK_NUMBER, PAYMENT_DATE, CREATION_DATE, BANK_ACCOUNT_NAME, INVOICE_DESCRIPTION FROM (
                 SELECT KDKPPN,PAYMENT_DATE , INVOICE_NUM, CHECK_DATE, CREATION_DATE, CHECK_NUMBER, CHECK_NUMBER_LINE_NUM, CHECK_AMOUNT, BANK_ACCOUNT_NAME ,BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE
