@@ -51,6 +51,11 @@ class DataGRController extends BaseController {
             }
         }
         $this->view->data = $d_spm1->get_gr_pfk_filter($filter, $bulan);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/test');
     }
 
@@ -88,6 +93,11 @@ class DataGRController extends BaseController {
             }
         }
         $this->view->data = $d_spm1->get_gr_pfk_filter($filter, $bulan);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->load('kppn/GR_PFK_GLOBAL_PDF');
     }
 
@@ -114,6 +124,11 @@ class DataGRController extends BaseController {
             $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
         }
         $this->view->data = $d_spm1->get_gr_pfk_detail_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/GR_PFK');
     }
@@ -153,6 +168,11 @@ class DataGRController extends BaseController {
         }
 
         $this->view->data = $d_spm1->get_gr_ijp_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/GR_IJP');
     }
 
@@ -183,6 +203,11 @@ class DataGRController extends BaseController {
 
 
         $this->view->data = $d_spm1->get_gr_ijp_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->load('kppn/GR_IJP_PDF');
     }
 
@@ -203,6 +228,11 @@ class DataGRController extends BaseController {
         }
 
         $this->view->data = $d_spm1->get_gr_status_lhp_filter($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/statusGR_LHP');
     }
@@ -237,6 +267,11 @@ class DataGRController extends BaseController {
             $this->view->data = $d_spm1->get_gr_status_harian($filter);
         }
 
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
 
         $this->view->render('kppn/GRStatusHarian');
     }
@@ -256,6 +291,11 @@ class DataGRController extends BaseController {
             $filter[$no++] = "substr(RESP_NAME,1,3) = '" . Session::get('id_user') . "'";
         }
         $this->view->data = $d_spm1->get_detail_lhp_rekap($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/detailLhpRekap');
     }
@@ -274,6 +314,11 @@ class DataGRController extends BaseController {
             $filter[$no++] = "substr(RESP_NAME,1,3) = '" . Session::get('id_user') . "'";
         }
         $this->view->data = $d_spm1->get_detail_lhp_rekap($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         $this->view->render('kppn/detailLhpRekap_PDF');
     }
 
@@ -286,6 +331,11 @@ class DataGRController extends BaseController {
             $this->view->d_tgl = $file_name;
         }
         $this->view->data = $d_spm1->get_detail_penerimaan($filter);
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->tambah_log("Sukses");
+		
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/detailPenerimaan');
     }

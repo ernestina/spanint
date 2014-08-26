@@ -47,7 +47,6 @@ $akses['DataDIPAKPPN'] = array(
     'DetailEncumbrances',
     'ProsesRevisi',
     'DetailRevisi',
-    'RevisiDipa_PDF',
     'Fund_fail_PDF',
     'RealisasiFA_PDF',
     'DataRealisasi_PDF',
@@ -160,7 +159,6 @@ $akses['DataSPMKPPN'] = array(
     'daftarsp2d',
     'RekapSp2d',
     'detailrekapsp2d',
-    'detailposisiSpm_PDF',
     'HoldSPM_PDF',
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
@@ -206,6 +204,47 @@ $akses['DataPNBPKPPN'] = array(
 	'DetailGRPNBP',
 	'DetailUPPNBP',
 	'DetailBelanjaPNBP',
+    '__destruct'
+);
+
+/*
+ * akses modul PDF
+ */
+$akses['PDFKPPN'] = array(
+    '__construct',
+    'index',
+    'RevisiDipa_PDF',
+    'Fund_fail_PDF',
+    'RealisasiFA_PDF',
+    'DataRealisasi_PDF',
+    'DataRealisasiBA_PDF',
+    'DataRealisasiTransfer_PDF',
+    'DetailRevisi_PDF',
+    'GR_PFK_PDF',
+    'GR_IJP_PDF',
+    'detailLhpRekap_PDF',
+    'monitoringSp2d_PDF',
+    'harianBO_PDF',
+    'sp2dHariIni_PDF',
+    'sp2dBesok_PDF',
+    'sp2dBackdate_PDF',
+    'sp2dNilaiMinus_PDF',
+    'sp2dSudahVoid_PDF',
+    'sp2dGajiDobel_PDF',
+    'sp2dSalahTanggal_PDF',
+    'sp2dSalahBank_PDF',
+    'sp2dSalahRekening_PDF',
+    'detailSp2dGaji_PDF',
+	'detailRekapSP2D_PDF',
+	'monitoringRetur_PDF',
+	'posisiSpm_PDF',
+	'detailposisiSpm_PDF',
+	'holdSpm_PDF',
+	'HistorySpm_PDF',
+	'daftarsp2d_PDF',
+	'detailrekapsp2d_PDF',
+	'monitoringUserSpan_PDF',
+	'Detail_Fund_fail_kd_PDF',
     '__destruct'
 );
 ?>

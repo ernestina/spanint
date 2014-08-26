@@ -49,4 +49,14 @@ $akses['DataReturPKN'] = array(
     'monitoringReturPkn',
     '__destruct'
 );
+
+/*
+ * akses modul PDF
+ */
+$akses['PDFPKN'] = array(
+    '__construct',
+    'index',
+    'detailDroping_PDF',
+    '__destruct'
+);
 ?>

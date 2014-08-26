@@ -58,16 +58,10 @@
                     <div id="winvoice" class="error"></div>
                     <label class="isian">Durasi: </label>	
                     <select type="text" name="durasi" id="durasi">
-                        <option value=''>- pilih -</option>
-                        <option value="< '1" <?php if ($this->durasi == "< 1") {
-                            echo "Kurang dari 1 jam";
-                        } ?>>Kurang dari satu jam</option>
-                        <option value="> 1 and durasi2 < '24" <?php if ($this->durasi == "> 1") {
-                            echo "Lebih dari 1 jam";
-                        } ?>>Lebih dari satu jam</option>
-                        <option value="> '24" <?php if ($this->durasi == "> 24") {
-                            echo "Lebih dari 1 hari";
-                        } ?>>Lebih dari satu hari</option>
+                        <option value="">- pilih -</option>
+                        <option value="< 13434">Kurang dari satu jam</option>
+                        <option value="> 1 and durasi2 < 24">Lebih dari satu jam</option>
+                        <option value="> 24" >Lebih dari satu hari</option>
 
                     </select>
 
@@ -93,13 +87,6 @@
                             echo $this->d_tgl_akhir;
                         } ?>"></li>
                     </ul>
-
-                    <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                    <!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
 
                     <ul class="inline" style="margin-left: 130px">
                         <li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
