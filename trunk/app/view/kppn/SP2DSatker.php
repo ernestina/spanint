@@ -15,13 +15,17 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : SP2DSatker.php  
 if(
-isset($this->d_invoice) || isset($this->invoice) || isset($this->JenisSP2D) ||
-isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
+isset($this->d_invoice) || isset($this->d_tgl_awal) || 
+isset($this->d_tgl_akhir)
+/* isset($this->invoice) || 
+isset($this->JenisSP2D) ||
+isset($this->JenisSPM) || 
+ */
 
 ){
 
-   foreach ($this->data as $value) {
-        $satker = substr($value->get_invoice_num(), 7, 6);
+   foreach ($this->data as $value1) {
+        $kdsatker = substr($value1->get_invoice_num(), 7, 6);
     }       
     if (isset($this->d_invoice)) {
         $check_number = $this->d_invoice;
@@ -54,7 +58,7 @@ isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 		 $kdtgl_akhir = 'null';
 	}
    ?>
-   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="modal">PDF</a>-->
+   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $kdsatker . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="modal">PDF</a>
 
     <?php
     //----------------------------------------------------		
