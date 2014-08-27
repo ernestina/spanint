@@ -13,10 +13,11 @@
  <?php
  //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA_1.php  
-  if( isset($this->account_code) || isset($this->program_code) ||
-	isset($this->output_code) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
-	){
-	
+	foreach ($this->data as $value) {
+		$kdsatker =$value->get_satker();
+     }
+	 
+	 $kdkppn=Session::get('id_user');
     if (isset($this->account_code)) {
         $kdakun = $this->account_code;
     }else{
@@ -45,10 +46,9 @@
     }
     ?>
 <ul class="inline" style="float: right"><li>
-<a href="<?php echo URL; ?>PDF/RealisasiFA_1_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+<a href="<?php echo URL; ?>PDF/RealisasiFA_1_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 	
 		<?php
-	}
 ?>
     <a href="#wModal" class="modal">FILTER DATA</a><br><br>
     <div id="wModal" class="modalDialog" >

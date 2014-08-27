@@ -19,19 +19,19 @@
     <?php
 	//----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : DataRealisasiBA.php  
-if( isset($this->d_kd_kppn)){
 	if (isset($this->d_bulan)) {
 		$kdbulan = $this->d_bulan;
 	}
 	if (isset($this->d_kd_kppn)) {
 		$kdkppn = $this->d_kd_kppn;
+	}else{
+		$kdkppn=Session::get('id_user');
 	}
 ?>
-<a href="<?php echo URL; ?>PDF/GR_IJP_PDF/<?php echo $kdbulan; ?>" class="modal">PDF</a>
+<a href="<?php echo URL; ?>PDF/GR_IJP_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" class="modal">PDF</a>
 <?php
 //----------------------------------------------------		
 
-}
 ?>
     <a href="#oModal" class="modal">FILTER DATA</a><br><br>
     <div id="oModal" class="modalDialog" >

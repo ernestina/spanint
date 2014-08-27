@@ -18,6 +18,22 @@
 
         <table><tr><td width="90%">
                     </div>
+    <?php
+	//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : DataRealisasiBA.php  
+	$kdkppn=Session::get('id_user');
+	if (isset($this->bulan)) {
+		$kdbulan = $this->bulan;
+	}
+	if (isset($this->d_tgl)) {
+		$kdakun = $this->d_tgl;
+	}
+?>
+<a href="<?php echo URL; ?>PDF/GR_PFK_DETAIL1_PDF/<?php echo $kdakun . "/" . $kdbulan . "/" . $kdkppn; ?>" class="modal">PDF</a>
+<?php
+//----------------------------------------------------		
+
+?>
 
 
         </table>

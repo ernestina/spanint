@@ -156,7 +156,7 @@ class FPDF_AutoWrapTable extends FPDF {
             $ukuran_kolom_dana, $ukuran_kolom_jenis_belanja,
             $ukuran_kolom_bank_pembayar, $ukuran_kolom_bank_pembayar
         ));
-        $this->SetAligns(array('C', 'L', 'L', 'C', 'L', 'L', 'L', 'C', 'C'));
+        $this->SetAligns(array('C', 'L', 'C', 'C', 'L', 'L', 'C', 'C'));
         if (count($this->data) == 0) {
 			 $this->Row(
 				array('',

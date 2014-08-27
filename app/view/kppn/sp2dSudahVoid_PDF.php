@@ -90,7 +90,7 @@ class FPDF_AutoWrapTable extends FPDF {
         /* $kdtgl_awal = 'null';
         $kdtgl_akhir = 'null'; */
 
-        if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
+        if (!empty($kdtgl_awal) OR !empty($kdtgl_akhir)) {
             $kdtgl_awal1 = $this->kdtgl_awal;
             $thn1 = substr($kdtgl_awal1, 6, 4);
             $bln1 = substr($kdtgl_awal1, 3, 2);

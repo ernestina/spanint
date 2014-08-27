@@ -43,19 +43,17 @@
 <?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : DataRealisasiTransfer.php  
-
-if(isset($this->lokasi) || isset($this->satkerku) ||
-isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
-){
+	$kdkppn=Session::get('id_user');
 	if (isset($this->lokasi)) {
 		$kdlokasi = $this->lokasi;
 	} else {
-		$kdlokasi = 'null';
+		$kdlokasi = $value->get_lokasi();
 	}
-	if (isset($this->satkerku)) {
-		$kdsatkerku = $this->satkerku;
+	if (isset($this->kdsatker)) {
+		$kdsatker = $this->kdsatker;	 
+
 	} else {
-		$kdsatkerku = 'null';
+		$kdsatker = 'null';
 	}
 	if (isset($this->d_tgl_awal)) {
 		$kdtgl_awal = $this->d_tgl_awal;
@@ -70,10 +68,9 @@ isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 ?>
 
 <ul class="inline" style="float: right"><li>
-<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatkerku . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 <?php
 //----------------------------------------------------		
-}
 ?>
 
         <li><a href="#xModal" class="modal">FILTER DATA</a></li></ul>

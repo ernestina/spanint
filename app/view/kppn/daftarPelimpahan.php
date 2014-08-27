@@ -63,7 +63,7 @@
 		$status = "null";
 	}
 ?>
-<a href="<?php echo URL; ?>PDF/holdSPM_PDF/<?php echo $kd_kppn . "/" . $invoice . "/" . $status; ?>" class="modal">PDF</a>
+<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kd_kppn . "/" . $invoice . "/" . $status; ?>" class="modal">PDF</a>
 
 <?php
 //----------------------------------------------------		

@@ -42,7 +42,7 @@ if(isset($this->d_kdsatker)){
 		$kdsatker = $this->d_kdsatker;
 	}
 	?>
-<a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker; ?>" class="modal">PDF</a>
+<a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" class="modal">PDF</a>
 <?php
 //----------------------------------------------------		
 

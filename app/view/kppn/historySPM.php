@@ -16,8 +16,7 @@
     <?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : historySPM.php  
-
-if(isset($this->d_invoice)){
+if(isset($this->d_invoice) || isset($this->invoice_num)){
     if (isset($this->data)) {
         foreach ($this->data as $value) {
             $satker = substr($value->get_invoice_num(), 7, 6);
@@ -31,9 +30,10 @@ if(isset($this->d_invoice)){
     }
 	$kdkppn=Session::get('id_user');
     ?>
-    <a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $check_number . "/" . $kdkppn;; ?>" class="modal">PDF</a>
+    <a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $check_number . "/" . $kdkppn; ?>" class="modal">PDF</a>
     <?php
     //----------------------------------------------------		
+
 }
     ?>
     <a href="#xModal" class="modal">FILTER DATA</a><br><br>

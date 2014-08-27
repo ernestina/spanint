@@ -64,7 +64,7 @@ isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
 		}
 ?>
 
-<a href="<?php echo URL; ?>PDF/detailRekapSP2D_PDF/<?php echo $kdbank . "/" . $kdjendok . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdkppn; ?>" class="modal">PDF</a>
+<a href="<?php echo URL; ?>PDF/detailRekapSP2D2_PDF/<?php echo $kdbank . "/" . $kdjendok . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdkppn; ?>" class="modal">PDF</a>
 
 <?php
 //----------------------------------------------------		
