@@ -161,7 +161,6 @@ $akses['DataSPMKPPN'] = array(
     'HoldSPM_PDF',
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
-    'RekapSp2d_PDF',
     'downloadSP2D',
     '__destruct'
 );

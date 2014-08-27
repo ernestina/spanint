@@ -130,7 +130,6 @@ $akses['DataSPMSatker'] = array(
     'HoldSpm_PDF',
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
-    'RekapSp2d_PDF',
     '__destruct'
 );
 
@@ -161,6 +160,9 @@ $akses['PDFSatker'] = array(
     'DataRealisasiBA_PDF',
     'DataRealisasiTransfer_PDF',
     'DetailRevisi_PDF',
+    'monitoringSp2d_PDF',
+	'monitoringRetur_PDF',
+	'posisiSpm_PDF',
 	'detailposisiSpm_PDF',
 	'holdSpm_PDF',
 	'HistorySpm_PDF',

@@ -53,7 +53,6 @@ $akses['DataSPMDJA'] = array(
     'RekapSp2d',
     'detailrekapsp2d',
     'daftarsp2d_PDF',
-    'RekapSp2d_PDF',
     '__destruct'
 );
 
