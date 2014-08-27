@@ -2,21 +2,19 @@
     <div id="header">
         <h2>Form Pengawasan PNBP <br/>
 			Pagu Dipa PNBP
-            <?php
-            if (isset($this->d_nama_kppn)) {
-                foreach ($this->d_nama_kppn as $kppn) {
-                    echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                    $kode_kppn = $kppn->get_kd_satker();
+            <br/>
+		<?php
+            if (isset($this->nmsatker)) {
+
+                foreach ($this->nmsatker as $value1) {
+                    $satker = $value1->get_nmsatker();
                 }
-            } else {
-                echo Session::get('user');
             }
-
-
-            if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
-                echo "<br>" . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
-            }
-            ?>
+            echo $satker . " ";
+            
+                ?>
+		
+		
         </h2>
     </div>
 
@@ -71,7 +69,7 @@ if(isset($this->d_kdsatker)){
             <tbody class='ratatengah'>
                 <?php
                 $no = 1;
-                $total;
+                $total = 0;
 
                 //var_dump ($this->data);
                 if (isset($this->data)) {
@@ -83,21 +81,28 @@ if(isset($this->d_kdsatker)){
                             echo "<td>" . $no++ . "</td>";
                             echo "<td>" . $value->get_satker_code() . "</td>";
                             echo "<td>" . $value->get_kppn_code() . "</td>";
-                            //echo "<td>" . $value->get_dana() . "</td>";
                             echo "<td>" . $value->get_program_code() . "</td>";
                             echo "<td>" . $value->get_output_code() . "</td>";
                             echo "<td>" . $value->get_account_code() . "</td>";
-                            //echo "<td>" . $value->get_revision_no() . "</td>";
-                            echo "<td align='right'>" . $value->get_line_amount() . "</td>";
-                            //echo "<td>" . $value->get_last_update_date(). "</td>";
+                            echo "<td align='right'>" . number_format($value->get_line_amount()) . "</td>";
+                            $total = $total + $value->get_line_amount();
                         }
                     }
-                } else {
+                } 
+				else {
                     echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
                 }
                 ?>
             </tbody>
+		<tfoot>
+                    <tr>
+                        <td colspan='5'></td>
+                        <td class='ratatengah'><b>GRAND TOTAL</td>
+                        <td align='right'><b><?php echo number_format($total); ?>
+                        </td>
 
+                    </tr>
+                </tfoot>
         </table>
     </div>
 </div>

@@ -10,6 +10,7 @@ class DataPNBP {
     private $db;
     private $_dipa_no;
     private $_satker_code;
+	private $_nmsatker;
     private $_kppn_code;
     private $_account_code;
 	private $_jenis_belanja;
@@ -33,11 +34,14 @@ class DataPNBP {
 	private $_table6 = 'SPAN_PNBP_GR_LINE_V';
 	private $_table7 = 'SPAN_PNBP_UP_LINE_V';
 	private $_table8 = 'SPAN_PNBP_BEL_LINE_V';
+	private $_table9 = 'T_SATKER';
     public $registry;
 
     /*
      * konstruktor
      */
+	
+
 
     public function __construct($registry = Registry) {
         $this->db = $registry->db;
@@ -48,13 +52,72 @@ class DataPNBP {
      * mendapatkan data dari tabel Data Tetap
      * @param limit batas default null
      * return array objek Data Tetap */
+	
+	
+	public function get_satker_pnbp($kppn ) {
+        $sql = "SELECT DISTINCT A.SATKER_CODE, B.NMSATKER 
+				FROM "
+                . $this->_table1 . " A, " 
+				. $this->_table9 . " B 
+				WHERE 
+				1=1 
+				AND A.SATKER_CODE=B.KDSATKER 
+				AND A.KPPN_CODE = '" .$kppn. "'"
+        ;
+        $no = 0;
+        // foreach ($filter as $filter) {
+            // $sql .= " AND " . $filter;
+        // }
 
-    public function get_dipa_pnbp($filter) {
-        $sql = "SELECT A.*
+        //$sql .= " ORDER BY  ";
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_nmsatker($val['NMSATKER']);
+            $d_data->set_satker_code($val['SATKER_CODE']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+
+	public function get_nama_satker_pnbp($satker) {
+        $sql = "SELECT DISTINCT KDSATKER, NMSATKER 
+				FROM "
+				. $this->_table9 . " 
+				WHERE 
+				1=1 
+				AND KDSATKER = '" .$satker. "'"
+        ;
+        $no = 0;
+        // foreach ($filter as $filter) {
+            // $sql .= " AND " . $filter;
+        // }
+
+        //$sql .= " ORDER BY  ";
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_nmsatker($val['NMSATKER']);
+            $d_data->set_satker_code($val['KDSATKER']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+    public function get_dipa_pnbp($filter, $satker1) {
+        $sql = "SELECT *
 				FROM "
                 . $this->_table1 . " 
 				WHERE 
-				1=1 "
+				1=1 
+				 
+				"
 
         ;
         $no = 0;
@@ -62,6 +125,7 @@ class DataPNBP {
             $sql .= " AND " . $filter;
         }
 
+		$sql .= " AND " . $satker1;
         //$sql .= " ORDER BY  ";
 
         //var_dump ($sql);
@@ -73,18 +137,20 @@ class DataPNBP {
             $d_data->set_satker_code($val['SATKER_CODE']);
             $d_data->set_kppn_code($val['KPPN_CODE']);
 			$d_data->set_jenis_belanja($val['JENBEL']);
-            $d_data->set_line_amount(number_format($val['AMOUNT']));
+            $d_data->set_line_amount($val['AMOUNT']);
             $data[] = $d_data;
         }
         return $data;
     }
 	
-	public function get_gr_pnbp($filter) {
-        $sql = "SELECT A.*
+	public function get_gr_pnbp($filter , $satker1) {
+        $sql = "SELECT *
 				FROM "
                 . $this->_table2 . " 
 				WHERE 
-				1=1 "
+				1=1 
+				
+				"
 
         ;
         $no = 0;
@@ -93,6 +159,7 @@ class DataPNBP {
         }
 
         //$sql .= " ORDER BY  ";
+		$sql .= " AND " . $satker1;
 
         //var_dump ($sql);
         $result = $this->db->select($sql);
@@ -102,24 +169,28 @@ class DataPNBP {
             $d_data->set_account_code($val['ACCOUNT_CODE']);
             $d_data->set_satker_code($val['SATKER_CODE']);
             $d_data->set_kppn_code($val['KPPN_CODE']);
-            $d_data->set_line_amount(number_format($val['AMOUNT']));
+            $d_data->set_line_amount($val['AMOUNT']);
             $data[] = $d_data;
         }
         return $data;
     }
 	
-	public function get_up_pnbp($filter) {
-        $sql = "SELECT A.*
+	public function get_up_pnbp($filter, $satker) {
+        $sql = "SELECT *
 				FROM "
                 . $this->_table4 . " 
 				WHERE 
-				1=1 "
+				1=1 
+				
+				"
 
         ;
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
+		
+		$sql .= " AND " . $satker;
 
         //$sql .= " ORDER BY  ";
 
@@ -128,20 +199,22 @@ class DataPNBP {
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_account_code($val['ACCOUNT_CODE']);
-            $d_data->set_satker_code($val['SATKER_CODE']);
+            $d_data->set_jenis_spm($val['JENIS_SPM']);
+            $d_data->set_satker_code($val['KODE_SATKER']);
             $d_data->set_kppn_code($val['KPPN_CODE']);
-            $d_data->set_line_amount(number_format($val['NILAI_SP2D']));
+            $d_data->set_line_amount($val['NILAI_SP2D']);
             $data[] = $d_data;
         }
         return $data;
     }
-	public function get_sa_pnbp($filter) {
-        $sql = "SELECT A.*
+	public function get_sa_pnbp($filter, $satker) {
+        $sql = "SELECT *
 				FROM "
                 . $this->_table3 . " 
 				WHERE 
-				1=1 "
+				1=1 
+				
+				"
 
         ;
         $no = 0;
@@ -149,6 +222,7 @@ class DataPNBP {
             $sql .= " AND " . $filter;
         }
 
+		$sql .= " AND " . $satker;
         //$sql .= " ORDER BY  ";
 
         //var_dump ($sql);
@@ -157,9 +231,9 @@ class DataPNBP {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_account_code($val['ACCOUNT_CODE']);
-            $d_data->set_satker_code($val['SATKER_CODE']);
+            $d_data->set_satker_code($val['KODE_SATKER']);
             $d_data->set_kppn_code($val['KPPN_CODE']);
-            $d_data->set_line_amount(number_format($val['NILAI_SPM']));
+            $d_data->set_line_amount($val['NILAI_SPM']);
             $data[] = $d_data;
         }
         return $data;
@@ -180,7 +254,7 @@ class DataPNBP {
 
         //$sql .= " ORDER BY  ";
 
-        var_dump ($sql);
+        //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
@@ -190,7 +264,7 @@ class DataPNBP {
             $d_data->set_kppn_code($val['KPPN_CODE']);
 			$d_data->set_program_code($val['PROGRAM_CODE']);
 			$d_data->set_output_code($val['OUTPUT_CODE']);
-            $d_data->set_line_amount(number_format($val['LINE_AMOUNT']));
+            $d_data->set_line_amount($val['LINE_AMOUNT']);
             $data[] = $d_data;
         }
         return $data;
@@ -211,7 +285,7 @@ class DataPNBP {
 
         //$sql .= " ORDER BY  ";
 
-        //var_dump ($sql);
+        var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
@@ -221,7 +295,7 @@ class DataPNBP {
             $d_data->set_kppn_code($val['KPPN_CODE']);
 			$d_data->set_tanggal($val['TANGGAL']);
 			$d_data->set_ntpn($val['RECEIPT_NUMBER']);
-            $d_data->set_line_amount(number_format($val['AMOUNT']));
+            $d_data->set_line_amount($val['AMOUNT']);
             $data[] = $d_data;
         }
         return $data;
@@ -255,7 +329,7 @@ class DataPNBP {
 			$d_data->set_description($val['DESCRIPTION']);
 			$d_data->set_check_num($val['NO_SP2D']);
 			$d_data->set_tanggal_sp2d($val['TG_SP2D']);
-            $d_data->set_line_amount(number_format($val['AMOUNT_DIST']));
+            $d_data->set_line_amount($val['AMOUNT_DIST']);
             $data[] = $d_data;
         }
         return $data;
@@ -292,8 +366,8 @@ class DataPNBP {
 			$d_data->set_account_code($val['SEGMENT3']);
 			$d_data->set_program_code($val['SEGMENT4']);
 			$d_data->set_output_code($val['SEGMENT5']);
-            $d_data->set_line_amount(number_format($val['AMOUNT_DIST']));
-			$d_data->set_amount(number_format($val['NILAI_SP2D']));
+            $d_data->set_line_amount($val['AMOUNT_DIST']);
+			$d_data->set_amount($val['NILAI_SP2D']);
             $data[] = $d_data;
         }
         return $data;
@@ -317,7 +391,9 @@ class DataPNBP {
     public function set_satker_code($satker_code) {
         $this->_satker_code = $satker_code;
     }
-
+	public function set_nmsatker($nmsatker) {
+        $this->_nmsatker = $nmsatker;
+    }
     public function set_kppn_code($kppn_code) {
         $this->_kppn_code = $kppn_code;
     }
@@ -407,6 +483,10 @@ class DataPNBP {
 
     public function get_satker_code() {
         return $this->_satker_code;
+    }
+	
+	public function get_nmsatker() {
+        return $this->_nmsatker;
     }
 
     public function get_account_code() {

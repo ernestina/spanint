@@ -59,7 +59,10 @@ class DataDIPAController extends BaseController {
                 $this->view->program_code = $program1;
             }
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
-                $filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '" . $_POST['tgl_awal'] . "' AND '" . $_POST['tgl_akhir'] . "'";
+                
+				
+				$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '" . date('d-m-Y', strtotime($_POST['tgl_awal'])) . "' AND '" . date('d-m-Y', strtotime($_POST['tgl_akhir'])) . "'";
+				
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }

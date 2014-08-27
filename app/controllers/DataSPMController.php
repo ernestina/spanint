@@ -267,7 +267,7 @@ class DataSPMController extends BaseController {
         if (!is_null($invoice_num1) and Session::get('role') == KPPN) {
             $invoice = "'" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "'";
             $kppn = Session::get('id_user');
-            $filter[$no++] = $kppn;
+            $filter[$no++] = "'".$kppn."'";
             $this->view->invoice_num = $invoice_num;
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
         } elseif (!is_null($invoice_num1) and Session::get('role') == SATKER) {
@@ -279,7 +279,7 @@ class DataSPMController extends BaseController {
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
         } elseif (!is_null($invoice_num1) and Session::get('role') == KANWIL) {
             $invoice = "'" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "'";
-            $kppn = substr($sp2d, 2, 3);
+            $kppn = "SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "'";
             $filter[$no++] = $kppn;
 			//$filter_kanwil = "SUBSTR(NO_SP2D,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
             $this->view->invoice_num = $invoice_num;
@@ -344,7 +344,8 @@ class DataSPMController extends BaseController {
                 $filter[$no++] = "jendok = '" . $_POST['JenisSPM'] . "'";
             }
             if ($_POST['durasi'] != '') {
-                $filter[$no++] = "durasi2 " . $_POST['durasi'] . "'";
+                $filter[$no++] = "durasi2 " . $_POST['durasi'];
+				var_dump($_POST['durasi']);
             }
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
                 $filter[$no++] = "TANGGAL_UPLOAD BETWEEN to_date('" . $_POST['tgl_awal'] . "','dd-mm-yyyy') AND to_date('" . $_POST['tgl_akhir'] . "' ,'dd-mm-yyyy')";
@@ -361,11 +362,13 @@ class DataSPMController extends BaseController {
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			$this->view->data2 = $d_spm1->get_jendok_spm_filter($filter);
 			//$filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
         }
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+			$this->view->data2 = $d_spm1->get_jendok_spm_filter($filter);
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
