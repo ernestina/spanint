@@ -128,7 +128,7 @@ class DataSupplierController extends BaseController {
         $no = 0;
         $this->view->ekstensi = ".txt";
         $this->view->kppn_code = Session::get('kd_satker');
-		if (Session::get('kd_satker')=='004'){
+		if (Session::get('kd_satker')=='088'){
 			//untuk mencatat log user
 			$d_log = new DataLog($this->registry);
 			$d_log->tambah_log("Sukses");
