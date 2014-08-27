@@ -223,6 +223,7 @@
 								<li><a href=' . URL . 'dataSPM/DurasiSpm></i>Durasi Penyelesaian SP2D</a></li>
 								<li><a href=' . URL . 'dataSPM/nmsatker></i>Daftar SP2D per Satker</a></li>
 								<li><a href=' . URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
+								<li><a href=' . URL . 'dataPNBP/KarwasPNBP></i>Karwas PNBP</a></li>
                             </ul>
 							</li>';
 
