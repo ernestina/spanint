@@ -14,7 +14,6 @@
     <?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : sp2dGajiRekening.php  
-if(isset($kdkppn)){
 	$kdkppn = Session::get('id_user');
 	?>
 
@@ -24,7 +23,6 @@ if(isset($kdkppn)){
 	//----------------------------------------------------		
 
 
-}
 ?>
 
 

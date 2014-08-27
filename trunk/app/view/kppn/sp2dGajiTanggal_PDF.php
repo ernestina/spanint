@@ -87,8 +87,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
         //tanggal
-        /* $kdtgl_awal = 'null';
-        $kdtgl_akhir = 'null'; */
+        $kdtgl_awal = 'null';
+        $kdtgl_akhir = 'null';
 
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
             $kdtgl_awal1 = $this->kdtgl_awal;
@@ -116,7 +116,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_jenis_belanja = 100;
         $ukuran_kolom_satker = 80;
         $ukuran_kolom_akun = 100;
-        $ukuran_kolom_dana = 160;
+        $ukuran_kolom_dana = 100;
         $ukuran_kolom_file = 85;
         $ukuran_kolom_bank_pembayar = 100;
         $ukuran_kolom_norek_penerima = 100;
@@ -125,7 +125,7 @@ class FPDF_AutoWrapTable extends FPDF {
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(30, $h, 'No', 1, 0, 'L', true);
+        $this->Cell(30, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += 30);
         $this->Cell($ukuran_kolom_tgl_selsp2d, $h, 'Kode Satker', 1, 0, 'C', true);
         $px1 = $this->GetX();
@@ -151,8 +151,7 @@ class FPDF_AutoWrapTable extends FPDF {
             30, $ukuran_kolom_tgl_selsp2d,
             $ukuran_kolom_tgl_sp2d, $ukuran_kolom_satker,
             $ukuran_kolom_akun, $ukuran_kolom_jenis_belanja,
-            $ukuran_kolom_bank_pembayar, $ukuran_kolom_bank_pembayar,
-            $ukuran_kolom_dana,
+            $ukuran_kolom_dana
         ));
         $this->SetAligns(array('C', 'C', 'C', 'R', 'C', 'R', 'L', 'C', 'L'));
         if (count($this->data) == 0) {
@@ -359,8 +358,8 @@ $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
     'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
-    'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
-    'orientation' => 'L' //orientation: P=portrait, L=landscape
+    'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
+    'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
 $tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
 $tabel->printPDF();

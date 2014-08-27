@@ -14,14 +14,12 @@
     <?php
 	//----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : sp2dGajiBank.php  
-if(isset($kdkppn)){
 	$kdkppn = Session::get('id_user');
 	?>
-	<a href="<?php echo URL; ?>PDF/sp2dSalahBank_PDF<?php echo $kdkppn; ?>" class="modal">PDF</a>
+	<a href="<?php echo URL; ?>PDF/sp2dSalahBank_PDF/<?php echo $kdkppn; ?>" class="modal">PDF</a>
 	<?php
 	//----------------------------------------------------		
 	
-}
 ?>
 
 <?php if (isset($this->kppn_list)) { ?>	

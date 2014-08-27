@@ -4,6 +4,20 @@
             <?php //echo Session::get('user'); ?>
         </h2>
     </div>
+    <?php
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : historySPM.php  
+
+	if (isset($this->d_tgl)) {
+        $kdtgl = $this->d_tgl;
+    }
+	$kdkppn=Session::get('id_user');
+    ?>
+    <a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>" class="modal">PDF</a>
+    <?php
+    //----------------------------------------------------		
+
+    ?>
 
     <div id="fitur">
         <table width="100%" class="table table-bordered zebra" id='fixheader'>

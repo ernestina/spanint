@@ -14,23 +14,25 @@
     <?php
 	 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : revisiDIPA.php  
-	
-if( isset($this->account_code) ||
-	isset($this->output_code) || isset($this->program_code) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
-	){
+	foreach ($this->data as $value) {
+		$kdsatker =$value->get_satker_code();
+     }
+
     if (isset($this->account_code)) {
         $kdakun = $this->account_code;
         $kdakun = rtrim($kdakun);
     } else {
         $kdakun = 'null';
     }
-    if (isset($this->satker_code)) {
+/*     if (isset($this->satker_code)) {
         $kdsatker = $this->satker_code;
         $kdsatker = rtrim($kdsatker);
     } else {
         $kdsatker = 'null';
+		
     }
-    if (isset($this->output_code)) {
+ */	
+     if (isset($this->output_code)) {
         $kdoutput = $this->output_code;
         $kdoutput = rtrim($kdoutput);
     } else {
@@ -66,11 +68,6 @@ if( isset($this->account_code) ||
 <a href="<?php echo URL; ?>PDF/RevisiDipa_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
         <?php
 //----------------------------------------------------		
-	
-	
-	
-	}
-
         ?>
         <li><a href="#yModal" class="modal">FILTER DATA</a></li></ul>
     <div id="yModal" class="modalDialog" >

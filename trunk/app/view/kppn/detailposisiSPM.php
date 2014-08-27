@@ -12,7 +12,7 @@ if($this->data as $value){
 		$kdnum = $value->get_invoice_num();
 	}
 ?>
-<a href="<?php echo URL; ?>PDF/detailposisiSPM_PDF/<?php echo $kdnum; ?>" class="modal">PDF</a>
+<a href="<?php echo URL; ?>PDF/detailposisiSpm_PDF/<?php echo $kdnum; ?>" class="modal">PDF</a>
 
 <?php
 }
