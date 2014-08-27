@@ -27,6 +27,10 @@ class DataPelimpahanController extends BaseController {
         $filter = array();
         $no = 0;
 		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_anak = $d_kppn_list->get_kppn_kanwil();
@@ -87,12 +91,11 @@ class DataPelimpahanController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_limpah->get_table());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
 
         //var_dump($d_sppm->get_sppm_filter($filter));
         $this->view->render('kppn/daftarPelimpahan');
+		
+		$d_log->tambah_log("Sukses");
     }
 
     public function __destruct() {

@@ -18,6 +18,9 @@ class AuthController extends BaseController {
     public function login() {
 
         if (isset($_POST['user'])) {
+			//untuk mencatat log user
+			$d_log = new DataLog($this->registry);
+			$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
             $user = $_POST['user'];
             $pass = hash('sha256',$_POST['pass']);
             //var_dump($_POST['user']);
@@ -56,33 +59,29 @@ class AuthController extends BaseController {
                 Session::set('role', $role);
                 Session::set('id_user', $res[3]);
                 Session::set('kd_satker', $res[4]);
-				//untuk mencatat log user
-				$d_log = new DataLog($this->registry);
 				$d_log->tambah_log("Sukses");
                 header('location:' . URL);
             } else if ((int) $res[0] == 0) {
                 $this->view->error = "user tidak ditemukan!";
-				//untuk mencatat log user
-				$d_log = new DataLog($this->registry);
 				$d_log->tambah_log("Sukses");
                 $this->view->load('admin/login');
             } else {
                 $this->view->error = "database tidak valid!";
-				//untuk mencatat log user
-				$d_log = new DataLog($this->registry);
 				$d_log->tambah_log("Sukses");
                 $this->view->load('admin/login');
             }
         } else {
 			//untuk mencatat log user
 			$d_log = new DataLog($this->registry);
-			$d_log->tambah_log("Sukses");
+			$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
             $this->view->load('admin/login');
+			$d_log->tambah_log("Sukses");
         }
     }
 
     public function logout() {
 		$d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		$d_log->tambah_log("Sukses");
         Session::createSession();
         Session::destroySession();
