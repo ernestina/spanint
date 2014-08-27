@@ -26,6 +26,10 @@ class DataSupplierController extends BaseController {
         $d_supp = new DataSupplier($this->registry);
         $filter = array();
         $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
         if (isset($_POST['submit_file'])) {
 
@@ -79,18 +83,20 @@ class DataSupplierController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_supp->get_table());
-		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
 
         $this->view->render('satker/isianSupplier');
+		$d_log->tambah_log("Sukses");
     }
 
     public function downloadSupplier() {
         $d_supp = new DataSupplier($this->registry);
         $filter = array();
         $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         if (count($_POST['checkbox']) != 0) {
             $array = array("checkbox" => $_POST['checkbox']);
             $ids = implode("','", $array['checkbox']);
@@ -101,22 +107,16 @@ class DataSupplierController extends BaseController {
         if ($_POST['download_ext'] == 'txt') {
             $this->view->data = $d_supp->get_download_supp_filter($ids);
             $this->view->ekstensi = ".txt";		
-			//untuk mencatat log user
-			$d_log = new DataLog($this->registry);
 			$d_log->tambah_log("Sukses");
             $this->view->load('satker/downloadSuppliertxt');
         } elseif ($_POST['download_ext'] == 'xml') {
             $this->view->data = $d_supp->get_download_supp_filter($ids);
             $this->view->ekstensi = ".xml";		
-			//untuk mencatat log user
-			$d_log = new DataLog($this->registry);
 			$d_log->tambah_log("Sukses");
             $this->view->load('satker/downloadSupplierxml');
         } elseif ($_POST['download_ext'] == 'xlsx') {
             $this->view->data = $d_supp->get_download_supp_filter_xls();
             $this->view->ekstensi = ".xls";		
-			//untuk mencatat log user
-			$d_log = new DataLog($this->registry);
 			$d_log->tambah_log("Sukses");
             $this->view->load('satker/downloadSupplierxls');
         }
@@ -126,17 +126,18 @@ class DataSupplierController extends BaseController {
         $d_supp = new DataSupplier($this->registry);
         $filter = array();
         $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         $this->view->ekstensi = ".txt";
         $this->view->kppn_code = Session::get('kd_satker');
 		if (Session::get('kd_satker')=='088'){
-			//untuk mencatat log user
-			$d_log = new DataLog($this->registry);
 			$d_log->tambah_log("Sukses");
 			$this->view->load('satker/downloadSupplierxls');
 		} else {
 			$this->view->data = $d_supp->get_download_supp_filter_xls(Session::get('kd_satker'));
-			//untuk mencatat log user
-			$d_log = new DataLog($this->registry);
 			$d_log->tambah_log("Sukses");
 			$this->view->load('satker/downloadSupplierxls2');
 		}

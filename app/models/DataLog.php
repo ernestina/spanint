@@ -11,7 +11,9 @@ class DataLog {
     private $_kd_log;
     private $_kd_d_user;
     private $_activity;
-    private $_activity_time;
+    private $_duration;
+    private $_activity_time_start;
+    private $_activity_time_end;
     private $_ip_client;
     private $_status;
     private $_error;
@@ -33,7 +35,9 @@ class DataLog {
             'KD_LOG' => $this->get_kd_log(),
             'KD_D_USER' => $this->get_kd_d_user(),
             'ACTIVITY' => $this->get_activity(),
-            //'ACTIVITY_TIME' => $this->get_activity_time(),
+            'DURATION' => $this->get_duration(),
+            'ACTIVITY_TIME_START' => $this->get_activity_time_start(),
+            'ACTIVITY_TIME_END' => $this->get_activity_time_end(),
             'IP_CLIENT' => $this->get_ip_client(),
             'STATUS' => $this->get_status()
         );
@@ -51,7 +55,10 @@ class DataLog {
         //$this->set_kd_log('');
 		$this->set_kd_d_user(Session::get('kd_satker'));
 		$this->set_activity("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
-		$this->set_activity_time(date("d-m-Y h:i:s"));
+		$this->set_activity_time_end(date("d-m-Y h:i:s"));
+		$mulai = strtotime($this->get_activity_time_start());
+		$selesai = strtotime($this->get_activity_time_end());
+		$this->set_duration($selesai - $mulai);
 		$this->set_ip_client($this->getIp());
 		$this->set_status($status);
         $this->add_d_log();
@@ -100,8 +107,16 @@ class DataLog {
         $this->_activity = $activity;
     }
 
-    public function set_activity_time($activity_time) {
-        $this->_activity_time = $activity_time;
+    public function set_duration($duration) {
+        $this->_duration = $duration;
+    }
+
+    public function set_activity_time_start($activity_time_start) {
+        $this->_activity_time_start = $activity_time_start;
+    }
+
+    public function set_activity_time_end($activity_time_end) {
+        $this->_activity_time_end = $activity_time_end;
     }
 
     public function set_ip_client($ip_client) {
@@ -128,8 +143,16 @@ class DataLog {
         return $this->_activity;
     }
 
-    public function get_activity_time() {
-        return $this->_activity_time;
+    public function get_duration() {
+        return $this->_duration;
+    }
+
+    public function get_activity_time_start() {
+        return $this->_activity_time_start;
+    }
+
+    public function get_activity_time_end() {
+        return $this->_activity_time_end;
     }
 
     public function get_ip_client() {

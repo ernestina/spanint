@@ -26,6 +26,11 @@ class DataDropingController extends BaseController {
         $d_sppm = new DataDroping($this->registry);
         $filter = array();
         $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         if (isset($_POST['submit_file'])) {
             if ($_POST['bank'] != '') {
                 if ($_POST['bank'] != 'SEMUA_BANK') {
@@ -53,18 +58,21 @@ class DataDropingController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
-		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
 
         $this->view->render('pkn/droping');
+		
+		$d_log->tambah_log("Sukses");
     }
 
     public function detailDroping($id = null, $bank = null, $tanggal = null) {
         $d_sppm = new DataDroping($this->registry);
         $filter = array();
         $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         if (!is_null($id)) {
             $filter[$no++] = "ID_DETAIL = '" . $id . "'";
             $this->view->d_id = $id;
@@ -84,43 +92,10 @@ class DataDropingController extends BaseController {
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table1());
-		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
 
         $this->view->render('pkn/dropingDetail');
-    }
-
-    public function detailDroping_PDF($id = null, $bank = null, $tanggal = null) {
-        $d_sppm = new DataDroping($this->registry);
-        $filter = array();
-        $no = 0;
-        if (!is_null($id)) {
-            $filter[$no++] = "ID_DETAIL = '" . $id . "'";
-            $this->view->d_id = $id;
-        }
-        if (!is_null($bank)) {
-            if ($bank != "SEMUA_BANK") {
-                $filter[$no++] = "BANK = '" . $bank . "'";
-            }
-            $this->view->d_bank = $bank;
-        }
-        if (!is_null($tanggal)) {
-            $filter[$no++] = "TO_CHAR(CREATION_DATE,'DD-MM-YYYY') = '" . $tanggal . "'";
-            $this->view->d_tanggal = $tanggal;
-        }
-        $this->view->data = $d_sppm->get_droping_detail_filter($filter);
-
-        // untuk mengambil data last update 
-        $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table1());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
-
-        $this->view->render('pkn/dropingDetail');
     }
 
     public function __destruct() {
