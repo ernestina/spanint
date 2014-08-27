@@ -59,8 +59,8 @@ class DataHistorySPM {
                 . $this->_table5 . " PAP 
 				WHERE FU.USER_ID = AIIA.created_by
 				and pap.person_id = fu.employee_id
-				and substr(aiia.operating_unit,1,3) = '" . $filter .
-                "' 
+				and substr(aiia.operating_unit,1,3) in (" . $filter .
+                ") 
 				and AIIA.invoice_num = " . $invoice . " 
 				
 				union all
@@ -100,8 +100,8 @@ class DataHistorySPM {
 				and ah.created_by=fu.user_id
 				and ah.last_updated_by=fu.user_id
 				and pap.person_id = fu.employee_id
-				and substr(ai.pay_group_lookup_code,1,3) = '" . $filter .
-                "' 
+				and substr(ai.pay_group_lookup_code,1,3) in (" . $filter .
+                ") 
 				
 				and ai.invoice_num = " . $invoice . " 
 				
@@ -133,8 +133,8 @@ class DataHistorySPM {
                 . $this->_table5 . " PAP
 				on pap.person_id = fu.employee_id
 				where
-				substr(aca.check_number,3,3) = '" . $filter .
-                "' 
+				substr(aca.check_number,3,3) in (" . $filter .
+                ") 
 				 and aia.invoice_num = " . $invoice . "
 				 ) 
 				 where 1=1 

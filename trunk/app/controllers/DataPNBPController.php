@@ -36,11 +36,37 @@ class DataPNBPController extends BaseController {
         $filter = array();
         $no = 0;
         
+		
+		if (Session::get('role') == KPPN) {
+			$this->view->data5 = $d_spm1->get_satker_pnbp(Session::get('id_user'));
+        }
+		
+		
+		if (isset($_POST['submit_file'])) {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn']."'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				
+            } else {
+                $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+            }
 
-        $this->view->data1 = $d_spm1->get_dipa_pnbp($filter);
-		$this->view->data2 = $d_spm1->get_gr_pnbp($filter);
-		$this->view->data3 = $d_spm1->get_sa_pnbp($filter);
-		$this->view->data4 = $d_spm1->get_up_pnbp($filter);
+            if ($_POST['kdsatker'] != '') {
+                $satker1 = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
+				$satker = "KODE_SATKER = '" . $_POST['kdsatker'] . "'";
+				$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($_POST['kdsatker']);
+            }
+        
+		}
+		if ($_POST['kdsatker'] != '') {
+		
+		$this->view->data1 = $d_spm1->get_dipa_pnbp($filter ,$satker1);
+		$this->view->data2 = $d_spm1->get_gr_pnbp($filter ,$satker1);
+		$this->view->data3 = $d_spm1->get_sa_pnbp($filter ,$satker);
+		$this->view->data4 = $d_spm1->get_up_pnbp($filter ,$satker);
+		}
+		
         //var_dump($d_spm->get_hist_spm_filter());
 		
 		//untuk mencatat log user
@@ -48,10 +74,10 @@ class DataPNBPController extends BaseController {
 		$d_log->tambah_log("Sukses");
 		
 		
-        $this->view->render('kppn/posisiSPM');
+        $this->view->render('kppn/karwasPNBP');
     }
 
-    public function DetailDipaPNBP() {
+    public function DetailDipaPNBP($akun, $satker) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -60,19 +86,16 @@ class DataPNBPController extends BaseController {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
             $this->view->d_kppn = Session::get('id_user');
         }
-        if (Session::get('role') == KANWIL) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			$filter[$no++] = "ATTRIBUTE15 IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
+		
+		if ($akun != '') {
+			$filter[$no++] = "SUBSTR(ACCOUNT_CODE,1,2) = '" . $akun."'";
         }
-        if (Session::get('role') == ADMIN) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+		if ($akun != '') {
+			$filter[$no++] = "SATKER_CODE = '" . $satker."'";
+			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
+			
         }
-        if (Session::get('role') == SATKER) {
-            $filter[$no++] = " SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
-            $this->view->d_satker = Session::get('kd_satker');
-        }
+		
 		$this->view->data = $d_spm1->get_pnbp_dipa_line($filter);
 		
         $d_log = new DataLog($this->registry);
@@ -82,7 +105,7 @@ class DataPNBPController extends BaseController {
     }
 
 
-    public function DetailGRPNBP() {
+    public function DetailGRPNBP($akun, $satker) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -92,18 +115,13 @@ class DataPNBPController extends BaseController {
             $this->view->d_kppn = Session::get('id_user');
 			
         }
-        if (Session::get('role') == KANWIL) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			$filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
+        if ($akun != '') {
+			$filter[$no++] = "ACCOUNT_CODE = '" . $akun."'";
         }
-        if (Session::get('role') == ADMIN) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-        }
-        if (Session::get('role') == SATKER) {
-            $filter[$no++] = " SATKER_CODE = '" . Session::get('kd_satker') . "'";
-            $this->view->d_satker = Session::get('kd_satker');
+		if ($akun != '') {
+			$filter[$no++] = "SATKER_CODE = '" . $satker."'";
+			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
+			
         }
 		
         $this->view->data = $d_spm1->get_pnbp_gr_line($filter);
@@ -120,7 +138,7 @@ class DataPNBPController extends BaseController {
         $this->view->render('kppn/detail_gr_pnbp');
     }
 	
-	public function DetailUPPNBP() {
+	public function DetailUPPNBP($akun, $satker) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -130,18 +148,13 @@ class DataPNBPController extends BaseController {
             $this->view->d_kppn = Session::get('id_user');
 			
         }
-        if (Session::get('role') == KANWIL) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			$filter[$no++] = "SEGMENT2 IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
+        if ($akun != '') {
+			$filter[$no++] = "JENIS_SPM = '" . $akun."'";
         }
-        if (Session::get('role') == ADMIN) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-        }
-        if (Session::get('role') == SATKER) {
-            $filter[$no++] = " KODE_SATKER = '" . Session::get('kd_satker') . "'";
-            $this->view->d_satker = Session::get('kd_satker');
+		if ($akun != '') {
+			$filter[$no++] = "KODE_SATKER = '" . $satker."'";
+			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
+			
         }
 		
         $this->view->data = $d_spm1->get_pnbp_up_line($filter);
@@ -158,7 +171,7 @@ class DataPNBPController extends BaseController {
         $this->view->render('kppn/detail_up_pnbp');
     }
 
-	public function DetailBelanjaPNBP() {
+	public function DetailBelanjaPNBP($akun, $satker) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -168,18 +181,13 @@ class DataPNBPController extends BaseController {
             $this->view->d_kppn = Session::get('id_user');
 			
         }
-        if (Session::get('role') == KANWIL) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			$filter[$no++] = "SEGMENT2 IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
+        if ($akun != '') {
+			$filter[$no++] = "SUBSTR(SEGMENT3,1,2) = '" . $akun."'";
         }
-        if (Session::get('role') == ADMIN) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-        }
-        if (Session::get('role') == SATKER) {
-            $filter[$no++] = " KODE_SATKER = '" . Session::get('kd_satker') . "'";
-            $this->view->d_satker = Session::get('kd_satker');
+		if ($akun != '') {
+			$filter[$no++] = "KODE_SATKER = '" . $satker."'";
+			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
+			
         }
 		
         $this->view->data = $d_spm1->get_pnbp_bel_line($filter);

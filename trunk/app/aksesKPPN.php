@@ -199,6 +199,7 @@ $akses['DataPelimpahanKPPN'] = array(
  */
 $akses['DataPNBPKPPN'] = array(
     '__construct',
+	'KarwasPNBP',
     'DetailDipaPNBP',
 	'DetailGRPNBP',
 	'DetailUPPNBP',
