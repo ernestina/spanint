@@ -127,7 +127,6 @@ $akses['DataSPMSatker'] = array(
     'daftarsp2d',
     'RekapSp2d',
     'detailrekapsp2d',
-    'detailHoldSPM_PDF',
     'HoldSpm_PDF',
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
@@ -155,7 +154,9 @@ $akses['PDFSatker'] = array(
     'index',
     'RevisiDipa_PDF',
     'Fund_fail_PDF',
+	'Detail_Fund_fail_kd_PDF',
     'RealisasiFA_PDF',
+    'RealisasiFA_1_PDF',
     'DataRealisasi_PDF',
     'DataRealisasiBA_PDF',
     'DataRealisasiTransfer_PDF',
@@ -164,8 +165,7 @@ $akses['PDFSatker'] = array(
 	'holdSpm_PDF',
 	'HistorySpm_PDF',
 	'daftarsp2d_PDF',
-	'detailrekapsp2d_PDF',
-	'monitoringUserSpan_PDF',
+	'detailrekapsp2d1_PDF',
     '__destruct'
 );
 

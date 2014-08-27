@@ -33,7 +33,7 @@ class DataLog {
             'KD_LOG' => $this->get_kd_log(),
             'KD_D_USER' => $this->get_kd_d_user(),
             'ACTIVITY' => $this->get_activity(),
-            'ACTIVITY_TIME' => $this->get_activity_time(),
+            //'ACTIVITY_TIME' => $this->get_activity_time(),
             'IP_CLIENT' => $this->get_ip_client(),
             'STATUS' => $this->get_status()
         );
@@ -59,14 +59,29 @@ class DataLog {
     }
 	
 	private function getIp() {
-		$ip = $_SERVER['REMOTE_ADDR'];
-		
+		$ipaddress = '';
 		if (!empty($_SERVER['HTTP_CLIENT_IP'])){
-			$ip=$_SERVER['HTTP_CLIENT_IP'];
-		} else if (!empty($_SERVER['HTTP_X_FORWARDER_FOR'])){
-			$ip = $_SERVER['HTTP_X_FORWARDER_FOR'];
+			$ipaddress = $_SERVER['HTTP_CLIENT_IP'];
 		}
-		return $ip;
+		else if((!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+			$ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}
+		else if((!empty($_SERVER['HTTP_X_FORWARDED'])){
+			$ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+		}
+		else if((!empty($_SERVER['HTTP_FORWARDED_FOR'])){
+			$ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+		}
+		else if((!empty($_SERVER['HTTP_FORWARDED'])){
+			$ipaddress = $_SERVER['HTTP_FORWARDED'];
+		}
+		else if((!empty($_SERVER['REMOTE_ADDR'])){
+			$ipaddress = $_SERVER['REMOTE_ADDR'];
+		}
+		else {
+			$ipaddress = 'UNKNOWN';
+		}
+		return $ipaddress;
 	}
 
     /*

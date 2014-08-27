@@ -12,13 +12,19 @@ if (!ini_get('safe_mode')) {
 	header('Content-Transfer-Encoding: binary');
 	ob_end_clean();
 	
-	$server_ftp ='192.168.1.5';
-	$user_ftp ='';
-	$direktori='tes_download';
-	$filename='datasupplier_'.$this->kppn_code;
+	//setting alamat download dari ftp, contoh : $ftp_address = "ftp://spanuat:spanuat@10.100.93.134/APLIKASI/CEKSUPPLIER/data_supplier_kppn/datasupplier_088.xlsx";
 	
-	$file = "\\\\".$user_ftp.$server_ftp."\\".$direktori."\\".$filename.$this->ekstensi;
+	$server_ftp ='10.100.93.134';
+	$user_ftp ='spanuat:spanuat';
+	$direktori='APLIKASI/CEKSUPPLIER/data_supplier_kppn';
+	$ekstensi=".xlsx";
+	$download_addres="ftp://".$user_ftp."@".$server_ftp."/".$direktori."/".".xlsx";
 	
+	$ftp_address = "ftp://spanuat:spanuat@10.100.93.134/APLIKASI/CEKSUPPLIER/data_supplier_kppn/datasupplier_088.xlsx";
+	
+	//$file = "\\\\10.244.6.69\\tes_download\\datasupplier_004.txt";
+	
+	$file = $ftp_address;
 	
 
 	//$file = "\\\\192.168.1.5\\tes_download\\datasupplier_004.txt";

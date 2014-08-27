@@ -126,7 +126,6 @@ $akses['DataKppnKPPN'] = array(
     'sp2dSalahBank_PDF',
     'sp2dSalahRekening_PDF',
     'detailSp2dGaji_PDF',
-    'detailRekapSP2D_PDF',
     '__destruct'
 );
 
@@ -215,7 +214,9 @@ $akses['PDFKPPN'] = array(
     'index',
     'RevisiDipa_PDF',
     'Fund_fail_PDF',
+	'Detail_Fund_fail_kd_PDF',
     'RealisasiFA_PDF',
+    'RealisasiFA_1_PDF',
     'DataRealisasi_PDF',
     'DataRealisasiBA_PDF',
     'DataRealisasiTransfer_PDF',
@@ -235,16 +236,16 @@ $akses['PDFKPPN'] = array(
     'sp2dSalahBank_PDF',
     'sp2dSalahRekening_PDF',
     'detailSp2dGaji_PDF',
-	'detailRekapSP2D_PDF',
 	'monitoringRetur_PDF',
 	'posisiSpm_PDF',
 	'detailposisiSpm_PDF',
 	'holdSpm_PDF',
 	'HistorySpm_PDF',
 	'daftarsp2d_PDF',
-	'detailrekapsp2d_PDF',
+	'detailrekapsp2d1_PDF',
 	'monitoringUserSpan_PDF',
-	'Detail_Fund_fail_kd_PDF',
+	'posisiSpm_PDF',
+	'monitoringPelimpahan_PDF',
     '__destruct'
 );
 ?>
