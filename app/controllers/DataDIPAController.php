@@ -217,7 +217,9 @@ class DataDIPAController extends BaseController {
 		
     }
 
-    public function Detail_Fund_Fail_KD($kdsatker = null, $output = null) {
+    
+	
+	public function Detail_Fund_Fail_KD($kf, $kdsatker = null, $output = null, $akun=null) {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
@@ -232,6 +234,17 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = " OUTPUT =  '" . $output . "'";
             //$this->view->invoice_num = $invoice_num;	
         }
+		
+		if ($akun != '' AND $kf=='2') {
+			$filter[$no++] = " AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
+			AND AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')";
+			
+		}
+		elseif ($akun != '' AND $kf=='1') {
+			$filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
+			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')";
+		}
+		
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kd_satker'] != '') {
@@ -260,12 +273,19 @@ class DataDIPAController extends BaseController {
 		$d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table3());
         //var_dump($d_spm->get_hist_spm_filter());
-        $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
 		
+		if ($kf=='2') {
+        $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
+		$this->view->render('kppn/detail_fund_fail_kd');
+		} else {
+		$d_spm1 = new DataFA($this->registry);
+		$this->view->data = $d_spm1->get_fa_filter($filter);
+		$this->view->render('kppn/detail_fund_fail_ff');
+		}
 		$d_log->tambah_log("Sukses");
 		
 		
-        $this->view->render('kppn/detail_fund_fail_kd');
+        //$this->view->render('kppn/detail_fund_fail_kd');
     }
 
     public function RealisasiFA_1($kdsatker = null) {

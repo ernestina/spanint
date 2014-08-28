@@ -50,8 +50,6 @@ class DataFundFail {
 				and realisasi > 0
 				and description is not null
 				"
-
-
         ;
         $no = 0;
         foreach ($filter as $filter) {
@@ -87,8 +85,6 @@ class DataFundFail {
 				where 1=1 
 				
 				"
-
-
         ;
         $no = 0;
         foreach ($filter as $filter) {
