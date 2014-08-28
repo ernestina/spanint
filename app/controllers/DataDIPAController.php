@@ -106,7 +106,7 @@ class DataDIPAController extends BaseController {
 
             if ($_POST['kd_satker'] != '') {
                 $filter[$no++] = "KDSATKER = '" . $_POST['kd_satker'] . "'";
-                $this->view->satker_code = $_POST['satker_code'];
+                $this->view->satker_code = $_POST['kd_satker'];
             }
             /* if ($_POST['akun']!=''){
               $filter[$no++]="A.ACCOUNT_CODE = '".$_POST['akun']."'";
@@ -176,7 +176,7 @@ class DataDIPAController extends BaseController {
 
             if ($_POST['kd_satker'] != '') {
                 $filter[$no++] = "SATKER = '" . $_POST['kd_satker'] . "'";
-                $this->view->satker_code = $_POST['satker_code'];
+                $this->view->satker_code = $_POST['kd_satker'];
             }
             /* if ($_POST['akun']!=''){
               $filter[$no++]="A.ACCOUNT_CODE = '".$_POST['akun']."'";
@@ -249,7 +249,7 @@ class DataDIPAController extends BaseController {
 
             if ($_POST['kd_satker'] != '') {
                 $filter[$no++] = "KDSATKER = '" . $_POST['kd_satker'] . "'";
-                $this->view->satker_code = $_POST['satker_code'];
+                $this->view->satker_code = $_POST['kd_satker'];
             }
         }
         if (Session::get('role') == KANWIL) {
@@ -379,7 +379,7 @@ class DataDIPAController extends BaseController {
 
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "A.SATKER = '" . $_POST['kdsatker'] . "'";
-                $this->view->satker_code = $_POST['satker_code'];
+                $this->view->satker_code = $_POST['kdsatker'];
             }
             if ($_POST['akun'] != '') {
                 $filter[$no++] = "A.AKUN = '" . $_POST['akun'] . "'";
