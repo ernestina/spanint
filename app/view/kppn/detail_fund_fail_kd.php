@@ -92,18 +92,18 @@
                     <th class='mid'>No.</th>
                     <th class='mid'>Tanggal Error</th>
                     <th class='mid'>Satker</th>
-                    <th>Kode KPPN</th>
+                    <th class='mid'>Kode KPPN</th>
                     <th class='mid'>Akun</th>
                     <th class='mid'>Program</th>
                     <th class='mid'>Output</th>
                     <th class='mid'>Dana</th>
                     <!--th class='mid'>Description</th-->
-                    <th>Pagu Saat Ini</th>
-                    <th>Pagu Usulan Revisi</th>
-                    <th>Total Kontrak</th>
-                    <th>Blokir</th>
-                    <th>Realisasi</th>
-                    <th>Sisa/kurang</th>
+                    <th class='ratakanan'>Pagu Saat Ini</th>
+                    <th class='ratakanan'>Pagu Usulan Revisi</th>
+                    <th class='ratakanan'>Total Kontrak</th>
+                    <th class='ratakanan'>Blokir</th>
+                    <th class='ratakanan'>Realisasi</th>
+                    <th class='ratakanan'>Sisa/kurang</th>
                 </tr>
             </thead>
             <tbody class='ratatengah'>
@@ -122,7 +122,7 @@
                         foreach ($this->data as $value) {
                             echo "<tr>	";
                             echo "<td>" . $no++ . "</td>";
-                            echo "<td class='ratakiri'>" . $value->get_error_date() . "</td>";
+                            echo "<td class='ratatengah'>" . $value->get_error_date() . "</td>";
                             echo "<td>" . $value->get_satker_code() . "</td>";
                             echo "<td>" . $value->get_kppn_code() . "</td>";
                             echo "<td>" . $value->get_account_code() . "</td>";

@@ -1,90 +1,47 @@
-<div id="top">
-	<div id="header">
-        <h2>CEK DATA SUPPLIER <br>
-			
-		</h2>
+<!-- Ndas -->
+<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Cek Data Supplier</h2>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
+                <!-- PDF -->            
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
+            </div>
+        </div>
+        
+        <div class="row" style="padding-top: 10px">
+            
+            <div class="col-md-6 col-sm-12">
+
+            </div>
+            
+            <div class="col-md-6 col-sm-12" style="text-align: right;">
+
+            </div>
+            
+        </div>
+        
     </div>
-
-
-<a href="#oModal" class="modal">FILTER DATA</a>
-        <div id="oModal" class="modalDialog" >
-            <div>
-                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
-				<a href="<?php
-                    $_SERVER['PHP_SELF'];
-                ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
-</a>
-
-	<div id="top">	
-		<form method="POST" action="cekSupplier" enctype="multipart/form-data">
-		
-		<div id='wtipesup' class='error'></div>
-		<label class='isian'>Tipe Supplier: </label>
-		<select type='text' name='tipesup' id='tipesup'>
-			<option value='1' <?php if ($this->d_tipesup==1){echo "selected";}?>>1. Satker</option>
-			<option value='2' <?php if ($this->d_tipesup==2){echo "selected";}?>>2. Penyedia BJ</option>
-			<option value='3' <?php if ($this->d_tipesup==3){echo "selected";}?>>3. Pegawai</option>
-			<option value='4' <?php if ($this->d_tipesup==4){echo "selected";}?>>4. BA.999</option>
-			<option value='5' <?php if ($this->d_tipesup==5){echo "selected";}?>>5. Transfer Daerah</option>
-			<option value='6' <?php if ($this->d_tipesup==6){echo "selected";}?>>6. PP/Banyak Penerima</option>
-			<option value='7' <?php if ($this->d_tipesup==7){echo "selected";}?>>7. Lain-lain</option>
-		</select>
-		
-		<div id="wnrs" class="error"></div>
-		<label class="isian">NRS: </label>
-		<input type="number" name="nrs" id="nrs" size="15" value="<?php if (isset($this->d_nrs)){echo $this->d_nrs;}?>">
-		
-		<div id="wnamasupplier" class="error"></div>
-		<label class="isian">Nama Supplier: </label>
-		<input type="text" name="namasupplier" id="namasupplier" value="<?php if (isset($this->d_namasupplier)){echo $this->d_namasupplier;}?>">
-		
-		<div id="wnpwpsupplier" class="error"></div>
-		<label class="isian">NPWP Supplier: </label>
-		<input type="text" name="npwpsupplier" id="npwpsupplier" value="<?php if (isset($this->d_npwpsupplier)){echo $this->d_npwpsupplier;}?>">
-		
-		<div id="wnip" class="error"></div>
-		<label class="isian">NIP Penerima: </label>
-		<input type="number" name="nip" id="nip" size="18" value="<?php if (isset($this->d_nip)){echo $this->d_nip;}?>">
-		
-		<div id="wnamapenerima" class="error"></div>
-		<label class="isian">Nama Penerima: </label>
-		<input type="text" name="namapenerima" id="namapenerima" value="<?php if (isset($this->d_namapenerima)){echo $this->d_namapenerima;}?>">
-		
-		<div id="wnorek" class="error"></div>
-		<label class="isian">Nomor Rek.: </label>
-		<input type="text" name="norek" id="norek" value="<?php if (isset($this->d_norek)){echo $this->d_norek;}?>">
-		
-		<div id="wnamarek" class="error"></div>
-		<label class="isian">Nama Rek.: </label>
-		<input type="text" name="namarek" id="namarek" value="<?php if (isset($this->d_namarek)){echo $this->d_namarek;}?>">
-		
-		<div id="wnpwppenerima" class="error"></div>
-		<label class="isian">NPWP Penerima: </label>
-		<input type="text" name="npwppenerima" id="npwppenerima" value="<?php if (isset($this->d_npwppenerima)){echo $this->d_npwppenerima;}?>">
-
-		<ul class="inline" style="margin-left: 150px">
-		<li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-		<li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
-		</ul>
-	</form>
-</div>
-</div>
 </div>
 
-<?php
-// untuk menampilkan last_update
-if (isset($this->last_update)){
-	foreach ($this->last_update as $last_update){ 
-		echo "Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB";
-	}
-}
-?>
+<form name='listSupplier' method='POST' action='downloadSupplier' enctype='multipart/form-data'>
 
-<div id="fitur">
-		<form name='listSupplier' method='POST' action='downloadSupplier' enctype='multipart/form-data'>
-		<table width="100%" class="table table-bordered zebra" id='fixheader' style="font-size: 80%">
-            <!--baris pertama-->
+<!-- Tabel -->
+<div id="table-container" class="wrapper">
+    <table class="footable">
+        <!--baris pertama-->
 			<thead>
+                <tr>
 					<th>No.</th>
 					<th>Kode KPPN</th>
 					<th>NRS / Tipe Kode Pos</th>
@@ -97,7 +54,7 @@ if (isset($this->last_update)){
 					<th>NPWP Penerima</th>
 					<th>NIP Penerima</th>
 					<th>pilih <input type="checkbox" onClick="toggle(this)" /> </th>
-					
+				</tr>
 			</thead>
 			<tbody class='ratatengah'>
 			<?php 
@@ -105,7 +62,7 @@ if (isset($this->last_update)){
 			
 			if (isset($this->data)){
 				if (empty($this->data)){
-					echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+					echo '<td colspan=12 align="center">Tidak ada data.</td>';
 				} else {
 					foreach ($this->data as $value){ 
 						echo "<tr>	";
@@ -125,41 +82,117 @@ if (isset($this->last_update)){
 					}
 				} 
 			} else {
-				echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+				echo '<td colspan=12 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
 			}
 			?>
 			
 			</tbody>
-        </table>
-            <br/>
-			<input id='download_ext' type='hidden' name='download_ext' value='txt'>
-		<input class='sukses' type='button' name='submit_txt' value='UNDUH .txt' onclick='downloadSupplier("txt");'>
-		<input class='sukses' type='button' name='submit_xml' value='UNDUH .xml' onclick='downloadSupplier("xml");'>
-		</form>
-		</div>
+    </table>
 </div>
+    
+<input id='download_ext' type='hidden' name='download_ext' value='txt'>
 
-<div id="checkFirst" class="modalDialog" >
-    <div><h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">Perhatian</h2>
-    <a href="#close" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
-        <div id="top">
-            <h3 style="text-align: center">Centang terlebih dahulu data yang akan diunduh.</h3>
+<div class="main-window-segment vertical-padded">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12"><h4>Unduh file</h4></div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12">
+                
+                <input style='width: 100%' class='btn btn-default' type='button' name='submit_txt' value='Unduh .txt' onclick='downloadSupplier("txt");'>
+		           
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12">
+            
+                <input style='width: 100%' class='btn btn-default' type='button' name='submit_xml' value='Unduh .xml' onclick='downloadSupplier("xml");'> 
+                
+            </div>
+            
         </div>
     </div>
 </div>
 
-<div id="checkMax" class="modalDialog" >
-    <div><h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">Perhatian</h2>
-    <a href="#close" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i></a>
-        <div id="top">
-            <h3 style="text-align: center">Data yang dipilih maksimal 1000 record. Silahkan mengirimkan email ke datasupplierdtp@gmail.com jika ingin mengubah lebih dari 1000 record.</h3>
+</form>
+
+<!-- Filter -->
+<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+        
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
+
+            </div>
+            
+            <form id="filter-form" method="POST" action="cekSupplier" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    
+                    <div id="wtipesup" class="alert alert-danger" style="display: none"></div>
+                    <label class='isian'>Tipe Supplier: </label>
+                    <select class='form-control' type='text' name='tipesup' id='tipesup'>
+                        <option value='1' <?php if ($this->d_tipesup==1){echo "selected";}?>>1. Satker</option>
+                        <option value='2' <?php if ($this->d_tipesup==2){echo "selected";}?>>2. Penyedia BJ</option>
+                        <option value='3' <?php if ($this->d_tipesup==3){echo "selected";}?>>3. Pegawai</option>
+                        <option value='4' <?php if ($this->d_tipesup==4){echo "selected";}?>>4. BA.999</option>
+                        <option value='5' <?php if ($this->d_tipesup==5){echo "selected";}?>>5. Transfer Daerah</option>
+                        <option value='6' <?php if ($this->d_tipesup==6){echo "selected";}?>>6. PP/Banyak Penerima</option>
+                        <option value='7' <?php if ($this->d_tipesup==7){echo "selected";}?>>7. Lain-lain</option>
+                    </select>
+                    <br/>
+                    <div id="wnrs" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">NRS: </label>
+                    <input class='form-control' type="number" name="nrs" id="nrs" size="15" value="<?php if (isset($this->d_nrs)){echo $this->d_nrs;}?>">
+                    <br/>
+                    <div id="wnamasupplier" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">Nama Supplier: </label>
+                    <input class='form-control' type="text" name="namasupplier" id="namasupplier" value="<?php if (isset($this->d_namasupplier)){echo $this->d_namasupplier;}?>">
+                    <br/>
+                    <div id="wnpwpsupplier" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">NPWP Supplier: </label>
+                    <input class='form-control' type="text" name="npwpsupplier" id="npwpsupplier" value="<?php if (isset($this->d_npwpsupplier)){echo $this->d_npwpsupplier;}?>">
+                    <br/>
+                    <div id="wnip" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">NIP Penerima: </label>
+                    <input class='form-control' type="number" name="nip" id="nip" size="18" value="<?php if (isset($this->d_nip)){echo $this->d_nip;}?>">
+                    <br/>
+                    <div id="wnamapenerima" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">Nama Penerima: </label>
+                    <input class='form-control' type="text" name="namapenerima" id="namapenerima" value="<?php if (isset($this->d_namapenerima)){echo $this->d_namapenerima;}?>">
+                    <br/>
+                    <div id="wnorek" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">Nomor Rek.: </label>
+                    <input class='form-control' type="text" name="norek" id="norek" value="<?php if (isset($this->d_norek)){echo $this->d_norek;}?>">
+                    <br/>
+                    <div id="wnamarek" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">Nama Rek.: </label>
+                    <input class='form-control' type="text" name="namarek" id="namarek" value="<?php if (isset($this->d_namarek)){echo $this->d_namarek;}?>">
+                    <br/>
+                    <div id="wnpwppenerima" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">NPWP Penerima: </label>
+                    <input class='form-control' type="text" name="npwppenerima" id="npwppenerima" value="<?php if (isset($this->d_npwppenerima)){echo $this->d_npwppenerima;}?>">
+                        
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
+                </div>
+
+            </form>
+
         </div>
+
     </div>
+
 </div>
 
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
-<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
 <script type="text/javascript" charset="utf-8">
     
     function downloadSupplier(type) {
@@ -177,9 +210,9 @@ if (isset($this->last_update)){
         var countChecked = $("#checkbox:checked").length;
         
         if (countChecked == 0) {
-            window.location = "#checkFirst";
+            alert('Tidak ada data yang dipilih.');
         } else if (countChecked > 1000) {
-            window.location = "#checkMax";
+            alert('Terlalu banyak data yang dipilih. Maksimal data yang dipilih sebanyak 1000 baris.');
         } else {
             document.listSupplier.submit();
         }
@@ -193,7 +226,7 @@ if (isset($this->last_update)){
 	});
 	
     function hideErrorId(){
-        $('.error').fadeOut(0);
+        $('.alert-danger').fadeOut(0);
     }
 	
 	function toggle(source) {
@@ -297,25 +330,4 @@ if (isset($this->last_update)){
             return false;
         } 
     }
-	
-	$(document).ready( function () {
-		var oTable = $('#fixheader').dataTable( {
-			"sScrollY": 400,
-			"sScrollX": "100%",
-			"sScrollXInner": "100%",
-			"bSort": false,
-			"bPaginate": false,
-			"bInfo": null,
-			"bFilter": false,
-			"oLanguage": {
-			"sEmptyTable": "Tidak ada data di dalam tabel ini."
-			
-			},
-		} );
-				
-		var keys = new KeyTable( {
-			"table": document.getElementById('fixheader'),
-			"datatable": oTable
-		} );
-	} );
 </script>

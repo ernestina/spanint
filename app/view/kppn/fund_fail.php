@@ -84,17 +84,17 @@
         <!--baris pertama-->
             <thead>
                 <tr>
-                    <th>No.</th>
-                    <th>Tanggal Error</th>
-                    <th>Satker</th>
-                    <th>Kode KPPN</th>
-                    <th>Akun</th>
-                    <th>Program</th>
-                    <th>Output</th>
-                    <th>Dana</th>
-                    <th>Description</th>
-                    <th>Blokir/Kontrak</th>
-                    <th>Realisasi</th>
+                    <th class='ratatengah'>No.</th>
+                    <th class='ratatengah'>Tanggal Error</th>
+                    <th class='ratatengah'>Satker</th>
+                    <th class='ratatengah'>Kode KPPN</th>
+                    <th class='ratatengah'>Akun</th>
+                    <th class='ratatengah'>Program</th>
+                    <th class='ratatengah'>Output</th>
+                    <th class='ratatengah'>Dana</th>
+                    <th class='ratatengah'>Description</th>
+                    <th class='ratakanan'>Blokir/Kontrak</th>
+                    <th class='ratakanan'>Realisasi</th>
                 </tr>
             </thead>
             <tbody class='ratatengah'>
@@ -108,7 +108,7 @@
                         foreach ($this->data as $value) {
                             echo "<tr>	";
                             echo "<td>" . $no++ . "</td>";
-                            echo "<td class='ratakiri'>" . $value->get_error_date() . "</td>";
+                            echo "<td class='ratatengah'>" . $value->get_error_date() . "</td>";
                             echo "<td>" . $value->get_satker_code() . "</td>";
                             /*echo "<td><a href=" . URL . "dataDIPA/Detail_Fund_Fail_KD/" . $value->get_satker_code() . "/" . $value->get_output_code() . " target='_blank' '>" . $value->get_satker_code() . "</td>";*/
                             echo "<td>" . $value->get_kppn_code() . "</td>";

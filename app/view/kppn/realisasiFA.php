@@ -93,22 +93,24 @@
     <table class="footable">
         <!--baris pertama-->
         <thead>
-        <th class='mid'>No.</th>
-        <th class='mid'>Satker</th>
-        <th class='mid'>KPPN</th>
-        <th class='mid'>Akun</th>
-        <th class='mid'>Program</th>
-        <th class='mid'>Output</th>
-        <th class='mid'>Dana</th>
-        <!--th class='mid'>Bank</th-->
-        <th>Kewenangan</th>
-        <th class='mid'>Lokasi</th>
-        <th class='mid'>Tipe Anggaran</th>
-        <!--th>Mata Uang</th-->
-        <th>Pagu</th>
-        <th>Pencadangan</th>
-        <th>Realisasi</th>
-        <th>Sisa pagu</th>
+            <tr>
+                <th class='ratatengah'>No.</th>
+                <th class='ratatengah'>Satker</th>
+                <th class='ratatengah'>KPPN</th>
+                <th class='ratatengah'>Akun</th>
+                <th class='ratatengah'>Program</th>
+                <th class='ratatengah'>Output</th>
+                <th class='ratatengah'>Dana</th>
+                <!--th class='mid'>Bank</th-->
+                <th>Kewenangan</th>
+                <th class='ratatengah'>Lokasi</th>
+                <th class='ratatengah'>Tipe Anggaran</th>
+                <!--th>Mata Uang</th-->
+                <th class='ratakanan'>Pagu</th>
+                <th class='ratakanan'>Pencadangan</th>
+                <th class='ratakanan'>Realisasi</th>
+                <th class='ratakanan'>Sisa pagu</th>
+            </tr>
         </thead>
         <tbody class='ratatengah'>
             <?php
@@ -150,6 +152,15 @@
                         $tot_encumbrance+=$value->get_encumbrance_amt();
                         $tot_actual+=$value->get_actual_amt();
                         $tot_balancing+=$value->get_balancing_amt();
+                        ?>
+                        <tr>
+                            <td colspan='10' class='ratatengah'><b>GRAND TOTAL</b></td>
+                            <td class='ratakanan'><b><?php echo number_format($tot_budget); ?></b></td>
+                            <td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></b></td>
+                            <td class='ratakanan'><b><?php echo number_format($tot_actual); ?></b></td>
+                            <td class='ratakanan'><b><?php echo number_format($tot_balancing); ?></b></td>
+                        </tr>
+                        <?php
                     }
                 }
             } else {
@@ -157,15 +168,6 @@
             }
             ?>
         </tbody>
-        <tfoot>
-            <tr>
-                <td colspan='10' class='ratatengah'><b>GRAND TOTAL</b></td>
-                <td class='ratakanan'><b><?php echo number_format($tot_budget); ?></b></td>
-                <td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></b></td>
-                <td class='ratakanan'><b><?php echo number_format($tot_actual); ?></b></td>
-                <td class='ratakanan'><b><?php echo number_format($tot_balancing); ?></b></td>
-            </tr>
-        </tfoot>
     </table>
 </div>
 
@@ -376,7 +378,7 @@
     }
 </script>
 
-<div class="main-window-segment" style="padding-top: none;">
+<div class="main-window-segment vertical-padded">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">

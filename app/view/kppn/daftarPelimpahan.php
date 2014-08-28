@@ -171,9 +171,9 @@ if (isset($this->data)) {
                 <div class="modal-body">
                     
                     <?php if (count($this->kppn_anak)>1){ ?>
-					<div id="wkppn_anak" class="error"></div>
+					<div id="wkppn_anak" class="alert alert-danger" style="display: none"></div>
                     <label class="isian">KPPN Anak: </label>
-                    <select type="text" name="kppn_anak" id="kppn_anak">                        
+                    <select class="form-control" type="text" name="kppn_anak" id="kppn_anak">                        
 						<option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option>
 						<?php
                             foreach ($this->kppn_anak as $value2) {
@@ -188,10 +188,10 @@ if (isset($this->data)) {
 				<?php }?>
 					
 					<?php if (isset($this->kppn_induk)) { ?>
-        
-					<div id="wkppn_induk" class="error"></div>
+                    <br/>
+					<div id="wkppn_induk" class="alert alert-danger" style="display: none"></div>
                     <label class="isian">KPPN Induk: </label>
-                    <select type="text" name="kppn_induk" id="kppn_induk">
+                    <select class="form-control" type="text" name="kppn_induk" id="kppn_induk">
                         <option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option><?php
                             foreach ($this->kppn_induk as $value3) {
                                 if ($this->d_kppn_induk == $value3->get_kd_d_kppn()) {
@@ -204,15 +204,15 @@ if (isset($this->data)) {
                     </select>  
 					<?php } ?>
 
-                    <div id="wstatus" class="error"></div>
+                    <div id="wstatus" class="alert alert-danger" style="display: none"></div>
                     <label class="isian">Status: </label>
-                    <select type="text" name="status" id="status">
+                    <select class="form-control" type="text" name="status" id="status">
                         <option value=''>- pilih -</option>
                         <option value='RECONCILED' <?php if ($this->d_status == 'RECONCILED') {echo "selected";} ?>>RECONCILED</option>
                         <option value='UNRECONCILED' <?php if ($this->d_status == 'UNRECONCILED') {echo "selected";} ?>>UNRECONCILED</option>
                         <option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option>
                     </select>                    
-
+                    <br/>
                     <div id="wtgl" class="error"></div>
                     <label class="isian">Tanggal Pelimpahan: </label>
                     

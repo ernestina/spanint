@@ -61,11 +61,11 @@
         <!--baris pertama-->
         <thead>
             <tr>
-                <th>No.</th>
-                <th>Sisa Kontrak</th>
-                <th>Blokir</th>
-                <th>Blokir Sementara</th>
-                <th>Invoice</th>
+                <th class='mid'>No.</th>
+                <th class='ratakanan'>Sisa Kontrak</th>
+                <th class='ratakanan'>Blokir</th>
+                <th class='ratakanan'>Blokir Sementara</th>
+                <th class='ratakanan'>Invoice</th>
             </tr>
         </thead>
         <tbody class='ratatengah'>
@@ -80,11 +80,11 @@
                 } else {
                     foreach ($this->data as $value) {
                         echo "<tr>	";
-                        echo "<td>" . $no++ . "</td>";
-                        echo "<td align='right'>" . number_format($value->get_obligation()) . "</td>";
-                        echo "<td align='right'>" . number_format($value->get_block_amount()) . "</td>";
-                        echo "<td align='right'>" . number_format($value->get_temp_block()) . "</td>";
-                        echo "<td align='right'>" . number_format($value->get_invoice()) . "</td>";
+                        echo "<td class='mid'>" . $no++ . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_obligation()) . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_block_amount()) . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_temp_block()) . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_invoice()) . "</td>";
                         //echo "<td align='right'>" . $value->get_encumbered_amount(). "</td>";
                         //$total = $total + $value->get_encumbered_amount();
                     }

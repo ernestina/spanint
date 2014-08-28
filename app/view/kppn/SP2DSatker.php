@@ -116,14 +116,14 @@ isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
         <!--baris pertama-->
         <thead>
             <tr>
-                <th>No.</th>
+                <th class='mid'>No.</th>
                 <th>Nomor SP2D</th>
                 <th>Tanggal Selesai SP2D</th>
                 <th>Tanggal SP2D</th>
-                <th>Nilai SP2D </th>
+                <th class='ratakanan'>Nilai SP2D </th>
                 <th>Nomor Invoice</th>
                 <th>Tanggal Invoice</th>
-                <th>Jenis SPM </th>
+                <th class='mid'>Jenis SPM </th>
                 <th>Jenis SP2D</th>
                 <th>Deskripsi</th>
                 <th>Pilih <input type="checkbox" onClick="toggle(this)" /> </th>
@@ -139,7 +139,7 @@ isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
                 } else {
                     foreach ($this->data as $value) {
                         echo "<tr>	";
-                        echo "<td>" . $no++ . "</td>";
+                        echo "<td class='mid'>" . $no++ . "</td>";
                         echo "<td>" . $value->get_check_number() . "</td>";
                         echo "<td>" . $value->get_creation_date() . "</td>";
                         echo "<td>" . $value->get_check_date() . "</td>";
@@ -161,8 +161,24 @@ isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
             ?>
         </tbody>
     </table>
-    </form>
 </div>
+    
+<div class="main-window-segment vertical-padded">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-md-12" style="text-align: right">
+                
+                <input class='btn btn-default' style='width:100%' id='submit' class='sukses' type='submit' name='submit_file2' value='Unduh' onClick=''>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+    
+    
+</form>
 
 <div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
         
