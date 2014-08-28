@@ -45,7 +45,7 @@
                         
                     <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul MU</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Manajemen User</h4>
                         <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
                             <ul>
                                 <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring Pergantian User</a></li>
@@ -53,7 +53,7 @@
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Manajemen DIPA</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
@@ -67,15 +67,16 @@
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul CM</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
                         <div class="collapse">
                             <ul>
-                                <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Penyaluran &amp; Droping Dana SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Droping Dana</a></li>
+                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
                             </ul>
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul PM</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Manajemen Pembayaran</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataSPM/PosisiSPM">Monitoring Posisi Invoice</a></li>
@@ -89,20 +90,12 @@
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul GR</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Manajemen Penerimaan</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelimpahan</h4>
-                        <div class="collapse">
-                            <ul>
-                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
                             </ul>
                         </div>
                     </li>
@@ -152,7 +145,7 @@
                         
                     <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul MU</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Manajemen User</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring Pergantian User</a></li>
@@ -160,7 +153,7 @@
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Manajemen DIPA</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
@@ -173,8 +166,16 @@
                             </ul>
                         </div>
                     </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul PM</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Manajemen Pembayaran</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataSPM/PosisiSPM">Monitoring Posisi Invoice</a></li>
@@ -188,20 +189,12 @@
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul GR</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Manajemen Penerimaan</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelimpahan<</h4>
-                        <div class="collapse">
-                            <ul>
-                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
                             </ul>
                         </div>
                     </li>
@@ -250,7 +243,7 @@
                         
                     <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul MU</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Manajemen User</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring Pergantian User</a></li>
@@ -258,7 +251,7 @@
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Manajemen DIPA</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
@@ -271,8 +264,16 @@
                             </ul>
                         </div>
                     </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul PM</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Manajemen Pembayaran</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataSPM/PosisiSPM">Monitoring Posisi Invoice</a></li>
@@ -286,7 +287,7 @@
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul GR</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Manajemen Penerimaan</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
@@ -296,18 +297,10 @@
                         </div>
                     </li>
                     
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Supplier</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataSupplier/downloadSupplierXls">Download Supplier</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelimpahan</h4>
-                        <div class="collapse">
-                            <ul>
-                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
                             </ul>
                         </div>
                     </li>
@@ -356,29 +349,30 @@
                         
                     <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Manajemen DIPA</h4>
                         <div class="collapse">
                             <ul>
-                                <li><a href="<?php echo URL; ?>dataDIPA/RevisiDipa/<?php Session::get('kd_satker'); ?>">Informasi Revisi DIPA</a></li>
-                                <li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA/<?php Session::get('kd_satker'); ?>">Informasi Proses Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/RevisiDipa/<?php Session::get('kd_satker'); ?>"></i>Informasi DIPA</a></li>
+								<li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi/<?php Session::get('kd_satker'); ?>"></i>Informasi Proses Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1/<?php Session::get('kd_satker'); ?>"></i>Sisa Pagu</a></li>
+								<li><a href="<?php echo URL; ?>dataDIPA/Fund_fail/<?php Session::get('kd_satker'); ?>"></i>Data Pagu Minus</a></li>
                             </ul>
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul PM</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Manajemen Pembayaran</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataSPM/PosisiSPM">Monitoring Posisi Invoice</a></li>
                                 <li><a href="<?php echo URL; ?>dataSPM/HoldSPM">Hold Invoice</a></li>
                                 <li><a href="<?php echo URL; ?>dataSPM/ValidasiSpm">Daftar Penolakan PMRT</a></li>
-                                <li><a href="<?php echo URL; ?>dataSPM/HistorySpm">Histori Invoice</a></li>
                                 <li><a href="<?php echo URL; ?>dataSPM/daftarsp2d/<?php Session::get('kd_satker'); ?>">Daftar SP2D</a></li>
                                 <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
                             </ul>
                         </div>
                     </li>
                     
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Supplier</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
@@ -414,16 +408,16 @@
                     <li class="subnav"><h4><span class="glyphicon glyphicon-transfer"></span>&nbsp;&nbsp;Retur</h4>
                         <div class="collapse">
                             <ul>
-                                <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPKN">Monitoring Penyelesaian Retur</a></li>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur</a></li>
                                 <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
                             </ul>
                         </div>
                     </li>
                     
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-arrow-down"></span>&nbsp;&nbsp;Droping</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
                         <div class="collapse">
                             <ul>
-                                <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Penyaluran &amp; Droping Dana SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Droping Dana</a></li>
                             </ul>
                         </div>
                     </li>
@@ -452,16 +446,14 @@
                         
                     <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
                     
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Manajemen DIPA</h4>
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
-                                <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                 <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
                                 <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
                                 <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
                                 <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
-                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
                             </ul>
                         </div>
                     </li>

@@ -1,6 +1,6 @@
 <div class="container power-center">
     
-    <div class="row" style="margin-top: 30px;">
+    <div class="row" style="margin-top: 20px;">
         
         <div class="col-md-12" style="text-align: center;">
             <img src="<?php echo URL; ?>public/start.png">
