@@ -91,7 +91,7 @@ class PDFController extends BaseController {
 		$d_log->tambah_log("Sukses");
     }
 
-    public function Fund_fail_PDF() {
+    public function Fund_fail_PDF($kdsatker=null,$kdkppn=null) {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
@@ -101,7 +101,7 @@ class PDFController extends BaseController {
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
 		
-        if ($kdkppn != '') {
+        if ($kdkppn != 'null') {
             $filter[$no++] = "KPPN_CODE = '" . $kdkppn . "'";
             $d_kppn = new DataUser($this->registry);
             $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
@@ -109,9 +109,11 @@ class PDFController extends BaseController {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
         }
 
-        if ($kdsatker != '') {
+        if ($kdsatker != 'null') {
             $filter[$no++] = "KDSATKER = '" . $kdsatker . "'";
         }
+		var_dump($kdsatker);
+		
         /* if ($kdakun!=''){
           $filter[$no++]="A.ACCOUNT_CODE = '".$kdakun."'";
           }
@@ -139,10 +141,12 @@ class PDFController extends BaseController {
         } else {
             $this->view->nm_kppn2 = Session::get('user');
         }
-		        if (Session::get('role') == KANWIL) {
+		   if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
 			$filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
+			
+			
 			$this->view->data = $d_spm1->get_fun_fail_filter($filter);
         }
         if (Session::get('role') == ADMIN || Session::get('role') == DJA) {
@@ -164,6 +168,7 @@ class PDFController extends BaseController {
 
 		
        	   $this->view->load('kppn/fund_fail_PDF');
+		   //$this->view->render('kppn/fund_fail');
 			//untuk mencatat log user
 			$d_log->tambah_log("Sukses");
 
@@ -224,7 +229,7 @@ class PDFController extends BaseController {
 
 		}
 
-    public function RealisasiFA_PDF($kdsatker = null, $kdakun = null, $kdprogram = null, $kdoutput = null) {
+    public function RealisasiFA_PDF($kdsatker = null,$kdprogram = null, $kdoutput = null,$kdakun = null ) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
@@ -234,9 +239,6 @@ class PDFController extends BaseController {
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
 		
-        if ($kdsatker != '') {
-            $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
-        }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
         }
@@ -245,6 +247,9 @@ class PDFController extends BaseController {
         }
 		if (Session::get('role') == KANWIL) {
             $filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+        }
+        if ($kdsatker != 'null') {
+            $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
         }
 
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
@@ -256,9 +261,10 @@ class PDFController extends BaseController {
             $this->view->kdtgl_akhir = $tglakhir;
         }
 
-        if ($kdakun != 'null') {
-            $filter[$no++] = " A.AKUN = '" . $kdakun . "'";
-        }
+		if ($kdakun != 'null') {
+			$filter[$no++] = "A.AKUN = '" . $kdakun . "'";        
+			}
+
         if ($kdprogram != 'null') {
             $filter[$no++] = " A.PROGRAM = '" . $kdprogram . "'";
         }
@@ -276,7 +282,7 @@ class PDFController extends BaseController {
 			$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
 			$this->view->data = $d_spm1->get_fa_filter($filter);
-
+			//$this->view->render('kppn/realisasiFA');
 			$this->view->load('kppn/realisasiFA_PDF');
 			//untuk mencatat log user
 			$d_log->tambah_log("Sukses");
@@ -306,6 +312,8 @@ class PDFController extends BaseController {
             if ($kdakun != 'null') {
                 $filter[$no++] = "A.AKUN = '" . $kdakun . "'";
             }
+			
+			
             if ($kdoutput != 'null') {
                 $filter[$no++] = "A.OUTPUT = '" . $kdoutput . "'";
             }
