@@ -13,56 +13,20 @@
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 <?php
-			//----------------------------------------------------
-			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : detail_revisi.php  
-		if (Session::get('role') == KANWIL || Session::get('role') == ADMIN) {
-			foreach ($this->data as $value) {
-					$kdkppn =$value->get_kppn();
-			}
-			if(isset($this->d_kdsatker)){
-				$kdsatker = $this->d_kdsatker;
-			}else{
-				$kdsatker =Session::get('kd_satker');
-			}
 
-			?>                
-                <a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+           if(isset($this->d_kdsatker)){
+                $kdkppn = Session::get('id_user');
+                if (isset($this->d_kdsatker)) {
+                    $kdsatker = $this->d_kdsatker;
+                }
+                ?>
+                
+                <a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
             <?php
-
-			}
-        if (Session::get('role') == KPPN) {
-			$kdkppn = Session::get('id_user');
-			if(isset($this->d_kdsatker)){
-				$kdsatker = $this->d_kdsatker;
-			}else{
-				$kdsatker =Session::get('kd_satker');
-			}
-			?>                
-                <a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-            <?php
-
-        }
-        if (Session::get('role') == SATKER) {
-			if(isset($kdkppn)){
-				foreach ($this->data as $value) {
-					$kdkppn =$value->get_kppn();
-				}
-			}else{
-				$kdkppn = Session::get('id_user');
-			}
-			if(isset($this->d_kdsatker)){
-				$kdsatker = $this->d_kdsatker;
-			}else{
-				$kdsatker =Session::get('kd_satker');
-			}
-			?>                
-                <a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-            <?php
-			
-			
-        }
-			
             //----------------------------------------------------		
+
+           }
+
             ?>
                 
                 <!-- button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button -->

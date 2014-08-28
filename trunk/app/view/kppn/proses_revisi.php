@@ -20,9 +20,10 @@
                 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            
+				
+			<?php if (Session::get('role') != SATKER) { ?>
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
+			<?php } ?>
             </div>
         </div>
         
@@ -120,7 +121,7 @@
 
             </div>
             
-            <form id="filter-form" method="POST" action="ProsesRevisi" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="#" enctype="multipart/form-data">
 
                 <div class="modal-body">
                     
@@ -141,23 +142,16 @@
                     <?php } ?>
                     
                     <br/>
-                    <div id="wakun" class="alert alert-danger" style="display:none;"></div>
+                    <div id="wsatker" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Kode Satker : </label>
                     <input class="form-control"  type="text" name="satker" id="satker">
                     
                     <br/>
-                    <div id="wakun" class="alert alert-danger" style="display:none;"></div>
+                    <div id="wnamasatker" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Nama Satker : </label>
                     <input class="form-control" type="text" name="nmsatker" id="nmsatker">
                     
                     <br/>
-                    <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                        
-
                 </div>
 
                 <div class="modal-footer">

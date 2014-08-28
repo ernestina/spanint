@@ -140,7 +140,9 @@ class DataSPMController extends BaseController {
             $this->view->d_satker = Session::get('kd_satker');
         }
 		if ($_POST['kdkppn'] != ''){
-        $this->view->data = $d_spm1->get_hold_spm_filter($filter);
+			$this->view->data = $d_spm1->get_hold_spm_filter($filter);
+		} else if (Session::get('role') == SATKER) {
+			$this->view->data = $d_spm1->get_hold_spm_filter($filter);
 		}
         //var_dump($d_spm1->get_hold_spm_filter ($filter));
 
@@ -458,10 +460,13 @@ class DataSPMController extends BaseController {
 		$d_log->tambah_log("Sukses");
     }
 
-    public function daftarsp2d($kdsatker, $tgl1 = null, $tgl2 = null) {
+    public function daftarsp2d($kdsatker=null, $tgl1 = null, $tgl2 = null) {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
+		if(is_null($kdsatker)){
+			$kdsatker = Session::get('kd_satker');
+		}
 		
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
@@ -479,6 +484,7 @@ class DataSPMController extends BaseController {
                 $filter[$no++] = " SEGMENT1 =  '" . $kdsatker . "'";
             }
         }
+		
         if ($tgl1 != '' AND $tgl2 != '') {
             $filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('" . $tgl1 . "','DD/MM/YYYY hh:mi:ss') AND TO_DATE('" . $tgl2 . "','DD/MM/YYYY hh:mi:ss')";
             $this->view->d_tgl_awal = $tgl1;
@@ -522,7 +528,7 @@ class DataSPMController extends BaseController {
         }
 		
 		if (kdsatker != '' ) {
-		$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);
+			$this->view->data = $d_spm1->get_sp2d_satker_filter($filter);
 		}
 
         $this->view->data2 = $d_spm1->get_jenis_spm_filter($kdsatker);

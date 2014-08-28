@@ -228,7 +228,7 @@ $akses['PDFAdmin'] = array(
 	'monitoringRetur_PDF',
 	'posisiSpm_PDF',
 	'detailposisiSpm_PDF',
-	'holdSpm_PDF',
+	'HoldSpm_PDF',
 	'HistorySpm_PDF',
 	'daftarsp2d_PDF',
 	'detailrekapsp2d1_PDF',

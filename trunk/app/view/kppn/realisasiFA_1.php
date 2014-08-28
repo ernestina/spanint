@@ -10,8 +10,7 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
     <?php
- //----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA_1.php  
+    //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA_1.php  
 if (Session::get('role') == SATKER) {
 	foreach ($this->data as $value) {
 		$kdsatker=$value->get_satker();
@@ -53,7 +52,7 @@ if(isset($this->account_code) || isset($this->program_code) || isset($this->outp
     }else{
 		$kdoutput = 'null';
 	}
- 	if (isset($this->d_tgl_awal)) {
+	if (isset($this->d_tgl_awal)) {
         $kdtgl_awal = $this->d_tgl_awal;
     } else {
         $kdtgl_awal = 'null';
@@ -64,11 +63,10 @@ if(isset($this->account_code) || isset($this->program_code) || isset($this->outp
         $kdtgl_akhir = 'null';
     }
     ?>
-<ul class="inline" style="float: right"><li>
+	<ul class="inline" style="float: right"><li>
 <a href="<?php echo URL; ?>PDF/RealisasiFA_1_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
-	
 		<?php
-}
+	}
 ?>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">

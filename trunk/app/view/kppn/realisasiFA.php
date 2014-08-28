@@ -10,8 +10,7 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA.php  
+    //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA.php  
   if(!empty($this->account_code) || !empty($this->program_code) || !empty($this->output_code)){
   
 	 if (isset($this->account_code)) {
@@ -43,7 +42,7 @@
 <a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 	<?php
 } 
-?>   
+?>  
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
@@ -88,7 +87,7 @@
     <table class="footable">
         <!--baris pertama-->
         <thead>
-            <tr>
+        <tr>
                 <th class='ratatengah'>No.</th>
                 <th class='ratatengah'>Satker</th>
                 <th class='ratatengah'>KPPN</th>
@@ -106,7 +105,7 @@
                 <th class='ratakanan'>Realisasi</th>
                 <th class='ratakanan'>Sisa pagu</th>
             </tr>
-        </thead>
+			</thead>
         <tbody class='ratatengah'>
             <?php
             $no = 1;
@@ -147,7 +146,7 @@
                         $tot_encumbrance+=$value->get_encumbrance_amt();
                         $tot_actual+=$value->get_actual_amt();
                         $tot_balancing+=$value->get_balancing_amt();
-                        ?>
+						 ?>
                         <tr>
                             <td colspan='10' class='ratatengah'><b>GRAND TOTAL</b></td>
                             <td class='ratakanan'><b><?php echo number_format($tot_budget); ?></b></td>
