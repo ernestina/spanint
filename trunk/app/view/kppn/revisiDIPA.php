@@ -1,38 +1,42 @@
-<div id="top">
-    <div id="header">
-        <h2>DATA REVISI DIPA <?php //echo Session::get('user');  ?>
-            <?php
-            $nmsatker = '';
-            foreach ($this->data as $value) {
-                $nmsatker = $value->get_nm_satker();
-            }
-            echo $nmsatker;
-            ?>
-
-        </h2>
-    </div>
+<!-- Ndas -->
+<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Data Revisi DIPA</h2>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
     <?php
-	 //----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : revisiDIPA.php  
-	foreach ($this->data as $value) {
-		$kdsatker =$value->get_satker_code();
-     }
-
+    //----------------------------------------------------
+    //Development history
+    //Revisi : 0
+    //Kegiatan :1.mencetak hasil filter ke dalam pdf
+    //File yang diubah : revisiDIPA.php
+    //Dibuat oleh : Rifan Abdul Rachman
+    //Tanggal dibuat : 18-07-2014
+    //----------------------------------------------------
+	
+	if( isset($this->account_code) ||
+	isset($this->output_code) || isset($this->program_code) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
+	){
     if (isset($this->account_code)) {
         $kdakun = $this->account_code;
         $kdakun = rtrim($kdakun);
     } else {
         $kdakun = 'null';
     }
-/*     if (isset($this->satker_code)) {
+
+    if (isset($this->satker_code)) {
         $kdsatker = $this->satker_code;
         $kdsatker = rtrim($kdsatker);
     } else {
         $kdsatker = 'null';
-		
     }
- */	
-     if (isset($this->output_code)) {
+
+    if (isset($this->output_code)) {
         $kdoutput = $this->output_code;
         $kdoutput = rtrim($kdoutput);
     } else {
@@ -45,107 +49,81 @@
         $kdprogram = 'null';
     }
     if (isset($this->d_tgl_awal)) {
-        $kdtgl_awal = $this->d_tgl_awal; //"01/25/2014"
-		
- 		list($bln,$tgl,$tahun)= explode("/",$kdtgl_awal);
-		$kdtgl_awal=$bln.'-'.$tgl.'-'.$tahun; //01-25-2014
- 
+        $kdtgl_awal = $this->d_tgl_awal;
     } else {
         $kdtgl_awal = 'null';
     }
     if (isset($this->d_tgl_akhir)) {
-        $kdtgl_akhir = $this->d_tgl_akhir; //08/25/2014
-		
-	list($bln,$tgl,$tahun)= explode("/",$kdtgl_akhir);
-		$kdtgl_akhir=$bln.'-'.$tgl.'-'.$tahun; //08-25-2014
-		
- 
+        $kdtgl_akhir = $this->d_tgl_akhir;
     } else {
         $kdtgl_akhir = 'null';
     }
     ?>
-<ul class="inline" style="float: right"><li>
-<a href="<?php echo URL; ?>PDF/RevisiDipa_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>							
+        
+        <a href="<?php echo URL; ?>PDF/revisiDIPA_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
         <?php
-//----------------------------------------------------		
+//----------------------------------------------------			
+	}
         ?>
-        <li><a href="#yModal" class="modal">FILTER DATA</a></li></ul>
-    <div id="yModal" class="modalDialog" >
-        <div>
-            <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
-            <a href="<?php
-        $_SERVER['PHP_SELF'];
-        ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
-            </a>
-
-            <div id="top">
-
-                <form method="POST" action="#" enctype="multipart/form-data">
-
-
-                    <div id="wakun" class="error"></div>
-                    <label class="isian">Akun : </label>
-                    <input type="text" name="akun" id="akun">
-
-                    <div id="woutput" class="error"></div>
-                    <label class="isian">Output : </label>
-                    <input type="text" name="output" id="output">
-
-                    <div id="wprogram" class="error"></div>
-                    <label class="isian">Program : </label>
-                    <input type="text" name="program" id="program">
-
-                    <div id="wtgl" class="error"></div>
-                    <label class="isian">Tanggal: </label>
-                    <ul class="inline">
-                        <li><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)) {
-            echo $this->d_tgl_awal;
-        } ?>"> </li> <li>s/d</li>
-                        <li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker1" value="<?php if (isset($this->d_tgl_akhir)) {
-            echo $this->d_tgl_akhir;
-        } ?>"></li>
-                    </ul>
-
-                    <ul class="inline"  style="margin-left: 130px">
-                        <li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-                        <li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
-                        <!--onClick="konfirm(); return false;"-->
-                    </ul>
-                </form>
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
             </div>
         </div>
+        
+        <div class="row" style="padding-top: 10px">
+            
+            <div class="col-md-6 col-sm-12">
+                <?php
+                $nmsatker = '';
+                foreach ($this->data as $value) {
+                    $nmsatker = $value->get_nm_satker();
+                }
+                echo $nmsatker;
+                ?>
+            </div>
+            
+            <div class="col-md-6 col-sm-12" style="text-align: right;">
+                <?php
+                    // untuk menampilkan last_update
+                    if (isset($this->last_update)) {
+                        foreach ($this->last_update as $last_update) {
+                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                        }
+                    }
+                ?>
+            </div>
+            
+        </div>
+        
     </div>
+</div>
 
-    <?php
-    // untuk menampilkan last_update
-    if (isset($this->last_update)) {
-        foreach ($this->last_update as $last_update) {
-            echo "Update Data Terakhir (Waktu Server)  "
-            ?> <br/>
-        <?php
-        echo $last_update->get_last_update() . " WIB";
-    }
-	}
-?>
-    <div id="fitur">
-        <table width="100%" class="table table-bordered zebra" id="example" style="font-size: 90%">
-            <!--baris pertama-->
+<!-- Blok Tabel -->
+<div id="table-container" class="wrapper">
+    <table width="100%" class="footable">
+        <!--baris pertama-->
             <thead>
-            <th class='mid'>No.</th>
-            <th class='mid'>Nomor DIPA</th>
-            <th>Revisi Ke</th>
-            <th>Tanggal Post Revisi</th>
-            <th class='mid'>Pagu</th>
-            <th class='mid'>Satker</th>
-            <th class='mid'>Akun</th>
-            <th class='mid'>Program</th>
-            <th class='mid'>Output</th>
-            <th class='mid'>Dana</th>
-            <th class='mid'>Bank</th>
-            <th>Kewenangan</th>
-            <th>Tipe Anggaran</th>
-            <th class='mid'>Kololari</th>
-            <th>Kode Cadangan</th>
+                
+                <tr>
+                    <th class='mid'>No.</th>
+                    <th class='mid'>Nomor DIPA</th>
+                    <th>Revisi Ke</th>
+                    <th>Tanggal Post Revisi</th>
+                    <th class='mid'>Pagu</th>
+                    <th class='mid'>Satker</th>
+                    <th class='mid'>Akun</th>
+                    <th class='mid'>Program</th>
+                    <th class='mid'>Output</th>
+                    <th class='mid'>Dana</th>
+                    <th class='mid'>Bank</th>
+                    <th>Kewenangan</th>
+                    <th>Tipe Anggaran</th>
+                    <th class='mid'>Kololari</th>
+                    <th>Kode Cadangan</th>
+                </tr>
 
             </thead>
             <tbody class='ratatengah'>
@@ -154,7 +132,7 @@
                 //var_dump ($this->data);
                 if (isset($this->data)) {
                     if (empty($this->data)) {
-                        echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+                        echo '<td colspan=6 align="center">Tidak ada data.</td>';
                     } else {
                         foreach ($this->data as $value) {
                             echo "<tr>	";
@@ -179,174 +157,204 @@
                         }
                     }
                 } else {
-                    echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+                    echo '<td colspan=6 align="center">Silahkan masukkan filter terlebih dahulu.</td>';
                 }
                 ?>
             </tbody>
-        </table>
-        <br>
-        <br>
-        <b><i>* Nilai Pagu Merupakan Pagu Awal DIPA, Untuk Melihat Sisa Pagu Tersedia Gunakan Menu Sisa Pagu Belanja Realisasi dan Encumbrance </i></b></br>
-        <b><i>* Data Merupakan Data Per Tanggal Sebelumnya Pukul 19.00 </i></b></br>
-    </div>
+    </table>
 </div>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
-<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+
+<!-- Blok Filter -->
+<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+        
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
+
+            </div>
+            
+            <form id="filter-form" method="POST" action="#" enctype="multipart/form-data">
+
+                <div class="modal-body">
+	                <div id="wakun" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">Akun : </label>
+                    <input class="form-control" type="text" name="akun" id="akun">
+                    <br/>
+                    <div id="woutput" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">Output : </label>
+                    <input class="form-control" type="text" name="output" id="output">
+                    <br/>
+                    <div id="wprogram" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">Program : </label>
+                    <input class="form-control" type="text" name="program" id="program">
+                    <br/>
+                    <div id="wtgl" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">Tanggal: </label>
+                    <div class="input-daterange input-group" id="datepicker" style="width: 100%">
+                        <input class="form-control" type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
+                        <span class="input-group-addon">s.d.</span>
+                        <input class="form-control" type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
+                    </div>
+                        
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
 <script type="text/javascript" charset="utf-8">
-                            $(function() {
-                                hideErrorId();
-                                hideWarning();
+    $(function() {
+        hideErrorId();
+        hideWarning();
 
-                            });
+    });
+    
+    $('#datepicker').datepicker({
+        format: 'dd-mm-yyyy'
+    });
 
-                            function hideErrorId() {
-                                $('.error').fadeOut(0);
-                            }
+    function hideErrorId() {
+        $('.error').fadeOut(0);
+    }
 
-                            function hideWarning() {
-                                $('#kd_satker').change(function() {
-                                    if (document.getElementById('kd_satker').value != '') {
-                                        $('#wkdsatker').fadeOut(200);
-                                    }
-                                });
+    function hideWarning() {
+        $('#kd_satker').change(function() {
+            if (document.getElementById('kd_satker').value != '') {
+                $('#wkdsatker').fadeOut(200);
+            }
+        });
 
-                                $('#akun').change(function() {
-                                    if (document.getElementById('akun').value != '') {
-                                        $('#wakun').fadeOut(200);
-                                    }
-                                });
+        $('#akun').change(function() {
+            if (document.getElementById('akun').value != '') {
+                $('#wakun').fadeOut(200);
+            }
+        });
 
-                                $('#output').change(function() {
-                                    if (document.getElementById('output').value != '') {
-                                        $('#woutput').fadeOut(200);
-                                    }
-                                });
+        $('#output').change(function() {
+            if (document.getElementById('output').value != '') {
+                $('#woutput').fadeOut(200);
+            }
+        });
 
-                                $('#program').change(function() {
-                                    if (document.getElementById('output').value != '') {
-                                        $('#wprogram').fadeOut(200);
-                                    }
-                                });
+        $('#program').change(function() {
+            if (document.getElementById('output').value != '') {
+                $('#wprogram').fadeOut(200);
+            }
+        });
 
-                                $('#datepicker2').change(function() {
-                                    if (document.getElementById('datepicker2').value != '' && document.getElementById('datepicker3').value != '') {
-                                        $('#wtgl').fadeOut(200);
-                                    }
-                                });
+        $('#datepicker2').change(function() {
+            if (document.getElementById('datepicker2').value != '' && document.getElementById('datepicker3').value != '') {
+                $('#wtgl').fadeOut(200);
+            }
+        });
 
-                                $('#datepicker3').change(function() {
-                                    if (document.getElementById('datepicker2').value != '' && document.getElementById('datepicker3').value != '') {
-                                        $('#wtgl').fadeOut(200);
-                                    }
-                                });
+        $('#datepicker3').change(function() {
+            if (document.getElementById('datepicker2').value != '' && document.getElementById('datepicker3').value != '') {
+                $('#wtgl').fadeOut(200);
+            }
+        });
 
-                            }
+    }
 
-                            function cek_upload() {
-                                var pattern = '^[0-9]+$';
-                                var v_kd_satker = document.getElementById('kd_satker').value;
-                                var v_akun = document.getElementById('akun').value;
-                                var v_output = document.getElementById('output').value;
-                                var v_program = document.getElementById('program').value;
-                                var v_tglawal = document.getElementById('datepicker2').value;
-                                var v_tglakhir = document.getElementById('datepicker3').value;
+    function cek_upload() {
+        var pattern = '^[0-9]+$';
+        var v_kd_satker = document.getElementById('kd_satker').value;
+        var v_akun = document.getElementById('akun').value;
+        var v_output = document.getElementById('output').value;
+        var v_program = document.getElementById('program').value;
+        var v_tglawal = document.getElementById('datepicker2').value;
+        var v_tglakhir = document.getElementById('datepicker3').value;
 
-                                var jml = 0;
-                                if (v_kd_satker == '' && v_akun == '' && v_output == '' && v_program == '' && v_tglawal == '' && v_tglakhir == '') {
-                                    $('#wkdsatker').html('Harap isi salah satu parameter');
-                                    $('#wkdsatker').fadeIn();
-                                    $('#wakun').html('Harap isi salah satu parameter');
-                                    $('#wakun').fadeIn();
-                                    $('#woutput').html('Harap isi salah satu parameter');
-                                    $('#woutput').fadeIn();
-                                    $('#wprogram').html('Harap isi salah satu parameter');
-                                    $('#wprogram').fadeIn();
-                                    $('#wtgl').html('Harap isi salah satu parameter');
-                                    $('#wtgl').fadeIn();
-                                    jml++;
-                                }
+        var jml = 0;
+        if (v_kd_satker == '' && v_akun == '' && v_output == '' && v_program == '' && v_tglawal == '' && v_tglakhir == '') {
+            $('#wkdsatker').html('Harap isi salah satu parameter');
+            $('#wkdsatker').fadeIn();
+            $('#wakun').html('Harap isi salah satu parameter');
+            $('#wakun').fadeIn();
+            $('#woutput').html('Harap isi salah satu parameter');
+            $('#woutput').fadeIn();
+            $('#wprogram').html('Harap isi salah satu parameter');
+            $('#wprogram').fadeIn();
+            $('#wtgl').html('Harap isi salah satu parameter');
+            $('#wtgl').fadeIn();
+            jml++;
+        }
 
-                                if (v_kd_satker != '' && v_kd_satker.length != 6) {
-                                    $('#wkdsatker').html('Kode Satker harus 6 digit');
-                                    $('#wkdsatker').fadeIn(200);
-                                    jml++;
-                                }
+        if (v_kd_satker != '' && v_kd_satker.length != 6) {
+            $('#wkdsatker').html('Kode Satker harus 6 digit');
+            $('#wkdsatker').fadeIn(200);
+            jml++;
+        }
 
-                                if (v_kd_satker != '' && !v_kd_satker.match(pattern)) {
-                                    var wkdsatker = 'Kode Satker harus dalam bentuk angka!';
-                                    $('#wkdsatker').html(wkdsatker);
-                                    $('#wkdsatker').fadeIn(200);
-                                    jml++;
-                                }
+        if (v_kd_satker != '' && !v_kd_satker.match(pattern)) {
+            var wkdsatker = 'Kode Satker harus dalam bentuk angka!';
+            $('#wkdsatker').html(wkdsatker);
+            $('#wkdsatker').fadeIn(200);
+            jml++;
+        }
 
-                                if (v_akun != '' && v_akun.length != 6) {
-                                    $('#wakun').html('Kode Akun harus 6 digit');
-                                    $('#wakun').fadeIn(200);
-                                    jml++;
-                                }
+        if (v_akun != '' && v_akun.length != 6) {
+            $('#wakun').html('Kode Akun harus 6 digit');
+            $('#wakun').fadeIn(200);
+            jml++;
+        }
 
-                                if (v_akun != '' && !v_akun.match(pattern)) {
-                                    var wakun = 'Kode Akun harus dalam bentuk angka!';
-                                    $('#wakun').html(wakun);
-                                    $('#wakun').fadeIn(200);
-                                    jml++;
-                                }
+        if (v_akun != '' && !v_akun.match(pattern)) {
+            var wakun = 'Kode Akun harus dalam bentuk angka!';
+            $('#wakun').html(wakun);
+            $('#wakun').fadeIn(200);
+            jml++;
+        }
 
-                                if (v_output != '' && v_output.length != 7) {
-                                    $('#woutput').html('Kode Output harus 7 digit');
-                                    $('#woutput').fadeIn(200);
-                                    jml++;
-                                }
+        if (v_output != '' && v_output.length != 7) {
+            $('#woutput').html('Kode Output harus 7 digit');
+            $('#woutput').fadeIn(200);
+            jml++;
+        }
 
-                                if (v_output != '' && !v_output.match(pattern)) {
-                                    var woutput = 'Kode Akun harus dalam bentuk angka!';
-                                    $('#woutput').html(woutput);
-                                    $('#woutput').fadeIn(200);
-                                    jml++;
-                                }
+        if (v_output != '' && !v_output.match(pattern)) {
+            var woutput = 'Kode Akun harus dalam bentuk angka!';
+            $('#woutput').html(woutput);
+            $('#woutput').fadeIn(200);
+            jml++;
+        }
 
-                                if (v_program != '' && v_program.length != 7) {
-                                    $('#wprogram').html('Kode Akun harus 7 digit');
-                                    $('#wprogram').fadeIn(200);
-                                    jml++;
-                                }
+        if (v_program != '' && v_program.length != 7) {
+            $('#wprogram').html('Kode Akun harus 7 digit');
+            $('#wprogram').fadeIn(200);
+            jml++;
+        }
 
-                                if (v_program != '' && !v_program.match(pattern)) {
-                                    var wprogram = 'Kode Akun harus dalam bentuk angka!';
-                                    $('#wprogram').html(wprogram);
-                                    $('#wprogram').fadeIn(200);
-                                    jml++;
-                                }
+        if (v_program != '' && !v_program.match(pattern)) {
+            var wprogram = 'Kode Akun harus dalam bentuk angka!';
+            $('#wprogram').html(wprogram);
+            $('#wprogram').fadeIn(200);
+            jml++;
+        }
 
-                                if (v_tglawal > v_tglakhir) {
-                                    $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
-                                    $('#wtgl').fadeIn(200);
-                                    jml++;
-                                }
+        if (v_tglawal > v_tglakhir) {
+            $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
+            $('#wtgl').fadeIn(200);
+            jml++;
+        }
 
-                                if (jml > 0) {
-                                    return false;
-                                }
-                            }
-                            $(document).ready(function() {
-                                var oTable = $('#example').dataTable({
-                                    "sScrollY": 400,
-                                    "sScrollX": "100%",
-                                    "sScrollXInner": "100%",
-                                    "bSort": false,
-                                    "bPaginate": false,
-                                    "bInfo": null,
-                                    "bFilter": false,
-                                    "oLanguage": {
-                                        "sEmptyTable": "Tidak ada data di dalam tabel ini."
+        if (jml > 0) {
+            return false;
+        }
+    }
 
-                                    },
-                                });
-
-                                var keys = new KeyTable({
-                                    "table": document.getElementById('example'),
-                                    "datatable": oTable
-                                });
-                            });
 </script>

@@ -6,6 +6,15 @@
 
 
 /*
+ * akses modul home
+ */
+$akses['HomePKN'] = array(
+    '__construct',
+    'index',
+    '__destruct'
+);
+
+/*
  * akses modul auth
  */
 $akses['AuthPKN'] = array(

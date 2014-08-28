@@ -213,6 +213,7 @@ $akses['PDFAdmin'] = array(
     'GR_IJP_PDF',
     'detailLhpRekap_PDF',
     'monitoringSp2d_PDF',
+	'monitoringDroping_PDF',
     'harianBO_PDF',
     'sp2dHariIni_PDF',
     'sp2dBesok_PDF',

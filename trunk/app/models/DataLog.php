@@ -18,7 +18,7 @@ class DataLog {
     private $_status;
     private $_error;
     private $_valid = TRUE;
-    private $_table = 'USRAPL14.LOG_USER';
+    private $_table = 'LOG_USER';
     public $registry;
 
     /*
@@ -32,7 +32,7 @@ class DataLog {
 
     public function add_d_log() {
         $data = array(
-            'KD_LOG' => $this->get_kd_log(),
+            //'KD_LOG' => $this->get_kd_log(),
             'KD_D_USER' => $this->get_kd_d_user(),
             'ACTIVITY' => $this->get_activity(),
             'DURATION' => $this->get_duration(),

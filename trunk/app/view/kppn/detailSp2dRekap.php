@@ -1,306 +1,159 @@
-<div id="top">
-    <div id="header">
-        <h2>Detail SP2D <?php
-            if ($this->d_jendok == 1) {
-                echo "Gaji ";
-            } else if ($this->d_jendok == 2) {
-                echo "Non-Gaji ";
-            } else if ($this->d_jendok == 3) {
-                echo "Retur ";
-            } else if ($this->d_jendok == 4) {
-                echo "Void ";
-            } else {
-                echo "";
-            }
-            echo $this->d_bank;
-            ?>
-            <?php
-            if (isset($this->d_nama_kppn)) {
-                foreach ($this->d_nama_kppn as $kppn) {
-                    echo "<br>" . $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                    $kode_kppn = $kppn->get_kd_satker();
-                }
-            }
-            ?>
-<?php echo "<br>" . date("d-m-Y", strtotime($this->d_tgl_awal)) . " s.d " . date("d-m-Y", strtotime($this->d_tgl_akhir)); ?>
-
-        </h2>
-    </div>
-
-    <?php
-// untuk menampilkan last_update
-    if (isset($this->last_update)) {
-        foreach ($this->last_update as $last_update) {
-            echo "<td>Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB </td>";
-        }
-    }
-    ?>
-    <?php
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : detailSp2dRekap.php  
-if(isset($this->d_bank) || isset($this->d_jendok) || 
-isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){ 
-
-		$kdkppn = Session::get('id_user');
-		if (isset($this->d_bank)) {
-			$kdbank = $this->d_bank;
-		 }else{
-			$kdbank='null';
-		}
-		if (isset($this->d_jendok)) {
-			$kdjendok = $this->d_jendok;		   
-		}else{
-			$kdjendok='null';
-		}
-		 if (isset($this->d_tgl_awal)) {
-			$kdtgl_awal = $this->d_tgl_awal;
-		} else {
-			$kdtgl_awal = 'null';
-		}
-		if (isset($this->d_tgl_akhir)) {
-			$kdtgl_akhir = $this->d_tgl_akhir;
-		} else {
-			$kdtgl_akhir = 'null';
-		}
-?>
-
-<a href="<?php echo URL; ?>PDF/detailRekapSP2D2_PDF/<?php echo $kdbank . "/" . $kdjendok . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdkppn; ?>" class="modal">PDF</a>
-
-<?php
-//----------------------------------------------------		
-
-		
-		
-		
-		}
-
-
-
-    ?>
-
-    <div id="fitur">
-        <table width="100%" class="table table-bordered zebra" id='fixheader'>
-            <!--baris pertama-->
-            <thead>
-            <th>No.</th>
-            <th width='100px'>Tgl Selesai SP2D</th>
-            <th width='100px'>Tgl SP2D</th>
-            <th>No. SP2D</th>
-            <!--th>Status</th-->
-
-            <!--th>No. Transaksi</th-->
-            <th>No. Invoice</th>
-            <th>Jumlah Rp</th>
-            <th>Nama Bank</th>
-            <th width='500px'>Deskripsi</th>
-
-            </thead>
-            <tbody class='ratatengah'>
+<!-- Ndas -->
+<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Detail SP2D <?php
+                                    if ($this->d_jendok == 1) {
+                                        echo "Gaji ";
+                                    } else if ($this->d_jendok == 2) {
+                                        echo "Non-Gaji ";
+                                    } else if ($this->d_jendok == 3) {
+                                        echo "Retur ";
+                                    } else if ($this->d_jendok == 4) {
+                                        echo "Void ";
+                                    } else {
+                                        echo "";
+                                    }
+                                    echo $this->d_bank;
+                                ?>
+                </h2>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
                 <?php
-                $no = 1;
-                if (isset($this->data)) {
-                    if (empty($this->data)) {
-                        echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
-                    } else {
-                        foreach ($this->data as $value) {
-                            echo "<tr>	";
-                            echo "<td>" . $no++ . "</td>";
-                            echo "<td>" . $value->get_creation_date() . "</td>";
-                            echo "<td>" . $value->get_payment_date() . "</td>";
-                            echo "<td>" . $value->get_check_number() . "</td>";
-                            //echo "<td>" . $value->get_return_code() . "</td>";
-                            //echo "<td>" . $value->get_check_number_line_num() . "</td>";
-                            echo "<td>" . $value->get_invoice_num() . "</td>";
-                            echo "<td class='ratakanan'>" . $value->get_check_amount() . "</td>";
-                            echo "<td>" . $value->get_bank_account_name() . "</td>";
-                            echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
-                            echo "</tr>	";
+                    //----------------------------------------------------
+                    //Development history
+                    //Revisi : 0
+                    //Kegiatan :1.mencetak hasil filter ke dalam pdf
+                    //File yang diubah : detailSp2dRekap.php
+                    //Dibuat oleh : Rifan Abdul Rachman
+                    //Tanggal dibuat : 18-07-2014
+                    //----------------------------------------------------
+                    if(isset($this->d_bank) || isset($this->d_jendok) || 
+                    isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){ 
+
+                            $kdkppn = Session::get('id_user');
+                            if (isset($this->d_bank)) {
+                                $kdbank = $this->d_bank;
+                             }else{
+                                $kdbank='null';
+                            }
+                            if (isset($this->d_jendok)) {
+                                $kdjendok = $this->d_jendok;
+
+                            }else{
+                                $kdjendok='null';
+                            }
+                             if (isset($this->d_tgl_awal)) {
+                                $kdtgl_awal = $this->d_tgl_awal;
+                            } else {
+                                $kdtgl_awal = 'null';
+                            }
+                            if (isset($this->d_tgl_akhir)) {
+                                $kdtgl_akhir = $this->d_tgl_akhir;
+                            } else {
+                                $kdtgl_akhir = 'null';
+                            }
+                ?>
+
+                <a href="<?php echo URL; ?>PDF/detailRekapSP2D_PDF/<?php echo $kdbank . "/" . $kdjendok . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
+                <?php
+                //----------------------------------------------------		
+
+
+
+
+                    }
+
+
+
+                ?>
+                
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <!-- button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button -->
+                
+            </div>
+        </div>
+        
+        <div class="row" style="padding-top: 10px">
+            
+            <div class="col-md-6 col-sm-12">
+                <?php
+                    if (isset($this->d_nama_kppn)) {
+                        foreach ($this->d_nama_kppn as $kppn) {
+                            echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                            $kode_kppn = $kppn->get_kd_satker();
                         }
                     }
-                } else {
-                    echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
-                }
                 ?>
-            </tbody>
-        </table>
+                <?php echo "<br>" . date("d-m-Y", strtotime($this->d_tgl_awal)) . " s.d " . date("d-m-Y", strtotime($this->d_tgl_akhir)); ?>
+            </div>
+            
+            <div class="col-md-6 col-sm-12" style="text-align: right;">
+                <?php
+                    if (isset($this->last_update)) {
+                        foreach ($this->last_update as $last_update) {
+                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                        }
+                    }
+                ?>
+            </div>
+            
+        </div>
+        
     </div>
 </div>
 
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
-<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
-<script type="text/javascript" charset="utf-8">
-    $(function() {
-        hideErrorId();
-        hideWarning();
 
-        $("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
-        });
-
-        $("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
-        });
-    });
-
-    function hideErrorId() {
-        $('.error').fadeOut(0);
-    }
-
-    function hideWarning() {
-
-        $('#nosp2d').keyup(function() {
-            if (document.getElementById('nosp2d').value != '') {
-                $('#wsp2d').fadeOut(200);
+<!-- Tabel -->
+<div id="table-container" class="wrapper">
+    <table class="footable">
+        <!--baris pertama-->
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th width='100px'>Tgl Selesai SP2D</th>
+                <th width='100px'>Tgl SP2D</th>
+                <th>No. SP2D</th>
+                <th>No. Invoice</th>
+                <th>Jumlah Rp</th>
+                <th>Nama Bank</th>
+                <th width='500px'>Deskripsi</th>
+            </tr>
+        </thead>
+        <tbody class='ratatengah'>
+            <?php
+            $no = 1;
+            if (isset($this->data)) {
+                if (empty($this->data)) {
+                    echo '<td colspan=8 align="center">Tidak ada data.</td>';
+                } else {
+                    foreach ($this->data as $value) {
+                        echo "<tr>	";
+                        echo "<td>" . $no++ . "</td>";
+                        echo "<td>" . $value->get_creation_date() . "</td>";
+                        echo "<td>" . $value->get_payment_date() . "</td>";
+                        echo "<td>" . $value->get_check_number() . "</td>";
+                        //echo "<td>" . $value->get_return_code() . "</td>";
+                        //echo "<td>" . $value->get_check_number_line_num() . "</td>";
+                        echo "<td>" . $value->get_invoice_num() . "</td>";
+                        echo "<td class='ratakanan'>" . $value->get_check_amount() . "</td>";
+                        echo "<td>" . $value->get_bank_account_name() . "</td>";
+                        echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
+                        echo "</tr>	";
+                    }
+                }
+            } else {
+                echo '<td colspan=8 align="center">Silahkan masukkan filter.</td>';
             }
-        })
-
-        $('#barsp2d').keyup(function() {
-            if (document.getElementById('barsp2d').value != '') {
-                $('#wbarsp2d').fadeOut(200);
-            }
-        });
-
-        $('#kdsatker').keyup(function() {
-            if (document.getElementById('kdsatker').value != '') {
-                $('#wsatker').fadeOut(200);
-            }
-        });
-
-        $('#invoice').keyup(function() {
-            if (document.getElementById('invoice').value != '') {
-                $('#winvoice').fadeOut(200);
-            }
-        });
-
-        $('#bank').change(function() {
-            if (document.getElementById('bank').value != '') {
-                $('#wbank').fadeOut(200);
-            }
-        });
-
-        $('#datepicker').change(function() {
-            if (document.getElementById('datepicker').value != '' && document.getElementById('datepicker1').value != '') {
-                $('#wtgl').fadeOut(200);
-            }
-        });
-
-        $('#datepicker1').change(function() {
-            if (document.getElementById('datepicker').value != '' && document.getElementById('datepicker1').value != '') {
-                $('#wtgl').fadeOut(200);
-            }
-        });
-
-        $('#fxml').keyup(function() {
-            if (document.getElementById('fxml').value != '') {
-                $('#wfxml').fadeOut(200);
-            }
-        });
-
-    }
-
-    function cek_upload() {
-        var pattern = '^[0-9]+$';
-        var v_nosp2d = document.getElementById('nosp2d').value;
-        var v_barsp2d = document.getElementById('barsp2d').value;
-        var v_kdsatker = document.getElementById('kdsatker').value;
-        var v_invoice = document.getElementById('invoice').value;
-        var v_bank = document.getElementById('bank').value;
-        var v_tglawal = document.getElementById('datepicker').value;
-        var v_tglakhir = document.getElementById('datepicker1').value;
-        var v_fxml = document.getElementById('fxml').value;
-
-        var jml = 0;
-        if (v_nosp2d == '' && v_barsp2d == '' && v_kdsatker == '' && v_invoice == '' && v_bank == '' && v_tglawal == '' && v_tglakhir == '' && v_fxml == '') {
-            $('#wsp2d').html('Harap isi salah satu parameter');
-            $('#wsp2d').fadeIn();
-            $('#wbarsp2d').html('Harap isi salah satu parameter');
-            $('#wbarsp2d').fadeIn();
-            $('#wsatker').html('Harap isi salah satu parameter');
-            $('#wsatker').fadeIn();
-            $('#winvoice').html('Harap isi salah satu parameter');
-            $('#winvoice').fadeIn();
-            $('#wbank').html('Harap isi salah satu parameter');
-            $('#wbank').fadeIn();
-            $('#wtgl').html('Harap isi salah satu parameter');
-            $('#wtgl').fadeIn();
-            $('#wfxml').html('Harap isi salah satu parameter');
-            $('#wfxml').fadeIn();
-            jml++;
-        }
-
-        if (v_nosp2d != '' && v_nosp2d.length != 15) {
-            $('#wsp2d').html('No. SP2D harus 15 digit');
-            $('#wsp2d').fadeIn(200);
-            jml++;
-        }
-
-        if (v_nosp2d != '' && !v_nosp2d.match(pattern)) {
-            var wsp2d = 'No SP2D harus dalam bentuk angka!';
-            $('#wsp2d').html(wsp2d);
-            $('#wsp2d').fadeIn(200);
-            jml++;
-        }
-
-        if (v_barsp2d != '' && v_barsp2d.length != 21) {
-            $('#wbarsp2d').html('No. Transaksi harus 21 digit');
-            $('#wbarsp2d').fadeIn(200);
-            jml++;
-        }
-
-        if (v_barsp2d != '' && !v_barsp2d.match(pattern)) {
-            var wbarsp2d = 'No Transaksi harus dalam bentuk angka!';
-            $('#wbarsp2d').html(wbarsp2d);
-            $('#wbarsp2d').fadeIn(200);
-            jml++;
-        }
-
-        if (v_kdsatker != '' && v_kdsatker.length != 6) {
-            $('#wsatker').html('Kode Satker harus 6 digit');
-            $('#wsatker').fadeIn(200);
-            jml++;
-        }
-
-        if (v_kdsatker != '' && !v_kdsatker.match(pattern)) {
-            var wsatker = 'No Transaksi harus dalam bentuk angka!';
-            $('#wsatker').html(wbarsp2d);
-            $('#wsatker').fadeIn(200);
-            jml++;
-        }
-
-        if (v_invoice != '' && v_invoice.length != 18) {
-            $('#winvoice').html('No. invoice harus 18 digit');
-            $('#winvoice').fadeIn(200);
-            jml++;
-        }
-
-        if (v_tglawal > v_tglakhir) {
-            $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
-            $('#wtgl').fadeIn(200);
-            jml++;
-        }
-
-        if (jml > 0) {
-            return false;
-        }
-    }
-
-    $(document).ready(function() {
-        var oTable = $('#fixheader').dataTable({
-            "sScrollY": 400,
-            "sScrollX": "100%",
-            "sScrollXInner": "100%",
-            "bSort": false,
-            "bPaginate": false,
-            "bInfo": null,
-            "bFilter": false,
-            "oLanguage": {
-                "sEmptyTable": "Tidak ada data di dalam tabel ini."
-
-            },
-        });
-
-        var keys = new KeyTable({
-            "table": document.getElementById('fixheader'),
-            "datatable": oTable
-        });
-    });
-</script>
+            ?>
+        </tbody>
+    </table>
+</div>

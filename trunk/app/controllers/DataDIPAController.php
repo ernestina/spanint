@@ -26,6 +26,12 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataDIPA($this->registry);
         $filter = array();
         $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if ($kdsatker != '') {
             $filter[$no++] = " A.SATKER_CODE =  '" . $kdsatker . "'";
             $this->view->satker_code = $kdsatker;
@@ -59,10 +65,7 @@ class DataDIPAController extends BaseController {
                 $this->view->program_code = $program1;
             }
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
-                
-				
-				$filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '" . date('d-m-Y', strtotime($_POST['tgl_awal'])) . "' AND '" . date('d-m-Y', strtotime($_POST['tgl_akhir'])) . "'";
-				
+                $filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '" . $_POST['tgl_awal'] . "' AND '" . $_POST['tgl_akhir'] . "'";
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
@@ -72,12 +75,10 @@ class DataDIPAController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
 
         $this->view->data = $d_spm1->get_dipa_filter($filter);
         $this->view->render('kppn/revisiDIPA');
+		$d_log->tambah_log("Sukses");
     }
 
 
@@ -85,6 +86,10 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         if ($satker != '') {
             $filter[$no++] = " KDSATKER =  '" . $satker . "'";
             $this->view->satker_code = $satker;
@@ -149,12 +154,9 @@ class DataDIPAController extends BaseController {
         //$this->view->data = $d_spm1->get_fun_fail_filter($filter);
 		
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
+        $this->view->render('kppn/fund_fail');
 		$d_log->tambah_log("Sukses");
 		
-		
-        $this->view->render('kppn/fund_fail');
     }
 
 
@@ -162,6 +164,10 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         if ($kdsatker != '') {
             $filter[$no++] = " KDSATKER =  '" . $kdsatker . "'";
             //$this->view->invoice_num = $invoice_num;	
@@ -207,12 +213,17 @@ class DataDIPAController extends BaseController {
         //$this->view->data = $d_spm1->get_detail_fun_fail_filter($filter);
         $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
         $this->view->render('kppn/detail_fund_fail_kd');
+		$d_log->tambah_log("Sukses");
+		
     }
 
     public function Detail_Fund_Fail_KD($kdsatker = null, $output = null) {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if ($kdsatker != '') {
             $filter[$no++] = " SATKER =  '" . $kdsatker . "'";
             //$this->view->invoice_num = $invoice_num;	
@@ -251,8 +262,6 @@ class DataDIPAController extends BaseController {
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
 		
@@ -263,6 +272,9 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if ($kdsatker != '' and Session::get('role') != SATKER) {
             $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
             //$this->view->invoice_num = $invoice_num;	
@@ -306,9 +318,6 @@ class DataDIPAController extends BaseController {
         $this->view->data = $d_spm1->get_fa_summary_filter($filter);
         //var_dump($d_spm->get_hist_spm_filter());
 		
-		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/realisasiFA_1');
@@ -318,6 +327,9 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if ($kdsatker != '' ) {
             $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
         } 
@@ -374,8 +386,6 @@ class DataDIPAController extends BaseController {
         $this->view->data = $d_spm1->get_fa_filter($filter);
         //var_dump($d_spm->get_hist_spm_filter());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/realisasiFA');
@@ -386,10 +396,14 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataNamaSatker($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "TS.KPPN = '" . $_POST['kdkppn'] . "'";
+                $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn'] . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             }
@@ -398,15 +412,15 @@ class DataDIPAController extends BaseController {
               } */
 
             if ($_POST['kdsatker'] != '') {
-                $filter[$no++] = "TS.KDSATKER = '" . $_POST['kdsatker'] . "'";
+                $filter[$no++] = "KDSATKER = '" . $_POST['kdsatker'] . "'";
                 $this->view->d_invoice = $_POST['kdsatker'];
             }
             if ($_POST['nmsatker'] != '') {
-                $filter[$no++] = " UPPER(TS.NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
+                $filter[$no++] = " UPPER(NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
                 $this->view->d_invoice = $_POST['nmsatker'];
             }
             if ($_POST['revisi'] != '') {
-                $filter[$no++] = "(SELECT MAX(A.REVISION_NO) FROM SPSA_BT_DIPA_V) " . $_POST['revisi'];
+                $filter[$no++] = "(SELECT MAX(REVISION_NO) FROM SPSA_BT_DIPA_V) " . $_POST['revisi'];
                 $this->view->d_invoice = $_POST['revisi'];
             }
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
@@ -427,13 +441,9 @@ class DataDIPAController extends BaseController {
             //$this->view->data = $d_spm1->get_satker_dipa_filter($filter);	
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "A.KPPN_CODE = '" . Session::get('id_user') . "'";
+            $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
         }
-		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
 		
 		
         if (Session::get('role') == ADMIN) {
@@ -441,6 +451,7 @@ class DataDIPAController extends BaseController {
         } else {
             $this->view->render('kppn/NamaSatkerDIPAkppn');
         }
+		$d_log->tambah_log("Sukses");
         //var_dump($d_spm1->get_satker_filter($filter));
         //$this->view->render('kppn/NamaSatkerDIPA1');
     }
@@ -449,14 +460,17 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataNamaSatker($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "TS.KPPN = '" . $_POST['kdkppn'] . "'";
+                $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn'] . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
-                $filter[$no++] = "TS.KPPN = '" . Session::get('id_user') . "'";
+                $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
             }
 
             if ($_POST['kdsatker'] != '') {
@@ -464,7 +478,7 @@ class DataDIPAController extends BaseController {
                 $this->view->d_invoice = $_POST['kdsatker'];
             }
             if ($_POST['nmsatker'] != '') {
-                $filter[$no++] = " UPPER(TS.NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
+                $filter[$no++] = " UPPER(NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
                 $this->view->d_invoice = $_POST['nmsatker'];
             }
 
@@ -480,22 +494,22 @@ class DataDIPAController extends BaseController {
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "TS.KPPN = '" . Session::get('id_user') . "'";
+            $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
         }
-
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
 		
         //var_dump($d_spm1->get_satker_filter($filter));
         $this->view->render('kppn/NamaSatkerDIPA2');
+		$d_log->tambah_log("Sukses");
     }
 
     public function DetailRealisasiFA($code_id = null) {
         $d_spm1 = new DataRealisasiFA($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if ($code_id != '') {
             $filter[$no++] = " DIST_CODE_COMBINATION_ID =  '" . $code_id . "'";
             //$this->view->invoice_num = $invoice_num;	
@@ -503,8 +517,6 @@ class DataDIPAController extends BaseController {
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_realisasi_fa_filter($filter);
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/DetailRealisasiFA');
@@ -514,6 +526,9 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "A.KPPN = '" . $_POST['kdkppn'] . "'";
@@ -549,8 +564,6 @@ class DataDIPAController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/DataRealisasi');
@@ -562,6 +575,9 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
 
@@ -599,8 +615,6 @@ class DataDIPAController extends BaseController {
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/DataRealisasiBA');
@@ -611,6 +625,9 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "A.KPPN = '" . $_POST['kdkppn'] . "'";
@@ -649,8 +666,6 @@ class DataDIPAController extends BaseController {
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/DataRealisasiLokasi');
@@ -660,6 +675,9 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             /* if ($_POST['kdkppn']!=''){
               $filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
@@ -716,8 +734,6 @@ class DataDIPAController extends BaseController {
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/DataRealisasiTransfer');
@@ -729,6 +745,9 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if ($code_id != '') {
             $filter[$no++] = " CODE_COMBINATION_ID =  '" . $code_id . "'";
             //$this->view->invoice_num = $invoice_num;	
@@ -736,8 +755,6 @@ class DataDIPAController extends BaseController {
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_fa_filter($filter);
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/encumbrances');
@@ -747,6 +764,11 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new proses_revisi($this->registry);
         $filter = array();
         $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         if ($satker != '') {
             $filter[$no++] = " A.SATKER_CODE =  '" . $satker . "'";
             $this->view->satker_code = $satker;
@@ -795,20 +817,21 @@ class DataDIPAController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
-        $this->view->data = $d_spm1->get_revisi_dipa($filter);
-		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
-		
+        $this->view->data = $d_spm1->get_revisi_dipa($filter);		
 		
         $this->view->render('kppn/proses_revisi');
+		$d_log->tambah_log("Sukses");
     }
 
     public function DetailRevisi($satker = null) {
         $d_spm1 = new proses_revisi($this->registry);
         $filter = array();
         $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
         if ($satker != '') {
             $filter[$no++] = " KDSATKER =  '" . $satker . "'";
         }
@@ -831,12 +854,9 @@ class DataDIPAController extends BaseController {
         $this->view->d_kdsatker = $satker;
         $this->view->data = $d_spm1->detail_revisi($filter);
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-		$d_log->tambah_log("Sukses");
-		
-		
         $this->view->render('kppn/detail_revisi');
+		
+		$d_log->tambah_log("Sukses");
     }
 
 

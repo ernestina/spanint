@@ -17,6 +17,7 @@ class DataNamaSatker {
     private $_table1 = 'T_SATKER';
     private $_table2 = 'AP_CHECKS_ALL_V';
     private $_table3 = 'SPSA_BT_DIPA_V';
+	private $_table4 = 'satker_max_revision';
     public $registry;
 
     /*
@@ -34,7 +35,6 @@ class DataNamaSatker {
      * return array objek Data Tetap */
 
     public function get_satker_filter($filter) {
-        Session::get('id_user');
         $sql = " SELECT SEGMENT1 KDSATKER
 				, UPPER(NMSATKER) NMSATKER
 				, substr(check_number,3,3) KPPN
@@ -63,7 +63,7 @@ class DataNamaSatker {
             $d_data->set_kdsatker($val['KDSATKER']);
             $d_data->set_nmsatker($val['NMSATKER']);
             $d_data->set_kppn($val['KPPN']);
-            $d_data->set_tgl_rev($val['TANGGAL_POSTING_REVISI']);
+            //$d_data->set_tgl_rev($val['TANGGAL_POSTING_REVISI']);
             $d_data->set_total_sp2d($val['TOTAL_SP2D']);
             $data[] = $d_data;
         }
@@ -72,27 +72,16 @@ class DataNamaSatker {
 
     public function get_satker_dipa_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT a.kppn_code, a. tanggal_posting_revisi, ts.kdsatker, UPPER(TS.NMSATKER) NMSATKER, max(a.revision_no) rev 
+        $sql = "SELECT *
 				FROM "
-                . $this->_table1 . " TS, "
-                . $this->_table3 . " a 
-				WHERE  
-				a.satker_code=ts.kdsatker
-				and a.REVISION_NO=(SELECT MAX(B.REVISION_NO) FROM " . $this->_table3 . " B  
-                     WHERE 
-                     B.SATKER_CODE= a.satker_code
-                    )
-				"
-
-        ;
+                . $this->_table4. " WHERE 1=1 ";
 
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " GROUP BY TS.KDSATKER, TS.NMSATKER, a.kppn_code, a. tanggal_posting_revisi";
-        $sql .= " ORDER BY a.kppn_code,max(revision_no) desc";
+        $sql .= " ORDER BY kppn_code,rev desc";
         //var_dump ($sql);
 
         $result = $this->db->select($sql);
@@ -102,7 +91,6 @@ class DataNamaSatker {
             $d_data->set_kdsatker($val['KDSATKER']);
             $d_data->set_nmsatker($val['NMSATKER']);
             $d_data->set_kppn($val['KPPN_CODE']);
-            $d_data->set_total_sp2d($val['TOTAL_SP2D']);
             $d_data->set_rev($val['REV']);
             $d_data->set_tgl_rev($val['TANGGAL_POSTING_REVISI']);
             $data[] = $d_data;

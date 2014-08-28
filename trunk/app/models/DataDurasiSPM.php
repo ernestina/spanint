@@ -70,7 +70,7 @@ class DataDurasiSPM {
         return $data;
     }
 
-    public function get_jendok_spm_filter($filter) {
+    public function get_jendok_spm_filter($filter=null) {
         Session::get('id_user');
         $sql = "SELECT DISTINCT JENDOK FROM "
                 . $this->_table1 .

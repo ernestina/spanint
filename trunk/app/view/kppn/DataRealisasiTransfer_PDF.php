@@ -87,8 +87,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
         //tanggal
-        /* $kdtgl_awal = 'null';
-        $kdtgl_akhir = 'null'; */
+        $kdtgl_awal = 'null';
+        $kdtgl_akhir = 'null';
 
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
             $kdtgl_awal1 = $this->kdtgl_awal;
@@ -325,7 +325,7 @@ if (is_array($this->nm_kppn2)) {
 //--------------------------
 //pilihan
 $judul = 'Laporan Data Realisasi Belanja Transfer Daerah'; //judul file laporan
-$tipefile = '.pdf';
+$tipefile = '.PDF';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(

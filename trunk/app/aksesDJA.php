@@ -5,6 +5,15 @@
 //-----------------------------------------------------------
 
 /*
+ * akses modul home
+ */
+$akses['HomeDJA'] = array(
+    '__construct',
+    'index',
+    '__destruct'
+);
+
+/*
  * akses modul auth
  */
 $akses['AuthDJA'] = array(

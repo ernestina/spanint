@@ -1,49 +1,147 @@
-<div id="top">
-    <div id="header">
-        <h2>MONITORING SP2D Gaji Terindikasi Salah PayGroup 
-            <?php
-            if (isset($this->d_nama_kppn)) {
-                foreach ($this->d_nama_kppn as $kppn) {
-                    echo "<br>" . $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                    $kode_kppn = $kppn->get_kd_satker();
-                }
-            }
-            ?><br>
-        </h2>
+<!-- Ndas -->
+<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Monitoring SP2D Gaji Terindikasi Salah PayGroup</h2>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
+                <?php
+    //----------------------------------------------------
+    //Development history
+    //Revisi : 0
+    //Kegiatan :1.mencetak hasil filter ke dalam pdf
+    //File yang diubah : sp2dGajiRekening.php
+    //Dibuat oleh : Rifan Abdul Rachman
+    //Tanggal dibuat : 18-07-2014
+    //----------------------------------------------------
+   
+
+	if(isset($kdkppn)){
+		$kdkppn = Session::get('id_user');
+		?>
+
+		<a href="<?php echo URL; ?>PDF/sp2dSalahRekening_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
+		<?php
+		//----------------------------------------------------		
+	
+	
+	}
+    ?>
+                
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
+            </div>
+        </div>
+        
+        <div class="row" style="padding-top: 10px">
+            
+            <div class="col-md-6 col-sm-12">
+                <?php
+                    if (isset($this->d_nama_kppn)) {
+                        foreach ($this->d_nama_kppn as $kppn) {
+                            echo "<br>" . $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                            $kode_kppn = $kppn->get_kd_satker();
+                        }
+                    }
+                    ?>
+                    <?php
+                    if (isset($this->d_bank)) {
+                        if ($this->d_bank == 13) {
+                            echo "<br> Semua Bank";
+                        } else {
+                            echo "<br>" . $this->d_bank;
+                        }
+                    }
+                    ?>
+            </div>
+            
+            <div class="col-md-6 col-sm-12" style="text-align: right;">
+                <?php
+                    // untuk menampilkan last_update
+                    if (isset($this->last_update)) {
+                        foreach ($this->last_update as $last_update) {
+                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                        }
+                    }
+                ?>
+            </div>
+            
+        </div>
+        
     </div>
-    <?php
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : sp2dGajiRekening.php  
-	$kdkppn = Session::get('id_user');
-	?>
+</div>
 
-	<a href="<?php echo URL; ?>PDF/sp2dSalahRekening_PDF/<?php echo $kdkppn; ?>" class="modal">PDF</a>
+<!-- Tabel -->
+<div id="table-container" class="wrapper">
+    <table class="footable">
+        <!--baris pertama-->
+            <thead>
+                <tr>    
+                    <th>No.</th>
+                    <th>Kode Satker</th>
+                    <th>No. Invoice</th>
+                    <th>No. SP2D</th>
+                    <th>BO I</th>
+                    <th>Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody class='ratatengah'>
+            <?php
+            $no = 1;
+            if (isset($this->data)) {
+                if (empty($this->data)) {
+                    echo '<td colspan=12 align="center">Tidak ada data.</td>';
+                } else {
+                    foreach ($this->data as $value) {
+                            echo "<tr>	";
+                            echo "<td>" . $no++ . "</td>";
+                            echo "<td>" . $value->get_kdsatker() . "</td>";
+                            echo "<td>" . $value->get_invoice_num() . "</td>";
+                            echo "<td>" . $value->get_check_number() . "</td>";
+                            echo "<td>" . $value->get_bank_account_name() . "</td>";
+                            echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
+                            echo "</tr>	";
+                    }
+                }
+            } else {
+                echo '<td colspan=12 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
+            }
+            ?>
+            </tbody>
+    </table>
+</div>
 
-	<?php
-	//----------------------------------------------------		
+<!-- Filter -->
+<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+        
+    <div class="modal-dialog">
 
+        <div class="modal-content">
 
-?>
+            <div class="modal-header">
 
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
 
-    <?php if (isset($this->kppn_list)) { ?>	
-        <a href="#bModal" class="modal">FILTER DATA</a><br><br>
-        <div id="bModal" class="modalDialog" >
-            <div>
-                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
-                <a href="<?php
-        $_SERVER['PHP_SELF'];
-        ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
-                </a>
+            </div>
+            
+            <form id="filter-form" method="POST" action="sp2dSalahRekening" enctype="multipart/form-data">
 
-                <div id="top">
-
-                    <form method="POST" action="sp2dSalahRekening" enctype="multipart/form-data">
-
-
-                        <div id="wkdkppn" class="error"></div>
+                <div class="modal-body">
+                    
+                    <!-- Paste Isi Fom mulai nangkene -->
+                    <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
                         <label class="isian">Kode KPPN: </label>
-                        <select type="text" name="kdkppn" id="kdkppn">
+                        <select class='form-control' type="text" name="kdkppn" id="kdkppn">
                             <?php
                             foreach ($this->kppn_list as $value1) {
                                 if ($kode_kppn == $value1->get_kd_d_kppn()) {
@@ -55,86 +153,18 @@
                             ?>
                         </select>
 
-                        <ul class="inline" style="margin-left: 130px">
-                            <li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-                            <li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
-                        </ul>
-                    </form>
                 </div>
-            </div>
+
+                <div class="modal-footer">
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" >Kirim</button>
+                </div>
+
+            </form>
+
         </div>
-    <?php } ?>
 
-    <?php
-// untuk menampilkan last_update
-    if (isset($this->last_update)) {
-        foreach ($this->last_update as $last_update) {
-            echo "<td>Update Data Terakhir (Waktu Server) = " . $last_update->get_last_update() . " WIB </td>";
-        }
-    }
-    ?>
-
-    <div id="fitur">
-        <table width="100%" class="table table-bordered zebra" id='fixheader'>
-            <!--baris pertama-->
-            <thead>
-            <th>No.</th>
-            <th>Kode Satker</th>
-            <th>No. Invoice</th>
-            <th>No. SP2D</th>
-            <th>BO I</th>
-            <th>Deskripsi</th>
-
-            </thead>
-            <tbody class='ratatengah'>
-                <?php
-                $no = 1;
-                if (isset($this->data)) {
-                    if (empty($this->data)) {
-                        echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
-                    } else {
-                        foreach ($this->data as $value) {
-                            echo "<tr>	";
-                            echo "<td>" . $no++ . "</td>";
-                            echo "<td>" . $value->get_kdsatker() . "</td>";
-                            echo "<td>" . $value->get_invoice_num() . "</td>";
-                            echo "<td>" . $value->get_check_number() . "</td>";
-                            echo "<td>" . $value->get_bank_account_name() . "</td>";
-                            echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
-                            echo "</tr>	";
-                        }
-                    }
-                } else {
-                    echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
-                }
-                ?>
-            </tbody>
-        </table>
     </div>
+
 </div>
 
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
-<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
-<script type="text/javascript" charset="utf-8">
-                            $(document).ready(function() {
-                                var oTable = $('#fixheader').dataTable({
-                                    "sScrollY": 400,
-                                    "sScrollX": "100%",
-                                    "sScrollXInner": "100%",
-                                    "bSort": false,
-                                    "bPaginate": false,
-                                    "bInfo": null,
-                                    "bFilter": false,
-                                    "oLanguage": {
-                                        "sEmptyTable": "Tidak ada data di dalam tabel ini."
-
-                                    },
-                                });
-
-                                var keys = new KeyTable({
-                                    "table": document.getElementById('fixheader'),
-                                    "datatable": oTable
-                                });
-                            });
-</script>
+<!-- Skrip -->

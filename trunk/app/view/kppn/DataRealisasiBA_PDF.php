@@ -211,8 +211,8 @@ class FPDF_AutoWrapTable extends FPDF {
             $h = 20;
             $this->SetFillColor(200, 200, 200);
             $left = $this->GetX();
-            $this->Cell(150, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-            $this->SetX($left += 150);
+            $this->Cell(140, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+            $this->SetX($left += 140);
             $this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($tot_pagu), 1, 0, 'R', true);
             $px1 = $this->GetX();
             $py1 = $this->GetY();
@@ -407,7 +407,7 @@ if (is_array($this->nm_kppn2)) {
 //--------------------------
 //pilihan
 $judul = 'Detail Realisasi Belanja Per BA'; //judul file laporan
-$tipefile = '.pdf';
+$tipefile = '.PDF';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(
