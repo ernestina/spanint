@@ -170,21 +170,39 @@ if (isset($this->data)) {
 
                 <div class="modal-body">
                     
-                    <?php if (isset($this->kppn_list)) { ?>
-                        <div id="wkdkppn" class="error"></div>
-                        <label class="isian">Kode KPPN: </label>
-                        <select type="text" name="kdkppn" id="kdkppn">
-                            <?php
-                            foreach ($this->kppn_list as $value1) {
-                                if ($kode_kppn == $value1->get_kd_d_kppn()) {
-                                    echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+                    <?php if (count($this->kppn_anak)>1){ ?>
+					<div id="wkppn_anak" class="error"></div>
+                    <label class="isian">KPPN Anak: </label>
+                    <select type="text" name="kppn_anak" id="kppn_anak">                        
+						<option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option>
+						<?php
+                            foreach ($this->kppn_anak as $value2) {
+                                if ($this->d_kppn_anak == $value2->get_kd_d_kppn()) {
+                                    echo "<option value='" . $value2->get_kd_d_kppn() . "' selected>" . $value2->get_kd_d_kppn() . " | " . $value2->get_nama_user() . "</option>";
                                 } else {
-                                    echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+                                    echo "<option value='" . $value2->get_kd_d_kppn() . "'>" . $value2->get_kd_d_kppn() . " | " . $value2->get_nama_user() . "</option>";
                                 }
                             }
                             ?>
-                        </select>
-<?php } ?>
+                    </select>  
+				<?php }?>
+					
+					<?php if (isset($this->kppn_induk)) { ?>
+        
+					<div id="wkppn_induk" class="error"></div>
+                    <label class="isian">KPPN Induk: </label>
+                    <select type="text" name="kppn_induk" id="kppn_induk">
+                        <option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option><?php
+                            foreach ($this->kppn_induk as $value3) {
+                                if ($this->d_kppn_induk == $value3->get_kd_d_kppn()) {
+                                    echo "<option value='" . $value3->get_kd_d_kppn() . "' selected>" . $value3->get_kd_d_kppn() . " | " . $value3->get_nama_user() . "</option>";
+                                } else {
+                                    echo "<option value='" . $value3->get_kd_d_kppn() . "'>" . $value3->get_kd_d_kppn() . " | " . $value3->get_nama_user() . "</option>";
+                                }
+                            }
+                            ?>
+                    </select>  
+					<?php } ?>
 
                     <div id="wstatus" class="error"></div>
                     <label class="isian">Status: </label>

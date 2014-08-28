@@ -235,6 +235,7 @@ $akses['PDFAdmin'] = array(
 	'monitoringUserSpan_PDF',
 	'posisiSpm_PDF',
 	'monitoringPelimpahan_PDF',
+	'monitoringReturPkn_PDF',
     '__destruct'
 );
 

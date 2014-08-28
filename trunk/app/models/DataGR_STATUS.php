@@ -105,7 +105,7 @@ class DataGR_STATUS {
         $sql = "select NTPN,NTB, cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,
 				RECEIPT_DIST_SEGMENT1, RECEIPT_DIST_SEGMENT2, RECEIPT_DIST_SEGMENT3,RECEIPT_DIST_AMOUNT as RPH  
 				from spgr_mpn_receipts_all 
-				where KDKPPN = '".Session::get('kd_satker')."' AND ";
+				where ";
         foreach ($filter as $filter) {
             $sql .= $filter;
         }

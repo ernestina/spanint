@@ -222,9 +222,11 @@ class DataGRController extends BaseController {
         }
         if (!is_null($kppn)) {
             $filter[$no++] = "KDKPPN = '" . $kppn . "'";
+			$this->view->kppn = $kppn;
             //$this->view->d_tgl = substr($tgl, 6, 2)."-".substr($tgl, 4, 2)."-".substr($tgl, 0, 4);
         } else {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+			$this->view->kppn =  Session::get('id_user');
         }
         $this->view->data = $d_spm1->get_detail_lhp_rekap($filter);
 		
@@ -233,7 +235,7 @@ class DataGRController extends BaseController {
 		$d_log->tambah_log("Sukses");
     }
 
-    public function detailPenerimaan($file_name = null) {
+    public function detailPenerimaan($file_name = null,$kppn=null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -243,8 +245,15 @@ class DataGRController extends BaseController {
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
         if (!is_null($file_name)) {
-            $filter[$no++] = "FILE_NAME =  '" . $file_name . "'";
+            $filter[$no++] = "FILE_NAME =  '" . $file_name . "' AND ";
             $this->view->d_tgl = $file_name;
+        }
+		if (!is_null($kppn)) {
+            $filter[$no++] = "KDKPPN = '" . $kppn . "'";
+			$this->view->kppn = $kppn;
+        } else {
+            $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+			$this->view->kppn =  Session::get('id_user');
         }
         $this->view->data = $d_spm1->get_detail_penerimaan($filter);
 		
