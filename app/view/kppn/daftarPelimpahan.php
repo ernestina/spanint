@@ -45,7 +45,6 @@
                             $kdtgl_akhir = 'null';
                         }
                     ?>
-                    <ul class="inline" style="float: right"><li>
                             <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdsatker . "/" . $kdkppn. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>						
                         <?php
 
@@ -100,22 +99,22 @@
         <!--baris pertama-->
             <thead>
                 <tr>
-                    <th rowspan="2" width='3%' class='mid'>No.</th>
+                    <th rowspan="2" class='mid'>No.</th>
                     <th colspan="5">Pelimpahan</th>
                     <th colspan="5">Penerimaan 501</th>
                     <th rowspan="2">Status Limpah</th>
                 </tr>
                 <tr>
-                    <th width='10%' class='mid'>No. Rekening<br>Nama Rekening</th>
-                    <th width='10%' class='mid'>No. Sakti</th>
-                    <th width='20%' class='mid'>Nilai</th>
-                    <th width='10%' class='mid'>Akun</th>
-                    <th width='10%' class='mid'>Kode KPPN </th>
-                    <th width='10%' class='mid'>No. Rekening<br>Nama Rekening</th>
-                    <th width='10%' class='mid'>No. Sakti</th>
-                    <th width='20%' class='mid'>Nilai</th>
-                    <th width='10%' class='mid'>Akun</th>
-                    <th width='10%' class='mid'>Kode KPPN </th>
+                    <th class='ratakiri'>No. Rekening<br>Nama Rekening</th>
+                    <th class='mid'>No. Sakti</th>
+                    <th class='ratakanan'>Nilai</th>
+                    <th class='mid'>Akun</th>
+                    <th class='mid'>Kode KPPN </th>
+                    <th class='mid'>No. Rekening<br>Nama Rekening</th>
+                    <th class='mid'>No. Sakti</th>
+                    <th class='ratakanan'>Nilai</th>
+                    <th class='mid'>Akun</th>
+                    <th class='mid'>Kode KPPN </th>
                 </tr>
             </thead>
             <tbody class='ratatengah'>
@@ -124,27 +123,27 @@ $no = 1;
 //var_dump($this->data);
 if (isset($this->data)) {
     if (empty($this->data)) {
-        echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+        echo '<td colspan=12 align="center">Tidak ada data.</td>';
     } else {
         foreach ($this->data as $value) {
-            echo "<tr>	";
-            echo "<td>" . $no++ . "</td>";
+            echo "<tr class='mid'>	";
+            echo "<td class='mid'>" . $no++ . "</td>";
             echo "<td class='ratakiri'>" . $value->get_norek_persepsi() . "<br>" . $value->get_nmrek_persepsi() . "</td>";
-            echo "<td>" . $value->get_nosakti_limpah . "</td>";
+            echo "<td class='mid'>" . $value->get_nosakti_limpah . "</td>";
             echo "<td class='ratakanan'> " . $value->get_jml_terima()  . "</td>";
-            echo "<td> " . $value->get_akun_terima() . " </td>";
-            echo "<td> " . $value->get_kppn_anak() . " </td>";
-            echo "<td>" . $value->get_norek_501() . "<br>" . $value->get_nmrek_501() . "</td>";
-            echo "<td>" . $value->get_nosakti_bs . "</td>";
+            echo "<td class='mid'> " . $value->get_akun_terima() . " </td>";
+            echo "<td class='mid'> " . $value->get_kppn_anak() . " </td>";
+            echo "<td class='mid'>" . $value->get_norek_501() . "<br>" . $value->get_nmrek_501() . "</td>";
+            echo "<td class='mid'>" . $value->get_nosakti_bs . "</td>";
             echo "<td class='ratakanan'> " . $value->get_jml_limpah()  . "</td>";
-            echo "<td> " . $value->get_akun_limpah() . " </td>";
-            echo "<td> " . $value->get_kppn_induk() . " </td>";
-            echo "<td>" .$value->get_status() . "</td>";
+            echo "<td class='mid'> " . $value->get_akun_limpah() . " </td>";
+            echo "<td class='mid'> " . $value->get_kppn_induk() . " </td>";
+            echo "<td class='mid'>" .$value->get_status() . "</td>";
             echo "</tr>	";
         }
     }
 } else {
-    echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+    echo '<td colspan=12 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
 }
 ?>
             </tbody>
