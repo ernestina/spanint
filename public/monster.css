@@ -53,6 +53,10 @@ h4, .h4 {
     border-top: 1px solid #e5e5e5;
 }
 
+.tfoot {
+    font-weight: bold;
+}
+
 #main-bar {
     border-radius: 0px;
     border-top: none;
@@ -194,6 +198,22 @@ tbody {
 
 .table>thead>tr>th {
     border-bottom: none;
+}
+
+.ratakiri {
+    text-align: left;
+}
+
+.ratakanan {
+    text-align: right;
+}
+
+.ratatengah, .mid {
+    text-align: center;
+}
+
+.vertical-padded {
+    padding-top: 10px; padding-bottom: 10px;
 }
 
 /* COLORIZATION */
