@@ -12,11 +12,11 @@
                 <?php
 	//----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : holdSPM.php  
-if( isset($invoice) || isset($status)){
+IF(isset($this->d_kppn) || isset($this->d_invoice) || isset($this->d_status)){
 	if (isset($this->d_kppn)) {
-		$kd_kppn = $this->d_kppn;
+		$kdkppn = $this->d_kppn;
 	} else {
-		$kd_kppn = "null";
+		$kdkppn = "null";
 	}
 	if (isset($this->d_invoice)) {
 		$invoice = $this->d_invoice;
@@ -30,9 +30,12 @@ if( isset($invoice) || isset($status)){
 	}
 ?>
                 
-    <a href="<?php echo URL; ?>PDF/holdSPM_PDF/<?php echo $kd_kppn . "/" . $invoice . "/" . $status; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+    <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $invoice . "/" . $status; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 <?php
+
+
 }
+
 //----------------------------------------------------		
 ?>
 

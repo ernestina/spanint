@@ -112,7 +112,6 @@ class PDFController extends BaseController {
         if ($kdsatker != 'null') {
             $filter[$no++] = "KDSATKER = '" . $kdsatker . "'";
         }
-		var_dump($kdsatker);
 		
         /* if ($kdakun!=''){
           $filter[$no++]="A.ACCOUNT_CODE = '".$kdakun."'";
@@ -1801,7 +1800,7 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataSPMController(DataSPMController.php)
 //------------------------------------------------------
-	    public function posisiSpm_PDF() {  //baru
+	    public function posisiSpm_PDF($kdkppn=null) {  //baru
         $d_spm1 = new DataHistSPM($this->registry);
         $filter = array();
         $no = 0;

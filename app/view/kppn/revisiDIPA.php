@@ -10,18 +10,9 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : revisiDIPA.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+	 //----------------------------------------------------
+	//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : revisiDIPA.php  
 	
-	if( isset($this->account_code) ||
-	isset($this->output_code) || isset($this->program_code) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
-	){
     if (isset($this->account_code)) {
         $kdakun = $this->account_code;
         $kdakun = rtrim($kdakun);
@@ -32,8 +23,10 @@
     if (isset($this->satker_code)) {
         $kdsatker = $this->satker_code;
         $kdsatker = rtrim($kdsatker);
-    } else {
-        $kdsatker = 'null';
+    } else {	
+		foreach ($this->data as $value) {
+		$kdsatker =$value->get_satker_code();
+		}
     }
 
     if (isset($this->output_code)) {
@@ -60,10 +53,10 @@
     }
     ?>
         
-        <a href="<?php echo URL; ?>PDF/revisiDIPA_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+        <a href="<?php echo URL; ?>PDF/RevisiDipa_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
         <?php
 //----------------------------------------------------			
-	}
+
         ?>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">

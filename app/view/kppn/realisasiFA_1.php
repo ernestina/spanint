@@ -10,23 +10,34 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
     <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : realisasiFA_1.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
-    
-    
-    if( isset($this->account_code) || isset($this->program_code) ||
-	isset($this->output_code) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
+ //----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA_1.php  
+if (Session::get('role') == SATKER) {
+	foreach ($this->data as $value) {
+		$kdsatker=$value->get_satker();
+		$kdkppn=$value->get_kppn();
+	}
+} else {
+	$kdsatker=Session::get('kd_satker');
+}
+if (Session::get('role') == KPPN) {
+	$kdkppn=Session::get('id_user');
+}
+if (Session::get('role') == KANWIL || Session::get('role') == ADMIN ) {
+
+	foreach ($this->data as $value) {
+		$kdsatker=$value->get_satker();
+		$kdkppn=$value->get_kppn();
+	}
+
+	$filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+}
+
+
+if(isset($this->account_code) || isset($this->program_code) || isset($this->output_code)){
 	
-	
-	){
-	
-    if (isset($this->account_code)) {
+
+   if (isset($this->account_code)) {
         $kdakun = $this->account_code;
     }else{
 		$kdakun = 'null';
@@ -42,7 +53,7 @@
     }else{
 		$kdoutput = 'null';
 	}
-	if (isset($this->d_tgl_awal)) {
+ 	if (isset($this->d_tgl_awal)) {
         $kdtgl_awal = $this->d_tgl_awal;
     } else {
         $kdtgl_awal = 'null';
@@ -53,10 +64,11 @@
         $kdtgl_akhir = 'null';
     }
     ?>
+<ul class="inline" style="float: right"><li>
+<a href="<?php echo URL; ?>PDF/RealisasiFA_1_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
 	
-        <a href="<?php echo URL; ?>PDF/RealisasiFA_1_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 		<?php
-	}
+}
 ?>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
