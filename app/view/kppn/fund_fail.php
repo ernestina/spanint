@@ -10,68 +10,32 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
-if(Session::get('role') == KANWIL || Session::get('role') == ADMIN || Session::get('role') == DJA){
-
 	if(isset($this->d_nama_kppn) || isset($this->satker_code)){
 		if (isset($this->d_nama_kppn)) {
-			
-			foreach ($this->d_nama_kppn as $kppn) {
-					 $kdkppn = $kppn->get_kd_satker();
-			 }
-		}
-		if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			} else {
-				$kdsatker = 'null';
-			}
-	?>
-	<ul class="inline" style="float: right"><li>
-	<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
-	
-	<?php
-	}
-
-	?>
-<?php
-}elseif(Session::get('role') == KPPN){
-	if (isset($this->d_nama_kppn)) {
-	
-			foreach ($this->d_nama_kppn as $kppn) {
-             $kdkppn = $kppn->get_kd_satker();
-            }
-		}else {
+			$kdkppn = $this->d_nama_kppn;
+		} else {
 			$kdkppn = Session::get('id_user');
 		}
-	?>
-	<ul class="inline" style="float: right"><li>
-	<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+		if (isset($this->satker_code)) {
+			$kdsatker = $this->satker_code;
+		} else {
+			$kdsatker = 'null';
+		}
+
+    ?>
+    <a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
 <?php
-}elseif(Session::get('role') == SATKER){
-
-	if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			} else {
-				$kdsatker = Session::get('kd_satker');
-			}
-			
-		?>
-		<ul class="inline" style="float: right"><li>
-		<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
-	<?php
-	}
-
 //----------------------------------------------------	
-	    	
-?>
+	
+	}
     	
-
+?>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            
+            <?php if (Session::get('role') != SATKER) { ?>
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
+            <?php } ?>
             </div>
         </div>
         

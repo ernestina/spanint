@@ -13,11 +13,9 @@
                 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            
-                <?php if (isset($this->kppn_list)) { ?>
+            <?php if (isset($this->kppn_list)) { ?>
                     <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                <?php } ?>
-                
+            <?php } ?>
             </div>
         </div>
         
@@ -675,6 +673,7 @@
                 ?>
             </tbody>
         </table>
+        
 </div>
 
 <!-- Filter -->
@@ -725,7 +724,6 @@
     </div>
 
 </div>
-
 <div class="main-window-segment vertical-padded light-panel">
     <div class="container-fluid">
         

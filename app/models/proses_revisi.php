@@ -39,7 +39,6 @@ class proses_revisi {
      * return array objek Data Tetap */
 
     public function get_revisi_dipa($filter) {
-        Session::get('id_user');
         $sql = "SELECT DISTINCT A.SATKER_CODE ,A.KPPN_CODE, A.REVISION_NO, A.MEANING, A.LAST_UPDATE_DATE, B.NMSATKER 
 				FROM "
                 . $this->_table1 . " A, "

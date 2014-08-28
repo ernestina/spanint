@@ -122,13 +122,15 @@
                             }
                             ?>
                         </select>
-<?php } ?>
+<?php } ?>			
                     <br/>
-                    <div id="wsatker" class="alert alert-danger" style="display: none"></div>
-                    <label class="isian">Kode Satker: </label>
-                    <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)) {
-    echo $this->kdsatker;
-} ?>">
+                    <input class="form-control" type="<?php if (Session::get('role') == SATKER) {
+                        echo "hidden";
+                    } else {
+                        echo "number";
+                    } ?>" name="kdsatker" id="kdsatker" size="15" value="<?php if (isset($this->d_kdsatker)) {
+                        echo $this->d_kdsatker;
+                    } ?>">
                     <br/>
                     <label class="isian">Nama File: </label>
                     <input class="form-control" type="text" name="file_name" id="file_name" value="<?php if (isset($this->file_name)) {

@@ -8,8 +8,7 @@
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-                <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
+                             <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
             <?php } ?>
                 
@@ -42,16 +41,16 @@
         }
 
         if (Session::get('role') == KPPN) {
-            $kdkppn=Session::get('id_user');
-        }
-
-
-    ?>			
+            $kdkppn=Session::get('id_user');		
     <a href="<?php echo URL; ?>PDF/posisiSpm_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
         <?php
 //----------------------------------------------------		
 ?>
-                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+            <?php } ?>  
             </div>
         </div>
         
@@ -92,12 +91,12 @@
                 <th class='mid'>No.</th>
                 <!--th>KPPN</th-->
                 <th class='mid'>Nomor Invoice</th>
-                <th class='ratakanan'>Nilai Invoice Rp</th>
+                <th class='mid'>Nilai Invoice Rp</th>
                 <th width='350px' class='mid'>Deskripsi Invoice</th>
-                <th width='70px' class='mid'>Approval Status</th>
+                <th width='70px'>Approval Status</th>
                 <th width='70px' class='mid'>Status</th>
                 <!--th>original_recipient</th-->
-                <th>User</th>
+                <th class='mid'>User</th>
                 <!--th>Posisi User</th-->
                 <th class='mid'>Mulai</th>
                 <!--th>Jam Mulai</th>
@@ -115,19 +114,19 @@
                 } else {
                     foreach ($this->data as $value) {
                         echo "<tr>	";
-                        echo "<td class='mid'>" . $no++ . "</td>";
+                        echo "<td width=80>" . $no++ . "</td>";
 
                         //echo "<td>" . $value->get_ou_name() . "</td>";
-                        echo "<td class='mid'>" . $value->get_invoice_num() . "</td>";
+                        echo "<td>" . $value->get_invoice_num() . "</td>";
                         //echo "<td><a href=".URL."dataSPM/detailposisiSpm/".$value->get_invoice_num()." target='_blank' '>" . $value->get_invoice_num() . "</a></td>";
                         echo "<td class='ratakanan'>" . $value->get_invoice_amount() . "</td>";
                         echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
                         echo "<td>" . $value->get_wfapproval_status() . "</td>";
-                        echo "<td class='mid'>" . $value->get_status() . "</td>";
+                        echo "<td>" . $value->get_status() . "</td>";
                         //echo "<td>" . $value->get_original_recipient() . "</td>";
                         echo "<td class='ratakiri'>" . $value->get_to_user() . ' ' . $value->get_fu_description() . "</td>";
                         //echo "<td>" . $value->get_fu_description() . "</td>";
-                        echo "<td class='mid'>" . $value->get_begin_date() . '<br>' . $value->get_time_begin_date() . "</td>";
+                        echo "<td>" . $value->get_begin_date() . '<br>' . $value->get_time_begin_date() . "</td>";
                         //echo "<td>" . $value->get_time_begin_date() . "</td>";
                         //echo "<td>" . $value->get_end_date() . ' ' . $value->get_time_end_date() . "</td>";
                         //echo "<td>" . $value->get_time_end_date() . "</td>";
