@@ -1,0 +1,217 @@
+/* Let's make use of our framework, and minimize our own CSS */
+
+/* HTML */
+
+body {
+    overflow-x: hidden;
+    font-size: 11px;
+}
+
+/* BOOTSTRAP CORE */
+
+h1, .h1 {
+    font-size: 32px;
+}
+
+h2, .h2 {
+    font-size: 24px;
+}
+
+h3, .h3 {
+    font-size: 20px;
+}
+
+h4, .h4 {
+    font-size: 14px;
+}
+
+.btn {
+    font-size: 12px;
+}
+
+.navbar-text {
+    margin: 10px;
+}
+
+.container-fluid {
+    padding: 0 5px 0 5px;
+}
+
+/* FOOTABLE CORE */
+
+.footable-row-detail-cell {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* CORE LAYOUT ITEMS */
+
+#footable-header {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+#footable-footer {
+    border-top: 1px solid #e5e5e5;
+}
+
+#main-bar {
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin: 0;
+}
+
+#footer-bar {
+    border-radius: 0px;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    margin: 0;
+}
+
+#sidebar {
+    position: absolute;
+    background: #003366;
+    color: rgba(255,255,255,.8);
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select:none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#sidebar ul, li {
+    display: block;
+    padding: 0px;
+}
+
+#sidebar > div > ul {
+    padding-top: 10px;
+}
+
+#sidebar > div > ul > li {
+    padding-bottom: 5px;
+}
+
+#sidebar > div > ul > li ul > li {
+    padding-bottom: 10px;
+}
+
+#sidebar a {
+    display: block;
+    color: rgba(255,255,255,.8);
+}
+
+#sidebar a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar h4 {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,.25);
+}
+
+#sidebar h4:hover {
+    color: #fff;
+}
+
+.nano .nano-content { padding: 10px 30px 10px 20px; }
+.nano .nano-pane   { margin: 10px; background: rgba(255,255,255,.25); }
+.nano .nano-slider { background: #fff !important; }
+
+#main-content {
+    width: 100%;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,.2);
+}
+
+#content-container {
+    overflow: auto;
+}
+
+.main-window-segment {
+    padding: 0 10px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #e5e5e5;
+    background: #333;
+}
+
+.main-window-segment .btn-default {
+    color: #e5e5e5;
+    background: #333;
+    border: 1px solid #e5e5e5;
+}
+
+.main-window-segment .btn-default:hover {
+    color: #333;
+    background: #e5e5e5;
+    border: 1px solid #e5e5e5;
+}
+
+#table-container {
+    border-bottom: 1px solid #e5e5e5;
+    overflow: auto;
+}
+
+.table {
+    margin: 0;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 10px 15px 10px 15px;
+}
+
+td {
+    vertical-align: top;
+}
+
+td {
+    vertical-align: center;
+}
+
+
+thead {
+    background: #fff;
+}
+
+tbody {
+    border-top: 1px solid #e5e5e5;
+}
+
+.alert {
+    padding: 20px 25px 20px 25px;
+}
+
+.row-padding {
+    font-weight: bold;
+}
+
+.table>thead>tr>th {
+    border-bottom: none;
+}
+
+/* COLORIZATION */
+
+/* Glow untuk accent dengan warna logo SPAN */
+
+.glow-span-blue {
+    box-shadow: 0px 0px 20px 1px rgba(0,119,182,.20);
+}
+
+.glow-span-orange {
+    box-shadow: 0px 0px 20px 1px rgba(241,187,0,.20);
+}
+
+.glow-span-red {
+    box-shadow: 0px 0px 20px 1px rgba(218,37,37,.20);
+}
+
+.glow-span-purple {
+    box-shadow: 0px 0px 20px 1px rgba(103,28,113,.20);
+}
