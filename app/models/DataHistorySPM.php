@@ -22,6 +22,7 @@ class DataHistorySPM {
     private $_table6 = 'AP_INVOICE_PAYMENTS_ALL';
     private $_table7 = 'AP_PAYMENT_HISTORY_ALL';
     private $_table8 = 'AP_CHECKS_ALL';
+    private $_table9 = 'HISTORY_SPM';
     public $registry;
 
     /*
@@ -39,13 +40,12 @@ class DataHistorySPM {
      * return array objek Data Tetap */
 
     public function get_history_spm_filter($filter, $invoice) {
-        Session::get('id_user');
         $no = 0;
         foreach ($filter as $filter) {
             
         }
 
-        $sql = "select distinct * from (
+        /*$sql = "select distinct * from (
 		
 				select 
 				AIIA.invoice_num NOMOR_DOKUMEN, 
@@ -59,8 +59,8 @@ class DataHistorySPM {
                 . $this->_table5 . " PAP 
 				WHERE FU.USER_ID = AIIA.created_by
 				and pap.person_id = fu.employee_id
-				and substr(aiia.operating_unit,1,3) in (" . $filter .
-                ") 
+				and substr(aiia.operating_unit,1,3) = '" . $filter .
+                "' 
 				and AIIA.invoice_num = " . $invoice . " 
 				
 				union all
@@ -100,8 +100,8 @@ class DataHistorySPM {
 				and ah.created_by=fu.user_id
 				and ah.last_updated_by=fu.user_id
 				and pap.person_id = fu.employee_id
-				and substr(ai.pay_group_lookup_code,1,3) in (" . $filter .
-                ") 
+				and substr(ai.pay_group_lookup_code,1,3) = '" . $filter .
+                "' 
 				
 				and ai.invoice_num = " . $invoice . " 
 				
@@ -133,16 +133,16 @@ class DataHistorySPM {
                 . $this->_table5 . " PAP
 				on pap.person_id = fu.employee_id
 				where
-				substr(aca.check_number,3,3) in (" . $filter .
-                ") 
+				substr(aca.check_number,3,3) = '" . $filter .
+                "' 
 				 and aia.invoice_num = " . $invoice . "
 				 ) 
 				 where 1=1 
 				 "
 
-        ;
+        ;*/
 
-
+		$sql = "select * from ".$this->_table9." where KDKPPN ='".$filter."' AND INVOICE_NUM =".$invoice;
         $no=0;
           //foreach ($filter_kanwil as $filter_kanwil) {
           $sql .=  " ORDER BY WAKTU_MULAI ";

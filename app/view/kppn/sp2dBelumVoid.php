@@ -110,12 +110,6 @@
     $(function() {
         hideErrorId();
         hideWarning();
-
-        $("#tgl_awal").datepicker({dateFormat: "yy-mm-dd"
-        });
-
-        $("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
-        });
     });
 
     function hideErrorId() {

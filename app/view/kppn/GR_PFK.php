@@ -1,55 +1,70 @@
-<div id="top">
-    <div id="header">
-        <h2>Monitoring PFK Akun 
-            <?php
-            $akun = '';
+<!-- Ndas -->
+<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Monitoring PFK Akun</h2>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <!-- button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button -->
+                
+            </div>
+        </div>
+        
+        <div class="row" style="padding-top: 10px">
+            
+            <div class="col-md-6 col-sm-12">
+                <?php
+                    $akun = '';
 
-            foreach ($this->data as $value) {
-                $akun = $value->get_akun();
-            }
-            echo $akun;
-            if (isset($this->d_nama_kppn)) {
-                foreach ($this->d_nama_kppn as $kppn) {
-                    echo "<br>" . $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                }
-            }
-            ?>
-        </h2>
+                    foreach ($this->data as $value) {
+                        $akun = $value->get_akun();
+                    }
+                    echo $akun;
+                    if (isset($this->d_nama_kppn)) {
+                        foreach ($this->d_nama_kppn as $kppn) {
+                            echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                        }
+                    }
+                    ?>
+            </div>
+            
+            <div class="col-md-6 col-sm-12" style="text-align: right;">
+                <?php
+                    // untuk menampilkan last_update
+                    if (isset($this->last_update)) {
+                        foreach ($this->last_update as $last_update) {
+                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                        }
+                    }
+                ?>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
 
-        <table><tr><td width="90%">
-                    </div>
-    <?php
-	//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : DataRealisasiBA.php  
-	$kdkppn=Session::get('id_user');
-	if (isset($this->bulan)) {
-		$kdbulan = $this->bulan;
-	}
-	if (isset($this->d_tgl)) {
-		$kdakun = $this->d_tgl;
-	}
-?>
-<a href="<?php echo URL; ?>PDF/GR_PFK_DETAIL1_PDF/<?php echo $kdakun . "/" . $kdbulan . "/" . $kdkppn; ?>" class="modal">PDF</a>
-<?php
-//----------------------------------------------------		
-
-?>
-
-
-        </table>
-
-
-        <div id="fitur">
-            <table width="100%" class="table table-bordered zebra" id='fixheader'>
-                <!--baris pertama-->
+<!-- Tabel -->
+<div id="table-container" class="wrapper">
+    <table class="footable">
+        <!--baris pertama-->
                 <thead>
-                <th>No.</th>
+                    <tr>
+                    <th>No.</th>
                 <th>Sumber Transaksi</th>
                 <th>Nama wajib Bayar setor</th>
                 <th>Tanggal Buku</th>
                 <th>Tanggal Bayar</th>
                 <th>NTPN/SP2D</th>
                 <th>Rupiah</th>
+                    </tr>
                 </thead>
                 <tbody class='ratatengah'>
                     <?php
@@ -59,7 +74,7 @@
                     //var_dump ($this->data);
                     if (isset($this->data)) {
                         if (empty($this->data)) {
-                            echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+                            echo '<td colspan=12 align="center">Tidak ada data.</td>';
                         } else {
                             foreach ($this->data as $value) {
                                 echo "<tr>	";
@@ -86,65 +101,63 @@
 
                     </tr>
                 </tfoot>
-            </table>
-        </div>
-    </div>
+    </table>
 </div>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
-<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
-<script type="text/javascript" charset="utf-8">
-    $(function() {
-        hideErrorId();
-        hideWarning();
 
-    });
+<!-- Filter -->
+<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+        
+    <div class="modal-dialog">
 
-    function hideErrorId() {
-        $('.error').fadeOut(0);
-    }
+        <div class="modal-content">
 
-    function hideWarning() {
-        $('#status').change(function() {
-            if (document.getElementById('status').value != '') {
-                $('#wstatus').fadeOut(200);
-            }
-        });
+            <div class="modal-header">
 
-    }
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
 
-    function cek_upload() {
-        var v_status = document.getElementById('status').value;
+            </div>
+            
+            <form id="filter-form" method="POST" action="sp2dRekap" enctype="multipart/form-data">
 
-        var jml = 0;
-        if (v_status == '') {
-            $('#wstatus').html('Harap pilih');
-            $('#wstatus').fadeIn();
-            jml++;
-        }
-        if (jml > 0) {
-            return false;
-        }
-    }
+                <div class="modal-body">
+                    
+                    <!-- Paste Isi Fom mulai nangkene -->
+                    <?php if (isset($this->kppn_list)) { ?>
+                    <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
+                    <label class="isian">Kode KPPN: </label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                        <?php foreach ($this->kppn_list as $value1){ 
+                        if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+                        else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
 
-    $(document).ready(function() {
-        var oTable = $('#fixheader').dataTable({
-            "sScrollY": 400,
-            "sScrollX": "100%",
-            "sScrollXInner": "100%",
-            "bSort": false,
-            "bPaginate": false,
-            "bInfo": null,
-            "bFilter": false,
-            "oLanguage": {
-                "sEmptyTable": "Tidak ada data di dalam tabel ini."
+                        } ?>
+                        </select>
+                    </div>
+                    <?php } ?>
+                    <br/>
+                    <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
+                    <label class="isian">Tanggal: </label>
+                    
+                    <div class="input-daterange input-group" id="datepicker" style="width: 100%">
+                        <input class="form-control" type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
+                        <span class="input-group-addon">s.d.</span>
+                        <input class="form-control" type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
+                    </div>
+                        
 
-            },
-        });
+                </div>
 
-        var keys = new KeyTable({
-            "table": document.getElementById('fixheader'),
-            "datatable": oTable
-        });
-    });
-</script>
+                <div class="modal-footer">
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

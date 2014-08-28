@@ -330,7 +330,7 @@ if (is_array($this->kdtgl_akhir)) {
 //--------------------------
 //pilihan
 $judul = 'Laporan Monitoring SP2D Gaji Terindikasi Dobel'; //judul file laporan
-$tipefile = '.pdf';
+$tipefile = '.PDF';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(

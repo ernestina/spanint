@@ -167,6 +167,8 @@ class FPDF_AutoWrapTable extends FPDF {
             );
 		}else{
 		
+		
+		]
 		$no = 1;
         $this->SetFillColor(255);
         foreach ($this->data as $value) {
@@ -184,8 +186,6 @@ class FPDF_AutoWrapTable extends FPDF {
                     )
             );
         }
-		
-		}
         $this->Ln(3);
     }
 
@@ -353,7 +353,7 @@ if (is_array($this->nm_kppn2)) {
 //--------------------------
 //pilihan
 $judul = 'Laporan Daftar SP2D Satker'; //judul file laporan
-$tipefile = '.pdf';
+$tipefile = '.PDF';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(

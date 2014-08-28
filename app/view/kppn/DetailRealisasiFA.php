@@ -1,81 +1,109 @@
-<div id="top">
-    <div id="header">
-        <h2>Detail Realisasi
-            <?php
-            //$akun='';
-            //foreach ($this->data as $value) {
-            //$akun=$value->get_akun(); 
-            //} 
-            //echo //$akun;
-            ?>
-        </h2>
-
-        <table><tr><td width="90%">
-                    </div>
-
-
-        </table>
-
-
-        <div id="fitur">
-            <table width="100%" class="table table-bordered zebra" id='fixheader'>
-                <!--baris pertama-->
-                <thead>
-                <th>No.</th>
-                <th>Nomor Invoice</th>
-                <th>Tanggal Invoice</th>
-                <th>Status Invoice</th>
-                <th>Nomor SP2D</th>
-                <th>Tanggal SP2D</th>
-                <th>Nilai Realisasi</th>
-                </thead>
-                <tbody class='ratatengah'>
-                    <?php
-                    $no = 1;
-                    $tot_pot = 0;
-
-                    //var_dump ($this->data);
-                    if (isset($this->data)) {
-                        if (empty($this->data)) {
-                            echo "<div class='alert alert-danger'><strong>Info!  </strong>Tidak ada data.</div>";
-                        } else {
-                            foreach ($this->data as $value) {
-                                echo "<tr>	";
-                                echo "<td>" . $no++ . "</td>";
-                                echo "<td>" . $value->get_invoice_num() . "</td>";
-                                //echo "<td>" . $value->get_status() . "</td>";
-                                echo "<td>" . $value->get_invoice_date() . "</td>";
-                                echo "<td>" . $value->get_status() . "</td>";
-                                echo "<td>" . $value->get_check_number() . "</td>";
-                                echo "<td>" . $value->get_check_date() . "</td>";
-                                echo "<td align='right'>" . number_format($value->get_amount()) . "</td>";
-
-                                echo "</tr>	";
-                                $tot_pot = $tot_pot + $value->get_amount();
-                            }
+<!-- Ndas -->
+<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Detail Realisasi</h2>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
+                <!--pdf-->
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <!--button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button-->
+                
+            </div>
+        </div>
+        
+        <div class="row" style="padding-top: 10px">
+            
+            <div class="col-md-6 col-sm-12">
+                &nbsp;
+                <?php /*
+                    if (isset($this->d_nama_kppn)) {
+                        foreach ($this->d_nama_kppn as $kppn) {
+                            echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                            $kode_kppn = $kppn->get_kd_satker();
+                        }
+                    } */
+                ?>
+            </div>
+            
+            <div class="col-md-6 col-sm-12" style="text-align: right;">
+                <?php
+                    // untuk menampilkan last_update
+                    if (isset($this->last_update)) {
+                        foreach ($this->last_update as $last_update) {
+                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
                         }
                     }
-                    ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan='5'></td>
-                        <td class='ratatengah'><b>GRAND TOTAL</td>
-                        <td align='right'><b><?php echo number_format($tot_pot); ?>
-                        </td>
-
-                    </tr>
-                </tfoot>
-            </table>
-            <!--br>
-            <b><i>Keterangan Status:  </i></b></br>
-            <b><i>REJECTED : Reject (Tidak mengembalikan Pagu, Harus di Batalkan)</i></b></br-->
+                ?>
+            </div>
+            
         </div>
+        
     </div>
 </div>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
-<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
+
+<!-- Tabel -->
+<div id="table-container" class="wrapper">
+    <table class="footable">
+        <!--baris pertama-->
+        <thead>
+        <th>No.</th>
+        <th>Nomor Invoice</th>
+        <th>Tanggal Invoice</th>
+        <th>Status Invoice</th>
+        <th>Nomor SP2D</th>
+        <th>Tanggal SP2D</th>
+        <th>Nilai Realisasi</th>
+        </thead>
+        <tbody class='ratatengah'>
+            <?php
+            $no = 1;
+            $tot_pot = 0;
+
+            //var_dump ($this->data);
+            if (isset($this->data)) {
+                if (empty($this->data)) {
+                    echo '<td colspan=12 align="center">Tidak ada data.</td>';
+                } else {
+                    foreach ($this->data as $value) {
+                        echo "<tr>	";
+                        echo "<td>" . $no++ . "</td>";
+                        echo "<td>" . $value->get_invoice_num() . "</td>";
+                        //echo "<td>" . $value->get_status() . "</td>";
+                        echo "<td>" . $value->get_invoice_date() . "</td>";
+                        echo "<td>" . $value->get_status() . "</td>";
+                        echo "<td>" . $value->get_check_number() . "</td>";
+                        echo "<td>" . $value->get_check_date() . "</td>";
+                        echo "<td align='right'>" . number_format($value->get_amount()) . "</td>";
+
+                        echo "</tr>	";
+                        $tot_pot = $tot_pot + $value->get_amount();
+                    }
+                }
+            }
+            ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan='5'></td>
+                <td class='ratatengah'><b>GRAND TOTAL</td>
+                <td align='right'><b><?php echo number_format($tot_pot); ?>
+                </td>
+
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<!--Filter-->
+<!--Skrip-->
 <script type="text/javascript" charset="utf-8">
     $(function() {
         hideErrorId();
@@ -84,7 +112,7 @@
     });
 
     function hideErrorId() {
-        $('.error').fadeOut(0);
+        $('.alert').fadeOut(0);
     }
 
     function hideWarning() {
@@ -109,25 +137,4 @@
             return false;
         }
     }
-
-    $(document).ready(function() {
-        var oTable = $('#fixheader').dataTable({
-            "sScrollY": 400,
-            "sScrollX": "100%",
-            "sScrollXInner": "100%",
-            "bSort": false,
-            "bPaginate": false,
-            "bInfo": null,
-            "bFilter": false,
-            "oLanguage": {
-                "sEmptyTable": "Tidak ada data di dalam tabel ini."
-
-            },
-        });
-
-        var keys = new KeyTable({
-            "table": document.getElementById('fixheader'),
-            "datatable": oTable
-        });
-    });
 </script>

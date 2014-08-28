@@ -1,21 +1,22 @@
 <div id="top">
     <div id="header">
         <h2>Form Pengawasan PNBP <br/>
-			Belanja PNBP
-			<br/>
-			
+			BELANJA PNBP
             <?php
-             
-		
-            if (isset($this->nmsatker)) {
-
-                foreach ($this->nmsatker as $value1) {
-                    $satker = $value1->get_nmsatker();
+            if (isset($this->d_nama_kppn)) {
+                foreach ($this->d_nama_kppn as $kppn) {
+                    echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                    $kode_kppn = $kppn->get_kd_satker();
                 }
+            } else {
+                echo Session::get('user');
             }
-            echo $satker . " ";
-            
-                ?>
+
+
+            if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
+                echo "<br>" . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
+            }
+            ?>
         </h2>
     </div>
 
@@ -76,8 +77,7 @@ if(isset($this->d_kdsatker)){
             <tbody class='ratatengah'>
                 <?php
                 $no = 1;
-                $total1 = 0;
-				$total2 = 0;
+                $total;
 
                 //var_dump ($this->data);
                 if (isset($this->data)) {
@@ -98,11 +98,8 @@ if(isset($this->d_kdsatker)){
 							echo "<td>" . $value->get_description() . "</td>";
 							echo "<td>" . $value->get_check_num() . "</td>";
 							echo "<td>" . $value->get_tanggal_sp2d() . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_line_amount()) . "</td>";
-							echo "<td align='right'>" . number_format($value->get_amount()) . "</td>";
-							
-							$total1 = $total1 + $value->get_line_amount();
-							$total2 = $total2 + $value->get_amount();
+                            echo "<td align='right'>" . $value->get_line_amount() . "</td>";
+							echo "<td align='right'>" . $value->get_amount() . "</td>";
                             //echo "<td>" . $value->get_last_update_date(). "</td>";
                         }
                     }
@@ -111,16 +108,7 @@ if(isset($this->d_kdsatker)){
                 }
                 ?>
             </tbody>
-		<tfoot>
-                    <tr>
-                        <td colspan='11'></td>
-                        <td class='ratatengah'><b>GRAND TOTAL</td>
-                        <td align='right'><b><?php echo number_format($total1); ?>
-						<td align='right'><b><?php echo number_format($total2); ?>
-                        </td>
 
-                    </tr>
-                </tfoot>
         </table>
     </div>
 </div>

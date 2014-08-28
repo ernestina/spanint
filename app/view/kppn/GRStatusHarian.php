@@ -1,63 +1,59 @@
-<div id="top">
-    <div id="header">
-        <h2>Monitoring Status LHP <?php //echo $this->d_bulan;  ?> <?php //echo $kode_satker;  ?>
-
-            <?php
-            if (isset($this->d_nama_kppn)) {
-                foreach ($this->d_nama_kppn as $kppn) {
-                    echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                    $kode_kppn = $kppn->get_kd_satker();
-                }
-            } else {
-                echo 'KPPN ' . Session::get('user');
-            }
-            ?>
-        </h2>
-    </div>
-<?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
-        <a href="#oModal" class="modal">FILTER DATA</a><br><br>
-        <div id="oModal" class="modalDialog" >
-            <div>
-                <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
-                <a href="<?php
-    $_SERVER['PHP_SELF'];
-    ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
-                </a>
-
-                <div id="top">	
-
-                    <form method="POST" action="grStatusHarian" enctype="multipart/form-data">
-
-                            <?php if (isset($this->kppn_list)) { ?>
-                            <div id="wkdkppn" class="error"></div>
-                            <label class="isian">Kode KPPN: </label>
-                            <select type="text" name="kdkppn" id="kdkppn">
-                                <?php
-                                foreach ($this->kppn_list as $value1) {
-                                    if ($kode_kppn == $value1->get_kd_d_kppn()) {
-                                        echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-                                    } else {
-                                        echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-                                    }
-                                }
-                                ?>
-                            </select>
-    <?php } ?>
-
-                        <ul class="inline" style="margin-left: 150px">
-                            <li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-                            <li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
-                        </ul>
-                    </form>
-
-                </div>
+<!-- Ndas -->
+<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Monitoring Status LHP</h2>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
+                
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
             </div>
         </div>
-<?php } ?>
+        
+        <div class="row" style="padding-top: 10px">
+            
+            <div class="col-md-6 col-sm-12">
+                <?php
+                    if (isset($this->d_nama_kppn)) {
+                        foreach ($this->d_nama_kppn as $kppn) {
+                            echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                            $kode_kppn = $kppn->get_kd_satker();
+                        }
+                    } else {
+                        echo Session::get('user');
+                    }
+                    ?>
+            </div>
+            
+            <div class="col-md-6 col-sm-12" style="text-align: right;">
+                <?php
+                    // untuk menampilkan last_update
+                    if (isset($this->last_update)) {
+                        foreach ($this->last_update as $last_update) {
+                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                        }
+                    }
+                ?>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
 
-    <div id="fitur">
-        <table width="100%" class="table table-bordered" style="font-size: 80%">
-            <!--baris pertama-->
+<!-- Tabel -->
+<div id="table-container" class="wrapper">
+    <table class="table table-bordered">
+        <!--baris pertama-->
             <thead>
                 <tr>
                     <th rowspan=2 width="10px">No.</th>
@@ -104,7 +100,7 @@
                 $no = 1;
                 if (isset($this->data)) {
                     if (empty($this->data)) {
-                        echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+                        echo '<td colspan=33 align="center">Tidak ada data.</td>';
                     } else {
                         foreach ($this->data as $value) {
                             if ($value->get_n01() == 0) {
@@ -672,7 +668,7 @@
                         }
                     }
                 } else {
-                    echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+                    echo '<td colspan=33 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
                 }
                 ?>
             </tbody>
@@ -682,7 +678,7 @@
         <b>Keterangan : </br>
             Angka didalam kotak adalah jumlah LHP<br>
             Jumlah Rekening Persepsi yang terdaftar sebanyak <?php echo $this->jml_rek; ?> Rekening</b>
-        <table style="font-size: 80%">
+        <table class="table table-bordered">
             <tr>
                 <th width="10px" >Warna</th>
                 <th width="70px" >Keterangan</th>
@@ -723,8 +719,56 @@
                 <td>Tidak Terdefenisi</td>
                 <td>Belum tahu</td>
             </tr>
-        </table>
+    </table>
+</div>
+
+<!-- Filter -->
+<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+        
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
+
+            </div>
+            
+            <form id="filter-form" method="POST" action="grStatusHarian" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    
+                    <?php if (isset($this->kppn_list)) { ?>
+                    <div id="wkdkppn" class="alert alert-danger"></div>
+                    <label class="isian">Kode KPPN: </label>
+                    <select type="text" name="kdkppn" id="kdkppn">
+                        <?php
+                        foreach ($this->kppn_list as $value1) {
+                            if ($kode_kppn == $value1->get_kd_d_kppn()) {
+                                echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+                            } else {
+                                echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                        
+                    <?php } ?>
+                    
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
+
 </div>
 
 <script type="text/javascript" charset="utf-8">
@@ -735,7 +779,7 @@
     });
 
     function hideErrorId() {
-        $('.error').fadeOut(0);
+        $('.alert-danger').fadeOut(0);
     }
 
     function hideWarning() {

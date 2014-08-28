@@ -52,7 +52,7 @@ class DataDashboard {
 
     public function get_sp2d_rekap_vol_pie($hari, $unitfilter = null) {
         if (!isset($unitfilter)) {
-            $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '" . Session::get('id_user') . "' and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+            $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         } else {
             $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         }
@@ -94,7 +94,7 @@ class DataDashboard {
         $data = array();
         for ($i = 0; $i < $hari; $i++) {
             if (!isset($unitfilter)) {
-                $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+                $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             } else {
                 $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             }
@@ -135,7 +135,7 @@ class DataDashboard {
     public function get_sp2d_rekap_num_pie($hari, $unitfilter = null) {
 
         if (!isset($unitfilter)) {
-            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '" . Session::get('id_user') . "' and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         } else {
             $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         }
@@ -181,7 +181,7 @@ class DataDashboard {
         $data = array();
         for ($i = 0; $i < $hari; $i++) {
             if (!isset($unitfilter)) {
-                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             } else {
                 $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             }
@@ -229,7 +229,7 @@ class DataDashboard {
         $data = array();
         for ($i = 0; $i < $hari; $i++) {
             if (!isset($unitfilter)) {
-                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where substr(check_number,3,3) = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             } else {
                 $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             }
@@ -318,7 +318,7 @@ class DataDashboard {
         $data = array();
 
         if (!isset($unitfilter)) {
-            $sql = "select distinct(check_number), check_date, jenis_sp2d, currency_code, exchange_rate, amount, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where substr(check_number,3,3) = " . Session::get('id_user') . " and check_date = to_date('" . date("Ymd", time()) . "','yyyymmdd') order by check_date desc";
+            $sql = "select distinct(check_number), check_date, jenis_sp2d, currency_code, exchange_rate, amount, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where kdkppn = " . Session::get('id_user') . " and check_date = to_date('" . date("Ymd", time()) . "','yyyymmdd') order by check_date desc";
         } else {
             $sql = "select distinct(check_number), check_date, jenis_sp2d, currency_code, exchange_rate, amount, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where " . $unitfilter . " order by check_date desc";
         }

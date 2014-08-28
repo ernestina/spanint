@@ -52,6 +52,7 @@ class DataUploadSPM {
 
         //var_dump ($sql);
         $result = $this->db->select($sql);
+		//var_dump ($result);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);

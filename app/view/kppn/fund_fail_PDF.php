@@ -358,7 +358,7 @@ if (is_array($this->nm_kppn2)) {
 //--------------------------
 //pilihan
 $judul = 'Laporan Data Pagu Minus (Fund Fail)'; //judul file laporan
-$tipefile = '.pdf';
+$tipefile = '.PDF';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(

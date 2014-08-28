@@ -14,11 +14,7 @@ class homeController extends BaseController {
      */
 
     public function index() {
-        if (Session::get('role') == SATKER) {
-            header('location:' . URL . 'home/mingguan');
-        } else {
-            header('location:' . URL . 'home/harian');
-        }
+        $this->view->render('kppn/home');
     }
 
     public function harian($kodeunit = null) {

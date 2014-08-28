@@ -1,364 +1,518 @@
-<!DOCTYPE html><?php //echo Session::get('created'); var_dump($_SESSION); ?>
+<!DOCTYPE HTML>
 <html>
+
     <head>
-        <title>.:Online Monitoring SPAN:.</title>
-       	<!--javascript-nya-->			
-        <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
-        <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
-        <script src="<?php echo URL; ?>public/js/jquery-2.0.3.min.js"></script>
-        <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
-        <script src="<?php echo URL; ?>public/js/myjs.js"></script>
-        <script src="<?php echo URL; ?>public/js/teamdf-jquery-number/jquery.number.js"></script>
-        <script src="<?php echo URL; ?>public/js/gaugejs/raphael.2.1.0.min.js"></script>
-        <script src="<?php echo URL; ?>public/js/gaugejs/justgage.1.0.1.min.js"></script>
-        <script src="<?php echo URL; ?>public/js/Chart.js"></script>
-        <script src="<?php echo URL; ?>public/js/paging.js"></script>
-        <script src="<?php echo URL; ?>public/js/Accounting.min.js"></script>
-
-        <!--css-nya-->
-        <link href="<?php echo URL; ?>public/js/jquery-ui-1.10.3/themes/base/jquery.ui.all.css" rel="stylesheet">
-        <link href="<?php echo URL; ?>public/css/ernest.css" rel="stylesheet">
-        <link href="<?php echo URL; ?>public/css/home.css" rel="stylesheet">
-
-
-        <script type="text/javascript">
-            $(function() {
-                $('#datepicker').datepicker();
-                $('#datepicker1').datepicker();
-                $('#datepicker2').datepicker({dateFormat: "dd-mm-yy"});
-                $('#datepicker3').datepicker({dateFormat: "dd-mm-yy"});
-            });
-            $(document).ready(function() {
-                $('#wrapper').css('min-height', window.innerHeight - 90);
-            });
-            $(window).resize(function() {
-                $('#wrapper').css('min-height', window.innerHeight - 90);
-            });
-        </script>
+        
+        <meta charset="utf-8">
+        
+        <title>Online Monitoring SPAN</title>
+        
+        <!-- JQuery & Jquery Plugins -->
+        <script src="<?php echo URL; ?>public/JQuery/jquery-2.1.1.min.js"></script>
+        <script src="<?php echo URL; ?>public/JQuery/plugins/jquery.nanoscroller.min.js"></script>
+        <script src="<?php echo URL; ?>public/JQuery/plugins/jquery.floatThead.min.js"></script>
+        <link href="<?php echo URL; ?>public/JQuery/plugins/nanoscroller.css" rel="stylesheet">
+        
+        <!-- Bootstrap CSS & JS -->
+        <script src="<?php echo URL; ?>public/Bootstrap/js/bootstrap.min.js"></script>
+        <link href="<?php echo URL; ?>public/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Bootstrap Datepicker CSS & JS -->
+        <script src="<?php echo URL; ?>public/Bootstrap/plugins/bootstrap-datepicker.js"></script>
+        <script src="<?php echo URL; ?>public/Bootstrap/plugins/bootstrap-datepicker.id.js"></script>
+        <link href="<?php echo URL; ?>public/Bootstrap/plugins/datepicker3.css" rel="stylesheet">
+        
+        <!-- FooTable CSS & JS -->
+        <script src="<?php echo URL; ?>public/FooTable/footable.min.js"></script>
+        <script src="<?php echo URL; ?>public/FooTable/footable.striping.min.js"></script>
+        <link href="<?php echo URL; ?>public/FooTable/footable.core.min.css" rel="stylesheet">
+        
+        <!-- Application CSS -->
+        <link href="<?php echo URL; ?>public/monster.css" rel="stylesheet">
+    
     </head>
-    <header><img src="<?php echo URL; ?>public/img/span-putih.png" width="40px" height="48px"></header>
+    
     <body>
-        <div id="wrapper">
-            <div id="menu">
+        
+        <!-- Sidebar -->
+        <div id="sidebar" class="nano">
+            
+            <div class="nano-content">
+            
+                <?php if (Session::get('role') == ADMIN): ?>
+                
                 <ul>
-                    <li class="nav"><a href="#"></a></li>
-                    <li class="nav"><a href="#"></a></li>
-                    <li class="nav"><a href="#"></a></li>
-                    <?php
-                    if (Session::get('role') == ADMIN) {
-                        echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
-                        echo '<li class="subnav"><a href=' . URL . 'userSpan/monitoringUserSpan>Modul MU</a>';
+                        
+                    <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
-                        echo '<ul>
-                                <li><a href=' . URL . 'userSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul MU</h4>
+                        <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
+                            <ul>
+                                <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring Pergantian User</a></li>
                             </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=#>Modul SA</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
-								<li><a href=' . URL . 'dataDIPA/ProsesRevisi></i>Informasi Proses Revisi DIPA</a></li>
-								<li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
-								<li><a href=' . URL . 'dataDIPA/Fund_fail></i>Data Pagu Minus</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasiTransfer></i>Realisasi Belanja Transfer Daerah</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataDroping/monitoringDroping></i>Modul CM</a>';
-                        echo '<ul>
-								<li><a href=' . URL . 'dataDroping/monitoringDroping>Monitoring Penyaluran & Droping Dana SP2D</a></li>
-                            </ul>
-							</li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataSPM/PosisiSPM></i>Modul PM</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/PosisiSPM></i>Monitoring Posisi Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/HoldSPM></i>Hold Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/ValidasiSpm></i>Daftar Penolakan PMRT</a></li>
-								<li><a href=' . URL . 'dataSPM/HistorySpm></i>Histori Invoice</a></li>
-								<li><a href=' . URL . 'dataSPM/DurasiSpm></i>Durasi Penyelesaian SP2D</a></li>
-								<li><a href=' . URL . 'dataSPM/nmsatker></i>Daftar SP2D per Satker</a></li>
-								<li><a href=' . URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
-                            </ul>
-							</li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataGR/grStatusHarian>Modul GR</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
-								<li><a href=' . URL . 'dataGR/GR_IJP></i>Monitoring IJP</a></li>
-								<li><a href=' . URL . 'dataGR/GR_PFK></i>Monitoring PFK</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan>Pelimpahan</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan></i>Pelimpahan</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
-                                <li><a href=' . URL . 'dataRetur/monitoringRetur></i>Daftar SP2D Retur</a></li>
-								<li><a href=' . URL . 'dataRetur/monitoringReturPkn>Monitoring Penyelesaian Retur</a></li>
-                                <li><a href=' . URL . 'dataKppn/harianBO></i>Laporan SP2D Harian ke Bank</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>Laporan SP2D terbit dan tertanggal di hari yang sama</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dBesok></i>Laporan SP2D terbit di atas jam 3 tertanggal hari ini</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dBackdate></i>SP2D Backdate</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSudahVoid></i>SP2D Void</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dRekap></i>Rekap SP2D BO Pusat</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/sp2dGajiDobel></i>Terindikasi dobel</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSalahTanggal></i>Terindikasi salah Tanggal</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSalahBank></i>Terindikasi salah Bank</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSalahRekening></i>Terindikasi salah PayGroup</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
-                        echo '<ul>
-								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
-							</ul>
-							</li>';
-                    }
-                    if (Session::get('role') == KANWIL) {
-
-                        echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
-                        echo '<li class="subnav"><a href=' . URL . 'UserSpan/monitoringUserSpan>Modul MU</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'UserSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
-                            </ul>
-                            </li>';
-
-                        echo '<li class="subnav"><a href=#>Modul SA</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
-								<li><a href=' . URL . 'dataDIPA/ProsesRevisi></i>Informasi Proses Revisi DIPA</a></li>
-								<li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
-								<li><a href=' . URL . 'dataDIPA/Fund_fail></i>Data Pagu Minus</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasiTransfer></i>Realisasi Belanja Transfer Daerah</a></li>
-                            </ul>
-                            </li>';
-
-
-                        echo '<li class="subnav"><a href=#>Modul PM</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/PosisiSPM></i>Monitoring Posisi Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/HoldSPM></i>Hold Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/validasiSPM></i>Daftar Penolakan PMRT</a></li>
-								<li><a href=' . URL . 'dataSPM/HistorySpm></i>Histori Invoice</a></li>
-								<li><a href=' . URL . 'dataSPM/DurasiSpm></i>Durasi Penyelesaian SP2D</a></li>
-								<li><a href=' . URL . 'dataSPM/nmsatker></i>Daftar SP2D per Satker</a></li>
-								<li><a href=' . URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
-                            </ul>
-							</li>';
-                        echo '<li class="subnav"><a href=#>Modul GR</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
-								 <li><a href=' . URL . 'dataGR/GR_IJP></i>Monitoring IJP</a></li>
-								<li><a href=' . URL . 'dataGR/GR_PFK></i>Monitoring PFK</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan>Pelimpahan</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan></i>Pelimpahan</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
-                                <li><a href=' . URL . 'dataRetur/monitoringRetur></i>Daftar SP2D Retur</a></li>
-                                <li><a href=' . URL . 'dataKppn/harianBO></i>SP2D Harian ke BO1</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>SP2D terbit dan tertanggal di hari yang sama</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dBesok></i>SP2D terbit diatas jam 3 tertanggal hari yang sama</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dBackdate></i>SP2D Backdate</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSudahVoid></i>SP2D Void</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dRekap></i>Rekap SP2D BO Pusat</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/sp2dGajiDobel></i>Terindikasi dobel</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSalahTanggal></i>Terindikasi salah Tanggal</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSalahBank></i>Terindikasi salah Bank</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSalahRekening></i>Terindikasi salah PayGroup</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
-                        echo '<ul>
-								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
-							</ul>
-							</li>';
-                    }
-                    if (Session::get('role') == KPPN) {
-                        echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
-                        echo '<li class="subnav"><a href=' . URL . 'userSpan/monitoringUserSpan>Modul MU</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'userSpan/monitoringUserSpan></i>Monitoring Pergantian User</a></li>
-                            </ul>
-                            </li>';
-
-                        echo '<li class="subnav"><a href=#>Modul SA</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
-								<li><a href=' . URL . 'dataDIPA/ProsesRevisi></i>Informasi Proses Revisi DIPA</a></li>
-                                <li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
-								<li><a href=' . URL . 'dataDIPA/Fund_fail></i>Data Pagu Minus</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasiTransfer></i>Realisasi Belanja Transfer Daerah</a></li>
-                            </ul>
-                            </li>';
-
-                        echo '<li class="subnav"><a href=#>Modul PM</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/PosisiSPM></i>Monitoring Posisi Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/HoldSPM></i>Hold Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/ValidasiSpm></i>Daftar Penolakan PMRT</a></li>
-								<li><a href=' . URL . 'dataSPM/HistorySpm></i>Histori Invoice</a></li>
-								<li><a href=' . URL . 'dataSPM/DurasiSpm></i>Durasi Penyelesaian SP2D</a></li>
-								<li><a href=' . URL . 'dataSPM/nmsatker></i>Daftar SP2D per Satker</a></li>
-								<li><a href=' . URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
-								<li><a href=' . URL . 'dataPNBP/KarwasPNBP></i>Karwas PNBP</a></li>
-                            </ul>
-							</li>';
-
-
-                        echo '<li class="subnav"><a href=#>Modul GR</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataGR/grStatusHarian></i>Monitoring Status LHP</a></li>
-                                <li><a href=' . URL . 'dataGR/GR_IJP></i>Monitoring IJP</a></li>
-								<li><a href=' . URL . 'dataGR/GR_PFK></i>Monitoring PFK</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan>Pelimpahan</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataPelimpahan/monitoringPelimpahan></i>Pelimpahan</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataSupplier/cekSupplier>Supplier</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataSupplier/downloadSupplierXls></i>Download Supplier</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
-                                <li><a href=' . URL . 'dataRetur/monitoringRetur></i>Daftar SP2D Retur</a></li>
-                                <li><a href=' . URL . 'dataKppn/harianBO></i>SP2D Harian ke BO1</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dHariIni></i>SP2D terbit dan tertanggal di hari yang sama</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dBesok></i>SP2D terbit diatas jam 3 tertanggal hari yang sama</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dBackdate></i>SP2D Backdate</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dNilaiMinus></i>SP2D Minus dan 0</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSudahVoid></i>SP2D Void</a></li>
-								<li><a href=' . URL . 'dataKppn/sp2dRekap></i>Rekap SP2D BO Pusat</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataKppn/Sp2dGajiDobel>Cek Gaji</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/sp2dGajiDobel></i>Terindikasi dobel</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSalahTanggal></i>Terindikasi salah Tanggal</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSalahBank></i>Terindikasi salah Bank</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dSalahRekening></i>Terindikasi salah PayGroup</a></li>
-                                <li><a href=' . URL . 'dataKppn/sp2dCompareGaji></i>Perbandingan Gaji per Bulan</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
-                        echo '<ul>
-								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
-							</ul>
-							</li>';
-                    }
-                    if (Session::get('role') == SATKER) {
-                        echo '<li class="nav"><a href=' . URL . 'home>Beranda</a>';
-                        echo '<li class="subnav"><a href=#>Modul SA</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataDIPA/RevisiDipa/' . Session::get('kd_satker') . '></i>Informasi DIPA</a></li>
-								<li><a href=' . URL . 'dataDIPA/ProsesRevisi/' . Session::get('kd_satker') . '></i>Informasi Proses Revisi DIPA</a></li>
-                                <li><a href=' . URL . 'dataDIPA/RealisasiFA_1/' . Session::get('kd_satker') . '></i>Sisa Pagu</a></li>
-								<li><a href=' . URL . 'dataDIPA/Fund_fail/' . Session::get('kd_satker') . '></i>Data Pagu Minus</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=#>Modul PM</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataSPM/PosisiSPM></i>Monitoring Posisi Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/HoldSPM></i>Hold Invoice</a></li>
-                                <li><a href=' . URL . 'dataSPM/ValidasiSpm></i>Daftar Penolakan PMRT</a></li>
-                                <li><a href=' . URL . 'dataSPM/daftarsp2d/' . Session::get('kd_satker') . '></i>Daftar SP2D</a></li>
-								<li><a href=' . URL . 'dataSPM/RekapSp2d></i>Rekap Penerbitan SP2D</a></li>
-                            </ul>
-							</li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataSupplier/cekSupplier>SUPPLIER</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataSupplier/cekSupplier></i>Cek Supplier</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="subnav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
-                                <li><a href=' . URL . 'dataRetur/monitoringRetur></i>Daftar SP2D Retur</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
-                        echo '<ul>
-								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
-							</ul>
-							</li>';
-                    }
-                    if (Session::get('role') == PKN) {
-                        echo '<li class="subnav"><a href=' . URL . 'dataRetur/monitoringReturPKN>Retur</a>';
-                        echo '<ul>
-								<li><a href=' . URL . 'dataRetur/monitoringReturPKN>Monitoring Penyelesaian Retur</a></li>
-                                <li><a href=' . URL . 'dataRetur/monitoringRetur></i>Daftar SP2D Retur</a></li>
-							</ul>
-							</li>';
-                        echo '<li class="nav"><a href=' . URL . 'dataDroping/monitoringDroping>Droping</a>';
-                        echo '<ul>
-								<li><a href=' . URL . 'dataDroping/monitoringDroping>Monitoring Penyaluran & Droping Dana SP2D</a></li>
-							</ul>
-							</li>';
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/monitoringSp2d>BANK</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataKppn/monitoringSp2d></i>Cek status SP2D</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
-                        echo '<ul>
-								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
-							</ul>
-							</li>';
-                    }
-                    if (Session::get('role') == DJA) {
-                        echo '<li class="subnav"><a href=#>Modul SA</a>';
-                        echo '<ul>
-                                <li><a href=' . URL . 'dataDIPA/nmsatker></i>Informasi Revisi DIPA</a></li>
-                                <li><a href=' . URL . 'dataDIPA/nmsatker1></i>Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
-								<li><a href=' . URL . 'dataDIPA/Fund_fail></i>Data Pagu Minus</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasi></i>Realisasi Belanja Per Satker</a></li>
-								<li><a href=' . URL . 'dataDIPA/DataRealisasiBA></i>Realisasi Belanja Per BA</a></li>
-                            </ul>
-                            </li>';
-                        echo '<li class="nav"><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan</a>';
-                        echo '<ul>
-								<li><a href=' . URL . 'dataKppn/lihatPanduan1>Panduan Simpan ke Excel</a></li>
-							</ul>
-							</li>';
-                    }
-                    ?>
-                    <li>
-                        <a href="<?php echo URL; ?>auth/logout"><i class="icon-off"></i></a>
+                        </div>
                     </li>
-                    <li class="nav" style="float: right;">
-                        <h3 style="margin-top: 13px"><a style="color: rgba(0,121,185,1); "><?php echo Session::get('user') ?></a></h3>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
+                            </ul>
+                        </div>
                     </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul CM</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Penyaluran &amp; Droping Dana SP2D</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul PM</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataSPM/PosisiSPM">Monitoring Posisi Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/HoldSPM">Hold Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/ValidasiSpm">Daftar Penolakan PMRT</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/HistorySpm">Histori Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/DurasiSpm">Durasi Penyelesaian SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/nmsatker">Daftar SP2D per Satker</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul GR</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
+                                <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
+                                <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelimpahan</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/harianBO">Laporan SP2D Harian ke Bank</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dHariIni">Laporan SP2D Terbit dan Tertanggal di Hari yang Sama</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">Laporan SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBackdate">SP2D Backdate</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dNilaiMinus">SP2D Minus dan 0</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSudahVoid">SP2D Void</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dRekap">Rekap SP2D BO Pusat</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-gift"></span>&nbsp;&nbsp;Gaji</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dGajiDobel">Terindikasi Dobel</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahTanggal">Terindikasi Salah Tanggal</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahBank">Terindikasi Salah Bank</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahRekening">Terindikasi Salah PayGroup</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dCompareGaji">Perbandingan Gaji per Bulan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
                 </ul>
+                
+                <?php elseif (Session::get('role') == KANWIL): ?>
+                
+                <ul>
+                        
+                    <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul MU</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring Pergantian User</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul PM</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataSPM/PosisiSPM">Monitoring Posisi Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/HoldSPM">Hold Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/ValidasiSpm">Daftar Penolakan PMRT</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/HistorySpm">Histori Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/DurasiSpm">Durasi Penyelesaian SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/nmsatker">Daftar SP2D per Satker</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul GR</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
+                                <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
+                                <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelimpahan<</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/harianBO">Laporan SP2D Harian ke BO1</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dHariIni">Laporan SP2D Terbit dan Tertanggal di Hari yang Sama</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">Laporan SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBackdate">SP2D Backdate</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dNilaiMinus">SP2D Minus dan 0</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSudahVoid">SP2D Void</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dRekap">Rekap SP2D BO Pusat</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-gift"></span>&nbsp;&nbsp;Gaji</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dGajiDobel">Terindikasi Dobel</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahTanggal">Terindikasi Salah Tanggal</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahBank">Terindikasi Salah Bank</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahRekening">Terindikasi Salah PayGroup</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dCompareGaji">Perbandingan Gaji per Bulan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+                
+                <?php elseif (Session::get('role') == KPPN): ?>
+                
+                <ul>
+                        
+                    <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul MU</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring Pergantian User</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul PM</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataSPM/PosisiSPM">Monitoring Posisi Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/HoldSPM">Hold Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/ValidasiSpm">Daftar Penolakan PMRT</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/HistorySpm">Histori Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/DurasiSpm">Durasi Penyelesaian SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/nmsatker">Daftar SP2D per Satker</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul GR</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
+                                <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
+                                <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Supplier</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataSupplier/downloadSupplierXls">Download Supplier</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelimpahan</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/harianBO">Laporan SP2D Harian ke BO1</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dHariIni">Laporan SP2D Terbit dan Tertanggal di Hari yang Sama</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">Laporan SP2D Terbit di Atas Jam 3 Tertanggal Hari yang Sama</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBackdate">SP2D Backdate</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dNilaiMinus">SP2D Minus dan 0</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSudahVoid">SP2D Void</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dRekap">Rekap SP2D BO Pusat</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-gift"></span>&nbsp;&nbsp;Gaji</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dGajiDobel">Terindikasi Dobel</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahTanggal">Terindikasi Salah Tanggal</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahBank">Terindikasi Salah Bank</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahRekening">Terindikasi Salah PayGroup</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dCompareGaji">Perbandingan Gaji per Bulan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+                
+                <?php elseif (Session::get('role') == SATKER): ?>
+                
+                <ul>
+                        
+                    <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataDIPA/RevisiDipa/<?php Session::get('kd_satker'); ?>">Informasi Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA/<?php Session::get('kd_satker'); ?>">Informasi Proses Revisi DIPA</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul PM</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataSPM/PosisiSPM">Monitoring Posisi Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/HoldSPM">Hold Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/ValidasiSpm">Daftar Penolakan PMRT</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/HistorySpm">Histori Invoice</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/daftarsp2d/<?php Session::get('kd_satker'); ?>">Daftar SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Supplier</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+                
+                <?php elseif (Session::get('role') == PKN): ?>
+                
+                <ul>
+                        
+                    <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-transfer"></span>&nbsp;&nbsp;Retur</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPKN">Monitoring Penyelesaian Retur</a></li>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-arrow-down"></span>&nbsp;&nbsp;Droping</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Penyaluran &amp; Droping Dana SP2D</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+                
+                <?php elseif (Session::get('role') == DJA): ?>
+                
+                <ul>
+                        
+                    <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul SA</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataKppn/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+                
+                <?php endif; ?>
+                
             </div>
+        
+        </div>
+        
+        <!-- Jendela Utama -->
+    
+        <div id="main-content">
+            
+            <nav id="main-bar" class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
 
+                    <div class="navbar-text btn-group hidden-xs hidden-sm hidden-md navbar-left">
+                        <a id="menu-toggle-thin" class="btn btn-outline" onclick="toggleSidebar()"><span class="glyphicon glyphicon-th-list"></span> Menu</a>
+                    </div>
 
+                    <div class="navbar-text btn-group hidden-lg" style="float: left;">
+                        <a type="button" id="menu-toggle-wide" class="btn btn-outline" onclick="toggleSidebar()"><span class="glyphicon glyphicon-th-list"></span> <span class="hidden-xs">Menu</span></a>
+                        <a type="button" class="btn btn-outline" id="button-user-small" data-toggle="tooltip" data-placement="bottom" title="<?php echo Session::get('user') ?>"><span class="glyphicon glyphicon-user"></span> <span class="hidden-xs">Pengguna</span></a>
+                        <a type="button" class="btn btn-outline" href="<?php echo URL; ?>auth/logout"><span class="glyphicon glyphicon-lock"></span> <span class="hidden-xs">Keluar</span></a>
+                    </div>
+                    
+                    <a class="navbar-brand hidden-xs hidden-sm hidden-md navbar-left" style="height: 54px; position: relative; left: 30px; border-left: 1px solid #e5e5e5;"href="http://www.span.depkeu.go.id/"><img src="<?php echo URL; ?>public/span-logo.png">&nbsp;&nbsp;</a>
+                    <a class="navbar-brand navbar-left hidden-xs" style="height: 54px; position: relative; left: 30px; border-left: 1px solid #e5e5e5;"href="<?php echo URL; ?>"><img src="<?php echo URL; ?>public/monster-logo-small.png">&nbsp;Online Monitoring</a>
+                    
+                    <a class="navbar-brand hidden-lg" style="float: right; height: 54px; position: relative; left: 10px; border-left: 1px solid #e5e5e5;"href="<?php echo URL; ?>"><img src="<?php echo URL; ?>public/span-logo-small.png"></a>
+                    <a class="navbar-brand navbar-left visible-xs" style="float: right; position: relative; left: 15px; height: 64px; border-left: 1px solid #e5e5e5;"href="http://www.span.depkeu.go.id/"><img src="<?php echo URL; ?>public/monster-logo-small.png"></a>
 
+                    <div class="navbar-text btn-group hidden-xs hidden-sm hidden-md navbar-right" style="padding-right: 10px">
+                        <a type="button" class="btn btn-outline" id="button-user-large" data-toggle="tooltip" data-placement="bottom" title="<?php echo Session::get('user') ?>"><span class="glyphicon glyphicon-user"></span> <span id="nav-user-name"><?php echo Session::get('user') ?></span></a>
+                        <a type="button" class="btn btn-outline" href="<?php echo URL; ?>auth/logout"><span class="glyphicon glyphicon-lock"></span> Keluar</a>
+                    </div>
 
-
+                </div>
+            </nav>
+            
+            <div id="content-container">
+                
+            <!-- Bersambung ke konten utama -->
