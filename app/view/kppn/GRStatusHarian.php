@@ -14,7 +14,9 @@
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                <?php if (isset($this->kppn_list)) { ?>
+                    <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                <?php } ?>
                 
             </div>
         </div>
@@ -673,53 +675,6 @@
                 ?>
             </tbody>
         </table>
-        <br>
-        <b><i>* Klik pada kolom warna untuk melihat detail transaksi </i></b></br>
-        <b>Keterangan : </br>
-            Angka didalam kotak adalah jumlah LHP<br>
-            Jumlah Rekening Persepsi yang terdaftar sebanyak <?php echo $this->jml_rek; ?> Rekening</b>
-        <table class="table table-bordered">
-            <tr>
-                <th width="10px" >Warna</th>
-                <th width="70px" >Keterangan</th>
-                <th width="70px" >Tindakan</th>
-                <th width="10px" >Warna</th>
-                <th width="70px" >Keterangan</th>
-                <th width="70px" >Tindakan</th>
-            </tr>
-            <tr>
-                <td bgcolor='#F5F5F5'></td>
-                <td>Data belum masuk</td>
-                <td>Konfirmasi ke Bank dan Upload</td>
-                <td bgcolor='#B2BEB5'></td>
-                <td>Ada data belum pengecekan</td>
-                <td>Lakukan pengecekan</td>
-            </tr>
-            <tr>
-                <td bgcolor='#A4C639'></td>
-                <td>Semua Data Completed</td>
-                <td>Tidak ada</td>
-                <td bgcolor='#99666CC'></td>
-                <td>Ada data yang belum oke</td>
-                <td>Lakukan pengecekan</td>
-            </tr>
-            <tr>
-                <td bgcolor='#FFBF00'></td>
-                <td>Ada yang belum diinterface</td>
-                <td>Lakukan interface</td>
-                <td bgcolor='#C19A6B'></td>
-                <td>Hari Libur</td>
-                <td>Tidak ada</td>
-            </tr>
-            <tr>
-                <td bgcolor='#FF2800'></td>
-                <td>Data error</td>
-                <td>upload ulang ADK</td>
-                <td bgcolor='#000000'></td>
-                <td>Tidak Terdefenisi</td>
-                <td>Belum tahu</td>
-            </tr>
-    </table>
 </div>
 
 <!-- Filter -->
@@ -743,7 +698,7 @@
                     <?php if (isset($this->kppn_list)) { ?>
                     <div id="wkdkppn" class="alert alert-danger"></div>
                     <label class="isian">Kode KPPN: </label>
-                    <select type="text" name="kdkppn" id="kdkppn">
+                    <select class="form-control" type="text" name="kdkppn" id="kdkppn">
                         <?php
                         foreach ($this->kppn_list as $value1) {
                             if ($kode_kppn == $value1->get_kd_d_kppn()) {
@@ -769,6 +724,80 @@
 
     </div>
 
+</div>
+
+<div class="main-window-segment vertical-padded light-panel">
+    <div class="container-fluid">
+        
+        <div class="row">
+            
+            <div class="col-md-12">
+                
+                <p>Klik pada kolom warna untuk melihat detail transaksi.</p>
+                
+                <p><b>Keterangan: </b>Angka didalam kotak adalah jumlah LHP. Jumlah Rekening Persepsi yang terdaftar sebanyak <?php echo $this->jml_rek; ?> Rekening.</p>
+            
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+<div class="main-window-segment vertical-padded">
+    <div class="container-fluid">
+        
+        <div class="row">
+            
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="10px" >Warna</th>
+                        <th width="70px" >Keterangan</th>
+                        <th width="70px" >Tindakan</th>
+                        <th width="10px" >Warna</th>
+                        <th width="70px" >Keterangan</th>
+                        <th width="70px" >Tindakan</th>
+                    </tr>
+                    <tr>
+                        <td bgcolor='#F5F5F5'></td>
+                        <td>Data belum masuk</td>
+                        <td>Konfirmasi ke Bank dan Upload</td>
+                        <td bgcolor='#B2BEB5'></td>
+                        <td>Ada data belum pengecekan</td>
+                        <td>Lakukan pengecekan</td>
+                    </tr>
+                    <tr>
+                        <td bgcolor='#A4C639'></td>
+                        <td>Semua Data Completed</td>
+                        <td>Tidak ada</td>
+                        <td bgcolor='#99666CC'></td>
+                        <td>Ada data yang belum oke</td>
+                        <td>Lakukan pengecekan</td>
+                    </tr>
+                    <tr>
+                        <td bgcolor='#FFBF00'></td>
+                        <td>Ada yang belum diinterface</td>
+                        <td>Lakukan interface</td>
+                        <td bgcolor='#C19A6B'></td>
+                        <td>Hari Libur</td>
+                        <td>Tidak ada</td>
+                    </tr>
+                    <tr>
+                        <td bgcolor='#FF2800'></td>
+                        <td>Data error</td>
+                        <td>upload ulang ADK</td>
+                        <td bgcolor='#000000'></td>
+                        <td>Tidak Terdefenisi</td>
+                        <td>Belum tahu</td>
+                    </tr>
+            </table>
+            
+            </div>
+            
+        </div>
+        
+    </div>
 </div>
 
 <script type="text/javascript" charset="utf-8">

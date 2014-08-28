@@ -22,11 +22,6 @@
         <script src="<?php echo URL; ?>public/Bootstrap/plugins/bootstrap-datepicker.id.js"></script>
         <link href="<?php echo URL; ?>public/Bootstrap/plugins/datepicker3.css" rel="stylesheet">
         
-        <!-- FooTable CSS & JS -->
-        <script src="<?php echo URL; ?>public/FooTable/footable.min.js"></script>
-        <script src="<?php echo URL; ?>public/FooTable/footable.striping.min.js"></script>
-        <link href="<?php echo URL; ?>public/FooTable/footable.core.min.css" rel="stylesheet">
-        
         <!-- Application CSS -->
         <link href="<?php echo URL; ?>public/monster.css" rel="stylesheet">
     
