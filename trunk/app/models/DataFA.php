@@ -51,7 +51,7 @@ class DataFA {
 
     public function get_fa_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT Distinct A.*, B.NMSATKER
+        $sql = "SELECT Distinct A.*, B.NMSATKER 
 				FROM "
                 . $this->_table1 . " A, "
                 . $this->_table2 . " B 

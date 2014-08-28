@@ -109,14 +109,21 @@
                             echo "<tr>	";
                             echo "<td>" . $no++ . "</td>";
                             echo "<td class='ratakiri'>" . $value->get_error_date() . "</td>";
-                            //echo "<td>" . $value->get_satker_code() . "</td>";
-                            echo "<td><a href=" . URL . "dataDIPA/Detail_Fund_Fail_KD/" . $value->get_satker_code() . "/" . $value->get_output_code() . " target='_blank' '>" . $value->get_satker_code() . "</td>";
+                            echo "<td>" . $value->get_satker_code() . "</td>";
+                            /*echo "<td><a href=" . URL . "dataDIPA/Detail_Fund_Fail_KD/" . $value->get_satker_code() . "/" . $value->get_output_code() . " target='_blank' '>" . $value->get_satker_code() . "</td>";*/
                             echo "<td>" . $value->get_kppn_code() . "</td>";
                             echo "<td>" . $value->get_account_code() . "</td>";
                             echo "<td>" . $value->get_program_code() . "</td>";
                             echo "<td>" . $value->get_output_code() . "</td>";
                             echo "<td>" . $value->get_dana_code() . "</td>";
-                            echo "<td>" . $value->get_description() . "</td>";
+                            $description = $value->get_description();
+							if (substr($description,0,4) == 'Fund') {
+								echo "<td><a href=" . URL . "dataDIPA/Detail_Fund_Fail_KD/1/" . $value->get_satker_code() . "/" . $value->get_output_code() . "/" .$value->get_account_code(). " target='_blank' '>" . $value->get_description() . "</td>";
+							} else {
+								echo "<td><a href=" . URL . "dataDIPA/Detail_Fund_Fail_KD/2/" . $value->get_satker_code() . "/" . $value->get_output_code() ."/" .$value->get_account_code(). " target='_blank' '>" . $value->get_description() . "</td>";
+							}
+							
+							//echo "<td>" . $value->get_description() . "</td>";
                             echo "<td class='ratakanan'>" . number_format($value->get_blokir_kontrak()) . "</td>";
                             echo "<td class='ratakanan'>" . number_format($value->get_blokir_realisasi()) . "</td>";
                             echo "</tr>	";
