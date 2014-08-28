@@ -127,7 +127,12 @@
                 $('#footable-body table').attr('width', totalWidth);
                 $('#footable-footer table').attr('width', totalWidth);
                 
-                $('#footable-header table').css('table-layout', 'fixed');
+                if ($('#footable-header tr').length > 1) {
+                    $('#footable-header table').css('table-layout', 'fixed !important');
+                } else {
+                    $('#footable-header table').css('table-layout', 'fixed');
+                }
+                
                 $('#footable-body table').css('table-layout', 'fixed');
                 $('#footable-footer table').css('table-layout', 'fixed');
                 return false;
@@ -179,6 +184,7 @@
             //Init tabel
             $('.footable').addClass('table');
             $('.footable').addClass('table-striped');
+            $('.footable').addClass('table-bordered');
             
             $('.footable > tbody > tr').each(function() {
                 $('td', this).each(function() {
@@ -206,7 +212,7 @@
             
             $('#table-container').prepend('<div id="footable-header"></div>');
             if (typeof $('#table-container .footable thead').html() !== 'undefined') {
-                $('#table-container #footable-header').html('<table class="table"><thead>' + $('#table-container .footable thead').html() + '</thead></table>');
+                $('#table-container #footable-header').html('<table class="table table-bordered"><thead>' + $('#table-container .footable thead').html() + '</thead></table>');
             }
             $('#table-container .footable thead').remove();
             
@@ -214,7 +220,7 @@
             
             $('#table-container').append('<div id="footable-footer"></div>');
             if (typeof $('#table-container .footable tfoot').html() !== 'undefined') {
-                $('#table-container #footable-footer').html('<table class="table"><tfoot>' + $('#table-container .footable tfoot').html() + '</tfoot></table>');
+                $('#table-container #footable-footer').html('<table class="table table-bordered"><tfoot>' + $('#table-container .footable tfoot').html() + '</tfoot></table>');
             }
             $('#table-container .footable tfoot').remove();
             

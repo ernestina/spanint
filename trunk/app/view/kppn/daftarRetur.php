@@ -123,18 +123,18 @@ if(isset($this->d_nosp2d) || isset($this->d_barsp2d) ||
             <tr>
                 <th rowspan=2 class='mid'>No.</th>
                 <th rowspan=2 class='mid'>Kode Satker <br> Nama Satker</th>
-                <th colspan=4>SP2D Retur</th>
-                <th colspan=3>SP2D Pengganti</th>
-                <th rowspan=2>Bank Pembayar <br> Status Retur</th>
+                <th colspan=4 class='mid'>SP2D Retur</th>
+                <th colspan=3 class='mid'>SP2D Pengganti</th>
+                <th rowspan=2 class='mid'>Bank Pembayar <br> Status Retur</th>
             </tr>
             <tr>
                 <th class='mid'>Tgl. SP2D<br>No. SP2D<br>No. Transaksi</th>
-                <th class='mid'>Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
-                <th class='mid'>Uraian SP2D</th>
-                <th class='mid'>Alasan Retur</th>
+                <th>Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
+                <th>Uraian SP2D</th>
+                <th>Alasan Retur</th>
                 <th class='mid'>Tgl Proses <br>SP2D Pengganti</th>
                 <th class='mid'>Tgl. SP2D<br>No. SP2D</th>
-                <th class='mid'>Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
+                <th>Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
             </tr>
         </thead>
         <tbody class='ratatengah'>
@@ -200,14 +200,14 @@ if (isset($this->data)) {
                             }
                             ?>
                         </select>
+                    <br/>
 <?php } ?>
-
                     <div id="wsp2d" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">No SP2D: </label>
                     <input class="form-control" type="number" name="nosp2d" id="nosp2d" size="15" value="<?php if (isset($this->d_nosp2d)) {
     echo $this->d_nosp2d;
 } ?>">
-
+                    <br/>
                     <div id="wbarsp2d" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">No Transaksi: </label>
                     <input class="form-control" type="number" name="barsp2d" id="barsp2d" value="<?php if (isset($this->d_barsp2d)) {
@@ -227,7 +227,7 @@ if (Session::get('role') != SATKER) {
 } ?>" name="kdsatker" id="kdsatker" size="15" value="<?php if (isset($this->d_kdsatker)) {
     echo $this->d_kdsatker;
 } ?>">
-
+                    <br/>
                     <div id="wstatus" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Status: </label>
                     <select class="form-control" type="text" name="status" id="status">
@@ -242,7 +242,7 @@ if (Session::get('role') != SATKER) {
     echo "selected";
 } ?>>SEMUA</option>
                     </select>
-
+                    <br/>
                     <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Tanggal: </label>
                     
