@@ -311,19 +311,19 @@ class DataDIPAController extends BaseController {
 
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "A.SATKER = '" . $_POST['kdsatker'] . "'";
-                $this->view->satker_code = $_POST['satker_code'];
+                $this->view->satker_code = $_POST['kdsatker'];
             }
             if ($_POST['akun'] != '') {
                 $filter[$no++] = "A.AKUN = '" . $_POST['akun'] . "'";
-                $this->view->account_code = $_POST['account_code'];
+                $this->view->account_code = $_POST['akun'];
             }
             if ($_POST['output'] != '') {
                 $filter[$no++] = "A.OUTPUT = '" . $_POST['output'] . "'";
-                $this->view->output_code = $_POST['output_code'];
+                $this->view->output_code = $_POST['output'];
             }
             if ($_POST['program'] != '') {
                 $filter[$no++] = "A.PROGRAM = '" . $_POST['program'] . "'";
-                $this->view->program_code = $_POST['program_code'];
+                $this->view->program_code = $_POST['program'];
             }
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
                 $filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '" . $_POST['tgl_awal'] . "' AND '" . $_POST['tgl_akhir'] . "'";
