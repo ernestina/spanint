@@ -85,7 +85,7 @@
                 <th class="align-center">Posisi</th>
                 <th class="align-center">Email Depkeu</th>
                 <th class="align-center">Tanggal Mulai Aktif</th>
-                <th class="align-center" class="align-center">Tanggal Berakhir</th>
+                <th class="align-center">Tanggal Berakhir</th>
             </tr>
         </thead>
         

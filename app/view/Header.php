@@ -10,7 +10,6 @@
         <!-- JQuery & Jquery Plugins -->
         <script src="<?php echo URL; ?>public/JQuery/jquery-2.1.1.min.js"></script>
         <script src="<?php echo URL; ?>public/JQuery/plugins/jquery.nanoscroller.min.js"></script>
-        <script src="<?php echo URL; ?>public/JQuery/plugins/jquery.floatThead.min.js"></script>
         <link href="<?php echo URL; ?>public/JQuery/plugins/nanoscroller.css" rel="stylesheet">
         
         <!-- Bootstrap CSS & JS -->
@@ -472,6 +471,8 @@
         <!-- Jendela Utama -->
     
         <div id="main-content">
+            
+            <!-- Navigasi atas -->
             
             <nav id="main-bar" class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">

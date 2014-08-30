@@ -1,11 +1,33 @@
-<!-- Blok Judul -->
-<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+<!-- A beautiful app starts with a beautiful code :) -->
+
+<!-- /dataDIPA/nmsatker -->
+
+<!-- Header -->
+<div class="main-window-segment header-segment bottom-padded">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-11 col-md-10 col-sm-12">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Informasi Revisi DIPA Satker</h2>
-                <p>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+                
+                <!-- PDF -->        
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+            
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
+            </div>
+        </div>
+        
+        <div class="row">
+            
+            <div class="col-md-6 col-sm-12">
                 <?php
+
                 if (isset($this->d_nama_kppn)) {
                     foreach ($this->d_nama_kppn as $kppn) {
                         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
@@ -14,12 +36,22 @@
                 } else {
                     echo Session::get('user');
                 }
+
                 ?>
-                </p>
             </div>
-            <div class="col-lg-1 col-md-2 col-sm-12" style="padding-top: 20px;">
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+            
+            <div class="col-md-6 col-sm-12 align-right">
+                <?php
+
+                if (isset($this->last_update)) {
+                    foreach ($this->last_update as $last_update) {
+                        echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                    }
+                }
+
+                ?>
             </div>
+            
         </div>
         
     </div>
@@ -27,44 +59,54 @@
 
 <!-- Blok Tabel -->
 <div id="table-container" class="wrapper">
-    <table width="100%" class="footable">
-        <!--baris pertama-->
+    <table class="footable">
+
         <thead>
+            
             <tr>
-                <th data-hide="phone, tablet" data-ignore="true">No.</th>
-                <th data-hide="phone, tablet">KPPN</th>
-                <th data-toggle="true">Kode Satker</th>
+                <th class="align-center">No.</th>
+                <th class="align-center">KPPN</th>
+                <th class="align-center">Kode Satker</th>
                 <th>Nama Satker</th>
-                <th data-hide="phone, tablet">Tanggal Posting Revisi</th>
-                <th data-hide="phone, tablet">No. Revisi Terakhir</th>
+                <th class="align-center">Tanggal Posting Revisi</th>
+                <th class="align-center">No. Revisi Terakhir</th>
             </tr>
-        <!--th>KPPN</th-->
+
         </thead>
+        
         <tbody>
-            <?php
-            $no = 1;
-            //var_dump ($this->data);
-            if (isset($this->data)) {
-                if (empty($this->data)) {
-                    echo '<td colspan=12 align="center">Tidak ada data.</td>';
-                } else {
-                    foreach ($this->data as $value) {
-                        echo "<tr>	";
-                        echo "<td>" . $no++ . "</td>";
-                        echo "<td>" . $value->get_kppn() . "</td>";
-                        echo "<td><a href=" . URL . "dataDIPA/RevisiDipa/" . $value->get_kdsatker() . " target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
-                        //echo "<td>" . $value->get_kdsatker() . "</td>";
-                        echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
-                        echo "<td>" . $value->get_tgl_rev() . "</td>";
-                        echo "<td>" . $value->get_rev() . "</td>";
-                        //echo "<td class='ratakanan'>" . $value->get_total_sp2d() . "</td>";
-                        echo "</tr>	";
-                    }
-                }
-            } else {
-                echo '<td colspan=12 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
-            }
-            ?>
+            
+            <?php $no = 1; ?>
+            
+            <?php if (isset($this->data)) { ?>
+                
+                <?php if (empty($this->data)) { ?>
+            
+                    <td colspan=6 align="center">Tidak ada data.</td>
+            
+                <?php } else { ?>
+            
+                    <?php foreach ($this->data as $value) { ?>
+            
+                        <tr>
+                            <td class="align-center"><?php echo $no++; ?></td>
+                            <td class="align-center"><?php echo $value->get_kppn(); ?></td>
+                            <td class="align-center"><a href="<?php echo URL; ?>dataDIPA/RevisiDipa/<?php echo $value->get_kdsatker(); ?>"><?php echo $value->get_kdsatker(); ?></a></td>
+                            <td><?php echo $value->get_nmsatker(); ?></td>
+                            <td class="align-center"><?php echo $value->get_tgl_rev(); ?></td>
+                            <td class="align-center"><?php echo $value->get_rev(); ?></td>
+                        </tr></a>
+                            
+                    <?php } ?>
+    
+                <?php } ?>
+    
+            <?php } else { ?>
+    
+                <td colspan=6 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>
+    
+            <?php } ?>
+    
         </tbody>
     </table>
 </div>
@@ -86,43 +128,62 @@
             <form id="filter-form" method="POST" action="nmsatker" enctype="multipart/form-data">
 
                 <div class="modal-body">
+                    
 	                <div id="winvoicea" class="alert alert-danger" style="display:none;"></div>
+                    
                     <?php if (isset($this->kppn_list)) { ?>
-                    <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
-                    <label class="isian">Kode KPPN: </label>
-                    <select class="form-control" type="text" name="kdkppn" id="kdkppn">
-                        <option value='' selected>- pilih -</option>
-                        <?php foreach ($this->kppn_list as $value1){ 
-                                if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
-                                else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+                    
+                        <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
+                        <label class="isian">Kode KPPN: </label>
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                            
+                            <option value="" selected>Pilih salah satu...</option>
+                            
+                            <?php foreach ($this->kppn_list as $value1) { ?>
+                            
+                                <?php if ($kode_kppn==$value1->get_kd_d_kppn()) { ?>
+                            
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+                                    
+                                <?php } else { ?>
+                            
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>"><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+                            
+                                <?php } ?>
 
-                        } ?>
-                    </select>
+                            <?php } ?>
+                            
+                        </select>
+                    
+                        <br/>
+                    
                     <?php } ?>
-                    <br/>
+                    
                     <label class="isian">Status Revisi: </label>
                     <select class="form-control" type="text" name="revisi" id="revisi">
 
-                        <option value=''>- pilih -</option>
-                        <option value='= 0' <?php if ($this->status=="BELUM REVISI"){echo "BELUM REVISI";}?>>BELUM REVISI</option>
-                        <option value='> 0' <?php if ($this->status=="SUDAH REVISI"){echo "NON GAJI";}?>>SUDAH REVISI</option>
+                        <option value="">Pilih salah satu...</option>
+                        <option value="= 0" <?php if ($this->status=='BELUM REVISI') { echo 'BELUM REVISI'; } ?>>BELUM REVISI</option>
+                        <option value="> 0" <?php if ($this->status=='SUDAH REVISI') { echo 'NON GAJI'; } ?>>SUDAH REVISI</option>
 
                     </select>
+                    
                     <br/>
+                    
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Kode Satker: </label>
-                    <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){echo $this->kdsatker;}?>">
+                    <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)){ echo $this->kdsatker; } ?>">
+                    
                     <br/>
+                    
                     <label class="isian">Nama Satker: </label>
-                    <input class="form-control" type="text" name="nmsatker" id="nmsatker" value="<?php if (isset($this->nmsatker)){echo $this->nmsatker;}?>">
-
+                    <input class="form-control" type="text" name="nmsatker" id="nmsatker" value="<?php if (isset($this->nmsatker)){ echo $this->nmsatker; } ?>">
 
                     <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
                     <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
                     <input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
                     <input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker."_".$kode_kppn."_".date("d-m-y")."_"; ?>">
-                        
+                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker.'_'.$kode_kppn.'_'.date('d-m-y').'_'; ?>">
 
                 </div>
 
