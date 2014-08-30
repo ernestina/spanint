@@ -14,23 +14,61 @@
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
                 
                 <?php 
-
-                if (isset($this->d_kd_kppn) || isset($this->d_nip)) {
-
-                    if (isset($this->d_kd_kppn)) {
-                        $kdkppn = $this->d_kd_kppn;
-                    } else {
-                        $kdkppn = Session::get('id_user');
-                    }
-                    if (isset($this->d_nip)) {
-                        $kdnip = $this->d_nip;
-                    }
-                    
-                ?>
-
-                <a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                
-                <?php } ?>
+				//---------------------------------
+				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
+				if (Session::get('role') == ADMIN) {
+					if( isset($this->d_kd_kppn) || isset($this->d_nip)){	
+						 if (isset($this->d_kd_kppn)) {
+							$kdkppn = $this->d_kd_kppn;
+						} else {
+							$kdkppn = 'null';
+						}
+						if (isset($this->d_nip)) {
+							$kdnip = $this->d_nip;
+						}else{
+							$kdnip ='null';
+						}
+						?>
+						<a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<?php
+					}
+				}
+				if (Session::get('role') == KANWIL) {
+					if( isset($this->d_kd_kppn) || isset($this->d_nip)){	
+						 if (isset($this->d_kd_kppn)) {
+							$kdkppn = $this->d_kd_kppn;
+						} else {
+							$kdkppn = 'null';
+						}
+						if (isset($this->d_nip)) {
+							$kdnip = $this->d_nip;
+						}else{
+							$kdnip ='null';
+						}
+						?>
+						<a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<?php
+					}
+				}
+				if (Session::get('role') == KPPN) {
+					 if (isset($this->d_kd_kppn)) {
+						$kdkppn = $this->d_kd_kppn;
+					} else {
+						$kdkppn = Session::get('id_user');
+					}
+					if (isset($this->d_nip)) {
+						$kdnip = $this->d_nip;
+					}else{
+						$kdnip ='null';
+					}
+					?>
+					<a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+					
+				}
+				//------------------------------
+				
+				?>
                 
             </div>
             
