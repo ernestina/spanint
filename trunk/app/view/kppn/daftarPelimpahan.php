@@ -1,5 +1,7 @@
 <!-- A beautiful app starts with a beautiful code :) -->
 
+<!-- /dataPelimpahan/monitoringPelimpahan -->
+
 <!-- Header -->
 <div class="main-window-segment header-segment bottom-padded">
     <div class="container-fluid">
@@ -72,11 +74,13 @@
             
             <div class="col-md-6 col-sm-12 align-right">
                 <?php
-                    if (isset($this->last_update)) {
-                        foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
-                        }
+
+                if (isset($this->last_update)) {
+                    foreach ($this->last_update as $last_update) {
+                        echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
                     }
+                }
+
                 ?>
             </div>
             
@@ -208,7 +212,7 @@
                     
                         <select class="form-control" type="text" name="kppn_induk" id="kppn_induk">
                             
-                            <option value='SEMUA' <?php if ($this->d_status == 'SEMUA') {echo "selected";} ?>>SEMUA</option>
+                            <option value="SEMUA" <?php if ($this->d_status == 'SEMUA') {echo 'selected';} ?>>SEMUA</option>
 
                             <?php foreach ($this->kppn_induk as $value3) { ?>
                             
@@ -234,10 +238,12 @@
                     <label class="isian">Status: </label>
                     
                     <select class="form-control" type="text" name="status" id="status">
-                        <option value=''>- pilih -</option>
-                        <option value='RECONCILED' <?php if ($this->d_status == 'RECONCILED') { echo "selected"; } ?>>RECONCILED</option>
-                        <option value='UNRECONCILED' <?php if ($this->d_status == 'UNRECONCILED') { echo "selected"; } ?>>UNRECONCILED</option>
-                        <option value='SEMUA' <?php if ($this->d_status == 'SEMUA') { echo "selected"; } ?>>SEMUA</option>
+                        
+                        <option value="">Pilih salah satu...</option>
+                        <option value="RECONCILED" <?php if ($this->d_status == 'RECONCILED') { echo 'selected'; } ?>>RECONCILED</option>
+                        <option value="UNRECONCILED" <?php if ($this->d_status == 'UNRECONCILED') { echo 'selected'; } ?>>UNRECONCILED</option>
+                        <option value="SEMUA" <?php if ($this->d_status == 'SEMUA') { echo "selected"; } ?>>SEMUA</option>
+                        
                     </select>      
                     
                     <br/>
