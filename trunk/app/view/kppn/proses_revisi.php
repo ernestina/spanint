@@ -64,14 +64,14 @@
         <!--baris pertama-->
         <thead>
             <tr>
-                <th data-hide="phone, tablet" data-ignore="true">No.</th>
-                <th data-toggle="true">Kode Satker</th>
+                <th align='center'>No.</th>
+                <th align='center'>Kode Satker</th>
                 <th>Nama Satker</th>
-                <th data-hide="phone, tablet">KPPN</th>
-                <th data-hide="phone, tablet">Revisi Ke</th>
-                <th data-hide="phone, tablet">Tahapan Proses</th>
-                <th data-hide="phone, tablet">Tanggal</th>
-                <th data-hide="phone, tablet">Locked Akun</th>
+                <th align='center'>KPPN</th>
+                <th align='center'>Revisi Ke</th>
+                <th align='center'>Tahapan Proses</th>
+                <th align='center'>Tanggal</th>
+                <th align='center'>Locked Akun</th>
             </tr>
         </thead>
         <tbody>
@@ -87,14 +87,14 @@
                 } else {
                     foreach ($this->data as $value) {
                         echo "<tr>	";
-                        echo "<td>" . $no++ . "</td>";
-                        echo "<td>" . $value->get_satker_code() . "</td>";
-                        echo "<td align='left'>" . $value->get_nmsatker() . "</td>";
-                        echo "<td align='left'>" . $value->get_kppn() . "</td>";
-                        echo "<td>" . $value->get_revision_no() . "</td>";
-                        echo "<td align ='left'>" . $value->get_meaning() . "</td>";
-                        echo "<td>" . $value->get_last_update_date() . "</td>";
-                        echo "<td><a href=" . URL . "dataDIPA/DetailRevisi/" . $value->get_satker_code() . " target='_blank' '> Lihat Detail </td>";
+                        echo "<td align='center'>" . $no++ . "</td>";
+                        echo "<td align='center'>" . $value->get_satker_code() . "</td>";
+                        echo "<td>" . $value->get_nmsatker() . "</td>";
+                        echo "<td align='center'>" . $value->get_kppn() . "</td>";
+                        echo "<td align='center'>" . $value->get_revision_no() . "</td>";
+                        echo "<td align='center'>" . $value->get_meaning() . "</td>";
+                        echo "<td align='center'>" . $value->get_last_update_date() . "</td>";
+                        echo "<td align='center'><a href=" . URL . "dataDIPA/DetailRevisi/" . $value->get_satker_code() . " target='_blank' '> Lihat Detail </td>";
 
                         //$total = $total + $value->get_encumbered_amount();
                     }
