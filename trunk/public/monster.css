@@ -4,26 +4,46 @@
 
 body {
     overflow-x: hidden;
-    font-size: 11px;
+    font-size: 12px;
 }
 
-/* BOOTSTRAP CORE */
+td {
+    vertical-align: top;
+}
 
-h1, .h1 {
+td {
+    vertical-align: center;
+}
+
+thead {
+    background: #fff;
+}
+
+tbody {
+    border-top: 1px solid #e5e5e5;
+}
+
+tfoot {
+    font-weight: bold;
+}
+
+h1 {
     font-size: 32px;
 }
 
-h2, .h2 {
+h2 {
     font-size: 24px;
 }
 
-h3, .h3 {
+h3 {
     font-size: 20px;
 }
 
-h4, .h4 {
+h4 {
     font-size: 14px;
 }
+
+/* BOOTSTRAP CORE CUTOMIZER */
 
 .btn {
     font-size: 12px;
@@ -37,25 +57,32 @@ h4, .h4 {
     padding: 0 5px 0 5px;
 }
 
-/* FOOTABLE CORE */
+.table {
+    margin: 0;
+}
 
-.footable-row-detail-cell {
-    border-bottom: 1px solid #e5e5e5;
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 10px 15px 10px 15px;
+}
+
+/* NANOSCROLLER */
+
+.nano .nano-content { 
+    padding: 10px 30px 10px 20px; 
+}
+
+.nano .nano-pane   { 
+    margin: 10px; 
+    background: rgba(255,255,255,.25); 
+}
+
+.nano .nano-slider { 
+    background: #fff !important; 
 }
 
 /* CORE LAYOUT ITEMS */
 
-#footable-header {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-#footable-footer {
-    border-top: 1px solid #e5e5e5;
-}
-
-.tfoot {
-    font-weight: bold;
-}
+/* APP PANELS AND SEGMENTS */
 
 #main-bar {
     border-radius: 0px;
@@ -74,6 +101,7 @@ h4, .h4 {
 }
 
 #sidebar {
+    
     position: absolute;
     background: #003366;
     color: rgba(255,255,255,.8);
@@ -124,10 +152,6 @@ h4, .h4 {
     color: #fff;
 }
 
-.nano .nano-content { padding: 10px 30px 10px 20px; }
-.nano .nano-pane   { margin: 10px; background: rgba(255,255,255,.25); }
-.nano .nano-slider { background: #fff !important; }
-
 #main-content {
     width: 100%;
     position: absolute;
@@ -163,42 +187,40 @@ h4, .h4 {
     overflow: auto;
 }
 
-.table {
-    margin: 0;
+/* STYLING CLASSES */
+
+/* Minor styling assists */
+
+.vertical-padded {
+    padding-top: 10px; padding-bottom: 10px;
 }
 
-.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
-    padding: 10px 15px 10px 15px;
+.bottom-padded {
+    padding-bottom: 20px;
 }
 
-td {
-    vertical-align: top;
+.top-padded {
+    padding-top: 20px;
 }
 
-td {
-    vertical-align: center;
+.align-right {
+    text-align: right;
 }
 
-
-thead {
-    background: #fff;
+.align-left {
+    text-align: left;
+    
 }
 
-tbody {
-    border-top: 1px solid #e5e5e5;
+.align-center {
+    text-align: center;
 }
 
-.alert {
-    padding: 20px 25px 20px 25px;
+.fullwidth {
+    width: 100%;
 }
 
-.row-padding {
-    font-weight: bold;
-}
-
-.table>thead>tr>th {
-    border-bottom: none;
-}
+/* -----Hapus setelah stabil----- */
 
 .ratakiri {
     text-align: left;
@@ -212,9 +234,7 @@ tbody {
     text-align: center;
 }
 
-.vertical-padded {
-    padding-top: 10px; padding-bottom: 10px;
-}
+/* ----------------------------------- */
 
 /* COLORIZATION */
 
@@ -234,4 +254,22 @@ tbody {
 
 .glow-span-purple {
     box-shadow: 0px 0px 20px 1px rgba(103,28,113,.20);
+}
+
+/* Border untuk accent dengan warna logo SPAN */
+
+.border-span-blue {
+    border-color: rgba(0,119,182,1);
+}
+
+.border-span-orange {
+    border-color: rgba(241,187,0,1);
+}
+
+.border-span-red {
+    border-color: rgba(218,37,37,1);
+}
+
+.border-span-purple {
+    border-color: rgba(103,28,113,1);
 }
