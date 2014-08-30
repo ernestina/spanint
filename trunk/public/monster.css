@@ -109,7 +109,7 @@ h4 {
 #sidebar {
     
     position: absolute;
-    background: #0077b6;
+    background: #555;
     color: rgba(255,255,255,.9);
     
     -webkit-touch-callout: none;
@@ -173,7 +173,7 @@ h4 {
     padding: 0 10px;
     color: #fff;
     background: #0077b6;
-    border-bottom: 4px solid #006fa8;
+    border-bottom: 4px solid #00a7ff;
 }
 
 .main-window-segment .btn-default {
