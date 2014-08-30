@@ -133,7 +133,6 @@ function initLayout() { //Fungsi untuk inisialisasi layout
     
     $('.footable').addClass('table');
     $('.footable').addClass('table-striped');
-    $('.footable').addClass('table-bordered');
 
     $('.footable > tbody > tr').each(function() {
         $('td', this).each(function() {
@@ -200,7 +199,12 @@ $(document).ready(function() {
     }
 
     $('#datepicker').datepicker({
-        format: 'dd-mm-yyyy'
+        format: "dd-mm-yyyy",
+        endDate: "'+1'",
+        todayBtn: "linked",
+        language: "id",
+        autoclose: true,
+        todayHighlight: true
     });
     
 });

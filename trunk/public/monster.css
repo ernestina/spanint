@@ -15,8 +15,9 @@ td {
     vertical-align: center;
 }
 
-thead {
-    background: #fff;
+thead, th {
+    background: #f3f3f3;
+    border-bottom: none;
 }
 
 tbody {
@@ -32,7 +33,7 @@ h1 {
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 28px;
 }
 
 h3 {
@@ -44,6 +45,11 @@ h4 {
 }
 
 /* BOOTSTRAP CORE CUTOMIZER */
+
+.navbar-default {
+    background: #fff;
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,.20);
+}
 
 .btn {
     font-size: 12px;
@@ -103,8 +109,8 @@ h4 {
 #sidebar {
     
     position: absolute;
-    background: #003366;
-    color: rgba(255,255,255,.8);
+    background: #0077b6;
+    color: rgba(255,255,255,.9);
     
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -132,7 +138,7 @@ h4 {
 
 #sidebar a {
     display: block;
-    color: rgba(255,255,255,.8);
+    color: rgba(255,255,255,.9);
 }
 
 #sidebar a:hover {
@@ -145,7 +151,7 @@ h4 {
     display: block;
     width: 100%;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255,255,255,.25);
+    border-bottom: 1px solid rgba(255,255,255,.5);
 }
 
 #sidebar h4:hover {
@@ -156,7 +162,7 @@ h4 {
     width: 100%;
     position: absolute;
     background: #fff;
-    box-shadow: 0px 0px 20px 1px rgba(0,0,0,.2);
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,.3);
 }
 
 #content-container {
@@ -165,25 +171,24 @@ h4 {
 
 .main-window-segment {
     padding: 0 10px;
-    border-bottom: 1px solid #e5e5e5;
-    color: #e5e5e5;
-    background: #333;
+    color: #fff;
+    background: #0077b6;
+    border-bottom: 4px solid #006fa8;
 }
 
 .main-window-segment .btn-default {
-    color: #e5e5e5;
-    background: #333;
-    border: 1px solid #e5e5e5;
+    color: #fff;
+    background: #0077b6;
+    border: 1px solid #fff;
 }
 
 .main-window-segment .btn-default:hover {
-    color: #333;
-    background: #e5e5e5;
-    border: 1px solid #e5e5e5;
+    color: #0077b6;
+    background: #fff;
+    border: 1px solid #fff;
 }
 
 #table-container {
-    border-bottom: 1px solid #e5e5e5;
     overflow: auto;
 }
 
@@ -201,6 +206,30 @@ h4 {
 
 .top-padded {
     padding-top: 20px;
+}
+
+.vertical-padded-little {
+    padding-top: 5px; padding-bottom: 5px;
+}
+
+.bottom-padded-little {
+    padding-bottom: 10px;
+}
+
+.top-padded-little {
+    padding-top: 10px;
+}
+
+.bottom-segmented {
+    border-bottom: 1px solid;
+}
+
+.top-segmented {
+    border-top: 1px solid;
+}
+
+.white-segment-separator {
+    border-top: 1px solid rgba(255,255,255,.5);
 }
 
 .align-right {
@@ -259,17 +288,21 @@ h4 {
 /* Border untuk accent dengan warna logo SPAN */
 
 .border-span-blue {
-    border-color: rgba(0,119,182,1);
+    border-color: #0077b6;
 }
 
 .border-span-orange {
-    border-color: rgba(241,187,0,1);
+    border-color: #f1bb00;
 }
 
 .border-span-red {
-    border-color: rgba(218,37,37,1);
+    border-color: #da2525;
 }
 
 .border-span-purple {
-    border-color: rgba(103,28,113,1);
+    border-color: #671c71;
+}
+
+.border-white {
+    border-color: #fff;
 }
