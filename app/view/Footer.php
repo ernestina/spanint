@@ -4,7 +4,7 @@
             
             <nav id="footer-bar" class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
-                    <div class="navbar-text" style="float: left; padding-top: 4px;">
+                    <div class="navbar-text" style="float: left; padding-top: 8px;">
                         <span class="visible-xs">&copy; 2014 DTP</span><span class="hidden-xs">&copy; 2014 Direktorat Transformasi Perbendaharaan</span>
                     </div>
                     <div class="navbar-text" style="float: right;">

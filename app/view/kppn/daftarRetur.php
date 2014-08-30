@@ -1,5 +1,9 @@
-<!-- Ndas -->
-<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+<!-- A beautiful app starts with a beautiful code :) -->
+
+<!-- /dataRetur/monitoringRetur -->
+
+<!-- Header -->
+<div class="main-window-segment header-segment bottom-padded">
     <div class="container-fluid">
         <div class="row">
             
@@ -7,86 +11,68 @@
                 <h2>Monitoring Retur SP2D</h2>
             </div>
             
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
                 
                 <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : daftarretur.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+            
+                if(isset($this->d_nosp2d) || isset($this->d_barsp2d) || isset($this->d_kdsatker) || isset($this->d_bank) || isset($this->d_status) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
+    
+                    $kdkppn = Session::get('id_user');
+                    
+                    if (isset($this->d_nosp2d)) {
+                        $kdnosp2d = $this->d_nosp2d;
+                    } else {
+                        $kdnosp2d='null';
+                    }
 
-if(isset($this->d_nosp2d) || isset($this->d_barsp2d) ||
- isset($this->d_kdsatker) || isset($this->d_bank) || 
- isset($this->d_status) || isset($this->d_tgl_awal) ||
- isset($this->d_tgl_akhir))
-{
-    $kdkppn = Session::get('id_user');
-    if (isset($this->d_nosp2d)) {
-        $kdnosp2d = $this->d_nosp2d;
-    }else{
-		$kdnosp2d='null';
-	}
-
-    if (isset($this->d_barsp2d)) {
-        $kdbarsp2d = $this->d_barsp2d;
-    }else{
-		$kdbarsp2d='null';
-	}
-    if (isset($this->d_kdsatker)) {
-        $kdsatker = $this->d_kdsatker;
-    }else{
-		$kdsatker='null';
-	}
-	
-	
-    if (isset($this->d_bank)) {
-        $kdbank = $this->d_bank;
-    }else{
-		$kdbank='null';
-	}
-    if (isset($this->d_status)) {
-        $kdstatus = $this->d_status;
-    }else{
-		$kdstatus='null';
-	}
-    if (isset($this->d_tgl_awal)) {
-        $kdtgl_awal = $this->d_tgl_awal;
-    } else {
-        $kdtgl_awal = 'null';
-    }
-    if (isset($this->d_tgl_akhir)) {
-        $kdtgl_akhir = $this->d_tgl_akhir;
-    } else {
-        $kdtgl_akhir = 'null';
-    }
-    ?>
-    <a href="<?php echo URL; ?>PDF/monitoringRetur_PDF/<?php echo $kdkppn . "/" . $kdnosp2d . "/" . $kdbarsp2d . "/" . $kdsatker . "/" . $kdbank . "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                    if (isset($this->d_barsp2d)) {
+                        $kdbarsp2d = $this->d_barsp2d;
+                    } else {
+                        $kdbarsp2d='null';
+                    }
+                    if (isset($this->d_kdsatker)) {
+                        $kdsatker = $this->d_kdsatker;
+                    } else {
+                        $kdsatker='null';
+                    }
 
 
-<?php
-//----------------------------------------------------		
-
-
-
-}
-
-
-?>
+                    if (isset($this->d_bank)) {
+                        $kdbank = $this->d_bank;
+                    } else {
+                        $kdbank='null';
+                    }
+                    if (isset($this->d_status)) {
+                        $kdstatus = $this->d_status;
+                    } else {
+                        $kdstatus='null';
+                    }
+                    if (isset($this->d_tgl_awal)) {
+                        $kdtgl_awal = $this->d_tgl_awal;
+                    } else {
+                        $kdtgl_awal = 'null';
+                    }
+                    if (isset($this->d_tgl_akhir)) {
+                        $kdtgl_akhir = $this->d_tgl_akhir;
+                    } else {
+                        $kdtgl_akhir = 'null';
+                    }
+                ?>
                 
+                <a href="<?php echo URL; ?>PDF/monitoringRetur_PDF/<?php echo $kdkppn . "/" . $kdnosp2d . "/" . $kdbarsp2d . "/" . $kdsatker . "/" . $kdbank . "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
+
+                <?php } ?>       
                 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
             
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
         </div>
         
-        <div class="row" style="padding-top: 10px">
+        <div class="row top-padded">
             
             <div class="col-md-6 col-sm-12">
                 <?php
@@ -99,12 +85,12 @@ if(isset($this->d_nosp2d) || isset($this->d_barsp2d) ||
                 ?>
             </div>
             
-            <div class="col-md-6 col-sm-12" style="text-align: right;">
+            <div class="col-md-6 col-sm-12 align-right">
                 <?php
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -121,23 +107,23 @@ if(isset($this->d_nosp2d) || isset($this->d_barsp2d) ||
         <!--baris pertama-->
         <thead>
             <tr>
-                <th rowspan=2 class='mid'>No.</th>
-                <th rowspan=2 class='mid'>Kode Satker <br> Nama Satker</th>
-                <th colspan=4 class='mid'>SP2D Retur</th>
-                <th colspan=3 class='mid'>SP2D Pengganti</th>
-                <th rowspan=2 class='mid'>Bank Pembayar <br> Status Retur</th>
+                <th rowspan=2 class="align-center">No.</th>
+                <th rowspan=2 class="align-center">Kode Satker <br> Nama Satker</th>
+                <th colspan=4 class="align-center">SP2D Retur</th>
+                <th colspan=3 class="align-center">SP2D Pengganti</th>
+                <th rowspan=2 class="align-center">Bank Pembayar <br> Status Retur</th>
             </tr>
             <tr>
-                <th class='mid'>Tgl. SP2D<br>No. SP2D<br>No. Transaksi</th>
-                <th>Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
+                <th class="align-center">Tgl. SP2D<br>No. SP2D<br>No. Transaksi</th>
+                <th width="200px">Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
                 <th>Uraian SP2D</th>
                 <th>Alasan Retur</th>
-                <th class='mid'>Tgl Proses <br>SP2D Pengganti</th>
-                <th class='mid'>Tgl. SP2D<br>No. SP2D</th>
-                <th>Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
+                <th class="align-center" width="100px">Tgl Proses <br>SP2D Pengganti</th>
+                <th class="align-center">Tgl. SP2D<br>No. SP2D</th>
+                <th width="200px">Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
             </tr>
         </thead>
-        <tbody class='ratatengah'>
+        <tbody>
 <?php
 $no = 1;
 if (isset($this->data)) {
@@ -149,7 +135,7 @@ if (isset($this->data)) {
             echo "<td>" . $no++ . "</td>";
             echo "<td>" . $value->get_kdsatker() . "<br>" . $value->get_nmsatker() . "</td>";
             echo "<td>" . $value->get_statement_date() . "<br>" . $value->get_sp2d_number() . "<br>" . $value->get_receipt_number() . "</td>";
-            echo "<td class='ratakiri'> " . $value->get_bank_name() . '<br>Penerima: ' . $value->get_vendor_name() . ' <br>No. Rek: ' . $value->get_vendor_ext_bank_account_num() . "<br> Rp. " . $value->get_amount() . "</td>";
+            echo "<td width='200px'> " . $value->get_bank_name() . '<br>Penerima: ' . $value->get_vendor_name() . ' <br>No. Rek: ' . $value->get_vendor_ext_bank_account_num() . "<br> Rp. " . $value->get_amount() . "</td>";
             echo "<td class='ratakiri'> " . $value->get_invoice_description() . " </td>";
             echo "<td class='ratakiri'> " . $value->get_keterangan_retur() . " </td>";
             echo "<td>" . $value->get_tgl_proses_sp2d_pengganti() . "</td>";
@@ -274,7 +260,7 @@ if (Session::get('role') != SATKER) {
     });
 
     function hideErrorId() {
-        $('.alert').fadeOut(0);
+        $('.alert-danger').fadeOut(0);
     }
 
     function hideWarning() {

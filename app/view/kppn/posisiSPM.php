@@ -1,5 +1,5 @@
 <!-- Ndas -->
-<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+<div class="main-window-segment bottom-padded">
     <div class="container-fluid">
         <div class="row">
             
@@ -7,14 +7,14 @@
                 <h2>Monitoring Posisi Invoice</h2>
             </div>
             
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
                 
                 <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
                     <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 <?php } ?>
                 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
                 
                 <?php
                 //----------------------------------------------------
@@ -54,7 +54,7 @@
             </div>
         </div>
         
-        <div class="row" style="padding-top: 10px">
+        <div class="row">
             
             <div class="col-md-6 col-sm-12">
                 <?php
@@ -72,7 +72,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
