@@ -1,5 +1,5 @@
-<!-- Ndas -->
-<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+<!-- Header -->
+<div class="main-window-segment header-segment bottom-padded">
     <div class="container-fluid">
         <div class="row">
             
@@ -7,47 +7,38 @@
                 <h2>Realisasi Belanja Per Satker </h2>
             </div>
             
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
                 
-                <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : DataRealisasi.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
-	
-	if(isset($this->d_kd_kppn) || isset($this->satker_code1) ){
-		if (isset($this->d_kd_kppn)) {
-			$kdkppn = $this->d_kd_kppn;
-		} else {
-			$kdkppn = Session::get('id_user');
-		}
-		if (isset($this->satker_code1)) {
-			$kdsatkerku = $this->satker_code1;
-		}
-		?>
+                <?php if (isset($this->d_kd_kppn) || isset($this->satker_code1) ) {
+    
+                    if (isset($this->d_kd_kppn)) {
+                        $kdkppn = $this->d_kd_kppn;
+                    } else {
+                        $kdkppn = Session::get('id_user');
+                    }
+                    if (isset($this->satker_code1)) {
+                        $kdsatkerku = $this->satker_code1;
+                    }
+    
+                ?>
 
-                <a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatkerku; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                <a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatkerku; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
-        <?php
-        //----------------------------------------------------		
-        }
-        ?>
+                <?php } ?>
+                
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+                
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
         </div>
         
-        <div class="row" style="padding-top: 10px">
+        <div class="row">
             
             <div class="col-md-6 col-sm-12">
                 <?php
+
                 if (isset($this->d_nama_kppn)) {
                     foreach ($this->d_nama_kppn as $kppn) {
                         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
@@ -56,29 +47,23 @@
                 } else {
                     echo Session::get('user');
                 }
-                ?>
-                <br>
-                sampai dengan
 
-                <?php
-                echo $kode_kppn;
-                //Tanggal::tgl_indo(Tanggal::getTglSekarang()) ;
+                ?> | Sampai dengan <?php
+
                 echo (date('d-m-Y'));
-                //echo $this->d_bulan;
-                //$date = new DateTime(Tanggal::getTglSekarang());
-                //$date->sub(new DateInterval('P1D'));
-                //echo Tanggal::tgl_indo($date->format('Y-m-d') ). "\n";
+
                 ?>
             </div>
             
-            <div class="col-md-6 col-sm-12" style="text-align: right;">
+            <div class="col-md-6 col-sm-12 align-right">
                 <?php
-                    // untuk menampilkan last_update
-                    if (isset($this->last_update)) {
-                        foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
-                        }
+
+                if (isset($this->last_update)) {
+                    foreach ($this->last_update as $last_update) {
+                        echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
                     }
+                }
+
                 ?>
             </div>
             
