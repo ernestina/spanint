@@ -137,13 +137,13 @@ if (Session::get('role') == SATKER) {
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
 				
                 <?php if (Session::get('role') != SATKER) { ?>
-                    <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                    <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 <?php } ?>
                 
             </div>
         </div>
         
-        <div class="row">
+        <div class="row top-padded-little">
             
             <div class="col-md-6 col-sm-12">
                 <?php

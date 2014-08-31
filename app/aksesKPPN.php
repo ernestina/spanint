@@ -10,9 +10,8 @@
 $akses['HomeKPPN'] = array(
     '__construct',
     'index',
-    'harian',
-    'mingguan',
-    'bulanan',
+    'ticker',
+    'dashboard',
     '__destruct'
 );
 

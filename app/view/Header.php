@@ -5,6 +5,8 @@
         
         <meta charset="utf-8">
         
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
         <title>Online Monitoring SPAN</title>
         
         <!-- JQuery & Jquery Plugins -->
@@ -122,6 +124,14 @@
                             </ul>
                         </div>
                     </li>
+        
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV &amp; Dashboard</h4>
+                        <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
+                            <ul>
+                                <li><a href="<?php echo URL; ?>home/dashboard">Dashboard</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
                     <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                         <div class="collapse">
@@ -217,6 +227,14 @@
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahBank">Terindikasi Salah Bank</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahRekening">Terindikasi Salah PayGroup</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dCompareGaji">Perbandingan Gaji per Bulan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV &amp; Dashboard</h4>
+                        <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
+                            <ul>
+                                <li><a href="<?php echo URL; ?>home/dashboard">Dashboard</a></li>
                             </ul>
                         </div>
                     </li>
@@ -327,6 +345,15 @@
                         </div>
                     </li>
 
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV &amp; Dashboard</h4>
+                        <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
+                            <ul>
+                                <li><a href="<?php echo URL; ?>home/dashboard">Dashboard</a></li>
+                                <li><a href="<?php echo URL; ?>home/ticker/spm" target="_blank">TV: SPM dalam Proses</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
                     <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                         <div class="collapse">
                             <ul>
@@ -379,6 +406,14 @@
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
                                 <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV &amp; Dashboard</h4>
+                        <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
+                            <ul>
+                                <li><a href="<?php echo URL; ?>home/dashboard">Dashboard</a></li>
                             </ul>
                         </div>
                     </li>
@@ -477,23 +512,24 @@
             <nav id="main-bar" class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
 
-                    <div class="navbar-text btn-group hidden-xs hidden-sm hidden-md navbar-left">
+                    <div id="mainmenu-left-single" class="navbar-text btn-group hidden-xs hidden-sm hidden-md navbar-left">
                         <a id="menu-toggle-thin" class="btn btn-outline" onclick="toggleSidebar()"><span class="glyphicon glyphicon-th-list"></span> Menu</a>
+                        <span id="tv-unit-title" style="display: none;"><?php echo Session::get('user') ?></span>
                     </div>
 
-                    <div class="navbar-text btn-group hidden-lg" style="float: left;">
+                    <div id="menu-package" class="navbar-text btn-group hidden-lg" style="float: left;">
                         <a type="button" id="menu-toggle-wide" class="btn btn-outline" onclick="toggleSidebar()"><span class="glyphicon glyphicon-th-list"></span> <span class="hidden-xs">Menu</span></a>
                         <a type="button" class="btn btn-outline" id="button-user-small" data-toggle="tooltip" data-placement="bottom" title="<?php echo Session::get('user') ?>"><span class="glyphicon glyphicon-user"></span> <span class="hidden-xs">Pengguna</span></a>
                         <a type="button" class="btn btn-outline" href="<?php echo URL; ?>auth/logout"><span class="glyphicon glyphicon-lock"></span> <span class="hidden-xs">Keluar</span></a>
                     </div>
                     
-                    <a class="navbar-brand hidden-xs hidden-sm hidden-md navbar-left" style="height: 54px; position: relative; left: 30px; border-left: 1px solid #e5e5e5;"href="http://www.span.depkeu.go.id/"><img src="<?php echo URL; ?>public/span-logo.png">&nbsp;&nbsp;</a>
-                    <a class="navbar-brand navbar-left hidden-xs" style="height: 54px; position: relative; left: 30px; border-left: 1px solid #e5e5e5;"href="<?php echo URL; ?>"><img src="<?php echo URL; ?>public/monster-logo-small.png">&nbsp;Online Monitoring</a>
+                    <a id="span-logo-regular" class="navbar-brand hidden-xs hidden-sm hidden-md navbar-left" href="http://www.span.depkeu.go.id/"><img src="<?php echo URL; ?>public/span-logo.png">&nbsp;&nbsp;</a>
+                    <a id="monster-logo-regular" class="navbar-brand navbar-left hidden-xs" href="<?php echo URL; ?>"><img src="<?php echo URL; ?>public/monster-logo-small.png">&nbsp;Online Monitoring</a>
                     
-                    <a class="navbar-brand hidden-lg" style="float: right; height: 54px; position: relative; left: 10px; border-left: 1px solid #e5e5e5;"href="<?php echo URL; ?>"><img src="<?php echo URL; ?>public/span-logo-small.png"></a>
-                    <a class="navbar-brand navbar-left visible-xs" style="float: right; position: relative; left: 15px; height: 64px; border-left: 1px solid #e5e5e5;"href="http://www.span.depkeu.go.id/"><img src="<?php echo URL; ?>public/monster-logo-small.png"></a>
+                    <a id="span-logo-small" class="navbar-brand hidden-lg" href="<?php echo URL; ?>"><img src="<?php echo URL; ?>public/span-logo-small.png"></a>
+                    <a id="monster-logo-small" class="navbar-brand navbar-left visible-xs" href="http://www.span.depkeu.go.id/"><img src="<?php echo URL; ?>public/monster-logo-small.png"></a>
 
-                    <div class="navbar-text btn-group hidden-xs hidden-sm hidden-md navbar-right" style="padding-right: 10px">
+                    <div id="mainmenu-right" class="navbar-text btn-group hidden-xs hidden-sm hidden-md navbar-right" style="padding-right: 10px">
                         <a type="button" class="btn btn-outline" id="button-user-large" data-toggle="tooltip" data-placement="bottom" title="<?php echo Session::get('user') ?>"><span class="glyphicon glyphicon-user"></span> <span id="nav-user-name"><?php echo Session::get('user') ?></span></a>
                         <a type="button" class="btn btn-outline" href="<?php echo URL; ?>auth/logout"><span class="glyphicon glyphicon-lock"></span> Keluar</a>
                     </div>
