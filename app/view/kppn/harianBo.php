@@ -22,7 +22,13 @@
 	
 	){
 	
-			$kdkppn = Session::get('id_user');
+			if (isset($this->d_nama_kppn)) {
+				foreach ($this->d_nama_kppn as $kppn) {
+					$kdkppn = $kppn->get_kd_satker();
+				  }
+			} else {
+				$kdkppn = Session::get('id_user');
+			}
 
 			if (isset($this->d_bank)) {
 				$kdbank = $this->d_bank;

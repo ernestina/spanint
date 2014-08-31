@@ -980,7 +980,7 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataKppnController(DataKppnController.php)
 //------------------------------------------------------
-    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null, $kdnoinvoice = null, $kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdfxml = null, $kdbank = null) {
+    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null,$kdnoinvoice = null, $kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdfxml = null, $kdbank = null ) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -991,7 +991,9 @@ class PDFController extends BaseController {
 
         if ($kdkppn != 'null') {
             $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
-        }
+        }else {
+                $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
+            }
         if ($kdnosp2d != 'null') {
             $filter[$no++] = "CHECK_NUMBER = '" . $kdnosp2d . "'";
         }
@@ -1006,7 +1008,7 @@ class PDFController extends BaseController {
             $filter[$no++] = "INVOICE_NUM = UPPER('" . $kdnoinvoice . "')";
         }
         if ($kdbank != 'null') {
-            if ($kdbank != 5) {
+            if ($kdbank != 'SEMUA_BANK') {
                 $filter[$no++] = "BANK_ACCOUNT_NAME LIKE '%" . $kdbank . "%'";
             }
         }
