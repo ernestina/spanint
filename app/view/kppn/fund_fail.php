@@ -104,7 +104,7 @@
             </div>
         </div>
         
-        <div class="row">
+        <div class="row top-padded-little">
             
             <div class="col-md-6 col-sm-12">
                 <?php

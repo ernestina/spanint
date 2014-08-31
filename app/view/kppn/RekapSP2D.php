@@ -166,7 +166,7 @@ IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_a
                 <th>Total SP2D</th>
             </tr>
         </thead>
-        <tbody class='ratatengah'>
+        <tbody>
             <?php
             $no = 1;
             $jum_sp2d;

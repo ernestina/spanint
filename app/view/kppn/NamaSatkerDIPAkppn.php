@@ -154,11 +154,11 @@ if (Session::get('role') == KPPN) {
         <!--baris pertama-->
         <thead>
             <tr>
-                <th data-hide="phone, tablet" data-ignore="true">No.</th>
-                <th data-toggle="true">Kode Satker</th>
+                <th class="align-center">No.</th>
+                <th class='align-center'>Kode Satker</th>
                 <th>Nama Satker</th>
-                <th data-hide="phone, tablet">Tanggal Posting Revisi</th>
-                <th data-hide="phone, tablet">No. Revisi Terakhir</th>
+                <th class="align-center">Tanggal Posting Revisi</th>
+                <th class="align-center">No. Revisi Terakhir</th>
                 <!--th>KPPN</th-->
             </tr>
         </thead>
@@ -172,13 +172,13 @@ if (Session::get('role') == KPPN) {
             } else {
         foreach ($this->data as $value){ 
             echo "<tr>	";
-                echo "<td>" . $no++ . "</td>";
+                echo "<td class='align-center'>" . $no++ . "</td>";
                 //echo "<td>" . $value->get_kppn() . "</td>";
-                echo "<td><a href=".URL."dataDIPA/RevisiDipa/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
+                echo "<td class='align-center'><a href=".URL."dataDIPA/RevisiDipa/".$value->get_kdsatker()." target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
                 //echo "<td>" . $value->get_kdsatker() . "</td>";
                 echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
-                echo "<td>" . $value->get_tgl_rev() . "</td>";
-                echo "<td>" . $value->get_rev() . "</td>";
+                echo "<td class='align-center'>" . $value->get_tgl_rev() . "</td>";
+                echo "<td class='align-center'>" . $value->get_rev() . "</td>";
                 //echo "<td class='ratakanan'>" . $value->get_total_sp2d() . "</td>";
             echo "</tr>	";
         } 

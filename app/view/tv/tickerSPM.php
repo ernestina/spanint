@@ -67,6 +67,72 @@
                         </tr>
 
                     <?php } ?>
+            
+            <?php foreach ($this->data as $value) { ?>
+
+                        <tr>
+                            <td class="align-center"><?php echo $no++; ?></td>
+                            <td><?php echo $value->get_invoice_num(); ?></td>
+                            <td class="align-right"><?php echo $value->get_invoice_amount(); ?></td>
+                            <td><?php echo $value->get_invoice_description(); ?></td>
+                            <td class="align-center"><?php echo $value->get_wfapproval_status(); ?></td>
+                            <td class="align-center"><?php echo $value->get_status(); ?></td>
+                        </tr>
+
+                    <?php } ?>
+            
+            <?php foreach ($this->data as $value) { ?>
+
+                        <tr>
+                            <td class="align-center"><?php echo $no++; ?></td>
+                            <td><?php echo $value->get_invoice_num(); ?></td>
+                            <td class="align-right"><?php echo $value->get_invoice_amount(); ?></td>
+                            <td><?php echo $value->get_invoice_description(); ?></td>
+                            <td class="align-center"><?php echo $value->get_wfapproval_status(); ?></td>
+                            <td class="align-center"><?php echo $value->get_status(); ?></td>
+                        </tr>
+
+                    <?php } ?>
+            
+            <?php foreach ($this->data as $value) { ?>
+
+                        <tr>
+                            <td class="align-center"><?php echo $no++; ?></td>
+                            <td><?php echo $value->get_invoice_num(); ?></td>
+                            <td class="align-right"><?php echo $value->get_invoice_amount(); ?></td>
+                            <td><?php echo $value->get_invoice_description(); ?></td>
+                            <td class="align-center"><?php echo $value->get_wfapproval_status(); ?></td>
+                            <td class="align-center"><?php echo $value->get_status(); ?></td>
+                        </tr>
+
+                    <?php } ?>
+            
+            <?php foreach ($this->data as $value) { ?>
+
+                        <tr>
+                            <td class="align-center"><?php echo $no++; ?></td>
+                            <td><?php echo $value->get_invoice_num(); ?></td>
+                            <td class="align-right"><?php echo $value->get_invoice_amount(); ?></td>
+                            <td><?php echo $value->get_invoice_description(); ?></td>
+                            <td class="align-center"><?php echo $value->get_wfapproval_status(); ?></td>
+                            <td class="align-center"><?php echo $value->get_status(); ?></td>
+                        </tr>
+
+                    <?php } ?>
+            
+            
+            <?php foreach ($this->data as $value) { ?>
+
+                        <tr>
+                            <td class="align-center"><?php echo $no++; ?></td>
+                            <td><?php echo $value->get_invoice_num(); ?></td>
+                            <td class="align-right"><?php echo $value->get_invoice_amount(); ?></td>
+                            <td><?php echo $value->get_invoice_description(); ?></td>
+                            <td class="align-center"><?php echo $value->get_wfapproval_status(); ?></td>
+                            <td class="align-center"><?php echo $value->get_status(); ?></td>
+                        </tr>
+
+                    <?php } ?>
 
                 <?php } ?>
 

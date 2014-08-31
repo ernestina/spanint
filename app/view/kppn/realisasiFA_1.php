@@ -118,14 +118,14 @@ if(isset($this->account_code) || isset($this->program_code) || isset($this->outp
                     <th class='mid'>Output</th>
                     <th class='mid'>Dana</th>
                     <!--th class='mid'>Bank</th-->
-                    <th>Kewenangan</th>
+                    <th class='mid'>Kewenangan</th>
                     <!--th class='mid'>Lokasi</th>
                     <th class='mid'>Tipe Anggaran</th>
                     <th>Mata Uang</th-->
-                    <th>Pagu</th>
-                    <th>Pencadangan</th>
-                    <th>Realisasi</th>
-                    <th>Sisa pagu</th>
+                    <th style='text-align: right'>Pagu</th>
+                    <th style='text-align: right'>Pencadangan</th>
+                    <th style='text-align: right'>Realisasi</th>
+                    <th style='text-align: right'>Sisa pagu</th>
                 </tr>
             </thead>
             <tbody class='ratatengah'>
@@ -149,7 +149,7 @@ if(isset($this->account_code) || isset($this->program_code) || isset($this->outp
                             echo "<td>" . $no++ . "</td>";
                             echo "<td>" . $value->get_satker() . "</td>";
                             echo "<td>" . $value->get_kppn() . "</td>";
-                            echo "<td style='text-align: right'><a href=" . URL . "dataDIPA/RealisasiFA/" . $value->get_satker() . "/" . $value->get_program() . "/" . $value->get_output() . "/" . $value->get_akun() . " target='_blank' '>" . $value->get_akun() . "</td>";
+                            echo "<td style='text-align: center'><a href=" . URL . "dataDIPA/RealisasiFA/" . $value->get_satker() . "/" . $value->get_program() . "/" . $value->get_output() . "/" . $value->get_akun() . " target='_blank' '>" . $value->get_akun() . "</td>";
                             echo "<td>" . $value->get_program() . "</td>";
                             echo "<td>" . $value->get_output() . "</td>";
                             echo "<td>" . $value->get_dana() . "</td>";
