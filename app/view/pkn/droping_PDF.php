@@ -89,9 +89,8 @@ class FPDF_AutoWrapTable extends FPDF {
         //tanggal
        /*  $kdtgl_awal = 'null';
         $kdtgl_akhir = 'null'; */
-
-        if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
-            $kdtgl_awal1 = $this->kdtgl_awal;
+		
+			$kdtgl_awal1 = $this->kdtgl_awal;
             $thn1 = substr($kdtgl_awal1, 6, 4);
             $bln1 = substr($kdtgl_awal1, 3, 2);
             $tgl1 = substr($kdtgl_awal1, 0, 2);
@@ -102,19 +101,16 @@ class FPDF_AutoWrapTable extends FPDF {
             $tgl2 = substr($kdtgl_akhir1, 0, 2);
             $kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
             $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);
-        } else {
-            $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);
-        }
         $this->Ln(20);
         $this->SetFont("", "B", 8);
         $this->Ln(10);
         //----------------------------------------------- 
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_pagu_total_sisa = 60;
-        $ukuran_kolom_jenis_belanja = 90;
-        $ukuran_kolom_satker = 60;
-        $ukuran_kolom_akun = 60;
+        $ukuran_kolom_pagu_total_sisa = 80;
+        $ukuran_kolom_jenis_belanja = 60;
+        $ukuran_kolom_satker = 80;
+        $ukuran_kolom_akun = 80;
         $ukuran_kolom_program = 35;
         $ukuran_kolom_output = 35;
         $ukuran_kolom_dana = 50;
@@ -130,8 +126,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($left += 30);
         $this->Cell(60, $h, 'Tanggal', 1, 0, 'C', true);
         $this->SetX($left += 60);
-        $this->Cell(100, $h, 'Bank', 1, 0, 'C', true);
-        $this->SetX($left += 100);
+        $this->Cell($ukuran_kolom_dana, $h, 'Bank', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_dana);
         $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Total File', 1, 0, 'C', true);
         $px1 = $this->GetX();
         $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
@@ -139,7 +135,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Total Transaksi SP2D', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'To. Trans SP2D', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
         $this->Cell($ukuran_kolom_satker, $h, 'Total Nilai', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_satker);
@@ -152,12 +148,12 @@ class FPDF_AutoWrapTable extends FPDF {
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(30, 60,
-            100, $ukuran_kolom_pagu_total_sisa,
+            $ukuran_kolom_dana, $ukuran_kolom_pagu_total_sisa,
             $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker,
             $ukuran_kolom_akun, $ukuran_kolom_pagu_total_sisa));
         $this->SetAligns(array('C', 'C',
             'C', 'C',
-            'R', 'R',
+            'C', 'R',
             'R', 'R'));
         if (count($this->data) == 0) {
             $this->Row(
@@ -328,7 +324,7 @@ if (is_array($this->kdtgl_awal)) {
         
     }
 } else {
-    //echo 'bukan array';
+    echo 'bukan array';
 }
 
 //mengambil array tanggal akhir dari controller
@@ -337,7 +333,7 @@ if (is_array($this->kdtgl_akhir)) {
         
     }
 } else {
-    //echo 'bukan array';
+    echo 'bukan array';
 }
 
 //mengambil array nama satker-kppn dari controller
@@ -353,14 +349,14 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring Retur SP2D PKN'; //judul file laporan
+$judul = 'Laporan Penyaluran & Droping Dana SP2D'; //judul file laporan
 $tipefile = '.PDF';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
-    'destinationfile' => 'I', //I=inline browser (default), F=local file, D=download
+    'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
     'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'P' //orientation: P=portrait, L=landscape
 );

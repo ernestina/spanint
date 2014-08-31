@@ -149,7 +149,7 @@ class FPDF_AutoWrapTable extends FPDF {
 		$ukuran_kolom_dana, $ukuran_kolom_pagu_total,
 		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja,
 		$ukuran_kolom_jenis_belanja, $ukuran_kolom_satker));
-        $this->SetAligns(array('C', 'L', 'R', 'L', 'C', 'C', 'C', 'C'));
+        $this->SetAligns(array('C', 'C', 'R', 'L', 'C', 'C', 'C', 'C'));
        
 	   if (count($this->data) == 0) {
 			$this->Row(
@@ -173,7 +173,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->Row(
 						array($no++,
 							$value->get_invoice_num(),
-							number_format($value->get_invoice_amount()),
+							$value->get_invoice_amount(),
 							$value->get_invoice_description(),
 							$value->get_wfapproval_status(),
 							$value->get_status(),
@@ -351,7 +351,7 @@ if (is_array($this->nm_kppn2)) {
 //--------------------------
 //pilihan
 $judul = 'Laporan Monitoring Posisi Invoice'; //judul file laporan
-$tipefile = '.PDF';
+$tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(

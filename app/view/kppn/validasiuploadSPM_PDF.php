@@ -4,7 +4,7 @@
   //Development history
   //Revisi : 0
   //Kegiatan :1.mencetak hasil filter ke dalam pdf
-  //File yang ditambah : GR_PFK_GLOBAL_PDF.php
+  //File yang ditambah : fund_fail_PDF.php
   //Dibuat oleh : Rifan Abdul Rachman
   //Tanggal dibuat : 18-07-2014
   //----------------------------------------------------
@@ -87,8 +87,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
         //tanggal
-        $kdtgl_awal = 'null';
-        $kdtgl_akhir = 'null';
+        /* $kdtgl_awal = 'null';
+        $kdtgl_akhir = 'null'; */
 
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
             $kdtgl_awal1 = $this->kdtgl_awal;
@@ -109,67 +109,61 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont("", "B", 8);
         $this->Ln(10);
         //----------------------------------------------- 
-
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 200;
-        $ukuran_kolom_satker = 80;
-        $ukuran_kolom_akun = 40;
-        $ukuran_kolom_dana = 60;
+        $ukuran_kolom_akun = 140;
+        $ukuran_kolom_dana = 80;
+		$ukuran_kolom_dana1 = 60;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
         $this->Cell(30, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += 30);
-        $this->Cell(50, $h, 'Akun', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_dana, $h, 'Tanggal Upload', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_akun, $h, 'Nama File', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_akun);
+        $this->Cell($ukuran_kolom_dana1, $h, 'Kode Satker', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += 50);
+        $this->SetX($left += $ukuran_kolom_dana1);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Uraian Akun', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Status Code', 1, 1, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_satker, $h, 'Potongan SPM', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_satker);
-        $this->Cell($ukuran_kolom_satker, $h, 'Setoran MPN', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_satker);
-        $this->Cell($ukuran_kolom_satker, $h, 'Total', 1, 1, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_satker);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(30, 50, $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, $ukuran_kolom_satker, $ukuran_kolom_satker));
-        $this->SetAligns(array('C', 'C', 'L', 'R', 'R', 'R'));
-		
-		 if (count($this->data) == 0) {
-			$this->Row(
+        $this->SetWidths(array(30, $ukuran_kolom_dana,$ukuran_kolom_akun, $ukuran_kolom_dana1, $ukuran_kolom_jenis_belanja));
+        $this->SetAligns(array('C', 'C','C', 'C', 'C'));
+
+        if (count($this->data) == 0) {
+            $this->Row(
                     array('',
                         'N I H I L',
                         '',
-                        '',
-                        '',
-                        ''
+                        '', 
+						''
                     )
             );
-		 }else{
-		     $no = 1;
-			$this->SetFillColor(255);
-			foreach ($this->data as $value) {
-				$this->Row(
-                    array($no++,
-                        $value->get_akun(),
-                        $value->get_uraian_akun(),
-                        number_format($value->get_potongan_spm()),
-                        number_format($value->get_setoran_mpn()),
-                        number_format($value->get_total())
-                    )
-            );
+        } else {
+            $no = 1;
+            $this->SetFillColor(255);
+            foreach ($this->data as $value) {
+                $this->Row(
+                        array($no++,
+                            $value->get_creation_date(),
+                            $value->get_file_name() ,
+                            $value->get_satker_code(),
+							$value->get_status_code(),
+							)
+                        
+                );
+            }
         }
 
-		 
-		 }
         $this->Ln(3);
     }
 
@@ -336,7 +330,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring PFK'; //judul file laporan
+$judul = 'Laporan Daftar Penolakan PMRT'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
@@ -352,6 +346,12 @@ $tabel->printPDF();
 //-------------------------------------
 ob_flush();
 ?>
+
+
+
+
+
+
 
 
 

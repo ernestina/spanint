@@ -12,15 +12,18 @@
     <?php
     //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA_1.php  
 if (Session::get('role') == SATKER) {
-	foreach ($this->data as $value) {
+	if(isset($this->data)){
+		foreach ($this->data as $value) {
+			$kdsatker=$value->get_satker();
+			$kdkppn=$value->get_kppn();
+		}
+	}
+}
+if (Session::get('role') == KPPN) {
+foreach ($this->data as $value) {
 		$kdsatker=$value->get_satker();
 		$kdkppn=$value->get_kppn();
 	}
-} else {
-	$kdsatker=Session::get('kd_satker');
-}
-if (Session::get('role') == KPPN) {
-	$kdkppn=Session::get('id_user');
 }
 if (Session::get('role') == KANWIL || Session::get('role') == ADMIN ) {
 
@@ -28,8 +31,6 @@ if (Session::get('role') == KANWIL || Session::get('role') == ADMIN ) {
 		$kdsatker=$value->get_satker();
 		$kdkppn=$value->get_kppn();
 	}
-
-	$filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
 }
 
 

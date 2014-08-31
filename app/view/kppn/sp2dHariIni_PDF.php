@@ -379,7 +379,7 @@ if (is_array($this->nm_kppn2)) {
 //--------------------------
 //pilihan
 $judul = 'Laporan Monitoring SP2D Terbit dan Tertanggal Hari Yang Sama'; //judul file laporan
-$tipefile = '.PDF';
+$tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(

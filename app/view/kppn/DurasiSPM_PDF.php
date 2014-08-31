@@ -4,7 +4,7 @@
   //Development history
   //Revisi : 0
   //Kegiatan :1.mencetak hasil filter ke dalam pdf
-  //File yang ditambah : GR_PFK_GLOBAL_PDF.php
+  //File yang ditambah : fund_fail_PDF.php
   //Dibuat oleh : Rifan Abdul Rachman
   //Tanggal dibuat : 18-07-2014
   //----------------------------------------------------
@@ -87,10 +87,21 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
         //tanggal
-        $kdtgl_awal = 'null';
-        $kdtgl_akhir = 'null';
+        /* $kdtgl_awal = 'null';
+        $kdtgl_akhir = 'null'; */
 
-        if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
+		$kdtgl_awal1 = $this->kdtgl_awal;
+            $thn1 = substr($kdtgl_awal1, 6, 4);
+            $bln1 = substr($kdtgl_awal1, 3, 2);
+            $tgl1 = substr($kdtgl_awal1, 0, 2);
+            $kdtgl_awal = $tgl1 . '-' . $bln1 . '-' . $thn1;
+            $kdtgl_akhir1 = $this->kdtgl_akhir;
+            $thn2 = substr($kdtgl_akhir1, 6, 4);
+            $bln2 = substr($kdtgl_akhir1, 3, 2);
+            $tgl2 = substr($kdtgl_akhir1, 0, 2);
+            $kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
+            $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);
+     /*    if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
             $kdtgl_awal1 = $this->kdtgl_awal;
             $thn1 = substr($kdtgl_awal1, 6, 4);
             $bln1 = substr($kdtgl_awal1, 3, 2);
@@ -104,72 +115,74 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);
         } else {
             $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);
-        }
+        } */
         $this->Ln(20);
         $this->SetFont("", "B", 8);
         $this->Ln(10);
         //----------------------------------------------- 
-
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 200;
-        $ukuran_kolom_satker = 80;
-        $ukuran_kolom_akun = 40;
-        $ukuran_kolom_dana = 60;
+        $ukuran_kolom_jenis_belanja = 60;
+        $ukuran_kolom_akun = 100;
+        $ukuran_kolom_dana = 80;
+		$ukuran_kolom_dana1 = 100;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
         $this->Cell(30, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += 30);
-        $this->Cell(50, $h, 'Akun', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_dana, $h, 'Nomor Invoice', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_dana, $h, 'Nomor SP2D', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_dana1, $h, 'Jenis SPM', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_dana1);
+        $this->Cell($ukuran_kolom_akun, $h, 'Tanggal Upload', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_akun);
+        $this->Cell($ukuran_kolom_akun, $h, 'Tanggal Selesai SP2D', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += 50);
+        $this->SetX($left += $ukuran_kolom_akun);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Uraian Akun', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Durasi', 1, 1, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_satker, $h, 'Potongan SPM', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_satker);
-        $this->Cell($ukuran_kolom_satker, $h, 'Setoran MPN', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_satker);
-        $this->Cell($ukuran_kolom_satker, $h, 'Total', 1, 1, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_satker);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(30, 50, $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, $ukuran_kolom_satker, $ukuran_kolom_satker));
-        $this->SetAligns(array('C', 'C', 'L', 'R', 'R', 'R'));
-		
-		 if (count($this->data) == 0) {
-			$this->Row(
+        $this->SetWidths(array(30, $ukuran_kolom_dana,$ukuran_kolom_dana,$ukuran_kolom_dana1,$ukuran_kolom_akun, $ukuran_kolom_akun, $ukuran_kolom_jenis_belanja));
+        $this->SetAligns(array('C', 'C','C','C','C', 'C', 'C'));
+
+        if (count($this->data) == 0) {
+            $this->Row(
                     array('',
                         'N I H I L',
                         '',
-                        '',
-                        '',
+                        '', 
+						'',
+                        '', 
                         ''
                     )
             );
-		 }else{
-		     $no = 1;
-			$this->SetFillColor(255);
-			foreach ($this->data as $value) {
-				$this->Row(
-                    array($no++,
-                        $value->get_akun(),
-                        $value->get_uraian_akun(),
-                        number_format($value->get_potongan_spm()),
-                        number_format($value->get_setoran_mpn()),
-                        number_format($value->get_total())
-                    )
-            );
+        } else {
+            $no = 1;
+            $this->SetFillColor(255);
+            foreach ($this->data as $value) {
+                $this->Row(
+                        array($no++,
+                            $value->get_invoice_num(),
+                            $value->get_check_number(),
+                            $value->get_attribute1(),
+							strtoupper($value->get_aia_creation_date()) . ' ' . $value->get_jam_upload(),
+							$value->get_aca_creation_date() . ' ' . $value->get_jam_selesai_sp2d(),
+							$value->get_durasi()
+							)
+                        
+                );
+            }
         }
 
-		 
-		 }
         $this->Ln(3);
     }
 
@@ -336,7 +349,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring PFK'; //judul file laporan
+$judul = 'Laporan Durasi Penyelesaian SP2D'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
@@ -352,6 +365,12 @@ $tabel->printPDF();
 //-------------------------------------
 ob_flush();
 ?>
+
+
+
+
+
+
 
 
 
