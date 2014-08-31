@@ -18,19 +18,18 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------
-   
-
-	if(isset($kdkppn)){
+   if (isset($this->d_nama_kppn)) {
+	foreach ($this->d_nama_kppn as $kppn) {
+			$kdkppn = $kppn->get_kd_satker();
+		  }
+	} else {
 		$kdkppn = Session::get('id_user');
-		?>
-
-		<a href="<?php echo URL; ?>PDF/sp2dSalahRekening_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-		<?php
-		//----------------------------------------------------		
-	
-	
 	}
+	?>
+	<a href="<?php echo URL; ?>PDF/sp2dSalahRekening_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+	<?php
+	//----------------------------------------------------		
+   
     ?>
                 
                 

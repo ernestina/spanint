@@ -16,8 +16,14 @@
                 <?php
             
                 if(isset($this->d_nosp2d) || isset($this->d_barsp2d) || isset($this->d_kdsatker) || isset($this->d_bank) || isset($this->d_status) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
-    
-                    $kdkppn = Session::get('id_user');
+					if (isset($this->d_nama_kppn)) {
+					foreach ($this->d_nama_kppn as $kppn) {
+							$kdkppn = $kppn->get_kd_satker();
+						  }
+					} else {
+						$kdkppn = Session::get('id_user');
+					}
+                    
                     
                     if (isset($this->d_nosp2d)) {
                         $kdnosp2d = $this->d_nosp2d;
