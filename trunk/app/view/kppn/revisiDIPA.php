@@ -24,9 +24,7 @@
         $kdsatker = $this->satker_code;
         $kdsatker = rtrim($kdsatker);
     } else {	
-		foreach ($this->data as $value) {
-		$kdsatker =$value->get_satker_code();
-		}
+		$kdsatker =Session::get('kd_satker');
     }
 
     if (isset($this->output_code)) {

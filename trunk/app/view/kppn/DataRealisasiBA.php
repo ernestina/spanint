@@ -17,37 +17,33 @@
                 foreach ($this->d_nama_kppn as $kppn) {
                     $kdkppn = $kppn->get_kd_satker();
                 }
-            } else {
-                $kdkppn =Session::get('user');
-            }
-
+				?>
+            <a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			<?php
+            } 
+			
         }
         if (Session::get('role') == ADMIN || Session::get('role') == DJA) {
 			if (isset($this->d_nama_kppn)) {
                 foreach ($this->d_nama_kppn as $kppn) {
                     $kdkppn = $kppn->get_kd_satker();
                 }
-            } else {
-                $kdkppn =Session::get('user');
-            }
+			?>
+            <a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			<?php
+
+            } 
         }
 
         if (Session::get('role') == KPPN) {
-            $kdkppn=Session::get('id_user');
-        }
-
-	
+            
+                    $kdkppn = Session::get('id_user');
 			?>
             <a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-			<!-- 				<ul class="inline" style="float: right"><li>
-					<a  href="<?php echo URL; ?>DataDIPA/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" class="warning"><i class="icon icon-file icon-white"></i>PDF</a></li>
-			-->			
 			<?php
-			//----------------------------------------------------		
-			
-			
-        
+		}
+
+//------------------------------
         ?>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">

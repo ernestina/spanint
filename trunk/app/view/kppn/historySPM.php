@@ -10,39 +10,69 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : historySPM.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
-if(isset($this->d_invoice)
+				//----------------------------------------------------
+                //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+                if (Session::get('role') == KANWIL) {
+                    IF(isset($this->d_nama_kppn) || isset($this->d_invoice)){
+						if (isset($this->d_nama_kppn)) {
+							foreach ($this->d_nama_kppn as $kppn) {
+								$kdkppn = $kppn->get_kd_satker();
+							}
+						} else {
+							echo Session::get('user');
+						}
+						if (isset($this->d_invoice)) {
+							$invoice = $this->d_invoice;
+						} else {
+							$invoice = "null";
+						}
+					?>
+									
+						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+					}
+                }
+                if (Session::get('role') == ADMIN) {
+                    IF(isset($this->d_nama_kppn) || isset($this->d_invoice)){
+						if (isset($this->d_nama_kppn)) {
+							foreach ($this->d_nama_kppn as $kppn) {
+								$kdkppn = $kppn->get_kd_satker();
+							}
+						} 
+						if (isset($this->d_invoice)) {
+							$invoice = $this->d_invoice;
+						} else {
+							$invoice = "null";
+						}
+					?>
+									
+						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+					}
+                }
+                if (Session::get('role') == KPPN) {
+                  
+						if (isset($this->d_nama_kppn)) {
+							foreach ($this->d_nama_kppn as $kppn) {
+								$kdkppn = $kppn->get_kd_satker();
+							}
+						} else {
+							 $kdkppn=Session::get('id_user');
+						}
+						if (isset($this->d_invoice)) {
+							$invoice = $this->d_invoice;
+						} else {
+							$invoice = "null";
+						}
+					?>
+									
+						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+					
+                }
+                //----------------------------------------------------		
 
-){
-    if (isset($this->data)) {
-        foreach ($this->data as $value) {
-            $satker = substr($value->get_invoice_num(), 7, 6);
-        }
-    }
- 
-	if (isset($this->d_invoice)) {
-        $check_number = $this->d_invoice;
-    }
-	elseif (isset($this->invoice_num)) {
-        $check_number = substr($this->invoice_num,1,18);
-    }
-	$kdkppn=Session::get('id_user');
-    ?>
-                
-                <a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $check_number . "/" . $kdkppn;; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-    <?php
-    //----------------------------------------------------		
-
-
-}
+				
 
     ?>
             </div>

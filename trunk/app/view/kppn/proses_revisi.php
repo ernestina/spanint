@@ -14,6 +14,124 @@
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
                 
                 <!-- PDF -->
+				<?php
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
+
+if (Session::get('role') == ADMIN  || Session::get('role') == DJA) {
+//-----------------------------
+if( isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker)){
+	if (isset($this->d_nama_kppn)) {
+		foreach ($this->d_nama_kppn as $kppn) {
+			$kdkppn = $kppn->get_kd_satker();
+          }
+	} else {
+		$kdkppn = 'null';
+	}
+	if (isset($this->d_kd_satker)) {
+		$kdsatker = $this->d_kd_satker;
+	} else {
+		$kdsatker = 'null';
+	}
+	
+	if (isset($this->d_nm_satker)) {
+		$nmsatker = $this->d_nm_satker;
+	} else {
+		$nmsatker = 'null';
+	}
+
+	?>
+    <a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+    <?php
+		}
+//------------------------------
+}
+if (Session::get('role') == KANWIL) {
+//-----------------------------
+if( isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker)){
+	if (isset($this->d_nama_kppn)) {
+		foreach ($this->d_nama_kppn as $kppn) {
+			$kdkppn = $kppn->get_kd_satker();
+          }
+	} else {
+		$kdkppn = 'null';
+	}
+	if (isset($this->d_kd_satker)) {
+		$kdsatker = $this->d_kd_satker;
+	} else {
+		$kdsatker = 'null';
+	}
+	
+	if (isset($this->d_nm_satker)) {
+		$nmsatker = $this->d_nm_satker;
+	} else {
+		$nmsatker = 'null';
+	}
+	
+	?>
+    <a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>    <?php
+	}
+//------------------------------
+}
+if (Session::get('role') == KPPN) {
+//-----------------------------
+	if (isset($this->d_nama_kppn)) {
+		foreach ($this->d_nama_kppn as $kppn) {
+			$kdkppn = $kppn->get_kd_satker();
+          }
+	} else {
+		$kdkppn = Session::get('id_user');
+	}
+	if (isset($this->d_kd_satker)) {
+		$kdsatker = $this->d_kd_satker;
+	} else {
+		$kdsatker = 'null';
+	}
+	
+	if (isset($this->d_nm_satker)) {
+		$nmsatker = $this->d_nm_satker;
+	} else {
+		$nmsatker = 'null';
+	}
+	
+	?>
+    <a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+    <?php
+	
+//------------------------------
+}
+if (Session::get('role') == SATKER) {
+//-----------------------------
+	if (isset($this->d_nama_kppn)) {
+		foreach ($this->d_nama_kppn as $kppn) {
+			$kdkppn = $kppn->get_kd_satker();
+          }
+	} else {
+		$kdkppn = Session::get('id_user');
+	}
+	if (isset($this->d_kd_satker)) {
+		$kdsatker = $this->d_kd_satker;
+	} else {
+		$kdsatker = Session::get('kd_satker');
+	}
+	
+	if (isset($this->d_nm_satker)) {
+		$nmsatker = $this->d_nm_satker;
+	} else {
+		$nmsatker = 'null';
+	}
+	
+	?>
+    <a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+    <?php
+	
+//------------------------------
+}
+
+			//----------------------------------------------------		
+			?>
+
+
                 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">

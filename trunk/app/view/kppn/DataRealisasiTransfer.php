@@ -8,52 +8,120 @@
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
+         <?php
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
+		if (Session::get('role') == KANWIL) {
+		if(isset($this->lokasi) || isset($this->satker) ||
+			isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
+				if (isset($this->lokasi)) {
+					$kdlokasi = $this->lokasi;
+				} else {
+					$kdlokasi = 'null';
+				}
+
+				if (isset($this->data3)) {
+					foreach ($this->data3 as $satker) {
+						$kdsatker = $satker->get_satker();
+					  }
+				} else {
+					$kdsatker = 'null';
+				}
+
+				if (isset($this->d_tgl_awal)) {
+					$kdtgl_awal = $this->d_tgl_awal;
+				} else {
+					$kdtgl_awal = 'null';
+				}
+				if (isset($this->d_tgl_akhir)) {
+					$kdtgl_akhir = $this->d_tgl_akhir;
+				} else {
+					$kdtgl_akhir = 'null';
+				}
+			?>
+
+			<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
+			<?php
+			}
+        }
+        if (Session::get('role') == ADMIN || Session::get('role') == DJA) {
+			if(isset($this->lokasi) || isset($this->satker) ||
+			isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
+				if (isset($this->lokasi)) {
+					$kdlokasi = $this->lokasi;
+				} else {
+					$kdlokasi = 'null';
+				}
+
+				if (isset($this->data3)) {
+					foreach ($this->data3 as $satker) {
+						$kdsatker = $satker->get_satker();
+					  }
+				} else {
+					$kdsatker = 'null';
+				}
+
+				if (isset($this->d_tgl_awal)) {
+					$kdtgl_awal = $this->d_tgl_awal;
+				} else {
+					$kdtgl_awal = 'null';
+				}
+				if (isset($this->d_tgl_akhir)) {
+					$kdtgl_akhir = $this->d_tgl_akhir;
+				} else {
+					$kdtgl_akhir = 'null';
+				}
+			?>
+
+			<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			
+			<?php
+			}
+        }
+
+        if (Session::get('role') == KPPN) {
+				if(isset($this->lokasi) || isset($this->satker) ||
+			isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
+
+				if (isset($this->lokasi)) {
+					$kdlokasi = $this->lokasi;
+				} else {
+					$kdlokasi = 'null';
+				}
+
+				if (isset($this->data3)) {
+					foreach ($this->data3 as $satker) {
+						$kdsatker = $satker->get_satker();					  
+						}
+				} else {
+					$kdsatker = 'null';
+				}
+
+				if (isset($this->d_tgl_awal)) {
+					$kdtgl_awal = $this->d_tgl_awal;
+				} else {
+					$kdtgl_awal = 'null';
+				}
+				if (isset($this->d_tgl_akhir)) {
+					$kdtgl_akhir = $this->d_tgl_akhir;
+				} else {
+					$kdtgl_akhir = 'null';
+				}
+			?>
+
+			<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
+			<?php
+			}
+		}
+
+	
+			//----------------------------------------------------		
+		        
+        ?>
+ 
                 <?php
-//----------------------------------------------------
-//Development history
-//Revisi : 0
-//Kegiatan :1.mencetak hasil filter ke dalam pdf
-//File yang diubah : DataRealisasiTransfer.php
-//Dibuat oleh : Rifan Abdul Rachman
-//Tanggal dibuat : 18-07-2014
-//----------------------------------------------------
-
-if(isset($this->lokasi) || isset($this->satkerku) ||
-isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
-){
-	if (isset($this->lokasi)) {
-		$kdlokasi = $this->lokasi;
-	} else {
-		$kdlokasi = 'null';
-	}
-
-
-	if (isset($this->satkerku)) {
-		$kdsatkerku = $this->satkerku;
-	} else {
-		$kdsatkerku = 'null';
-	}
-
-	if (isset($this->d_tgl_awal)) {
-		$kdtgl_awal = $this->d_tgl_awal;
-	} else {
-		$kdtgl_awal = 'null';
-	}
-	if (isset($this->d_tgl_akhir)) {
-		$kdtgl_akhir = $this->d_tgl_akhir;
-	} else {
-		$kdtgl_akhir = 'null';
-	}
-?>
-
-<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatkerku . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-<?php
-//----------------------------------------------------		
-
-
-}
 ?>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -236,13 +304,13 @@ foreach ($this->data4 as $value1)
 ?>
                     </select>
                     <br/>
-                    <div id="wtgl" class="alert alert-danger"></div>
+                   <!--  <div id="wtgl" class="alert alert-danger"></div>
                     <label class="isian">Tanggal: </label>
                     <div class="input-daterange input-group" id="datepicker" style="width: 100%">
                         <input class="form-control" type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
                         <span class="input-group-addon">s.d.</span>
                         <input class="form-control" type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
-                    </div>
+                    </div> -->
 
 
                     <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">

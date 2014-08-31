@@ -22,7 +22,7 @@ class DataDIPAController extends BaseController {
         
     }
 
-    public function RevisiDipa($kdsatker = null) {
+        public function RevisiDipa($kdsatker = null) {
         $d_spm1 = new DataDIPA($this->registry);
         $filter = array();
         $no = 0;
@@ -32,10 +32,21 @@ class DataDIPAController extends BaseController {
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-        if ($kdsatker != '') {
+        
+		if ($kdsatker != '') {
             $filter[$no++] = " A.SATKER_CODE =  '" . $kdsatker . "'";
             $this->view->satker_code = $kdsatker;
+			
         }
+		if (Session::get('role') == SATKER) {
+            $filter[$no++] = " A.SATKER_CODE =  '" . Session::get('kd_satker') . "'";
+			
+        }
+		
+		if (Session::get('role') == KANWIL) {
+              $filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+			  
+		}	
 		if (Session::get('role') == KANWIL) {
               $filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
 			  
@@ -80,6 +91,7 @@ class DataDIPAController extends BaseController {
         $this->view->render('kppn/revisiDIPA');
 		$d_log->tambah_log("Sukses");
     }
+
 
 
     public function Fund_fail($satker = null) {
@@ -433,15 +445,15 @@ class DataDIPAController extends BaseController {
 
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "KDSATKER = '" . $_POST['kdsatker'] . "'";
-                $this->view->d_invoice = $_POST['kdsatker'];
+                $this->view->d_kd_satker = $_POST['kdsatker'];
             }
             if ($_POST['nmsatker'] != '') {
                 $filter[$no++] = " UPPER(NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
-                $this->view->d_invoice = $_POST['nmsatker'];
+                $this->view->d_nm_satker = $_POST['nmsatker'];
             }
             if ($_POST['revisi'] != '') {
                 $filter[$no++] = "(SELECT MAX(REVISION_NO) FROM SPSA_BT_DIPA_V) " . $_POST['revisi'];
-                $this->view->d_invoice = $_POST['revisi'];
+                $this->view->d_kd_revisi = $_POST['revisi'];
             }
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
             //$this->view->render('kppn/NamaSatker');			
@@ -806,13 +818,12 @@ class DataDIPAController extends BaseController {
 
             if ($_POST['satker'] != '') {
                 $filter[$no++] = "A.SATKER_CODE = '" . $_POST['satker'] . "'";
-                $this->view->d_invoice = $_POST['satker'];
+                $this->view->d_kd_satker = $_POST['satker'];
             }
             if ($_POST['nmsatker'] != '') {
                 $filter[$no++] = " UPPER(B.NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
-                $this->view->d_invoice = $_POST['nmsatker'];
+                $this->view->d_nm_satker = $_POST['nmsatker'];
             }
-            //$this->view->data = $d_spm1->get_revisi_dipa($filter);
         }
 		if (Session::get('role') == SATKER) {
             $filter[$no++] = "A.SATKER_CODE = '" . Session::get('kd_satker') . "'";

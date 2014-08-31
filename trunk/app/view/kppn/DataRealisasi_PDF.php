@@ -407,7 +407,7 @@ if (is_array($this->nm_kppn2)) {
 //--------------------------
 //pilihan
 $judul = 'Detail Realisasi Belanja Per Satker'; //judul file laporan
-$tipefile = '.PDF';
+$tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(

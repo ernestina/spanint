@@ -4,7 +4,7 @@
   //Development history
   //Revisi : 0
   //Kegiatan :1.mencetak hasil filter ke dalam pdf
-  //File yang ditambah : GR_PFK_GLOBAL_PDF.php
+  //File yang ditambah : posisiSPM_PDF.php
   //Dibuat oleh : Rifan Abdul Rachman
   //Tanggal dibuat : 18-07-2014
   //----------------------------------------------------
@@ -20,8 +20,8 @@ class FPDF_AutoWrapTable extends FPDF {
         'judul' => '',
         'filename' => '',
         'destinationfile' => '',
-        'paper_size' => '',
-        'orientation' => ''
+        'paper_size' => 'F4',
+        'orientation' => 'L'
     );
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
@@ -112,38 +112,41 @@ class FPDF_AutoWrapTable extends FPDF {
 
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 200;
-        $ukuran_kolom_satker = 80;
+        $ukuran_kolom_pagu_total_sisa = 40;
+        $ukuran_kolom_pagu_total = 200;
+        $ukuran_kolom_jenis_belanja = 100;
+        $ukuran_kolom_satker = 75;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
+        $ukuran_kolom_deskripsi = 160;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
         $this->Cell(30, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += 30);
-        $this->Cell(50, $h, 'Akun', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'KPPN', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
+        $this->Cell($ukuran_kolom_dana, $h, 'Kode Satker', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_pagu_total, $h, 'Nama Satker', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += 50);
+        $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Uraian Akun', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Tanggal Posting Revisi', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_satker, $h, 'Potongan SPM', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_satker);
-        $this->Cell($ukuran_kolom_satker, $h, 'Setoran MPN', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_satker);
-        $this->Cell($ukuran_kolom_satker, $h, 'Total', 1, 1, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_satker);
+        $this->Cell($ukuran_kolom_satker, $h, 'No. Revisi Terakhir', 1, 1, 'C', true);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(30, 50, $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, $ukuran_kolom_satker, $ukuran_kolom_satker));
-        $this->SetAligns(array('C', 'C', 'L', 'R', 'R', 'R'));
-		
-		 if (count($this->data) == 0) {
+        $this->SetWidths(array(30, $ukuran_kolom_pagu_total_sisa,
+		$ukuran_kolom_dana, $ukuran_kolom_pagu_total,
+		$ukuran_kolom_jenis_belanja, $ukuran_kolom_satker));
+        $this->SetAligns(array('C', 'C', 'C', 'L', 'C', 'C'));
+       
+	   if (count($this->data) == 0) {
 			$this->Row(
                     array('',
                         'N I H I L',
@@ -153,23 +156,25 @@ class FPDF_AutoWrapTable extends FPDF {
                         ''
                     )
             );
-		 }else{
-		     $no = 1;
-			$this->SetFillColor(255);
+	   
+	   
+	   
+	   }else{
+	   
+		   $no = 1;$this->SetFillColor(255);
 			foreach ($this->data as $value) {
 				$this->Row(
-                    array($no++,
-                        $value->get_akun(),
-                        $value->get_uraian_akun(),
-                        number_format($value->get_potongan_spm()),
-                        number_format($value->get_setoran_mpn()),
-                        number_format($value->get_total())
-                    )
-            );
-        }
-
-		 
-		 }
+						array($no++,
+							$value->get_kppn(),
+							$value->get_kdsatker(),
+							$value->get_nmsatker(),
+							$value->get_tgl_rev(),
+							$value->get_rev()
+						)
+				);
+			}
+	   
+	   }		
         $this->Ln(3);
     }
 
@@ -336,7 +341,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring PFK'; //judul file laporan
+$judul = 'Laporan Informasi Revisi DIPA Satker'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
@@ -352,6 +357,8 @@ $tabel->printPDF();
 //-------------------------------------
 ob_flush();
 ?>
+
+
 
 
 
