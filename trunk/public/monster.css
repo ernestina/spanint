@@ -3,8 +3,8 @@
 /* HTML */
 
 body {
-    overflow-x: hidden;
     font-size: 12px;
+    overflow-x: hidden;
 }
 
 td {
@@ -29,19 +29,19 @@ tfoot {
 }
 
 h1 {
-    font-size: 32px;
+    font-size: 2em;
 }
 
 h2 {
-    font-size: 28px;
+    font-size: 1.8em;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 1.6em;
 }
 
 h4 {
-    font-size: 14px;
+    font-size: 1.3em;
 }
 
 /* BOOTSTRAP CORE CUTOMIZER */
@@ -52,7 +52,7 @@ h4 {
 }
 
 .btn {
-    font-size: 12px;
+    font-size: 1em;
 }
 
 .navbar-text {
@@ -69,6 +69,10 @@ h4 {
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
     padding: 10px 15px 10px 15px;
+}
+
+.tv-mode .table>thead>tr>th, .tv-mode .table>tbody>tr>th, .tv-mode .table>tfoot>tr>th, .tv-mode .table>thead>tr>td, .tv-mode .table>tbody>tr>td, .tv-mode .table>tfoot>tr>td {
+    padding: 30px 15px 30px 15px;
 }
 
 /* NANOSCROLLER */
@@ -89,6 +93,45 @@ h4 {
 /* CORE LAYOUT ITEMS */
 
 /* APP PANELS AND SEGMENTS */
+
+#tv-unit-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#current-clock {
+    margin-top: 25px;
+}
+
+#span-logo-small {
+    float: right; 
+    height: 54px; 
+    position: relative; 
+    left: 10px; 
+    border-left: 1px solid #e5e5e5;
+}
+
+#span-logo-regular {
+    height: 54px; 
+    position: relative; 
+    left: 30px; 
+    border-left: 1px solid #e5e5e5;
+}
+
+#monster-logo-small {
+    float: right; 
+    position: relative; 
+    left: 15px; 
+    height: 54px; 
+    border-left: 1px solid #e5e5e5;
+}
+
+#monster-logo-regular {
+    height: 54px; 
+    position: relative; 
+    left: 30px; 
+    border-left: 1px solid #e5e5e5;
+}
 
 #main-bar {
     border-radius: 0px;
@@ -305,4 +348,37 @@ h4 {
 
 .border-white {
     border-color: #fff;
+}
+
+@media screen and (max-width: @screen-sm-max) {
+    
+    .top-padded {
+        padding-top: 0px;
+    }
+    
+    .bottom-padded {
+        padding-bottom: 0px;
+    }
+    
+    .vertical-padded {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    
+    .row {
+        padding-bottom: 10px;
+    }
+    
+    .row > div {
+        padding-top: 10px;
+    }
+    
+    .main-window-segment {
+        text-align: center !important;
+    }
+    
+    .main-window-segment >.row > .align-right {
+        text-align: center !important;
+    }
+    
 }
