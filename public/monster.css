@@ -152,8 +152,8 @@ h4 {
 #sidebar {
     
     position: absolute;
-    background: #555;
-    color: rgba(255,255,255,.9);
+    background: #036;
+    color: rgba(255,255,255,.8);
     
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -181,7 +181,7 @@ h4 {
 
 #sidebar a {
     display: block;
-    color: rgba(255,255,255,.9);
+    color: rgba(255,255,255,.8);
 }
 
 #sidebar a:hover {
@@ -194,7 +194,7 @@ h4 {
     display: block;
     width: 100%;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255,255,255,.5);
+    border-bottom: 1px solid rgba(255,255,255,.8);
 }
 
 #sidebar h4:hover {
@@ -233,6 +233,27 @@ h4 {
 
 #table-container {
     overflow: auto;
+}
+
+.dark-panel {
+    background: #333;
+    border: none;
+}
+
+.dark-panel th {
+    background: #333;
+}
+
+.main-window-segment th, td {
+    padding: 10px !important;
+}
+
+.table-filled a {
+    color: rgba(255,255,255,.8);
+}
+
+.table-filled a:hover {
+    color: rgba(255,255,255,1);
 }
 
 /* STYLING CLASSES */

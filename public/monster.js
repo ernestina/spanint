@@ -28,55 +28,51 @@ function toggleFullScreen() {
 
 function wrapTable() {
     
-    $('.footable > tbody > tr').each(function() {
-        $('td', this).each(function() {
-            $(this).attr('width', $(this).outerWidth() + 'px');
-        });
-        return false;
-    });
-
-    $('.footable > tfoot > tr').each(function() {
-        $('td', this).each(function() {
-            $(this).attr('width', $(this).outerWidth() + 'px');
-        });
-        return false;
-    });
-
-    $('.footable th').each(function() {
-        $(this).attr('width', $(this).outerWidth() + 'px');
-    });
-
-    if ($('.footable').length < 1) {
-        $('#table-container').css('overflow','auto');
-    } else {
-        $('#table-container').css('overflow','hidden');
-    }
-
-    $('#table-container').prepend('<div id="footable-header"></div>');
-    if (typeof $('#table-container .footable thead').html() !== 'undefined') {
-        $('#table-container #footable-header').html('<table class="table table-bordered"><thead>' + $('#table-container .footable thead').html() + '</thead></table>');
-    }
-    $('#table-container .footable thead').remove();
-
+    $('#table-container').css('overflow-x','hidden');
     $('#table-container .footable').wrap('<div id="footable-body"></div>');
-
-    $('#table-container').append('<div id="footable-footer"></div>');
-    if (typeof $('#table-container .footable tfoot').html() !== 'undefined') {
-        $('#table-container #footable-footer').html('<table class="table table-bordered"><tfoot>' + $('#table-container .footable tfoot').html() + '</tfoot></table>');
+    
+    $('#footable-body .footable thead th').each(function() {
+        
+        $(this).css('width',$(this).outerWidth() + 'px');
+        
+    });
+    
+    $('#footable-body .footable tfoot td').each(function() {
+        
+        $(this).css('width',$(this).outerWidth() + 'px');
+        
+    });
+    
+    $('#table-container').prepend('<div id="footable-header"></div>');
+    $('#footable-header').html('<table class="table table-bordered" style="width: ' + $('#footable-body .footable').outerWidth() + 'px"><thead>' + $('#footable-body .footable thead').html() + '</thead></table>');
+    
+    if ($('#footable-body .footable tfoot').length > 0) {
+        $('#table-container').append('<div id="footable-footer"></div>');
+        $('#footable-footer').html('<table class="table table-bordered" style="width: ' + $('#footable-body .footable').outerWidth() + 'px"><tfoot>' + $('#footable-body .footable tfoot').html() + '</tfoot></table>');
     }
-    $('#table-container .footable tfoot').remove();
-
-    $('#footable-body').css('display', 'block');
-    if (typeof tvMode !== 'undefined') {
-        $('#footable-body').css('overflow', 'hidden');
-    } else {
-        $('#footable-body').css('overflow', 'auto');
-    }
-
+    
+    $('#footable-body .footable tbody tr').each(function() {
+        
+        $('td', this).each(function() {
+            $(this).css('width',$(this).outerWidth() + 'px');
+        });
+                           
+        return false;
+        
+    });
+    
+    $('#footable-body .footable').css('width', $('#footable-body .footable').outerWidth() + 'px');
+    
+    $('#footable-body thead').remove();
+    $('#footable-body tfoot').remove();
+    
+    $('#footable-body').css('height', ($('#table-container').height() - $('#footable-header').outerHeight() - $('#footable-footer').outerHeight()) + 'px');
+    $('#footable-body').css('overflow','auto');
+    
     $('#footable-header').css('position', 'relative');
     $('#footable-footer').css('position', 'relative');
-
-    $('#footable-body').bind('scroll', function() {
+    
+    $('#footable-body').scroll(function() {
         $('#footable-header').css('left', $('#footable-body').scrollLeft() * -1);
         $('#footable-footer').css('left', $('#footable-body').scrollLeft() * -1);
     });
@@ -85,44 +81,55 @@ function wrapTable() {
 
 function unWrapTable() {
     
-    restoredTable = '<table class="footable">' + $('#footable-header > .table').html() + $('#footable-body > .table').html();
+    $('#footable-body .footable').prepend($('#footable-header table').html());
     
-    if (typeof $('#footable-footer .table').html() !== 'undefined') {
-        
-        console.log('Footer detected.');
-        restoredTable += $('#footable-footer > .table').html() + '</table>';
-        
-    } else {
-        
-        restoredTable += '</table>';
+    if ($('#footable-footer').length > 0) {
+        $('#footable-body .footable').append($('#footable-footer table').html());
     }
-
-    $('#table-container').prepend(restoredTable); 
     
     $('#footable-header').remove();
-    $('#footable-body').remove();
     $('#footable-footer').remove();
     
-    $('.footable > tbody > tr').each(function() {
-        $('td', this).each(function() {
-            $(this).removeAttr('width');
-        });
-        return false;
-    });
-
-    $('.footable > tfoot > tr').each(function() {
-        $('td', this).each(function() {
-            $(this).removeAttr('width');
-        });
-        return false;
-    });
-
-    $('.footable th').each(function() {
-        $(this).removeAttr('width');
+    $('#footable-body .footable thead th').each(function() {
+        
+        $(this).removeAttr('style');
+        
     });
     
-    $('.footable').addClass('table');
-    $('.footable').addClass('table-striped');
+    $('#footable-body .footable tfoot td').each(function() {
+        
+        $(this).removeAttr('style');
+        
+    });
+    
+    $('#footable-body .footable tbody tr').each(function() {
+        
+        $('td', this).each(function() {
+            $(this).removeAttr('style');
+        });
+                           
+        return false;
+        
+    });
+    
+    $('#footable-body .footable').removeAttr('style');
+    
+    $('#footable-body .footable').unwrap();
+    
+    
+}
+
+function wrapRewrapTable() {
+    
+    if ($('.footable').length > 0) {
+        
+        if ($('#footable-body').length > 0) {
+            unWrapTable();
+        }
+
+        wrapTable();
+        
+    }
     
 }
 
@@ -158,58 +165,9 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
     $('#table-container').css('height', remainingTableSpace);
     
     //Table Reset
-    
-    if ($('#footable-body').length > 0) {
-        unWrapTable();
-    }
-    
-    wrapTable();
-    
+    wrapRewrapTable();
 
-    //Fixed Header
-
-    $('#footable-body').css('height', $('#table-container').innerHeight() - $('#table-container #footable-header').outerHeight() - $('#table-container #footable-footer').outerHeight());
-
-    i = 0;
-    $('#footable-header tr').each(function() {
-        $('th', this).each(function() {
-            if (typeof $(this).attr('colspan') === 'undefined') {
-                $(this).attr('id', i);
-                i++;
-            }
-        });
-    });
-
-    i = 0;
-    count = 0;
-    $('.footable > tbody > tr').each(function() {
-        
-        count++;
-        totalWidth = 0;
-        
-        $('td', this).each(function() {
-            totalWidth += $(this).outerWidth();
-            i++;
-        });
-        
-        $('#footable-header').css('width', totalWidth);
-        $('#footable-footer').css('width', totalWidth);
-
-        $('#footable-header table').attr('width', totalWidth);
-        $('#footable-body table').attr('width', totalWidth);
-        $('#footable-footer table').attr('width', totalWidth);
-
-        if ($('#footable-header tr').length > 1) {
-            $('#footable-header table').css('table-layout', 'fixed !important');
-        } else {
-            $('#footable-header table').css('table-layout', 'fixed');
-        }
-
-        $('#footable-body table').css('table-layout', 'fixed');
-        $('#footable-footer table').css('table-layout', 'fixed');
-        
-        return false;
-    });
+    //TV Scroll
     
     rowPointer = -3;
     $('#footable-body').animate({ scrollTop: 0  }, 500);
@@ -317,6 +275,7 @@ function initLayout() { //Fungsi untuk inisialisasi layout
     
     $('.footable').addClass('table');
     $('.footable').addClass('table-striped');
+    $('.footable').addClass('table-bordered');
 
 }
 
