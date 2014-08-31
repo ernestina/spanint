@@ -184,10 +184,10 @@ if (Session::get('role') == KPPN) {
         <!--baris pertama-->
             <thead>
                 <tr>
-                    <th>No.</th>
+                    <th class="align-center">No.</th>
                     <th>Kode Satker</th>
                     <th>Nama Satker</th>
-                    <th>Total SP2D</th>
+                    <th class="align-right">Total SP2D</th>
                     <!--th>KPPN</th-->
                 </tr>
             </thead>
@@ -201,7 +201,7 @@ if (Session::get('role') == KPPN) {
                     } else {
                         foreach ($this->data as $value) {
                             echo "<tr>	";
-                            echo "<td>" . $no++ . "</td>";
+                            echo "<td class='align-center'>" . $no++ . "</td>";
                             echo "<td><a href=" . URL . "dataSPM/daftarsp2d/" . $value->get_kdsatker() . "/" . $tgl_filter . " target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
                             //echo "<td>" . $value->get_kdsatker() . "</td>";
                             echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";

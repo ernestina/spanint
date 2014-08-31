@@ -52,13 +52,13 @@
 
 <!-- Tabel -->
 <div id="table-container" class="wrapper">
-    <table class="table table-bordered">
+    <table class="table table-bordered table-filled">
         <!--baris pertama-->
             <thead>
                 <tr>
-                    <th rowspan=2 width="10px">No.</th>
+                    <th rowspan=2 class="align-center" class="align-center" width="10px">No.</th>
                     <th rowspan=2 width="70px">Bulan</th>
-                    <th colspan=31>Tanggal LHP</th>
+                    <th colspan=31 class="align-center">Tanggal LHP</th>
                 </tr>
                 <tr>
                     <th width="30px">1</th>
@@ -631,7 +631,7 @@
                                 $warna31 = '000000';
                             }
                             echo "<tr class='ratakanan'>	";
-                            echo "<td>" . $no++ . "</td>";
+                            echo "<td class='align-center'>" . $no++ . "</td>";
                             echo "<td style='text-align: left' >" . Tanggal::bulan_indo($value->get_bulan()) . "</td>";
                             echo "<td bgcolor='#" . $warna01 . "'><a href=" . URL . "dataGR/detailLhpRekap/" . $value->get_tahun() . "" . $value->get_bulan() . "01/" . $_POST['kdkppn'] . " target='_blank' style='text-decoration:none'><center>" . $value->get_r01() . "</center></a></td>";
                             echo "<td bgcolor='#" . $warna02 . "'><a href=" . URL . "dataGR/detailLhpRekap/" . $value->get_tahun() . "" . $value->get_bulan() . "02/" . $_POST['kdkppn'] . " target='_blank' style='text-decoration:none'><center>" . $value->get_r02() . "</center></a></td>";
@@ -724,17 +724,12 @@
     </div>
 
 </div>
-<div class="main-window-segment vertical-padded light-panel">
+<div class="main-window-segment vertical-padded dark-panel">
     <div class="container-fluid">
         
         <div class="row">
             
-            <div class="col-md-12">
-                
-                <p>Klik pada kolom warna untuk melihat detail transaksi.</p>
-                
-                <p><b>Keterangan: </b>Angka didalam kotak adalah jumlah LHP. Jumlah Rekening Persepsi yang terdaftar sebanyak <?php echo $this->jml_rek; ?> Rekening.</p>
-            
+            <div class="col-md-12">Klik pada kolom warna untuk melihat detail transaksi. <br/><b>Keterangan:</b> Angka didalam kotak adalah jumlah LHP. Jumlah Rekening Persepsi yang terdaftar sebanyak <?php echo $this->jml_rek; ?> Rekening.
             </div>
             
         </div>
@@ -742,7 +737,7 @@
     </div>
 </div>
 
-<div class="main-window-segment vertical-padded">
+<div class="main-window-segment vertical-padded dark-panel">
     <div class="container-fluid">
         
         <div class="row">

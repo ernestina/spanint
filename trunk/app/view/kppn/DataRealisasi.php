@@ -78,7 +78,7 @@
             </div>
         </div>
         
-        <div class="row">
+        <div class="row top-padded-little">
             
             <div class="col-md-6 col-sm-12">
                 <?php
@@ -118,16 +118,16 @@
 
 <!-- Blok Tabel -->
 <div id="table-container" class="wrapper">
-    <table width="100%" class="footable">
+    <table class="footable">
             <!--baris pertama-->
             <thead>
                 <tr>
-                    <th id="0" rowspan=2 width="10px" class='mid'>No.</th>
+                    <th id="0" rowspan=2 class='mid'>No.</th>
                     <!--th>KPPN</th-->
                     <!--th>Tanggal</th-->
                     <th id="1"  rowspan=2 class='mid'>Satker</th>
 
-                    <th id="2"  rowspan=2 class='mid' width='200px'> Nama Satker </th>
+                    <th id="2"  rowspan=2 class='mid'> Nama Satker </th>
                     <th id="3"  rowspan=2 class='mid'> Pagu </th>
 
 

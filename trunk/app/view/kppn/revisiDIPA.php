@@ -100,20 +100,20 @@
                 
                 <tr>
                     <th class='mid'>No.</th>
-                    <th class='mid'>Nomor DIPA</th>
-                    <th>Revisi Ke</th>
-                    <th>Tanggal Post Revisi</th>
-                    <th class='mid'>Pagu</th>
+                    <th>Nomor DIPA</th>
+                    <th class='mid'>Revisi Ke</th>
+                    <th class='mid'>Tanggal Post Revisi</th>
+                    <th class='align-right'>Pagu</th>
                     <th class='mid'>Satker</th>
                     <th class='mid'>Akun</th>
                     <th class='mid'>Program</th>
                     <th class='mid'>Output</th>
                     <th class='mid'>Dana</th>
                     <th class='mid'>Bank</th>
-                    <th>Kewenangan</th>
-                    <th>Tipe Anggaran</th>
+                    <th class='mid'>Kewenangan</th>
+                    <th class='mid'>Tipe Anggaran</th>
                     <th class='mid'>Kololari</th>
-                    <th>Kode Cadangan</th>
+                    <th class='mid'>Kode Cadangan</th>
                 </tr>
 
             </thead>

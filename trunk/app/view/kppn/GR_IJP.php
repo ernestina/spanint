@@ -73,46 +73,46 @@ if( isset($this->d_kd_kppn) || isset($this->d_bulan)){
         <!--baris pertama-->
             <thead>
                 <tr>
-                    <th rowspan=2 width="10px" class='mid'>No.</th>
+                    <th rowspan=2 class='mid'>No.</th>
                     <!--th>KPPN</th-->
                     <!--th>Tanggal</th-->
                     <th rowspan=2 class='mid'>Bank - Cabang - No Rek</th>
                     <!--th>Kode Cabang Bank</th-->
-                    <th colspan=31>Tanggal Penerimaan</th>
+                    <th colspan=31 class='mid'>Tanggal Penerimaan</th>
                     <th rowspan=2 class='mid'>Total</th>
                 </tr>
                 <tr>
-                    <th width="30px">1</th>
-                    <th width="30px">2</th>
-                    <th width="30px">3</th>
-                    <th width="30px">4</th>
-                    <th width="30px">5</th>
-                    <th width="30px">6</th>
-                    <th width="30px">7</th>
-                    <th width="30px">8</th>
-                    <th width="30px">9</th>
-                    <th width="30px">10</th>
-                    <th width="30px">11</th>
-                    <th width="30px">12</th>
-                    <th width="30px">13</th>
-                    <th width="30px">14</th>
-                    <th width="30px">15</th>
-                    <th width="30px">16</th>
-                    <th width="30px">17</th>
-                    <th width="30px">18</th>
-                    <th width="30px">19</th>
-                    <th width="30px">20</th>
-                    <th width="30px">21</th>
-                    <th width="30px">22</th>
-                    <th width="30px">23</th>
-                    <th width="30px">24</th>
-                    <th width="30px">25</th>
-                    <th width="30px">26</th>
-                    <th width="30px">27</th>
-                    <th width="30px">28</th>
-                    <th width="30px">29</th>
-                    <th width="30px">30</th>
-                    <th width="30px">31</th>
+                    <th class="align-right">1</th>
+                    <th class="align-right">2</th>
+                    <th class="align-right">3</th>
+                    <th class="align-right">4</th>
+                    <th class="align-right">5</th>
+                    <th class="align-right">6</th>
+                    <th class="align-right">7</th>
+                    <th class="align-right">8</th>
+                    <th class="align-right">9</th>
+                    <th class="align-right">10</th>
+                    <th class="align-right">11</th>
+                    <th class="align-right">12</th>
+                    <th class="align-right">13</th>
+                    <th class="align-right">14</th>
+                    <th class="align-right">15</th>
+                    <th class="align-right">16</th>
+                    <th class="align-right">17</th>
+                    <th class="align-right">18</th>
+                    <th class="align-right">19</th>
+                    <th class="align-right">20</th>
+                    <th class="align-right">21</th>
+                    <th class="align-right">22</th>
+                    <th class="align-right">23</th>
+                    <th class="align-right">24</th>
+                    <th class="align-right">25</th>
+                    <th class="align-right">26</th>
+                    <th class="align-right">27</th>
+                    <th class="align-right">28</th>
+                    <th class="align-right">29</th>
+                    <th class="align-right">30</th>
+                    <th class="align-right">31</th>
                 </tr>
 
             </thead>
@@ -227,7 +227,7 @@ if( isset($this->d_kd_kppn) || isset($this->d_bulan)){
                             $j31 = $j31 + $value->get_n31();
                             $jtotal = $jtotal + $value->get_jumlah();
                         }
-                        echo "</tbody><tfoot style='font-weight: bold; font-size: 80% '>";
+                        echo "</tbody><tfoot>";
                         echo "<tr class='ratakanan'>	";
                         echo "<td> </td>";
                         echo "<td class='ratakiri'> GRAND TOTAL </td>";
