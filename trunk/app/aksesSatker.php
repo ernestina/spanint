@@ -117,6 +117,7 @@ $akses['DataReturSatker'] = array(
  */
 $akses['DataSPMSatker'] = array(
     '__construct',
+	'downloadSP2D',
 	'PosisiSPM',
     'HoldSPM',
     'detailHoldSPM',
