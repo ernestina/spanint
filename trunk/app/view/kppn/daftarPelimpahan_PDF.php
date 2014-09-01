@@ -112,17 +112,19 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_pagu_total = 90;
         $ukuran_kolom_jenis_belanja = 60;
         $ukuran_kolom_1a = 100;
-        $ukuran_kolom_2a = 100;
+        $ukuran_kolom_2a = 50;
         $ukuran_kolom_3a = 75;
         $ukuran_kolom_4a = 50;
 		$ukuran_kolom_5a = 50;
-        $ukuran_kolom_a = $ukuran_kolom_1a + $ukuran_kolom_2a + $ukuran_kolom_3a + $ukuran_kolom_4a+ $ukuran_kolom_5a;
+        $ukuran_kolom_6a = 50;
+		$ukuran_kolom_a = $ukuran_kolom_1a + $ukuran_kolom_2a + $ukuran_kolom_3a + $ukuran_kolom_4a+ $ukuran_kolom_5a+ $ukuran_kolom_6a;
         $ukuran_kolom_1b = 100;
-        $ukuran_kolom_2b = 100;
-        $ukuran_kolom_3b = 100;
+        $ukuran_kolom_2b = 50;
+        $ukuran_kolom_3b = 75;
 		$ukuran_kolom_4b = 50;
         $ukuran_kolom_5b = 50;
-        $ukuran_kolom_b = $ukuran_kolom_1b + $ukuran_kolom_2b + $ukuran_kolom_3b+ $ukuran_kolom_4b + $ukuran_kolom_5b;
+		$ukuran_kolom_6b = 50;
+        $ukuran_kolom_b = $ukuran_kolom_1b + $ukuran_kolom_2b + $ukuran_kolom_3b+ $ukuran_kolom_4b + $ukuran_kolom_5b+ $ukuran_kolom_6b;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -135,13 +137,15 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetXY($px2, $py2);
         $this->Cell($ukuran_kolom_1a, $h / 2, 'No-Nama Rek', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_1a);
-        $this->Cell($ukuran_kolom_2a, $h / 2, 'No. Sakti', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_2a, $h / 2, 'Tanggal', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_2a);
-        $this->Cell($ukuran_kolom_3a, $h / 2, 'Nilai', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_3a, $h / 2, 'No. Sakti', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_3a);
-		$this->Cell($ukuran_kolom_4a, $h / 2, 'Akun', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_4a, $h / 2, 'Nilai', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_4a);
-        $this->Cell($ukuran_kolom_5a, $h / 2, 'Kode KPPN', 1, 0, 'C', true);
+		$this->Cell($ukuran_kolom_5a, $h / 2, 'Akun', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_5a);
+        $this->Cell($ukuran_kolom_6a, $h / 2, 'Kode KPPN', 1, 0, 'C', true);
         $py3 = $this->GetY();
         $this->SetY($py3 -= 20);
         $this->SetX($left += $ukuran_kolom_a);
@@ -153,14 +157,16 @@ class FPDF_AutoWrapTable extends FPDF {
 
         $this->Cell($ukuran_kolom_1b, $h / 2, 'No.-Nama Rek', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_1b);
-        $this->Cell($ukuran_kolom_2b, $h / 2, 'No. Sakti', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_2b, $h / 2, 'Tanggal', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_2b);
-        $this->Cell($ukuran_kolom_3b, $h / 2, 'Nilai', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_3b, $h / 2, 'No. Sakti', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_3b);
-        $this->Cell($ukuran_kolom_4b, $h / 2, 'Akun', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_4b, $h / 2, 'Nilai', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_4b);
-        $this->Cell($ukuran_kolom_5b, $h / 2, 'Kode KPPN', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_5b, $h / 2, 'Akun', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_5b);
+        $this->Cell($ukuran_kolom_6b, $h / 2, 'Kode KPPN', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_6b);
         $py3 = $this->GetY();
         $this->SetY($py3 -= 20);
         $this->SetX($left += $ukuran_kolom_b);
@@ -168,21 +174,21 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Ln(3);
 
         $this->SetFont('Arial', '', 6);
-        $this->SetWidths(array(20,
-			$ukuran_kolom_1a,$ukuran_kolom_2a,
-			$ukuran_kolom_3a,$ukuran_kolom_4a,
-			$ukuran_kolom_5a,$ukuran_kolom_1b,
+        $this->SetWidths(array(20,$ukuran_kolom_1a,
+			$ukuran_kolom_2a,$ukuran_kolom_3a,
+			$ukuran_kolom_4a,$ukuran_kolom_5a,
+			$ukuran_kolom_6a,$ukuran_kolom_1b,
 			$ukuran_kolom_2b,$ukuran_kolom_3b,
-			$ukuran_kolom_4b, $ukuran_kolom_5b,
-			$ukuran_kolom_pagu_total
+			$ukuran_kolom_4b,$ukuran_kolom_5b,
+			$ukuran_kolom_6b,$ukuran_kolom_pagu_total
         ));
-        $this->SetAligns(array('C', 
-		'L','C', 
+        $this->SetAligns(array('C', 'L',
+		'C', 'C',
 		'R','C',
-		'C','R', 
-		'C', 'R', 
+		'C', 'C',
 		'C', 'C', 
-		'L'));
+		'R', 'C',
+		'C', 'C'));
         
 		if (count($this->data) == 0) {
 		 $this->Row(
@@ -207,13 +213,15 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->Row(
 						array($no++,
 							$value->get_norek_persepsi() . ' ' .$value->get_nmrek_persepsi() ,
-							$value->get_nosakti_limpah,
-							$value->get_jml_terima(),
+							$value->get_tgl_limpah(),
+							$value->get_nosakti_limpah(),
+							number_format($value->get_jml_terima()),
 							$value->get_akun_terima(),
 							$value->get_kppn_anak(),
 							$value->get_norek_501() . ' ' . $value->get_nmrek_501(),
-							$value->get_nosakti_bs,
-							$value->get_jml_limpah(),
+							$value->get_tgl_terima(),
+							$value->get_nosakti_bs(),
+							number_format($value->get_jml_limpah()),
 							$value->get_akun_limpah(),
 							$value->get_kppn_induk(),
 							$value->get_status()

@@ -162,7 +162,7 @@ class FPDF_AutoWrapTable extends FPDF {
 		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja1,
 		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, 
 		$ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa));
-        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'R', 'R', 'R', 'R', 'R'));
+        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'R', 'R', 'R', 'R', 'R'));
         if (count($this->data) == 0) {
             $this->Row(
                     array('',
@@ -206,20 +206,20 @@ class FPDF_AutoWrapTable extends FPDF {
                 $tot_blokir+=$value->get_blokir();
                 $tot_actual+=$value->get_blokir_realisasi();
             }
-            $this->SetFont('Arial', '', 6);
+            $this->SetFont('Arial', '', 7);
             $h = 20;
             $this->SetFillColor(200, 200, 200);
             $left = $this->GetX();
-            $this->Cell(530, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-            $this->SetX($left += 530);
+            $this->Cell(525, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+            $this->SetX($left += 525);
 			
             $px1 = $this->GetX();
             $py1 = $this->GetY();
             $px2 = $px1;
             $py2 = $py1;
             $this->SetXY($px2, $py2);
-		   $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_budget), 1, 0, 'R', true);
-			$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		   $this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($tot_budget), 1, 0, 'R', true);
+			$this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
             $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_encumbrance), 1, 0, 'R', true);
             $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
             $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_blokir), 1, 0, 'R', true);

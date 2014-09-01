@@ -8,8 +8,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Monitoring Pelimpahan</h2>
-				<?php
+							<?php
 				if (isset($this->d_kppn_induk)) {
 					echo "Dari - Ke KPPN : " . $this->d_kppn_induk . " - " ;
 				}
@@ -28,17 +27,16 @@
 				if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
 					echo "Tanggal : " . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
 				}
-				?>
+				
+				?> 
+                <h2>Monitoring Pelimpahan</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
                 
                 <?php
 				//---------------------
-				       
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
-		if (Session::get('role') == KANWIL) {
+				if (Session::get('role') == KANWIL) {
 			if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
 
 				if (isset($this->d_status)) {
@@ -79,95 +77,84 @@
                 
                 <?php }
 
-			
-        }
-        if (Session::get('role') == ADMIN ) {
-			if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
+			}
+			 if (Session::get('role') == ADMIN ) {
+				if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
 
 
-				if (isset($this->d_status)) {
-					$kdstatus = $this->d_status;
-				} else {
-					$kdstatus = 'null';
-				}
-
-				if (isset($this->d_kppn_anak)) {
-					$kdkppn_anak = $this->d_kppn_anak;
-				} else {
-					foreach ($this->kppn_anak as $kppn_anak) {
-                    $kdkppn_anak = $kppn_anak->get_kppn_kanwil();
+					if (isset($this->d_status)) {
+						$kdstatus = $this->d_status;
+					} else {
+						$kdstatus = 'null';
 					}
-				}
-
-				if (isset($this->d_kppn_induk)) {
-					$kdkppn_induk = $this->d_kppn_induk;
-				} else {
-					foreach ($this->kppn_induk as $kppn_induk) {
-                    $kdkppn_induk = $kppn_induk->get_induk_limpah();
+					if (isset($this->d_kppn_anak)) {
+						$kdkppn_anak = $this->d_kppn_anak;
+					} else {
+						$kdkppn_anak = 'null';
 					}
-				}
-				
-				if (isset($this->d_tgl_awal)) {
-					$kdtgl_awal = $this->d_tgl_awal;
-				} else {
-					$kdtgl_awal = 'null';
-				}
-				if (isset($this->d_tgl_akhir)) {
-					$kdtgl_akhir = $this->d_tgl_akhir;
-				} else {
-					$kdtgl_akhir = 'null';
-				}
+					if (isset($this->d_kppn_induk)) {
+						$kdkppn_induk = $this->d_kppn_induk;
+					} else {
+						$kdkppn_induk = 'null';
+					}
+					if (isset($this->d_tgl_awal)) {
+						$kdtgl_awal = $this->d_tgl_awal;
+					} else {
+						$kdtgl_awal = 'null';
+					}
+					if (isset($this->d_tgl_akhir)) {
+						$kdtgl_akhir = $this->d_tgl_akhir;
+					} else {
+						$kdtgl_akhir = 'null';
+					}
 			?>
                     
-                <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
+					<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
                 
-                <?php }
-        }
-
-        if (Session::get('role') == KPPN) {
+                <?php 
+				}
+			}
+			if (Session::get('role') == KPPN) {
             
-			if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
+				if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
 
-				if (isset($this->d_status)) {
-					$kdstatus = $this->d_status;
-				} else {
-					$kdstatus = 'null';
-				}
+					if (isset($this->d_status)) {
+						$kdstatus = $this->d_status;
+					} else {
+						$kdstatus = 'null';
+					}
 
-				if (isset($this->d_kppn_anak)) {
-					$kdkppn_anak = $this->d_kppn_anak;
-				} else {
+					if (isset($this->d_kppn_anak)) {
+						$kdkppn_anak = $this->d_kppn_anak;
+					} else {
+						
+						$kdkppn_induk = Session::get('id_user');			
+					}
+					if (isset($this->d_kppn_induk)) {
+						$kdkppn_induk = $this->d_kppn_induk;
+					} else {
+						$kdkppn_induk = Session::get('id_user');
+					}
+					if (isset($this->d_tgl_awal)) {
+						$kdtgl_awal = $this->d_tgl_awal;
+					} else {
+						$kdtgl_awal = 'null';
+					}
+					if (isset($this->d_tgl_akhir)) {
+						$kdtgl_akhir = $this->d_tgl_akhir;
+					} else {
+						$kdtgl_akhir = 'null';
+					}
+				?>
+						
+					<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
 					
-                    $kdkppn_anak = $kppn_anak->kppn_anak;
-					
-				}
-
-				if (isset($this->d_kppn_induk)) {
-					$kdkppn_induk = $this->d_kppn_induk;
-				} else {
-                    $kdkppn_induk = Session::get('id_user');
-				}
-				
-				if (isset($this->d_tgl_awal)) {
-					$kdtgl_awal = $this->d_tgl_awal;
-				} else {
-					$kdtgl_awal = 'null';
-				}
-				if (isset($this->d_tgl_akhir)) {
-					$kdtgl_akhir = $this->d_tgl_akhir;
-				} else {
-					$kdtgl_akhir = 'null';
-				}
-			?>
-                    
-                <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
-                
-                <?php }
-				}
-				//------------------------------
+					<?php }
+					}
+					//------------------------------
         ?>
-                
-                
+
+                               
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
             
@@ -300,7 +287,7 @@
 </div>
 
 <!-- Filter -->
-<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+<div class="modal fade" id="modal-app-filter" tabindex="-0" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
         
     <div class="modal-dialog">
 

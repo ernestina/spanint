@@ -13,6 +13,61 @@
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 <!-- PDF -->
+				<?php
+/* 				//----------------
+				//---------------------------------
+				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
+				if (Session::get('role') == ADMIN) {
+						 if (isset($kdkppn)) {
+							$kdkppn = $kdkppn;
+						} else {
+							$kdkppn = 'null';
+						}
+						if (isset($kdtgl)) {
+							$kdtgl = $kdtgl;
+						}else{
+							$kdtgl ='null';
+						}
+						?>
+						<a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<?php
+					
+				}
+				if (Session::get('role') == KANWIL) {
+					 if (isset($kdkppn)) {
+							$kdkppn = $kdkppn;
+						} else {
+							$kdkppn = 'null';
+						}
+						if (isset($kdtgl)) {
+							$kdtgl = $kdtgl;
+						}else{
+							$kdtgl ='null';
+						}
+						?>
+						<a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<?php
+				}
+				if (Session::get('role') == KPPN) {
+					  if (isset($kdkppn)) {
+							$kdkppn = $kdkppn;
+						} else {
+							$kdkppn = 'null';
+						}
+						if (isset($kdtgl)) {
+							$kdtgl = $kdtgl;
+						}else{
+							$kdtgl ='null';
+						}
+						?>
+						<a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<?php
+					
+				}
+				//------------------------------
+
+				//-------------------
+ */				?>
                 
             </div>
         </div>

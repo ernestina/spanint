@@ -27,12 +27,12 @@
 		}
 		?>
 
-		<a href="<?php echo URL; ?>PDF/sp2dSalahBank_PDF<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		<a href="<?php echo URL; ?>PDF/sp2dSalahBank_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 		<?php
 		//----------------------------------------------------		
 		
-	}
+	
     ?>
                 
                 
