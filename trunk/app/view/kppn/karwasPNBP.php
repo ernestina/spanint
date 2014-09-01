@@ -31,6 +31,7 @@
 
                         foreach ($this->nmsatker as $value1) {
                             $satker = $value1->get_nmsatker();
+							//var_dump($value1);
                         }
                     }
                     echo $satker . " ";
@@ -292,7 +293,7 @@
 					</tr>
 					<?php
 					echo "<tr> " ;	
-					echo "<td colspan='5'>MAKSIMUM PENCAIRAN (MP)</td> ";
+					echo "<td colspan='5'>MAKSIMUM PENCAIRAN (MP) SAAT INI</td> ";
 					echo "<td style='text-align: right';padding-top: 20px; padding-bottom: 10px; font-weight: bold;>". number_format($maksimum_pencairan)."</td>";
                     echo "</tr> " ;	
 					?>
@@ -315,7 +316,7 @@
 
             </div>
             
-            <form id="filter-form" method="POST" action="monitoringPelimpahan" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="KarwasPNBP" enctype="multipart/form-data">
 
                 <div class="modal-body">
                     
