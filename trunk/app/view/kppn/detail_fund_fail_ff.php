@@ -1,20 +1,16 @@
-<div id="top">
-    <div id="header">
-        <h2>DETAIL DATA PAGU MINUS KARENA FUND FAIL <?php //echo Session::get('user');  ?>
-            <?php
-            if (isset($this->d_nama_kppn)) {
-                foreach ($this->d_nama_kppn as $kppn) {
-                    echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                    $kode_kppn = $kppn->get_kd_satker();
-                }
-            } else {
-                echo Session::get('user');
-            }
-            ?>
-
-        </h2>
-    </div>
-    <?php
+<!-- Ndas -->
+<div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Detail Data Pagu Minus Karena <i>Fund Fail</i></h2>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                <!--pdf-->
+				<?php
+//<?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 // if( isset($this->data) || isset($this->d_nama_kppn)
@@ -38,73 +34,51 @@
 <?php
 		
 // }
-?>
-
-    <a href="#yModal" class="modal">FILTER DATA</a><br><br>
-    <div id="yModal" class="modalDialog" >
-        <div>
-            <h2 style="border-bottom: 1px solid #eee; padding-bottom: 10px">FILTER</h2>
-            <a href="<?php
-            $_SERVER['PHP_SELF'];
-            ?>" title="Tutup" class="close"><i class="icon-remove icon-white" style="margin-left: 5px; margin-top: 2px"></i>
-            </a>
-
-            <div id="top">
-
-                <form method="POST" action="#" enctype="multipart/form-data">
-
-
-                    <div id="wakun" class="error"></div>
-                    <label class="isian">Satker : </label>
-                    <input type="text" name="kd_satker" id="kd_satker">
-
-                    <!--div id="woutput" class="error"></div>
-                    <label class="isian">Output : </label>
-                    <input type="text" name="output" id="output">
-                    
-                    <div id="wprogram" class="error"></div>
-                    <label class="isian">Program : </label>
-                    <input type="text" name="program" id="program">
-                    
-                    <div id="wtgl" class="error"></div>
-                    <label class="isian">Tanggal: </label>
-                    <ul class="inline">
-                    <li><input type="text" class="tanggal" name="tgl_awal" id="datepicker" value="<?php if (isset($this->d_tgl_awal)) {
-                echo $this->d_tgl_awal;
-            } ?>"> </li> <li>s/d</li>
-                    <li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker1" value="<?php if (isset($this->d_tgl_akhir)) {
-                echo $this->d_tgl_akhir;
-            } ?>"></li>
-                    </ul-->
-
-                    <ul class="inline"  style="margin-left: 130px">
-                        <li><input id="reset" class="normal" type="reset" name="reset_file" value="RESET" onClick=""></li>
-                        <li><input id="submit" class="sukses" type="submit" name="submit_file" value="SUBMIT" onClick="return cek_upload();"></li>
-                        <!--onClick="konfirm(); return false;"-->
-                    </ul>
-                </form>
+?>               
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
             </div>
         </div>
+        
+        <div class="row" style="padding-top: 10px">
+            
+            <div class="col-md-6 col-sm-12">
+                <?php
+            if (isset($this->d_nama_kppn)) {
+                foreach ($this->d_nama_kppn as $kppn) {
+                    echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                    $kode_kppn = $kppn->get_kd_satker();
+                }
+            } else {
+                echo Session::get('user');
+            }
+            ?>
+            </div>
+            
+            <div class="col-md-6 col-sm-12" style="text-align: right;">
+                <?php
+                    // untuk menampilkan last_update
+                    if (isset($this->last_update)) {
+                        foreach ($this->last_update as $last_update) {
+                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                        }
+                    }
+                ?>
+            </div>
+            
+        </div>
+        
     </div>
-	
-	 <?php
-    // untuk menampilkan last_update
-    if (isset($this->last_update)) {
-        foreach ($this->last_update as $last_update) {
-            echo "Update Data Terakhir (Waktu Server)  "
-            ?> <br/>
-            <?php
-            echo $last_update->get_last_update() . " WIB";
-        }
-    }
-    ?>
-    
-	
-	
-    <div id="fitur">
-        <table width="100%" class="table table-bordered zebra" id="example" style="font-size: 90%">
-            <!--baris pertama-->
-            <thead>
+</div>
+
+<!-- Tabel -->
+<div id="table-container" class="wrapper">
+    <table class="footable">
+        <!--baris pertama-->
+        <thead>
             <th class='mid'>No.</th>
             <!--th class='mid'>Tanggal Error</th-->
             <th class='mid'>Satker</th>
@@ -120,225 +94,102 @@
             <th>Blokir</th>
             <th>Realisasi</th>
             <th>Sisa/kurang</th>
-
-            </thead>
-            <tbody class='ratatengah'>
-                <?php
-                $no = 1;
-                //var_dump ($this->data);
-                if (isset($this->data)) {
-                    if (empty($this->data)) {
-                        echo "<div class='alert alert-danger'><strong>Info! </strong>Data Tidak ada karena akun sebelumnya menjadi hilang padahal sudah ada realisasi/kontrak .</div>";
-                    } else {
-                        $tot_budget = 0;
-                        $tot_encumbrance = 0;
-                        $tot_actual = 0;
-                        $tot_blokir = 0;
-                        foreach ($this->data as $value) {
-                            echo "<tr>	";
-                            echo "<td>" . $no++ . "</td>";
-                            //echo "<td class='ratakiri'>" . $value->get_error_date() . "</td>";
-                            echo "<td>" . $value->get_satker() . "</td>";
-                            echo "<td>" . $value->get_kppn() . "</td>";
-                            echo "<td>" . $value->get_akun() . "</td>";
-                            echo "<td>" . $value->get_program() . "</td>";
-                            echo "<td>" . $value->get_output() . "</td>";
-                            echo "<td>" . $value->get_dana() . "</td>";
-                            //echo "<td>" . $value->get_description() . "</td>";
-                            echo "<td class='ratakanan'>" . number_format($value->get_budget_amt()) . "</td>";
-                            echo "<td class='ratakanan'>  0 </td>";
-                            echo "<td class='ratakanan'>" . number_format($value->get_obligation()) . "</td>";
-                            echo "<td class='ratakanan'>" . number_format($value->get_block_amount()) . "</td>";
-                            echo "<td class='ratakanan'>" . number_format($value->get_actual_amt()) . "</td>";
-                            echo "<td class='ratakanan'>" . number_format($value->get_budget_amt() - $value->get_obligation() - $value->get_block_amount() - $value->get_actual_amt()) . "</td>";
-                            echo "</tr>	";
-                            $tot_budget+=$value->get_budget_amt();
-                            $tot_encumbrance+=$value->get_obligation();
-                            $tot_blokir+=$value->get_block_amount();
-                            $tot_actual+=$value->get_actual_amt();
-                        }
+        </thead>
+        <tbody class='ratatengah'>
+            <?php
+            $no = 1;
+            //var_dump ($this->data);
+            if (isset($this->data)) {
+                if (empty($this->data)) {
+                    echo '<td colspan=12 align="center">Data Tidak ada karena akun sebelumnya menjadi hilang padahal sudah ada realisasi/kontrak .</td>';
+                } else {
+                    $tot_budget = 0;
+                    $tot_encumbrance = 0;
+                    $tot_actual = 0;
+                    $tot_blokir = 0;
+                    foreach ($this->data as $value) {
+                        echo "<tr>	";
+                        echo "<td>" . $no++ . "</td>";
+                        //echo "<td class='ratakiri'>" . $value->get_error_date() . "</td>";
+                        echo "<td>" . $value->get_satker() . "</td>";
+                        echo "<td>" . $value->get_kppn() . "</td>";
+                        echo "<td>" . $value->get_akun() . "</td>";
+                        echo "<td>" . $value->get_program() . "</td>";
+                        echo "<td>" . $value->get_output() . "</td>";
+                        echo "<td>" . $value->get_dana() . "</td>";
+                        //echo "<td>" . $value->get_description() . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_budget_amt()) . "</td>";
+                        echo "<td class='ratakanan'>  0 </td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_obligation()) . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_block_amount()) . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_actual_amt()) . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_budget_amt() - $value->get_obligation() - $value->get_block_amount() - $value->get_actual_amt()) . "</td>";
+                        echo "</tr>	";
+                        $tot_budget+=$value->get_budget_amt();
+                        $tot_encumbrance+=$value->get_obligation();
+                        $tot_blokir+=$value->get_block_amount();
+                        $tot_actual+=$value->get_actual_amt();
                     }
                 }
-                ?>
-                <!--footernya ditaruh disini-->		
-                <tr>
-                    <td colspan='8' class='ratatengah'><b>GRAND TOTAL<b></td>
-                                <td class='ratakanan'><b><?php echo number_format($tot_budget); ?></td>
-                                <td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></td>
-                                <td class='ratakanan'><b><?php echo number_format($tot_blokir); ?></td>
-                                <td class='ratakanan'><b><?php echo number_format($tot_actual); ?></td>
-                                <td class='ratakanan'><b><?php echo number_format($tot_budget - $tot_encumbrance - $tot_blokir - $tot_actual); ?></td>
-                                </tr>
-                                <!--end footernya-->
-                                </tbody>
-                                <tfoot>
+            }
+            ?>
+            <!--footernya ditaruh disini-->		
+            <tr>
+                <td colspan='8' class='ratatengah'><b>GRAND TOTAL<b></td>
+                <td class='ratakanan'><b><?php echo number_format($tot_budget); ?></td>
+                <td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></td>
+                <td class='ratakanan'><b><?php echo number_format($tot_blokir); ?></td>
+                <td class='ratakanan'><b><?php echo number_format($tot_actual); ?></td>
+                <td class='ratakanan'><b><?php echo number_format($tot_budget - $tot_encumbrance - $tot_blokir - $tot_actual); ?></td>
+            </tr>
+                <!--end footernya-->
+        </tbody>
+    </table>
+</div>
 
-                                </tfoot>
+<!-- Filter -->
+<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+        
+    <div class="modal-dialog">
 
-                                </table>
-                                <br>
-                                <br>
-                                <!--b><i>* Nilai Pagu Merupakan Pagu Awal DIPA, Untuk Melihat Sisa Pagu Tersedia Gunakan Menu Sisa Pagu Belanja Realisasi dan Encumbrance </i></b></br>
-                                <b><i>* Data Merupakan Data Per Tanggal Sebelumnya Pukul 19.00 </i></b></br-->
-                                </div>
-                                </div>
-                                <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
-                                <script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
-                                <script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
-                                <script type="text/javascript" charset="utf-8">
-                            $(function() {
-                                hideErrorId();
-                                hideWarning();
+        <div class="modal-content">
 
-                            });
+            <div class="modal-header">
 
-                            function hideErrorId() {
-                                $('.error').fadeOut(0);
-                            }
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
 
-                            function hideWarning() {
-                                $('#kd_satker').change(function() {
-                                    if (document.getElementById('kd_satker').value != '') {
-                                        $('#wkdsatker').fadeOut(200);
-                                    }
-                                });
+            </div>
+            
+            <form id="filter-form" method="POST" action="#" enctype="multipart/form-data">
 
-                                $('#akun').change(function() {
-                                    if (document.getElementById('akun').value != '') {
-                                        $('#wakun').fadeOut(200);
-                                    }
-                                });
+            <div class="modal-body">
 
-                                $('#output').change(function() {
-                                    if (document.getElementById('output').value != '') {
-                                        $('#woutput').fadeOut(200);
-                                    }
-                                });
+                <!-- Paste Isi Fom mulai nangkene -->
+                <div id="wakun" class="alert alert-danger" style="display:none;"></div>
+                <label class="isian">Satker : </label>
+                <input class="form-control" type="text" name="kd_satker" id="kd_satker">
 
-                                $('#program').change(function() {
-                                    if (document.getElementById('output').value != '') {
-                                        $('#wprogram').fadeOut(200);
-                                    }
-                                });
+                <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
+                <label class="isian">Tanggal: </label>
 
-                                $('#datepicker2').change(function() {
-                                    if (document.getElementById('datepicker2').value != '' && document.getElementById('datepicker3').value != '') {
-                                        $('#wtgl').fadeOut(200);
-                                    }
-                                });
+                <div class="input-daterange input-group" id="datepicker" style="width: 100%">
+                    <input class="form-control" type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
+                    <span class="input-group-addon">s.d.</span>
+                    <input class="form-control" type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
+                </div>
 
-                                $('#datepicker3').change(function() {
-                                    if (document.getElementById('datepicker2').value != '' && document.getElementById('datepicker3').value != '') {
-                                        $('#wtgl').fadeOut(200);
-                                    }
-                                });
 
-                            }
+            </div>
 
-                            function cek_upload() {
-                                var pattern = '^[0-9]+$';
-                                var v_kd_satker = document.getElementById('kd_satker').value;
-                                var v_akun = document.getElementById('akun').value;
-                                var v_output = document.getElementById('output').value;
-                                var v_program = document.getElementById('program').value;
-                                var v_tglawal = document.getElementById('datepicker2').value;
-                                var v_tglakhir = document.getElementById('datepicker3').value;
+                <div class="modal-footer">
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="">Kirim</button>
+                </div>
 
-                                var jml = 0;
-                                if (v_kd_satker == '' && v_akun == '' && v_output == '' && v_program == '' && v_tglawal == '' && v_tglakhir == '') {
-                                    $('#wkdsatker').html('Harap isi salah satu parameter');
-                                    $('#wkdsatker').fadeIn();
-                                    $('#wakun').html('Harap isi salah satu parameter');
-                                    $('#wakun').fadeIn();
-                                    $('#woutput').html('Harap isi salah satu parameter');
-                                    $('#woutput').fadeIn();
-                                    $('#wprogram').html('Harap isi salah satu parameter');
-                                    $('#wprogram').fadeIn();
-                                    $('#wtgl').html('Harap isi salah satu parameter');
-                                    $('#wtgl').fadeIn();
-                                    jml++;
-                                }
+            </form>
 
-                                if (v_kd_satker != '' && v_kd_satker.length != 6) {
-                                    $('#wkdsatker').html('Kode Satker harus 6 digit');
-                                    $('#wkdsatker').fadeIn(200);
-                                    jml++;
-                                }
+        </div>
 
-                                if (v_kd_satker != '' && !v_kd_satker.match(pattern)) {
-                                    var wkdsatker = 'Kode Satker harus dalam bentuk angka!';
-                                    $('#wkdsatker').html(wkdsatker);
-                                    $('#wkdsatker').fadeIn(200);
-                                    jml++;
-                                }
+    </div>
 
-                                if (v_akun != '' && v_akun.length != 6) {
-                                    $('#wakun').html('Kode Akun harus 6 digit');
-                                    $('#wakun').fadeIn(200);
-                                    jml++;
-                                }
-
-                                if (v_akun != '' && !v_akun.match(pattern)) {
-                                    var wakun = 'Kode Akun harus dalam bentuk angka!';
-                                    $('#wakun').html(wakun);
-                                    $('#wakun').fadeIn(200);
-                                    jml++;
-                                }
-
-                                if (v_output != '' && v_output.length != 7) {
-                                    $('#woutput').html('Kode Output harus 7 digit');
-                                    $('#woutput').fadeIn(200);
-                                    jml++;
-                                }
-
-                                if (v_output != '' && !v_output.match(pattern)) {
-                                    var woutput = 'Kode Akun harus dalam bentuk angka!';
-                                    $('#woutput').html(woutput);
-                                    $('#woutput').fadeIn(200);
-                                    jml++;
-                                }
-
-                                if (v_program != '' && v_program.length != 7) {
-                                    $('#wprogram').html('Kode Akun harus 7 digit');
-                                    $('#wprogram').fadeIn(200);
-                                    jml++;
-                                }
-
-                                if (v_program != '' && !v_program.match(pattern)) {
-                                    var wprogram = 'Kode Akun harus dalam bentuk angka!';
-                                    $('#wprogram').html(wprogram);
-                                    $('#wprogram').fadeIn(200);
-                                    jml++;
-                                }
-
-                                if (v_tglawal > v_tglakhir) {
-                                    $('#wtgl').html('Tanggal awal tidak boleh melebihi tanggal akhir');
-                                    $('#wtgl').fadeIn(200);
-                                    jml++;
-                                }
-
-                                if (jml > 0) {
-                                    return false;
-                                }
-                            }
-                            $(document).ready(function() {
-                                var oTable = $('#example').dataTable({
-                                    "sScrollY": 400,
-                                    "sScrollX": "100%",
-                                    "sScrollXInner": "100%",
-                                    "bSort": false,
-                                    "bPaginate": false,
-                                    "bInfo": null,
-                                    "bFilter": false,
-                                    "oLanguage": {
-                                        "sEmptyTable": "Tidak ada data di dalam tabel ini."
-                                                "fnServerData":getRows,
-                                    },
-                                });
-
-                                var keys = new KeyTable({
-                                    "table": document.getElementById('example'),
-                                    "datatable": oTable
-                                });
-                            });
-                                </script>
+</div>
