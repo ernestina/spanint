@@ -43,6 +43,25 @@ class homeController extends BaseController {
             
             $this->view->render('tv/tickerSPM');
             
+        } elseif ($whereto == 'sp2d') {
+            
+            $d_log = new DataLog($this->registry);
+            $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+            
+            $kodeunit = Session::get('id_user');
+
+            $unitfilter = " substr(CHECK_NUMBER,3,3)='" . $kodeunit . "' ";
+
+            $unitfilter .= "and check_date = to_date('" . date("Ymd", time()) . "','yyyymmdd')";
+
+            $d_dashboard = new DataDashboard($this->registry);
+
+            $this->view->data = $d_dashboard->get_list_sp2d_selesai($unitfilter);
+            
+            $d_log->tambah_log("Sukses");
+            
+            $this->view->render('tv/tickerSP2D');
+            
         }
     }
     

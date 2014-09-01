@@ -16,6 +16,16 @@ $akses['HomeAdmin'] = array(
     '__destruct'
 );
 
+/*
+ * akses PNBP
+ */
+$akses['DataPNBPAdmin'] = array(
+    '__construct',
+    'KarwasPNBP',
+    '__destruct'
+);
+
+
 
 /*
  * akses modul auth
