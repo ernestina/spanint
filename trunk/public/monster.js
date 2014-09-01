@@ -130,8 +130,12 @@ function wrapRewrapTable() {
         if ($('#footable-body').length > 0) {
             unWrapTable();
         }
+        
+        console.log($(window).innerHeight() / window.devicePixelRatio);
 
-        wrapTable();
+        if ($(window).innerHeight() / window.devicePixelRatio > 480) {
+            wrapTable();
+        }
         
     }
     
@@ -161,12 +165,13 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
     }
     
     //App Content Height
-
-    remainingTableSpace = $('#content-container').innerHeight();
-    $('.main-window-segment').each(function() {
-        remainingTableSpace -= $(this).outerHeight();
-    });
-    $('#table-container').css('height', remainingTableSpace);
+    if ($(window).innerHeight() / window.devicePixelRatio > 480) {
+        remainingTableSpace = $('#content-container').innerHeight();
+        $('.main-window-segment').each(function() {
+            remainingTableSpace -= $(this).outerHeight();
+        });
+        $('#table-container').css('height', remainingTableSpace);
+    }
     
     //Table Reset
     wrapRewrapTable();
