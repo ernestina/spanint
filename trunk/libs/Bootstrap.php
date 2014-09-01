@@ -103,7 +103,6 @@ class Bootstrap {
         $_POST = $this->clean_input_data($_POST);
         $_GET = $this->clean_input_data($_GET);
         $_REQUEST = $this->clean_input_data($_REQUEST);
-
         $arguments = $this->clean_input_data($arguments);
 
         Session::sessionUpdated();
@@ -170,14 +169,7 @@ class Bootstrap {
          * * */
         $str = rawurldecode($str);
 
-        // quote string with slashes
-        // ie. single quote, double quote, backslash, and NULL
-        $str = addslashes($str);
-        // strip HTML and PHP tags from a string
-        $str = strip_tags($str);
-
-        // escape string, specific to oracle database
-        $str = $this->oci_escape_string($str);
+		$str = preg_replace("/[^A-Za-z0-9\/\-]/","",$str);
 
         return $str;
     }
