@@ -231,7 +231,7 @@
                         <tr>
                             <td class="align-center"><?php echo $no++; ?></td>
                             <td class="align-left"><?php echo $value->get_norek_persepsi(); ?><br><?php echo $value->get_nmrek_persepsi(); ?></td>
-                            <td class="align-center"><?php echo $value->get_nosakti_limpah; ?></td>
+                            <td class="align-center"><?php echo $value->get_nosakti_limpah(); ?></td>
                             <td class="align-right"><?php echo $value->get_jml_terima(); ?></td>
                             <td class="align-center"><?php echo $value->get_akun_terima(); ?></td>
                             <td class="align-center"><?php echo $value->get_kppn_anak(); ?></td>

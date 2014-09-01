@@ -27,7 +27,7 @@ class DataPelimpahan {
     private $_status_amount;
     private $_error;
     private $_valid = TRUE;
-    private $_table = 'USRAPL14.T_LIMPAH';
+    private $_table = 'T_LIMPAH';
     public $registry;
 
     /*
