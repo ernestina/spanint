@@ -35,6 +35,10 @@ class DataPNBPController extends BaseController {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
 		
 		if (Session::get('role') == KPPN) {
@@ -74,8 +78,6 @@ class DataPNBPController extends BaseController {
 		
         //var_dump($d_spm->get_hist_spm_filter());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
 		
@@ -86,6 +88,9 @@ class DataPNBPController extends BaseController {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
 		if (Session::get('role') == KPPN) {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
@@ -103,7 +108,6 @@ class DataPNBPController extends BaseController {
 		
 		$this->view->data = $d_spm1->get_pnbp_dipa_line($filter);
 		
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 		
         $this->view->render('kppn/detail_dipa_pnbp');
@@ -114,6 +118,9 @@ class DataPNBPController extends BaseController {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
@@ -136,8 +143,6 @@ class DataPNBPController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 
         $this->view->render('kppn/detail_gr_pnbp');
@@ -147,6 +152,9 @@ class DataPNBPController extends BaseController {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "SEGMENT2 = '" . Session::get('id_user')."'";
@@ -169,8 +177,6 @@ class DataPNBPController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 
         $this->view->render('kppn/detail_up_pnbp');
@@ -180,6 +186,9 @@ class DataPNBPController extends BaseController {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "SEGMENT2 = '" . Session::get('id_user')."'";
@@ -202,8 +211,6 @@ class DataPNBPController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 
         $this->view->render('kppn/detail_belanja_pnbp');
@@ -213,6 +220,9 @@ class DataPNBPController extends BaseController {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
@@ -235,8 +245,6 @@ class DataPNBPController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 		
-		//untuk mencatat log user
-        $d_log = new DataLog($this->registry);
 		$d_log->tambah_log("Sukses");
 
         $this->view->render('kppn/detail_setoran_up_pnbp');
