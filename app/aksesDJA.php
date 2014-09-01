@@ -92,6 +92,8 @@ $akses['PDFDJA'] = array(
 	'daftarsp2d_PDF',
 	'detailrekapsp2d1_PDF',
 	'monitoringUserSpan_PDF',
+	'nmsatker_PDF',
+	'nmsatker1_PDF',
     '__destruct'
 );
 ?>

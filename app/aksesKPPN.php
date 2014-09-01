@@ -183,6 +183,8 @@ $akses['DataSPMKPPN'] = array(
 $akses['DataSupplierKPPN'] = array(
     '__construct',
     'index',
+    'cekSupplier',
+    'downloadSupplier',
     'downloadSupplierXls',
     '__destruct'
 );
@@ -245,6 +247,13 @@ $akses['PDFKPPN'] = array(
 	'monitoringUserSpan_PDF',
 	'posisiSpm_PDF',
 	'monitoringPelimpahan_PDF',
+	'nmsatker_PDF',
+	'nmsatker1_PDF',
+	'ProsesRevisi_PDF',
+	'ValidasiSpm_PDF',
+	'DurasiSpm_PDF',
+	'nmsatkerSP2D_PDF',
+	'RekapSp2d_PDF',
     '__destruct'
 );
 ?>

@@ -169,6 +169,11 @@ $akses['PDFSatker'] = array(
 	'HistorySpm_PDF',
 	'daftarsp2d_PDF',
 	'detailrekapsp2d1_PDF',
+	'nmsatker_PDF',
+	'nmsatker1_PDF',
+	'ProsesRevisi_PDF',
+	'ValidasiSpm_PDF',
+	'RekapSp2d_PDF',
     '__destruct'
 );
 
