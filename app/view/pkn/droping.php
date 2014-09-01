@@ -91,11 +91,13 @@
             <div class="col-md-6 col-sm-12">
             <?php if (isset($this->d_bank)) {
                 if($this->d_bank=="MDRI"){
-                    echo "<br> Mandiri" ;
+                    echo "Bank : Mandiri" ;
+                    echo "<br>" ;
                 } elseif($this->d_bank=="SEMUA_BANK"){
-                    echo "<br> SEMUA_BANK" ;
+                    echo "SEMUA_BANK" ;
+                    echo "<br>" ;
                 }else {
-                    echo $this->d_bank;
+                    echo "Bank : " . $this->d_bank;
                     echo "<br>" ;
                 }
 			}
@@ -128,11 +130,11 @@
         <thead>
             <tr>
                 <th class='mid'>No.</th>
-                <th >Tanggal</th>
+                <th class='mid'>Tanggal</th>
                 <th >Bank</th>
                 <th >Total File</th>
-                <th >Total Transaksi SP2D</th>
-                <th style="text-align:right">Total Nilai</th>
+                <th width='100px' class='align-center'>Total Transaksi SP2D</th>
+                <th class="align-right">Total Nilai</th>
                 <th style="text-align:right">Total Droping</th>
                 <th style="text-align:right">Total Penihilan</th>
                 <th style="text-align:right">Selisih</th>
