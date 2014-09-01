@@ -9,6 +9,26 @@
             
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Monitoring Pelimpahan</h2>
+				<?php
+				if (isset($this->d_kppn_induk)) {
+					echo "Kppn Induk : " . $this->d_kppn_induk . "<br/>";
+				}
+				?>
+				<?php
+				if (isset($this->d_kppn_anak)) {
+					echo "Kppn Anak : " . $this->d_kppn_anak . "<br/>";
+				}
+				?>
+				<?php
+				if (isset($this->d_status)) {
+					echo "Status : " . $this->d_status . "<br/>";
+				}
+				?>
+				<?php
+				if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
+					echo "Tanggal : " . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
+				}
+				?>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
@@ -196,17 +216,19 @@
         <thead>
             <tr>
                 <th rowspan="2" class="align-center">No.</th>
-                <th colspan="5" class="align-center">Pelimpahan</th>
-                <th colspan="5" class="align-center">Penerimaan 501</th>
+                <th colspan="6" class="align-center">Pelimpahan</th>
+                <th colspan="6" class="align-center">Penerimaan 501</th>
                 <th rowspan="2">Status Limpah</th>
             </tr>
             <tr>
                 <th class="align-left">No. Rekening<br>Nama Rekening</th>
+                <th class="align-center">Tanggal</th>
                 <th class="align-center">No. Sakti</th>
                 <th class="align-right">Nilai</th>
                 <th class="align-center">Akun</th>
                 <th class="align-center">Kode KPPN </th>
                 <th class="align-center">No. Rekening<br>Nama Rekening</th>
+                <th class="align-center">Tanggal</th>
                 <th class="align-center">No. Sakti</th>
                 <th class="align-center">Nilai</th>
                 <th class="align-center">Akun</th>
@@ -234,11 +256,13 @@
                         <tr>
                             <td class="align-center"><?php echo $no++; ?></td>
                             <td class="align-left"><?php echo $value->get_norek_persepsi(); ?><br><?php echo $value->get_nmrek_persepsi(); ?></td>
+                            <td class="align-center"><?php echo $value->get_tgl_limpah(); ?></td>
                             <td class="align-center"><?php echo $value->get_nosakti_limpah(); ?></td>
                             <td class="align-right"><?php echo number_format($value->get_jml_terima()); ?></td>
                             <td class="align-center"><?php echo $value->get_akun_terima(); ?></td>
                             <td class="align-center"><?php echo $value->get_kppn_anak(); ?></td>
                             <td class="align-center"><?php echo $value->get_norek_501(); ?><br><?php echo $value->get_nmrek_501(); ?></td>
+                            <td class="align-center"><?php echo $value->get_tgl_terima(); ?></td>
                             <td class="align-center"><?php echo $value->get_nosakti_bs(); ?></td>
                             <td class="align-right"><?php echo number_format($value->get_jml_limpah()); ?></td>
                             <td class="align-center"><?php echo $value->get_akun_limpah(); ?></td>
@@ -263,10 +287,10 @@
 		<tfoot>
             <tr>
 				<td class='ratatengah'><b><b></td>
-                <td colspan='2' class='ratatengah'><b>GRAND TOTAL<b></td>
+                <td colspan='3' class='ratatengah'><b>GRAND TOTAL<b></td>
                 <td class='ratakanan'><?php echo number_format($terima); ?></td>
                 <td colspan='2' class='ratatengah'><b><b></td>
-                <td colspan='2' class='ratatengah'><b>GRAND TOTAL<b></td>
+                <td colspan='3' class='ratatengah'><b>GRAND TOTAL<b></td>
                 <td class='ratakanan'><?php echo number_format($limpah); ?></td>
                 <td colspan='2' class='ratatengah'><b><b></td>
 				<td class='ratatengah'><b><b></td>
