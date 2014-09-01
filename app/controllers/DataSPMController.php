@@ -117,7 +117,13 @@ class DataSPMController extends BaseController {
                 $this->view->d_kppn = $_POST['kdkppn'];
             }
             if ($_POST['STATUS'] != '') {
-                $filter[$no++] = "A.CANCELLED_DATE " . $_POST['STATUS'];
+			
+				if($_POST['STATUS'] == '1'){
+					$filter[$no++] = "A.CANCELLED_DATE IS NULL";
+				}
+				if($_POST['STATUS'] == '2'){
+					$filter[$no++] = "A.CANCELLED_DATE IS NOT NULL";
+				}
                 $this->view->d_status = $_POST['STATUS'];
             }
         }
