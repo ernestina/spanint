@@ -47,7 +47,7 @@ class DataFundFail {
 				FROM "
                 . $this->_table1 . "
 				where 1=1 
-				and realisasi > 0
+				and realisasi + BLOKIR_KONTRAK> 0
 				and description is not null
 				"
         ;
