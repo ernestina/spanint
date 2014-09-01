@@ -15,7 +15,7 @@ class DataPNBPController extends BaseController {
     }
 
     /*
-     * Index
+      Index
      */
 
     public function index() {
