@@ -117,13 +117,7 @@ class DataSPMController extends BaseController {
                 $this->view->d_kppn = $_POST['kdkppn'];
             }
             if ($_POST['STATUS'] != '') {
-			
-				if($_POST['STATUS'] == '1'){
-					$filter[$no++] = "A.CANCELLED_DATE IS NULL";
-				}
-				if($_POST['STATUS'] == '2'){
-					$filter[$no++] = "A.CANCELLED_DATE IS NOT NULL";
-				}
+                $filter[$no++] = "A.CANCELLED_DATE " . $_POST['STATUS'];
                 $this->view->d_status = $_POST['STATUS'];
             }
         }
@@ -570,11 +564,11 @@ class DataSPMController extends BaseController {
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) IN ( '" . $_POST['kdkppn'] . "')";
+                $filter[$no++] = "KDKPPN IN ( '" . $_POST['kdkppn'] . "')";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } elseif (Session::get('role') == KANWIL) {
-                $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+                $filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
             } elseif (Session::get('role') == ADMIN) {
                 //$filter[$no++]="SUBSTR(CHECK_NUMBER,3,3) = ".Session::get('id_user');
                 //$this->view->data = $d_spm1->get_sp2d_rekap_admin_filter ($filter);
@@ -594,7 +588,7 @@ class DataSPMController extends BaseController {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
             $this->view->data = $d_spm1->get_sp2d_rekap_kanwil_filter($filter);
-			$filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
+			$filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
         }
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
@@ -602,12 +596,12 @@ class DataSPMController extends BaseController {
             $this->view->data = $d_spm1->get_sp2d_rekap_admin_filter($filter);
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) = '" . Session::get('id_user') . "'";
+            $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_sp2d_rekap_filter($filter);
         }
 
         if (Session::get('role') == SATKER) {
-            $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) = '" . Session::get('id_user') . "'";
+            $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
             $filter[$no++] = "SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
             $this->view->data = $d_spm1->get_sp2d_rekap_filter($filter);
         }
