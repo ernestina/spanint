@@ -62,6 +62,21 @@ class homeController extends BaseController {
             
             $this->view->render('tv/tickerSP2D');
             
+        } elseif ($whereto == 'spm-sp2d') {
+            
+            $d_log = new DataLog($this->registry);
+            $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+            
+            $kodeunit = Session::get('id_user');
+
+            $d_dashboard = new DataDashboard($this->registry);
+
+            $this->view->data = $d_dashboard->get_hist_spm_sp2d_filter_tv($kodeunit);
+            
+            $d_log->tambah_log("Sukses");
+            
+            $this->view->render('tv/tickerSPM-SP2D');
+            
         }
     }
     

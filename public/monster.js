@@ -5,6 +5,8 @@ needResize = false;
 rowPointer = -3;
 rowTotal = 0;
 
+currentScroll = 0;
+
 function toggleFullScreen() {
   if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
    (!document.mozFullScreen && !document.webkitIsFullScreen)) {
@@ -43,8 +45,10 @@ function wrapTable() {
         
     });
     
-    $('#table-container').prepend('<div id="footable-header"></div>');
-    $('#footable-header').html('<table class="table table-bordered" style="width: ' + $('#footable-body .footable').outerWidth() + 'px"><thead>' + $('#footable-body .footable thead').html() + '</thead></table>');
+    if ($('#footable-body .footable thead').length > 0) {
+        $('#table-container').prepend('<div id="footable-header"></div>');
+        $('#footable-header').html('<table class="table table-bordered" style="width: ' + $('#footable-body .footable').outerWidth() + 'px"><thead>' + $('#footable-body .footable thead').html() + '</thead></table>');
+    }
     
     if ($('#footable-body .footable tfoot').length > 0) {
         $('#table-container').append('<div id="footable-footer"></div>');
@@ -181,13 +185,15 @@ function tvScroll() {
     if (rowPointer >= rowTotal) {
         
         rowPointer = -3;
+        currentScroll = 0;
         $('#footable-body').animate({ scrollTop: 0  }, 500);
         
     } else {
         
         if ($('#table-row-' + rowPointer).length > 0) {
         
-            $('#footable-body').animate({ scrollTop: $('#footable-body').scrollTop() + $('#table-row-' + rowPointer).outerHeight()  }, 500);
+            $('#footable-body').animate({ scrollTop: currentScroll + $('#table-row-' + rowPointer).outerHeight()  }, 500);
+            currentScroll += $('#table-row-' + rowPointer).outerHeight();
 
         }
         
@@ -275,7 +281,10 @@ function initLayout() { //Fungsi untuk inisialisasi layout
     
     $('.footable').addClass('table');
     $('.footable').addClass('table-striped');
-    $('.footable').addClass('table-bordered');
+    
+    if (typeof tvMode === 'undefined') {
+        $('.footable').addClass('table-bordered');
+    }
 
 }
 
