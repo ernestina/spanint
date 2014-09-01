@@ -343,6 +343,7 @@
                         <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
                             <ul>
                                 <li><a href="<?php echo URL; ?>home/ticker/spm" target="_blank">TV: SPM dalam Proses</a></li>
+                                <li><a href="<?php echo URL; ?>home/ticker/sp2d" target="_blank">TV: SP2D Terbit Hari Ini</a></li>
                             </ul>
                         </div>
                     </li>
