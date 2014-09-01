@@ -16,16 +16,6 @@ $akses['HomeKPPN'] = array(
 );
 
 /*
- * akses PNBP
- */
-$akses['DataPNBPKPPN'] = array(
-    '__construct',
-    'KarwasPNBP',
-    '__destruct'
-);
-
-
-/*
  * akses modul auth
  */
 $akses['AuthKPPN'] = array(
@@ -180,6 +170,8 @@ $akses['DataSupplierKPPN'] = array(
     '__construct',
     'index',
     'downloadSupplierXls',
+    'cekSupplier',
+    'downloadSupplier',
     '__destruct'
 );
 
@@ -206,6 +198,7 @@ $akses['DataPelimpahanKPPN'] = array(
  */
 $akses['DataPNBPKPPN'] = array(
     '__construct',
+    'KarwasPNBP',
     'DetailDipaPNBP',
 	'DetailGRPNBP',
 	'DetailUPPNBP',
