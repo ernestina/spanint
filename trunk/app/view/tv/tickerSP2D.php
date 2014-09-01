@@ -1,3 +1,5 @@
+<?php //var_dump($this->data); ?>
+
 <!-- Header -->
 <div class="main-window-segment bottom-padded">
     <div class="container-fluid">
@@ -5,7 +7,7 @@
         <div class="row">
 
             <div class="col-md-6">
-                <h2>SPM dalam Proses</h2>
+                <h2>SP2D Hari Ini</h2>
             </div>
 
             <div class="col-md-6 align-right">
@@ -35,10 +37,10 @@
 
             <tr>
                 <th class="align-center">No.</th>
-                <th>Nomor Invoice</th>
-                <th  class="align-right">Nilai Invoice Rp</th>
-                <th>Deskripsi Invoice</th>
-                <th  class="align-center">Status</th>
+                <th class="align-center">Jenis SP2D</th>
+                <th>Nomor SP2D</th>
+                <th class="align-right">Nominal SP2D</th>
+                <th  class="align-center">Mata Uang</th>
             </tr>
 
         </thead>
@@ -58,10 +60,10 @@
 
                         <tr>
                             <td class="align-center"><?php echo $no++; ?></td>
-                            <td><?php echo $value->get_invoice_num(); ?></td>
-                            <td class="align-right"><?php echo $value->get_invoice_amount(); ?></td>
-                            <td><?php echo $value->get_invoice_description(); ?></td>
-                            <td class="align-center"><?php echo $value->get_status(); ?></td>
+                            <td class="align-center"><?php echo $value->get_jenis_sp2d(); ?></td>
+                            <td><?php echo $value->get_check_number(); ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?></td>
+                            <td class="align-center"><?php echo $value->get_currency_sp2d(); ?></td>
                         </tr>
 
                     <?php } ?>
