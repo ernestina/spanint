@@ -15,6 +15,15 @@ $akses['HomeKPPN'] = array(
     '__destruct'
 );
 
+/*
+ * akses PNBP
+ */
+$akses['DataPNBPKPPN'] = array(
+    '__construct',
+    'KarwasPNBP',
+    '__destruct'
+);
+
 
 /*
  * akses modul auth
