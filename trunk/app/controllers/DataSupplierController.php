@@ -30,10 +30,26 @@ class DataSupplierController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+		if (Session::get('role')==KPPN) {
+			$filter[$no++] = "KPPN_CODE = '" . Session::get('kd_satker') . "'";
+		}
+		if (Session::get('role')==SATKER) {
+			$filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
+		}
 
         if (isset($_POST['submit_file'])) {
 
-            if ($_POST['tipesup'] != '') {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn'] . "'";
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            }
+			
+			if ($_POST['tipesup'] != '') {
                 $filter[$no++] = "substr(TIPE_SUPP,1,1) = '" . $_POST['tipesup'] . "'";
                 $this->view->d_tipesup = $_POST['tipesup'];
             }

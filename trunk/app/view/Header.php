@@ -85,6 +85,14 @@
                             </ul>
                         </div>
                     </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
                     <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Manajemen Penerimaan</h4>
                         <div class="collapse">
@@ -314,6 +322,7 @@
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataSupplier/downloadSupplierXls">Download Supplier</a></li>
+                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
                             </ul>
                         </div>
                     </li>

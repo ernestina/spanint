@@ -163,6 +163,17 @@ $akses['DataSPMAdmin'] = array(
 );
 
 /*
+ * akses Data Supplier
+ */
+$akses['DataSupplierAdmin'] = array(
+    '__construct',
+    'index',
+    'cekSupplier',
+    'downloadSupplier',
+    '__destruct'
+);
+
+/*
  * akses Data User
  */
 $akses['DataUserAdmin'] = array(

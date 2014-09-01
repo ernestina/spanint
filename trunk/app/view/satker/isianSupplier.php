@@ -133,7 +133,23 @@
             <form id="filter-form" method="POST" action="cekSupplier" enctype="multipart/form-data">
 
                 <div class="modal-body">
-                    
+				
+					<?php if (isset($this->kppn_list)) { ?>
+                        <div id="wkdkppn" class='alert alert-danger' style='display:none;'></div>
+                        <label class="isian">Kode KPPN: </label>
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                            <?php
+                            foreach ($this->kppn_list as $value1) {
+                                if ($this->d_kd_kppn == $value1->get_kd_d_kppn()) {
+                                    echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+                                } else {
+                                    echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+					<?php } ?>
+                    <br/>
                     <div id="wtipesup" class="alert alert-danger" style="display: none"></div>
                     <label class='isian'>Tipe Supplier: </label>
                     <select class='form-control' type='text' name='tipesup' id='tipesup'>
@@ -316,7 +332,7 @@
         }
 		
 		if(v_tipesup =='1' || v_tipesup =='3'){
-            document.getElementById("namasupplier").value='<?php echo Session::get('kd_satker');?>';
+            document.getElementById("namasupplier").value='<?php if (Session::get('role')==SATKER) {echo Session::get('kd_satker');}?>';
         }
 		
 		if((v_tipesup =='4' || v_tipesup =='5' || v_tipesup =='6' || v_tipesup =='7')&& v_npwpsupplier==''){
