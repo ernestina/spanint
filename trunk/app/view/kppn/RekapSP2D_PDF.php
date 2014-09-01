@@ -135,7 +135,7 @@ class FPDF_AutoWrapTable extends FPDF {
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(30, $ukuran_kolom_dana,$ukuran_kolom_akun,$ukuran_kolom_jenis_belanja));
-        $this->SetAligns(array('C', 'C','R','R'));
+        $this->SetAligns(array('C', 'L','R','R'));
 
         if (count($this->data) == 0) {
             $this->Row(
@@ -154,7 +154,7 @@ class FPDF_AutoWrapTable extends FPDF {
                         array($no++,
                             $value->get_attribute6(),
                             $value->get_total_sp2d(),
-                            $value->get_jumlah_sp2d()
+                            number_format($value->get_jumlah_sp2d())
 							)
                         
                 );
