@@ -132,14 +132,6 @@
                             </ul>
                         </div>
                     </li>
-        
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV &amp; Dashboard</h4>
-                        <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
-                            <ul>
-                                <li><a href="<?php echo URL; ?>home/dashboard">Dashboard</a></li>
-                            </ul>
-                        </div>
-                    </li>
 
                     <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                         <div class="collapse">
@@ -235,14 +227,6 @@
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahBank">Terindikasi Salah Bank</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahRekening">Terindikasi Salah PayGroup</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dCompareGaji">Perbandingan Gaji per Bulan</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV &amp; Dashboard</h4>
-                        <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
-                            <ul>
-                                <li><a href="<?php echo URL; ?>home/dashboard">Dashboard</a></li>
                             </ul>
                         </div>
                     </li>
@@ -355,10 +339,9 @@
                         </div>
                     </li>
 
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV &amp; Dashboard</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV</h4>
                         <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
                             <ul>
-                                <li><a href="<?php echo URL; ?>home/dashboard">Dashboard</a></li>
                                 <li><a href="<?php echo URL; ?>home/ticker/spm" target="_blank">TV: SPM dalam Proses</a></li>
                             </ul>
                         </div>
@@ -416,14 +399,6 @@
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
                                 <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV &amp; Dashboard</h4>
-                        <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
-                            <ul>
-                                <li><a href="<?php echo URL; ?>home/dashboard">Dashboard</a></li>
                             </ul>
                         </div>
                     </li>
