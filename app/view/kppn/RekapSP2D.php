@@ -190,7 +190,7 @@ IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_a
                             $kppn = Session::get('id_user');
                         }
 
-                        echo "<td td align='right'><a href=" . URL . "dataSPM/detailrekapsp2d/" . $value->get_jendok() . "/" . $kppn . "/" . $_POST['tgl_awal'] . "/" . $_POST['tgl_akhir'] . " target='_blank' '>" . $value->get_jumlah_sp2d() . "</td>";
+                        echo "<td td align='right'><a href=" . URL . "dataSPM/detailrekapsp2d/" . $value->get_jendok() . "/" . $kppn . "/" . $_POST['tgl_awal'] . "/" . $_POST['tgl_akhir'] . " target='_blank' '>" . number_format($value->get_jumlah_sp2d()) . "</td>";
 
                         echo "</tr>	";
                         $jum_sp2d = $jum_sp2d + $value->get_jumlah_sp2d();
