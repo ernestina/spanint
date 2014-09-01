@@ -221,7 +221,7 @@ function initLayout() { //Fungsi untuk inisialisasi layout
     
     if (typeof tvMode !== 'undefined') {
         
-        if ($(window).innerWidth() >= 1920) {
+        if ($(window).innerWidth() > 1280) {
             $('#content-container').css('font-size', '2.2em');
         } else {
             $('#content-container').css('font-size', '1.4em');
