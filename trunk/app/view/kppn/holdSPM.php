@@ -234,10 +234,10 @@
                     <label class="isian">Status Invoice: </label>
                     <select class="form-control" type="text" name="STATUS" id="STATUS">
                         <option value=''>- pilih -</option>
-                        <option value="IS NULL" <?php if ($this->status == "IS NULL") {
+                        <option value="1" <?php if ($this->status == "IS NULL") {
     echo "selected";
 } ?>>Invoice Belum Di Cancel</option>
-                        <option value="IS NOT NULL" <?php if ($this->status == "IS NOT NULL") {
+                        <option value="2" <?php if ($this->status == "IS NOT NULL") {
     echo "selected";
 } ?>>Invoice Sudah Di Cancel</option>
                     </select>
