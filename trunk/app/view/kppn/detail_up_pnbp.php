@@ -1,187 +1,118 @@
-<div id="top">
-    <div id="header">
-        <h2>Form Pengawasan PNBP <br/>
-			UP PNBP
-            <?php
-            if (isset($this->d_nama_kppn)) {
-                foreach ($this->d_nama_kppn as $kppn) {
-                    echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                    $kode_kppn = $kppn->get_kd_satker();
-                }
-            } else {
-                echo Session::get('user');
-            }
+<!-- A beautiful app starts with a beautiful code :) -->
 
+<!-- /dataPelimpahan/monitoringPelimpahan -->
 
-            if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
-                echo "<br>" . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
-            }
-            ?>
-        </h2>
-    </div>
-
-
-
-    <?php
-    // untuk menampilkan last_update
-    if (isset($this->last_update)) {
-        foreach ($this->last_update as $last_update) {
-            echo "Update Data Terakhir (Waktu Server)  "
-            ?> <br/>
-            <?php
-            echo $last_update->get_last_update() . " WIB";
-        }
-    }
-    ?>
-    <?php
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : detail_revisi.php  
-
-if(isset($this->d_kdsatker)){
-	$kdkppn = Session::get('id_user');
-	if (isset($this->d_kdsatker)) {
-		$kdsatker = $this->d_kdsatker;
-	}
-	?>
-<a href="<?php echo URL; ?>PDF/DetailRevisi_PDF/<?php echo $kdsatker; ?>" class="modal">PDF</a>
-<?php
-//----------------------------------------------------		
-
-}
-
-?>
-
-
-    <div id="fitur">
-        <table width="100%" class="table table-bordered zebra" id='fixheader'>
-            <!--baris pertama-->
-            <thead>
-            <th>No.</th>
-            <th>Kode Satker</th>
-			<th>Jendok</th>
-			<th>Jenis SPM</th>
-			<th>Nomor Invoice</th>
-			<th>Tanggal Invoice</th>
-            <th>Deskripsi</th>
-            <th>Nomor Sp2d</th>
-			<th>Tanggal Sp2d</th>
-            <th>Jumlah</th>
-            <!--th>Usulan Revisi</th>
-            <!--th>Tanggal</th-->
-
-            </thead>
-            <tbody class='ratatengah'>
+<!-- Header -->
+<div class="main-window-segment header-segment bottom-padded">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Form Pengawasan PNBP - UP PNBP</h2>
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+                
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+                
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
+            </div>
+        </div>
+        
+        <div class="row top-padded-little">
+            
+            <div class="col-md-6 col-sm-12">
+                
                 <?php
-                $no = 1;
-                $total;
-
-                //var_dump ($this->data);
-                if (isset($this->data)) {
-                    if (empty($this->data)) {
-                        echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada akun yang di lock.</div>";
-                    } else {
-                        foreach ($this->data as $value) {
-                            echo "<tr>	";
-                            echo "<td>" . $no++ . "</td>";
-                            echo "<td>" . $value->get_satker_code() . "</td>";
-                            echo "<td>" . $value->get_jendok() . "</td>";
-                            echo "<td>" . $value->get_jenis_spm() . "</td>";
-                            echo "<td>" . $value->get_invoice_num() . "</td>";
-                            echo "<td>" . $value->get_tanggal() . "</td>";
-							echo "<td>" . $value->get_description() . "</td>";
-							echo "<td>" . $value->get_check_num() . "</td>";
-							echo "<td>" . $value->get_tanggal_sp2d() . "</td>";
-                            echo "<td align='right'>" . $value->get_line_amount() . "</td>";
-                            //echo "<td>" . $value->get_last_update_date(). "</td>";
-                        }
+                if (isset($this->d_nama_kppn)) {
+                    foreach ($this->d_nama_kppn as $kppn) {
+                        echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                        $kode_kppn = $kppn->get_kd_satker();
                     }
                 } else {
-                    echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+                    echo Session::get('user');
+                }
+
+
+                if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
+                    echo "<br>" . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
                 }
                 ?>
-            </tbody>
+                
+            </div>
+            
+            <div class="col-md-6 col-sm-12 align-right">
+                <?php
 
-        </table>
+                if (isset($this->last_update)) {
+                    foreach ($this->last_update as $last_update) {
+                        echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                    }
+                }
+
+                ?>
+            </div>
+            
+        </div>
+        
     </div>
 </div>
 
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="<?php echo URL; ?>public/js/jquery.dataTables.js"></script>
-<script src="<?php echo URL; ?>public/js/jquery-ui.js"></script>
-<script type="text/javascript" charset="utf-8">
-    $(function() {
-        hideErrorId();
-        hideWarning();
+<!-- Tabel -->
+<div id="table-container" class="wrapper">
+    <table class="footable">
+        
+        <!--baris pertama-->
+        <thead>
+            <tr>
+                <th class="align-center">No.</th>
+                <th class="align-center">Kode Satker</th>
+                <th class="align-center">Jendok</th>
+                <th class="align-center">Jenis SPM</th>
+                <th class="align-center">Nomor Invoice</th>
+                <th class="align-center">Tanggal Invoice</th>
+                <th>Deskripsi</th>
+                <th class="align-center">Nomor Sp2d</th>
+                <th class="align-center">Tanggal Sp2d</th>
+                <th class="align-right">Jumlah</th>
+                <!--th>Usulan Revisi</th>
+                <!--th>Tanggal</th-->
+            </tr>
+        </thead>
+        <tbody class='ratatengah'>
+            <?php
+            $no = 1;
+            $total;
 
-        $("#tgl_awal").datepicker({dateFormat: "dd-mm-yy"
-        });
-
-        $("#tgl_akhir").datepicker({dateFormat: "dd-mm-yy"
-        });
-    });
-
-
-    function hideErrorId() {
-        $('.error').fadeOut(0);
-    }
-
-    function hideWarning() {
-        $('#invoice').keyup(function() {
-            if (document.getElementById('invoice').value != '') {
-                $('#winvoice').fadeOut(200);
+            //var_dump ($this->data);
+            if (isset($this->data)) {
+                if (empty($this->data)) {
+                    echo '<tr><td colspan=10 class="align-center">Tidak ada data.</td></tr>';
+                } else {
+                    foreach ($this->data as $value) {
+                        echo "<tr>	";
+                        echo "<td>" . $no++ . "</td>";
+                        echo "<td>" . $value->get_satker_code() . "</td>";
+                        echo "<td>" . $value->get_jendok() . "</td>";
+                        echo "<td>" . $value->get_jenis_spm() . "</td>";
+                        echo "<td>" . $value->get_invoice_num() . "</td>";
+                        echo "<td>" . $value->get_tanggal() . "</td>";
+                        echo "<td class='align-left'>" . $value->get_description() . "</td>";
+                        echo "<td>" . $value->get_check_num() . "</td>";
+                        echo "<td>" . $value->get_tanggal_sp2d() . "</td>";
+                        echo "<td align='right'>" . number_format($value->get_line_amount()) . "</td>";
+                        //echo "<td>" . $value->get_last_update_date(). "</td>";
+                    }
+                }
+            } else {
+                echo '<tr><td colspan=10 class="align-center" id="filter-first">Silahkan masukkan filer terlebih dahulu.</td></tr>';
             }
-        });
-        $('#tgl_awal').change(function() {
-            if (document.getElementById('tgl_awal').value != '' && document.getElementById('tgl_akhir').value != '') {
-                $('#wtgl').fadeOut(200);
-            }
-        });
+            ?>
+        </tbody>
+        
+    </table>
+</div>
 
-        $('#tgl_akhir').change(function() {
-            if (document.getElementById('tgl_awal').value != '' && document.getElementById('tgl_akhir').value != '') {
-                $('#wtgl').fadeOut(200);
-            }
-        });
-
-    }
-
-    function cek_upload() {
-        var v_invoice = document.getElementById('invoice').value;
-        var v_tglawal = document.getElementById('tgl_awal').value;
-        var v_tglakhir = document.getElementById('tgl_akhir').value;
-
-        var jml = 0;
-        if (v_invoice == '' && v_tglawal == '' && v_tglakhir == '') {
-            $('#winvoice').html('Harap isi no invoice');
-            $('#winvoice').fadeIn();
-            $('#wtgl').html('Harap isi tanggal');
-            $('#wtgl').fadeIn();
-            jml++;
-        }
-
-        if (jml > 0) {
-            return false;
-        }
-    }
-
-    $(document).ready(function() {
-        var oTable = $('#fixheader').dataTable({
-            "sScrollY": 400,
-            "sScrollX": "100%",
-            "sScrollXInner": "100%",
-            "bSort": false,
-            "bPaginate": false,
-            "bInfo": null,
-            "bFilter": false,
-            "oLanguage": {
-                "sEmptyTable": "Tidak ada data di dalam tabel ini."
-
-            },
-        });
-
-        var keys = new KeyTable({
-            "table": document.getElementById('example'),
-            "datatable": oTable
-        });
-    });
-</script>
