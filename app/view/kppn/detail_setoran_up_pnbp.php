@@ -103,7 +103,8 @@
                         //echo "<td>" . $value->get_revision_no() . "</td>";
                         echo "<td align='right'>" . number_format($value->get_line_amount()) . "</td>";
                         //echo "<td>" . $value->get_last_update_date(). "</td>";
-                        $total = $total + $value->get_line_amount;
+                        echo "</tr>";
+                        $total = $total + $value->get_line_amount();
                     }
                 }
             } else {
