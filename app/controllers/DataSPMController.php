@@ -361,7 +361,17 @@ class DataSPMController extends BaseController {
                 $filter[$no++] = "jendok = '" . $_POST['JenisSPM'] . "'";
             }
             if ($_POST['durasi'] != '') {
-                $filter[$no++] = "durasi2 " . $_POST['durasi'];
+				
+				if($_POST['durasi'] == '1'){
+					$filter[$no++] = "durasi2 < 1";
+				}
+				if($_POST['durasi'] == '2'){
+					$filter[$no++] == "durasi2 > 1 and durasi2 < 24";
+				}
+				if($_POST['durasi'] == '3'){
+					$filter[$no++] = "durasi2 > 24";
+				}
+				
             }
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
                 $filter[$no++] = "TANGGAL_UPLOAD BETWEEN to_date('" . $_POST['tgl_awal'] . "','dd-mm-yyyy') AND to_date('" . $_POST['tgl_akhir'] . "' ,'dd-mm-yyyy')";
