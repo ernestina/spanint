@@ -75,6 +75,7 @@ $registry->auth->add_access('dataKppn','admin',$akses['DataKppnAdmin']);
 $registry->auth->add_access('dataRetur','admin',$akses['DataReturAdmin']);
 $registry->auth->add_access('dataRetur','admin',$akses['DataSatkerAdmin']);
 $registry->auth->add_access('dataSPM','admin',$akses['DataSPMAdmin']);
+$registry->auth->add_access('dataSupplier','admin',$akses['DataSupplierAdmin']);
 $registry->auth->add_access('dataUser','admin',$akses['DataUserAdmin']);
 $registry->auth->add_access('userSpan','admin',$akses['UserSpanAdmin']);
 $registry->auth->add_access('dataPelimpahan','admin',$akses['DataPelimpahanAdmin']);
