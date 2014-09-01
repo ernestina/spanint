@@ -31,7 +31,7 @@ $akses['DataDIPADJA'] = array(
     '__construct',
     'RevisiDipa',
     'Fund_fail',
-    'Detail_Fund_Fail',
+    'Detail_Fund_fail',
     'Detail_Fund_fail_kd',
     'RealisasiFA',
     'nmsatker',
