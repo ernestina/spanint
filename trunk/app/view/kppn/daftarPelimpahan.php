@@ -226,24 +226,30 @@
             
                 <?php } else { ?>
             
-                    <?php foreach ($this->data as $value) { ?>
+                    <?php 
+						$terima = 0;
+						$limpah = 0;
+						foreach ($this->data as $value) { ?>
                         
                         <tr>
                             <td class="align-center"><?php echo $no++; ?></td>
                             <td class="align-left"><?php echo $value->get_norek_persepsi(); ?><br><?php echo $value->get_nmrek_persepsi(); ?></td>
                             <td class="align-center"><?php echo $value->get_nosakti_limpah(); ?></td>
-                            <td class="align-right"><?php echo $value->get_jml_terima(); ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_jml_terima()); ?></td>
                             <td class="align-center"><?php echo $value->get_akun_terima(); ?></td>
                             <td class="align-center"><?php echo $value->get_kppn_anak(); ?></td>
                             <td class="align-center"><?php echo $value->get_norek_501(); ?><br><?php echo $value->get_nmrek_501(); ?></td>
                             <td class="align-center"><?php echo $value->get_nosakti_bs(); ?></td>
-                            <td class="align-right"><?php echo $value->get_jml_limpah(); ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_jml_limpah()); ?></td>
                             <td class="align-center"><?php echo $value->get_akun_limpah(); ?></td>
                             <td class="align-center"><?php echo $value->get_kppn_induk(); ?></td>
                             <td class="align-center"><?php echo $value->get_status(); ?></td>
                         </tr>
             
-                    <?php } ?>
+                    <?php 
+						$terima += $value->get_jml_terima();
+						$limpah += $value->get_jml_limpah();
+						} ?>
             
                 <?php } ?>
             
@@ -254,6 +260,18 @@
             <?php } ?>
             
         </tbody>
+		<tfoot>
+            <tr>
+				<td class='ratatengah'><b><b></td>
+                <td colspan='2' class='ratatengah'><b>GRAND TOTAL<b></td>
+                <td class='ratakanan'><?php echo number_format($terima); ?></td>
+                <td colspan='2' class='ratatengah'><b><b></td>
+                <td colspan='2' class='ratatengah'><b>GRAND TOTAL<b></td>
+                <td class='ratakanan'><?php echo number_format($limpah); ?></td>
+                <td colspan='2' class='ratatengah'><b><b></td>
+				<td class='ratatengah'><b><b></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
