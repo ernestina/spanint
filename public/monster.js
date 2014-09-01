@@ -133,7 +133,7 @@ function wrapRewrapTable() {
         
         console.log($(window).innerHeight() / window.devicePixelRatio);
 
-        if ($(window).innerHeight() / window.devicePixelRatio > 480) {
+        if ($(window).innerHeight() / window.devicePixelRatio >= 600) {
             wrapTable();
         }
         
@@ -165,7 +165,7 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
     }
     
     //App Content Height
-    if ($(window).innerHeight() / window.devicePixelRatio > 480) {
+    if ($(window).innerHeight() / window.devicePixelRatio >= 600) {
         remainingTableSpace = $('#content-container').innerHeight();
         $('.main-window-segment').each(function() {
             remainingTableSpace -= $(this).outerHeight();
