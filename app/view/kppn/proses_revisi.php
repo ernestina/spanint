@@ -194,9 +194,9 @@ if (Session::get('role') == SATKER) {
                 <th>Nama Satker</th>
                 <th class="align-center">KPPN</th>
                 <th class="align-center">Revisi Ke</th>
-                <th>Tahapan Proses</th>
+                <th width="300px">Tahapan Proses</th>
                 <th width="100px" class="align-center">Tanggal</th>
-                <th class="align-center">Locked Akun</th>
+                <th width="100px" class="align-center">Locked Akun</th>
             </tr>
             
         </thead>
