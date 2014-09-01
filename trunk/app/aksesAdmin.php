@@ -184,6 +184,17 @@ $akses['DataSupplierAdmin'] = array(
 );
 
 /*
+ * akses Data Supplier
+ */
+$akses['DataSupplierAdmin'] = array(
+    '__construct',
+    'index',
+    'cekSupplier',
+    'downloadSupplier',
+    '__destruct'
+);
+
+/*
  * akses Data User
  */
 $akses['DataUserAdmin'] = array(
@@ -257,6 +268,13 @@ $akses['PDFAdmin'] = array(
 	'posisiSpm_PDF',
 	'monitoringPelimpahan_PDF',
 	'monitoringReturPkn_PDF',
+	'nmsatker_PDF',
+	'nmsatker1_PDF',
+	'ProsesRevisi_PDF',
+	'ValidasiSpm_PDF',
+	'DurasiSpm_PDF',
+	'nmsatkerSP2D_PDF',
+	'RekapSp2d_PDF',
     '__destruct'
 );
 
