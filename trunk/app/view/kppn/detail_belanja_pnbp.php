@@ -89,7 +89,8 @@
             <?php
 
                 $no = 1;
-                $total;
+                $total1 = 0;
+                $total2 = 0;
 
                 //var_dump ($this->data);
                 if (isset($this->data)) {
@@ -114,6 +115,8 @@
                             echo "<td align='right'>" . number_format($value->get_amount()) . "</td>";
                             //echo "<td>" . $value->get_last_update_date(). "</td>";
                             echo "</tr>";
+                            $total1 = $total + $value->get_line_amount();
+                            $total2 = $total + $value->get_amount();
                         }
                     }
                 } else {

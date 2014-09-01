@@ -105,6 +105,8 @@
                         echo "<td>" . $value->get_tanggal_sp2d() . "</td>";
                         echo "<td align='right'>" . number_format($value->get_line_amount()) . "</td>";
                         //echo "<td>" . $value->get_last_update_date(). "</td>";
+                        echo "</tr>";
+                        $total = $total + $value->get_line_amount();
                     }
                 }
             } else {
@@ -112,7 +114,12 @@
             }
             ?>
         </tbody>
-        
+        <tfoot>
+            <tr>
+                <td colspan='9' class='ratatengah'><b>GRAND TOTAL</b></td>
+                <td align='right'><b><?php echo number_format($total); ?></b></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
