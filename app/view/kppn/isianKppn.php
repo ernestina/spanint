@@ -546,7 +546,7 @@ if (Session::get('role') != SATKER) {
         var v_fxml = document.getElementById('fxml').value;
 
         var jml = 0;
-        if (v_nosp2d == '' && v_barsp2d == '' && v_kdsatker == '' && v_invoice == '' && v_bank == '' && v_status == '' && v_bayar == '' && v_tglawal == '' && v_tglakhir == '' && v_fxml == '') {
+        if (v_nosp2d == '' && v_barsp2d == '' && v_kdsatker == '' && v_invoice == '' && v_bank == '' && v_status == '' && v_bayar == '' && v_fxml == '') {
             $('#wsp2d').html('Harap isi salah satu parameter');
             $('#wsp2d').fadeIn();
             $('#wbarsp2d').html('Harap isi salah satu parameter');
@@ -561,10 +561,13 @@ if (Session::get('role') != SATKER) {
             $('#wstatus').fadeIn();
             $('#wbayar').html('Harap isi salah satu parameter');
             $('#wbayar').fadeIn();
-            $('#wtgl').html('Harap isi salah satu parameter');
-            $('#wtgl').fadeIn();
             $('#wfxml').html('Harap isi salah satu parameter');
             $('#wfxml').fadeIn();
+            jml++;
+        }
+        if(v_tglawal == '' && v_tglakhir == ''){
+            $('#wtgl').html('Tanggal awal dan akhir harus diisi');
+            $('#wtgl').fadeIn();
             jml++;
         }
 
