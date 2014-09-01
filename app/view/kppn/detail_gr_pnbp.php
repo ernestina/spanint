@@ -72,10 +72,12 @@
             
             <tr>
                 <th class="align-center">No.</th>
+                <th class="align-center">NTPN</th>
                 <th class="align-center">Kode Satker</th>
                 <th class="align-center">KPPN</th>
+                <th class="align-center">Tanggal</th>
                 <th class="align-center">Akun</th>
-                <th  class="align-right">Jumlah</th>
+                <th class="align-right">Jumlah</th>
                 <!--th>Usulan Revisi</th>
                 <!--th>Tanggal</th-->
             </tr>
@@ -89,14 +91,16 @@
             //var_dump ($this->data);
             if (isset($this->data)) {
                 if (empty($this->data)) {
-                    echo '<tr><td colspan=5 class="align-center">Tidak ada data.</td></tr>';
+                    echo '<tr><td colspan=7 class="align-center">Tidak ada data.</td></tr>';
                 } else {
                     foreach ($this->data as $value) {
                         echo "<tr>	";
                         echo "<td>" . $no++ . "</td>";
+                        echo "<td>" . $value->get_ntpn() . "</td>";
                         echo "<td>" . $value->get_satker_code() . "</td>";
                         echo "<td>" . $value->get_kppn_code() . "</td>";
                         //echo "<td>" . $value->get_dana() . "</td>";
+                        echo "<td>" . $value->get_tanggal() . "</td>";
                         echo "<td>" . $value->get_account_code() . "</td>";
                         //echo "<td>" . $value->get_revision_no() . "</td>";
                         echo "<td align='right'>" . number_format($value->get_line_amount()) . "</td>";
@@ -104,11 +108,16 @@
                     }
                 }
             } else {
-                echo '<tr><td colspan=5 class="align-center" id="filter-first">Silahkan masukkan filer terlebih dahulu.</td></tr>';
+                echo '<tr><td colspan=7 class="align-center" id="filter-first">Silahkan masukkan filer terlebih dahulu.</td></tr>';
             }
             ?>
         </tbody>
-        
+        <tfoot>
+            <tr>
+                <td colspan='6' class='ratatengah'><b>GRAND TOTAL</b></td>
+                <td align='right'><b><?php echo number_format($total); ?></b></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
