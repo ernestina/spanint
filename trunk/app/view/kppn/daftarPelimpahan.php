@@ -11,12 +11,12 @@
                 <h2>Monitoring Pelimpahan</h2>
 				<?php
 				if (isset($this->d_kppn_induk)) {
-					echo "Kppn Induk : " . $this->d_kppn_induk . "<br/>";
+					echo "Dari - Ke KPPN : " . $this->d_kppn_induk . " - " ;
 				}
 				?>
 				<?php
 				if (isset($this->d_kppn_anak)) {
-					echo "Kppn Anak : " . $this->d_kppn_anak . "<br/>";
+					echo $this->d_kppn_anak . "<br/>";
 				}
 				?>
 				<?php
@@ -222,13 +222,13 @@
             </tr>
             <tr>
                 <th class="align-left">No. Rekening<br>Nama Rekening</th>
-                <th class="align-center">Tanggal</th>
+                <th class="align-center" width="100px">Tanggal</th>
                 <th class="align-center">No. Sakti</th>
                 <th class="align-right">Nilai</th>
                 <th class="align-center">Akun</th>
                 <th class="align-center">Kode KPPN </th>
                 <th class="align-center">No. Rekening<br>Nama Rekening</th>
-                <th class="align-center">Tanggal</th>
+                <th class="align-center" width="100px">Tanggal</th>
                 <th class="align-center">No. Sakti</th>
                 <th class="align-center">Nilai</th>
                 <th class="align-center">Akun</th>
