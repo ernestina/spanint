@@ -123,7 +123,7 @@
                         echo "<td class='ratakanan'>" . number_format($value->get_obligation()) . "</td>";
                         echo "<td class='ratakanan'>" . number_format($value->get_block_amount()) . "</td>";
                         echo "<td class='ratakanan'>" . number_format($value->get_actual_amt()) . "</td>";
-                        echo "<td class='ratakanan'>" . number_format($value->get_budget_amt() - $value->get_obligation() - $value->get_block_amount() - $value->get_actual_amt()) . "</td>";
+                        echo "<td class='ratakanan'>" . number_format(0 - $value->get_obligation() - $value->get_block_amount() - $value->get_actual_amt()) . "</td>";
                         echo "</tr>	";
                         $tot_budget+=$value->get_budget_amt();
                         $tot_encumbrance+=$value->get_obligation();
@@ -135,12 +135,13 @@
             ?>
             <!--footernya ditaruh disini-->		
             <tr>
-                <td colspan='8' class='ratatengah'><b>GRAND TOTAL<b></td>
+                <td colspan='7' class='ratatengah'><b>GRAND TOTAL<b></td>
                 <td class='ratakanan'><b><?php echo number_format($tot_budget); ?></td>
+				<td class='ratakanan'>0</td>
                 <td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></td>
                 <td class='ratakanan'><b><?php echo number_format($tot_blokir); ?></td>
                 <td class='ratakanan'><b><?php echo number_format($tot_actual); ?></td>
-                <td class='ratakanan'><b><?php echo number_format($tot_budget - $tot_encumbrance - $tot_blokir - $tot_actual); ?></td>
+                <td class='ratakanan'><b><?php echo number_format(0 - $tot_encumbrance - $tot_blokir - $tot_actual); ?></td>
             </tr>
                 <!--end footernya-->
         </tbody>
