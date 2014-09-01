@@ -467,6 +467,7 @@
                                 <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
                                 <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Encumbrance</a></li>
                                 <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
+								<li><a href="<?php echo URL; ?>dataDIPA/Detail_Fund_fail">Data Pagu Minus Seluruh Satker</a></li>
                                 <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
                                 <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
                             </ul>
