@@ -22,7 +22,7 @@
             </div>
         </div>
         
-        <div class="row">
+        <div class="row top-padded-little">
             
             <div class="col-md-6 col-sm-12">
                 
@@ -63,10 +63,10 @@
     <table class="regtable table table-bordered">
         
         <tbody>
-                <tr>
+                <tr style="background: #f3f3f3;">
                     <td colspan=6 style="padding-top: 20px; padding-bottom: 20px; font-weight: bold;">DIPA PNBP</td>
                 </tr>
-                <tr>
+                <tr style="background: #f3f3f3;">
                     <td>No.</td>
 					<td>Kode Satker</td>
 					<td>Kode KPPN</td>
@@ -108,10 +108,10 @@
                     // }
                 ?>
                 
-                <tr>
+                <tr style="background: #f3f3f3;">
                     <td colspan=6 style="padding-top: 20px; padding-bottom: 20px; font-weight: bold;">Penerimaan PNBP</td>
                 </tr>
-                <tr>
+                <tr style="background: #f3f3f3;">
                     <td>No.</td>
 					<td>Kode Satker</td>
                     <td>Kode KPPN</td>
@@ -153,10 +153,10 @@
                     // }
                 ?>
 				
-                <tr>
+                <tr style="background: #f3f3f3;">
                     <td colspan=6 style="padding-top: 20px; padding-bottom: 20px; font-weight: bold;">UP PNBP</td>
                 </tr>
-                <tr>
+                <tr style="background: #f3f3f3;">
                     <td>No.</td>
 					<td>Kode Satker</td>
                     <td>Kode KPPN</td>
@@ -197,10 +197,10 @@
                     // }
                 ?>
 				
-				<tr>
+				<tr style="background: #f3f3f3;">
                     <td colspan=6 style="padding-top: 20px; padding-bottom: 20px; font-weight: bold;">BELANJA PNBP</td>
                 </tr>
-                <tr>
+                <tr style="background: #f3f3f3;">
                     <td>No.</td>
                     <td>Kode Satker</td>
 					<td>Kode KPPN</td>
@@ -242,10 +242,10 @@
                     }
                 ?>
 				
-				<tr>
+				<tr style="background: #f3f3f3;">
                     <td colspan=6 style="padding-top: 20px; padding-bottom: 20px; font-weight: bold;">SETORAN UP/TUP PNBP</td>
                 </tr>
-                <tr>
+                <tr style="background: #f3f3f3;">
                     <td>No.</td>
                     <td>Kode Satker</td>
 					<td>Kode KPPN</td>
@@ -289,7 +289,7 @@
 					$maksimum_pencairan = ($pendapatan_hitung * $total_penerimaan) - $total_belanja;
 					?>
 					<tr>
-                    <td colspan=6 style="padding-top: 20px; padding-bottom: 20px; font-weight: bold;">MAKSIMUM PENCAIRAN</td>
+                    <td colspan=6 style="padding-top: 20px; padding-bottom: 20px; font-weight: bold; background: #f3f3f3;">MAKSIMUM PENCAIRAN</td>
 					</tr>
 					<?php
 					echo "<tr> " ;	
@@ -324,7 +324,7 @@
 
 
 	<?php if (isset($this->kppn_list)) { ?>
-                        <div id="wkdkppn" class="error"></div>
+                        <div id="wkdkppn" class="alert alert-danger"></div>
                         <label class="isian">Kode KPPN: </label>
                         <select type="text" name="kdkppn" id="kdkppn">
                             <option value='' selected>Semua KPPN</option>
@@ -347,9 +347,9 @@
 					} ?>
 
 
-                    <div id="wkdkppn" class="error"></div>
+                    <div id="satker" class="alert alert-danger"></div>
                     <label class="isian">Satker PNBP: </label>
-                    <select type="text" name="kdsatker" id="kdsatker">
+                    <select class="form-control" type="text" name="kdsatker" id="kdsatker">
                         <!--option value='' selected>- pilih -</option-->
                         <?php
                         foreach ($this->data5 as $value1) {
@@ -359,11 +359,15 @@
                         ?>
                     </select>
 					
+                    <br/>
+                    
+                    <div id="wppp" class="alert alert-danger"></div>
 					<label class="isian">PPP (DALAM PERSENTASE): </label>
-                    <input type="text" name="ppp" id="ppp" value="<?php if (isset($this->ppp)) {
+                    <input class="form-control" type="text" name="ppp" id="ppp" value="<?php if (isset($this->ppp)) {
 					echo $this->ppp;
 					} ?>">
-
+                    
+                    <br/> 
 
                     <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
                     <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
@@ -388,5 +392,46 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
+    
+    $(function() {
+        hideErrorId();
+        hideWarning();
+
+    });
+
+    function hideErrorId() {
+        $('.alert-danger').fadeOut(0);
+    }
+
+    function hideWarning() {
+        $('#ppp').keyup(function() {
+            if (document.getElementById('ppp').value != '') {
+                $('#wppp').fadeOut(200);
+            }
+        });
+
+    }
+
+    function cek_upload() {
+
+        var jml = 0;
+        
+        if ($('#ppp').val() > 100 || $('#ppp').val() < 0) {
+            $('#wppp').html('Masukkan angka antara 0 - 100.');
+            $('#wppp').fadeIn();
+            jml++;
+        }
+        
+        if ($('#ppp').val() == '') {
+            $('#wppp').html('Masukkan nilai persentase.');
+            $('#wppp').fadeIn();
+            jml++;
+        }
+        
+        if (jml > 0) {
+            return false;
+        }
+        
+    }
 
 </script>
