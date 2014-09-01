@@ -38,7 +38,6 @@
                 <th>Nomor Invoice</th>
                 <th  class="align-right">Nilai Invoice Rp</th>
                 <th>Deskripsi Invoice</th>
-                <th  class="align-center">Approval Status</th>
                 <th  class="align-center">Status</th>
             </tr>
 
@@ -62,7 +61,6 @@
                             <td><?php echo $value->get_invoice_num(); ?></td>
                             <td class="align-right"><?php echo $value->get_invoice_amount(); ?></td>
                             <td><?php echo $value->get_invoice_description(); ?></td>
-                            <td class="align-center"><?php echo $value->get_wfapproval_status(); ?></td>
                             <td class="align-center"><?php echo $value->get_status(); ?></td>
                         </tr>
 
