@@ -113,10 +113,8 @@
         </tbody>
         <tfoot>
                 <tr>
-                    <td colspan='5'></td>
-                    <td class='ratatengah'><b>GRAND TOTAL</td>
-                    <td align='right'><b><?php echo number_format($total); ?>
-                    </td>
+                    <td colspan='6' class='ratatengah'><b>GRAND TOTAL</b></td>
+                    <td align='right'><b><?php echo number_format($total); ?></b></td>
 
                 </tr>
             </tfoot>

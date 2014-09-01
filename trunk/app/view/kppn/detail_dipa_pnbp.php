@@ -109,7 +109,12 @@
             }
             ?>
         </tbody>
-        
+        <tfoot>
+            <tr>
+                <td class='ratatengah' colspan='6'><b>GRAND TOTAL</b></td>
+                <td align='right'><b><?php echo number_format($total); ?></b></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 

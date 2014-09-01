@@ -122,7 +122,13 @@
 
             ?>
         </tbody>
-        
+        <tfoot>
+            <tr>
+                <td colspan='12' class='ratatengah'><b>GRAND TOTAL</b></td>
+                <td align='right'><b><?php echo number_format($total1); ?></b></td>
+                <td align='right'><b><?php echo number_format($total2); ?></b></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
