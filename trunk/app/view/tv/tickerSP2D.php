@@ -1,4 +1,4 @@
-<?php //var_dump($this->data); ?>
+<?php //echo var_dump($this->data); ?>
 
 <!-- Header -->
 <div class="main-window-segment bottom-padded">
@@ -7,11 +7,11 @@
         <div class="row">
 
             <div class="col-md-6">
-                <h2>SP2D Hari Ini</h2>
+                <h2 class="uppercase"><b>SP2D Hari Ini</b></h2>
             </div>
 
             <div class="col-md-6 align-right">
-                <h3 id="current-clock"></h3>
+                <h2 id="current-clock"></h2>
             </div>
 
         </div>
@@ -39,8 +39,8 @@
                 <th class="align-center">No.</th>
                 <th class="align-center">Jenis SP2D</th>
                 <th>Nomor SP2D</th>
-                <th class="align-right">Nominal SP2D</th>
-                <th  class="align-center">Mata Uang</th>
+                <th class="align-center">Tanggal</th>
+                <th class="align-right">Nominal</th>
             </tr>
 
         </thead>
@@ -59,11 +59,12 @@
                     <?php foreach ($this->data as $value) { ?>
 
                         <tr>
+                            
                             <td class="align-center"><?php echo $no++; ?></td>
                             <td class="align-center"><?php echo $value->get_jenis_sp2d(); ?></td>
                             <td><?php echo $value->get_check_number(); ?></td>
+                            <td class="align-center"><?php echo $value->get_tanggal_sp2d(); ?></td>
                             <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?></td>
-                            <td class="align-center"><?php echo $value->get_currency_sp2d(); ?></td>
                         </tr>
 
                     <?php } ?>
@@ -87,6 +88,6 @@
     //Reload setiap 1 jam
     setTimeout(function() {
         location.reload();
-    }, 60*60*1000);
+    }, 9*60*1000);
 
 </script>

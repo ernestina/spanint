@@ -99,10 +99,6 @@ h4 {
     font-weight: bold;
 }
 
-#current-clock {
-    margin-top: 25px;
-}
-
 #span-logo-small {
     float: right; 
     height: 54px; 
@@ -244,7 +240,7 @@ h4 {
     background: #333;
 }
 
-.main-window-segment th, td {
+.main-window-segment th, .main-window-segment td {
     padding: 10px !important;
 }
 
@@ -309,8 +305,22 @@ h4 {
     text-align: center;
 }
 
+.tight-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
 .fullwidth {
     width: 100%;
+}
+
+.segmented-bottom {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 /* -----Hapus setelah stabil----- */

@@ -467,6 +467,28 @@ class DataDashboard {
         }
         return $data;
     }
+    
+    public function get_hist_spm_sp2d_filter_tv($kdkppn) {
+        $sql = "select AP_INVOICES_ALL_V.INVOICE_NUM NO_INVOICE, AP_INVOICES_ALL_V.BEGIN_DATE DATE_START, AP_INVOICES_ALL_V.STATUS LAST_STATUS, AP_CHECKS_ALL_V.CHECK_NUMBER NO_SP2D, AP_CHECKS_ALL_V.CHECK_DATE TGL_SP2D, AP_CHECKS_ALL_V.AMOUNT JUMLAH, AP_CHECKS_ALL_V.CURRENCY_CODE MATA_UANG, AP_CHECKS_ALL_V.DESCRIPTION DESKRIPSI from AP_INVOICES_ALL_V left join AP_CHECKS_ALL_V on AP_INVOICES_ALL_V.INVOICE_NUM = AP_CHECKS_ALL_V.INVOICE_NUM where AP_INVOICES_ALL_V.KDKPPN='" . $kdkppn . "' and AP_INVOICES_ALL_V.BEGIN_DATE = to_date('20140901','yyyymmdd') order by AP_INVOICES_ALL_V.BEGIN_DATE DESC, AP_INVOICES_ALL_V.TIME_BEGIN_DATE DESC, AP_INVOICES_ALL_V.INVOICE_NUM";
+
+        $result = $this->db->select($sql);
+        
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_ou_name($val['OU_NAME']);
+            $d_data->set_invoice_num($val['NO_INVOICE']);
+            $d_data->set_begin_date($val['DATE_START']);
+            $d_data->set_status($val['LAST_STATUS']);
+            $d_data->set_check_number($val['NO_SP2D']);
+            $d_data->set_check_date($val['TGL_SP2D']);
+            $d_data->set_nominal_sp2d($val['JUMLAH']);
+            $d_data->set_mata_uang($val['MATA_UANG']);
+            $d_data->set_deskripsi($val['DESKRIPSI']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
 
     public function get_kanwil() {
         $sql = "SELECT KDKANWIL, NMKANWIL FROM T_KANWIL";
@@ -541,6 +563,10 @@ class DataDashboard {
 
     public function set_vol_lainnya($vol_lainnya) {
         $this->_vol_lainnya = $vol_lainnya;
+    }
+    
+    public function set_check_date($check_date) {
+        $this->_check_date = $check_date;
     }
 
     //SP2D Ongoing
@@ -664,7 +690,19 @@ class DataDashboard {
     public function set_tanggal_sp2d($tanggal_sp2d) {
         $this->_tanggal_sp2d = $tanggal_sp2d;
     }
+    
+    public function set_mata_uang($mata_uang) {
+        $this->_mata_uang = $mata_uang;
+    }
+    
+    public function set_deskripsi($deskripsi) {
+        $this->_deskripsi = $deskripsi;
+    }
 
+    public function set_status($status) {
+        $this->_status = $status;
+    }
+    
     /*
      * getter
      */
@@ -822,6 +860,22 @@ class DataDashboard {
 
     public function get_tanggal_sp2d() {
         return $this->_tanggal_sp2d;
+    }
+    
+    public function get_mata_uang() {
+        return $this->_mata_uang;
+    }
+    
+    public function get_deskripsi() {
+        return $this->_deskripsi;
+    }
+    
+    public function get_check_date() {
+        return $this->_check_date;
+    }
+    
+    public function get_status() {
+        return $this->_status;
     }
 
     /*

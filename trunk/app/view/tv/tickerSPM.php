@@ -5,11 +5,11 @@
         <div class="row">
 
             <div class="col-md-6">
-                <h2>SPM dalam Proses</h2>
+                <h2 class="uppercase"><b>SPM dalam Proses</b></h2>
             </div>
 
             <div class="col-md-6 align-right">
-                <h3 id="current-clock"></h3>
+                <h2 id="current-clock"></h2>
             </div>
 
         </div>
@@ -30,18 +30,6 @@
 
 <div id="table-container" class="wrapper">
     <table class="footable">
-
-        <thead>
-
-            <tr>
-                <th class="align-center">No.</th>
-                <th>Nomor Invoice</th>
-                <th  class="align-right">Nilai Invoice Rp</th>
-                <th>Deskripsi Invoice</th>
-                <th  class="align-center">Status</th>
-            </tr>
-
-        </thead>
 
         <tbody>
 
@@ -85,6 +73,6 @@
     //Reload setiap 1 jam
     setTimeout(function() {
         location.reload();
-    }, 60*60*1000);
+    }, 9*60*1000);
 
 </script>
