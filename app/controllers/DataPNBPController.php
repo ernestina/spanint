@@ -48,7 +48,7 @@ class DataPNBPController extends BaseController {
 		$d_log->tambah_log("Sukses");
 		
 		
-        $this->view->render('kppn/posisiSPM');
+        $this->view->render('kppn/karwasPNBP');
     }
 
     public function DetailDipaPNBP() {
