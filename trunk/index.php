@@ -95,6 +95,7 @@ $registry->auth->add_access('PDF','satker',$akses['PDFSatker']);
 //level kppn
 $registry->auth->add_access('auth','kppn',$akses['AuthKPPN']);
 $registry->auth->add_access('home','kppn',$akses['HomeKPPN']);
+$registry->auth->add_access('dataPNBP','kppn',$akses['DataPNBPKPPN']);
 $registry->auth->add_access('dataDIPA','kppn',$akses['DataDIPAKPPN']);
 $registry->auth->add_access('dataGR','kppn',$akses['DataGRKPPN']);
 $registry->auth->add_access('dataJSON','kppn',$akses['DataJSONKPPN']);
