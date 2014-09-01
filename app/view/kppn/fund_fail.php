@@ -29,9 +29,8 @@
 						if (isset($this->satker_code)) {
 							$kdsatker=$this->satker_code;
 						} else {
-							foreach ($this->data as $value) {
-								$kdsatker=$value->get_satker_code();
-							}
+							
+							$kdsatker='null';
 						}
 						?>
 						<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>

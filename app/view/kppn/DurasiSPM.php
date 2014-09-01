@@ -56,14 +56,16 @@
 						} else {
 							$kdtgl_akhir = 'null';
 						}
-						
-						
+						 foreach ($this->data as $value) {
+                            $invoice1=$value->get_invoice_num();
+							$kdsatker=substr($invoice1,7,6);
+						}
 						$invoice='null';
 						$jenisspm='null';
 						$durasi='null';
 					?>
 									
-					<a href="<?php echo URL; ?>PDF/DurasiSpm_PDF/<?php echo $kdkppn . "/" . $invoice . "/" . $jenisspm . "/" . $durasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<a href="<?php echo URL; ?>PDF/DurasiSpm_PDF/<?php echo $kdkppn . "/" . $invoice . "/" . $jenisspm . "/" . $durasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 					<?php
 					}

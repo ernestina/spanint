@@ -160,22 +160,22 @@ class FPDF_AutoWrapTable extends FPDF {
 
             //------------------
         }
-        $this->SetFont('Arial', '', 6);
+        $this->SetFont('Arial', '', 7);
         $h = 20;
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(180, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-        $this->SetX($left += 180);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($total), 1, 0, 'R', true);
+        $this->Cell(280, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+        $this->SetX($left += 280);
+        //$this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($total), 1, 0, 'R', true);
         $px1 = $this->GetX();
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_hari, $h, number_format($j1), 1, 0, 'R', true);
+        $this->Cell($ukuran_kolom_hari, $h, number_format($total), 1, 0, 'R', true);
         $py3 = $this->GetY();
-        $this->SetX($left += 200);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($jtotal), 1, 1, 'R', true);
+        $this->SetX($left += 100);
+        $this->Cell($ukuran_kolom_pagu_total_sisa, $h,'' , 1, 1, 'R', true);
         $this->Ln(3);
     }
 

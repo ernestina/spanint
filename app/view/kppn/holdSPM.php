@@ -61,6 +61,7 @@
 					}
                 }
 				if (Session::get('role') == SATKER) {
+
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
