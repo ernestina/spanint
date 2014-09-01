@@ -21,6 +21,7 @@ class DataDroping {
     private $_tgl_tarik;
     private $_payment_date;
     private $_bank_trxn_number;
+    private $_penihilan;
     private $_attribute4;
     private $_error;
     private $_valid = TRUE;
@@ -50,7 +51,7 @@ class DataDroping {
 				, JUMLAH_FTP_FILE_NAME
 				,JUMLAH_CHECK_NUMBER_LINE_NUM
 				, JUMLAH_CHECK_AMOUNT
-				,PAYMENT_AMOUNT
+				,PAYMENT_AMOUNT, PENIHILAN
 				from " . $this->_table . "
 				where jumlah_check_number_line_num is not null
 				and  id in (select max(id) id from " . $this->_table . " 
@@ -72,6 +73,7 @@ class DataDroping {
             $d_data->set_jumlah_ftp_file_name($val['JUMLAH_FTP_FILE_NAME']);
             $d_data->set_jumlah_check_number_line_num($val['JUMLAH_CHECK_NUMBER_LINE_NUM']);
             $d_data->set_jumlah_check_amount($val['JUMLAH_CHECK_AMOUNT']);
+            $d_data->set_penihilan($val['PENIHILAN']);
             $d_data->set_payment_amount($val['PAYMENT_AMOUNT']);
             $data[] = $d_data;
         }
@@ -160,6 +162,10 @@ class DataDroping {
         $this->_bank_trxn_number = $bank_trxn_number;
     }
 
+    public function set_penihilan($penihilan) {
+        $this->_penihilan = $penihilan;
+    }
+
     public function set_attribute4($attribute4) {
         $this->_attribute4 = $attribute4;
     }
@@ -222,6 +228,10 @@ class DataDroping {
 
     public function get_bank_trxn_number() {
         return $this->_bank_trxn_number;
+    }
+
+    public function get_penihilan() {
+        return $this->_penihilan;
     }
 
     public function get_table() {
