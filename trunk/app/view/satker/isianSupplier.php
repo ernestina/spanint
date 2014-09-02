@@ -343,9 +343,6 @@
 				jml++;
 			}
 		<?php } ?>
-		if(v_tipesup =='1' || v_tipesup =='3'){
-            document.getElementById("namasupplier").value='<?php if (Session::get('role')==SATKER) {echo Session::get('kd_satker');}?>';
-        }
 		
 		if((v_tipesup =='4' || v_tipesup =='5' || v_tipesup =='6' || v_tipesup =='7')&& v_npwpsupplier==''){
             var wnpwpsupplier = 'Untuk tipe supplier selain 1,2 atau 3, npwp harus diisi';
