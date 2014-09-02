@@ -40,8 +40,8 @@ class DataPelimpahanController extends BaseController {
             $d_kppn_list = new DataUser($this->registry);
             //$this->view->kppn_anak = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
             //$this->view->kppn_induk = $d_kppn_list->get_induk_limpah(Session::get('id_user'));
-            $this->view->kppn_anak = $d_kppn_list->get_kppn_kanwil("02");
-            $this->view->kppn_induk = $d_kppn_list->get_induk_limpah("02");
+            $this->view->kppn_anak = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+            $this->view->kppn_induk = $d_kppn_list->get_induk_limpah(Session::get('id_user'));
         }
         if (Session::get('role') == KPPN) {
             $d_kppn_list = new DataUser($this->registry);

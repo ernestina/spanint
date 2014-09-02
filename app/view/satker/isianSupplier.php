@@ -331,6 +331,18 @@
             jml++;
         }
 		
+		<?php if (Session::get('role')==SATKER) { ?>
+			if(v_tipesup =='1' || v_tipesup =='3'){
+				document.getElementById("namasupplier").value='<?php echo Session::get('kd_satker'); ?>';
+			}
+		<?php } else { ?>
+			if(v_namasupplier =='' ){
+				var wnamasupplier = 'NamaSupplier harus diisi';
+				$('#wnamasupplier').html(wnamasupplier);
+				$('#wnamasupplier').fadeIn(200);
+				jml++;
+			}
+		<?php } ?>
 		if(v_tipesup =='1' || v_tipesup =='3'){
             document.getElementById("namasupplier").value='<?php if (Session::get('role')==SATKER) {echo Session::get('kd_satker');}?>';
         }
