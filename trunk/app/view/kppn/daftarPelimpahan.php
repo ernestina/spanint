@@ -239,13 +239,13 @@
                             <td class="align-center"><?php echo $value->get_tgl_limpah(); ?></td>
                             <td class="align-center"><?php echo $value->get_nosakti_limpah(); ?></td>
                             <td class="align-right"><?php echo number_format($value->get_jml_terima()); ?></td>
-                            <td class="align-center"><?php echo $value->get_akun_terima(); ?></td>
+                            <td class="align-center"><?php echo $value->get_akun_limpah(); ?></td>
                             <td class="align-center"><?php echo $value->get_kppn_anak(); ?></td>
                             <td class="align-center"><?php echo $value->get_norek_501(); ?><br><?php echo $value->get_nmrek_501(); ?></td>
                             <td class="align-center"><?php echo $value->get_tgl_terima(); ?></td>
                             <td class="align-center"><?php echo $value->get_nosakti_bs(); ?></td>
                             <td class="align-right"><?php echo number_format($value->get_jml_limpah()); ?></td>
-                            <td class="align-center"><?php echo $value->get_akun_limpah(); ?></td>
+                            <td class="align-center"><?php echo $value->get_akun_terima(); ?></td>
                             <td class="align-center"><?php echo $value->get_kppn_induk(); ?></td>
                             <td class="align-center"><?php echo $value->get_status(); ?></td>
                         </tr>
