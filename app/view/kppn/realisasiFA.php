@@ -11,35 +11,40 @@
                 
                 <?php
     //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA.php  
-  if(!empty($this->account_code) || !empty($this->program_code) || !empty($this->output_code)){
+
+	if(!empty($this->account_code) || !empty($this->program_code) || !empty($this->output_code)){
   
-	 if (isset($this->account_code)) {
-	 
-        $kdakun = $this->account_code;
-		
+ 
+	 if (isset($this->account_code)) {	 
+        $kdakun = $this->account_code;		
     }else{
-		 $kdakun = $value->get_akun();
+		 foreach ($this->data as $value) {
+            $kdakun =$value->get_akun();
+		}
 	}
     if (isset($this->program_code)) {
         $kdprogram = $this->program_code;
     }else{
-		$kdprogram = $value->get_program();
+		foreach ($this->data as $value) {
+			$kdprogram =$value->get_program();
+			}
 	}
     if (isset($this->output_code)) {
         $kdoutput = $this->output_code;
     }else{
-		 $kdoutput = $value->get_output();
+		 foreach ($this->data as $value) {
+			$kdoutput =$value->get_output();
+		}
 	}
 	if (isset($this->satker_code)) {
         $kdsatker = $this->satker_code;
     }else{
-		 foreach ($this->data as $value) {
-                $kdsatker = $value->get_satker();
-            }
+		  foreach ($this->data as $value) {
+            $kdsatker =$value->get_satker();
+		}
 	}
     ?>
-<ul class="inline" style="float: right"><li>
-<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun; ?>" class="warning"><i class="icon icon-print icon-white"></i>PDF</a></li>
+		<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 	<?php
 } 
 ?>  

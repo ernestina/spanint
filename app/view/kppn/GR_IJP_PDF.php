@@ -331,9 +331,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $h = 20;
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(140, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-        $this->SetX($left += 140);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($tot_pagu), 1, 0, 'R', true);
+        $this->Cell(200, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+        $this->SetX($left += 200);
         $px1 = $this->GetX();
         $py1 = $this->GetY();
         $px2 = $px1;
@@ -415,7 +414,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'I', 8);
         // Print centered page number
         $this->Cell(0, 10, 'Hal : ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
-        $hari_ini = date("d-m-Y");
+        $hari_ini =  Date("Y-m-d H:i:s");
         $this->Cell(0, 10, 'Dicetak : ' . $hari_ini, 0, 0, 'R');
     }
 

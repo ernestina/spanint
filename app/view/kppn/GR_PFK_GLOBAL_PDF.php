@@ -117,14 +117,17 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_satker = 80;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
+		$kolom1=20;
+		$kolom2=50;
+		$kolom_grandtotal=$kolom1+$kolom2+$ukuran_kolom_jenis_belanja;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(30, $h, 'No', 1, 0, 'C', true);
-        $this->SetX($left += 30);
-        $this->Cell(50, $h, 'Akun', 1, 0, 'C', true);
+        $this->Cell($kolom1, $h, 'No', 1, 0, 'C', true);
+        $this->SetX($left += $kolom1);
+        $this->Cell($kolom2, $h, 'Akun', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += 50);
+        $this->SetX($left += $kolom2);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
@@ -140,7 +143,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(30, 50, $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, $ukuran_kolom_satker, $ukuran_kolom_satker));
+        $this->SetWidths(array($kolom1,$kolom2, $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, $ukuran_kolom_satker, $ukuran_kolom_satker));
         $this->SetAligns(array('C', 'C', 'L', 'R', 'R', 'R'));
 		
 		 if (count($this->data) == 0) {
@@ -166,11 +169,29 @@ class FPDF_AutoWrapTable extends FPDF {
                         number_format($value->get_total())
                     )
             );
+			$tot_pot_spm = $tot_pot_spm + $value->get_potongan_spm();
+			$tot_set_mpn = $tot_set_mpn + $value->get_setoran_mpn();
+			$tot_total = $tot_total + $value->get_total();
         }
-
-		 
+			$this->SetFont('Arial', '', 6);
+            $h = 20;
+            $this->SetFillColor(200, 200, 200);
+            $left = $this->GetX();
+            $this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+            $this->SetX($left += $kolom_grandtotal);
+            $px1 = $this->GetX();
+            $py1 = $this->GetY();
+            $px2 = $px1;
+            $py2 = $py1;
+            $this->SetXY($px2, $py2);
+            $this->Cell($ukuran_kolom_satker, $h, number_format($tot_pot_spm), 1, 0, 'R', true);
+            $this->SetX($px2 += $ukuran_kolom_satker);
+            $this->Cell($ukuran_kolom_satker, $h, number_format($tot_set_mpn), 1, 0, 'R', true);
+            $py3 = $this->GetY();
+            $this->Cell($ukuran_kolom_satker, $h, number_format($tot_total), 1, 1, 'R', true);
+			$this->Ln(3);
 		 }
-        $this->Ln(3);
+       
     }
 
     //footer
@@ -182,7 +203,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'I', 8);
         // Print centered page number
         $this->Cell(0, 10, 'Hal : ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
-        $hari_ini = date("d-m-Y");
+        $hari_ini =  Date("Y-m-d H:i:s");
         $this->Cell(0, 10, 'Dicetak : ' . $hari_ini, 0, 0, 'R');
     }
 

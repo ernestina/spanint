@@ -19,10 +19,9 @@
     //Dibuat oleh : Rifan Abdul Rachman
     //Tanggal dibuat : 18-07-2014
     //----------------------------------------------------	
-	if(
-	isset($this->data) || isset($this->d_nama_kppn)
-	){
-		if (isset($this->data)) {
+		if (isset($this->satker_code)) {
+			$kdsatker = $this->satker_code;
+		}else{
 			foreach ($this->data as $value1) {
 			 $kdsatker=$value1->get_satker_code();
 			$kdoutput=$value1->get_output_code();
@@ -37,13 +36,12 @@
 
     ?>
     
-    <a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kdsatker . "/" . $kdoutput. "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+    <a href="<?php echo URL; ?>PDF/Detail_Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdoutput. "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 <?php
 //----------------------------------------------------		
 
 	
-	}
 ?>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
