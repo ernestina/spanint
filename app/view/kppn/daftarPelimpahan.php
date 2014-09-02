@@ -40,37 +40,30 @@
 			if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
 
 				if (isset($this->d_status)) {
-					$kdstatus = $this->d_status;
-				} else {
-					$kdstatus = 'null';
-				}
-
-				if (isset($this->d_kppn_anak)) {
-					$kdkppn_anak = $this->d_kppn_anak;
-				} else {
-					foreach ($this->kppn_anak as $kppn_anak) {
-                    $kdkppn_anak = $kppn_anak->get_kppn_kanwil("02");
+						$kdstatus = $this->d_status;
+					} else {
+						$kdstatus = 'null';
 					}
-				}
-
-				if (isset($this->d_kppn_induk)) {
-					$kdkppn_induk = $this->d_kppn_induk;
-				} else {
-					foreach ($this->kppn_induk as $kppn_induk) {
-                    $kdkppn_induk = $kppn_induk->get_induk_limpah("02");
+					if (isset($this->d_kppn_anak)) {
+						$kdkppn_anak = $this->d_kppn_anak;
+					} else {
+						$kdkppn_anak = 'null';
 					}
-				}
-				
-				if (isset($this->d_tgl_awal)) {
-					$kdtgl_awal = $this->d_tgl_awal;
-				} else {
-					$kdtgl_awal = 'null';
-				}
-				if (isset($this->d_tgl_akhir)) {
-					$kdtgl_akhir = $this->d_tgl_akhir;
-				} else {
-					$kdtgl_akhir = 'null';
-				}
+					if (isset($this->d_kppn_induk)) {
+						$kdkppn_induk = $this->d_kppn_induk;
+					} else {
+						$kdkppn_induk = 'null';
+					}
+					if (isset($this->d_tgl_awal)) {
+						$kdtgl_awal = $this->d_tgl_awal;
+					} else {
+						$kdtgl_awal = 'null';
+					}
+					if (isset($this->d_tgl_akhir)) {
+						$kdtgl_akhir = $this->d_tgl_akhir;
+					} else {
+						$kdtgl_akhir = 'null';
+					}
 			?>
                     
                 <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
