@@ -12,7 +12,7 @@
 ob_start();
 //-------------------------------------
 require_once("./././public/fpdf17/fpdf.php");
-
+//no.2
 class FPDF_AutoWrapTable extends FPDF {
 
     private $data = array();
@@ -108,20 +108,24 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Ln(20);
         $this->SetFont("", "B", 8);
         $this->Ln(10);
-        //----------------------------------------------- 
+        //-----------------untuk header atas------------------------------ 
         #tableheader
         $this->SetFont('Arial', 'B', 9);
         $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 65;
+		$kolom1=20;
+		$kolom2=40;
+		$kolom3=80;
+		$kolom_grandtotal=$kolom1+$kolom2+$kolom3;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(20, $h, 'No', 1, 0, 'C', true);
-        $this->SetX($left += 20);
-        $this->Cell(40, $h, 'Satker', 1, 0, 'C', true);
-        $this->SetX($left += 40);
-        $this->Cell(80, $h, 'Nama Satker', 1, 0, 'C', true);
-        $this->SetX($left += 80);
+        $this->Cell($kolom1, $h, 'No', 1, 0, 'C', true);
+        $this->SetX($left += $kolom1);
+        $this->Cell($kolom2, $h, 'Satker', 1, 0, 'C', true);
+        $this->SetX($left += $kolom2);
+        $this->Cell($kolom3, $h, 'Nama Satker', 1, 0, 'C', true);
+        $this->SetX($left += $kolom3);
         $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Pagu', 1, 0, 'C', true);
         $px1 = $this->GetX();
         $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
@@ -154,7 +158,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(20, 40, 80, $ukuran_kolom_pagu_total_sisa, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa, $ukuran_kolom_pagu_total_sisa));
+        $this->SetWidths(array($kolom1,$kolom2,$kolom3, $ukuran_kolom_pagu_total_sisa, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa, $ukuran_kolom_pagu_total_sisa));
         $this->SetAligns(array('C', 'C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 
         if (count($this->data) == 0) {
@@ -211,8 +215,8 @@ class FPDF_AutoWrapTable extends FPDF {
             $h = 20;
             $this->SetFillColor(200, 200, 200);
             $left = $this->GetX();
-            $this->Cell(140, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-            $this->SetX($left += 140);
+            $this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+            $this->SetX($left += $kolom_grandtotal);
             $this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($tot_pagu), 1, 0, 'R', true);
             $px1 = $this->GetX();
             $py1 = $this->GetY();
@@ -417,6 +421,7 @@ $options = array(
     'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );
+//no.1
 $tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
 $tabel->printPDF();
 //-------------------------------------

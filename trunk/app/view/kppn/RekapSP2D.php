@@ -15,7 +15,7 @@
 
 if (Session::get('role') == ADMIN) {
 //-----------------------------
-IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
+/* IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){ */
 	
 	if (isset($this->d_nama_kppn)) {
 		foreach ($this->d_nama_kppn as $kppn) {
@@ -38,7 +38,7 @@ IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_a
 	?>
     <a href="<?php echo URL; ?>PDF/RekapSp2d_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
     <?php
-	}
+	/* } */
 //------------------------------
 }
 if (Session::get('role') == KANWIL) {

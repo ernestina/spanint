@@ -87,8 +87,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
         //tanggal
-        /* $kdtgl_awal = 'null';
-        $kdtgl_akhir = 'null'; */
+        $kdtgl_awal = 'null';
+        $kdtgl_akhir = 'null';
 
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
             $kdtgl_awal1 = $this->kdtgl_awal;
@@ -170,7 +170,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'I', 8);
         // Print centered page number
         $this->Cell(0, 10, 'Hal : ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
-        $hari_ini = date("d-m-Y");
+        $hari_ini =  Date("Y-m-d H:i:s");
         $this->Cell(0, 10, 'Dicetak : ' . $hari_ini, 0, 0, 'R');
     }
 

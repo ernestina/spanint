@@ -116,9 +116,9 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_pagu_total = 60;
         $ukuran_kolom_jenis_belanja = 65;
 		$ukuran_kolom_jenis_belanja1 = 70;
-		$ukuran_kolom_jenis_belanja2 = 90;
+		$ukuran_kolom_jenis_belanja2 = 140;
 		$ukuran_kolom_jenis_belanja3 = 90;
-        $ukuran_kolom_satker = 75;
+        $ukuran_kolom_satker = 80;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 70;
         $ukuran_kolom_deskripsi = 160;
@@ -144,9 +144,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
         $this->Cell($ukuran_kolom_jenis_belanja3, $h, 'Nomor Batch', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja3);
-        $this->Cell($ukuran_kolom_jenis_belanja2, $h, 'Nama File', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja2);
-        $this->Cell($ukuran_kolom_satker, $h, 'Tindakan', 1, 1, 'C', true);
+        $this->Cell($ukuran_kolom_satker, $h, 'Nama File', 1, 1, 'C', true);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
@@ -156,10 +154,9 @@ class FPDF_AutoWrapTable extends FPDF {
 		$ukuran_kolom_pagu_total,
 		$ukuran_kolom_jenis_belanja1,
 		$ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_jenis_belanja3,
-		$ukuran_kolom_jenis_belanja2, 
+		$ukuran_kolom_jenis_belanja3, 
 		$ukuran_kolom_satker));
-        $this->SetAligns(array('C', 'L', 'C', 'C', 'C', 'R', 'C', 'C','C'));
+        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'R', 'C', 'C','C'));
        
 	   if (count($this->data) == 0) {
 			$this->Row(
@@ -189,8 +186,8 @@ class FPDF_AutoWrapTable extends FPDF {
 							$value->get_bank_account_num(),
 							$value->get_keterangan(),
 							$value->get_gr_batch_num(),
-							$value->get_file_name(),
-							$value->get_status()
+							$value->get_file_name()
+							
 						)
 				);
 			}
@@ -208,7 +205,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'I', 8);
         // Print centered page number
         $this->Cell(0, 10, 'Hal : ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
-        $hari_ini = date("d-m-Y");
+        $hari_ini =  Date("Y-m-d H:i:s");
         $this->Cell(0, 10, 'Dicetak : ' . $hari_ini, 0, 0, 'R');
     }
 

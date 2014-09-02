@@ -13,7 +13,7 @@
 				//--------------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 				if (Session::get('role') == ADMIN  || Session::get('role') == DJA) {
-					if( isset($this->d_nama_kppn) && isset($this->satker_code1)){
+					if( isset($this->d_nama_kppn) || isset($this->satker_code1)){
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
