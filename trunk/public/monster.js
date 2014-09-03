@@ -31,46 +31,67 @@ function toggleFullScreen() {
 function wrapTable() {
     
     $('#table-container').css('overflow-x','hidden');
+    
     $('#table-container .footable').wrap('<div id="footable-body"></div>');
+    
+    tableWidth = 0;
     
     $('#footable-body .footable thead th').each(function() {
         
         $(this).css('width',$(this).outerWidth() + 'px');
+        $(this).attr('width',$(this).outerWidth() + 'px');
         
     });
     
     $('#footable-body .footable tfoot td').each(function() {
         
         $(this).css('width',$(this).outerWidth() + 'px');
+        $(this).attr('width',$(this).outerWidth() + 'px');
+        tableWidth += $(this).outerWidth();
         
     });
     
+    console.log(navigator.userAgent);
+    
+    if (navigator.userAgent.indexOf('Chrome') != -1 || navigator.userAgent.indexOf('Opera') != -1 || navigator.userAgent.indexOf('Safari') != -1) {
+        
+        tableWidth = $('#footable-body .footable').outerWidth();
+        
+    }
+    
     if ($('#footable-body .footable thead').length > 0) {
-        $('#table-container').prepend('<div id="footable-header"></div>');
-        $('#footable-header').html('<table class="table table-bordered" style="width: ' + $('#footable-body .footable').outerWidth() + 'px"><thead>' + $('#footable-body .footable thead').html() + '</thead></table>');
+        $('#table-container').prepend('<div id="footable-header" style="width: ' + tableWidth + 'px"></div>');
+        $('#footable-header').html('<table class="table table-bordered" style="width: ' + tableWidth + 'px"><thead>' + $('#footable-body .footable thead').html() + '</thead></table>');
+        
     }
     
     if ($('#footable-body .footable tfoot').length > 0) {
-        $('#table-container').append('<div id="footable-footer"></div>');
-        $('#footable-footer').html('<table class="table table-bordered" style="width: ' + $('#footable-body .footable').outerWidth() + 'px"><tfoot>' + $('#footable-body .footable tfoot').html() + '</tfoot></table>');
+        $('#table-container').append('<div id="footable-footer" style="width: ' + tableWidth + 'px"></div>');
+        $('#footable-footer').html('<table class="table table-bordered" style="width: ' + tableWidth + 'px"><tfoot>' + $('#footable-body .footable tfoot').html() + '</tfoot></table>');
+        
     }
     
     $('#footable-body .footable tbody tr').each(function() {
         
         $('td', this).each(function() {
             $(this).css('width',$(this).outerWidth() + 'px');
+            $(this).attr('width',$(this).outerWidth() + 'px');
         });
                            
         return false;
         
     });
     
-    $('#footable-body .footable').css('width', $('#footable-body .footable').outerWidth() + 'px');
+    $('#footable-body .footable').css('width', tableWidth + 'px');
     
-    $('#footable-body thead').remove();
+    if (navigator.userAgent.indexOf('Firefox') != -1 || navigator.userAgent.indexOf('Mozilla') != -1) {
+        $('#footable-body .footable').css('table-layout', 'fixed');
+    }
+    
     $('#footable-body tfoot').remove();
+    $('#footable-body thead').remove();
     
-    $('#footable-body').css('height', ($('#table-container').height() - $('#footable-header').outerHeight() - $('#footable-footer').outerHeight()) + 'px');
+    $('#footable-body').css('height', ($('#table-container').height() - $('#footable-header').outerHeight() - $('#footable-footer').outerHeight() - 10) + 'px');
     $('#footable-body').css('overflow','auto');
     
     $('#footable-header').css('position', 'relative');
@@ -96,27 +117,27 @@ function unWrapTable() {
     
     $('#footable-body .footable thead th').each(function() {
         
-        $(this).removeAttr('style');
+        $(this).removeAttr('style'); $(this).removeAttr('width');
         
     });
     
     $('#footable-body .footable tfoot td').each(function() {
         
-        $(this).removeAttr('style');
+        $(this).removeAttr('style'); $(this).removeAttr('width');
         
     });
     
     $('#footable-body .footable tbody tr').each(function() {
         
         $('td', this).each(function() {
-            $(this).removeAttr('style');
+            $(this).removeAttr('style'); $(this).removeAttr('width');
         });
                            
         return false;
         
     });
     
-    $('#footable-body .footable').removeAttr('style');
+    $('#footable-body .footable').removeAttr('style'); $('#footable-body .footable').removeAttr('width');
     
     $('#footable-body .footable').unwrap();
     
@@ -130,8 +151,6 @@ function wrapRewrapTable() {
         if ($('#footable-body').length > 0) {
             unWrapTable();
         }
-        
-        console.log($(window).innerHeight() / window.devicePixelRatio);
 
         if ($(window).innerHeight() / window.devicePixelRatio >= 600) {
             wrapTable();
