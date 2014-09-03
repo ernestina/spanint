@@ -8,27 +8,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-							<?php
-				if (isset($this->d_kppn_induk)) {
-					echo "Dari - Ke KPPN : " . $this->d_kppn_induk . " - " ;
-				}
-				?>
-				<?php
-				if (isset($this->d_kppn_anak)) {
-					echo $this->d_kppn_anak . "<br/>";
-				}
-				?>
-				<?php
-				if (isset($this->d_status)) {
-					echo "Status : " . $this->d_status . "<br/>";
-				}
-				?>
-				<?php
-				if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
-					echo "Tanggal : " . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
-				}
-				
-				?> 
+							 
                 <h2>Monitoring Pelimpahan</h2>
             </div>
             
@@ -160,15 +140,26 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-
-                if (isset($this->d_nama_kppn)) {
-                    foreach ($this->d_nama_kppn as $kppn) {
-                        echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                        $kode_kppn = $kppn->get_kd_satker();
-                    }
-                }
-
-                ?>
+				if (isset($this->d_kppn_induk)) {
+					echo "Dari - Ke KPPN : " . $this->d_kppn_induk . " - " ;
+				}
+				?>
+				<?php
+				if (isset($this->d_kppn_anak)) {
+					echo $this->d_kppn_anak . "<br/>";
+				}
+				?>
+				<?php
+				if (isset($this->d_status)) {
+					echo "Status : " . $this->d_status . "<br/>";
+				}
+				?>
+				<?php
+				if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
+					echo "Tanggal : " . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
+				}
+				
+				?>
             </div>
             
             <div class="col-md-6 col-sm-12 align-right">
@@ -195,9 +186,9 @@
         
         <thead>
             <tr>
-                <th rowspan="2" class="align-center">No.</th>
-                <th colspan="6" class="align-center">Pelimpahan</th>
-                <th colspan="6" class="align-center">Penerimaan 501</th>
+                <th rowspan="2" >No.</th>
+                <th colspan="6" >Pelimpahan</th>
+                <th colspan="6" >Penerimaan 501</th>
                 <th rowspan="2">Status Limpah</th>
             </tr>
             <tr>
@@ -216,7 +207,7 @@
             </tr>
         </thead>
         
-        <tbody>
+        <tbody style='font-size: 98%'>
             
             <?php $no = 1; ?>
 
@@ -369,7 +360,7 @@
                     
                     <br/>
                     
-                    <div id="wtgl" class="error"></div>
+                    <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Tanggal Pelimpahan: </label>
                     
                     <div class="input-daterange input-group" id="datepicker" style="width: 100%">

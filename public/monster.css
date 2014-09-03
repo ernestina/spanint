@@ -1,7 +1,6 @@
 /* Let's make use of our framework, and minimize our own CSS */
 
 /* HTML */
-
 body {
     font-size: 12px;
     overflow-x: hidden;
@@ -69,6 +68,10 @@ h4 {
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
     padding: 10px 15px 10px 15px;
+}
+
+.table>thead>tr>th {
+    text-align: center;
 }
 
 .tv-mode .table>thead>tr>th, .tv-mode .table>tbody>tr>th, .tv-mode .table>tfoot>tr>th, .tv-mode .table>thead>tr>td, .tv-mode .table>tbody>tr>td, .tv-mode .table>tfoot>tr>td {
@@ -298,7 +301,6 @@ h4 {
 
 .align-left {
     text-align: left;
-    
 }
 
 .align-center {
