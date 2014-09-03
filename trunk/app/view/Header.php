@@ -34,6 +34,9 @@
         <div id="sidebar" class="nano">
             
             <div class="nano-content">
+                <!--//////////////////////////////////////// --> 
+                <!--/////////////// Header ADMIN /////////// -->  
+                <!--//////////////////////////////////////// --> 
             
                 <?php if (Session::get('role') == ADMIN): ?>
                 
@@ -62,12 +65,11 @@
                             </ul>
                         </div>
                     </li>
-
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
                         <div class="collapse">
                             <ul>
-                                <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Droping Dana</a></li>
-                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
                             </ul>
                         </div>
                     </li>
@@ -85,14 +87,6 @@
                             </ul>
                         </div>
                     </li>
-                    
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
-                        <div class="collapse">
-                            <ul>
-                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
-                            </ul>
-                        </div>
-                    </li>
 
                     <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Manajemen Penerimaan</h4>
                         <div class="collapse">
@@ -100,6 +94,15 @@
                                 <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Droping Dana</a></li>
+                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
                             </ul>
                         </div>
                     </li>
@@ -143,6 +146,11 @@
 
                 </ul>
                 
+                
+                <!--//////////////////////////////////////// --> 
+                <!--/////////////// Header KANWIL /////////// -->  
+                <!--//////////////////////////////////////// --> 
+                
                 <?php elseif (Session::get('role') == KANWIL): ?>
                 
                 <ul>
@@ -170,14 +178,6 @@
                             </ul>
                         </div>
                     </li>
-                    
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
-                        <div class="collapse">
-                            <ul>
-                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
-                            </ul>
-                        </div>
-                    </li>
 
                     <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Manajemen Pembayaran</h4>
                         <div class="collapse">
@@ -199,6 +199,14 @@
                                 <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
                             </ul>
                         </div>
                     </li>
@@ -241,6 +249,11 @@
 
                 </ul>
                 
+                
+                <!--//////////////////////////////////////// --> 
+                <!--/////////////// Header KANWIL /////////// -->  
+                <!--//////////////////////////////////////// --> 
+                
                 <?php elseif (Session::get('role') == KPPN): ?>
                 
                 <ul>
@@ -269,10 +282,11 @@
                         </div>
                     </li>
                     
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
                         <div class="collapse">
                             <ul>
-                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                                <li><a href="<?php echo URL; ?>dataSupplier/downloadSupplierXls">Download Supplier</a></li>
+                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
                             </ul>
                         </div>
                     </li>
@@ -302,11 +316,10 @@
                         </div>
                     </li>
                     
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
                         <div class="collapse">
                             <ul>
-                                <li><a href="<?php echo URL; ?>dataSupplier/downloadSupplierXls">Download Supplier</a></li>
-                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
+                                <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
                             </ul>
                         </div>
                     </li>
@@ -359,6 +372,10 @@
 
                 </ul>
                 
+                <!--//////////////////////////////////////// --> 
+                <!--/////////////// Header SATKER /////////// -->  
+                <!--//////////////////////////////////////// --> 
+                
                 <?php elseif (Session::get('role') == SATKER): ?>
                 
                 <ul>
@@ -375,6 +392,14 @@
                             </ul>
                         </div>
                     </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
                     <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Manajemen Pembayaran</h4>
                         <div class="collapse">
@@ -384,14 +409,6 @@
                                 <li><a href="<?php echo URL; ?>dataSPM/ValidasiSpm">Daftar Penolakan PMRT</a></li>
                                 <li><a href="<?php echo URL; ?>dataSPM/daftarsp2d/<?php Session::get('kd_satker'); ?>">Daftar SP2D</a></li>
                                 <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
-                        <div class="collapse">
-                            <ul>
-                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
                             </ul>
                         </div>
                     </li>
@@ -415,20 +432,15 @@
 
                 </ul>
                 
+                <!--//////////////////////////////////////// --> 
+                <!--/////////////// Header PKN /////////// -->  
+                <!--//////////////////////////////////////// --> 
+                
                 <?php elseif (Session::get('role') == PKN): ?>
                 
                 <ul>
                         
                     <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
-
-                    <li class="subnav"><h4><span class="glyphicon glyphicon-transfer"></span>&nbsp;&nbsp;Retur</h4>
-                        <div class="collapse">
-                            <ul>
-                                <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur</a></li>
-                                <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
-                            </ul>
-                        </div>
-                    </li>
                     
                     <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Manajemen Kas</h4>
                         <div class="collapse">
@@ -442,6 +454,8 @@
                         <div class="collapse">
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur</a></li>
+                                <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
                             </ul>
                         </div>
                     </li>
@@ -455,6 +469,10 @@
                     </li>
 
                 </ul>
+                
+                <!--//////////////////////////////////////// --> 
+                <!--/////////////// Header DJA /////////// -->  
+                <!--//////////////////////////////////////// --> 
                 
                 <?php elseif (Session::get('role') == DJA): ?>
                 
