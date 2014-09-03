@@ -10,27 +10,26 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 <!--pdf-->
 				
-<!--?php
+				<?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
- if( isset($this->data) || isset($this->d_nama_kppn)){
+ if( isset($this->data)){
 	if (isset($this->data)) {
-	foreach ($this->data as $value1) {
-		$kdsatker=$value1->get_satker_code();
-		$kdoutput=$value1->get_output_code();
+		foreach ($this->data as $value) {
+			$kdsatker=$value->get_satker();
+			$kdoutput=$value->get_output();
+			$kdkppn=$value->get_kppn();
+			$kdakun=$value->get_akun();
+			}
+			
 		}
-	}
-	if (isset($this->d_nama_kppn)) {
-		$kdkppn = $this->d_nama_kppn;
-	 } else {
-		$kdkppn = Session::get('id_user');
-	 }
-
+	 $kf='1';
 	?>
-	    <a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kdsatker . "/" . $kdoutput. "/" . $kdkppn. "/" . $kdakun. "/" . $kf; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-<!--?php
+	    <a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdkppn . "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		<?php
 		}
-?-->               
+?>               
+               
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
