@@ -169,17 +169,7 @@ $akses['DataSPMAdmin'] = array(
     'HoldSpm_PDF',
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
-    '__destruct'
-);
-
-/*
- * akses Data Supplier
- */
-$akses['DataSupplierAdmin'] = array(
-    '__construct',
-    'index',
-    'cekSupplier',
-    'downloadSupplier',
+    'downloadSP2D',
     '__destruct'
 );
 

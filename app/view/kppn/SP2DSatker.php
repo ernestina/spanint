@@ -111,7 +111,7 @@ isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 
 
 <div id="table-container" class="wrapper">
-    <form method='POST' action='../downloadSP2D' enctype='multipart/form-data'>
+    <form method='POST' action='<?php echo URL;?>dataSPM/downloadSP2D' enctype='multipart/form-data'>
     <table class="footable">
         <!--baris pertama-->
         <thead>
