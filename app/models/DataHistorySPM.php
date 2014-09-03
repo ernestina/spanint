@@ -145,7 +145,7 @@ class DataHistorySPM {
 		$sql = "select * from ".$this->_table9." where KDKPPN ='".$filter."' AND INVOICE_NUM =".$invoice;
         $no=0;
           //foreach ($filter_kanwil as $filter_kanwil) {
-          $sql .=  " ORDER BY WAKTU_MULAI ";
+          $sql .=  " ORDER BY WAKTU_MULAI DESC ";
           //}
         //var_dump ($sql);
 
