@@ -729,7 +729,7 @@
         
         <div class="row">
             
-            <div class="col-md-12">Klik pada kolom warna untuk melihat detail transaksi. <br/><b>Keterangan:</b> Angka didalam kotak adalah jumlah LHP. Jumlah Rekening Persepsi yang terdaftar sebanyak <?php echo $this->jml_rek; ?> Rekening.
+            <div class="col-md-12" style='font-size: 90%'><b>Keterangan: </b>Klik pada kolom warna untuk melihat detail transaksi. Angka didalam kotak adalah jumlah LHP. Jumlah Rekening Persepsi yang terdaftar sebanyak <?php echo $this->jml_rek; ?> Rekening.
             </div>
             
         </div>
@@ -743,47 +743,50 @@
         <div class="row">
             
             <div class="col-md-12">
-                <table class="table table-bordered">
+                <table class="table table-bordered" style='font-size: 90%'>
                     <tr>
                         <th width="10px" >Warna</th>
-                        <th width="70px" >Keterangan</th>
-                        <th width="70px" >Tindakan</th>
+                        <th width="100px" >Keterangan</th>
+                        <th width="100px" >Tindakan</th>
                         <th width="10px" >Warna</th>
-                        <th width="70px" >Keterangan</th>
-                        <th width="70px" >Tindakan</th>
+                        <th width="100px" >Keterangan</th>
+                        <th width="100px" >Tindakan</th>
+                        <th width="10px" >Warna</th>
+                        <th width="100px" >Keterangan</th>
+                        <th width="100px" >Tindakan</th>
+                        <th width="10px" >Warna</th>
+                        <th width="100px" >Keterangan</th>
+                        <th width="100px" >Tindakan</th>
                     </tr>
                     <tr>
                         <td bgcolor='#F5F5F5'></td>
                         <td>Data belum masuk</td>
-                        <td>Konfirmasi ke Bank dan Upload</td>
-                        <td bgcolor='#B2BEB5'></td>
-                        <td>Ada data belum pengecekan</td>
-                        <td>Lakukan pengecekan</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor='#A4C639'></td>
-                        <td>Semua Data Completed</td>
-                        <td>Tidak ada</td>
-                        <td bgcolor='#99666CC'></td>
-                        <td>Ada data yang belum oke</td>
-                        <td>Lakukan pengecekan</td>
-                    </tr>
-                    <tr>
+                        <td>Konfirm Bank, upload</td>
                         <td bgcolor='#FFBF00'></td>
-                        <td>Ada yang belum diinterface</td>
+                        <td>Data belum diinterface</td>
                         <td>Lakukan interface</td>
+                        <td bgcolor='#B2BEB5'></td>
+                        <td>Data belum pengecekan</td>
+                        <td>Lakukan pengecekan</td>
                         <td bgcolor='#C19A6B'></td>
                         <td>Hari Libur</td>
                         <td>Tidak ada</td>
                     </tr>
                     <tr>
+                        <td bgcolor='#A4C639'></td>
+                        <td>Semua data Completed</td>
+                        <td>Tidak ada</td>
                         <td bgcolor='#FF2800'></td>
                         <td>Data error</td>
                         <td>upload ulang ADK</td>
+                        <td bgcolor='#99666CC'></td>
+                        <td>Data belum valid</td>
+                        <td>Lakukan pengecekan</td>
                         <td bgcolor='#000000'></td>
                         <td>Tidak Terdefenisi</td>
-                        <td>Belum tahu</td>
+                        <td>Koordinasi DTP</td> 
                     </tr>
+
             </table>
             
             </div>

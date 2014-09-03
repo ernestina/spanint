@@ -7,8 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             
-            <div class="col-lg-10 col-md-6 col-sm-12">
-							 
+            <div class="col-lg-10 col-md-6 col-sm-12">			 
                 <h2>Monitoring Pelimpahan</h2>
             </div>
             
@@ -167,7 +166,7 @@
 
                 if (isset($this->last_update)) {
                     foreach ($this->last_update as $last_update) {
-                        echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                        echo "Update Data Terakhir (Waktu Server) : " . "<br>" . $last_update->get_last_update() . " WIB";
                     }
                 }
 
@@ -192,7 +191,7 @@
                 <th rowspan="2">Status Limpah</th>
             </tr>
             <tr>
-                <th class="align-left">No. Rekening<br>Nama Rekening</th>
+                <th class="align-left" width="120px">No. Rekening<br>Nama Rekening</th>
                 <th class="align-center" width="100px">Tanggal</th>
                 <th class="align-center">No. Sakti</th>
                 <th class="align-right">Nilai</th>
@@ -207,7 +206,7 @@
             </tr>
         </thead>
         
-        <tbody style='font-size: 98%'>
+        <tbody style='font-size: 94%'>
             
             <?php $no = 1; ?>
 
@@ -229,13 +228,13 @@
                             <td class="align-left"><?php echo $value->get_norek_persepsi(); ?><br><?php echo $value->get_nmrek_persepsi(); ?></td>
                             <td class="align-center"><?php echo $value->get_tgl_limpah(); ?></td>
                             <td class="align-center"><?php echo $value->get_nosakti_limpah(); ?></td>
-                            <td class="align-right"><?php echo number_format($value->get_jml_terima()); ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_jml_limpah()); ?></td>
                             <td class="align-center"><?php echo $value->get_akun_limpah(); ?></td>
                             <td class="align-center"><?php echo $value->get_kppn_anak(); ?></td>
                             <td class="align-center"><?php echo $value->get_norek_501(); ?><br><?php echo $value->get_nmrek_501(); ?></td>
                             <td class="align-center"><?php echo $value->get_tgl_terima(); ?></td>
                             <td class="align-center"><?php echo $value->get_nosakti_bs(); ?></td>
-                            <td class="align-right"><?php echo number_format($value->get_jml_limpah()); ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_jml_terima()); ?></td>
                             <td class="align-center"><?php echo $value->get_akun_terima(); ?></td>
                             <td class="align-center"><?php echo $value->get_kppn_induk(); ?></td>
                             <td class="align-center"><?php echo $value->get_status(); ?></td>
