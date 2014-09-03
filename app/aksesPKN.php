@@ -65,12 +65,12 @@ $akses['DataReturPKN'] = array(
 $akses['PDFPKN'] = array(
     '__construct',
     'index',
-    'monitoringSp2d_PDF',
-	'monitoringRetur_PDF',
-	'monitoringReturPkn_PDF',
-	'monitoringDroping_PDF',
     'detailDroping_PDF',
-	'monitoringPelimpahan',
+    'monitoringDroping_PDF',
+    'monitoringPelimpahan_PDF',
+    'monitoringRetur_PDF',
+    'monitoringReturPkn_PDF',
+    'monitoringSp2d_PDF',
     '__destruct'
 );
 ?>
