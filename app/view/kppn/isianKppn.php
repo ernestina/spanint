@@ -16,7 +16,7 @@
 				if( isset($this->d_nama_kppn) || isset($this->d_nosp2d) || 
 					isset($this->d_barsp2d) || isset($this->d_kdsatker) || 
 					isset($this->d_invoice) || isset($this->d_bank) || isset($this->d_status) ||
-					isset($this->d_bayar) || isset($this->d_fxml) || isset($this->d_tgl_awal) ||
+					isset($this->d_bayar) || isset($this->d_tgl_awal) ||
 					isset($this->d_tgl_akhir)) {
 					if (isset($this->d_nama_kppn)) {
 						foreach ($this->d_nama_kppn as $kppn) {
@@ -66,11 +66,7 @@
 						$kdbayar='null';
 					}
 
-					if (isset($this->d_fxml)) {
-						$kdfxml = $this->d_fxml;
-					}else{
-						$kdfxml='null';
-					}
+
 
 					if (isset($this->d_tgl_awal)) {
 						$kdtgl_awal = $this->d_tgl_awal;
@@ -83,7 +79,7 @@
 						$kdtgl_akhir = 'null';
 					}
                 ?>
-                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdfxml . "/" . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/"  . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
                 <?php
                 //----------------------------------------------------		
@@ -93,7 +89,7 @@
 						if( isset($this->d_nama_kppn) || isset($this->d_nosp2d) || 
 					isset($this->d_barsp2d) || isset($this->d_kdsatker) || 
 					isset($this->d_invoice) || isset($this->d_bank) || isset($this->d_status) ||
-					isset($this->d_bayar) || isset($this->d_fxml) || isset($this->d_tgl_awal) ||
+					isset($this->d_bayar) || isset($this->d_tgl_awal) ||
 					isset($this->d_tgl_akhir)) {
 					if (isset($this->d_nama_kppn)) {
 						foreach ($this->d_nama_kppn as $kppn) {
@@ -143,12 +139,6 @@
 						$kdbayar='null';
 					}
 
-					if (isset($this->d_fxml)) {
-						$kdfxml = $this->d_fxml;
-					}else{
-						$kdfxml='null';
-					}
-
 					if (isset($this->d_tgl_awal)) {
 						$kdtgl_awal = $this->d_tgl_awal;
 					} else {
@@ -160,7 +150,7 @@
 						$kdtgl_akhir = 'null';
 					}
                 ?>
-                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdfxml . "/" . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
                 <?php
                 //----------------------------------------------------		
@@ -215,8 +205,8 @@
             <thead>
                 <tr>
                     <th class='mid'>No.</th>
-                    <th width='160px' class='mid'>Tgl Selesai SP2D</th>
-                    <th width='160px' class='mid'>Tgl SP2D</th>
+                    <th width='100px' class='mid'>Tgl Selesai SP2D</th>
+                    <th width='100px' class='mid'>Tgl SP2D</th>
                     <th class='mid'>No. SP2D</th>
                     <!--th>Status</th-->
 
@@ -225,7 +215,7 @@
                     <!--th>Jumlah Rp</th-->
                     <th class='mid'>Bank Pembayar</th>
                     <th width='250px'>Bank Penerima, Nama,<br> No. Rekening Penerima</th>
-                    <th width='350px' class='mid'>Deskripsi</th>
+                    <th >Deskripsi</th>
                     <!--th>File Transaksi</th-->
                     <th class='mid'>Status</th>
                 </tr>
@@ -351,19 +341,7 @@ if (Session::get('role') != SATKER) {
                         echo $this->d_invoice;
                     } ?>">
 
-                    <?php
-                    if (Session::get('role') != SATKER) {
-                        echo "<br/><div id='wfxml' class='alert alert-danger' style='display:none;'></div>";
-                        echo "<label class='isian'>Nama file xml: </label>";
-                    }
-                    ?>
-                    <input class="form-control" type="<?php if (Session::get('role') == SATKER) {
-                        echo "hidden";
-                    } else {
-                        echo "text";
-                    } ?>" name="fxml" id="fxml" value="<?php if (isset($this->d_fxml)) {
-                        echo $this->d_fxml;
-                    } ?>">
+                   
 
 <?php
 if (Session::get('role') != SATKER) {
@@ -521,12 +499,6 @@ if (Session::get('role') != SATKER) {
             }
         });
 
-        $('#fxml').keyup(function() {
-            if (document.getElementById('fxml').value != '') {
-                $('#wfxml').fadeOut(200);
-            }
-        });
-
     }
 
     function cek_upload() {
@@ -543,32 +515,24 @@ if (Session::get('role') != SATKER) {
         var v_bayar = document.getElementById('bayar').value;
         var v_tglawal = document.getElementById('tgl_awal').value;
         var v_tglakhir = document.getElementById('tgl_akhir').value;
-        var v_fxml = document.getElementById('fxml').value;
-
+        
         var jml = 0;
-        if (v_nosp2d == '' && v_barsp2d == '' && v_kdsatker == '' && v_invoice == '' && v_bank == '' && v_status == '' && v_bayar == '' && v_fxml == '') {
+        if (v_nosp2d == '' && v_barsp2d == '' && v_kdsatker == '' && v_invoice == '' && v_bank == '' && v_status == '' && v_bayar == '' && (v_tglawal == '' || v_tglakhir == '')) {
             $('#wsp2d').html('Harap isi salah satu parameter');
             $('#wsp2d').fadeIn();
-            $('#wbarsp2d').html('Harap isi salah satu parameter');
-            $('#wbarsp2d').fadeIn();
-            $('#wsatker').html('Harap isi salah satu parameter');
-            $('#wsatker').fadeIn();
-            $('#winvoice').html('Harap isi salah satu parameter');
-            $('#winvoice').fadeIn();
-            $('#wbank').html('Harap isi salah satu parameter');
-            $('#wbank').fadeIn();
-            $('#wstatus').html('Harap isi salah satu parameter');
-            $('#wstatus').fadeIn();
-            $('#wbayar').html('Harap isi salah satu parameter');
-            $('#wbayar').fadeIn();
-            $('#wfxml').html('Harap isi salah satu parameter');
-            $('#wfxml').fadeIn();
             jml++;
         }
-        if(v_tglawal == '' && v_tglakhir == ''){
-            $('#wtgl').html('Tanggal awal dan akhir harus diisi');
-            $('#wtgl').fadeIn();
+        
+        if (v_tglawal == '' || v_tglakhir == ''){
+            if (v_nosp2d == '' && v_barsp2d == '' && v_invoice == '') {
+            $('#wsp2d').html('Harap isi salah satu parameter');
+            $('#wsp2d').fadeIn(); 
+            $('#wbarsp2d').html('Harap isi salah satu parameter');
+            $('#wbarsp2d').fadeIn();
+            $('#winvoice').html('Harap isi salah satu parameter');
+            $('#winvoice').fadeIn();
             jml++;
+            }
         }
 
         if (v_nosp2d != '' && v_nosp2d.length != 15) {
@@ -626,7 +590,7 @@ if (Session::get('role') != SATKER) {
 </script>
 
 
-<div class="main-window-segment vertical-padded">
+<div class="main-window-segment vertical-padded dark-panel">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
