@@ -9,8 +9,8 @@
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 <!--pdf-->
-				<?php
-<?php
+				
+<!--?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
  if( isset($this->data) || isset($this->d_nama_kppn)){
@@ -28,9 +28,9 @@
 
 	?>
 	    <a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kdsatker . "/" . $kdoutput. "/" . $kdkppn. "/" . $kdakun. "/" . $kf; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-<?php
+<!--?php
 		}
-?>               
+?-->               
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
