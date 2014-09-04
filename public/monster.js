@@ -42,12 +42,13 @@ function wrapTable() {
         $(this).attr('width',$(this).outerWidth() + 'px');
         
     });
+     
+    tableWidth = $('#footable-body .footable tbody tr').outerWidth();
     
     $('#footable-body .footable tfoot td').each(function() {
         
         $(this).css('width',$(this).outerWidth() + 'px');
         $(this).attr('width',$(this).outerWidth() + 'px');
-        tableWidth += $(this).outerWidth();
         
     });
     
