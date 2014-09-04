@@ -7,11 +7,11 @@
         <div class="row">
 
             <div class="col-md-6">
-                <h2 class="uppercase"><b><?php echo date('d-M-Y', time()); ?></b></h2>
+                <h2 class="uppercase" style="padding-left: 20px;"><b><?php echo date('d-M-Y', time()); ?></b></h2>
             </div>
 
             <div class="col-md-6 align-right">
-                <h2 id="current-clock"></h2>
+                <h2 id="current-clock" style="padding-right: 20px;"></h2>
             </div>
 
         </div>
@@ -50,17 +50,41 @@
                             
                             <td>
                             
-                                <h3 class="tight-margin"><b>Satker <?php echo substr($value->get_invoice_num(), 7, 6); ?></b></h3>
-                                <h3 class="tight-margin"><b>SPM No. <?php echo $value->get_invoice_num(); ?></b></h3>
-                                <h3 class="tight-margin"><b><?php if ($value->get_status() == 'CANCELED') { echo 'DITOLAK'; } else if ($value->get_status() == 'CLOSED' && $value->get_check_number() !='') { echo 'SELESAI SP2D'; } else { echo 'DALAM PROSES'; } ?></b></h3>
+                                <div class="container-fluid">
+                                    <div class="row bottom-padded-little" style="margin: 0px;">
+                                        <div class="col-md-6">
+
+                                            <h3 class="tight-margin"><b><?php echo substr($value->get_invoice_num(), 7, 6); ?></b></h3>
+                                            <h3 class="tight-margin"><b><?php echo $value->get_invoice_num(); ?></b></h3>
+
+                                        </div>
+
+                                        <div class="col-md-6 align-right">
+
+                                            <h1 class="tight-margin top-padded"><b><?php if ($value->get_status() == 'CANCELED' ) { echo 'DITOLAK'; } else if ($value->get_status() == 'CLOSED' && $value->get_check_number() != '') { echo 'SELESAI SP2D'; } else { echo 'DALAM PROSES'; } ?></b></h1>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <?php if ($value->get_check_number() != '') { ?>
+                                    
+                                    <div class="row top-padded-little" style="margin: 0px;">
+                                        
+                                        <div class="col-md-6">
+                                            <h4 class="tight-margin"><b>No. SP2D: <?php if ($value->get_check_number() == '') { echo '-'; } else { echo $value->get_check_number(); } ?></b></h4>
+                                            <h4 class="tight-margin"><b>Tanggal: <?php if ($value->get_check_date() == '') { echo '-'; } else { echo $value->get_check_date(); } ?></b></h4>
+                                            <h4 class="tight-margin"><b>Nominal: <?php if ($value->get_nominal_sp2d() == '') { echo '-'; } else { echo $value->get_mata_uang()." ".number_format($value->get_nominal_sp2d());} ?></b></h4>
+                                        </div>
+                                        <div class="col-md-6 align-right">
+                                            <h4 class="tight-margin"><b><?php if ($value->get_deskripsi() == '') { echo '-'; } else { echo $value->get_deskripsi(); } ?></b></h4>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <?php } ?>
+                                    
+                                </div>
                                 
-                            </td>
-                            <td>
-                                
-                                <h4 class="tight-margin segmented-bottom">No. SP2D: <?php if ($value->get_check_number() == '') { echo '-'; } else { echo $value->get_check_number(); } ?></h4>
-                                <p class="tight-margin">Tanggal: <?php if ($value->get_check_date() == '') { echo '-'; } else { echo $value->get_check_date(); } ?></p>
-                                <p class="tight-margin">Nominal: <?php if ($value->get_nominal_sp2d() == '') { echo '-'; } else { echo $value->get_mata_uang()." ".number_format($value->get_nominal_sp2d());} ?></p>
-                                <p class="tight-margin"><?php echo $value->get_deskripsi(); ?></p>
                             </td>
                             
                         </tr>
@@ -86,6 +110,6 @@
     //Reload setiap 1 jam
     setTimeout(function() {
         location.reload();
-    }, 7*60*1000);
+    }, 9*60*1000);
 
 </script>

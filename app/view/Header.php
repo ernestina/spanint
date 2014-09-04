@@ -518,7 +518,7 @@
 
                     <div id="mainmenu-left-single" class="navbar-text btn-group hidden-xs hidden-sm hidden-md navbar-left">
                         <a id="menu-toggle-thin" class="btn btn-outline" onclick="toggleSidebar()"><span class="glyphicon glyphicon-th-list"></span> Menu</a>
-                        <span id="tv-unit-title" style="display: none;"><?php echo Session::get('user') ?></span>
+                        <span id="tv-unit-title" style="display: none; padding-left: 20px;"><?php echo Session::get('user') ?></span>
                     </div>
 
                     <div id="menu-package" class="navbar-text btn-group hidden-lg" style="float: left;">
