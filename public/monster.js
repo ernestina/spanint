@@ -195,14 +195,13 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
     //Table Reset
     wrapRewrapTable();
 
-    //TV Scroll
-    
+    //TV Scroll Reset
     rowPointer = -3;
     $('#footable-body').animate({ scrollTop: 0  }, 500);
 
 }
 
-function tvScroll() {
+function tvScroll() { // Untuk autoscroll pada TV
     
     rowPointer ++;
     
@@ -252,9 +251,9 @@ function initLayout() { //Fungsi untuk inisialisasi layout
     if (typeof tvMode !== 'undefined') {
         
         if ($(window).innerWidth() > 1280) {
-            $('#content-container').css('font-size', '2.2em');
+            $('#content-container').css('font-size', '2.2em'); // Full HD
         } else {
-            $('#content-container').css('font-size', '1.4em');
+            $('#content-container').css('font-size', '1.4em'); // HD
         }
         
         $('#table-container').addClass('tv-mode');
@@ -376,7 +375,7 @@ $(document).ready(function() {
         
         setInterval(function() {
             tvScroll();
-        },5000);
+        },2000);
         
         startTime();
         
