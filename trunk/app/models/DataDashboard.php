@@ -474,11 +474,15 @@ class DataDashboard {
                 . "AP_CHECKS_ALL_V.AMOUNT JUMLAH, AP_CHECKS_ALL_V.CURRENCY_CODE MATA_UANG, AP_CHECKS_ALL_V.DESCRIPTION DESKRIPSI "
                 . "from AP_INVOICES_ALL_V left join AP_CHECKS_ALL_V on AP_INVOICES_ALL_V.INVOICE_NUM = AP_CHECKS_ALL_V.INVOICE_NUM "
                 . "where AP_INVOICES_ALL_V.KDKPPN='" . $kdkppn . "' "
-                . "and (AP_INVOICES_ALL_V.BEGIN_DATE = '". date("d-m-Y", time()) . "' or AP_INVOICES_ALL_V.STATUS = 'OPEN') "
-                . "order by AP_INVOICES_ALL_V.BEGIN_DATE DESC, AP_INVOICES_ALL_V.INVOICE_NUM";
+                . "and ("
+                . "AP_INVOICES_ALL_V.BEGIN_DATE = '". date("d-m-Y", time()) . "' "
+                . "or AP_INVOICES_ALL_V.STATUS = 'OPEN' "
+                . "or AP_CHECKS_ALL_V.CHECK_DATE  = TO_DATE ('" . date("d-m-Y", time()) . "','DD-MM-YYYY')"
+                . ") "
+                . "order by AP_INVOICES_ALL_V.BEGIN_DATE DESC, AP_INVOICES_ALL_V.INVOICE_NUM, substr(AP_INVOICES_ALL_V.INVOICE_NUM,7,6) ";
 
         $result = $this->db->select($sql);
-        var_dump($sql);
+        //var_dump($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
