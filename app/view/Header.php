@@ -251,7 +251,7 @@
                 
                 
                 <!--//////////////////////////////////////// --> 
-                <!--/////////////// Header KANWIL /////////// -->  
+                <!--/////////////// Header KPPN /////////// -->  
                 <!--//////////////////////////////////////// --> 
                 
                 <?php elseif (Session::get('role') == KPPN): ?>
@@ -355,9 +355,7 @@
                     <li class="subnav"><h4><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;TV</h4>
                         <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
                             <ul>
-                                <li><a href="<?php echo URL; ?>home/ticker/spm" target="_blank">TV: SPM dalam Proses</a></li>
-                                <li><a href="<?php echo URL; ?>home/ticker/sp2d" target="_blank">TV: SP2D Terbit Hari Ini</a></li>
-                                <li><a href="<?php echo URL; ?>home/ticker/spm-sp2d" target="_blank">TV: SPM &amp; SP2D</a></li>
+                                <li><a href="<?php echo URL; ?>home/ticker/spm-sp2d" target="_blank">TV: Status SP2D</a></li>
                             </ul>
                         </div>
                     </li>
