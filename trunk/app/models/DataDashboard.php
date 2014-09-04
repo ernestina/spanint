@@ -471,7 +471,7 @@ class DataDashboard {
     public function get_hist_spm_sp2d_filter_tv($kdkppn) {
         $sql = "select DISTINCT(AP_INVOICES_ALL_V.INVOICE_NUM) NO_INVOICE, AP_INVOICES_ALL_V.BEGIN_DATE DATE_START, "
                 . "AP_INVOICES_ALL_V.STATUS LAST_STATUS, AP_CHECKS_ALL_V.CHECK_NUMBER NO_SP2D, AP_CHECKS_ALL_V.CHECK_DATE TGL_SP2D, "
-                . "AP_CHECKS_ALL_V.AMOUNT JUMLAH, AP_CHECKS_ALL_V.CURRENCY_CODE MATA_UANG, AP_CHECKS_ALL_V.DESCRIPTION DESKRIPSI "
+                . "AP_CHECKS_ALL_V.AMOUNT JUMLAH, AP_CHECKS_ALL_V.CURRENCY_CODE MATA_UANG, substr(AP_CHECKS_ALL_V.DESCRIPTION,0,70) DESKRIPSI "
                 . "from AP_INVOICES_ALL_V left join AP_CHECKS_ALL_V on AP_INVOICES_ALL_V.INVOICE_NUM = AP_CHECKS_ALL_V.INVOICE_NUM "
                 . "where AP_INVOICES_ALL_V.KDKPPN='" . $kdkppn . "' "
                 . "and ("
@@ -479,7 +479,7 @@ class DataDashboard {
                 . "or AP_INVOICES_ALL_V.STATUS = 'OPEN' "
                 . "or AP_CHECKS_ALL_V.CHECK_DATE  = TO_DATE ('" . date("d-m-Y", time()) . "','DD-MM-YYYY')"
                 . ") "
-                . "order by AP_INVOICES_ALL_V.BEGIN_DATE DESC, AP_INVOICES_ALL_V.INVOICE_NUM, substr(AP_INVOICES_ALL_V.INVOICE_NUM,7,6) ";
+                . "order by AP_INVOICES_ALL_V.BEGIN_DATE, AP_INVOICES_ALL_V.INVOICE_NUM, substr(AP_INVOICES_ALL_V.INVOICE_NUM,7,6) ";
 
         $result = $this->db->select($sql);
         //var_dump($sql);
