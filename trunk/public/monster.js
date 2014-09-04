@@ -197,6 +197,7 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
 
     //TV Scroll Reset
     rowPointer = -3;
+    currentScroll = 0;
     $('#footable-body').animate({ scrollTop: 0  }, 500);
 
 }
@@ -370,7 +371,12 @@ $(document).ready(function() {
         }, 1500);
         
         setTimeout(function() {
-            $('#mainmenu-left-single').animate({ width: '+=' + ($('#main-bar').innerWidth() - $('#span-logo-regular').outerWidth() - $('#monster-logo-regular').outerWidth() - $('#mainmenu-left-single').outerWidth() - 30) }, 500);
+            $('#mainmenu-left-single').animate({ width: '+=' + ($('#main-bar').innerWidth() - $('#span-logo-regular').outerWidth() - $('#monster-logo-regular').outerWidth() - $('#mainmenu-left-single').outerWidth() - 50) }, 500);
+        }, 1000);
+        
+        setTimeout(function() {
+            $('#copyright').css('position','relative');
+            $('#copyright').animate({ left: '+=' + 20 }, 500);
         }, 1000);
         
         setInterval(function() {

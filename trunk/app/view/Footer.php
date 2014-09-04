@@ -5,7 +5,7 @@
             <nav id="footer-bar" class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                     <div class="navbar-text" style="float: left; padding-top: 8px;">
-                        <span class="visible-xs">&copy; 2014 DTP</span><span class="hidden-xs">&copy; 2014 Direktorat Transformasi Perbendaharaan</span>
+                        <span class="visible-xs">&copy; 2014 DTP</span><span class="hidden-xs" id="copyright">&copy; 2014 Direktorat Transformasi Perbendaharaan</span>
                     </div>
                     <div id="footer-dev" class="navbar-text" style="float: right;">
                         <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-app-credit"><span class="glyphicon glyphicon-heart"></span> Tim Pengembang</button>
