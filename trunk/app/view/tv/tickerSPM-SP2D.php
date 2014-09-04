@@ -50,16 +50,16 @@
                             
                             <td>
                             
-                                <h4 class="tight-margin"><b>Satker <?php echo substr($value->get_invoice_num(), 7, 6); ?></b></h4>
+                                <h3 class="tight-margin"><b>Satker <?php echo substr($value->get_invoice_num(), 7, 6); ?></b></h3>
                                 <h3 class="tight-margin"><b>SPM No. <?php echo $value->get_invoice_num(); ?></b></h3>
-                                <h3 class="tight-margin"><b><?php if ($value->get_status() == 'OPEN') { echo 'DALAM PROSES'; } else if ($value->get_status() == 'CLOSED') { 'SELESAI'; } else { echo 'DIBATALKAN'; } ?></b></h3>
+                                <h3 class="tight-margin"><b><?php if ($value->get_status() == 'OPEN' || $value->get_check_number()=='') { echo 'DALAM PROSES'; } else if ($value->get_status() == 'CLOSED') { echo 'SELESAI SP2D'; } else { echo 'DIBATALKAN'; } ?></b></h3>
                                 
                             </td>
                             <td>
                                 
                                 <h4 class="tight-margin segmented-bottom">No. SP2D: <?php if ($value->get_check_number() == '') { echo '-'; } else { echo $value->get_check_number(); } ?></h4>
                                 <p class="tight-margin">Tanggal: <?php if ($value->get_check_date() == '') { echo '-'; } else { echo $value->get_check_date(); } ?></p>
-                                <p class="tight-margin">Nominal: <?php if ($value->get_nominal_sp2d() == '') { echo '-'; } else { echo $value->get_nominal_sp2d(); echo ' '; echo $value->get_mata_uang(); } ?></p>
+                                <p class="tight-margin">Nominal: <?php if ($value->get_nominal_sp2d() == '') { echo '-'; } else { echo $value->get_mata_uang()." ".number_format($value->get_nominal_sp2d());} ?></p>
                                 
                             </td>
                             
