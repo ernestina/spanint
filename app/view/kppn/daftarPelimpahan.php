@@ -191,14 +191,14 @@
                 <th rowspan="2">Status Limpah</th>
             </tr>
             <tr>
-                <th class="align-left" width="120px">No. Rekening<br>Nama Rekening</th>
-                <th class="align-center" width="100px">Tanggal</th>
+                <th class="align-left">No. Rekening<br>Nama Rekening</th>
+                <th class="align-center" width='100px'>Tanggal</th>
                 <th class="align-center">No. Sakti</th>
                 <th class="align-right">Nilai</th>
                 <th class="align-center">Akun</th>
                 <th class="align-center">Kode KPPN </th>
                 <th class="align-center">No. Rekening<br>Nama Rekening</th>
-                <th class="align-center" width="100px">Tanggal</th>
+                <th class="align-center" width='100px'>Tanggal</th>
                 <th class="align-center">No. Sakti</th>
                 <th class="align-center">Nilai</th>
                 <th class="align-center">Akun</th>
