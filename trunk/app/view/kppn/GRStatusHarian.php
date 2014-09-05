@@ -743,7 +743,7 @@
         <div class="row">
             
             <div class="col-md-12">
-                <table class="table table-bordered" style='font-size: 90%'>
+                <table class="table table-bordered" style='font-size: 70%'>
                     <tr>
                         <th width="10px" >Warna</th>
                         <th width="100px" >Keterangan</th>
