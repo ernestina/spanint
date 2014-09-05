@@ -5,6 +5,7 @@
         
         <meta charset="utf-8">
         <link rel="shortcut icon" href="<?php echo URL; ?>public/monster-logo-small.ico"/>
+        <link rel="icon" href="<?php echo URL; ?>public/monster-logo-small.ico"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes">
         
         <title>Online Monitoring SPAN</title>
