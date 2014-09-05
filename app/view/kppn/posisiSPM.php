@@ -9,13 +9,6 @@
             
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
                 
-                <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
-                    <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                <?php } ?>
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
-                
                 <?php
                 //----------------------------------------------------
                 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
@@ -55,6 +48,11 @@
                 //----------------------------------------------------		
                 ?>
                 
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+                <?php if (Session::get('role') == ADMIN OR Session::get('role') == KANWIL) { ?>
+                    <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                <?php } ?>
                 
             </div>
         </div>

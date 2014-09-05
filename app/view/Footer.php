@@ -8,7 +8,7 @@
                         <span class="visible-xs">&copy; 2014 DTP</span><span class="hidden-xs" id="copyright">&copy; 2014 Direktorat Transformasi Perbendaharaan</span>
                     </div>
                     <div id="footer-dev" class="navbar-text" style="float: right;">
-                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-app-credit"><span class="glyphicon glyphicon-heart"></span> Tim Pengembang</button>
+                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-app-credit"><span class="glyphicon glyphicon-fire"></span> Tim Pengembang</button>
                     </div>
                 </div>
             </nav>
@@ -25,7 +25,7 @@
                     <div class="modal-header">
                     
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
-                        <h4 class="modal-title" id="app-credit-label"><span class="glyphicon glyphicon-heart"></span> Tim Pengembang</h4>
+                        <h4 class="modal-title" id="app-credit-label"><span class="glyphicon glyphicon-fire"></span> Tim Pengembang</h4>
                     
                     </div>
                     

@@ -142,7 +142,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -162,9 +162,9 @@
                     <th>Nilai Invoice</th>
                     <th width='350px'>Uraian</th>
                     <th width='200px'>Alasan Hold</th>
-                    <th width='200px' >Status Release</th>
-                    <th width='100px'>Tanggal Hold</th>
-                    <th width='200px'>Status Invoice</th>
+                    <th >Status Release</th>
+                    <th >Tanggal Hold</th>
+                    <th>Status Invoice</th>
                 </tr>
             </thead>
             <tbody class='ratatengah'>

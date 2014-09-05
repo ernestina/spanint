@@ -1,9 +1,20 @@
 /* Let's make use of our framework, and minimize our own CSS */
 
 /* HTML */
+@font-face {
+    font-family: "Nexa";
+    src: url('font/segoeui.ttf');
+}
+
+@font-face {
+    font-family: "Nexa";
+    src: url("font/segoeuib.ttf");
+    font-weight: bold;
+}
 body {
-    font-size: 12px;
+    font-size: 14px;
     overflow-x: hidden;
+    font-family: Nexa;
 }
 
 td {
