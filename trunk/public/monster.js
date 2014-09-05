@@ -28,6 +28,98 @@ function toggleFullScreen() {
   }  
 }
 
+function renderPie(data,target) {
+
+    var pieContainerContent = "";
+
+    pieContainerContent += "<canvas id='" + target + "-canvas'></canvas>";
+    pieContainerContent += "<div class='pie-info'>";
+    pieContainerContent += "<div class='pie-info-title'>" + data.title + "</div>";
+
+    for (i=0; i<data.pieData.length; i++) {
+
+        if (data.pieData.length > 2) {
+
+            pieContainerContent += "<div class='pie-info-content half'>";
+
+
+        } else {
+
+            pieContainerContent += "<div class='pie-info-content full'>";
+
+        }
+
+        pieContainerContent += "<div class='sphere' style='background: " + data.pieData[i].color + "'></div>"
+        pieContainerContent += "<span class='info-number'>" + data.pieData[i].index + "</span><br/><span class='info-text'>" + data.pieData[i].label + "</span>"
+        pieContainerContent += "</div>";
+
+    }
+
+    pieContainerContent += "</div>";
+
+    $("#" + target).html(pieContainerContent);
+    $("#" + target).fadeIn(400, "swing", function() {
+        $("#" + target + "-canvas").attr("width",$("#" + target + "-canvas").width()-5);
+        $("#" + target + "-canvas").attr("height",$("#" + target + " > .pie-info").height());
+
+        dataExists = false;
+
+        for (i=0; i<data.pieData.length; i++) {
+
+            if ((data.pieData[i].value != 0) && (data.pieData[i].value != null)) {
+
+                dataExists = true;
+                break;
+
+            }
+
+        }
+
+        var pieData = new Array();
+
+        if (dataExists) {
+
+            for (i=0; i<data.pieData.length; i++) {
+
+                pieData[i] = new Array();
+                pieData[i].value = data.pieData[i].value;
+                pieData[i].color = data.pieData[i].color;
+
+            }
+
+        } else {
+
+            pieData[0] = new Array();
+            pieData[0].value = 1;
+            pieData[0].color = "#e5e5e5";
+        }
+
+        var canvas = $("#" + target + "-canvas").get(0).getContext("2d");
+        var chart = new Chart(canvas).Doughnut(pieData);
+
+        dataLoaded();
+        
+    });
+
+}
+
+function renderLine(data,target) {
+    
+    var lineContainerContent = "<div id='line-chart-container'><div class='ticker-title'>" + data.title + "<div class='line-legend'><span class='sphere blue'></span>Gaji</div><div class='line-legend'><span class='sphere purple'></span>Non Gaji</div><div class='line-legend'><span class='sphere yellow'></span>Lainnya</div><div class='line-legend'><span class='sphere red'></span>Void</div></div><canvas id='" + target + "-canvas'></canvas></div>";
+    
+    $("#" + target).html(lineContainerContent);
+    $("#" + target).fadeIn(400, "swing", function() {
+        $("#" + target + "-canvas").attr("width",$("#" + target).innerWidth()-40);
+        $("#" + target + "-canvas").attr("height",$(window).innerHeight()-600);
+
+        var canvas = $("#" + target + "-canvas").get(0).getContext("2d");
+        var chart = new Chart(canvas).Line(data.lineData);
+
+        dataLoaded();
+        
+    });
+}
+
 function wrapTable() {
     
     $('#table-container').css('overflow-x','hidden');
@@ -382,7 +474,7 @@ $(document).ready(function() {
         
         setInterval(function() {
             tvScroll();
-        },2000);
+        },4000);
         
         startTime();
         
