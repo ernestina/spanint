@@ -14,7 +14,7 @@
 body {
     font-size: 14px;
     overflow-x: hidden;
-    font-family: Nexa;
+    font-family: Nexa, "Segoe UI", sans-serif;
 }
 
 td {
