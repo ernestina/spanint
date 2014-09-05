@@ -46,11 +46,11 @@ if(isset($this->data)){
             <div class="col-md-6 col-sm-12">
                 <?php if (isset($this->d_bank)) {
 					if($this->d_bank=="MDRI"){
-						echo "<br> Mandiri" ;
+						echo "Bank : Mandiri <br>" ;
 					} elseif($this->d_bank=="SEMUA_BANK"){
-						echo "<br> SEMUA_BANK" ;
+						echo "SEMUA_BANK <br>" ;
 					}else {
-						echo $this->d_bank;
+						echo "Bank : " . $this->d_bank;
                         echo "<br>";
 					}
                 }

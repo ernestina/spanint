@@ -42,14 +42,14 @@
         <!--baris pertama-->
 			<thead>
                 <tr>
-					<th>No.</th>
+					<th width='5px'>No.</th>
 					<th>Kode KPPN</th>
 					<th>NRS / Tipe Kode Pos</th>
 					<th>Nama Supplier<br>NPWP Supplier</th>
 					<th>Nama Bank</th>
 					<th>KD NAB - Kode Valas</th>
 					<th>Nama Penerima</th>
-					<th>Nama pemilik Rekening<br>Nomor Rekening</th>
+					<th width='300px'>Nama pemilik Rekening<br>Nomor Rekening</th>
 					<th>SWIFT / IBAN</th>
 					<th>NPWP Penerima</th>
 					<th>NIP Penerima</th>
