@@ -9,6 +9,19 @@
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 <!--pdf-->
+				<?php
+							//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+
+				//-----------------------------------
+				 foreach ($this->data as $value) {
+                        $file_name=$value->get_file_name();
+				}
+				?>
+				<a href="<?php echo URL; ?>PDF/errorSpm_PDF/<?php echo $file_name; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				<?php
+				//----------------------------------
+				?>
                 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">

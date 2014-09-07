@@ -112,7 +112,7 @@ class FPDF_AutoWrapTable extends FPDF {
         #tableheader
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_jenis_belanja = 200;
-        $ukuran_kolom_akun = 200;
+        $ukuran_kolom_akun = 100;
         $ukuran_kolom_dana = 80;
 
         $this->SetFillColor(200, 200, 200);

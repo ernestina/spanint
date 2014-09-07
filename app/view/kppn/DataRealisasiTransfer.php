@@ -12,8 +12,7 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 		if (Session::get('role') == KANWIL) {
-		if(isset($this->lokasi) || isset($this->satker) ||
-			isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
+			if(isset($this->lokasi) || isset($this->data3)){
 				if (isset($this->lokasi)) {
 					$kdlokasi = $this->lokasi;
 				} else {
@@ -25,29 +24,15 @@
 						$kdsatker = $satker->get_satker();
 					  }
 				} else {
-					$kdsatker = 'null';
-				}
-
-				if (isset($this->d_tgl_awal)) {
-					$kdtgl_awal = $this->d_tgl_awal;
-				} else {
-					$kdtgl_awal = 'null';
-				}
-				if (isset($this->d_tgl_akhir)) {
-					$kdtgl_akhir = $this->d_tgl_akhir;
-				} else {
-					$kdtgl_akhir = 'null';
+						$kdsatker = 'null';
 				}
 			?>
-
-			<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
+			<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 			<?php
+						
 			}
         }
         if (Session::get('role') == ADMIN || Session::get('role') == DJA) {
-			if(isset($this->lokasi) || isset($this->satker) ||
-			isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
 				if (isset($this->lokasi)) {
 					$kdlokasi = $this->lokasi;
 				} else {
@@ -59,61 +44,38 @@
 						$kdsatker = $satker->get_satker();
 					  }
 				} else {
-					$kdsatker = 'null';
-				}
-
-				if (isset($this->d_tgl_awal)) {
-					$kdtgl_awal = $this->d_tgl_awal;
-				} else {
-					$kdtgl_awal = 'null';
-				}
-				if (isset($this->d_tgl_akhir)) {
-					$kdtgl_akhir = $this->d_tgl_akhir;
-				} else {
-					$kdtgl_akhir = 'null';
+						$kdsatker = 'null';
 				}
 			?>
-
-			<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-			
+			<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 			<?php
-			}
         }
 
         if (Session::get('role') == KPPN) {
-				if(isset($this->lokasi) || isset($this->satker) ||
-			isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
-
+			IF(isset($this->lokasi)){
 				if (isset($this->lokasi)) {
-					$kdlokasi = $this->lokasi;
-				} else {
-					$kdlokasi = 'null';
-				}
+						$kdlokasi = $this->lokasi;
+					} else {
+						$kdlokasi = 'null';
+					}
 
-				if (isset($this->data3)) {
-					foreach ($this->data3 as $satker) {
-						$kdsatker = $satker->get_satker();					  
-						}
-				} else {
-					$kdsatker = 'null';
-				}
-
-				if (isset($this->d_tgl_awal)) {
-					$kdtgl_awal = $this->d_tgl_awal;
-				} else {
-					$kdtgl_awal = 'null';
-				}
-				if (isset($this->d_tgl_akhir)) {
-					$kdtgl_akhir = $this->d_tgl_akhir;
-				} else {
-					$kdtgl_akhir = 'null';
-				}
-			?>
-
-			<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-			<?php
+					if (isset($this->data3)) {
+						foreach ($this->data3 as $satker) {
+							$kdsatker = $satker->get_satker();
+						  }
+					} else {
+							$kdsatker = 'null';
+					}
+				?>
+				<a href="<?php echo URL; ?>PDF/DataRealisasiTransfer_PDF/<?php echo $kdsatker . "/" . $kdlokasi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				<?php
+			
+			}else{
+				$kdlokasi = 'null';
+				$kdsatker = 'null';
+			
 			}
+				
 		}
 
 	

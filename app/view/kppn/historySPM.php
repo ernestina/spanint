@@ -13,44 +13,79 @@
 				//----------------------------------------------------
                 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
                 if (Session::get('role') == KANWIL) {
-                    IF(isset($this->d_nama_kppn) || isset($this->d_invoice)){
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
 							}
 						} else {
-							echo Session::get('user');
+							 $kdkppn =$this->kd_kppn;
 						}
 						if (isset($this->d_invoice)) {
 							$invoice = $this->d_invoice;
 						} else {
-							$invoice = "null";
-						}
+							if (isset($this->data)) {
+								foreach ($this->data as $value) {
+									$invoice =$value->get_invoice_num();
+								} 
+							
+							}
+
+ 						}
 					?>
 									
 						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
-					}
                 }
                 if (Session::get('role') == ADMIN) {
-                    IF(isset($this->d_nama_kppn) || isset($this->d_invoice)){
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
 							}
+						}else{
+							$kdkppn =$this->kd_kppn;
 						} 
 						if (isset($this->d_invoice)) {
 							$invoice = $this->d_invoice;
 						} else {
-							$invoice = "null";
+							//$invoice ='null';
+							if (isset($this->data)) {
+								foreach ($this->data as $value) {
+									$invoice =$value->get_invoice_num();
+								} 
+							
+							}
 						}
 					?>
 									
 						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
-					}
                 }
                 if (Session::get('role') == KPPN) {
+						if (isset($this->d_nama_kppn)) {
+							foreach ($this->d_nama_kppn as $kppn) {
+								$kdkppn = $kppn->get_kd_satker();
+							}
+						} else {
+							 $kdkppn=Session::get('id_user');
+						}
+						if (isset($this->d_invoice)) {
+							$invoice = $this->d_invoice;
+						} else {
+							if (isset($this->data)) {
+								foreach ($this->data as $value) {
+									$invoice =$value->get_invoice_num();
+								} 
+							
+							}
+
+						}
+					?>
+									
+						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+					
+                }
+				 if (Session::get('role') == SATKER) {
                   
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
@@ -62,7 +97,14 @@
 						if (isset($this->d_invoice)) {
 							$invoice = $this->d_invoice;
 						} else {
-							$invoice = "null";
+							
+							if (isset($this->data)) {
+								foreach ($this->data as $value) {
+									$invoice =$value->get_invoice_num();
+								} 
+							
+							}
+
 						}
 					?>
 									

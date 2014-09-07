@@ -67,19 +67,18 @@
 					}
 
 
-
 					if (isset($this->d_tgl_awal)) {
 						$kdtgl_awal = $this->d_tgl_awal;
 					} else {
-						$kdtgl_awal = 'null';
+						$kdtgl_awal='null';
 					}
 					if (isset($this->d_tgl_akhir)) {
 						$kdtgl_akhir = $this->d_tgl_akhir;
 					} else {
-						$kdtgl_akhir = 'null';
+						$kdtgl_akhir ='null';
 					}
                 ?>
-                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/"  . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar  . "/" . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
                 <?php
                 //----------------------------------------------------		
@@ -91,6 +90,74 @@
 					isset($this->d_invoice) || isset($this->d_bank) || isset($this->d_status) ||
 					isset($this->d_bayar) || isset($this->d_tgl_awal) ||
 					isset($this->d_tgl_akhir)) {
+					if (isset($this->d_nama_kppn)) {
+						foreach ($this->d_nama_kppn as $kppn) {
+							$kdkppn = $kppn->get_kd_satker();
+						  }
+					} else {
+						    $kdkppn = 'null';
+					}
+
+					if (isset($this->d_nosp2d)) {
+						$kdnosp2d = $this->d_nosp2d;
+					}else{
+						$kdnosp2d='null';
+					}
+
+					if (isset($this->d_barsp2d)) {
+						$kdbarsp2d = $this->d_barsp2d;
+					}else{
+						$kdbarsp2d='null';
+					}
+					if (isset($this->d_kdsatker)) {
+						$kdsatker = $this->d_kdsatker;
+					}else{
+						$kdsatker='null';
+					}
+
+					if (isset($this->d_invoice)) {
+						$kdnoinvoice = $this->d_invoice;
+					}else{
+						$kdnoinvoice='null';
+					}      
+
+					if (isset($this->d_bank)) {
+						$kdbank = $this->d_bank;
+					}else{
+						$kdbank='null';
+					}
+					if (isset($this->d_status)) {
+						$kdstatus = $this->d_status;
+					}else{
+						$kdstatus='null';
+					}
+
+					if (isset($this->d_bayar)) {
+						$kdbayar = $this->d_bayar;
+					}else{
+						$kdbayar='null';
+					}
+
+					if (isset($this->d_tgl_awal)) {
+						$kdtgl_awal = $this->d_tgl_awal;
+					} else {
+						$kdtgl_awal='null';
+					}
+					if (isset($this->d_tgl_akhir)) {
+						$kdtgl_akhir = $this->d_tgl_akhir;
+					} else {
+						$kdtgl_akhir ='null';
+					}
+                ?>
+                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar  . "/" . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
+                <?php
+                //----------------------------------------------------		
+				}
+
+			}
+			if (Session::get('role') == KPPN) {
+
 					if (isset($this->d_nama_kppn)) {
 						foreach ($this->d_nama_kppn as $kppn) {
 							$kdkppn = $kppn->get_kd_satker();
@@ -139,24 +206,86 @@
 						$kdbayar='null';
 					}
 
+
 					if (isset($this->d_tgl_awal)) {
 						$kdtgl_awal = $this->d_tgl_awal;
 					} else {
-						$kdtgl_awal = 'null';
+						$kdtgl_awal='null';
 					}
 					if (isset($this->d_tgl_akhir)) {
 						$kdtgl_akhir = $this->d_tgl_akhir;
 					} else {
-						$kdtgl_akhir = 'null';
+						$kdtgl_akhir ='null';
 					}
                 ?>
-                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar  . "/" . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
+                <?php
+                //----------------------------------------------------		
+				}
+			if (Session::get('role') == SATKER) {
+
+						    $kdkppn = 'null';
+
+					if (isset($this->d_nosp2d)) {
+						$kdnosp2d = $this->d_nosp2d;
+					}else{
+						$kdnosp2d='null';
+					}
+
+					if (isset($this->d_barsp2d)) {
+						$kdbarsp2d = $this->d_barsp2d;
+					}else{
+						$kdbarsp2d='null';
+					}
+					if (isset($this->d_kdsatker)) {
+						$kdsatker = $this->d_kdsatker;
+					}else{
+						$kdsatker='null';
+					}
+
+					if (isset($this->d_invoice)) {
+						$kdnoinvoice = $this->d_invoice;
+					}else{
+						$kdnoinvoice='null';
+					}      
+
+					if (isset($this->d_bank)) {
+						$kdbank = $this->d_bank;
+					}else{
+						$kdbank='null';
+					}
+					if (isset($this->d_status)) {
+						$kdstatus = $this->d_status;
+					}else{
+						$kdstatus='null';
+					}
+
+					if (isset($this->d_bayar)) {
+						$kdbayar = $this->d_bayar;
+					}else{
+						$kdbayar='null';
+					}
+
+
+					if (isset($this->d_tgl_awal)) {
+						$kdtgl_awal = $this->d_tgl_awal;
+					} else {
+						$kdtgl_awal='null';
+					}
+					if (isset($this->d_tgl_akhir)) {
+						$kdtgl_akhir = $this->d_tgl_akhir;
+					} else {
+						$kdtgl_akhir ='null';
+					}
+                ?>
+                <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar  . "/" . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
                 <?php
                 //----------------------------------------------------		
 				}
 
-			}
+			
                 //----------------------------------------------------		
                 ?>
                 

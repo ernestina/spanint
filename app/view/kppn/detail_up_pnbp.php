@@ -12,6 +12,34 @@
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+			                			<?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+			    if (Session::get('role') == KPPN) {
+				
+					if (isset($this->nmsatker)) {
+								foreach ($this->nmsatker as $satker) {
+									$kdsatker = $satker->get_satker_code();
+								}
+						}else{
+							if (isset($this->data)) {
+								 foreach ($this->data as $value) {
+									$kdsatker =$value->get_satker_code();
+								}
+							}
+						}
+						if (isset($this->akun)) {
+								$kdakun =$this->akun;
+						}			
+					
+					?>
+						<a href="<?php echo URL; ?>PDF/DetailUPPNBP_PDF/<?php echo $kdakun . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+					}
+                
+			//---------------------------------------------------
+			?>
+
                 
                 
             </div>

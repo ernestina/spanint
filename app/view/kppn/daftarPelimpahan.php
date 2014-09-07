@@ -15,6 +15,8 @@
                 
                 <?php
 				//---------------------
+				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+
 				if (Session::get('role') == KANWIL) {
 			if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
 
@@ -36,12 +38,12 @@
 					if (isset($this->d_tgl_awal)) {
 						$kdtgl_awal = $this->d_tgl_awal;
 					} else {
-						$kdtgl_awal = 'null';
+						$kdtgl_awal='null';
 					}
 					if (isset($this->d_tgl_akhir)) {
 						$kdtgl_akhir = $this->d_tgl_akhir;
 					} else {
-						$kdtgl_akhir = 'null';
+						$kdtgl_akhir ='null';
 					}
 			?>
                     
@@ -72,12 +74,12 @@
 					if (isset($this->d_tgl_awal)) {
 						$kdtgl_awal = $this->d_tgl_awal;
 					} else {
-						$kdtgl_awal = 'null';
+						$kdtgl_awal='null';
 					}
 					if (isset($this->d_tgl_akhir)) {
 						$kdtgl_akhir = $this->d_tgl_akhir;
 					} else {
-						$kdtgl_akhir = 'null';
+						$kdtgl_akhir ='null';
 					}
 			?>
                     
@@ -100,7 +102,7 @@
 						$kdkppn_anak = $this->d_kppn_anak;
 					} else {
 						
-						$kdkppn_induk = Session::get('id_user');			
+						$kdkppn_anak = Session::get('id_user');			
 					}
 					if (isset($this->d_kppn_induk)) {
 						$kdkppn_induk = $this->d_kppn_induk;
@@ -110,12 +112,12 @@
 					if (isset($this->d_tgl_awal)) {
 						$kdtgl_awal = $this->d_tgl_awal;
 					} else {
-						$kdtgl_awal = 'null';
+						$kdtgl_awal='null';
 					}
 					if (isset($this->d_tgl_akhir)) {
 						$kdtgl_akhir = $this->d_tgl_akhir;
 					} else {
-						$kdtgl_akhir = 'null';
+						$kdtgl_akhir ='null';
 					}
 				?>
 						

@@ -251,6 +251,48 @@ class FPDF_AutoWrapTable extends FPDF {
         $jtotal = 0;
 
         $this->SetFillColor(255);
+		if (count($this->data) == 0) {
+			 $this->Row(
+                    array('',
+                        'N I H I L',
+                        '',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+						'',
+                        ''
+                    )
+            );
+		
+		}else{
+		
+		}
         foreach ($this->data as $value) {
             $this->Row(
                     array($no++,

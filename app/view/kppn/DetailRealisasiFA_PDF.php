@@ -150,6 +150,9 @@ class FPDF_AutoWrapTable extends FPDF {
                     array('',
                         'N I H I L',
                         '',
+						'',
+						'',
+						'',
                         ''
                     )
             );

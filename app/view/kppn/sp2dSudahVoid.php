@@ -10,14 +10,8 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : sp2dSudahVoid.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 	if( isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
 		if (isset($this->d_nama_kppn)) {
 			foreach ($this->d_nama_kppn as $kppn) {
@@ -33,13 +27,13 @@
 			$kdbank='null';
 		}
 
-		if (isset($this->d_tgl_awal)) {
-			$kdtgl_awal = $this->d_tgl_awal;
+		if (isset($this->d_kdtgl_awal1)) {
+			$kdtgl_awal = $this->d_kdtgl_awal1;
 		} else {
 			$kdtgl_awal = 'null';
 		}
-		if (isset($this->d_tgl_akhir)) {
-			$kdtgl_akhir = $this->d_tgl_akhir;
+		if (isset($this->d_kdtgl_akhir1)) {
+			$kdtgl_akhir = $this->d_kdtgl_akhir1;
 		} else {
 			$kdtgl_akhir = 'null';
 		}

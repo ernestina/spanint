@@ -10,14 +10,8 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : harianBO.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
     if( isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 	
 	){
@@ -39,12 +33,13 @@
 			if (isset($this->d_tgl_awal)) {
 				$kdtgl_awal = $this->d_tgl_awal;
 			} else {
-				$kdtgl_awal = 'null';
+				$kdtgl_awal='null';
 			}
 			if (isset($this->d_tgl_akhir)) {
 				$kdtgl_akhir = $this->d_tgl_akhir;
 			} else {
-				$kdtgl_akhir = 'null';
+				$kdtgl_akhir ='null';
+				}
 			}
     ?>
 

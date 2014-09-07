@@ -15,7 +15,6 @@
 
 if (Session::get('role') == ADMIN) {
 //-----------------------------
-/* IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){ */
 	
 	if (isset($this->d_nama_kppn)) {
 		foreach ($this->d_nama_kppn as $kppn) {
@@ -38,12 +37,10 @@ if (Session::get('role') == ADMIN) {
 	?>
     <a href="<?php echo URL; ?>PDF/RekapSp2d_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
     <?php
-	/* } */
 //------------------------------
 }
 if (Session::get('role') == KANWIL) {
 //-----------------------------
-IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
 	
 	if (isset($this->d_nama_kppn)) {
 		foreach ($this->d_nama_kppn as $kppn) {
@@ -66,13 +63,11 @@ IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_a
 	?>
     <a href="<?php echo URL; ?>PDF/RekapSp2d_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
     <?php
-	}
 //------------------------------
 //------------------------------
 }
 if (Session::get('role') == KPPN) {
 //-----------------------------
-IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
 	
 	if (isset($this->d_nama_kppn)) {
 		foreach ($this->d_nama_kppn as $kppn) {
@@ -95,12 +90,38 @@ IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_a
 	?>
     <a href="<?php echo URL; ?>PDF/RekapSp2d_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
     <?php
+}
+//------------------------------
+
+
+if (Session::get('role') == SATKER) {
+//-----------------------------
+	
+	if (isset($this->d_nama_kppn)) {
+		foreach ($this->d_nama_kppn as $kppn) {
+			$kdkppn = $kppn->get_kd_satker();
+		  }
+	} else {
+		$kdkppn = 'null';
 	}
+	
+	if (isset($this->d_tgl_awal)) {
+		$kdtgl_awal = $this->d_tgl_awal;
+	} else {
+		$kdtgl_awal = 'null';
+	}
+	if (isset($this->d_tgl_akhir)) {
+		$kdtgl_akhir = $this->d_tgl_akhir;
+	} else {
+		$kdtgl_akhir = 'null';
+	}
+	?>
+    <a href="<?php echo URL; ?>PDF/RekapSp2d_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+    <?php
 }
 //------------------------------
 
 ?>                
-
                 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -186,10 +207,9 @@ IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_a
 
                         if (isset($_POST['kdkppn'])) {
                             $kppn = $_POST['kdkppn'];
-                        } else {
+                        } else{
                             $kppn = Session::get('id_user');
                         }
-
                         echo "<td td align='right'><a href=" . URL . "dataSPM/detailrekapsp2d/" . $value->get_jendok() . "/" . $kppn . "/" . $_POST['tgl_awal'] . "/" . $_POST['tgl_akhir'] . " target='_blank' '>" . number_format($value->get_jumlah_sp2d()) . "</td>";
 
                         echo "</tr>	";

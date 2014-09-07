@@ -158,8 +158,14 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array($kolom1,$kolom2,$kolom3,$kolom4, $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, $ukuran_kolom_dana, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja));
-        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'R', 'R', 'R', 'R'));
+        $this->SetWidths(array($kolom1,$kolom2,
+		$kolom3,$kolom4, 
+		$ukuran_kolom_jenis_belanja, $ukuran_kolom_satker,
+		$ukuran_kolom_dana, $ukuran_kolom_jenis_belanja, 
+		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, 
+		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, 
+		$ukuran_kolom_jenis_belanja));
+        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'R', 'R', 'R', 'R', 'R', 'R'));
 
         if (count($this->data) == 0) {
             $this->Row(
@@ -195,10 +201,11 @@ class FPDF_AutoWrapTable extends FPDF {
                             $value->get_output(),
                             $value->get_dana(),
                            number_format($value->get_budget_amt()),
+						   '0',
                             number_format($value->get_obligation()),
                             number_format($value->get_block_amount()),
                             number_format($value->get_actual_amt()),
-                            number_format(0 - $value->get_obligation())
+                            number_format(0 - $value->get_obligation() - $value->get_block_amount() - $value->get_actual_amt())
                         )
                 );
 				$tot_budget+=$value->get_budget_amt();
@@ -218,12 +225,13 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->SetXY($px2, $py2);
 				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_budget), 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+				$this->Cell($ukuran_kolom_jenis_belanja, $h, '0', 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_encumbrance), 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_blokir), 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_actual), 1, 0, 'R', true);
-				$py3 = $this->GetY();
 				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format(0 - $tot_encumbrance - $tot_blokir - $tot_actual), 1, 1, 'R', true);
 				$this->Ln(3);
 				

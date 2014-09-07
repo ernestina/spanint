@@ -87,8 +87,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
         //tanggal
-        /* $kdtgl_awal = 'null';
-        $kdtgl_akhir = 'null'; */
+        $kdtgl_awal = 'null';
+        $kdtgl_akhir = 'null';
 
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
             $kdtgl_awal1 = $this->kdtgl_awal;
@@ -175,12 +175,12 @@ class FPDF_AutoWrapTable extends FPDF {
                         $value->get_check_number(),
                         $value->get_creation_date(),
                         $value->get_check_date(),
-                        $value->get_check_number(),
+                        $value->get_amount(),
                         $value->get_invoice_num(),
                         $value->get_invoice_date(),
                         $value->get_attribute6(),
                         $value->get_jenis_sp2d(),
-                        $value->get_description(),
+                        $value->get_description()
                     )
             );
         }
