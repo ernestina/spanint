@@ -178,7 +178,7 @@ class FPDF_AutoWrapTable extends FPDF {
 							$value->get_check_number(),
 							$value->get_creation_date(),
 							$value->get_check_date(),
-							$value->get_check_number(),
+							$value->get_amount(),
 							$value->get_invoice_num(),
 							$value->get_invoice_date(),
 							$value->get_attribute6(),

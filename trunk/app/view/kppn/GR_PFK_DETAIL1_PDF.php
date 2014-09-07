@@ -353,7 +353,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'DETAIL DATA PAGU MINUS (FUND FAIL)'; //judul file laporan
+$judul = 'Laporan Monitoring PFK Akun'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 

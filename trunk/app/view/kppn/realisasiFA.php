@@ -5,49 +5,144 @@
             
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Informasi Sisa Pagu Per Akun DIPA Satker</h2>
+				<?php //echo 'kdakun:'.$value->get_akun(); ?>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php
-    //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA.php  
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 
-	if(!empty($this->account_code) || !empty($this->program_code) || !empty($this->output_code)){
-  
- 
-	 if (isset($this->account_code)) {	 
-        $kdakun = $this->account_code;		
-    }else{
-		 foreach ($this->data as $value) {
-            $kdakun =$value->get_akun();
-		}
-	}
-    if (isset($this->program_code)) {
-        $kdprogram = $this->program_code;
-    }else{
-		foreach ($this->data as $value) {
-			$kdprogram =$value->get_program();
+	$kdakun1 = $this->account_code1;	
+	if (Session::get('role') == ADMIN || Session::get('role') == KANWIL  || Session::get('role') == KPPN) {
+	
+	 
+			 if (isset($this->account_code)) {	 
+				$kdakun = $this->account_code;		
+			}else{
+				if (isset($this->data)) {
+					 foreach ($this->data as $value) {
+						$kdakun =$value->get_akun();
+					}
+				}
 			}
+			if (isset($this->program_code)) {
+				$kdprogram = $this->program_code;
+			}else{
+				if (isset($this->data)) {
+					foreach ($this->data as $value) {
+						$kdprogram =$value->get_program();
+					}
+				}
+			}
+			if (isset($this->output_code)) {
+				$kdoutput = $this->output_code;
+			}else{
+				if (isset($this->data)) {
+					 foreach ($this->data as $value) {
+						$kdoutput =$value->get_output();
+					}
+				}
+			}
+			if (isset($this->satker_code)) {
+				$kdsatker = $this->satker_code;
+			}else{
+				if (isset($this->data)) {
+					foreach ($this->data as $value) {
+						$kdsatker =$value->get_satker();
+					}
+				}
+			}
+			?>
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			<?php
+	
 	}
-    if (isset($this->output_code)) {
-        $kdoutput = $this->output_code;
-    }else{
-		 foreach ($this->data as $value) {
-			$kdoutput =$value->get_output();
-		}
+	
+	if (Session::get('role') == SATKER) {
+			 if (isset($this->account_code)) {	 
+				$kdakun = $this->account_code;		
+			}else{
+				if (isset($this->data)) {
+					 foreach ($this->data as $value) {
+						$kdakun =$value->get_akun();
+					}
+				}
+			}
+			if (isset($this->program_code)) {
+				$kdprogram = $this->program_code;
+			}else{
+				if (isset($this->data)) {
+					foreach ($this->data as $value) {
+						$kdprogram =$value->get_program();
+					}
+				}
+			}
+			if (isset($this->output_code)) {
+				$kdoutput = $this->output_code;
+			}else{
+				if (isset($this->data)) {
+					 foreach ($this->data as $value) {
+						$kdoutput =$value->get_output();
+					}
+				}
+			}
+
+					$kdsatker =Session::get('kd_satker');
+			?>
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			<?php
+	
+	
 	}
-	if (isset($this->satker_code)) {
-        $kdsatker = $this->satker_code;
-    }else{
-		  foreach ($this->data as $value) {
-            $kdsatker =$value->get_satker();
-		}
+
+	if (Session::get('role') == DJA) {
+			
+			 if (isset($this->account_code)) {	 
+				$kdakun = $this->account_code;		
+			}else{
+				if (isset($this->data)) {
+					 foreach ($this->data as $value) {
+						$kdakun =$value->get_akun();
+					}
+				}
+			}
+			if (isset($this->program_code)) {
+				$kdprogram = $this->program_code;
+			}else{
+				if (isset($this->data)) {
+					foreach ($this->data as $value) {
+						$kdprogram =$value->get_program();
+					}
+				}
+			}
+			if (isset($this->output_code)) {
+				$kdoutput = $this->output_code;
+			}else{
+				if (isset($this->data)) {
+					 foreach ($this->data as $value) {
+						$kdoutput =$value->get_output();
+					}
+				}
+			}
+			if (isset($this->satker_code)) {
+				$kdsatker = $this->satker_code;
+			}else{
+				if (isset($this->data)) {
+					foreach ($this->data as $value) {
+						$kdsatker =$value->get_satker();
+					}
+				}
+			}
+
+			?>
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			<?php
+	
 	}
-    ?>
-		<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-	<?php
-} 
-?>  
+?>
+	
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             

@@ -87,7 +87,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
         //tanggal
-        /* $kdtgl_awal = 'null';
+       /*  $kdtgl_awal = 'null';
         $kdtgl_akhir = 'null'; */
 
 		$kdtgl_awal1 = $this->kdtgl_awal;

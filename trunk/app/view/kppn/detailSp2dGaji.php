@@ -10,14 +10,8 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php
-    //----------------------------------------------------
-    //Development history
-    //Revisi : 0
-    //Kegiatan :1.mencetak hasil filter ke dalam pdf
-    //File yang diubah : detailSp2dGaji.php
-    //Dibuat oleh : Rifan Abdul Rachman
-    //Tanggal dibuat : 18-07-2014
-    //----------------------------------------------------
+	//----------------------------------------------------
+	//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 
 if( isset($this->d_bank) || isset($this->d_bulan)){
 	if(isset($this->d_nama_kppn)){
@@ -33,7 +27,9 @@ if( isset($this->d_bank) || isset($this->d_bulan)){
     }
     if (isset($this->d_bulan)) {
         $kdbulan = $this->d_bulan;
-    }
+    }else{
+		$kdbulan = 'all';
+	}
     ?>
 
     <a href="<?php echo URL; ?>PDF/detailSp2dGaji_PDF/<?php echo $kdbank . "/" . $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>

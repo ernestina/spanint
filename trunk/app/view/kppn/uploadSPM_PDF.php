@@ -4,7 +4,7 @@
   //Development history
   //Revisi : 0
   //Kegiatan :1.mencetak hasil filter ke dalam pdf
-  //File yang ditambah : detail_fund_fail_kd_PDF.php
+  //File yang ditambah : holdSPM_PDF.php
   //Dibuat oleh : Rifan Abdul Rachman
   //Tanggal dibuat : 18-07-2014
   //----------------------------------------------------
@@ -109,62 +109,60 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont("", "B", 8);
         $this->Ln(10);
         //----------------------------------------------- 
+
         #tableheader
-        $this->SetFont('Arial', 'B', 9);
-        $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 65;
-		$ukuran_kolom_jenis_belanja1 = 70;
-		$kolom1=70;
-		$kolom2=40;
+        $this->SetFont('Arial', 'B', 7);
+        $ukuran_kolom_pagu_total_sisa = 80;
+        $ukuran_kolom_pagu_total = 80;
+		$ukuran_kolom_pagu_total1 = 60;
+        $ukuran_kolom_jenis_belanja = 80;
+        $ukuran_kolom_satker = 75;
+        $ukuran_kolom_akun = 40;
+        $ukuran_kolom_dana = 60;
+        $ukuran_kolom_deskripsi = 140;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(20, $h, 'No', 1, 0, 'C', true);
-        $this->SetX($left += 20);
-        $this->Cell($kolom1, $h, 'Tanggal Error', 1, 0, 'C', true);
-        $this->SetX($left += $kolom1);
-        $this->Cell($kolom2, $h, 'Satker', 1, 0, 'C', true);
-        $this->SetX($left += $kolom2);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Kode KPPN', 1, 0, 'C', true);
-        $px1 = $this->GetX();
+        $this->Cell(30, $h, 'No', 1, 0, 'L', true);
+        $this->SetX($left += 30);
+        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Nomor Invoice', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
+        $this->Cell($ukuran_kolom_pagu_total1, $h, 'Tanggal Invoice', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_pagu_total1);
+        $this->Cell($ukuran_kolom_pagu_total, $h, 'Nilai Invoice', 1, 0, 'C', true);
+        $px1 = $this->GetX();
+        $this->SetX($left += $ukuran_kolom_pagu_total);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Akun', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Uraian Invoice', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Program', 1, 0, 'C', true);
-		$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Output', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Dana', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Pagu Saat Ini', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Pagu Usul Rev', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Total Kontrak', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Blokir', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Realisasi', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Sisa/kurang', 1, 1, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_pagu_total_sisa);
-        $this->Ln(3);
+        $this->Cell($ukuran_kolom_satker, $h, 'Nama File', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_satker);
+        $this->Cell($ukuran_kolom_dana, $h, 'Status Code', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_dana, $h, 'Supplier', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_dana, $h, 'Site Supplier', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_dana, $h, 'Nama Kolom', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_dana, $h, 'Nilai Kolom', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_deskripsi, $h, 'Error Message', 1, 1, 'C', true);
+        $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(20, $kolom1,
-		$kolom2, $ukuran_kolom_pagu_total_sisa,
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja,
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja,
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja1,
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa));
-        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'R', 'R', 'R', 'R', 'R', 'R'));
+        $this->SetWidths(array(30, $ukuran_kolom_pagu_total_sisa,
+		$ukuran_kolom_pagu_total1, $ukuran_kolom_pagu_total, 
+		$ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, 
+		$ukuran_kolom_dana,$ukuran_kolom_dana,
+		$ukuran_kolom_dana,$ukuran_kolom_dana,
+		$ukuran_kolom_dana, $ukuran_kolom_deskripsi));
+        $this->SetAligns(array('C', 'C', 'C', 'R', 'L', 'C', 'C','L', 'C', 'C', 'C','L'));
         if (count($this->data) == 0) {
-            $this->Row(
+			$this->Row(
                     array('',
                         'N I H I L',
                         '',
@@ -172,62 +170,33 @@ class FPDF_AutoWrapTable extends FPDF {
                         '',
                         '',
                         '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
                         ''
-            ));
-        } else {
-            $no = 1;
-            $this->SetFillColor(255);
-            foreach ($this->data as $value) {
-                $this->Row(
-                        array($no++,
-                            $value->get_error_date(),
-                            $value->get_satker_code(),
-                            $value->get_kppn_code(),
-                            $value->get_account_code(),
-                            $value->get_program_code(),
-                            $value->get_output_code(),
-                            $value->get_dana_code(),
-                            number_format($value->get_pagu_semula()),
-                            number_format($value->get_pagu_revisi()),
-                            number_format($value->get_blokir_kontrak()),
-                            number_format($value->get_blokir()),
-                            number_format($value->get_blokir_realisasi()),
-                            number_format($value->get_pagu_revisi() - $value->get_blokir_kontrak() - $value->get_blokir() - $value->get_blokir_realisasi())
-                ));
-                //jumlah grand total
-                $tot_budget+=$value->get_pagu_revisi();
-                $tot_encumbrance+=$value->get_blokir_kontrak();
-                $tot_blokir+=$value->get_blokir();
-                $tot_actual+=$value->get_blokir_realisasi();
-            }
-            $this->SetFont('Arial', '', 7);
-            $h = 20;
-            $this->SetFillColor(200, 200, 200);
-            $left = $this->GetX();
-            $this->Cell(525, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-            $this->SetX($left += 525);
-			
-            $px1 = $this->GetX();
-            $py1 = $this->GetY();
-            $px2 = $px1;
-            $py2 = $py1;
-            $this->SetXY($px2, $py2);
-		   $this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($tot_budget), 1, 0, 'R', true);
-			$this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_encumbrance), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_blokir), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_actual), 1, 0, 'R', true);
-            $this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($tot_budget - $tot_encumbrance - $tot_blokir - $tot_actual), 1, 1, 'R', true);
-            $this->Ln(3);
+                    )
+            );
+		}else{
+		
+		$no = 1;
+        $this->SetFillColor(255);
+        foreach ($this->data as $value) {
+            $this->Row(
+                    array($no++,
+                        $value->get_invoice_num(),
+                        $value->get_invoice_date(),
+                        $value->get_invoice_amount(),
+						$value->get_description(),
+                        $value->get_file_name(),
+                        $value->get_status_code(),
+                        $value->get_vendor_name(),
+                        $value->get_vendor_site_code(),
+                        $value->get_column_name(),
+						$value->get_column_value(),
+                        $value->get_error_message()
+                    )
+            );
         }
+		
+		}
+        $this->Ln(3);
     }
 
     //footer
@@ -393,7 +362,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'DETAIL DATA PAGU MINUS (FUND FAIL)'; //judul file laporan
+$judul = 'Laporan Detail Alasan Penolakan PMRT'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 

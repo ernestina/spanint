@@ -70,7 +70,6 @@
 					}
                 }
 				if (Session::get('role') == SATKER) {
-                    IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
@@ -103,18 +102,12 @@
 									
 						<a href="<?php echo URL; ?>PDF/ValidasiSpm_PDF/<?php echo $kdkppn . "/" . $filename . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
-					}
 					
                 }
                 if (Session::get('role') == KPPN) {
                   
-                    IF(isset($this->d_nama_kppn) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
-						if (isset($this->d_nama_kppn)) {
-							foreach ($this->d_nama_kppn as $kppn) {
-								$kdkppn = $kppn->get_kd_satker();
-							}
-						} else {$kdkppn = Session::get('id_user');
-						}
+						$kdkppn = Session::get('id_user');
+						
 	
 						
 						if (isset($this->d_tgl_awal)) {
@@ -135,7 +128,7 @@
 									
 						<a href="<?php echo URL; ?>PDF/ValidasiSpm_PDF/<?php echo $kdkppn . "/" . $filename . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
-					}
+					
 					}
                 //----------------------------------------------------		
 			?>

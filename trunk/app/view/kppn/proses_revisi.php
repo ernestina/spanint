@@ -20,119 +20,125 @@
 
 if (Session::get('role') == ADMIN  || Session::get('role') == DJA) {
 //-----------------------------
-if( isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker)){
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-          }
-	} else {
-		$kdkppn = 'null';
-	}
-	if (isset($this->d_kd_satker)) {
-		$kdsatker = $this->d_kd_satker;
-	} else {
-		$kdsatker = 'null';
-	}
-	
-	if (isset($this->d_nm_satker)) {
-		$nmsatker = $this->d_nm_satker;
-	} else {
-		$nmsatker = 'null';
-	}
-
-	?>
-    <a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-    <?php
+	if( isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker)){
+		if (isset($this->d_nama_kppn)) {
+			foreach ($this->d_nama_kppn as $kppn) {
+				$kdkppn = $kppn->get_kd_satker();
+			  }
+		}else{
+			$kdkppn = 'null';
 		}
-//------------------------------
+		if (isset($this->d_kd_satker)) {
+			$kdsatker = $this->d_kd_satker;
+		}else{
+			$kdsatker = 'null';
+		}
+		if (isset($this->d_nm_satker)) {
+			$nmsatker = $this->d_nm_satker;
+		}else{
+			$nmsatker = 'null';
+		}
+	}else{
+		foreach ($this->data as $value) { 
+			$kdsatker =$value->get_satker_code();
+			$nmsatker =$value->get_nmsatker();
+			$kdkppn =$value->get_kppn();
+		}
+		$kdkppn ='null';
+		$kdsatker = 'null';
+		$nmsatker = 'null';
+			
+	}
+		?>
+		<a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		<?php
+
 }
 if (Session::get('role') == KANWIL) {
 //-----------------------------
-if( isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker)){
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-          }
-	} else {
-		$kdkppn = 'null';
-	}
-	if (isset($this->d_kd_satker)) {
-		$kdsatker = $this->d_kd_satker;
-	} else {
+	if( isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker)){
+		if (isset($this->d_nama_kppn)) {
+			foreach ($this->d_nama_kppn as $kppn) {
+				$kdkppn = $kppn->get_kd_satker();
+			  }
+		}else{
+			$kdkppn = 'null';
+		}
+		if (isset($this->d_kd_satker)) {
+			$kdsatker = $this->d_kd_satker;
+		}else{
+			$kdsatker = 'null';
+		}
+		if (isset($this->d_nm_satker)) {
+			$nmsatker = $this->d_nm_satker;
+		}else{
+			$nmsatker = 'null';
+		}
+	}else{
+		foreach ($this->data as $value) { 
+			$kdsatker =$value->get_satker_code();
+			$nmsatker =$value->get_nmsatker();
+			$kdkppn =$value->get_kppn();
+		}
+		$kdkppn ='null';
 		$kdsatker = 'null';
-	}
-	
-	if (isset($this->d_nm_satker)) {
-		$nmsatker = $this->d_nm_satker;
-	} else {
 		$nmsatker = 'null';
+			
 	}
-	
-	?>
-    <a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>    <?php
-	}
-//------------------------------
+		?>
+		<a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		<?php
+
 }
 if (Session::get('role') == KPPN) {
-//-----------------------------
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-          }
-	} else {
+	if( isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker)){
+		if (isset($this->d_nama_kppn)) {
+			foreach ($this->d_nama_kppn as $kppn) {
+				$kdkppn = $kppn->get_kd_satker();
+			  }
+		}else{
+			$kdkppn = 'null';
+		}
+		if (isset($this->d_kd_satker)) {
+			$kdsatker = $this->d_kd_satker;
+		}else{
+			$kdsatker = 'null';
+		}
+		if (isset($this->d_nm_satker)) {
+			$nmsatker = $this->d_nm_satker;
+		}else{
+			$nmsatker = 'null';
+		}
+	}else{
+		foreach ($this->data as $value) { 
+			$kdsatker =$value->get_satker_code();
+			$nmsatker =$value->get_nmsatker();
+			$kdkppn =$value->get_kppn();
+		}
 		$kdkppn = Session::get('id_user');
-	}
-	if (isset($this->d_kd_satker)) {
-		$kdsatker = $this->d_kd_satker;
-	} else {
 		$kdsatker = 'null';
-	}
-	
-	if (isset($this->d_nm_satker)) {
-		$nmsatker = $this->d_nm_satker;
-	} else {
 		$nmsatker = 'null';
 	}
-	
-	?>
-    <a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-    <?php
-	
-//------------------------------
+		?>
+		<a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		<?php
 }
 if (Session::get('role') == SATKER) {
-//-----------------------------
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-          }
-	} else {
-		$kdkppn = Session::get('id_user');
-	}
-	if (isset($this->d_kd_satker)) {
-		$kdsatker = $this->d_kd_satker;
-	} else {
+		foreach ($this->data as $value) { 
+			$kdsatker =$value->get_satker_code();
+			$nmsatker =$value->get_nmsatker();
+			$kdkppn =$value->get_kppn();
+		}
+		//$kdkppn = Session::get('id_user');
 		$kdsatker = Session::get('kd_satker');
-	}
-	
-	if (isset($this->d_nm_satker)) {
-		$nmsatker = $this->d_nm_satker;
-	} else {
 		$nmsatker = 'null';
-	}
-	
-	?>
-    <a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-    <?php
-	
-//------------------------------
+		?>
+		<a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		<?php
 }
-
-			//----------------------------------------------------		
+	//----------------------------------------------------		
 			?>
-
-
-                
+            
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
 				

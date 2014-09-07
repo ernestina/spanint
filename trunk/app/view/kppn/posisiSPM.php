@@ -34,7 +34,15 @@
                     } 
                 }
 				if (Session::get('role') == SATKER) {
-					$kdkppn='null';
+						if(!empty($this->data)){
+							foreach ($this->data as $value) {
+								$kdkppn=substr($value->get_invoice_num(),8,6);
+							}
+						
+						}else{
+							$kdkppn = 'null';
+							
+						}
 					?>
 					<a href="<?php echo URL; ?>PDF/posisiSpm_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
