@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Monitoring SP2D - Nilai Minus dan 0</h2>
+                <h2>Monitoring SP2D Minus dan 0</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -92,7 +92,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -163,10 +163,7 @@
                 ?>
             </tbody>
     </table>
-    <b>Keterangan : </b></br>
-    Sukses Overbooking = Dana sudah masuk ke Rekening Penerima </br>
-    Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima, mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima</br>
-    Nomor Ref/SOR/BOR = Nomor bukti transaksi pada perbankan yang dapat digunakan untuk konfirmasi ke bank penerima
+
 </div>
 
 <!-- Filter -->
@@ -306,3 +303,17 @@
     }
 
 </script>
+
+<div class="main-window-segment vertical-padded dark-panel">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <b>Keterangan : </b></br>
+                Sukses Overbooking = Dana sudah masuk ke Rekening Penerima </br>
+                Sukses RTGS / SKN / Swift = Dana sudah ditransfer dari Bank Pembayar ke Bank Penerima, mekanisme transfer dana dari Bank Penerima ke Rekening Penerima tergantung pada Bank Penerima</br>
+                Nomor Ref/SOR/BOR = Nomor bukti transaksi pada perbankan yang dapat digunakan untuk konfirmasi ke bank penerima
+            </div>
+            
+        </div>
+    </div>
+</div>
