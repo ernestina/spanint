@@ -355,7 +355,7 @@ class DataDIPAController extends BaseController {
         $this->view->render('kppn/realisasiFA_1');
     }
 
-    public function RealisasiFA($kdsatker = null, $program = null, $output = null, $akun = null) {
+    public function RealisasiFA($kdsatker = null, $program = null, $output = null, $akun = null, $dana=null) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
@@ -371,6 +371,11 @@ class DataDIPAController extends BaseController {
         if ($output != '') {
             $filter[$no++] = " A.OUTPUT =  '" . $output . "'";
         }
+		
+		if ($dana != '') {
+            $filter[$no++] = " A.DANA =  '" . $dana . "'";
+        }
+		
         if ($akun != '') {
             $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
 			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')"

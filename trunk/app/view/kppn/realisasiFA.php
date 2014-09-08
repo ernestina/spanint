@@ -247,15 +247,18 @@
                         $tot_actual+=$value->get_actual_amt();
                         $tot_balancing+=$value->get_balancing_amt();
 						 ?>
-                        <tr>
+                        
+                        <?php
+                    }
+					?>
+					<tr>
                             <td colspan='10' class='ratatengah'><b>GRAND TOTAL</b></td>
                             <td class='ratakanan'><b><?php echo number_format($tot_budget); ?></b></td>
                             <td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></b></td>
                             <td class='ratakanan'><b><?php echo number_format($tot_actual); ?></b></td>
                             <td class='ratakanan'><b><?php echo number_format($tot_balancing); ?></b></td>
-                        </tr>
-                        <?php
-                    }
+                     </tr>
+					 <?php
                 }
             } else {
                 echo '<td colspan=12 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';

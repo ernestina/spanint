@@ -272,7 +272,7 @@ if (Session::get('role') == DJA) {
                             echo "<td>" . $no++ . "</td>";
                             echo "<td>" . $value->get_satker() . "</td>";
                             echo "<td>" . $value->get_kppn() . "</td>";
-                            echo "<td style='text-align: center'><a href=" . URL . "dataDIPA/RealisasiFA/" . $value->get_satker() . "/" . $value->get_program() . "/" . $value->get_output() . "/" . $value->get_akun() . " target='_blank' '>" . $value->get_akun() . "</td>";
+                            echo "<td style='text-align: center'><a href=" . URL . "dataDIPA/RealisasiFA/" . $value->get_satker() . "/" . $value->get_program() . "/" . $value->get_output() . "/" . $value->get_akun() . "/". $value->get_dana(). " target='_blank' '>" . $value->get_akun() . "</td>";
                             echo "<td>" . $value->get_program() . "</td>";
                             echo "<td>" . $value->get_output() . "</td>";
                             echo "<td>" . $value->get_dana() . "</td>";
