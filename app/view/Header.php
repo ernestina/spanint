@@ -5,7 +5,7 @@
         
         <meta charset="utf-8">
         <link rel="shortcut icon" href="<?php echo URL; ?>public/monster-logo-small.ico"/>
-        <link rel="icon" href="<?php echo URL; ?>public/monster-logo-small.ico"/>
+		<link rel="icon" href="<?php echo URL; ?>public/monster-logo-small.ico"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes">
         
         <title>Online Monitoring SPAN</title>
@@ -114,7 +114,7 @@
                                 <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
                                 <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
                                 <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur</a></li>
-                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">Laporan SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
                                 <!--<li><a href="<?php echo URL; ?>dataKppn/harianBO">Laporan SP2D Harian ke Bank</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dHariIni">Laporan SP2D Terbit dan Tertanggal di Hari yang Sama</a></li>-->
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dBackdate">SP2D Backdate</a></li>
@@ -217,7 +217,7 @@
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
                                 <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
-                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">Laporan SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
                                 <!--<li><a href="<?php echo URL; ?>dataKppn/harianBO">Laporan SP2D Harian ke Bank</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dHariIni">Laporan SP2D Terbit dan Tertanggal di Hari yang Sama</a></li>-->
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dBackdate">SP2D Backdate</a></li>
@@ -330,7 +330,7 @@
                             <ul>
                                 <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
                                 <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
-                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">Laporan SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
+                                <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
                                 <!--<li><a href="<?php echo URL; ?>dataKppn/harianBO">Laporan SP2D Harian ke Bank</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dHariIni">Laporan SP2D Terbit dan Tertanggal di Hari yang Sama</a></li>-->
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dBackdate">SP2D Backdate</a></li>
