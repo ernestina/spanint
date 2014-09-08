@@ -41,7 +41,7 @@
                 <?php
                     if (isset($this->d_nama_kppn)) {
                         foreach ($this->d_nama_kppn as $kppn) {
-                            echo "<br>" . $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                            echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
                             $kode_kppn = $kppn->get_kd_satker();
                         }
                     }
@@ -49,9 +49,9 @@
                     <?php
                     if (isset($this->d_bank)) {
                         if ($this->d_bank == 13) {
-                            echo "<br> Semua Bank";
+                            echo "Semua Bank";
                         } else {
-                            echo "<br>" . $this->d_bank;
+                            echo $this->d_bank;
                         }
                     }
                     ?>
@@ -62,7 +62,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
