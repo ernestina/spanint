@@ -313,6 +313,10 @@
                                 <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
                                 <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
+								<li><a href="<?php echo URL; ?>dataGR/KonfirmasiPenerimaan">Konfirmasi Penerimaan</a></li>
+								<li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
+								<li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun</a></li>
+								<li><a href="<?php echo URL; ?>dataGR/NTPNGanda">NTPN Ganda</a></li>
                             </ul>
                         </div>
                     </li>
@@ -411,6 +415,24 @@
                             </ul>
                         </div>
                     </li>
+
+					
+					<li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Manajemen Penerimaan</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataGR/KonfirmasiPenerimaan">Konfirmasi Penerimaan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Manajemen Supplier</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Supplier</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
 
                     <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                         <div class="collapse">
