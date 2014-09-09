@@ -4,22 +4,14 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Detail Penerimaan File: <?php echo $this->d_tgl; ?></h2>
+                <h2>Detail CoA Penerimaan <br/></h2>
+				<h3>NTPN: <?php echo $this->d_tgl; ?></h3>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <!-- PDF -->
-				<?php
-							//----------------------------------------------------
-			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-
-				$file_name=$this->d_tgl;
-				$kdkppn=$this->kppn;
-				?>
-				<a href="<?php echo URL; ?>PDF/detailPenerimaan_PDF/<?php echo $file_name . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-			
-
+                
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
@@ -64,15 +56,13 @@
         <!--baris pertama-->
         <thead>
             <tr>
-                <th>No.</th>
-                <th>NTPN</th>
-                <th>NTB</th>
-                <th>Tanggal Penerimaan</th>
-                <th>Kode Bank</th>
-                <th>Nomor Rekening Persepsi</th>
-				<th>Mata Uang</th>
-                <th>Nilai</th>
-                <th>Satker/KPPN/Akun</th>
+                <th class='ratatengah'>No.</th>
+                <th class='ratatengah'>NTPN</th>
+                <th class='ratatengah'>Satker</th>
+                <th class='ratatengah'>KPPN</th>
+                <th class='ratatengah'>Akun</th>
+                <th class='ratatengah'>Mata Uang</th>
+                <th class='ratatengah'>Nilai</th>
             </tr>
         </thead>
         <tbody class='ratatengah'>
@@ -81,14 +71,12 @@
             foreach ($this->data as $value) {
                 echo "<tr>	";
                 echo "<td>" . $no++ . "</td>";
-				echo "<td class='ratakiri'><a href=" . URL . "dataGR/detailCoAPenerimaan/" . $value->get_status() . " target='_blank' >" . $value->get_status() . "</a></td>";
-                echo "<td>" . $value->get_file_name() . "</td>";
-                echo "<td>" . $value->get_gl_date() . "</td>";
-                echo "<td>" . $value->get_bank_code() . "</td>";
-                echo "<td>" . $value->get_bank_account_num() . "</td>";
+                echo "<td>" . $value->get_ntpn() . "</td>";
+                echo "<td>" . $value->get_segment1() . "</td>";
+                echo "<td>" . $value->get_segment2() . "</td>";
+                echo "<td>" . $value->get_segment3() . "</td>";
 				echo "<td>" . $value->get_mata_uang() . "</td>";
-                echo "<td class='ratakanan'>" . $value->get_keterangan() . "</td>";
-                echo "<td>" . $value->get_resp_name() . "</td>";
+                echo "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";
                 echo "</tr>	";
             }
             ?>
