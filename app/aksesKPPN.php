@@ -83,6 +83,12 @@ $akses['DataGRKPPN'] = array(
     'GR_PFK_PDF',
     'GR_IJP_PDF',
     'detailLhpRekap_PDF',
+    'detailCoAPenerimaan',
+    'KonfirmasiPenerimaan',
+    'downloadkonfirmasi',
+    'SuspendSatkerPenerimaan',
+    'SuspendAkunPenerimaan',
+    'NTPNGanda',
     '__destruct'
 );
 

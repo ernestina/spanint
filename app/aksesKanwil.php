@@ -68,6 +68,7 @@ $akses['DataGRKanwil'] = array(
     'grStatusHarian',
     'detailLhpRekap',
     'detailPenerimaan',
+    'detailCoAPenerimaan',
     '__destruct'
 );
 
