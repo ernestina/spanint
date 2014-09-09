@@ -484,12 +484,12 @@ class DataSPMController extends BaseController {
 
         if ($kdsatker != '') {
             if (Session::get('role') == SATKER) {
-                if (Session::get('kd_satker') != $kdsatker) {
-                    header('location:' . URL . 'auth/logout');
-                    exit();
-                } else {
-                    $filter[$no++] = " SEGMENT1 =  '" . Session::get('kd_satker') . "'";
-                }
+                // if (Session::get('kd_satker') != $kdsatker) {
+                    // header('location:' . URL . 'auth/logout');
+                    // exit();
+                // } else {
+                    // $filter[$no++] = " SEGMENT1 =  '" . Session::get('kd_satker') . "'";
+                // }
             } else {
                 $filter[$no++] = " SEGMENT1 =  '" . $kdsatker . "'";
             }

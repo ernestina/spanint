@@ -276,7 +276,7 @@
 
             </div>
             
-            <form id="filter-form" method="POST" action="sp2dRekap" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="daftarsp2d" enctype="multipart/form-data">
 
                 <div class="modal-body">
 

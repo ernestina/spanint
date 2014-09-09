@@ -261,6 +261,214 @@ class DataGRController extends BaseController {
         $this->view->render('kppn/detailPenerimaan');
 		$d_log->tambah_log("Sukses");
     }
+	
+	public function detailCoAPenerimaan($ntpn = null) {
+        $d_spm1 = new DataGR_STATUS($this->registry);
+        $filter = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+        if (!is_null($ntpn)) {
+            $filter[$no++] = "RECEIPT_NUMBER =  '" . $ntpn . "'";
+            $this->view->d_tgl = $ntpn;
+        }
+		// if (!is_null($kppn)) {
+            // $filter[$no++] = "KDKPPN = '" . $kppn . "'";
+			// $this->view->kppn = $kppn;
+        // } else {
+            // $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+			// $this->view->kppn =  Session::get('id_user');
+        // }
+        $this->view->data = $d_spm1->get_detail_coa_penerimaan($filter);
+		
+        //var_dump($d_spm->get_gr_status_filter($filter));
+        $this->view->render('kppn/detailCoAPenerimaan');
+		$d_log->tambah_log("Sukses");
+    }
+	
+	public function KonfirmasiPenerimaan() {
+        $d_spm1 = new DataGR_STATUS($this->registry);
+        $filter = array();
+        $no = 0;
+		if (!ini_get('safe_mode')) {
+			set_time_limit(0);
+			ini_set('max_input_time', -1);
+			ini_set('memory_limit', -1);
+			ini_set('max_execution_time', -1);
+		}
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+        if (isset($_POST['submit_file'])) {
+            
+			if ($_POST['ntpn'] != '') {
+                $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
+                $this->view->ntpn = $_POST['ntpn'];
+            } 
+			// if (Session::get('role') == KPPN){
+				// $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+			// }
+			$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+        }
+		
+        //$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+		
+        //var_dump($d_spm->get_gr_status_filter($filter));
+        $this->view->render('kppn/konfirmasi_penerimaan');
+		$d_log->tambah_log("Sukses");
+    }
+	
+	public function NTPNGanda() {
+        $d_spm1 = new DataGR_STATUS($this->registry);
+        $filter = array();
+        $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		
+		if (Session::get('role') == KPPN){
+				$filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+			}
+        if (isset($_POST['submit_file'])) {
+		
+			if ($_POST['ntpn'] != '') {
+                $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
+                $this->view->ntpn = $_POST['ntpn'];
+            } 
+			if ($_POST['bulan'] != '') {
+                $filter[$no++] = "SUBSTR(BULAN,1,2) = '" . $_POST['bulan'] . "'";
+                $this->view->d_bulan = $_POST['bulan'];
+            }
+			$this->view->data = $d_spm1->get_ntpn_ganda($filter);
+        }
+		
+        //$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+		
+        //var_dump($d_spm->get_gr_status_filter($filter));
+        $this->view->render('kppn/ntpn_ganda');
+		$d_log->tambah_log("Sukses");
+    }
+	
+	public function downloadkonfirmasi() {
+        $d_spm1 = new DataGR_STATUS($this->registry);
+        //$filter = array();
+        $no = 0;
+		if (!ini_get('safe_mode')) {
+			set_time_limit(0);
+			ini_set('max_input_time', -1);
+			ini_set('memory_limit', -1);
+			ini_set('max_execution_time', -1);
+		}
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		if (count($_POST['checkbox1']) != 0) {
+            $array = array("checkbox" => $_POST['checkbox1']);
+            $ids = implode("','", $array['checkbox']);
+			
+        $this->view->data = $d_spm1->get_download_koreksi_penerimaan($ids);
+		$d_log->tambah_log("Sukses");
+		
+        $this->view->load('kppn/downloadkoreksi');
+		}
+		
+		if (count($_POST['checkbox2']) != 0) {
+            $array = array("checkbox" => $_POST['checkbox2']);
+            $ids = implode("','", $array['checkbox']);
+			
+			if (Session::get('role') == KPPN){
+				$segment1 = "(SELECT KDSATKER FROM T_SATKER WHERE SATKER_BUN = 'Y' AND KPPN = '".Session::get('id_user')."') SEGMENT1,";
+			}
+			if (Session::get('role') == SATKER){
+				$segment1 = "(SELECT KDSATKER FROM T_SATKER WHERE KDSATKER = '".Session::get('kd_satker')."') SEGMENT1,";
+			}
+			
+        $this->view->data1 = $d_spm1->get_download_konfirmasi_penerimaan($ids, $segment1);
+		$d_log->tambah_log("Sukses");
+		
+        $this->view->load('kppn/downloadkonfirmasi');
+		}
+		if (count($_POST['checkbox2']) != 0 and count($_POST['checkbox1']) != 0)  {
+            echo "<script>alert ('Belum ada yang dipilih (centang/checkmark))</script>";
+            header('location:' . URL . 'DataGR/KonfirmasiPenerimaan');
+        }
+    }
+	
+	public function SuspendSatkerPenerimaan() {
+        $d_spm1 = new DataGR_STATUS($this->registry);
+        $filter = array();
+        $no = 0;
+		if (!ini_get('safe_mode')) {
+			set_time_limit(0);
+			ini_set('max_input_time', -1);
+			ini_set('memory_limit', -1);
+			ini_set('max_execution_time', -1);
+		}
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+			
+		 if (isset($_POST['submit_file'])) {
+            
+			if ($_POST['bulan'] != '') {
+                $filter[$no++] = "SUBSTR(TANGGAL,4,3) = '" . $_POST['bulan'] . "'";
+                $this->view->d_bulan = $_POST['bulan'];
+            }
+			
+			if (Session::get('role') == KPPN){
+				$filter[$no++] = "SEGMENT2 = '" . Session::get('id_user') . "'";
+				$filter[$no++] = "SUBSTR(SEGMENT1,1,3) = 'ZZZ'";
+			}
+			
+		$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);	
+        }
+		
+        //var_dump($d_spm->get_gr_status_filter($filter));
+		
+        $this->view->render('kppn/suspend_satker_penerimaan');
+		$d_log->tambah_log("Sukses");
+    }
+	
+	public function SuspendAkunPenerimaan() {
+        $d_spm1 = new DataGR_STATUS($this->registry);
+        $filter = array();
+        $no = 0;
+		if (!ini_get('safe_mode')) {
+			set_time_limit(0);
+			ini_set('max_input_time', -1);
+			ini_set('memory_limit', -1);
+			ini_set('max_execution_time', -1);
+		}
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+       
+		if (Session::get('role') == KPPN){
+				$filter[$no++] = "SEGMENT2 = '" . Session::get('id_user') . "'";
+				$filter[$no++] = "SEGMENT3 = '498111'";
+			}
+			
+		 if (isset($_POST['submit_file'])) {
+            
+			if ($_POST['bulan'] != '') {
+                $filter[$no++] = "SUBSTR(TANGGAL,4,3) = '" . $_POST['bulan'] . "'";
+                $this->view->d_bulan = $_POST['bulan'];
+            }
+		
+        }
+		$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+        //var_dump($d_spm->get_gr_status_filter($filter));
+		
+        $this->view->render('kppn/suspend_satker_penerimaan');
+		$d_log->tambah_log("Sukses");
+    }
 
     public function __destruct() {
         
