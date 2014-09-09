@@ -218,9 +218,12 @@ $akses['PDFKPPN'] = array(
     'daftarsp2d_PDF',
     'DataRealisasi_PDF',
     'DataRealisasiTransfer_PDF',
+    'DetailBelanjaPNBP_PDF',
+    'DetailDipaPNBP_PDF',
+    'DetailEncumbrances_PDF',
     'Detail_Fund_fail_kd_PDF',
     'Detail_Fund_fail_PDF',
-    'DetailEncumbrances_PDF',
+    'DetailGRPNBP_PDF',
     'detailLhpRekap_PDF',
     'detailPenerimaan_PDF',
     'detailposisiSpm_PDF',
@@ -228,7 +231,9 @@ $akses['PDFKPPN'] = array(
     'detailrekapsp2d1_PDF',
     'detailRekapSP2D2_PDF',
     'DetailRevisi_PDF',
+    'DetailSetoranUPPNBP_PDF',
     'detailSp2dGaji_PDF',
+    'DetailUPPNBP_PDF',
     'DurasiSpm_PDF',
     'errorSpm_PDF',
     'Fund_fail_PDF',
@@ -238,6 +243,7 @@ $akses['PDFKPPN'] = array(
     'harianBO_PDF',
     'HistorySpm_PDF',
     'HoldSpm_PDF',
+    'KarwasPNBP_PDF',
     'monitoringPelimpahan_PDF',
     'monitoringRetur_PDF',
     'monitoringSp2d_PDF',
@@ -263,6 +269,7 @@ $akses['PDFKPPN'] = array(
     'sp2dSalahTanggal_PDF',
     'sp2dSudahVoid_PDF',
     'ValidasiSpm_PDF',
+
     '__destruct'
 );
 ?>
