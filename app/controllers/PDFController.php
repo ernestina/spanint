@@ -2595,17 +2595,15 @@ class PDFController extends BaseController {
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
-
-            if ($kdkppn != 'null' AND ( $invoice != 'null' or $jenisspm != 'null'  or $jenisspm != 'null' or $durasi != 'null' or $kdtgl_awal != 'null')) {
-
+            if ($kdkppn != 'null' AND ( $invoice != 'null' or $jenisspm != 'null' or $kdsatker != 'null' or $jenisspm != 'null' or $durasi != 'null' or $kdtgl_awal != 'null')) {
                 $filter[$no++] = "KDKPPN = '" . $kdkppn."'";
             } elseif ($kdkppn != 'null') {
                 $filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') in (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
 								from DURATION_INV_ALL_V where KDKPPN = '" . $kdkppn . "')";
                 $filter[$no++] = "KDKPPN = '" . $kdkppn."'";
-            } /* else {
+            }else {
                 $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
-            } */
+            }
 
              if ($invoice != 'null') {
                 $filter[$no++] = "invoice_num = '" . $invoice . "'";
@@ -2617,7 +2615,16 @@ class PDFController extends BaseController {
                 $filter[$no++] = "jendok = '" . $jenisspm . "'";
             }
             if ($durasi != 'null') {
-                $filter[$no++] = "durasi2 " . $durasi;
+				if($durasi == '1'){
+					$filter[$no++] = "durasi2 < 1";
+				}
+				if($durasi == '2'){
+					$filter[$no++] == "durasi2 > 1 and durasi2 < 24";
+				}
+				if($durasi == '3'){
+					$filter[$no++] = "durasi2 > 24";
+				}
+				
             }
              if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
                 $filter[$no++] = "TANGGAL_UPLOAD BETWEEN to_date('" . $kdtgl_awal . "','dd-mm-yyyy') AND to_date('" . $kdtgl_akhir . "' ,'dd-mm-yyyy')";
@@ -2630,12 +2637,12 @@ class PDFController extends BaseController {
 
             $this->view->data = $d_spm1->get_durasi_spm_filter($filter);
 			
-			 if (Session::get('role') == SATKER) {
-						$d_nm_kppn1 = new DataUser($this->registry);
-						$this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
-					} else {
-						$this->view->nm_kppn2 = Session::get('user');
-					}
+		 if (Session::get('role') == SATKER) {
+				$d_nm_kppn1 = new DataUser($this->registry);
+				$this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+		} else {
+				$this->view->nm_kppn2 = Session::get('user');
+			}
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
@@ -2647,13 +2654,13 @@ class PDFController extends BaseController {
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
-           
-                $filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') = (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
+			   if( $invoice == 'null' && $jenisspm == 'null' && $kdsatker == 'null' && $jenisspm == 'null' && $durasi == 'null' && $kdtgl_awal == 'null' && $kdtgl_akhir == 'null'){
+				$filter[$no++] = " to_date(tanggal_upload,'dd-MM-yyyy') = (select max(to_date(tanggal_upload,'dd-MON-yyyy'))
 								from DURATION_INV_ALL_V where KDKPPN = '" . Session::get('id_user') . "')";
 				$this->view->data = $d_spm1->get_durasi_spm_filter($filter);
+			   }
+                
             
-            
-            //var_dump($d_spm1->get_durasi_spm_filter ($filter));
         }
         $this->view->data2 = $d_spm1->get_jendok_spm_filter();
         $d_last_update = new DataLastUpdate($this->registry);

@@ -129,7 +129,7 @@ class FPDF_AutoWrapTable extends FPDF {
 		$kolom1=20;
 		$kolom2=60;
 		$kolom3=50;
-		$kolom4=50;
+		$kolom4=200;
 		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+$kolom4+$ukuran_kolom_jenis_belanja;
 
  
@@ -205,6 +205,7 @@ class FPDF_AutoWrapTable extends FPDF {
 	//-------------------BAGIAN 2-------------------------------------
         $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 80;
+		$kolom4=125;
 		
 		$ukuran_kolom_jenis_belanja1 =$kolom4+$ukuran_kolom_jenis_belanja;
         $ukuran_kolom_satker = 40;
@@ -213,9 +214,8 @@ class FPDF_AutoWrapTable extends FPDF {
 		$kolom1=20;
 		$kolom2=60;
 		$kolom3=50;
-		$kolom4=50;
 		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+$kolom4+
-		$ukuran_kolom_jenis_belanja;
+		$ukuran_kolom_jenis_belanja1;
 
  
         $left = $this->GetX();
@@ -292,10 +292,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_dana = 60;
 		$kolom1=20;
 		$kolom2=60;
-		$kolom3=50;
-		$kolom4=50;
-		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+$kolom4+
-		$ukuran_kolom_jenis_belanja;
+		$kolom_grandtotal=$kolom1+$kolom2+$kolom4+
+		$ukuran_kolom_jenis_belanja1;
 
  
         $left = $this->GetX();
@@ -367,17 +365,15 @@ class FPDF_AutoWrapTable extends FPDF {
 	//---------------------BAGIAN 4-----------------------------------
         $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 80;
-				$ukuran_kolom_jenis_belanja1 =$kolom4+$ukuran_kolom_jenis_belanja;
+		$ukuran_kolom_jenis_belanja1 =$kolom4+$ukuran_kolom_jenis_belanja;
 
         $ukuran_kolom_satker = 40;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
 		$kolom1=20;
 		$kolom2=60;
-		$kolom3=50;
-		$kolom4=50;
-		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+$kolom4+
-		$ukuran_kolom_jenis_belanja;
+		$kolom_grandtotal=$kolom1+$kolom2+$kolom4+
+		$ukuran_kolom_jenis_belanja1;
 
  
         $left = $this->GetX();
@@ -455,10 +451,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_dana = 60;
 		$kolom1=20;
 		$kolom2=60;
-		$kolom3=50;
-		$kolom4=50;
-		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+$kolom4+
-		$ukuran_kolom_jenis_belanja;
+		$kolom_grandtotal=$kolom1+$kolom2+$kolom4+
+		$ukuran_kolom_jenis_belanja1;
 
  
         $left = $this->GetX();

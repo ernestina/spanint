@@ -62,13 +62,31 @@
 						} else {
 							$kdtgl_akhir ='null';
 						}
-						 foreach ($this->data as $value) {
-                            $invoice1=$value->get_invoice_num();
-							$kdsatker=substr($invoice1,7,6);
+						
+						if (isset($this->d_invoice)) {
+							$invoice = $this->d_invoice;
+						} else {
+							$invoice ='null';
 						}
-						$invoice='null';
-						$jenisspm='null';
-						$durasi='null';
+						if (isset($this->d_kdsatker)) {
+							$kdsatker = $this->d_kdsatker;
+						} else {
+							$kdsatker ='null';
+						}
+						
+						if (isset($this->d_jendok)) {
+							$jenisspm = $this->d_jendok;
+						} else {
+							$jenisspm ='null';
+						}
+						if (isset($this->d_durasi)) {
+							$durasi = $this->d_durasi;
+						} else {
+							$durasi ='null';
+						}
+						
+						
+						
 					?>
 									
 					<a href="<?php echo URL; ?>PDF/DurasiSpm_PDF/<?php echo $kdkppn . "/" . $invoice . "/" . $jenisspm . "/" . $durasi . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
@@ -80,7 +98,7 @@
                 if (Session::get('role') == KPPN) {
                   
 						
-							$kdkppn = Session::get('id_user');
+						$kdkppn = Session::get('id_user');
 						
 						if (isset($this->d_tgl_awal)) {
 							$kdtgl_awal = $this->d_tgl_awal;
