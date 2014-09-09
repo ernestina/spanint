@@ -90,6 +90,12 @@ $akses['DataGRAdmin'] = array(
     'grStatusHarian',
     'detailLhpRekap',
     'detailPenerimaan',
+    'detailCoAPenerimaan',
+    'KonfirmasiPenerimaan',
+    'downloadkonfirmasi',
+    'SuspendSatkerPenerimaan',
+    'SuspendAkunPenerimaan',
+    'NTPNGanda',
     '__destruct'
 );
 

@@ -68,6 +68,8 @@ $akses['DataGRSatker'] = array(
     'grStatusHarian',
     'detailLhpRekap',
     'detailPenerimaan',
+    'KonfirmasiPenerimaan',
+    'downloadkonfirmasi',
     '__destruct'
 );
 
