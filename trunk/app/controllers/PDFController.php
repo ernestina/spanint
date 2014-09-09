@@ -2632,7 +2632,10 @@ class PDFController extends BaseController {
 				$tglakhir = array("$kdtgl_akhir");
 
 				$this->view->kdtgl_awal = $tglawal;
-				$this->view->kdtgl_akhir = $tglakhir;
+				$this->view->kdtgl_akhir = $tglakhir; 
+				
+				/* $this->view->kdtgl_awal = $kdtgl_awal;
+				$this->view->kdtgl_akhir = $kdtgl_akhir;  */
             }
 
             $this->view->data = $d_spm1->get_durasi_spm_filter($filter);
