@@ -216,13 +216,13 @@ class FPDF_AutoWrapTable extends FPDF {
 							$value->get_tgl_limpah(),
 							$value->get_nosakti_limpah(),
 							number_format($value->get_jml_terima()),
-							$value->get_akun_terima(),
+							$value->get_akun_limpah(),
 							$value->get_kppn_anak(),
 							$value->get_norek_501() . ' ' . $value->get_nmrek_501(),
 							$value->get_tgl_terima(),
 							$value->get_nosakti_bs(),
 							number_format($value->get_jml_limpah()),
-							$value->get_akun_limpah(),
+							$value->get_akun_terima(),
 							$value->get_kppn_induk(),
 							$value->get_status()
 				));
