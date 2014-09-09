@@ -86,25 +86,24 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Ln(10);
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
-        //tanggal
-        $kdtgl_awal = 'null';
-        $kdtgl_akhir = 'null'; 
-
-        if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
-            $kdtgl_awal1 = $this->kdtgl_awal;
+               //tanggal
+		$kdtgl_awal1 = $this->kdtgl_awal;
+		$kdtgl_akhir1 = $this->kdtgl_akhir;
+	    if (isset($kdtgl_awal1) && isset($kdtgl_akhir1)) {
             $thn1 = substr($kdtgl_awal1, 6, 4);
             $bln1 = substr($kdtgl_awal1, 3, 2);
             $tgl1 = substr($kdtgl_awal1, 0, 2);
             $kdtgl_awal = $tgl1 . '-' . $bln1 . '-' . $thn1;
-            $kdtgl_akhir1 = $this->kdtgl_akhir;
             $thn2 = substr($kdtgl_akhir1, 6, 4);
             $bln2 = substr($kdtgl_akhir1, 3, 2);
             $tgl2 = substr($kdtgl_akhir1, 0, 2);
             $kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
-            $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);
+            $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);		
         } else {
-            $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);
-        }
+            $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);			 
+        } 
+		//--------------------
+
         $this->Ln(20);
         $this->SetFont("", "B", 8);
         $this->Ln(10);
