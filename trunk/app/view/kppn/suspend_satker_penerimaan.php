@@ -61,6 +61,7 @@
         <thead>
             <tr>
                 <th class='mid'>No.</th>
+				<th class='ratatengah'>NTPN</th>
                 <th>Tanggal Penerimaan</th>
 				<th class='ratatengah'>Nama</th>
 				<th class='ratatengah'>Bagan Akun SPAN</th>
@@ -82,6 +83,7 @@
                     foreach ($this->data as $value) {
                         echo "<tr>	";
                         echo "<td class='mid'>" . $no++ . "</td>";
+						echo "<td>" . $value->get_ntpn() . "</td>";
 						echo "<td>" . $value->get_gl_date() . "</td>";
 						echo "<td>" . $value->get_resp_name() . "</td>";
 						echo "<td>" . $value->get_segment1(). "." .$value->get_segment2(). "." .$value->get_segment3(). "." .$value->get_segment4()."." .$value->get_segment5(). "." .$value->get_segment6(). "." .$value->get_segment7(). "." .$value->get_segment8(). "." .$value->get_segment9(). "." .$value->get_segment10(). "." .$value->get_segment11(). "." .$value->get_segment12()."</td>";
@@ -136,6 +138,7 @@
 
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
 					
+					
 					<label class="isian">Pilih bulan: </label>
                     <select class="form-control" type="text" name="bulan" id="bulan">
                         <option value='JAN' <?php if ($this->d_bulan == 'JAN') {
@@ -178,6 +181,12 @@
                         <option value='Error' <?php //if ($this->status==Error){echo "selected";} ?>>Error</option-->
 
                     </select>
+					<br/>
+					<label class="isian">NTPN: </label>
+                    <input class="form-control" type="text" name="ntpn" id="ntpn" value="<?php if (isset($this->check_number)) {
+                   echo $this->ntpn;
+					} ?>">
+                    
 
                     <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
                     <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">

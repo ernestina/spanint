@@ -34,6 +34,7 @@ class DataGR_STATUS {
     private $_table1 = 'spgr_mpn_receipts_all';
 	private $_table2 = 'spgr_mpn_coa';
 	private $_table3 = 'SPGR_MPN_NTPN_GANDA';
+	private $_table4 = 'SPGR_MPN_NTPN_GANDA_DETAIL';
     public $registry;
 
     /*
@@ -112,7 +113,7 @@ class DataGR_STATUS {
             $d_data->set_resp_name($val['RESP_NAME']);
             $d_data->set_keterangan(number_format($val['RPH']));
             $d_data->set_gr_batch_num($val['GR_BATCH_NUM']);
-
+	
             $data[] = $d_data;
         }
         return $data;
@@ -359,6 +360,38 @@ class DataGR_STATUS {
 			$d_data->set_segment1($val['BULAN']);
 			$d_data->set_segment2($val['KDKPPN']);
 			$d_data->set_amount($val['AMOUNT']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_detail_ntpn_ganda($filter) {
+        $sql = "SELECT * 
+		FROM SPGR_MPN_NTPN_GANDA_DETAIL 
+		WHERE 
+		1=1 " ;
+  
+        foreach ($filter as $filter) {
+            $sql .= " AND ". $filter;
+        }
+        $sql .= " order by NTPN";
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_ntpn($val['NTPN']);
+			$d_data->set_file_name($val['NTB']);
+			$d_data->set_resp_name($val['NAMA']);
+			$d_data->set_segment1($val['SEGMENT1']);
+			$d_data->set_segment2($val['SEGMENT2']);
+			$d_data->set_segment3($val['SEGMENT3']);
+			$d_data->set_amount($val['AMOUNT']);
+			$d_data->set_bank_account_num($val['BANK_ACCOUNT_NUM']);
+			$d_data->set_gr_batch_num($val['GR_BATCH_NUM']);
+			$d_data->set_file_name($val['FILE_NAME']);
+			$d_data->set_status($val['STATUS']);
             $data[] = $d_data;
         }
         return $data;
