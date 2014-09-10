@@ -113,17 +113,19 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'B', 9);
         $ukuran_kolom_pagu_total_sisa = 60;
         $ukuran_kolom_hari = 20;
+		$kolom1=40;
+		$kolom2=60;
+		$kolom3=100;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(20, $h, 'No', 1, 0, 'C', true);
-
-        $this->SetX($left += 20);
-        $this->Cell(80, $h, 'Bank Cabang', 1, 0, 'C', true);
-        $this->SetX($left += 80);
-        $this->Cell(100, $h, 'No.Rekening', 1, 0, 'C', true);
+        $this->Cell($kolom1, $h, 'No', 1, 0, 'C', true);
+        $this->SetX($left += $kolom1);
+        $this->Cell($kolom2, $h, 'Bank Cabang', 1, 0, 'C', true);
+        $this->SetX($left += $kolom2);
+        $this->Cell($kolom3, $h, 'No.Rekening', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += 100);
+        $this->SetX($left += $kolom3);
         $this->Cell(620, $h / 2, 'Tanggal Penerimaan', 1, 0, 'C', true);
         $py1 = $this->GetY();
         $px2 = $px1;
@@ -197,7 +199,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(20, 80, 100,
+        $this->SetWidths(array($kolom1, $kolom2, $kolom3,
             $ukuran_kolom_hari, $ukuran_kolom_hari,
             $ukuran_kolom_hari, $ukuran_kolom_hari,
             $ukuran_kolom_hari, $ukuran_kolom_hari,
