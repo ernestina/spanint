@@ -293,12 +293,7 @@ class DataGRController extends BaseController {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
-		if (!ini_get('safe_mode')) {
-			set_time_limit(0);
-			ini_set('max_input_time', -1);
-			ini_set('memory_limit', -1);
-			ini_set('max_execution_time', -1);
-		}
+	
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
@@ -336,17 +331,13 @@ class DataGRController extends BaseController {
 			}
         if (isset($_POST['submit_file'])) {
 		
-			if ($_POST['ntpn'] != '') {
-                $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
-                $this->view->ntpn = $_POST['ntpn'];
-            } 
 			if ($_POST['bulan'] != '') {
                 $filter[$no++] = "SUBSTR(BULAN,1,2) = '" . $_POST['bulan'] . "'";
                 $this->view->d_bulan = $_POST['bulan'];
             }
-			$this->view->data = $d_spm1->get_ntpn_ganda($filter);
+			
         }
-		
+		$this->view->data = $d_spm1->get_ntpn_ganda($filter);
         //$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
 		
         //var_dump($d_spm->get_gr_status_filter($filter));
@@ -354,16 +345,36 @@ class DataGRController extends BaseController {
 		$d_log->tambah_log("Sukses");
     }
 	
+	public function DetailNTPNGanda($ntpn) {
+        $d_spm1 = new DataGR_STATUS($this->registry);
+        $filter = array();
+        $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		
+		if (Session::get('role') == KPPN){
+				$filter[$no++] = "SUBSTR(RESP_NAME,1,3) = '" . Session::get('id_user') . "'";
+			}
+			
+		if (Sntpn != '') {
+			
+			$filter[$no++] = "NTPN = '" . $ntpn . "'";
+			
+			}
+        
+		$this->view->data = $d_spm1->get_detail_ntpn_ganda($filter);
+        
+        $this->view->render('kppn/detail_ntpn_ganda');
+		$d_log->tambah_log("Sukses");
+    }
+	
 	public function downloadkonfirmasi() {
         $d_spm1 = new DataGR_STATUS($this->registry);
         //$filter = array();
         $no = 0;
-		if (!ini_get('safe_mode')) {
-			set_time_limit(0);
-			ini_set('max_input_time', -1);
-			ini_set('memory_limit', -1);
-			ini_set('max_execution_time', -1);
-		}
+	
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
@@ -404,12 +415,7 @@ class DataGRController extends BaseController {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
-		if (!ini_get('safe_mode')) {
-			set_time_limit(0);
-			ini_set('max_input_time', -1);
-			ini_set('memory_limit', -1);
-			ini_set('max_execution_time', -1);
-		}
+		
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
@@ -422,9 +428,13 @@ class DataGRController extends BaseController {
             }
 			
 			if (Session::get('role') == KPPN){
-				$filter[$no++] = "SEGMENT2 = '" . Session::get('id_user') . "'";
-				$filter[$no++] = "SUBSTR(SEGMENT1,1,3) = 'ZZZ'";
+				$filter[$no++] = "SEGMENT1 = 'ZZZ". Session::get('id_user') ."'";
 			}
+			
+			if ($_POST['ntpn'] != '') {
+                $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
+                $this->view->ntpn = $_POST['ntpn'];
+            }
 			
 		$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);	
         }
@@ -439,12 +449,7 @@ class DataGRController extends BaseController {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
-		if (!ini_get('safe_mode')) {
-			set_time_limit(0);
-			ini_set('max_input_time', -1);
-			ini_set('memory_limit', -1);
-			ini_set('max_execution_time', -1);
-		}
+		
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));

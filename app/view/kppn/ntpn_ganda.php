@@ -11,7 +11,7 @@
 			}
 			?>
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Daftar NTPN Terindikasi Ganda Bulan <?php echo Tanggal::bulan_indo($this->d_bulan); ?></h2>
+                <h2>Daftar NTPN Terindikasi Ganda  <?php //echo Tanggal::bulan_indo($this->d_bulan); ?></h2>
 				
             </div>
             
@@ -55,8 +55,8 @@
 </div>
 
 <div id="table-container" class="wrapper">
-    <form method='POST' action='downloadkonfirmasi' enctype='multipart/form-data'>
     <table class="footable">
+   
         <!--baris pertama-->
         <thead>
             <tr>
@@ -80,7 +80,8 @@
                         echo "<tr>	";
                         echo "<td class='mid'>" . $no++ . "</td>";
 						echo "<td>" . $value->get_segment2() . "</td>";
-						echo "<td>" . $value->get_ntpn() . "</td>";
+						//echo "<td>" . $value->get_ntpn() . "</td>";
+						echo "<td><a href=" . URL . "DataGR/DetailNTPNGanda/" . $value->get_ntpn() . " target='_blank' '>" . $value->get_ntpn() . "</a></td>";
 						echo "<td>" . $value->get_segment1() . "</td>";
 						echo "<td>" . $value->get_gl_date() . "</td>";
                         echo "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";
@@ -96,7 +97,7 @@
     </table>
 </div>
     
-<div class="main-window-segment vertical-padded">
+<!--div class="main-window-segment vertical-padded">
     <div class="container-fluid">
         <div class="row">
             
@@ -108,10 +109,10 @@
             
         </div>
     </div>
-</div>
+</div-->
     
     
-</form>
+
 
 <div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
         
@@ -132,11 +133,11 @@
 
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
 
-                    <label class="isian">NTPN: </label>
-                    <input class="form-control" type="text" name="ntpn" id="ntpn" value="<?php if (isset($this->check_number)) {
-                   echo $this->ntpn;
-					} ?>">
-                    <br/>
+                    <!--label class="isian">NTPN: </label>
+                    <input class="form-control" type="text" name="ntpn" id="ntpn" value="<?php //if (isset($this->check_number)) {
+                   //echo $this->ntpn;
+					//} ?>">
+                    <br/-->
                     
 					
 					   <label class="isian">Pilih bulan: </label>
