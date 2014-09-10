@@ -16,6 +16,8 @@
 			if( isset($this->d_nama_kppn) || isset($this->d_bulan)){
 				if (isset($this->d_bulan)) {
 					$kdbulan = $this->d_bulan;
+				}else{
+					$kdbulan ='null';
 				}
 				if (isset($this->d_nama_kppn)) {
 					foreach ($this->d_nama_kppn as $kppn) {
@@ -34,13 +36,15 @@
 			if( isset($this->d_nama_kppn) || isset($this->d_bulan)){
 				if (isset($this->d_bulan)) {
 					$kdbulan = $this->d_bulan;
+				}else{
+					$kdbulan ='null';
 				}
 				if (isset($this->d_nama_kppn)) {
 					foreach ($this->d_nama_kppn as $kppn) {
 					  $kdkppn = $kppn->get_kd_satker();
 					}
 				}else{
-					 $kdkppn = Session::get('id_user');
+					 $kdkppn = 'null';
 				}
 			?>
 			<a href="<?php echo URL; ?>PDF/GR_IJP_PDF/<?php echo $kdbulan. "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
@@ -54,6 +58,8 @@
 			if( isset($this->d_bulan)){
 				if (isset($this->d_bulan)) {
 					$kdbulan = $this->d_bulan;
+				}else{
+					$kdbulan ='null';
 				}
 				
 				$kdkppn = Session::get('id_user');
