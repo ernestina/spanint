@@ -191,7 +191,9 @@
                             //$tot_pot = $tot_pot  + $value->get_amount() ;	
                         }
                     }
-                }
+                } else {
+    echo '<td colspan=12 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
+}
                 ?>
             </tbody>
     </table>
