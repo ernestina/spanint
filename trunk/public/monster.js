@@ -197,6 +197,85 @@ function wrapTable() {
     
 }
 
+function wrapDashTable() {
+    
+    $('.dashtable').each(function() {
+        
+        $(this).wrap('<div class="dashtable-body"></div>');
+
+        tableWidth = 0;
+
+        $('thead th', this).each(function() {
+
+            $(this).css('width',$(this).outerWidth() + 'px');
+            $(this).attr('width',$(this).outerWidth() + 'px');
+
+        });
+
+        tableWidth = $(this).parent().outerWidth();
+
+        $('tfoot td', this).each(function() {
+
+            $(this).css('width',$(this).outerWidth() + 'px');
+            $(this).attr('width',$(this).outerWidth() + 'px');
+
+        });
+
+        console.log(navigator.userAgent);
+
+        if (navigator.userAgent.indexOf('Chrome') != -1 || navigator.userAgent.indexOf('Opera') != -1 || navigator.userAgent.indexOf('Safari') != -1) {
+
+            tableWidth = $(this).outerWidth();
+
+        }
+
+        if ($('thead', this).length > 0) {
+            $(this).parent().parent().prepend('<div class="dashtable-header" style="width: ' + tableWidth + 'px"></div>');
+            $(this).parent().parent().children('.dashtable-header').html('<table class="table table-bordered" style="width: ' + tableWidth + 'px"><thead>' + $('thead', this).html() + '</thead></table>');
+
+        }
+
+        if ($('tfoot', this).length > 0) {
+            $(this).parent().parent().append('<div class="dashtable-footer" style="width: ' + tableWidth + 'px"></div>');
+            $(this).parent().parent().children('.dashtable-footer').html('<table class="table table-bordered" style="width: ' + tableWidth + 'px"><tfoot>' + $('tfoot', this).html() + '</tfoot></table>');
+
+        }
+
+        $('tbody tr', this).each(function() {
+
+            $('td', this).each(function() {
+                $(this).css('width',$(this).outerWidth() + 'px');
+                $(this).attr('width',$(this).outerWidth() + 'px');
+            });
+
+            return false;
+
+        });
+
+        $(this).css('width', tableWidth + 'px');
+
+        if (navigator.userAgent.indexOf('Firefox') != -1 || navigator.userAgent.indexOf('Mozilla') != -1) {
+            $(this).css('table-layout', 'fixed');
+        }
+
+        $('tfoot', this).remove();
+        $('thead', this).remove();
+
+        $(this).parent().css('height', ($(this).parent().parent().height() - $(this).parent().parent().children('.dashtable-header').outerHeight() - $(this).parent().parent().children('.dashtable-footer').outerHeight() - 10) + 'px');
+        $(this).parent().css('overflow','auto');
+
+        $(this).parent().parent().children('.dashtable-header').css('position', 'relative');
+        $(this).parent().parent().children('.dashtable-header').css('position', 'relative');
+
+        $(this).parent().scroll(function() {
+            $(this).parent().children('.dashtable-header').css('left', $(this).scrollLeft() * -1);
+            $(this).parent().children('.dashtable-header').css('left', $(this).scrollLeft() * -1);
+        });
+        
+    });
+    
+}
+
 function unWrapTable() {
     
     $('#footable-body .footable').prepend($('#footable-header table').html());
@@ -234,6 +313,48 @@ function unWrapTable() {
     
     $('#footable-body .footable').unwrap();
     
+}
+
+function unWrapDashTable() {
+    
+    $('.dashtable').each(function() {
+    
+        $('this').prepend($(this).parent().parent().children('.dashtable-header table').html());
+
+        if ($(this).parent().parent().children('.dashtable-footer').length > 0) {
+            $(this).append($(this).parent().parent().children('.dashtable-footer table').html());
+        }
+
+        $(this).parent().parent().children('.dashtable-header').remove();
+        $(this).parent().parent().children('.dashtable-footer').remove();
+
+        $('thead th', this).each(function() {
+
+            $(this).removeAttr('style'); $(this).removeAttr('width');
+
+        });
+
+        $('tfoot td', this).each(function() {
+
+            $(this).removeAttr('style'); $(this).removeAttr('width');
+
+        });
+
+        $('tbody tr', this).each(function() {
+
+            $('td', this).each(function() {
+                $(this).removeAttr('style'); $(this).removeAttr('width');
+            });
+
+            return false;
+
+        });
+
+        $(this).removeAttr('style'); $(this).removeAttr('width');
+
+        $(this).unwrap();
+        
+    });
     
 }
 
@@ -247,6 +368,22 @@ function wrapRewrapTable() {
 
         if ($(window).innerHeight() / window.devicePixelRatio >= 600) {
             wrapTable();
+        }
+        
+    }
+    
+}
+
+function wrapRewrapDashTable() {
+    
+    if ($('.dashtable').length > 0) {
+        
+        if ($('.dashtable-body').length > 0) {
+            unWrapDashTable();
+        }
+
+        if ($(window).innerHeight() / window.devicePixelRatio >= 600) {
+            wrapDashTable();
         }
         
     }
@@ -290,6 +427,7 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
     
     //Table Reset
     wrapRewrapTable();
+    wrapRewrapDashTable();
 
     //TV Scroll Reset
     rowPointer = -3;
@@ -405,6 +543,9 @@ function initLayout() { //Fungsi untuk inisialisasi layout
     if (typeof tvMode === 'undefined') {
         $('.footable').addClass('table-bordered');
     }
+    
+    $('.dashtable').addClass('table');
+    $('.dashtable').addClass('table-bordered');
 
 }
 
