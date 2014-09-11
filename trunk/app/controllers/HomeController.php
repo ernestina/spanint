@@ -548,7 +548,7 @@ class homeController extends BaseController {
                 $this->view->pieReturSP2D = $this->pieReturSP2D($kodeunit);
                 $this->view->pieStatusLHP = $this->pieStatusLHP(7, $kodeunit);
                 
-                $this->view->lineHistSP2D = $this->lineHistSP2D(7);
+                $this->view->lineHistSP2D = $this->lineHistSP2D(7, $kodeunit);
                 
                 $this->view->periode = 7;
                 
@@ -632,7 +632,7 @@ class homeController extends BaseController {
                 $this->view->pieReturSP2D = $this->pieReturSP2D($kodeunit);
                 $this->view->pieStatusLHP = $this->pieStatusLHP(30, $kodeunit);
                 
-                $this->view->lineHistSP2D = $this->lineHistSP2D(30);
+                $this->view->lineHistSP2D = $this->lineHistSP2D(30, $kodeunit);
                 
                 $this->view->periode = 30;
                 
