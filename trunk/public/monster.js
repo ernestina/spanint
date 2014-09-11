@@ -284,6 +284,9 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
         });
         $('#table-container').css('height', remainingTableSpace);
     }
+        
+    $('#dashboard-line').css('min-height', '200px');
+    $('#dashboard-line').css('height', remainingTableSpace - 120);
     
     //Table Reset
     wrapRewrapTable();

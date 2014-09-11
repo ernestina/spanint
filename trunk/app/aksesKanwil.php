@@ -10,9 +10,7 @@
 $akses['HomeKanwil'] = array(
     '__construct',
     'index',
-    'harian',
-    'mingguan',
-    'bulanan',
+    'dashboard',
     '__destruct'
 );
 

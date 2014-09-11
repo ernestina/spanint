@@ -11,10 +11,11 @@
     src: url("font/segoeuib.ttf");
     font-weight: bold;
 }
+
 body {
-    font-size: 14px;
+    font-size: 13px;
     overflow-x: hidden;
-    font-family: Nexa, "Segoe UI", sans-serif;
+    font-family: "Segoe UI", Nexa, sans-serif;
 }
 
 td {
@@ -107,6 +108,51 @@ h4 {
 /* CORE LAYOUT ITEMS */
 
 /* APP PANELS AND SEGMENTS */
+
+.pie-segment-container {
+    padding: 10px;
+}
+
+.pie-segment {
+    width: 100%;
+    display: block;
+    float: left;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+}
+
+.pie-canvas {
+    float: left;
+    width: 40%;
+}
+
+.pie-legend {
+    float: left;
+    padding-left: 10px;
+    width: 60%;
+}
+
+.pie-legend h4 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.pie-legend p {
+    padding: 0;
+    margin: 0 0 0 10px;
+    font-size: 1.2em;
+}
+
+.pie-legend .sub {
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.pie-legend div {
+    margin-bottom: 5px;
+}
 
 #tv-unit-title {
     font-size: 24px;
@@ -239,6 +285,13 @@ h4 {
     color: #0077b6;
     background: #fff;
     border: 1px solid #fff;
+}
+
+.sub-segment {
+    padding: 0 10px;
+    color: #333;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 #table-container {
