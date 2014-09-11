@@ -92,16 +92,16 @@ h4 {
 
 /* NANOSCROLLER */
 
-.nano .nano-content { 
+#sidebar .nano .nano-content { 
     padding: 10px 30px 10px 20px; 
 }
 
-.nano .nano-pane   { 
+#sidebar .nano .nano-pane   { 
     margin: 10px; 
     background: rgba(255,255,255,.25); 
 }
 
-.nano .nano-slider { 
+#sidebar .nano .nano-slider { 
     background: #fff !important; 
 }
 
@@ -291,8 +291,8 @@ h4 {
 .sub-segment {
     padding: 0 10px;
     color: #333;
-    background: #f5f5f5;
-    border-bottom: 1px solid #e5e5e5;
+    background: #fff;
+    border-bottom: none;
 }
 
 #table-container {

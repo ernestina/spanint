@@ -261,7 +261,7 @@ function wrapDashTable() {
         $('tfoot', this).remove();
         $('thead', this).remove();
 
-        $(this).parent().css('height', ($(this).parent().parent().height() - $(this).parent().parent().children('.dashtable-header').outerHeight() - $(this).parent().parent().children('.dashtable-footer').outerHeight() - 10) + 'px');
+        $(this).parent().css('height', ($(this).parent().parent().height() - $(this).parent().parent().children('.dashtable-header').outerHeight() - $(this).parent().parent().children('.dashtable-footer').outerHeight() - 20) + 'px');
         $(this).parent().css('overflow','auto');
 
         $(this).parent().parent().children('.dashtable-header').css('position', 'relative');
