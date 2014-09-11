@@ -26,7 +26,7 @@ td {
     vertical-align: center;
 }
 
-thead, th {
+.table-striped thead, .table-striped th {
     background: #f3f3f3;
     border-bottom: none;
 }
@@ -40,11 +40,11 @@ tfoot {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 2.2em;
 }
 
 h2 {
-    font-size: 1.8em;
+    font-size: 2em;
 }
 
 h3 {
@@ -133,6 +133,7 @@ h4 {
 }
 
 .pie-legend h4 {
+    font-size: 1.3em;
     margin-top: 5px;
     margin-bottom: 10px;
     padding-bottom: 7px;
