@@ -304,7 +304,7 @@
 
 </script>
 
-<div class="main-window-segment vertical-padded dark-panel">
+<div class="main-window-segment vertical-padded">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
