@@ -305,7 +305,7 @@ if(isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
 
 </script>
 
-<div class="main-window-segment vertical-padded dark-panel">
+<div class="main-window-segment vertical-padded">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">

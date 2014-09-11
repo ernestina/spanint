@@ -8,7 +8,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Sisa Pagu Belanja Realisasi dan <em>Encumbrance</em></h2>
+                <h2>Sisa Pagu Belanja Realisasi dan Pencadangan</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">

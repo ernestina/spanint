@@ -8,7 +8,13 @@
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+               
                 
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                 
                 <?php
 	//----------------------------------------------------
 	//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
@@ -40,12 +46,6 @@ if( isset($this->d_bank) || isset($this->d_bulan)){
 }
     ?>
                 
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            
-                <!-- button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button -->
-                
             </div>
         </div>
         
@@ -54,7 +54,7 @@ if( isset($this->d_bank) || isset($this->d_bulan)){
             <div class="col-md-6 col-sm-12">
                 <?php if (isset($this->d_nama_kppn)) {
                         foreach($this->d_nama_kppn as $kppn){
-                            echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().")"; 
+                            echo $kppn->get_nama_user()." (".$kppn->get_kd_satker().") <br>"; 
                             $kode_kppn=$kppn->get_kd_satker();
                         }
                     }?>
@@ -79,7 +79,7 @@ if( isset($this->d_bank) || isset($this->d_bulan)){
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
