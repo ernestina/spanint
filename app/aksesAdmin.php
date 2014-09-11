@@ -10,9 +10,7 @@
 $akses['HomeAdmin'] = array(
     '__construct',
     'index',
-    'harian',
-    'mingguan',
-    'bulanan',
+    'dashboard',
     '__destruct'
 );
 
@@ -90,12 +88,6 @@ $akses['DataGRAdmin'] = array(
     'grStatusHarian',
     'detailLhpRekap',
     'detailPenerimaan',
-    'detailCoAPenerimaan',
-    'KonfirmasiPenerimaan',
-    'downloadkonfirmasi',
-    'SuspendSatkerPenerimaan',
-    'SuspendAkunPenerimaan',
-    'NTPNGanda',
     '__destruct'
 );
 

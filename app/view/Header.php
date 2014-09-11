@@ -24,6 +24,9 @@
         <script src="<?php echo URL; ?>public/Bootstrap/plugins/bootstrap-datepicker.id.js"></script>
         <link href="<?php echo URL; ?>public/Bootstrap/plugins/datepicker3.css" rel="stylesheet">
         
+        <!-- ChartJS -->
+        <script src="<?php echo URL; ?>public/ChartJS/Chart.min.js"></script>
+        
         <!-- Application CSS -->
         <link href="<?php echo URL; ?>public/monster.css" rel="stylesheet">
     
@@ -136,6 +139,16 @@
                             </ul>
                         </div>
                     </li>
+        
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>home/dashboard/harian">Hari Ini</a></li>
+                                <li><a href="<?php echo URL; ?>home/dashboard/mingguan">7 Hari</a></li>
+                                <li><a href="<?php echo URL; ?>home/dashboard/bulanan">30 Hari</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
                     <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                         <div class="collapse">
@@ -236,6 +249,16 @@
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahBank">Terindikasi Salah Bank</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahRekening">Terindikasi Salah PayGroup</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dCompareGaji">Perbandingan Gaji per Bulan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>home/dashboard/harian">Hari Ini</a></li>
+                                <li><a href="<?php echo URL; ?>home/dashboard/mingguan">7 Hari</a></li>
+                                <li><a href="<?php echo URL; ?>home/dashboard/bulanan">30 Hari</a></li>
                             </ul>
                         </div>
                     </li>
@@ -353,6 +376,16 @@
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahBank">Terindikasi Salah Bank</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahRekening">Terindikasi Salah PayGroup</a></li>
                                 <li><a href="<?php echo URL; ?>dataKppn/sp2dCompareGaji">Perbandingan Gaji per Bulan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>home/dashboard/harian">Hari Ini</a></li>
+                                <li><a href="<?php echo URL; ?>home/dashboard/mingguan">7 Hari</a></li>
+                                <li><a href="<?php echo URL; ?>home/dashboard/bulanan">30 Hari</a></li>
                             </ul>
                         </div>
                     </li>

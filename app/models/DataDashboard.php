@@ -349,7 +349,7 @@ class DataDashboard {
         if (!isset($unitfilter)) {
             $sql = "select tanggal, jumlah, nominal, status from spgr_mpn_dashboard where kppn = '" . Session::get('id_user') . "' and tanggal = to_date('" . $tanggal . "','ddmmyyyy')";
         } else {
-            $sql = "select tanggal, jumlah, nominal, status from spgr_mpn_dashboard where " . $unitfilter . " and tanggal = to_date('" . $tanggal . "','ddmmyyyy')";
+            $sql = "select tanggal, jumlah, nominal, status from spgr_mpn_dashboard where " . $unitfilter . " and tanggal = to_date('" . $tanggal . "','dd-mm-yyyy')";
         }
 
         //var_dump($sql);
@@ -466,6 +466,19 @@ class DataDashboard {
             $data[] = $d_data;
         }
         return $data;
+    }
+    
+    public function get_hist_spm_count($filter) {
+        $sql = "SELECT count(STATUS) JUMLAH from AP_INVOICES_ALL_V where STATUS = 'OPEN' ";
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            return $val['JUMLAH'];
+        }
     }
     
     public function get_hist_spm_sp2d_filter_tv($kdkppn) {

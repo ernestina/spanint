@@ -10,9 +10,7 @@
 $akses['HomeSatker'] = array(
     '__construct',
     'index',
-    'mingguan',
-    'bulanan',
-    'triwulanan',
+    'dashboard',
     '__destruct'
 );
 
