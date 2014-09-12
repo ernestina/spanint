@@ -169,7 +169,7 @@ class Bootstrap {
          * * */
         $str = rawurldecode($str);
 
-		$str = preg_replace("/[^A-Za-z0-9\/\-\.]/","",$str);
+        $str = preg_replace("/[^A-Za-z0-9 \/\-\.]/","",$str);
 
         return $str;
     }

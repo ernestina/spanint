@@ -21,11 +21,11 @@ class UserSpanController extends BaseController {
     public function monitoringUserSpan() {   //nama function
         $d_user = new DataUserSPAN($this->registry); //model
         $filter = array();
-		
-		//untuk mencatat log user
+
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = " KDKPPN = '" . $_POST['kdkppn'] . "'";
@@ -34,6 +34,7 @@ class UserSpanController extends BaseController {
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
             } else {
                 $filter[$no++] = " KDKPPN = " . Session::get('id_user');
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
             }
             if ($_POST['nip'] != '') {
                 $filter[] = " USER_NAME = '" . $_POST['nip'] . "'";
@@ -53,9 +54,13 @@ class UserSpanController extends BaseController {
             $filter[$no++] = " KDKPPN = " . Session::get('id_user');
             $this->view->data = $d_user->get_user_filter($filter);
         }
-		
-		//untuk mencatat log user
-		$d_log->tambah_log("Sukses");
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_user->get_table());
+
+        //untuk mencatat log user
+        $d_log->tambah_log("Sukses");
         $this->view->render('kppn/monitoringUser');
     }
 
