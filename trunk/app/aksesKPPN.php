@@ -80,9 +80,9 @@ $akses['DataGRKPPN'] = array(
     'grStatusHarian',
     'detailLhpRekap',
     'detailPenerimaan',
-	'detailCoAPenerimaan',
-	'KonfirmasiPenerimaan',
-	'downloadkonfirmasi',
+    'detailCoAPenerimaan',
+    'KonfirmasiPenerimaan',
+    'downloadkonfirmasi',
     'GR_PFK_PDF',
     'GR_IJP_PDF',
     'detailLhpRekap_PDF',
@@ -92,6 +92,7 @@ $akses['DataGRKPPN'] = array(
     'SuspendSatkerPenerimaan',
     'SuspendAkunPenerimaan',
     'NTPNGanda',
+    'DetailNTPNGanda',
     '__destruct'
 );
 
@@ -278,7 +279,6 @@ $akses['PDFKPPN'] = array(
     'sp2dSalahTanggal_PDF',
     'sp2dSudahVoid_PDF',
     'ValidasiSpm_PDF',
-
     '__destruct'
 );
 ?>
