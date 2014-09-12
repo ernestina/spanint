@@ -117,6 +117,7 @@ class DataCheck {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_attribute6($val['JENIS_SPM']);
+			$d_data->set_jendok($val['JENDOK']);
 
             $data[] = $d_data;
         }
