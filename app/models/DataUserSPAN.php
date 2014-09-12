@@ -148,6 +148,10 @@ class DataUserSPAN {
         return $this->_end_date;
     }
 
+    public function get_table() {
+        return $this->_table;
+    }
+
     /*
      * destruktor
      */
