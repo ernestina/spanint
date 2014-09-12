@@ -26,7 +26,7 @@ td {
     vertical-align: center;
 }
 
-.table-striped thead, .table-striped th {
+.table-striped > thead, .table-striped > th, #footable-header > table > thead, #footable-header > table > thead th {
     background: #f3f3f3;
     border-bottom: none;
 }
@@ -92,16 +92,16 @@ h4 {
 
 /* NANOSCROLLER */
 
-#sidebar .nano .nano-content { 
+.nano .nano-content { 
     padding: 10px 30px 10px 20px; 
 }
 
-#sidebar .nano .nano-pane   { 
+.nano .nano-pane   { 
     margin: 10px; 
     background: rgba(255,255,255,.25); 
 }
 
-#sidebar .nano .nano-slider { 
+.nano .nano-slider { 
     background: #fff !important; 
 }
 

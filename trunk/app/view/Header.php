@@ -8,7 +8,7 @@
         <link rel="icon" href="<?php echo URL; ?>public/monster-logo-small.ico"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes">
 
-        <title>Online Monitoring SPAN</title>
+        <title>Online Monitoring SPAN - Beta Version 1.0</title>
 
         <!-- JQuery & Jquery Plugins -->
         <script src="<?php echo URL; ?>public/JQuery/jquery-2.1.1.min.js"></script>
