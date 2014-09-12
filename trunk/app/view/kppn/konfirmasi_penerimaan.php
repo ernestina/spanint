@@ -67,8 +67,8 @@
 				<th>Mata Uang</th>
                 <th class='ratakanan'>Nilai</th>
                 <!--th>keterangan</th-->
-                <th>Pilih (koreksi) <input type="checkbox" onClick="toggle1(this)" /> </th>
-				<th>Pilih (konfirmasi) <input type="checkbox" onClick="toggle2(this)" /> </th>
+                <th>Pilih (koreksi) <input type="checkbox" name="checkboxToggle1" onClick="toggle1(this)" /> </th>
+				<th>Pilih (konfirmasi) <input type="checkbox" name="checkboxToggle2" onClick="toggle2(this)" /> </th>
             </tr>
         </thead>
         <tbody class='ratatengah'>
@@ -87,8 +87,8 @@
 						echo "<td>" . $value->get_segment1(). "." .$value->get_segment2(). "." .$value->get_segment3(). "." .$value->get_segment4()."." .$value->get_segment5(). "." .$value->get_segment6(). "." .$value->get_segment7(). "." .$value->get_segment8(). "." .$value->get_segment9(). "." .$value->get_segment10(). "." .$value->get_segment11(). "." .$value->get_segment12()."</td>";
 						echo "<td>" . $value->get_mata_uang() . "</td>";
                         echo "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";
-                        echo "<td><input name='checkbox1[]' type='checkbox' id='checkbox1' value='".$value->get_gr_batch_num()."'> </td>";
-						echo "<td><input name='checkbox2[]' type='checkbox' id='checkbox2' value='".$value->get_gr_batch_num()."'> </td>";
+                        echo "<td><input class='check-box-1' name='checkbox1[]' type='checkbox' id='checkbox1' value='".$value->get_gr_batch_num()."'> </td>";
+						echo "<td><input class='check-box-2' name='checkbox2[]' type='checkbox' id='checkbox2' value='".$value->get_gr_batch_num()."'> </td>";
                         echo "</tr>	";
                     }
                 }
@@ -170,11 +170,41 @@
         hideErrorId();
         hideWarning();
     });
+    
+    function emptyToggle(what) {
+        
+        checkboxes = document.getElementsByName(what);
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = false;
+        }
+        
+    }
+    
+    $('.check-box-1').each(function() {
+        $(this).change(function() {
+            if ($(this).is(':checked')) {
+                emptyToggle('checkboxToggle2');
+                emptyToggle('checkbox2[]');
+            }
+        });
+    });
+    
+    $('.check-box-2').each(function() {
+        $(this).change(function() {
+            if ($(this).is(':checked')) {
+                emptyToggle('checkboxToggle1');
+                emptyToggle('checkbox1[]');
+            }
+        });
+    });
+    
     function toggle1(source) {
         checkboxes = document.getElementsByName('checkbox1[]');
         for (var i = 0, n = checkboxes.length; i < n; i++) {
             checkboxes[i].checked = source.checked;
         }
+        emptyToggle('checkboxToggle2');
+        emptyToggle('checkbox2[]');
     }
 	
 	function toggle2(source) {
@@ -182,6 +212,8 @@
         for (var i = 0, n = checkboxes.length; i < n; i++) {
             checkboxes[i].checked = source.checked;
         }
+        emptyToggle('checkboxToggle1');
+        emptyToggle('checkbox1[]');
     }
 	
     function hideErrorId() {
