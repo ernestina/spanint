@@ -292,13 +292,13 @@
                    echo $this->invoice;
                } ?>">
                     <br/>
-                    <label class="isian">Jenis SP2D: </label>
+                    <!--label class="isian">Jenis SP2D: </label>
                     <select class="form-control" type="text" name="JenisSP2D" id="JenisSP2D">
                         <option value=''>- pilih -</option>
                         <option value='GAJI' <?php if ($this->status == "GAJI") {
                    echo "GAJI";
                } ?>>GAJI</option>
-                        <option value='NON GAJI' <?php if ($this->status == "NON GAJI") {
+                        <option value='NON%GAJI%' <?php if ($this->status == "NON GAJI") {
                    echo "NON GAJI";
                } ?>>NON GAJI</option>
                         <option value='RETUR' <?php if ($this->status == "RETUR") {
@@ -307,7 +307,7 @@
                         <option value='LAINNYA' <?php if ($this->status == "LAINNYA") {
                             echo "LAINNYA";
                         } ?>>LAINNYA</option>	
-                    </select>
+                    </select-->
                     <br/>
                     <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Jenis SPM: </label>
@@ -315,7 +315,7 @@
                         <option value='' selected>- pilih -</option>
 <?php
 foreach ($this->data2 as $value1)
-    echo "<option value = '" . $value1->get_attribute6() . "'>" . $value1->get_attribute6() . "</option>";
+    echo "<option value = '" . $value1->get_jendok() . "'>" . $value1->get_attribute6() . "</option>";
 //if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
 //else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
 ?>
