@@ -154,7 +154,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Panduan UAT</a></li>
+                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -268,7 +268,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Panduan UAT</a></li>
+                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -404,7 +404,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Panduan UAT</a></li>
+                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -483,7 +483,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Panduan UAT</a></li>
+                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -522,7 +522,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Panduan UAT</a></li>
+                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -556,7 +556,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Panduan UAT</a></li>
+                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
                                 </ul>
                             </div>
                         </li>
