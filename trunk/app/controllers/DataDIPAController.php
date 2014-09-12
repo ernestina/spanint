@@ -457,9 +457,20 @@ class DataDIPAController extends BaseController {
                 $this->view->d_nm_satker = $_POST['nmsatker'];
             }
             if ($_POST['revisi'] != '') {
-                $filter[$no++] = "(SELECT MAX(REVISION_NO) FROM SPSA_BT_DIPA_V) " . $_POST['revisi'];
+				if ($_POST['revisi'] == 0){
+                $filter[$no++] = "REV = 0";
                 $this->view->d_kd_revisi = $_POST['revisi'];
+				}
+				
+				if ($_POST['revisi'] == 1){
+                $filter[$no++] = "REV > 0";
+                $this->view->d_kd_revisi = $_POST['revisi'];
+				}
+				
             }
+			
+			
+			
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
             //$this->view->render('kppn/NamaSatker');			
         }
