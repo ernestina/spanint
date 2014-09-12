@@ -218,6 +218,16 @@ $akses['DataPelimpahanKPPN'] = array(
 );
 
 /*
+ * akses Panduan
+ */
+$akses['PanduanKPPN'] = array(
+    '__construct',
+    'lihatPanduan1',
+    'PanduanUAT',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFKPPN'] = array(

@@ -75,6 +75,16 @@ $akses['UserSpanDJA'] = array(
 );
 
 /*
+ * akses Panduan
+ */
+$akses['PanduanDJA'] = array(
+    '__construct',
+    'lihatPanduan1',
+    'PanduanUAT',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFDJA'] = array(

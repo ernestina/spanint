@@ -60,6 +60,16 @@ $akses['DataReturPKN'] = array(
 );
 
 /*
+ * akses Panduan
+ */
+$akses['PanduanPKN'] = array(
+    '__construct',
+    'lihatPanduan1',
+    'PanduanUAT',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFPKN'] = array(

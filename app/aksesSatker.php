@@ -147,6 +147,16 @@ $akses['DataSupplierSatker'] = array(
 );
 
 /*
+ * akses Panduan
+ */
+$akses['PanduanSatker'] = array(
+    '__construct',
+    'lihatPanduan1',
+    'PanduanUAT',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFSatker'] = array(

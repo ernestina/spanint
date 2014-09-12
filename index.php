@@ -80,6 +80,7 @@ $registry->auth->add_access('dataUser','admin',$akses['DataUserAdmin']);
 $registry->auth->add_access('userSpan','admin',$akses['UserSpanAdmin']);
 $registry->auth->add_access('dataPelimpahan','admin',$akses['DataPelimpahanAdmin']);
 $registry->auth->add_access('PDF','admin',$akses['PDFAdmin']);
+$registry->auth->add_access('panduan','admin',$akses['PanduanAdmin']);
 
 //level satker
 $registry->auth->add_access('auth','satker',$akses['AuthSatker']);
@@ -91,6 +92,7 @@ $registry->auth->add_access('dataRetur','satker',$akses['DataReturSatker']);
 $registry->auth->add_access('dataSPM','satker',$akses['DataSPMSatker']);
 $registry->auth->add_access('dataSupplier','satker',$akses['DataSupplierSatker']);
 $registry->auth->add_access('PDF','satker',$akses['PDFSatker']);
+$registry->auth->add_access('panduan','satker',$akses['PanduanSatker']);
 
 
 //level kppn
@@ -107,6 +109,7 @@ $registry->auth->add_access('dataSupplier','kppn',$akses['DataSupplierKPPN']);
 $registry->auth->add_access('userSpan','kppn',$akses['UserSpanAdmin']);
 $registry->auth->add_access('dataPelimpahan','kppn',$akses['DataPelimpahanKPPN']);
 $registry->auth->add_access('PDF','kppn',$akses['PDFKPPN']);
+$registry->auth->add_access('panduan','kppn',$akses['PanduanKPPN']);
 
 //level pkn
 $registry->auth->add_access('auth','pkn',$akses['AuthPKN']);
@@ -115,6 +118,7 @@ $registry->auth->add_access('dataKppn','pkn',$akses['DataKppnPKN']);
 $registry->auth->add_access('dataDroping','pkn',$akses['DataDropingPKN']);
 $registry->auth->add_access('dataRetur','pkn',$akses['DataReturPKN']);
 $registry->auth->add_access('PDF','pkn',$akses['PDFPKN']);
+$registry->auth->add_access('panduan','pkn',$akses['PanduanPKN']);
 
 
 //level kanwil
@@ -128,6 +132,7 @@ $registry->auth->add_access('dataSPM','kanwil',$akses['DataSPMKanwil']);
 $registry->auth->add_access('userSpan','kanwil',$akses['UserSpanKanwil']);
 $registry->auth->add_access('dataPelimpahan','kanwil',$akses['DataPelimpahanKanwil']);
 $registry->auth->add_access('PDF','kanwil',$akses['PDFKanwil']);
+$registry->auth->add_access('panduan','kanwil',$akses['PanduanKanwil']);
 
 //level dja
 $registry->auth->add_access('auth','dja',$akses['AuthDJA']);
@@ -136,6 +141,7 @@ $registry->auth->add_access('dataDIPA','dja',$akses['DataDIPADJA']);
 $registry->auth->add_access('dataSPM','dja',$akses['DataSPMDJA']);
 $registry->auth->add_access('userSpan','dja',$akses['UserSpanDJA']);
 $registry->auth->add_access('PDF','dja',$akses['PDFDJA']);
+$registry->auth->add_access('panduan','dja',$akses['PanduanDJA']);
 
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
