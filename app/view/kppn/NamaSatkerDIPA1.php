@@ -259,8 +259,8 @@
                     <select class="form-control" type="text" name="revisi" id="revisi">
 
                         <option value="">Pilih salah satu...</option>
-                        <option value="= 0" <?php if ($this->status=='BELUM REVISI') { echo 'BELUM REVISI'; } ?>>BELUM REVISI</option>
-                        <option value="> 0" <?php if ($this->status=='SUDAH REVISI') { echo 'NON GAJI'; } ?>>SUDAH REVISI</option>
+                        <option value="0" <?php if ($this->status=='BELUM REVISI') { echo 'BELUM REVISI'; } ?>>BELUM REVISI</option>
+                        <option value="1" <?php if ($this->status=='SUDAH REVISI') { echo 'NON GAJI'; } ?>>SUDAH REVISI</option>
 
                     </select>
                     
@@ -272,8 +272,8 @@
                     
                     <br/>
                     
-                    <label class="isian">Nama Satker: </label>
-                    <input class="form-control" type="text" name="nmsatker" id="nmsatker" value="<?php if (isset($this->nmsatker)){ echo $this->nmsatker; } ?>">
+                    <!--label class="isian">Nama Satker: </label>
+                    <input class="form-control" type="text" name="nmsatker" id="nmsatker" value="<?php //if (isset($this->nmsatker)){ echo $this->nmsatker; } ?>"-->
 
                     <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
                     <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
