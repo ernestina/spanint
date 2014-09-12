@@ -185,6 +185,8 @@
             if ($(this).is(':checked')) {
                 emptyToggle('checkboxToggle2');
                 emptyToggle('checkbox2[]');
+            } else {
+                emptyToggle('checkboxToggle1');
             }
         });
     });
@@ -194,6 +196,8 @@
             if ($(this).is(':checked')) {
                 emptyToggle('checkboxToggle1');
                 emptyToggle('checkbox1[]');
+            } else {
+                emptyToggle('checkboxToggle2');
             }
         });
     });
