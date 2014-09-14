@@ -371,31 +371,46 @@ class homeController extends BaseController {
         if ($periode == 'harian') {
             
             if (!isset($kodeunit)) {
+                
+                $this->view->pieJenisSP2D = $this->pieJenisSP2D(1);
+                $this->view->pieNominalSP2D = $this->pieNominalSP2D(1);
+                $this->view->pieReturSP2D = $this->pieReturSP2D();
+                $this->view->pieStatusLHP = $this->pieStatusLHP(1);
 
                 if (Session::get('role')==KANWIL) {
                     
                     $d_kppn_list = new DataUser($this->registry);
                     $this->view->unit_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
                     
-                } else {
+                    $this->view->summaryUnit = array();
+                
+                    foreach ($this->view->unit_list as $unit_list) {
+
+                        if ($unit_list->_kd_d_kppn != 'K00') {
+                            $this->view->summaryUnit[] = $this->summaryUnit($unit_list->_kd_d_kppn, $this->view->pieStatusLHP[0]->get_tgl_lhp());
+                        }
+
+                    }
+                    
+                } else if (Session::get('role')==ADMIN) {
                     
                     $d_kanwil_list = new DataDashboard($this->registry);
                     $this->view->unit_list = $d_kanwil_list->get_kanwil();
                     
-                }
+                    $this->view->summaryUnit = array();
                 
-                $this->view->pieJenisSP2D = $this->pieJenisSP2D(1);
-                $this->view->pieNominalSP2D = $this->pieNominalSP2D(1);
-                $this->view->pieReturSP2D = $this->pieReturSP2D();
-                $this->view->pieStatusLHP = $this->pieStatusLHP(1);
-                
-                $this->view->summaryUnit = array();
-                
-                foreach ($this->view->unit_list as $unit_list) {
-                    
-                    if ($unit_list->_kd_d_kppn != 'K00') {
-                        $this->view->summaryUnit[] = $this->summaryUnit($unit_list->_kd_d_kppn, $this->view->pieStatusLHP[0]->get_tgl_lhp());
+                    foreach ($this->view->unit_list as $unit_list) {
+
+                        if ($unit_list->_kd_d_kppn != 'K00') {
+                            $this->view->summaryUnit[] = $this->summaryUnit($unit_list->_kd_d_kppn, $this->view->pieStatusLHP[0]->get_tgl_lhp());
+                        }
+
                     }
+                    
+                } else {
+                    
+                    $this->view->SPMOngoing = $this->listSPMOngoing(1);
+                    $this->view->SP2DFinished = $this->listSP2DFinished(1);
                     
                 }
                 

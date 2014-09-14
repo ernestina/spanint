@@ -414,7 +414,6 @@
 
 <?php if (isset($this->summaryUnit)) { ?>
 
-<!-- Tabel -->
 <div style="padding: 0px 5px;">
     <div class="container-fluid">
 
@@ -578,6 +577,107 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<?php } ?>
+
+<?php if (isset($this->SP2DFinished)) { ?>
+
+<div style="padding: 0px 5px;">
+    <div class="container-fluid">
+
+        <div class="row">
+            
+            <div class="col-lg-6 col-md-12 top-padded" style="border: 1px solid #e5e5e5">
+                
+                <table class="dashtable">
+                    
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>No. SPM</th>
+                            <th>User</th>
+                            <th>Waktu Mulai</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        
+                        <?php if (empty($this->SPMOngoing)) { ?>
+
+                            <tr><td colspan=14 class="align-center">Tidak ada data.</td></tr>
+
+                        <?php } else { ?>
+                        
+                            <?php $no = 1; ?>
+
+                            <?php foreach ($this->SPMOngoing as $value) { ?>
+                        
+                                <tr>
+                                    
+                                    <td><?php echo $no++; ?></td>                        
+                                    <td><?php echo $value->get_invoice_num(); ?></td>
+                                    <td><?php echo $value->get_to_user(); ?><br/><?php echo $value->get_fu_description(); ?></td>
+                                    <td><?php echo $value->get_begin_date(); ?><br/><?php echo $value->get_time_begin_date(); ?></td>
+                        
+                                </tr>
+                        
+                            <?php } ?>
+                        
+                        <?php } ?>
+                        
+                    </tbody>
+                
+                </table>
+            
+            </div>
+            
+            <div class="col-lg-6 col-md-12 top-padded" style="border: 1px solid #e5e5e5">
+                
+                <table class="dashtable">
+                    
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>No. SP2D</th>
+                            <th>Nominal</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        
+                        <?php if (empty($this->SP2DFinished)) { ?>
+
+                            <tr><td colspan=14 class="align-center">Tidak ada data.</td></tr>
+
+                        <?php } else { ?>
+                        
+                            <?php $no = 1; ?>
+
+                            <?php foreach ($this->SP2DFinished as $value) { ?>
+                        
+                                <tr>
+                                    
+                                    <td><?php echo $no++; ?></td>                        
+                                    <td><?php echo $value->get_check_number(); ?></td>
+                                    <td><?php echo $value->get_jenis_sp2d(); ?></td>
+                                    <td><?php echo $value->get_nominal_sp2d(); ?></td>
+                        
+                                </tr>
+                        
+                            <?php } ?>
+                        
+                        <?php } ?>
+                    
+                    </tbody>
+                
+                </table>
+            
+            </div>
+            
+        </div>
+        
     </div>
 </div>
 
