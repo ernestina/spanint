@@ -120,6 +120,9 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
         $ukuran_kolom_deskripsi = 240;
+		$kolom_grandtotal=30+$ukuran_kolom_pagu_total_sisa+
+		$ukuran_kolom_pagu_total+$ukuran_kolom_pagu_total;
+		
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -131,7 +134,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($left += $ukuran_kolom_pagu_total);
         $this->Cell($ukuran_kolom_pagu_total, $h, 'Tanggal SP2D', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
+        $this->SetX($left += $ukuran_kolom_pagu_total);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
@@ -169,6 +172,7 @@ class FPDF_AutoWrapTable extends FPDF {
             );
 
 		}else{
+			
 			$no = 1;
 			$this->SetFillColor(255);
 			foreach ($this->data as $value) {
@@ -182,10 +186,29 @@ class FPDF_AutoWrapTable extends FPDF {
 							$value->get_invoice_date(),
 							$value->get_attribute6(),
 							$value->get_jenis_sp2d(),
-							$value->get_description(),
+							$value->get_description()
 						)
 				);
+			$jumlah +=$value->get_amount();
 			}
+				$this->SetFont('Arial', '', 6);
+				$h = 20;
+				$this->SetFillColor(200, 200, 200);
+				$left = $this->GetX();
+				$this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+				$this->SetX($left += $kolom_grandtotal);
+				$px1 = $this->GetX();
+				$py1 = $this->GetY();
+				$px2 = $px1;
+				$py2 = $py1;
+				$this->SetXY($px2, $py2);
+				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($jumlah), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+				$this->Cell($ukuran_kolom_satker+$ukuran_kolom_dana+$ukuran_kolom_jenis_belanja+$ukuran_kolom_jenis_belanja+$ukuran_kolom_deskripsi, $h, '', 1, 1, 'R', true);
+				$this->Ln(3);	
+			
+
+			
 		}
 		
         $this->Ln(3);

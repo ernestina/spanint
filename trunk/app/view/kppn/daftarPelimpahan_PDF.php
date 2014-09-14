@@ -118,18 +118,22 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_1a = 100;
         $ukuran_kolom_2a = 50;
         $ukuran_kolom_3a = 75;
-        $ukuran_kolom_4a = 50;
+        $ukuran_kolom_4a = 60;
 		$ukuran_kolom_5a = 50;
         $ukuran_kolom_6a = 50;
 		$ukuran_kolom_a = $ukuran_kolom_1a + $ukuran_kolom_2a + $ukuran_kolom_3a + $ukuran_kolom_4a+ $ukuran_kolom_5a+ $ukuran_kolom_6a;
         $ukuran_kolom_1b = 100;
         $ukuran_kolom_2b = 50;
         $ukuran_kolom_3b = 75;
-		$ukuran_kolom_4b = 50;
+		$ukuran_kolom_4b = 60;
         $ukuran_kolom_5b = 50;
 		$ukuran_kolom_6b = 50;
         $ukuran_kolom_b = $ukuran_kolom_1b + $ukuran_kolom_2b + $ukuran_kolom_3b+ $ukuran_kolom_4b + $ukuran_kolom_5b+ $ukuran_kolom_6b;
-
+		$kolom_grandtotal1=20+$ukuran_kolom_1a+$ukuran_kolom_2a+$ukuran_kolom_3a;
+		
+		$kolom_grandtotal2=$ukuran_kolom_5a+$ukuran_kolom_6a+$ukuran_kolom_1b+$ukuran_kolom_2b+
+		$ukuran_kolom_3b+$ukuran_kolom_4b;		
+		
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
         $this->Cell(20, $h, 'No', 1, 0, 'C', true);
@@ -207,6 +211,8 @@ class FPDF_AutoWrapTable extends FPDF {
                         '',
                         '',
 						'',
+                        '',
+						'',
 						''
             ));
 		
@@ -230,7 +236,35 @@ class FPDF_AutoWrapTable extends FPDF {
 							$value->get_kppn_induk(),
 							$value->get_status()
 				));
+				$terima += $value->get_jml_terima();
+				$limpah += $value->get_jml_limpah();
 			}
+			$this->SetFont('Arial', '', 6);
+				$h = 20;
+				$this->SetFillColor(200, 200, 200);
+				$left = $this->GetX();
+				$this->Cell($kolom_grandtotal1, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+				$this->SetX($left += $kolom_grandtotal1);
+				$px1 = $this->GetX();
+				$py1 = $this->GetY();
+				$px2 = $px1;
+				$py2 = $py1;
+				$this->SetXY($px2, $py2);
+				$this->Cell($ukuran_kolom_4a, $h, number_format($terima), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_4a);
+				$this->Cell($ukuran_kolom_5a+$ukuran_kolom_6a, $h, '', 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_5a+$ukuran_kolom_6a);
+				$this->Cell($kolom_grandtotal2, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+				$this->SetX($left += $kolom_grandtotal2);
+				$px1 = $this->GetX();
+				$py1 = $this->GetY();
+				$px2 = $px1;
+				$py2 = $py1;
+				$this->SetXY($px2, $py2);
+				$this->Cell($ukuran_kolom_4b, $h, number_format($limpah), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_4b);
+				$this->Cell($ukuran_kolom_5b+$ukuran_kolom_6b+$ukuran_kolom_pagu_total, $h, '', 1, 1, 'R', true);
+				$this->Ln(3);
 		
 		}
 
