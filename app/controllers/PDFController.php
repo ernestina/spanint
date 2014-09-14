@@ -393,7 +393,6 @@ class PDFController extends BaseController {
 
             /* if ($kdlokasi != 'null') {
                 $filter[$no++] = "a.lokasi = '" . $kdlokasi . "'";
-                $this->view->lokasi = $_POST['kdlokasi'];
             } */
             $this->view->data = $d_spm1->get_realisasi_fa_global_ba_filter($filter);
         
@@ -432,12 +431,6 @@ class PDFController extends BaseController {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
-        /* if ($_POST['kdkppn']!='null'){
-          $filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
-          }
-          elseif (Session::get('role')==KANWIL){
-          $filter[$no++]="A.KANWIL = '".Session::get('id_user')."'";
-          } */
 		  
 		  				//untuk mencatat log user
         $d_log = new DataLog($this->registry);
@@ -470,7 +463,6 @@ class PDFController extends BaseController {
             $this->view->data4 = $d_spm1->get_realisasi_lokasi_kanwil(Session::get('id_user'));
             $this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
             $this->view->data2 = $d_spm1->get_realisasi_satker_transfer();
-            //$this->view->data2 = $d_spm1->get_realisasi_satker_transfer($_POST['kdkppn']);
         }
 
         if (Session::get('role') == KPPN) {
@@ -759,44 +751,6 @@ class PDFController extends BaseController {
             $filter[$no++] = " KDSATKER =  '" . $kdsatker . "'";
             //$this->view->invoice_num = $invoice_num;	
         }
-		/*
-        if (isset($_POST['submit_file'])) {
-
-            if ($_POST['kd_satker'] != 'null') {
-                $filter[$no++] = "SATKER = '" . $_POST['kd_satker'] . "'";
-                $this->view->satker_code = $_POST['kd_satker'];
-            }
-             if ($_POST['akun']!='null'){
-              $filter[$no++]="A.ACCOUNT_CODE = '".$_POST['akun']."'";
-              $this->view->account_code = $_POST['account_code'];
-              }
-              if ($_POST['output']!='null'){
-              $filter[$no++]="A.OUTPUT_CODE = '".$_POST['output']."'";
-              $this->view->output_code = $_POST['output_code'];
-              }
-              if ($_POST['program']!='null'){
-              $filter[$no++]="A.PROGRAM_CODE = '".$_POST['program']."'";
-              $this->view->program_code = $_POST['program_code'];
-              }
-              if ($_POST['tgl_awal']!='null' AND $_POST['tgl_akhir']!='null'){
-              $filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '".$_POST['tgl_awal']."' AND '".$_POST['tgl_akhir']."'";
-              $this->view->d_tgl_awal = $_POST['tgl_awal'];
-              $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
-              }
-
-              
-              if (Session::get('role')==KANWIL){
-              $d_kppn_list = new DataUser($this->registry);
-              $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-              }
-              if (Session::get('role')==ADMIN || Session::get('role')==DJA){
-              $d_kppn_list = new DataUser($this->registry);
-              $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-              }
-              if (Session::get('role')==KPPN) {$filter[$no++]="KDKPPN = '".Session::get('id_user')."'";
-             
-        }
-			*/
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_detail_fun_fail_filter($filter);
 		if (Session::get('role') == SATKER) {
@@ -2566,7 +2520,10 @@ class PDFController extends BaseController {
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
-            if (!isset($_POST['submit_file'])) {
+			
+			
+			
+            if ($kdsatker == 'null' || $filename == 'null' || $kdtgl_awal == 'null' || $kdtgl_akhir == 'null' ) {
                 $filter[$no++] = " creation_date in 
 							(select max(creation_date) from SPPM_AP_INV_INT_ALL where KDKPPN = '" . Session::get('id_user') . "'
 							and STATUS_CODE = 'Validasi gagal') ";
@@ -2851,7 +2808,7 @@ class PDFController extends BaseController {
 			}
 			
 			if ($kdkppn_induk != 'null') {
-				if ($_POST['kppn_induk'] != 'SEMUA') {
+				if ($kdkppn_induk != 'SEMUA') {
 					$filter[$no++] = "KPPN_INDUK = '" . $kdkppn_induk . "'";
 				} 
             } 
@@ -2902,6 +2859,7 @@ class PDFController extends BaseController {
 
 		//$this->view->load('blank');
 		$this->view->load('kppn/daftarPelimpahan_PDF');
+		//$this->view->render('kppn/daftarPelimpahan');
 		        //untuk mencatat log user
 		$d_log->tambah_log("Sukses");
 
