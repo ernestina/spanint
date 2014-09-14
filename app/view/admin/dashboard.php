@@ -277,17 +277,13 @@
                 <?php
 
                 if (!isset($this->kodeunit)) {
-                    if (Session::get('role') == KANWIL) {
-                        echo Session::get('user');
-                    } else {
+                    if (Session::get('role') == ADMIN) {
                         echo "DJPB";
+                    } else {
+                        echo Session::get('user');
                     }
                 } else {
-                    if (Session::get('role') == KPPN) {
-                        echo Session::get('user');
-                    } else {
-                        echo $this->namaunit;
-                    }
+                    echo $this->namaunit;
                 }
 
                 ?>
@@ -414,10 +410,10 @@
 
 <?php if (isset($this->summaryUnit)) { ?>
 
-<div style="padding: 0px 5px;">
+<div style="padding: 0px 10px;">
     <div class="container-fluid">
 
-        <div class="row"><div class="col-md-12 top-padded" id="table-container" style="border: 1px solid #e5e5e5">
+        <div class="row"><div class="col-md-12 top-padded table-container" style="border: 1px solid #e5e5e5">
 
             <table class="dashtable">
 
@@ -584,12 +580,12 @@
 
 <?php if (isset($this->SP2DFinished)) { ?>
 
-<div style="padding: 0px 5px;">
+<div style="padding: 0px 10px;">
     <div class="container-fluid">
 
         <div class="row">
             
-            <div class="col-lg-6 col-md-12 top-padded" style="border: 1px solid #e5e5e5">
+            <div class="col-lg-6 col-md-12 top-padded table-container" style="border: 1px solid #e5e5e5">
                 
                 <table class="dashtable">
                     
@@ -633,7 +629,7 @@
             
             </div>
             
-            <div class="col-lg-6 col-md-12 top-padded" style="border: 1px solid #e5e5e5">
+            <div class="col-lg-6 col-md-12 top-padded table-container" style="border: 1px solid #e5e5e5">
                 
                 <table class="dashtable">
                     

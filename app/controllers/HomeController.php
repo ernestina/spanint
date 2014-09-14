@@ -386,8 +386,8 @@ class homeController extends BaseController {
                 
                     foreach ($this->view->unit_list as $unit_list) {
 
-                        if ($unit_list->_kd_d_kppn != 'K00') {
-                            $this->view->summaryUnit[] = $this->summaryUnit($unit_list->_kd_d_kppn, $this->view->pieStatusLHP[0]->get_tgl_lhp());
+                        if ($unit_list->get_kd_d_kppn() != 'K00') {
+                            $this->view->summaryUnit[] = $this->summaryUnit($unit_list->get_kd_d_kppn(), $this->view->pieStatusLHP[0]->get_tgl_lhp());
                         }
 
                     }
@@ -401,8 +401,8 @@ class homeController extends BaseController {
                 
                     foreach ($this->view->unit_list as $unit_list) {
 
-                        if ($unit_list->_kd_d_kppn != 'K00') {
-                            $this->view->summaryUnit[] = $this->summaryUnit($unit_list->_kd_d_kppn, $this->view->pieStatusLHP[0]->get_tgl_lhp());
+                        if ($unit_list->get_kd_d_kppn() != 'K00') {
+                            $this->view->summaryUnit[] = $this->summaryUnit($unit_list->get_kd_d_kppn(), $this->view->pieStatusLHP[0]->get_tgl_lhp());
                         }
 
                     }

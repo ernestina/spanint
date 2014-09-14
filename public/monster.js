@@ -420,6 +420,9 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
             remainingTableSpace -= $(this).outerHeight();
         });
         $('#table-container').css('height', remainingTableSpace);
+        $('.table-container').each(function() {
+            $(this).css('height', remainingTableSpace);
+        });
     }
         
     $('#dashboard-line').css('min-height', '200px');

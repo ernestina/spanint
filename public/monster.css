@@ -295,7 +295,7 @@ h4 {
     border-bottom: none;
 }
 
-#table-container {
+#table-container, .table-container {
     overflow: auto;
 }
 
