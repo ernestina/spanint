@@ -868,6 +868,10 @@ class DataDashboard {
     public function get_kd_d_kanwil() {
         return $this->_kd_d_kppn;
     }
+    
+    public function get_kd_d_kppn() {
+        return $this->_kd_d_kppn;
+    }
 
     public function get_nama_user() {
         return $this->_nama_user;

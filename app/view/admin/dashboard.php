@@ -253,10 +253,22 @@
             <div class="col-lg-10 col-md-6 col-sm-12"><h2>Dashboard</h2></div>
             
             <div class="col-lg-1 col-md-3 col-sm-12 align-right top-padded">
-                <button type="button" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 7 Hari</button>
+                
+                <?php if ($this->mode == 'Mingguan') { ?>
+                    <a href="<?php echo URL; ?>home/dashboard/harian/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> Hari Ini</a>
+                <?php } else { ?>
+                    <a href="<?php echo URL; ?>home/dashboard/mingguan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 7 Hari</a>
+                <?php } ?>
+                
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12 align-right top-padded">
-                <button type="button" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 30 Hari</button>
+                
+                <?php if ($this->mode == 'Bulanan') { ?>
+                    <a href="<?php echo URL; ?>home/dashboard/harian/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> Hari Ini</a>
+                <?php } else { ?>
+                    <a href="<?php echo URL; ?>home/dashboard/bulanan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 30 Hari</a>
+                <?php } ?>
+                
             </div>
         </div>
         <div class="row top-padded-little">
@@ -612,10 +624,10 @@
                         
                                 <tr>
                                     
-                                    <td><?php echo $no++; ?></td>                        
-                                    <td><?php echo $value->get_invoice_num(); ?></td>
-                                    <td><?php echo $value->get_to_user(); ?><br/><?php echo $value->get_fu_description(); ?></td>
-                                    <td><?php echo $value->get_begin_date(); ?><br/><?php echo $value->get_time_begin_date(); ?></td>
+                                    <td class="align-center"><?php echo $no++; ?></td>                        
+                                    <td class="align-center"><?php echo $value->get_invoice_num(); ?></td>
+                                    <td class="align-center"><?php echo $value->get_to_user(); ?><br/><?php echo $value->get_fu_description(); ?></td>
+                                    <td class="align-center"><?php echo $value->get_begin_date(); ?><br/><?php echo $value->get_time_begin_date(); ?></td>
                         
                                 </tr>
                         
@@ -637,7 +649,8 @@
                         <tr>
                             <th>No.</th>
                             <th>No. SP2D</th>
-                            <th>Nominal</th>
+                            <th>Jenis SP2D</th>
+                            <th class="align-right">Nominal</th>
                         </tr>
                     </thead>
                     
@@ -655,10 +668,10 @@
                         
                                 <tr>
                                     
-                                    <td><?php echo $no++; ?></td>                        
-                                    <td><?php echo $value->get_check_number(); ?></td>
-                                    <td><?php echo $value->get_jenis_sp2d(); ?></td>
-                                    <td><?php echo $value->get_nominal_sp2d(); ?></td>
+                                    <td class="align-center"><?php echo $no++; ?></td>                        
+                                    <td class="align-center"><?php echo $value->get_check_number(); ?></td>
+                                    <td class="align-center"><?php echo $value->get_jenis_sp2d(); ?></td>
+                                    <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?></td>
                         
                                 </tr>
                         

@@ -456,6 +456,9 @@ class homeController extends BaseController {
 
                     $this->view->kodekanwil = "K".$d_dashboard->get_kanwil_kppn($kodeunit);
                     $this->view->namakanwil = $d_dashboard->get_nama_unit($this->view->kodekanwil);
+                    
+                    $this->view->SPMOngoing = $this->listSPMOngoing(1, $kodeunit);
+                    $this->view->SP2DFinished = $this->listSP2DFinished(1, $kodeunit);
 
                 } else {
 
