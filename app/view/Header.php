@@ -48,6 +48,16 @@
 
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>home/dashboard/harian">Hari Ini</a></li>
+                                    <li><a href="<?php echo URL; ?>home/dashboard/mingguan">7 Hari</a></li>
+                                    <li><a href="<?php echo URL; ?>home/dashboard/bulanan">30 Hari</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
                         <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul Manajemen User</h4>
                             <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
                                 <ul>
@@ -140,16 +150,6 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/harian">Hari Ini</a></li>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/mingguan">7 Hari</a></li>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/bulanan">30 Hari</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
                         <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                             <div class="collapse">
                                 <ul>
@@ -172,6 +172,16 @@
 
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>home/dashboard/harian">Hari Ini</a></li>
+                                    <li><a href="<?php echo URL; ?>home/dashboard/mingguan">7 Hari</a></li>
+                                    <li><a href="<?php echo URL; ?>home/dashboard/bulanan">30 Hari</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
                         <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul Manajemen User</h4>
                             <div class="collapse">
                                 <ul>
@@ -250,16 +260,6 @@
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahBank">Terindikasi Salah Bank</a></li>
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahRekening">Terindikasi Salah PayGroup</a></li>
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dCompareGaji">Perbandingan Gaji per Bulan</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/harian">Hari Ini</a></li>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/mingguan">7 Hari</a></li>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/bulanan">30 Hari</a></li>
                                 </ul>
                             </div>
                         </li>
