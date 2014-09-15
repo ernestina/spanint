@@ -500,30 +500,30 @@
 
                             ?>
 
-                            <?php //if ($overtotal > 0) { ?>
+                            <?php if ($overtotal > 0 || $value->nama_unit[0] != 'K') { ?>
 
                                 <tr>
                                     <td><a href="<?php echo URL; ?>home/dashboard/harian/<?php echo $value->nama_unit; ?>"><?php echo $value->nama_lengkap_unit; ?></a></td>
 
                                     <td class="align-center"><?php echo $value->data_pos_spm; $total_pos_spm += $value->data_pos_spm; ?></td> 
 
-                                    <td class="align-center"><?php echo $total_row_gaji; ?></td> 
-                                    <td class="align-center"><?php echo $total_row_non_gaji; ?></td> 
-                                    <td class="align-center"><?php echo $total_row_lainnya; ?></td>
-                                    <td class="align-center"><?php echo $total_row_void; ?></td> 
-                                    <td class="align-center"><?php echo ($total_row_gaji + $total_row_non_gaji + $total_row_lainnya + $total_row_void); ?></td> 
+                                    <td class="align-center"><?php echo number_format($total_row_gaji); ?></td> 
+                                    <td class="align-center"><?php echo number_format($total_row_non_gaji); ?></td> 
+                                    <td class="align-center"><?php echo number_format($total_row_lainnya); ?></td>
+                                    <td class="align-center"><?php echo number_format($total_row_void); ?></td> 
+                                    <td class="align-center"><?php echo number_format(($total_row_gaji + $total_row_non_gaji + $total_row_lainnya + $total_row_void)); ?></td> 
 
-                                    <td class="align-center"><?php echo $value->data_retur->get_retur_sudah_proses(); ?></td> 
-                                    <td class="align-center"><?php echo $value->data_retur->get_retur_belum_proses(); ?></td>
+                                    <td class="align-center"><?php echo number_format($value->data_retur->get_retur_sudah_proses()); ?></td> 
+                                    <td class="align-center"><?php echo number_format($value->data_retur->get_retur_belum_proses()); ?></td>
 
-                                    <td class="align-center"><?php echo $total_row_lhp_completed; ?></td>
-                                    <td class="align-center"><?php echo $total_row_lhp_validated; ?></td>
-                                    <td class="align-center"><?php echo $total_row_lhp_etc; ?></td>
-                                    <td class="align-center"><?php echo $total_row_lhp_error; ?></td>
-                                    <td class="align-center"><?php echo ($total_row_lhp_completed + $total_row_lhp_validated + $total_row_lhp_etc + $total_row_lhp_error); ?></td>
+                                    <td class="align-center"><?php echo number_format($total_row_lhp_completed); ?></td>
+                                    <td class="align-center"><?php echo number_format($total_row_lhp_validated); ?></td>
+                                    <td class="align-center"><?php echo number_format($total_row_lhp_etc); ?></td>
+                                    <td class="align-center"><?php echo number_format($total_row_lhp_error); ?></td>
+                                    <td class="align-center"><?php echo number_format(($total_row_lhp_completed + $total_row_lhp_validated + $total_row_lhp_etc + $total_row_lhp_error)); ?></td>
                                 </tr>
 
-                            <?php //} ?>
+                            <?php } ?>
 
                     <?php } ?>
 
@@ -531,22 +531,22 @@
                         <tr>
                             <td>Total</td>
 
-                            <td class="align-center"><?php echo $total_pos_spm; ?></td> 
+                            <td class="align-center"><?php echo number_format($total_pos_spm); ?></td> 
 
-                            <td class="align-center"><?php echo $total_gaji; ?></td> 
-                            <td class="align-center"><?php echo $total_non_gaji; ?></td> 
-                            <td class="align-center"><?php echo $total_lainnya; ?></td>
-                            <td class="align-center"><?php echo $total_void; ?></td> 
-                            <td class="align-center"><?php echo ($total_gaji + $total_non_gaji + $total_lainnya + $total_void); ?></td> 
+                            <td class="align-center"><?php echo number_format($total_gaji); ?></td> 
+                            <td class="align-center"><?php echo number_format($total_non_gaji); ?></td> 
+                            <td class="align-center"><?php echo number_format($total_lainnya); ?></td>
+                            <td class="align-center"><?php echo number_format($total_void); ?></td> 
+                            <td class="align-center"><?php echo number_format(($total_gaji + $total_non_gaji + $total_lainnya + $total_void)); ?></td> 
 
-                            <td class="align-center"><?php echo $this->pieReturSP2D->get_retur_sudah_proses(); ?></td> 
-                            <td class="align-center"><?php echo $this->pieReturSP2D->get_retur_belum_proses(); ?></td>
+                            <td class="align-center"><?php echo number_format($this->pieReturSP2D->get_retur_sudah_proses()); ?></td> 
+                            <td class="align-center"><?php echo number_format($this->pieReturSP2D->get_retur_belum_proses()); ?></td>
 
-                            <td class="align-center"><?php echo $total_lhp_completed; ?></td>
-                            <td class="align-center"><?php echo $total_lhp_validated; ?></td>
-                            <td class="align-center"><?php echo $total_lhp_etc; ?></td>
-                            <td class="align-center"><?php echo $total_lhp_error; ?></td>
-                            <td class="align-center"><?php echo ($total_lhp_completed + $total_lhp_validated + $total_lhp_etc + $total_lhp_error); ?></td>
+                            <td class="align-center"><?php echo number_format($total_lhp_completed); ?></td>
+                            <td class="align-center"><?php echo number_format($total_lhp_validated); ?></td>
+                            <td class="align-center"><?php echo number_format($total_lhp_etc); ?></td>
+                            <td class="align-center"><?php echo number_format($total_lhp_error); ?></td>
+                            <td class="align-center"><?php echo number_format(($total_lhp_completed + $total_lhp_validated + $total_lhp_etc + $total_lhp_error)); ?></td>
                         </tr>
                     </tfoot>
 
@@ -603,6 +603,9 @@
                     
                     <thead>
                         <tr>
+                            <th colspan=4>SPM dalam Proses (<?php echo (count($this->SPMOngoing)); ?>)</th>
+                        </tr>
+                        <tr>
                             <th>No.</th>
                             <th>No. SPM</th>
                             <th>User</th>
@@ -626,8 +629,8 @@
                                     
                                     <td class="align-center"><?php echo $no++; ?></td>                        
                                     <td class="align-center"><?php echo $value->get_invoice_num(); ?></td>
-                                    <td class="align-center"><?php echo $value->get_to_user(); ?><br/><?php echo $value->get_fu_description(); ?></td>
-                                    <td class="align-center"><?php echo $value->get_begin_date(); ?><br/><?php echo $value->get_time_begin_date(); ?></td>
+                                    <td class="align-center"><?php echo $value->get_to_user(); ?> - <?php echo $value->get_fu_description(); ?></td>
+                                    <td class="align-center"><?php echo $value->get_begin_date(); ?> <?php echo $value->get_time_begin_date(); ?></td>
                         
                                 </tr>
                         
@@ -647,6 +650,9 @@
                     
                     <thead>
                         <tr>
+                            <th colspan=4>SP2D Hari Ini (<?php echo (count($this->SP2DFinished)); ?>)</th>
+                        </tr>
+                        <tr>
                             <th>No.</th>
                             <th>No. SP2D</th>
                             <th>Jenis SP2D</th>
@@ -663,6 +669,8 @@
                         <?php } else { ?>
                         
                             <?php $no = 1; ?>
+                        
+                            <?php $total_nominal_sp2d = 0; ?>
 
                             <?php foreach ($this->SP2DFinished as $value) { ?>
                         
@@ -672,6 +680,8 @@
                                     <td class="align-center"><?php echo $value->get_check_number(); ?></td>
                                     <td class="align-center"><?php echo $value->get_jenis_sp2d(); ?></td>
                                     <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?></td>
+                                    
+                                    <?php $total_nominal_sp2d += $value->get_nominal_sp2d(); ?>
                         
                                 </tr>
                         
@@ -680,6 +690,21 @@
                         <?php } ?>
                     
                     </tbody>
+                    
+                    <?php if (!empty($this->SP2DFinished)) { ?>
+                    
+                    <tfoot>
+
+                            <tr>
+                                    
+                                <td colspan=3 class="align-center">Jumlah</td>                        
+                                <td class="align-right"><?php echo number_format($total_nominal_sp2d); ?></td>
+
+                            </tr>
+                        
+                    </tfoot>
+
+                    <?php } ?>
                 
                 </table>
             

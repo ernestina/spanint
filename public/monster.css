@@ -110,7 +110,7 @@ h4 {
 /* APP PANELS AND SEGMENTS */
 
 .pie-segment-container {
-    padding: 10px;
+    padding: 15px;
 }
 
 .pie-segment {
@@ -119,7 +119,6 @@ h4 {
     float: left;
     padding: 10px;
     border: 1px solid #e5e5e5;
-    margin: 5px;
 }
 
 .pie-canvas {
@@ -362,15 +361,15 @@ h4 {
 }
 
 .align-right {
-    text-align: right;
+    text-align: right !important;
 }
 
 .align-left {
-    text-align: left;
+    text-align: left !important;
 }
 
 .align-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .tight-margin {
