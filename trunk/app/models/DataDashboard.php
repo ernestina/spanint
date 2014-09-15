@@ -79,7 +79,7 @@ class DataDashboard {
                     $d_data->set_vol_gaji($d_data->get_vol_gaji() + $val['NOMINAL']);
                 } else if ($val['JENIS_SP2D'] == 'NON GAJI') {
                     $d_data->set_vol_non_gaji($d_data->get_vol_non_gaji() + $val['NOMINAL']);
-                } else if ($val['JENIS_SP2D'] == 'LAINNYA') {
+                } else {
                     $d_data->set_vol_lainnya($d_data->get_vol_lainnya() + $val['NOMINAL']);
                 }
             }
@@ -165,7 +165,7 @@ class DataDashboard {
                 } else if ($val['JENIS_SP2D'] == 'NON GAJI') {
                     $d_data->set_non_gaji($d_data->get_non_gaji() + $val['JUMLAH']);
                     $d_data->set_vol_non_gaji($d_data->get_vol_non_gaji() + $val['NOMINAL']);
-                } else if ($val['JENIS_SP2D'] == 'LAINNYA') {
+                } else {
                     $d_data->set_lainnya($d_data->get_lainnya() + $val['JUMLAH']);
                     $d_data->set_vol_lainnya($d_data->get_vol_lainnya() + $val['NOMINAL']);
                 }
