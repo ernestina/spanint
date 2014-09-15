@@ -189,7 +189,7 @@ if (isset($this->d_bank)){
     } ?>>Agustus</option>
                         <option value='SEPTEMBER' <?php if ($this->d_bank == SEPTEMBER) {
         echo "selected";
-    } ?>>Sepetember</option>
+    } ?>>September</option>
                         <option value='OKTOBER' <?php if ($this->d_bank == OKTOBER) {
         echo "selected";
     } ?>>Oktober</option>
