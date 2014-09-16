@@ -623,6 +623,9 @@ class DataSPMController extends BaseController {
         //$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);
         //var_dump($d_spm1->get_error_spm_filter ($filter));
 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
         $d_log->tambah_log("Sukses");
 
         $this->view->render('kppn/RekapSP2D');

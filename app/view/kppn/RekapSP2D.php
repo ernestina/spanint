@@ -162,7 +162,7 @@ if (Session::get('role') == SATKER) {
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) :<br> " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -210,7 +210,7 @@ if (Session::get('role') == SATKER) {
                         } else{
                             $kppn = Session::get('id_user');
                         }
-                        echo "<td td align='right'><a href=" . URL . "dataSPM/detailrekapsp2d/" . $value->get_jendok() . "/" . $kppn . "/" . $_POST['tgl_awal'] . "/" . $_POST['tgl_akhir'] . " target='_blank' '>" . number_format($value->get_jumlah_sp2d()) . "</td>";
+                        echo "<td td align='right'><a href=" . URL . "dataSPM/detailrekapsp2d/" . $value->get_jendok() . "/" . $kppn . "/" . $_POST['tgl_awal'] . "/" . $_POST['tgl_akhir'] . ">" . number_format($value->get_jumlah_sp2d()) . "</td>";
 
                         echo "</tr>	";
                         $jum_sp2d = $jum_sp2d + $value->get_jumlah_sp2d();
