@@ -130,7 +130,7 @@
                         //echo "<td>" . $value->get_ou_name() . "</td>";
                         echo "<td  class='mid'>" . $value->get_invoice_num() . "</td>";
                         //echo "<td><a href=".URL."dataSPM/detailposisiSpm/".$value->get_invoice_num()." target='_blank' '>" . $value->get_invoice_num() . "</a></td>";
-                        echo "<td class='ratakanan'>" . $value->get_invoice_amount() . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_invoice_amount()) . "</td>";
                         echo "<td class='ratakiri'>" . $value->get_invoice_description() . "</td>";
                         echo "<td class='mid'>" . $value->get_wfapproval_status() . "</td>";
                         echo "<td class='mid'>" . $value->get_status() . "</td>";

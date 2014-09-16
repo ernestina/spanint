@@ -202,7 +202,7 @@ if (Session::get('role') == SATKER) {
                         echo "<td>" . $no++ . "</td>";
                         echo "<td>" . $value->get_attribute6() . "</td>";
                         //echo "<td>" . $value->get_jenis_sp2d() . "</td>";
-                        echo "<td align='right'>" . $value->get_total_sp2d() . "</td>";
+                        echo "<td align='right'>" . number_format($value->get_total_sp2d()) . "</td>";
                         //echo "<td>" . $value->get_jumlah_sp2d() . "</td>";
 
                         if (isset($_POST['kdkppn'])) {

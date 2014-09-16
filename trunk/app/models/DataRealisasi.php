@@ -196,7 +196,8 @@ class DataRealisasi {
 				and a.budget_type = '2'			
 				and substr(a.program,1,3)=b.kdba
 				and substr(a.bank,1,1)  <= '9'
-				and substr(a.akun,1,2) <> '72'
+				and substr(a.akun,1,1) <> '7'
+				and a.summary_flag = 'N'
 				"
         ;
         $no = 0;

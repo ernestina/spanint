@@ -270,11 +270,11 @@ if (isset($this->last_update)) {
                             echo "<td>" . $value->get_check_number() . "</td>";
                             echo "<td>" . $value->get_creation_date() . "</td>";
                             echo "<td>" . $value->get_check_date() . "</td>";
-                            echo "<td class='ratakanan'>" . $value->get_amount() . "</td>";
+                            echo "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";
                             echo "<td>" . $value->get_currency_code() . "</td>";
-                            echo "<td>" . $value->get_exchange_rate() . "</td>";
+                            echo "<td>" . number_format($value->get_exchange_rate()) . "</td>";
                             echo "<td>" . $value->get_exchange_date() . "</td>";
-                            echo "<td>" . $value->get_base_amount() . "</td>";
+                            echo "<td>" . number_format($value->get_base_amount()) . "</td>";
                             echo "<td>" . $value->get_attribute6() . "</td>";
                             echo "<td><a href=" . URL . "dataSPM/HistorySpm/" . $value->get_invoice_num() . "/" . $value->get_check_number() . " target='_blank' '>" . $value->get_invoice_num() . "</a></td>";
                             echo "<td>" . $value->get_invoice_date() . "</td>";

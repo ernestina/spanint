@@ -72,8 +72,8 @@ class DataCheck {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
-            $d_data->set_amount(NUMBER_FORMAT($val['AMOUNT']));
-            $d_data->set_base_amount(NUMBER_FORMAT($val['BASE_AMOUNT']));
+            $d_data->set_amount($val['AMOUNT']);
+            $d_data->set_base_amount($val['BASE_AMOUNT']);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_invoice_date(date("d-m-Y", strtotime($val['INVOICE_DATE'])));
             $d_data->set_description($val['DESCRIPTION']);
@@ -83,7 +83,7 @@ class DataCheck {
             $d_data->set_nmsatker($val['NMSATKER']);
             $d_data->set_currency_code($val['CURRENCY_CODE']);
             $d_data->set_exchange_date(date("d-m-Y", strtotime($val['EXCHANGE_DATE'])));
-            $d_data->set_exchange_rate(NUMBER_FORMAT($val['EXCHANGE_RATE']));
+            $d_data->set_exchange_rate($val['EXCHANGE_RATE']);
             $d_data->set_creation_date(date("d-m-Y", strtotime($val['CREATION_DATE'])));
             $d_data->set_status_lookup_code($val['STATUS_LOOKUP_CODE']);
             $data[] = $d_data;
@@ -150,7 +150,7 @@ class DataCheck {
             $d_data->set_jumlah_sp2d($val['JUMLAH_SP2D']);
             $d_data->set_jendok($val['JENDOK']);
             $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
-            $d_data->set_total_sp2d(NUMBER_FORMAT($val['TOTAL_SP2D']));
+            $d_data->set_total_sp2d($val['TOTAL_SP2D']);
             $d_data->set_attribute6($val['JENIS_SPM']);
             $data[] = $d_data;
         }
