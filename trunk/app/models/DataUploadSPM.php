@@ -172,6 +172,10 @@ class DataUploadSPM {
         return $this->_error_message;
     }
 
+    public function get_table() {
+        return $this->_table;
+    }
+
     /*
      * destruktor
      */
