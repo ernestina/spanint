@@ -144,7 +144,6 @@
                         echo "</tr>	";
                         $tot_pagu+=$value->get_Pagu();
                         $tot_51+=$value->get_belanja_51();
-                        $tot_51+=$value->get_belanja_51();
                         $tot_52+=$value->get_belanja_52();
                         $tot_53+=$value->get_belanja_53();
                         $tot_54+=$value->get_belanja_54();
