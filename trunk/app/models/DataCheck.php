@@ -94,7 +94,7 @@ class DataCheck {
     public function get_jenis_spm_filter($satker = null) {
         Session::get('id_user');
 
-        $sql = "SELECT DISTINCT JENIS_SPM 
+        $sql = "SELECT DISTINCT JENIS_SPM, JENDOK 
 				FROM "
                 . $this->_table1 . "
 				WHERE 

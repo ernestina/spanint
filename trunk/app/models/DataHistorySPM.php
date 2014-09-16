@@ -221,6 +221,10 @@ class DataHistorySPM {
         return $this->_check_number;
     }
 
+    public function get_table9() {
+        return $this->_table9;
+    }
+
     /*
      * destruktor
      */

@@ -198,7 +198,7 @@ if (isset($this->data)) {
             echo "<tr>	";
             echo "<td>" . $no++ . "</td>";
             echo "<td>" . $value->get_creation_date() . "</td>";
-            echo "<td><a href=" . URL . "dataSPM/errorSpm/" . $value->get_file_name() . " target='_blank' '>" . $value->get_file_name() . "</a></td>";
+            echo "<td><a href=" . URL . "dataSPM/errorSpm/" . $value->get_file_name() . " >" . $value->get_file_name() . "</a></td>";
             echo "<td>" . $value->get_satker_code() . "</td>";
             echo "<td>" . $value->get_status_code() . "</td>";
 

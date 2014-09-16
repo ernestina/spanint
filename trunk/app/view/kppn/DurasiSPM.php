@@ -174,8 +174,27 @@
                         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
                         $kode_kppn = $kppn->get_kd_satker();
                     }
-                } else {
-                    echo Session::get('user');
+                }
+                if (isset($this->d_invoice)) {
+                    echo "<br>No. Invoice : ".$this->d_invoice;
+                }
+                if (isset($this->d_kdsatker)) {
+                    echo "<br>Satker : ".$this->d_kdsatker;
+                }
+                if (isset($this->d_jendok)) {
+                    echo "<br>Jenis SPM : ".$this->d_jendok;
+                }
+                if (isset($this->d_durasi)) {
+                    if($this->d_durasi==1){
+                        echo "<br>Durasi : Kurang dari 1 jam";
+                    }else if($this->d_durasi==2){
+                        echo "<br>Durasi : Lebih dari 1 jam";
+                    } else if($this->d_durasi==3){
+                        echo "<br>Durasi : Lebih dari 1 hari";
+                    }
+                }
+                if (isset($this->d_tgl_awal)&&isset($this->d_tgl_akhir)) {
+                    echo "<br>Tanggal : ".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir;
                 }
                 ?>
             </div>
@@ -185,7 +204,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) :<br> " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -284,7 +303,11 @@
                         <option value='' selected>- pilih -</option>
                         <?php
                         foreach ($this->data2 as $value1)
-                            echo "<option value = '" . $value1->get_attribute1() . "'>" . $value1->get_attribute1() . "</option>";
+                            if ($value1->get_attribute1()==$this->d_jendok){
+                                echo "<option value = '" . $value1->get_attribute1() . "' selected>" . $value1->get_attribute1() . "</option>";
+                            } else {
+                                echo "<option value = '" . $value1->get_attribute1() . "'>" . $value1->get_attribute1() . "</option>";
+                            }
                         //if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
                         //else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
                         ?>
@@ -294,28 +317,28 @@
                     <label class="isian">Durasi: </label>	
                     <select class="form-control" type="text" name="durasi" id="durasi">
                         <option value=''>- pilih -</option>
-                        <option value="1" <?php if ($this->durasi == "< 1") {
-                            echo "Kurang dari 1 jam";
+                        <option value="1" <?php if ($this->d_durasi == "1") {
+                            echo "selected";
                         } ?>>Kurang dari satu jam</option>
-                        <option value="2" <?php if ($this->durasi == "> 1") {
-                            echo "Lebih dari 1 jam";
+                        <option value="2" <?php if ($this->d_durasi == "2") {
+                            echo "selected";
                         } ?>>Lebih dari satu jam</option>
-                        <option value="3" <?php if ($this->durasi == "> 24") {
-                            echo "Lebih dari 1 hari";
+                        <option value="3" <?php if ($this->d_durasi == "3") {
+                            echo "selected";
                         } ?>>Lebih dari satu hari</option>
 
                     </select>
                     <br/>
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">No Invoice: </label>
-                    <input class="form-control" type="text" name="invoice" id="invoice" value="<?php if (isset($this->invoice)) {
-                            echo $this->invoice;
+                    <input class="form-control" type="text" name="invoice" id="invoice" value="<?php if (isset($this->d_invoice)) {
+                            echo $this->d_invoice;
                         } ?>">
                     <br/>
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Kode Satker: </label>
-                    <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)) {
-                            echo $this->kdsatker;
+                    <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->d_kdsatker)) {
+                            echo $this->d_kdsatker;
                         } ?>">
                     <br/>
                     <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
@@ -325,13 +348,6 @@
                         <span class="input-group-addon">s.d.</span>
                         <input class="form-control" type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
                     </div>
-
-                    <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                    <!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
                         
 
                 </div>

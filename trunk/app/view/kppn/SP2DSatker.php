@@ -168,11 +168,25 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-                $nmsatker = '';
-                foreach ($this->data as $value) {
-                    $nmsatker = $value->get_nmsatker();
+                if (isset($this->d_kd_satker)) {
+                    echo "Satker : " . $this->d_kd_satker;
                 }
-                echo $nmsatker;
+                if (isset($this->d_invoice)) {
+                    echo "<br>No. SP2D : " . $this->d_invoice;
+                }
+                if (isset($this->invoice)) {
+                    echo "<br>No. Invoice : " . $this->invoice;
+                }
+                if (isset($this->JenisSPM)) {
+                    foreach ($this->data2 as $value3) {
+                        if($this->JenisSPM == $value3->get_jendok()){
+                            echo "<br>Jenis SPM : " . $value3->get_attribute6();
+                        }
+                    }
+                }
+                if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
+                    echo "<br>Tanggal : " . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
+                }
                 ?>
             </div>
             
@@ -181,7 +195,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) :<br> " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -276,23 +290,23 @@
 
             </div>
             
-            <form id="filter-form" method="POST" action="daftarsp2d" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="<?php echo URL;?>dataSPM/daftarsp2d/<?php echo $this->d_kd_satker?>" enctype="multipart/form-data">
 
                 <div class="modal-body">
 
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
 
                     <label class="isian">No SP2D: </label>
-                    <input class="form-control" type="text" name="check_number" id="check_number" value="<?php if (isset($this->check_number)) {
-                   echo $this->check_number;
+                    <input class="form-control" type="text" name="check_number" id="check_number" value="<?php if (isset($this->d_invoice)) {
+                   echo $this->d_invoice;
                } ?>">
                     <br/>
                     <label class="isian">Nomor Invoice: </label>
                     <input class="form-control" type="text" name="invoice" id="invoice" value="<?php if (isset($this->invoice)) {
                    echo $this->invoice;
                } ?>">
-                    <br/>
-                    <!--label class="isian">Jenis SP2D: </label>
+                    <!--br/>
+                    <label class="isian">Jenis SP2D: </label>
                     <select class="form-control" type="text" name="JenisSP2D" id="JenisSP2D">
                         <option value=''>- pilih -</option>
                         <option value='GAJI' <?php if ($this->status == "GAJI") {
@@ -313,12 +327,15 @@
                     <label class="isian">Jenis SPM: </label>
                     <select class="form-control" type="text" name="JenisSPM" id="JenisSPM">
                         <option value='' selected>- pilih -</option>
-<?php
-foreach ($this->data2 as $value1)
-    echo "<option value = '" . $value1->get_jendok() . "'>" . $value1->get_attribute6() . "</option>";
-//if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
-//else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
-?>
+                        <?php
+                        foreach ($this->data2 as $value1) {
+                            if($this->JenisSPM == $value1->get_jendok()){
+                                echo "<option value = '" . $value1->get_jendok() . "' selected>" . $value1->get_attribute6() . "</option>";
+                            } else {
+                                echo "<option value = '" . $value1->get_jendok() . "' >" . $value1->get_attribute6() . "</option>";
+                            }                           
+                        }
+                        ?>
                     </select>
                     <br/>
                     <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
@@ -328,13 +345,6 @@ foreach ($this->data2 as $value1)
                         <span class="input-group-addon">s.d.</span>
                         <input class="form-control" type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
                     </div>
-
-                    <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                    <!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
                         
 
                 </div>

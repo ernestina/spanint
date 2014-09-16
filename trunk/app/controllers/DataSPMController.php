@@ -322,10 +322,13 @@ class DataSPMController extends BaseController {
 
             if ($_POST['invoice'] != '') {
                 $invoice = "'" . $_POST['invoice'] . "'";
-                $this->view->d_invoice = $_POST['invoice'];
+                $this->view->invoice_num = $_POST['invoice'];
             }
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
         }
+        
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table9());
 
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->render('kppn/historySPM');
@@ -473,6 +476,9 @@ class DataSPMController extends BaseController {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_satker_filter($filter);
         }
+        
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 
         //var_dump($d_spm1->get_satker_filter($filter));
         $this->view->render('kppn/NamaSatker');
@@ -501,6 +507,7 @@ class DataSPMController extends BaseController {
                 // }
             } else {
                 $filter[$no++] = " SEGMENT1 =  '" . $kdsatker . "'";
+                $this->view->d_kd_satker = $kdsatker;
             }
         }
 
@@ -510,8 +517,6 @@ class DataSPMController extends BaseController {
             $this->view->d_tgl_akhir = $tgl2;
         }
         if (isset($_POST['submit_file'])) {
-
-
             if ($_POST['check_number'] != '') {
                 $filter[$no++] = "check_number = '" . $_POST['check_number'] . "'";
                 $this->view->d_invoice = $_POST['check_number'];
@@ -526,8 +531,8 @@ class DataSPMController extends BaseController {
                 $this->view->JenisSP2D = $_POST['JenisSP2D'];
             }
             if ($_POST['JenisSPM'] != '') {
-                $filter[$no++] = "JENIS_SPM = '" . $_POST['JenisSPM'] . "'";
-                $this->view->JenisSP2D = $_POST['JenisSPM'];
+                $filter[$no++] = "JENDOK = '" . $_POST['JenisSPM'] . "'";
+                $this->view->JenisSPM = $_POST['JenisSPM'];
             }
         }
 

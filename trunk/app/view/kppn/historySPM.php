@@ -134,8 +134,9 @@
                         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
                         $kode_kppn = $kppn->get_kd_satker();
                     }
-                } else {
-                    echo Session::get('user');
+                }
+                if (isset($this->invoice_num)) {
+                    echo "<br>No. Invoice : ".$this->invoice_num;
                 }
                 ?>
             </div>
