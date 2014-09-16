@@ -208,31 +208,31 @@
                     echo "KPPN : ".$this->d_kd_kppn;
                 }
                 if (isset($this->d_tipesup)) {
-                    echo "<br>TIPE SUPP : ".$this->d_tipesup;
+                    echo "<br>Tipe Supp : ".$this->d_tipesup;
                 }
                 if (isset($this->d_nrs)) {
                     echo "<br>NRS : ".$this->d_nrs;
                 }
                 if (isset($this->d_namasupplier)) {
-                    echo "<br>NAMA SUPP : ".$this->d_namasupplier;
+                    echo "<br>Nama Supp : ".$this->d_namasupplier;
                 }
                 if (isset($this->d_npwpsupplier)) {
-                    echo "<br>NPWP SUPP : ".$this->d_npwpsupplier;
+                    echo "<br>NPWP Supp : ".$this->d_npwpsupplier;
                 }
                 if (isset($this->d_nip)) {
-                    echo "<br>NIP PENERIMA : ".$this->d_nip;
+                    echo "<br>NIP Penerima : ".$this->d_nip;
                 }
                 if (isset($this->d_namapenerima)) {
-                    echo "<br>NAMA PENERIMA : ".$this->d_namapenerima;
+                    echo "<br>Nama Penerima : ".$this->d_namapenerima;
                 }
                 if (isset($this->d_norek)) {
-                    echo "<br>NO REK. PENERIMA : ".$this->d_norek;
+                    echo "<br>No. Rek Penerima : ".$this->d_norek;
                 }
                 if (isset($this->d_namarek)) {
-                    echo "<br>NAMA REKENING : ".$this->d_namarek;
+                    echo "<br>Nama Rekening : ".$this->d_namarek;
                 }
                 if (isset($this->d_npwppenerima)) {
-                    echo "<br>NPWP PENERIMA : ".$this->d_npwppenerima;
+                    echo "<br>NPWP Penerima : ".$this->d_npwppenerima;
                 }
                 ?>
             </div>

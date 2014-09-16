@@ -35,25 +35,22 @@
             
             <div class="col-md-6 col-sm-12">
                 <!--detail filter-->
-                <!--?php
-                    if (isset($this->d_nama_kppn)) {
-                        foreach ($this->d_nama_kppn as $kppn) {
-                            echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                            $kode_kppn = $kppn->get_kd_satker();
-                        }
+                <?php
+                    if (isset($this->d_file_name)) {
+                        echo "File PMRT : ".$this->d_file_name;
                     }
-                ?-->
+                ?>
             </div>
             
             <div class="col-md-6 col-sm-12" style="text-align: right;">
-                <!--?php
+                <?php
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server):<br/>" . $last_update->get_last_update() . " WIB";
                         }
                     }
-                ?-->
+                ?>
             </div>
             
         </div>
