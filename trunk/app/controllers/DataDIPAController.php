@@ -22,39 +22,32 @@ class DataDIPAController extends BaseController {
         
     }
 
-        public function RevisiDipa($kdsatker = null) {
+    public function RevisiDipa($kdsatker = null) {
         $d_spm1 = new DataDIPA($this->registry);
         $filter = array();
         $no = 0;
-		
-		//untuk mencatat log user
+
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-        
-		if ($kdsatker != '') {
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if ($kdsatker != '') {
             $filter[$no++] = " A.SATKER_CODE =  '" . $kdsatker . "'";
             $this->view->satker_code = $kdsatker;
-			
         }
-		if (Session::get('role') == SATKER) {
+        if (Session::get('role') == SATKER) {
             $filter[$no++] = " A.SATKER_CODE =  '" . Session::get('kd_satker') . "'";
-			
         }
-		
-		if (Session::get('role') == KANWIL) {
-              $filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
-			  
-		}	
-		if (Session::get('role') == KANWIL) {
-              $filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
-			  
-		}	  
-		if (Session::get('role') == KPPN) {
-              $filter[$no++] = "KPPN_CODE IN ('" . Session::get('id_user') . "')";
-			  
-		}
+
+        if (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+        }
+        if (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+        }
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = "KPPN_CODE IN ('" . Session::get('id_user') . "')";
+        }
 
         if (isset($_POST['submit_file'])) {
             $akun1 = $_POST['akun'];
@@ -85,23 +78,21 @@ class DataDIPAController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		
+
 
         $this->view->data = $d_spm1->get_dipa_filter($filter);
         $this->view->render('kppn/revisiDIPA');
-		$d_log->tambah_log("Sukses");
+        $d_log->tambah_log("Sukses");
     }
-
-
 
     public function Fund_fail($satker = null) {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
         if ($satker != '') {
             $filter[$no++] = " KDSATKER =  '" . $satker . "'";
             $this->view->satker_code = $satker;
@@ -112,9 +103,10 @@ class DataDIPAController extends BaseController {
                 $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn'] . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-            } else {
+            } /*else {
                 $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
-            }
+                $this->view->d_nama_kppn = Session::get('id_user');
+            }*/
 
             if ($_POST['kd_satker'] != '') {
                 $filter[$no++] = "KDSATKER = '" . $_POST['kd_satker'] . "'";
@@ -142,8 +134,8 @@ class DataDIPAController extends BaseController {
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			$filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
-			$this->view->data = $d_spm1->get_fun_fail_filter($filter);
+            $filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+            $this->view->data = $d_spm1->get_fun_fail_filter($filter);
         }
         if (Session::get('role') == ADMIN || Session::get('role') == DJA) {
             $d_kppn_list = new DataUser($this->registry);
@@ -158,28 +150,26 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = "KDSATKER = '" . Session::get('kd_satker') . "'";
             $this->view->data = $d_spm1->get_fun_fail_filter($filter);
         }
-		
-		$d_last_update = new DataLastUpdate($this->registry);
+
+        $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_fun_fail_filter($filter);
-		
-		
-        $this->view->render('kppn/fund_fail');
-		$d_log->tambah_log("Sukses");
-		
-    }
 
+
+        $this->view->render('kppn/fund_fail');
+        $d_log->tambah_log("Sukses");
+    }
 
     public function Detail_Fund_fail() {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
         if ($kdsatker != '') {
             $filter[$no++] = " KDSATKER =  '" . $kdsatker . "'";
             //$this->view->invoice_num = $invoice_num;	
@@ -225,40 +215,35 @@ class DataDIPAController extends BaseController {
         //$this->view->data = $d_spm1->get_detail_fun_fail_filter($filter);
         $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
         $this->view->render('kppn/detail_fund_fail_kd');
-		$d_log->tambah_log("Sukses");
-		
+        $d_log->tambah_log("Sukses");
     }
 
-    
-	
-	public function Detail_Fund_Fail_KD($kf, $kdsatker = null, $output = null, $akun=null) {
+    public function Detail_Fund_Fail_KD($kf, $kdsatker = null, $output = null, $akun = null) {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if ($kdsatker != '') {
             $filter[$no++] = " SATKER =  '" . $kdsatker . "'";
-            //$this->view->invoice_num = $invoice_num;	
+            $this->view->satker_code = $kdsatker;
         }
         if ($output != '') {
             $filter[$no++] = " OUTPUT =  '" . $output . "'";
-            //$this->view->invoice_num = $invoice_num;	
+            $this->view->output_code = $output;
         }
-		
-		if ($akun != '' AND $kf=='2') {
-			$filter[$no++] = " AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
-			AND AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')";
-			 $this->view->account_code1 = $akun;
-			
-		}
-		elseif ($akun != '' AND $kf=='1') {
-			$filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
-			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')";
-			$this->view->account_code1 = $akun;
-		}
-		
+
+        if ($akun != '' AND $kf == '2') {
+            $filter[$no++] = " AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
+			AND AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '" . $akun . "')";
+            $this->view->account_code = $akun;
+        } elseif ($akun != '' AND $kf == '1') {
+            $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
+			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '" . $akun . "')";
+            $this->view->account_code = $akun;
+        }
+
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kd_satker'] != '') {
@@ -269,8 +254,7 @@ class DataDIPAController extends BaseController {
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-			$filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
-			
+            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
         }
         if (Session::get('role') == ADMIN || Session::get('role') == DJA) {
             $d_kppn_list = new DataUser($this->registry);
@@ -283,22 +267,22 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = " SATKER = '" . Session::get('kd_satker') . "'";
             $this->view->data = $d_spm1->get_fun_fail_filter($filter);
         }
-		
-		$d_last_update = new DataLastUpdate($this->registry);
+
+        $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table3());
         //var_dump($d_spm->get_hist_spm_filter());
-		
-		if ($kf=='2') {
-        $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
-		$this->view->render('kppn/detail_fund_fail_kd');
-		} else {
-		$d_spm1 = new DataFA($this->registry);
-		$this->view->data = $d_spm1->get_fa_filter($filter);
-		$this->view->render('kppn/detail_fund_fail_ff');
-		}
-		$d_log->tambah_log("Sukses");
-		
-		
+
+        if ($kf == '2') {
+            $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
+            $this->view->render('kppn/detail_fund_fail_kd');
+        } else {
+            $d_spm1 = new DataFA($this->registry);
+            $this->view->data = $d_spm1->get_fa_filter($filter);
+            $this->view->render('kppn/detail_fund_fail_ff');
+        }
+        $d_log->tambah_log("Sukses");
+
+
         //$this->view->render('kppn/detail_fund_fail_kd');
     }
 
@@ -306,19 +290,20 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
         if ($kdsatker != '' and Session::get('role') != SATKER) {
             $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
-            //$this->view->invoice_num = $invoice_num;	
+            $this->view->satker_code = $kdsatker;
         } else {
             $filter[$no++] = " A.SATKER =  '" . Session::get('kd_satker') . "'";
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
         }
-		if (Session::get('role') == KANWIL) {
+        if (Session::get('role') == KANWIL) {
             $filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
         }
         if (isset($_POST['submit_file'])) {
@@ -351,50 +336,53 @@ class DataDIPAController extends BaseController {
 
         $this->view->data = $d_spm1->get_fa_summary_filter($filter);
         //var_dump($d_spm->get_hist_spm_filter());
-		
-		$d_log->tambah_log("Sukses");
-		
+
+        $d_log->tambah_log("Sukses");
+
         $this->view->render('kppn/realisasiFA_1');
     }
 
-    public function RealisasiFA($kdsatker = null, $program = null, $output = null, $akun = null, $dana=null) {
+    public function RealisasiFA($kdsatker = null, $program = null, $output = null, $akun = null, $dana = null) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-        if ($kdsatker != '' ) {
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        if ($kdsatker != '') {
             $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
-        } 
+            $this->view->satker_code = $kdsatker;
+        }
         if ($program != '') {
             $filter[$no++] = " A.PROGRAM =  '" . $program . "'";
+            $this->view->program_code = $program;
         }
         if ($output != '') {
             $filter[$no++] = " A.OUTPUT =  '" . $output . "'";
+            $this->view->output_code = $output;
         }
-		
-		if ($dana != '') {
+
+        if ($dana != '') {
             $filter[$no++] = " A.DANA =  '" . $dana . "'";
+            //$this->view->dana_code = $dana;
         }
-		
         if ($akun != '') {
             $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
-			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')"
-			;
-			$this->view->account_code1 = $akun;
+			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '" . $akun . "')"
+            ;
+            $this->view->account_code = $akun;
         }
 
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
         }
-		if (Session::get('role') == SATKER) {
+        if (Session::get('role') == SATKER) {
             $filter[$no++] = "A.SATKER = '" . Session::get('kd_satker') . "'";
         }
-		if (Session::get('role') == KANWIL) {
+        if (Session::get('role') == KANWIL) {
             $filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
         }
-		
+
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdsatker'] != '') {
@@ -425,21 +413,24 @@ class DataDIPAController extends BaseController {
 
         $this->view->data = $d_spm1->get_fa_filter($filter);
         //var_dump($d_spm->get_hist_spm_filter());
-		
-		$d_log->tambah_log("Sukses");
-		
+
+        $d_log->tambah_log("Sukses");
+
         $this->view->render('kppn/realisasiFA');
     }
-    
 
     public function nmsatker() {
         $d_spm1 = new DataNamaSatker($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table4());
+
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdkppn'] != '') {
@@ -460,20 +451,19 @@ class DataDIPAController extends BaseController {
                 $this->view->d_nm_satker = $_POST['nmsatker'];
             }
             if ($_POST['revisi'] != '') {
-				if ($_POST['revisi'] == 0){
-                $filter[$no++] = "REV = 0";
-                $this->view->d_kd_revisi = $_POST['revisi'];
-				}
-				
-				if ($_POST['revisi'] == 1){
-                $filter[$no++] = "REV > 0";
-                $this->view->d_kd_revisi = $_POST['revisi'];
-				}
-				
+                if ($_POST['revisi'] == 0) {
+                    $filter[$no++] = "REV = 0";
+                    $this->view->d_kd_revisi = $_POST['revisi'];
+                }
+
+                if ($_POST['revisi'] == 1) {
+                    $filter[$no++] = "REV > 0";
+                    $this->view->d_kd_revisi = $_POST['revisi'];
+                }
             }
-			
-			
-			
+
+
+
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
             //$this->view->render('kppn/NamaSatker');			
         }
@@ -495,14 +485,16 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
         }
-		
-		
+
+
         if (Session::get('role') == ADMIN) {
             $this->view->render('kppn/NamaSatkerDIPA1');
         } else {
             $this->view->render('kppn/NamaSatkerDIPAkppn');
         }
-		$d_log->tambah_log("Sukses");
+        
+        
+        $d_log->tambah_log("Sukses");
         //var_dump($d_spm1->get_satker_filter($filter));
         //$this->view->render('kppn/NamaSatkerDIPA1');
     }
@@ -511,9 +503,14 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataNamaSatker($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table4());
+        
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdkppn'] != '') {
@@ -522,15 +519,16 @@ class DataDIPAController extends BaseController {
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
                 $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
+                $this->view->d_nama_kppn = Session::get('id_user');
             }
 
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "KDSATKER = '" . $_POST['kdsatker'] . "'";
-                $this->view->d_invoice = $_POST['kdsatker'];
+                $this->view->d_kd_satker = $_POST['kdsatker'];
             }
             if ($_POST['nmsatker'] != '') {
                 $filter[$no++] = " UPPER(NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
-				$this->view->d_nm_satker = $_POST['nmsatker'];
+                $this->view->d_nm_satker = $_POST['nmsatker'];
             }
 
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
@@ -548,28 +546,34 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
         }
-		
+
         //var_dump($d_spm1->get_satker_filter($filter));
         $this->view->render('kppn/NamaSatkerDIPA2');
-		$d_log->tambah_log("Sukses");
+        $d_log->tambah_log("Sukses");
     }
 
     public function DetailRealisasiFA($code_id = null) {
         $d_spm1 = new DataRealisasiFA($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        
         if ($code_id != '') {
             $filter[$no++] = " DIST_CODE_COMBINATION_ID =  '" . $code_id . "'";
             //$this->view->invoice_num = $invoice_num;	
         }
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_realisasi_fa_filter($filter);
-		
-		$d_log->tambah_log("Sukses");
-		
+
+        $d_log->tambah_log("Sukses");
+
         $this->view->render('kppn/DetailRealisasiFA');
     }
 
@@ -577,9 +581,9 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "A.KPPN = '" . $_POST['kdkppn'] . "'";
@@ -614,21 +618,19 @@ class DataDIPAController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		
-		$d_log->tambah_log("Sukses");
-		
+
+        $d_log->tambah_log("Sukses");
+
         $this->view->render('kppn/DataRealisasi');
     }
-
-   
 
     public function DataRealisasiBA() {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
 
@@ -663,23 +665,22 @@ class DataDIPAController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		
+
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
-		
-		$d_log->tambah_log("Sukses");
-		
+
+        $d_log->tambah_log("Sukses");
+
         $this->view->render('kppn/DataRealisasiBA');
     }
-
 
     public function DataRealisasiLokasi() {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "A.KPPN = '" . $_POST['kdkppn'] . "'";
@@ -717,9 +718,9 @@ class DataDIPAController extends BaseController {
         }
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
-		
-		$d_log->tambah_log("Sukses");
-		
+
+        $d_log->tambah_log("Sukses");
+
         $this->view->render('kppn/DataRealisasiLokasi');
     }
 
@@ -727,9 +728,9 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             /* if ($_POST['kdkppn']!=''){
               $filter[$no++]="A.KPPN = '".$_POST['kdkppn']."'";
@@ -785,30 +786,28 @@ class DataDIPAController extends BaseController {
         }
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
-		
-		$d_log->tambah_log("Sukses");
-		
+
+        $d_log->tambah_log("Sukses");
+
         $this->view->render('kppn/DataRealisasiTransfer');
     }
-
-    
 
     public function DetailEncumbrances($code_id = null) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
-		//untuk mencatat log user
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if ($code_id != '') {
             $filter[$no++] = " CODE_COMBINATION_ID =  '" . $code_id . "'";
             //$this->view->invoice_num = $invoice_num;	
         }
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_fa_filter($filter);
-		
-		$d_log->tambah_log("Sukses");
-		
+
+        $d_log->tambah_log("Sukses");
+
         $this->view->render('kppn/encumbrances');
     }
 
@@ -816,11 +815,11 @@ class DataDIPAController extends BaseController {
         $d_spm1 = new proses_revisi($this->registry);
         $filter = array();
         $no = 0;
-		
-		//untuk mencatat log user
+
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
         if ($satker != '') {
             $filter[$no++] = " A.SATKER_CODE =  '" . $satker . "'";
             $this->view->satker_code = $satker;
@@ -845,18 +844,18 @@ class DataDIPAController extends BaseController {
                 $this->view->d_nm_satker = $_POST['nmsatker'];
             }
         }
-		if (Session::get('role') == SATKER) {
+        if (Session::get('role') == SATKER) {
             $filter[$no++] = "A.SATKER_CODE = '" . Session::get('kd_satker') . "'";
             //$this->view->data = $d_spm1->get_revisi_dipa($filter);
         }
-		
+
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN_CODE = '" . Session::get('id_user') . "'";
             //$this->view->data = $d_spm1->get_revisi_dipa($filter);
         }
 
         if (Session::get('role') == KANWIL) {
-			$filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+            $filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
         }
@@ -867,26 +866,27 @@ class DataDIPAController extends BaseController {
         }
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		
-        $this->view->data = $d_spm1->get_revisi_dipa($filter);		
-		
+
+        $this->view->data = $d_spm1->get_revisi_dipa($filter);
+
         $this->view->render('kppn/proses_revisi');
-		$d_log->tambah_log("Sukses");
+        $d_log->tambah_log("Sukses");
     }
 
     public function DetailRevisi($satker = null) {
         $d_spm1 = new proses_revisi($this->registry);
         $filter = array();
         $no = 0;
-		
-		//untuk mencatat log user
+
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
         if ($satker != '') {
             $filter[$no++] = " KDSATKER =  '" . $satker . "'";
+            $this->view->satker_code = $satker;
         }
-		if (Session::get('role') == KANWIL) {
+        if (Session::get('role') == KANWIL) {
             $filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
             //$this->view->data = $d_spm1->detail_revisi($filter);
         }
@@ -898,18 +898,17 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = "KDSATKER = '" . Session::get('kd_satker') . "'";
             //$this->view->data = $d_spm1->detail_revisi($filter);
         }
-		
-		$d_last_update = new DataLastUpdate($this->registry);
+
+        $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table3());
-		
+
         $this->view->d_kdsatker = $satker;
         $this->view->data = $d_spm1->detail_revisi($filter);
-		
-        $this->view->render('kppn/detail_revisi');
-		
-		$d_log->tambah_log("Sukses");
-    }
 
+        $this->view->render('kppn/detail_revisi');
+
+        $d_log->tambah_log("Sukses");
+    }
 
     public function __destruct() {
         

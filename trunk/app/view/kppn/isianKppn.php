@@ -437,12 +437,7 @@
                     <br/>
                     <div id="wsp2d" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">No SP2D: </label>
-                    <input class="form-control" type="number" name="nosp2d" id="nosp2d" size="15" value="<?php
-                    if (isset($this->d_nosp2d)) {
-                        echo $this->d_nosp2d;
-                    }
-                    ?>">
-                    <br/>
+                    <input class="form-control" type="number" name="nosp2d" id="nosp2d" size="15" value="<?php if (isset($this->d_nosp2d)) {echo $this->d_nosp2d;}?>"><br/>
                     <div id="wbarsp2d" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">No Transaksi: </label>
                     <input class="form-control" type="number" name="barsp2d" id="barsp2d" value="<?php

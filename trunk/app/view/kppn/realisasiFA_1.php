@@ -204,11 +204,18 @@ if (Session::get('role') == DJA) {
             
             <div class="col-md-6 col-sm-12">
                 <?php
-                $nmsatker = '';
-                foreach ($this->data as $value) {
-                    $nmsatker = $value->get_nm_satker();
+                if (isset($this->satker_code)){
+                    echo "Satker : ".$this->satker_code;
                 }
-                echo $nmsatker;
+                if (isset($this->account_code)){
+                    echo "<br>Akun : ".$this->account_code;
+                }
+                if (isset($this->output_code)){
+                    echo "<br>Output : ".$this->output_code;
+                }
+                if (isset($this->program_code)){
+                    echo "<br>Program : ".$this->program_code;
+                }
                 ?>
             </div>
             
@@ -217,7 +224,7 @@ if (Session::get('role') == DJA) {
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) :</br> " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -272,7 +279,7 @@ if (Session::get('role') == DJA) {
                             echo "<td>" . $no++ . "</td>";
                             echo "<td>" . $value->get_satker() . "</td>";
                             echo "<td>" . $value->get_kppn() . "</td>";
-                            echo "<td style='text-align: center'><a href=" . URL . "dataDIPA/RealisasiFA/" . $value->get_satker() . "/" . $value->get_program() . "/" . $value->get_output() . "/" . $value->get_akun() . "/". $value->get_dana(). " target='_blank' '>" . $value->get_akun() . "</td>";
+                            echo "<td style='text-align: center'><a href=" . URL . "dataDIPA/RealisasiFA/" . $value->get_satker() . "/" . $value->get_program() . "/" . $value->get_output() . "/" . $value->get_akun() . "/". $value->get_dana(). ">" . $value->get_akun() . "</td>";
                             echo "<td>" . $value->get_program() . "</td>";
                             echo "<td>" . $value->get_output() . "</td>";
                             echo "<td>" . $value->get_dana() . "</td>";
@@ -342,14 +349,18 @@ if (Session::get('role') == DJA) {
                     <input class="form-control" type="text" name="akun" id="akun" value="<?php if (isset($this->account_code)) {
                         echo $this->account_code;
                     } ?>">
-
+                    <br>
                     <div id="woutput" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Output : </label>
-                    <input class="form-control" type="text" name="output" id="output">
-
+                    <input class="form-control" type="text" name="output" id="output" value="<?php if (isset($this->output_code)) {
+                        echo $this->output_code;
+                    } ?>">
+                    <br>
                     <div id="wprogram" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Program : </label>
-                    <input class="form-control" type="text" name="program" id="program">
+                    <input class="form-control" type="text" name="program" id="program" value="<?php if (isset($this->program_code)) {
+                        echo $this->program_code;
+                    } ?>">
 
                     <!--<div id="wtgl" class="error"></div>
                     <label class="isian">Tanggal: </label>

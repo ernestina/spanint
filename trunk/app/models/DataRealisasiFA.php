@@ -147,6 +147,10 @@ class DataRealisasiFA {
         return $this->_cancelled_date;
     }
 
+    public function get_table1() {
+        return $this->_table1;
+    }
+
     /*
      * destruktor
      */

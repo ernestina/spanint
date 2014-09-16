@@ -31,7 +31,7 @@ class DataLastUpdate {
     public function get_last_updatenya($filter) {
         $sql = "SELECT TABLE_NAME, to_char(MAX(LAST_UPDATE),'dd-mm-yyyy hh24:mi:ss') LAST_UPDATE
 				FROM T_LAST_UPDATE
-				WHERE TABLE_NAME = '" . $filter . "' group by TABLE_NAME";
+				WHERE TABLE_NAME = '" . strtoupper($filter) . "' group by TABLE_NAME";
         $result = $this->db->select($sql);
         //var_dump ($sql);
         $data = array();

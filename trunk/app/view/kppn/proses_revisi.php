@@ -153,23 +153,18 @@ if (Session::get('role') == SATKER) {
             
             <div class="col-md-6 col-sm-12">
                 <?php
-
-                    if (isset($this->d_nama_kppn)) {
-                        foreach ($this->d_nama_kppn as $kppn) {
-                            echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                            $kode_kppn = $kppn->get_kd_satker();
-                        }
-                    } else {
-                        echo Session::get('user');
+                if (isset($this->d_nama_kppn)) {
+                    foreach ($this->d_nama_kppn as $kppn) {
+                        echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                        $kode_kppn = $kppn->get_kd_satker();
                     }
-
-                ?>
-                <?php
-
-                    if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
-                        echo "<br/>" . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
-                    }
-
+                }
+                if (isset($this->d_kd_satker) ) {
+                    echo "<br/>Satker : " . $this->d_kd_satker ;
+                }
+                if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
+                    echo "<br/>Tanggal : " . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
+                }
                 ?>
             </div>
             
@@ -177,7 +172,7 @@ if (Session::get('role') == SATKER) {
                 <?php
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) :</br> " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -292,13 +287,15 @@ if (Session::get('role') == SATKER) {
                     
                     <div id="wsatker" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Kode Satker : </label>
-                    <input class="form-control"  type="text" name="satker" id="satker">
+                    <input class="form-control"  type="text" name="satker" id="satker" value="<?php if (isset($this->d_kd_satker)) {echo $this->d_kd_satker;}?>">
                     
+                    <!--
                     <br/>
                     
                     <div id="wnamasatker" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Nama Satker : </label>
                     <input class="form-control" type="text" name="nmsatker" id="nmsatker">
+                    -->
                     
                 </div>
 

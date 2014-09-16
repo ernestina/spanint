@@ -17,7 +17,7 @@ class DataNamaSatker {
     private $_table1 = 'T_SATKER';
     private $_table2 = 'AP_CHECKS_ALL_V';
     private $_table3 = 'SPSA_BT_DIPA_V';
-	private $_table4 = 'satker_max_revision';
+    private $_table4 = 'satker_max_revision';
     public $registry;
 
     /*
@@ -74,7 +74,7 @@ class DataNamaSatker {
         Session::get('id_user');
         $sql = "SELECT *
 				FROM "
-                . $this->_table4. " WHERE 1=1 ";
+                . $this->_table4 . " WHERE 1=1 ";
 
         $no = 0;
         foreach ($filter as $filter) {
@@ -152,6 +152,22 @@ class DataNamaSatker {
 
     public function get_total_sp2d() {
         return $this->_total_sp2d;
+    }
+
+    public function get_table1() {
+        return $this->_table1;
+    }
+
+    public function get_table2() {
+        return $this->_table2;
+    }
+
+    public function get_table3() {
+        return $this->_table3;
+    }
+
+    public function get_table4() {
+        return $this->_table4;
     }
 
     /*
