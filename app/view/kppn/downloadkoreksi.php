@@ -8,7 +8,9 @@
     // $tgl1 = $value->get_tgl1();
     // $tgl2 = $value->get_tgl2();
 // }
-$filename = "ADKKOREKSI.txt";
+
+$time = strtotime("now");
+$filename = Session::get('id_user')."_ADKKOREKSI_".$time.".txt";
 
 header("Content-Type: application/octet-stream");
 header("Content-Disposition: attachment;Filename=" . $filename);
