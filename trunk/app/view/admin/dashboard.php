@@ -28,28 +28,31 @@
 
         {
             "value" : <?php echo $total_gaji; ?>,
-            "index" : "<?php echo number_format($total_gaji); ?>",
-            "label" : "Gaji",
             "color" : "#409ACA"
         },
         {
             "value" : <?php echo $total_non_gaji; ?>,
-            "index" : "<?php echo number_format($total_non_gaji); ?>",
-            "label" : "Non Gaji",
             "color" : "#8E5696"
         },
         {
             "value" : <?php echo $total_lainnya; ?>,
-            "index" : "<?php echo number_format($total_lainnya); ?>",
-            "label" : "Lainnya",
             "color" : "#F6CE40"
         },
         {
             "value" : <?php echo $total_void; ?>,
-            "index" : "<?php echo number_format($total_void); ?>",
-            "label" : "Void",
             "color" : "#E35C5C"
         }
+        
+        <?php if ($total_void + $total_lainnya + $total_non_gaji + $total_gaji == 0) { ?>
+        
+        ,{
+            
+            "value" : 1,
+            "color" : "#F3F3F3"
+            
+        }
+        
+        <?php } ?>
 
     ]
     
@@ -75,6 +78,17 @@
             "value" : <?php echo $total_vol_non_gaji; ?>,
             "color" : "#8E5696"
         }
+        
+        <?php if ($total_vol_non_gaji + $total_vol_gaji == 0) { ?>
+        
+        ,{
+            
+            "value" : 1,
+            "color" : "#F3F3F3"
+            
+        }
+        
+        <?php } ?>
 
     ]
     
