@@ -152,12 +152,12 @@ if (Session::get('role') == KPPN) {
                             echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
                             $kode_kppn = $kppn->get_kd_satker();
                         }
-                    } else {
-                        echo Session::get('user');
                     }
-
+                    if (isset($this->d_kd_satker)) {
+                        echo "<br>Satker : ".$this->d_kd_satker;
+                    }
                     if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
-                        echo "<br>" . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
+                        echo "<br>Tanggal : " . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
                         $tgl_filter = $this->d_tgl_awal . "/" . $this->d_tgl_akhir;
                     }
                     ?>
@@ -202,7 +202,7 @@ if (Session::get('role') == KPPN) {
                         foreach ($this->data as $value) {
                             echo "<tr>	";
                             echo "<td class='align-center'>" . $no++ . "</td>";
-                            echo "<td><a href=" . URL . "dataSPM/daftarsp2d/" . $value->get_kdsatker() . "/" . $tgl_filter . " target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
+                            echo "<td><a href=" . URL . "dataSPM/daftarsp2d/" . $value->get_kdsatker() . "/" . $tgl_filter . " >" . $value->get_kdsatker() . "</a></td>";
                             //echo "<td>" . $value->get_kdsatker() . "</td>";
                             echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
                             //echo "<td>" . $value->get_kppn() . "</td>";
@@ -254,10 +254,10 @@ if (Session::get('role') == KPPN) {
 <?php } ?>
                     <br/>
                     <label class="isian">Kode Satker: </label>
-                    <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)) {
-    echo $this->kdsatker;
+                    <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->d_kd_satker)) {
+    echo $this->d_kd_satker;
 } ?>">
-                    <br/>
+                    <!--br/>
                     <label class="isian">Nama Satker: </label>
                     <input class="form-control" type="text" name="nmsatker" id="nmsatker" value="<?php //if (isset($this->nmsatker)){echo $this->nmsatker;} ?>"-->
                     <br/>
@@ -268,14 +268,6 @@ if (Session::get('role') == KPPN) {
                         <span class="input-group-addon">s.d.</span>
                         <input class="form-control" type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
                     </div>
-
-                    <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                        
-
                 </div>
 
                 <div class="modal-footer">

@@ -132,13 +132,11 @@ if (Session::get('role') == KPPN) {
             
             <div class="col-md-6 col-sm-12" style="text-align: right;">
                 <?php
-
                 if (isset($this->last_update)) {
                     foreach ($this->last_update as $last_update) {
                         echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
                     }
                 }
-
                 ?>
             </div>
             
