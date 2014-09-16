@@ -69,14 +69,10 @@
 
         {
             "value" : <?php echo $total_vol_gaji; ?>,
-            "index" : "<?php echo (number_format(round(($total_vol_gaji / 1000000000), 2), 2)." M"); ?>",
-            "label" : "Gaji",
             "color" : "#409ACA"
         },
         {
             "value" : <?php echo $total_vol_non_gaji; ?>,
-            "index" : "<?php echo (number_format(round(($total_vol_non_gaji / 1000000000), 2), 2)." M"); ?>",
-            "label" : "Non Gaji",
             "color" : "#8E5696"
         }
 
@@ -84,18 +80,27 @@
     
     //Retur SP2D
     
-    var pieReturSP2DData = [
+    var pieJumlahReturSP2DData = [
 
         {
             "value" : <?php echo $this->pieReturSP2D->get_retur_sudah_proses(); ?>,
-            "index" : "<?php echo (number_format($this->pieReturSP2D->get_retur_sudah_proses())." (".number_format(round($this->pieReturSP2D->get_vol_retur_sudah_proses() / 1000000000, 2), 2)." M)"); ?>",
-            "label" : "Sudah Proses",
             "color" : "#409ACA"
         },
         {
             "value" : <?php echo $this->pieReturSP2D->get_retur_belum_proses(); ?>,
-            "index" : "<?php echo (number_format($this->pieReturSP2D->get_retur_belum_proses())." (".number_format(round($this->pieReturSP2D->get_vol_retur_belum_proses() / 1000000000, 2), 2)." M)"); ?>",
-            "label" : "Belum Proses",
+            "color" : "#F6CE40"
+        }
+
+    ]
+    
+    var pieNominalReturSP2DData = [
+
+        {
+            "value" : <?php echo $this->pieReturSP2D->get_vol_retur_sudah_proses(); ?>,
+            "color" : "#409ACA"
+        },
+        {
+            "value" : <?php echo $this->pieReturSP2D->get_vol_retur_belum_proses(); ?>,
             "color" : "#F6CE40"
         }
 
@@ -116,10 +121,16 @@
 
     foreach ($this->pieStatusLHP as $lhp_rekap_harian) {
         $tanggal_lhp = $lhp_rekap_harian->get_tgl_lhp();
+        
         $total_lhp_completed += $lhp_rekap_harian->get_lhp_completed();
         $total_lhp_validated += $lhp_rekap_harian->get_lhp_validated();
         $total_lhp_error += $lhp_rekap_harian->get_lhp_error();
         $total_lhp_etc += $lhp_rekap_harian->get_lhp_etc();
+        
+        $total_vol_lhp_completed += $lhp_rekap_harian->get_vol_lhp_completed();
+        $total_vol_lhp_validated += $lhp_rekap_harian->get_vol_lhp_validated();
+        $total_vol_lhp_error += $lhp_rekap_harian->get_vol_lhp_error();
+        $total_vol_lhp_etc += $lhp_rekap_harian->get_vol_lhp_etc();
     }
 
     ?>
@@ -128,26 +139,39 @@
 
         {
             "value" : <?php echo $total_lhp_completed; ?>,
-            "index" : "<?php echo number_format($total_lhp_completed); ?>",
-            "label" : "Completed",
             "color" : "#409ACA"
         },
         {
             "value" : <?php echo $total_lhp_validated; ?>,
-            "index" : "<?php echo number_format($total_lhp_validated); ?>",
-            "label" : "Validated",
             "color" : "#8E5696"
         },
         {
             "value" : <?php echo $total_lhp_etc; ?>,
-            "index" : "<?php echo number_format($total_lhp_etc); ?>",
-            "label" : "Lainnya",
             "color" : "#F6CE40"
         },
         {
             "value" : <?php echo $total_lhp_error; ?>,
-            "index" : "<?php echo number_format($total_lhp_error); ?>",
-            "label" : "Error",
+            "color" : "#E35C5C"
+        }
+
+    ]
+    
+    var pieNominalLHPData = [
+
+        {
+            "value" : <?php echo $total_vol_lhp_completed; ?>,
+            "color" : "#409ACA"
+        },
+        {
+            "value" : <?php echo $total_vol_lhp_validated; ?>,
+            "color" : "#8E5696"
+        },
+        {
+            "value" : <?php echo $total_vol_lhp_etc; ?>,
+            "color" : "#F6CE40"
+        },
+        {
+            "value" : <?php echo $total_vol_lhp_error; ?>,
             "color" : "#E35C5C"
         }
 
@@ -362,20 +386,34 @@
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-12 pie-segment-container">
-                <div class="pie-segment">
-                    <div class="pie-canvas"><canvas id="pieReturSP2D"></canvas></div>
+                
+                <div class="pie-segment" id="pie-jumlah-retur">
+                    <div class="pie-canvas"><canvas id="pieJumlahReturSP2D"></canvas></div>
                     <div class="pie-legend">
                         <h4>Retur SP2D</h4>
-                        <div style="width: 100%; float: left; border-left: 4px solid #409ACA">
-                            <p><?php echo (number_format($this->pieReturSP2D->get_retur_sudah_proses())." (".number_format(round($this->pieReturSP2D->get_vol_retur_sudah_proses() / 1000000000, 2), 2)." M)"); ?></p>
-                            <p class="sub">Sudah Proses</p>
+                        <div id="legend-jumlah-retur">
+                            <div style="width: 100%; float: left; border-left: 4px solid #409ACA">
+                                <p><?php echo (number_format($this->pieReturSP2D->get_retur_sudah_proses())); ?></p>
+                                <p class="sub">Sudah Proses</p>
+                            </div>
+                            <div style="width: 100%; float: left; border-left: 4px solid #F6CE40">
+                                <p><?php echo (number_format($this->pieReturSP2D->get_retur_belum_proses())); ?></p>
+                                <p class="sub">Belum Proses</p>
+                            </div>
                         </div>
-                        <div style="width: 100%; float: left; border-left: 4px solid #8E5696">
-                            <p><?php echo (number_format($this->pieReturSP2D->get_retur_belum_proses())." (".number_format(round($this->pieReturSP2D->get_vol_retur_belum_proses() / 1000000000, 2), 2)." M)"); ?></p>
-                            <p class="sub">Belum Proses</p>
+                        <div id="legend-nominal-retur" style="display:none">
+                            <div style="width: 100%; float: left; border-left: 4px solid #409ACA">
+                                <p><?php echo (number_format(round($this->pieReturSP2D->get_vol_retur_sudah_proses() / 1000000000, 2), 2)." M"); ?></p>
+                                <p class="sub">Sudah Proses</p>
+                            </div>
+                            <div style="width: 100%; float: left; border-left: 4px solid #F6CE40">
+                                <p><?php echo (number_format(round($this->pieReturSP2D->get_vol_retur_belum_proses() / 1000000000, 2), 2)." M"); ?></p>
+                                <p class="sub">Belum Proses</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-12 pie-segment-container">
@@ -383,21 +421,41 @@
                     <div class="pie-canvas"><canvas id="pieStatusLHP"></canvas></div>
                     <div class="pie-legend">
                         <h4>LHP (<?php echo $tanggal_lhp; ?>)</h4>
-                        <div style="width: 50%; float: left; border-left: 4px solid #409ACA">
-                            <p><?php echo number_format($total_lhp_completed); ?></p>
-                            <p class="sub">Completed</p>
+                        <div id="legend-jumlah-lhp">
+                            <div style="width: 50%; float: left; border-left: 4px solid #409ACA">
+                                <p><?php echo number_format($total_lhp_completed); ?></p>
+                                <p class="sub">Completed</p>
+                            </div>
+                            <div style="width: 50%; float: left; border-left: 4px solid #8E5696">
+                                <p><?php echo number_format($total_lhp_validated); ?></p>
+                                <p class="sub">Validated</p>
+                            </div>
+                            <div style="width: 50%; float: left; border-left: 4px solid #F6CE40">
+                                <p><?php echo number_format($total_lhp_etc); ?></p>
+                                <p class="sub">Lainnya</p>
+                            </div>
+                            <div style="width: 50%; float: left; border-left: 4px solid #E35C5C">
+                                <p><?php echo number_format($total_lhp_error); ?></p>
+                                <p class="sub">Error</p>
+                            </div>
                         </div>
-                        <div style="width: 50%; float: left; border-left: 4px solid #8E5696">
-                            <p><?php echo number_format($total_lhp_validated); ?></p>
-                            <p class="sub">Validated</p>
-                        </div>
-                        <div style="width: 50%; float: left; border-left: 4px solid #F6CE40">
-                            <p><?php echo number_format($total_lhp_etc); ?></p>
-                            <p class="sub">Lainnya</p>
-                        </div>
-                        <div style="width: 50%; float: left; border-left: 4px solid #E35C5C">
-                            <p><?php echo number_format($total_lhp_error); ?></p>
-                            <p class="sub">Error</p>
+                        <div id="legend-nominal-lhp" style="display:none">
+                            <div style="width: 50%; float: left; border-left: 4px solid #409ACA">
+                                <p><?php echo (number_format(round($total_vol_lhp_completed / 1000000000, 2), 2)." M"); ?></p>
+                                <p class="sub">Completed</p>
+                            </div>
+                            <div style="width: 50%; float: left; border-left: 4px solid #8E5696">
+                                <p><?php echo (number_format(round($total_vol_lhp_validated / 1000000000, 2), 2)." M"); ?></p>
+                                <p class="sub">Validated</p>
+                            </div>
+                            <div style="width: 50%; float: left; border-left: 4px solid #F6CE40">
+                                <p><?php echo (number_format(round($total_vol_lhp_etc / 1000000000, 2), 2)." M"); ?></p>
+                                <p class="sub">Lainnya</p>
+                            </div>
+                            <div style="width: 50%; float: left; border-left: 4px solid #E35C5C">
+                                <p><?php echo (number_format(round($total_vol_lhp_error / 1000000000, 2), 2)." M"); ?></p>
+                                <p class="sub">Error</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -724,7 +782,7 @@
         $(".pie-canvas").each(function() {
             $(this).css("height", $(this).parent().children(".pie-legend").height());
         });
-        setTimeout(function() {
+        window.setTimeout(function() {
             
             var pieJenisSP2DCanvas = document.getElementById("pieJenisSP2D").getContext("2d");
             var pieJenisSP2D = new Chart(pieJenisSP2DCanvas).Doughnut(pieJenisSP2DData);
@@ -732,8 +790,8 @@
             var pieNominalSP2DCanvas = document.getElementById("pieNominalSP2D").getContext("2d");
             var pieNominalSP2D = new Chart(pieNominalSP2DCanvas).Doughnut(pieNominalSP2DData);
 
-            var pieReturSP2DCanvas = document.getElementById("pieReturSP2D").getContext("2d");
-            var pieReturSP2D = new Chart(pieReturSP2DCanvas).Doughnut(pieReturSP2DData);
+            var pieJumlahReturSP2DCanvas = document.getElementById("pieJumlahReturSP2D").getContext("2d");
+            var pieJumlahReturSP2D = new Chart(pieJumlahReturSP2DCanvas).Doughnut(pieJumlahReturSP2DData);
 
             var pieStatusLHPCanvas = document.getElementById("pieStatusLHP").getContext("2d");
             var pieStatusLHP = new Chart(pieStatusLHPCanvas).Doughnut(pieStatusLHPData);
@@ -747,7 +805,52 @@
             
             <?php } ?>
             
+            window.setInterval(function() {
+            
+                if ($('#legend-jumlah-retur').css('display') == 'none' || $('#legend-jumlah-retur').css('visibility') == 'hidden') {
+                    
+                    $('#legend-nominal-retur').fadeOut(400, function() { 
+                        $('#legend-jumlah-retur').fadeIn(); 
+                        pieJumlahReturSP2D.segments[0].value = pieJumlahReturSP2DData[0].value;
+                        pieJumlahReturSP2D.segments[1].value = pieJumlahReturSP2DData[1].value;
+                        pieJumlahReturSP2D.update();
+                    });
+                    
+                } else {
+                    
+                    $('#legend-jumlah-retur').fadeOut(400, function() { 
+                        $('#legend-nominal-retur').fadeIn();
+                        pieJumlahReturSP2D.segments[0].value = pieNominalReturSP2DData[0].value;
+                        pieJumlahReturSP2D.segments[1].value = pieNominalReturSP2DData[1].value;
+                        pieJumlahReturSP2D.update();
+                    });
+                    
+                }
+                
+                if ($('#legend-jumlah-lhp').css('display') == 'none' || $('#legend-jumlah-lhp').css('visibility') == 'hidden') {
+                    
+                    $('#legend-nominal-lhp').fadeOut(400, function() { 
+                        $('#legend-jumlah-lhp').fadeIn(); 
+                        pieStatusLHP.segments[0].value = pieStatusLHPData[0].value;
+                        pieStatusLHP.segments[1].value = pieStatusLHPData[1].value;
+                        pieStatusLHP.update();
+                    });
+                    
+                } else {
+                    
+                    $('#legend-jumlah-lhp').fadeOut(400, function() { 
+                        $('#legend-nominal-lhp').fadeIn();
+                        pieStatusLHP.segments[0].value = pieNominalLHPData[0].value;
+                        pieStatusLHP.segments[1].value = pieNominalLHPData[1].value;
+                        pieStatusLHP.update();
+                    });
+                    
+                }
+            
+            }, 7000);
+            
         }, 1000);
+        
     });
 
 </script>
