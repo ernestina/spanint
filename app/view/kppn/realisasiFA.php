@@ -155,14 +155,21 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-                    $nmsatker = '';
-
-                    foreach ($this->data as $value) {
-                        $nmsatker = $value->get_nm_satker();
-                        $kdsatker = $value->get_satker();
-                    }
-
-                    echo $nmsatker;
+                if (isset($this->satker_code)){
+                    echo "Satker : ".$this->satker_code;
+                }
+                if (isset($this->account_code)){
+                    echo "<br>Akun : ".$this->account_code;
+                }
+                if (isset($this->output_code)){
+                    echo "<br>Output : ".$this->output_code;
+                }
+                if (isset($this->program_code)){
+                    echo "<br>Program : ".$this->program_code;
+                }
+                if (isset($this->dana_code)){
+                    echo "<br>Dana : ".$this->dana_code;
+                }
                 ?>
             </div>
             
@@ -171,7 +178,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) :</br> " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -237,8 +244,8 @@
                         echo "<td>" . $value->get_budget_type() . "</td>";
                         //echo "<td>" . $value->get_currency_code() . "</td>";
                         echo "<td style='text-align: right'>" . number_format($value->get_budget_amt()) . "</td>";
-                        echo "<td style='text-align: right'><a href=" . URL . "dataDIPA/DetailEncumbrances/" . $value->get_code_id() . " target='_blank' '>" . number_format($value->get_encumbrance_amt()) . "</td>";
-                        echo "<td style='text-align: right'><a href=" . URL . "dataDIPA/DetailRealisasiFA/" . $value->get_code_id() . " target='_blank' '>" . number_format($value->get_actual_amt()) . "</td>";
+                        echo "<td style='text-align: right'><a href=" . URL . "dataDIPA/DetailEncumbrances/" . $value->get_code_id() . " >" . number_format($value->get_encumbrance_amt()) . "</td>";
+                        echo "<td style='text-align: right'><a href=" . URL . "dataDIPA/DetailRealisasiFA/" . $value->get_code_id() . " >" . number_format($value->get_actual_amt()) . "</td>";
 
                         echo "<td style='text-align: right'>" . number_format($value->get_balancing_amt()) . "</td>";
                         echo "</tr>	";
@@ -300,14 +307,18 @@
                 <input class='form-control' type="text" name="akun" id="akun" value="<?php if (isset($this->account_code)) {
                     echo $this->account_code;
                 } ?>">
-
+                <br>
                 <div id="woutput" class='alert alert-danger' style='display:none;'></div>
                 <label class="isian">Output : </label>
-                <input class='form-control' type="text" name="output" id="output">
-
+                <input class='form-control' type="text" name="output" id="output"value="<?php if (isset($this->output_code)) {
+                        echo $this->output_code;
+                    } ?>">
+                <br>
                 <div id="wprogram" class='alert alert-danger' style='display:none;'></div>
                 <label class="isian">Program : </label>
-                <input class='form-control' type="text" name="program" id="program">
+                <input class='form-control' type="text" name="program" id="program"value="<?php if (isset($this->program_code)) {
+                        echo $this->program_code;
+                    } ?>">
 
                 <!--<div id="wtgl" class="error"></div>
                 <label class="isian">Tanggal: </label>

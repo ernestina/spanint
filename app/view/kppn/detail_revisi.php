@@ -45,13 +45,9 @@
                         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
                         $kode_kppn = $kppn->get_kd_satker();
                     }
-                } else {
-                    echo Session::get('user');
                 }
-
-
-                if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)) {
-                    echo "<br>" . $this->d_tgl_awal . " s.d " . $this->d_tgl_akhir;
+                if (isset($this->satker_code)) {
+                    echo "<br>Satker : " . $this->satker_code;
                 }
                 ?>
             </div>
@@ -61,7 +57,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)" . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) :</br>" . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>

@@ -101,16 +101,15 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-
                 if (isset($this->d_nama_kppn)) {
                     foreach ($this->d_nama_kppn as $kppn) {
                         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
                         $kode_kppn = $kppn->get_kd_satker();
                     }
-                } else {
-                    echo Session::get('user');
+                } 
+                if (isset($this->satker_code)){
+                    echo "<br>Satker : ".$this->satker_code;
                 }
-
                 ?>
             </div>
             
@@ -119,7 +118,7 @@
 
                 if (isset($this->last_update)) {
                     foreach ($this->last_update as $last_update) {
-                        echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                        echo "Update Data Terakhir (Waktu Server) :<br> " . $last_update->get_last_update() . " WIB";
                     }
                 }
 
@@ -253,7 +252,9 @@
                     
                     <div id="wakun" class="alert alert-danger" style="display: none"></div>
                     <label class="isian">Satker : </label>
-                    <input class="form-control" type="text" name="kd_satker" id="kd_satker">
+                    <input class="form-control" type="text" name="kd_satker" id="kd_satker" value="<?php if (isset($this->satker_code)) {
+                        echo $this->satker_code;
+                    } ?>">
 
                 </div>
 
