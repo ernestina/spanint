@@ -59,7 +59,7 @@
                     $nmsatker='';
                     foreach ($this->data as $value) 
                     {$jenis_spm=$value->get_attribute6() ;}
-                     echo $jenis_spm;
+                     echo "Jenis SPM : ".$jenis_spm;
 
                     //{$nmsatker=$value->get_nmsatker();} 
                     //echo $nmsatker;
@@ -71,7 +71,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) :<br> " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
