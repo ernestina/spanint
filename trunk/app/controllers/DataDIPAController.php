@@ -596,7 +596,7 @@ class DataDIPAController extends BaseController {
 
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "A.SATKER = '" . $_POST['kdsatker'] . "'";
-                $this->view->satker_code1 = $_POST['kdsatker'];
+                $this->view->satker_code = $_POST['kdsatker'];
             }
             $this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
         }
@@ -718,7 +718,9 @@ class DataDIPAController extends BaseController {
         }
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
-
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        
         $d_log->tambah_log("Sukses");
 
         $this->view->render('kppn/DataRealisasiLokasi');
@@ -750,6 +752,7 @@ class DataDIPAController extends BaseController {
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "A.SATKER = '" . $_POST['kdsatker'] . "'";
                 $this->view->data3 = $d_spm1->get_realisasi_nmsatker_transfer($_POST['kdsatker']);
+                $this->view->satker_code = $_POST['kdsatker'];
             }
 
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
@@ -786,6 +789,8 @@ class DataDIPAController extends BaseController {
         }
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $d_log->tambah_log("Sukses");
 
