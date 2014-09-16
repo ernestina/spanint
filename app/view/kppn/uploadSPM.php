@@ -91,7 +91,7 @@
                         echo "<tr>	";
                         echo "<td>" . $no++ . "</td>";
                         echo "<td>" . $value->get_invoice_num() . '<br>' . $value->get_invoice_date() . "</td>";
-                        echo "<td class='ratakanan'>" . $value->get_invoice_amount() . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_invoice_amount()) . "</td>";
                         //echo "<td>" . $value->get_invoice_date() . "</td>";
                         echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
                         echo "<td>" . $value->get_file_name() . "</td>";

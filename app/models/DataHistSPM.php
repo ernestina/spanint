@@ -65,7 +65,7 @@ class DataHistSPM {
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_invoice_amount(number_format($val['INVOICE_AMOUNT']));
+            $d_data->set_invoice_amount($val['INVOICE_AMOUNT']);
             $d_data->set_ou_name($val['OU_NAME']);
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_invoice_num($val['INVOICE_NUM']);

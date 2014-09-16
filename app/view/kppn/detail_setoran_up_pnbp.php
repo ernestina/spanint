@@ -87,7 +87,7 @@
     </div>
 </div>
 
-<!-- Tabel -->
+<tabel>
 <div id="table-container" class="wrapper">
     <table class="footable">
         

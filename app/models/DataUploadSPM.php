@@ -57,7 +57,7 @@ class DataUploadSPM {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
-            $d_data->set_invoice_amount(number_format($val['INVOICE_AMOUNT']));
+            $d_data->set_invoice_amount($val['INVOICE_AMOUNT']);
             $d_data->set_invoice_date(date("d-m-Y", strtotime($val['INVOICE_DATE'])));
             $d_data->set_file_name($val['FILE_NAME']);
             $d_data->set_status_code($val['STATUS_CODE']);
