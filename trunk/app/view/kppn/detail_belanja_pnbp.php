@@ -142,8 +142,8 @@
                             echo "<td align='right'>" . number_format($value->get_amount()) . "</td>";
                             //echo "<td>" . $value->get_last_update_date(). "</td>";
                             echo "</tr>";
-                            $total1 = $total + $value->get_line_amount();
-                            $total2 = $total + $value->get_amount();
+                            $total1 = $total1 + $value->get_line_amount();
+                            $total2 = $total2 + $value->get_amount();
                         }
                     }
                 } else {

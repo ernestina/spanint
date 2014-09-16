@@ -57,7 +57,7 @@ class DataPNBP {
 	
 	
 	public function get_satker_pnbp($kppn ) {
-        $sql = "SELECT DISTINCT A.SATKER_CODE, B.NMSATKER 
+        $sql = "SELECT DISTINCT A.SATKER_CODE, UPPER(B.NMSATKER) NMSATKER 
 				FROM "
                 . $this->_table1 . " A, " 
 				. $this->_table9 . " B 
@@ -369,7 +369,7 @@ class DataPNBP {
         return $data;
     }
 	public function get_pnbp_bel_line($filter) {
-        $sql = "SELECT INVOICE_NUM, KODE_SATKER, INVOICE_DATE, DESCRIPTION, NO_SP2D, TG_SP2D, JENDOK, JENIS_SPM, SEGMENT3, SEGMENT4, SEGMENT5, AMOUNT_DIST, NILAI_SP2D
+        $sql = "SELECT INVOICE_NUM, SATKER_CODE, INVOICE_DATE, DESCRIPTION, NO_SP2D, TG_SP2D, JENDOK, JENIS_SPM, SEGMENT3, SEGMENT4, SEGMENT5, AMOUNT_DIST, NILAI_SP2D
 				FROM "
                 . $this->_table8 . " 
 				WHERE 

@@ -130,7 +130,7 @@
             <?php
             $no = 1;
             $tot_pot = 0;
-
+			
             if (isset($this->data)) {
                 if (empty($this->data)) {
                     echo '<td colspan=12 align="center">Tidak ada data.</td>';
@@ -167,15 +167,20 @@
 						$tot_61+=$value->get_belanja_61();
                         $tot_bel+=($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58()+$value->get_belanja_61());
                         $tot_sisa+=($value->get_pagu() - ($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58()+$value->get_belanja_61()));
-                        $pagu_pembiayaan = $value->get_pagu_pembiayaan() ;	
-						$pembiayaan = $value->get_belanja_71() ;	
+                        //$pagu_pembiayaan = $value->get_pagu_pembiayaan() ;	
+						//$pembiayaan = $value->get_belanja_71() ;	
                     }
+					echo "<tr>";
+						
+					echo "</tr>";
+					
+					
                 }
             }
             ?>
         </tbody>
         <tfoot>
-            <tr>
+            <!--tr>
 			<td colspan='2' class='ratatengah'><b>PEMBIAYAAN<b></td>
 				<td class='ratakanan'><?php echo "(" .number_format($pagu_pembiayaan). ")"; ?></td>
                 <td class='ratakanan'><?php echo ''; ?></td>
@@ -186,12 +191,13 @@
                 <td class='ratakanan'><?php echo ''; ?></td>
                 <td class='ratakanan'><?php echo ''; ?></td>
                 <td class='ratakanan'><?php echo ''; ?></td>
+				 <td class='ratakanan'><?php echo ''; ?></td>
                 <td class='ratakanan'><?php //echo "(".number_format($pembiayaan).")"; ?></td>
                 <td class='ratakanan'><?php echo ''; ?></td>
-			<tr>
+			<tr-->
 			<tr>
                 <td colspan='2' class='ratatengah'><b>GRAND TOTAL<b></td>
-                <td class='ratakanan'><?php echo number_format($tot_pagu-$pagu_pembiayaan); ?></td>
+                <td class='ratakanan'><?php echo number_format($tot_pagu); ?></td>
                 <td class='ratakanan'><?php echo number_format($tot_51); ?></td>
                 <td class='ratakanan'><?php echo number_format($tot_52); ?></td>
                 <td class='ratakanan'><?php echo number_format($tot_53); ?></td>
@@ -200,6 +206,7 @@
                 <td class='ratakanan'><?php echo number_format($tot_56); ?></td>
                 <td class='ratakanan'><?php echo number_format($tot_57); ?></td>
                 <td class='ratakanan'><?php echo number_format($tot_58); ?></td>
+				<td class='ratakanan'><?php echo number_format($tot_61); ?></td>
                 <td class='ratakanan'><?php echo number_format($tot_bel); ?></td>
                 <td class='ratakanan'><?php echo number_format($tot_sisa); ?></td>
             </tr>

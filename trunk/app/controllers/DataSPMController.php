@@ -353,20 +353,23 @@ class DataSPMController extends BaseController {
 
             if ($_POST['invoice'] != '') {
                 $filter[$no++] = "invoice_num = '" . $_POST['invoice'] . "'";
+				 $this->view->d_invoice = $_POST['invoice']; 
             }
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "substr(invoice_num,8,6) = '" . $_POST['kdsatker'] . "'";
+				 $this->view->d_kdsatker = $_POST['kdsatker'];
             }
             if ($_POST['JenisSPM'] != '') {
                 $filter[$no++] = "jendok = '" . $_POST['JenisSPM'] . "'";
+				$this->view->d_jendok = $_POST['JenisSPM'];
             }
             if ($_POST['durasi'] != '') {
-				
+				  $this->view->d_durasi = $_POST['durasi'];
 				if($_POST['durasi'] == '1'){
 					$filter[$no++] = "durasi2 < 1";
 				}
 				if($_POST['durasi'] == '2'){
-					$filter[$no++] == "durasi2 > 1 and durasi2 < 24";
+					$filter[$no++] = "durasi2 > 1 and durasi2 < 24";
 				}
 				if($_POST['durasi'] == '3'){
 					$filter[$no++] = "durasi2 > 24";

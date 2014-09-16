@@ -298,7 +298,7 @@
 								echo "<td>" . $value->get_kppn_code() . "</td>";
                                 echo "<td colspan=2>" . $value->get_account_code() . "</td>";
                                 //echo "<td>" . $value->get_line_amount() . "</td>";
-								echo "<td style='text-align: right'><a href=" . URL . "dataPNBP/DetailBelanjaPNBP/". $value->get_account_code(). "/"
+								echo "<td style='text-align: right'><a href=" . URL . "dataPNBP/DetailSetoranUPPNBP/". $value->get_account_code(). "/"
 								. $_POST['kdsatker'] . " target='_blank' '>" . number_format($value->get_line_amount()) ."</td>";
 
                                 echo "</tr>	";
