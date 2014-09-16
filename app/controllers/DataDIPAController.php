@@ -250,11 +250,13 @@ class DataDIPAController extends BaseController {
 		if ($akun != '' AND $kf=='2') {
 			$filter[$no++] = " AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
 			AND AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')";
+			 $this->view->account_code1 = $akun;
 			
 		}
 		elseif ($akun != '' AND $kf=='1') {
 			$filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
 			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')";
+			$this->view->account_code1 = $akun;
 		}
 		
         if (isset($_POST['submit_file'])) {
@@ -380,6 +382,7 @@ class DataDIPAController extends BaseController {
             $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
 			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $akun . "')"
 			;
+			$this->view->account_code1 = $akun;
         }
 
         if (Session::get('role') == KPPN) {
@@ -527,7 +530,7 @@ class DataDIPAController extends BaseController {
             }
             if ($_POST['nmsatker'] != '') {
                 $filter[$no++] = " UPPER(NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
-                $this->view->d_invoice = $_POST['nmsatker'];
+				$this->view->d_nm_satker = $_POST['nmsatker'];
             }
 
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
@@ -660,6 +663,7 @@ class DataDIPAController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
         //var_dump($d_spm->get_hist_spm_filter());
         //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		

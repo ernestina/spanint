@@ -102,6 +102,7 @@
         <tbody class='ratatengah'>
             <?php
             $no = 1;
+			$total = 0;
             foreach ($this->data as $value) {
                 echo "<tr>	";
                 echo "<td>" . $no++ . "</td>";
@@ -120,8 +121,17 @@
                     echo "<td></td>";
                 }
                 echo "</tr>	";
+				$total = $total + $value->get_keterangan();
+				
             }
             ?>
+			<tr>
+                <td colspan='5' class='ratatengah'><b>GRAND TOTAL<b></td>
+				<td class='ratakanan'><b><?php echo number_format($total); ?><b></td>
+				<td class='ratatengah'></td>
+				<td class='ratatengah'></td>
+				<td class='ratatengah'></td>
+			</tr>
         </tbody>
         
     </table>

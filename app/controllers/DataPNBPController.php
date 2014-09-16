@@ -100,7 +100,7 @@ class DataPNBPController extends BaseController {
 		if ($akun != '') {
 			$filter[$no++] = "SUBSTR(ACCOUNT_CODE,1,2) = '" . $akun."'";
         }
-		if ($akun != '') {
+		if ($satker != '') {
 			$filter[$no++] = "SATKER_CODE = '" . $satker."'";
 			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
 			
@@ -130,7 +130,7 @@ class DataPNBPController extends BaseController {
         if ($akun != '') {
 			$filter[$no++] = "ACCOUNT_CODE = '" . $akun."'";
         }
-		if ($akun != '') {
+		if ($satker != '') {
 			$filter[$no++] = "SATKER_CODE = '" . $satker."'";
 			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
 			
@@ -164,7 +164,7 @@ class DataPNBPController extends BaseController {
         if ($akun != '') {
 			$filter[$no++] = "JENIS_SPM = '" . $akun."'";
         }
-		if ($akun != '') {
+		if ($satker != '') {
 			$filter[$no++] = "SATKER_CODE = '" . $satker."'";
 			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
 			
@@ -198,8 +198,8 @@ class DataPNBPController extends BaseController {
         if ($akun != '') {
 			$filter[$no++] = "SUBSTR(SEGMENT3,1,2) = '" . $akun."'";
         }
-		if ($akun != '') {
-			$filter[$no++] = "KODE_SATKER = '" . $satker."'";
+		if ($satker != '') {
+			$filter[$no++] = "SATKER_CODE = '" . $satker."'";
 			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
 			
         }
@@ -232,7 +232,7 @@ class DataPNBPController extends BaseController {
         if ($akun != '') {
 			$filter[$no++] = "ACCOUNT_CODE = '" . $akun."'";
         }
-		if ($akun != '') {
+		if ($satker != '') {
 			$filter[$no++] = "SATKER_CODE = '" . $satker."'";
 			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
 			

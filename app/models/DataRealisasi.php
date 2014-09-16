@@ -176,7 +176,7 @@ class DataRealisasi {
 				substr(a.program,1,3) BA
 				, b.nmba
 				, sum(a.budget_amt) Pagu
-				, sum(decode(substr(a.akun,1,1),'7',a.budget_amt,0)) pagu_pembiayaan
+				, sum(decode(substr(a.akun,1,2),'72',a.budget_amt,0)) pagu_pembiayaan
 				, sum(decode(substr(a.akun,1,2),'51',a.actual_amt,0)) belanja_51
 				, sum(decode(substr(a.akun,1,2),'52',a.actual_amt,0)) belanja_52
 				, sum(decode(substr(a.akun,1,2),'53',a.actual_amt,0)) belanja_53
@@ -186,8 +186,8 @@ class DataRealisasi {
 				, sum(decode(substr(a.akun,1,2),'57',a.actual_amt,0)) belanja_57
 				, sum(decode(substr(a.akun,1,2),'58',a.actual_amt,0)) belanja_58
 				, sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
-				, sum(decode(substr(a.akun,1,1),'7',a.actual_amt,0)) belanja_71
-				, sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
+				, sum(decode(substr(a.akun,1,2),'72',a.actual_amt,0)) belanja_71
+				, (select sum(actual_amt) from gl_balances_transfer c where substr (c.program,1,3)=substr(a.program,1,3)) belanja_61
 				, sum(ENCUMBRANCE_AMT) encumbrance 
 				FROM "
                 . $this->_table1 . " a,"
@@ -196,6 +196,7 @@ class DataRealisasi {
 				and a.budget_type = '2'			
 				and substr(a.program,1,3)=b.kdba
 				and substr(a.bank,1,1)  <= '9'
+				and substr(a.akun,1,2) <> '72'
 				"
         ;
         $no = 0;

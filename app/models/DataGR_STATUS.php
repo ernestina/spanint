@@ -111,7 +111,7 @@ class DataGR_STATUS {
             $d_data->set_bank_account_num($val['CONT_BANK_ACCOUNT_NUM']);
             $d_data->set_file_name($val['FILE_NAME']);
             $d_data->set_resp_name($val['RESP_NAME']);
-            $d_data->set_keterangan(number_format($val['RPH']));
+            $d_data->set_keterangan($val['RPH']);
             $d_data->set_gr_batch_num($val['GR_BATCH_NUM']);
 	
             $data[] = $d_data;
