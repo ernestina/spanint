@@ -65,6 +65,7 @@ $akses['DataDIPAKPPN'] = array(
     'DataRealisasiBA_PDF',
     'DataRealisasiTransfer_PDF',
     'DetailRevisi_PDF',
+    'DetailSetoranUPPNBP',
     '__destruct'
 );
 
