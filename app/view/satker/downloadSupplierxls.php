@@ -20,7 +20,9 @@
 	//ftp://10.100.93.134/APLIKASI/CEKSUPPLIER/data_supplier_kppn/datasupplier_088.txt
 	
 	//$ftp_address = "ftp://".$user_ftp."@".$server_ftp."/".$direktori."/".$filename;
-        $ftp_address ='http://10.100.244.253/public/datasupplier_088.txt';
+        //header("Content-Disposition: attachment");
+        //Header set Content-Disposition attachment
+        $ftp_address ='ftp://spanint:password123@10.100.244.253/datasupplier_088.txt';
 	//var_dump($ftp_address);
 	//$download_addres="ftp://".$user_ftp."@".$server_ftp."/".$direktori."/".$filename;
 	header('location:' . $ftp_address);

@@ -27,9 +27,9 @@ class DataRealisasi {
     private $_belanja_57;
     private $_belanja_58;
     private $_belanja_59;
-	private $_belanja_71;
-	private $_belanja_61;
-	private $_pagu_pembiayaan;
+    private $_belanja_71;
+    private $_belanja_61;
+    private $_pagu_pembiayaan;
     private $_table1 = 'GL_BALANCES_V';
     private $_table2 = 't_satker';
     private $_table3 = 't_ba';
@@ -225,9 +225,9 @@ class DataRealisasi {
             $d_data->set_belanja_57($val['BELANJA_57']);
             $d_data->set_belanja_58($val['BELANJA_58']);
             $d_data->set_belanja_59($val['BELANJA_59']);
-			$d_data->set_belanja_71($val['BELANJA_71']);
-			$d_data->set_belanja_61($val['BELANJA_61']);
-			$d_data->set_pagu_pembiayaan($val['PAGU_PEMBIAYAAN']);
+            $d_data->set_belanja_71($val['BELANJA_71']);
+            $d_data->set_belanja_61($val['BELANJA_61']);
+            $d_data->set_pagu_pembiayaan($val['PAGU_PEMBIAYAAN']);
             $data[] = $d_data;
         }
         return $data;
@@ -473,9 +473,11 @@ class DataRealisasi {
     public function set_pagu($pagu) {
         $this->_pagu = $pagu;
     }
-	public function set_pagu_pembiayaan($pagu_pembiayaan) {
+
+    public function set_pagu_pembiayaan($pagu_pembiayaan) {
         $this->_pagu_pembiayaan = $pagu_pembiayaan;
     }
+
     public function set_realisasi($realisasi) {
         $this->_realisasi = $realisasi;
     }
@@ -539,10 +541,12 @@ class DataRealisasi {
     public function set_belanja_59($belanja_59) {
         $this->_belanja_59 = $belanja_59;
     }
-	public function set_belanja_71($belanja_71) {
+
+    public function set_belanja_71($belanja_71) {
         $this->_belanja_71 = $belanja_71;
     }
-	public function set_belanja_61($belanja_61) {
+
+    public function set_belanja_61($belanja_61) {
         $this->_belanja_61 = $belanja_61;
     }
 
@@ -569,7 +573,8 @@ class DataRealisasi {
     public function get_pagu() {
         return $this->_pagu;
     }
-	public function get_pagu_pembiayaan() {
+
+    public function get_pagu_pembiayaan() {
         return $this->_pagu_pembiayaan;
     }
 
@@ -628,14 +633,33 @@ class DataRealisasi {
     public function get_belanja_59() {
         return $this->_belanja_59;
     }
-	public function get_belanja_71() {
+
+    public function get_belanja_71() {
         return $this->_belanja_71;
     }
-	public function get_belanja_61() {
+
+    public function get_belanja_61() {
         return $this->_belanja_61;
     }
+
     public function get_table1() {
         return $this->_table1;
+    }
+
+    public function get_table2() {
+        return $this->_table2;
+    }
+
+    public function get_table3() {
+        return $this->_table3;
+    }
+
+    public function get_table4() {
+        return $this->_table4;
+    }
+
+    public function get_table5() {
+        return $this->_table5;
     }
 
     /*

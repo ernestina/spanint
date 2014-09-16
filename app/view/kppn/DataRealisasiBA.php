@@ -57,28 +57,16 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-            if (isset($this->d_nama_kppn)) {
-                foreach ($this->d_nama_kppn as $kppn) {
-                    echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                    $kode_kppn = $kppn->get_kd_satker();
+                if (isset($this->d_nama_kppn)) {
+                    foreach ($this->d_nama_kppn as $kppn) {
+                        echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                        $kode_kppn = $kppn->get_kd_satker();
+                    }
                 }
-            } else {
-                echo Session::get('user');
-            }
-            ?>
-            <br>
-            Sampai Dengan
-
-            <?php
-            //echo 
-            //Tanggal::tgl_indo(Tanggal::getTglSekarang()) ;
-            //echo (date('d-m-y'));
-
-
-            $date = new DateTime(Tanggal::getTglSekarang());
-            $date->sub(new DateInterval('P1D'));
-            echo Tanggal::tgl_indo($date->format('Y-m-d')) . "\n";
-            ?>
+                ?>
+                <br>Tanggal : s.d <?php
+                echo (date('d-m-Y'));
+                ?>
             </div>
             
             <div class="col-md-6 col-sm-12" style="text-align: right;">
@@ -86,7 +74,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) :<br> " . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>

@@ -86,11 +86,12 @@
                         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
                         $kode_kppn = $kppn->get_kd_satker();
                     }
-                } else {
-                    echo Session::get('user');
                 }
-
-                ?> | Sampai dengan <?php
+                if (isset($this->satker_code)){
+                    echo "<br>Satker : ".$this->satker_code;
+                }
+                ?> 
+                <br>Tanggal : s.d <?php
 
                 echo (date('d-m-Y'));
 
@@ -102,7 +103,7 @@
 
                 if (isset($this->last_update)) {
                     foreach ($this->last_update as $last_update) {
-                        echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                        echo "Update Data Terakhir (Waktu Server) :<br> " . $last_update->get_last_update() . " WIB";
                     }
                 }
 
@@ -260,64 +261,11 @@
                             ?>
                         </select>
 <?php } ?>
-
+                        <br>
                     <label class="isian">Kode Satker: </label>
-                    <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->kdsatker)) {
-    echo $this->kdsatker;
+                    <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->satker_code)) {
+    echo $this->satker_code;
 } ?>">
-
-                    <!--label class="isian">Pilih Periode: </label>
-                    <select type="text" name="bulan" id="bulan">
-                            <option value='JAN' <?php if ($this->d_bulan == '01') {
-    echo "selected";
-} ?> >Januari</option>
-                            <option value='FEB' <?php if ($this->d_bulan == '02') {
-    echo "selected";
-} ?> >Februari</option>
-                            <option value='MAR' <?php if ($this->d_bulan == '03') {
-    echo "selected";
-} ?> >Maret</option>
-                            <option value='APR' <?php if ($this->d_bulan == '04') {
-    echo "selected";
-} ?> >April</option>
-                            <option value='MAY' <?php if ($this->d_bulan == '05') {
-    echo "selected";
-} ?> >Mei</option>
-                            <option value='JUN' <?php if ($this->d_bulan == '06') {
-    echo "selected";
-} ?> >Juni</option>
-                            <option value='JUL' <?php if ($this->d_bulan == '07') {
-    echo "selected";
-} ?> >Juli</option>
-                            <option value='AGT' <?php if ($this->d_bulan == '08') {
-    echo "selected";
-} ?> >Agustus</option>
-                            <option value='SEP' <?php if ($this->d_bulan == '09') {
-    echo "selected";
-} ?> >September</option>
-                            <option value='OCT' <?php if ($this->d_bulan == '10') {
-        echo "selected";
-    } ?> >Oktober</option>
-                            <option value='NOV' <?php if ($this->d_bulan == '11') {
-        echo "selected";
-    } ?> >November</option>
-                            <option value='DEC' <?php if ($this->d_bulan == '12') {
-        echo "selected";
-    } ?> >Desember</option>
-                            <!--option value='Validated' <?php //if ($this->status==Validated){echo "selected";} ?>>Validated</option>
-                            <option value='Error' <?php //if ($this->status==Error){echo "selected";} ?>>Error</option>
-                            
-                    </select-->
-
-
-                    <input class="form-control" type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input class="form-control" type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input class="form-control" type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input class="form-control" type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input class="form-control" type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                    <!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
-                        
-
                 </div>
 
                 <div class="modal-footer">

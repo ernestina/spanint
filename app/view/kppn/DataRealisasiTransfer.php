@@ -97,12 +97,12 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-                    if (isset($this->d_nama_kppn)) {
-                        foreach ($this->d_nama_kppn as $kppn) {
-                            echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                            $kode_kppn = $kppn->get_kd_satker();
-                        }
-                    }
+                if (isset($this->satker_code)) {
+                    echo "Satker : " . $this->satker_code;
+                }
+                if (isset($this->satker_code)) {
+                    echo "<br>Lokasi : " . $this->lokasi;
+                }
                 ?>
             </div>
             
@@ -275,14 +275,6 @@ foreach ($this->data4 as $value1)
                         <span class="input-group-addon">s.d.</span>
                         <input class="form-control" type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)){echo $this->d_tgl_akhir;}?>">
                     </div> -->
-
-
-                    <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                    <!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
                         
 
                 </div>
