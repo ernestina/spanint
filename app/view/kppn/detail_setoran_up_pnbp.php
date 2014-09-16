@@ -89,7 +89,7 @@
 
 <!-- Tabel -->
 <div id="table-container" class="wrapper">
-    <table class="regtable">
+    <table class="footable">
         
         <!--baris pertama-->
         <thead>
