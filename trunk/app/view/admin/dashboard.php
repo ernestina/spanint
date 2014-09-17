@@ -62,9 +62,11 @@
 
     $total_vol_gaji = 0;
     $total_vol_non_gaji = 0;
+    $total_vol_lainnya = 0;
 
     $total_vol_gaji += $this->pieNominalSP2D->get_vol_gaji();
     $total_vol_non_gaji += $this->pieNominalSP2D->get_vol_non_gaji();
+    $total_vol_lainnya += $this->pieNominalSP2D->get_vol_lainnya();
 
     ?>
     
@@ -77,9 +79,12 @@
         {
             "value" : <?php echo $total_vol_non_gaji; ?>,
             "color" : "#8E5696"
+        },{
+            "value" : <?php echo $total_vol_lainnya; ?>,
+            "color" : "#F6CE40"
         }
         
-        <?php if ($total_vol_non_gaji + $total_vol_gaji == 0) { ?>
+        <?php if ($total_vol_non_gaji + $total_vol_gaji + $total_vol_lainnya == 0) { ?>
         
         ,{
             
@@ -387,13 +392,17 @@
                     <div class="pie-canvas"><canvas id="pieNominalSP2D"></canvas></div>
                     <div class="pie-legend">
                         <h4>Nominal SP2D</h4>
-                        <div style="width: 100%; float: left; border-left: 4px solid #409ACA">
+                        <div style="width: 50%; float: left; border-left: 4px solid #409ACA">
                             <p><?php echo (number_format(round(($total_vol_gaji / 1000000000), 2), 2)." M"); ?></p>
                             <p class="sub">Gaji</p>
                         </div>
-                        <div style="width: 100%; float: left; border-left: 4px solid #8E5696">
+                        <div style="width: 50%; float: left; border-left: 4px solid #8E5696">
                             <p><?php echo (number_format(round(($total_vol_non_gaji / 1000000000), 2), 2)." M"); ?></p>
                             <p class="sub">Non Gaji</p>
+                        </div>
+                        <div style="width: 50%; float: left; border-left: 4px solid #F6CE40">
+                            <p><?php echo (number_format(round(($total_vol_lainnya / 1000000000), 2), 2)." M"); ?></p>
+                            <p class="sub">Lainnya</p>
                         </div>
                     </div>
                 </div>
@@ -407,11 +416,11 @@
                         <h4>Retur SP2D</h4>
                         <div id="legend-jumlah-retur">
                             <div style="width: 100%; float: left; border-left: 4px solid #409ACA">
-                                <p><?php echo (number_format($this->pieReturSP2D->get_retur_sudah_proses())); ?></p>
+                                <p><?php echo (number_format($this->pieReturSP2D->get_retur_sudah_proses())); ?> SP2D</p>
                                 <p class="sub">Sudah Proses</p>
                             </div>
                             <div style="width: 100%; float: left; border-left: 4px solid #F6CE40">
-                                <p><?php echo (number_format($this->pieReturSP2D->get_retur_belum_proses())); ?></p>
+                                <p><?php echo (number_format($this->pieReturSP2D->get_retur_belum_proses())); ?> SP2D</p>
                                 <p class="sub">Belum Proses</p>
                             </div>
                         </div>
