@@ -256,18 +256,6 @@
     return $nl;
     }
     } //end of class
-     /*
-        #koneksi ke database (disederhanakan)
-    mysql_connect ("localhost", "root", "");
-    mysql_select_db ("demo");
- 
-    #ambil data dari DB dan masukkan ke array
-      $data = array();
-   $query = "SELECT nip, nama, alamat, email, website FROM pegawai ORDER BY nama";
-    $sql = mysql_query ($query);
-    while ($row = mysql_fetch_assoc($sql)) {
-    array_push($data, $row);
-    } */
 //-----------------------
 
 //mengambil array data dari controller
@@ -279,8 +267,6 @@
 	}
  
 
-//--------------------------
- //Laporan Data Revisi DIPA
     //pilihan
     $options = array(
     'filename' => 'Laporan Monitoring PFK.PDF', //nama file penyimpanan, kosongkan jika output ke browser

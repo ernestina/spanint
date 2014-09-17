@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -123,6 +127,15 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_2b = 60;
         $ukuran_kolom_3b = 140;
         $ukuran_kolom_b = $ukuran_kolom_1b + $ukuran_kolom_2b + $ukuran_kolom_3b;
+		
+		/* $kolom_grandtotal1=20+$ukuran_kolom_pagu_total_sisa+
+		$ukuran_kolom_1a+$ukuran_kolom_2a+
+		$ukuran_kolom_3a+$ukuran_kolom_4a; */
+		$kolom_grandtotal1=20+$ukuran_kolom_pagu_total_sisa+$ukuran_kolom_1a;
+		
+		$kolom_grandtotal2=$ukuran_kolom_3a+$ukuran_kolom_4a;
+		$kolom_grandtotal3=$ukuran_kolom_1b+$ukuran_kolom_2b;
+		$kolom_grandtotal4=$ukuran_kolom_pagu_total;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -199,15 +212,40 @@ class FPDF_AutoWrapTable extends FPDF {
 						array($no++,
 							$value->get_kdsatker() . ' ' . $value->get_nmsatker(),
 							$value->get_statement_date() . ' ' . $value->get_sp2d_number() . ' ' . $value->get_receipt_number(),
-							$value->get_bank_name() . ' ' . $value->get_vendor_name() . ' ' . $value->get_vendor_ext_bank_account_num() . ' ' . $value->get_amount(),
+							$value->get_bank_name() . ' ' . $value->get_vendor_name() . ' ' . $value->get_vendor_ext_bank_account_num() . ' ' . number_format($value->get_amount()),
 							$value->get_invoice_description(),
 							$value->get_keterangan_retur(),
 							$value->get_tgl_proses_sp2d_pengganti(),
 							$value->get_tgsp2d_pengganti() . ' ' . $value->get_nosp2d_pengganti(),
-							$value->get_bank_name_pengganti() . ' ' . $value->get_vendor_name_pengganti() . ' ' . $value->get_vendor_account_num_pengganti() . ' ' . $value->get_nilai_sp2d_pengganti(),
+							$value->get_bank_name_pengganti() . ' ' . $value->get_vendor_name_pengganti() . ' ' . $value->get_vendor_account_num_pengganti() . ' ' . number_format($value->get_nilai_sp2d_pengganti()),
 							$value->get_bank_account_name() . ' ' . $value->get_status_retur()
 				));
+				$tot1 = $tot1 + $value->get_amount();	
+				$tot2 = $tot2 + $value->get_nilai_sp2d_pengganti();	
+				
 			}
+			$this->SetFont('Arial', 'B', 7);
+				$h = 20;
+				$this->SetFillColor(200, 200, 200);
+				$left = $this->GetX();
+				$this->Cell($kolom_grandtotal1, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+				$this->SetX($left += $kolom_grandtotal1);
+				$px1 = $this->GetX();
+				$py1 = $this->GetY();
+				$px2 = $px1;
+				$py2 = $py1;
+				$this->SetXY($px2, $py2);
+				$py3 = $this->GetY();
+				$this->Cell($ukuran_kolom_2a, $h, number_format($tot1), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_2a);
+				$this->Cell($kolom_grandtotal2, $h,'', 1, 0, 'R', true);
+				$this->SetX($px2 += $kolom_grandtotal2);
+				$this->Cell($kolom_grandtotal3, $h,'GRAND TOTAL', 1, 0, 'L', true);
+				$this->SetX($px2 += $kolom_grandtotal3);
+				$this->Cell($ukuran_kolom_3b, $h, number_format($tot2), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_3b);
+				$this->Cell($kolom_grandtotal4, $h,'', 1, 1, 'R', true);
+				$this->Ln(3);
 		
 		}
 

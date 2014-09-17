@@ -39,6 +39,7 @@ class FPDF_AutoWrapTable extends FPDF {
     public function rptDetailData() {
         $judul = $this->options['judul'];
         $nm_kppn = $this->nm_kppn;
+		//echo '$nm_kppn:'.$nm_kppn;
         $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
         $border = 0;
         $h = 40;
@@ -68,6 +69,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -78,8 +83,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
         //tanggal
-		$kdtgl_awal1 = $this->kdtgl_awal;
-		$kdtgl_akhir1 = $this->kdtgl_akhir;
+		/* $kdtgl_awal1 = $this->kdtgl_awal;
+		$kdtgl_akhir1 = $this->kdtgl_akhir; */
 	    if (isset($kdtgl_awal1) && isset($kdtgl_akhir1)) {
             $thn1 = substr($kdtgl_awal1, 6, 4);
             $bln1 = substr($kdtgl_awal1, 3, 2);
@@ -104,14 +109,20 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 65;
+		$ukuran_kolom_jenis_belanja1 = 95;
         $ukuran_kolom_satker = 40;
         $ukuran_kolom_akun = 40;
-        $ukuran_kolom_dana = 80;
+        $ukuran_kolom_dana = 70;
         $ukuran_kolom_file = 85;
         $ukuran_kolom_bank_pembayar = 60;
         $ukuran_kolom_norek_penerima = 100;
         $ukuran_kolom_tgl_selsp2d = 60;
         $ukuran_kolom_tgl_sp2d = 45;
+		
+		$kolom_grandtotal=30+$ukuran_kolom_tgl_selsp2d+
+		$ukuran_kolom_tgl_sp2d+$ukuran_kolom_satker+$ukuran_kolom_dana+
+		$ukuran_kolom_jenis_belanja+$ukuran_kolom_bank_pembayar+$ukuran_kolom_dana;
+				
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -136,8 +147,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($px2 += $ukuran_kolom_bank_pembayar);
         $this->Cell($ukuran_kolom_dana, $h, 'Revisi Ke', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Usulan Revisi', 1, 1, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Usulan Revisi', 1, 1, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
@@ -146,7 +157,7 @@ class FPDF_AutoWrapTable extends FPDF {
             $ukuran_kolom_tgl_sp2d, $ukuran_kolom_satker,
             $ukuran_kolom_dana, $ukuran_kolom_jenis_belanja,
             $ukuran_kolom_bank_pembayar, $ukuran_kolom_dana,
-            $ukuran_kolom_jenis_belanja
+            $ukuran_kolom_jenis_belanja1
         ));
         $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'R'));
 
@@ -178,7 +189,22 @@ class FPDF_AutoWrapTable extends FPDF {
                             number_format($value->get_usulan_revisi())
                         )
                 );
+				$tot_pot = $tot_pot + $value->get_usulan_revisi();				
             }
+			$this->SetFont('Arial', 'B', 7);
+				$h = 20;
+				$this->SetFillColor(200, 200, 200);
+				$left = $this->GetX();
+				$this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+				$this->SetX($left += $kolom_grandtotal);
+				$px1 = $this->GetX();
+				$py1 = $this->GetY();
+				$px2 = $px1;
+				$py2 = $py1;
+				$this->SetXY($px2, $py2);
+				$py3 = $this->GetY();
+				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($tot_pot), 1, 1, 'R', true);
+				$this->Ln(3);
         }
 
 

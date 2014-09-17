@@ -85,6 +85,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -122,7 +126,7 @@ class FPDF_AutoWrapTable extends FPDF {
 	   //---------------------BAGIAN 1-----------------------------------
 
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 80;
+        $ukuran_kolom_jenis_belanja = 100;
         $ukuran_kolom_satker = 40;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
@@ -185,7 +189,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				
 				
             }
-			$this->SetFont('Arial', '', 6);
+			$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();
@@ -204,7 +208,7 @@ class FPDF_AutoWrapTable extends FPDF {
 		$this->Ln(15);
 	//-------------------BAGIAN 2-------------------------------------
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 80;
+        $ukuran_kolom_jenis_belanja = 100;
 		$kolom4=125;
 		
 		$ukuran_kolom_jenis_belanja1 =$kolom4+$ukuran_kolom_jenis_belanja;
@@ -214,7 +218,7 @@ class FPDF_AutoWrapTable extends FPDF {
 		$kolom1=20;
 		$kolom2=60;
 		$kolom3=50;
-		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+$kolom4+
+		$kolom_grandtotal=$kolom1+$kolom2+$kolom4+
 		$ukuran_kolom_jenis_belanja1;
 
  
@@ -266,6 +270,7 @@ class FPDF_AutoWrapTable extends FPDF {
 			
             }
 			$h = 20;
+				$this->SetFont('Arial', 'B', 7);
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();
 				$this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
@@ -284,7 +289,7 @@ class FPDF_AutoWrapTable extends FPDF {
 	//----------------------------------------------------------
 	//---------------------BAGIAN 3-----------------------------------
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 80;
+        $ukuran_kolom_jenis_belanja = 100;
 				$ukuran_kolom_jenis_belanja1 =$kolom4+$ukuran_kolom_jenis_belanja;
 
         $ukuran_kolom_satker = 40;
@@ -344,7 +349,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$total_up = $total_up + $value->get_line_amount();
 				
             }
-				$this->SetFont('Arial', '', 6);
+				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();
@@ -364,7 +369,7 @@ class FPDF_AutoWrapTable extends FPDF {
 	//----------------------------------------------------------
 	//---------------------BAGIAN 4-----------------------------------
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 80;
+        $ukuran_kolom_jenis_belanja = 100;
 		$ukuran_kolom_jenis_belanja1 =$kolom4+$ukuran_kolom_jenis_belanja;
 
         $ukuran_kolom_satker = 40;
@@ -423,7 +428,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$total_belanja = $total_belanja + $value->get_line_amount();
 				
             }
-				$this->SetFont('Arial', '', 6);
+				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();
@@ -443,7 +448,7 @@ class FPDF_AutoWrapTable extends FPDF {
 	//----------------------------------------------------------
 	//---------------------BAGIAN 5-----------------------------------
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 80;
+        $ukuran_kolom_jenis_belanja = 100;
 				$ukuran_kolom_jenis_belanja1 =$kolom4+$ukuran_kolom_jenis_belanja;
 
         $ukuran_kolom_satker = 40;
@@ -503,7 +508,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$total_setoran_up = $total_setoran_up + $value->get_line_amount();
 				
             }
-				$this->SetFont('Arial', '', 6);
+				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();
@@ -524,7 +529,7 @@ class FPDF_AutoWrapTable extends FPDF {
 	//---------------------BAGIAN 6-----------------------------------
 				$pendapatan_hitung = $this->ppp/100;
 				$maksimum_pencairan = ($pendapatan_hitung * $total_penerimaan) - $total_belanja;
-				$this->SetFont('Arial', '', 6);
+				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();

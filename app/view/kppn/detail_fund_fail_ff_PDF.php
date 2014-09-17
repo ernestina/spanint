@@ -112,6 +112,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 65;
+		$ukuran_kolom_jenis_belanja1 = 92;
         $ukuran_kolom_satker = 40;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
@@ -144,27 +145,27 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($px2 += $ukuran_kolom_satker);
         $this->Cell($ukuran_kolom_dana, $h, 'Dana', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Pagu Saat Ini', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Pagu Usulan Revisi', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Total Kontrak', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Blokir', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Realisasi', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Sisa/kurang', 1, 1, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Pagu Saat Ini', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Pagu Usulan Revisi', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Total Kontrak', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Blokir', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Realisasi', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Sisa/kurang', 1, 1, 'C', true);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array($kolom1,$kolom2,
 		$kolom3,$kolom4, 
 		$ukuran_kolom_jenis_belanja, $ukuran_kolom_satker,
-		$ukuran_kolom_dana, $ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_jenis_belanja));
+		$ukuran_kolom_dana, $ukuran_kolom_jenis_belanja1, 
+		$ukuran_kolom_jenis_belanja1, $ukuran_kolom_jenis_belanja1, 
+		$ukuran_kolom_jenis_belanja1, $ukuran_kolom_jenis_belanja1, 
+		$ukuran_kolom_jenis_belanja1));
         $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'R', 'R', 'R', 'R', 'R', 'R'));
 
         if (count($this->data) == 0) {
@@ -212,7 +213,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$tot_encumbrance+=$value->get_obligation();
 				$tot_blokir+=$value->get_block_amount();
 				$tot_actual+=$value->get_actual_amt();
-				$this->SetFont('Arial', '', 6);
+				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();
@@ -223,16 +224,16 @@ class FPDF_AutoWrapTable extends FPDF {
 				$px2 = $px1;
 				$py2 = $py1;
 				$this->SetXY($px2, $py2);
-				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_budget), 1, 0, 'R', true);
-				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-				$this->Cell($ukuran_kolom_jenis_belanja, $h, '0', 1, 0, 'R', true);
-				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_encumbrance), 1, 0, 'R', true);
-				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_blokir), 1, 0, 'R', true);
-				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_actual), 1, 0, 'R', true);
-				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format(0 - $tot_encumbrance - $tot_blokir - $tot_actual), 1, 1, 'R', true);
+				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($tot_budget), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+				$this->Cell($ukuran_kolom_jenis_belanja1, $h, '0', 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($tot_encumbrance), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($tot_blokir), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($tot_actual), 1, 0, 'R', true);
+				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format(0 - $tot_encumbrance - $tot_blokir - $tot_actual), 1, 1, 'R', true);
 				$this->Ln(3);
 				
             }

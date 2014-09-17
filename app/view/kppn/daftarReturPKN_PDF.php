@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -110,10 +114,10 @@ class FPDF_AutoWrapTable extends FPDF {
         //----------------------------------------------- 
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_pagu_total_sisa = 60;
+        $ukuran_kolom_pagu_total_sisa = 65;
         $ukuran_kolom_jenis_belanja = 90;
-        $ukuran_kolom_satker = 60;
-        $ukuran_kolom_akun = 60;
+        $ukuran_kolom_satker = 65;
+        $ukuran_kolom_akun = 65;
         $ukuran_kolom_program = 35;
         $ukuran_kolom_output = 35;
         $ukuran_kolom_dana = 50;
@@ -122,6 +126,9 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_kolorari = 50;
         $jumlah_kolom = $ukuran_kolom_jenis_belanja +
                 $ukuran_kolom_satker + $ukuran_kolom_akun;
+		$kolom_grandtotal=30+60+100+$ukuran_kolom_pagu_total_sisa+
+		$ukuran_kolom_jenis_belanja;
+
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -184,7 +191,29 @@ class FPDF_AutoWrapTable extends FPDF {
                             number_format($saldo+=($value->get_amount() - $value->get_nilai_sp2d_pengganti()))
 							)
                 );
+					$tot1 = $tot1 + $value->get_nilai_sp2d_pengganti();	
+					$tot2 = $tot2 + $value->get_amount();	
+					$tot3 = $tot3 + ($value->get_amount() - $value->get_nilai_sp2d_pengganti());						
+
             }
+			$this->SetFont('Arial', 'B', 7);
+				$h = 20;
+				$this->SetFillColor(200, 200, 200);
+				$left = $this->GetX();
+				$this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+				$this->SetX($left += $kolom_grandtotal);
+				$px1 = $this->GetX();
+				$py1 = $this->GetY();
+				$px2 = $px1;
+				$py2 = $py1;
+				$this->SetXY($px2, $py2);
+				$py3 = $this->GetY();
+				$this->Cell($ukuran_kolom_satker, $h, number_format($tot1), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_satker);
+				$this->Cell($ukuran_kolom_akun, $h, number_format($tot2), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_akun);
+				$this->Cell($ukuran_kolom_pagu_total_sisa, $h,number_format($tot3), 1, 1, 'R', true);
+				$this->Ln(3);
         }
         $this->Ln(3);
     }

@@ -66,7 +66,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetXY($px2, $py2);
         $this->SetX($left + 50);
 
-        if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
+       if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 6) == 'KANWIL') { //5
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -110,7 +114,7 @@ class FPDF_AutoWrapTable extends FPDF {
         //----------------------------------------------- 
         #tableheader
         $this->SetFont('Arial', 'B', 9);
-        $ukuran_kolom_pagu_total_sisa = 70;
+        $ukuran_kolom_pagu_total_sisa = 86;
         $ukuran_kolom_jenis_belanja = 65;
 		$ukuran_kolom_jenis_belanja1 = 80;
 		$kolom1=100;
@@ -172,7 +176,7 @@ class FPDF_AutoWrapTable extends FPDF {
                 //jumlah grand total
 				$tot_pot = $tot_pot + $value->get_rupiah();
             }
-            $this->SetFont('Arial', '', 6);
+            $this->SetFont('Arial', 'B', 7);
             $h = 20;
             $this->SetFillColor(200, 200, 200);
             $left = $this->GetX();
@@ -184,7 +188,7 @@ class FPDF_AutoWrapTable extends FPDF {
             $px2 = $px1;
             $py2 = $py1;
             $this->SetXY($px2, $py2);
-            $this->Cell($ukuran_kolom_pagu_total_sisa, $h, $tot_pot, 1, 1, 'R', true);
+            $this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($tot_pot), 1, 1, 'R', true);
             $this->Ln(3);
         }
     }

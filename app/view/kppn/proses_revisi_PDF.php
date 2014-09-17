@@ -20,8 +20,8 @@ class FPDF_AutoWrapTable extends FPDF {
         'judul' => '',
         'filename' => '',
         'destinationfile' => '',
-        'paper_size' => 'F4',
-        'orientation' => 'L'
+        'paper_size' => '',
+        'orientation' => ''
     );
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -116,7 +120,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_jenis_belanja = 100;
         $ukuran_kolom_satker = 75;
         $ukuran_kolom_akun = 40;
-        $ukuran_kolom_dana = 200;
+        $ukuran_kolom_dana = 190;
         $ukuran_kolom_deskripsi = 160;
 
         $this->SetFillColor(200, 200, 200);

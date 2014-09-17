@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -112,22 +116,31 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 65;
+		$ukuran_kolom_jenis_belanja1 = 86;
         $ukuran_kolom_satker = 40;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
         $ukuran_kolom_deskripsi = 200;
+		$kolom1=30;
+		$kolom2=60;
+		$kolom3=40;
+		$kolom4=50;
+		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+$kolom4+
+		$ukuran_kolom_jenis_belanja+$ukuran_kolom_satker+
+		$ukuran_kolom_dana+$ukuran_kolom_jenis_belanja+
+		$ukuran_kolom_deskripsi;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(30, $h, 'No', 1, 0, 'C', true);
-        $this->SetX($left += 30);
-        $this->Cell(60, $h, 'Tanggal Error', 1, 0, 'C', true);
-        $this->SetX($left += 60);
-        $this->Cell(40, $h, 'Satker', 1, 0, 'C', true);
-        $this->SetX($left += 40);
-        $this->Cell(50, $h, 'Kode KPPN', 1, 0, 'C', true);
+        $this->Cell($kolom1, $h, 'No', 1, 0, 'C', true);
+        $this->SetX($left += $kolom1);
+        $this->Cell($kolom2, $h, 'Tanggal Error', 1, 0, 'C', true);
+        $this->SetX($left += $kolom2);
+        $this->Cell($kolom3, $h, 'Satker', 1, 0, 'C', true);
+        $this->SetX($left += $kolom3);
+        $this->Cell($kolom4, $h, 'Kode KPPN', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += 50);
+        $this->SetX($left += $kolom4);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
@@ -142,18 +155,18 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
         $this->Cell($ukuran_kolom_deskripsi, $h, 'Description', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_deskripsi);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Blokir/Kontrak', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Realisasi', 1, 1, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Blokir/Kontrak', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Realisasi', 1, 1, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(30, 60,
-            40, 50,
+        $this->SetWidths(array($kolom1, $kolom2,
+            $kolom3, $kolom4,
             $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker,
             $ukuran_kolom_dana, $ukuran_kolom_jenis_belanja,
-            $ukuran_kolom_deskripsi, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja));
+            $ukuran_kolom_deskripsi, $ukuran_kolom_jenis_belanja1, $ukuran_kolom_jenis_belanja1));
         $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'L', 'R', 'R'));
 
         if (count($this->data) == 0) {
@@ -173,6 +186,8 @@ class FPDF_AutoWrapTable extends FPDF {
             );
         } else {
             $no = 1;
+			$total1 =0;
+			$total2 =0;
             $this->SetFillColor(255);
             foreach ($this->data as $value) {
                 $this->Row(
@@ -188,7 +203,25 @@ class FPDF_AutoWrapTable extends FPDF {
                             number_format($value->get_blokir_kontrak()),
                             number_format($value->get_blokir_realisasi()))
                 );
+				$total1 = $total1 + $value->get_blokir_kontrak();
+				$total2 = $total2 + $value->get_blokir_realisasi();
             }
+				$this->SetFont('Arial', 'B', 7);
+				$h = 20;
+				$this->SetFillColor(200, 200, 200);
+				$left = $this->GetX();
+				$this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+				$this->SetX($left += $kolom_grandtotal);
+				$px1 = $this->GetX();
+				$py1 = $this->GetY();
+				$px2 = $px1;
+				$py2 = $py1;
+				$this->SetXY($px2, $py2);
+				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($total1), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
+				$py3 = $this->GetY();
+				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($total2), 1, 1, 'R', true);
+				$this->Ln(3);
         }
         $this->Ln(3);
     }
@@ -364,7 +397,7 @@ $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
     'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
-    'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
+    'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );
 $tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
