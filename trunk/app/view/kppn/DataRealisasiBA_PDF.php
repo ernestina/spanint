@@ -66,7 +66,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetXY($px2, $py2);
         $this->SetX($left + 50);
 
-        if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
+                if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 6) == 'KANWIL') { //5
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
@@ -78,9 +78,14 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
+
 
         $this->Cell(0, 1, " ", "B");
         $this->Ln(10);
@@ -206,7 +211,7 @@ class FPDF_AutoWrapTable extends FPDF {
                 $tot_bel+=($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58());
                 $tot_sisa+=($value->get_pagu() - ($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58()));
             }
-            $this->SetFont('Arial', '', 6);
+            $this->SetFont('Arial', 'B', 7);
             $h = 20;
             $this->SetFillColor(200, 200, 200);
             $left = $this->GetX();

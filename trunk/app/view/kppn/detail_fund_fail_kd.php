@@ -28,7 +28,7 @@
 				$kdoutput=$value->get_output_code();
 				$kdkppn=$value->get_kppn_code();
 		}
-		$kdakun1= $this->account_code1;
+		$kdakun1= $this->account_code;
 		$kf='2';
 		?>
    

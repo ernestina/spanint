@@ -77,6 +77,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -110,15 +114,15 @@ class FPDF_AutoWrapTable extends FPDF {
         //----------------------------------------------- 
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 60;
+        $ukuran_kolom_pagu_total_sisa = 68;
+        $ukuran_kolom_jenis_belanja = 65;
         $ukuran_kolom_satker = 40;
-        $ukuran_kolom_akun = 35;
-        $ukuran_kolom_dana = 60;
+        $ukuran_kolom_akun = 34;
+        $ukuran_kolom_dana = 50;
 		$kolom1=20;
-		$kolom2=40;
-		$kolom3=30;
-		$kolom4=40;
+		$kolom2=35;
+		$kolom3=25;
+		$kolom4=35;
 		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+
 		$kolom4+$ukuran_kolom_akun+$ukuran_kolom_satker+
 		$ukuran_kolom_dana+$ukuran_kolom_akun;
@@ -204,7 +208,7 @@ class FPDF_AutoWrapTable extends FPDF {
 					$tot_actual+=$value->get_actual_amt();
 					$tot_balancing+=$value->get_balancing_amt();
             }
-			$this->SetFont('Arial', '', 6);
+			$this->SetFont('Arial', 'B', 7);
             $h = 20;
             $this->SetFillColor(200, 200, 200);
             $left = $this->GetX();

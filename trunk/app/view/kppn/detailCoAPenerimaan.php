@@ -11,6 +11,14 @@
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <!-- PDF -->
+			<?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+
+				$kdntpn=$this->d_tgl;
+				?>
+				<a href="<?php echo URL; ?>PDF/detailCoAPenerimaan_PDF/<?php echo $kdntpn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
                 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">

@@ -29,7 +29,7 @@
 				$kdoutput=$value->get_output();
 				$kdkppn=$value->get_kppn();
 		}
-		$kdakun1= $this->account_code1;
+		$kdakun1= $this->account_code;
 		$kf='1';
 		?>
    
@@ -61,7 +61,7 @@
 		} else {
 			$kdkppn = Session::get('id_user');
 		}
-		$kdakun1= $this->account_code1;		
+		$kdakun1= $this->account_code;		
 		$kf='1';
 		?>
    
@@ -102,7 +102,7 @@
 					$kdoutput = 'null';
 			}
 			$kf='1';
-			$kdakun1= $this->account_code1;
+			$kdakun1= $this->account_code;
 
 			?>		   
 			<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdkppn . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>

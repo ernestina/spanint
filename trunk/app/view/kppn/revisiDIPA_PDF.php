@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -111,20 +115,28 @@ class FPDF_AutoWrapTable extends FPDF {
         #tableheader
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 65;
-        $ukuran_kolom_satker = 40;
-        $ukuran_kolom_akun = 40;
-        $ukuran_kolom_program = 35;
-        $ukuran_kolom_output = 35;
+        $ukuran_kolom_jenis_belanja = 100;
+        $ukuran_kolom_satker = 60;
+        $ukuran_kolom_akun = 45;
+        $ukuran_kolom_program = 45;
+        $ukuran_kolom_output = 42;
         $ukuran_kolom_dana = 50;
-        $ukuran_kolom_bank = 35;
+        $ukuran_kolom_bank = 40;
         $ukuran_kolom_kewenangan = 50;
         $ukuran_kolom_kolorari = 50;
-        $jumlah_kolom = $ukuran_kolom_jenis_belanja * 2 + $ukuran_kolom_program +
+		$kolom_grandtotal=30+120+40+$ukuran_kolom_pagu_total_sisa;
+		$kolom_grandtotal1 = $ukuran_kolom_pagu_total_sisa+ $ukuran_kolom_program +
                 $ukuran_kolom_output + $ukuran_kolom_dana +
                 $ukuran_kolom_satker + $ukuran_kolom_akun +
                 $ukuran_kolom_bank + $ukuran_kolom_kewenangan +
-                $ukuran_kolom_kolorari;
+                $ukuran_kolom_kolorari+$ukuran_kolom_pagu_total_sisa;
+		
+
+        $jumlah_kolom = $ukuran_kolom_jenis_belanja+ $ukuran_kolom_program +
+                $ukuran_kolom_output + $ukuran_kolom_dana +
+                $ukuran_kolom_satker + $ukuran_kolom_akun +
+                $ukuran_kolom_bank + $ukuran_kolom_kewenangan +
+                $ukuran_kolom_kolorari+$ukuran_kolom_pagu_total_sisa;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -157,8 +169,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($px2 += $ukuran_kolom_bank);
         $this->Cell($ukuran_kolom_kewenangan, $h, 'Kewenangan', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_kewenangan);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Tipe Anggaran', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Tipe Anggaran', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_pagu_total_sisa);
         $this->Cell($ukuran_kolom_kolorari, $h, 'Kolorari', 1, 0, 'C', true);
         $py3 = $this->GetY();
         $this->SetX($left += $jumlah_kolom);
@@ -172,7 +184,7 @@ class FPDF_AutoWrapTable extends FPDF {
             $ukuran_kolom_akun, $ukuran_kolom_program,
             $ukuran_kolom_output, $ukuran_kolom_dana,
             $ukuran_kolom_bank, $ukuran_kolom_kewenangan,
-            $ukuran_kolom_jenis_belanja, $ukuran_kolom_kolorari,
+            $ukuran_kolom_pagu_total_sisa, $ukuran_kolom_kolorari,
             $ukuran_kolom_pagu_total_sisa));
         $this->SetAligns(array('C', 'C',
             'C', 'C',
@@ -209,7 +221,7 @@ class FPDF_AutoWrapTable extends FPDF {
                             $value->get_dipa_no(),
                             $value->get_revision_no(),
                             $value->get_tanggal_posting_revisi(),
-                            $value->get_line_amount(),
+                            number_format($value->get_line_amount()),
                             $value->get_satker_code(),
                             $value->get_account_code(),
                             $value->get_program_code(),
@@ -221,7 +233,24 @@ class FPDF_AutoWrapTable extends FPDF {
                             $value->get_intraco_code(),
                             $value->get_cadangan_code())
                 );
+				$total = $total + $value->get_line_amount();
             }
+				$this->SetFont('Arial', 'B', 7);
+				$h = 20;
+				$this->SetFillColor(200, 200, 200);
+				$left = $this->GetX();
+				$this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+				$this->SetX($left += $kolom_grandtotal);
+				$px1 = $this->GetX();
+				$py1 = $this->GetY();
+				$px2 = $px1;
+				$py2 = $py1;
+				$this->SetXY($px2, $py2);
+				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($total), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+				$this->Cell($kolom_grandtotal1, $h, '', 1, 1, 'R', true);
+				$this->Ln(3);
+
         }
         $this->Ln(3);
     }

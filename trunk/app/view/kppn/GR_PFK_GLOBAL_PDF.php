@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -112,7 +116,7 @@ class FPDF_AutoWrapTable extends FPDF {
         #tableheader
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 200;
+        $ukuran_kolom_jenis_belanja = 230;
         $ukuran_kolom_satker = 80;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
@@ -172,7 +176,7 @@ class FPDF_AutoWrapTable extends FPDF {
 			$tot_set_mpn = $tot_set_mpn + $value->get_setoran_mpn();
 			$tot_total = $tot_total + $value->get_total();
         }
-			$this->SetFont('Arial', '', 6);
+			$this->SetFont('Arial', 'B', 7);
             $h = 20;
             $this->SetFillColor(200, 200, 200);
             $left = $this->GetX();

@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -132,7 +136,10 @@ class FPDF_AutoWrapTable extends FPDF {
 		$kolom_grandtotal1=20+$ukuran_kolom_1a+$ukuran_kolom_2a+$ukuran_kolom_3a;
 		
 		$kolom_grandtotal2=$ukuran_kolom_5a+$ukuran_kolom_6a+$ukuran_kolom_1b+$ukuran_kolom_2b+
-		$ukuran_kolom_3b+$ukuran_kolom_4b;		
+		$ukuran_kolom_3b+$ukuran_kolom_4b;
+		$kolom_grandtotal3a=$ukuran_kolom_5a+$ukuran_kolom_6a;
+		$kolom_grandtotal3b=$ukuran_kolom_5b+$ukuran_kolom_6b+$ukuran_kolom_pagu_total ;
+		
 		
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -239,7 +246,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$terima += $value->get_jml_terima();
 				$limpah += $value->get_jml_limpah();
 			}
-			$this->SetFont('Arial', '', 6);
+				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();
@@ -252,8 +259,8 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->SetXY($px2, $py2);
 				$this->Cell($ukuran_kolom_4a, $h, number_format($terima), 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom_4a);
-				$this->Cell($ukuran_kolom_5a+$ukuran_kolom_6a, $h, '', 1, 0, 'R', true);
-				$this->SetX($px2 += $ukuran_kolom_5a+$ukuran_kolom_6a);
+				$this->Cell($kolom_grandtotal3a, $h, '', 1, 0, 'R', true);
+				$this->SetX($px2 += $kolom_grandtotal3a);
 				$this->Cell($kolom_grandtotal2, $h, 'GRAND TOTAL', 1, 0, 'L', true);
 				$this->SetX($left += $kolom_grandtotal2);
 				$px1 = $this->GetX();
@@ -263,7 +270,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->SetXY($px2, $py2);
 				$this->Cell($ukuran_kolom_4b, $h, number_format($limpah), 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom_4b);
-				$this->Cell($ukuran_kolom_5b+$ukuran_kolom_6b+$ukuran_kolom_pagu_total, $h, '', 1, 1, 'R', true);
+				$this->Cell($kolom_grandtotal3b, $h, '', 1, 1, 'R', true);
 				$this->Ln(3);
 		
 		}

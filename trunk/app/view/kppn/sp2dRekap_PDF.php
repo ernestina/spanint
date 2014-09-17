@@ -65,7 +65,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $py2 = $py1;
         $this->SetXY($px2, $py2);
         $this->SetX($left + 50);
-        if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
+       if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 6) == 'KANWIL') { //5
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
@@ -77,6 +77,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -116,7 +120,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
 		$kolom1=20;
-		$kolom2=40;
+		$kolom2=100;
 		$kolom3=40;
 		$kolom4=80;
 		$kolom_grandtotal=$kolom1+$kolom2;
@@ -213,7 +217,7 @@ class FPDF_AutoWrapTable extends FPDF {
 						$nil_void+=$value->get_vendor_ext_bank_account_num();
             }
 						
-				$this->SetFont('Arial', '', 6);
+				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();

@@ -68,6 +68,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -105,7 +109,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_jenis_belanja = 100;
         $ukuran_kolom_satker = 80;
         $ukuran_kolom_akun = 100;
-        $ukuran_kolom_dana = 200;
+        $ukuran_kolom_dana = 210;
         $ukuran_kolom_file = 85;
         $ukuran_kolom_bank_pembayar = 110;
         $ukuran_kolom_norek_penerima = 100;

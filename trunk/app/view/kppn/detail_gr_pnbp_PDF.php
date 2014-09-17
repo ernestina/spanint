@@ -77,6 +77,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -111,16 +115,15 @@ class FPDF_AutoWrapTable extends FPDF {
         #tableheader
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 65;
+        $ukuran_kolom_jenis_belanja = 100;
         $ukuran_kolom_satker = 40;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
 		$kolom1=20;
-		$kolom2=40;
+		$kolom2=120;
 		$kolom3=50;
 		$kolom4=50;
 		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+$kolom4+
-		$ukuran_kolom_jenis_belanja+$ukuran_kolom_jenis_belanja+
 		$ukuran_kolom_jenis_belanja+$ukuran_kolom_jenis_belanja;
 
         $this->SetFillColor(200, 200, 200);
@@ -146,7 +149,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array($kolom1,$kolom2,$kolom3,$kolom4, $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, $ukuran_kolom_dana));
+        $this->SetWidths(array($kolom1,$kolom2,$kolom3,$kolom4, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja));
         $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C'));
 
         if (count($this->data) == 0) {
@@ -178,7 +181,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$total = $total + $value->get_line_amount();
 			
             }
-			$this->SetFont('Arial', '', 6);
+			$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();
@@ -366,8 +369,8 @@ $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
     'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
-    'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
-    'orientation' => 'L' //orientation: P=portrait, L=landscape
+    'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
+    'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
 $tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
 $tabel->printPDF();

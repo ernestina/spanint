@@ -66,7 +66,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetXY($px2, $py2);
         $this->SetX($left + 50);
 
-        if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
+                if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 6) == 'KANWIL') { //5
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
@@ -78,9 +78,14 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
+
 
         $this->Cell(0, 1, " ", "B");
         $this->Ln(10);
@@ -113,8 +118,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 80;
         $ukuran_kolom_pagu_total = 80;
-        $ukuran_kolom_jenis_belanja = 65;
-        $ukuran_kolom_satker = 75;
+        $ukuran_kolom_jenis_belanja = 87;
+        $ukuran_kolom_satker = 100;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
         $ukuran_kolom_deskripsi = 160;

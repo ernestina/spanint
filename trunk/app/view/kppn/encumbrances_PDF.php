@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -110,9 +114,7 @@ class FPDF_AutoWrapTable extends FPDF {
         //----------------------------------------------- 
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_jenis_belanja = 200;
-        $ukuran_kolom_akun = 100;
-        $ukuran_kolom_dana = 80;
+        $ukuran_kolom_dana = 128;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -122,20 +124,21 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($left += $ukuran_kolom_dana);
         $this->Cell($ukuran_kolom_dana, $h, 'Blokir', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_akun, $h, 'Blokir Sementara', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_dana, $h, 'Blokir Sementara', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += $ukuran_kolom_akun);
+        $this->SetX($left += $ukuran_kolom_dana);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Invoice', 1, 1, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_dana, $h, 'Invoice', 1, 1, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_dana);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(30, $ukuran_kolom_dana,$ukuran_kolom_dana, $ukuran_kolom_akun, $ukuran_kolom_jenis_belanja));
-        $this->SetAligns(array('C', 'C','C', 'L', 'R'));
+        $this->SetWidths(array(30, $ukuran_kolom_dana,$ukuran_kolom_dana,
+		$ukuran_kolom_dana, $ukuran_kolom_dana));
+        $this->SetAligns(array('C', 'R','R', 'R', 'R'));
 
         if (count($this->data) == 0) {
             $this->Row(
@@ -158,7 +161,32 @@ class FPDF_AutoWrapTable extends FPDF {
 							number_format($value->get_invoice())
                         )
                 );
+				$tot1+=$value->get_obligation();
+				$tot2+=$value->get_block_amount();
+				$tot3+=$value->get_temp_block();
+				$tot4+=$value->get_invoice();
             }
+				$this->SetFont('Arial', 'B', 7);
+				$h = 20;
+				$this->SetFillColor(200, 200, 200);
+				$left = $this->GetX();
+				$px1 = $this->GetX();
+				$py1 = $this->GetY();
+				$px2 = $px1;
+				$py2 = $py1;
+				$this->SetXY($px2, $py2);
+				$this->Cell(30, $h, '', 1, 0, 'R', true);
+				$this->SetX($px2 += 30);
+				$this->Cell($ukuran_kolom_dana, $h, number_format($tot1), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_dana);
+				$this->Cell($ukuran_kolom_dana, $h, number_format($tot2), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_dana);
+				$this->Cell($ukuran_kolom_dana, $h, number_format($tot3), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_dana);
+				$py3 = $this->GetY();
+				$this->Cell($ukuran_kolom_dana, $h, number_format($tot4), 1, 1, 'R', true);
+				$this->Ln(3);
+
         }
 
         $this->Ln(3);

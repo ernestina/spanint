@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -114,6 +118,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'B', 9);
         $ukuran_kolom_pagu_total_sisa = 100;
         $ukuran_kolom_hari = 100;
+		$ukuran_kolom=160;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -128,12 +133,12 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($left += 100);
         $this->Cell(100, $h, 'Nilai Transaksi', 1, 0, 'C', true);
         $this->SetX($left += 100);
-        $this->Cell(100, $h, 'Nama Rekening', 1, 1, 'C', true);
+        $this->Cell($ukuran_kolom, $h, 'Nama Rekening', 1, 1, 'C', true);
         $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(20, 80, 
-		80,100,100,100));
+		80,100,100,$ukuran_kolom));
         $this->SetAligns(array('C', 'C', 'C', 'C', 'R','L'));
         $no = 1;
         $j1 = 0;
@@ -160,7 +165,7 @@ class FPDF_AutoWrapTable extends FPDF {
 
             //------------------
         }
-        $this->SetFont('Arial', '', 7);
+        $this->SetFont('Arial', 'B', 7);
         $h = 20;
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -175,7 +180,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->Cell($ukuran_kolom_hari, $h, number_format($total), 1, 0, 'R', true);
         $py3 = $this->GetY();
         $this->SetX($left += 100);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h,'' , 1, 1, 'R', true);
+        $this->Cell($ukuran_kolom, $h,'' , 1, 1, 'R', true);
         $this->Ln(3);
     }
 
