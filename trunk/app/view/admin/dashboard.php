@@ -396,13 +396,13 @@
                             <p><?php echo (number_format(round(($total_vol_gaji / 1000000000), 2), 2)." M"); ?></p>
                             <p class="sub">Gaji</p>
                         </div>
-                        <div style="width: 50%; float: left; border-left: 4px solid #8E5696">
-                            <p><?php echo (number_format(round(($total_vol_non_gaji / 1000000000), 2), 2)." M"); ?></p>
-                            <p class="sub">Non Gaji</p>
-                        </div>
                         <div style="width: 50%; float: left; border-left: 4px solid #F6CE40">
                             <p><?php echo (number_format(round(($total_vol_lainnya / 1000000000), 2), 2)." M"); ?></p>
                             <p class="sub">Lainnya</p>
+                        </div>
+                        <div style="width: 100%; float: left; border-left: 4px solid #8E5696">
+                            <p><?php echo (number_format(round(($total_vol_non_gaji / 1000000000), 2), 2)." M"); ?></p>
+                            <p class="sub">Non Gaji</p>
                         </div>
                     </div>
                 </div>

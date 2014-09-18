@@ -38,7 +38,7 @@ class homeController extends BaseController {
                 $kodeunit = Session::get('id_user');
             }
 
-            $unitfilter = " kdkppn='" . $kodeunit . "' ";
+            $unitfilter = " kdkppn = '" . $kodeunit . "' ";
 
             return $d_dashboard->get_sp2d_rekap_num_pie($periode, $unitfilter);
             

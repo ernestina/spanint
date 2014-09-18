@@ -52,9 +52,9 @@ class DataDashboard {
 
     public function get_sp2d_rekap_vol_pie($hari, $unitfilter = null) {
         if (!isset($unitfilter)) {
-            $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+            $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select kdkppn,  check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         } else {
-            $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+            $sql = "select status_lookup_code, jenis_sp2d, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, amount * nvl(exchange_rate,1) amount_rph, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         }
 
         //echo $sql;
@@ -135,12 +135,12 @@ class DataDashboard {
     public function get_sp2d_rekap_num_pie($hari, $unitfilter = null) {
 
         if (!isset($unitfilter)) {
-            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select kdkppn,  check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         } else {
-            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
+            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select kdkppn,  check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         }
 
-        //var_dump($sql);
+        //echo($sql);
         $result = $this->db->select($sql);
         //var_dump($result);
         $d_data = new $this($this->registry);
