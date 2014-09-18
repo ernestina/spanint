@@ -181,9 +181,9 @@ class DataDashboard {
         $data = array();
         for ($i = 0; $i < $hari; $i++) {
             if (!isset($unitfilter)) {
-                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where kdkppn = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             } else {
-                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) where " . $unitfilter . " and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
             }
 
             //var_dump($sql);
