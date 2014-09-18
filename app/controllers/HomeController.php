@@ -38,7 +38,7 @@ class homeController extends BaseController {
                 $kodeunit = Session::get('id_user');
             }
 
-            $unitfilter = " substr(CHECK_NUMBER,3,3)='" . $kodeunit . "' ";
+            $unitfilter = " kdkppn='" . $kodeunit . "' ";
 
             return $d_dashboard->get_sp2d_rekap_num_pie($periode, $unitfilter);
             
@@ -48,7 +48,7 @@ class homeController extends BaseController {
                 $kodeunit = 'K' . Session::get('id_user');
             }
 
-            $unitfilter = " substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
+            $unitfilter = " kdkppn in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
 
             return $d_dashboard->get_sp2d_rekap_num_pie($periode, $unitfilter);
             
@@ -82,7 +82,7 @@ class homeController extends BaseController {
                 $kodeunit = Session::get('id_user');
             }
 
-            $unitfilter = " substr(CHECK_NUMBER,3,3)='" . $kodeunit . "' ";
+            $unitfilter = " kdkppn = '" . $kodeunit . "' ";
 
             return $d_dashboard->get_sp2d_rekap_vol_pie($periode, $unitfilter);
             
@@ -92,7 +92,7 @@ class homeController extends BaseController {
                 $kodeunit = 'K' . Session::get('id_user');
             }
 
-            $unitfilter = " substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
+            $unitfilter = " kdkppn in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
 
             return $d_dashboard->get_sp2d_rekap_vol_pie($periode, $unitfilter);
             
@@ -212,7 +212,7 @@ class homeController extends BaseController {
             }
 
             $filter_pos_spm = array();
-            $filter_pos_spm[] = "SUBSTR(OU_NAME,1,3) = '" . $kodeunit . "'";
+            $filter_pos_spm[] = "KDKPPN = '" . $kodeunit . "'";
             
             return $d_dashboard->get_hist_spm_filter($filter_pos_spm);
             
@@ -241,7 +241,7 @@ class homeController extends BaseController {
                 $kodeunit = Session::get('id_user');
             }
 
-            $unitfilter = " substr(CHECK_NUMBER,3,3)='" . $kodeunit . "' ";
+            $unitfilter = " KDKPPN = '" . $kodeunit . "' ";
 
             $unitfilter .= "and check_date = to_date('" . date("Ymd", time()) . "','yyyymmdd')";
 
@@ -274,11 +274,11 @@ class homeController extends BaseController {
         if ($kodeunit[0] != 'K') {
 
             //Rekap SP2D
-            $unitfilter = " substr(CHECK_NUMBER,3,3)='" . $kodeunit . "' ";
+            $unitfilter = " KDKPPN = '" . $kodeunit . "' ";
             $summary_result->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap(1, $unitfilter);
 
             //Rekap Retur
-            $returfilter = " KDKPPN='" . $kodeunit . "' ";
+            $returfilter = " KDKPPN = '" . $kodeunit . "' ";
             $summary_result->data_retur = $d_dashboard->get_sp2d_retur($returfilter);
 
             //Rekap LHP
@@ -287,7 +287,7 @@ class homeController extends BaseController {
 
             //SPM dalam proses
             $filter_pos_spm = array();
-            $filter_pos_spm[1] = "SUBSTR(OU_NAME,1,3) = '" . $kodeunit . "'";
+            $filter_pos_spm[1] = "KDKPPN = '" . $kodeunit . "'";
             $summary_result->data_pos_spm = $d_dashboard->get_hist_spm_count($filter_pos_spm);
             
             return $summary_result;
@@ -295,7 +295,7 @@ class homeController extends BaseController {
         } else {
 
             //Rekap SP2D
-            $unitfilter = " substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "')  ";
+            $unitfilter = " KDKPPN in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "')  ";
             $summary_result->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap(1, $unitfilter);
 
             //Rekap Retur
@@ -308,7 +308,7 @@ class homeController extends BaseController {
 
             //SPM dalam proses
             $filter_pos_spm = array();
-            $filter_pos_spm[1] = "SUBSTR(OU_NAME,1,3) in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
+            $filter_pos_spm[1] = "KDKPPN in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
             $summary_result->data_pos_spm = $d_dashboard->get_hist_spm_count($filter_pos_spm);
             
             return $summary_result;
@@ -327,7 +327,7 @@ class homeController extends BaseController {
                 $kodeunit = Session::get('id_user');
             }
 
-            $unitfilter = " substr(CHECK_NUMBER,3,3)='" . $kodeunit . "' ";
+            $unitfilter = " KDKPPN = '" . $kodeunit . "' ";
 
             $d_dashboard = new DataDashboard($this->registry);
 
@@ -339,7 +339,7 @@ class homeController extends BaseController {
                 $kodeunit = 'K' . Session::get('id_user');
             }
 
-            $unitfilter = " substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
+            $unitfilter = " KDKPPN in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
 
             $d_dashboard = new DataDashboard($this->registry);
 
