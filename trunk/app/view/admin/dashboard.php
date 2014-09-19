@@ -749,6 +749,8 @@
 
                         <?php } else { ?>
                         
+                            <?php $disp_currency_warning = false; ?>
+                        
                             <?php $no = 1; ?>
                         
                             <?php $total_nominal_sp2d = 0; ?>
@@ -760,9 +762,15 @@
                                     <td class="align-center"><?php echo $no++; ?></td>                        
                                     <td class="align-center"><?php echo $value->get_check_number(); ?></td>
                                     <td class="align-center"><?php echo $value->get_jenis_sp2d(); ?></td>
-                                    <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?></td>
+                                    <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?> <?php if ($value->get_currency_sp2d() != 'IDR' && ($value->get_rate_sp2d() == 0 || $value->get_rate_sp2d() == null)) { echo $value->get_currency_sp2d().'*'; $disp_currency_warning = true; } ?></td>
                                     
-                                    <?php $total_nominal_sp2d += $value->get_nominal_sp2d(); ?>
+                                    <?php 
+                                                                           
+                                        if ($value->get_currency_sp2d() == 'IDR' || ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) {
+                                            $total_nominal_sp2d += $value->get_nominal_sp2d(); 
+                                        }
+                                    
+                                    ?>
                         
                                 </tr>
                         
@@ -778,7 +786,7 @@
 
                             <tr>
                                     
-                                <td colspan=3 class="align-center">Jumlah</td>                        
+                                <td colspan=3 class="align-center">Jumlah <?php if ($disp_currency_warning == true) { echo '(Nominal bertanda bintang belum memiliki data nilai tukar, sehingga tidak ikut dijumlahkan)'; } ?></td>                        
                                 <td class="align-right"><?php echo number_format($total_nominal_sp2d); ?></td>
 
                             </tr>
