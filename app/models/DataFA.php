@@ -59,14 +59,14 @@ class DataFA {
 				A.BUDGET_TYPE='2' AND
 				A.SATKER=B.KDSATKER
 				AND A.SUMMARY_FLAG = 'N' 
-				AND A.BUDGET_AMT + A.ENCUMBRANCE_AMT + A.ACTUAL_AMT <> 0 
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				";
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " ORDER BY A.AKUN ";
+        $sql .= " ORDER BY A.KPPN, A.AKUN ";
 
         //var_dump($sql);
         $result = $this->db->select($sql);
@@ -110,14 +110,14 @@ class DataFA {
 				AND
 				A.SATKER=B.KDSATKER 
 				AND A.SUMMARY_FLAG = 'Y' 
-				AND A.BUDGET_AMT + A.ENCUMBRANCE_AMT + A.ACTUAL_AMT <> 0
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				";
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " ORDER BY A.OUTPUT, A.AKUN ";
+        $sql .= " ORDER BY A.KPPN, A.OUTPUT, A.AKUN ";
 
         //var_dump($sql);
         $result = $this->db->select($sql);

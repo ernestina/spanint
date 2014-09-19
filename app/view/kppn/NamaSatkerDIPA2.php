@@ -123,6 +123,7 @@ if (Session::get('role') == KPPN) {
                         $kode_kppn = $kppn->get_kd_satker();
                     }
                 }
+				
                 if (isset($this->d_kd_satker)) {
                     echo "<br>Satker : ".$this->d_kd_satker;
                 }
@@ -172,7 +173,7 @@ if (Session::get('role') == KPPN) {
             
                         <tr>
                             <td class="align-center"><?php echo $no++; ?></td>
-                            <td class="align-center"><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1/<?php echo $value->get_kdsatker(); ?>" ><?php echo $value->get_kdsatker(); ?></a></td>
+                            <td class="align-center"><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1/<?php echo $value->get_kdsatker()."/".$value->get_kppn(); ?>" ><?php echo $value->get_kdsatker(); ?></a></td>
                             <td><?php echo $value->get_nmsatker(); ?></td>
                         </tr>
                             
