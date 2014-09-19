@@ -124,7 +124,7 @@
                     <th id="0" rowspan=2 class='mid'>No.</th>
                     <!--th>KPPN</th-->
                     <!--th>Tanggal</th-->
-                    <th id="1"  rowspan=2 class='mid'>Satker</th>
+                    <th id="1"  rowspan=2 class='mid'>BA-Satker</th>
 
                     <th id="2"  rowspan=2 class='mid'> Nama Satker </th>
                     <th id="3"  rowspan=2 class='mid'> Pagu </th>
@@ -173,7 +173,7 @@
                         foreach ($this->data as $value) {
                             echo "<tr>	";
                             echo "<td>" . $no++ . "</td>";
-                            echo "<td>" . $value->get_satker() . "</td>";
+                            echo "<td>" . $value->get_ba() . '-'. $value->get_satker(). "</td>";
                             echo "<td align='left'>" . $value->get_dipa() . "</td>";
                             echo "<td align='right'>" . number_format($value->get_Pagu()) . "</td>";
                             echo "<td align='right'>" . number_format($value->get_belanja_51()) . "</td>";
@@ -266,6 +266,19 @@
                     <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->satker_code)) {
     echo $this->satker_code;
 } ?>">
+
+<br/>
+                    <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
+                    <label class="isian">Bagian Anggaran: </label>
+                    <select class="form-control" type="text" name="JenisSPM" id="JenisSPM">
+                        <option value='' selected>- pilih -</option>
+<?php
+foreach ($this->data2 as $value2){
+    echo "<option value = '" . $value2->get_dipa() . "'>" . $value2->get_satker() . "</option>";
+	}
+?>
+                    </select>
+                    <br/>
                 </div>
 
                 <div class="modal-footer">

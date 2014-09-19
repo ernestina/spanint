@@ -339,6 +339,30 @@ class DataRealisasi {
         }
         return $data;
     }
+	
+	
+	public function get_nama_BA() {
+       
+        $sql = "select * 
+				FROM T_BA
+				 				
+				"
+        ;
+       
+        $sql .= " ORDER by NMBA ";
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['NMBA']);
+            $d_data->set_dipa($val['KDBA']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
 
     public function get_realisasi_satker_transfer_kanwil($transfer = null) {
         Session::get('id_user');

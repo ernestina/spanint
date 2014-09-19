@@ -286,7 +286,7 @@ class DataDIPAController extends BaseController {
         //$this->view->render('kppn/detail_fund_fail_kd');
     }
 
-    public function RealisasiFA_1($kdsatker = null) {
+    public function RealisasiFA_1($kdsatker=null, $kppn = null) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
@@ -300,6 +300,10 @@ class DataDIPAController extends BaseController {
         } else {
             $filter[$no++] = " A.SATKER =  '" . Session::get('kd_satker') . "'";
         }
+		if($kppn !='' and Session::get('role') != SATKER) {
+			$filter[$no++] = " A.KPPN =  '" . $kppn . "'";
+		}
+		
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
         }
@@ -517,9 +521,11 @@ class DataDIPAController extends BaseController {
                 $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn'] . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				$this->view->kppn = $_POST['kdkppn'];
             } else {
                 $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
-                $this->view->d_nama_kppn = Session::get('id_user');
+				$d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn(Session::get('id_user'));
             }
 
             if ($_POST['kdsatker'] != '') {
@@ -599,6 +605,7 @@ class DataDIPAController extends BaseController {
                 $this->view->satker_code = $_POST['kdsatker'];
             }
             $this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+			
         }
 
         //----------------------------------------------------
@@ -614,6 +621,7 @@ class DataDIPAController extends BaseController {
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+			$this->view->data2 = $d_spm1->get_nama_BA();
         }
 
         $d_last_update = new DataLastUpdate($this->registry);
