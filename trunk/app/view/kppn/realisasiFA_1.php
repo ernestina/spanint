@@ -43,6 +43,7 @@ if (Session::get('role') == SATKER) {
 				 $kdprogram=$value->get_program();
 			}
 		}
+			$kdprogram='null';
 			$kdoutput='null';
 			 $kdakun='null';
 	}	
@@ -87,6 +88,7 @@ if (Session::get('role') == KPPN) {
 			}
 
 		}
+			$kdprogram='null';
 			$kdoutput='null';
 			 $kdakun='null';
 	}	
@@ -135,6 +137,7 @@ if (Session::get('role') == KANWIL || Session::get('role') == ADMIN ) {
 			}
 
 		}
+			$kdprogram='null';
 			$kdoutput='null';
 			 $kdakun='null';
 	?>
@@ -182,8 +185,9 @@ if (Session::get('role') == DJA) {
 				}
 
 			}
+			$kdprogram='null';
 			$kdoutput='null';
-			 //$kdakun='null';
+			 $kdakun='null';
 	}	
 	    ?>
     <a href="<?php echo URL; ?>PDF/RealisasiFA_1_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>

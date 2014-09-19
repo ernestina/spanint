@@ -281,7 +281,6 @@ class PDFController extends BaseController {
 
 		}
 		
-   // public function RealisasiFA($kdsatker = null, $program = null, $output = null, $akun = null) {
 
     public function RealisasiFA_PDF($kdsatker = null,$kdprogram = null, $kdoutput = null,$kdakun = null,$kdakun1 = null ) {
         $d_spm1 = new DataFA($this->registry);
@@ -376,6 +375,10 @@ class PDFController extends BaseController {
         } else {
             $filter[$no++] = " A.SATKER =  '" . Session::get('kd_satker') . "'";
         }
+		if($kdkppn !='null' and Session::get('role') != SATKER) {
+			$filter[$no++] = " A.KPPN =  '" . $kdkppn . "'";
+		}
+
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
         }
@@ -383,7 +386,7 @@ class PDFController extends BaseController {
             $filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
         }
         
-
+	IF($kdakun != 'null' || $kdprogram != 'null' || $kdoutput!= 'null'){
 		if ($kdsatker != 'null') {
 			$filter[$no++] = "A.SATKER = '" . $kdsatker . "'";
 		}
@@ -397,6 +400,8 @@ class PDFController extends BaseController {
 		if ($kdprogram != 'null') {
 			$filter[$no++] = "A.PROGRAM = '" . $kdprogram . "'";
 		}
+
+	}
         		//-------------------------
 		 if (Session::get('role') == SATKER) {
             $d_nm_kppn1 = new DataUser($this->registry);
@@ -431,6 +436,7 @@ class PDFController extends BaseController {
         $this->view->data = $d_spm1->get_fa_summary_filter($filter);
         
 		$this->view->load('kppn/realisasiFA_1_PDF');
+		//$this->view->render('kppn/realisasiFA_1');
 		 //untuk mencatat log user
 		$d_log->tambah_log("Sukses");
     }
