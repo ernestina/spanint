@@ -786,7 +786,7 @@
 
                             <tr>
                                     
-                                <td colspan=3 class="align-center">Jumlah <?php if ($disp_currency_warning == true) { echo '(Nominal bertanda bintang belum memiliki data nilai tukar, sehingga tidak ikut dijumlahkan)'; } ?></td>                        
+                                <td colspan=3 class="align-center">Jumlah <?php if ($disp_currency_warning == true) { echo '(SP2D dengan tanda bintang belum memiliki informasi nilai tukar, sehingga tidak disertakan dalam perhitungan)'; } ?></td>                        
                                 <td class="align-right"><?php echo number_format($total_nominal_sp2d); ?></td>
 
                             </tr>
