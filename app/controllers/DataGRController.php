@@ -419,17 +419,34 @@ class DataGRController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-			
+		
+		if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = "SEGMENT1 = 'ZZZ". Session::get('id_user') ."'";
+        }
+		
 		 if (isset($_POST['submit_file'])) {
-            
+			
+			if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "SEGMENT1 = 'ZZZ" . $_POST['kdkppn'] . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            } else {
+                $filter[$no++] = "SEGMENT1 = 'ZZZ". Session::get('id_user') ."'";
+            }
+			
 			if ($_POST['bulan'] != '') {
                 $filter[$no++] = "SUBSTR(TANGGAL,4,3) = '" . $_POST['bulan'] . "'";
                 $this->view->d_bulan = $_POST['bulan'];
             }
-			
-			if (Session::get('role') == KPPN){
-				$filter[$no++] = "SEGMENT1 = 'ZZZ". Session::get('id_user') ."'";
-			}
 			
 			if ($_POST['ntpn'] != '') {
                 $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
@@ -454,24 +471,42 @@ class DataGRController extends BaseController {
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
-       
+		if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
 		if (Session::get('role') == KPPN){
 				$filter[$no++] = "SEGMENT2 = '" . Session::get('id_user') . "'";
 				$filter[$no++] = "SEGMENT3 = '498111'";
-			}
-			
+		$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+		}
 		 if (isset($_POST['submit_file'])) {
+		 
+			if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "SEGMENT2 = '" . $_POST['kdkppn'] . "'";
+				$filter[$no++] = "SEGMENT3 = '498111'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            } else {
+                $filter[$no++] = "SEGMENT2 = '" . Session::get('id_user') . "'";
+				$filter[$no++] = "SEGMENT3 = '498111'";
+            }
             
 			if ($_POST['bulan'] != '') {
                 $filter[$no++] = "SUBSTR(TANGGAL,4,3) = '" . $_POST['bulan'] . "'";
                 $this->view->d_bulan = $_POST['bulan'];
             }
-		
-        }
 		$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+        }
+		
         //var_dump($d_spm->get_gr_status_filter($filter));
 		
-        $this->view->render('kppn/suspend_satker_penerimaan');
+        $this->view->render('kppn/suspend_akun_penerimaan');
 		$d_log->tambah_log("Sukses");
     }
 

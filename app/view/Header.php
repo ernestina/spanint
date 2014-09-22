@@ -108,6 +108,9 @@
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
+									<li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">NTPN Ganda</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -224,6 +227,9 @@
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
+									<li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">NTPN Ganda</a></li>
                                 </ul>
                             </div>
                         </li>

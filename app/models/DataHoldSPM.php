@@ -44,7 +44,8 @@ class DataHoldSPM {
                 . $this->_table1 . " A, "
                 . $this->_table2 . " B  
 				WHERE 
-				A.INVOICE_ID=B.INVOICE_ID"
+				A.INVOICE_ID=B.INVOICE_ID
+				"
         ;
         $no = 0;
         foreach ($filter as $filter) {

@@ -162,6 +162,31 @@
 
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
 					
+					<?php if (isset($this->kppn_list)) { ?>
+                        <div id="wkdkppn" class="alert alert-danger" style="display: none"></div>
+                        <label class="isian">Kode KPPN: </label>
+                    
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                            
+                            <?php foreach ($this->kppn_list as $value1) { ?>
+                            
+                                <?php if ($kode_kppn == $value1->get_kd_d_kppn()) { ?>
+                            
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+                            
+                                <?php } else { ?>
+                            
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>"><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+                            
+                                <?php } ?>
+                            
+                            <?php } ?>
+                            
+                        </select>
+                    
+                        <br/>
+                    
+                    <?php } ?>
 					
 					<label class="isian">Pilih bulan: </label>
                     <select class="form-control" type="text" name="bulan" id="bulan">
