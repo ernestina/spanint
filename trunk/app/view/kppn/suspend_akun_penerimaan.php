@@ -159,46 +159,77 @@
                 <div class="modal-body">
 
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
+					
+					<?php if (isset($this->kppn_list)) { ?>
+                        <div id="wkdkppn" class="alert alert-danger" style="display: none"></div>
+                        <label class="isian">Kode KPPN: </label>
+                    
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                            
+                            <?php foreach ($this->kppn_list as $value1) { ?>
+                            
+                                <?php if ($kode_kppn == $value1->get_kd_d_kppn()) { ?>
+                            
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+                            
+                                <?php } else { ?>
+                            
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>"><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+                            
+                                <?php } ?>
+                            
+                            <?php } ?>
+                            
+                        </select>
+                    
+                        <br/>
+                    
+                    <?php } ?>
+					
 
 					
 					<label class="isian">Pilih bulan: </label>
+					
                     <select class="form-control" type="text" name="bulan" id="bulan">
+					
+						<option value="" selected>SEMUA BULAN</option>
+						
                         <option value='JAN' <?php if ($this->d_bulan == 'JAN') {
     echo "selected";
-} ?> >Januari</option>
+} ?> >JANUARI</option>
                         <option value='FEB' <?php if ($this->d_bulan == 'FEB') {
     echo "selected";
-} ?> >Februari</option>
+} ?> >FEBRUARI</option>
                         <option value='MAR' <?php if ($this->d_bulan == 'MAR') {
     echo "selected";
-} ?> >Maret</option>
+} ?> >MARET</option>
                         <option value='APR' <?php if ($this->d_bulan == 'APR') {
     echo "selected";
-} ?> >April</option>
+} ?> >APRIL</option>
                         <option value='MAY' <?php if ($this->d_bulan == 'MAY') {
     echo "selected";
-} ?> >Mei</option>
+} ?> >MEI</option>
                         <option value='JUN' <?php if ($this->d_bulan == 'JUN') {
     echo "selected";
-} ?> >Juni</option>
+} ?> >JUNI</option>
                         <option value='JUL' <?php if ($this->d_bulan == 'JUL') {
     echo "selected";
-} ?> >Juli</option>
+} ?> >JULI</option>
                         <option value='AUG' <?php if ($this->d_bulan == 'AUG') {
     echo "selected";
-} ?> >Agustus</option>
+} ?> >AGUSTUS</option>
                         <option value='SEP' <?php if ($this->d_bulan == 'SEP') {
     echo "selected";
-} ?> >September</option>
+} ?> >SEPTEMBER</option>
                         <option value='OCT' <?php if ($this->d_bulan == 'OCT') {
     echo "selected";
-} ?> >Oktober</option>
+} ?> >OKTOBER</option>
                         <option value='NOV' <?php if ($this->d_bulan == 'NOV') {
     echo "selected";
-} ?> >November</option>
+} ?> >NOVEMBER</option>
                         <option value='DEC' <?php if ($this->d_bulan == 'DEC') {
     echo "selected";
-} ?> >Desember</option>
+} ?> >DESEMBER</option>
                         <!--option value='Validated' <?php //if ($this->status==Validated){echo "selected";} ?>>Validated</option>
                         <option value='Error' <?php //if ($this->status==Error){echo "selected";} ?>>Error</option-->
 
