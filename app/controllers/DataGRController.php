@@ -325,22 +325,35 @@ class DataGRController extends BaseController {
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
-		
+		if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
 		if (Session::get('role') == KPPN){
 				$filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+				$this->view->data = $d_spm1->get_ntpn_ganda($filter);
 			}
         if (isset($_POST['submit_file'])) {
-		
+			
+			if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn'] . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            } else {
+                $filter[$no++] = "KDKPPN = ". Session::get('id_user') ."'";
+            }
 			if ($_POST['bulan'] != '') {
                 $filter[$no++] = "SUBSTR(BULAN,1,2) = '" . $_POST['bulan'] . "'";
                 $this->view->d_bulan = $_POST['bulan'];
             }
-			
-        }
 		$this->view->data = $d_spm1->get_ntpn_ganda($filter);
-        //$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+        }
 		
-        //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/ntpn_ganda');
 		$d_log->tambah_log("Sukses");
     }
