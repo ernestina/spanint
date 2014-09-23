@@ -104,7 +104,7 @@
                         echo "<td class='mid'>" . $no++ . "</td>";
 						echo "<td>" . $value->get_segment2() . "</td>";
 						//echo "<td>" . $value->get_ntpn() . "</td>";
-						echo "<td><a href=" . URL . "DataGR/DetailNTPNGanda/" . $value->get_ntpn() . " target='_blank' '>" . $value->get_ntpn() . "</a></td>";
+						echo "<td><a href=" . URL . "dataGR/DetailNTPNGanda/" . $value->get_ntpn() . " target='_blank' '>" . $value->get_ntpn() . "</a></td>";
 						echo "<td>" . $value->get_segment1() . "</td>";
 						echo "<td>" . $value->get_gl_date() . "</td>";
                         echo "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";
@@ -156,51 +156,73 @@
 
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
 
-                    <!--label class="isian">NTPN: </label>
-                    <input class="form-control" type="text" name="ntpn" id="ntpn" value="<?php //if (isset($this->check_number)) {
-                   //echo $this->ntpn;
-					//} ?>">
-                    <br/-->
+                    <?php if (isset($this->kppn_list)) { ?>
+                        <div id="wkdkppn" class="alert alert-danger" style="display: none"></div>
+                        <label class="isian">Kode KPPN: </label>
+                    
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                            
+                            <?php foreach ($this->kppn_list as $value1) { ?>
+                            
+                                <?php if ($kode_kppn == $value1->get_kd_d_kppn()) { ?>
+                            
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+                            
+                                <?php } else { ?>
+                            
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>"><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+                            
+                                <?php } ?>
+                            
+                            <?php } ?>
+                            
+                        </select>
+                    
+                        <br/>
+                    
+                    <?php } ?>
                     
 					
 					   <label class="isian">Pilih bulan: </label>
                     <select class="form-control" type="text" name="bulan" id="bulan">
+					
+						<option value="" selected>SEMUA BULAN</option>
                         <option value='01' <?php if ($this->d_bulan == '01') {
     echo "selected";
-} ?> >Januari</option>
+} ?> >JANUARI</option>
                         <option value='02' <?php if ($this->d_bulan == '02') {
     echo "selected";
-} ?> >Februari</option>
+} ?> >FEBRUARI</option>
                         <option value='03' <?php if ($this->d_bulan == '03') {
     echo "selected";
-} ?> >Maret</option>
+} ?> >MARET</option>
                         <option value='04' <?php if ($this->d_bulan == '04') {
     echo "selected";
-} ?> >April</option>
+} ?> >APRIL</option>
                         <option value='05' <?php if ($this->d_bulan == '05') {
     echo "selected";
-} ?> >Mei</option>
+} ?> >MEI</option>
                         <option value='06' <?php if ($this->d_bulan == '06') {
     echo "selected";
-} ?> >Juni</option>
+} ?> >JUNI</option>
                         <option value='07' <?php if ($this->d_bulan == '07') {
     echo "selected";
-} ?> >Juli</option>
+} ?> >JULI</option>
                         <option value='08' <?php if ($this->d_bulan == '08') {
     echo "selected";
-} ?> >Agustus</option>
+} ?> >AGUSTUS</option>
                         <option value='09' <?php if ($this->d_bulan == '09') {
     echo "selected";
-} ?> >September</option>
+} ?> >SEPTEMBER</option>
                         <option value='10' <?php if ($this->d_bulan == '10') {
     echo "selected";
-} ?> >Oktober</option>
+} ?> >OKTOBER</option>
                         <option value='11' <?php if ($this->d_bulan == '11') {
     echo "selected";
-} ?> >November</option>
+} ?> >NOVEMBER</option>
                         <option value='12' <?php if ($this->d_bulan == '12') {
     echo "selected";
-} ?> >Desember</option>
+} ?> >DESEMBER</option>
                         <!--option value='Validated' <?php //if ($this->status==Validated){echo "selected";} ?>>Validated</option>
                         <option value='Error' <?php //if ($this->status==Error){echo "selected";} ?>>Error</option-->
 
