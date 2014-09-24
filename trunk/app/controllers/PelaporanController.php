@@ -83,7 +83,7 @@ class PelaporanController extends BaseController {
                 $end_date = date('d-M-Y', strtotime($_POST['tgl_akhir']));
                 
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
-                $this->view->d_tgl_akhir = $_POST['tgl_awal'];
+                $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
                 
                 $data = array();
 
