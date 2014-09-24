@@ -14,6 +14,12 @@ $akses['HomeKanwil'] = array(
     '__destruct'
 );
 
+$akses['PelaporanKanwil'] = array(
+    '__construct',
+    'downloadLaporanKPPN',
+    '__destruct'
+);
+
 
 /*
  * akses modul auth

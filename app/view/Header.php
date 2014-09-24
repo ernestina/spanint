@@ -152,6 +152,15 @@
                                 </ul>
                             </div>
                         </li>
+        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Unduh LAK KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Unduh LRA KPPN</a></li>
+                                </ul>
+                            </div>
+                        </li>
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                             <div class="collapse">
@@ -163,6 +172,8 @@
                         </li>
 
                     </ul>
+    
+    
 
 
                     <!--//////////////////////////////////////// --> 
@@ -266,6 +277,15 @@
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahBank">Terindikasi Salah Bank</a></li>
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dSalahRekening">Terindikasi Salah PayGroup</a></li>
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dCompareGaji">Perbandingan Gaji per Bulan</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Unduh LAK KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Unduh LRA KPPN</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -403,6 +423,15 @@
                             <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
                                 <ul>
                                     <li><a href="<?php echo URL; ?>home/ticker/spm-sp2d" target="_blank">TV: Status SP2D</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Unduh LAK KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Unduh LRA KPPN</a></li>
                                 </ul>
                             </div>
                         </li>
