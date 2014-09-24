@@ -260,24 +260,28 @@
                             }
                             ?>
                         </select>
+						
 <?php } ?>
+					<div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
+                    <label class="isian">Bagian Anggaran: </label>					
+                    <select class="form-control" type="text" name="KodeBA" id="KodeBA">
+                        <option value='' selected>- pilih -</option>
+<?php
+foreach ($this->data2 as $value2){
+    echo "<option value = '" . $value2->get_dipa() . "'>" . $value2->get_dipa() . " | " . $value2->get_satker() . "</option>";
+	}
+?>
+                    </select>
+					
+					
+					
                         <br>
                     <label class="isian">Kode Satker: </label>
                     <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->satker_code)) {
     echo $this->satker_code;
 } ?>">
 
-<br/>
-                    <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
-                    <label class="isian">Bagian Anggaran: </label>
-                    <select class="form-control" type="text" name="JenisSPM" id="JenisSPM">
-                        <option value='' selected>- pilih -</option>
-<?php
-foreach ($this->data2 as $value2){
-    echo "<option value = '" . $value2->get_dipa() . "'>" . $value2->get_satker() . "</option>";
-	}
-?>
-                    </select>
+                    
                     <br/>
                 </div>
 
