@@ -15,6 +15,12 @@ $akses['HomeKPPN'] = array(
     '__destruct'
 );
 
+$akses['PelaporanKPPN'] = array(
+    '__construct',
+    'downloadLaporanKPPN',
+    '__destruct'
+);
+
 /*
  * akses PNBP
  */

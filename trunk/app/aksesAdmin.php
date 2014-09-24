@@ -5,6 +5,16 @@
 //-----------------------------------------------------------
 
 /*
+ * akses modul Pelaporan
+ */
+$akses['PelaporanAdmin'] = array(
+    '__construct',
+    'downloadLaporanKPPN',
+    '__destruct'
+);
+
+
+/*
  * akses modul Home
  */
 $akses['HomeAdmin'] = array(
