@@ -75,6 +75,7 @@ class DataRealisasi {
 				and a.budget_type = '2' 
 				and a.satker=b.kdsatker 
 				and a.kppn=b.kppn
+				and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) > 0
 				
 				"
         ;
@@ -187,7 +188,7 @@ class DataRealisasi {
 				, sum(decode(substr(a.akun,1,2),'58',a.actual_amt,0)) belanja_58
 				, sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
 				, sum(decode(substr(a.akun,1,2),'72',a.actual_amt,0)) belanja_71
-				, (select sum(actual_amt) from gl_balances_transfer c where substr (c.program,1,3)=substr(a.program,1,3)) belanja_61
+				, sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
 				, sum(ENCUMBRANCE_AMT) encumbrance 
 				FROM "
                 . $this->_table1 . " a,"
@@ -198,6 +199,7 @@ class DataRealisasi {
 				and substr(a.bank,1,1)  <= '9'
 				and substr(a.akun,1,1) <> '7'
 				and a.summary_flag = 'N'
+				and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) > 0
 				"
         ;
         $no = 0;
@@ -341,11 +343,13 @@ class DataRealisasi {
     }
 	
 	
-	public function get_nama_BA() {
+	public function get_nama_BA($kppn) {
        
-        $sql = "select * 
-				FROM T_BA
-				 				
+        $sql = "SELECT DISTINCT A.* 
+				FROM T_BA A, GL_BALANCES_V B
+				WHERE 
+				SUBSTR(B.PROGRAM,1,3)=A.KDBA
+				AND B.KPPN = '".$kppn."'
 				"
         ;
        

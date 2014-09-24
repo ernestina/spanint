@@ -604,7 +604,12 @@ class DataDIPAController extends BaseController {
                 $filter[$no++] = "A.SATKER = '" . $_POST['kdsatker'] . "'";
                 $this->view->satker_code = $_POST['kdsatker'];
             }
+			if ($_POST['KodeBA'] != '') {
+                $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . $_POST['KodeBA'] . "'";
+                //$this->view->satker_code = $_POST['KodeBA'];
+            }
             $this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+			$this->view->data2 = $d_spm1->get_nama_BA($_POST['kdkppn']);
 			
         }
 
@@ -621,7 +626,7 @@ class DataDIPAController extends BaseController {
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
             $this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
-			$this->view->data2 = $d_spm1->get_nama_BA();
+			$this->view->data2 = $d_spm1->get_nama_BA(Session::get('id_user'));
         }
 
         $d_last_update = new DataLastUpdate($this->registry);
