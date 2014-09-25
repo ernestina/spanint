@@ -38,8 +38,9 @@ class DataUserSPAN {
 
     public function get_user_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT KDKPPN, USER_NAME, LAST_NAME, ATTRIBUTE1, substr(NAME,12,30) NAME, EMAIL_ADDRESS, START_DATE, END_DATE FROM " . $this->_table . "
-		WHERE 1=1 ";
+        $sql = "SELECT KDKPPN, USER_NAME, LAST_NAME, ATTRIBUTE1, substr(NAME,12,30) NAME, EMAIL_ADDRESS, START_DATE, END_DATE FROM " . $this->_table . " 
+				 WHERE 
+				end_date is null";
 
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
