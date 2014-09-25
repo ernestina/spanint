@@ -15,12 +15,6 @@ $akses['HomeKPPN'] = array(
     '__destruct'
 );
 
-$akses['PelaporanKPPN'] = array(
-    '__construct',
-    'downloadLaporanKPPN',
-    '__destruct'
-);
-
 /*
  * akses PNBP
  */
@@ -246,6 +240,7 @@ $akses['PDFKPPN'] = array(
     'DataRealisasi_PDF',
     'DataRealisasiTransfer_PDF',
     'DetailBelanjaPNBP_PDF',
+    'detailCoAPenerimaan_PDF',
     'DetailDipaPNBP_PDF',
     'DetailEncumbrances_PDF',
     'Detail_Fund_fail_kd_PDF',
@@ -271,6 +266,7 @@ $akses['PDFKPPN'] = array(
     'HistorySpm_PDF',
     'HoldSpm_PDF',
     'KarwasPNBP_PDF',
+    'KonfirmasiPenerimaan_PDF',
     'monitoringPelimpahan_PDF',
     'monitoringRetur_PDF',
     'monitoringSp2d_PDF',
@@ -278,6 +274,7 @@ $akses['PDFKPPN'] = array(
     'nmsatker_PDF',
     'nmsatker1_PDF',
     'nmsatkerSP2D_PDF',
+    'NTPNGanda_PDF',
     'posisiSpm_PDF',
     'ProsesRevisi_PDF',
     'RealisasiFA_1_PDF',
@@ -295,7 +292,10 @@ $akses['PDFKPPN'] = array(
     'sp2dSalahRekening_PDF',
     'sp2dSalahTanggal_PDF',
     'sp2dSudahVoid_PDF',
+    'SuspendAkunPenerimaan_PDF',
+    'SuspendSatkerPenerimaan_PDF',
     'ValidasiSpm_PDF',
+
     '__destruct'
 );
 ?>

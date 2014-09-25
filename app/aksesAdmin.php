@@ -5,16 +5,6 @@
 //-----------------------------------------------------------
 
 /*
- * akses modul Pelaporan
- */
-$akses['PelaporanAdmin'] = array(
-    '__construct',
-    'downloadLaporanKPPN',
-    '__destruct'
-);
-
-
-/*
  * akses modul Home
  */
 $akses['HomeAdmin'] = array(
@@ -98,10 +88,6 @@ $akses['DataGRAdmin'] = array(
     'grStatusHarian',
     'detailLhpRekap',
     'detailPenerimaan',
-	'SuspendSatkerPenerimaan',
-    'SuspendAkunPenerimaan',
-    'NTPNGanda',
-    'DetailNTPNGanda',
     '__destruct'
 );
 
@@ -254,6 +240,7 @@ $akses['PDFAdmin'] = array(
     'DetailEncumbrances_PDF',
     'detailLhpRekap_PDF',
     'detailPenerimaan_PDF',
+    'detailCoAPenerimaan_PDF',
     'detailposisiSpm_PDF',
     'DetailRealisasiFA_PDF',
     'detailrekapsp2d1_PDF',

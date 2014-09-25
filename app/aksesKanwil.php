@@ -14,12 +14,6 @@ $akses['HomeKanwil'] = array(
     '__destruct'
 );
 
-$akses['PelaporanKanwil'] = array(
-    '__construct',
-    'downloadLaporanKPPN',
-    '__destruct'
-);
-
 
 /*
  * akses modul auth
@@ -73,10 +67,6 @@ $akses['DataGRKanwil'] = array(
     'detailLhpRekap',
     'detailPenerimaan',
     'detailCoAPenerimaan',
-	'SuspendSatkerPenerimaan',
-    'SuspendAkunPenerimaan',
-    'NTPNGanda',
-    'DetailNTPNGanda',
     '__destruct'
 );
 
@@ -186,6 +176,7 @@ $akses['PDFKanwil'] = array(
     'daftarsp2d_PDF',
     'DataRealisasi_PDF',
     'DataRealisasiTransfer_PDF',
+    'detailCoAPenerimaan_PDF',
     'Detail_Fund_fail_kd_PDF',
     'Detail_Fund_fail_PDF',
     'DetailEncumbrances_PDF',
