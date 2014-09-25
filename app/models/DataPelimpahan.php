@@ -59,7 +59,7 @@ class DataPelimpahan {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= " ORDER BY TGL_LIMPAH, KPPN_ANAK";
+        $sql .= " ORDER BY TGL_LIMPAH desc, KPPN_ANAK";
         //var_dump ($sql);
         $result = $this->db->select($sql);
 		//var_dump ($result);

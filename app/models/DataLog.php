@@ -59,37 +59,60 @@ class DataLog {
 		$mulai = strtotime($this->get_activity_time_start());
 		$selesai = strtotime($this->get_activity_time_end());
 		$this->set_duration($selesai - $mulai);
-		$this->set_ip_client($this->getIp());
+		$this->set_ip_client($this->get_ip_address());
 		$this->set_status($status);
-        $this->add_d_log();
+                $this->add_d_log();
 		return true;
     }
-	
-	private function getIp() {
-		$ipaddress = '';
-		if (!empty($_SERVER['HTTP_CLIENT_IP'])){
-			$ipaddress = $_SERVER['HTTP_CLIENT_IP'];
-		}
-		else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-			$ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		}
-		else if(!empty($_SERVER['HTTP_X_FORWARDED'])){
-			$ipaddress = $_SERVER['HTTP_X_FORWARDED'];
-		}
-		else if(!empty($_SERVER['HTTP_FORWARDED_FOR'])){
-			$ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
-		}
-		else if(!empty($_SERVER['HTTP_FORWARDED'])){
-			$ipaddress = $_SERVER['HTTP_FORWARDED'];
-		}
-		else if(!empty($_SERVER['REMOTE_ADDR'])){
-			$ipaddress = $_SERVER['REMOTE_ADDR'];
-		}
-		else {
-			$ipaddress = 'UNKNOWN';
-		}
-		return $ipaddress;
-	}
+    
+    function get_ip_address() {
+        $ip_keys = array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR');
+        foreach ($ip_keys as $key) {
+            if (array_key_exists($key, $_SERVER) === true) {
+                foreach (explode(',', $_SERVER[$key]) as $ip) {
+                    // trim for safety measures
+                    $ip = trim($ip);
+                    // attempt to validate IP
+                    if ($this->validate_ip($ip)) {
+                        return $ip;
+                    }
+                }
+            }
+        }
+
+        return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : false;
+    }
+
+    /**
+     * Ensures an ip address is both a valid IP and does not fall within
+     * a private network range.
+     */
+    function validate_ip($ip) {
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+            return false;
+        }
+        return true;
+    }
+
+    private function getIp() {
+        $ipaddress = 'localhost';
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+        } else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else if (!empty($_SERVER['HTTP_X_FORWARDED'])) {
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+        } else if (!empty($_SERVER['HTTP_FORWARDED_FOR'])) {
+            $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+        } else if (!empty($_SERVER['HTTP_FORWARDED'])) {
+            $ipaddress = $_SERVER['HTTP_FORWARDED'];
+        } else if (!empty($_SERVER['REMOTE_ADDR'])) {
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+        } else {
+            $ipaddress = 'UNKNOWN';
+        }
+        return $ipaddress;
+    }
 
     /*
      * setter
