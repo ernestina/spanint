@@ -251,7 +251,8 @@
                             //echo "<td>" . $value->get_jam_upload() . "</td>";
                             echo "<td>" . $value->get_aca_creation_date() . ' ' . $value->get_jam_selesai_sp2d() . "</td>";
                             //echo "<td>" . $value->get_jam_selesai_sp2d() . "</td>";
-                            echo "<td>" . $value->get_durasi() . "</td>";
+                            
+                            echo "<td>" . CariWaktuKerja::cariBedaWaktuKerja(strtoupper($value->get_aia_creation_date()) . ' ' . $value->get_jam_upload(), $value->get_aca_creation_date() . ' ' . $value->get_jam_selesai_sp2d()) . "</td>";
 
                             echo "</tr>	";
                         }
