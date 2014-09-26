@@ -60,6 +60,7 @@ class DataFA {
 				A.SATKER=B.KDSATKER
 				AND A.SUMMARY_FLAG = 'N' 
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				AND SUBSTR(AKUN,1,2) <> '53'
 				";
         $no = 0;
         foreach ($filter as $filter) {
@@ -111,6 +112,7 @@ class DataFA {
 				A.SATKER=B.KDSATKER 
 				AND A.SUMMARY_FLAG = 'Y' 
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				AND SUBSTR(AKUN,1,2) <> 'B3'
 				";
         $no = 0;
         foreach ($filter as $filter) {
