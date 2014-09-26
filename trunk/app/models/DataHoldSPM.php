@@ -45,6 +45,7 @@ class DataHoldSPM {
                 . $this->_table2 . " B  
 				WHERE 
 				A.INVOICE_ID=B.INVOICE_ID
+				AND A.PAYMENT_STATUS_FLAG <> 'Y'
 				"
         ;
         $no = 0;
