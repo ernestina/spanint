@@ -224,6 +224,15 @@ $akses['PanduanAdmin'] = array(
 );
 
 /*
+ * akses Pelaporan
+ */
+$akses['PelaporanAdmin'] = array(
+    '__construct',
+    'downloadLaporanKPPN',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFAdmin'] = array(

@@ -167,6 +167,15 @@ $akses['PanduanKanwil'] = array(
 );
 
 /*
+ * akses Pelaporan
+ */
+$akses['PelaporanKanwil'] = array(
+    '__construct',
+    'downloadLaporanKPPN',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFKanwil'] = array(
