@@ -538,3 +538,15 @@ if (Session::get('role') == DJA) {
         }
     }
 </script>
+
+<div class="main-window-segment vertical-padded">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <b>NB : </b></br>
+                Untuk sementara data untuk akun 53 tidak dimunculkan </br>
+            </div>
+
+        </div>
+    </div>
+</div>
