@@ -43,11 +43,13 @@
                 
                 
             </div>
+            <?php if (isset($this->kppn_list)){ ?>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
+            <?php }?>
         </div>
         
         <div class="row" style="padding-top: 10px">
@@ -343,7 +345,6 @@
     </table>
 </div>
 
-<?php if (isset($this->kppn_list)) { ?>	
 
 <!-- Filter -->
 <div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
@@ -392,7 +393,6 @@
 
 </div>
 
-<?php } ?>
 
 
 

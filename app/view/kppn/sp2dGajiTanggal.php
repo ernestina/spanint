@@ -31,11 +31,13 @@
                 
                 
             </div>
+            <?php if (isset($this->kppn_list)){ ?>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
+            <?php }?>
         </div>
         
         <div class="row" style="padding-top: 10px">
@@ -122,7 +124,6 @@
                 <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
 
             </div>
-            
             <form id="filter-form" method="POST" action="sp2dSalahTanggal" enctype="multipart/form-data">
 
                 <div class="modal-body">
