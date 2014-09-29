@@ -751,6 +751,8 @@
                         
                             <?php $disp_currency_warning = false; ?>
                         
+                            <?php $disp_minus_warning = false; ?>
+                        
                             <?php $no = 1; ?>
                         
                             <?php $total_nominal_sp2d = 0; ?>
@@ -765,11 +767,13 @@
                                     <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?> <?php if ($value->get_currency_sp2d() != 'IDR' && ($value->get_rate_sp2d() == 0 || $value->get_rate_sp2d() == null)) { echo $value->get_currency_sp2d().'*'; $disp_currency_warning = true; } ?></td>
                                     
                                     <?php 
-                                                                           
-                                        if ($value->get_currency_sp2d() == 'IDR' || ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) {
-                                            $total_nominal_sp2d += $value->get_nominal_sp2d(); 
+                                        if ($value->get_nominal_sp2d() > 0) {                  
+                                            if ($value->get_currency_sp2d() == 'IDR' || ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) {
+                                                $total_nominal_sp2d += $value->get_nominal_sp2d(); 
+                                            }
+                                        } else {
+                                            $disp_minus_warning = true;
                                         }
-                                    
                                     ?>
                         
                                 </tr>
@@ -786,7 +790,7 @@
 
                             <tr>
                                     
-                                <td colspan=3 class="align-center">Jumlah <?php if ($disp_currency_warning == true) { echo '(SP2D dengan tanda bintang belum memiliki informasi nilai tukar, sehingga tidak disertakan dalam perhitungan)'; } ?></td>                        
+                                <td colspan=3 class="align-center">Jumlah <?php if ($disp_currency_warning == true) { echo '(SP2D dengan tanda bintang belum memiliki informasi nilai tukar, sehingga tidak disertakan dalam perhitungan)'; } ?> <?php if ($disp_minus_warning == true) { echo '(Tidak termasuk SP2D Pengesahan)'; } ?></td>                        
                                 <td class="align-right"><?php echo number_format($total_nominal_sp2d); ?></td>
 
                             </tr>
