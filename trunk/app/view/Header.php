@@ -57,7 +57,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul Manajemen User</h4>
                             <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
                                 <ul>
@@ -73,8 +73,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                    <!--<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>-->
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
                                 </ul>
                             </div>
@@ -108,7 +108,7 @@
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
-									<li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">NTPN Ganda</a></li>
                                 </ul>
@@ -152,7 +152,7 @@
                                 </ul>
                             </div>
                         </li>
-        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
                             <div class="collapse">
                                 <ul>
@@ -172,8 +172,8 @@
                         </li>
 
                     </ul>
-    
-    
+
+
 
 
                     <!--//////////////////////////////////////// --> 
@@ -195,7 +195,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul Manajemen User</h4>
                             <div class="collapse">
                                 <ul>
@@ -211,8 +211,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                    <!--<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>-->
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
                                 </ul>
                             </div>
@@ -238,7 +238,7 @@
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
-									<li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">NTPN Ganda</a></li>
                                 </ul>
@@ -322,7 +322,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul Manajemen User</h4>
                             <div class="collapse">
                                 <ul>
@@ -338,8 +338,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                    <!--<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>-->
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
                                 </ul>
                             </div>
@@ -582,8 +582,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Data Pagu Minus</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Detail_Fund_fail">Data Pagu Minus Seluruh Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                    <!--<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>-->
                                 </ul>
                             </div>
                         </li>
