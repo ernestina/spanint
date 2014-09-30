@@ -143,12 +143,12 @@ if (isset($this->data)) {
             echo "<td>" . $no++ . "</td>";
             echo "<td>" . $value->get_kdsatker() . "<br>" . $value->get_nmsatker() . "</td>";
             echo "<td>" . $value->get_statement_date() . "<br>" . $value->get_sp2d_number() . "<br>" . $value->get_receipt_number() . "</td>";
-            echo "<td width='200px'> " . $value->get_bank_name() . '<br>Penerima: ' . $value->get_vendor_name() . ' <br>No. Rek: ' . $value->get_vendor_ext_bank_account_num() . "<br> Rp. " . $value->get_amount() . "</td>";
+            echo "<td width='200px'> " . $value->get_bank_name() . '<br>Penerima: ' . $value->get_vendor_name() . ' <br>No. Rek: ' . $value->get_vendor_ext_bank_account_num() . "<br> Rp. " . number_format($value->get_amount()) . "</td>";
             echo "<td class='ratakiri'> " . $value->get_invoice_description() . " </td>";
             echo "<td class='ratakiri'> " . $value->get_keterangan_retur() . " </td>";
             echo "<td>" . $value->get_tgl_proses_sp2d_pengganti() . "</td>";
             echo "<td>" . $value->get_tgsp2d_pengganti() . "<br> " . $value->get_nosp2d_pengganti() . "</td>";
-            echo "<td class='ratakiri'> " . $value->get_bank_name_pengganti() . '<br>Penerima: ' . $value->get_vendor_name_pengganti() . ' <br>No. Rek: ' . $value->get_vendor_account_num_pengganti() . "<br> Rp. " . $value->get_nilai_sp2d_pengganti() . "</td>";
+            echo "<td class='ratakiri'> " . $value->get_bank_name_pengganti() . '<br>Penerima: ' . $value->get_vendor_name_pengganti() . ' <br>No. Rek: ' . $value->get_vendor_account_num_pengganti() . "<br> Rp. " . number_format($value->get_nilai_sp2d_pengganti()) . "</td>";
             echo "<td>" . $value->get_bank_account_name() . "<br>" . $value->get_status_retur() . "</td>";
             echo "</tr>	";
         }
