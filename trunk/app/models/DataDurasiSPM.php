@@ -57,14 +57,19 @@ class DataDurasiSPM {
             $d_data->set_aia_creation_date(date("d-m-Y", strtotime($val['TANGGAL_UPLOAD'])));
             $d_data->set_check_number($val['CHECK_NUMBER']);
             if ($val['TANGAL_SELESAI_SP2D'] != '') {
-                $d_data->set_aca_creation_date(date("d-m-Y", strtotime($val['TANGAL_SELESAI_SP2D'])));
+                $tgl_selesai_sp2d = date("d-m-Y", strtotime($val['TANGAL_SELESAI_SP2D']));
             } else {
-                $d_data->set_aca_creation_date($val['TANGAL_SELESAI_SP2D']);
+                $tgl_selesai_sp2d = $val['TANGAL_SELESAI_SP2D'];
             }
-            $d_data->set_durasi($val['DURASI']);
+            $d_data->set_aca_creation_date($tgl_selesai_sp2d);
             $d_data->set_attribute1($val['JENDOK']);
             $d_data->set_jam_upload($val['JAM_UPLOAD']);
             $d_data->set_jam_selesai_sp2d($val['JAM_SELESAI_SP2D']);
+            $tgl_awalnya= date("d-m-Y", strtotime($val['TANGGAL_UPLOAD'])). ' ' . $val['JAM_UPLOAD'];
+            $tgl_akhirnya = $tgl_selesai_sp2d . ' ' . $val['JAM_SELESAI_SP2D'];
+            $durasi = CariWaktuKerja::cariBedaWaktuKerja($tgl_awalnya, $tgl_akhirnya);
+            //var_dump($tgl_awalnya);var_dump($tgl_akhirnya);
+            $d_data->set_durasi($durasi);
             $data[] = $d_data;
         }
         return $data;
