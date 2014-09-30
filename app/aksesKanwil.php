@@ -176,6 +176,18 @@ $akses['PelaporanKanwil'] = array(
 );
 
 /*
+ * akses Data Retur
+ */
+$akses['DataReturKanwil'] = array(
+    '__construct',
+    'index',
+    'monitoringRetur',
+    'monitoringReturPkn',
+    'monitoringRetur_PDF',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFKanwil'] = array(
