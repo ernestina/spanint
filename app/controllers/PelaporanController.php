@@ -98,7 +98,7 @@ class PelaporanController extends BaseController {
                         
                         do {
                             
-                            $curl = curl_init('http://10.100.244.253/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
+                            $curl = curl_init('http://10.100.93.56/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
         
                             curl_setopt($curl, CURLOPT_NOBODY, true);
 
@@ -117,7 +117,7 @@ class PelaporanController extends BaseController {
                             curl_close($curl);
                         
                             if ($ret) {
-                                $data[] = (object) array('kode_unit' => $unit, 'tanggal' => strtoupper($pointer_date), 'nama_file' => $folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf', 'url' => 'http://10.100.244.253/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
+                                $data[] = (object) array('kode_unit' => $unit, 'tanggal' => strtoupper($pointer_date), 'nama_file' => $folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf', 'url' => 'http://10.100.93.56/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
                             }
                             
                             $i++;
@@ -136,7 +136,7 @@ class PelaporanController extends BaseController {
 
                     do {
 
-                        $curl = curl_init('http://10.100.244.253/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
+                        $curl = curl_init('http://10.100.93.56/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
 
                         curl_setopt($curl, CURLOPT_NOBODY, true);
 
@@ -155,7 +155,7 @@ class PelaporanController extends BaseController {
                         curl_close($curl);
 
                         if ($ret) {
-                            $data[] = (object) array('kode_unit' => $unit, 'tanggal' => strtoupper($pointer_date), 'nama_file' => $folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf', 'url' => 'http://10.100.244.253/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
+                            $data[] = (object) array('kode_unit' => $unit, 'tanggal' => strtoupper($pointer_date), 'nama_file' => $folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf', 'url' => 'http://10.100.93.56/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
                         }
 
                         $i++;
