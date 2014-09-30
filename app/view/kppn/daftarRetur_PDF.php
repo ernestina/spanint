@@ -212,12 +212,12 @@ class FPDF_AutoWrapTable extends FPDF {
 						array($no++,
 							$value->get_kdsatker() . ' ' . $value->get_nmsatker(),
 							$value->get_statement_date() . ' ' . $value->get_sp2d_number() . ' ' . $value->get_receipt_number(),
-							$value->get_bank_name() . ' ' . $value->get_vendor_name() . ' ' . $value->get_vendor_ext_bank_account_num() . ' ' . number_format($value->get_amount()),
+							$value->get_bank_name() . ' '.'Penerima:'. $value->get_vendor_name() . ' ' .'No.Rek:'. $value->get_vendor_ext_bank_account_num() . ' '.'Rp:' . number_format($value->get_amount()),
 							$value->get_invoice_description(),
 							$value->get_keterangan_retur(),
 							$value->get_tgl_proses_sp2d_pengganti(),
 							$value->get_tgsp2d_pengganti() . ' ' . $value->get_nosp2d_pengganti(),
-							$value->get_bank_name_pengganti() . ' ' . $value->get_vendor_name_pengganti() . ' ' . $value->get_vendor_account_num_pengganti() . ' ' . number_format($value->get_nilai_sp2d_pengganti()),
+							$value->get_bank_name_pengganti() . ' ' .'Penerima:'. $value->get_vendor_name_pengganti() . ' ' .'No.Rek:'. $value->get_vendor_account_num_pengganti() . ' ' .'Rp:'. number_format($value->get_nilai_sp2d_pengganti()),
 							$value->get_bank_account_name() . ' ' . $value->get_status_retur()
 				));
 				$tot1 = $tot1 + $value->get_amount();	

@@ -78,7 +78,7 @@ class DataRetur {
             $d_data->set_receipt_number($val['RECEIPT_NUMBER']);
             $d_data->set_sp2d_number($val['SP2D_NUMBER']);
             $d_data->set_statement_date(date("d-m-Y", strtotime($val['STATEMENT_DATE'])));
-            $d_data->set_amount(number_format($val['AMOUNT']));
+            $d_data->set_amount(($val['AMOUNT']));
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
             $d_data->set_vendor_name($val['VENDOR_NAME']);
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
@@ -97,7 +97,7 @@ class DataRetur {
             } else {
                 $d_data->set_tgl_proses_sp2d_pengganti('');
             }
-            $d_data->set_nilai_sp2d_pengganti(number_format($val['NILAI_SP2D_PENGGANTI']));
+            $d_data->set_nilai_sp2d_pengganti(($val['NILAI_SP2D_PENGGANTI']));
             $d_data->set_bank_name_pengganti($val['BANK_NAME_PENGGANTI']);
             $d_data->set_vendor_name_pengganti($val['VENDOR_NAME_PENGGANTI']);
             $d_data->set_vendor_account_num_pengganti($val['VENDOR_ACCOUNT_NUM_PENGGANTI']);
