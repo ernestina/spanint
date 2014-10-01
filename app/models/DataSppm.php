@@ -76,7 +76,7 @@ class DataSppm {
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+			$d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -155,7 +155,7 @@ class DataSppm {
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -206,7 +206,7 @@ class DataSppm {
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -257,7 +257,7 @@ class DataSppm {
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -308,7 +308,7 @@ class DataSppm {
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -359,7 +359,7 @@ class DataSppm {
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+			 $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -410,7 +410,7 @@ class DataSppm {
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -462,7 +462,7 @@ class DataSppm {
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -513,7 +513,7 @@ class DataSppm {
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_check_number_line_num($val['CHECK_NUMBER_LINE_NUM']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_vendor_ext_bank_account_num($val['VENDOR_EXT_BANK_ACCOUNT_NUM']);
@@ -896,7 +896,7 @@ class DataSppm {
             $d_data->set_check_date(date("d-m-Y", strtotime($val['CHECK_DATE'])));
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
@@ -928,7 +928,7 @@ class DataSppm {
             $d_data->set_check_date(date("d-m-Y", strtotime($val['CHECK_DATE'])));
             $d_data->set_creation_date($val['CREATION_DATE']);
             $d_data->set_check_number($val['CHECK_NUMBER']);
-            $d_data->set_check_amount(number_format($val['CHECK_AMOUNT']));
+            $d_data->set_check_amount(($val['CHECK_AMOUNT']));
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);

@@ -364,7 +364,7 @@
                         echo "<td>" . $value->get_check_number() . "</td>";
                         //echo "<td>" . $value->get_return_code() . "</td>";
                         //echo "<td>" . $value->get_check_number_line_num() . "</td>";
-                        echo "<td class='ratakanan'>" . $value->get_invoice_num() . '<br>Rp ' . $value->get_check_amount() . "</td>";
+                        echo "<td class='ratakanan'>" . $value->get_invoice_num() . '<br>Rp ' . number_format($value->get_check_amount()) . "</td>";
                         //echo "<td class='ratakanan'>" . $value->get_check_amount() . "</td>";
                         echo "<td>" . $value->get_bank_account_name() . "</td>";
                         //echo "<td>" . $value->get_bank_name() . "</td>";
