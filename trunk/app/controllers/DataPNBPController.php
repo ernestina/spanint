@@ -249,8 +249,73 @@ class DataPNBPController extends BaseController {
 
         $this->view->render('kppn/detail_setoran_up_pnbp');
     }
-    
+    public function ReportSPAN() {
+        /* $d_spm1 = new DataPNBP($this->registry);
+        $filter = array();
+        $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+            $this->view->d_kppn = Session::get('id_user');
+			
+        }
+        if ($akun != '') {
+			$filter[$no++] = "ACCOUNT_CODE = '" . $akun."'";
+        }
+		if ($satker != '') {
+			$filter[$no++] = "SATKER_CODE = '" . $satker."'";
+			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
+			
+        }
+		
+        $this->view->data = $d_spm1->get_pnbp_set_up_line($filter);
+		
+        
 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
+		$d_log->tambah_log("Sukses"); */
+
+        $this->view->render('span/reportspan');
+    }
+	
+	public function ViewReportSPAN() {
+        /* $d_spm1 = new DataPNBP($this->registry);
+        $filter = array();
+        $no = 0;
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+            $this->view->d_kppn = Session::get('id_user');
+			
+        }
+        if ($akun != '') {
+			$filter[$no++] = "ACCOUNT_CODE = '" . $akun."'";
+        }
+		if ($satker != '') {
+			$filter[$no++] = "SATKER_CODE = '" . $satker."'";
+			$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($satker);
+			
+        }
+		
+        $this->view->data = $d_spm1->get_pnbp_set_up_line($filter);
+		
+        
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
+		$d_log->tambah_log("Sukses"); */
+		header('location: http://10.100.244.253/span/report/SPGLR00258/'.Session::get('id_user').'/SPGLR00258-'.Session::get('id_user').'-18-SEP-2014.pdf');
+        //$this->view->render('span/reportspan');
+    }
 
     //author by jhon
 
