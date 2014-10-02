@@ -83,7 +83,7 @@ class DataDipa {
             $d_data->set_intraco_code($val['INTRACO_CODE']);
             $d_data->set_cadangan_code($val['CADANGAN_CODE']);
             $d_data->set_nm_satker($val['NMSATKER']);
-            $d_data->set_line_amount(number_format($val['LINE_AMOUNT']));
+            $d_data->set_line_amount(($val['LINE_AMOUNT']));
             $data[] = $d_data;
         }
         return $data;

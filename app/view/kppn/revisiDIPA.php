@@ -142,7 +142,7 @@
                             echo "<td>" . $value->get_revision_no() . "</td>";
                             echo "<td>" . $value->get_tanggal_posting_revisi() . ' ' . $value->get_jam_posting_revisi() . "</td>";
                             //echo "<td>" . $value->get_jam_posting_revisi() . "</td>";
-                            echo "<td class='ratakanan'>" . $value->get_line_amount() . "</td>";
+                            echo "<td class='ratakanan'>" . number_format($value->get_line_amount()) . "</td>";
                             echo "<td>" . $value->get_satker_code() . "</td>";
                             //echo "<td>" . $value->get_kppn_code() . "</td>";
                             echo "<td>" . $value->get_account_code() . "</td>";
