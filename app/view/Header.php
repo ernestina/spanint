@@ -167,6 +167,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
                                     <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
+                                    <li><a href="<?php echo URL; ?>panduan/petunjukManual">Petunjuk Manual</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -295,6 +296,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
                                     <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
+                                    <li><a href="<?php echo URL; ?>panduan/petunjukManual">Petunjuk Manual</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -441,6 +443,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
                                     <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
+                                    <li><a href="<?php echo URL; ?>panduan/petunjukManual">Petunjuk Manual</a></li>
                                 </ul>
                             </div>
                         </li>
