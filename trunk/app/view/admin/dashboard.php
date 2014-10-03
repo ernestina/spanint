@@ -767,7 +767,7 @@
                                     <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?> <?php if ($value->get_currency_sp2d() != 'IDR' && ($value->get_rate_sp2d() == 0 || $value->get_rate_sp2d() == null)) { echo $value->get_currency_sp2d().'*'; $disp_currency_warning = true; } ?></td>
                                     
                                     <?php 
-                                        if ($value->get_nominal_sp2d() > 0) {                  
+                                        if ($value->get_nominal_sp2d() >= 0) {                  
                                             if ($value->get_currency_sp2d() == 'IDR' || ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) {
                                                 $total_nominal_sp2d += $value->get_nominal_sp2d(); 
                                             }
