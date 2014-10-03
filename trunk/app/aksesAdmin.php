@@ -224,6 +224,7 @@ $akses['PanduanAdmin'] = array(
     '__construct',
     'lihatPanduan1',
     'PanduanUAT',
+    'petunjukManual',
     '__destruct'
 );
 
