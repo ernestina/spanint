@@ -71,13 +71,25 @@ class PelaporanController extends BaseController {
             $_POST['kdkppn'] = Session::get('id_user');
         }
 
-        if (isset($_POST['submit_file'])) {
-            if ($_POST['tgl_awal'] != '' && $_POST['tgl_akhir'] != '') {
+        if (isset($_POST['submit_file']) || (Session::get('role') == KPPN)) {
+            if (($_POST['tgl_awal'] != '' && $_POST['tgl_akhir'] != '') || (Session::get('role') == KPPN)) {
                 if ($_POST['kdkppn'] != '' && $_POST['kdkppn'] != 'ALL') {
                     $d_kppn = new DataUser($this->registry);
                     $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                     $this->view->d_kd_kppn = $_POST['kdkppn'];
                 }
+                
+                if (Session::get('role') == KPPN) {
+                    
+                    if (!isset($_POST['tgl_awal']) && !isset($_POST['tgl_akhir'])) {
+                        $_POST['tgl_awal'] = '01-01-2014';
+                        $_POST['tgl_akhir'] = date('d-m-Y', time());
+                    }
+                    
+                }
+                
+                //var_dump($_POST['tgl_awal']);
+                //var_dump($_POST['tgl_akhir']);
                 
                 $start_date = date('d-M-Y', strtotime($_POST['tgl_awal']));
                 $end_date = date('d-M-Y', strtotime($_POST['tgl_akhir']));
@@ -98,7 +110,7 @@ class PelaporanController extends BaseController {
                         
                         do {
                             
-                            $curl = curl_init('http://10.100.93.56/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
+                            $curl = curl_init('http://spanint.perbendaharaan.go.id/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
         
                             curl_setopt($curl, CURLOPT_NOBODY, true);
 
@@ -117,7 +129,7 @@ class PelaporanController extends BaseController {
                             curl_close($curl);
                         
                             if ($ret) {
-                                $data[] = (object) array('kode_unit' => $unit, 'tanggal' => strtoupper($pointer_date), 'nama_file' => $folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf', 'url' => 'http://10.100.93.56/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
+                                $data[] = (object) array('kode_unit' => $unit, 'tanggal' => str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))), 'nama_file' => $folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf', 'url' => 'http://spanint.perbendaharaan.go.id/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
                             }
                             
                             $i++;
@@ -136,7 +148,7 @@ class PelaporanController extends BaseController {
 
                     do {
 
-                        $curl = curl_init('http://10.100.93.56/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
+                        $curl = curl_init('http://spanint.perbendaharaan.go.id/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
 
                         curl_setopt($curl, CURLOPT_NOBODY, true);
 
@@ -155,7 +167,7 @@ class PelaporanController extends BaseController {
                         curl_close($curl);
 
                         if ($ret) {
-                            $data[] = (object) array('kode_unit' => $unit, 'tanggal' => strtoupper($pointer_date), 'nama_file' => $folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf', 'url' => 'http://10.100.93.56/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.strtoupper($pointer_date).'.pdf');
+                            $data[] = (object) array('kode_unit' => $unit, 'tanggal' => str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))), 'nama_file' => $folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf', 'url' => 'http://spanint.perbendaharaan.go.id/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
                         }
 
                         $i++;
