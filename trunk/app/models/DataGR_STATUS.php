@@ -141,7 +141,7 @@ class DataGR_STATUS {
             $d_data->set_bank_code($val['BANK_CODE']);
             $d_data->set_bank_account_num($val['CONT_BANK_ACCOUNT_NUM']);
             $d_data->set_resp_name($val['RECEIPT_DIST_SEGMENT1'] . "/" . $val['RECEIPT_DIST_SEGMENT2'] . "/" . $val['RECEIPT_DIST_SEGMENT3']);
-            $d_data->set_keterangan(number_format($val['RPH']));
+            $d_data->set_keterangan($val['RPH']);
 
             $data[] = $d_data;
         }

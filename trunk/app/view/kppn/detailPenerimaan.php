@@ -87,7 +87,7 @@
                 echo "<td>" . $value->get_bank_code() . "</td>";
                 echo "<td>" . $value->get_bank_account_num() . "</td>";
 				echo "<td>" . $value->get_mata_uang() . "</td>";
-                echo "<td class='ratakanan'>" . $value->get_keterangan() . "</td>";
+                echo "<td class='ratakanan'>" . number_format($value->get_keterangan()) . "</td>";
                 echo "<td>" . $value->get_resp_name() . "</td>";
                 echo "</tr>	";
             }

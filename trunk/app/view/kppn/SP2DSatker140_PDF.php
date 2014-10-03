@@ -204,7 +204,7 @@ class FPDF_AutoWrapTable extends FPDF {
                         $value->get_check_date(),
 						number_format($value->get_amount()),
                         $value->get_currency_code(),
-                        $value->get_exchange_rate(),
+                        number_format($value->get_exchange_rate()),
                         $value->get_exchange_date(),
                         number_format($value->get_base_amount()),
                         $value->get_attribute6(),

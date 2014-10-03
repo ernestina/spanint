@@ -183,7 +183,7 @@ class DataCheck {
             $d_data->set_jumlah_sp2d($val['JUMLAH_SP2D']);
             $d_data->set_jendok($val['JENDOK']);
             $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
-            $d_data->set_total_sp2d(NUMBER_FORMAT($val['TOTAL_SP2D']));
+            $d_data->set_total_sp2d($val['TOTAL_SP2D']);
             $d_data->set_attribute6($val['JENIS_SPM']);
             $data[] = $d_data;
         }
@@ -216,7 +216,7 @@ class DataCheck {
             $d_data->set_jumlah_sp2d($val['JUMLAH_SP2D']);
             $d_data->set_jendok($val['JENDOK']);
             $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
-            $d_data->set_total_sp2d(NUMBER_FORMAT($val['TOTAL_SP2D']));
+            $d_data->set_total_sp2d($val['TOTAL_SP2D']);
             $d_data->set_attribute6($val['JENIS_SPM']);
             $data[] = $d_data;
         }
