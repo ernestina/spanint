@@ -51,6 +51,18 @@ class PelaporanController extends BaseController {
             //Back to Home
             
         }
+        
+        if (strpos(URL, 'dev2') == false) {
+        
+            $fileURL = substr(URL, 0, -8).'span/report/';
+            
+        } else {
+            
+            $fileURL = substr(URL, 0, -5).'span/report/';
+            
+        }
+        
+        //var_dump($fileURL);
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
@@ -110,7 +122,7 @@ class PelaporanController extends BaseController {
                         
                         do {
                             
-                            $curl = curl_init('http://spanint.perbendaharaan.go.id/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
+                            $curl = curl_init($fileURL.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
         
                             curl_setopt($curl, CURLOPT_NOBODY, true);
 
@@ -129,7 +141,7 @@ class PelaporanController extends BaseController {
                             curl_close($curl);
                         
                             if ($ret) {
-                                $data[] = (object) array('kode_unit' => $unit, 'tanggal' => str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))), 'nama_file' => $folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf', 'url' => 'http://spanint.perbendaharaan.go.id/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
+                                $data[] = (object) array('kode_unit' => $unit, 'tanggal' => str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))), 'nama_file' => $folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf', 'url' => $fileURL.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
                             }
                             
                             $i++;
@@ -148,7 +160,7 @@ class PelaporanController extends BaseController {
 
                     do {
 
-                        $curl = curl_init('http://spanint.perbendaharaan.go.id/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
+                        $curl = curl_init($fileURL.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
 
                         curl_setopt($curl, CURLOPT_NOBODY, true);
 
@@ -167,7 +179,7 @@ class PelaporanController extends BaseController {
                         curl_close($curl);
 
                         if ($ret) {
-                            $data[] = (object) array('kode_unit' => $unit, 'tanggal' => str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))), 'nama_file' => $folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf', 'url' => 'http://spanint.perbendaharaan.go.id/span/report/'.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
+                            $data[] = (object) array('kode_unit' => $unit, 'tanggal' => str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))), 'nama_file' => $folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf', 'url' => $fileURL.$folder.'/'.$unit.'/'.$folder.'-'.$unit.'-'.str_replace("DEC","DES", str_replace("OCT","OKT", str_replace("AUG", "AGU", str_replace("MAY", "MEI", strtoupper($pointer_date))))).'.pdf');
                         }
 
                         $i++;
