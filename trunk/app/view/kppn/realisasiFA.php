@@ -14,7 +14,6 @@
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 
-	$kdakun1 = $this->account_code1;	
 	if (Session::get('role') == ADMIN || Session::get('role') == KANWIL  || Session::get('role') == KPPN) {
 	
 	 
@@ -54,8 +53,18 @@
 					}
 				}
 			}
+			if (isset($this->dana_code)) {
+				$kddana = $this->dana_code;
+			}else{
+				if (isset($this->data)) {
+					foreach ($this->data as $value) {
+						$kddana =$value->get_dana();
+					}
+				}
+			}
+
 			?>
-				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 			<?php
 	
 	}
@@ -89,9 +98,19 @@
 				}
 			}
 
-					$kdsatker =Session::get('kd_satker');
+			$kdsatker =Session::get('kd_satker');
+			if (isset($this->dana_code)) {
+				$kddana = $this->dana_code;
+			}else{
+				if (isset($this->data)) {
+					foreach ($this->data as $value) {
+						$kddana =$value->get_dana();
+					}
+				}
+			}
+
 			?>
-				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 			<?php
 	
 	
@@ -136,8 +155,18 @@
 				}
 			}
 
+			if (isset($this->dana_code)) {
+				$kddana = $this->dana_code;
+			}else{
+				if (isset($this->data)) {
+					foreach ($this->data as $value) {
+						$kddana =$value->get_dana();
+					}
+				}
+			}
+
 			?>
-				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 			<?php
 	
 	}

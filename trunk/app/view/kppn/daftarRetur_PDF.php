@@ -150,7 +150,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $px2 = $px1;
         $py2 = $py1 + 20;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_1a, $h / 2, 'No/Tgl.SP2D-No.Transaksi', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_1a, $h / 2, 'Tgl/No.SP2D-No.Transaksi', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_1a);
         $this->Cell($ukuran_kolom_2a, $h / 2, 'Bank/Nama/No.Rek. Penerima-Jumlah', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_2a);
@@ -166,7 +166,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $py2 = $py1 + 20;
         $this->SetXY($px2, $py2);
 
-        $this->Cell($ukuran_kolom_1b, $h / 2, 'Tgl/No.SP2D Pengganti', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_1b, $h / 2, 'Tgl Proses SP2D Pengganti', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_1b);
 
         $this->Cell($ukuran_kolom_2b, $h / 2, 'Tgl/No. SP2D', 1, 0, 'C', true);
@@ -211,14 +211,14 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->Row(
 						array($no++,
 							$value->get_kdsatker() . ' ' . $value->get_nmsatker(),
-							$value->get_statement_date() . ' ' . $value->get_sp2d_number() . ' ' . $value->get_receipt_number(),
-							$value->get_bank_name() . ' '.'Penerima:'. $value->get_vendor_name() . ' ' .'No.Rek:'. $value->get_vendor_ext_bank_account_num() . ' '.'Rp:' . number_format($value->get_amount()),
+							$value->get_statement_date() . ' /' . $value->get_sp2d_number() . ' -' . $value->get_receipt_number(),
+							$value->get_bank_name() . ' '.'Penerima:'. $value->get_vendor_name() . ' ' .'/No.Rek:'. $value->get_vendor_ext_bank_account_num() . ' '.'-Rp:' . number_format($value->get_amount()),
 							$value->get_invoice_description(),
 							$value->get_keterangan_retur(),
 							$value->get_tgl_proses_sp2d_pengganti(),
-							$value->get_tgsp2d_pengganti() . ' ' . $value->get_nosp2d_pengganti(),
-							$value->get_bank_name_pengganti() . ' ' .'Penerima:'. $value->get_vendor_name_pengganti() . ' ' .'No.Rek:'. $value->get_vendor_account_num_pengganti() . ' ' .'Rp:'. number_format($value->get_nilai_sp2d_pengganti()),
-							$value->get_bank_account_name() . ' ' . $value->get_status_retur()
+							$value->get_tgsp2d_pengganti() . ' /' . $value->get_nosp2d_pengganti(),
+							$value->get_bank_name_pengganti() . ' ' .'/Penerima:'. $value->get_vendor_name_pengganti() . ' ' .'/No.Rek:'. $value->get_vendor_account_num_pengganti() . ' ' .'/Rp:'. number_format($value->get_nilai_sp2d_pengganti()),
+							$value->get_bank_account_name() . '- ' . $value->get_status_retur()
 				));
 				$tot1 = $tot1 + $value->get_amount();	
 				$tot2 = $tot2 + $value->get_nilai_sp2d_pengganti();	

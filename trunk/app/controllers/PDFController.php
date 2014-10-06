@@ -282,7 +282,7 @@ class PDFController extends BaseController {
 		}
 		
 
-    public function RealisasiFA_PDF($kdsatker = null,$kdprogram = null, $kdoutput = null,$kdakun = null,$kdakun1 = null ) {
+    public function RealisasiFA_PDF($kdsatker = null,$kdprogram = null, $kdoutput = null,$kdakun = null,$dana = null ) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
@@ -301,9 +301,6 @@ class PDFController extends BaseController {
 		if (Session::get('role') == KANWIL) {
             $filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
         }
-        if ($kdsatker != 'null') {
-            $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
-        }
 
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
             //$filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '".$kdtgl_awal."' AND '".$kdtgl_akhir."'";
@@ -314,19 +311,29 @@ class PDFController extends BaseController {
             $this->view->kdtgl_akhir = $tglakhir;
         }
 		
-		if ($kdakun1 != 'null') {
-            $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun1 . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun1 . "') 
-			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $kdakun1 . "')";
-			}else{
-			$filter[$no++] = "A.AKUN = '" . $kdakun . "'";
-			}
-
+        if ($kdsatker != 'null') {
+            $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
+            $this->view->satker_code = $kdsatker;
+		}
+			
         if ($kdprogram != 'null') {
             $filter[$no++] = " A.PROGRAM = '" . $kdprogram . "'";
+			$this->view->program_code = $program;
         }
         if ($kdoutput != 'null') {
             $filter[$no++] = " A.OUTPUT = '" . $kdoutput . "'";
+			$this->view->output_code = $output;
         }
+		if ($dana != '') {
+            $filter[$no++] = " A.DANA =  '" . $dana . "'";
+            //$this->view->dana_code = $dana;
+        }
+		if ($kdakun != 'null') {
+            $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun . "') 
+			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $kdakun . "')";
+			$this->view->account_code = $akun;
+		}
+
         		//-------------------------
 		 if (Session::get('role') == SATKER) {
             $d_nm_kppn1 = new DataUser($this->registry);
@@ -1281,6 +1288,8 @@ class PDFController extends BaseController {
         $no = 0;
         if (!is_null($kdakun)) {
             $filter[$no++] = "akun =  '" . $kdakun . "'";
+			$this->view->kd_akun = $kdakun;
+			
         }
         if (!is_null($kdbulan)) {
 			    if ($kdbulan == '01') {
