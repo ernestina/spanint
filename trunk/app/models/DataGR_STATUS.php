@@ -163,7 +163,7 @@ class DataGR_STATUS {
 						gcc.segment11,
 						gcc.segment12,
 						smc.currency_code,
-						smc.amount
+						smc.amount_dist
 						FROM GL_CODE_COMBINATIONS gcc,
 						SPGR_MPN_COA smc
 						WHERE smc.CODE_COMBINATION_ID=gcc.CODE_COMBINATION_ID ";
@@ -182,7 +182,7 @@ class DataGR_STATUS {
 			$d_data->set_segment2($val['SEGMENT2']);
 			$d_data->set_segment3($val['SEGMENT3']);
 			$d_data->set_mata_uang($val['CURRENCY_CODE']);
-			$d_data->set_amount($val['AMOUNT']);
+			$d_data->set_amount($val['AMOUNT_DIST']);
 
             $data[] = $d_data;
         }
