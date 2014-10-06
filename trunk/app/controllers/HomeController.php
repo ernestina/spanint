@@ -375,7 +375,12 @@ class homeController extends BaseController {
                 $this->view->pieJenisSP2D = $this->pieJenisSP2D(1);
                 $this->view->pieNominalSP2D = $this->pieNominalSP2D(1);
                 $this->view->pieReturSP2D = $this->pieReturSP2D();
-                $this->view->pieStatusLHP = $this->pieStatusLHP(1);
+                
+                if (Session::get('role')==SATKER) {
+                    $this->view->pieStatusDIPA = $this->pieStatusDIPA();
+                } else {
+                    $this->view->pieStatusLHP = $this->pieStatusLHP(1);
+                }
 
                 if (Session::get('role')==KANWIL) {
                     
@@ -505,7 +510,11 @@ class homeController extends BaseController {
                 $this->view->pieJenisSP2D = $this->pieJenisSP2D(7);
                 $this->view->pieNominalSP2D = $this->pieNominalSP2D(7);
                 $this->view->pieReturSP2D = $this->pieReturSP2D();
-                $this->view->pieStatusLHP = $this->pieStatusLHP(7);
+                if (Session::get('role')==SATKER) {
+                    $this->view->pieStatusDIPA = $this->pieStatusDIPA();
+                } else {
+                    $this->view->pieStatusLHP = $this->pieStatusLHP(7);
+                }
                 
                 $this->view->lineHistSP2D = $this->lineHistSP2D(7);
                 
@@ -591,7 +600,11 @@ class homeController extends BaseController {
                 $this->view->pieJenisSP2D = $this->pieJenisSP2D(30);
                 $this->view->pieNominalSP2D = $this->pieNominalSP2D(30);
                 $this->view->pieReturSP2D = $this->pieReturSP2D();
-                $this->view->pieStatusLHP = $this->pieStatusLHP(30);
+                if (Session::get('role')==SATKER) {
+                    $this->view->pieStatusDIPA = $this->pieStatusDIPA();
+                } else {
+                    $this->view->pieStatusLHP = $this->pieStatusLHP(30);
+                }
                 
                 $this->view->lineHistSP2D = $this->lineHistSP2D(30);
                 
@@ -662,6 +675,8 @@ class homeController extends BaseController {
             
             $this->view->mode = "Triwulanan";
             
+            $this->view->mode = "Bulanan";
+            
             if (!isset($kodeunit)) {
 
                 if (Session::get('role')==KANWIL) {
@@ -671,15 +686,27 @@ class homeController extends BaseController {
                     $d_kanwil_list = new DataDashboard($this->registry);
                     $this->view->unit_list = $d_kanwil_list->get_kanwil();
                 }
+                
+                $this->view->pieJenisSP2D = $this->pieJenisSP2D(90);
+                $this->view->pieNominalSP2D = $this->pieNominalSP2D(90);
+                $this->view->pieReturSP2D = $this->pieReturSP2D();
+                if (Session::get('role')==SATKER) {
+                    $this->view->pieStatusDIPA = $this->pieStatusDIPA();
+                } else {
+                    $this->view->pieStatusLHP = $this->pieStatusLHP(90);
+                }
+                
+                $this->view->lineHistSP2D = $this->lineHistSP2D(90);
+                
+                $this->view->periode = 90;
+                
+                $this->view->last_update = $this->lastUpdate();
 
             } else {
 
-                $this->view->kodeunit = $kodeunit;
-                $this->view->namaunit = $d_dashboard->get_nama_unit($kodeunit);
-
                 if (Session::get('role')==SATKER) {
 
-                    header('location:' . URL . 'home/triwulanan');
+                    header('location:' . URL . 'home/bulanan');
 
                 } else if (Session::get('role')==KPPN) {
 
@@ -687,9 +714,27 @@ class homeController extends BaseController {
 
                 } else if (Session::get('role')==KANWIL) {
 
-                    header('location:' . URL . 'home/bulanan');
+                    if ($kodeunit != Session::get('id_user')) {
+                        $d_kppn_list = new DataUser($this->registry);
+                        $unit_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+
+                        $inList = false;
+                        foreach ($unit_list as $list) {
+                            if ($list->get_kd_d_kppn() == $kodeunit) {
+                                $inList = true;
+                            }
+                        }
+
+                        if ($inList == false) {
+                            header('location:' . URL . 'home/bulanan');
+                        }
+
+                    }
 
                 }
+
+                $this->view->kodeunit = $kodeunit;
+                $this->view->namaunit = $d_dashboard->get_nama_unit($kodeunit);
 
                 if ($kodeunit[0] != 'K') {
 
@@ -702,6 +747,17 @@ class homeController extends BaseController {
                     $this->view->unit_list = $d_kppn_list->get_kppn_kanwil(substr($kodeunit,1,2));
 
                 }
+                
+                $this->view->pieJenisSP2D = $this->pieJenisSP2D(90, $kodeunit);
+                $this->view->pieNominalSP2D = $this->pieNominalSP2D(90, $kodeunit);
+                $this->view->pieReturSP2D = $this->pieReturSP2D($kodeunit);
+                $this->view->pieStatusLHP = $this->pieStatusLHP(90, $kodeunit);
+                
+                $this->view->lineHistSP2D = $this->lineHistSP2D(90, $kodeunit);
+                
+                $this->view->periode = 90;
+                
+                $this->view->last_update = $this->lastUpdate();
 
             }
             
