@@ -42,12 +42,13 @@ $akun = '';
 foreach ($this->data as $value) {
     $akun = $value->get_akun();
 }
-echo $akun;
+echo "AKUN " .$akun ." " ;
 if (isset($this->d_nama_kppn)) {
     foreach ($this->d_nama_kppn as $kppn) {
         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
     }
 }
+echo " Bulan " .$this->bulan;
 ?>
             </div>
 
