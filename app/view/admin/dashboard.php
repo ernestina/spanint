@@ -125,6 +125,23 @@
 
     ]
     
+    <?php if (Session::get('role')==SATKER) { ?>
+    
+    var pieStatusDIPAData = [
+
+        {
+            "value" : <?php echo $this->pieStatusDIPA->get_dipa_terpakai(); ?>,
+            "color" : "#409ACA"
+        },
+        {
+            "value" : <?php echo $this->pieStatusDIPA->get_dipa_sisa(); ?>,
+            "color" : "#8E5696"
+        }
+
+    ]
+    
+    <?php } else { ?>
+    
     //Status LHP
     
     <?php
@@ -195,6 +212,8 @@
         }
 
     ]
+    
+    <?php } ?>
     
     <?php if (isset($this->lineHistSP2D)) { ?>
     
@@ -298,7 +317,11 @@
             <div class="col-lg-1 col-md-3 col-sm-12 align-right top-padded">
                 
                 <?php if ($this->mode == 'Mingguan') { ?>
-                    <a href="<?php echo URL; ?>home/dashboard/harian/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> Hari Ini</a>
+                    <?php if (Session::get('role') == SATKER) { ?>
+                        <a href="<?php echo URL; ?>home/dashboard/triwulanan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 90 Hari</a>
+                    <?php } else { ?>
+                        <a href="<?php echo URL; ?>home/dashboard/harian/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> Hari Ini</a>
+                    <?php } >
                 <?php } else { ?>
                     <a href="<?php echo URL; ?>home/dashboard/mingguan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 7 Hari</a>
                 <?php } ?>
@@ -307,7 +330,11 @@
             <div class="col-lg-1 col-md-3 col-sm-12 align-right top-padded">
                 
                 <?php if ($this->mode == 'Bulanan') { ?>
-                    <a href="<?php echo URL; ?>home/dashboard/harian/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> Hari Ini</a>
+                    <?php if (Session::get('role') == SATKER) { ?>
+                        <a href="<?php echo URL; ?>home/dashboard/triwulanan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 90 Hari</a>
+                    <?php } else { ?>
+                        <a href="<?php echo URL; ?>home/dashboard/harian/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> Hari Ini</a>
+                    <?php } >
                 <?php } else { ?>
                     <a href="<?php echo URL; ?>home/dashboard/bulanan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 30 Hari</a>
                 <?php } ?>
@@ -323,6 +350,8 @@
                     echo "7 HARI TERAKHIR";
                 } else if ($this->mode == 'Bulanan') {
                     echo "30 HARI TERAKHIR";
+                } else if ($this->mode == 'Triwulanan') {
+                    echo "90 HARI TERAKHIR";
                 } else {
                     echo "HARI INI";
                 }
@@ -438,51 +467,74 @@
                 </div>
                 
             </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-12 pie-segment-container">
-                <div class="pie-segment">
-                    <div class="pie-canvas"><canvas id="pieStatusLHP"></canvas></div>
-                    <div class="pie-legend">
-                        <h4>LHP (<?php echo $tanggal_lhp; ?>)</h4>
-                        <div id="legend-jumlah-lhp">
-                            <div style="width: 50%; float: left; border-left: 4px solid #409ACA">
-                                <p><?php echo number_format($total_lhp_completed); ?></p>
-                                <p class="sub">Completed</p>
+            
+            <?php if (Session::get('role')==SATKER) { ?>
+            
+                <div class="col-lg-3 col-md-6 col-sm-12 pie-segment-container">
+                    <div class="pie-segment">
+                        <div class="pie-canvas"><canvas id="pieStatusDIPA"></canvas></div>
+                        <div class="pie-legend">
+                            <h4>DIPA</h4>
+                            <div style="width: 100%; float: left; border-left: 4px solid #409ACA">
+                                <p><?php echo (number_format(round($this->pieStatusDIPA->get_dipa_terpakai() / 1000000000, 2), 2)." M"); ?></p>
+                                <p class="sub">Terpakai</p>
                             </div>
-                            <div style="width: 50%; float: left; border-left: 4px solid #8E5696">
-                                <p><?php echo number_format($total_lhp_validated); ?></p>
-                                <p class="sub">Validated</p>
-                            </div>
-                            <div style="width: 50%; float: left; border-left: 4px solid #F6CE40">
-                                <p><?php echo number_format($total_lhp_etc); ?></p>
-                                <p class="sub">Lainnya</p>
-                            </div>
-                            <div style="width: 50%; float: left; border-left: 4px solid #E35C5C">
-                                <p><?php echo number_format($total_lhp_error); ?></p>
-                                <p class="sub">Error</p>
-                            </div>
-                        </div>
-                        <div id="legend-nominal-lhp" style="display:none">
-                            <div style="width: 50%; float: left; border-left: 4px solid #409ACA">
-                                <p><?php echo (number_format(round($total_vol_lhp_completed / 1000000000, 2), 2)." M"); ?></p>
-                                <p class="sub">Completed</p>
-                            </div>
-                            <div style="width: 50%; float: left; border-left: 4px solid #8E5696">
-                                <p><?php echo (number_format(round($total_vol_lhp_validated / 1000000000, 2), 2)." M"); ?></p>
-                                <p class="sub">Validated</p>
-                            </div>
-                            <div style="width: 50%; float: left; border-left: 4px solid #F6CE40">
-                                <p><?php echo (number_format(round($total_vol_lhp_etc / 1000000000, 2), 2)." M"); ?></p>
-                                <p class="sub">Lainnya</p>
-                            </div>
-                            <div style="width: 50%; float: left; border-left: 4px solid #E35C5C">
-                                <p><?php echo (number_format(round($total_vol_lhp_error / 1000000000, 2), 2)." M"); ?></p>
-                                <p class="sub">Error</p>
+                            <div style="width: 100%; float: left; border-left: 4px solid #8E5696">
+                                <p><?php echo (number_format(round($this->pieStatusDIPA->get_dipa_sisa() / 1000000000, 2), 2)." M"); ?></p>
+                                <p class="sub">Sisa</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            
+            <?php } else { ?>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 pie-segment-container">
+                    <div class="pie-segment">
+                        <div class="pie-canvas"><canvas id="pieStatusLHP"></canvas></div>
+                        <div class="pie-legend">
+                            <h4>LHP (<?php echo $tanggal_lhp; ?>)</h4>
+                            <div id="legend-jumlah-lhp">
+                                <div style="width: 50%; float: left; border-left: 4px solid #409ACA">
+                                    <p><?php echo number_format($total_lhp_completed); ?></p>
+                                    <p class="sub">Completed</p>
+                                </div>
+                                <div style="width: 50%; float: left; border-left: 4px solid #8E5696">
+                                    <p><?php echo number_format($total_lhp_validated); ?></p>
+                                    <p class="sub">Validated</p>
+                                </div>
+                                <div style="width: 50%; float: left; border-left: 4px solid #F6CE40">
+                                    <p><?php echo number_format($total_lhp_etc); ?></p>
+                                    <p class="sub">Lainnya</p>
+                                </div>
+                                <div style="width: 50%; float: left; border-left: 4px solid #E35C5C">
+                                    <p><?php echo number_format($total_lhp_error); ?></p>
+                                    <p class="sub">Error</p>
+                                </div>
+                            </div>
+                            <div id="legend-nominal-lhp" style="display:none">
+                                <div style="width: 50%; float: left; border-left: 4px solid #409ACA">
+                                    <p><?php echo (number_format(round($total_vol_lhp_completed / 1000000000, 2), 2)." M"); ?></p>
+                                    <p class="sub">Completed</p>
+                                </div>
+                                <div style="width: 50%; float: left; border-left: 4px solid #8E5696">
+                                    <p><?php echo (number_format(round($total_vol_lhp_validated / 1000000000, 2), 2)." M"); ?></p>
+                                    <p class="sub">Validated</p>
+                                </div>
+                                <div style="width: 50%; float: left; border-left: 4px solid #F6CE40">
+                                    <p><?php echo (number_format(round($total_vol_lhp_etc / 1000000000, 2), 2)." M"); ?></p>
+                                    <p class="sub">Lainnya</p>
+                                </div>
+                                <div style="width: 50%; float: left; border-left: 4px solid #E35C5C">
+                                    <p><?php echo (number_format(round($total_vol_lhp_error / 1000000000, 2), 2)." M"); ?></p>
+                                    <p class="sub">Error</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            <?php } ?>
 
         </div>
 
@@ -725,83 +777,169 @@
             
             </div>
             
-            <div class="col-lg-6 col-md-12 top-padded table-container" style="border: 1px solid #e5e5e5">
-                
-                <table class="dashtable">
-                    
-                    <thead>
-                        <tr>
-                            <th colspan=4>SP2D Hari Ini (<?php echo (count($this->SP2DFinished)); ?>)</th>
-                        </tr>
-                        <tr>
-                            <th>No.</th>
-                            <th>No. SP2D</th>
-                            <th>Jenis SP2D</th>
-                            <th class="align-right">Nominal</th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        
-                        <?php if (empty($this->SP2DFinished)) { ?>
-
-                            <tr><td colspan=14 class="align-center">Tidak ada data.</td></tr>
-
-                        <?php } else { ?>
-                        
-                            <?php $disp_currency_warning = false; ?>
-                        
-                            <?php $disp_minus_warning = false; ?>
-                        
-                            <?php $no = 1; ?>
-                        
-                            <?php $total_nominal_sp2d = 0; ?>
-
-                            <?php foreach ($this->SP2DFinished as $value) { ?>
-                        
-                                <tr>
-                                    
-                                    <td class="align-center"><?php echo $no++; ?></td>                        
-                                    <td class="align-center"><?php echo $value->get_check_number(); ?></td>
-                                    <td class="align-center"><?php echo $value->get_jenis_sp2d(); ?></td>
-                                    <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?> <?php if ($value->get_currency_sp2d() != 'IDR' && ($value->get_rate_sp2d() == 0 || $value->get_rate_sp2d() == null)) { echo $value->get_currency_sp2d().'*'; $disp_currency_warning = true; } ?></td>
-                                    
-                                    <?php 
-                                        if ($value->get_nominal_sp2d() >= 0) {                  
-                                            if ($value->get_currency_sp2d() == 'IDR' || ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) {
-                                                $total_nominal_sp2d += $value->get_nominal_sp2d(); 
-                                            }
-                                        } else {
-                                            $disp_minus_warning = true;
-                                        }
-                                    ?>
-                        
-                                </tr>
-                        
-                            <?php } ?>
-                        
-                        <?php } ?>
-                    
-                    </tbody>
-                    
-                    <?php if (!empty($this->SP2DFinished)) { ?>
-                    
-                    <tfoot>
-
-                            <tr>
-                                    
-                                <td colspan=3 class="align-center">Jumlah <?php if ($disp_currency_warning == true) { echo '(SP2D dengan tanda bintang belum memiliki informasi nilai tukar, sehingga tidak disertakan dalam perhitungan)'; } ?> <?php if ($disp_minus_warning == true) { echo '(Tidak termasuk SP2D Pengesahan)'; } ?></td>                        
-                                <td class="align-right"><?php echo number_format($total_nominal_sp2d); ?></td>
-
-                            </tr>
-                        
-                    </tfoot>
-
-                    <?php } ?>
-                
-                </table>
+            <?php if ($this->kodeunit == '140' || Session::get('role')==SATKER) { ?>
             
-            </div>
+                <div class="col-lg-6 col-md-12 top-padded table-container" style="border: 1px solid #e5e5e5">
+                
+                    <table class="dashtable">
+
+                        <thead>
+                            <tr>
+                                <th colspan=5>SP2D Hari Ini (<?php echo (count($this->SP2DFinished)); ?>)</th>
+                            </tr>
+                            <tr>
+                                <th>No.</th>
+                                <th>No. SP2D</th>
+                                <th>Jenis SP2D</th>
+                                <th class="align-right">Nominal</th>
+                                <th class="align-right">Nominal (Rupiah)</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <?php if (empty($this->SP2DFinished)) { ?>
+
+                                <tr><td colspan=14 class="align-center">Tidak ada data.</td></tr>
+
+                            <?php } else { ?>
+
+                                <?php $disp_minus_warning = false; ?>
+
+                                <?php $no = 1; ?>
+
+                                <?php $total_nominal_sp2d = 0; ?>
+
+                                <?php foreach ($this->SP2DFinished as $value) { ?>
+
+                                    <tr>
+
+                                        <td class="align-center"><?php echo $no++; ?></td>                        
+                                        <td class="align-center"><?php echo $value->get_check_number(); ?></td>
+                                        <td class="align-center"><?php echo $value->get_jenis_sp2d(); ?></td>
+                                        <td class="align-right"><?php echo number_format($value->get_gross_nominal_sp2d()).' '.$value->get_currency_sp2d(); ?></td>
+                                        <td class="align-right">
+                                            <?php if ($value->get_currency_sp2d() == 'IDR' || ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) { echo number_format($value->get_nominal_sp2d()); } else { echo '-'; } ?>
+                                        </td>
+
+                                        <?php 
+                                            if ($value->get_nominal_sp2d() >= 0) {                  
+                                                if ($value->get_currency_sp2d() == 'IDR' || ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) {
+                                                    $total_nominal_sp2d += $value->get_nominal_sp2d(); 
+                                                }
+                                            } else {
+                                                $disp_minus_warning = true;
+                                            }
+                                        ?>
+
+                                    </tr>
+
+                                <?php } ?>
+
+                            <?php } ?>
+
+                        </tbody>
+
+                        <?php if (!empty($this->SP2DFinished)) { ?>
+
+                        <tfoot>
+
+                                <tr>
+
+                                    <td colspan=4 class="align-center">Jumlah <?php if ($disp_minus_warning == true) { echo '(Tidak termasuk SP2D Pengesahan)'; } ?></td>
+                                    <td class="align-right"><?php echo number_format($total_nominal_sp2d); ?></td>
+
+                                </tr>
+
+                        </tfoot>
+
+                        <?php } ?>
+
+                    </table>
+
+                </div>
+
+            <?php } else { ?>
+            
+                <div class="col-lg-6 col-md-12 top-padded table-container" style="border: 1px solid #e5e5e5">
+
+                    <table class="dashtable">
+
+                        <thead>
+                            <tr>
+                                <th colspan=4>SP2D Hari Ini (<?php echo (count($this->SP2DFinished)); ?>)</th>
+                            </tr>
+                            <tr>
+                                <th>No.</th>
+                                <th>No. SP2D</th>
+                                <th>Jenis SP2D</th>
+                                <th class="align-right">Nominal</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <?php if (empty($this->SP2DFinished)) { ?>
+
+                                <tr><td colspan=14 class="align-center">Tidak ada data.</td></tr>
+
+                            <?php } else { ?>
+
+                                <?php $disp_currency_warning = false; ?>
+
+                                <?php $disp_minus_warning = false; ?>
+
+                                <?php $no = 1; ?>
+
+                                <?php $total_nominal_sp2d = 0; ?>
+
+                                <?php foreach ($this->SP2DFinished as $value) { ?>
+
+                                    <tr>
+
+                                        <td class="align-center"><?php echo $no++; ?></td>                        
+                                        <td class="align-center"><?php echo $value->get_check_number(); ?></td>
+                                        <td class="align-center"><?php echo $value->get_jenis_sp2d(); ?></td>
+                                        <td class="align-right"><?php echo number_format($value->get_nominal_sp2d()); ?> <?php if ($value->get_currency_sp2d() != 'IDR' && ($value->get_rate_sp2d() == 0 || $value->get_rate_sp2d() == null)) { echo $value->get_currency_sp2d().'*'; $disp_currency_warning = true; } ?></td>
+
+                                        <?php 
+                                            if ($value->get_nominal_sp2d() >= 0) {                  
+                                                if ($value->get_currency_sp2d() == 'IDR' || ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) {
+                                                    $total_nominal_sp2d += $value->get_nominal_sp2d(); 
+                                                }
+                                            } else {
+                                                $disp_minus_warning = true;
+                                            }
+                                        ?>
+
+                                    </tr>
+
+                                <?php } ?>
+
+                            <?php } ?>
+
+                        </tbody>
+
+                        <?php if (!empty($this->SP2DFinished)) { ?>
+
+                        <tfoot>
+
+                                <tr>
+
+                                    <td colspan=3 class="align-center">Jumlah <?php if ($disp_currency_warning == true) { echo '(SP2D dengan tanda bintang belum memiliki informasi nilai tukar, sehingga tidak disertakan dalam perhitungan)'; } ?> <?php if ($disp_minus_warning == true) { echo '(Tidak termasuk SP2D Pengesahan)'; } ?></td>                        
+                                    <td class="align-right"><?php echo number_format($total_nominal_sp2d); ?></td>
+
+                                </tr>
+
+                        </tfoot>
+
+                        <?php } ?>
+
+                    </table>
+
+                </div>
+
+            <?php } ?>
             
         </div>
         
@@ -827,9 +965,18 @@
 
             var pieJumlahReturSP2DCanvas = document.getElementById("pieJumlahReturSP2D").getContext("2d");
             var pieJumlahReturSP2D = new Chart(pieJumlahReturSP2DCanvas).Doughnut(pieJumlahReturSP2DData);
+            
+            <?php if (Session::get('role')==SATKER) { ?>
+            
+            var pieStatusDIPACanvas = document.getElementById("pieStatusDIPA").getContext("2d");
+            var pieStatusDIPA = new Chart(pieStatusDIPACanvas).Doughnut(pieStatusDIPAData);
+            
+            <?php } else { ?>
 
             var pieStatusLHPCanvas = document.getElementById("pieStatusLHP").getContext("2d");
             var pieStatusLHP = new Chart(pieStatusLHPCanvas).Doughnut(pieStatusLHPData);
+            
+            <?php } ?>
             
             <?php if (isset($this->lineHistSP2D)) { ?>
             

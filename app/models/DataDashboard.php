@@ -91,9 +91,9 @@ class DataDashboard {
     public function get_sp2d_rekap_num_pie($hari, $unitfilter = null) {
         
         if (!isset($unitfilter)) {
-            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where amount >= 0) where kdkppn = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where amount >= 0) where kdkppn = '" . Session::get('id_user') . "' and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         } else {
-            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where amount >= 0) where " . $unitfilter . " and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from AP_CHECKS_ALL_V where amount >= 0) where " . $unitfilter . " and (check_date between to_date('" . date("Ymd", time() - (($hari - 1) * 24 * 60 * 60)) . "','yyyymmdd') and to_date('" . date("Ymd", time()) . "','yyyymmdd'))) group by status_lookup_code, jenis_sp2d";
         }
 
         //echo($sql);
@@ -129,6 +129,54 @@ class DataDashboard {
         }
         //var_dump($data);
         return $d_data;
+    }
+    
+    public function get_sp2d_rekap_num($hari, $unitfilter = null) {
+        //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
+
+        $data = array();
+        for ($i = 0; $i < $hari; $i++) {
+            if (!isset($unitfilter)) {
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah, sum(amount_rph) nominal from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where (CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) and amount > 0) where kdkppn = '" . Session::get('id_user') . "' and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            } else {
+                $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, check_date, segment1 from AP_CHECKS_ALL_V where (CURRENCY_CODE = 'IDR' or EXCHANGE_RATE is not null) and amount > 0) where " . $unitfilter . " and check_date = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')) group by status_lookup_code, jenis_sp2d";
+            }
+
+            //var_dump($sql);
+            $result = $this->db->select($sql);
+            //var_dump($result);
+            $d_data = new $this($this->registry);
+
+            $d_data->set_void(0);
+            $d_data->set_vol_void(0);
+            $d_data->set_gaji(0);
+            $d_data->set_vol_gaji(0);
+            $d_data->set_non_gaji(0);
+            $d_data->set_vol_non_gaji(0);
+            $d_data->set_lainnya(0);
+            $d_data->set_vol_lainnya(0);
+
+            foreach ($result as $val) {
+                if ($val['STATUS_LOOKUP_CODE'] == 'VOIDED') {
+                    $d_data->set_void($d_data->get_void() + $val['JUMLAH']);
+                    $d_data->set_vol_void($d_data->get_vol_void() + $val['NOMINAL']);
+                } else {
+                    if ($val['JENIS_SP2D'] == 'GAJI') {
+                        $d_data->set_gaji($d_data->get_gaji() + $val['JUMLAH']);
+                        $d_data->set_vol_gaji($d_data->get_vol_gaji() + $val['NOMINAL']);
+                    } else if ($val['JENIS_SP2D'] == 'NON GAJI') {
+                        $d_data->set_non_gaji($d_data->get_non_gaji() + $val['JUMLAH']);
+                        $d_data->set_vol_non_gaji($d_data->get_vol_non_gaji() + $val['NOMINAL']);
+                    } else {
+                        $d_data->set_lainnya($d_data->get_lainnya() + $val['JUMLAH']);
+                        $d_data->set_vol_lainnya($d_data->get_vol_lainnya() + $val['NOMINAL']);
+                    }
+                }
+            }
+            $data[$i] = $d_data;
+        }
+        //var_dump($data);
+        return $data;
     }
 
     public function get_sp2d_rekap($hari, $unitfilter = null) {
@@ -243,7 +291,7 @@ class DataDashboard {
             $d_data->set_rate_sp2d($val['EXCHANGE_RATE']);
             $d_data->set_currency_sp2d($val['CURRENCY_CODE']);
             $d_data->set_gross_nominal_sp2d($val['AMOUNT']);
-            //var_dump($val['AMOUNT']);
+            //var_dump($d_data);
             $data[] = $d_data;
         }
         //var_dump($data);
@@ -598,7 +646,7 @@ class DataDashboard {
         $this->_currency_sp2d = $currency_sp2d;
     }
 
-    public function set_gross_nominal_sp2d($gross_nominal_sp2ds) {
+    public function set_gross_nominal_sp2d($gross_nominal_sp2d) {
         $this->_gross_nominal_sp2d = $gross_nominal_sp2d;
     }
 
