@@ -356,7 +356,8 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring PFK Akun'; //judul file laporan
+ $kd_akun = $this->kd_akun;
+$judul = 'Laporan Monitoring PFK Akun  '.$kd_akun; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
