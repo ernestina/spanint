@@ -321,7 +321,7 @@
                         <a href="<?php echo URL; ?>home/dashboard/triwulanan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 90 Hari</a>
                     <?php } else { ?>
                         <a href="<?php echo URL; ?>home/dashboard/harian/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> Hari Ini</a>
-                    <?php } >
+                    <?php } ?>
                 <?php } else { ?>
                     <a href="<?php echo URL; ?>home/dashboard/mingguan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 7 Hari</a>
                 <?php } ?>
@@ -334,7 +334,7 @@
                         <a href="<?php echo URL; ?>home/dashboard/triwulanan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 90 Hari</a>
                     <?php } else { ?>
                         <a href="<?php echo URL; ?>home/dashboard/harian/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> Hari Ini</a>
-                    <?php } >
+                    <?php } ?>
                 <?php } else { ?>
                     <a href="<?php echo URL; ?>home/dashboard/bulanan/<?php if (isset($this->kodeunit)) { echo $this->kodeunit; } ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-calendar"></span> 30 Hari</a>
                 <?php } ?>
