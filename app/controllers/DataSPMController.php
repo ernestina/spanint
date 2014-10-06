@@ -236,7 +236,7 @@ class DataSPMController extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
         if (!is_null($file_name)) {
-            $filter[$no++] = "FILE_NAME =  '" . $file_name . "'";
+            $filter[$no++] = "FILE_NAME =  '" . $file_name . ".xlsx'";
             $this->view->d_file_name = $file_name;
         }
         if (Session::get('role') == KPPN) {

@@ -155,3 +155,14 @@
         }
     }
 </script>
+<div class="main-window-segment vertical-padded">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <b>Keterangan : </b></br>
+                Data Merupakan Invoice Yang di Proses Dengan Aplikasi SPAN 
+            </div>
+            
+        </div>
+    </div>
+</div>
