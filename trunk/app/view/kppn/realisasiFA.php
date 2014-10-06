@@ -486,14 +486,3 @@
     }
 </script>
 
-<div class="main-window-segment vertical-padded">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <b>Keterangan : </b></br>
-                Data Merupakan Data Per Tanggal Sebelumnya Pukul 19.00 
-            </div>
-            
-        </div>
-    </div>
-</div>

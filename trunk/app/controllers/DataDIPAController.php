@@ -306,6 +306,9 @@ class DataDIPAController extends BaseController {
 		
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
+			/* if (Session::get('id_user') != '019'){
+			$filter[$no++] = "SUBSTR(AKUN,1,2) <> 'B3'";
+			}	 */
         }
         if (Session::get('role') == KANWIL) {
             $filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
@@ -379,6 +382,9 @@ class DataDIPAController extends BaseController {
 
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
+			/* if (Session::get('id_user') != '019'){
+			$filter[$no++] = "SUBSTR(AKUN,1,2) <> '53'";
+			} */
         }
         if (Session::get('role') == SATKER) {
             $filter[$no++] = "A.SATKER = '" . Session::get('kd_satker') . "'";
