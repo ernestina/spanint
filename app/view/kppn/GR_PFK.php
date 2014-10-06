@@ -48,6 +48,7 @@ if (isset($this->d_nama_kppn)) {
         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
     }
 }
+
 echo " Bulan " .$this->bulan;
 ?>
             </div>
