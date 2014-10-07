@@ -791,8 +791,8 @@
                                 <th>No.</th>
                                 <th>No. SP2D</th>
                                 <th>Jenis SP2D</th>
-                                <th class="align-right">Nominal</th>
-                                <th class="align-right">Nominal (Rupiah)</th>
+                                <th class="align-right">Nominal (Kurs)</th>
+                                <th class="align-right">Nominal Rupiah</th>
                             </tr>
                         </thead>
 
@@ -817,7 +817,7 @@
                                         <td class="align-center"><?php echo $no++; ?></td>                        
                                         <td class="align-center"><?php echo $value->get_check_number(); ?></td>
                                         <td class="align-center"><?php echo $value->get_jenis_sp2d(); ?></td>
-                                        <td class="align-right"><?php echo number_format($value->get_gross_nominal_sp2d()).' '.$value->get_currency_sp2d(); ?></td>
+                                        <td class="align-right"><?php echo number_format($value->get_gross_nominal_sp2d()).' '.$value->get_currency_sp2d(); ?><?php if ($value->get_currency_sp2d() != 'IDR' && ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) { echo ' ('.$value->get_rate_sp2d().')'; } ?></td>
                                         <td class="align-right">
                                             <?php if ($value->get_currency_sp2d() == 'IDR' || ($value->get_rate_sp2d() != 0 && $value->get_rate_sp2d() != null)) { echo number_format($value->get_nominal_sp2d()); } else { echo '-'; } ?>
                                         </td>
