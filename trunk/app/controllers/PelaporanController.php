@@ -46,6 +46,11 @@ class PelaporanController extends BaseController {
             $folder = 'SPGLR00264';
             $this->view->page_title = "Laporan Realisasi Anggaran Tingkat KPPN";
             
+        } else if ($tipe == 'LKP') {
+            
+            $folder = 'SPCMR00051';
+            $this->view->page_title = "Laporan Konsolidasi Saldo Kas KPPN";
+            
         } else {
             
             //Back to Home

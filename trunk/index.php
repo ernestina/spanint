@@ -121,6 +121,7 @@ $registry->auth->add_access('dataDroping','pkn',$akses['DataDropingPKN']);
 $registry->auth->add_access('dataRetur','pkn',$akses['DataReturPKN']);
 $registry->auth->add_access('PDF','pkn',$akses['PDFPKN']);
 $registry->auth->add_access('panduan','pkn',$akses['PanduanPKN']);
+$registry->auth->add_access('pelaporan','pkn',$akses['PelaporanPKN']);
 
 
 //level kanwil

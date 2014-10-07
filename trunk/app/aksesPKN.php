@@ -70,6 +70,15 @@ $akses['PanduanPKN'] = array(
 );
 
 /*
+ * akses Pelaporan
+ */
+$akses['PelaporanPKN'] = array(
+    '__construct',
+    'downloadLaporanKPPN',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFPKN'] = array(
