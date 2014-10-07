@@ -89,6 +89,7 @@ $registry->auth->add_access('home','satker',$akses['HomeSatker']);
 $registry->auth->add_access('dataDIPA','satker',$akses['DataDIPASatker']);
 $registry->auth->add_access('dataJSON','satker',$akses['DataJSONSatker']);
 $registry->auth->add_access('dataKppn','satker',$akses['DataKppnSatker']);
+$registry->auth->add_access('dataGR','satker',$akses['DataGRSatker']);
 $registry->auth->add_access('dataRetur','satker',$akses['DataReturSatker']);
 $registry->auth->add_access('dataSPM','satker',$akses['DataSPMSatker']);
 $registry->auth->add_access('dataSupplier','satker',$akses['DataSupplierSatker']);
