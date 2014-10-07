@@ -345,6 +345,18 @@ class homeController extends BaseController {
 
             return $d_dashboard->get_sp2d_rekap_num($periode, $unitfilter);
             
+        } else if (Session::get('role') == SATKER) {
+
+            if (!isset($kodeunit)) {
+                $kodeunit = Session::get('kd_satker');
+            }
+
+            $unitfilter = " SEGMENT1='" . $kodeunit . "' ";
+
+            $d_dashboard = new DataDashboard($this->registry);
+
+            return $d_dashboard->get_sp2d_rekap_num($periode, $unitfilter);
+            
         } else {
 
             $unitfilter = " CHECK_NUMBER is not null ";

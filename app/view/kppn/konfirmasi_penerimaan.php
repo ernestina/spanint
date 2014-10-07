@@ -96,7 +96,7 @@
             //var_dump ($this->data);
             if (isset($this->data)) {
                 if (empty($this->data)) {
-                    echo "<div class='alert alert-danger'><strong>Info! </strong>Tidak ada data.</div>";
+                    echo '<td colspan=8 class="align-center">Tidak ada data.</td>';
                 } else {
                     foreach ($this->data as $value) {
                         echo "<tr>	";
@@ -112,7 +112,7 @@
                     }
                 }
             } else {
-                echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+                echo '<td colspan=8 class="align-center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
             }
             ?>
         </tbody>
