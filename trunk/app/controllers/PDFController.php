@@ -313,25 +313,20 @@ class PDFController extends BaseController {
 		
         if ($kdsatker != 'null') {
             $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
-            $this->view->satker_code = $kdsatker;
 		}
 			
         if ($kdprogram != 'null') {
             $filter[$no++] = " A.PROGRAM = '" . $kdprogram . "'";
-			$this->view->program_code = $program;
         }
         if ($kdoutput != 'null') {
             $filter[$no++] = " A.OUTPUT = '" . $kdoutput . "'";
-			$this->view->output_code = $output;
         }
-		if ($dana != '') {
+		if ($dana != 'null') {
             $filter[$no++] = " A.DANA =  '" . $dana . "'";
-            //$this->view->dana_code = $dana;
         }
 		if ($kdakun != 'null') {
             $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun . "') 
 			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '". $kdakun . "')";
-			$this->view->account_code = $akun;
 		}
 
         		//-------------------------
@@ -1328,7 +1323,7 @@ class PDFController extends BaseController {
                 if ($kdbulan == '12') {
                     $bulan = 'december';
                 }
-
+			$this->view->nm_bulan = $bulan;
             $filter[$no++] = "TRIM(to_char(tanggal_bayar,'month')) =  '" . $bulan . "'";
         }
         if (!is_null($kdkppn)) {
