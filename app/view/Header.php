@@ -288,6 +288,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Unduh LAK Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Unduh LRA Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Unduh Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -435,6 +436,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Unduh LAK Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Unduh LRA Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Unduh Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -555,14 +557,6 @@
                                     <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur</a></li>
                                     <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Unduh Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                 </ul>
                             </div>
                         </li>
