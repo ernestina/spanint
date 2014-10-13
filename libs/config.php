@@ -27,7 +27,7 @@ define('DIR_UPLOAD', 'upload/');
 
 date_default_timezone_set('Asia/Jakarta');
 
-define('MAX_SESSION', 600); //dalam detik
+define('MAX_SESSION', 1800); //dalam detik
 
 define('HASH_GENERAL_KEY', 'MixitUp200');
 
