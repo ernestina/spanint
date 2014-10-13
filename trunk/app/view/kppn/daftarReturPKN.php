@@ -195,7 +195,7 @@
                         <option value='BTN' <?php if ($this->d_bank == BTN) {
     echo "selected";
 } ?>>BTN</option>
-                        <option value='SEMUA_BANK' <?php if ($this->d_bank == SEMUA_BANK) {
+                        <option value='SEMUA' <?php if ($this->d_bank == SEMUA) {
     echo "selected";
 } ?>>SEMUA BANK</option>
                     </select>

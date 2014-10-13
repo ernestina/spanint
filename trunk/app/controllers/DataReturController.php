@@ -112,7 +112,7 @@ class DataReturController extends BaseController {
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             }
             if ($_POST['bank'] != '') {
-                if ($_POST['bank'] != 'SEMUA_BANK') {
+                if ($_POST['bank'] != 'SEMUA') {
                     $filter[$no++] = "BANK_ACCOUNT_NAME LIKE '%" . $_POST['bank'] . "%'";
                 }
                 $this->view->d_bank = $_POST['bank'];

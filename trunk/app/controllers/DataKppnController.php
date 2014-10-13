@@ -69,7 +69,7 @@ class DataKppnController extends BaseController {
                 $this->view->d_invoice = $_POST['invoice'];
             }
             if ($_POST['bank'] != '') {
-                if ($_POST['bank'] != 'SEMUA_BANK') {
+                if ($_POST['bank'] != '5') {
                     $filter[$no++] = "BANK_ACCOUNT_NAME LIKE '%" . $_POST['bank'] . "%'";
                 }
                 $this->view->d_bank = $_POST['bank'];

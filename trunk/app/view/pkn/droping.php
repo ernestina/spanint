@@ -93,8 +93,8 @@
                 if($this->d_bank=="MDRI"){
                     echo "Bank : Mandiri" ;
                     echo "<br>" ;
-                } elseif($this->d_bank=="SEMUA_BANK"){
-                    echo "SEMUA_BANK" ;
+                } elseif($this->d_bank=="SEMUA"){
+                    echo "SEMUA" ;
                     echo "<br>" ;
                 }else {
                     echo "Bank : " . $this->d_bank;
@@ -156,7 +156,7 @@
                         echo "<td>" . number_format($value->get_jumlah_check_number_line_num()) . "</td>";
                         echo "<td>" . number_format($value->get_jumlah_ftp_file_name()) . "</td>";
                         echo "<td align = 'right'>" . number_format($value->get_jumlah_check_amount()) . "</td>";
-                        echo "<td align = 'right'><a href=".URL."dataDroping/detailDroping/" . $value->get_id()."/".$value->get_bank()."/".$value->get_creation_date()." target='_blank'>" . number_format($value->get_payment_amount()) . "</a></td>";
+                        echo "<td align = 'right'><a href=".URL."dataDroping/detailDroping/" . $value->get_id()."/".$value->get_bank()."/".$value->get_creation_date().">" . number_format($value->get_payment_amount()) . "</a></td>";
                         echo "<td align = 'right'>" . number_format($value->get_penihilan()) . "</td>";
                         $selisih = $value->get_payment_amount()-($value->get_jumlah_check_amount()+$value->get_penihilan());
                         echo "<td align = 'right'>" . number_format($selisih) . "</td>";
@@ -198,7 +198,7 @@
                         <option value='BRI' <?php if ($this->d_bank==BRI){echo "selected";}?>>BRI</option>
                         <option value='BNI' <?php if ($this->d_bank==BNI){echo "selected";}?>>BNI</option>
                         <option value='BTN' <?php if ($this->d_bank==BTN){echo "selected";}?>>BTN</option>
-                        <option value='SEMUA_BANK' <?php if ($this->d_bank==SEMUA_BANK){echo "selected";}?>>SEMUA BANK</option>
+                        <option value='SEMUA' <?php if ($this->d_bank==SEMUA){echo "selected";}?>>SEMUA BANK</option>
                     </select>
                     <?php } else {
                         echo "<input class='form-control' type='hidden' name='bank' id='bank' value=''>";
