@@ -33,8 +33,8 @@ class DataDropingController extends BaseController {
 		
         if (isset($_POST['submit_file'])) {
             if ($_POST['bank'] != '') {
-                if ($_POST['bank'] != 'SEMUA_BANK') {
-                    $filter[$no++] = "BANK = '" . $_POST['bank'] . "'";
+                if ($_POST['bank'] != 'SEMUA') {
+                    $filter[$no++] = "BANK = '" . $_POST['bank'] . "' ";
                 }
                 $this->view->d_bank = $_POST['bank'];
             }
@@ -78,7 +78,7 @@ class DataDropingController extends BaseController {
             $this->view->d_id = $id;
         }
         if (!is_null($bank)) {
-            if ($bank != "SEMUA_BANK") {
+            if ($bank != "SEMUA") {
                 $filter[$no++] = "BANK = '" . $bank . "'";
             }
             $this->view->d_bank = $bank;

@@ -47,8 +47,8 @@ if(isset($this->data)){
                 <?php if (isset($this->d_bank)) {
 					if($this->d_bank=="MDRI"){
 						echo "Bank : Mandiri <br>" ;
-					} elseif($this->d_bank=="SEMUA_BANK"){
-						echo "SEMUA_BANK <br>" ;
+					} elseif($this->d_bank=="SEMUA"){
+						echo "SEMUA <br>" ;
 					}else {
 						echo "Bank : " . $this->d_bank;
                         echo "<br>";
