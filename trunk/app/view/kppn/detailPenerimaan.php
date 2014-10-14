@@ -81,7 +81,7 @@
             foreach ($this->data as $value) {
                 echo "<tr>	";
                 echo "<td>" . $no++ . "</td>";
-				echo "<td class='ratakiri'><a href=" . URL . "dataGR/detailCoAPenerimaan/" . $value->get_status() . " target='_blank' >" . $value->get_status() . "</a></td>";
+				echo "<td class='ratakiri'><a href=" . URL . "dataGR/detailCoAPenerimaan/" . $value->get_status() . " >" . $value->get_status() . "</a></td>";
                 echo "<td>" . $value->get_file_name() . "</td>";
                 echo "<td>" . $value->get_gl_date() . "</td>";
                 echo "<td>" . $value->get_bank_code() . "</td>";

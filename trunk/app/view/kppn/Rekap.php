@@ -116,7 +116,7 @@
                 echo "<td>" . $value->get_check_date() . "</td>";
                 echo "<td class='ratakanan'>" . $value->get_amount() . "</td>";
 				if (Session::get('role') != SATKER) {
-                echo "<td><a href=".URL."dataSPM/HistorySpm/".$value->get_invoice_num()."/".$value->get_check_number()." target='_blank' '>" . $value->get_invoice_num(). "</a></td>";
+                echo "<td><a href=".URL."dataSPM/HistorySpm/".$value->get_invoice_num()."/".$value->get_check_number().">" . $value->get_invoice_num(). "</a></td>";
                 }
 				else{
 				echo "<td>" . $value->get_invoice_num(). "</a></td>";

@@ -139,7 +139,7 @@
                             echo "<tr>	";
                             echo "<td>" . $no++ . "</td>";
                             //echo "<td>" . $value->get_akun() . "</td>";
-                            echo "<td><a href=" . URL . "dataGR/GR_PFK_DETAIL/" . $value->get_akun() . "/" . $bulan . "/" . $_POST['kdkppn'] . " target='_blank' '>" . $value->get_akun() . "</a></td>";
+                            echo "<td><a href=" . URL . "dataGR/GR_PFK_DETAIL/" . $value->get_akun() . "/" . $bulan . "/" . $_POST['kdkppn'] . ">" . $value->get_akun() . "</a></td>";
                             echo "<td align='left' >" . $value->get_uraian_akun() . "</td>";
                             echo "<td align='right'>" . number_format($value->get_potongan_spm()) . "</td>";
                             echo "<td align='right'>" . number_format($value->get_setoran_mpn()) . "</td>";

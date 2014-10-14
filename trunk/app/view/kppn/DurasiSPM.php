@@ -244,7 +244,7 @@
                         foreach ($this->data as $value) {
                             echo "<tr>	";
                             echo "<td>" . $no++ . "</td>";
-                            echo "<td><a href=" . URL . "dataSPM/HistorySpm/" . $value->get_invoice_num() . "/" . $value->get_check_number() . " target='_blank' '>" . $value->get_invoice_num() . "</a></td>";
+                            echo "<td><a href=" . URL . "dataSPM/HistorySpm/" . $value->get_invoice_num() . "/" . $value->get_check_number() . " >" . $value->get_invoice_num() . "</a></td>";
                             echo "<td>" . $value->get_check_number() . "</td>";
                             echo "<td class='ratakiri'>" . $value->get_attribute1() . "</td>";
                             echo "<td>" . strtoupper($value->get_aia_creation_date()) . ' ' . $value->get_jam_upload() . "</td>";
