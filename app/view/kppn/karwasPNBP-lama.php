@@ -122,7 +122,7 @@
                                 echo "<td>" . $value->get_dipa_no() . "</td>";
                                 echo "<td>" . $value->get_jenis_belanja() . "</td>";
                                 echo "<td style='text-align: right'><a href=" . URL . "dataPNBP/DetailDipaPNBP/". $value->get_jenis_belanja(). "/"
-								. $_POST['kdsatker'] . " target='_blank' '>" . number_format($value->get_line_amount()) ."</td>";
+								. $_POST['kdsatker'] . " >" . number_format($value->get_line_amount()) ."</td>";
 
                                 echo "</tr>	";
 								$total_dipa = $total_dipa + $value->get_line_amount();
@@ -165,7 +165,7 @@
                                 echo "<td colspan=2>" . $value->get_account_code() . "</td>";
                                 
                                 echo "<td style='text-align: right'><a href=" . URL . "dataPNBP/DetailGRPNBP/". $value->get_account_code(). "/"
-								. $_POST['kdsatker'] . " target='_blank' '>" . number_format($value->get_line_amount()) ."</td>";
+								. $_POST['kdsatker'] . " >" . number_format($value->get_line_amount()) ."</td>";
 								$total_penerimaan = $total_penerimaan + $value->get_line_amount();
 								//echo "</tr>	";
 								
@@ -208,7 +208,7 @@
                                 echo "<td>" . $value->get_kppn_code() . "</td>";
                                 echo "<td colspan=2>" . $value->get_jenis_spm() . "</td>";
 								echo "<td style='text-align: right'><a href=" . URL . "dataPNBP/DetailUPPNBP/". $value->get_jenis_spm(). "/"
-								. $_POST['kdsatker'] . " target='_blank' '>" . number_format($value->get_line_amount()) ."</td>";
+								. $_POST['kdsatker'] . " >" . number_format($value->get_line_amount()) ."</td>";
 
                                 echo "</tr>	";
 								$total_up = $total_up + $value->get_line_amount();
@@ -253,7 +253,7 @@
                                 echo "<td colspan=2>" . $value->get_account_code() . "</td>";
                                 //echo "<td>" . $value->get_line_amount() . "</td>";
 								echo "<td style='text-align: right'><a href=" . URL . "dataPNBP/DetailBelanjaPNBP/". $value->get_account_code(). "/"
-								. $_POST['kdsatker'] . " target='_blank' '>" . number_format($value->get_line_amount()) ."</td>";
+								. $_POST['kdsatker'] . " >" . number_format($value->get_line_amount()) ."</td>";
 
                                 echo "</tr>	";
 								$total_belanja = $total_belanja + $value->get_line_amount();
@@ -298,7 +298,7 @@
                                 echo "<td colspan=2>" . $value->get_account_code() . "</td>";
                                 //echo "<td>" . $value->get_line_amount() . "</td>";
 								echo "<td style='text-align: right'><a href=" . URL . "dataPNBP/DetailBelanjaPNBP/". $value->get_account_code(). "/"
-								. $_POST['kdsatker'] . " target='_blank' '>" . number_format($value->get_line_amount()) ."</td>";
+								. $_POST['kdsatker'] . " >" . number_format($value->get_line_amount()) ."</td>";
 
                                 echo "</tr>	";
 								$total_setoran_up = $total_setoran_up + $value->get_line_amount();

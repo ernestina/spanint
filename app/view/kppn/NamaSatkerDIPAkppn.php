@@ -185,7 +185,7 @@
                         echo "<tr>	";
                         echo "<td class='align-center'>" . $no++ . "</td>";
                         //echo "<td>" . $value->get_kppn() . "</td>";
-                        echo "<td class='align-center'><a href=" . URL . "dataDIPA/RevisiDipa/" . $value->get_kdsatker() . " target='_blank' '>" . $value->get_kdsatker() . "</a></td>";
+                        echo "<td class='align-center'><a href=" . URL . "dataDIPA/RevisiDipa/" . $value->get_kdsatker() . " >" . $value->get_kdsatker() . "</a></td>";
                         //echo "<td>" . $value->get_kdsatker() . "</td>";
                         echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
                         echo "<td class='align-center'>" . $value->get_tgl_rev() . "</td>";

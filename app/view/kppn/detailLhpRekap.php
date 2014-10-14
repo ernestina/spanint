@@ -112,7 +112,7 @@
                 echo "<td>" . $value->get_bank_account_num() . "</td>";
                 echo "<td class='ratakanan'>" . number_format($value->get_keterangan()) . "</td>";
                 echo "<td>" . $value->get_gr_batch_num() . "</td>";
-                echo "<td class='ratakiri'><a href=" . URL . "dataGR/detailPenerimaan/" . $value->get_file_name() . "/".$this->kppn." target='_blank' >" . $value->get_file_name() . "</a></td>";
+                echo "<td class='ratakiri'><a href=" . URL . "dataGR/detailPenerimaan/" . $value->get_file_name() . "/".$this->kppn." >" . $value->get_file_name() . "</a></td>";
                 if ($value->get_status() == 'Validated') {
                     echo "<td>Lakukan interface ulang</td>";
                 } else if ($value->get_status() == 'Error') {
