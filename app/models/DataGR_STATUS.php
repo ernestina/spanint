@@ -15,26 +15,26 @@ class DataGR_STATUS {
     private $_bank_account_num;
     private $_resp_name;
     private $_keterangan;
-	private $_mata_uang;
-	private $_ntpn;
-	private $_segment1;
-	private $_segment2;
-	private $_segment3;
-	private $_segment4;
-	private $_segment5;
-	private $_segment6;
-	private $_segment7;
-	private $_segment8;
-	private $_segment9;
-	private $_segment10;
-	private $_segment11;
-	private $_segment12;
-	private $_amount;
+    private $_mata_uang;
+    private $_ntpn;
+    private $_segment1;
+    private $_segment2;
+    private $_segment3;
+    private $_segment4;
+    private $_segment5;
+    private $_segment6;
+    private $_segment7;
+    private $_segment8;
+    private $_segment9;
+    private $_segment10;
+    private $_segment11;
+    private $_segment12;
+    private $_amount;
     private $_gr_batch_num;
     private $_table1 = 'spgr_mpn_receipts_all';
-	private $_table2 = 'spgr_mpn_coa';
-	private $_table3 = 'SPGR_MPN_NTPN_GANDA';
-	private $_table4 = 'SPGR_MPN_NTPN_GANDA_DETAIL';
+    private $_table2 = 'spgr_mpn_coa';
+    private $_table3 = 'SPGR_MPN_NTPN_GANDA';
+    private $_table4 = 'SPGR_MPN_NTPN_GANDA_DETAIL';
     public $registry;
 
     /*
@@ -113,7 +113,7 @@ class DataGR_STATUS {
             $d_data->set_resp_name($val['RESP_NAME']);
             $d_data->set_keterangan($val['RPH']);
             $d_data->set_gr_batch_num($val['GR_BATCH_NUM']);
-	
+
             $data[] = $d_data;
         }
         return $data;
@@ -135,7 +135,7 @@ class DataGR_STATUS {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_status($val['NTPN']);
-			$d_data->set_mata_uang($val['CURRENCY_CODE']);
+            $d_data->set_mata_uang($val['CURRENCY_CODE']);
             $d_data->set_file_name($val['NTB']);
             $d_data->set_gl_date(substr($val['CONT_GL_DATE'], 6, 2) . "-" . substr($val['CONT_GL_DATE'], 4, 2) . "-" . substr($val['CONT_GL_DATE'], 0, 4));
             $d_data->set_bank_code($val['BANK_CODE']);
@@ -147,8 +147,8 @@ class DataGR_STATUS {
         }
         return $data;
     }
-	
-	public function get_detail_coa_penerimaan($filter) {
+
+    public function get_detail_coa_penerimaan($filter) {
         $sql = "SELECT smc.receipt_number,
 						gcc.segment1,
 						gcc.segment2,
@@ -168,70 +168,67 @@ class DataGR_STATUS {
 						SPGR_MPN_COA smc
 						WHERE smc.CODE_COMBINATION_ID=gcc.CODE_COMBINATION_ID ";
         foreach ($filter as $filter) {
-            $sql .= " AND ". $filter;
+            $sql .= " AND " . $filter;
         }
         //$sql .= " order by CONT_GL_DATE, NTPN";
-
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_ntpn($val['RECEIPT_NUMBER']);
-			$d_data->set_segment1($val['SEGMENT1']);
-			$d_data->set_segment2($val['SEGMENT2']);
-			$d_data->set_segment3($val['SEGMENT3']);
-			$d_data->set_mata_uang($val['CURRENCY_CODE']);
-			$d_data->set_amount($val['AMOUNT_DIST']);
+            $d_data->set_segment1($val['SEGMENT1']);
+            $d_data->set_segment2($val['SEGMENT2']);
+            $d_data->set_segment3($val['SEGMENT3']);
+            $d_data->set_mata_uang($val['CURRENCY_CODE']);
+            $d_data->set_amount($val['AMOUNT_DIST']);
 
             $data[] = $d_data;
         }
         return $data;
     }
-	
-	public function get_konfirmasi_penerimaan($filter) {
+
+    public function get_konfirmasi_penerimaan($filter) {
         $sql = "SELECT * FROM "
-				. $this->_table2."
-				WHERE 1=1" ;
-  
+                . $this->_table2 . "
+				WHERE 1=1";
+
         foreach ($filter as $filter) {
-            $sql .= " AND ". $filter;
+            $sql .= " AND " . $filter;
         }
         //$sql .= " order by CONT_GL_DATE, NTPN";
-
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_ntpn($val['RECEIPT_NUMBER']);
-			$d_data->set_file_name($val['NTB']);
-			$d_data->set_gl_date($val['TANGGAL']);
-			$d_data->set_resp_name($val['NAMA']);
-			$d_data->set_segment1($val['SEGMENT1']);
-			$d_data->set_segment2($val['SEGMENT2']);
-			$d_data->set_segment3($val['SEGMENT3']);
-			$d_data->set_segment4($val['SEGMENT4']);
-			$d_data->set_segment5($val['SEGMENT5']);
-			$d_data->set_segment6($val['SEGMENT6']);
-			$d_data->set_segment7($val['SEGMENT7']);
-			$d_data->set_segment8($val['SEGMENT8']);
-			$d_data->set_segment9($val['SEGMENT9']);
-			$d_data->set_segment10($val['SEGMENT10']);
-			$d_data->set_segment11($val['SEGMENT11']);
-			$d_data->set_segment12($val['SEGMENT12']);
-			$d_data->set_mata_uang($val['CURRENCY_CODE']);
-			$d_data->set_amount($val['AMOUNT_DIST']);
-			$d_data->set_gr_batch_num($val['NOURUT']);
-			
+            $d_data->set_file_name($val['NTB']);
+            $d_data->set_gl_date($val['TANGGAL']);
+            $d_data->set_resp_name($val['NAMA']);
+            $d_data->set_segment1($val['SEGMENT1']);
+            $d_data->set_segment2($val['SEGMENT2']);
+            $d_data->set_segment3($val['SEGMENT3']);
+            $d_data->set_segment4($val['SEGMENT4']);
+            $d_data->set_segment5($val['SEGMENT5']);
+            $d_data->set_segment6($val['SEGMENT6']);
+            $d_data->set_segment7($val['SEGMENT7']);
+            $d_data->set_segment8($val['SEGMENT8']);
+            $d_data->set_segment9($val['SEGMENT9']);
+            $d_data->set_segment10($val['SEGMENT10']);
+            $d_data->set_segment11($val['SEGMENT11']);
+            $d_data->set_segment12($val['SEGMENT12']);
+            $d_data->set_mata_uang($val['CURRENCY_CODE']);
+            $d_data->set_amount($val['AMOUNT_DIST']);
+            $d_data->set_gr_batch_num($val['NOURUT']);
+
             $data[] = $d_data;
         }
         return $data;
     }
-	
-	
-	public function get_download_koreksi_penerimaan($ids) {
-		$sql = "SELECT 
+
+    public function get_download_koreksi_penerimaan($ids) {
+        $sql = "SELECT 
 					RECEIPT_NUMBER ,
 					'O' TYPE
 					,TO_CHAR(TO_DATE(TANGGAL_GL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL,
@@ -252,7 +249,7 @@ class DataGR_STATUS {
 					TO_CHAR(TO_DATE(TANGGAL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL2
 					 FROM SPGR_MPN_COA
 					 WHERE 
-					 NOURUT IN ('".$ids."') 
+					 NOURUT IN ('" . $ids . "') 
 					 UNION ALL
 					SELECT RECEIPT_NUMBER ,'C' TYPE,TO_CHAR(TO_DATE(TANGGAL_GL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL,
 					SEGMENT1,
@@ -271,108 +268,106 @@ class DataGR_STATUS {
 					AMOUNT_DIST AMOUNT,
 					TO_CHAR(TO_DATE(TANGGAL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL2
 					 FROM SPGR_MPN_COA
-					 WHERE NOURUT IN ('".$ids."')"
-			   ;
-			
-  
+					 WHERE NOURUT IN ('" . $ids . "')"
+        ;
+
+
         // foreach ($filter as $filter) {
-            // $sql .= " AND ". $filter;
+        // $sql .= " AND ". $filter;
         // }
         //$sql .= " order by CONT_GL_DATE, NTPN";
-
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_ntpn($val['RECEIPT_NUMBER']);
-			$d_data->set_file_name($val['TYPE']);
-			$d_data->set_gl_date($val['TANGGAL']);
-			$d_data->set_segment1($val['SEGMENT1']);
-			$d_data->set_segment2($val['SEGMENT2']);
-			$d_data->set_segment3($val['SEGMENT3']);
-			$d_data->set_segment4($val['SEGMENT4']);
-			$d_data->set_segment5($val['SEGMENT5']);
-			$d_data->set_segment6($val['SEGMENT6']);
-			$d_data->set_segment7($val['SEGMENT7']);
-			$d_data->set_segment8($val['SEGMENT8']);
-			$d_data->set_segment9($val['SEGMENT9']);
-			$d_data->set_segment10($val['SEGMENT10']);
-			$d_data->set_segment11($val['SEGMENT11']);
-			$d_data->set_segment12($val['SEGMENT12']);
-			$d_data->set_mata_uang($val['CURRENCY_CODE']);
-			$d_data->set_amount($val['AMOUNT']);
+            $d_data->set_file_name($val['TYPE']);
+            $d_data->set_gl_date($val['TANGGAL']);
+            $d_data->set_segment1($val['SEGMENT1']);
+            $d_data->set_segment2($val['SEGMENT2']);
+            $d_data->set_segment3($val['SEGMENT3']);
+            $d_data->set_segment4($val['SEGMENT4']);
+            $d_data->set_segment5($val['SEGMENT5']);
+            $d_data->set_segment6($val['SEGMENT6']);
+            $d_data->set_segment7($val['SEGMENT7']);
+            $d_data->set_segment8($val['SEGMENT8']);
+            $d_data->set_segment9($val['SEGMENT9']);
+            $d_data->set_segment10($val['SEGMENT10']);
+            $d_data->set_segment11($val['SEGMENT11']);
+            $d_data->set_segment12($val['SEGMENT12']);
+            $d_data->set_mata_uang($val['CURRENCY_CODE']);
+            $d_data->set_amount($val['AMOUNT']);
             $data[] = $d_data;
         }
         return $data;
     }
-	
-	public function get_download_konfirmasi_penerimaan($ids, $segment1) {
-        $sql = "SELECT ".
-		$segment1." 
+
+    public function get_download_konfirmasi_penerimaan($ids, $segment1) {
+        $sql = "SELECT " .
+                $segment1 . " 
 		RECEIPT_NUMBER,
 		NTB, 
 		SEGMENT3, 
 		AMOUNT_DIST AMOUNT 
 		FROM SPGR_MPN_COA 
 		WHERE 
-		NOURUT IN ('".$ids."')" ;
-  
+		NOURUT IN ('" . $ids . "')";
+
         // foreach ($filter as $filter) {
-            // $sql .= " AND ". $filter;
+        // $sql .= " AND ". $filter;
         // }
         //$sql .= " order by CONT_GL_DATE, NTPN";
-
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_ntpn($val['RECEIPT_NUMBER']);
-			$d_data->set_file_name($val['NTB']);
-			$d_data->set_segment1($val['SEGMENT1']);
-			$d_data->set_segment3($val['SEGMENT3']);
-			$d_data->set_amount($val['AMOUNT']);
-			
+            $d_data->set_file_name($val['NTB']);
+            $d_data->set_segment1($val['SEGMENT1']);
+            $d_data->set_segment3($val['SEGMENT3']);
+            $d_data->set_amount($val['AMOUNT']);
+
             $data[] = $d_data;
         }
         return $data;
     }
-	
-	public function get_ntpn_ganda($filter) {
+
+    public function get_ntpn_ganda($filter) {
         $sql = "SELECT * 
 		FROM SPGR_MPN_NTPN_GANDA 
 		WHERE 
-		1=1 " ;
-  
+		1=1 ";
+
         foreach ($filter as $filter) {
-            $sql .= " AND ". $filter;
+            $sql .= " AND " . $filter;
         }
         $sql .= " order by NTPN";
 
-        //var_dump ($sql);
+        //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_ntpn($val['NTPN']);
-			$d_data->set_gl_date($val['TG_BUKU']);
-			$d_data->set_segment1($val['BULAN']);
-			$d_data->set_segment2($val['KDKPPN']);
-			$d_data->set_amount($val['AMOUNT']);
+            $d_data->set_gl_date($val['TG_BUKU']);
+            $d_data->set_segment1($val['BULAN']);
+            $d_data->set_segment2($val['KDKPPN']);
+            $d_data->set_amount($val['AMOUNT']);
             $data[] = $d_data;
         }
         return $data;
     }
-	
-	public function get_detail_ntpn_ganda($filter) {
+
+    public function get_detail_ntpn_ganda($filter) {
         $sql = "SELECT * 
 		FROM SPGR_MPN_NTPN_GANDA_DETAIL 
 		WHERE 
-		1=1 " ;
-  
+		1=1 ";
+
         foreach ($filter as $filter) {
-            $sql .= " AND ". $filter;
+            $sql .= " AND " . $filter;
         }
         $sql .= " order by NTPN";
 
@@ -382,20 +377,21 @@ class DataGR_STATUS {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_ntpn($val['NTPN']);
-			$d_data->set_file_name($val['NTB']);
-			$d_data->set_resp_name($val['NAMA']);
-			$d_data->set_segment1($val['SEGMENT1']);
-			$d_data->set_segment2($val['SEGMENT2']);
-			$d_data->set_segment3($val['SEGMENT3']);
-			$d_data->set_amount($val['AMOUNT']);
-			$d_data->set_bank_account_num($val['BANK_ACCOUNT_NUM']);
-			$d_data->set_gr_batch_num($val['GR_BATCH_NUM']);
-			$d_data->set_file_name($val['FILE_NAME']);
-			$d_data->set_status($val['STATUS']);
+            $d_data->set_file_name($val['NTB']);
+            $d_data->set_resp_name($val['NAMA']);
+            $d_data->set_segment1($val['SEGMENT1']);
+            $d_data->set_segment2($val['SEGMENT2']);
+            $d_data->set_segment3($val['SEGMENT3']);
+            $d_data->set_amount($val['AMOUNT']);
+            $d_data->set_bank_account_num($val['BANK_ACCOUNT_NUM']);
+            $d_data->set_gr_batch_num($val['GR_BATCH_NUM']);
+            $d_data->set_file_name($val['FILE_NAME']);
+            $d_data->set_status($val['STATUS']);
             $data[] = $d_data;
         }
         return $data;
     }
+
     /*
      * setter
      */
@@ -403,59 +399,71 @@ class DataGR_STATUS {
     public function set_status($status) {
         $this->_status = $status;
     }
-	
-	public function set_segment1($segment1) {
+
+    public function set_segment1($segment1) {
         $this->_segment1 = $segment1;
     }
-	public function set_segment2($segment2) {
+
+    public function set_segment2($segment2) {
         $this->_segment2 = $segment2;
     }
-	public function set_segment3($segment3) {
+
+    public function set_segment3($segment3) {
         $this->_segment3 = $segment3;
     }
-	public function set_segment4($segment4) {
+
+    public function set_segment4($segment4) {
         $this->_segment4 = $segment4;
     }
-	public function set_segment5($segment5) {
+
+    public function set_segment5($segment5) {
         $this->_segment5 = $segment5;
     }
-	public function set_segment6($segment6) {
+
+    public function set_segment6($segment6) {
         $this->_segment6 = $segment6;
     }
-	public function set_segment7($segment7) {
+
+    public function set_segment7($segment7) {
         $this->_segment7 = $segment7;
     }
-	public function set_segment8($segment8) {
+
+    public function set_segment8($segment8) {
         $this->_segment8 = $segment8;
     }
-	public function set_segment9($segment9) {
+
+    public function set_segment9($segment9) {
         $this->_segment9 = $segment9;
     }
-	public function set_segment10($segment10) {
+
+    public function set_segment10($segment10) {
         $this->_segment10 = $segment10;
     }
-	public function set_segment11($segment11) {
+
+    public function set_segment11($segment11) {
         $this->_segment11 = $segment11;
     }
-	public function set_segment12($segment12) {
+
+    public function set_segment12($segment12) {
         $this->_segment12 = $segment12;
     }
-	public function set_amount($amount) {
+
+    public function set_amount($amount) {
         $this->_amount = $amount;
     }
-	
-	public function set_ntpn($ntpn) {
+
+    public function set_ntpn($ntpn) {
         $this->_ntpn = $ntpn;
     }
-	
+
     public function set_file_name($file_name) {
         $this->_file_name = $file_name;
     }
-	
-	public function set_mata_uang($mata_uang) {
+
+    public function set_mata_uang($mata_uang) {
         $this->_mata_uang = $mata_uang;
     }
-	
+
     public function set_bank_code($bank_code) {
         $this->_bank_code = $bank_code;
     }
@@ -483,53 +491,63 @@ class DataGR_STATUS {
     /*
      * getter
      */
-	
-	public function get_ntpn() {
+
+    public function get_ntpn() {
         return $this->_ntpn;
     }
-	public function get_segment1() {
+
+    public function get_segment1() {
         return $this->_segment1;
     }
-	
-	public function get_segment2() {
+
+    public function get_segment2() {
         return $this->_segment2;
     }
-	
-	public function get_segment3() {
+
+    public function get_segment3() {
         return $this->_segment3;
     }
-	public function get_segment4() {
+
+    public function get_segment4() {
         return $this->_segment4;
     }
-	public function get_segment5() {
+
+    public function get_segment5() {
         return $this->_segment5;
     }
-	public function get_segment6() {
+
+    public function get_segment6() {
         return $this->_segment6;
     }
-	public function get_segment7() {
+
+    public function get_segment7() {
         return $this->_segment7;
     }
-	public function get_segment8() {
+
+    public function get_segment8() {
         return $this->_segment8;
     }
-	public function get_segment9() {
+
+    public function get_segment9() {
         return $this->_segment9;
     }
-	public function get_segment10() {
+
+    public function get_segment10() {
         return $this->_segment10;
     }
-	public function get_segment11() {
+
+    public function get_segment11() {
         return $this->_segment11;
     }
-	public function get_segment12() {
+
+    public function get_segment12() {
         return $this->_segment12;
     }
-	
-	public function get_amount() {
+
+    public function get_amount() {
         return $this->_amount;
     }
-	
+
     public function get_status() {
         return $this->_status;
     }
@@ -545,11 +563,11 @@ class DataGR_STATUS {
     public function get_gl_date() {
         return $this->_gl_date;
     }
-	
-	public function get_mata_uang() {
+
+    public function get_mata_uang() {
         return $this->_mata_uang;
     }
-	
+
     public function get_bank_code() {
         return $this->_bank_code;
     }

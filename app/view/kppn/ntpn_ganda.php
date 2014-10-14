@@ -53,12 +53,17 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-                // $nmsatker = '';
-                // foreach ($this->data as $value) {
-                    // $nmsatker = $value->get_nmsatker();
-                // }
-                // echo $nmsatker;
-                // ?>
+                if (isset($this->d_nama_kppn)) {
+                    foreach ($this->d_nama_kppn as $kppn) {
+                        echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
+                    }
+                }
+                if (isset($this->d_bulan)) {
+                    echo "Bulan : ".  Tanggal::bulan_indo($this->d_bulan);
+                } else {
+                    echo "Bulan : SEMUA BULAN";
+                }
+                ?>
             </div>
             
             <div class="col-md-6 col-sm-12" style="text-align: right;">
