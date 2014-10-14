@@ -104,7 +104,7 @@
                         echo "<td class='mid'>" . $no++ . "</td>";
 						echo "<td>" . $value->get_segment2() . "</td>";
 						//echo "<td>" . $value->get_ntpn() . "</td>";
-						echo "<td><a href=" . URL . "dataGR/DetailNTPNGanda/" . $value->get_ntpn() . " target='_blank' '>" . $value->get_ntpn() . "</a></td>";
+						echo "<td><a href=" . URL . "dataGR/DetailNTPNGanda/" . $value->get_ntpn() . ">" . $value->get_ntpn() . "</a></td>";
 						echo "<td>" . $value->get_segment1() . "</td>";
 						echo "<td>" . $value->get_gl_date() . "</td>";
                         echo "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";

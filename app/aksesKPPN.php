@@ -257,6 +257,7 @@ $akses['PDFKPPN'] = array(
     'Detail_Fund_fail_PDF',
     'DetailGRPNBP_PDF',
     'detailLhpRekap_PDF',
+    'DetailNTPNGanda_PDF',
     'detailPenerimaan_PDF',
     'detailposisiSpm_PDF',
     'DetailRealisasiFA_PDF',
