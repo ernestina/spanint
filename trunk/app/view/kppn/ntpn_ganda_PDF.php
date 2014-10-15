@@ -108,14 +108,14 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 160;
-        $ukuran_kolom_satker = 140;
+        $ukuran_kolom_satker = 80;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
         $ukuran_kolom_file = 85;
         $ukuran_kolom_bank_pembayar = 60;
         $ukuran_kolom_norek_penerima = 100;
         $ukuran_kolom_tgl_selsp2d = 90;
-        $ukuran_kolom_tgl_sp2d = 60;
+        $ukuran_kolom_tgl_sp2d = 100;
 		$kolom_grandtotal1=30+$ukuran_kolom_tgl_selsp2d+
 		$ukuran_kolom_tgl_sp2d+$ukuran_kolom_satker+
 		$ukuran_kolom_dana;
@@ -148,7 +148,7 @@ class FPDF_AutoWrapTable extends FPDF {
             $ukuran_kolom_dana,
             $ukuran_kolom_jenis_belanja
         ));
-        $this->SetAligns(array('C', 'C', 'C', 'L', 'C','R'));
+        $this->SetAligns(array('C', 'C', 'C', 'C', 'C','R'));
 
         if (count($this->data) == 0) {
             $this->Row(
