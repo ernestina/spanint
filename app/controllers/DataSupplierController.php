@@ -36,10 +36,10 @@ class DataSupplierController extends BaseController {
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "KPPN_CODE = '" . Session::get('kd_satker') . "'";
+            //$filter[$no++] = "KPPN_CODE = '" . Session::get('kd_satker') . "'";
         }
         if (Session::get('role') == SATKER) {
-            $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
+            //$filter[$no++] = "KPPN_CODE = '" . Session::get('id_user') . "'";
         }
 
         if (isset($_POST['submit_file'])) {
