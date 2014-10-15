@@ -69,6 +69,7 @@ class DataSupplier {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
+        $sql .= " ORDER BY IDS";
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
