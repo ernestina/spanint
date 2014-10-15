@@ -300,20 +300,26 @@ class DataGRController extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
+		$this->view->data2 = $d_spm1->get_akun_pnbp($filter);
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['ntpn'] != '') {
                 $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
                 $this->view->ntpn = $_POST['ntpn'];
-            }
-            // if (Session::get('role') == KPPN){
-            // $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
-            // }
-            $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
-        }
+            } 
+			
+			if ($_POST['akun'] != '') {
+                $filter[$no++] = "SEGMENT3 = '" . $_POST['akun'] . "'";
+				$filter[$no++] = "SEGMENT2 = '" . Session::get('id_user') . "'";
+                $this->view->akun = $_POST['akun'];
+            } 
+			
+			$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
 
-        //$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
-        //var_dump($d_spm->get_gr_status_filter($filter));
+        }
+           
+           // $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+			
         $this->view->render('kppn/konfirmasi_penerimaan');
         $d_log->tambah_log("Sukses");
     }
