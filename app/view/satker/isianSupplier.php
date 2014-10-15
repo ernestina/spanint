@@ -402,7 +402,7 @@ if (isset($this->data)) {
                         } ?>">
                     <br/>
                     <div id="wnamasupplier" class="alert alert-danger" style="display: none"></div>
-                    <label class="isian">Nama Supplier: </label>
+                    <label class="isian">Nama Supplier / Kode Satker: </label>
                     <input class='form-control' type="text" name="namasupplier" id="namasupplier" value="<?php if (isset($this->d_namasupplier)) {
                             echo $this->d_namasupplier;
                         } ?>">
@@ -586,7 +586,7 @@ if (isset($this->data)) {
             }
 <?php } else { ?>
             if (v_namasupplier == '') {
-                var wnamasupplier = 'NamaSupplier harus diisi';
+                var wnamasupplier = 'Nama Supplier / Kode Satker harus diisi';
                 $('#wnamasupplier').html(wnamasupplier);
                 $('#wnamasupplier').fadeIn(200);
                 jml++;
