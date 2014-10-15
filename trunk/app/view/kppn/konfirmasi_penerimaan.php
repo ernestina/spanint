@@ -4,14 +4,14 @@
         <div class="row">
             <?php
 			
-			if (isset($this->data)) {
+			if (isset($this->ntpn)) {
 				foreach ($this->data as $value) {
 					$ntb = $value->get_file_name();
 				}
 			}
 			?>
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Konfirmasi Penerimaan</h2>
+                <h2>Konfirmasi Penerimaan Berdasarkan NTPN dan AKUN</h2>
 				<h4>NTPN: <?php echo $this->ntpn; ?> - NTB: <?php echo $ntb; ?> </h4>
             </div>
             
@@ -80,6 +80,8 @@
         <thead>
             <tr>
                 <th class='mid'>No.</th>
+				<th>NTPN</th>
+				<th>NTB</th>
                 <th>Tanggal Penerimaan</th>
 				<th class='ratatengah'>Nama</th>
 				<th class='ratatengah'>Bagan Akun SPAN</th>
@@ -101,6 +103,8 @@
                     foreach ($this->data as $value) {
                         echo "<tr>	";
                         echo "<td class='mid'>" . $no++ . "</td>";
+						echo "<td>" . $value->get_ntpn() . "</td>";
+						echo "<td>" . $value->get_file_name() . "</td>";
 						echo "<td>" . $value->get_gl_date() . "</td>";
 						echo "<td>" . $value->get_resp_name() . "</td>";
 						echo "<td>" . $value->get_segment1(). "." .$value->get_segment2(). "." .$value->get_segment3(). "." .$value->get_segment4()."." .$value->get_segment5(). "." .$value->get_segment6(). "." .$value->get_segment7(). "." .$value->get_segment8(). "." .$value->get_segment9(). "." .$value->get_segment10(). "." .$value->get_segment11(). "." .$value->get_segment12()."</td>";
@@ -160,6 +164,21 @@
                    echo $this->ntpn;
 					} ?>">
                     <br/>
+					
+					<div id="winvoice" class="alert alert-danger" style="display:none;"></div>
+                    <label class="isian">Akun PNBP: </label>
+                    <select class="form-control" type="text" name="akun" id="akun">
+                        <option value='' >- pilih -</option>
+                        <?php
+                        foreach ($this->data2 as $value1)
+                            if ($value1->get_segment3()==$this->akun){
+                                echo "<option value = '" . $value1->get_segment3() . "' selected>" . $value1->get_segment3() . " | ". $value1->get_keterangan(). " </option>";
+                            } else {
+                                echo "<option value = '" . $value1->get_segment3() . "' selected>" . $value1->get_segment3() . " | ". $value1->get_keterangan(). " </option>";
+                            }
+                       
+                        ?>
+                    </select>
                     
 
                     <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">

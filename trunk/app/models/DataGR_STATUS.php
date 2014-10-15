@@ -227,8 +227,37 @@ class DataGR_STATUS {
         return $data;
     }
 
+	
+	public function get_akun_pnbp($filter) {
+        $sql = "SELECT distinct SEGMENT3, B.DESCRIPTION FROM "
+				. $this->_table2. " A, T_NAMA_AKUN B
+				WHERE 1=1
+				AND A.SEGMENT3=B.FLEX_VALUE 
+				AND SUBSTR(SEGMENT3,1,2) = '42'
+				AND SEGMENT2 = '".Session::get('id_user')."'
+				" ;
+  
+        foreach ($filter as $filter) {
+            $sql .= " AND ". $filter;
+        }
+        $sql .= " order by SEGMENT3";
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+			$d_data->set_segment3($val['SEGMENT3']);
+			$d_data->set_keterangan($val['DESCRIPTION']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+
     public function get_download_koreksi_penerimaan($ids) {
         $sql = "SELECT 
+
 					RECEIPT_NUMBER ,
 					'O' TYPE
 					,TO_CHAR(TO_DATE(TANGGAL_GL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL,
