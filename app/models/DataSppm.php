@@ -632,6 +632,7 @@ class DataSppm {
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_bank_name($val['BANK_NAME']);
             $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
+            $d_data->set_payment_date(date("d-m-Y", strtotime($val['PAYMENT_DATE'])));
             $data[] = $d_data;
         }
         return $data;
@@ -667,6 +668,7 @@ class DataSppm {
             $d_data->set_check_number($val['CHECK_NUMBER']);
             $d_data->set_bank_account_name($val['BANK_ACCOUNT_NAME']);
             $d_data->set_invoice_description($val['INVOICE_DESCRIPTION']);
+            $d_data->set_payment_date(date("d-m-Y", strtotime($val['PAYMENT_DATE'])));
             $data[] = $d_data;
         }
         return $data;

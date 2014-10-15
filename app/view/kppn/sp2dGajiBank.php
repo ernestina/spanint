@@ -78,7 +78,7 @@
                     <th>No.</th>
                     <th>Kode Satker</th>
                     <th>No. Invoice</th>
-                    <th>No. SP2D</th>
+                    <th>Tanggal SP2D<br>No. SP2D</th>
                     <th>BO I</th>
                     <th>Bank Rekening Penerima</th>
                     <th>Nama Supplier</th>
@@ -98,7 +98,7 @@
                             echo "<td>" . $no++ . "</td>";
                             echo "<td>" . $value->get_kdsatker() . "</td>";
                             echo "<td>" . $value->get_invoice_num() . "</td>";
-                            echo "<td>" . $value->get_check_number() . "</td>";
+                            echo "<td>" .$value->get_payment_date(). "<br>".$value->get_check_number() . "</td>";
                             echo "<td>" . $value->get_bank_account_name() . "</td>";
                             echo "<td>" . $value->get_bank_name() . "</td>";
                             echo "<td>" . $value->get_vendor_name() . "</td>";
