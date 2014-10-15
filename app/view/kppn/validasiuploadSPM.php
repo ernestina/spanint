@@ -31,8 +31,17 @@
                             $kdtgl_akhir = 'null';
                         }
 
-                        $filename = 'null';
-                        $kdsatker = 'null';
+						if (isset($this->d_satker_code)) {
+							$kdsatker= $this->d_satker_code;
+						} else {
+							$kdsatker = 'null';
+						}
+						if (isset($this->d_file_name)) {
+							$filename= $this->d_file_name;
+						} else {
+							$filename = 'null';
+						}
+
                         ?>
 
                         <a href="<?php echo URL; ?>PDF/ValidasiSpm_PDF/<?php echo $kdkppn . "/" . $filename . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
@@ -58,12 +67,20 @@ if (Session::get('role') == ADMIN) {
             $kdtgl_akhir = 'null';
         }
 
-        $filename = 'null';
-        $kdsatker = 'null';
+		if (isset($this->d_satker_code)) {
+            $kdsatker= $this->d_satker_code;
+        } else {
+            $kdsatker = 'null';
+        }
+		if (isset($this->d_file_name)) {
+            $filename= $this->d_file_name;
+        } else {
+            $filename = 'null';
+        }
         ?>
 
-                        <a href="<?php echo URL; ?>PDF/ValidasiSpm_PDF/<?php echo $kdkppn . "/" . $filename . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        <?php
+			<a href="<?php echo URL; ?>PDF/ValidasiSpm_PDF/<?php echo $kdkppn . "/" . $filename . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		<?php
                     }
                 }
                 if (Session::get('role') == SATKER) {
@@ -90,8 +107,17 @@ if (Session::get('role') == ADMIN) {
                         $kdtgl_akhir = 'null';
                     }
 
-                    $filename = 'null';
-                    $kdsatker = 'null';
+					if (isset($this->d_satker_code)) {
+						$kdsatker= $this->d_satker_code;
+					} else {
+						$kdsatker = 'null';
+					}
+					if (isset($this->d_file_name)) {
+						$filename= $this->d_file_name;
+					} else {
+						$filename = 'null';
+					}
+
                     ?>
 
                     <a href="<?php echo URL; ?>PDF/ValidasiSpm_PDF/<?php echo $kdkppn . "/" . $filename . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
@@ -114,8 +140,17 @@ if (Session::get('role') == ADMIN) {
                         $kdtgl_akhir = 'null';
                     }
 
-                    $filename = 'null';
-                    $kdsatker = 'null';
+					if (isset($this->d_satker_code)) {
+						$kdsatker= $this->d_satker_code;
+					} else {
+						$kdsatker = 'null';
+					}
+					if (isset($this->d_file_name)) {
+						$filename= $this->d_file_name;
+					} else {
+						$filename = 'null';
+					}
+
                     ?>
 
                     <a href="<?php echo URL; ?>PDF/ValidasiSpm_PDF/<?php echo $kdkppn . "/" . $filename . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>

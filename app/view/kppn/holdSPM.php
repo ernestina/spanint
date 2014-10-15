@@ -33,7 +33,7 @@
                         }
                         ?>
 
-                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $invoice . "/" . $status; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
                         <?php
                     }
                 }
@@ -43,7 +43,9 @@
                             foreach ($this->d_nama_kppn as $kppn) {
                                 $kdkppn = $kppn->get_kd_satker();
                             }
-                        }
+                        }else{
+							$kdkppn = $this->d_kppn;
+						}
                         if (isset($this->d_invoice)) {
                             $invoice = $this->d_invoice;
                         } else {
@@ -56,7 +58,7 @@
                         }
                         ?>
 
-                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $invoice . "/" . $status; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
                         <?php
                     }
                 }
@@ -81,7 +83,7 @@
                     }
                     ?>
 
-                    <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $invoice . "/" . $status; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
                     <?php
                 }
                 if (Session::get('role') == KPPN) {
@@ -105,7 +107,7 @@
                     }
                     ?>
 
-                    <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $invoice . "/" . $status; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
                     <?php
                 }
                 //----------------------------------------------------		

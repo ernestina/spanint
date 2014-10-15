@@ -158,7 +158,7 @@ class FPDF_AutoWrapTable extends FPDF {
                 $this->Row(
                         array($no++,
                             $value->get_attribute6(),
-                            $value->get_total_sp2d(),
+                            number_format($value->get_total_sp2d()),
                             number_format($value->get_jumlah_sp2d())
 							)
                         );

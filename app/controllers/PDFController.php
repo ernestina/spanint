@@ -289,7 +289,7 @@ class PDFController extends BaseController {
         }
         if (Session::get('role') == SATKER) {
             $filter[$no++] = "A.SATKER = '" . Session::get('kd_satker') . "'";
-        }
+        }  
         if (Session::get('role') == KANWIL) {
             $filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
         }
@@ -1589,7 +1589,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function NTPNGanda_PDF($kdbulan = null) {
+    public function NTPNGanda_PDF($kdbulan = null,$kdkppn = null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1598,11 +1598,11 @@ class PDFController extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
 
-        if (Session::get('role') == KPPN) {
-            $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+        if ($kdkppn != 'null') {
+            $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
         }
 
-        if ($kdbulan != '') {
+        if ($kdbulan != 'null') {
             $filter[$no++] = "SUBSTR(BULAN,1,2) = '" . $kdbulan . "'";
         }
 
@@ -3064,13 +3064,15 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function HoldSpm_PDF($kdkppn = null, $invoice = null, $status = null) {
+    public function HoldSpm_PDF($kdkppn = null, $status = null,$invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null) {
         $d_spm1 = new DataHoldSPM($this->registry);
         $filter = array();
         $no = 0;
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		$invoice = "'" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "'";
+		$invoice = substr($invoice,1,18);
 
         if ($kdkppn != 'null') {
             $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
@@ -3079,7 +3081,11 @@ class PDFController extends BaseController {
             $filter[$no++] = "invoice_num = '" . $invoice . "'";
         }
         if ($status != 'null') {
-            $filter[$no++] = "A.CANCELLED_DATE " . $status;
+			if ($status == 1) {
+                    $filter[$no++] = "A.CANCELLED_DATE IS NULL ";
+                } elseif ($status == 2) {
+                    $filter[$no++] = "A.CANCELLED_DATE IS NOT NULL";
+				}
         }
 
         if (Session::get('role') == KPPN) {
@@ -3129,11 +3135,12 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 
         $this->view->load('kppn/holdSPM_PDF');
+		//$this->view->render('kppn/holdSPM');
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function HistorySpm_PDF($kdkppn = null, $invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null, $sp2d = null, $invoice = null) {
+    public function HistorySpm_PDF($kdkppn=null,$invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null, $sp2d = null,$invoice = null ) {
         $d_spm1 = new DataHistorySPM($this->registry);
         $filter = array();
         $invoice = '';
@@ -3171,8 +3178,9 @@ class PDFController extends BaseController {
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
         } elseif (!is_null($invoice_num1) and ( Session::get('role') == KANWIL OR Session::get('role') == ADMIN)) {
             $invoice = "'" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "'";
-            $kppn = substr($invoice, 0, 3);
-            $filter[$no++] = $kdkppn;
+            $kppn = substr($sp2d, 2, 3);
+			//$kppn = substr($invoice_num1, 2, 3);
+            $filter[$no++] = $kppn;
             //$filter_kanwil = "SUBSTR(NO_SP2D,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
             $this->view->invoice_num = $invoice_num;
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
@@ -3183,7 +3191,7 @@ class PDFController extends BaseController {
         } else {
             $filter[$no++] = Session::get('id_user');
         }
-        if ($invoice_num1 != 'null') {
+        if ($invoice != 'null') {
             $invoice = $invoice;
         }
 
@@ -3411,7 +3419,7 @@ class PDFController extends BaseController {
             $filter[$no++] = " upper(file_name) = upper('" . $filename . "')";
         }
         if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
-            $filter[$no++] = "CREATION_DATE BETWEEN TO_DATE('" . $kdtgl_awal . "','DD/MM/YYYY hh:mi:ss') AND TO_DATE('" . $kdtgl_akhir . "','DD/MM/YYYY hh:mi:ss')";
+            $filter[$no++] = "CREATION_DATE BETWEEN TO_DATE('" . $kdtgl_awal . " 00:00:01','DD/MM/YYYY hh24:mi:ss') AND TO_DATE('" . $kdtgl_akhir . " 23:59:59','DD/MM/YYYY hh24:mi:ss')";
             $tglawal = array("$kdtgl_awal");
             $tglakhir = array("$kdtgl_akhir");
 

@@ -107,10 +107,11 @@ class FPDF_AutoWrapTable extends FPDF {
         #tableheader
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 160;
-        $ukuran_kolom_satker = 140;
+        $ukuran_kolom_jenis_belanja = 140;
+        $ukuran_kolom_satker = 80;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 60;
+		$ukuran_kolom_dana1 = 100;
         $ukuran_kolom_file = 85;
         $ukuran_kolom_bank_pembayar = 60;
         $ukuran_kolom_norek_penerima = 100;
@@ -118,7 +119,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_tgl_sp2d = 60;
 		$kolom_grandtotal1=30+$ukuran_kolom_tgl_selsp2d+
 		$ukuran_kolom_tgl_sp2d+$ukuran_kolom_satker+
-		$ukuran_kolom_dana;
+		$ukuran_kolom_dana*3+$ukuran_kolom_dana1*2;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -137,14 +138,14 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($px2 += $ukuran_kolom_satker);
         $this->Cell($ukuran_kolom_dana, $h, 'Akun', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_dana, $h, 'Nama File', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_dana1, $h, 'Nama File', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_dana1);
         $this->Cell($ukuran_kolom_dana, $h, 'Status', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_dana);
         $this->Cell($ukuran_kolom_dana, $h, 'Norek Persepsi', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_dana, $h, 'Nomor Batch', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_dana1, $h, 'Nomor Batch', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_dana1);
         $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Nilai', 1, 1, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
         $this->Ln(8);
@@ -153,9 +154,9 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetWidths(array(
             30, $ukuran_kolom_tgl_selsp2d,
             $ukuran_kolom_tgl_sp2d, $ukuran_kolom_satker,
-            $ukuran_kolom_dana,$ukuran_kolom_dana,
+            $ukuran_kolom_dana,$ukuran_kolom_dana1,
 			$ukuran_kolom_dana,$ukuran_kolom_dana,
-			$ukuran_kolom_dana,$ukuran_kolom_jenis_belanja
+			$ukuran_kolom_dana1,$ukuran_kolom_jenis_belanja
         ));
         $this->SetAligns(array('C', 'C', 
 		'C', 'C',
@@ -381,7 +382,7 @@ $options = array(
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
     'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
     'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
-    'orientation' => 'P' //orientation: P=portrait, L=landscape
+    'orientation' => 'L' //orientation: P=portrait, L=landscape
 );
 
 $tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);

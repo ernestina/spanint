@@ -30,12 +30,13 @@ class FPDF_AutoWrapTable extends FPDF {
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
     private $nm_kppn;
+	private $kd_ppp;
 
     /*
      * Konstruktor
      */
 
-    function __construct($data1 = array(),$data2 = array(),$data3 = array(),$data4 = array(),$data6 = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn) {
+    function __construct($data1 = array(),$data2 = array(),$data3 = array(),$data4 = array(),$data6 = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn,$kd_ppp) {
         parent::__construct();
         $this->data1 = $data1;
 		$this->data2 = $data2;
@@ -46,6 +47,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->kdtgl_awal = $kdtgl_awal;
         $this->kdtgl_akhir = $kdtgl_akhir;
         $this->nm_kppn = $nm_kppn;
+		$this->kd_ppp=$kd_ppp;
     }
 
     /*
@@ -56,6 +58,8 @@ class FPDF_AutoWrapTable extends FPDF {
         //-----------------------------------
         $judul = $this->options['judul'];
         $nm_kppn = $this->nm_kppn;
+		$kd_ppp= $this->kd_ppp;
+    //}
         $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
         $border = 0;
         $h = 40;
@@ -527,8 +531,11 @@ class FPDF_AutoWrapTable extends FPDF {
 	$this->Ln(15);
 	//----------------------------------------------------------
 	//---------------------BAGIAN 6-----------------------------------
-				$pendapatan_hitung = $this->ppp/100;
+				//echo 'kd_ppp:'.$kd_ppp;
+				$pendapatan_hitung = $kd_ppp/100;
+				//echo 'pendapatan_hitung:'.$pendapatan_hitung;
 				$maksimum_pencairan = ($pendapatan_hitung * $total_penerimaan) - $total_belanja;
+
 				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
@@ -848,7 +855,8 @@ $options = array(
     'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data1,$data2,$data3,$data4,$data6, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
+$kd_ppp = $this->ppp;
+$tabel = new FPDF_AutoWrapTable($data1,$data2,$data3,$data4,$data6, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn,$kd_ppp);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();

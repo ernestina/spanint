@@ -194,52 +194,52 @@ class FPDF_AutoWrapTable extends FPDF {
             );
 		}else{
 		
-		$no = 1;
-        $this->SetFillColor(255);
-        foreach ($this->data as $value) {
-            $this->Row(
-                    array($no++,
-                        $value->get_check_number(),
-                        $value->get_creation_date(),
-                        $value->get_check_date(),
-						number_format($value->get_amount()),
-                        $value->get_currency_code(),
-                        number_format($value->get_exchange_rate()),
-                        $value->get_exchange_date(),
-                        number_format($value->get_base_amount()),
-                        $value->get_attribute6(),
-						$value->get_invoice_num(),
-						$value->get_invoice_date(),
-						$value->get_jenis_sp2d(),
-                        $value->get_description()
-                    )
-            );
-			$tot1 = $tot1 + $value->get_amount();	
-			$tot2 = $tot2 + $value->get_base_amount();	
-        }
-		$this->SetFont('Arial', 'B', 7);
-				$h = 20;
-				$this->SetFillColor(200, 200, 200);
-				$left = $this->GetX();
-				$this->Cell($kolom_grandtotal1, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-				$this->SetX($left += $kolom_grandtotal1);
-				$px1 = $this->GetX();
-				$py1 = $this->GetY();
-				$px2 = $px1;
-				$py2 = $py1;
-				$this->SetXY($px2, $py2);
-				$py3 = $this->GetY();
-				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot1), 1, 0, 'R', true);
-				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-				$this->Cell($kolom_grandtotal2, $h, 'GRAND TOTAL', 1, 0, 'R', true);
-				$this->SetX($px2 += $kolom_grandtotal2);
-				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot2), 1, 0, 'R', true);
-				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-				$this->Cell($kolom_grandtotal3, $h,'', 1, 1, 'R', true);
-				$this->Ln(3);
-		
-		}
-        $this->Ln(3);
+			$no = 1;
+			$this->SetFillColor(255);
+			foreach ($this->data as $value) {
+				$this->Row(
+						array($no++,
+							$value->get_check_number(),
+							$value->get_creation_date(),
+							$value->get_check_date(),
+							number_format($value->get_amount()),
+							$value->get_currency_code(),
+							number_format($value->get_exchange_rate()),
+							$value->get_exchange_date(),
+							number_format($value->get_base_amount()),
+							$value->get_attribute6(),
+							$value->get_invoice_num(),
+							$value->get_invoice_date(),
+							$value->get_jenis_sp2d(),
+							$value->get_description()
+						)
+				);
+				$tot1 = $tot1 + $value->get_amount();	
+				$tot2 = $tot2 + $value->get_base_amount();	
+			}
+			$this->SetFont('Arial', 'B', 7);
+					$h = 20;
+					$this->SetFillColor(200, 200, 200);
+					$left = $this->GetX();
+					$this->Cell($kolom_grandtotal1, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+					$this->SetX($left += $kolom_grandtotal1);
+					$px1 = $this->GetX();
+					$py1 = $this->GetY();
+					$px2 = $px1;
+					$py2 = $py1;
+					$this->SetXY($px2, $py2);
+					$py3 = $this->GetY();
+					$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot1), 1, 0, 'R', true);
+					$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+					$this->Cell($kolom_grandtotal2, $h, 'GRAND TOTAL', 1, 0, 'R', true);
+					$this->SetX($px2 += $kolom_grandtotal2);
+					$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot2), 1, 0, 'R', true);
+					$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+					$this->Cell($kolom_grandtotal3, $h,'', 1, 1, 'R', true);
+					$this->Ln(3);
+			
+			}
+			$this->Ln(3);
     }
 
     //footer

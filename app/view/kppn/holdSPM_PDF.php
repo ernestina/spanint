@@ -153,38 +153,54 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(30, $ukuran_kolom_pagu_total_sisa, $ukuran_kolom_dana, $ukuran_kolom_pagu_total, $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, $ukuran_kolom_dana, $ukuran_kolom_jenis_belanja));
         $this->SetAligns(array('C', 'C', 'R', 'L', 'L', 'L', 'C', 'C'));
-        $no = 1;
-        $this->SetFillColor(255);
-        foreach ($this->data as $value) {
-            $this->Row(
-                    array($no++,
-                        $value->get_invoice_num(),
-                        number_format($value->get_invoice_amount()),
-                        $value->get_description(),
-                        $value->get_hold_reason(),
-                        $value->get_release_reason(),
-                        $value->get_hold_date(),
-                        $value->get_keterangan()
+        if (count($this->data) == 0) {
+			$this->Row(
+                    array('',
+                        'N I H I L',
+                        '',
+                        '',
+                        '',
+						'',
+                        '',
+                        ''
                     )
             );
-			$total = $total + $value->get_invoice_amount();
-        }
-				$this->SetFont('Arial', 'B', 7);
-				$h = 20;
-				$this->SetFillColor(200, 200, 200);
-				$left = $this->GetX();
-				$this->Cell($kolom_grandtotal1, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-				$this->SetX($left += $kolom_grandtotal1);
-				$px1 = $this->GetX();
-				$py1 = $this->GetY();
-				$px2 = $px1;
-				$py2 = $py1;
-				$this->SetXY($px2, $py2);
-				$this->Cell($ukuran_kolom_dana, $h, number_format($total), 1, 0, 'R', true);
-				$this->SetX($px2 += $ukuran_kolom_dana);
-				$this->Cell($kolom_grandtotal2, $h, '', 1, 1, 'R', true);
-				$this->Ln(3);
-        $this->Ln(3);
+		}else{
+		
+		
+			$no = 1;
+			$this->SetFillColor(255);
+			foreach ($this->data as $value) {
+				$this->Row(
+						array($no++,
+							$value->get_invoice_num(),
+							number_format($value->get_invoice_amount()),
+							$value->get_description(),
+							$value->get_hold_reason(),
+							$value->get_release_reason(),
+							$value->get_hold_date(),
+							$value->get_keterangan()
+						)
+				);
+				$total = $total + $value->get_invoice_amount();
+			}
+					$this->SetFont('Arial', 'B', 7);
+					$h = 20;
+					$this->SetFillColor(200, 200, 200);
+					$left = $this->GetX();
+					$this->Cell($kolom_grandtotal1, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+					$this->SetX($left += $kolom_grandtotal1);
+					$px1 = $this->GetX();
+					$py1 = $this->GetY();
+					$px2 = $px1;
+					$py2 = $py1;
+					$this->SetXY($px2, $py2);
+					$this->Cell($ukuran_kolom_dana, $h, number_format($total), 1, 0, 'R', true);
+					$this->SetX($px2 += $ukuran_kolom_dana);
+					$this->Cell($kolom_grandtotal2, $h, '', 1, 1, 'R', true);
+					$this->Ln(3);
+			}
+			$this->Ln(3);
     }
 
     //footer
