@@ -611,11 +611,11 @@ if (is_array($this->nm_kppn2)) {
     //echo 'bukan array';
     $nm_kppn = $this->nm_kppn2;
 }
-
+$kdbulan = $this->kd_bulan;
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring Imbalan Jasa Perbankan'; //judul file laporan
+$judul = 'Laporan Monitoring Imbalan Jasa Perbankan Bulan '.$kdbulan; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
@@ -626,7 +626,7 @@ $options = array(
     'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn,$kdbulan);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();
