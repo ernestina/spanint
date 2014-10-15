@@ -1348,6 +1348,44 @@ class PDFController extends BaseController {
         }
         if ($kdbulan != 'null') {
             $filter[$no++] = "BULAN = '" . $kdbulan . "'";
+			if ($kdbulan == '01') {
+                $bulan = 'Januari';
+            }
+            if ($kdbulan == '02') {
+                $bulan = 'FebruarI';
+            }
+            if ($kdbulan == '03') {
+                $bulan = 'Maret';
+            }
+            if ($kdbulan == '04') {
+                $bulan = 'April';
+            }
+            if ($kdbulan == '05') {
+                $bulan = 'Mei';
+            }
+            if ($kdbulan == '06') {
+                $bulan = 'Juni';
+            }
+            if ($kdbulan == '07') {
+                $bulan = 'Juli';
+            }
+            if ($kdbulan == '08') {
+                $bulan = 'Agustus';
+            }
+            if ($kdbulan == '09') {
+                $bulan = 'September';
+            }
+            if ($kdbulan == '10') {
+                $bulan = 'Oktober';
+            }
+            if ($kdbulan == '11') {
+                $bulan = 'November';
+            }
+            if ($kdbulan == '12') {
+                $bulan = 'Desember';
+            }
+
+			$this->view->kd_bulan = $bulan;
         }
         if ($kdkppn != 'null') {
             $filter[$no++] = "KPPN = '" . $kdkppn . "'";
