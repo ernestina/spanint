@@ -277,6 +277,7 @@ class DataSPMController extends BaseController {
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = Session::get('id_user')
+			$this->view->kd_kppn = $kppn;
             ;
         }
         /*
