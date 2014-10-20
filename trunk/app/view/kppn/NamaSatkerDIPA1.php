@@ -262,7 +262,7 @@
 
                     <?php } ?>
 
-                    <label class="isian">Status Revisi: </label>
+                    <!-- label class="isian">Status Revisi: </label>
                     <select class="form-control" type="text" name="revisi" id="revisi">
 
                         <option value="">Pilih salah satu...</option>
@@ -277,7 +277,7 @@
                         }
                         ?>>SUDAH REVISI</option>
 
-                    </select>
+                    </select -->
 
                     <br/>
 
