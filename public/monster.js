@@ -413,6 +413,8 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
         $('#main-content').css('left', $('#sidebar').outerWidth());
     }
     
+    $('#dashboard-line').css('min-height', '200px');
+    
     //App Content Height
     if ($(window).innerHeight() / window.devicePixelRatio >= 600) {
         remainingTableSpace = $('#content-container').innerHeight();
@@ -423,10 +425,9 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
         $('.table-container').each(function() {
             $(this).css('height', remainingTableSpace);
         });
-    }
         
-    $('#dashboard-line').css('min-height', '200px');
-    $('#dashboard-line').css('height', remainingTableSpace - 120);
+        $('#dashboard-line').css('height', remainingTableSpace - 120);
+    }
     
     //Table Reset
     wrapRewrapTable();
@@ -568,6 +569,38 @@ function checkTime(i) {
     return i;
 }
 
+$('#tgl_awal').change(function() {
+    
+    tglAwal = $('#tgl_awal').val();
+    
+    endDate = new Date(tglAwal.substr(6,4), tglAwal.substr(3,2)-1, tglAwal.substr(0,2));
+    
+    console.log(endDate);
+    
+    maxEndDate = new Date(endDate.getTime() + (30*24*60*60*1000));
+    
+    console.log(maxEndDate);
+    
+    $('#tgl_akhir').datepicker('setEndDate', maxEndDate  );
+    
+});
+    
+$('#tgl_akhir').change(function() {
+    
+    tglAkhir = $('#tgl_akhir').val();
+    
+    startDate = new Date(tglAkhir.substr(6,4), tglAkhir.substr(3,2)-1, tglAkhir.substr(0,2));
+    
+    console.log(startDate);
+    
+    maxStartDate = new Date(startDate.getTime() - (30*24*60*60*1000));
+    
+    console.log(maxStartDate);
+    
+    $('#tgl_awal').datepicker('setStartDate', maxStartDate );
+    
+});
+
 //Event (ready, resize, et cetera)
 
 $(document).ready(function() {
@@ -576,19 +609,18 @@ $(document).ready(function() {
     resizePage();
     
     $('.nano').nanoScroller(); //Init scrollbar seksi
-    
-    if ($('#filter-first').length > 0) {
-        $('#modal-app-filter').modal();
-    }
 
     $('#datepicker').datepicker({
         format: "dd-mm-yyyy",
-        endDate: "'+1'",
         todayBtn: "linked",
         language: "id",
         autoclose: true,
         todayHighlight: true
     });
+    
+    if ($('#filter-first').length > 0) {
+        $('#modal-app-filter').modal();
+    }
     
     //Set-up untuk mode TV
     
