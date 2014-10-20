@@ -239,6 +239,15 @@ $akses['PelaporanKPPN'] = array(
 );
 
 /*
+ * akses dataPMRT
+ */
+$akses['DataPMRTKPPN'] = array(
+    '__construct',
+    'cekPMRT',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFKPPN'] = array(
