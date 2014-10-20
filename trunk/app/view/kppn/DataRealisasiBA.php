@@ -9,6 +9,9 @@
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
+                <?php if (Session::get('role') != KPPN) { ?>
+                    <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                <?php } ?>
         
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -49,9 +52,6 @@
 
 //------------------------------
         ?>
-            
-                <!--button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button-->
-                
             </div>
         </div>
         
@@ -165,6 +165,10 @@
 					
 					
                 }
+            } else {
+                
+                echo '<td colspan=12 id="filter-first" align="center">Masukkan filter terlebih dahulu.</td>';
+                
             }
             ?>
         </tbody>
