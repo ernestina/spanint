@@ -236,7 +236,7 @@
                         </select>
 <?php } ?>
 
-                    <label class="isian">Status Revisi: </label>
+                    <!--label class="isian">Status Revisi: </label>
                     <select class="form-control" type="text" name="revisi" id="revisi">
 
                         <option value=''>- pilih -</option>
@@ -247,7 +247,7 @@
     echo "NON GAJI";
 } ?>>SUDAH REVISI</option>
 
-                    </select>
+                    </select -->
                     <br/>
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Kode Satker: </label>
