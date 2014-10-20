@@ -276,9 +276,9 @@ class DataSPMController extends BaseController {
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = Session::get('id_user')
+            $filter[$no++] = Session::get('id_user');
 			$this->view->kd_kppn = $kppn;
-            ;
+            
         }
         /*
           if (!is_null($invoice_num1)) {
