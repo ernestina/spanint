@@ -145,7 +145,6 @@
 
             <div class="col-md-6 col-sm-12 align-right">
                 <?php
-                echo "123";
                 // untuk menampilkan last_update
                 if (isset($this->last_update)) {
                     foreach ($this->last_update as $last_update) {
