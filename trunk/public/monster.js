@@ -573,15 +573,23 @@ $('#tgl_awal').change(function() {
     
     tglAwal = $('#tgl_awal').val();
     
-    endDate = new Date(tglAwal.substr(6,4), tglAwal.substr(3,2)-1, tglAwal.substr(0,2));
+    if (tglAwal.length > 0 && tglAwal != undefined) {
     
-    console.log(endDate);
-    
-    maxEndDate = new Date(endDate.getTime() + (30*24*60*60*1000));
-    
-    console.log(maxEndDate);
-    
-    $('#tgl_akhir').datepicker('setEndDate', maxEndDate  );
+        endDate = new Date(tglAwal.substr(6,4), tglAwal.substr(3,2)-1, tglAwal.substr(0,2));
+
+        console.log(endDate);
+
+        maxEndDate = new Date(endDate.getTime() + (29*24*60*60*1000));
+
+        console.log(maxEndDate);
+
+        $('#tgl_akhir').datepicker('setEndDate', maxEndDate  );
+        
+    } else {
+        
+        $('#tgl_akhir').datepicker('setEndDate', null);
+        
+    }
     
 });
     
@@ -589,15 +597,23 @@ $('#tgl_akhir').change(function() {
     
     tglAkhir = $('#tgl_akhir').val();
     
-    startDate = new Date(tglAkhir.substr(6,4), tglAkhir.substr(3,2)-1, tglAkhir.substr(0,2));
+    if (tglAkhir.length > 0 && tglAkhir != undefined) {
     
-    console.log(startDate);
-    
-    maxStartDate = new Date(startDate.getTime() - (30*24*60*60*1000));
-    
-    console.log(maxStartDate);
-    
-    $('#tgl_awal').datepicker('setStartDate', maxStartDate );
+        startDate = new Date(tglAkhir.substr(6,4), tglAkhir.substr(3,2)-1, tglAkhir.substr(0,2));
+
+        console.log(startDate);
+
+        maxStartDate = new Date(startDate.getTime() - (29*24*60*60*1000));
+
+        console.log(maxStartDate);
+
+        $('#tgl_awal').datepicker('setStartDate', maxStartDate );
+        
+    } else {
+        
+        $('#tgl_awal').datepicker('setStartDate', null);
+        
+    }
     
 });
 
