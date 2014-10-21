@@ -229,11 +229,9 @@ class DataGR_STATUS {
 
 	
 	public function get_akun_pnbp($filter) {
-        $sql = "SELECT distinct SEGMENT3, B.DESCRIPTION FROM "
-				. $this->_table2. " A, T_NAMA_AKUN B
+        $sql = "SELECT SEGMENT3, DESCRIPTION FROM 
+				AKUN_PNBP
 				WHERE 1=1
-				AND A.SEGMENT3=B.FLEX_VALUE 
-				AND SUBSTR(SEGMENT3,1,2) = '42'
 				AND SEGMENT2 = '".Session::get('id_user')."'
 				" ;
   
