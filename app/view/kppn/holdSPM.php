@@ -24,7 +24,7 @@
                         if (isset($this->d_invoice)) {
                             $invoice = $this->d_invoice;
                         } else {
-                            $invoice = "null";
+                            $invoice = "null/null/null";
                         }
                         if (isset($this->d_status)) {
                             $status = $this->d_status;
@@ -49,7 +49,7 @@
                         if (isset($this->d_invoice)) {
                             $invoice = $this->d_invoice;
                         } else {
-                            $invoice = "null";
+                            $invoice = "null/null/null";
                         }
                         if (isset($this->d_status)) {
                             $status = $this->d_status;
@@ -74,7 +74,7 @@
                     if (isset($this->d_invoice)) {
                         $invoice = $this->d_invoice;
                     } else {
-                        $invoice = "null";
+                        $invoice = "null/null/null";
                     }
                     if (isset($this->d_status)) {
                         $status = $this->d_status;
@@ -98,7 +98,7 @@
                     if (isset($this->d_invoice)) {
                         $invoice = $this->d_invoice;
                     } else {
-                        $invoice = "null";
+                        $invoice = "null/null/null";
                     }
                     if (isset($this->d_status)) {
                         $status = $this->d_status;
