@@ -149,14 +149,8 @@ class DataSupplierController extends BaseController {
 
         $this->view->ekstensi = ".txt";
         $this->view->kppn_code = Session::get('kd_satker');
-        if (Session::get('kd_satker') == '088') {
             $d_log->tambah_log("Sukses");
             $this->view->load('satker/downloadSupplierxls');
-        } else {
-            $this->view->data = $d_supp->get_download_supp_filter_xls(Session::get('kd_satker'));
-            $d_log->tambah_log("Sukses");
-            $this->view->load('satker/downloadSupplierxls2');
-        }
     }
 
     public function __destruct() {

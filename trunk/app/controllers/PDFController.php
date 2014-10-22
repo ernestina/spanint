@@ -3115,7 +3115,7 @@ class PDFController extends BaseController {
         if ($kdkppn != 'null') {
             $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
         }
-        if ($invoice != 'null') {
+        if ($invoice_num1 != 'null') {
             $filter[$no++] = "invoice_num = '" . $invoice . "'";
         }
         if ($status != 'null') {
