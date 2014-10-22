@@ -232,13 +232,13 @@ class FPDF_AutoWrapTable extends FPDF {
 							$value->get_norek_persepsi() . ' ' .$value->get_nmrek_persepsi() ,
 							$value->get_tgl_limpah(),
 							$value->get_nosakti_limpah(),
-							number_format($value->get_jml_terima()),
+							number_format($value->get_jml_limpah()),
 							$value->get_akun_limpah(),
 							$value->get_kppn_anak(),
 							$value->get_norek_501() . ' ' . $value->get_nmrek_501(),
 							$value->get_tgl_terima(),
 							$value->get_nosakti_bs(),
-							number_format($value->get_jml_limpah()),
+							number_format($value->get_jml_terima()),
 							$value->get_akun_terima(),
 							$value->get_kppn_induk(),
 							$value->get_status()
@@ -257,7 +257,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$px2 = $px1;
 				$py2 = $py1;
 				$this->SetXY($px2, $py2);
-				$this->Cell($ukuran_kolom_4a, $h, number_format($terima), 1, 0, 'R', true);
+				$this->Cell($ukuran_kolom_4a, $h, number_format($limpah), 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom_4a);
 				$this->Cell($kolom_grandtotal3a, $h, '', 1, 0, 'R', true);
 				$this->SetX($px2 += $kolom_grandtotal3a);
@@ -268,7 +268,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$px2 = $px1;
 				$py2 = $py1;
 				$this->SetXY($px2, $py2);
-				$this->Cell($ukuran_kolom_4b, $h, number_format($limpah), 1, 0, 'R', true);
+				$this->Cell($ukuran_kolom_4b, $h, number_format($terima), 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom_4b);
 				$this->Cell($kolom_grandtotal3b, $h, '', 1, 1, 'R', true);
 				$this->Ln(3);

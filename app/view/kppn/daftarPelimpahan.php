@@ -260,10 +260,10 @@
             <tr>
 				<td class='ratatengah'><b><b></td>
                 <td colspan='3' class='ratatengah'><b>GRAND TOTAL<b></td>
-                <td class='ratakanan'><?php echo number_format($terima); ?></td>
+                <td class='ratakanan'><?php echo number_format($limpah); ?></td>
                 <td colspan='2' class='ratatengah'><b><b></td>
                 <td colspan='3' class='ratatengah'><b>GRAND TOTAL<b></td>
-                <td class='ratakanan'><?php echo number_format($limpah); ?></td>
+                <td class='ratakanan'><?php echo number_format($terima); ?></td>
                 <td colspan='2' class='ratatengah'><b><b></td>
 				<td class='ratatengah'><b><b></td>
             </tr>
