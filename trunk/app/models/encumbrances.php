@@ -9,11 +9,16 @@ class encumbrances {
 
     private $db;
     private $_segment1;
+	private $_attribute1;
+	private $_attribute11;
     private $_status;
     private $_comments;
-    private $_attribute1;
     private $_code_id;
     private $_encumbered_amount;
+	private $_billed_amount;
+	private $_sisa_encumbrence;
+	private $_app_date;
+	private $_description;
     private $_table1 = 'ENCUMBRANCES';
     public $registry;
 
@@ -43,7 +48,7 @@ class encumbrances {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " ORDER BY SEGMENT1 DESC ";
+        $sql .= " ORDER BY SEGMENT1, CREATION_DATE DESC ";
 
         //var_dump ($sql);
         $result = $this->db->select($sql);
@@ -51,11 +56,16 @@ class encumbrances {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_segment1($val['SEGMENT1']);
+			$d_data->set_attribute11($val['ATTRIBUTE11']);
             $d_data->set_code_id($val['DIST_CODE_COMBINATION_ID']);
-            $d_data->set_status($val['AUTHORIZATION_STATUS']);
+            $d_data->set_status($val['APPROVED_FLAG']);
             $d_data->set_encumbered_amount($val['ENCUMBERED_AMOUNT']);
+			$d_data->set_billed_amount($val['AMOUNT_BILLED']);
+			$d_data->set_sisa_encumbrence($val['SISA_ENCUMBRANCE']);
             $d_data->set_comments($val['COMMENTS']);
             $d_data->set_attribute1($val['ATTRIBUTE1']);
+			$d_data->set_app_date($val['APPROVED_DATE']);
+			$d_data->set_description($val['DESCRIPTION']);
             $data[] = $d_data;
         }
         return $data;
@@ -72,7 +82,13 @@ class encumbrances {
     public function set_encumbered_amount($encumbered_amount) {
         $this->_encumbered_amount = $encumbered_amount;
     }
-
+	public function set_billed_amount($billed_amount) {
+        $this->_billed_amount = $billed_amount;
+    }
+	public function set_sisa_encumbrence($sisa_encumbrence) {
+        $this->_sisa_encumbrence = $sisa_encumbrence;
+    }
+	
     public function set_code_id($code_id) {
         $this->_code_id = $code_id;
     }
@@ -88,7 +104,15 @@ class encumbrances {
     public function set_attribute1($attribute1) {
         $this->_attribute1 = $attribute1;
     }
-
+	public function set_attribute11($attribute11) {
+        $this->_attribute11 = $attribute11;
+    }
+	public function set_app_date($app_date) {
+        $this->_app_date = $app_date;
+    }
+	public function set_description($description) {
+        $this->_description = $description;
+    }
     /*
      * getter
      */
@@ -99,6 +123,14 @@ class encumbrances {
 
     public function get_encumbered_amount() {
         return $this->_encumbered_amount;
+    }
+	
+	public function get_billed_amount() {
+        return $this->_billed_amount;
+    }
+	
+	public function get_sisa_encumbrence() {
+        return $this->_sisa_encumbrence;
     }
 
     public function get_code_id() {
@@ -115,6 +147,16 @@ class encumbrances {
 
     public function get_attribute1() {
         return $this->_attribute1;
+    }
+	
+	public function get_attribute11() {
+        return $this->_attribute11;
+    }
+	public function get_app_date() {
+        return $this->_app_date;
+    }
+	public function get_description() {
+        return $this->_description;
     }
 
     /*

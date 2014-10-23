@@ -74,10 +74,16 @@
         <thead>
             <tr>
                 <th class='mid'>No.</th>
-                <th class='ratakanan'>Sisa Kontrak</th>
-                <th class='ratakanan'>Blokir</th>
-                <th class='ratakanan'>Blokir Sementara</th>
-                <th class='ratakanan'>Invoice</th>
+                <th class='ratakanan'>Nomor PO</th>
+				<th class='ratakanan'>CAN</th>
+				<th class='ratakanan'>Status</th>
+				<th class='ratakanan'>TGL Approve</th>
+				<th class='ratakanan'>Nomor Kontrak</th>
+                <th class='ratakanan'>Uraian Kontrak</th>
+				<th class='ratakanan'>Nilai Termin Ke-</th>
+                <th class='ratakanan'>Nilai Termin</th>
+                <th class='ratakanan'>Nilai Realisasi</th>
+				<th class='ratakanan'>Nilai Sisa Encumbrance</th>
             </tr>
         </thead>
         <tbody class='ratatengah'>
@@ -93,19 +99,34 @@
                     foreach ($this->data as $value) {
                         echo "<tr>	";
                         echo "<td class='mid'>" . $no++ . "</td>";
-                        echo "<td class='ratakanan'>" . number_format($value->get_obligation()) . "</td>";
-                        echo "<td class='ratakanan'>" . number_format($value->get_block_amount()) . "</td>";
-                        echo "<td class='ratakanan'>" . number_format($value->get_temp_block()) . "</td>";
-                        echo "<td class='ratakanan'>" . number_format($value->get_invoice()) . "</td>";
-                        //echo "<td align='right'>" . $value->get_encumbered_amount(). "</td>";
-                        //$total = $total + $value->get_encumbered_amount();
+                        echo "<td class='mid'>" . $value->get_segment1() . "</td>";
+                        echo "<td class='mid'>" . $value->get_attribute11() . "</td>";
+						echo "<td class='mid'>" . $value->get_status() . "</td>";
+						echo "<td class='mid'>" . $value->get_app_date() . "</td>";
+						echo "<td class='mid'>" . $value->get_attribute1() . "</td>";
+                        echo "<td class='ratakiri'>" . $value->get_comments() . "</td>";
+						echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_encumbered_amount()) . "</td>";
+                        echo "<td align='right'>" . number_format($value->get_billed_amount()). "</td>";
+						echo "<td align='right'>" . number_format($value->get_sisa_encumbrence()). "</td>";
+                        $total = $total + $value->get_sisa_encumbrence();
                     }
+				
                 }
             } else {
                 echo '<td colspan=5 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
             }
             ?>
         </tbody>
+		<tfoot>
+            <tr>
+                <td colspan='9'></td>
+                <td class='ratatengah'><b>GRAND TOTAL</td>
+                <td align='right'><b><?php echo number_format($total); ?>
+                </td>
+
+            </tr>
+        </tfoot>
     </table>
 </div>
 

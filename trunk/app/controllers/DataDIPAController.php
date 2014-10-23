@@ -254,7 +254,7 @@ class DataDIPAController extends BaseController {
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+            //$filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
         }
         if (Session::get('role') == ADMIN || Session::get('role') == DJA) {
             $d_kppn_list = new DataUser($this->registry);
@@ -275,9 +275,9 @@ class DataDIPAController extends BaseController {
         if ($kf == '2') {
             $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
             $this->view->render('kppn/detail_fund_fail_kd');
-        } else {
-            $d_spm1 = new DataFA($this->registry);
-            $this->view->data = $d_spm1->get_fa_filter($filter);
+        } elseif ($kf == '1')  {
+            $d_spm2 = new DataFA($this->registry);
+            $this->view->data = $d_spm2->get_fa_filter($filter);
             $this->view->render('kppn/detail_fund_fail_ff');
         }
         $d_log->tambah_log("Sukses");
@@ -461,18 +461,16 @@ class DataDIPAController extends BaseController {
                 $this->view->d_nm_satker = $_POST['nmsatker'];
             }
             if ($_POST['revisi'] != '') {
-                if ($_POST['revisi'] == 0) {
+                if ($_POST['revisi'] == '0') {
                     $filter[$no++] = "REV = 0";
                     $this->view->d_kd_revisi = $_POST['revisi'];
                 }
-
-                if ($_POST['revisi'] == 1) {
+				
+                elseif ($_POST['revisi'] == '1') {
                     $filter[$no++] = "REV > 0";
                     $this->view->d_kd_revisi = $_POST['revisi'];
                 }
             }
-
-
 
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
             //$this->view->render('kppn/NamaSatker');			
@@ -817,7 +815,7 @@ class DataDIPAController extends BaseController {
     }
 
     public function DetailEncumbrances($code_id = null) {
-        $d_spm1 = new DataFA($this->registry);
+        $d_spm1 = new encumbrances($this->registry);
         $filter = array();
         $no = 0;
         //untuk mencatat log user
@@ -828,7 +826,7 @@ class DataDIPAController extends BaseController {
             //$this->view->invoice_num = $invoice_num;	
         }
         //var_dump($d_spm->get_hist_spm_filter());
-        $this->view->data = $d_spm1->get_fa_filter($filter);
+        $this->view->data = $d_spm1->get_encumbrances($filter);
 
         $d_log->tambah_log("Sukses");
 
