@@ -8,7 +8,7 @@
         <div class="row">
 
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Monitoring Pergantian User</h2>
+                <h2>Monitoring User Aktif</h2>
             </div>
 
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
