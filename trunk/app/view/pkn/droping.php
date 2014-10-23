@@ -153,8 +153,8 @@
                         echo "<td>" . $no++ . "</td>";
                         echo "<td>" . $value->get_creation_date() . "</td>";
                         echo "<td>" . $value->get_bank() . "</td>";
-                        echo "<td>" . number_format($value->get_jumlah_check_number_line_num()) . "</td>";
                         echo "<td>" . number_format($value->get_jumlah_ftp_file_name()) . "</td>";
+                        echo "<td>" . number_format($value->get_jumlah_check_number_line_num()) . "</td>";
                         echo "<td align = 'right'>" . number_format($value->get_jumlah_check_amount()) . "</td>";
                         echo "<td align = 'right'><a href=".URL."dataDroping/detailDroping/" . $value->get_id()."/".$value->get_bank()."/".$value->get_creation_date().">" . number_format($value->get_payment_amount()) . "</a></td>";
                         echo "<td align = 'right'>" . number_format($value->get_penihilan()) . "</td>";
