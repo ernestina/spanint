@@ -50,22 +50,22 @@ class encumbrances {
 
         $sql .= " ORDER BY SEGMENT1, CREATION_DATE DESC ";
 
-        //var_dump ($sql);
+        var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_segment1($val['SEGMENT1']);
-			$d_data->set_attribute11($val['ATTRIBUTE11']);
-            $d_data->set_code_id($val['DIST_CODE_COMBINATION_ID']);
+            $d_data->set_attribute11($val['ATTRIBUTE11']);
+            $d_data->set_code_id($val['CODE_COMBINATION_ID']);
             $d_data->set_status($val['APPROVED_FLAG']);
             $d_data->set_encumbered_amount($val['ENCUMBERED_AMOUNT']);
-			$d_data->set_billed_amount($val['AMOUNT_BILLED']);
-			$d_data->set_sisa_encumbrence($val['SISA_ENCUMBRANCE']);
+            $d_data->set_billed_amount($val['AMOUNT_BILLED']);
+            $d_data->set_sisa_encumbrence($val['SISA_ENCUMBRANCE']);
             $d_data->set_comments($val['COMMENTS']);
             $d_data->set_attribute1($val['ATTRIBUTE1']);
-			$d_data->set_app_date($val['APPROVED_DATE']);
-			$d_data->set_description($val['DESCRIPTION']);
+            $d_data->set_app_date($val['APPROVED_DATE']);
+            $d_data->set_description($val['DESCRIPTION']);
             $data[] = $d_data;
         }
         return $data;

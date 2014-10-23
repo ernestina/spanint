@@ -145,7 +145,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $left = $this->GetX();
         $this->Cell(20, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += 20);
-        $this->Cell($ukuran_kolom_a, $h / 2, 'Pelimpahan', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_a, $h / 2, 'Pencatatan Pelimpahan oleh KPPN', 1, 0, 'C', true);
         $py1 = $this->GetY();
         $px2 = $px1+19;
         $py2 = $py1 + 20;
@@ -164,7 +164,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $py3 = $this->GetY();
         $this->SetY($py3 -= 20);
         $this->SetX($left += $ukuran_kolom_a);
-        $this->Cell($ukuran_kolom_b, $h / 2, 'Penerimaan 501', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_b, $h / 2, 'Penerimaan pada Rekening Sub RKUN501', 1, 0, 'C', true);
         $py1 = $this->GetY();
         $px2 = $px1 + $ukuran_kolom_a+19;
         $py2 = $py1 + 20;
