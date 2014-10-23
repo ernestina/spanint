@@ -188,8 +188,8 @@
         <thead>
             <tr>
                 <th rowspan="2" >No.</th>
-                <th colspan="6" >Pelimpahan</th>
-                <th colspan="6" >Penerimaan 501</th>
+                <th colspan="6" >Pencatatan Pelimpahan oleh KPPN</th>
+                <th colspan="6" >Penerimaan pada Rekening Sub RKUN 501</th>
                 <th rowspan="2">Status Limpah</th>
             </tr>
             <tr>

@@ -907,7 +907,7 @@ class PDFController extends BaseController {
 
 //baru
     public function DetailEncumbrances_PDF($code_id = null) {
-        $d_spm1 = new DataFA($this->registry);
+        $d_spm1 = new encumbrances($this->registry);
         $filter = array();
         $no = 0;
         //untuk mencatat log user
@@ -943,7 +943,7 @@ class PDFController extends BaseController {
         }
         //-------------------------
         //var_dump($d_spm->get_hist_spm_filter());
-        $this->view->data = $d_spm1->get_fa_filter($filter);
+        $this->view->data = $d_spm1->get_encumbrances($filter);
         $d_log->tambah_log("Sukses");
         $this->view->load('kppn/encumbrances_PDF');
     }

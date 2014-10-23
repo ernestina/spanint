@@ -101,14 +101,14 @@
                         echo "<td class='mid'>" . $no++ . "</td>";
                         echo "<td class='mid'>" . $value->get_segment1() . "</td>";
                         echo "<td class='mid'>" . $value->get_attribute11() . "</td>";
-						echo "<td class='mid'>" . $value->get_status() . "</td>";
-						echo "<td class='mid'>" . $value->get_app_date() . "</td>";
-						echo "<td class='mid'>" . $value->get_attribute1() . "</td>";
+                        echo "<td class='mid'>" . $value->get_status() . "</td>";
+                        echo "<td class='mid'>" . $value->get_app_date() . "</td>";
+                        echo "<td class='mid'>" . $value->get_attribute1() . "</td>";
                         echo "<td class='ratakiri'>" . $value->get_comments() . "</td>";
-						echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
+                        echo "<td class='ratakiri'>" . $value->get_description() . "</td>";
                         echo "<td class='ratakanan'>" . number_format($value->get_encumbered_amount()) . "</td>";
-                        echo "<td align='right'>" . number_format($value->get_billed_amount()). "</td>";
-						echo "<td align='right'>" . number_format($value->get_sisa_encumbrence()). "</td>";
+                        echo "<td align='right'>" . number_format($value->get_billed_amount()) . "</td>";
+                        echo "<td align='right'>" . number_format($value->get_sisa_encumbrence()) . "</td>";
                         $total = $total + $value->get_sisa_encumbrence();
                     }
 				
