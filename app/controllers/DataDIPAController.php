@@ -68,8 +68,13 @@ class DataDIPAController extends BaseController {
                 $filter[$no++] = "A.PROGRAM_CODE =  '" . $program1 . "'";
                 $this->view->program_code = $program1;
             }
-            if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
+            /*if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
                 $filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN '" . $_POST['tgl_awal'] . "' AND '" . $_POST['tgl_akhir'] . "'";
+                $this->view->d_tgl_awal = $_POST['tgl_awal'];
+                $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+            }*/
+            if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
+                $filter[$no++] = "A.TANGGAL_POSTING_REVISI BETWEEN TO_DATE (" . date('Ymd', strtotime($_POST['tgl_awal'])) . ",'YYYYMMDD') AND TO_DATE (" . date('Ymd', strtotime($_POST['tgl_akhir'])) . ",'YYYYMMDD')";
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
@@ -471,9 +476,16 @@ class DataDIPAController extends BaseController {
                     $this->view->d_kd_revisi = $_POST['revisi'];
                 }
             }
-
+            
+            /*if ($_POST['KodeBA'] != '') {
+                $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . $_POST['KodeBA'] . "'";
+                //$this->view->satker_code = $_POST['KodeBA'];
+            }*/
+            
             $this->view->data = $d_spm1->get_satker_dipa_filter($filter);
-            //$this->view->render('kppn/NamaSatker');			
+			//$this->view->data2 = $d_spm1->get_nama_BA($_POST['kdkppn']);
+            
+            		
         }
         /* elseif (Session::get('role')==ADMIN){
           $filter[$no++]="(SELECT MAX(A.REVISION_NO) FROM SPSA_BT_DIPA_V) > '0'";

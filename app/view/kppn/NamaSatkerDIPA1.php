@@ -276,9 +276,9 @@
                         }
                         ?>>SUDAH REVISI</option>
 
-                    </select -->
+                    </select>
 
-                    <br/>
+                    <br/-->
 
                     <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Kode Satker: </label>

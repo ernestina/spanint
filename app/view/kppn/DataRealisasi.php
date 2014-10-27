@@ -262,7 +262,8 @@
                         </select>
 						
 <?php } ?>
-					<div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
+					<br>
+                    <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Bagian Anggaran: </label>					
                     <select class="form-control" type="text" name="KodeBA" id="KodeBA">
                         <option value='' selected>- pilih -</option>
