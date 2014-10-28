@@ -78,6 +78,10 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
@@ -162,14 +166,11 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetAligns(array('C', 'C', 'C', 'R', 'L', 'C', 'C','L', 'C', 'C', 'C','L'));
         if (count($this->data) == 0) {
 			$this->Row(
-                    array('',
-                        'N I H I L',
-                        '',
-                        '',
-                        '',
-                        '',
-                        '',
-                        ''
+                    array('','N I H I L',
+                        '','',
+                        '','',
+						'','',
+                        '',''
                     )
             );
 		}else{
