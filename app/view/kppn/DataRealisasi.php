@@ -13,16 +13,16 @@
 				//--------------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 				if (Session::get('role') == ADMIN  || Session::get('role') == DJA) {
-					if( isset($this->d_nama_kppn) || isset($this->satker_code1)){
+					if( isset($this->d_nama_kppn) || isset($this->satker_code)){
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
 							}
 						} else {
-							$kdkppn = 'null';
+								$kdkppn = $this->d_kd_kppn;
 						}
-						if (isset($this->satker_code1)) {
-							$kdsatker =$this->satker_code1;
+						if (isset($this->satker_code)) {
+							$kdsatker =$this->satker_code;
 						} else {
 							$kdsatker = 'null';
 						}
@@ -33,16 +33,16 @@
 					}
 				}
 				if (Session::get('role') == KANWIL) {
-					if( isset($this->d_nama_kppn) || isset($this->satker_code1)){
+					if( isset($this->d_nama_kppn) || isset($this->satker_code)){
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
 							  }
 						} else {
-							$kdkppn = 'null';
+								$kdkppn = $this->d_kd_kppn;
 						}
-						if (isset($this->satker_code1)) {
-							$kdsatker = $this->satker_code1;
+						if (isset($this->satker_code)) {
+							$kdsatker = $this->satker_code;
 						} else {
 							$kdsatker = 'null';
 						}							
@@ -57,8 +57,8 @@
 						} else {
 							$kdkppn = Session::get('id_user');
 						}
-						if (isset($this->satker_code1)) {
-							$kdsatker = $this->satker_code1;
+						if (isset($this->satker_code)) {
+							$kdsatker = $this->satker_code;
 						} else {
 							$kdsatker = 'null';
 						}						
