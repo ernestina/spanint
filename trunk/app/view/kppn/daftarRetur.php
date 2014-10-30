@@ -117,16 +117,18 @@
             <tr>
                 <th rowspan=2 class="align-center">No.</th>
                 <th rowspan=2 class="align-center">Kode Satker <br> Nama Satker</th>
-                <th colspan=4 class="align-center">SP2D Retur</th>
+                <th colspan=5 class="align-center">SP2D Retur</th>
                 <th colspan=3 class="align-center">SP2D Pengganti</th>
-                <th rowspan=2 class="align-center">Bank Pembayar <br> Status Retur</th>
+                <th rowspan=2 class="align-center">Status Retur</th>
+                
             </tr>
             <tr>
                 <th class="align-center">Tgl. SP2D<br>No. SP2D<br>No. Transaksi</th>
+                <th rowspan=2 class="align-center">Bank Pembayar</th>
                 <th width="200px">Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
                 <th>Uraian SP2D</th>
                 <th>Alasan Retur</th>
-                <th class="align-center" width="100px">Tgl Proses <br>SP2D Pengganti</th>
+                <th class="align-center">Tgl Proses <br>SP2D Pengganti</th>
                 <th class="align-center">Tgl. SP2D<br>No. SP2D</th>
                 <th width="200px">Bank Penerima <br>Nama Penerima<br>No. Rekening Penerima <br>Jumlah</th>
             </tr>
@@ -143,13 +145,14 @@ if (isset($this->data)) {
             echo "<td>" . $no++ . "</td>";
             echo "<td>" . $value->get_kdsatker() . "<br>" . $value->get_nmsatker() . "</td>";
             echo "<td>" . $value->get_statement_date() . "<br>" . $value->get_sp2d_number() . "<br>" . $value->get_receipt_number() . "</td>";
+            echo "<td>" . $value->get_bank_account_name() . "</td>";
             echo "<td width='200px'> " . $value->get_bank_name() . '<br>Penerima: ' . $value->get_vendor_name() . ' <br>No. Rek: ' . $value->get_vendor_ext_bank_account_num() . "<br> Rp. " . number_format($value->get_amount()) . "</td>";
             echo "<td class='ratakiri'> " . $value->get_invoice_description() . " </td>";
             echo "<td class='ratakiri'> " . $value->get_keterangan_retur() . " </td>";
             echo "<td>" . $value->get_tgl_proses_sp2d_pengganti() . "</td>";
             echo "<td>" . $value->get_tgsp2d_pengganti() . "<br> " . $value->get_nosp2d_pengganti() . "</td>";
             echo "<td class='ratakiri'> " . $value->get_bank_name_pengganti() . '<br>Penerima: ' . $value->get_vendor_name_pengganti() . ' <br>No. Rek: ' . $value->get_vendor_account_num_pengganti() . "<br> Rp. " . number_format($value->get_nilai_sp2d_pengganti()) . "</td>";
-            echo "<td>" . $value->get_bank_account_name() . "<br>" . $value->get_status_retur() . "</td>";
+            echo "<td> KPPN " . $value->get_status_retur() . "</td>";
             echo "</tr>	";
         }
     }
