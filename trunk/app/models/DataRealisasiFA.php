@@ -37,7 +37,7 @@ class DataRealisasiFA {
         Session::get('id_user');
         $sql = "SELECT INVOICE_NUM, DIST_CODE_COMBINATION_ID, INVOICE_DATE, AMOUNT, CHECK_NUMBER, CHECK_DATE, 
 				CASE WHEN WFAPPROVAL_STATUS = 'WFAPPROVED' THEN 'Sudah Disetujui' 
-				WHEN WFAPPROVAL_STATUS = 'REJECTED' THEN 'Ditolak (Belum Dibatalkan)'
+				WHEN WFAPPROVAL_STATUS = 'REJECTED' AND CANCELLED_DATE IS NULL THEN 'Ditolak (Belum Dibatalkan)'
 				END WFAPPROVAL_STATUS 
 				FROM "
                 . $this->_table1 . " 
@@ -45,6 +45,7 @@ class DataRealisasiFA {
 				and (status_lookup_code <> 'VOIDED' 
 				or status_lookup_code is null) 
 				and WFAPPROVAL_STATUS <> 'NOT REQUIRED'
+				AND CANCELLED_DATE IS NULL
 				";
         $no = 0;
         foreach ($filter as $filter) {
