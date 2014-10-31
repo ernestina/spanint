@@ -299,7 +299,12 @@ class DataGRController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-
+		
+		if (Session::get('role') == SATKER) {
+            $filter[$no++] = "SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
+            $this->view->data = $d_spm1->get_sp2d_rekap_filter($filter);
+        }
+		
 		$this->view->data2 = $d_spm1->get_akun_pnbp($filter);
         if (isset($_POST['submit_file'])) {
 
@@ -309,6 +314,12 @@ class DataGRController extends BaseController {
             } 
 			
 			if ($_POST['akun'] != '') {
+			
+				if (Session::get('role') == SATKER) {
+					$filter[$no++] = $filter[$no++] = "SEGMENT1 = '" . Session::get('kd_satker') . "'";
+					
+				}
+			
                 $filter[$no++] = "SEGMENT3 = '" . $_POST['akun'] . "'";
 				$filter[$no++] = "SEGMENT2 = '" . Session::get('id_user') . "'";
                 $this->view->akun = $_POST['akun'];
