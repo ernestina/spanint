@@ -128,6 +128,12 @@
 
                     <th id="2"  rowspan=2 class='mid'> Nama Satker </th>
                     <th id="3"  rowspan=2 class='mid'> Pagu </th>
+					<!--tr>
+						 <th id="3"  rowspan=2 class='mid'> Pagu Belanja </th>
+						 <th id="3"  rowspan=2 class='mid'> Realisasi </th>
+						 <th id="3"  rowspan=2 class='mid'> Sisa </th>
+					
+					</tr-->
 
 
                     <th  colspan=9 class='mid'>Jenis Belanja</th>
@@ -159,6 +165,7 @@
                     } else {
 
                         $tot_pagu = 0;
+						$tot_real = 0;
                         $tot_51 = 0;
                         $tot_52 = 0;
                         $tot_53 = 0;
@@ -167,6 +174,14 @@
                         $tot_56 = 0;
                         $tot_57 = 0;
                         $tot_58 = 0;
+						$tot_pagu_51 = 0;
+                        $tot_pagu_52 = 0;
+                        $tot_pagu_53 = 0;
+                        $tot_pagu_54 = 0;
+                        $tot_pagu_55 = 0;
+                        $tot_pagu_56 = 0;
+                        $tot_pagu_57 = 0;
+                        $tot_pagu_58 = 0;
                         $tot_bel = 0;
                         $tot_sisa = 0;
                         
@@ -175,23 +190,20 @@
                             echo "<td>" . $no++ . "</td>";
                             echo "<td>" . $value->get_ba() . '-'. $value->get_satker(). "</td>";
                             echo "<td align='left'>" . $value->get_dipa() . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_Pagu()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_belanja_51()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_belanja_52()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_belanja_53()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_belanja_54()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_belanja_55()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_belanja_56()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_belanja_57()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_belanja_58()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_encumbrance()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_pagu() - ($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58())) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_59()) . "</td>";
-
+							echo "<td align='left'> PAGU <br> REALISASI <br> SISA </td>";
+                            echo "<td align='right'>" . number_format($value->get_pagu_51()) ."<br>". number_format($value->get_belanja_51())."<br>". number_format($value->get_pagu_51()-$value->get_belanja_51()). "</td> ";
+                            echo "<td align='right'>" . number_format($value->get_pagu_52()) ."<br>". number_format($value->get_belanja_52())."<br>". number_format($value->get_pagu_52()-$value->get_belanja_52()). "</td> ";
+                            echo "<td align='right'>" . number_format($value->get_pagu_53()) ."<br>". number_format($value->get_belanja_53())."<br>". number_format($value->get_pagu_53()-$value->get_belanja_53())."</td> ";
+                            echo "<td align='right'>" . number_format($value->get_pagu_54()) ."<br>". number_format($value->get_belanja_54())."<br>". number_format($value->get_pagu_54()-$value->get_belanja_54()). "</td> ";
+                            echo "<td align='right'>" . number_format($value->get_pagu_55()) ."<br>". number_format($value->get_belanja_55())."<br>". number_format($value->get_pagu_55()-$value->get_belanja_55()). "</td> ";
+                            echo "<td align='right'>" . number_format($value->get_pagu_56()) ."<br>". number_format($value->get_belanja_56())."<br>". number_format($value->get_pagu_56()-$value->get_belanja_56()). "</td> ";
+                            echo "<td align='right'>" . number_format($value->get_pagu_57()) ."<br>". number_format($value->get_belanja_57())."<br>". number_format($value->get_pagu_57()-$value->get_belanja_57()). "</td> ";
+                            echo "<td align='right'>" . number_format($value->get_pagu_58()) ."<br>". number_format($value->get_belanja_58())."<br>". number_format($value->get_pagu_58()-$value->get_belanja_58()). "</td> ";
+                            echo "<td align='right'>" . number_format($value->get_pagu()) ."<br>". number_format($value->get_realisasi())."<br>". number_format($value->get_pagu()-$value->get_realisasi()).  "</td>";
                             echo "</tr>	";
-                            //$tot_pot = $tot_pot  + $value->get_amount() ;	
+                   
                             $tot_pagu+=$value->get_Pagu();
+							$tot_real+=$value->get_realisasi();
                             $tot_51+=$value->get_belanja_51();
                             $tot_52+=$value->get_belanja_52();
                             $tot_53+=$value->get_belanja_53();
@@ -200,8 +212,15 @@
                             $tot_56+=$value->get_belanja_56();
                             $tot_57+=$value->get_belanja_57();
                             $tot_58+=$value->get_belanja_58();
-                            $tot_bel+=($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58());
-                            $tot_sisa+=($value->get_pagu() - ($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58()));
+							$tot_pagu_51+=$value->get_pagu_51();
+                            $tot_pagu_52+=$value->get_pagu_52();
+                            $tot_pagu_53+=$value->get_pagu_53();
+                            $tot_pagu_54+=$value->get_pagu_54();
+                            $tot_pagu_55+=$value->get_pagu_55();
+                            $tot_pagu_56+=$value->get_pagu_56();
+                            $tot_pagu_57+=$value->get_pagu_57();
+                            $tot_pagu_58+=$value->get_pagu_58();
+                            
                             }
                         }
                     }
@@ -210,17 +229,19 @@
             <tfoot>
                 <tr>
                     <td colspan='3' class='ratatengah'><b>GRAND TOTAL<b></td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_51); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_52); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_53); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_54); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_55); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_56); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_57); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_58); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_bel); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_sisa); ?></td>
+					<td class='ratakiri'>PAGU <br> REALISASI <br> SISA </td>
+					<td class='ratakanan'><?php echo number_format($tot_pagu_51); ?> <br><?php echo number_format($tot_51); ?> <br><?php echo number_format($tot_pagu_51-$tot_51); ?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_52); ?> <br><?php echo number_format($tot_52); ?> <br><?php echo number_format($tot_pagu_52-$tot_52); ?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_53); ?> <br><?php echo number_format($tot_53); ?> <br><?php echo number_format($tot_pagu_53-$tot_53); ?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_54); ?> <br><?php echo number_format($tot_54); ?> <br><?php echo number_format($tot_pagu_54-$tot_54); ?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_55); ?> <br><?php echo number_format($tot_55); ?> <br><?php echo number_format($tot_pagu_55-$tot_55); ?> </td>
+					<td class='ratakanan'><?php echo number_format($tot_pagu_56); ?> <br><?php echo number_format($tot_56); ?> <br><?php echo number_format($tot_pagu_56-$tot_56); ?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_57); ?> <br><?php echo number_format($tot_57); ?> <br><?php echo number_format($tot_pagu_57-$tot_57); ?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_58); ?> <br><?php echo number_format($tot_58); ?> <br><?php echo number_format($tot_pagu_58-$tot_58); ?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu); ?>    <br><?php echo number_format($tot_real); ?> <br><?php echo number_format($tot_pagu-$tot_realisasi); ?> </td>
+					<td class='ratakanan'></td>
+                    
+                    
                 </tr>
             </tfoot>
         </tbody>
