@@ -235,7 +235,7 @@ class FPDF_AutoWrapTable extends FPDF {
                 );
 				$total = $total + $value->get_line_amount();
             }
-				$this->SetFont('Arial', 'B', 7);
+				/*$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();
@@ -249,7 +249,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($total), 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 				$this->Cell($kolom_grandtotal1, $h, '', 1, 1, 'R', true);
-				$this->Ln(3);
+				$this->Ln(3);*/
 
         }
         $this->Ln(3);
