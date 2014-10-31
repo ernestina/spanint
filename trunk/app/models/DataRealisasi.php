@@ -79,6 +79,7 @@ class DataRealisasi {
 				, sum(decode(substr(a.akun,1,2),'57',a.budget_amt,0)) pagu_57
 				, sum(decode(substr(a.akun,1,2),'58',a.budget_amt,0)) pagu_58
 				, sum(decode(substr(a.akun,1,2),'59',a.budget_amt,0)) pagu_59
+				, sum(decode(substr(a.akun,1,1),'6',a.budget_amt,0)) pagu_61
 				, sum(decode(substr(a.akun,1,2),'51',a.actual_amt,0)) belanja_51
 				, sum(decode(substr(a.akun,1,2),'52',a.actual_amt,0)) belanja_52
 				, sum(decode(substr(a.akun,1,2),'53',a.actual_amt,0)) belanja_53
@@ -88,6 +89,7 @@ class DataRealisasi {
 				, sum(decode(substr(a.akun,1,2),'57',a.actual_amt,0)) belanja_57
 				, sum(decode(substr(a.akun,1,2),'58',a.actual_amt,0)) belanja_58
 				, sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
+				, sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
 				, sum(ENCUMBRANCE_AMT) encumbrance 
 				FROM "
                 . $this->_table1 . " a,"
@@ -96,7 +98,7 @@ class DataRealisasi {
 				and a.budget_type = '2' 
 				and a.satker=b.kdsatker 
 				and a.kppn=b.kppn
-				AND SUBSTR(a.akun,1,1) = '5'
+				AND SUBSTR(a.akun,1,1) in ('5','6')
 				and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) > 0
 				
 				"
@@ -129,6 +131,7 @@ class DataRealisasi {
             $d_data->set_pagu_57($val['PAGU_57']);
             $d_data->set_pagu_58($val['PAGU_58']);
             $d_data->set_pagu_59($val['PAGU_59']);
+			$d_data->set_pagu_61($val['PAGU_61']);
             $d_data->set_belanja_51($val['BELANJA_51']);
             $d_data->set_belanja_52($val['BELANJA_52']);
             $d_data->set_belanja_53($val['BELANJA_53']);
@@ -138,6 +141,7 @@ class DataRealisasi {
             $d_data->set_belanja_57($val['BELANJA_57']);
             $d_data->set_belanja_58($val['BELANJA_58']);
             $d_data->set_belanja_59($val['BELANJA_59']);
+			$d_data->set_belanja_61($val['BELANJA_61']);
 			$d_data->set_realisasi($val['TOTAL_REALISASI']);
             $data[] = $d_data;
         }
