@@ -10,7 +10,7 @@
     $login_result = ftp_login($conn_id, "spanint", "password123");
 
     // upload a file
-    ftp_put($conn_id, $remote_file, $file, FTP_ASCII);
+    ftp_put($conn_id, $remote_file, $file, FTP_BINARY);
 
     
     // close the connection
