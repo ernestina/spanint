@@ -127,14 +127,30 @@
     
     <?php if (Session::get('role')==SATKER) { ?>
     
+    <?php 
+
+        $tot_budget = 0;
+        $tot_encumbrance = 0;
+        $tot_actual = 0;
+        $tot_balancing = 0;
+
+        foreach ($this->pieStatusDIPA as $value) {
+            $tot_budget+=$value->get_budget_amt();
+            $tot_encumbrance+=$value->get_encumbrance_amt();
+            $tot_actual+=$value->get_actual_amt();
+            $tot_balancing+=$value->get_balancing_amt();
+        }
+
+    ?>
+    
     var pieStatusDIPAData = [
 
         {
-            "value" : <?php echo $this->pieStatusDIPA->get_dipa_terpakai(); ?>,
+            "value" : <?php echo ($tot_actual + $tot_encumbrance) ?>,
             "color" : "#409ACA"
         },
         {
-            "value" : <?php echo $this->pieStatusDIPA->get_dipa_sisa(); ?>,
+            "value" : <?php echo $tot_balancing; ?>,
             "color" : "#8E5696"
         }
 
@@ -474,13 +490,13 @@
                     <div class="pie-segment">
                         <div class="pie-canvas"><canvas id="pieStatusDIPA"></canvas></div>
                         <div class="pie-legend">
-                            <h4>DIPA</h4>
+                            <h4>DIPA (<?php echo (number_format(round(($tot_actual + $tot_encumbrance + $tot_balancing) / 1000000000, 2), 2)." M"); ?>)</h4>
                             <div style="width: 100%; float: left; border-left: 4px solid #409ACA">
-                                <p><?php echo (number_format(round($this->pieStatusDIPA->get_dipa_terpakai() / 1000000000, 2), 2)." M"); ?></p>
+                                <p><?php echo (number_format(round(($tot_actual + $tot_encumbrance) / 1000000000, 2), 2)." M (".round($tot_actual / ($tot_actual + $tot_encumbrance + $tot_balancing) * 100, 2)."%)"); ?></p>
                                 <p class="sub">Terpakai</p>
                             </div>
                             <div style="width: 100%; float: left; border-left: 4px solid #8E5696">
-                                <p><?php echo (number_format(round($this->pieStatusDIPA->get_dipa_sisa() / 1000000000, 2), 2)." M"); ?></p>
+                                <p><?php echo (number_format(round($tot_balancing / 1000000000, 2), 2)." M (".round($tot_balancing / ($tot_actual + $tot_encumbrance + $tot_balancing) * 100, 2)."%)"); ?></p>
                                 <p class="sub">Sisa</p>
                             </div>
                         </div>
