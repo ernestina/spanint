@@ -608,10 +608,12 @@ class DataDIPAController extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "A.KPPN = '" . $_POST['kdkppn'] . "'";
-                $d_kppn = new DataUser($this->registry);
-                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-                $this->view->d_kd_kppn = $_POST['kdkppn'];
+				if ($_POST['kdkppn'] != 'SEMUA') {
+					$filter[$no++] = "A.KPPN = '" . $_POST['kdkppn'] . "'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+					$this->view->d_kd_kppn = $_POST['kdkppn'];
+				}
             } else {
                 $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
             }
