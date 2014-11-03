@@ -120,7 +120,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom_jenis_belanja = 68;
 		$ukuran_kolom_jenis_belanja1=$ukuran_kolom_jenis_belanja*9;
 		$kolom1=20;
-		$kolom2=40;
+		$kolom2=55;
 		$kolom3=80;
 		$kolom_grandtotal=$kolom1+$kolom2+$kolom3;
 
@@ -128,13 +128,13 @@ class FPDF_AutoWrapTable extends FPDF {
         $left = $this->GetX();
         $this->Cell($kolom1, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += $kolom1);
-        $this->Cell($kolom2, $h, 'Satker', 1, 0, 'C', true);
+        $this->Cell($kolom2, $h, 'BA-Satker', 1, 0, 'C', true);
         $this->SetX($left += $kolom2);
         $this->Cell($kolom3, $h, 'Nama Satker', 1, 0, 'C', true);
         $this->SetX($left += $kolom3);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Pagu', 1, 0, 'C', true);
+        $this->Cell($kolom2, $h, 'Ket', 1, 0, 'C', true);
         $px1 = $this->GetX();
-        $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
+        $this->SetX($left += $kolom2);
         $this->Cell($ukuran_kolom_jenis_belanja1, $h / 2, 'Jenis Belanja', 1, 0, 'C', true);
         $py1 = $this->GetY();
         $px2 = $px1;
@@ -156,16 +156,16 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
         $this->Cell($ukuran_kolom_jenis_belanja, $h / 2, 'Lain-lain', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h / 2, 'Total', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h / 2, 'Transfer', 1, 0, 'C', true);
         $py3 = $this->GetY();
         $this->SetY($py3 -= 20);
         $this->SetX($left += $ukuran_kolom_jenis_belanja1);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Sisa Pagu', 1, 1, 'C', true);
+        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Total', 1, 1, 'C', true);
         $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array($kolom1,$kolom2,$kolom3, $ukuran_kolom_pagu_total_sisa, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa));
-        $this->SetAligns(array('C', 'C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
+        $this->SetWidths(array($kolom1,$kolom2,$kolom3,$kolom2,$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa));
+        $this->SetAligns(array('C', 'C', 'L', 'L','R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 
         if (count($this->data) == 0) {
             $this->Row(
@@ -181,76 +181,289 @@ class FPDF_AutoWrapTable extends FPDF {
                         '',
                         '',
                         '',
+						'',
                         '',
                         ''
             ));
         } else {
+			$tot_pagu = 0;
+			$tot_real = 0;
+			$tot_51 = 0;
+			$tot_52 = 0;
+			$tot_53 = 0;
+			$tot_54 = 0;
+			$tot_55 = 0;
+			$tot_56 = 0;
+			$tot_57 = 0;
+			$tot_58 = 0;
+			$tot_61 = 0;
+			$tot_pagu_51 = 0;
+			$tot_pagu_52 = 0;
+			$tot_pagu_53 = 0;
+			$tot_pagu_54 = 0;
+			$tot_pagu_55 = 0;
+			$tot_pagu_56 = 0;
+			$tot_pagu_57 = 0;
+			$tot_pagu_58 = 0;
+			$tot_pagu_61 = 0;
+			$tot_bel = 0;
+			$tot_sisa = 0;
+
             $no = 1;
             $this->SetFillColor(255);
             foreach ($this->data as $value) {
+			
+				if	($value->get_pagu_51() == 0) { 
+					$nil_51='0.00%';
+				}else { 
+					$nil_51="(".number_format($value->get_belanja_51()/$value->get_pagu_51()*100,2)."%)";
+				}
+				if	($value->get_pagu_52() == 0) { 
+					$nil_52='0.00%';
+				}else { 
+					$nil_52="(".number_format($value->get_belanja_52()/$value->get_pagu_52()*100,2)."%)";
+				}
+				if	($value->get_pagu_53() == 0) { 
+					$nil_53='0.00%';
+				}else { 
+					$nil_53="(".number_format($value->get_belanja_53()/$value->get_pagu_53()*100,2)."%)";
+				}
+				if	($value->get_pagu_54() == 0) { 
+					$nil_54='0.00%';
+				}else { 
+					$nil_54="(".number_format($value->get_belanja_54()/$value->get_pagu_54()*100,2)."%)";
+				}
+				if	($value->get_pagu_55() == 0) { 
+					$nil_55='0.00%';
+				}else { 
+					$nil_55="(".number_format($value->get_belanja_55()/$value->get_pagu_55()*100,2)."%)";
+				}
+				if	($value->get_pagu_56() == 0) { 
+					$nil_56='0.00%';
+				}else { 
+					$nil_56="(".number_format($value->get_belanja_56()/$value->get_pagu_56()*100,2)."%)";
+				}
+				if	($value->get_pagu_58() == 0) { 
+					$nil_58='0.00%';
+				}else { 
+					$nil_58="(".number_format($value->get_belanja_58()/$value->get_pagu_58()*100,2)."%)";
+				}
+				
+				if	($value->get_pagu_61() == 0) { 
+					$nil_61='0.00%';
+				}else { 
+					$nil_61="(".number_format($value->get_belanja_61()/$value->get_pagu_61()*100,2)."%)";
+				}
+					$nil_pr="(".number_format($value->get_realisasi()/$value->get_pagu()*100,2)."%)";
+			
+			
+			
                 $this->Row(
                         array($no++,
-                            $value->get_satker(),
-                            strtoupper($value->get_dipa()),
-                            number_format($value->get_Pagu()),
-                            number_format($value->get_belanja_51()),
-                            number_format($value->get_belanja_52()),
-                            number_format($value->get_belanja_53()),
-                            number_format($value->get_belanja_54()),
-                            number_format($value->get_belanja_55()),
-                            number_format($value->get_belanja_56()),
-                            number_format($value->get_belanja_57()),
-                            number_format($value->get_belanja_58()),
-                            number_format($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58()),
-                            number_format($value->get_pagu() - ($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58()))
+                            strtoupper($value->get_ba()). '-' .strtoupper($value->get_satker()),
+							strtoupper($value->get_dipa()),
+							'PAGU'."\n".'REALISASI'."\n".'PERSENTASE'."\n".'SISA',
+                            number_format($value->get_pagu_51())."\n".number_format($value->get_belanja_51())."\n".$nil_51."\n".number_format($value->get_pagu_51()-$value->get_belanja_51()),
+                            number_format($value->get_pagu_52())."\n".number_format($value->get_belanja_52())."\n".$nil_52."\n".number_format($value->get_pagu_52()-$value->get_belanja_52()),
+                            number_format($value->get_pagu_53())."\n".number_format($value->get_belanja_53())."\n".$nil_53."\n".number_format($value->get_pagu_53()-$value->get_belanja_53()),
+                            number_format($value->get_pagu_54())."\n".number_format($value->get_belanja_54())."\n".$nil_54."\n".number_format($value->get_pagu_54()-$value->get_belanja_54()),
+                            number_format($value->get_pagu_55())."\n".number_format($value->get_belanja_55())."\n".$nil_55."\n".number_format($value->get_pagu_55()-$value->get_belanja_55()),
+                            number_format($value->get_pagu_56())."\n".number_format($value->get_belanja_56())."\n".$nil_56."\n".number_format($value->get_pagu_56()-$value->get_belanja_56()),
+                            number_format($value->get_pagu_57())."\n".number_format($value->get_belanja_57())."\n".$nil_57."\n".number_format($value->get_pagu_57()-$value->get_belanja_57()),
+                            number_format($value->get_pagu_58())."\n".number_format($value->get_belanja_58())."\n".$nil_58."\n".number_format($value->get_pagu_58()-$value->get_belanja_58()),
+                            number_format($value->get_pagu_61())."\n".number_format($value->get_belanja_61())."\n".$nil_61."\n".number_format($value->get_pagu_61()-$value->get_belanja_61()),
+							number_format($value->get_pagu())."\n".number_format($value->get_realisasi())."\n".$nil_pr."\n".number_format($value->get_pagu()-$value->get_realisasi())
                 ));
                 //jumlah grand total
-                $tot_pagu+=$value->get_Pagu();
-                $tot_51+=$value->get_belanja_51();
-                $tot_52+=$value->get_belanja_52();
-                $tot_53+=$value->get_belanja_53();
-                $tot_54+=$value->get_belanja_54();
-                $tot_55+=$value->get_belanja_55();
-                $tot_56+=$value->get_belanja_56();
-                $tot_57+=$value->get_belanja_57();
-                $tot_58+=$value->get_belanja_58();
-                $tot_bel+=($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58());
-                $tot_sisa+=($value->get_pagu() - ($value->get_belanja_51() + $value->get_belanja_52() + $value->get_belanja_53() + $value->get_belanja_54() + $value->get_belanja_55() + $value->get_belanja_56() + $value->get_belanja_57() + $value->get_belanja_58()));
+							$tot_pagu+=$value->get_Pagu();
+							$tot_real+=$value->get_realisasi();
+                            $tot_51+=$value->get_belanja_51();
+                            $tot_52+=$value->get_belanja_52();
+                            $tot_53+=$value->get_belanja_53();
+                            $tot_54+=$value->get_belanja_54();
+                            $tot_55+=$value->get_belanja_55();
+                            $tot_56+=$value->get_belanja_56();
+                            $tot_57+=$value->get_belanja_57();
+                            $tot_58+=$value->get_belanja_58();
+							$tot_61+=$value->get_belanja_61();
+							$tot_pagu_51+=$value->get_pagu_51();
+                            $tot_pagu_52+=$value->get_pagu_52();
+                            $tot_pagu_53+=$value->get_pagu_53();
+                            $tot_pagu_54+=$value->get_pagu_54();
+                            $tot_pagu_55+=$value->get_pagu_55();
+                            $tot_pagu_56+=$value->get_pagu_56();
+                            $tot_pagu_57+=$value->get_pagu_57();
+                            $tot_pagu_58+=$value->get_pagu_58();
+                            $tot_pagu_61+=$value->get_pagu_61();
+							
             }
-            $this->SetFont('Arial', 'B', 7);
-            $h = 20;
-            $this->SetFillColor(200, 200, 200);
-            $left = $this->GetX();
-            $this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-            $this->SetX($left += $kolom_grandtotal);
-            $this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($tot_pagu), 1, 0, 'R', true);
-            $px1 = $this->GetX();
-            $py1 = $this->GetY();
-            $px2 = $px1;
-            $py2 = $py1;
-            $this->SetXY($px2, $py2);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_51), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_52), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_53), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_54), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_55), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_56), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_57), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_58), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-            $this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_bel), 1, 0, 'R', true);
-            $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-			$py3 = $this->GetY();
-            $this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($tot_sisa), 1, 1, 'R', true);
-            $this->Ln(3);
-        }
+			
+			//--------------------------------------------
+		$this->SetFont('Arial', 'B', 7);
+		$h = 80;
+		$this->SetFillColor(200, 200, 200);
+		$left = $this->GetX();
+		$this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+		$this->SetX($left += $kolom_grandtotal);
+//-------------------------------------------
+        $py1 = $this->GetY();
+		$px1 = $this->GetX();
+        $px2 = $px1;
+        $py2 = $py1;
+        $this->SetXY($px2, $py2);
+        $this->Cell($kolom2, $h/4, 'PAGU', 1, 0, 'L', true);
+        $this->SetX($px2 += $kolom2);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_51), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		 $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_52), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		 $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_53), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_54), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_55), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_56), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_57), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_58), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_61), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu), 1, 0, 'C', true);
+        $py3 = $this->GetY();
+        $this->SetY($py3 -= 20);
+
+//---------------------------------------------------
+        $py1 = $this->GetY();
+        $px2 = $px1;
+        $py2 = $py2 + 20;
+        $this->SetXY($px2, $py2);
+        $this->Cell($kolom2, $h/4, 'REALISASI', 1, 0, 'L', true);
+        $this->SetX($px2 += $kolom2);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_51), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		 $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_52), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		 $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_53), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_54), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_55), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_56), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_57), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_58), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_61), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_real), 1, 0, 'C', true);
+        $py3 = $this->GetY();
+        $this->SetY($py3 -= 20);
+//---------------------------------------------------
+//---------------------------------------------------
+
+	if ($tot_pagu_51==0){
+		$per_51='0.00%';
+	}else{
+		$per_51="(".number_format($tot_51/$tot_pagu_51*100)."%)";
+	}
+	if ($tot_pagu_52==0){
+		$per_52='0.00%';
+	}else{
+		$per_52="(".number_format($tot_52/$tot_pagu_52*100)."%)";
+	}
+	if ($tot_pagu_53==0){
+		$per_53='0.00%';
+	}else{
+		$per_53="(".number_format($tot_53/$tot_pagu_53*100)."%)";
+	}
+	if ($tot_pagu_54==0){
+		$per_54='0.00%';
+	}else{
+		$per_54="(".number_format($tot_54/$tot_pagu_54*100)."%)";
+	}
+	if ($tot_pagu_55==0){
+		$per_55='0.00%';
+	}else{
+		$per_55="(".number_format($tot_55/$tot_pagu_55*100)."%)";
+	}
+	if ($tot_pagu_56==0){
+		$per_56='0.00%';
+	}else{
+		$per_56="(".number_format($tot_56/$tot_pagu_56*100)."%)";
+	}
+	if ($tot_pagu_58==0){
+		$per_58='0.00%';
+	}else{
+		$per_58="(".number_format($tot_58/$tot_pagu_58*100)."%)";
+	}
+	if ($tot_pagu_61==0){
+		$per_61='0.00%';
+	}else{
+		$per_61="(".number_format($tot_61/$tot_pagu_61*100)."%)";
+	}
+		$per_pr="(".number_format($tot_real/$tot_pagu*100)."%)";
+
+        $py1 = $this->GetY();
+        $px2 = $px1;
+        $py2 = $py2 + 20;
+        $this->SetXY($px2, $py2);
+        $this->Cell($kolom2, $h/4, 'PERSENTASE', 1, 0, 'L', true);
+        $this->SetX($px2 += $kolom2);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, $per_51, 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		 $this->Cell($ukuran_kolom_jenis_belanja, $h/4,$per_52, 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		 $this->Cell($ukuran_kolom_jenis_belanja, $h/4, $per_53, 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, $per_54, 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, $per_55, 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, $per_56, 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, $per_57, 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, $per_58, 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, $per_61, 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, $per_pr, 1, 0, 'C', true);
+        $py3 = $this->GetY();
+        $this->SetY($py3 -= 20);
+//---------------------------------------------------
+        $py1 = $this->GetY();
+        $px2 = $px1;
+        $py2 = $py2 + 20;
+        $this->SetXY($px2, $py2);
+        $this->Cell($kolom2, $h/4, 'SISA', 1, 0, 'L', true);
+        $this->SetX($px2 += $kolom2);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_51-$tot_51), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		 $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_52-$tot_52), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		 $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_53-$tot_53), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_54-$tot_54), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_55-$tot_55), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_56-$tot_56), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_57-$tot_57), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_58-$tot_58), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu_61-$tot_61), 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($tot_pagu-$tot_real), 1, 0, 'C', true);
+        $py3 = $this->GetY();
+        $this->SetY($py3 -= 20);
+ }
     }
 
     //footer
@@ -416,7 +629,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Detail Realisasi Belanja Per Satker'; //judul file laporan
+$judul = 'Pagu dan Realisasi Belanja Per Satker'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
