@@ -255,6 +255,8 @@ $akses['DataPMRTKPPN'] = array(
 $akses['DataPersiapanRolloutKPPN'] = array(
     '__construct',
     'downloadPagu',
+    'downloadRealisasi',
+    'downloadToolRekonsiliasi',
     '__destruct'
 );
 
