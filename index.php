@@ -113,6 +113,7 @@ $registry->auth->add_access('dataPelimpahan','kppn',$akses['DataPelimpahanKPPN']
 $registry->auth->add_access('PDF','kppn',$akses['PDFKPPN']);
 $registry->auth->add_access('panduan','kppn',$akses['PanduanKPPN']);
 $registry->auth->add_access('pelaporan','kppn',$akses['PelaporanKPPN']);
+$registry->auth->add_access('dataPersiapanRollout','kppn',$akses['DataPersiapanRolloutKPPN']);
 
 //level pkn
 $registry->auth->add_access('auth','pkn',$akses['AuthPKN']);
