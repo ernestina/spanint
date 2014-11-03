@@ -247,6 +247,18 @@ $akses['DataPMRTKPPN'] = array(
     '__destruct'
 );
 
+
+
+/*
+ * akses dataPersiapanRollout
+ */
+$akses['DataPersiapanRolloutKPPN'] = array(
+    '__construct',
+    'downloadPagu',
+    '__destruct'
+);
+
+
 /*
  * akses modul PDF
  */
