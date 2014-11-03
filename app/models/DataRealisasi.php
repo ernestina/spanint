@@ -214,7 +214,18 @@ class DataRealisasi {
 				substr(a.program,1,3) BA
 				, b.nmba
 				, sum(a.budget_amt) Pagu
+				, sum(a.actual_amt) Total_realisasi
 				, sum(decode(substr(a.akun,1,2),'72',a.budget_amt,0)) pagu_pembiayaan
+				, sum(decode(substr(a.akun,1,2),'51',a.budget_amt,0)) pagu_51
+				, sum(decode(substr(a.akun,1,2),'52',a.budget_amt,0)) pagu_52
+				, sum(decode(substr(a.akun,1,2),'53',a.budget_amt,0)) pagu_53
+				, sum(decode(substr(a.akun,1,2),'54',a.budget_amt,0)) pagu_54
+				, sum(decode(substr(a.akun,1,2),'55',a.budget_amt,0)) pagu_55
+				, sum(decode(substr(a.akun,1,2),'56',a.budget_amt,0)) pagu_56
+				, sum(decode(substr(a.akun,1,2),'57',a.budget_amt,0)) pagu_57
+				, sum(decode(substr(a.akun,1,2),'58',a.budget_amt,0)) pagu_58
+				, sum(decode(substr(a.akun,1,2),'59',a.budget_amt,0)) pagu_59
+				, sum(decode(substr(a.akun,1,1),'6',a.budget_amt,0)) pagu_61
 				, sum(decode(substr(a.akun,1,2),'51',a.actual_amt,0)) belanja_51
 				, sum(decode(substr(a.akun,1,2),'52',a.actual_amt,0)) belanja_52
 				, sum(decode(substr(a.akun,1,2),'53',a.actual_amt,0)) belanja_53
@@ -256,6 +267,16 @@ class DataRealisasi {
             $d_data->set_ba($val['BA']);
             $d_data->set_pagu($val['PAGU']);
             $d_data->set_encumbrance($val['ENCUMBRANCE']);
+			$d_data->set_pagu_51($val['PAGU_51']);
+            $d_data->set_pagu_52($val['PAGU_52']);
+            $d_data->set_pagu_53($val['PAGU_53']);
+            $d_data->set_pagu_54($val['PAGU_54']);
+            $d_data->set_pagu_55($val['PAGU_55']);
+            $d_data->set_pagu_56($val['PAGU_56']);
+            $d_data->set_pagu_57($val['PAGU_57']);
+            $d_data->set_pagu_58($val['PAGU_58']);
+            $d_data->set_pagu_59($val['PAGU_59']);
+			$d_data->set_pagu_61($val['PAGU_61']);
             $d_data->set_belanja_51($val['BELANJA_51']);
             $d_data->set_belanja_52($val['BELANJA_52']);
             $d_data->set_belanja_53($val['BELANJA_53']);
@@ -267,6 +288,7 @@ class DataRealisasi {
             $d_data->set_belanja_59($val['BELANJA_59']);
             $d_data->set_belanja_71($val['BELANJA_71']);
             $d_data->set_belanja_61($val['BELANJA_61']);
+			$d_data->set_realisasi($val['TOTAL_REALISASI']);
             $d_data->set_pagu_pembiayaan($val['PAGU_PEMBIAYAAN']);
             $data[] = $d_data;
         }
