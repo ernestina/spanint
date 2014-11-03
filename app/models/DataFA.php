@@ -95,7 +95,7 @@ class DataFA {
             $d_data->set_block_amount($val['BLOCK_AMOUNT']);
             $d_data->set_temp_block($val['TEMP_BLOCKED_AMOUNT']);
             $d_data->set_cash_limit($val['CASH_LIMIT']);
-            $d_data->set_invoice($val['INVOICE']);
+            $d_data->set_invoice($val['INVOICES']);
             $data[] = $d_data;
         }
         return $data;
@@ -147,7 +147,7 @@ class DataFA {
             $d_data->set_block_amount($val['BLOCK_AMOUNT']);
             $d_data->set_temp_block($val['TEMP_BLOCKED_AMOUNT']);
             $d_data->set_cash_limit($val['CASH_LIMIT']);
-            $d_data->set_invoice($val['INVOICE']);
+            $d_data->set_invoice($val['INVOICES']);
             $data[] = $d_data;
         }
         return $data;

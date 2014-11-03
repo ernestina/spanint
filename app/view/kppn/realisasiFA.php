@@ -224,23 +224,28 @@
         <!--baris pertama-->
         <thead>
         <tr>
-                <th class='ratatengah'>No.</th>
-                <th class='ratatengah'>Satker</th>
-                <th class='ratatengah'>KPPN</th>
-                <th class='ratatengah'>Akun</th>
-                <th class='ratatengah'>Program</th>
-                <th class='ratatengah'>Output</th>
-                <th class='ratatengah'>Dana</th>
+                <th rowspan=2 class='ratatengah'>No.</th>
+                <th rowspan=2 class='ratatengah'>Satker</th>
+                <th rowspan=2 class='ratatengah'>KPPN</th>
+                <th rowspan=2 class='ratatengah'>Akun</th>
+                <th rowspan=2 class='ratatengah'>Program</th>
+                <th rowspan=2 class='ratatengah'>Output</th>
+                <th rowspan=2 class='ratatengah'>Dana</th>
                 <!--th class='mid'>Bank</th-->
-                <th>Kewenangan</th>
-                <th class='ratatengah'>Lokasi</th>
-                <th class='ratatengah'>Tipe Anggaran</th>
+                <th rowspan=2 >Kewenangan</th>
+                <th rowspan=2 class='ratatengah'>Lokasi</th>
+                <th rowspan=2 class='ratatengah'>Tipe Anggaran</th>
                 <!--th>Mata Uang</th-->
-                <th class='ratakanan'>Pagu</th>
-                <th class='ratakanan'>Pencadangan</th>
-                <th class='ratakanan'>Realisasi</th>
-                <th class='ratakanan'>Sisa pagu</th>
-            </tr>
+                <th rowspan=2 class='ratakanan'>Pagu</th>
+                <th colspan=3 class='ratakanan'>Pencadangan</th>
+                <th rowspan=2 class='ratakanan'>Realisasi</th>
+                <th rowspan=2 class='ratakanan'>Sisa pagu</th>
+			</tr>
+		 <tr>
+				<th   class='mid' >Kontrak</th>
+                <th   class='mid' >Blokir</th>
+                <th   class='mid' >Invoice</th>
+		  </tr>
 			</thead>
         <tbody class='ratatengah'>
             <?php
@@ -256,6 +261,8 @@
                 } else {
                     $tot_budget = 0;
                     $tot_encumbrance = 0;
+					$tot_blokir = 0;
+					$tot_invoice = 0;
                     $tot_actual = 0;
                     $tot_balancing = 0;
                     foreach ($this->data as $value) {
@@ -271,15 +278,19 @@
                         echo "<td>" . $value->get_kewenangan() . "</td>";
                         echo "<td>" . $value->get_lokasi() . "</td>";
                         echo "<td>" . $value->get_budget_type() . "</td>";
-                        //echo "<td>" . $value->get_currency_code() . "</td>";
                         echo "<td style='text-align: right'>" . number_format($value->get_budget_amt()) . "</td>";
-                        echo "<td style='text-align: right'><a href=" . URL . "dataDIPA/DetailEncumbrances/" . $value->get_code_id() . " >" . number_format($value->get_encumbrance_amt()) . "</td>";
+                        echo "<td style='text-align: right'><a href=" . URL . "dataDIPA/DetailEncumbrances/" . $value->get_code_id() . " >" . number_format($value->get_obligation()) . "</td>";
+						//echo "<td>" . $value->get_obligation() . "</td>";
+						echo "<td style='text-align: right'>" . number_format($value->get_block_amount()) . "</td>";
+						echo "<td style='text-align: right'>" . number_format($value->get_invoice()) . "</td>";
                         echo "<td style='text-align: right'><a href=" . URL . "dataDIPA/DetailRealisasiFA/" . $value->get_code_id() . " >" . number_format($value->get_actual_amt()) . "</td>";
 
                         echo "<td style='text-align: right'>" . number_format($value->get_balancing_amt()) . "</td>";
                         echo "</tr>	";
                         $tot_budget+=$value->get_budget_amt();
-                        $tot_encumbrance+=$value->get_encumbrance_amt();
+						$tot_encumbrance+=$value->get_obligation();
+						$tot_blokir+=$value->get_block_amount();
+						$tot_invoice+=$value->get_invoice();
                         $tot_actual+=$value->get_actual_amt();
                         $tot_balancing+=$value->get_balancing_amt();
 						 ?>
@@ -290,7 +301,9 @@
 					<tr>
                             <td colspan='10' class='ratatengah'><b>GRAND TOTAL</b></td>
                             <td class='ratakanan'><b><?php echo number_format($tot_budget); ?></b></td>
-                            <td class='ratakanan'><b><?php echo number_format($tot_encumbrance); ?></b></td>
+						 <td class='ratakanan'><?php echo number_format($tot_encumbrance); ?></td>
+								<td class='ratakanan'><?php echo number_format($tot_blokir); ?></td>
+								<td class='ratakanan'><?php echo number_format($tot_invoice); ?></td>
                             <td class='ratakanan'><b><?php echo number_format($tot_actual); ?></b></td>
                             <td class='ratakanan'><b><?php echo number_format($tot_balancing); ?></b></td>
                      </tr>
