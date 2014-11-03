@@ -440,6 +440,9 @@
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Unduh LAK Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Unduh LRA Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Unduh Laporan Konsolidasi Saldo Kas KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Unduh Data Pagu</a
+                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Unduh Data Realisasi</a
+                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Unduh Tool Rekonsiliasi</a
                                 </ul>
                             </div>
                         </li>
