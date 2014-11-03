@@ -579,7 +579,7 @@ $('#tgl_awal').change(function() {
 
         console.log(endDate);
 
-        maxEndDate = new Date(endDate.getTime() + (29*24*60*60*1000));
+        maxEndDate = new Date(endDate.getTime() + (30*24*60*60*1000));
 
         console.log(maxEndDate);
 
@@ -603,7 +603,7 @@ $('#tgl_akhir').change(function() {
 
         console.log(startDate);
 
-        maxStartDate = new Date(startDate.getTime() - (29*24*60*60*1000));
+        maxStartDate = new Date(startDate.getTime() - (30*24*60*60*1000));
 
         console.log(maxStartDate);
 
