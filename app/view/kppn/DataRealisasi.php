@@ -259,8 +259,12 @@
                             $tot_pagu_61+=$value->get_pagu_61();
                             }
                         }
-                    }
-                ?>
+                    } else {
+                
+                echo '<td colspan=12 id="filter-first" align="center">Masukkan filter terlebih dahulu.</td>';
+                
+            }
+            ?>
             </tbody>
             <tfoot>
                 <tr>
@@ -292,6 +296,7 @@
                     
                     
                 </tr>
+
             </tfoot>
         </tbody>
     </table>
@@ -332,7 +337,8 @@
                         </select>
 						
 <?php } ?>
-					<div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
+					<br>
+                    <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Bagian Anggaran: </label>					
                     <select class="form-control" type="text" name="KodeBA" id="KodeBA">
                         <option value='' selected>- pilih -</option>

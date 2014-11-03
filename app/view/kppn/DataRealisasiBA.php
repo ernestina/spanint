@@ -145,6 +145,7 @@
 
                         echo "</tr>	";
                         echo "<tr>	";
+                            echo "<td align='left'>SISA</td>";
                             echo "<td align='right'>". number_format($value->get_pagu_51()-$value->get_belanja_51()). "</td> ";
                             echo "<td align='right'>". number_format($value->get_pagu_52()-$value->get_belanja_52()). "</td> ";
                             echo "<td align='right'>". number_format($value->get_pagu_53()-$value->get_belanja_53()). "</td> ";
@@ -196,6 +197,7 @@
 			<tr>
                     <td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
 					<td class='ratakiri'>PAGU <br> REALISASI</td>
+                  
 					<td class='ratakanan'><?php echo number_format($tot_pagu_51); ?><br><?php echo number_format($tot_51); ?></td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_52); ?><br><?php echo number_format($tot_52); ?></td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_53); ?><br><?php echo number_format($tot_53); ?></td>
