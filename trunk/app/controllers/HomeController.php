@@ -188,17 +188,13 @@ class homeController extends BaseController {
 
     private function pieStatusDIPA($kodeunit = null) {
 
-        $d_dashboard = new DataDashboard($this->registry);
+        $d_spm1 = new DataFA($this->registry);
+        $filter = array();
+        $no = 0;
+        
+        $filter[$no++] = " A.SATKER =  '" . Session::get('kd_satker') . "'";
 
-        if (isset($kodeunit)) {
-
-            return $d_dashboard->get_summary_dipa_unit($kodeunit);
-            
-        } else {
-
-            return $d_dashboard->get_summary_dipa_unit();
-            
-        }
+        return $d_spm1->get_fa_summary_filter($filter);
     }
 
     private function listSPMOngoing($hari, $kodeunit = null) {
