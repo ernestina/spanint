@@ -244,23 +244,28 @@ if (Session::get('role') == DJA) {
         <!--baris pertama-->
             <thead>
                 <tr>
-                    <th class='mid'>No.</th>
-                    <th class='mid'>Satker</th>
-                    <th class='mid'>KPPN</th>
-                    <th class='mid'>Akun Summary</th>
-                    <th class='mid'>Program</th>
-                    <th class='mid'>Output</th>
-                    <th class='mid'>Dana</th>
-                    <!--th class='mid'>Bank</th-->
-                    <th class='mid'>Kewenangan</th>
-                    <!--th class='mid'>Lokasi</th>
-                    <th class='mid'>Tipe Anggaran</th>
-                    <th>Mata Uang</th-->
-                    <th style='text-align: right'>Pagu</th>
-                    <th style='text-align: right'>Pencadangan</th>
-                    <th style='text-align: right'>Realisasi</th>
-                    <th style='text-align: right'>Sisa pagu</th>
-                </tr>
+                <th rowspan=2 class='ratatengah'>No.</th>
+                <th rowspan=2 class='ratatengah'>Satker</th>
+                <th rowspan=2 class='ratatengah'>KPPN</th>
+                <th rowspan=2 class='ratatengah'>Akun</th>
+                <th rowspan=2 class='ratatengah'>Program</th>
+                <th rowspan=2 class='ratatengah'>Output</th>
+                <th rowspan=2 class='ratatengah'>Dana</th>
+                <!--th class='mid'>Bank</th-->
+                <th rowspan=2 >Kewenangan</th>
+                <!--th rowspan=2 class='ratatengah'>Lokasi</th>
+                <th rowspan=2 class='ratatengah'>Tipe Anggaran</th>
+                <!--th>Mata Uang</th-->
+                <th rowspan=2 class='ratakanan'>Pagu</th>
+                <th colspan=3 class='ratakanan'>Pencadangan</th>
+                <th rowspan=2 class='ratakanan'>Realisasi</th>
+                <th rowspan=2 class='ratakanan'>Sisa pagu</th>
+			</tr>
+		 <tr>
+				<th   class='mid' >Kontrak</th>
+                <th   class='mid' >Blokir</th>
+                <th   class='mid' >Invoice</th>
+		  </tr>
             </thead>
             <tbody class='ratatengah'>
                 <?php
@@ -276,6 +281,8 @@ if (Session::get('role') == DJA) {
                     } else {
                         $tot_budget = 0;
                         $tot_encumbrance = 0;
+						$tot_blokir = 0;
+						$tot_invoice = 0;
                         $tot_actual = 0;
                         $tot_balancing = 0;
                         foreach ($this->data as $value) {
@@ -293,13 +300,17 @@ if (Session::get('role') == DJA) {
                             //echo "<td>" . $value->get_budget_type() . "</td>";
                             //echo "<td>" . $value->get_currency_code() . "</td>";
                             echo "<td style='text-align: right'>" . number_format($value->get_budget_amt()) . "</td>";
-                            echo "<td style='text-align: right'> " . number_format($value->get_encumbrance_amt()) . "</td>";
+                            echo "<td style='text-align: right'> " . number_format($value->get_obligation()) . "</td>";
+							echo "<td style='text-align: right'>" . number_format($value->get_block_amount()) . "</td>";
+							echo "<td style='text-align: right'>" . number_format($value->get_invoice()) . "</td>";
                             echo "<td style='text-align: right'> " . number_format($value->get_actual_amt()) . "</td>";
 
                             echo "<td style='text-align: right'>" . number_format($value->get_balancing_amt()) . "</td>";
                             echo "</tr>	";
                             $tot_budget+=$value->get_budget_amt();
-                            $tot_encumbrance+=$value->get_encumbrance_amt();
+                            $tot_encumbrance+=$value->get_obligation();
+							$tot_blokir+=$value->get_block_amount();
+							$tot_invoice+=$value->get_invoice();
                             $tot_actual+=$value->get_actual_amt();
                             $tot_balancing+=$value->get_balancing_amt();
                         }
@@ -314,6 +325,8 @@ if (Session::get('role') == DJA) {
                     <td colspan='8' class='ratatengah'><b>GRAND TOTAL<b></td>
                                 <td class='ratakanan'><?php echo number_format($tot_budget); ?></td>
                                 <td class='ratakanan'><?php echo number_format($tot_encumbrance); ?></td>
+								<td class='ratakanan'><?php echo number_format($tot_blokir); ?></td>
+								<td class='ratakanan'><?php echo number_format($tot_invoice); ?></td>		
                                 <td class='ratakanan'><?php echo number_format($tot_actual); ?></td>
                                 <td class='ratakanan'><?php echo number_format($tot_balancing); ?></td>
                                 </tr>
