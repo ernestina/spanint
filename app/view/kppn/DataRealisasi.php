@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Pagu dan Realisasi Belanja Per Satker </h2>
+                <h2>Pagu dan Realisasi Belanja per Satker </h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">

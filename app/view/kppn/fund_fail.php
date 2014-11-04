@@ -8,7 +8,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Penolakan revisi karena menyebabkan pagu minus <em>(Fund Fail)</em></h2>
+                <h2>Penolakan Revisi karena Menyebabkan Pagu Minus <em>(Fund Fail)</em></h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">

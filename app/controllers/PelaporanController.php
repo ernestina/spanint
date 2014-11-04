@@ -39,7 +39,7 @@ class PelaporanController extends BaseController {
         if ($tipe == 'LAK') {
         
             $folder = 'SPGLR00258';
-            $this->view->page_title = "Laporan Arus Kas per Akun Tingkat KPPN"; 
+            $this->view->page_title = "Laporan Arus Kas Tingkat KPPN"; 
             
         } else if ($tipe == 'LRA') {
             

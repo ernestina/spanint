@@ -63,7 +63,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul Manajemen User</h4>
                             <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring Pergantian User</a></li>
+                                    <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring User Aktif</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -75,8 +75,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
                                 </ul>
                             </div>
@@ -108,11 +108,11 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">NTPN Ganda</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring Imbalan Jasa Perbankan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring Perhitungan Fihak Ketiga</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker Penerimaan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun Penerimaan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">Daftar NTPN Terindikasi Ganda</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -120,8 +120,8 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul Kas</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Droping Dana</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Penyaluran dan Droping Dana SP2D</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -129,10 +129,10 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
-                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
-                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur</a></li>
-                                    <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
+                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Monitoring SP2D - Bank</a></li>
+                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Monitoring Retur SP2D</a></li>
+                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur - PKN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">SP2D Terbit di Atas Jam 3 Tertanggal Hari yang Sama</a></li>
                                     <!--<li><a href="<?php echo URL; ?>dataKppn/harianBO">Laporan SP2D Harian ke Bank</a></li>
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dHariIni">Laporan SP2D Terbit dan Tertanggal di Hari yang Sama</a></li>-->
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dBackdate">SP2D Backdate</a></li>
@@ -155,12 +155,12 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Unduh LAK Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Unduh LRA Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Unduh Laporan Konsolidasi Saldo Kas KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -204,7 +204,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul Manajemen User</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring Pergantian User</a></li>
+                                    <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring User Aktif</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -216,8 +216,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
                                 </ul>
                             </div>
@@ -241,11 +241,11 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">NTPN Ganda</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring Imbalan Jasa Perbankan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring Perhitungan Fihak Ketiga</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker Penerimaan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun Penerimaan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">Daftar NTPN Terindikasi Ganda</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -253,7 +253,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul Kas</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -261,9 +261,9 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
-                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
-                                    <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
+                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Monitoring SP2D - Bank</a></li>
+                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Monitoring Retur SP2D</a></li>
+                                    <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">SP2D Terbit di Atas Jam 3 Tertanggal Hari yang Sama</a></li>
                                     <!--<li><a href="<?php echo URL; ?>dataKppn/harianBO">Laporan SP2D Harian ke Bank</a></li>
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dHariIni">Laporan SP2D Terbit dan Tertanggal di Hari yang Sama</a></li>-->
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dBackdate">SP2D Backdate</a></li>
@@ -286,12 +286,12 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Unduh LAK Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Unduh LRA Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Unduh Laporan Konsolidasi Saldo Kas KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -333,7 +333,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Modul Manajemen User</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring Pergantian User</a></li>
+                                    <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring User Aktif</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -345,8 +345,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
                                 </ul>
                             </div>
@@ -380,12 +380,12 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring IJP</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring PFK</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring Imbalan Jasa Perbankan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring Perhitungan Fihak Ketiga</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/KonfirmasiPenerimaan">Konfirmasi Penerimaan</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">NTPN Ganda</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker Penerimaan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun Penerimaan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">Daftar NTPN Terindikasi Ganda</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -393,7 +393,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul Kas</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Pelimpahan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -401,9 +401,9 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
-                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
-                                    <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">SP2D Terbit di Atas Jam 3 Tertanggal Hari Ini</a></li>
+                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Monitoring SP2D - Bank</a></li>
+                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Monitoring Retur SP2D</a></li>
+                                    <li><a href="<?php echo URL; ?>dataKppn/sp2dBesok">SP2D Terbit di Atas Jam 3 Tertanggal Hari yang Sama</a></li>
                                     <!--<li><a href="<?php echo URL; ?>dataKppn/harianBO">Laporan SP2D Harian ke Bank</a></li>
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dHariIni">Laporan SP2D Terbit dan Tertanggal di Hari yang Sama</a></li>-->
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dBackdate">SP2D Backdate</a></li>
@@ -434,12 +434,15 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Unduh LAK Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Unduh LRA Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Unduh Laporan Konsolidasi Saldo Kas KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Laporan Konsolidasi Saldo Kas KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Unduh Data Pagu</a>
+                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Unduh Data Realisasi</a>
+                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Unduh Tool Rekonsiliasi</a>
                                     <!--<li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Unduh Data Pagu</a>
                                     <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Unduh Data Realisasi</a>
                                     <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Unduh Tool Rekonsiliasi</a>-->
@@ -523,8 +526,8 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
-                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
+                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Monitoring SP2D - Bank</a></li>
+                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Monitoring Retur SP2D</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -555,7 +558,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul Kas</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Droping Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Penyaluran dan Droping Dana SP2D</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -563,9 +566,9 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Cek Status SP2D</a></li>
-                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur</a></li>
-                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Daftar SP2D Retur</a></li>
+                                    <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Monitoring SP2D - Bank</a></li>
+                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur - PKN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Monitoring Retur SP2D</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -599,8 +602,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Detail_Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus Seluruh Satker</a></li>
-                                    <!--<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Realisasi Belanja per BA</a></li>-->
+                                    <!--<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>-->
                                 </ul>
                             </div>
                         </li>
