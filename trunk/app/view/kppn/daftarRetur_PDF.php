@@ -116,22 +116,20 @@ class FPDF_AutoWrapTable extends FPDF {
         #tableheader
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_pagu_total = 100;
+        $ukuran_kolom_pagu_total = 60;
         $ukuran_kolom_jenis_belanja = 60;
         $ukuran_kolom_1a = 100;
         $ukuran_kolom_2a = 140;
-        $ukuran_kolom_3a = 75;
-        $ukuran_kolom_4a = 75;
-        $ukuran_kolom_a = $ukuran_kolom_1a + $ukuran_kolom_2a + $ukuran_kolom_3a + $ukuran_kolom_4a;
+        $ukuran_kolom_3a = 70;
+        $ukuran_kolom_4a = 55;
+		$ukuran_kolom_5a = 60;
+        $ukuran_kolom_a = $ukuran_kolom_1a + $ukuran_kolom_2a + $ukuran_kolom_3a + $ukuran_kolom_4a+$ukuran_kolom_5a;
         $ukuran_kolom_1b = 100;
         $ukuran_kolom_2b = 60;
-        $ukuran_kolom_3b = 140;
+        $ukuran_kolom_3b = 160;
         $ukuran_kolom_b = $ukuran_kolom_1b + $ukuran_kolom_2b + $ukuran_kolom_3b;
 		
-		/* $kolom_grandtotal1=20+$ukuran_kolom_pagu_total_sisa+
-		$ukuran_kolom_1a+$ukuran_kolom_2a+
-		$ukuran_kolom_3a+$ukuran_kolom_4a; */
-		$kolom_grandtotal1=20+$ukuran_kolom_pagu_total_sisa+$ukuran_kolom_1a;
+		$kolom_grandtotal1=20+$ukuran_kolom_pagu_total_sisa+$ukuran_kolom_1a+$ukuran_kolom_5a;
 		
 		$kolom_grandtotal2=$ukuran_kolom_3a+$ukuran_kolom_4a;
 		$kolom_grandtotal3=$ukuran_kolom_1b+$ukuran_kolom_2b;
@@ -152,6 +150,8 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetXY($px2, $py2);
         $this->Cell($ukuran_kolom_1a, $h / 2, 'Tgl/No.SP2D-No.Transaksi', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_1a);
+		$this->Cell($ukuran_kolom_5a, $h / 2, 'Bank Pembayar', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_5a);
         $this->Cell($ukuran_kolom_2a, $h / 2, 'Bank/Nama/No.Rek. Penerima-Jumlah', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_2a);
         $this->Cell($ukuran_kolom_3a, $h / 2, 'Uraian SP2D', 1, 0, 'C', true);
@@ -166,23 +166,23 @@ class FPDF_AutoWrapTable extends FPDF {
         $py2 = $py1 + 20;
         $this->SetXY($px2, $py2);
 
-        $this->Cell($ukuran_kolom_1b, $h / 2, 'Tgl Proses SP2D Pengganti', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_1b, $h / 2, 'Tgl Proses'.'-'.'SP2D Pengganti', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_1b);
 
         $this->Cell($ukuran_kolom_2b, $h / 2, 'Tgl/No. SP2D', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_2b);
 
-        $this->Cell($ukuran_kolom_3b, $h / 2, 'Bank/Nama/No.Rek/Jumlah Penerima', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_3b, $h / 2, 'Bank/Nama/No.Rek Penerima'.'-'.'Jumlah Penerima', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_3b);
 
         $py3 = $this->GetY();
         $this->SetY($py3 -= 20);
         $this->SetX($left += $ukuran_kolom_b);
-        $this->Cell($ukuran_kolom_pagu_total, $h, 'Bank Pembayar-Status Retur', 1, 1, 'C', true);
+        $this->Cell($ukuran_kolom_pagu_total, $h, 'Status Retur', 1, 1, 'C', true);
         $this->Ln(3);
 
         $this->SetFont('Arial', '', 6);
-        $this->SetWidths(array(20,$ukuran_kolom_pagu_total_sisa,$ukuran_kolom_1a, 
+        $this->SetWidths(array(20,$ukuran_kolom_pagu_total_sisa,$ukuran_kolom_1a,$ukuran_kolom_5a, 
 			$ukuran_kolom_2a,$ukuran_kolom_3a,
 			$ukuran_kolom_4a,$ukuran_kolom_1b,
             $ukuran_kolom_2b, $ukuran_kolom_3b, 
@@ -210,15 +210,16 @@ class FPDF_AutoWrapTable extends FPDF {
 			foreach ($this->data as $value) {
 				$this->Row(
 						array($no++,
-							$value->get_kdsatker() . ' ' . $value->get_nmsatker(),
-							$value->get_statement_date() . ' /' . $value->get_sp2d_number() . ' -' . $value->get_receipt_number(),
-							$value->get_bank_name() . ' '.'Penerima:'. $value->get_vendor_name() . ' ' .'/No.Rek:'. $value->get_vendor_ext_bank_account_num() . ' '.'-Rp:' . number_format($value->get_amount()),
+							$value->get_kdsatker()."\n".$value->get_nmsatker(),
+							$value->get_statement_date()."\n".$value->get_sp2d_number()."\n".$value->get_receipt_number(),
+							$value->get_bank_account_name(),
+							$value->get_bank_name()."\n".'Penerima:'. $value->get_vendor_name()."\n".'No.Rek:'. $value->get_vendor_ext_bank_account_num()."\n".'Rp:' . number_format($value->get_amount()),
 							$value->get_invoice_description(),
 							$value->get_keterangan_retur(),
 							$value->get_tgl_proses_sp2d_pengganti(),
-							$value->get_tgsp2d_pengganti() . ' /' . $value->get_nosp2d_pengganti(),
-							$value->get_bank_name_pengganti() . ' ' .'/Penerima:'. $value->get_vendor_name_pengganti() . ' ' .'/No.Rek:'. $value->get_vendor_account_num_pengganti() . ' ' .'/Rp:'. number_format($value->get_nilai_sp2d_pengganti()),
-							$value->get_bank_account_name() . '- ' . $value->get_status_retur()
+							$value->get_tgsp2d_pengganti()."\n".$value->get_nosp2d_pengganti(),
+							$value->get_bank_name_pengganti()."\n".'Penerima:'. $value->get_vendor_name_pengganti()."\n".'No.Rek:'. $value->get_vendor_account_num_pengganti()."\n".'Rp:'. number_format($value->get_nilai_sp2d_pengganti()),
+							$value->get_status_retur()
 				));
 				$tot1 = $tot1 + $value->get_amount();	
 				$tot2 = $tot2 + $value->get_nilai_sp2d_pengganti();	
