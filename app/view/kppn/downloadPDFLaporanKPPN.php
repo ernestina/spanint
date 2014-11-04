@@ -81,7 +81,7 @@
                         <td class="align-center"><?php echo $value->kode_unit; ?></td>
                         <td class="align-center"><?php echo $value->tanggal; ?></td>
                         <td><?php echo $value->nama_file; ?></td>
-                        <td class="align-center"><a href="<?php echo $value->url; ?>">Unduh File</a></td>
+                        <td><a href="<?php echo $value->url; ?>">Unduh File</a></td>
                     </tr>
 
                     <?php } ?>

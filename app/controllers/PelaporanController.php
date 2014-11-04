@@ -57,7 +57,7 @@ class PelaporanController extends BaseController {
             
         }
         
-        if (strpos(URL, 'dev2') == false) {
+        /*if (strpos(URL, 'dev2') == false) {
         
             $fileURL = substr(URL, 0, -8).'span/report/';
             
@@ -65,6 +65,12 @@ class PelaporanController extends BaseController {
             
             $fileURL = substr(URL, 0, -5).'span/report/';
             
+        }*/
+        
+        if (strpos(URL, 'kemenkeu') == false || strpos(URL, 'perbendaharaan') == false){
+            $fileURL = 'http://spanint.kemenkeu.go.id/span/report/';
+        } else {
+            $fileURL = $_SERVER['HTTP_REFERER'].'span/report/';
         }
         
         //var_dump($fileURL);
@@ -202,6 +208,215 @@ class PelaporanController extends BaseController {
         $d_log->tambah_log("Sukses");
         
         $this->view->render('kppn/downloadPDFLaporanKPPN');
+        
+    }
+    
+    public function downloadLaporanKPPN2($tipe) {
+        
+        $filter = array();
+        $no=0;
+        
+        if ($tipe == 'LAK') {
+        
+            $folder = 'SPGLR00258';
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Arus Kas per Akun Tingkat KPPN"; 
+            
+        } else if ($tipe == 'LRA') {
+            
+            $folder = 'SPGLR00264';
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Realisasi Anggaran Tingkat KPPN";
+            
+        } else if ($tipe == 'LKP') {
+            
+            $folder = 'SPCMR00051';
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Konsolidasi Saldo Kas KPPN";
+            
+        } else {
+            
+            //Back to Home
+            
+        }
+        
+        /*if (strpos(URL, 'dev2') == false) {
+        
+            $fileURL = substr(URL, 0, -8).'span/report/';
+            
+        } else {
+            
+            $fileURL = substr(URL, 0, -5).'span/report/';
+            
+        }*/
+        
+        if (strpos(URL, 'kemenkeu') == false || strpos(URL, 'perbendaharaan') == false){
+            $fileURL = 'http://spanint.kemenkeu.go.id/span/report/';
+        } else {
+            $fileURL = $_SERVER['HTTP_REFERER'].'span/report/';
+        }
+        $this->view->fileURL = $fileURL;
+        
+        //var_dump($fileURL);
+        
+        
+        $d_pelaporan = new DataPelaporan($this->registry);
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if (Session::get('role') == ADMIN || Session::get('role') == PKN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        
+        if (Session::get('role') == KPPN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $_POST['kdkppn'] = Session::get('id_user');
+        }
+
+        if (isset($_POST['submit_file'])) {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn'] . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            }
+        }
+        $this->view->data = $d_pelaporan->get_laporan($filter);
+
+        //untuk mencatat log user
+        $d_log->tambah_log("Sukses");
+        
+        $this->view->render('pkn/downloadPDFLaporanPKN');
+        
+    }
+    
+    public function downloadLaporanPKN($tipe) {
+        
+        $filter = array();
+        $no=0;
+        
+        if ($tipe == 'SPGLR00008') {
+        
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Arus Kas BUN dan KPPN"; 
+            
+        } else if ($tipe == 'SPGLR00009') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Belanja Pemerintah Pusat";
+            
+        } else if ($tipe == 'SPGLR00010') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Realisasi APBN";
+            
+        }else if ($tipe == 'SPGLR00011') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Penerimaan Perpajakan";
+            
+        }else if ($tipe == 'SPGLR00012') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Penerimaan Pembiayaan";
+            
+        }else if ($tipe == 'SPGLR00013') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Penerimaan Negara Bukan Pajak";
+            
+        }else if ($tipe == 'SPGLR00014') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Transfer Daerah";
+            
+        }else if ($tipe == 'SPGLR00015') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Penerimaan Hibah";
+            
+        }else if ($tipe == 'SPGLR00016') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Penerimaan dan Pengeluaran Non Anggaran Lainnya";
+            
+        }else if ($tipe == 'SPGLR00017') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Pengeluaran Pembiayaan";
+            
+        }else if ($tipe == 'SPGLR00018') {
+            
+            $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Penerimaan dan Pengeluaran PFK";
+            
+        } else {
+            
+            //Back to Home
+            
+        }
+        
+        /*if (strpos(URL, 'dev2') == false) {
+        
+            $fileURL = substr(URL, 0, -8).'span/report/';
+            
+        } else {
+            
+            $fileURL = substr(URL, 0, -5).'span/report/';
+            
+        }*/
+        
+        if (strpos(URL, 'kemenkeu') == false || strpos(URL, 'perbendaharaan') == false){
+            $fileURL = 'http://spanint.kemenkeu.go.id/span/report/';
+        } else {
+            $fileURL = $_SERVER['HTTP_REFERER'].'span/report/';
+        }
+        $this->view->fileURL = $fileURL;
+        
+        //var_dump($fileURL);
+        
+        
+        $d_pelaporan = new DataPelaporan($this->registry);
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if (Session::get('role') == ADMIN || Session::get('role') == PKN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        
+        $this->view->data = $d_pelaporan->get_laporan($filter);
+
+        //untuk mencatat log user
+        $d_log->tambah_log("Sukses");
+        
+        $this->view->render('pkn/downloadPDFLaporanPKN');
         
     }
     
