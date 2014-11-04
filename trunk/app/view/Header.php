@@ -297,7 +297,7 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan SPAN</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>
@@ -445,15 +445,12 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan SPAN</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Laporan Konsolidasi Saldo Kas KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Unduh Data Pagu</a>
-                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Unduh Data Realisasi</a>
-                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Unduh Tool Rekonsiliasi</a>
                                     <!--<li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Unduh Data Pagu</a>
                                     <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Unduh Data Realisasi</a>
                                     <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Unduh Tool Rekonsiliasi</a>-->
@@ -570,6 +567,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Penyaluran dan Droping Dana SP2D</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -584,7 +582,7 @@
                             </div>
                         </li>
                         
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00008">Laporan Arus Kas BUN dan KPPN</a></li>
