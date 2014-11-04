@@ -161,6 +161,17 @@
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Laporan Konsolidasi Saldo Kas KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00008">Laporan Arus Kas BUN dan KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00009">Laporan Rincian Belanja Pemerintah Pusat</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00010">Laporan Realisasi APBN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00011">Laporan Rincian Penerimaan Perpajakan</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00012">Laporan Rincian Penerimaan Pembiayaan</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00013">Laporan Rincian Penerimaan Negara Bukan Pajak</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00014">Laporan Rincian Transfer Daerah</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00015">Laporan Rincian Penerimaan Hibah</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00016">Laporan Penerimaan dan Pengeluaran Non Anggaran Lainnya</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00017">Laporan Rincian Pengeluaran Pembiayaan</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00018">Laporan Penerimaan dan Pengeluaran PFK</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -569,6 +580,24 @@
                                     <li><a href="<?php echo URL; ?>dataKppn/monitoringSp2d">Monitoring SP2D - Bank</a></li>
                                     <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur - PKN</a></li>
                                     <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Monitoring Retur SP2D</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00008">Laporan Arus Kas BUN dan KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00009">Laporan Rincian Belanja Pemerintah Pusat</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00010">Laporan Realisasi APBN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00011">Laporan Rincian Penerimaan Perpajakan</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00012">Laporan Rincian Penerimaan Pembiayaan</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00013">Laporan Rincian Penerimaan Negara Bukan Pajak</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00014">Laporan Rincian Transfer Daerah</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00015">Laporan Rincian Penerimaan Hibah</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00016">Laporan Penerimaan dan Pengeluaran Non Anggaran Lainnya</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00017">Laporan Rincian Pengeluaran Pembiayaan</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00018">Laporan Penerimaan dan Pengeluaran PFK</a></li>
                                 </ul>
                             </div>
                         </li>
