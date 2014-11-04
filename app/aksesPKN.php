@@ -80,6 +80,15 @@ $akses['PelaporanPKN'] = array(
 );
 
 /*
+ * akses DataPelimpahan
+ */
+$akses['DataPelimpahanPKN'] = array(
+    '__construct',
+    'monitoringPelimpahan',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFPKN'] = array(

@@ -31,7 +31,7 @@ class DataPelimpahanController extends BaseController {
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
-        if (Session::get('role') == ADMIN) {
+        if (Session::get('role') == ADMIN || Session::get('role') == PKN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_anak = $d_kppn_list->get_kppn_kanwil();
             $this->view->kppn_induk = $d_kppn_list->get_induk_limpah();

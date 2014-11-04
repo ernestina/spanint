@@ -408,7 +408,6 @@
                         <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
                         <label class="isian">Kode KPPN: </label>
                         <select class="form-control" type="text" name="kdkppn" id="kdkppn">
-						<option value='SEMUA' selected>SEMUA KPPN</option>
                             <?php
                             foreach ($this->kppn_list as $value1) {
                                 if ($kode_kppn == $value1->get_kd_d_kppn()) {
