@@ -90,40 +90,40 @@ $tot_pot_spm = 0;
 $tot_set_mpn = 0;
 $tot_total = 0;
 //var_dump ($this->data);
-if ($this->d_bulan == 'januari') {
+if ($this->d_bulan == 'Januari') {
     $bulan = 'january';
 }
-if ($this->d_bulan == 'februari') {
+if ($this->d_bulan == 'Februari') {
     $bulan = 'february';
 }
-if ($this->d_bulan == 'maret') {
+if ($this->d_bulan == 'Maret') {
     $bulan = 'march';
 }
-if ($this->d_bulan == 'april') {
+if ($this->d_bulan == 'April') {
     $bulan = 'april';
 }
-if ($this->d_bulan == 'mei') {
+if ($this->d_bulan == 'Mei') {
     $bulan = 'may';
 }
-if ($this->d_bulan == 'juni') {
+if ($this->d_bulan == 'Juni') {
     $bulan = 'june';
 }
-if ($this->d_bulan == 'juli') {
+if ($this->d_bulan == 'Juli') {
     $bulan = 'july';
 }
-if ($this->d_bulan == 'agustus') {
+if ($this->d_bulan == 'Agustus') {
     $bulan = 'august';
 }
-if ($this->d_bulan == 'september') {
+if ($this->d_bulan == 'September') {
     $bulan = 'september';
 }
-if ($this->d_bulan == 'oktober') {
+if ($this->d_bulan == 'Oktober') {
     $bulan = 'october';
 }
-if ($this->d_bulan == 'november') {
+if ($this->d_bulan == 'November') {
     $bulan = 'november';
 }
-if ($this->d_bulan == 'desember') {
+if ($this->d_bulan == 'Desember') {
     $bulan = 'december';
 }
 if (isset($this->data)) {
@@ -200,63 +200,63 @@ if (isset($this->data)) {
                     <br>    
                     <label class="isian">Pilih bulan: </label>
                     <select type="text" class="form-control" name="bulan" id="bulan">
-                        <option value='januari' <?php
-                        if ($this->d_bulan == 'januari') {
+                        <option value='Januari' <?php
+                        if ($this->d_bulan == 'Januari') {
                             echo "selected";
                         }
                         ?> >Januari</option>
-                        <option value='februari' <?php
-                        if ($this->d_bulan == 'februari') {
+                        <option value='Februari' <?php
+                        if ($this->d_bulan == 'Februari') {
                             echo "selected";
                         }
                         ?> >Februari</option>
-                        <option value='maret' <?php
-                                if ($this->d_bulan == 'maret') {
+                        <option value='Maret' <?php
+                                if ($this->d_bulan == 'Maret') {
                                     echo "selected";
                                 }
                                 ?> >Maret</option>
-                        <option value='april' <?php
-                        if ($this->d_bulan == 'april') {
+                        <option value='April' <?php
+                        if ($this->d_bulan == 'April') {
                             echo "selected";
                         }
                         ?> >April</option>
-                        <option value='mei' <?php
-                        if ($this->d_bulan == 'mei') {
+                        <option value='Mei' <?php
+                        if ($this->d_bulan == 'Mei') {
                             echo "selected";
                         }
                         ?> >Mei</option>
-                        <option value='juni' <?php
-                                if ($this->d_bulan == 'juni') {
+                        <option value='Juni' <?php
+                                if ($this->d_bulan == 'Juni') {
                                     echo "selected";
                                 }
                                 ?> >Juni</option>
-                        <option value='juli' <?php
-                        if ($this->d_bulan == 'juli') {
+                        <option value='Juli' <?php
+                        if ($this->d_bulan == 'Juli') {
                             echo "selected";
                         }
                         ?> >Juli</option>
-                        <option value='agustus' <?php
-                        if ($this->d_bulan == 'agustus') {
+                        <option value='Agustus' <?php
+                        if ($this->d_bulan == 'Agustus') {
                             echo "selected";
                         }
                         ?> >Agustus</option>
-                        <option value='september' <?php
-                                if ($this->d_bulan == 'september') {
+                        <option value='September' <?php
+                                if ($this->d_bulan == 'September') {
                                     echo "selected";
                                 }
                         ?> >September</option>
-                        <option value='oktober' <?php
-                                if ($this->d_bulan == 'oktober') {
+                        <option value='Oktober' <?php
+                                if ($this->d_bulan == 'Oktober') {
                                     echo "selected";
                                 }
                         ?> >Oktober</option>
-                        <option value='november' <?php
-                                if ($this->d_bulan == 'november') {
+                        <option value='November' <?php
+                                if ($this->d_bulan == 'November') {
                                     echo "selected";
                                 }
                         ?> >November</option>
-                        <option value='desember' <?php
-                                if ($this->d_bulan == 'desember') {
+                        <option value='Desember' <?php
+                                if ($this->d_bulan == 'Desember') {
                                     echo "selected";
                                 }
                         ?> >Desember</option>
