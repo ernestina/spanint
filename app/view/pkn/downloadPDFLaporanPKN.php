@@ -41,7 +41,8 @@
         <thead>
             <tr>
                 <th class="align-center">No.</th>
-                <th class="align-center">Periode Berakhir Laporan</th>
+                <th class="align-center">Periode Laporan</th>
+                <th class="align-center">ID Laporan</th>
                 <th class="align-center">Opsi</th>
             </tr>
         </thead>
@@ -62,7 +63,8 @@
 
                     <tr>
                         <td class="align-center"><?php echo $no++; ?></td>
-                        <td class="align-center"><?php echo date("d-m-Y", strtotime(substr($value->get_argument_text(),21,10))); ?></td>
+                        <td class="align-center"><?php echo date("d-m-Y", strtotime(substr($value->get_argument_text(),0,10)))." s.d ".date("d-m-Y", strtotime(substr($value->get_argument_text(),21,10))); ?></td>
+                        <td class="align-center"><?php echo $value->get_request_id(); ?></td>
                         <td class="align-center"><a href="<?php echo $this->fileURL.$value->get_request_id().".PDF"; ?>">Unduh File</a></td>
                     </tr>
 

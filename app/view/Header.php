@@ -155,7 +155,7 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Pelaporan SPAN</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>

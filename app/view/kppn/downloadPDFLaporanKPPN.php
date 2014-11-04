@@ -41,7 +41,7 @@
             </div>
 
             <div class="col-md-6 col-sm-12 align-right">
-                Update Data Terakhir (Waktu Server)<br/>Hari ini, 07:00 WIB
+                Update Data Terakhir (Waktu Server)<br/>Sesuai dengan yang ada di Cetakan PDF
             </div>
 
         </div>
