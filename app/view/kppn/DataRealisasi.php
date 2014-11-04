@@ -21,8 +21,8 @@
 						} else {
 							$kdkppn = 'null';
 						}
-						if (isset($this->satker_code1)) {
-							$kdsatker =$this->satker_code1;
+						if (isset($this->satker_code)) {
+							$kdsatker =$this->satker_code;
 						} else {
 							$kdsatker = 'null';
 						}
@@ -41,8 +41,8 @@
 						} else {
 							$kdkppn = 'null';
 						}
-						if (isset($this->satker_code1)) {
-							$kdsatker = $this->satker_code1;
+						if (isset($this->satker_code)) {
+							$kdsatker = $this->satker_code;
 						} else {
 							$kdsatker = 'null';
 						}							
@@ -57,8 +57,8 @@
 						} else {
 							$kdkppn = Session::get('id_user');
 						}
-						if (isset($this->satker_code1)) {
-							$kdsatker = $this->satker_code1;
+						if (isset($this->satker_code)) {
+							$kdsatker = $this->satker_code;
 						} else {
 							$kdsatker = 'null';
 						}						
