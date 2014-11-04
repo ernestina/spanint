@@ -245,7 +245,7 @@ class DataRealisasi {
 				and a.budget_type = '2'			
 				and substr(a.program,1,3)=b.kdba
 				and substr(a.bank,1,1)  <= '9'
-				and substr(a.akun,1,1) <> '7'
+				and substr(a.akun,1,1) in ('5','6')
 				and a.summary_flag = 'N'
 				and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) > 0
 				"
