@@ -132,16 +132,95 @@
                         echo "<td rowspan=2>" . $no++ . "</td>";
                         echo "<td rowspan=2 class='ratakiri'>" . $value->get_ba() . " " . $value->get_nmba() . "</td>";
                         echo "<td align='left'> PAGU <br> REALISASI </td>";
-                        echo "<td align='right'>" . number_format($value->get_pagu_51()) ."<br>". number_format($value->get_belanja_51())."</td> ";
-						echo "<td align='right'>" . number_format($value->get_pagu_52()) ."<br>". number_format($value->get_belanja_52())."</td> ";
-						echo "<td align='right'>" . number_format($value->get_pagu_53()) ."<br>". number_format($value->get_belanja_53())."</td> ";
-						echo "<td align='right'>" . number_format($value->get_pagu_54()) ."<br>". number_format($value->get_belanja_54())."</td> ";
-						echo "<td align='right'>" . number_format($value->get_pagu_55()) ."<br>". number_format($value->get_belanja_55())."</td> ";
-						echo "<td align='right'>" . number_format($value->get_pagu_56()) ."<br>". number_format($value->get_belanja_56())."</td> ";
-						echo "<td align='right'>" . number_format($value->get_pagu_57()) ."<br>". number_format($value->get_belanja_57())."</td> ";
-						echo "<td align='right'>" . number_format($value->get_pagu_58()) ."<br>". number_format($value->get_belanja_58())."</td> ";
-						echo "<td align='right'>" . number_format($value->get_pagu_61()) ."<br>". number_format($value->get_belanja_61())."</td> ";
-						echo "<td align='right'>" . number_format($value->get_pagu()) ."<br>". number_format($value->get_realisasi())."</td>";
+                        echo "<td align='right'>" . number_format($value->get_pagu_51()) ."<br>". number_format($value->get_belanja_51()). "<br>";
+						if	($value->get_pagu_51() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_belanja_51()/$value->get_pagu_51()*100,2)."%)";
+						}
+						"</td> ";
+                        echo "<td align='right'>" . number_format($value->get_pagu_52()) ."<br>". number_format($value->get_belanja_52()). "<br>";
+						if	($value->get_pagu_52() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_belanja_52()/$value->get_pagu_52()*100,2)."%)";
+						}
+						
+						"</td> ";
+                        echo "<td align='right'>" . number_format($value->get_pagu_53()) ."<br>". number_format($value->get_belanja_53()). "<br>";
+						if	($value->get_pagu_53() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_belanja_53()/$value->get_pagu_53()*100,2)."%)";
+						}
+						
+						"</td> ";
+                        echo "<td align='right'>" . number_format($value->get_pagu_54()) ."<br>". number_format($value->get_belanja_54()). "<br>";
+						if	($value->get_pagu_54() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_belanja_54()/$value->get_pagu_54()*100,2)."%)";
+						}
+						
+						"</td> ";
+                        echo "<td align='right'>" . number_format($value->get_pagu_55()) ."<br>". number_format($value->get_belanja_55()). "<br>";
+						if	($value->get_pagu_55() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_belanja_55()/$value->get_pagu_55()*100,2)."%)";
+						}
+						
+						"</td> ";
+                        echo "<td align='right'>" . number_format($value->get_pagu_56()) ."<br>". number_format($value->get_belanja_56()). "<br>";
+						if	($value->get_pagu_56() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_belanja_56()/$value->get_pagu_56()*100,2)."%)";
+						}
+						
+						"</td> ";
+                        echo "<td align='right'>" . number_format($value->get_pagu_57()) ."<br>". number_format($value->get_belanja_57()). "<br>";
+						if	($value->get_pagu_57() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_belanja_57()/$value->get_pagu_57()*100,2)."%)";
+						}
+						
+						"</td> ";
+                        echo "<td align='right'>" . number_format($value->get_pagu_58()) ."<br>". number_format($value->get_belanja_58()). "<br>";
+						if	($value->get_pagu_58() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_belanja_58()/$value->get_pagu_58()*100,2)."%)";
+						}
+						
+						"</td> ";
+				        echo "<td align='right'>" . number_format($value->get_pagu_61()) ."<br>". number_format($value->get_belanja_61()). "<br>";
+						if	($value->get_pagu_61() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_belanja_61()/$value->get_pagu_61()*100,2)."%)";
+						}
+						
+						"</td> ";
+                        echo "<td align='right'>" . number_format($value->get_pagu()) ."<br>". number_format($value->get_realisasi()). "<br>";
+						if	($value->get_pagu() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_realisasi()/$value->get_pagu()*100,2)."%)";
+						}
+
+						"</td>"; 
 
                         echo "</tr>	";
                         echo "<tr>	";
@@ -158,7 +237,7 @@
                             echo "<td align='right'>". number_format($value->get_pagu()-$value->get_realisasi())."</td> ";
                         echo "</tr>	";
                         
-                        $tot_pagu+=$value->get_Pagu();
+							$tot_pagu+=$value->get_Pagu();
 							$tot_real+=$value->get_realisasi();
                             $tot_51+=$value->get_belanja_51();
                             $tot_52+=$value->get_belanja_52();
@@ -198,16 +277,16 @@
                     <td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
 					<td class='ratakiri'>PAGU <br> REALISASI</td>
                   
-					<td class='ratakanan'><?php echo number_format($tot_pagu_51); ?><br><?php echo number_format($tot_51); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_52); ?><br><?php echo number_format($tot_52); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_53); ?><br><?php echo number_format($tot_53); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_54); ?><br><?php echo number_format($tot_54); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_55); ?><br><?php echo number_format($tot_55); ?></td>
-					<td class='ratakanan'><?php echo number_format($tot_pagu_56); ?><br><?php echo number_format($tot_56); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_57); ?><br><?php echo number_format($tot_57); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_58); ?><br><?php echo number_format($tot_58); ?></td>
-					<td class='ratakanan'><?php echo number_format($tot_pagu_61); ?><br><?php echo number_format($tot_61); ?></td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu); ?><br><?php echo number_format($tot_real); ?></td> 
+					<td class='ratakanan'><?php echo number_format($tot_pagu_51); ?><br><?php echo number_format($tot_51); ?><br><?php if ($tot_pagu_51==0){echo '(0.00%)';} else {echo "("  .number_format($tot_51/$tot_pagu_51*100). "%)";}?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_52); ?><br><?php echo number_format($tot_52); ?><br><?php if ($tot_pagu_52==0){echo '(0.00%)';} else {echo "("  .number_format($tot_52/$tot_pagu_52*100). "%)";}?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_53); ?><br><?php echo number_format($tot_53); ?><br><?php if ($tot_pagu_53==0){echo '(0.00%)';} else {echo "("  .number_format($tot_53/$tot_pagu_53*100). "%)";}?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_54); ?><br><?php echo number_format($tot_54); ?><br><?php if ($tot_pagu_54==0){echo '(0.00%)';} else {echo "("  .number_format($tot_54/$tot_pagu_54*100). "%)";}?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_55); ?><br><?php echo number_format($tot_55); ?><br><?php if ($tot_pagu_55==0){echo '(0.00%)';} else {echo "("  .number_format($tot_55/$tot_pagu_55*100). "%)";}?> </td>
+					<td class='ratakanan'><?php echo number_format($tot_pagu_56); ?><br><?php echo number_format($tot_56); ?><br><?php if ($tot_pagu_56==0){echo '(0.00%)';} else {echo "("  .number_format($tot_56/$tot_pagu_56*100). "%)";}?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_57); ?><br><?php echo number_format($tot_57); ?><br><?php if ($tot_pagu_57==0){echo '(0.00%)';} else {echo "("  .number_format($tot_57/$tot_pagu_57*100). "%)";}?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_58); ?><br><?php echo number_format($tot_58); ?><br><?php if ($tot_pagu_58==0){echo '(0.00%)';} else {echo "("  .number_format($tot_58/$tot_pagu_58*100). "%)";}?> </td>
+					<td class='ratakanan'><?php echo number_format($tot_pagu_61); ?><br><?php echo number_format($tot_61); ?><br><?php if ($tot_pagu_61==0){echo '(0.00%)';} else {echo "("  .number_format($tot_61/$tot_pagu_61*100). "%)";}?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu); ?><br><?php echo number_format($tot_real); ?><br><?php if ($tot_pagu==0){echo '(0.00%)';} else {echo "(" .number_format($tot_real/$tot_pagu*100). "%)";}?> </td>
             </tr>
             <tr>
                 <td>SISA</td>

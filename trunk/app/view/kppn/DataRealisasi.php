@@ -294,7 +294,15 @@
 						}
 						
 						"</td> ";
-                        echo "<td align='right'>" . number_format($value->get_pagu()) ."<br>". number_format($value->get_realisasi()). "<br> (". number_format($value->get_realisasi()/$value->get_pagu()*100,2)."%) </td>"; 
+                        echo "<td align='right'>" . number_format($value->get_pagu()) ."<br>". number_format($value->get_realisasi()). "<br>";
+						if	($value->get_pagu() == 0) { 
+							echo '0.00%';
+						} 
+						else { echo 
+						"(". number_format($value->get_realisasi()/$value->get_pagu()*100,2)."%)";
+						}
+
+						"</td>"; 
                     echo "</tr>	";
                     echo "<tr style='border-top: 1px solid black' !important>";
                         echo "<td align='left'> SISA </td>";
@@ -354,7 +362,7 @@
                     <td class='ratakanan'><?php echo number_format($tot_pagu_57); ?><br><?php echo number_format($tot_57); ?><br><?php if ($tot_pagu_57==0){echo '(0.00%)';} else {echo "("  .number_format($tot_57/$tot_pagu_57*100). "%)";}?> </td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_58); ?><br><?php echo number_format($tot_58); ?><br><?php if ($tot_pagu_58==0){echo '(0.00%)';} else {echo "("  .number_format($tot_58/$tot_pagu_58*100). "%)";}?> </td>
 					<td class='ratakanan'><?php echo number_format($tot_pagu_61); ?><br><?php echo number_format($tot_61); ?><br><?php if ($tot_pagu_61==0){echo '(0.00%)';} else {echo "("  .number_format($tot_61/$tot_pagu_61*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu); ?><br><?php echo number_format($tot_real); ?><br><?php echo "(" .number_format($tot_real/$tot_pagu*100). "%)";?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu); ?><br><?php echo number_format($tot_real); ?><br><?php if ($tot_pagu==0){echo '(0.00%)';} else {echo "(" .number_format($tot_real/$tot_pagu*100). "%)";}?> </td>
                 </tr>
                 <tr>
                     <td>SISA</td>
