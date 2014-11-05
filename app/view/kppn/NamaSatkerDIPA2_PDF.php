@@ -104,7 +104,7 @@ class FPDF_AutoWrapTable extends FPDF {
             $kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
             $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);		
         } else {
-            $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);			 
+            $this->Cell(0, 20, 's.d  Periode Tanggal  ' . date('d-m-Y'), 0, 0, 'C', false);			 
         } 
 		//--------------------
 
@@ -332,7 +332,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Sisa Pagu Belanja Realisasi dan Encumbrance'; //judul file laporan
+$judul = 'Sisa Pagu Belanja Realisasi dan Pencadangan'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
