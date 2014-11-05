@@ -11,6 +11,7 @@ $akses['HomeAdmin'] = array(
     '__construct',
     'index',
     'dashboard',
+    'dashboardPenerbitan',
     '__destruct'
 );
 
