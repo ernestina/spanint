@@ -219,7 +219,7 @@ class FPDF_AutoWrapTable extends FPDF {
 							$value->get_tgl_proses_sp2d_pengganti(),
 							$value->get_tgsp2d_pengganti()."\n".$value->get_nosp2d_pengganti(),
 							$value->get_bank_name_pengganti()."\n".'Penerima:'. $value->get_vendor_name_pengganti()."\n".'No.Rek:'. $value->get_vendor_account_num_pengganti()."\n".'Rp:'. number_format($value->get_nilai_sp2d_pengganti()),
-							$value->get_status_retur()
+							'KPPN  '.$value->get_status_retur()
 				));
 				$tot1 = $tot1 + $value->get_amount();	
 				$tot2 = $tot2 + $value->get_nilai_sp2d_pengganti();	
