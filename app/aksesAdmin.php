@@ -236,6 +236,7 @@ $akses['PelaporanAdmin'] = array(
     '__construct',
     'downloadLaporanKPPN',
     'downloadLaporanPKN',
+    'lihatLaporan',
     '__destruct'
 );
 

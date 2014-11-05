@@ -420,6 +420,14 @@ class PelaporanController extends BaseController {
         
     }
     
+    public function lihatLaporan() {
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        $this->view->render('kppn/listLaporan');
+        $d_log->tambah_log("Sukses");
+    }
+    
     public function __destruct() {
         
     }
