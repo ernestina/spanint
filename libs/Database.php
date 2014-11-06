@@ -15,7 +15,7 @@ class Database extends PDO {
         try {
             parent::__construct("oci:dbname=" . DB_TNS, DB_USER, DB_PASS);
         } catch (PDOException $e) {
-            echo " tidak bisa mengakses database";
+            echo $e;
         }
     }
 

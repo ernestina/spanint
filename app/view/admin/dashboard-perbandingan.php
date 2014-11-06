@@ -359,9 +359,6 @@
 
         <div class="row top-padded">
             <div class="col-md-6">
-                
-                <?php if (Session::get('role') == ADMIN) { ?>
-                
                 <h4>Lihat Detail Unit: &nbsp;
                 <select id="ke_unit">  
                             
@@ -392,20 +389,15 @@
 
                 </select>
                 </h4>
-                
-                <?php } ?>
-                
             </div>
 
             <div class="col-md-6 align-right top-padded-little">
+                Kembali ke: &nbsp;
                 
                 <?php
 
                     if (isset($this->kodeunit) && (Session::get('role') == ADMIN)) {
-                        
-                        echo 'Kembali ke: &nbsp;';
                         echo '<a href="'.URL.'home/dashboardPenerbitan/">DJPB</a>';
-                        
                     }
 
                 ?>
