@@ -4,7 +4,7 @@
         <div class="row">
 
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Monitoring PFK Bulan <?php echo ($this->d_bulan); ?></h2>
+                <h2>Monitoring PFK Bulan <?php echo UPPER($this->d_bulan); ?></h2>
             </div>
 
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -94,37 +94,37 @@ if ($this->d_bulan == 'Januari') {
     $bulan = 'january';
 }
 if ($this->d_bulan == 'Februari') {
-    $bulan = 'february';
+    $bulan = 'februari';
 }
 if ($this->d_bulan == 'Maret') {
-    $bulan = 'march';
+    $bulan = 'maret';
 }
 if ($this->d_bulan == 'April') {
     $bulan = 'april';
 }
 if ($this->d_bulan == 'Mei') {
-    $bulan = 'may';
+    $bulan = 'mei';
 }
 if ($this->d_bulan == 'Juni') {
-    $bulan = 'june';
+    $bulan = 'juni';
 }
 if ($this->d_bulan == 'Juli') {
-    $bulan = 'july';
+    $bulan = 'juli';
 }
 if ($this->d_bulan == 'Agustus') {
-    $bulan = 'august';
+    $bulan = 'agustus';
 }
 if ($this->d_bulan == 'September') {
     $bulan = 'september';
 }
 if ($this->d_bulan == 'Oktober') {
-    $bulan = 'october';
+    $bulan = 'oktober';
 }
 if ($this->d_bulan == 'November') {
     $bulan = 'november';
 }
 if ($this->d_bulan == 'Desember') {
-    $bulan = 'december';
+    $bulan = 'desember';
 }
 if (isset($this->data)) {
     if (empty($this->data)) {
