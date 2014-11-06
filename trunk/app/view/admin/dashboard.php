@@ -404,6 +404,58 @@
 
 <div class="main-window-segment sub-segment">
     <div class="container-fluid">
+        
+        <div class="row top-padded">
+            <div class="col-md-6">
+                <h4>Lihat Detail Unit: &nbsp;
+                <select id="ke_unit">  
+                            
+                    <?php 
+        
+                        $count_unit = 0;
+
+                        foreach ($this->summaryUnit as $value) {
+
+                            $total_sp2d = 0;
+
+                            foreach ($value->data_sp2d_rekap as $sp2d_rekap_harian) {
+                                $total_sp2d += $sp2d_rekap_harian->get_gaji();
+                                $total_sp2d += $sp2d_rekap_harian->get_non_gaji();
+                                $total_sp2d += $sp2d_rekap_harian->get_void();
+                                $total_sp2d += $sp2d_rekap_harian->get_lainnya();
+                            }
+
+                            if (($value->data_pos_spm > 0) && ($total_sp2d > 0) && ($value->nama_unit[0] != 'K')) {
+                                if ($count_unit > 0) { echo " , "; }
+                                echo '<option value="'.$value->nama_unit.'">'.$value->nama_unit.' - '.$value->nama_lengkap_unit.'</option>';
+                                $count_unit ++;
+                            }
+
+                        } 
+
+                    ?>
+
+                </select>
+                </h4>
+            </div>
+
+            <div class="col-md-6 align-right top-padded-little">
+                Kembali ke: &nbsp;
+                
+                <?php
+
+                    if (isset($this->kodeunit) && (Session::get('role') == ADMIN)) {
+                        echo '<a href="'.URL.'home/dashboardPenerbitan/">DJPB</a>';
+                    }
+
+                    if (isset($this->kodeunit) && ($this->kodeunit[0] != 'K') && ((Session::get('role') == ADMIN) || (Session::get('role') == KANWIL))) {
+                        echo '<a href="'.URL.'home/dashboardPenerbitan/">'.$this->kode_kanwil.'</a>';
+                    }
+
+                ?>
+                
+            </div>
+        </div>
 
         <div class="row">
 
