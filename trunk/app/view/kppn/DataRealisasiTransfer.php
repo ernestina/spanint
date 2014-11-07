@@ -75,6 +75,7 @@
 				$kdsatker = 'null';
 			
 			}
+			
 				
 		}
 
@@ -103,8 +104,14 @@
                 if (isset($this->satker_code)) {
                     echo "<br>Lokasi : " . $this->lokasi;
                 }
+                ?> 
+                <br>Tanggal : s.d <?php
+
+                echo (date('d-m-Y'));
+
                 ?>
             </div>
+			
             
             <div class="col-md-6 col-sm-12" style="text-align: right;">
                 <?php
@@ -134,26 +141,26 @@
                     <th rowspan=2 class='mid'>Lokasi</th>
                     <th rowspan=2 class='mid'>Nama Lokasi</th>
 
-                    <!--th rowspan=2 class='mid' width='200px'> Nama Satker </th-->
-                    <th style="text-align: right"> Realisasi </th>
+                    <!--th rowspan=2 class='mid' width='200px'> Nama Satker </th>
+                    <th style="text-align: right"> Realisasi </th-->
 
 
-                    <!--th colspan=9 class='mid'>Jenis Belanja</th>
-                    <th rowspan=2 class='mid'>Sisa Pagu</th-->
+                    <th colspan=7 class='mid'>Jenis Belanja</th>
+                    <th rowspan=2 class='mid'>Total Realisasi Belanja Transfer</th>
                 </tr>
-                <!--tr >
-                                <th class='mid' >Pegawai</th>
-                                <th class='mid' >Barang</th>
-                                <th class='mid' >Modal</th>
-                                <th class='mid' >Beban Bunga</th>
-                                <th class='mid' >Subsidi</th>
-                                <th class='mid' >Hibah</th>
-                                <th class='mid' >BanSos</th>
-                                <th class='mid' >Lain lain</th>
+                <tr >
+                                <th class='mid' >DBH</th>
+                                <th class='mid' >DAU</th>
+                                <th class='mid' >DAK</th>
+                                <th class='mid' >DANA OTONOMI KHUSUS</th>
+                                <th class='mid' >DANA PENYESUAIAN</th>
+                                <th class='mid' >DANA KEISTIMEWAAN DIY</th>
+								<th class='mid' >SUSPEND </th>
+                                
                 <!--th >Pencadangan Dana</th-->
-                <!--th class='mid' >Total</th>
+                <!--th class='mid' >Total</th-->
                 
-</tr-->
+				</tr>
             </thead>
             <tbody class='ratatengah'>
                 <?php
@@ -165,30 +172,40 @@
                     if (empty($this->data)) {
                         echo '<td colspan=4 align="center">Tidak ada data.</td>';
                     } else {
+						$tot_51 = 0;
+						$tot_52 = 0;
+						$tot_53 = 0;
+						$tot_54 = 0;
+						$tot_55 = 0;
+						$tot_56 = 0;						
+						$tot_59 = 0;
+						$tot_real = 0;
+					
                         foreach ($this->data as $value) {
                             echo "<tr>	";
                             echo "<td>" . $no++ . "</td>";
-                            echo "<td>" . $value->get_lokasi() . "</td>";
-                            //echo "<td>" . $value->get_satker() . "</td>";
-                            echo "<td align='left'>" . $value->get_nmlokasi() . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_Pagu()) . "</td>";
-                            echo "<td align='right'>" . number_format($value->get_realisasi()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_52()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_53()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_54()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_55()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_56()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_57()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_58()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_encumbrance()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_51()+$value->get_belanja_52()+$value->get_belanja_53()+$value->get_belanja_54()
-                            //+$value->get_belanja_55()+$value->get_belanja_56()+$value->get_belanja_57()+$value->get_belanja_58()) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_pagu()-($value->get_belanja_51()+$value->get_belanja_52()+$value->get_belanja_53()+$value->get_belanja_54()
-                            //+$value->get_belanja_55()+$value->get_belanja_56()+$value->get_belanja_57()+$value->get_belanja_58())) . "</td>";
-                            //echo "<td align='right'>" . number_format($value->get_belanja_59()) . "</td>";
-
+                            echo "<td>" . $value->get_lokasi() . "</td>";                           
+                            echo "<td align='left'>" . $value->get_nmlokasi() . "</td>";                                                        
+							echo "<td align='right'>" . number_format($value->get_belanja_51()) . "</td>";
+                            echo "<td align='right'>" . number_format($value->get_belanja_52()) . "</td>";
+                            echo "<td align='right'>" . number_format($value->get_belanja_53()) . "</td>";
+                            echo "<td align='right'>" . number_format($value->get_belanja_54()) . "</td>";
+                            echo "<td align='right'>" . number_format($value->get_belanja_55()) . "</td>";
+                            echo "<td align='right'>" . number_format($value->get_belanja_56()) . "</td>"; 
+							echo "<td align='right'>" . number_format($value->get_belanja_59()) . "</td>";
+							echo "<td align='right'>" . number_format($value->get_realisasi()) . "</td>";							
                             echo "</tr>	";
-                            //$tot_pot = $tot_pot  + $value->get_amount() ;	
+							
+						$tot_real+=$value->get_realisasi();
+						$tot_51+=$value->get_belanja_51();
+						$tot_52+=$value->get_belanja_52();
+						$tot_53+=$value->get_belanja_53();
+						$tot_54+=$value->get_belanja_54();
+						$tot_55+=$value->get_belanja_55();
+						$tot_56+=$value->get_belanja_56();
+						$tot_57+=$value->get_belanja_59();
+
+                           
                         }
                     }
                 } else {
@@ -196,6 +213,18 @@
 }
                 ?>
             </tbody>
+			 <tfoot>
+                <tr>
+                    <td colspan=3 rowspan=2 class='mid'><b>GRAND TOTAL<b></td>
+					<td class='ratakanan'><?php echo number_format($tot_51); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_52); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_53); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_54); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_55); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_56); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_59); ?></td>
+					<td class='ratakanan'><?php echo number_format($tot_real); ?></td>					
+			 <tfoot>
     </table>
 </div>
 
@@ -249,6 +278,7 @@
                     <div id="wkdkppn" class="alert alert-danger"></div>
                     <label class="isian">Satker: </label>
                     <select class="form-control" type="text" name="kdsatker" id="kdsatker">
+					 <option value='' selected>- SEMUA SATKER -</option>
                         <!--option value='' selected>- pilih -</option-->
                         <?php
                         foreach ($this->data2 as $value1)
