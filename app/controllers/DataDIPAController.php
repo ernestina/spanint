@@ -793,6 +793,11 @@ class DataDIPAController extends BaseController {
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
+			
+			if (Session::get('role') == KPPN) {
+            $filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
+			} 
+			
             $this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
         }
 
@@ -813,7 +818,7 @@ class DataDIPAController extends BaseController {
         }
 
         if (Session::get('role') == KPPN) {
-            //$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
+            $filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
             $this->view->data4 = $d_spm1->get_realisasi_lokasi(Session::get('id_user'));
             $this->view->data2 = $d_spm1->get_realisasi_satker_transfer(Session::get('id_user'));
             //$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);

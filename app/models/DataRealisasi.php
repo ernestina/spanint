@@ -508,8 +508,17 @@ class DataRealisasi {
 				, a.lokasi
 				, c.nmlokasi
 				, sum(a.actual_amt) Realisasi
+				, sum(decode(substr(a.akun,1,2),'61',a.actual_amt,0)) belanja_61
+				, sum(decode(substr(a.akun,1,2),'62',a.actual_amt,0)) belanja_62
+				, sum(decode(substr(a.akun,1,2),'63',a.actual_amt,0)) belanja_63
+				, sum(decode(substr(a.akun,1,2),'64',a.actual_amt,0)) belanja_64
+				, sum(decode(substr(a.akun,1,2),'65',a.actual_amt,0)) belanja_65
+				, sum(decode(substr(a.akun,1,2),'66',a.actual_amt,0)) belanja_66
+				, sum(decode(substr(a.akun,1,2),'67',a.actual_amt,0)) belanja_67
+				, sum(decode(substr(a.akun,1,2),'68',a.actual_amt,0)) belanja_68
+				, sum(decode(substr(a.akun,1,2),'69',a.actual_amt,0)) belanja_69
 				FROM "
-                . $this->_table5 . " a,"
+                . $this->_table1 . " a,"
                 . $this->_table2 . " b, "
                 . $this->_table4 . " c 
 				where 
@@ -541,6 +550,15 @@ class DataRealisasi {
             $d_data->set_dipa($val['NMSATKER']);
             $d_data->set_encumbrance($val['ENCUMBRANCE']);
             $d_data->set_realisasi($val['REALISASI']);
+			$d_data->set_belanja_51($val['BELANJA_61']);
+            $d_data->set_belanja_52($val['BELANJA_62']);
+            $d_data->set_belanja_53($val['BELANJA_63']);
+            $d_data->set_belanja_54($val['BELANJA_64']);
+            $d_data->set_belanja_55($val['BELANJA_65']);
+            $d_data->set_belanja_56($val['BELANJA_66']);
+            $d_data->set_belanja_57($val['BELANJA_67']);
+            $d_data->set_belanja_58($val['BELANJA_68']);
+            $d_data->set_belanja_59($val['BELANJA_69']);
             $data[] = $d_data;
         }
         return $data;
