@@ -31,6 +31,7 @@ class DataCheck {
     private $_pilih;
     private $_tgl1;
     private $_tgl2;
+	private $_satker;
     private $_table1 = 'AP_CHECKS_ALL_V';
     public $registry;
 
@@ -86,11 +87,56 @@ class DataCheck {
             $d_data->set_exchange_rate($val['EXCHANGE_RATE']);
             $d_data->set_creation_date(date("d-m-Y", strtotime($val['CREATION_DATE'])));
             $d_data->set_status_lookup_code($val['STATUS_LOOKUP_CODE']);
+			
             $data[] = $d_data;
         }
         return $data;
     }
 
+	public function get_karwas_up_filter($filter_up) {
+        Session::get('id_user');
+        $sql = "SELECT *
+				FROM "
+                . $this->_table1 . "
+				WHERE 
+				STATUS_LOOKUP_CODE <> 'VOIDED'"
+
+        ;
+
+        $no = 0;
+        foreach ($filter_up as $filter_up) {
+            $sql .= " AND " . $filter_up;
+        }
+
+
+        $sql .= " ORDER BY CHECK_DATE DESC";
+        //var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_jenis_sp2d($val['JENIS_SP2D']);
+            $d_data->set_amount($val['AMOUNT']);
+            $d_data->set_base_amount($val['BASE_AMOUNT']);
+            $d_data->set_invoice_num($val['INVOICE_NUM']);
+            $d_data->set_invoice_date(date("d-m-Y", strtotime($val['INVOICE_DATE'])));
+            $d_data->set_description($val['DESCRIPTION']);
+            $d_data->set_check_number($val['CHECK_NUMBER']);
+            $d_data->set_check_date(date("d-m-Y", strtotime($val['CHECK_DATE'])));
+            $d_data->set_attribute6($val['JENIS_SPM']);
+            $d_data->set_nmsatker($val['NMSATKER']);
+            $d_data->set_currency_code($val['CURRENCY_CODE']);
+            $d_data->set_exchange_date(date("d-m-Y", strtotime($val['EXCHANGE_DATE'])));
+            $d_data->set_exchange_rate($val['EXCHANGE_RATE']);
+            $d_data->set_creation_date(date("d-m-Y", strtotime($val['CREATION_DATE'])));
+            $d_data->set_status_lookup_code($val['STATUS_LOOKUP_CODE']);
+			$d_data->set_satker($val['SEGMENT1']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
     public function get_jenis_spm_filter($satker = null) {
         Session::get('id_user');
 
@@ -293,6 +339,10 @@ class DataCheck {
      * setter
      */
 
+	 public function set_satker($satker) {
+        $this->_satker = $satker;
+    }
+	 
     public function set_thang($thang) {
         $this->_thang = $thang;
     }
@@ -388,7 +438,11 @@ class DataCheck {
     /*
      * getter
      */
-
+	
+	public function get_satker() {
+        return $this->_satker;
+    }
+	
     public function get_tgl2() {
         return $this->_tgl2;
     }
