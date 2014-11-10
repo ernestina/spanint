@@ -4,11 +4,22 @@
         <div class="row">
 
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Monitoring PFK Akun</h2>
+                <?php $akun = '';
+
+                foreach ($this->data as $value) {
+                    $akun = $value->get_akun();
+                    } ?>
+                <h2>Monitoring PFK Akun <?php echo $akun ?></h2>
             </div>
 
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                <?php
+                
+
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+
+    <!-- button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button -->
+<?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 
@@ -21,14 +32,10 @@
                 }
                 ?>
                 <a href="<?php echo URL; ?>PDF/GR_PFK_DETAIL1_PDF/<?php echo $kdakun . "/" . $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                <?php
-                //----------------------------------------------------		
-                ?>
 
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-
-    <!-- button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button -->
+<?php
+//----------------------------------------------------		
+?>
 
             </div>
         </div>
@@ -37,12 +44,12 @@
 
             <div class="col-md-6 col-sm-12">
 <?php
-$akun = '';
+/*$akun = '';
 
 foreach ($this->data as $value) {
     $akun = $value->get_akun();
 }
-echo "AKUN " .$akun ." " ;
+echo "AKUN " .$akun ." " ; */
 if (isset($this->d_nama_kppn)) {
     foreach ($this->d_nama_kppn as $kppn) {
         echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
