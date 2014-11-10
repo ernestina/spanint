@@ -33,7 +33,7 @@ class DataPelaporan {
     public function get_laporan($filter) {
         $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME, ARGUMENT_TEXT, REQUESTED_START_DATE, ACTUAL_START_DATE, ACTUAL_COMPLETION_DATE, FILE_HASH, TIMESTAMP
 				FROM " . $this->_table . "
-				WHERE 1=1 ";
+				WHERE FILE_HASH <> ' ' ";
         $no = 0;
         //var_dump($filter);
         foreach ($filter as $filter) {
@@ -48,7 +48,19 @@ class DataPelaporan {
             $d_data->set_request_id($val['REQUEST_ID']);
             $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
             $d_data->set_argument_text($val['ARGUMENT_TEXT']);
-            $d_data->set_requested_start_date(date("d-m-Y", strtotime($val['REQUESTED_START_DATE'])));
+            if($val['PROGRAM_SHORT_NAME']=='SPGLR00258'){
+                $tahun = substr($val['ARGUMENT_TEXT'],6,4);
+                $bulan = substr($val['ARGUMENT_TEXT'],19,3);
+                $tgl = substr($val['ARGUMENT_TEXT'],27,2);
+                $d_data->set_requested_start_date($tgl."-".$bulan."-".$tahun);                
+            } else if ($val['PROGRAM_SHORT_NAME']=='SPGLR00264'){
+                $tahun = substr($val['ARGUMENT_TEXT'],6,4);
+                $bulan = substr($val['ARGUMENT_TEXT'],19,3);
+                $tgl = substr($val['ARGUMENT_TEXT'],27,2);
+                $d_data->set_requested_start_date($tgl."-".$bulan."-".$tahun);               
+            } else if ($val['PROGRAM_SHORT_NAME']=='SPCMR00051'){
+                $d_data->set_requested_start_date(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10))));                
+            }
             $d_data->set_actual_start_date(date("d-m-Y", strtotime($val['ACTUAL_START_DATE'])));
             $d_data->set_actual_completion_date(date("d-m-Y", strtotime($val['ACTUAL_COMPLETION_DATE'])));
             $d_data->set_file_hash($val['FILE_HASH']);
@@ -168,7 +180,7 @@ class DataPelaporan {
                 GROUP BY PROGRAM_SHORT_NAME 
                 ORDER BY PROGRAM_SHORT_NAME";
         $no = 0;
-        var_dump ($sql);
+        //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
@@ -255,7 +267,7 @@ class DataPelaporan {
                 GROUP BY PROGRAM_SHORT_NAME 
                 ORDER BY PROGRAM_SHORT_NAME";
         $no = 0;
-        var_dump ($sql);
+        //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
