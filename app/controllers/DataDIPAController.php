@@ -794,10 +794,10 @@ class DataDIPAController extends BaseController {
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
 			
-			if (Session::get('role') == KPPN) {
+			/* if (Session::get('role') == KPPN) {
             $filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
-			} 
-			
+			}  */
+			$filter[$no++]="A.KPPN = '019'";
             $this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
         }
 
@@ -812,7 +812,7 @@ class DataDIPAController extends BaseController {
             $d_kppn_list = new DataUser($this->registry);
             //$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
             $this->view->data4 = $d_spm1->get_realisasi_lokasi_kanwil(Session::get('id_user'));
-            $this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
+            //$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
             $this->view->data2 = $d_spm1->get_realisasi_satker_transfer();
             //$this->view->data2 = $d_spm1->get_realisasi_satker_transfer($_POST['kdkppn']);
         }
