@@ -145,7 +145,7 @@
                     <th style="text-align: right"> Realisasi </th-->
 
 
-                    <th colspan=7 class='mid'>Jenis Belanja</th>
+                    <th colspan=7 class='mid'>JENIS BELANJA</th>
                     <th rowspan=2 class='mid'>Total Realisasi Belanja Transfer</th>
                 </tr>
                 <tr >
