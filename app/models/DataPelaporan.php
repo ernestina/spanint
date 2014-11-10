@@ -105,7 +105,7 @@ class DataPelaporan {
             $d_data->set_argument_text($val['ARGUMENT_TEXT']);
             $d_data->set_requested_start_date(date("d-m-Y", strtotime($val['REQUESTED_START_DATE'])));
             $d_data->set_actual_start_date(date("d-m-Y", strtotime($val['ACTUAL_START_DATE'])));
-            $d_data->set_actual_completion_date(date("d-m-Y", strtotime($val['ACTUAL_COMPLETION_DATE'])));
+            $d_data->set_actual_completion_date(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],21,10))));
             switch ($val['PROGRAM_SHORT_NAME']) {
                               case "SPGLR00008":
                                 $url_link="Laporan Arus Kas BUN dan KPPN";
@@ -190,7 +190,7 @@ class DataPelaporan {
             $d_data->set_argument_text($val['ARGUMENT_TEXT']);
             $d_data->set_requested_start_date(date("d-m-Y", strtotime($val['REQUESTED_START_DATE'])));
             $d_data->set_actual_start_date(date("d-m-Y", strtotime($val['ACTUAL_START_DATE'])));
-            $d_data->set_actual_completion_date(date("d-m-Y", strtotime($val['ACTUAL_COMPLETION_DATE'])));
+            $d_data->set_actual_completion_date(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10))));
             switch ($val['PROGRAM_SHORT_NAME']) {
                               case "SPCMR00028":
                                 $url_link="Ikhtisar Posisi dan Arus Kas  Rekening BUN di Bank Indonesia";
