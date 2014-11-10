@@ -75,6 +75,15 @@ class PelaporanController extends BaseController {
         
         $d_laporan = new DataPelaporan($this->registry);
         
+        if (isset($_POST['submit_file'])) {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn'] . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            }
+        }
+        
         switch ($jenis_laporan) {
           case "laporanKPPN":
             $this->view->data = $d_laporan -> get_laporan_terakhir_laporankppn();
@@ -95,7 +104,7 @@ class PelaporanController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
     
-    public function downloadLaporanKPPN($tipe) {
+    /*public function downloadLaporanKPPN($tipe) {
         
         $d_user = new DataUserSPAN($this->registry); //model
         $filter = array();
@@ -129,7 +138,7 @@ class PelaporanController extends BaseController {
             
             $fileURL = substr(URL, 0, -5).'span/report/';
             
-        }*/
+        }
         
         if (strpos(URL, 'kemenkeu') == false || strpos(URL, 'perbendaharaan') == false){
             $fileURL = 'http://spanint.kemenkeu.go.id/span/report/';
@@ -143,7 +152,7 @@ class PelaporanController extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
-        if (Session::get('role') == ADMIN) {
+        if (Session::get('role') == ADMIN || Session::get('role') == PKN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
@@ -273,26 +282,26 @@ class PelaporanController extends BaseController {
         
         $this->view->render('kppn/downloadPDFLaporanKPPN');
         
-    }
+    }*/
     
-    public function downloadLaporanKPPN2($tipe) {
+    public function downloadLaporanKPPN($tipe) {
         
         $filter = array();
         $no=0;
         
-        if ($tipe == 'LAK') {
+        if ($tipe == 'SPGLR00258') {
         
             $folder = 'SPGLR00258';
             $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
             $this->view->page_title = "Laporan Arus Kas per Akun Tingkat KPPN"; 
             
-        } else if ($tipe == 'LRA') {
+        } else if ($tipe == 'SPGLR00264') {
             
             $folder = 'SPGLR00264';
             $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
             $this->view->page_title = "Laporan Realisasi Anggaran Tingkat KPPN";
             
-        } else if ($tipe == 'LKP') {
+        } else if ($tipe == 'SPCMR00051') {
             
             $folder = 'SPCMR00051';
             $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
@@ -330,6 +339,18 @@ class PelaporanController extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
+        
+
+        if (isset($_POST['submit_file'])) {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = " substr(ARGUMENT_TEXT,-3,3) = '" . $_POST['kdkppn'] . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            }
+            $this->view->data = $d_pelaporan->get_laporan($filter);
+        }
+        
         if (Session::get('role') == ADMIN || Session::get('role') == PKN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
@@ -343,22 +364,14 @@ class PelaporanController extends BaseController {
         if (Session::get('role') == KPPN) {
             $d_kppn_list = new DataUser($this->registry);
             $_POST['kdkppn'] = Session::get('id_user');
+            $filter[$no++] = " substr(ARGUMENT_TEXT,-3,3) = '" . Session::get('id_user') . "'";
+            $this->view->data = $d_pelaporan->get_laporan($filter);
         }
-
-        if (isset($_POST['submit_file'])) {
-            if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn'] . "'";
-                $d_kppn = new DataUser($this->registry);
-                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-                $this->view->d_kd_kppn = $_POST['kdkppn'];
-            }
-        }
-        $this->view->data = $d_pelaporan->get_laporan($filter);
 
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
         
-        $this->view->render('pkn/downloadPDFLaporanPKN');
+        $this->view->render('kppn/downloadPDFLaporanKPPN2');
         
     }
     

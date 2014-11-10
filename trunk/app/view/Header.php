@@ -158,9 +158,9 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Laporan Konsolidasi Saldo Kas KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPGLR00258">Laporan Arus Kas Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPGLR00264">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPCMR00051">Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00008">Laporan Arus Kas BUN dan KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00009">Laporan Rincian Belanja Pemerintah Pusat</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanPKN/SPGLR00010">Laporan Realisasi APBN</a></li>
@@ -300,9 +300,9 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Laporan Konsolidasi Saldo Kas KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPGLR00258">Laporan Arus Kas Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPGLR00264">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPCMR00051">Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -448,9 +448,9 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LAK">Laporan Arus Kas Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LRA">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
-                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/LKP">Laporan Konsolidasi Saldo Kas KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPGLR00258">Laporan Arus Kas Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPGLR00264">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPCMR00051">Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                     <!--<li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Unduh Data Pagu</a>
                                     <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Unduh Data Realisasi</a>
                                     <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Unduh Tool Rekonsiliasi</a>-->
