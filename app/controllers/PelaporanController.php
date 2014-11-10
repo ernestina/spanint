@@ -9,6 +9,14 @@ class PelaporanController extends BaseController {
         parent::__construct($registry);
     }
     
+    /*
+     * Index
+     */
+
+    public function index() {
+        
+    }
+    
     private function checkFileExists($url) {
         $curl = curl_init($url);
         
@@ -31,8 +39,35 @@ class PelaporanController extends BaseController {
         return $ret;
     }
     
-    private function listLaporan($jenis_laporan) {
+    public function listLaporan($jenis_laporan=null) {
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
+        $d_laporan = new DataPelaporan($this->registry);
+        
+        switch ($jenis_laporan) {
+          case "LaporanKPPN":
+            echo "Your favorite color is red!";
+            break;
+          case "BukuMerah":
+            $this->view->data = $d_laporan -> get_laporan_terakhir_bukumerah();
+            break;
+          case "BukuBiru":
+            echo "Your favorite color is green!";
+            break;
+          default:
+            //do nothing
+        }
+        
+        if (strpos(URL, 'kemenkeu') == false || strpos(URL, 'perbendaharaan') == false){
+            $this->view->fileURL = 'http://spanint.kemenkeu.go.id/span/report/';
+        } else {
+            $this->view->fileURL = $_SERVER['HTTP_REFERER'].'span/report/';
+        }  
+        
+        $this->view->render('kppn/listLaporan');
+        $d_log->tambah_log("Sukses");
     }
     
     public function downloadLaporanKPPN($tipe) {

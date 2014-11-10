@@ -76,6 +76,8 @@ $akses['PelaporanPKN'] = array(
     '__construct',
     'downloadLaporanKPPN',
     'downloadLaporanPKN',
+    'lihatLaporan',
+    'listLaporan',
     '__destruct'
 );
 

@@ -58,6 +58,86 @@ class DataPelaporan {
         }
         return $data;
     }
+    
+    public function get_laporan_terakhir_bukumerah() {
+        $sql = "SELECT MAX(TIMESTAMP) TIMESTAMP, 
+                MAX(REQUEST_ID) REQUEST_ID, 
+                PROGRAM_SHORT_NAME, 
+                MAX(ARGUMENT_TEXT) ARGUMENT_TEXT, 
+                MAX(REQUESTED_START_DATE) REQUESTED_START_DATE, 
+                MAX(ACTUAL_START_DATE) ACTUAL_START_DATE, 
+                MAX(ACTUAL_COMPLETION_DATE) ACTUAL_COMPLETION_DATE
+                FROM  " . $this->_table . "
+                WHERE PROGRAM_SHORT_NAME in (
+                'SPGLR00008',
+                'SPGLR00016',
+                'SPGLR00018',
+                'SPGLR00010',
+                'SPGLR00009',
+                'SPGLR00015',
+                'SPGLR00013',
+                'SPGLR00012',
+                'SPGLR00011',
+                'SPGLR00017',
+                'SPGLR00014')
+                GROUP BY PROGRAM_SHORT_NAME 
+                ORDER BY PROGRAM_SHORT_NAME";
+        $no = 0;
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_request_id($val['REQUEST_ID']);
+            $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
+            $d_data->set_argument_text($val['ARGUMENT_TEXT']);
+            $d_data->set_requested_start_date(date("d-m-Y", strtotime($val['REQUESTED_START_DATE'])));
+            $d_data->set_actual_start_date(date("d-m-Y", strtotime($val['ACTUAL_START_DATE'])));
+            $d_data->set_actual_completion_date(date("d-m-Y", strtotime($val['ACTUAL_COMPLETION_DATE'])));
+            switch ($val['PROGRAM_SHORT_NAME']) {
+                              case "SPGLR00008":
+                                $url_link="Laporan Arus Kas BUN dan KPPN";
+                                break;
+                              case "SPGLR00009":
+                                $url_link="Laporan Rincian Belanja Pemerintah Pusat";
+                                break;
+                              case "SPGLR00010":
+                                $url_link="Laporan Realisasi APBN";
+                                break;
+                              case "SPGLR00011":
+                                $url_link="Laporan Rincian Penerimaan Perpajakan";
+                                break;
+                              case "SPGLR00012":
+                                $url_link="Laporan Rincian Penerimaan Pembiayaan";
+                                break;
+                              case "SPGLR00013":
+                                $url_link="Laporan Rincian Penerimaan Negara Bukan Pajak";
+                                break;
+                              case "SPGLR00014":
+                                $url_link="Laporan Rincian Transfer Daerah";
+                                break;
+                              case "SPGLR00015":
+                                $url_link="Laporan Rincian Penerimaan Hibah";
+                                break;
+                              case "SPGLR00016":
+                                $url_link="Laporan Penerimaan dan Pengeluaran Non Anggaran Lainnya";
+                                break;
+                              case "SPGLR00017":
+                                $url_link="Laporan Rincian Pengeluaran Pembiayaan";
+                                break;
+                              case "SPGLR00018":
+                                $url_link="Laporan Penerimaan dan Pengeluaran PFK";
+                                break;
+                              default:
+                                //do nothing
+                            }
+            $d_data->set_file_hash($url_link);
+            $d_data->set_timestamp($val['TIMESTAMP']);
+            $data[] = $d_data;
+			//var_dump($d_data);
+        }
+        return $data;
+    }
 
     /*
      * setter
