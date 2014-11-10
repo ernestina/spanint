@@ -31,6 +31,10 @@ class PelaporanController extends BaseController {
         return $ret;
     }
     
+    private function listLaporan($jenis_laporan) {
+        
+    }
+    
     public function downloadLaporanKPPN($tipe) {
         
         $d_user = new DataUserSPAN($this->registry); //model
