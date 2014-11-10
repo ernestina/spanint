@@ -138,6 +138,154 @@ class DataPelaporan {
         }
         return $data;
     }
+    
+    public function get_laporan_terakhir_bukubiru() {
+        $sql = "SELECT MAX(TIMESTAMP) TIMESTAMP, 
+                MAX(REQUEST_ID) REQUEST_ID, 
+                PROGRAM_SHORT_NAME, 
+                MAX(ARGUMENT_TEXT) ARGUMENT_TEXT, 
+                MAX(REQUESTED_START_DATE) REQUESTED_START_DATE, 
+                MAX(ACTUAL_START_DATE) ACTUAL_START_DATE, 
+                MAX(ACTUAL_COMPLETION_DATE) ACTUAL_COMPLETION_DATE
+                FROM  " . $this->_table . "
+                WHERE PROGRAM_SHORT_NAME in (
+                'SPCMR00028',
+                'SPCMR00028B',
+                'SPCMR00029',
+                'SPCMR00030',
+                'SPCMR00032',
+                'SPCMR00032D',
+                'SPCMR00033',
+                'SPCMR00054',
+                'SPCMR00055',
+                'SPCMR00060',
+                'SPCMR00063',
+                'SPCMR00064',
+                'SPCMR00065',
+                'SPCMR00066',
+                'SPCMR00067',
+                'SPCMR00002')
+                GROUP BY PROGRAM_SHORT_NAME 
+                ORDER BY PROGRAM_SHORT_NAME";
+        $no = 0;
+        var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_request_id($val['REQUEST_ID']);
+            $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
+            $d_data->set_argument_text($val['ARGUMENT_TEXT']);
+            $d_data->set_requested_start_date(date("d-m-Y", strtotime($val['REQUESTED_START_DATE'])));
+            $d_data->set_actual_start_date(date("d-m-Y", strtotime($val['ACTUAL_START_DATE'])));
+            $d_data->set_actual_completion_date(date("d-m-Y", strtotime($val['ACTUAL_COMPLETION_DATE'])));
+            switch ($val['PROGRAM_SHORT_NAME']) {
+                              case "SPCMR00028":
+                                $url_link="Ikhtisar Posisi dan Arus Kas  Rekening BUN di Bank Indonesia";
+                                break;
+                              case "SPCMR00028B":
+                                $url_link="Laporan Rincian Ikhtisar Posisi dan Arus Kas Rekening Penempatan di BI";
+                                break;
+                              case "SPCMR00029":
+                                $url_link="Laporan Rincian Saldo Rekening Dana Reboisasi";
+                                break;
+                              case "SPCMR00030":
+                                $url_link="Laporan Rincian Saldo Rekening Dana Bergulir Program UKM pada Bank Umum";
+                                break;
+                              case "SPCMR00032":
+                                $url_link="Laporan Rincian Saldo Dana BAPERTARUM";
+                                break;
+                              case "SPCMR00032D":
+                                $url_link="Laporan Rincian Saldo Dana BAPERTARUM-Detail";
+                                break;
+                              case "SPCMR00033":
+                                $url_link="Laporan Rincian Saldo Akhir BLU";
+                                break;
+                              case "SPCMR00054":
+                                $url_link="Laporan Rincian Saldo Reksus";
+                                break;
+                              case "SPCMR00055":
+                                $url_link="Daftar Saldo Rekening Dana Cadangan";
+                                break;
+                              case "SPCMR00060":
+                                $url_link="Laporan Posisi Saldo Akhir KPPN";
+                                break;
+                              case "SPCMR00063":
+                                $url_link="Laporan Kas Pemerintah";
+                                break;
+                              case "SPCMR00064":
+                                $url_link="Laporan Proporsi Kas Pemerintah";
+                                break;
+                              case "SPCMR00065":
+                                $url_link="Posisi Dan Arus Kas Pemerintah Yang Likuid";
+                                break;
+                              case "SPCMR00066":
+                                $url_link="Posisi Dan Arus Kas Pemerintah Lainnya Yang Cukup Likuid";
+                                break;
+                              case "SPCMR00067":
+                                $url_link="Posisi Dan Arus Kas Pemerintah Lainnya Yang Tidak Likuid";
+                                break;
+                              case "SPCMR00002":
+                                $url_link="Laporan kas Posisi";
+                                break;
+                              default:
+                                //do nothing
+                            }
+            $d_data->set_file_hash($url_link);
+            $d_data->set_timestamp($val['TIMESTAMP']);
+            $data[] = $d_data;
+			//var_dump($d_data);
+        }
+        return $data;
+    }
+    
+    public function get_laporan_terakhir_laporankppn() {
+        $sql = "SELECT MAX(TIMESTAMP) TIMESTAMP, 
+                MAX(REQUEST_ID) REQUEST_ID, 
+                PROGRAM_SHORT_NAME, 
+                MAX(ARGUMENT_TEXT) ARGUMENT_TEXT, 
+                MAX(REQUESTED_START_DATE) REQUESTED_START_DATE, 
+                MAX(ACTUAL_START_DATE) ACTUAL_START_DATE, 
+                MAX(ACTUAL_COMPLETION_DATE) ACTUAL_COMPLETION_DATE
+                FROM  " . $this->_table . "
+                WHERE PROGRAM_SHORT_NAME in (
+                'SPGLR00258',
+                'SPGLR00264',
+                'SPCMR00051')
+                GROUP BY PROGRAM_SHORT_NAME 
+                ORDER BY PROGRAM_SHORT_NAME";
+        $no = 0;
+        var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_request_id($val['REQUEST_ID']);
+            $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
+            $d_data->set_argument_text($val['ARGUMENT_TEXT']);
+            $d_data->set_requested_start_date(date("d-m-Y", strtotime($val['REQUESTED_START_DATE'])));
+            $d_data->set_actual_start_date(date("d-m-Y", strtotime($val['ACTUAL_START_DATE'])));
+            $d_data->set_actual_completion_date(date("d-m-Y", strtotime($val['ACTUAL_COMPLETION_DATE'])));
+            switch ($val['PROGRAM_SHORT_NAME']) {
+                              case "SPGLR00258":
+                                $url_link="Laporan Arus Kas per Akun Tingkat KPPN";
+                                break;
+                              case "SPGLR00264":
+                                $url_link="Laporan Realisasi Anggaran Tingkat KPPN";
+                                break;
+                              case "SPCMR00051":
+                                $url_link="Laporan Konsolidasi Saldo Kas KPPN";
+                                break;
+                              default:
+                                //do nothing
+                            }
+            $d_data->set_file_hash($url_link);
+            $d_data->set_timestamp($val['TIMESTAMP']);
+            $data[] = $d_data;
+			//var_dump($d_data);
+        }
+        return $data;
+    }
 
     /*
      * setter

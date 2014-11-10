@@ -50,7 +50,7 @@
                             echo "<h4>".$value->get_file_hash()."</h4>";
                             echo "</div>";
                             echo "<div class='col-md-6' style='text-align: right;'>";
-                            echo "<button type='button' class='btn btn-primary'><a href=".URL."pelaporan/downloadLaporanPKN/".$value->get_program_short_name()."><span class='glyphicon glyphicon-list-alt'></span>LIST LAPORAN</a></button>";
+                            echo "<button type='button' class='btn btn-primary'><a href=".$this->fileURLdepan.$value->get_program_short_name()."><span class='glyphicon glyphicon-list-alt'></span>LIST LAPORAN</a></button>";
                             echo "<button type='button' class='btn btn-warning'><a href=".$this->fileURL.$value->get_request_id().".PDF><span class='glyphicon glyphicon-download-alt'></span>".date("d-m-Y", strtotime(substr($value->get_argument_text(),21,10)))."</a></button>";
                             echo "</div>";
                             echo "</li>";
