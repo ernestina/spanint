@@ -21,25 +21,13 @@
         <div class="row" style="padding-top: 10px">
 
             <div class="col-md-6 col-sm-12">
-                <?php
-                if (isset($this->d_nama_kppn)) {
-                    foreach ($this->d_nama_kppn as $kppn) {
-                        echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-                        $kode_kppn = $kppn->get_kd_satker();
-                    }
-                }
-                ?>
             </div>
 
             <div class="col-md-6 col-sm-12" style="text-align: right;">
                 <?php
                 // untuk menampilkan last_update
-                if (isset($this->last_update)) {
-                    foreach ($this->last_update as $last_update) {
-                        echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
-                    }
-                }
-                ?>
+                        echo "Update Data Terakhir (Waktu Server) :<br> Sesuai dengan yang ada di Cetakan PDF<br/>";
+                ?>                
             </div>
 
         </div>
@@ -51,140 +39,27 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12" style="padding-top: 20px;">
             <ul class="list-group">
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Arus Kas Tingkat KPPN</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Realisasi Anggaran Tingkat KPPN</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Konsolidasi Saldo Kas Tingkat KPPN</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Arus Kas BUN dan KPPN</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Rincian Belanja Pemerintah Pusat</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Realisasi APBN</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Rincian Penerimaan Perpajakan</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-            </ul>
-        </div>
-    
-    <div class="col-lg-6 col-md-6 col-sm-12" style="padding-top: 20px;">
-        <ul class="list-group">
-              
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Rincian Penerimaan Pembiayaan</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Rincian PNBP</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Rincian Transfer Daerah</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Rincian Penerimaan Hibah</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Penerimaan dan Pengeluaran Non Anggaran</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Rincian Pengeluaran Pembiayaan</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-              <li class="list-group-item" style="padding-bottom: 40px;">
-                <div class="col-md-6">    
-                    <h4>Laporan Penerimaan dan Pengeluaran PFK</h4>
-                  </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> LIST LAPORAN</button>
-                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> 05-NOV-2014</button>
-                </div>
-              </li>
-                
-                
+                <?php
+                  if (isset($this->data)) {
+                    if (empty($this->data)) {
+                        echo '<td colspan=12 align="center">Tidak ada data.</td>';
+                    } else {
+                        foreach ($this->data as $value) {
+                            echo "<li class='list-group-item' style='padding-bottom: 40px;'>";
+                            echo "<div class='col-md-6'>";
+                            echo "<h4>".$value->get_file_hash()."</h4>";
+                            echo "</div>";
+                            echo "<div class='col-md-6' style='text-align: right;'>";
+                            echo "<button type='button' class='btn btn-primary'><a href=".URL."pelaporan/downloadLaporanPKN/".$value->get_program_short_name()."><span class='glyphicon glyphicon-list-alt'></span>LIST LAPORAN</a></button>";
+                            echo "<button type='button' class='btn btn-warning'><a href=".$this->fileURL.$value->get_request_id().".PDF><span class='glyphicon glyphicon-download-alt'></span>".date("d-m-Y", strtotime(substr($value->get_argument_text(),21,10)))."</a></button>";
+                            echo "</div>";
+                            echo "</li>";
+                        }
+                    }
+                  } else {
+                    echo "tidak ada data";   
+                  }
+                ?>
             </ul>
         </div>
     </div>
