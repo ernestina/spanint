@@ -52,7 +52,7 @@ class proses_revisi {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " ORDER BY A.LAST_UPDATE_DATE DESC, A.KPPN_CODE, A.SATKER_CODE ASC ";
+        $sql .= " ORDER BY TO_DATE(substr(A.LAST_UPDATE_DATE,0,10),'dd-mm-YYYY') DESC, A.KPPN_CODE, A.SATKER_CODE ASC ";
 
         //var_dump ($sql);
         $result = $this->db->select($sql);

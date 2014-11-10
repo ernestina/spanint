@@ -23,6 +23,7 @@ class DataDIPAController extends BaseController {
     }
 
     public function RevisiDipa($kdsatker = null) {
+        
         $d_spm1 = new DataDIPA($this->registry);
         $filter = array();
         $no = 0;
@@ -44,6 +45,7 @@ class DataDIPAController extends BaseController {
         }
         if (Session::get('role') == KANWIL) {
             $filter[$no++] = "KPPN_CODE IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+            
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KPPN_CODE IN ('" . Session::get('id_user') . "')";

@@ -264,6 +264,7 @@ if (Session::get('role') == SATKER) {
                         <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
                         <label class="isian">Kode KPPN: </label>
                         <select class="form-control"  type="text" name="kdkppn" id="kdkppn">
+                            <option value=''>SEMUA KPPN</option>
                             
                             <?php foreach ($this->kppn_list as $value1) { ?>
                             
