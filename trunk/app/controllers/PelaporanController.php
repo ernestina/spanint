@@ -39,7 +39,7 @@ class PelaporanController extends BaseController {
         return $ret;
     }
     
-    public function listLaporan($jenis_laporan=null) {
+    public function listLaporanPKN($jenis_laporan=null) {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
@@ -47,14 +47,11 @@ class PelaporanController extends BaseController {
         $d_laporan = new DataPelaporan($this->registry);
         
         switch ($jenis_laporan) {
-          case "LaporanKPPN":
-            echo "Your favorite color is red!";
-            break;
           case "BukuMerah":
             $this->view->data = $d_laporan -> get_laporan_terakhir_bukumerah();
             break;
           case "BukuBiru":
-            echo "Your favorite color is green!";
+            $this->view->data = $d_laporan -> get_laporan_terakhir_bukubiru();
             break;
           default:
             //do nothing
@@ -65,6 +62,34 @@ class PelaporanController extends BaseController {
         } else {
             $this->view->fileURL = $_SERVER['HTTP_REFERER'].'span/report/';
         }  
+        $this->view->fileURLdepan = URL."pelaporan/downloadLaporanPKN/" ; 
+        
+        $this->view->render('kppn/listLaporan');
+        $d_log->tambah_log("Sukses");
+    }
+    
+    public function listLaporanKPPN($jenis_laporan=null) {
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        $d_laporan = new DataPelaporan($this->registry);
+        
+        switch ($jenis_laporan) {
+          case "laporanKPPN":
+            $this->view->data = $d_laporan -> get_laporan_terakhir_laporankppn();
+            break;
+          default:
+            //do nothing
+        }
+        
+        if (strpos(URL, 'kemenkeu') == false || strpos(URL, 'perbendaharaan') == false){
+            $this->view->fileURL = 'http://spanint.kemenkeu.go.id/span/report/';
+        } else {
+            $this->view->fileURL = $_SERVER['HTTP_REFERER'].'span/report/';
+        }  
+        
+        $this->view->fileURLdepan = URL."pelaporan/downloadLaporanKPPN/" ; 
         
         $this->view->render('kppn/listLaporan');
         $d_log->tambah_log("Sukses");
@@ -410,9 +435,97 @@ class PelaporanController extends BaseController {
             
         } else {
             
-            //Back to Home
+            
+            switch ($tipe) {
+                              case "SPCMR00028":
+                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Ikhtisar Posisi dan Arus Kas  Rekening BUN di Bank Indonesia";
+                                break;
+                              case "SPCMR00028B":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Ikhtisar Posisi dan Arus Kas Rekening Penempatan di BI";
+                                break;
+                              case "SPCMR00029":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Saldo Rekening Dana Reboisasi";
+                                break;
+                              case "SPCMR00030":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Saldo Rekening Dana Bergulir Program UKM pada Bank Umum";
+                                break;
+                              case "SPCMR00032":
+                               $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Saldo Dana BAPERTARUM";
+                                break;
+                              case "SPCMR00032D":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Saldo Dana BAPERTARUM-Detail";
+                                break;
+                              case "SPCMR00033":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Saldo Akhir BLU";
+                                break;
+                              case "SPCMR00054":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Rincian Saldo Reksus";
+                                break;
+                              case "SPCMR00055":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Daftar Saldo Rekening Dana Cadangan";
+                                break;
+                              case "SPCMR00060":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Posisi Saldo Akhir KPPN";
+                                break;
+                              case "SPCMR00063":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Kas Pemerintah";
+                                break;
+                              case "SPCMR00064":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan Proporsi Kas Pemerintah";
+                                break;
+                              case "SPCMR00065":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Posisi Dan Arus Kas Pemerintah Yang Likuid";
+                                break;
+                              case "SPCMR00066":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Posisi Dan Arus Kas Pemerintah Lainnya Yang Cukup Likuid";
+                                break;
+                              case "SPCMR00067":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Posisi Dan Arus Kas Pemerintah Lainnya Yang Tidak Likuid";
+                                break;
+                              case "SPCMR00002":
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $this->view->page_title = "Laporan kas Posisi";
+                                break;
+                              default:
+                                $folder = $tipe;
+            $filter[$no++] = " PROGRAM_SHORT_NAME = '12345' ";
+            $this->view->page_title = "Laporan tidak diketemukan";
+                            }
             
         }
+        
+        
         
         /*if (strpos(URL, 'dev2') == false) {
         

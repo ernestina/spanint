@@ -63,7 +63,11 @@
 
                     <tr>
                         <td class="align-center"><?php echo $no++; ?></td>
+                        <?php if(strtotime(substr($value->get_argument_text(),21,10)) > '01-01-1970'){ ?>
                         <td class="align-center"><?php echo date("d-m-Y", strtotime(substr($value->get_argument_text(),0,10)))." s.d ".date("d-m-Y", strtotime(substr($value->get_argument_text(),21,10))); ?></td>
+                        <?php } else { ?>
+                        <td class="align-center"><?php echo "Per Tanggal : ".date("d-m-Y", strtotime(substr($value->get_argument_text(),0,10))); ?></td>
+                         <?php } ?>
                         <td class="align-center"><?php echo $value->get_request_id(); ?></td>
                         <td class="align-center"><a href="<?php echo $this->fileURL.$value->get_request_id().".PDF"; ?>">Unduh File</a></td>
                     </tr>
