@@ -49,9 +49,11 @@ class PelaporanController extends BaseController {
         switch ($jenis_laporan) {
           case "BukuMerah":
             $this->view->data = $d_laporan -> get_laporan_terakhir_bukumerah();
+			$this->view->judul_halaman = "Daftar Laporan Buku Merah";
             break;
           case "BukuBiru":
             $this->view->data = $d_laporan -> get_laporan_terakhir_bukubiru();
+			$this->view->judul_halaman = "Daftar Laporan Buku Biru";
             break;
           default:
             //do nothing
