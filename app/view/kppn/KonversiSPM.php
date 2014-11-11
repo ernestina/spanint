@@ -112,7 +112,7 @@
 						echo "<td>" . $value->get_satker() . "</td>";
                         echo "<td>" . $value->get_invoice_num() .  "</td>";
 						echo "<td>" . $value->get_invoice_date() .  "</td>";
-						echo "<td>" . $value->get_conversion_date() . "</td>";  
+						echo "<td>" . strtoupper ($value->get_conversion_date()) . "</td>";  
                         echo "<td class='ratakanan'>" . number_format($value->get_invoice_amount()) . "</td>";
 						echo "<td>" . $value->get_jendok() . "</td>";						
                         echo "<td>" . $value->get_file_name() . "</td>";
