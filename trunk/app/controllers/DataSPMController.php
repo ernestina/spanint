@@ -826,13 +826,38 @@ class DataSPMController extends BaseController {
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
-		
+		if (isset($_POST['submit_file'])) {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn']."'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				
+            } 
+			if (Session::get('role') == KANWIL){
+			$filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+			}
+			$this->view->data = $d_spm1->get_adk_konversi($filter);
+			$this->view->data1 = $d_spm1->get_jml_adk_konversi($filter);
+		}
 		if (Session::get('role') == KPPN) {
 			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
+			$this->view->data = $d_spm1->get_adk_konversi($filter);
+			$this->view->data1 = $d_spm1->get_jml_adk_konversi($filter);
         }
 		
-		$this->view->data = $d_spm1->get_adk_konversi($filter);
-		$this->view->data1 = $d_spm1->get_jml_adk_konversi($filter);
+		if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+            
+        }
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+		
+		
+		$d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table());
 		
         //var_dump($d_spm1->get_adk_konversi(filter));
 		
