@@ -69,8 +69,8 @@ class DataADKKonversi {
             $d_data = new $this($this->registry);
             $d_data->set_invoice_num($val['INVOICE_NUM']);
             $d_data->set_invoice_amount($val['INVOICE_AMOUNT']);
-			$d_data->set_invoice_date(date("d-m-Y", strtotime($val['INVOICE_DATE'])));
-            $d_data->set_conversion_date(date("d-m-Y", strtotime($val['UPLOAD_DATE'])));
+			$d_data->set_invoice_date ($val['INVOICE_DATE']);
+            $d_data->set_conversion_date(date("d-M-Y", strtotime($val['UPLOAD_DATE'])));
             $d_data->set_file_name($val['PMRT_FILE_NAME']);            
             $d_data->set_file_name_zip($val['ZIP_FILE_NAME']);
             $d_data->set_satker($val['KD_SATKER']);
