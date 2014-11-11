@@ -140,6 +140,7 @@ $akses['DataSPMKanwil'] = array(
     'HoldSPM_PDF',
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
+	'Konversi',
     '__destruct'
 );
 

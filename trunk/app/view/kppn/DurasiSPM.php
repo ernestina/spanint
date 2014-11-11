@@ -309,8 +309,7 @@
                             } else {
                                 echo "<option value = '" . $value1->get_attribute1() . "'>" . $value1->get_attribute1() . "</option>";
                             }
-                        //if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
-                        //else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+                       
                         ?>
                     </select>
                     <br/>
