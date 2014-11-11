@@ -18,7 +18,7 @@
 			?>
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Daftar Invoice Hasil Konversi Yang Belum Diproses di SPAN</h2>
-				<h4>Jumlah Invoice : <?php echo $jml_invoice ?>  || Jumlah PMRT : <?php echo $jml_pmrt ?> || Jumlah Nilai Invoice : <?php echo number_format($jml_nil_invoice) ?> </h4>
+				<h4>Jumlah Invoice : <?php echo $jml_invoice ?>  || Jumlah PMRT : <?php echo $jml_pmrt ?> || Total Nilai Invoice : <?php echo number_format($jml_nil_invoice) ?> </h4>
 				
             </div>
               <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -28,7 +28,7 @@
                 <?php } ?>
         
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+           <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
                 <!--pdf-->
 				<?php
@@ -38,12 +38,12 @@
 				//-----------------------------------
 				 
 				?>
-				<a href="<?php echo URL; ?>PDF/errorSpm_PDF/<?php echo $file_name; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				<!--a href="<?php //echo URL; ?>PDF/errorSpm_PDF/<?php //echo $file_name; ?>" --><style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 				<?php
 				//----------------------------------
 				?>
                 
-            </div>
+            </div> 
         </div>
         
         <div class="row" style="padding-top: 10px">
