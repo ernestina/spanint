@@ -24,6 +24,9 @@
                     } else {
                         $kdkppn = Session::get('id_user');
                     }
+					if ($kdkppn<=0){
+						$kdkppn="SEMUAKPPN";
+					}
                     ?>
                     <a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
                     <?php
