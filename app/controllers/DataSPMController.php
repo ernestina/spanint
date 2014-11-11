@@ -486,7 +486,7 @@ class DataSPMController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function daftarsp2d($kdsatker = null, $tgl1 = null, $tgl2 = null) {
+    public function daftarsp2d($kdsatker = null, $tgl1 = null, $tgl2 = null, $jendok = null) {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
@@ -500,12 +500,8 @@ class DataSPMController extends BaseController {
 
         if ($kdsatker != '') {
             if (Session::get('role') == SATKER) {
-                // if (Session::get('kd_satker') != $kdsatker) {
-                // header('location:' . URL . 'auth/logout');
-                // exit();
-                // } else {
-                // $filter[$no++] = " SEGMENT1 =  '" . Session::get('kd_satker') . "'";
-                // }
+                $filter[$no++] = " SEGMENT1 =  '" .Session::get('kd_satker'). "'";
+				
             } else {
                 $filter[$no++] = " SEGMENT1 =  '" . $kdsatker . "'";
                 $this->view->d_kd_satker = $kdsatker;
@@ -517,6 +513,12 @@ class DataSPMController extends BaseController {
             $this->view->d_tgl_awal = $tgl1;
             $this->view->d_tgl_akhir = $tgl2;
         }
+		
+		if ($jendok != '') {
+		
+            $filter[$no++] = "JENDOK = '" . $jendok . "'";
+        }
+		
         if (isset($_POST['submit_file'])) {
             if ($_POST['check_number'] != '') {
                 $filter[$no++] = "check_number = '" . $_POST['check_number'] . "'";
@@ -664,6 +666,7 @@ class DataSPMController extends BaseController {
             $filter[$no++] = "SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
             $this->view->data = $d_spm1->get_sp2d_rekap_filter($filter);
         }
+
         $this->view->data = $d_spm1->get_sp2d_satker_filter($filter);
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -673,9 +676,170 @@ class DataSPMController extends BaseController {
 
         $this->view->render('kppn/Rekap');
     }
+	
+	public function KarwasUP() {
+        $d_spm1 = new DataKarwasUP($this->registry);
+		$d_spm2 = new DataCheck($this->registry);
+        $filter = array();
+		//$filter2 = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		
+		if (Session::get('role') == KPPN) {
+			$this->view->data5 = $d_spm1->get_satker_up(Session::get('id_user'));
+        }
+		
+		
+		if (isset($_POST['submit_file'])) {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn']."'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				
+            } else {
+                $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+            }
+			
+			if ($_POST['ppp'] != '') {
+                //$filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
+				$this->view->ppp = $_POST['ppp'];
+            }
+			
+            if ($_POST['kdsatker'] != '') {
+                $filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
+				$this->view->nmsatker = $d_spm1->get_nama_satker_up($_POST['kdsatker']);
+				$filter_up[$no++] = "SEGMENT1 = '" . $_POST['kdsatker'] . "'";
+				$filter_up[$no++] = "JENDOK = '312'";
+				$this->view->data3 = $d_spm2->get_karwas_up_filter($filter_up);
+            }
+        $this->view->data5 = $d_spm1->get_satker_up(Session::get('id_user'));
+		}
+		if ($_POST['kdsatker'] != '') {
+		
+		$this->view->data1 = $d_spm1->get_dipa_up($filter);
+		$this->view->data2 = $d_spm1->get_total_up($filter);
+		//$this->view->data3 = $d_spm1->get_sa_pnbp($filter);
+		//$this->view->data4 = $d_spm1->get_up_pnbp($filter);
+		//$this->view->data6 = $d_spm1->get_set_up_pnbp($filter);
+		}
+		
+        //var_dump($d_spm->get_hist_spm_filter());
+		
+		$d_log->tambah_log("Sukses");
+		
+		
+        $this->view->render('kppn/karwasUP');
+    }
+	
+	public function KarwasUPSatker() {
+        $d_spm1 = new DataKarwasUP($this->registry);
+        $filter = array();
+		//$filter2 = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+        }
+		
+		
+		if (isset($_POST['submit_file'])) {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn']."'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				
+            } else {
+                $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+            }
+				
+            if ($_POST['kdsatker'] != '') {
+                $filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
+				
+            }
+       
+		}
 
+		$this->view->data1 = $d_spm1->get_karwas_up_satker($filter);
+		
+        //var_dump($d_spm->get_hist_spm_filter());
+		
+		$d_log->tambah_log("Sukses");
+        $this->view->render('kppn/karwasUPSatker');
+    }
+	
+	public function UPSatker($kd_satker, $jendok) {
+        $d_spm1 = new DataKarwasUP($this->registry);
+        $filter = array();
+		//$filter2 = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+        }
+		if ($kd_satker != '') {
+            if (Session::get('role') == SATKER) {
+                $filter[$no++] = " SATKER_CODE =  '" . Session::get('kd_satker'). "'";
+            } else {
+                $filter[$no++] = " SATKER_CODE =  '" . $kd_satker . "'";
+                $this->view->d_kd_satker = $kd_satker;
+            }
+			$this->view->nmsatker = $d_spm1->get_nama_satker_up($kd_satker);
+        }
+		if ($jendok == 'UP') {
+                $filter[$no++] = " JENIS_SPM = 'UP'";
+        }
+		else {
+				$filter[$no++] = " JENIS_SPM = 'GUP NIHIL'";
+		}
+		
+
+		$this->view->data1 = $d_spm1->get_total_up($filter);
+		
+        //var_dump($d_spm->get_hist_spm_filter());
+		
+		$d_log->tambah_log("Sukses");
+        $this->view->render('kppn/DetailUP');
+    }
     //author by jhon
-
+	
+	public function Konversi() {
+        $d_spm1 = new DataADKKonversi($this->registry);
+        $filter = array();
+		//$filter2 = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
+        }
+		
+		$this->view->data = $d_spm1->get_adk_konversi($filter);
+		$this->view->data1 = $d_spm1->get_jml_adk_konversi($filter);
+		
+        //var_dump($d_spm1->get_adk_konversi(filter));
+		
+		$d_log->tambah_log("Sukses");
+        $this->view->render('kppn/KonversiSPM');
+    }
+	
     public function __destruct() {
         
     }
