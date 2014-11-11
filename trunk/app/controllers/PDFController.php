@@ -572,6 +572,9 @@ class PDFController extends BaseController {
         if ($kdsatker != 'null') {
             $filter[$no++] = "A.SATKER = '" . $kdsatker . "'";
         }
+		$filter[$no++]="A.KPPN = '019'";
+            $this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
+			
 
         //-------------------------
         if (Session::get('role') == SATKER) {
@@ -609,18 +612,21 @@ class PDFController extends BaseController {
             $d_kppn_list = new DataUser($this->registry);
             //$this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
             $this->view->data4 = $d_spm1->get_realisasi_lokasi_kanwil(Session::get('id_user'));
-            $this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
+            //$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
             $this->view->data2 = $d_spm1->get_realisasi_satker_transfer();
+            //$this->view->data2 = $d_spm1->get_realisasi_satker_transfer($_POST['kdkppn']);
         }
 
         if (Session::get('role') == KPPN) {
-            //$filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
+            $filter[$no++]="A.KPPN = '".Session::get('id_user')."'";
             $this->view->data4 = $d_spm1->get_realisasi_lokasi(Session::get('id_user'));
             $this->view->data2 = $d_spm1->get_realisasi_satker_transfer(Session::get('id_user'));
             //$this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
         }
-
-        $this->view->data = $d_spm1->get_realisasi_transfer_global_filter($filter);
+        //var_dump($d_spm->get_hist_spm_filter());
+        //$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->load('kppn/DataRealisasiTransfer_PDF');
         $d_log->tambah_log("Sukses");
