@@ -133,7 +133,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($left += $ukuran_kolom_akun);
 		$px1 = $this->GetX();
 		
-        $this->Cell($ukuran_kolom_jenis_belanja1, $h / 2, 'Jenis Belanja', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h / 2, 'JENIS BELANJA', 1, 0, 'C', true);
 		$py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1 + 20;
