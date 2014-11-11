@@ -26,18 +26,20 @@ class FPDF_AutoWrapTable extends FPDF {
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
     private $nm_kppn;
+	private $bulan;
 
     /*
      * Konstruktor
      */
 
-    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn) {
+    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn,$bulan) {
         parent::__construct();
         $this->data = $data;
         $this->options = $options;
         $this->kdtgl_awal = $kdtgl_awal;
         $this->kdtgl_akhir = $kdtgl_akhir;
         $this->nm_kppn = $nm_kppn;
+		$this->bulan = $bulan;
     }
 
     /*
@@ -48,6 +50,7 @@ class FPDF_AutoWrapTable extends FPDF {
         //-----------------------------------
         $judul = $this->options['judul'];
         $nm_kppn = $this->nm_kppn;
+		$bulan = $this->bulan;
         $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
         $border = 0;
         $h = 40;
@@ -102,9 +105,9 @@ class FPDF_AutoWrapTable extends FPDF {
             $bln2 = substr($kdtgl_akhir1, 3, 2);
             $tgl2 = substr($kdtgl_akhir1, 0, 2);
             $kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
-            $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);		
+            $this->Cell(0, 20, 'Bulan :' . $bulan, 0, 0, 'C', false);		
         } else {
-            $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);			 
+            $this->Cell(0, 20, 'Bulan :   ' . $bulan, 0, 0, 'C', false);			 
         } 
 		//--------------------
 
@@ -371,7 +374,7 @@ $options = array(
     'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn, $this->bulan);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();

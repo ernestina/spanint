@@ -1192,9 +1192,10 @@ class PDFController extends BaseController {
         }
         if ($kdbulan != 'null') {
             $bulan = $kdbulan;
+			$this->view->bulan = $kdbulan;
         }
         if ($kdkppn != 'null') {
-            if ($kdkppn != 'SEMUA KPPN') {
+            if ($kdkppn != 'SEMUAKPPN') {
                 $filter[$no++] = "KPPN = '" . $kdkppn . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);

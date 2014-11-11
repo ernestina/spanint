@@ -50,9 +50,9 @@ class DataPFK {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        //var_dump ($sql);
         $sql .= " GROUP BY akun ORDER BY akun";
 
+        //var_dump ($sql);
 
 
         $result = $this->db->select($sql);
