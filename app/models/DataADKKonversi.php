@@ -14,6 +14,8 @@ class DataADKKonversi {
 	private $_invoice_date;
     private $_invoice_amount;
 	private $_satker;
+	private $_kppn;
+	private $_jendok;
     private $_conversion_date;
 	private $_durasi;
     private $_status_code;  
@@ -21,6 +23,7 @@ class DataADKKonversi {
     private $_jml_pmrt;
     private $_jml_nilai_inv;
     private $_table = 'SPAN_PMRT';
+	private $_table1 = 'T_JENDOK';
     public $registry;
 
     /*
@@ -40,10 +43,12 @@ class DataADKKonversi {
     public function get_adk_konversi($filter) {
         Session::get('id_user');
         $sql = "SELECT INVOICE_NUM, INVOICE_AMOUNT, INVOICE_DATE, PMRT_FILE_NAME,  STATUS_UPLOAD, ZIP_FILE_NAME,
-				SUBSTR (ZIP_FILE_NAME,8,8) UPLOAD_DATE, KD_SATKER, TO_CHAR(SYSDATE,'YYYYMMDD') - SUBSTR (ZIP_FILE_NAME,8,8) DURASI
+				SUBSTR (ZIP_FILE_NAME,8,8) UPLOAD_DATE, KD_SATKER, TO_CHAR(SYSDATE,'YYYYMMDD') - SUBSTR (ZIP_FILE_NAME,8,8) DURASI, KDKPPN, URAIAN
 				FROM "
-                . $this->_table . "
-				WHERE 1=1 				
+                . $this->_table . "  , "
+				. $this->_table1 . "  
+				WHERE 1=1
+				AND SPAN_PMRT.JENDOK = T_JENDOK.KDJENDOK
 				AND PMRT_FILE_NAME IS NOT NULL
 				AND STATUS_UPLOAD IS NULL
 				
@@ -55,7 +60,7 @@ class DataADKKonversi {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-
+		 $sql .= " ORDER BY KDKPPN, SUBSTR  (ZIP_FILE_NAME,8,8) ASC";
         //var_dump ($sql);
         $result = $this->db->select($sql);
 		//var_dump ($result);
@@ -70,6 +75,8 @@ class DataADKKonversi {
             $d_data->set_file_name_zip($val['ZIP_FILE_NAME']);
             $d_data->set_satker($val['KD_SATKER']);
             $d_data->set_durasi($val['DURASI']);
+			$d_data->set_jendok($val['URAIAN']);
+			$d_data->set_kppn($val['KDKPPN']);
             $d_data->set_jml_invoice($val['JML_INVOICE']);
             $d_data->set_jml_pmrt($val['JML_PMRT']);
             $d_data->set_jml_nilai_inv($val['JML_NILAI_INV']);
@@ -146,6 +153,14 @@ class DataADKKonversi {
     public function set_durasi($durasi) {
         $this->_durasi = $durasi;
     }
+	
+	public function set_kppn($kppn) {
+        $this->_kppn = $kppn;
+    }
+	
+	public function set_jendok($jendok) {
+        $this->_jendok = $jendok;
+    }
 
     public function set_attribute1($attribute1) {
         $this->_attribute1 = $attribute1;
@@ -197,6 +212,14 @@ class DataADKKonversi {
 
     public function get_satker() {
         return $this->_satker;
+    }
+	
+	public function get_kppn() {
+        return $this->_kppn;
+    }
+	
+	public function get_jendok() {
+        return $this->_jendok;
     }
 
     public function get_durasi() {
