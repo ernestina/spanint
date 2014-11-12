@@ -378,6 +378,8 @@ class homeController extends BaseController {
         
         if ($periode == 'harian') {
             
+            $this->view->mode = "Harian";
+            
             if (!isset($kodeunit)) {
                 
                 $this->view->pieJenisSP2D = $this->pieJenisSP2D(1);
@@ -438,11 +440,11 @@ class homeController extends BaseController {
 
                 if (Session::get('role')==SATKER) {
 
-                    header('location:' . URL . 'home/mingguan');
+                    header('location:' . URL . 'home/dashboard/mingguan');
 
                 } else if (Session::get('role')==KPPN) {
 
-                    header('location:' . URL . 'home/harian');
+                    header('location:' . URL . 'home/dashboard/harian');
 
                 } else if (Session::get('role')==KANWIL) {
 
@@ -458,7 +460,7 @@ class homeController extends BaseController {
                         }
 
                         if ($inList == false) {
-                            header('location:' . URL . 'home/harian');
+                            header('location:' . URL . 'home/dashboard/harian');
                         }
 
                     }
@@ -539,11 +541,11 @@ class homeController extends BaseController {
 
                 if (Session::get('role')==SATKER) {
 
-                    header('location:' . URL . 'home/mingguan');
+                    header('location:' . URL . 'home/dashboard/mingguan');
 
                 } else if (Session::get('role')==KPPN) {
 
-                    header('location:' . URL . 'home/mingguan');
+                    header('location:' . URL . 'home/dashboard/mingguan');
 
                 } else if (Session::get('role')==KANWIL) {
 
@@ -559,7 +561,7 @@ class homeController extends BaseController {
                         }
 
                         if ($inList == false) {
-                            header('location:' . URL . 'home/mingguan');
+                            header('location:' . URL . 'home/dashboard/mingguan');
                         }
 
                     }
@@ -624,11 +626,11 @@ class homeController extends BaseController {
 
                 if (Session::get('role')==SATKER) {
 
-                    header('location:' . URL . 'home/bulanan');
+                    header('location:' . URL . 'home/dashboard/bulanan');
 
                 } else if (Session::get('role')==KPPN) {
 
-                    header('location:' . URL . 'home/bulanan');
+                    header('location:' . URL . 'home/dashboard/bulanan');
 
                 } else if (Session::get('role')==KANWIL) {
 
@@ -644,7 +646,7 @@ class homeController extends BaseController {
                         }
 
                         if ($inList == false) {
-                            header('location:' . URL . 'home/bulanan');
+                            header('location:' . URL . 'home/dashboard/bulanan');
                         }
 
                     }
@@ -714,11 +716,11 @@ class homeController extends BaseController {
 
                 if (Session::get('role')==SATKER) {
 
-                    header('location:' . URL . 'home/bulanan');
+                    header('location:' . URL . 'home/dashboard/bulanan');
 
                 } else if (Session::get('role')==KPPN) {
 
-                    header('location:' . URL . 'home/bulanan');
+                    header('location:' . URL . 'home/dashboard/bulanan');
 
                 } else if (Session::get('role')==KANWIL) {
 
@@ -734,7 +736,7 @@ class homeController extends BaseController {
                         }
 
                         if ($inList == false) {
-                            header('location:' . URL . 'home/bulanan');
+                            header('location:' . URL . 'home/dashboard/bulanan');
                         }
 
                     }
@@ -845,7 +847,7 @@ class homeController extends BaseController {
                     }
 
                     if ($inList == false) {
-                        header('location:' . URL . 'home/harian');
+                        header('location:' . URL . 'home/dashboard/harian');
                     }
 
                 }

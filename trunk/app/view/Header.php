@@ -53,9 +53,8 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/harian">SP2D &amp; LHP - Hari Ini</a></li>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/mingguan">SP2D &amp; LHP - 7 Hari</a></li>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/bulanan">SP2D &amp; LHP - 30 Hari</a></li>
+                                    <li><a href="<?php echo URL; ?>home/dashboard/harian">SP2D &amp; LHP</a></li>
+                                    <li><a href="<?php echo URL; ?>home/dashboardPenerbitan">Penerbitan SP2D</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -197,9 +196,8 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/harian">SP2D &amp; LHP - Hari Ini</a></li>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/mingguan">SP2D &amp; LHP - 7 Hari</a></li>
-                                    <li><a href="<?php echo URL; ?>home/dashboard/bulanan">SP2D &amp; LHP - 30 Hari</a></li>
+                                    <li><a href="<?php echo URL; ?>home/dashboard/harian">SP2D &amp; LHP</a></li>
+                                    <li><a href="<?php echo URL; ?>home/dashboardPenerbitan">Penerbitan SP2D</a></li>
                                 </ul>
                             </div>
                         </li>

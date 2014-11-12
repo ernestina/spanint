@@ -407,49 +407,75 @@
         
         <div class="row top-padded">
             <div class="col-md-6">
+                
+                <?php if ((($this->kodeunit[0] == 'K') || !isset($this->kodeunit)) && ((Session::get('role') == ADMIN) || (Session::get('role') == KANWIL))) { ?>
+                
                 <h4>Lihat Detail Unit: &nbsp;
                 <select id="ke_unit">  
                             
                     <?php 
+
+                        echo '<option value="">Pilih unit...</option>';
         
-                        $count_unit = 0;
+                        if (isset($this->summaryUnit)) {
+        
+                            $count_unit = 0;
 
-                        foreach ($this->summaryUnit as $value) {
+                            foreach ($this->summaryUnit as $value) {
 
-                            $total_sp2d = 0;
+                                $total_sp2d = 0;
 
-                            foreach ($value->data_sp2d_rekap as $sp2d_rekap_harian) {
-                                $total_sp2d += $sp2d_rekap_harian->get_gaji();
-                                $total_sp2d += $sp2d_rekap_harian->get_non_gaji();
-                                $total_sp2d += $sp2d_rekap_harian->get_void();
-                                $total_sp2d += $sp2d_rekap_harian->get_lainnya();
-                            }
+                                foreach ($value->data_sp2d_rekap as $sp2d_rekap_harian) {
+                                    $total_sp2d += $sp2d_rekap_harian->get_gaji();
+                                    $total_sp2d += $sp2d_rekap_harian->get_non_gaji();
+                                    $total_sp2d += $sp2d_rekap_harian->get_void();
+                                    $total_sp2d += $sp2d_rekap_harian->get_lainnya();
+                                }
 
-                            if (($value->data_pos_spm > 0) && ($total_sp2d > 0) && ($value->nama_unit[0] != 'K')) {
-                                if ($count_unit > 0) { echo " , "; }
-                                echo '<option value="'.$value->nama_unit.'">'.$value->nama_unit.' - '.$value->nama_lengkap_unit.'</option>';
-                                $count_unit ++;
-                            }
+                                if ((($value->data_pos_spm > 0) || ($total_sp2d > 0))) {
+                                    if ($count_unit > 0) { echo " , "; }
+                                    echo '<option value="'.$value->nama_unit.'">'.$value->nama_unit.' - '.$value->nama_lengkap_unit.'</option>';
+                                    $count_unit ++;
+                                }
 
-                        } 
+                            } 
+                            
+                        } else {
+                            
+                            foreach ($this->unit_list as $value) {
+
+                                echo '<option value="'.$value->get_kd_d_kppn().'">KPPN '.$value->get_kd_d_kppn().'</option>';
+
+                            } 
+                            
+                        }
 
                     ?>
 
                 </select>
                 </h4>
+                
+                <?php } ?>
+                
             </div>
 
             <div class="col-md-6 align-right top-padded-little">
-                Kembali ke: &nbsp;
                 
                 <?php
+
+                    if (isset($this->kodeunit)) { echo "Kembali ke: &nbsp;"; }
 
                     if (isset($this->kodeunit) && (Session::get('role') == ADMIN)) {
                         echo '<a href="'.URL.'home/dashboardPenerbitan/">DJPB</a>';
                     }
 
                     if (isset($this->kodeunit) && ($this->kodeunit[0] != 'K') && ((Session::get('role') == ADMIN) || (Session::get('role') == KANWIL))) {
-                        echo '<a href="'.URL.'home/dashboardPenerbitan/">'.$this->kode_kanwil.'</a>';
+                        
+                        if (Session::get('role') == ADMIN) {
+                            echo "&nbsp; | &nbsp;";
+                        }
+                        
+                        echo '<a href="'.URL.'home/dashboard/'.strtolower($this->mode).'/'.$this->kodekanwil.'">'.$this->namakanwil.'</a>';
                     }
 
                 ?>
@@ -626,7 +652,7 @@
 <div style="padding: 0px 10px;">
     <div class="container-fluid">
 
-        <div class="row"><div class="col-md-12 top-padded table-container" style="border: 1px solid #e5e5e5">
+        <div class="row"><div class="col-md-12 top-padded table-container" style="border: 1px solid #e5e5e5;">
 
             <table class="dashtable">
 
@@ -1017,6 +1043,12 @@
 <?php } ?>
 
 <script type="text/javascript" charset="utf-8">
+    
+    $('#ke_unit').change(function() {
+       
+        window.location.assign('<?php echo URL; ?>home/dashboard/<?php echo strtolower($this->mode); ?>/' + $(this).val());
+        
+    });
     
     //Render Charts
     $(document).ready(function() {
