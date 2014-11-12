@@ -360,33 +360,47 @@
         <div class="row top-padded">
             <div class="col-md-6">
                 
-                <?php if (Session::get('role') == ADMIN) { ?>
+                <?php if ((Session::get('role') == ADMIN) && !isset($this->kodeunit)) { ?>
                 
                 <h4>Lihat Detail Unit: &nbsp;
                 <select id="ke_unit">  
                             
                     <?php 
+                    
+                        echo '<option value="">Pilih unit...</option>';
+                    
+                        if (isset($this->summaryUnit)) {
         
-                        $count_unit = 0;
+                            $count_unit = 0;
 
-                        foreach ($this->summaryUnit as $value) {
+                            foreach ($this->summaryUnit as $value) {
 
-                            $total_sp2d = 0;
+                                $total_sp2d = 0;
 
-                            foreach ($value->data_sp2d_rekap as $sp2d_rekap_harian) {
-                                $total_sp2d += $sp2d_rekap_harian->get_gaji();
-                                $total_sp2d += $sp2d_rekap_harian->get_non_gaji();
-                                $total_sp2d += $sp2d_rekap_harian->get_void();
-                                $total_sp2d += $sp2d_rekap_harian->get_lainnya();
-                            }
+                                foreach ($value->data_sp2d_rekap as $sp2d_rekap_harian) {
+                                    $total_sp2d += $sp2d_rekap_harian->get_gaji();
+                                    $total_sp2d += $sp2d_rekap_harian->get_non_gaji();
+                                    $total_sp2d += $sp2d_rekap_harian->get_void();
+                                    $total_sp2d += $sp2d_rekap_harian->get_lainnya();
+                                }
 
-                            if (($value->data_pos_spm > 0) && ($total_sp2d > 0) && ($value->nama_unit[0] != 'K')) {
-                                if ($count_unit > 0) { echo " , "; }
-                                echo '<option value="'.$value->nama_unit.'">'.$value->nama_unit.' - '.$value->nama_lengkap_unit.'</option>';
-                                $count_unit ++;
-                            }
+                                if ((($value->data_pos_spm > 0) || ($total_sp2d > 0)) && ($value->nama_unit[0] == 'K')) {
+                                    if ($count_unit > 0) { echo " , "; }
+                                    echo '<option value="'.$value->nama_unit.'">'.$value->nama_unit.' - '.$value->nama_lengkap_unit.'</option>';
+                                    $count_unit ++;
+                                }
 
-                        } 
+                            } 
+                            
+                        } else {
+                            
+                            foreach ($this->unit_list as $value) {
+
+                                echo '<option value="'.$value->get_kd_d_kppn().'">'.$value->get_kd_d_kppn().'</option>';
+
+                            } 
+                            
+                        }
 
                     ?>
 
@@ -609,7 +623,7 @@
     
     $('#ke_unit').change(function() {
        
-        window.location.href('<?php echo URL; ?>home/dashboardPenerbitan/' + $(this).val());
+        window.location.assign('<?php echo URL; ?>home/dashboardPenerbitan/' + $(this).val());
         
     });
     
