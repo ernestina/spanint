@@ -36,13 +36,31 @@
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 
 				//-----------------------------------
-				 if (isset($this->d_nama_kppn)) {
-                    foreach ($this->d_nama_kppn as $kppn) {
-                        $kdkppn = $kppn->get_kd_satker();
-                    }
-                }else{
-					$kdkppn='null';
+				if (Session::get('role') == KANWIL) {
+					if (isset($this->d_nama_kppn)) {
+						foreach ($this->d_nama_kppn as $kppn) {
+							$kdkppn = $kppn->get_kd_satker();
+						}
+					}else{
+						$kdkppn='null';
+					}
 				}
+				 if (Session::get('role') == ADMIN) {
+					if (isset($this->d_nama_kppn)) {
+						foreach ($this->d_nama_kppn as $kppn) {
+							$kdkppn = $kppn->get_kd_satker();
+						}
+					}else{
+						$kdkppn='null';
+					}
+				 
+				 
+				 }
+				   if (Session::get('role') == KPPN) {
+					  $kdkppn = Session::get('id_user');
+				   }
+				
+				 
 				?>
 				<a href="<?php echo URL; ?>PDF/KonversiSPM_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
