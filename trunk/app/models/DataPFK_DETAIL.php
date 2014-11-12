@@ -57,9 +57,9 @@ class DataPFK_DETAIL{
 		foreach ($filter as $filter) {
 			$sql .= " AND ".$filter;
 		}
-		//var_dump ($sql);
-		$sql .= " ORDER BY TANGGAL_BUKU DESC";
 		
+		$sql .= " ORDER BY TANGGAL_BUKU DESC";
+		//var_dump ($sql);
 		
 		
         $result = $this->db->select($sql);
