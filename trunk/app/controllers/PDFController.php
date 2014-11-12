@@ -3851,6 +3851,79 @@ class PDFController extends BaseController {
 
         $d_log->tambah_log("Sukses");
     }
+	
+		public function KonversiSPM_PDF($kdkppn = null) {
+        $d_spm1 = new DataADKKonversi($this->registry);
+        $filter = array();
+		//$filter2 = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+            if ($kdkppn != 'null') {
+                $filter[$no++] = "KDKPPN = '" . $kdkppn."'";
+                $d_kppn = new DataUser($this->registry);
+                //$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+				
+            } 
+			if (Session::get('role') == KANWIL){
+			$filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+			}
+			$this->view->data = $d_spm1->get_adk_konversi($filter);
+			$this->view->data1 = $d_spm1->get_jml_adk_konversi($filter);
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";
+			$this->view->data = $d_spm1->get_adk_konversi($filter);
+			$this->view->data1 = $d_spm1->get_jml_adk_konversi($filter);
+        }
+		
+		if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+            
+        }
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+		        //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+
+		
+		
+		$d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table());
+		
+        //var_dump($d_spm1->get_adk_konversi(filter));
+		
+		$d_log->tambah_log("Sukses");
+        $this->view->load('kppn/KonversiSPM_PDF');
+    }
 
     //------------------------------------------------------
     //Function PDF untuk DataPelimpahanController(daftarPelimpahan.php)
