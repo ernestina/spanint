@@ -406,7 +406,7 @@
     <div class="container-fluid">
         
         <div class="row top-padded">
-            <div class="col-md-6">
+            <!--<div class="col-md-6">
                 
                 <?php if ((($this->kodeunit[0] == 'K') || !isset($this->kodeunit)) && ((Session::get('role') == ADMIN) || (Session::get('role') == KANWIL))) { ?>
                 
@@ -457,7 +457,7 @@
                 
                 <?php } ?>
                 
-            </div>
+            </div>-->
 
             <div class="col-md-6 align-right top-padded-little">
                 
