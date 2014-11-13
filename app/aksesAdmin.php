@@ -305,6 +305,7 @@ $akses['PDFAdmin'] = array(
     'sp2dSalahTanggal_PDF',
     'sp2dSudahVoid_PDF',
     'ValidasiSpm_PDF',
+    'KonversiSPM_PDF',
     '__destruct'
 );
 ?>

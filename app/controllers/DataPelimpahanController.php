@@ -46,7 +46,7 @@ class DataPelimpahanController extends BaseController {
         if (Session::get('role') == KPPN) {
             $d_kppn_list = new DataUser($this->registry);
 			$kppn_list = $d_kppn_list->get_induk_limpah_kppn(Session::get('id_user'));
-			if (count($kppn_list)>0){
+			if (count($kppn_list)>1){
 				$filter[$no++] = "KPPN_INDUK= '" . Session::get('id_user')."'";
 			}
             $this->view->kppn_anak = $kppn_list;
