@@ -79,8 +79,8 @@
                     <?php foreach ($this->data as $value) {?>
                     <tr>
                         <td class="align-center"><?php echo $no++; ?></td>
-                        <td class="align-center"><?php echo substr($value->get_argument_text(),-3,3); ?></td>
-                        <td class="align-center"><?php echo $value->get_requested_start_date(); ?></td>
+                        <td class="align-center"><?php echo $value->get_kppn(); ?></td>
+                        <td class="align-center"><?php echo $value->get_tgl_akhir_laporan(); ?></td>
                         <td class="align-center"><?php echo $value->get_request_id().".PDF"; ?></td>
                         <td><a href="<?php echo $this->fileURL.$value->get_request_id().".PDF"; ?>">Unduh File</a></td>
                     </tr>
