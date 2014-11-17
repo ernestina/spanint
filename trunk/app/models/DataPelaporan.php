@@ -103,12 +103,12 @@ class DataPelaporan {
                 $tahun = substr($val['ARGUMENT_TEXT'],6,4);
                 $bulan = substr($val['ARGUMENT_TEXT'],19,3);
                 $tgl = substr($val['ARGUMENT_TEXT'],27,2);
-                $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime($tgl."-".$bulan."-".$tahun)));              
+                $d_data->set_tgl_akhir_laporan($tgl."-".$bulan."-".$tahun);              
             } else if ($val['PROGRAM_SHORT_NAME']=='SPGLR00264'){
                 $tahun = substr($val['ARGUMENT_TEXT'],6,4);
                 $bulan = substr($val['ARGUMENT_TEXT'],19,3);
                 $tgl = substr($val['ARGUMENT_TEXT'],27,2);
-                $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime($tgl."-".$bulan."-".$tahun)));               
+                $d_data->set_tgl_akhir_laporan($tgl."-".$bulan."-".$tahun);               
             } else if ($val['PROGRAM_SHORT_NAME']=='SPCMR00051'){
                 $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10))));                
             }
