@@ -74,6 +74,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
+									<li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus_51">Monitoring Pagu Minus Belanja Pegawai</a></li>
+									<li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus">Monitoring Pagu Minus Non Belanja Pegawai</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
@@ -217,6 +219,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
+									<li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus_51">Monitoring Pagu Minus Belanja Pegawai</a></li>
+									<li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus">Monitoring Pagu Minus Non Belanja Pegawai</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
@@ -347,6 +351,8 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Informasi Proses Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
+									<li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus_51">Monitoring Pagu Minus Belanja Pegawai</a></li>
+									<li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus">Monitoring Pagu Minus Non Belanja Pegawai</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
