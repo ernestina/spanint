@@ -16,6 +16,9 @@ class DataPelaporan {
     private $_actual_completion_date;
     private $_file_hash;
     private $_timestamp;
+    private $_tgl_awal_laporan;
+    private $_tgl_akhir_laporan;
+    private $_kppn;
     private $_error;
     private $_valid = TRUE;
     private $_table = 'SPCO_CONCURRENT_REQUESTS';
@@ -31,7 +34,8 @@ class DataPelaporan {
     }
 
     public function get_laporan($filter) {
-        $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME, ARGUMENT_TEXT, REQUESTED_START_DATE, ACTUAL_START_DATE, ACTUAL_COMPLETION_DATE, FILE_HASH, TIMESTAMP
+        $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME,ARGUMENT_TEXT, TO_DATE(substr(ARGUMENT_TEXT,0,10), 'yyyy/mm/dd') TGL_AWAL_LAPORAN,TO_DATE(substr(ARGUMENT_TEXT,22,10), 'yyyy/mm/dd') TGL_AKHIR_LAPORAN,REQUESTED_START_DATE, ACTUAL_START_DATE
+, ACTUAL_COMPLETION_DATE, FILE_HASH, TIMESTAMP
 				FROM " . $this->_table . "
 				WHERE FILE_HASH <> ' ' ";
         $no = 0;
@@ -47,24 +51,118 @@ class DataPelaporan {
             $d_data = new $this($this->registry);
             $d_data->set_request_id($val['REQUEST_ID']);
             $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
-            $d_data->set_argument_text($val['ARGUMENT_TEXT']);
+            $d_data->set_kppn(substr($val['ARGUMENT_TEXT'],-3,3));
+            //$d_data->set_actual_start_date(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10))));
+            //$d_data->set_actual_completion_date(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],21,10))));
+            if (substr($val['ARGUMENT_TEXT'],22,4) > 2010 && substr($val['ARGUMENT_TEXT'],22,4) < 2020) {
+            $d_data->set_argument_text(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10)))." s.d ".date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],22,10))));
+            } else {
+                $d_data->set_argument_text("Per Tanggal : ".date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10))));
+                
+            }
             if($val['PROGRAM_SHORT_NAME']=='SPGLR00258'){
                 $tahun = substr($val['ARGUMENT_TEXT'],6,4);
                 $bulan = substr($val['ARGUMENT_TEXT'],19,3);
                 $tgl = substr($val['ARGUMENT_TEXT'],27,2);
-                $d_data->set_requested_start_date($tgl."-".$bulan."-".$tahun);                
+                $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime($tgl."-".$bulan."-".$tahun)));                
             } else if ($val['PROGRAM_SHORT_NAME']=='SPGLR00264'){
                 $tahun = substr($val['ARGUMENT_TEXT'],6,4);
                 $bulan = substr($val['ARGUMENT_TEXT'],19,3);
                 $tgl = substr($val['ARGUMENT_TEXT'],27,2);
-                $d_data->set_requested_start_date($tgl."-".$bulan."-".$tahun);               
+                $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime($tgl."-".$bulan."-".$tahun)));              
             } else if ($val['PROGRAM_SHORT_NAME']=='SPCMR00051'){
-                $d_data->set_requested_start_date(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10))));                
+                $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10))));                
             }
-            $d_data->set_actual_start_date(date("d-m-Y", strtotime($val['ACTUAL_START_DATE'])));
-            $d_data->set_actual_completion_date(date("d-m-Y", strtotime($val['ACTUAL_COMPLETION_DATE'])));
-            $d_data->set_file_hash($val['FILE_HASH']);
-            $d_data->set_timestamp($val['TIMESTAMP']);
+            //$d_data->set_file_hash($val['FILE_HASH']);
+            //$d_data->set_timestamp($val['TIMESTAMP']);
+            $data[] = $d_data;
+			//var_dump($d_data);
+        }
+        return $data;
+    }
+
+    public function get_laporan_kppn($filter) {
+        $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME,ARGUMENT_TEXT
+				FROM " . $this->_table . "
+				WHERE FILE_HASH <> ' ' ";
+        $no = 0;
+        //var_dump($filter);
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " ORDER BY REQUEST_ID DESC";
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_request_id($val['REQUEST_ID']);
+            $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
+            $d_data->set_kppn(substr($val['ARGUMENT_TEXT'],-3,3));
+            if($val['PROGRAM_SHORT_NAME']=='SPGLR00258'){
+                $tahun = substr($val['ARGUMENT_TEXT'],6,4);
+                $bulan = substr($val['ARGUMENT_TEXT'],19,3);
+                $tgl = substr($val['ARGUMENT_TEXT'],27,2);
+                $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime($tgl."-".$bulan."-".$tahun)));              
+            } else if ($val['PROGRAM_SHORT_NAME']=='SPGLR00264'){
+                $tahun = substr($val['ARGUMENT_TEXT'],6,4);
+                $bulan = substr($val['ARGUMENT_TEXT'],19,3);
+                $tgl = substr($val['ARGUMENT_TEXT'],27,2);
+                $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime($tgl."-".$bulan."-".$tahun)));               
+            } else if ($val['PROGRAM_SHORT_NAME']=='SPCMR00051'){
+                $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10))));                
+            }
+            $data[] = $d_data;
+			//var_dump($d_data);
+        }
+        return $data;
+    }
+
+    public function get_laporan_pkn_bm($filter) {
+        $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME, TO_DATE(substr(ARGUMENT_TEXT,0,10), 'yyyy/mm/dd') TGL_AWAL_LAPORAN,TO_DATE(substr(ARGUMENT_TEXT,22,10), 'yyyy/mm/dd') TGL_AKHIR_LAPORAN
+				FROM " . $this->_table . "
+				WHERE FILE_HASH <> ' ' ";
+        $no = 0;
+        //var_dump($filter);
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " ORDER BY REQUEST_ID DESC";
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_request_id($val['REQUEST_ID']);
+            $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
+            $d_data->set_tgl_awal_laporan(date("d-m-Y", strtotime($val['TGL_AWAL_LAPORAN'])));
+            $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime($val['TGL_AKHIR_LAPORAN'])));
+            $d_data->set_argument_text((date("d-m-Y", strtotime($val['TGL_AWAL_LAPORAN'])))." s.d ".(date("d-m-Y", strtotime($val['TGL_AKHIR_LAPORAN']))));
+            $data[] = $d_data;
+			//var_dump($d_data);
+        }
+        return $data;
+    }
+
+    public function get_laporan_pkn_bb($filter) {
+        $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME, TO_DATE(substr(ARGUMENT_TEXT,0,10), 'yyyy/mm/dd') TGL_AKHIR_LAPORAN
+				FROM " . $this->_table . "
+				WHERE FILE_HASH <> ' ' ";
+        $no = 0;
+        //var_dump($filter);
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " ORDER BY REQUEST_ID DESC";
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_request_id($val['REQUEST_ID']);
+            $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
+            $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime($val['TGL_AKHIR_LAPORAN'])));
+            $d_data->set_argument_text(" Per Tanggal : ".(date("d-m-Y", strtotime($val['TGL_AKHIR_LAPORAN']))));
             $data[] = $d_data;
 			//var_dump($d_data);
         }
@@ -91,7 +189,7 @@ class DataPelaporan {
                 'SPGLR00012',
                 'SPGLR00011',
                 'SPGLR00017',
-                'SPGLR00014')
+                'SPGLR00014') AND FILE_HASH <> ' ' 
                 GROUP BY PROGRAM_SHORT_NAME 
                 ORDER BY PROGRAM_SHORT_NAME";
         $no = 0;
@@ -102,7 +200,7 @@ class DataPelaporan {
             $d_data = new $this($this->registry);
             $d_data->set_request_id($val['REQUEST_ID']);
             $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
-            $d_data->set_argument_text($val['ARGUMENT_TEXT']);
+            $d_data->set_argument_text(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10)))." s.d ".date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],21,10))));
             $d_data->set_requested_start_date(date("d-m-Y", strtotime($val['REQUESTED_START_DATE'])));
             $d_data->set_actual_start_date(date("d-m-Y", strtotime($val['ACTUAL_START_DATE'])));
             $d_data->set_actual_completion_date(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],21,10))));
@@ -176,7 +274,7 @@ class DataPelaporan {
                 'SPCMR00065',
                 'SPCMR00066',
                 'SPCMR00067',
-                'SPCMR00002')
+                'SPCMR00002') AND FILE_HASH <> ' ' 
                 GROUP BY PROGRAM_SHORT_NAME 
                 ORDER BY PROGRAM_SHORT_NAME";
         $no = 0;
@@ -263,7 +361,7 @@ class DataPelaporan {
                 WHERE PROGRAM_SHORT_NAME in (
                 'SPGLR00258',
                 'SPGLR00264',
-                'SPCMR00051')
+                'SPCMR00051') AND FILE_HASH <> ' ' 
                 GROUP BY PROGRAM_SHORT_NAME 
                 ORDER BY PROGRAM_SHORT_NAME";
         $no = 0;
@@ -335,6 +433,18 @@ class DataPelaporan {
         $this->_timestamp = $timestamp;
     }
 
+    public function set_tgl_awal_laporan($tgl_awal_laporan) {
+        $this->_tgl_awal_laporan = $tgl_awal_laporan;
+    }
+
+    public function set_tgl_akhir_laporan($tgl_akhir_laporan) {
+        $this->_tgl_akhir_laporan = $tgl_akhir_laporan;
+    }
+
+    public function set_kppn($kppn) {
+        $this->_kppn = $kppn;
+    }
+
     /*
      * getter
      */
@@ -369,6 +479,18 @@ class DataPelaporan {
 
     public function get_timestamp() {
         return $this->_timestamp;
+    }
+
+    public function get_tgl_awal_laporan() {
+        return $this->_tgl_awal_laporan;
+    }
+
+    public function get_tgl_akhir_laporan() {
+        return $this->_tgl_akhir_laporan;
+    }
+
+    public function get_kppn() {
+        return $this->_kppn;
     }
 
     public function get_table() {
