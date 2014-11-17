@@ -62,6 +62,8 @@ $akses['DataDIPAAdmin'] = array(
     'DataRealisasiBA_PDF',
     'DataRealisasiTransfer_PDF',
     'DetailRevisi_PDF',
+	'RealisasiFA_1_minus_51',
+	'RealisasiFA_1_minus',
     '__destruct'
 );
 
