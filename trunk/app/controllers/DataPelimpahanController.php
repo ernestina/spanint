@@ -70,6 +70,11 @@ class DataPelimpahanController extends BaseController {
 				} 
 				$this->view->d_kppn_induk = $_POST['kppn_induk'];
             } 
+            
+            if ($_POST['no_rek_persepsi'] != '') {
+				$filter[$no++] = "NOREK_PERSEPSI = '" . $_POST['no_rek_persepsi'] . "'";
+				$this->view->d_no_rek_persepsi = $_POST['no_rek_persepsi'];
+            }
            
             if ($_POST['status'] != '') {
                 if ($_POST['status'] != 'SEMUA') {
