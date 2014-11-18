@@ -346,6 +346,10 @@
                         <br/>
                     
 					<?php } ?>
+                    
+                    <div id="wno_rek_persepsi" class="alert alert-danger" style="display:none;"></div>
+                    <label class="isian">No Rekening: </label>
+                    <input class="form-control" type="number" name="no_rek_persepsi" id="no_rek_persepsi" value="<?php if (isset($this->d_no_rek_persepsi)) {echo $this->d_no_rek_persepsi;}?>"><br/>
 
                     <div id="wstatus" class="alert alert-danger" style="display: none"></div>
                     <label class="isian">Status: </label>
