@@ -428,10 +428,11 @@
         
         var v_tglawal = document.getElementById('tgl_awal').value;
         var v_tglakhir = document.getElementById('tgl_akhir').value;
+        var v_no_rek_persepsi = document.getElementById('no_rek_persepsi').value;
 
         var jml = 0;
         
-        if (v_tglawal == '' && v_tglakhir == '') {
+        if (v_tglawal == '' && v_tglakhir == '' && v_no_rek_persepsi = '') {
             $('#wbayar').html('Harap isi tanggal');
             $('#wbayar').fadeIn();
             $('#wtgl').html('Harap isi tanggal');
