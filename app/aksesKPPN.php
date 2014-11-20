@@ -334,6 +334,8 @@ $akses['PDFKPPN'] = array(
     'SuspendSatkerPenerimaan_PDF',
     'ValidasiSpm_PDF',
     'KonversiSPM_PDF',
+    'RealisasiFA_1_Minus_PDF',
+    'RealisasiFA_1_Minus_51_PDF',
     '__destruct'
 );
 ?>
