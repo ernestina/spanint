@@ -4128,7 +4128,7 @@ class PDFController extends BaseController {
     //------------------------------------------------------
     //Function PDF untuk DataPelimpahanController(daftarPelimpahan.php)
     //------------------------------------------------------
-    public function monitoringPelimpahan_PDF($kdkppn_anak = null, $kdkppn_induk = null, $kdstatus = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function monitoringPelimpahan_PDF($kdkppn_anak = null, $kdkppn_induk = null, $kdstatus = null,$kdnorek= null, $kdtgl_awal = null, $kdtgl_akhir = null) {
         $d_limpah = new DataPelimpahan($this->registry);
         $filter = array();
         $no = 0;
@@ -4155,6 +4155,10 @@ class PDFController extends BaseController {
                 $filter[$no++] = "STATUS = '" . $kdstatus . "'";
             }
         }
+		if ($kdnorek != 'null') {
+				$filter[$no++] = "NOREK_PERSEPSI = '" . $kdnorek . "'";
+				$this->view->d_no_rek_persepsi = $kdnorek;
+            }
         if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
             $filter[$no++] = "TGL_LIMPAH BETWEEN TO_DATE ('" . date('Ymd', strtotime($kdtgl_awal)) . "','YYYYMMDD') 
 								AND TO_DATE ('" . date('Ymd', strtotime($kdtgl_akhir)) . "','YYYYMMDD')  ";

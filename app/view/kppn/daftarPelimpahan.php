@@ -18,12 +18,16 @@
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 
 				if (Session::get('role') == KANWIL) {
-			if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
 
-				if (isset($this->d_status)) {
-						$kdstatus = $this->d_status;
+					if (isset($this->d_status)) {
+							$kdstatus = $this->d_status;
 					} else {
-						$kdstatus = 'null';
+							$kdstatus = 'null';
+					}
+					if (isset($this->d_no_rek_persepsi)) {
+							$kdnorek = $this->d_no_rek_persepsi;
+					} else {
+							$kdnorek = 'null';
 					}
 					if (isset($this->d_kppn_anak)) {
 						$kdkppn_anak = $this->d_kppn_anak;
@@ -47,19 +51,23 @@
 					}
 			?>
                     
-                <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
+                <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
                 
-                <?php }
+                <?php 
 
 			}
 			 if (Session::get('role') == ADMIN ) {
-				if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
 
 
 					if (isset($this->d_status)) {
 						$kdstatus = $this->d_status;
 					} else {
 						$kdstatus = 'null';
+					}
+					if (isset($this->d_no_rek_persepsi)) {
+							$kdnorek = $this->d_no_rek_persepsi;
+					} else {
+							$kdnorek = 'null';
 					}
 					if (isset($this->d_kppn_anak)) {
 						$kdkppn_anak = $this->d_kppn_anak;
@@ -83,19 +91,22 @@
 					}
 			?>
                     
-					<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
+                <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
                 
                 <?php 
-				}
 			}
 			if (Session::get('role') == KPPN) {
             
-				if(isset($this->d_status) || isset($this->d_kppn_anak) || isset($this->d_kppn_induk) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)) {
 
 					if (isset($this->d_status)) {
 						$kdstatus = $this->d_status;
 					} else {
 						$kdstatus = 'null';
+					}
+					if (isset($this->d_no_rek_persepsi)) {
+							$kdnorek = $this->d_no_rek_persepsi;
+					} else {
+							$kdnorek = 'null';
 					}
 
 					if (isset($this->d_kppn_anak)) {
@@ -121,10 +132,9 @@
 					}
 				?>
 						
-					<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
+                <a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>						    
 					
 					<?php }
-					}
 					//------------------------------
         ?>
 
