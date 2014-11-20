@@ -30,4 +30,10 @@ $akses['PanduanBLU'] = array(
     'lihatPanduan1',
     '__destruct'
 );
+
+$akses['DataBLU'] = array(
+    'KarwasBLU',
+	'DaftarSP3',
+    '__destruct'
+);
 ?>

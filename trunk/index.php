@@ -157,6 +157,7 @@ $registry->auth->add_access('panduan','dja',$akses['PanduanDJA']);
 $registry->auth->add_access('auth','blu',$akses['AuthBLU']);
 $registry->auth->add_access('home','blu',$akses['HomeBLU']);
 $registry->auth->add_access('panduan','blu',$akses['PanduanBLU']);
+$registry->auth->add_access('dataBLU','blu',$akses['DataBLU']);
 
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
