@@ -1043,6 +1043,206 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
+	//20-11-2014
+		public function RealisasiFA_1_Minus_PDF($kdsatker = null, $kdkppn = null, $kdakun = null, $kdprogram = null, $kdoutput = null) {
+        $d_spm1 = new DataFA($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if ($kdsatker != 'null' and Session::get('role') != SATKER) {
+            $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
+            $this->view->satker_code = $kdsatker;
+        }
+		/* else {
+            $filter[$no++] = " A.SATKER =  '" . Session::get('kd_satker') . "'";
+        } */
+		if($kdkppn !='null' and Session::get('role') != SATKER) {
+			$filter[$no++] = " A.KPPN =  '" . $kdkppn . "'";
+		}
+		
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
+			/* if (Session::get('id_user') != '019'){
+			$filter[$no++] = "SUBSTR(AKUN,1,2) <> 'B3'";
+			}	 */
+        }
+       
+		if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			$filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+        }
+        if (Session::get('role') == ADMIN || Session::get('role') == DJA) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+            //$this->view->data = $d_spm1->get_satker_dipa_filter($filter);	
+        }
+		
+			
+			if ($kdkppn != 'null') {
+                $filter[$no++] = "A.KPPN = '" . $kdkppn . "'";
+				$this->view->kppn_code = $kdkppn;
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+            }
+
+            if ($kdsatker != 'null') {
+                $filter[$no++] = "A.SATKER = '" . $kdsatker . "'";
+                $this->view->satker_code = $kdsatker;
+            }
+            if ($kdakun != 'null') {
+                $filter[$no++] = "A.AKUN = '" . $kdakun . "'";
+                $this->view->account_code = $kdakun;
+            }
+            if ($kdoutput != 'null') {
+                $filter[$no++] = "A.OUTPUT = '" . $kdoutput . "'";
+                $this->view->output_code = $kdoutput;
+            }
+            if ($kdprogram != 'null') {
+                $filter[$no++] = "A.PROGRAM = '" . $kdprogram . "'";
+                $this->view->program_code = $kdprogram;
+            }
+
+		$filter[$no++] = "SUBSTR(A.AKUN,1,2) <> 'B1'";
+		
+		        //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $this->view->data = $d_spm1->get_fa_summary_minus_filter($filter);
+        //var_dump($d_spm->get_hist_spm_filter());
+
+        $d_log->tambah_log("Sukses");
+
+        $this->view->load('kppn/realisasiFA_1_minus_PDF');
+    }
+	
+	public function RealisasiFA_1_Minus_51_PDF($kdsatker = null, $kdkppn = null, $kdakun = null, $kdprogram = null, $kdoutput = null) {
+        $d_spm1 = new DataFA($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if ($kdsatker != 'null' and Session::get('role') != SATKER) {
+            $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
+            $this->view->satker_code = $kdsatker;
+        }
+		/* else {
+            $filter[$no++] = " A.SATKER =  '" . Session::get('kd_satker') . "'";
+        } */
+		if($kdkppn !='null' and Session::get('role') != SATKER) {
+			$filter[$no++] = " A.KPPN =  '" . $kdkppn . "'";
+		}
+		
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
+			/* if (Session::get('id_user') != '019'){
+			$filter[$no++] = "SUBSTR(AKUN,1,2) <> 'B3'";
+			}	 */
+        }
+       
+		if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+			$filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+        }
+        if (Session::get('role') == ADMIN || Session::get('role') == DJA) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+            //$this->view->data = $d_spm1->get_satker_dipa_filter($filter);	
+        }
+		
+            if ($kdkppn != 'null') {
+                $filter[$no++] = "A.KPPN = '" . $kdkppn . "'";
+				$this->view->kppn_code = $kdkppn;
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+            }
+
+            if ($kdsatker != 'null') {
+                $filter[$no++] = "A.SATKER = '" . $kdsatker . "'";
+                $this->view->satker_code = $kdsatker;
+            }
+            if ($kdakun != 'null') {
+                $filter[$no++] = "A.AKUN = '" . $kdakun . "'";
+                $this->view->account_code = $kdakun;
+            }
+            if ($kdoutput != 'null') {
+                $filter[$no++] = "A.OUTPUT = '" . $kdoutput . "'";
+                $this->view->output_code = $kdoutput;
+            }
+            if ($kdprogram != 'null') {
+                $filter[$no++] = "A.PROGRAM = '" . $kdprogram . "'";
+                $this->view->program_code = $kdprogram;
+            }
+        
+		$filter[$no++] = "SUBSTR(A.AKUN,1,2) = 'B1'";
+		 //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $this->view->data = $d_spm1->get_fa_summary_minus_filter($filter);
+        //var_dump($d_spm->get_hist_spm_filter());
+
+        $d_log->tambah_log("Sukses");
+
+        $this->view->load('kppn/realisasiFA_1_minus_51_PDF');
+		//$this->view->render('kppn/realisasiFA_1_minus_51');
+    }
+
 //------------------------------------------------------
     //Function PDF untuk DataDropingController(DataDropingController.php)
 //------------------------------------------------------
