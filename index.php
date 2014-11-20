@@ -32,6 +32,7 @@ define('KPPN','kppn');
 define('PKN','pkn');
 define('KANWIL','kanwil');
 define('DJA','dja');
+define('BLU','blu');
 
 $path = array(
     ROOT.'/libs/',
@@ -61,6 +62,7 @@ $registry->auth->add_roles('kppn'); //kppn
 $registry->auth->add_roles('kanwil'); //kanwil
 $registry->auth->add_roles('pkn'); //pkn
 $registry->auth->add_roles('dja'); //dja
+$registry->auth->add_roles('blu'); //blu
 $registry->auth->add_roles('guest'); //guest
 
 //menambahkan akses ke level user
@@ -150,6 +152,11 @@ $registry->auth->add_access('dataSPM','dja',$akses['DataSPMDJA']);
 $registry->auth->add_access('userSpan','dja',$akses['UserSpanDJA']);
 $registry->auth->add_access('PDF','dja',$akses['PDFDJA']);
 $registry->auth->add_access('panduan','dja',$akses['PanduanDJA']);
+
+//level blu
+$registry->auth->add_access('auth','blu',$akses['AuthBLU']);
+$registry->auth->add_access('home','blu',$akses['HomeBLU']);
+$registry->auth->add_access('panduan','blu',$akses['PanduanBLU']);
 
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);

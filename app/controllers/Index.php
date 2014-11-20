@@ -25,6 +25,8 @@ class Index extends BaseController {
             header('location:' . URL . 'home');
         } elseif (Session::get('role') == DJA) {
             header('location:' . URL . 'home');
+        } elseif (Session::get('role') == BLU) {
+            header('location:' . URL . 'home');
         } else {
             header('location:' . URL . 'auth/login');
         }
