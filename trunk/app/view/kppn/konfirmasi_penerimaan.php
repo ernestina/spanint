@@ -174,7 +174,7 @@
                             if ($value1->get_segment3()==$this->akun){
                                 echo "<option value = '" . $value1->get_segment3() . "' selected>" . $value1->get_segment3() . " | ". $value1->get_keterangan(). " </option>";
                             } else {
-                                echo "<option value = '" . $value1->get_segment3() . "' selected>" . $value1->get_segment3() . " | ". $value1->get_keterangan(). " </option>";
+                                echo "<option value = '" . $value1->get_segment3() . "'>" . $value1->get_segment3() . " | ". $value1->get_keterangan(). " </option>";
                             }
                        
                         ?>

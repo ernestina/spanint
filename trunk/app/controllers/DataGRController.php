@@ -300,11 +300,11 @@ class DataGRController extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
-		if (Session::get('role') == SATKER) {
+		/* if (Session::get('role') == SATKER) {
             $filter[$no++] = "SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
             $this->view->data = $d_spm1->get_sp2d_rekap_filter($filter);
         }
-		
+		 */
 		$this->view->data2 = $d_spm1->get_akun_pnbp($filter);
         if (isset($_POST['submit_file'])) {
 
