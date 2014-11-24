@@ -4,6 +4,17 @@
 // AKSES UNTUK Admin // -------------------------------------
 //-----------------------------------------------------------
 
+
+$akses['DataUserAdmin'] = array(
+        '__construct',
+        'index',
+        'addDataUser',
+        'updDataUser',
+        'delDataUser',
+        '__destruct'
+);
+
+
 /*
  * akses modul Home
  */

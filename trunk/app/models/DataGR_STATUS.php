@@ -92,8 +92,7 @@ class DataGR_STATUS {
     public function get_detail_lhp_rekap($filter) {
         $sql = "select status,cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,
 				file_name,resp_name, sum(RECEIPT_DIST_AMOUNT) as RPH ,GR_BATCH_NUM
-				from spgr_mpn_receipts_all 
-				where Status<>'Reversed'";
+				from ".$this->_table1." where Status<>'Reversed'";
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
@@ -122,7 +121,7 @@ class DataGR_STATUS {
     public function get_detail_penerimaan($filter) {
         $sql = "select NTPN,NTB, CURRENCY_CODE, cont_gl_date,bank_code,CONT_BANK_ACCOUNT_NUM,
 				RECEIPT_DIST_SEGMENT1, RECEIPT_DIST_SEGMENT2, RECEIPT_DIST_SEGMENT3,RECEIPT_DIST_AMOUNT as RPH  
-				from spgr_mpn_receipts_all 
+				from ".$this->_table1." 
 				where ";
 
 		foreach ($filter as $filter) {
@@ -365,7 +364,7 @@ class DataGR_STATUS {
 
     public function get_ntpn_ganda($filter) {
         $sql = "SELECT * 
-		FROM SPGR_MPN_NTPN_GANDA 
+		FROM ".$this->_table3."
 		WHERE 
 		1=1 ";
 
@@ -391,7 +390,7 @@ class DataGR_STATUS {
 
     public function get_detail_ntpn_ganda($filter) {
         $sql = "SELECT * 
-		FROM SPGR_MPN_NTPN_GANDA_DETAIL 
+		FROM ".$this->_table4." 
 		WHERE 
 		1=1 ";
 
@@ -517,6 +516,22 @@ class DataGR_STATUS {
         $this->_keterangan = $keterangan;
     }
 
+    public function set_table1($table1) {
+        $this->_table1 = $table1;
+    }
+
+    public function set_table2($table2) {
+        $this->_table2 = $table2;
+    }
+
+    public function set_table3($table3) {
+        $this->_table3 = $table3;
+    }
+
+    public function set_table4($table4) {
+        $this->_table4 = $table4;
+    }
+
     /*
      * getter
      */
@@ -611,6 +626,22 @@ class DataGR_STATUS {
 
     public function get_keterangan() {
         return $this->_keterangan;
+    }
+
+    public function get_table1() {
+        return $this->_table1;
+    }
+
+    public function get_table2() {
+        return $this->_table2;
+    }
+
+    public function get_table3() {
+        return $this->_table3;
+    }
+
+    public function get_table4() {
+        return $this->_table4;
     }
 
     /*

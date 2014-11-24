@@ -97,6 +97,10 @@ class DataPFK {
         $this->_uraian_akun = $uraian_akun;
     }
 
+    public function set_table1($table1) {
+        $this->_table1 = $table1;
+    }
+
     /*
      * getter
      */
@@ -123,6 +127,10 @@ class DataPFK {
 
     public function get_uraian_akun() {
         return $this->_uraian_akun;
+    }
+
+    public function get_table1() {
+        return $this->_table1;
     }
 
     /*

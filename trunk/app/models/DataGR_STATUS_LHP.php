@@ -130,6 +130,10 @@ class DataGR_STATUS_LHP {
         $this->_bulan = $bulan;
     }
 
+    public function set_table1($table1) {
+        $this->_table1 = $table1;
+    }
+
     /*
       public function set_satu($satu) {
       $this->_satu = $satu;
@@ -237,6 +241,10 @@ class DataGR_STATUS_LHP {
 
     public function get_bulan() {
         return $this->_bulan;
+    }
+
+    public function get_table1() {
+        return $this->_table1;
     }
 
     /*

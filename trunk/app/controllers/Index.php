@@ -15,7 +15,7 @@ class Index extends BaseController {
 
         if (Session::get('role') == ADMIN) {
             header('location:' . URL . 'home');
-        } elseif (Session::get('role') == SATKER) {
+        }  elseif (Session::get('role') == SATKER) {
             header('location:' . URL . 'home');
         } elseif (Session::get('role') == KPPN) {
             header('location:' . URL . 'home');

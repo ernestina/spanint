@@ -28,8 +28,11 @@ class AuthController extends BaseController {
             $pwd = $pass;
             $cuser = new User($this->registry);
             $res = $cuser->login($user, $pwd);
-            //var_dump($res);
+            var_dump($res);
             switch ($res[1]) {
+                case '99':
+                    $role = 'admin';
+                    break;
                 case 1:
                     $role = 'admin';
                     break;
