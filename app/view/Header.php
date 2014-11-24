@@ -619,7 +619,8 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;SP3B BLU</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataBLU/KarwasBLU">Monitoring SP3B BLU Tahunan</a></li>                                   
+                                    <li><a href="<?php echo URL; ?>dataBLU/KarwasBLU">Monitoring SP3B BLU Tahunan</a></li>
+									<li><a href="<?php echo URL; ?>dataBLU/CariSP3B">Cari SP3B BLU</a></li>		
 								</ul>
                             </div>
                         </li>

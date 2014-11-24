@@ -34,6 +34,7 @@ $akses['PanduanBLU'] = array(
 $akses['DataBLU'] = array(
     'KarwasBLU',
 	'DaftarSP3',
+	'CariSP3B',
     '__destruct'
 );
 ?>
