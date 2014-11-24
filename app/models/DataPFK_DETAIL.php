@@ -108,6 +108,9 @@ class DataPFK_DETAIL{
 	public function set_kppn($kppn) {
         $this->_kppn = $kppn;
     }
+	public function set_table1($table1) {
+        $this->_table1 = $table1;
+    }
 	
 	/*
      * getter
@@ -138,6 +141,9 @@ class DataPFK_DETAIL{
     }
 	public function get_kppn() {
         return $this->_kppn;
+    }
+	public function get_table1() {
+        return $this->_table1;
     }
     /*
      * destruktor

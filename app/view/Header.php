@@ -38,8 +38,24 @@
         <div id="sidebar" class="nano">
 
             <div class="nano-content">
+                
+                
+                <?php if (Session::get('kd_satker') == andi ){ ?>
+                
+                <ul>
+                    <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
+                        <div class="collapse">
+                            <ul>
+                                <li><a href="<?php echo URL; ?>home/dashboard/harian">SP2D &amp; LHP</a></li>
+                                <li><a href="<?php echo URL; ?>home/dashboardPenerbitan">Penerbitan SP2D</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                
+                <?php }?>
 
-                <?php if (Session::get('role') == ADMIN): ?>
+                <?php if (Session::get('role') == ADMIN ): ?>
                 
                 
                 <!--//////////////////////////////////////// --> 
@@ -47,7 +63,6 @@
                 <!--//////////////////////////////////////// --> 
 
                     <ul>
-
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>

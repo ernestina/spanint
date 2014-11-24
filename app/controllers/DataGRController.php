@@ -58,6 +58,10 @@ class DataGRController extends BaseController {
             }
         }
         $this->view->data = $d_spm1->get_gr_pfk_filter($filter, $bulan);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->render('kppn/test');
         $d_log->tambah_log("Sukses");
@@ -91,6 +95,10 @@ class DataGRController extends BaseController {
             $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
         }
         $this->view->data = $d_spm1->get_gr_pfk_detail_filter($filter);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/GR_PFK');
@@ -137,6 +145,10 @@ class DataGRController extends BaseController {
         }
 
         $this->view->data = $d_spm1->get_gr_ijp_filter($filter);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->render('kppn/GR_IJP');
         $d_log->tambah_log("Sukses");
@@ -164,6 +176,10 @@ class DataGRController extends BaseController {
         }
 
         $this->view->data = $d_spm1->get_gr_status_lhp_filter($filter);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/statusGR_LHP');
@@ -204,6 +220,10 @@ class DataGRController extends BaseController {
             $this->view->jml_rek = $d_spm1->get_jml_rek_dep($_POST['kdkppn']);
             $this->view->data = $d_spm1->get_gr_status_harian($filter);
         }
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table());
 
         $this->view->render('kppn/GRStatusHarian');
         $d_log->tambah_log("Sukses");
@@ -231,6 +251,10 @@ class DataGRController extends BaseController {
             $this->view->kppn = Session::get('id_user');
         }
         $this->view->data = $d_spm1->get_detail_lhp_rekap($filter);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/detailLhpRekap');
@@ -258,6 +282,10 @@ class DataGRController extends BaseController {
             $this->view->kppn = Session::get('id_user');
         }
         $this->view->data = $d_spm1->get_detail_penerimaan($filter);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/detailPenerimaan');
@@ -285,6 +313,10 @@ class DataGRController extends BaseController {
         // $this->view->kppn =  Session::get('id_user');
         // }
         $this->view->data = $d_spm1->get_detail_coa_penerimaan($filter);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya("SPGR_MPN_COA");
 
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/detailCoAPenerimaan');
@@ -330,6 +362,10 @@ class DataGRController extends BaseController {
         }
            
            // $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 			
         $this->view->render('kppn/konfirmasi_penerimaan');
         $d_log->tambah_log("Sukses");
@@ -372,6 +408,10 @@ class DataGRController extends BaseController {
             $this->view->data = $d_spm1->get_ntpn_ganda($filter);
         }
 
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table3());
+        
         $this->view->render('kppn/ntpn_ganda');
         $d_log->tambah_log("Sukses");
     }
@@ -396,6 +436,10 @@ class DataGRController extends BaseController {
 
         $this->view->data = $d_spm1->get_detail_ntpn_ganda($filter);
 
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table4());
+
         $this->view->render('kppn/detail_ntpn_ganda');
         $d_log->tambah_log("Sukses");
     }
@@ -414,7 +458,6 @@ class DataGRController extends BaseController {
             $ids = implode("','", $array['checkbox']);
 
             $this->view->data = $d_spm1->get_download_koreksi_penerimaan($ids);
-            $d_log->tambah_log("Sukses");
 
             $this->view->load('kppn/downloadkoreksi');
         }
@@ -431,7 +474,6 @@ class DataGRController extends BaseController {
             }
 
             $this->view->data1 = $d_spm1->get_download_konfirmasi_penerimaan($ids, $segment1);
-            $d_log->tambah_log("Sukses");
 
             $this->view->load('kppn/downloadkonfirmasi');
         }
@@ -439,6 +481,13 @@ class DataGRController extends BaseController {
             echo "<script>alert ('Belum ada yang dipilih (centang/checkmark))</script>";
             header('location:' . URL . 'DataGR/KonfirmasiPenerimaan');
         }
+        
+        $d_log->tambah_log("Sukses");
+        
+
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
     }
 
     public function SuspendSatkerPenerimaan() {
@@ -485,6 +534,10 @@ class DataGRController extends BaseController {
 
             $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
         }
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 
         //var_dump($d_spm->get_gr_status_filter($filter));
 
@@ -533,6 +586,10 @@ class DataGRController extends BaseController {
             }
             $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
         }
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 
         //var_dump($d_spm->get_gr_status_filter($filter));
 

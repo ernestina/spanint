@@ -556,6 +556,14 @@ class DataGR_IJP {
         $this->_jumlah = $jumlah;
     }
 
+    public function set_tabel($table) {
+        $this->_table = $table;
+    }
+
+    public function set_tabel1($table1) {
+        $this->_table1 = $table1;
+    }
+
     /*
      * getter
      */
@@ -838,6 +846,14 @@ class DataGR_IJP {
 
     public function get_jumlah() {
         return $this->_jumlah;
+    }
+
+    public function get_table() {
+        return $this->_table;
+    }
+
+    public function get_table1() {
+        return $this->_table1;
     }
 
     /*
