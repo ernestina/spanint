@@ -51,11 +51,7 @@ class DataBLUController extends BaseController {
             } else {
                 $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
             }
-			
-			if ($_POST['ppp'] != '') {
-                //$filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
-				$this->view->ppp = $_POST['ppp'];
-            }
+					
 			
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
@@ -109,7 +105,7 @@ class DataBLUController extends BaseController {
 									
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
-				$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($_POST['kdsatker']);
+				
             }
        
 		}
@@ -125,6 +121,58 @@ class DataBLUController extends BaseController {
 		
         $this->view->render('blu/daftarSP3');
     }
+	
+	public function CariSP3B() {
+        $d_spm1 = new DataBLU($this->registry);
+        $filter = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		
+		
+		if (isset($_POST['submit_file'])) {
+            /*if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn']."'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				
+            } else {
+                $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+            }*/
+						
+			
+            if ($_POST['kdsatker'] != '') {
+                $filter[$no++] = "SEGMENT1 = '" . $_POST['kdsatker'] . "'";
+				$this->view->kdsatkerr = $_POST['kdsatker'];
+            }
+			if ($_POST['invoice'] != '') {
+                $filter[$no++] = "INVOICE_NUM = '" . $_POST['invoice'] . "'";
+				$this->view->invoice = $_POST['invoice'];
+            }
+			
+			if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
+                $filter[$no++] = "TO_CHAR(INVOICE_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' AND '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "'";
+
+                $this->view->d_tgl_awal = $_POST['tgl_awal'];
+                $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+            }
+		$this->view->data = $d_spm1->get_cari_sp3b($filter);
+		}
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";			
+        }
+		
+		
+		$d_log->tambah_log("Sukses");
+		
+		
+        $this->view->render('blu/cariSP3');
+    }
+	
     //author by jhon
 
     public function __destruct() {

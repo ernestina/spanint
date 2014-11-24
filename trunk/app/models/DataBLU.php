@@ -31,8 +31,12 @@ class DataBLU {
 	private $_check_amount;
 	private $_pendapatan;
 	private $_belanja;
+	private $_akun;
+	private $_program;
+	private $_output;
     private $_table1 = 'SP3B_BLU';
 	private $_table2 = 'DAFTAR_SP3B_BLU';
+	private $_table3 = 'CARI_SP3B_BLU';
     public $registry;
 
     /*
@@ -128,6 +132,46 @@ class DataBLU {
         return $data;
     }
 	
+	public function get_cari_sp3b($filter) {
+        Session::get('id_user');
+        $sql = "SELECT *
+				FROM "
+                . $this->_table3 . "
+				WHERE 
+				1=1"
+
+        ;
+
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+
+        $sql .= " ORDER BY INVOICE_NUM";
+        //var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_invoice_num($val['INVOICE_NUM']);
+            $d_data->set_invoice_date($val['INVOICE_DATE']);
+			$d_data->set_check_number($val['CHECK_NUMBER']);
+			$d_data->set_check_date($val['CHECK_DATE']);
+			$d_data->set_check_amount($val['CHECK_AMOUNT']);
+			$d_data->set_pendapatan($val['PENDAPATAN']);
+			$d_data->set_belanja($val['BELANJA']);
+			$d_data->set_akun($val['SEGMENT3']);
+			$d_data->set_kppn($val['KDKPPN']);
+			$d_data->set_satker($val['SEGMENT1']);
+			$d_data->set_program($val['SEGMENT4']);
+			$d_data->set_output($val['SEGMENT5']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
 	public function get_kdsatker_blu($satker) {
         Session::get('id_user');
         $sql = "SELECT A.KDSATKER ,A.NMSATKER ,A.BA ,B.NMBA
@@ -170,6 +214,15 @@ class DataBLU {
 
 	public function set_satker($satker) {
         $this->_satker = $satker;
+    }
+	public function set_akun($akun) {
+        $this->_akun = $akun;
+    }
+	public function set_program($program) {
+        $this->_program = $program;
+    }
+	public function set_output($output) {
+        $this->_output = $output;
     }
     public function set_nmsatker($nmsatker) {
         $this->_nmsatker = $nmsatker;
@@ -243,6 +296,15 @@ class DataBLU {
 	
 	public function get_satker() {
         return $this->_satker;
+    }
+	public function get_akun() {
+        return $this->_akun;
+    }
+	public function get_program() {
+        return $this->_program;
+    }
+	public function get_output() {
+        return $this->_output;
     }
 	public function get_kppn() {
         return $this->_kppn;
