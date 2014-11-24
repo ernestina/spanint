@@ -161,6 +161,7 @@ $registry->auth->add_access('auth','blu',$akses['AuthBLU']);
 $registry->auth->add_access('home','blu',$akses['HomeBLU']);
 $registry->auth->add_access('panduan','blu',$akses['PanduanBLU']);
 $registry->auth->add_access('dataBLU','blu',$akses['DataBLU']);
+$registry->auth->add_access('PDF','blu',$akses['PDFBLU']);
 
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
