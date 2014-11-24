@@ -4731,6 +4731,150 @@ class PDFController extends BaseController {
 
         $this->view->load('kppn/detail_setoran_up_pnbp_PDF');
     }
+	
+	//------------------------------------------------------
+    //Function PDF untuk DataBLUController(DataBLUController.php)
+	//------------------------------------------------------
+	
+	    public function KarwasBLU_PDF($kdkppn = null, $kdsatker = null,$kdppp = null ) {
+        $d_spm1 = new DataBLU($this->registry);
+        $filter = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        		
+		if ($kdkppn != 'null') {
+			$filter[$no++] = "KPPN_CODE = '" . $kdkppn."'";
+			$d_kppn = new DataUser($this->registry);
+			$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+			
+		} 
+		
+		if ($kdppp != 'null') {
+			//$filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
+			$this->view->ppp = $kdppp;
+		}
+		
+		if ($kdsatker != 'null') {
+			$filter[$no++] = "SATKER_CODE = '" . $kdsatker . "'";
+		}
+       
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";			
+        }
+				 //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+
+		$this->view->data = $d_spm1->get_rekap_sp3b($filter);
+		
+		$d_log->tambah_log("Sukses");
+		
+		
+        //$this->view->render('blu/karwasBLU');
+		$this->view->load('blu/karwasBLU_PDF');
+    }
+	
+	public function DaftarSP3_PDF($bulan=null, $satker=null, $kdkppn=null, $kdsatker=null) {
+        $d_spm1 = new DataBLU($this->registry);
+        $filter = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		
+		if ($bulan != 'null') {           
+                $filter[$no++] = " TO_CHAR(CHECK_DATE,'MM') =  '" .$bulan. "'";
+				$this->view->bulan = $bulan;				
+        }
+		
+		if ($satker != 'null') {           
+                $filter[$no++] = " SUBSTR(INVOICE_NUM,8,6) =  '" .$satker. "'";
+				$this->view->satker = $satker;
+				
+        }
+		
+		
+            if ($kdkppn != 'null') {
+                $filter[$no++] = "KPPN_CODE = '" . $kdkppn."'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+				
+            }
+									
+            if ($kdsatker != 'null') {
+                $filter[$no++] = "SATKER_CODE = '" . $kdsatker . "'";
+				$this->view->nmsatker = $d_spm1->get_nama_satker_pnbp($kdsatker);
+            }
+       
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";			
+        }
+				 //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+
+		$this->view->data = $d_spm1->get_daftar_sp3b($filter);
+		$this->view->data1 = $d_spm1->get_kdsatker_blu($satker);
+		
+		$d_log->tambah_log("Sukses");
+		
+		
+        //$this->view->render('blu/daftarSP3');
+		$this->view->load('blu/daftarSP3_PDF');
+    }
+
+	
+	
+	//-------------------------------------------------------
+
 
     public function __destruct() {
         
