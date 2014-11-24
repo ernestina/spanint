@@ -35,14 +35,27 @@
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 
 				//-----------------------------------
-				if (Session::get('role') == KANWIL) {
-					if (isset($this->d_nama_kppn)) {
-						foreach ($this->d_nama_kppn as $kppn) {
-							$kdkppn = $kppn->get_kd_satker();
+				if (Session::get('role') == BLU) {
+					if (isset($this->data)) {
+						foreach ($this->data as $kppn) {
+							$kdkppn = $kppn->get_kppn();
+							$kdsatker = $kppn->get_satker();
 						}
 					}else{
 						$kdkppn='null';
+						$kdsatker='null';
 					}
+					$kdkppn='null';
+					$kdsatker='null';
+					if (isset($this->ppp)) {
+						$kdppp = $this->ppp;
+						
+					}else{
+						$kdppp='null';
+					}
+					
+					
+					
 				}
 				 if (Session::get('role') == ADMIN) {
 					if (isset($this->d_nama_kppn)) {
@@ -61,7 +74,7 @@
 				
 				 
 				?>
-				<a href="<?php echo URL; ?>PDF/KonversiSPM_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				<a href="<?php echo URL; ?>PDF/KarwasBLU_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdppp; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 				<?php
 				//----------------------------------
