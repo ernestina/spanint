@@ -37,4 +37,17 @@ $akses['DataBLU'] = array(
 	'CariSP3B',
     '__destruct'
 );
+
+
+
+/*
+ * akses modul PDF
+ */
+$akses['PDFBLU'] = array(
+    '__construct',
+    'index',
+    'KarwasBLU_PDF',
+    'DaftarSP3_PDF',
+    '__destruct'
+);
 ?>
