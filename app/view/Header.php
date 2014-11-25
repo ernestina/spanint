@@ -639,6 +639,14 @@
 								</ul>
                             </div>
                         </li>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;DATA REALISASI BLU</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataBLU/DataRealisasiBLU">Realisasi Satker BLU</a></li>
+											
+								</ul>
+                            </div>
+                        </li>
 						
                         <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                             <div class="collapse">

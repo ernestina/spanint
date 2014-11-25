@@ -334,16 +334,7 @@
             <form id="filter-form" method="POST" action="#" enctype="multipart/form-data">
 
                 <div class="modal-body">
-                    
-                <!-- Paste Isi Fom mulai nangkene -->
-                <?php
-                //if (Session::get('role')!=SATKER) {
-                //echo "<div id='wkdsatker' class='error'></div>";
-                //echo "<label class='isian'>Satker: </label>";
-                //} 
-                ?>
-                <!--input type="<?php //if (Session::get('role')==SATKER) {echo "hidden";} else {echo "text";}?>" name="kdsatker" id="kdsatker" value="<?php //if (isset($this->satker_code)){echo $this->satker_code;}?>"-->
-
+                                    
                 <div id="wakun" class='alert alert-danger' style='display:none;'></div>
                 <label class="isian">Akun: </label>
                 <input class='form-control' type="text" name="akun" id="akun" value="<?php if (isset($this->account_code)) {
@@ -361,19 +352,7 @@
                 <input class='form-control' type="text" name="program" id="program"value="<?php if (isset($this->program_code)) {
                         echo $this->program_code;
                     } ?>">
-
-                <!--<div id="wtgl" class="error"></div>
-                <label class="isian">Tanggal: </label>
-                <ul class="inline">
-                <li><input type="text" class="tanggal" name="tgl_awal" id="datepicker2" value="<?php if (isset($this->d_tgl_awal)) {
-                    echo $this->d_tgl_awal;
-                } ?>" /> </li> <li>s/d</li>
-                <li><input type="text" class="tanggal" name="tgl_akhir" id="datepicker3" value="<?php if (isset($this->d_tgl_akhir)) {
-                    echo $this->d_tgl_akhir;
-                } ?>"></li>
-                </ul>--->
-                        
-
+                                    
                 </div>
 
                 <div class="modal-footer">
