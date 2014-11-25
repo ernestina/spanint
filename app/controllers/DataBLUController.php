@@ -213,7 +213,7 @@ class DataBLUController extends BaseController {
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->render('BLU/RealisasiBLU');
+        $this->view->render('blu/RealisasiBLU');
     }
 	
     //author by jhon
