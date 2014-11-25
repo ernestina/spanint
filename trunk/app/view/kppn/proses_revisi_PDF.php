@@ -348,7 +348,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Informasi Proses Revisi DIPA '; //judul file laporan
+$judul = 'Daftar DIPA dalam Proses Revisi '; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
