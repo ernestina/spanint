@@ -630,7 +630,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Pagu dan Realisasi Belanja Satker BLU'; //judul file laporan
+$judul = 'Daftar Pagu dan Realisasi Belanja Satker BLU'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
