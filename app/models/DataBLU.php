@@ -682,6 +682,18 @@ class DataBLU {
 	public function get_dipa() {
         return $this->_dipa;
     }
+	public function get_table1() {
+        return $this->_table1;
+    }
+	public function get_table2() {
+        return $this->_table2;
+    }
+	public function get_table3() {
+        return $this->_table3;
+    }
+	public function get_table4() {
+        return $this->_table4;
+    }
     /*
      * destruktor
      */
