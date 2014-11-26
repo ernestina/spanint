@@ -40,18 +40,29 @@ class DataADKKonversi {
      * @param limit batas default null
      * return array objek Data Tetap */
 
-    public function get_adk_konversi($filter) {
-        Session::get('id_user');
-        $sql = "SELECT INVOICE_NUM, INVOICE_AMOUNT, INVOICE_DATE, PMRT_FILE_NAME,  STATUS_UPLOAD, ZIP_FILE_NAME,
+    public function get_adk_konversi($filter, $kppn) {		
+        Session::get('id_user');				
+        $sql = "SELECT SPAN_PMRT.INVOICE_NUM, INVOICE_AMOUNT, INVOICE_DATE, PMRT_FILE_NAME,  STATUS_UPLOAD, ZIP_FILE_NAME,
 				SUBSTR (ZIP_FILE_NAME,8,8) UPLOAD_DATE, KD_SATKER, TO_CHAR(SYSDATE,'YYYYMMDD') - SUBSTR (ZIP_FILE_NAME,8,8) DURASI, KDKPPN, URAIAN
 				FROM "
                 . $this->_table . "  , "
-				. $this->_table1 . "  
+				. $this->_table1 . " , 
+				(SELECT INVOICE_NUM ,
+					  MAX(SUBSTR(PMRT_FILE_NAME,13,12))DURASI
+					FROM SPAN_PMRT
+					WHERE PMRT_FILE_NAME   IS NOT NULL
+					AND STATUS_UPLOAD      IS NULL					
+					AND INVOICE_AMOUNT NOT IN (1,2,3,4,5)
+					 ".$kppn." 
+					GROUP BY INVOICE_NUM
+				) C
 				WHERE 1=1
 				AND SPAN_PMRT.JENDOK = T_JENDOK.KDJENDOK
 				AND PMRT_FILE_NAME IS NOT NULL
 				AND STATUS_UPLOAD IS NULL
-				
+				AND INVOICE_AMOUNT NOT IN (1,2,3,4,5)
+				AND SUBSTR(SPAN_PMRT.PMRT_FILE_NAME,13,12)=C.DURASI
+				AND SPAN_PMRT.INVOICE_NUM=C.INVOICE_NUM
 				"
 
         ;
@@ -93,7 +104,7 @@ class DataADKKonversi {
 				WHERE 1=1 				
 				AND PMRT_FILE_NAME IS NOT NULL
 				AND STATUS_UPLOAD IS NULL
-				
+				AND INVOICE_AMOUNT NOT IN (1,2,3,4,5)
 				"
 
         ;
