@@ -26,7 +26,7 @@ class DataBLUController extends BaseController {
       public function infoSP2D() {
       $d_spm = new DataSPM($this->registry);
       d_spm->get_spm_filter();
-      //var_dump($d_sppm->get_sppm_filter($filter));
+      //var_dump($d_spm1->get_sppm_filter($filter));
       $this->view->render('kppn/isianSPM');
       }
      */
@@ -64,6 +64,12 @@ class DataBLUController extends BaseController {
 			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";			
         }
 		$this->view->data = $d_spm1->get_rekap_sp3b($filter);
+        
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        //var_dump($d_last_update->get_last_updatenya($d_spm1->get_table1()));
 		
 		$d_log->tambah_log("Sukses");
 		
@@ -115,6 +121,11 @@ class DataBLUController extends BaseController {
         }
 		$this->view->data = $d_spm1->get_daftar_sp3b($filter);
 		$this->view->data1 = $d_spm1->get_kdsatker_blu($satker);
+        
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 		
 		$d_log->tambah_log("Sukses");
 		
@@ -166,6 +177,9 @@ class DataBLUController extends BaseController {
 			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";			
         }
 		
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table3());
 		
 		$d_log->tambah_log("Sukses");
 		
@@ -207,9 +221,10 @@ class DataBLUController extends BaseController {
 
         //----------------------------------------------------
         $this->view->data = $d_spm1->get_realisasi_blu($filter);
-
-        //$d_last_update = new DataLastUpdate($this->registry);
-        //$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table4());
 
         $d_log->tambah_log("Sukses");
 
