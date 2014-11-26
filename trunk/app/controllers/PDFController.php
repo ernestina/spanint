@@ -4872,7 +4872,79 @@ class PDFController extends BaseController {
     }
 
 	
-	
+	public function CariSP3B_PDF($kdsatker=null, $kd_tgl_awal=null, $kd_tgl_akhir=null, $kdinvoice4=null) {
+        $d_spm1 = new DataBLU($this->registry);
+        $filter = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		
+			if ($kdinvoice4 != 'null') {
+				$kdinvoice1=substr($kdinvoice4,0,6);
+				$kdinvoice2=substr($kdinvoice4,7,6);
+				$kdinvoice3=substr($kdinvoice4,14,6);
+				$kdinvoice4=$kdinvoice1.'/'.$kdinvoice2.'/'.$kdinvoice3;
+
+                $filter[$no++] = "INVOICE_NUM = '" . $kdinvoice4 . "'";
+				$this->view->invoice = $kdinvoice4;
+            }
+            if ($kdsatker != 'null') {
+                $filter[$no++] = "SEGMENT1 = '" . $kdsatker . "'";
+				$this->view->kdsatkerr = $kdsatker;
+            }
+			
+			
+			if ($kd_tgl_awal != 'null' AND $kd_tgl_akhir != 'null') {
+                $filter[$no++] = "TO_CHAR(INVOICE_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($kd_tgl_awal)) . "' AND '" . date('Ymd', strtotime($kd_tgl_akhir)) . "'";
+
+				$tglawal = array("$kd_tgl_awal");
+				$tglakhir = array("$kd_tgl_akhir");
+				//var_dump($tglawal);
+				//var_dump($tglakhir);
+				$this->view->kdtgl_awal = $tglawal;
+				$this->view->kdtgl_akhir = $tglakhir;
+            }
+			 //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+		$this->view->data = $d_spm1->get_cari_sp3b($filter);
+		
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";			
+        }
+		
+		
+		$d_log->tambah_log("Sukses");
+		
+		
+        //$this->view->render('blu/cariSP3');
+		$this->view->load('blu/cariSP3_PDF');
+    }
 	//-------------------------------------------------------
 
 

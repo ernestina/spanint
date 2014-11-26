@@ -34,14 +34,34 @@
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 
 				//-----------------------------------
-				if (Session::get('role') == KANWIL) {
-					if (isset($this->d_nama_kppn)) {
-						foreach ($this->d_nama_kppn as $kppn) {
-							$kdkppn = $kppn->get_kd_satker();
-						}
+				if (Session::get('role') == BLU) {
+					if (isset($this->kdsatkerr)) {
+						$kdsatker = $this->kdsatkerr;
 					}else{
-						$kdkppn='null';
+						$kdsatker='null';
 					}
+					
+					if (isset($this->invoice)) {
+						$kdinvoice = $this->invoice;
+						$kdinvoice1=substr($kdinvoice,0,6);
+						$kdinvoice2=substr($kdinvoice,7,6);
+						$kdinvoice3=substr($kdinvoice,14,6);
+						$kdinvoice4=$kdinvoice1.'-'.$kdinvoice2.'-'.$kdinvoice3;
+						//$kdinvoice =00106T/651135/2014
+					}else{
+						$kdinvoice4='null';
+					}
+					
+					if (isset($this->d_tgl_awal) AND isset($this->d_tgl_akhir) ) {
+						$kd_tgl_awal = $this->d_tgl_awal;
+						$kd_tgl_akhir = $this->d_tgl_akhir;
+					}else{
+						$kd_tgl_awal ='null';
+						$kd_tgl_akhir ='null';
+					}
+					
+					
+					
 				}
 				 if (Session::get('role') == ADMIN) {
 					if (isset($this->d_nama_kppn)) {
@@ -60,7 +80,7 @@
 				
 				 
 				?>
-				<a style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				<a href="<?php echo URL; ?>PDF/CariSP3B_PDF/<?php echo $kdsatker . "/" . $kd_tgl_awal . "/" . $kd_tgl_akhir . "/" . $kdinvoice4; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 				<?php
 				//----------------------------------
