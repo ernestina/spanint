@@ -49,6 +49,7 @@ $akses['PDFBLU'] = array(
     'index',
     'KarwasBLU_PDF',
     'DaftarSP3_PDF',
+    'DataRealisasiBLU_PDF',
     '__destruct'
 );
 ?>
