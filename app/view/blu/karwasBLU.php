@@ -197,7 +197,7 @@
 
             </div>
             
-            <form id="filter-form" method="POST" action="Konversi" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="KarwasBLU" enctype="multipart/form-data">
 
                 <div class="modal-body">
                     
@@ -214,7 +214,7 @@
                             echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
                         }
                     ?>
-                    <!--/select>
+                    </select>
 
 
                     <div id="wkdkppn" class="error"></div>
