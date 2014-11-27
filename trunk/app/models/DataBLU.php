@@ -233,12 +233,13 @@ class DataBLU {
         return $data;
     }
 	
-	 public function get_realisasi_blu($filter) {
+	public function get_realisasi_blu($filter) {
         Session::get('id_user');
         $sql = "select a.satker
 				, substr(a.program,1,3) BA
 				, a.kppn
 				, b.nmsatker
+				, c.rumpun
 				, sum(a.budget_amt) Pagu
 				, sum(a.actual_amt) Total_realisasi
 				, sum(decode(substr(a.akun,1,2),'51',a.budget_amt,0)) pagu_51
@@ -264,10 +265,12 @@ class DataBLU {
 				, sum(ENCUMBRANCE_AMT) encumbrance 
 				FROM "
                 . $this->_table4 . " a,
-                t_satker_blu  b 
+                t_satker_blu  b ,
+				rumpun_blu c
 				where 1=1
 				and a.budget_type = '2' 
-				and a.satker=b.kdsatker 
+				and a.satker=b.kdsatker
+				and a.satker=c.kdsatker 				
 				and a.kppn=b.kdkppn
 				AND SUBSTR(a.akun,1,1) in ('5','6')
 				and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) > 0
@@ -279,7 +282,7 @@ class DataBLU {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " group by a.satker ,b.nmsatker, a.kppn, substr(a.program,1,3) ";
+        $sql .= " group by a.satker ,b.nmsatker, a.kppn, substr(a.program,1,3)	, c.rumpun ";
         $sql .= " ORDER by a.satker ";
 
         //var_dump ($sql);
@@ -292,6 +295,91 @@ class DataBLU {
             $d_data->set_ba($val['BA']);
             $d_data->set_pagu($val['PAGU']);
             $d_data->set_dipa($val['NMSATKER']);
+			$d_data->set_rumpun($val['RUMPUN']);
+			$d_data->set_pagu_51($val['PAGU_51']);
+            $d_data->set_pagu_52($val['PAGU_52']);
+            $d_data->set_pagu_53($val['PAGU_53']);
+            $d_data->set_pagu_54($val['PAGU_54']);
+            $d_data->set_pagu_55($val['PAGU_55']);
+            $d_data->set_pagu_56($val['PAGU_56']);
+            $d_data->set_pagu_57($val['PAGU_57']);
+            $d_data->set_pagu_58($val['PAGU_58']);
+            $d_data->set_pagu_59($val['PAGU_59']);
+			$d_data->set_pagu_61($val['PAGU_61']);
+            $d_data->set_belanja_51($val['BELANJA_51']);
+            $d_data->set_belanja_52($val['BELANJA_52']);
+            $d_data->set_belanja_53($val['BELANJA_53']);
+            $d_data->set_belanja_54($val['BELANJA_54']);
+            $d_data->set_belanja_55($val['BELANJA_55']);
+            $d_data->set_belanja_56($val['BELANJA_56']);
+            $d_data->set_belanja_57($val['BELANJA_57']);
+            $d_data->set_belanja_58($val['BELANJA_58']);
+            $d_data->set_belanja_59($val['BELANJA_59']);
+			$d_data->set_belanja_61($val['BELANJA_61']);
+			$d_data->set_realisasi($val['TOTAL_REALISASI']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_realisasi_belanja_blu($filter) {
+        Session::get('id_user');
+        $sql = "select a.satker
+				, substr(a.program,1,3) BA
+				, a.kppn
+				, b.nmsatker
+				, c.rumpun
+				, sum(a.budget_amt) Pagu
+				, sum(a.actual_amt) Total_realisasi
+				, sum(decode(a.akun,'525111',a.budget_amt,0)) pagu_51
+				, sum(decode(a.akun,'525112',a.budget_amt,0)) pagu_52
+				, sum(decode(a.akun,'525113',a.budget_amt,0)) pagu_53
+				, sum(decode(a.akun,'525114',a.budget_amt,0)) pagu_54
+				, sum(decode(a.akun,'525115',a.budget_amt,0)) pagu_55
+				, sum(decode(a.akun,'525116',a.budget_amt,0)) pagu_56
+				, sum(decode(a.akun,'525119',a.budget_amt,0)) pagu_57				
+				, sum(decode(a.akun,'525111',a.actual_amt,0)) belanja_51
+				, sum(decode(a.akun,'525112',a.actual_amt,0)) belanja_52
+				, sum(decode(a.akun,'525113',a.actual_amt,0)) belanja_53
+				, sum(decode(a.akun,'525114',a.actual_amt,0)) belanja_54
+				, sum(decode(a.akun,'525115',a.actual_amt,0)) belanja_55
+				, sum(decode(a.akun,'525116',a.actual_amt,0)) belanja_56
+				, sum(decode(a.akun,'525119',a.actual_amt,0)) belanja_57				
+				, sum(ENCUMBRANCE_AMT) encumbrance 
+				FROM "
+                . $this->_table4 . " a,
+                t_satker_blu  b ,
+				rumpun_blu c
+				where 1=1
+				and a.budget_type = '2' 
+				and a.satker=b.kdsatker
+				and a.satker=c.kdsatker				
+				and a.kppn=b.kdkppn
+				AND SUBSTR(a.akun,1,1) in ('5','6')
+				and substr(a.akun,1,3) = '525'
+				and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) > 0
+				
+				"
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        $sql .= " group by a.satker ,b.nmsatker, a.kppn, substr(a.program,1,3), c.rumpun ";
+        $sql .= " ORDER by a.satker ";
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['SATKER']);
+            $d_data->set_kppn($val['KPPN']);
+            $d_data->set_ba($val['BA']);
+            $d_data->set_pagu($val['PAGU']);
+            $d_data->set_dipa($val['NMSATKER']);
+			$d_data->set_rumpun($val['RUMPUN']);
 			$d_data->set_pagu_51($val['PAGU_51']);
             $d_data->set_pagu_52($val['PAGU_52']);
             $d_data->set_pagu_53($val['PAGU_53']);

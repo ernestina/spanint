@@ -215,6 +215,25 @@ class DataBLUController extends BaseController {
                 $filter[$no++] = "SUBSTR(A.DANA,1,1) = '" . $_POST['SumberDana'] . "'";
                 $this->view->SumberDana = $_POST['SumberDana'];
             }
+			if ($_POST['Rumpun'] != '') {
+				
+				if ($_POST['Rumpun'] == 'Kesehatan'){
+					 $filter[$no++] = "C.RUMPUN = 'Kesehatan'";
+				}
+				if ($_POST['Rumpun'] == 'Pendidikan'){
+					 $filter[$no++] = "C.RUMPUN = 'Pendidikan'";
+				}
+				if ($_POST['Rumpun'] == 'Pengelola'){
+					 $filter[$no++] = "C.RUMPUN = 'Pengelola Dana'";
+				}
+				if ($_POST['Rumpun'] == 'Kawasan'){
+					 $filter[$no++] = "C.RUMPUN = 'Kawasan'";
+				}
+				if ($_POST['Rumpun'] == 'Barang'){
+					 $filter[$no++] = "C.RUMPUN = 'Barang Jasa Lainnya'";
+				}				
+                
+            }
             			
 			
         }
@@ -229,6 +248,69 @@ class DataBLUController extends BaseController {
         $d_log->tambah_log("Sukses");
 
         $this->view->render('blu/RealisasiBLU');
+    }
+	
+	public function DataRealisasiBelanjaBLU() {
+        $d_spm1 = new DataBLU($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+		
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        if (isset($_POST['submit_file'])) {
+            /* if ($_POST['kdkppn'] != '') {
+				if ($_POST['kdkppn'] != 'SEMUA') {
+					$filter[$no++] = "A.KPPN = '" . $_POST['kdkppn'] . "'";
+					$d_kppn = new DataUser($this->registry);
+					$this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+					$this->view->d_kd_kppn = $_POST['kdkppn'];
+				}
+            } else {
+                $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
+            } */
+
+            if ($_POST['kdsatker'] != '') {
+                $filter[$no++] = "A.SATKER = '" . $_POST['kdsatker'] . "'";
+                $this->view->satker_code = $_POST['kdsatker'];
+            }
+			if ($_POST['SumberDana'] != '') {
+                $filter[$no++] = "SUBSTR(A.DANA,1,1) = '" . $_POST['SumberDana'] . "'";
+                $this->view->SumberDana = $_POST['SumberDana'];
+            }
+			if ($_POST['Rumpun'] != '') {
+				
+				if ($_POST['Rumpun'] == 'Kesehatan'){
+					 $filter[$no++] = "C.RUMPUN = 'Kesehatan'";
+				}
+				if ($_POST['Rumpun'] == 'Pendidikan'){
+					 $filter[$no++] = "C.RUMPUN = 'Pendidikan'";
+				}
+				if ($_POST['Rumpun'] == 'Pengelola'){
+					 $filter[$no++] = "C.RUMPUN = 'Pengelola Dana'";
+				}
+				if ($_POST['Rumpun'] == 'Kawasan'){
+					 $filter[$no++] = "C.RUMPUN = 'Kawasan'";
+				}
+				if ($_POST['Rumpun'] == 'Barang'){
+					 $filter[$no++] = "C.RUMPUN = 'Barang Jasa Lainnya'";
+				}
+				
+               
+            }
+            			
+			
+        }
+
+        //----------------------------------------------------
+        $this->view->data = $d_spm1->get_realisasi_belanja_blu($filter);
+
+        //$d_last_update = new DataLastUpdate($this->registry);
+        //$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('BLU/RealisasiBelanjaBLU');
     }
 	
     //author by jhon

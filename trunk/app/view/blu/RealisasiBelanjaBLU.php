@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Pagu dan Realisasi Belanja Satker BLU Total</h2>
+                <h2>Pagu dan Realisasi Belanja Satker BLU Kode 525</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
@@ -13,6 +13,7 @@
 				//--------------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 				if (Session::get('role') == ADMIN  || Session::get('role') == DJA) {
+					if( isset($this->d_nama_kppn) || isset($this->satker_code1)){
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
@@ -25,26 +26,46 @@
 						} else {
 							$kdsatker = 'null';
 						}
+						
+					?>
+					<a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+					}
 				}
-				if (Session::get('role') == BLU) {
+				if (Session::get('role') == KANWIL) {
+					if( isset($this->d_nama_kppn) || isset($this->satker_code1)){
+						if (isset($this->d_nama_kppn)) {
+							foreach ($this->d_nama_kppn as $kppn) {
+								$kdkppn = $kppn->get_kd_satker();
+							  }
+						} else {
+							$kdkppn = 'null';
+						}
 						if (isset($this->satker_code)) {
 							$kdsatker = $this->satker_code;
-							  
 						} else {
 							$kdsatker = 'null';
-						}
-						if (isset($this->SumberDana)) {
-							$kdsumberdana = $this->SumberDana;
-						} else {
-							$kdsumberdana = 'null';
 						}							
-						
+						?>
+						<a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<?php
+						}
 				}
-				
-			?>
-			<a href="<?php echo URL; ?>PDF/DataRealisasiBLU_PDF/<?php echo $kdsatker . "/" . $kdsumberdana; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-			<?php
-				
+				if (Session::get('role') == KPPN) {
+						if (isset($this->d_nama_kppn)) {
+								$kdkppn = $this->d_kd_kppn;
+						} else {
+							$kdkppn = Session::get('id_user');
+						}
+						if (isset($this->satker_code)) {
+							$kdsatker = $this->satker_code;
+						} else {
+							$kdsatker = 'null';
+						}						
+						?>
+						<a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<?php
+				}
 				//----------------------------------------------------		
 ?>                
             </div>
@@ -126,19 +147,18 @@
 					</tr-->
 
 
-                    <th  colspan=9 class='mid'>Jenis Belanja</th>
+                    <th  colspan=7 class='mid'>Jenis Belanja BLU (525)</th>
                     <th id="13"  rowspan=2 class='mid'>Total</th>
                 </tr>
                 <tr>
-                    <th id="4"  class='mid' >Pegawai</th>
+                    <th id="4"  class='mid' >Gaji dan Tunjangan</th>
                     <th id="5"  class='mid' >Barang</th>
-                    <th id="6"  class='mid' >Modal</th>
-                    <th id="7"  class='mid' >Beban Bunga</th>
-                    <th id="8"  class='mid' >Subsidi</th>
-                    <th id="9"  class='mid' >Hibah</th>
-                    <th id="10"  class='mid' >BanSos</th>
-                    <th id="11"  class='mid' >Lain lain</th>
-                    <th id="12"  class='mid'>Transfer</th>
+                    <th id="6"  class='mid' >Jasa</th>
+                    <th id="7"  class='mid' >Pemeliharaan</th>
+                    <th id="8"  class='mid' >Perjalanan</th>
+                    <th id="9"  class='mid' >Pengelolaan Endowment Fund</th>
+                    <th id="10"  class='mid' >Barang dan Jasa BLU Lainnya</th>
+                   
                     
 
                 </tr>
@@ -267,24 +287,7 @@
 						}
 						
 						"</td> ";
-                        echo "<td align='right'>" . number_format($value->get_pagu_58()) ."<br>". number_format($value->get_belanja_58()). "<br>";
-						if	($value->get_pagu_58() == 0) { 
-							echo '0.00%';
-						} 
-						else { echo 
-						"(". number_format($value->get_belanja_58()/$value->get_pagu_58()*100,2)."%)";
-						}
-						
-						"</td> ";
-				        echo "<td align='right'>" . number_format($value->get_pagu_61()) ."<br>". number_format($value->get_belanja_61()). "<br>";
-						if	($value->get_pagu_61() == 0) { 
-							echo '0.00%';
-						} 
-						else { echo 
-						"(". number_format($value->get_belanja_61()/$value->get_pagu_61()*100,2)."%)";
-						}
-						
-						"</td> ";
+                        
                         echo "<td align='right'>" . number_format($value->get_pagu()) ."<br>". number_format($value->get_realisasi()). "<br>";
 						if	($value->get_pagu() == 0) { 
 							echo '0.00%';
@@ -303,9 +306,7 @@
                         echo "<td align='right'>" . number_format($value->get_pagu_54()-$value->get_belanja_54()). "</td> ";
                         echo "<td align='right'>" . number_format($value->get_pagu_55()-$value->get_belanja_55()). "</td> ";
                         echo "<td align='right'>" . number_format($value->get_pagu_56()-$value->get_belanja_56()). "</td> ";
-                        echo "<td align='right'>" . number_format($value->get_pagu_57()-$value->get_belanja_57()). "</td> ";
-                        echo "<td align='right'>" . number_format($value->get_pagu_58()-$value->get_belanja_58()). "</td> ";
-                        echo "<td align='right'>" . number_format($value->get_pagu_61()-$value->get_belanja_61()). "</td> ";
+                        echo "<td align='right'>" . number_format($value->get_pagu_57()-$value->get_belanja_57()). "</td> ";                       
                         echo "<td align='right'>" . number_format($value->get_pagu()-$value->get_realisasi()). "</td> ";
                     echo "</tr>";
                             
@@ -350,9 +351,7 @@
                     <td class='ratakanan'><?php echo number_format($tot_pagu_54); ?><br><?php echo number_format($tot_54); ?><br><?php if ($tot_pagu_54==0){echo '(0.00%)';} else {echo "("  .number_format($tot_54/$tot_pagu_54*100). "%)";}?> </td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_55); ?><br><?php echo number_format($tot_55); ?><br><?php if ($tot_pagu_55==0){echo '(0.00%)';} else {echo "("  .number_format($tot_55/$tot_pagu_55*100). "%)";}?> </td>
 					<td class='ratakanan'><?php echo number_format($tot_pagu_56); ?><br><?php echo number_format($tot_56); ?><br><?php if ($tot_pagu_56==0){echo '(0.00%)';} else {echo "("  .number_format($tot_56/$tot_pagu_56*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_57); ?><br><?php echo number_format($tot_57); ?><br><?php if ($tot_pagu_57==0){echo '(0.00%)';} else {echo "("  .number_format($tot_57/$tot_pagu_57*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_58); ?><br><?php echo number_format($tot_58); ?><br><?php if ($tot_pagu_58==0){echo '(0.00%)';} else {echo "("  .number_format($tot_58/$tot_pagu_58*100). "%)";}?> </td>
-					<td class='ratakanan'><?php echo number_format($tot_pagu_61); ?><br><?php echo number_format($tot_61); ?><br><?php if ($tot_pagu_61==0){echo '(0.00%)';} else {echo "("  .number_format($tot_61/$tot_pagu_61*100). "%)";}?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_57); ?><br><?php echo number_format($tot_57); ?><br><?php if ($tot_pagu_57==0){echo '(0.00%)';} else {echo "("  .number_format($tot_57/$tot_pagu_57*100). "%)";}?> </td>                    
                     <td class='ratakanan'><?php echo number_format($tot_pagu); ?><br><?php echo number_format($tot_real); ?><br><?php if ($tot_pagu==0){echo '(0.00%)';} else {echo "(" .number_format($tot_real/$tot_pagu*100). "%)";}?> </td>
                 </tr>
                 <tr>
@@ -363,9 +362,7 @@
                     <td class='ratakanan'><?php echo number_format($tot_pagu_54-$tot_54); ?> </td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_55-$tot_55); ?> </td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_56-$tot_56); ?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_57-$tot_57); ?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_58-$tot_58); ?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_61-$tot_61); ?> </td>
+                    <td class='ratakanan'><?php echo number_format($tot_pagu_57-$tot_57); ?> </td>                   
                     <td class='ratakanan'><?php echo number_format($tot_pagu-$tot_real); ?> </td>
                     
                     
@@ -390,7 +387,7 @@
 
             </div>
             
-            <form id="filter-form" method="POST" action="DataRealisasiBLU" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="DataRealisasiBelanjaBLU" enctype="multipart/form-data">
 
                 <div class="modal-body">
                     
@@ -430,14 +427,14 @@
 						<option value='Kawasan'>- Kawasan -</option>
 						<option value='Barang'>- Barang Jasa Lainnya -</option>
                     </select>
-					
 															
                         <br>
                     <label class="isian">Kode Satker: </label>
                     <input class="form-control" type="text" name="kdsatker" id="kdsatker" value="<?php if (isset($this->satker_code)) {
     echo $this->satker_code;
 } ?>">
-                   
+
+                    
                     <br/>
                 </div>
 
