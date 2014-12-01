@@ -238,6 +238,16 @@ class DataGRController extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+            $kppnya='';
+            foreach ($kppn_list as $value1) {
+                $kppnya .= "'".$value1->get_kd_d_kppn()."',";
+            }
+            $filter[$no++] = " a.kppn in (".$kppnya."'0') ";
+        }
+        
         if (isset($_POST['submit_file'])) {
             if ($_POST['bulan'] != '') {
                 if ($_POST['bulan'] != 'SEMUA_BULAN') {

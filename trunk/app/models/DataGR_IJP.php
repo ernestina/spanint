@@ -179,7 +179,7 @@ class DataGR_IJP {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= " ORDER BY a.BULAN ";
+        $sql .= " ORDER BY a.BULAN, a.kppn ";
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
