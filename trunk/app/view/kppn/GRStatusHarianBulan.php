@@ -778,29 +778,14 @@
                         <th width="100px" >Tindakan</th>
                     </tr>
                     <tr>
-                        <td bgcolor='#F5F5F5'></td>
-                        <td>Data belum masuk</td>
-                        <td>Konfirm Bank, upload</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor='#FFBF00'></td>
-                        <td>Data belum diinterface</td>
-                        <td>Lakukan interface</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor='#A4C639'></td>
-                        <td>Semua data berstatus "Completed"</td>
-                        <td>Tidak ada</td>
-                    </tr>
-                    <tr>
                         <td bgcolor='#C19A6B'></td>
                         <td>Hari Libur</td>
                         <td>Tidak ada</td>
                     </tr>
-                    <tr> 
-                        <td bgcolor='#B2BEB5'></td>
-                        <td>Data belum pengecekan</td>
-                        <td>Lakukan pengecekan</td>
+                    <tr>
+                        <td bgcolor='#F5F5F5'></td>
+                        <td>Data belum masuk</td>
+                        <td>Konfirm Bank, upload</td>
                     </tr>
                     <tr>
                         <td bgcolor='#FF2800'></td>
@@ -811,6 +796,21 @@
                         <td bgcolor='#99666CC'></td>
                         <td>Data belum valid</td>
                         <td>Lakukan pengecekan</td>
+                    </tr>
+                    <tr> 
+                        <td bgcolor='#B2BEB5'></td>
+                        <td>Data belum pengecekan</td>
+                        <td>Lakukan pengecekan</td>
+                    </tr>
+                    <tr>
+                        <td bgcolor='#FFBF00'></td>
+                        <td>Data belum diinterface</td>
+                        <td>Lakukan interface</td>
+                    </tr>
+                    <tr>
+                        <td bgcolor='#A4C639'></td>
+                        <td>Semua data berstatus "Completed"</td>
+                        <td>Tidak ada</td>
                     </tr>
                     <tr>
                         <td bgcolor='#000000'></td>
