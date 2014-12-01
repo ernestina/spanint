@@ -9,6 +9,7 @@ class DataGR_IJP {
 
     private $db;
     private $_kppn;
+    private $_nama_kppn;
     private $_tahun;
     private $_bulan;
     //private $_gl_date_char;
@@ -165,10 +166,12 @@ class DataGR_IJP {
 
     public function get_gr_status_harian($filter) {
         Session::get('id_user');
-        $sql = "SELECT *
+        $sql = "SELECT a.*,b.nmkppn nama_kppn
 				FROM "
-                . $this->_table . " 
-				 WHERE 
+                . $this->_table . " a
+                inner join T_KPPN b
+                on a.kppn = b.kdkppn 
+				WHERE 
 				1=1"
 
         ;
@@ -176,13 +179,14 @@ class DataGR_IJP {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= " ORDER BY BULAN ";
+        $sql .= " ORDER BY a.BULAN ";
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_kppn($val['KPPN']);
+            $d_data->set_nama_kppn($val['NAMA_KPPN']);
             $d_data->set_tahun($val['TAHUN']);
             $d_data->set_bulan($val['BULAN']);
             $d_data->set_n01($val['LHP01']);
@@ -278,6 +282,10 @@ class DataGR_IJP {
 
     public function set_kppn($kppn) {
         $this->_kppn = $kppn;
+    }
+
+    public function set_nama_kppn($nama_kppn) {
+        $this->_nama_kppn = $nama_kppn;
     }
 
     public function set_tahun($tahun) {
@@ -570,6 +578,10 @@ class DataGR_IJP {
 
     public function get_kppn() {
         return $this->_kppn;
+    }
+
+    public function get_nama_kppn() {
+        return $this->_nama_kppn;
     }
 
     public function get_tahun() {

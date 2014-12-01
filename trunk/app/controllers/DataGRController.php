@@ -205,17 +205,17 @@ class DataGRController extends BaseController {
         }
 
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
+            $filter[$no++] = "a.KPPN = '" . Session::get('id_user') . "'";
             $this->view->jml_rek = $d_spm1->get_jml_rek_dep(Session::get('id_user'));
             $this->view->data = $d_spm1->get_gr_status_harian($filter);
         }
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "KPPN = '" . $_POST['kdkppn'] . "'";
+                $filter[$no++] = "a.KPPN = '" . $_POST['kdkppn'] . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
             } else {
-                $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
+                $filter[$no++] = "a.KPPN = '" . Session::get('id_user') . "'";
             }
             $this->view->jml_rek = $d_spm1->get_jml_rek_dep($_POST['kdkppn']);
             $this->view->data = $d_spm1->get_gr_status_harian($filter);
@@ -241,12 +241,12 @@ class DataGRController extends BaseController {
         if (isset($_POST['submit_file'])) {
             if ($_POST['bulan'] != '') {
                 if ($_POST['bulan'] != 'SEMUA_BULAN') {
-                    $filter[$no++] = "BULAN = '" . $_POST['bulan'] . "'";
+                    $filter[$no++] = "a.BULAN = '" . $_POST['bulan'] . "'";
                 }
                 $this->view->d_bulan = $_POST['bulan'];
             }
         } else {
-            $filter[$no++] = "BULAN = '" . date('m', time()) . "'";
+            $filter[$no++] = "a.BULAN = '" . date('m', time()) . "'";
             //$filter[$no++] = "BULAN = '11'";
             $this->view->d_bulan = date('m', time());
         }
