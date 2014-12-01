@@ -246,8 +246,8 @@ class DataGRController extends BaseController {
                 $this->view->d_bulan = $_POST['bulan'];
             }
         } else {
-            //$filter[$no++] = "BULAN = '" . date('m', time()) . "'";
-            $filter[$no++] = "BULAN = '11'";
+            $filter[$no++] = "BULAN = '" . date('m', time()) . "'";
+            //$filter[$no++] = "BULAN = '11'";
             $this->view->d_bulan = date('m', time());
         }
         
