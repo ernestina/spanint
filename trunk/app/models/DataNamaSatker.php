@@ -82,7 +82,7 @@ class DataNamaSatker {
         }
 
         $sql .= " ORDER BY kppn_code,rev desc";
-        //var_dump ($sql);
+        var_dump ($sql);
 
         $result = $this->db->select($sql);
         $data = array();

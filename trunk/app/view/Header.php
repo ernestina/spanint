@@ -124,7 +124,8 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul Penerimaan</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP per KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataGR/grStatusHarianBulan">Monitoring Status LHP per Bulan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring Imbalan Jasa Perbankan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring Perhitungan Fihak Ketiga</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker Penerimaan</a></li>
@@ -583,6 +584,14 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataDroping/monitoringDroping">Penyaluran dan Droping Dana SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul Penerimaan</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataGR/grStatusHarianBulan">Monitoring Status LHP per Bulan</a></li>
                                 </ul>
                             </div>
                         </li>

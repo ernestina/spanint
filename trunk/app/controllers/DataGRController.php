@@ -228,6 +228,40 @@ class DataGRController extends BaseController {
         $this->view->render('kppn/GRStatusHarian');
         $d_log->tambah_log("Sukses");
     }
+    
+    public function grStatusHarianBulan() {
+        $d_spm1 = new DataGR_IJP($this->registry);
+        $filter = array();
+        $no = 0;
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if (isset($_POST['submit_file'])) {
+            if ($_POST['bulan'] != '') {
+                if ($_POST['bulan'] != 'SEMUA_BULAN') {
+                    $filter[$no++] = "BULAN = '" . $_POST['bulan'] . "'";
+                }
+                $this->view->d_bulan = $_POST['bulan'];
+            }
+        } else {
+            //$filter[$no++] = "BULAN = '" . date('m', time()) . "'";
+            $filter[$no++] = "BULAN = '11'";
+            $this->view->d_bulan = date('m', time());
+        }
+        
+        
+        //$this->view->jml_rek = $d_spm1->get_jml_rek_dep($_POST['kdkppn']);
+        $this->view->data = $d_spm1->get_gr_status_harian($filter);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table());
+
+        $this->view->render('kppn/GRStatusHarianBulan');
+        $d_log->tambah_log("Sukses");
+    }
 
     public function detailLhpRekap($tgl = null, $kppn = null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
