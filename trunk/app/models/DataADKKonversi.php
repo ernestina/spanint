@@ -43,7 +43,7 @@ class DataADKKonversi {
     public function get_adk_konversi($filter, $kppn) {		
         Session::get('id_user');				
         $sql = "SELECT SPAN_PMRT.INVOICE_NUM, INVOICE_AMOUNT, INVOICE_DATE, PMRT_FILE_NAME,  STATUS_UPLOAD, ZIP_FILE_NAME,
-				SUBSTR (ZIP_FILE_NAME,8,8) UPLOAD_DATE, KD_SATKER, TO_CHAR(SYSDATE,'YYYYMMDD') - SUBSTR (ZIP_FILE_NAME,8,8) DURASI, KDKPPN, URAIAN
+				SUBSTR (ZIP_FILE_NAME,8,8) UPLOAD_DATE, KD_SATKER, SPAN_PMRT.DURASI, KDKPPN, URAIAN
 				FROM "
                 . $this->_table . "  , "
 				. $this->_table1 . " , 
