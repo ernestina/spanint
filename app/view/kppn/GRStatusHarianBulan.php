@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Monitoring Status LHP</h2>
+                <h2>Monitoring Status LHP per Bulan</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -625,7 +625,7 @@
                             }
                             echo "<tr class='ratakanan'>	";
                             echo "<td class='align-center'>" . $no++ . "</td>";
-                            echo "<td style='text-align: left' >" . $value->get_kppn() . "</td>";
+                            echo "<td style='text-align: left' >" . $value->get_nama_kppn()." (".$value->get_kppn() . ")</td>";
                             echo "<td bgcolor='#" . $warna01 . "'><a href=" . URL . "dataGR/detailLhpRekap/" . $value->get_tahun() . "" . $value->get_bulan() . "01/" . $value->get_kppn() . "  style='text-decoration:none'><center>" . $value->get_r01() . "</center></a></td>";
                             echo "<td bgcolor='#" . $warna02 . "'><a href=" . URL . "dataGR/detailLhpRekap/" . $value->get_tahun() . "" . $value->get_bulan() . "02/" . $value->get_kppn() . "  style='text-decoration:none'><center>" . $value->get_r02() . "</center></a></td>";
                             echo "<td bgcolor='#" . $warna03 . "'><a href=" . URL . "dataGR/detailLhpRekap/" . $value->get_tahun() . "" . $value->get_bulan() . "03/" . $value->get_kppn() . "  style='text-decoration:none'><center>" . $value->get_r03() . "</center></a></td>";
