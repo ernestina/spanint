@@ -4,7 +4,11 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
+                <?php if (Session::get('role') == KPPN){?>
+                <h2>Monitoring Status LHP</h2>
+                <?php } else  {?>
                 <h2>Monitoring Status LHP per KPPN</h2>
+                <?php } ?>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
