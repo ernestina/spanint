@@ -46,6 +46,13 @@ $akses['DataDropingPKN'] = array(
     'detailDroping',
     'detailDroping_PDF',
     '__destruct'
+);/*
+ * akses modul DataGR
+ */
+$akses['DataGRPKN'] = array(
+    '__construct',
+    'grStatusHarianBulan',
+    '__destruct'
 );
 
 /*

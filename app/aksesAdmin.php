@@ -100,6 +100,7 @@ $akses['DataGRAdmin'] = array(
     'GR_IJP',
     'GR_STATUS_LHP',
     'grStatusHarian',
+    'grStatusHarianBulan',
     'detailLhpRekap',
     'detailPenerimaan',
     'detailCoAPenerimaan',
