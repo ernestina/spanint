@@ -45,12 +45,12 @@
 
 <!-- Tabel -->
 <div id="table-container" class="wrapper">
-    <table class="table table-bordered table-filled">
+    <table class="table table-bordered table-filled" style="font-size: 70%";>
         <!--baris pertama-->
             <thead>
                 <tr>
                     <th rowspan=2 class="align-center" class="align-center" width="10px">No.</th>
-                    <th rowspan=2 width="70px">KPPN</th>
+                    <th rowspan=2 width="50px">KPPN</th>
                     <th colspan=31 class="align-center">Tanggal LHP</th>
                 </tr>
                 <tr>
@@ -739,12 +739,16 @@
     </div>
 
 </div>
-<div class="main-window-segment vertical-padded dark-panel">
+<!-- Keterangan -->
+<div class="main-window-segment vertical-padded">
     <div class="container-fluid">
         
         <div class="row">
             
-            <div class="col-md-12" style='font-size: 90%'><b>Keterangan: </b>Klik pada kolom warna untuk melihat detail transaksi. Angka didalam kotak adalah jumlah LHP. Jumlah Rekening Persepsi yang terdaftar sebanyak <?php echo $this->jml_rek; ?> Rekening.
+            <div class="col-lg-12 col-md-6 col-sm-12" style="text-align: right;">
+                
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter1"><span class="glyphicon glyphicon-book"></span>&nbsp; Keterangan</button>     
+                
             </div>
             
         </div>
@@ -752,23 +756,23 @@
     </div>
 </div>
 
-<div class="main-window-segment vertical-padded dark-panel">
-    <div class="container-fluid">
+<div class="modal fade" id="modal-app-filter1" tabindex="-1" role="dialog" aria-labelledby="app-filter-label1" aria-hidden="true">
         
-        <div class="row">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label1"><span class="glyphicon glyphicon-book"></span>&nbsp; Keterangan</h4>
+
+            </div>
             
-            <div class="col-md-12">
-                <table class="table table-bordered" style='font-size: 70%'>
+                <div class="modal-body">
+                    
+                    <table class="table table-bordered" style="font-size: 90%;">
                     <tr>
-                        <th width="10px" >Warna</th>
-                        <th width="100px" >Keterangan</th>
-                        <th width="100px" >Tindakan</th>
-                        <th width="10px" >Warna</th>
-                        <th width="100px" >Keterangan</th>
-                        <th width="100px" >Tindakan</th>
-                        <th width="10px" >Warna</th>
-                        <th width="100px" >Keterangan</th>
-                        <th width="100px" >Tindakan</th>
                         <th width="10px" >Warna</th>
                         <th width="100px" >Keterangan</th>
                         <th width="100px" >Tindakan</th>
@@ -777,38 +781,57 @@
                         <td bgcolor='#F5F5F5'></td>
                         <td>Data belum masuk</td>
                         <td>Konfirm Bank, upload</td>
+                    </tr>
+                    <tr>
                         <td bgcolor='#FFBF00'></td>
                         <td>Data belum diinterface</td>
                         <td>Lakukan interface</td>
-                        <td bgcolor='#B2BEB5'></td>
-                        <td>Data belum pengecekan</td>
-                        <td>Lakukan pengecekan</td>
+                    </tr>
+                    <tr>
+                        <td bgcolor='#A4C639'></td>
+                        <td>Semua data berstatus "Completed"</td>
+                        <td>Tidak ada</td>
+                    </tr>
+                    <tr>
                         <td bgcolor='#C19A6B'></td>
                         <td>Hari Libur</td>
                         <td>Tidak ada</td>
                     </tr>
+                    <tr> 
+                        <td bgcolor='#B2BEB5'></td>
+                        <td>Data belum pengecekan</td>
+                        <td>Lakukan pengecekan</td>
+                    </tr>
                     <tr>
-                        <td bgcolor='#A4C639'></td>
-                        <td>Semua data Completed</td>
-                        <td>Tidak ada</td>
                         <td bgcolor='#FF2800'></td>
                         <td>Data error</td>
-                        <td>upload ulang ADK</td>
+                        <td>Upload ulang ADK</td>
+                    </tr>
+                    <tr>
                         <td bgcolor='#99666CC'></td>
                         <td>Data belum valid</td>
                         <td>Lakukan pengecekan</td>
+                    </tr>
+                    <tr>
                         <td bgcolor='#000000'></td>
-                        <td>Tidak Terdefenisi</td>
+                        <td>Tidak terdefenisi</td>
                         <td>Koordinasi DTP</td> 
                     </tr>
 
-            </table>
+                    </table>
+                    
+                </div>
+
+                <div class="modal-footer">
+                     <button type="button" class="btn btn-default" style="width: 100%" data-dismiss="modal">Tutup</button>
+                </div>
+
             
-            </div>
-            
+
         </div>
-        
+
     </div>
+
 </div>
 
 <script type="text/javascript" charset="utf-8">

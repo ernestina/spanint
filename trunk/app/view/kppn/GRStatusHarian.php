@@ -52,7 +52,7 @@
 
 <!-- Tabel -->
 <div id="table-container" class="wrapper">
-    <table class="table table-bordered table-filled">
+    <table class="table table-bordered table-filled" style="font-size: 70%">
         <!--baris pertama-->
             <thead>
                 <tr>
@@ -61,37 +61,37 @@
                     <th colspan=31 class="align-center">Tanggal LHP</th>
                 </tr>
                 <tr>
-                    <th width="30px">1</th>
-                    <th width="30px">2</th>
-                    <th width="30px">3</th>
-                    <th width="30px">4</th>
-                    <th width="30px">5</th>
-                    <th width="30px">6</th>
-                    <th width="30px">7</th>
-                    <th width="30px">8</th>
-                    <th width="30px">9</th>
-                    <th width="30px">10</th>
-                    <th width="30px">11</th>
-                    <th width="30px">12</th>
-                    <th width="30px">13</th>
-                    <th width="30px">14</th>
-                    <th width="30px">15</th>
-                    <th width="30px">16</th>
-                    <th width="30px">17</th>
-                    <th width="30px">18</th>
-                    <th width="30px">19</th>
-                    <th width="30px">20</th>
-                    <th width="30px">21</th>
-                    <th width="30px">22</th>
-                    <th width="30px">23</th>
-                    <th width="30px">24</th>
-                    <th width="30px">25</th>
-                    <th width="30px">26</th>
-                    <th width="30px">27</th>
-                    <th width="30px">28</th>
-                    <th width="30px">29</th>
-                    <th width="30px">30</th>
-                    <th width="30px">31</th>
+                    <th width="20px">1</th>
+                    <th width="20px">2</th>
+                    <th width="20px">3</th>
+                    <th width="20px">4</th>
+                    <th width="20px">5</th>
+                    <th width="20px">6</th>
+                    <th width="20px">7</th>
+                    <th width="20px">8</th>
+                    <th width="20px">9</th>
+                    <th width="20px">10</th>
+                    <th width="20px">11</th>
+                    <th width="20px">12</th>
+                    <th width="20px">13</th>
+                    <th width="20px">14</th>
+                    <th width="20px">15</th>
+                    <th width="20px">16</th>
+                    <th width="20px">17</th>
+                    <th width="20px">18</th>
+                    <th width="20px">19</th>
+                    <th width="20px">20</th>
+                    <th width="20px">21</th>
+                    <th width="20px">22</th>
+                    <th width="20px">23</th>
+                    <th width="20px">24</th>
+                    <th width="20px">25</th>
+                    <th width="20px">26</th>
+                    <th width="20px">27</th>
+                    <th width="20px">28</th>
+                    <th width="20px">29</th>
+                    <th width="20px">30</th>
+                    <th width="20px">31</th>
                 </tr>
 
             </thead>
@@ -724,6 +724,8 @@
     </div>
 
 </div>
+
+<!-- Keterangan -->
 <div class="main-window-segment vertical-padded">
     <div class="container-fluid">
         
@@ -731,7 +733,7 @@
             
             <div class="col-lg-12 col-md-6 col-sm-12" style="text-align: right;">
                 
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter1"><span class="glyphicon glyphicon-map-marker"></span> Keterangan</button>     
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter1"><span class="glyphicon glyphicon-book"></span>&nbsp; Keterangan</button>     
                 
             </div>
             
@@ -740,7 +742,6 @@
     </div>
 </div>
 
-<!-- Filter -->
 <div class="modal fade" id="modal-app-filter1" tabindex="-1" role="dialog" aria-labelledby="app-filter-label1" aria-hidden="true">
         
     <div class="modal-dialog">
@@ -750,7 +751,7 @@
             <div class="modal-header">
 
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
-                <h4 class="modal-title" id="app-filter-label1"><span class="glyphicon glyphicon-filter"></span> Keterangan</h4>
+                <h4 class="modal-title" id="app-filter-label1"><span class="glyphicon glyphicon-book"></span>&nbsp; Keterangan</h4>
 
             </div>
             
@@ -772,20 +773,20 @@
                         <td>Data belum diinterface</td>
                         <td>Lakukan interface</td>
                     </tr>
-                    <tr> 
-                        <td bgcolor='#B2BEB5'></td>
-                        <td>Data belum pengecekan</td>
-                        <td>Lakukan pengecekan</td>
+                    <tr>
+                        <td bgcolor='#A4C639'></td>
+                        <td>Semua data berstatus "Completed"</td>
+                        <td>Tidak ada</td>
                     </tr>
                     <tr>
                         <td bgcolor='#C19A6B'></td>
                         <td>Hari Libur</td>
                         <td>Tidak ada</td>
                     </tr>
-                    <tr>
-                        <td bgcolor='#A4C639'></td>
-                        <td>Semua data Completed</td>
-                        <td>Tidak ada</td>
+                    <tr> 
+                        <td bgcolor='#B2BEB5'></td>
+                        <td>Data belum pengecekan</td>
+                        <td>Lakukan pengecekan</td>
                     </tr>
                     <tr>
                         <td bgcolor='#FF2800'></td>
@@ -799,7 +800,7 @@
                     </tr>
                     <tr>
                         <td bgcolor='#000000'></td>
-                        <td>Tidak Terdefenisi</td>
+                        <td>Tidak terdefenisi</td>
                         <td>Koordinasi DTP</td> 
                     </tr>
 
@@ -818,64 +819,6 @@
     </div>
 
 </div>
-<!--div class="main-window-segment vertical-padded dark-panel">
-    <div class="container-fluid">
-        
-        <div class="row">
-            
-            <div class="col-md-12">
-                <table class="table table-bordered" style='font-size: 70%'>
-                    <tr>
-                        <th width="10px" >Warna</th>
-                        <th width="100px" >Keterangan</th>
-                        <th width="100px" >Tindakan</th>
-                        <th width="10px" >Warna</th>
-                        <th width="100px" >Keterangan</th>
-                        <th width="100px" >Tindakan</th>
-                        <th width="10px" >Warna</th>
-                        <th width="100px" >Keterangan</th>
-                        <th width="100px" >Tindakan</th>
-                        <th width="10px" >Warna</th>
-                        <th width="100px" >Keterangan</th>
-                        <th width="100px" >Tindakan</th>
-                    </tr>
-                    <tr>
-                        <td bgcolor='#F5F5F5'></td>
-                        <td>Data belum masuk</td>
-                        <td>Konfirm Bank, upload</td>
-                        <td bgcolor='#FFBF00'></td>
-                        <td>Data belum diinterface</td>
-                        <td>Lakukan interface</td>
-                        <td bgcolor='#B2BEB5'></td>
-                        <td>Data belum pengecekan</td>
-                        <td>Lakukan pengecekan</td>
-                        <td bgcolor='#C19A6B'></td>
-                        <td>Hari Libur</td>
-                        <td>Tidak ada</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor='#A4C639'></td>
-                        <td>Semua data Completed</td>
-                        <td>Tidak ada</td>
-                        <td bgcolor='#FF2800'></td>
-                        <td>Data error</td>
-                        <td>upload ulang ADK</td>
-                        <td bgcolor='#99666CC'></td>
-                        <td>Data belum valid</td>
-                        <td>Lakukan pengecekan</td>
-                        <td bgcolor='#000000'></td>
-                        <td>Tidak Terdefenisi</td>
-                        <td>Koordinasi DTP</td> 
-                    </tr>
-
-            </table>
-            
-            </div>
-            
-        </div>
-        
-    </div>
-</div-->
 
 <script type="text/javascript" charset="utf-8">
     $(function() {
