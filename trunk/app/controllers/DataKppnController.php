@@ -56,6 +56,10 @@ class DataKppnController extends BaseController {
                 $filter[$no++] = "CHECK_NUMBER = '" . $_POST['nosp2d'] . "'";
                 $this->view->d_nosp2d = $_POST['nosp2d'];
             }
+            if ($_POST['vendor_name'] != '') {
+                $filter[$no++] = "UPPER(VENDOR_NAME) = '" . strtoupper($_POST['vendor_name']) . "'";
+                $this->view->d_vendor_name = $_POST['vendor_name'];
+            }
             if ($_POST['barsp2d'] != '') {
                 $filter[$no++] = "CHECK_NUMBER_LINE_NUM = '" . $_POST['barsp2d'] . "'";
                 $this->view->d_barsp2d = $_POST['barsp2d'];
