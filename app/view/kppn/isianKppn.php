@@ -472,6 +472,13 @@
                     if (isset($this->d_invoice)) {
                         echo $this->d_invoice;
                     }
+                    ?>"><br/>
+                    <div id="wvendor_name" class='alert alert-danger' style='display:none;'></div>
+                    <label class="isian">Nama Penerima: </label>
+                    <input class="form-control" type="text" name="vendor_name" id="vendor_name" value="<?php
+                    if (isset($this->d_vendor_name)) {
+                        echo $this->d_vendor_name;
+                    }
                     ?>">
 
 
@@ -632,6 +639,12 @@
             }
         });
 
+        $('#vendor_name').keyup(function() {
+            if (document.getElementById('vendor_name').value != '') {
+                $('#wvendor_name').fadeOut(200);
+            }
+        });
+
         $('#bank').change(function() {
             if (document.getElementById('bank').value != '') {
                 $('#wbank').fadeOut(200);
@@ -673,6 +686,7 @@
         var v_barsp2d = document.getElementById('barsp2d').value;
         var v_kdsatker = document.getElementById('kdsatker').value;
         var v_invoice = document.getElementById('invoice').value;
+        var v_vendor_name = document.getElementById('vendor_name').value;
         var v_bank = document.getElementById('bank').value;
         var v_status = document.getElementById('status').value;
         var v_bayar = document.getElementById('bayar').value;
@@ -680,20 +694,22 @@
         var v_tglakhir = document.getElementById('tgl_akhir').value;
 
         var jml = 0;
-        if (v_nosp2d == '' && v_barsp2d == '' && v_kdsatker == '' && v_invoice == '' && v_bank == '' && v_status == '' && v_bayar == '' && (v_tglawal == '' || v_tglakhir == '')) {
+        if (v_nosp2d == '' && v_barsp2d == '' && v_kdsatker == '' && v_invoice == '' && v_vendor_name == '' && v_bank == '' && v_status == '' && v_bayar == '' && (v_tglawal == '' || v_tglakhir == '')) {
             $('#wsp2d').html('Harap isi salah satu parameter');
             $('#wsp2d').fadeIn();
             jml++;
         }
 
         if (v_tglawal == '' || v_tglakhir == '') {
-            if (v_nosp2d == '' && v_barsp2d == '' && v_invoice == '') {
+            if (v_nosp2d == '' && v_barsp2d == '' && v_invoice == '' && v_vendor_name == '') {
                 $('#wsp2d').html('Harap isi salah satu parameter');
                 $('#wsp2d').fadeIn();
                 $('#wbarsp2d').html('Harap isi salah satu parameter');
                 $('#wbarsp2d').fadeIn();
                 $('#winvoice').html('Harap isi salah satu parameter');
                 $('#winvoice').fadeIn();
+                $('#wvendor_name').html('Harap isi salah satu parameter');
+                $('#wvendor_name').fadeIn();
                 jml++;
             }
         }
