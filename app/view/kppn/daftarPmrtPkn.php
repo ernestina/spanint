@@ -58,48 +58,48 @@
 <div id="table-container" class="wrapper">
     <table class="footable">
         <!--baris pertama-->
-        <thead>
+        <thead class="align-center">
             <tr>
-                <th rowspan=3 class="align-center">No.</th>
-                <th rowspan=3 class="align-center">Jenis Belanja</th>
-                <th rowspan=2 colspan=2 class="align-center">S.D tgl 16 Desember 2014</th>
-                <th colspan=6 class="align-center">Tgl 17 Desember 2014</th>
-                <th colspan=6 class="align-center">Tgl 18 Desember 2014</th>
-                <th colspan=6 class="align-center">Dan seterusnya s.d 30 Desember 2014</th>
+                <th rowspan=3>No.</th>
+                <th rowspan=3>Jenis Belanja</th>
+                <th rowspan=2 colspan=2>S.D tgl 16 Desember 2014</th>
+                <th colspan=6>Tgl 17 Desember 2014</th>
+                <th colspan=6>Tgl 18 Desember 2014</th>
+                <th colspan=6>Dan seterusnya s.d 30 Desember 2014</th>
                 
             </tr>
             <tr>
-                <th colspan=2 class="align-center">Diterima</th>
-                <th colspan=2 class="align-center">SP2D Terbit</th>
-                <th colspan=2  class="align-center">Dalam Proses</th>
-                <th colspan=2 class="align-center">Diterima</th>
-                <th colspan=2 class="align-center">SP2D Terbit</th>
-                <th colspan=2 class="align-center">Dalam Proses</th>
-                <th colspan=2 class="align-center">Diterima</th>
-                <th colspan=2 class="align-center">SP2D Terbit</th>
-                <th colspan=2 class="align-center">Dalam Proses</th>
+                <th colspan=2>Diterima</th>
+                <th colspan=2>SP2D Terbit</th>
+                <th colspan=2>Dalam Proses</th>
+                <th colspan=2>Diterima</th>
+                <th colspan=2>SP2D Terbit</th>
+                <th colspan=2>Dalam Proses</th>
+                <th colspan=2>Diterima</th>
+                <th colspan=2>SP2D Terbit</th>
+                <th colspan=2>Dalam Proses</th>
             </tr>
             <tr>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
-                <th class="align-center">Jml SPM</th>
-                <th class="align-center">Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
+                <th>Jml SPM</th>
+                <th>Jml Netto (Rp.)</th>
             </tr>
         </thead>
         <tbody class='ratakanan'>
@@ -145,30 +145,32 @@ if (isset($this->data)) {
     echo '<td colspan=12 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
 }
 ?>
-            </tbody><tfoot>
-            <tr>
-				<td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b>GRAND TOTAL<b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
-                <td class='ratatengah'><b><b></td>
+            <!--/tbody><tfoot-->
+            <tr class="ratakanan">
+				<td>&nbsp;</td>
+                <td ><b>GRAND TOTAL</b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
+                <td ><b></b></td>
             </tr>
-        </tfoot>
+        </tbody>
     </table>
 </div>
 
