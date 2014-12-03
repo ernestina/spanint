@@ -1735,7 +1735,6 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-//baru	
     public function detailCoAPenerimaan_PDF($kdntpn = null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
@@ -1880,6 +1879,143 @@ class PDFController extends BaseController {
         $this->view->load('kppn/detail_ntpn_ganda_PDF');
         $d_log->tambah_log("Sukses");
     }
+	
+//baru	
+    public function grStatusHarian_PDF($kdkppn = null) {
+        $d_spm1 = new DataGR_IJP($this->registry);
+        $filter = array();
+        $no = 0;
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = "a.KPPN = '" . Session::get('id_user') . "'";
+            $this->view->jml_rek = $d_spm1->get_jml_rek_dep(Session::get('id_user'));
+            $this->view->data = $d_spm1->get_gr_status_harian($filter);
+        }
+		
+		//-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+
+            if ($kdkppn != 'null') {
+                $filter[$no++] = "a.KPPN = '" . $kdkppn . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+            } else {
+                $filter[$no++] = "a.KPPN = '" . Session::get('id_user') . "'";
+            }
+            $this->view->jml_rek = $d_spm1->get_jml_rek_dep($kdkppn);
+            $this->view->data = $d_spm1->get_gr_status_harian($filter);
+        
+        
+		
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table());
+
+        $this->view->load('kppn/GRStatusHarian_PDF');
+        $d_log->tambah_log("Sukses");
+    }
+    
+    public function grStatusHarianBulan_PDF($kdbulan = null) {
+        $d_spm1 = new DataGR_IJP($this->registry);
+        $filter = array();
+        $no = 0;
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+            $kppnya='';
+            foreach ($kppn_list as $value1) {
+                $kppnya .= "'".$value1->get_kd_d_kppn()."',";
+            }
+            $filter[$no++] = " a.kppn in (".$kppnya."'0') ";
+        }
+        
+		//-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+       
+            if ($kdbulan != 'null') {
+                if ($kdbulan != 'SEMUA_BULAN') {
+                    $filter[$no++] = "a.BULAN = '" . $kdbulan . "'";
+                }
+                $this->view->d_bulan = $kdbulan;
+            }else {
+            $filter[$no++] = "a.BULAN = '" . date('m', time()) . "'";
+            $this->view->d_bulan = date('m', time());
+			}
+        
+        
+        //$this->view->jml_rek = $d_spm1->get_jml_rek_dep($_POST['kdkppn']);
+        $this->view->data = $d_spm1->get_gr_status_harian($filter);
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table());
+
+        $this->view->load('kppn/GRStatusHarianBulan_PDF');
+        $d_log->tambah_log("Sukses");
+    }
+
 
 //------------------------------------------------------
 //Function PDF untuk DataKppnController(DataKppnController.php)
