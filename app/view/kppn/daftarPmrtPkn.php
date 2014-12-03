@@ -135,13 +135,40 @@ if (isset($this->data)) {
             echo "<td>" . $value->get_jml_spm_dlm_proses_19() . "</td>";
             echo "<td>" . number_format($value->get_nilai_spm_dlm_proses_19()) . "</td>";
             echo "</tr>	";
+            
+            //$terima += $value->get_jml_terima();
+			//$limpah += $value->get_jml_limpah();
+			 
         }
     }
 } else {
     echo '<td colspan=12 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
 }
 ?>
-            </tbody>
+            </tbody><tfoot>
+            <tr>
+				<td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b>GRAND TOTAL<b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+                <td class='ratatengah'><b><b></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
