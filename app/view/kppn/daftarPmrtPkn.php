@@ -136,8 +136,26 @@ if (isset($this->data)) {
             echo "<td>" . number_format($value->get_nilai_spm_dlm_proses_19()) . "</td>";
             echo "</tr>	";
             
-            //$terima += $value->get_jml_terima();
-			//$limpah += $value->get_jml_limpah();
+            $jml_spm_dlm_proses_16 += $value->get_jml_spm_dlm_proses_16();
+			$nilai_spm_dlm_proses_16 += $value->get_nilai_spm_dlm_proses_16();
+            $jml_spm_diterima_17 += $value->get_jml_spm_diterima_17();
+			$nilai_spm_diterima_17 += $value->get_nilai_spm_diterima_17();
+            $jml_spm_diterbitkan_17 += $value->get_jml_spm_diterbitkan_17();
+			$nilai_spm_diterbitkan_17 += $value->get_nilai_spm_diterbitkan_17();
+            $jml_spm_dlm_proses_17 += $value->get_jml_spm_dlm_proses_17();
+			$nilai_spm_dlm_proses_17 += $value->get_nilai_spm_dlm_proses_17();   
+            $jml_spm_diterima_18 += $value->get_jml_spm_diterima_18();
+			$nilai_spm_diterima_18 += $value->get_nilai_spm_diterima_18();
+            $jml_spm_diterbitkan_18 += $value->get_jml_spm_diterbitkan_18();
+			$nilai_spm_diterbitkan_18 += $value->get_nilai_spm_diterbitkan_18();
+            $jml_spm_dlm_proses_18 += $value->get_jml_spm_dlm_proses_18();
+			$nilai_spm_dlm_proses_18 += $value->get_nilai_spm_dlm_proses_18();   
+            $jml_spm_diterima_19 += $value->get_jml_spm_diterima_19();
+			$nilai_spm_diterima_19 += $value->get_nilai_spm_diterima_19();
+            $jml_spm_diterbitkan_19 += $value->get_jml_spm_diterbitkan_19();
+			$nilai_spm_diterbitkan_19 += $value->get_nilai_spm_diterbitkan_19();
+            $jml_spm_dlm_proses_19 += $value->get_jml_spm_dlm_proses_19();
+			$nilai_spm_dlm_proses_19 += $value->get_nilai_spm_dlm_proses_19();
 			 
         }
     }
@@ -149,26 +167,26 @@ if (isset($this->data)) {
             <tr class="ratakanan">
 				<td>&nbsp;</td>
                 <td ><b>GRAND TOTAL</b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
-                <td ><b></b></td>
+                <td ><b><?php echo $jml_spm_dlm_proses_16 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_dlm_proses_16) ; ?></b></td>
+                <td ><b><?php echo $jml_spm_diterima_17 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_diterima_17) ; ?></b></td>
+                <td ><b><?php echo $jml_spm_diterbitkan_17 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_diterbitkan_17) ; ?></b></td>
+                <td ><b><?php echo $jml_spm_dlm_proses_17 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_dlm_proses_17) ; ?></b></td>
+                <td ><b><?php echo $jml_spm_diterima_18 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_diterima_18) ; ?></b></td>
+                <td ><b><?php echo $jml_spm_diterbitkan_18 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_diterbitkan_18) ; ?></b></td>
+                <td ><b><?php echo $jml_spm_dlm_proses_18 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_dlm_proses_18) ; ?></b></td>
+                <td ><b><?php echo $jml_spm_diterima_19 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_diterima_19) ; ?></b></td>
+                <td ><b><?php echo $jml_spm_diterbitkan_19 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_diterbitkan_19) ; ?></b></td>
+                <td ><b><?php echo $jml_spm_dlm_proses_19 ; ?></b></td>
+                <td ><b><?php echo number_format($nilai_spm_dlm_proses_19) ; ?></b></td>
             </tr>
         </tfoot>
     </table>
