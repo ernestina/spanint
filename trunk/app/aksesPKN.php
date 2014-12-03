@@ -101,6 +101,19 @@ $akses['DataPelimpahanPKN'] = array(
 );
 
 /*
+ * akses DataPMRTPKN
+ */
+$akses['DataPMRTPKN'] = array(
+    '__construct',
+    'DataSPMAkhirTahun',
+    'DataSPMAkhirTahunNihil',
+    'DataSPMAkhirTahunBUN',
+    '__destruct'
+);
+    
+    
+
+/*
  * akses modul PDF
  */
 $akses['PDFPKN'] = array(
