@@ -246,6 +246,17 @@ $akses['PanduanAdmin'] = array(
 );
 
 /*
+ * akses DataPMRTPKNADMIN
+ */
+$akses['DataPMRTPKNADMIN'] = array(
+    '__construct',
+    'DataSPMAkhirTahun',
+    'DataSPMAkhirTahunNihil',
+    'DataSPMAkhirTahunBUN',
+    '__destruct'
+);
+
+/*
  * akses Pelaporan
  */
 $akses['PelaporanAdmin'] = array(
