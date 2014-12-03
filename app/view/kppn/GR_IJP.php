@@ -26,9 +26,6 @@
 				}else{
 					 $kdkppn = 'null';
 				}
-			?>
-			<a href="<?php echo URL; ?>PDF/GR_IJP_PDF/<?php echo $kdbulan. "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-			<?php
             } 
 			
         }
@@ -46,13 +43,8 @@
 				}else{
 					 $kdkppn = 'null';
 				}
-			?>
-			<a href="<?php echo URL; ?>PDF/GR_IJP_PDF/<?php echo $kdbulan. "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-			<?php
-
             } 
         }
-
         if (Session::get('role') == KPPN) {
             
 			if( isset($this->d_bulan)){
@@ -61,14 +53,12 @@
 				}else{
 					$kdbulan ='null';
 				}
-				
-				$kdkppn = Session::get('id_user');
-				
-			?>
-			<a href="<?php echo URL; ?>PDF/GR_IJP_PDF/<?php echo $kdbulan. "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-			<?php
+				$kdkppn = Session::get('id_user');		
 		}
 	}
+	?>
+			<a href="<?php echo URL; ?>PDF/GR_IJP_PDF/<?php echo $kdbulan. "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			<?php
 //------------------------------
 ?>
                 

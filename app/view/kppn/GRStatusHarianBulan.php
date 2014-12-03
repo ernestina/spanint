@@ -9,7 +9,41 @@
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
-                
+                                <?php
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
+		if (Session::get('role') == KANWIL) {
+			if (isset($this->d_bulan)) {
+				$kdbulan = $this->d_bulan;
+			}else{
+				$kdbulan ='null';
+			}
+			
+        }
+        if (Session::get('role') == ADMIN) {
+				if (isset($this->d_bulan)) {
+					$kdbulan = $this->d_bulan;
+				}else{
+					$kdbulan ='null';
+				}
+        }
+        if (Session::get('role') == KPPN) {
+            
+			if( isset($this->d_bulan)){
+				if (isset($this->d_bulan)) {
+					$kdbulan = $this->d_bulan;
+				}else{
+					$kdbulan ='null';
+				}
+				$kdkppn = Session::get('id_user');		
+		}
+	}
+	?>
+			<a href="<?php echo URL; ?>PDF/grStatusHarianBulan_PDF/<?php echo $kdbulan; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			<?php
+//------------------------------
+?>
+
                 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
