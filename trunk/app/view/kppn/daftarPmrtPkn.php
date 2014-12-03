@@ -56,7 +56,7 @@
 
 <!-- Tabel -->
 <div id="table-container" class="wrapper">
-    <table class="footable">
+    <table class="footable" >
         <!--baris pertama-->
         <thead class="align-center">
             <tr>
@@ -145,7 +145,7 @@ if (isset($this->data)) {
     echo '<td colspan=12 align="center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
 }
 ?>
-            <!--/tbody><tfoot-->
+            </tbody><tfoot>
             <tr class="ratakanan">
 				<td>&nbsp;</td>
                 <td ><b>GRAND TOTAL</b></td>
@@ -170,7 +170,7 @@ if (isset($this->data)) {
                 <td ><b></b></td>
                 <td ><b></b></td>
             </tr>
-        </tbody>
+        </tfoot>
     </table>
 </div>
 
