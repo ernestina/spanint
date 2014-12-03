@@ -132,6 +132,7 @@ $registry->auth->add_access('panduan','pkn',$akses['PanduanPKN']);
 $registry->auth->add_access('pelaporan','pkn',$akses['PelaporanPKN']);
 $registry->auth->add_access('dataPelimpahan','pkn',$akses['DataPelimpahanPKN']);
 $registry->auth->add_access('dataGR','pkn',$akses['DataGRPKN']);
+$registry->auth->add_access('dataPMRTPKN','pkn',$akses['DataPMRTPKN']);
 
 
 //level kanwil
