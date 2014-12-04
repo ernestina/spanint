@@ -43,6 +43,8 @@ class DataPMRTPKNController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
+            } else {
+                $this->view->d_kd_kppn = 'SEMUA';
             }
             $this->view->data = $d_pmrtpkn->get_pmrt_pkn_filter($filter);
         }
@@ -74,10 +76,12 @@ class DataPMRTPKNController extends BaseController {
 
         
         if ($kppn != '') {
-            $filter[$no++] = "KDKPPN = '" . $kppn . "'";
-            $d_kppn = new DataUser($this->registry);
-            $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
-            $this->view->d_kd_kppn = $kppn;
+            if($kppn !='SEMUA'){
+                $filter[$no++] = "KDKPPN = '" . $kppn . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
+                $this->view->d_kd_kppn = $kppn;
+            }
             $this->view->data = $d_pmrtpkn->get_pmrt_pkn_xls_filter($filter); 
         }
         
@@ -111,6 +115,8 @@ class DataPMRTPKNController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
+            } else {
+                $this->view->d_kd_kppn = 'SEMUA';
             }
             $this->view->data = $d_pmrtpkn->get_pmrt_pkn_nihil_filter($filter);
         }
@@ -142,10 +148,12 @@ class DataPMRTPKNController extends BaseController {
 
         
         if ($kppn != '') {
-            $filter[$no++] = "KDKPPN = '" . $kppn . "'";
-            $d_kppn = new DataUser($this->registry);
-            $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
-            $this->view->d_kd_kppn = $kppn;
+            if($kppn !='SEMUA'){
+                $filter[$no++] = "KDKPPN = '" . $kppn . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
+                $this->view->d_kd_kppn = $kppn;
+            }
             $this->view->data = $d_pmrtpkn->get_pmrt_pkn_nihil_filter($filter);
         }
         
@@ -179,6 +187,8 @@ class DataPMRTPKNController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
+            } else {
+                $this->view->d_kd_kppn = 'SEMUA';
             }
             $this->view->data = $d_pmrtpkn->get_pmrt_pkn_bun_filter($filter);
         }
@@ -210,10 +220,12 @@ class DataPMRTPKNController extends BaseController {
 
         
         if ($kppn != '') {
-            $filter[$no++] = "KDKPPN = '" . $kppn . "'";
-            $d_kppn = new DataUser($this->registry);
-            $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
-            $this->view->d_kd_kppn = $kppn;
+            if($kppn !='SEMUA'){
+                $filter[$no++] = "KDKPPN = '" . $kppn . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
+                $this->view->d_kd_kppn = $kppn;
+            }
             $this->view->data = $d_pmrtpkn->get_pmrt_pkn_bun_filter($filter);
         }
         
