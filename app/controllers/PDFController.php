@@ -2020,7 +2020,7 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataKppnController(DataKppnController.php)
 //------------------------------------------------------
-    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null, $kdnoinvoice = null, $kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdbank = null) {
+    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null, $kdnoinvoice = null, $kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdbank = null,$kd_fxml=null,$kd_vendor_name=null ) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -2075,6 +2075,17 @@ class PDFController extends BaseController {
             $this->view->kdtgl_awal = $tglawal;
             $this->view->kdtgl_akhir = $tglakhir;
         }
+		
+		if ($kd_fxml != 'null') {
+                $fxml = $kd_fxml;
+                $filter[$no++] = "UPPER(FTP_FILE_NAME) = '" . strtoupper($fxml) . "'";
+                $this->view->d_fxml = $kd_fxml;
+            }
+			
+		if ($kd_vendor_name != 'null') {
+                $filter[$no++] = "UPPER(VENDOR_NAME) = '" . strtoupper($kd_vendor_name) . "'";
+                $this->view->d_vendor_name = $kd_vendor_name;
+            }
 
         //-------------------------
         if (Session::get('role') == SATKER) {
