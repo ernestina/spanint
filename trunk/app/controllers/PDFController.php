@@ -2020,7 +2020,7 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataKppnController(DataKppnController.php)
 //------------------------------------------------------
-    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null, $kdnoinvoice = null, $kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdbank = null,$kd_fxml=null,$kd_vendor_name=null ) {
+    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null, $kdnoinvoice = null, $kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdbank = null,$kd_vendor_name=null ) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
