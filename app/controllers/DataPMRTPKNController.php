@@ -44,10 +44,10 @@ class DataPMRTPKNController extends BaseController {
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
             }
+            $this->view->data = $d_pmrtpkn->get_pmrt_pkn_filter($filter);
         }
         
         //$filter[$no++] = " KDKPPN <> '999'  ";
-		$this->view->data = $d_pmrtpkn->get_pmrt_pkn_filter($filter);
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -78,10 +78,10 @@ class DataPMRTPKNController extends BaseController {
             $d_kppn = new DataUser($this->registry);
             $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
             $this->view->d_kd_kppn = $kppn;
+            $this->view->data = $d_pmrtpkn->get_pmrt_pkn_xls_filter($filter); 
         }
         
         //$filter[$no++] = " KDKPPN <> '999'  ";
-		$this->view->data = $d_pmrtpkn->get_pmrt_pkn_xls_filter($filter);
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -112,12 +112,10 @@ class DataPMRTPKNController extends BaseController {
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
             }
-            
-            
+            $this->view->data = $d_pmrtpkn->get_pmrt_pkn_nihil_filter($filter);
         }
         
         //$filter[$no++] = " KDKPPN <> '999'  ";
-		$this->view->data = $d_pmrtpkn->get_pmrt_pkn_nihil_filter($filter);
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -148,10 +146,10 @@ class DataPMRTPKNController extends BaseController {
             $d_kppn = new DataUser($this->registry);
             $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
             $this->view->d_kd_kppn = $kppn;
+            $this->view->data = $d_pmrtpkn->get_pmrt_pkn_nihil_filter($filter);
         }
         
         //$filter[$no++] = " KDKPPN <> '999'  ";
-		$this->view->data = $d_pmrtpkn->get_pmrt_pkn_nihil_filter($filter);
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -182,10 +180,10 @@ class DataPMRTPKNController extends BaseController {
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
             }
+            $this->view->data = $d_pmrtpkn->get_pmrt_pkn_bun_filter($filter);
         }
         
         //$filter[$no++] = " KDKPPN <> '999'  ";
-        $this->view->data = $d_pmrtpkn->get_pmrt_pkn_bun_filter($filter);
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -216,10 +214,10 @@ class DataPMRTPKNController extends BaseController {
             $d_kppn = new DataUser($this->registry);
             $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
             $this->view->d_kd_kppn = $kppn;
+            $this->view->data = $d_pmrtpkn->get_pmrt_pkn_bun_filter($filter);
         }
         
         //$filter[$no++] = " KDKPPN <> '999'  ";
-		$this->view->data = $d_pmrtpkn->get_pmrt_pkn_bun_filter($filter);
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
