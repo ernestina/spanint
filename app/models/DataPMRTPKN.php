@@ -296,6 +296,61 @@ class DataPMRTPKN {
         return $data;
     }
     
+    
+    
+    public function get_pmrt_pkn_xls_filter($filter) {
+        $sql = "SELECT 
+                AKUN, 
+                sum(JML_SPM_DLM_PROSES_16) as JML_SPM_DLM_PROSES_16, sum(NILAI_SPM_DLM_PROSES_16) as NILAI_SPM_DLM_PROSES_16,
+                sum(JML_SPM_DITERIMA_17) as JML_SPM_DITERIMA_17, sum(NILAI_SPM_DITERIMA_17) as NILAI_SPM_DITERIMA_17, 
+                sum(JML_SPM_DITERBITKAN_17) as JML_SPM_DITERBITKAN_17, sum(NILAI_SPM_DITERBITKAN_17) as NILAI_SPM_DITERBITKAN_17, 
+                sum(JML_SPM_DLM_PROSES_17) as JML_SPM_DLM_PROSES_17, sum(NILAI_SPM_DLM_PROSES_17) as NILAI_SPM_DLM_PROSES_17, 
+                sum(JML_SPM_DITERIMA_18) as JML_SPM_DITERIMA_18, sum(NILAI_SPM_DITERIMA_18) as NILAI_SPM_DITERIMA_18, 
+                sum(JML_SPM_DITERBITKAN_18) as JML_SPM_DITERBITKAN_18, sum(NILAI_SPM_DITERBITKAN_18) as NILAI_SPM_DITERBITKAN_18, 
+                sum(JML_SPM_DLM_PROSES_18) as JML_SPM_DLM_PROSES_18, sum(NILAI_SPM_DLM_PROSES_18) as NILAI_SPM_DLM_PROSES_18, 
+                sum(JML_SPM_DITERIMA_19) as JML_SPM_DITERIMA_19, sum(NILAI_SPM_DITERIMA_19) as NILAI_SPM_DITERIMA_19, 
+                sum(JML_SPM_DITERBITKAN_19) as JML_SPM_DITERBITKAN_19, sum(NILAI_SPM_DITERBITKAN_19) as NILAI_SPM_DITERBITKAN_19, 
+                sum(JML_SPM_DLM_PROSES_19) as JML_SPM_DLM_PROSES_19, sum(NILAI_SPM_DLM_PROSES_19) as NILAI_SPM_DLM_PROSES_19
+                FROM ".$this->_table3." WHERE 1 = 1 ";
+        
+        $no = 0;
+        //var_dump($filter);
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " GROUP BY AKUN ORDER BY AKUN ";
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_akun($val['AKUN']);
+            $d_data->set_jml_spm_dlm_proses_16($val['JML_SPM_DLM_PROSES_16']);
+            $d_data->set_nilai_spm_dlm_proses_16($val['NILAI_SPM_DLM_PROSES_16']);
+            $d_data->set_jml_spm_diterima_17($val['JML_SPM_DITERIMA_17']);
+            $d_data->set_nilai_spm_diterima_17($val['NILAI_SPM_DITERIMA_17']);
+            $d_data->set_jml_spm_diterbitkan_17($val['JML_SPM_DITERBITKAN_17']);
+            $d_data->set_nilai_spm_diterbitkan_17($val['NILAI_SPM_DITERBITKAN_17']);
+            $d_data->set_jml_spm_dlm_proses_17($val['JML_SPM_DLM_PROSES_17']);
+            $d_data->set_nilai_spm_dlm_proses_17($val['NILAI_SPM_DLM_PROSES_17']);
+            $d_data->set_jml_spm_diterima_18($val['JML_SPM_DITERIMA_18']);
+            $d_data->set_nilai_spm_diterima_18($val['NILAI_SPM_DITERIMA_18']);
+            $d_data->set_jml_spm_diterbitkan_18($val['JML_SPM_DITERBITKAN_18']);
+            $d_data->set_nilai_spm_diterbitkan_18($val['NILAI_SPM_DITERBITKAN_18']);
+            $d_data->set_jml_spm_dlm_proses_18($val['JML_SPM_DLM_PROSES_18']);
+            $d_data->set_nilai_spm_dlm_proses_18($val['NILAI_SPM_DLM_PROSES_18']);
+            $d_data->set_jml_spm_diterima_19($val['JML_SPM_DITERIMA_19']);
+            $d_data->set_nilai_spm_diterima_19($val['NILAI_SPM_DITERIMA_19']);
+            $d_data->set_jml_spm_diterbitkan_19($val['JML_SPM_DITERBITKAN_19']);
+            $d_data->set_nilai_spm_diterbitkan_19($val['NILAI_SPM_DITERBITKAN_19']);
+            $d_data->set_jml_spm_dlm_proses_19($val['JML_SPM_DLM_PROSES_19']);
+            $d_data->set_nilai_spm_dlm_proses_19($val['NILAI_SPM_DLM_PROSES_19']);
+            $data[] = $d_data;
+			//var_dump($d_data);
+        }
+        return $data;
+    }
+    
     /*
      * setter
      */

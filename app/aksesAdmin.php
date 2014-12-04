@@ -253,6 +253,9 @@ $akses['DataPMRTPKNADMIN'] = array(
     'DataSPMAkhirTahun',
     'DataSPMAkhirTahunNihil',
     'DataSPMAkhirTahunBUN',
+    'DataSPMAkhirTahunXls',
+    'DataSPMAkhirTahunNihilXls',
+    'DataSPMAkhirTahunBUNXls',
     '__destruct'
 );
 
