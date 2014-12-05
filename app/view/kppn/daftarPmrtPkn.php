@@ -7,15 +7,17 @@
     <div class="container-fluid">
         <div class="row">
             
-            <div class="col-lg-10 col-md-6 col-sm-12">
+            <div class="col-lg-9 col-md-3 col-sm-12">
                 <h2><?php echo $this->judul; ?></h2>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
-                <a href="<?php echo $_SERVER['HTTP_REFERER']."Xls/csv/".$this->d_kd_kppn ; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> CSV</a>
-                <a href="<?php echo $_SERVER['HTTP_REFERER']."Xls/xls/".$this->d_kd_kppn ; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> XLS</a>
-                     
-                
+                <a href="<?php echo $_SERVER['HTTP_REFERER']."Xls/csv/".$this->d_kd_kppn ; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>  &nbsp; CSV</a>
             </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+                <a href="<?php echo $_SERVER['HTTP_REFERER']."Xls/xls/".$this->d_kd_kppn ; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-saved"></span> &nbsp; XLS</a>
+            </div>
+            
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
             
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
@@ -46,6 +48,8 @@
                             echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
                         }
                     }
+                //tampilan di bawah ini buat contoh aja, kalau udah ada datanya bisa dihapus
+                    echo "Update Data Terakhir (Waktu Server) : 05-12-2014 09:01:12 WIB";
                 ?>
             </div>
             
