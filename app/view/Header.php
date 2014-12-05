@@ -190,7 +190,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahun">Data SPM Akhir Tahun</a></li>
                                     <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunNihil">Data SPM GU Nihil Akhir Tahun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunBUN">Data SPM Satker BUN Nihil Akhir Tahun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunBUN">Data SPM Satker BUN Akhir Tahun</a></li>
 								</ul>
                             </div>
                         </li>
@@ -621,7 +621,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahun">Data SPM Akhir Tahun</a></li>
                                     <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunNihil">Data SPM GU Nihil Akhir Tahun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunBUN">Data SPM Satker BUN Nihil Akhir Tahun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunBUN">Data SPM Satker BUN Akhir Tahun</a></li>
 								</ul>
                             </div>
                         </li>

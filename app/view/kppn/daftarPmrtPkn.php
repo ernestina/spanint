@@ -59,7 +59,7 @@
 </div>
 
 <!-- Tabel -->
-<div id="table-container" class="wrapper" width= 80% style="font-size: 85%">
+<div id="table-container" class="wrapper" width= 80% style="font-size: 75%">
     <table class="footable">
         <!--baris pertama-->
         <thead class="align-center">
