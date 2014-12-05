@@ -59,8 +59,8 @@
 </div>
 
 <!-- Tabel -->
-<div id="table-container" class="wrapper">
-    <table class="footable" >
+<div id="table-container" class="wrapper" width= 80% style="font-size: 85%">
+    <table class="footable">
         <!--baris pertama-->
         <thead class="align-center">
             <tr>
