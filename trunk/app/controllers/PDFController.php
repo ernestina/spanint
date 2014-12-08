@@ -5170,7 +5170,7 @@ class PDFController extends BaseController {
         $d_kppn_list = new DataUser($this->registry);
         $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 
-            if ($kdkppn != 'SEMUA') {
+            if ($kdkppn != 'null') {
                 $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
@@ -5182,10 +5182,7 @@ class PDFController extends BaseController {
         
         
         //-------------------------
-        if (Session::get('role') == SATKER) {
-            $d_nm_kppn1 = new DataUser($this->registry);
-            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
-        } elseif (Session::get('role') == ADMIN) {
+		if (Session::get('role') == ADMIN) {
             if ($kdkppn != 'null') {
                 $d_kppn = new DataUser($this->registry);
                 $d_kppn->get_d_user_kppn($kdkppn);
@@ -5195,14 +5192,18 @@ class PDFController extends BaseController {
             } else {
                 $this->view->nm_kppn2 = 'null';
             }
-        } elseif (Session::get('role') == KANWIL) {
-            $d_kppn = new DataUser($this->registry);
-            $d_kppn->get_d_user_kppn($kdkppn);
-            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
-                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+        }elseif (Session::get('role') == PKN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
             }
         } else {
-            $this->view->nm_kppn2 = Session::get('user');
+            $this->view->nm_kppn2 = 'null';
         }
         //-------------------------
 
@@ -5230,7 +5231,7 @@ class PDFController extends BaseController {
         $d_kppn_list = new DataUser($this->registry);
         $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
 
-            if ($kdkppn != 'SEMUA') {
+            if ($kdkppn != 'null') {
                 $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
@@ -5242,10 +5243,7 @@ class PDFController extends BaseController {
         
         
         //-------------------------
-        if (Session::get('role') == SATKER) {
-            $d_nm_kppn1 = new DataUser($this->registry);
-            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
-        } elseif (Session::get('role') == ADMIN) {
+		if (Session::get('role') == ADMIN) {
             if ($kdkppn != 'null') {
                 $d_kppn = new DataUser($this->registry);
                 $d_kppn->get_d_user_kppn($kdkppn);
@@ -5255,14 +5253,18 @@ class PDFController extends BaseController {
             } else {
                 $this->view->nm_kppn2 = 'null';
             }
-        } elseif (Session::get('role') == KANWIL) {
-            $d_kppn = new DataUser($this->registry);
-            $d_kppn->get_d_user_kppn($kdkppn);
-            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
-                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+        }elseif (Session::get('role') == PKN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
             }
         } else {
-            $this->view->nm_kppn2 = Session::get('user');
+            $this->view->nm_kppn2 = 'null';
         }
         //-------------------------
 
@@ -5301,13 +5303,8 @@ class PDFController extends BaseController {
             }
             $this->view->data = $d_pmrtpkn->get_pmrt_pkn_bun_filter($filter);
         
-        //-----------------------------
-        // INI KODINGAN UNTUK APA !!!!
-        //-----------------------------
-        if (Session::get('role') == SATKER) {
-            $d_nm_kppn1 = new DataUser($this->registry);
-            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
-        } elseif (Session::get('role') == ADMIN) {
+        //-------------------------
+		if (Session::get('role') == ADMIN) {
             if ($kdkppn != 'null') {
                 $d_kppn = new DataUser($this->registry);
                 $d_kppn->get_d_user_kppn($kdkppn);
@@ -5317,14 +5314,18 @@ class PDFController extends BaseController {
             } else {
                 $this->view->nm_kppn2 = 'null';
             }
-        } elseif (Session::get('role') == KANWIL) {
-            $d_kppn = new DataUser($this->registry);
-            $d_kppn->get_d_user_kppn($kdkppn);
-            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
-                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+        }elseif (Session::get('role') == PKN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
             }
         } else {
-            $this->view->nm_kppn2 = Session::get('user');
+            $this->view->nm_kppn2 = 'null';
         }
         //-------------------------
 
