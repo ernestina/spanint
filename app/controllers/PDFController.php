@@ -5152,6 +5152,197 @@ class PDFController extends BaseController {
 		$this->view->load('blu/RealisasiBLU_PDF');
     }
 	//-------------------------------------------------------
+		//------------------------------------------------------
+    //Function PDF untuk DataPMRTPKNController(DataPMRTPKNController.php)
+	//------------------------------------------------------
+    public function DataSPMAkhirTahun_PDF($kdkppn = null,$kdjudul = null) {
+        $d_pmrtpkn = new DataPMRTPKN($this->registry);
+        $filter = array();
+        $no = 0;
+		
+        $this->view->judul =$kdjudul;
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        //narik list kppn
+        $d_kppn_list = new DataUser($this->registry);
+        $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+
+            if ($kdkppn != 'null') {
+                $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+                $this->view->d_kd_kppn = $kdkppn;
+            } else {
+                $this->view->d_kd_kppn = 'SEMUA';
+            }
+            $this->view->data = $d_pmrtpkn->get_pmrt_pkn_filter($filter);
+        
+        
+        //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
+
+        //$this->view->render('kppn/daftarPmrtPkn');
+		$this->view->load('kppn/daftarPmrtPkn_PDF');
+        $d_log->tambah_log("Sukses");
+    }
+
+    
+    public function DataSPMAkhirTahunNihil_PDF($kdkppn = null,$kdjudul = null) {
+        $d_pmrtpkn = new DataPMRTPKN($this->registry);
+        $filter = array();
+        $no = 0;
+        $this->view->judul =$kdjudul;
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        //narik list kppn
+        $d_kppn_list = new DataUser($this->registry);
+        $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+
+            if ($kdkppn != 'null') {
+                $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+                $this->view->d_kd_kppn = $kdkppn;
+            } else {
+                $this->view->d_kd_kppn = 'SEMUA';
+            }
+            $this->view->data = $d_pmrtpkn->get_pmrt_pkn_nihil_filter($filter);
+        
+        
+        //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
+
+        //$this->view->render('kppn/daftarPmrtPkn');
+		$this->view->load('kppn/daftarPmrtPkn_PDF');
+        $d_log->tambah_log("Sukses");
+    }
+    
+    
+    public function DataSPMAkhirTahunBUN_PDF($kdkppn = null,$kdjudul = null) {
+        $d_pmrtpkn = new DataPMRTPKN($this->registry);
+        $filter = array();
+        $no = 0;
+        $this->view->judul =$kdjudul;
+		
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        //narik list kppn
+        $d_kppn_list = new DataUser($this->registry);
+        $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+
+            if ($kdkppn != 'null') {
+                $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+                $this->view->d_kd_kppn = $kdkppn;
+            } else {
+                $this->view->d_kd_kppn = 'SEMUA';
+            }
+            $this->view->data = $d_pmrtpkn->get_pmrt_pkn_bun_filter($filter);
+        
+                //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
+
+
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
+
+        //$this->view->render('kppn/daftarPmrtPkn');
+        $this->view->load('kppn/daftarPmrtPkn_PDF');
+        $d_log->tambah_log("Sukses");
+    }
+    
+
+	
+	
+	
+	//------------------------------------------------------
+	
+	
 
 
     public function __destruct() {
