@@ -17,12 +17,33 @@
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
                 <a href="<?php echo $_SERVER['HTTP_REFERER']."Xls/xls/".$this->d_kd_kppn ; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-saved"></span> &nbsp; XLS</a>
             </div>
-            
+            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+ <?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+
+					if (isset($this->d_kd_kppn)) {
+						$kdkppn = $this->d_kd_kppn;
+					} else {
+						$kdkppn = Session::get('id_user');
+					}
+					if (isset($this->judul)) {
+						$kdjudul = $this->judul;
+					}
+					
+                ?>                
+                <a href="<?php echo URL; ?>PDF/DataSPMAkhirTahun_PDF/<?php echo $kdkppn . "/" . $kdjudul; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                <?php 
+			//----------------------------------------------------
+				?>       
+            </div>
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
             
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
+			
+			
         </div>
         
         <div class="row top-padded">
