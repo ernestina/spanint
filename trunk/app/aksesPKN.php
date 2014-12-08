@@ -128,6 +128,9 @@ $akses['PDFPKN'] = array(
     'monitoringRetur_PDF',
     'monitoringReturPkn_PDF',
     'monitoringSp2d_PDF',
+    'DataSPMAkhirTahun_PDF',
+    'DataSPMAkhirTahunNihil_PDF',
+    'DataSPMAkhirTahunBUN_PDF',
     '__destruct'
 );
 ?>

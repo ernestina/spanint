@@ -256,6 +256,8 @@ $akses['PDFKanwil'] = array(
     'KonversiSPM_PDF',
     'RealisasiFA_1_Minus_PDF',
     'RealisasiFA_1_Minus_51_PDF',
+    'grStatusHarian_PDF',
+    'grStatusHarianBulan_PDF',
     '__destruct'
 );
 ?>
