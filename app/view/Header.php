@@ -18,6 +18,7 @@
         <!-- Bootstrap CSS & JS -->
         <script src="<?php echo URL; ?>public/Bootstrap/js/bootstrap.min.js"></script>
         <link href="<?php echo URL; ?>public/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo URL; ?>public/css/font-awesome.css" rel="stylesheet">
 
         <!-- Bootstrap Datepicker CSS & JS -->
         <script src="<?php echo URL; ?>public/Bootstrap/plugins/bootstrap-datepicker.js"></script>
@@ -185,7 +186,7 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Laporan SPM Akhir Tahun</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;Laporan SPM Akhir Tahun</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahun">Data SPM Akhir Tahun</a></li>
@@ -616,7 +617,7 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Laporan SPM Akhir Tahun</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;Laporan SPM Akhir Tahun</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahun">Data SPM Akhir Tahun</a></li>
