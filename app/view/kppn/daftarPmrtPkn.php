@@ -128,7 +128,7 @@ if (isset($this->data)) {
             echo "<td class='ratatengah'>" . $no++ . "</td>";
             echo "<td class='ratatengah'>" . $value->get_akun() . "</td>";
             //echo "<td>" . $value->get_upload_date() . "</td>";
-            echo "<td>" . $value->get_jml_spm_dlm_proses_16() . "</td>";
+            echo "<td>" . number_format($value->get_jml_spm_dlm_proses_16() ). "</td>";
             echo "<td>" . number_format($value->get_nilai_spm_dlm_proses_16()) . "</td>";
             echo "<td>" . $value->get_jml_spm_diterima_17() . "</td>";
             echo "<td>" . number_format($value->get_nilai_spm_diterima_17()) . "</td>";
