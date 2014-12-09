@@ -98,13 +98,13 @@ class DataADKKonversi {
 	
 	public function get_jml_adk_konversi($filter) {
         Session::get('id_user');
-        $sql = "SELECT COUNT(DISTINCT PMRT_FILE_NAME) JML_PMRT, COUNT(DISTINCT INVOICE_NUM) JML_INVOICE, SUM(INVOICE_AMOUNT)  JML_NILAI_INV
+        $sql = "SELECT COUNT(DISTINCT PMRT_FILE_NAME) JML_PMRT, COUNT(DISTINCT INVOICE_NUM) JML_INVOICE, SUM(NETT_AMOUNT)  JML_NILAI_INV
 				FROM "
                 . $this->_table . "
 				WHERE 1=1 				
 				AND PMRT_FILE_NAME IS NOT NULL
 				AND STATUS_UPLOAD IS NULL
-				AND INVOICE_AMOUNT NOT IN (1,2,3,4,5)
+				AND NETT_AMOUNT NOT IN (1,2,3,4,5)
 				"
 
         ;
