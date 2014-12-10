@@ -174,6 +174,18 @@
                             </div>
                         </li>
 
+                        <!--
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;Laporan SPM Akhir Tahun</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahun">Data SPM Akhir Tahun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunNihil">Data SPM GU Nihil Akhir Tahun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunBUN">Data SPM Satker BUN Akhir Tahun</a></li>
+								</ul>
+                            </div>
+                        </li>
+                        -->
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
@@ -183,16 +195,6 @@
                                     <li><a href="<?php echo URL; ?>pelaporan/listLaporanPKN/BukuMerah">Laporan Buku Merah</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/listLaporanPKN/BukuBiru">Laporan Buku Biru</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/listLaporanSingle/SPCMR00005">Ikhtisar Kebutuhan Dana Harian</a>
-								</ul>
-                            </div>
-                        </li>
-
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;Laporan SPM Akhir Tahun</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahun">Data SPM Akhir Tahun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunNihil">Data SPM GU Nihil Akhir Tahun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunBUN">Data SPM Satker BUN Akhir Tahun</a></li>
 								</ul>
                             </div>
                         </li>
@@ -619,6 +621,7 @@
                         </li>
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;Laporan SPM Akhir Tahun</h4>
+                            <!--blom boleh
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahun">Data SPM Akhir Tahun</a></li>
@@ -627,6 +630,7 @@
 								</ul>
                             </div>
                         </li>
+                        -->
                         
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
