@@ -52,6 +52,9 @@ $akses['DataDropingPKN'] = array(
 $akses['DataGRPKN'] = array(
     '__construct',
     'grStatusHarianBulan',
+    'detailLhpRekap',
+    'detailPenerimaan',
+    'detailCoAPenerimaan',
     '__destruct'
 );
 
@@ -88,6 +91,7 @@ $akses['PelaporanPKN'] = array(
     'lihatLaporan',
     'listLaporanPKN',
     'listLaporanKPPN',
+    'listLaporanSingle',
     '__destruct'
 );
 

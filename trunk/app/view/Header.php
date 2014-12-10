@@ -182,6 +182,7 @@
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPCMR00051">Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/listLaporanPKN/BukuMerah">Laporan Buku Merah</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/listLaporanPKN/BukuBiru">Laporan Buku Biru</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/listLaporanSingle/SPCMR00005">Ikhtisar Kebutuhan Dana Harian</a>
 								</ul>
                             </div>
                         </li>
@@ -635,6 +636,7 @@
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPCMR00051">Laporan Konsolidasi Saldo Kas KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/listLaporanPKN/BukuMerah">Laporan Buku Merah</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/listLaporanPKN/BukuBiru">Laporan Buku Biru</a></li>
+                                    <li><a href="<?php echo URL; ?>pelaporan/listLaporanSingle/SPCMR00005">Ikhtisar Kebutuhan Dana Harian</a>
 								</ul>
                             </div>
                         </li>

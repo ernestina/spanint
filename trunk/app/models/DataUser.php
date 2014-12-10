@@ -223,6 +223,20 @@ class DataUser {
             $data[] = $d_user;
         }
         return $data;
+    }   
+    
+
+    public function get_d_user_kppn1($kppn) {
+        $sql = "SELECT * FROM " . $this->_table . " WHERE KD_SATKER = '" . $kppn . "'";
+        $result = $this->db->select($sql);
+        //var_dump($sql);
+        $data = '';
+        foreach ($result as $val) {
+            $d_user = new $this($this->registry);
+
+            $data = $val['NAMA_USER'];
+        }
+        return $data;
     }
 
     public function add_d_user() {

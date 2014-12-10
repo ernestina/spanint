@@ -248,7 +248,7 @@ $akses['PanduanAdmin'] = array(
 /*
  * akses DataPMRTPKNADMIN
  */
-$akses['DataPMRTPKNADMIN'] = array(
+$akses['DataPMRTPKNAdmin'] = array(
     '__construct',
     'DataSPMAkhirTahun',
     'DataSPMAkhirTahunNihil',
@@ -271,6 +271,7 @@ $akses['PelaporanAdmin'] = array(
     'lihatLaporan',
     'listLaporanPKN',
     'listLaporanKPPN',
+    'listLaporanSingle',
     '__destruct'
 );
 

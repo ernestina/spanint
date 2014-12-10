@@ -72,6 +72,36 @@ class PelaporanController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
     
+    public function listLaporanSingle($jenis_laporan=null) {
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        $d_laporan = new DataPelaporan($this->registry);
+        
+        switch ($jenis_laporan) {
+          case "SPCMR00005":
+            $this->view->data = $d_laporan -> get_laporan_ikhtisar($jenis_laporan);
+            $this->view->page_title = "Ikhtisar Kebutuhan Dana Harian"; 
+            break;
+          default:
+            //do nothing
+        }
+        
+        if (strpos(URL, 'kemenkeu') == false || strpos(URL, 'perbendaharaan') == false){
+            $this->view->fileURL = 'http://spanint.kemenkeu.go.id/span/report/';
+        } else {
+            $this->view->fileURL = $_SERVER['HTTP_REFERER'].'span/report/';
+        }  
+        
+        
+        
+        $this->view->fileURLdepan = URL."pelaporan/downloadLaporanKPPN/" ; 
+        
+        $this->view->render('pkn/listLaporanPKN');
+        $d_log->tambah_log("Sukses");
+    }
+    
     public function listLaporanKPPN($jenis_laporan=null) {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
