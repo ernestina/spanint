@@ -181,25 +181,25 @@ if (isset($this->data)) {
             <tr class="ratakanan">
 				<td>&nbsp;</td>
                 <td ><b>GRAND TOTAL</b></td>
-                <td ><b><?php echo $jml_spm_dlm_proses_16 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_dlm_proses_16) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_dlm_proses_16) ; ?></b></td>
-                <td ><b><?php echo $jml_spm_diterima_17 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_diterima_17) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_diterima_17) ; ?></b></td>
-                <td ><b><?php echo $jml_spm_diterbitkan_17 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_diterbitkan_17) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_diterbitkan_17) ; ?></b></td>
-                <td ><b><?php echo $jml_spm_dlm_proses_17 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_dlm_proses_17) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_dlm_proses_17) ; ?></b></td>
-                <td ><b><?php echo $jml_spm_diterima_18 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_diterima_18) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_diterima_18) ; ?></b></td>
-                <td ><b><?php echo $jml_spm_diterbitkan_18 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_diterbitkan_18) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_diterbitkan_18) ; ?></b></td>
-                <td ><b><?php echo $jml_spm_dlm_proses_18 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_dlm_proses_18) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_dlm_proses_18) ; ?></b></td>
-                <td ><b><?php echo $jml_spm_diterima_19 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_diterima_19) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_diterima_19) ; ?></b></td>
-                <td ><b><?php echo $jml_spm_diterbitkan_19 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_diterbitkan_19) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_diterbitkan_19) ; ?></b></td>
-                <td ><b><?php echo $jml_spm_dlm_proses_19 ; ?></b></td>
+                <td ><b><?php echo number_format($jml_spm_dlm_proses_19) ; ?></b></td>
                 <td ><b><?php echo number_format($nilai_spm_dlm_proses_19) ; ?></b></td>
             </tr>
         </tfoot>
