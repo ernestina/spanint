@@ -166,11 +166,9 @@ class DataGR_IJP {
 
     public function get_gr_status_harian($filter) {
         Session::get('id_user');
-        $sql = "SELECT a.*,b.nmkppn nama_kppn
+        $sql = "SELECT a.*
 				FROM "
                 . $this->_table . " a
-                inner join T_KPPN b
-                on a.kppn = b.kdkppn 
 				WHERE 
 				1=1"
 
@@ -186,7 +184,7 @@ class DataGR_IJP {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_kppn($val['KPPN']);
-            $d_data->set_nama_kppn($val['NAMA_KPPN']);
+            //$d_data->set_nama_kppn($val['NAMA_KPPN']);
             $d_data->set_tahun($val['TAHUN']);
             $d_data->set_bulan($val['BULAN']);
             $d_data->set_n01($val['LHP01']);

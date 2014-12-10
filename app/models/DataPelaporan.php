@@ -118,6 +118,28 @@ class DataPelaporan {
         return $data;
     }
 
+    public function get_laporan_ikhtisar($filter) {
+        $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME,ARGUMENT_TEXT
+				FROM " . $this->_table . "
+				WHERE FILE_HASH <> ' ' AND PROGRAM_SHORT_NAME= '".$filter."'";
+        $no = 0;
+        //var_dump($filter);
+        $sql .= " ORDER BY REQUEST_ID DESC";
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_request_id($val['REQUEST_ID']);
+            $d_data->set_program_short_name($val['PROGRAM_SHORT_NAME']);
+            $d_data->set_kppn(substr($val['ARGUMENT_TEXT'],-3,3));
+            $d_data->set_tgl_akhir_laporan(date("d-m-Y", strtotime(substr($val['ARGUMENT_TEXT'],0,10))));  
+            $data[] = $d_data;
+			//var_dump($d_data);
+        }
+        return $data;
+    }
+
     public function get_laporan_pkn_bm($filter) {
         $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME, TO_DATE(substr(ARGUMENT_TEXT,0,10), 'yyyy/mm/dd') TGL_AWAL_LAPORAN,TO_DATE(substr(ARGUMENT_TEXT,22,10), 'yyyy/mm/dd') TGL_AKHIR_LAPORAN
 				FROM " . $this->_table . "

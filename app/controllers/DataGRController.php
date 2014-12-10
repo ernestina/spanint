@@ -238,6 +238,10 @@ class DataGRController extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
+        
+        $d_kppn = new DataUser($this->registry);
+        $this->view->kppn_list = $d_kppn->get_kppn_kanwil();
+        
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));

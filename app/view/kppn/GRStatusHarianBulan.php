@@ -659,7 +659,17 @@
                             }
                             echo "<tr class='ratakanan'>	";
                             echo "<td class='align-center'>" . $no++ . "</td>";
-                            echo "<td style='text-align: left' >" . $value->get_nama_kppn()." (".$value->get_kppn() . ")</td>";
+                            if (isset($this->kppn_list)) {
+                                foreach ($this->kppn_list as $kppn) {
+                                    if ($value->get_kppn() == $kppn->get_kd_d_kppn()){
+                                        $nama_kppn = $kppn->get_nama_user();
+                                    }
+                                    if ($value->get_kppn() == "PNR"){
+                                        $nama_kppn = "PENERIMAAN";
+                                    }
+                                }
+                            }
+                            echo "<td style='text-align: left' >" . $nama_kppn." (".$value->get_kppn() . ")</td>";
                             echo "<td bgcolor='#" . $warna01 . "'><a href=" . URL . "dataGR/detailLhpRekap/" . $value->get_tahun() . "" . $value->get_bulan() . "01/" . $value->get_kppn() . "  style='text-decoration:none'><center>" . $value->get_r01() . "</center></a></td>";
                             echo "<td bgcolor='#" . $warna02 . "'><a href=" . URL . "dataGR/detailLhpRekap/" . $value->get_tahun() . "" . $value->get_bulan() . "02/" . $value->get_kppn() . "  style='text-decoration:none'><center>" . $value->get_r02() . "</center></a></td>";
                             echo "<td bgcolor='#" . $warna03 . "'><a href=" . URL . "dataGR/detailLhpRekap/" . $value->get_tahun() . "" . $value->get_bulan() . "03/" . $value->get_kppn() . "  style='text-decoration:none'><center>" . $value->get_r03() . "</center></a></td>";
