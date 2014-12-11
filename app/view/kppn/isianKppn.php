@@ -24,7 +24,7 @@
                                 $kdkppn = $kppn->get_kd_satker();
                             }
                         } else {
-                            $kdkppn = Session::get('id_user');
+                            $kdkppn = 'null';
                         }
 
                         if (isset($this->d_nosp2d)) {
@@ -79,18 +79,18 @@
                             $kdtgl_akhir = 'null';
                         }
 						
-						/* if (isset($this->d_fxml)) {
+						if (isset($this->d_fxml)) {
                             $kd_fxml = $this->d_fxml;
                         } else {
                             $kd_fxml = 'null';
-                        } */
+                        }
                         if (isset($this->d_vendor_name)) {
                             $kd_vendor_name = $this->d_vendor_name;
                         } else {
                             $kd_vendor_name = 'null';
                         }
                         ?>
-                        <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank . "/" . $kd_vendor_name; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank . "/" . $kd_vendor_name . "/" . $kd_fxml; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
                         <?php
                         //----------------------------------------------------		
@@ -161,18 +161,18 @@
                             $kdtgl_akhir = 'null';
                         }
 						
-/* 						if (isset($this->d_fxml)) {
+						if (isset($this->d_fxml)) {
                             $kd_fxml = $this->d_fxml;
                         } else {
                             $kd_fxml = 'null';
                         }
- */                        if (isset($this->d_vendor_name)) {
+                        if (isset($this->d_vendor_name)) {
                             $kd_vendor_name = $this->d_vendor_name;
                         } else {
                             $kd_vendor_name = 'null';
                         }
                         ?>
-                        <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank . "/" . $kd_vendor_name; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank . "/" . $kd_vendor_name . "/" . $kd_fxml; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 
 
@@ -241,19 +241,19 @@
                     } else {
                         $kdtgl_akhir = 'null';
                     }
-/* 						if (isset($this->d_fxml)) {
+					if (isset($this->d_fxml)) {
                             $kd_fxml = $this->d_fxml;
                         } else {
                             $kd_fxml = 'null';
                         }
- */                     
+                      
 					if (isset($this->d_vendor_name)) {
 						$kd_vendor_name = $this->d_vendor_name;
 					} else {
 						$kd_vendor_name = 'null';
 					}
                     ?>
-                        <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank . "/" . $kd_vendor_name; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank . "/" . $kd_vendor_name . "/" . $kd_fxml; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 
                     <?php
@@ -261,7 +261,13 @@
                 }
                 if (Session::get('role') == SATKER) {
 
-                    $kdkppn = 'null';
+					if (isset($this->d_nama_kppn)) {
+                            foreach ($this->d_nama_kppn as $kppn) {
+                                $kdkppn = $kppn->get_kd_satker();
+                            }
+                    } else {
+                            $kdkppn = 'null';
+                     }
 
                     if (isset($this->d_nosp2d)) {
                         $kdnosp2d = $this->d_nosp2d;
@@ -315,18 +321,18 @@
                         $kdtgl_akhir = 'null';
                     }
 					
-/* 					if (isset($this->d_fxml)) {
+ 					if (isset($this->d_fxml)) {
                             $kd_fxml = $this->d_fxml;
                         } else {
                             $kd_fxml = 'null';
                         }
- */					if (isset($this->d_vendor_name)) {
+					if (isset($this->d_vendor_name)) {
 						$kd_vendor_name = $this->d_vendor_name;
 					} else {
 						$kd_vendor_name = 'null';
 					}
                     ?>
-                        <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank . "/" . $kd_vendor_name; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        <a href="<?php echo URL; ?>PDF/monitoringSp2d_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdnosp2d . "/" . $kdnoinvoice . "/" . $kdbarsp2d . "/" . $kdstatus . "/" . $kdbayar . "/" . $kdbank . "/" . $kd_vendor_name . "/" . $kd_fxml; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 
                     <?php
