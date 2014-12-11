@@ -2028,7 +2028,7 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataKppnController(DataKppnController.php)
 //------------------------------------------------------
-    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null, $kdnoinvoice = null, $kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdbank = null,$kd_vendor_name=null ) {
+    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null, $kdnoinvoice = null, $kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdbank = null,$kd_vendor_name=null,$kd_fxml=null ) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -2036,6 +2036,14 @@ class PDFController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        if (Session::get('role') == ADMIN OR Session::get('role') == PKN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
 
         if ($kdkppn != 'null') {
             $filter[$no++] = "KDKPPN = '" . $kdkppn . "'";
@@ -2126,19 +2134,12 @@ class PDFController extends BaseController {
         }
         $this->view->data = $d_sppm->get_sppm_filter($filter);
 
-        if (Session::get('role') == ADMIN OR Session::get('role') == PKN) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
-        }
-        if (Session::get('role') == KANWIL) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-        }
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         $this->view->load('kppn/isianKppn_PDF');
+		
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
