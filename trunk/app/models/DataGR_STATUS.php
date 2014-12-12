@@ -61,7 +61,7 @@ class DataGR_STATUS {
 				FROM "
                 . $this->_table1 . " 
 				WHERE 
-				SUBSTR(RESP_NAME,1,3) = '" . Session::get('id_user') . "'  
+				KPPN = '" . Session::get('id_user') . "'  
 				 AND status <> 'Reversed' "
 
         ;

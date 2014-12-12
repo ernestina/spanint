@@ -9,7 +9,7 @@ class Session {
 
     public static function createSession() {
         @session_start();
-		session_regenerate_id(true);
+		//session_regenerate_id(true);
     }
 
     public static function set($name, $value) {
