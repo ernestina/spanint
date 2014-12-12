@@ -82,7 +82,7 @@ class PelaporanController extends BaseController {
         switch ($jenis_laporan) {
           case "SPCMR00005":
             $this->view->data = $d_laporan -> get_laporan_ikhtisar($jenis_laporan);
-            $this->view->page_title = "Ikhtisar Kebutuhan Dana Harian"; 
+            $this->view->page_title = "Laporan Ikhtisar Kebutuhan Dana Harian"; 
             break;
           default:
             //do nothing
