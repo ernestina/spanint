@@ -59,7 +59,7 @@
                         }
                     }
                 //tampilan di bawah ini buat contoh aja, kalau udah ada datanya bisa dihapus
-                    echo "Update Data Terakhir (Waktu Server) : 05-12-2014 09:01:12 WIB";
+                    //echo "Update Data Terakhir (Waktu Server) : 05-12-2014 09:01:12 WIB";
                 ?>
             </div>
             

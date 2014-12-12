@@ -125,7 +125,7 @@ class DataPMRTPKNController extends BaseController {
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table2());
 
         $this->view->render('kppn/daftarPmrtPkn');
         $d_log->tambah_log("Sukses");
@@ -161,7 +161,7 @@ class DataPMRTPKNController extends BaseController {
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table2());
 
         $this->view->load('pkn/daftarPmrtPknbXls');
         $d_log->tambah_log("Sukses");
@@ -197,7 +197,7 @@ class DataPMRTPKNController extends BaseController {
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table3());
 
         $this->view->render('kppn/daftarPmrtPkn');
         $d_log->tambah_log("Sukses");
@@ -233,7 +233,7 @@ class DataPMRTPKNController extends BaseController {
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table3());
 
         $this->view->load('pkn/daftarPmrtPknbXls');
         $d_log->tambah_log("Sukses");
