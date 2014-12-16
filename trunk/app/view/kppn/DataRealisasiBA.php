@@ -81,7 +81,7 @@
 </div>
 
 <!-- Tabel -->
-<div id="table-container" class="wrapper">
+<div id="table-container" class="wrapper" style="font-size: 85%">
     <table class="footable">
         <!--baris pertama-->
         <thead>
