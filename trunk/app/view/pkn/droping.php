@@ -1,4 +1,4 @@
-<!-- Ndas -->
+-<!-- Ndas -->
 <div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
     <div class="container-fluid">
         <div class="row">
@@ -124,7 +124,7 @@
     </div>
 </div>
 
-<div id="table-container" class="wrapper">
+<div id="table-container" class="wrapper" style='font-size: 85%'>
     <table class="footable">
         <!--baris pertama-->
         <thead>
