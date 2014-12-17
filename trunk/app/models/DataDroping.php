@@ -16,12 +16,17 @@ class DataDroping {
     private $_payment_amount;
     private $_trxn_status_code;
     private $_jumlah_ftp_file_name;
+    private $_jumlah_check_number;
     private $_jumlah_check_number_line_num;
     private $_jumlah_check_amount;
     private $_tgl_tarik;
     private $_payment_date;
     private $_bank_trxn_number;
     private $_penihilan;
+    private $_jml_ftp_file_name_bank;
+    private $_jml_check_number_bank;
+    private $_jml_check_number_line_num_bank;
+    private $_jml_check_amount_bank;
     private $_attribute4;
     private $_error;
     private $_valid = TRUE;
@@ -49,9 +54,14 @@ class DataDroping {
 				, BANK
 				, to_char(CREATION_DATE,'dd-mm-yyyy') CREATION_DATEX
 				, JUMLAH_FTP_FILE_NAME
+				,JUMLAH_CHECK_NUMBER
 				,JUMLAH_CHECK_NUMBER_LINE_NUM
 				, JUMLAH_CHECK_AMOUNT
 				,PAYMENT_AMOUNT, PENIHILAN
+                ,JML_FTP_FILE_NAME_BANK
+				,JML_CHECK_NUMBER_BANK
+				,JML_CHECK_NUMBER_LINE_NUM_BANK
+				, JML_CHECK_AMOUNT_BANK
 				from " . $this->_table . "
 				where jumlah_check_number_line_num is not null
 				and  id in (select max(id) id from " . $this->_table . " 
@@ -71,9 +81,14 @@ class DataDroping {
             $d_data->set_bank($val['BANK']);
             $d_data->set_creation_date(date("d-m-Y", strtotime($val['CREATION_DATEX'])));
             $d_data->set_jumlah_ftp_file_name($val['JUMLAH_FTP_FILE_NAME']);
+            $d_data->set_jumlah_check_number($val['JUMLAH_CHECK_NUMBER']);
             $d_data->set_jumlah_check_number_line_num($val['JUMLAH_CHECK_NUMBER_LINE_NUM']);
             $d_data->set_jumlah_check_amount($val['JUMLAH_CHECK_AMOUNT']);
             $d_data->set_penihilan($val['PENIHILAN']);
+            $d_data->set_jml_ftp_file_name_bank($val['JML_FTP_FILE_NAME_BANK']);
+            $d_data->set_jml_check_number_bank($val['JML_CHECK_NUMBER_BANK']);
+            $d_data->set_jml_check_number_line_num_bank($val['JML_CHECK_NUMBER_LINE_NUM_BANK']);
+            $d_data->set_jml_check_amount_bank($val['JML_CHECK_AMOUNT_BANK']);
             $d_data->set_payment_amount($val['PAYMENT_AMOUNT']);
             $data[] = $d_data;
         }
@@ -142,6 +157,10 @@ class DataDroping {
         $this->_jumlah_ftp_file_name = $jumlah_ftp_file_name;
     }
 
+    public function set_jumlah_check_number($jumlah_check_number) {
+        $this->_jumlah_check_number = $jumlah_check_number;
+    }
+
     public function set_jumlah_check_number_line_num($jumlah_check_number_line_num) {
         $this->_jumlah_check_number_line_num = $jumlah_check_number_line_num;
     }
@@ -164,6 +183,22 @@ class DataDroping {
 
     public function set_penihilan($penihilan) {
         $this->_penihilan = $penihilan;
+    }
+
+    public function set_jml_ftp_file_name_bank($jml_ftp_file_name_bank) {
+        $this->_jml_ftp_file_name_bank = $jml_ftp_file_name_bank;
+    }
+
+    public function set_jml_check_number_bank($jml_check_number_bank) {
+        $this->_jml_check_number_bank = $jml_check_number_bank;
+    }
+
+    public function set_jml_check_number_line_num_bank($jml_check_number_line_num_bank) {
+        $this->_jml_check_number_line_num_bank = $jml_check_number_line_num_bank;
+    }
+
+    public function set_jml_check_amount_bank($jml_check_amount_bank) {
+        $this->_jml_check_amount_bank = $jml_check_amount_bank;
     }
 
     public function set_attribute4($attribute4) {
@@ -206,6 +241,10 @@ class DataDroping {
         return $this->_jumlah_ftp_file_name;
     }
 
+    public function get_jumlah_check_number() {
+        return $this->_jumlah_check_number;
+    }
+
     public function get_jumlah_check_number_line_num() {
         return $this->_jumlah_check_number_line_num;
     }
@@ -232,6 +271,22 @@ class DataDroping {
 
     public function get_penihilan() {
         return $this->_penihilan;
+    }
+
+    public function get_jml_ftp_file_name_bank() {
+        return $this->_jml_ftp_file_name_bank;
+    }
+
+    public function get_jml_check_number_bank() {
+        return $this->_jml_check_number_bank;
+    }
+
+    public function get_jml_check_number_line_num_bank() {
+        return $this->_jml_check_number_line_num_bank;
+    }
+
+    public function get_jml_check_amount_bank() {
+        return $this->_jml_check_amount_bank;
     }
 
     public function get_table() {
