@@ -113,7 +113,7 @@
                     // untuk menampilkan last_update
                     if (isset($this->last_update)) {
                         foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) : " . $last_update->get_last_update() . " WIB";
+                            echo "Update Data Terakhir (Waktu Server) : <br>" . $last_update->get_last_update() . " WIB";
                         }
                     }
                 ?>
@@ -129,16 +129,23 @@
         <!--baris pertama-->
         <thead>
             <tr>
-                <th class='mid'>No.</th>
-                <th class='mid'>Tanggal</th>
-                <th >Bank</th>
+                <th class='mid' rowspan="2">No.</th>
+                <th class='mid' rowspan="2">Tanggal</th>
+                <th rowspan="2">Bank</th>
+                <th colspan="2">Diterbitkan SPAN</th>
+                <th colspan="2">Sudah Dijalankan Bank</th>
+                <th class='mid' rowspan="2">Selisih Rp.<br>SPAN - BANK</th>
+                <th class='mid' rowspan="2">Total Droping</th>
+                <th class='mid' rowspan="2">Total Penihilan</th>
+                <th class='mid' rowspan="2">Selisih Rp.<br>DROPING -<br>(SPAN+PENIHILAN)</th>
+                <th rowspan="2">Keterangan</th>
+            </tr>
                 <th >Total File</th>
-                <th width='100px' class='align-center'>Total Transaksi SP2D</th>
-                <th class="align-right">Total Nilai</th>
-                <th style="text-align:right">Total Droping</th>
-                <th style="text-align:right">Total Penihilan</th>
-                <th style="text-align:right">Selisih</th>
-                <th >Keterangan</th>
+                <th width='100px' class='align-center'>TotalNilai<br>Total SP2D<br>Total Transaksi</th>
+                <th >Total File</th>
+                <th width='100px' class='align-center'>TotalNilai<br>Total SP2D<br>Total Transaksi</th>
+            <tr>
+                
             </tr>
         </thead>
         <tbody class='ratatengah'>
@@ -154,14 +161,35 @@
                         echo "<td>" . $value->get_creation_date() . "</td>";
                         echo "<td>" . $value->get_bank() . "</td>";
                         echo "<td>" . number_format($value->get_jumlah_ftp_file_name()) . "</td>";
-                        echo "<td>" . number_format($value->get_jumlah_check_number_line_num()) . "</td>";
-                        echo "<td align = 'right'>" . number_format($value->get_jumlah_check_amount()) . "</td>";
+                        echo "<td align = 'right'>" . 
+                                      number_format($value->get_jumlah_check_amount())."<br>".
+                                      number_format($value->get_jumlah_check_number()) ."<br>".
+                                      number_format($value->get_jumlah_check_number_line_num()). "</td>";
+                        echo "<td align = 'right'>" . number_format($value->get_jml_ftp_file_name_bank()) . "</td>";
+                        echo "<td align = 'right'>" . 
+                                      number_format($value->get_jml_check_amount_bank())."<br>".
+                                      number_format($value->get_jml_check_number_bank()) ."<br>".
+                                      number_format($value->get_jml_check_number_line_num_bank()) . "</td>";
+                        $selisih_span_bank = $value->get_jumlah_check_amount()-$value->get_jml_check_amount_bank();
+                        echo "<td align = 'right'>" . number_format($selisih_span_bank) . "</td>";
                         echo "<td align = 'right'><a href=".URL."dataDroping/detailDroping/" . $value->get_id()."/".$value->get_bank()."/".$value->get_creation_date().">" . number_format($value->get_payment_amount()) . "</a></td>";
                         echo "<td align = 'right'>" . number_format($value->get_penihilan()) . "</td>";
-                        $selisih = $value->get_payment_amount()-($value->get_jumlah_check_amount()+$value->get_penihilan());
-                        echo "<td align = 'right'>" . number_format($selisih) . "</td>";
-                        if ($selisih<0) { echo "<td>Kurang Droping</td>"; } else if ($selisih > 0) {echo "<td>Lebih Droping</td>";} else { echo "<td> SAMA </td>";};
+                        $selisih_droping_span_nihil = $value->get_payment_amount()-($value->get_jumlah_check_amount()+$value->get_penihilan());
+                        echo "<td align = 'right'>" . number_format($selisih_droping_span_nihil) . "</td>";
+                        if ($selisih_droping_span_nihil<0) { echo "<td>Kurang Droping</td>"; } else if ($selisih_droping_span_nihil > 0) {echo "<td>Lebih Droping</td>";} else { echo "<td> SAMA </td>";};
                     echo "</tr>	";
+                    $jumlah_ftp_file_name += $value->get_jumlah_ftp_file_name();
+                    $jumlah_check_amount += $value->get_jumlah_check_amount();
+                    $jumlah_check_number += $value->get_jumlah_check_number();
+                    $jumlah_check_number_line_num += $value->get_jumlah_check_number_line_num();
+                    $jml_ftp_file_name_bank += $value->get_jml_ftp_file_name_bank();
+                    $jml_check_amount_bank += $value->get_jml_ftp_file_name_bank();
+                    $jml_check_number_bank += $value->get_jml_check_amount_bank();
+                    $jml_check_number_line_num_bank += $value->get_jml_check_number_line_num_bank();
+                    $total_selisih_span_bank += $selisih_span_bank;
+                    $payment_amount += $value->get_payment_amount();
+                    $penihilan += $value->get_penihilan();
+                    $total_selisih_droping_span_nihil += $selisih_droping_span_nihil;
                 }
             } 
         } else {
@@ -169,6 +197,26 @@
         }
         ?>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan='3' rowspan='3' class='ratatengah'><b>GRAND TOTAL<b></td>
+                <td class='ratakanan'><?php echo number_format($jumlah_ftp_file_name); ?></td>
+                <td class='ratakanan'><?php echo 
+                                      number_format($jumlah_check_amount)."<br>".
+                                      number_format($jumlah_check_number) ."<br>".
+                                      number_format($jumlah_check_number_line_num); ?></td>
+                <td class='ratakanan'><?php echo number_format($jml_ftp_file_name_bank); ?></td>
+                <td class='ratakanan'><?php echo 
+                                      number_format($jml_check_amount_bank)."<br>".
+                                      number_format($jml_check_number_bank) ."<br>".
+                                      number_format($jml_check_number_line_num_bank); ?></td>
+                <td class='ratakanan'><?php echo number_format($total_selisih_span_bank); ?></td>
+                <td class='ratakanan'><?php echo number_format($payment_amount); ?></td>
+                <td class='ratakanan'><?php echo number_format($penihilan); ?></td>
+                <td class='ratakanan'><?php echo number_format($total_selisih_droping_span_nihil); ?></td>
+				<td class='ratatengah'><b><b></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
