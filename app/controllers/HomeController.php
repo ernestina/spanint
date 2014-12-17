@@ -376,6 +376,10 @@ class homeController extends BaseController {
         
         $d_dashboard = new DataDashboard($this->registry);
         
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
         if ($periode == 'harian') {
             
             $this->view->mode = "Harian";
@@ -774,6 +778,9 @@ class homeController extends BaseController {
         }
         
         $this->view->render('admin/dashboard');
+        
+		
+		$d_log->tambah_log("Sukses");
         
     }
     
