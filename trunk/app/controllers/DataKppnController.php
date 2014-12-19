@@ -636,9 +636,12 @@ class DataKppnController extends BaseController {
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
+        $tahun = date("Y");
+        $this->view->d_tahun = $tahun;
+        
         if ($_POST['tahun'] != '') {
             $tahun = $_POST['tahun'];
-            $this->view->d_tahun = $_POST['tahun'];
+            $this->view->d_tahun = $tahun;
         }
 		
         if (Session::get('role') == ADMIN) {
@@ -756,7 +759,8 @@ class DataKppnController extends BaseController {
                 $filter[$no++] = "to_char(PAYMENT_DATE,'yyyy') = '" . $tahun . "'";
                 $this->view->d_tahun = $tahun;
             //}
-        }
+        } 
+        
         if (!is_null($kdkppn)) {
             $filter[$no++] = " KDKPPN = '" . $kdkppn . "'";
             $d_kppn = new DataUser($this->registry);
