@@ -3120,7 +3120,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dCompareGaji_PDF($kdkppn = null) {
+    public function sp2dCompareGaji_PDF($kdkppn = null,$kdtahun = null) {
         $d_sppm = new DataSppm($this->registry);
 
         //untuk mencatat log user
@@ -3131,7 +3131,10 @@ class PDFController extends BaseController {
             if ($kdkppn != 'null') {
                 $kppn = " AND KDKPPN = '" . $kdkppn . "'";
             }
-            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
+			if ($kdtahun != 'null') {
+                $tahun = $kdtahun;
+            }
+            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn,$tahun);
 
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
@@ -3139,16 +3142,25 @@ class PDFController extends BaseController {
         if (Session::get('role') == KANWIL) {
             if ($kdkppn != 'null') {
                 $kppn = " AND KDKPPN = '" . $kdkppn . "'";
+            }			
+			if ($kdtahun != 'null') {
+                $tahun = $kdtahun;
             }
-            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
+            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn,$tahun);
+
 
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
         }
         if (session::get('role') == KPPN) {
             $kppn = " AND KDKPPN = '" . Session::get('id_user') . "'";
-            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
-        }
+			if ($kdtahun != 'null') {
+                $tahun = $kdtahun;
+            }
+            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn,$tahun);
+
+        
+		}
 
         //-------------------------
         if (Session::get('role') == SATKER) {
