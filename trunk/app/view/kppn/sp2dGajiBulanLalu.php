@@ -43,13 +43,11 @@
                 
                 
             </div>
-            <?php if (isset($this->kppn_list)){ ?>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
-            <?php }?>
         </div>
         
         <div class="row" style="padding-top: 10px">
@@ -80,7 +78,7 @@
         
     </div>
 </div>
-
+<?php ?>
 <!-- Tabel -->
 <div id="table-container" class="wrapper">
     <table class="footable">
@@ -89,9 +87,10 @@
                 <tr>
                     <th width="5%" rowspan="2" valign: "middle">No.</th>
                     <th width="35%" rowspan="2">BANK</th>
-                    <th width="60%" colspan="12">Jumlah SP2D</th>
+                    <th width="60%" colspan="13">Jumlah SP2D</th>
                 </tr>
                 <tr>
+                    <th width="5%">Des <?php echo ($this->d_tahun-1);?></th>
                     <th width="5%">Jan</th>
                     <th width="5%">Feb</th>
                     <th width="5%">Mar</th>
@@ -110,6 +109,7 @@
                 <?php
                 $no = 1;
                 if (isset($this->data)) {
+                    $des1 = 0;
                     $jan = 0;
                     $feb = 0;
                     $mar = 0;
@@ -128,13 +128,27 @@
                         //filter bank
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_payment_date() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/all/" . $kode_kppn . ">" . $value->get_payment_date() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/all/".$this->d_tahun."/" . $kode_kppn . ">" . $value->get_payment_date() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_payment_date() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . ">" . $value->get_payment_date() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() ."/all/".$this->d_tahun. ">" . $value->get_payment_date() . "</a></td>";
+                            } else {
+                                echo "<td>0</td>";
+                            }
+                        }
+                        //filter desember1
+                        if (isset($this->d_nama_kppn)) {
+                            if ($value->get_return_desc() != '') {
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/12/".($this->d_tahun-1)."/" . $kode_kppn . ">" . $value->get_return_desc() . "</a></td>";
+                            } else {
+                                echo "<td>0</td>";
+                            }
+                        } else {
+                            if ($value->get_return_desc() != '') {
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/12/".($this->d_tahun-1)." >" . $value->get_return_desc() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -142,13 +156,13 @@
                         //filter januari
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_invoice_num() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/01/" . $kode_kppn . ">" . $value->get_invoice_num() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/01/".($this->d_tahun)."/"  . $kode_kppn . ">" . $value->get_invoice_num() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_invoice_num() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/01 >" . $value->get_invoice_num() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/01/".($this->d_tahun)." >" . $value->get_invoice_num() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -156,13 +170,13 @@
                         //filter februari
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_check_date() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/02/" . $kode_kppn . " >" . $value->get_check_date() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/02/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_check_date() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_check_date() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/02 >" . $value->get_check_date() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/02/".($this->d_tahun)." >" . $value->get_check_date() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -170,13 +184,13 @@
                         //filter maret
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_creation_date() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/03/" . $kode_kppn . " >" . $value->get_creation_date() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/03/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_creation_date() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_creation_date() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/03 >" . $value->get_creation_date() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/03/".($this->d_tahun)." >" . $value->get_creation_date() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -184,13 +198,13 @@
                         //filter april
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_check_number() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/04/" . $kode_kppn . " >" . $value->get_check_number() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/04/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_check_number() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_check_number() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/04 >" . $value->get_check_number() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/04/".($this->d_tahun)." >" . $value->get_check_number() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -198,13 +212,13 @@
                         //filter mei
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_check_number_line_num() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/05/" . $kode_kppn . " >" . $value->get_check_number_line_num() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/05/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_check_number_line_num() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_check_number_line_num() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/05 >" . $value->get_check_number_line_num() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/05/".($this->d_tahun)." >" . $value->get_check_number_line_num() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -212,13 +226,13 @@
                         //filter juni
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_check_amount() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/06/" . $kode_kppn . " >" . $value->get_check_amount() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/06/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_check_amount() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_check_amount() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/06 >" . $value->get_check_amount() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/06/".($this->d_tahun)." >" . $value->get_check_amount() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -226,13 +240,13 @@
                         //filter juli
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_bank_account_name() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/07/" . $kode_kppn . " >" . $value->get_bank_account_name() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/07/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_bank_account_name() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_bank_account_name() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/07 >" . $value->get_bank_account_name() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/07/".($this->d_tahun)." >" . $value->get_bank_account_name() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -240,13 +254,13 @@
                         //filter agustus
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_bank_name() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/08/" . $kode_kppn . " >" . $value->get_bank_name() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/08/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_bank_name() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_bank_name() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/08 >" . $value->get_bank_name() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/08/".($this->d_tahun)." >" . $value->get_bank_name() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -254,13 +268,13 @@
                         //filter september
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_vendor_ext_bank_account_num() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/09/" . $kode_kppn . " >" . $value->get_vendor_ext_bank_account_num() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/09/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_vendor_ext_bank_account_num() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_vendor_ext_bank_account_num() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/09 >" . $value->get_vendor_ext_bank_account_num() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/09/".($this->d_tahun)." >" . $value->get_vendor_ext_bank_account_num() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -268,13 +282,13 @@
                         //filter oktober
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_vendor_name() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/10/" . $kode_kppn . " >" . $value->get_vendor_name() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/10/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_vendor_name() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_vendor_name() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/10 >" . $value->get_vendor_name() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/10/".($this->d_tahun)." >" . $value->get_vendor_name() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -282,13 +296,13 @@
                         //filter nopember
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_invoice_description() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/11/" . $kode_kppn . " >" . $value->get_invoice_description() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/11/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_invoice_description() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_invoice_description() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/11 >" . $value->get_invoice_description() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/11/".($this->d_tahun)." >" . $value->get_invoice_description() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
@@ -296,18 +310,19 @@
                         //filter desember
                         if (isset($this->d_nama_kppn)) {
                             if ($value->get_ftp_file_name() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/12/" . $kode_kppn . " >" . $value->get_ftp_file_name() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/12/".($this->d_tahun)."/"  . $kode_kppn . " >" . $value->get_ftp_file_name() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         } else {
                             if ($value->get_ftp_file_name() != '') {
-                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/12 >" . $value->get_ftp_file_name() . "</a></td>";
+                                echo "<td><a href=" . URL . "dataKppn/detailSp2dGaji/" . $value->get_payment_date() . "/12/".($this->d_tahun)." >" . $value->get_ftp_file_name() . "</a></td>";
                             } else {
                                 echo "<td>0</td>";
                             }
                         }
                         echo "</tr> ";
+                        $des1+=$value->get_return_desc();
                         $jan+=$value->get_invoice_num();
                         $feb+=$value->get_check_date();
                         $mar+=$value->get_creation_date();
@@ -324,6 +339,7 @@
                     echo "<tr> ";
                     echo "<td></td>";
                     echo "<td><b>TOTAL</b></td>";
+                    echo "<td><b>" . $des1 . "</b></td>";
                     echo "<td><b>" . $jan . "</b></td>";
                     echo "<td><b>" . $feb . "</b></td>";
                     echo "<td><b>" . $mar . "</b></td>";
@@ -365,6 +381,7 @@
                 <div class="modal-body">
                     
                     <!-- Paste Isi Fom mulai nangkene -->
+                    <?php if (isset($this->kppn_list)){ ?>
                     <div id="wkdkppn" class="alert alert-danger" style="display:none"></div>
                     <label class="isian">Kode KPPN: </label>
                     <select class="form-control" type="text" name="kdkppn" id="kdkppn">
@@ -378,9 +395,16 @@
                         }
                         ?>
                     </select>
+                    <br>
+                    <?php } ?>
+                    <div id="wtahun" class="alert alert-danger" style="display:none"></div>
+                    <label class="isian">Tahun: </label>
+                    <select class="form-control" type="text" name="tahun" id="tahun">
+                        <option value='2014' <?php if($this->d_tahun == '2014') echo 'SELECTED'; ?>>2014</option>
+                        <option value='2015' <?php if($this->d_tahun == '2015') echo 'SELECTED'; ?>>2015</option>
+                    </select>
 
                 </div>
-
                 <div class="modal-footer">
                     <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
                 </div>
