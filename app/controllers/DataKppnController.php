@@ -635,6 +635,11 @@ class DataKppnController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if ($_POST['tahun'] != '') {
+            $tahun = $_POST['tahun'];
+            $this->view->d_tahun = $_POST['tahun'];
+        }
 		
         if (Session::get('role') == ADMIN) {
             if (isset($_POST['submit_file'])) {
@@ -643,7 +648,7 @@ class DataKppnController extends BaseController {
                     $d_kppn = new DataUser($this->registry);
                     $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 }
-                $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
+                $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn,$tahun);
             }
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
@@ -655,14 +660,14 @@ class DataKppnController extends BaseController {
                     $d_kppn = new DataUser($this->registry);
                     $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 }
-                $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
+                $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn,$tahun);
             }
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
         }
         if (session::get('role') == KPPN) {
             $kppn = " AND KDKPPN = '" . Session::get('id_user') . "'";
-            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn);
+            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn,$tahun);
         }
 
         // untuk mengambil data last update 
@@ -715,7 +720,7 @@ class DataKppnController extends BaseController {
 		$d_log->tambah_log("Sukses");
     }
 
-    public function detailSp2dGaji($bank = null, $bulan = null, $kdkppn = null) {
+    public function detailSp2dGaji($bank = null, $bulan = null, $tahun=null,$kdkppn = null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -745,6 +750,12 @@ class DataKppnController extends BaseController {
                 $filter[$no++] = "to_char(PAYMENT_DATE,'mm') = '" . $bulan . "'";
                 $this->view->d_bulan = $bulan;
             }
+        }
+        if (!is_null($tahun)) {
+            //if ($bulan != 'all') {
+                $filter[$no++] = "to_char(PAYMENT_DATE,'yyyy') = '" . $tahun . "'";
+                $this->view->d_tahun = $tahun;
+            //}
         }
         if (!is_null($kdkppn)) {
             $filter[$no++] = " KDKPPN = '" . $kdkppn . "'";
