@@ -19,7 +19,6 @@
 	//----------------------------------------------------
 	//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 
-if( isset($this->d_bank) || isset($this->d_bulan)){
 	if(isset($this->d_nama_kppn)){
 		foreach ($this->d_nama_kppn as $kppn) {
 			$kdkppn = $kppn->get_kd_satker();
@@ -28,7 +27,10 @@ if( isset($this->d_bank) || isset($this->d_bulan)){
 			$kdkppn = Session::get('id_user');
 		}
 
-    if (isset($this->d_bank)) {
+    if (isset($this->d_tahun)) {
+        $kdtahun = $this->d_tahun;
+    }
+	if (isset($this->d_bank)) {
         $kdbank = $this->d_bank;
     }
     if (isset($this->d_bulan)) {
@@ -38,12 +40,12 @@ if( isset($this->d_bank) || isset($this->d_bulan)){
 	}
     ?>
 
-    <a href="<?php echo URL; ?>PDF/detailSp2dGaji_PDF/<?php echo $kdbank . "/" . $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+    <a href="<?php echo URL; ?>PDF/detailSp2dGaji_PDF/<?php echo $kdbank . "/" . $kdbulan . "/" . $kdtahun . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
     <?php
     //----------------------------------------------------		
 
-}
+
     ?>
                 
             </div>

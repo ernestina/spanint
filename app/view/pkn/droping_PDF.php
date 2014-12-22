@@ -79,6 +79,8 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 4) == 'BANK') { //6
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
         }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
             $this->MultiCell(0, $h1 / 2, '');
         }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
@@ -228,10 +230,6 @@ class FPDF_AutoWrapTable extends FPDF {
 		
 		//----------
 
-/* 		$px5 = $px4+$ukuran_kolom_jenis_belanja;
-        $py5 = $py3+20;
-        $this->SetXY($px5, $py5);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Selisih Rp. (SPAN-BANK)', 1, 0, 'C', true);  */
 
 		$px6 = $px4+($ukuran_kolom_jenis_belanja);
         $py5 = $py3+20;
@@ -258,15 +256,17 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetWidths(array(30, 60,
             $ukuran_kolom_dana,$ukuran_kolom_file,
 			$ukuran_kolom_jenis_belanja,$ukuran_kolom_file,
-			$ukuran_kolom_jenis_belanja,$ukuran_kolom_file,$ukuran_kolom_jenis_belanja,			
-			$ukuran_kolom_pagu_total_sisa,$ukuran_kolom_pagu_total_sisa,
-			$ukuran_kolom_pagu_total_sisa1,$ukuran_kolom_ket));
+			$ukuran_kolom_jenis_belanja,$ukuran_kolom_file,
+			$ukuran_kolom_jenis_belanja,$ukuran_kolom_pagu_total_sisa,
+			$ukuran_kolom_pagu_total_sisa,$ukuran_kolom_pagu_total_sisa1,
+			$ukuran_kolom_ket));
         $this->SetAligns(array('C', 'C',
             'C', 'C',
             'R', 'C',
             'R', 'C',
 			'R', 'R',
-            'R', 'C'));
+            'R', 'R',
+			'C'));
         if (count($this->data) == 0) {
             $this->Row(
                     array('','N I H I L',
