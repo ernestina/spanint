@@ -27,6 +27,8 @@ class Index extends BaseController {
             header('location:' . URL . 'home');
         } elseif (Session::get('role') == BLU) {
             header('location:' . URL . 'home');
+        } elseif (Session::get('role') == BANK) {
+            header('location:' . URL . 'dataDroping/monitoringDroping');
         } else {
             header('location:' . URL . 'auth/login');
         }

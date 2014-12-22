@@ -725,6 +725,21 @@
 
                     </ul>
 
+
+                <?php elseif (Session::get('role') == BANK): ?>
+                    
+                    
+                    <!--//////////////////////////////////////// --> 
+                    <!--/////////////// Header BANK /////////// -->  
+                    <!--//////////////////////////////////////// --> 
+
+                    <ul>
+
+                        <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+                        <li class="nav"><h4><a href="<?php echo URL; ?>dataDroping/monitoringDroping"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Penyaluran dan Droping Dana SP2D</a></h4></li>
+
+                    </ul>
+
                 <?php endif; ?>
 
             </div>
