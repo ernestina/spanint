@@ -162,7 +162,7 @@
                         echo "<td>" . $no++ . "</td>";
                         echo "<td>" . $value->get_creation_date() . "</td>";
                         echo "<td>" . $value->get_bank() . "</td>";
-                        echo "<td align = 'right'>" . number_format($value->get_jumlah_ftp_file_name()) . "</td>";
+                        echo "<td align = 'right'><a href=".URL."dataDroping/detailSPAN/" . $value->get_bank()."/".$value->get_creation_date().">" . number_format($value->get_jumlah_ftp_file_name()) . "</a>"  . "</td>";
                         echo "<td align = 'right'>" . 
                                       number_format($value->get_jumlah_check_amount())."<br>".
                                       number_format($value->get_jumlah_check_number()) ."<br>".

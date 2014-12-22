@@ -112,6 +112,43 @@ class DataDropingController extends BaseController {
 		
 		$d_log->tambah_log("Sukses");
     }
+    
+    public function detailSPAN($bank = null, $tanggal = null) {
+        $d_sppm = new DataDroping($this->registry);
+        $filter = array();
+        $no = 0;
+        
+        
+        if (Session::get('role') == BANK) {
+            $filter[$no++] = "BANK = '" . Session::get('kd_satker') . "' ";
+            $this->view->d_bank = Session::get('kd_satker');
+            //var_dump(Session::get('role'));
+        }
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if (!is_null($bank)) {
+            if ($bank != "SEMUA") {
+                $filter[$no++] = "BANK = '" . $bank . "'";
+            }
+            $this->view->d_bank = $bank;
+        }
+        if (!is_null($tanggal)) {
+            $filter[$no++] = "PAYMENT_DATE = TO_DATE('" . $tanggal . "','DD-MM-YYYY')";
+            $this->view->d_tanggal = $tanggal;
+        }
+        $this->view->data = $d_sppm->get_droping_detail_span_filter($filter);
+
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table2());
+
+        $this->view->render('pkn/dropingDetailSPAN');
+		
+		$d_log->tambah_log("Sukses");
+    }
 
     public function __destruct() {
         

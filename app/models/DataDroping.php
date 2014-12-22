@@ -32,6 +32,7 @@ class DataDroping {
     private $_valid = TRUE;
     private $_table = 'T_DROPING';
     private $_table1 = 'T_DROPING_DETAIL';
+    private $_table2 = 'T_SP2D_FTP';
     public $registry;
 
     /*
@@ -116,6 +117,36 @@ class DataDroping {
             $d_data->set_bank_trxn_number($val['BANK_TRXN_NUMBER']);
             $d_data->set_payment_amount($val['PAYMENT_AMOUNT']);
             $d_data->set_attribute4($val['ATTRIBUTE4']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+
+    public function get_droping_detail_span_filter($filter) {
+        $sql = "SELECT PAYMENT_DATE, BANK, FTP_FILE_NAME,  JUMLAH_TRX, JUMLAH_CHECK_AMOUNT, '0' JUMLAH_SP2D
+                FROM T_SP2D_FTP WHERE ID =
+                    ( 
+                    SELECT MAX(ID) FROM " . $this->_table2 . " WHERE 
+                    PAYMENT_DATE = TO_DATE(TO_CHAR(SYSDATE,'YYYYMMDD'),'YYYYMMDD')
+                    )
+                    ";
+        $no = 0;
+        //var_dump($filter);
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " ORDER BY FTP_FILE_NAME";
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_id(date("d-m-Y", strtotime($val['PAYMENT_DATE'])));
+            $d_data->set_creation_date($val['BANK']);
+            $d_data->set_payment_currency_code($val['FTP_FILE_NAME']);
+            $d_data->set_bank_trxn_number($val['JUMLAH_SP2D']);
+            $d_data->set_payment_amount($val['JUMLAH_TRX']);
+            $d_data->set_attribute4($val['JUMLAH_CHECK_AMOUNT']);
             $data[] = $d_data;
         }
         return $data;
@@ -295,6 +326,10 @@ class DataDroping {
 
     public function get_table1() {
         return $this->_table1;
+    }
+
+    public function get_table2() {
+        return $this->_table2;
     }
 
     /*
