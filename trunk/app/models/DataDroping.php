@@ -65,6 +65,7 @@ class DataDroping {
 				, JML_CHECK_AMOUNT_BANK
 				from " . $this->_table . "
 				where jumlah_check_number_line_num is not null
+                and CREATION_DATE is not null
 				and  id in (select max(id) id from " . $this->_table . " 
 				where 1=1 ";
         $no = 0;
