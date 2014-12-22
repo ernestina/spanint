@@ -33,6 +33,7 @@ define('PKN','pkn');
 define('KANWIL','kanwil');
 define('DJA','dja');
 define('BLU','blu');
+define('BANK','bank');
 
 $path = array(
     ROOT.'/libs/',
@@ -63,6 +64,7 @@ $registry->auth->add_roles('kanwil'); //kanwil
 $registry->auth->add_roles('pkn'); //pkn
 $registry->auth->add_roles('dja'); //dja
 $registry->auth->add_roles('blu'); //blu
+$registry->auth->add_roles('bank'); //bank
 $registry->auth->add_roles('guest'); //guest
 
 //menambahkan akses ke level user
@@ -165,6 +167,12 @@ $registry->auth->add_access('home','blu',$akses['HomeBLU']);
 $registry->auth->add_access('panduan','blu',$akses['PanduanBLU']);
 $registry->auth->add_access('dataBLU','blu',$akses['DataBLU']);
 $registry->auth->add_access('PDF','blu',$akses['PDFBLU']);
+
+//level bank
+$registry->auth->add_access('auth','bank',$akses['AuthBank']);
+$registry->auth->add_access('home','bank',$akses['HomeBank']);
+$registry->auth->add_access('dataDroping','bank',$akses['DataDropingBank']);
+$registry->auth->add_access('PDF','bank',$akses['PDFBank']);
 
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);

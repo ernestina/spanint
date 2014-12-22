@@ -134,12 +134,14 @@
                 <th rowspan="2">Bank</th>
                 <th colspan="2">Diterbitkan SPAN</th>
                 <th colspan="2">Sudah Dijalankan Bank</th>
-                <th class='mid' rowspan="2">Selisih Rp.<br>SPAN - BANK</th>
+                <th colspan="2">Yang Belum Dijalankan Bank</th>
                 <th class='mid' rowspan="2">Total Droping</th>
                 <th class='mid' rowspan="2">Total Penihilan</th>
                 <th class='mid' rowspan="2">Selisih Rp.<br>DROPING -<br>(SPAN+PENIHILAN)</th>
                 <th rowspan="2">Keterangan</th>
             </tr>
+                <th >Total File</th>
+                <th width='100px' class='align-center'>TotalNilai<br>Total SP2D<br>Total Transaksi</th>
                 <th >Total File</th>
                 <th width='100px' class='align-center'>TotalNilai<br>Total SP2D<br>Total Transaksi</th>
                 <th >Total File</th>
@@ -169,10 +171,12 @@
                         echo "<td align = 'right'>" . 
                                       number_format($value->get_jml_check_amount_bank())."<br>".
                                       number_format($value->get_jml_check_number_bank()) ."<br>".
-                                      number_format($value->get_jml_check_number_line_num_bank()) . "</td>";
+                                      number_format($value->get_jml_check_number_line_num_bank()) . "</td>";                       
+                        $selisih_span_bank_file = $value->get_jumlah_ftp_file_name()-$value->get_jml_ftp_file_name_bank();
                         $selisih_span_bank_amount = $value->get_jumlah_check_amount()-$value->get_jml_check_amount_bank();
                         $selisih_span_bank_number = $value->get_jumlah_check_number()-$value->get_jml_check_number_bank();
                         $selisih_span_bank_line_number = $value->get_jumlah_check_number_line_num()-$value->get_jml_check_number_line_num_bank();
+                        echo "<td align = 'right'>" . number_format($selisih_span_bank_file) . "</td>";
                         echo "<td align = 'right'>" . 
                                       number_format($selisih_span_bank_amount) ."<br>".
                                       number_format($selisih_span_bank_number) ."<br>".
@@ -191,6 +195,7 @@
                     $jml_check_amount_bank += $value->get_jml_check_amount_bank();
                     $jml_check_number_bank += $value->get_jml_check_number_bank();
                     $jml_check_number_line_num_bank += $value->get_jml_check_number_line_num_bank();
+                    $total_selisih_span_bank_file += $selisih_span_bank_file;
                     $total_selisih_span_bank_amount += $selisih_span_bank_amount;
                     $total_selisih_span_bank_number += $selisih_span_bank_number;
                     $total_selisih_span_bank_line_number += $selisih_span_bank_line_number;
@@ -217,6 +222,7 @@
                                       number_format($jml_check_amount_bank)."<br>".
                                       number_format($jml_check_number_bank) ."<br>".
                                       number_format($jml_check_number_line_num_bank); ?></td>
+                <td class='ratakanan'><?php echo number_format($total_selisih_span_bank_file); ?></td>
                 <td class='ratakanan'><?php echo 
                                       number_format($total_selisih_span_bank_amount)."<br>".
                                       number_format($total_selisih_span_bank_number) ."<br>".
@@ -247,7 +253,7 @@
 
                 <div class="modal-body">
 
-                    <?php  if (Session::get('role')!=SATKER) {
+                    <?php  if (Session::get('role')!=BANK) {
                     echo "<div id='wbank' class='alert alert-danger' style='display:none;'></div>";
                     echo "<label class='isian'>Nama Bank: </label>";
                     echo "<select class='form-control' type='text' name='bank' id='bank'>";

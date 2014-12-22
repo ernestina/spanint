@@ -54,6 +54,9 @@ class AuthController extends BaseController {
                 case 7:
                     $role = 'blu';
                     break;
+                case 8:
+                    $role = 'bank';
+                    break;
                 default:
                     $role = 'guest';
             }
