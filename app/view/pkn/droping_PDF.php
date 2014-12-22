@@ -165,7 +165,6 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetY($py3 -= 80);		
 		//------------
 		
-		//----------
 		$px5 = $px4+($ukuran_kolom_jenis_belanja);
 		$py5 = $py3+20;
 		$this->SetXY($px5, $py5);
@@ -195,13 +194,46 @@ class FPDF_AutoWrapTable extends FPDF {
         $py3 = $this->GetY();
         $this->SetY($py3 -= 80);		
 		
+		//----------
+		//------------
+		
+		$px5 = $px4+($ukuran_kolom_jenis_belanja);
+		$py5 = $py3+20;
+		$this->SetXY($px5, $py5);
+		$px1 = $this->GetX();
+		
+        $this->Cell($ukuran_kolom_jenis_belanja1, $h*1/4, 'Yang Belum Dijalankan Bank', 1, 0, 'C', true);
+		$py1 = $this->GetY();
+        $px2 = $px1;
+        $py2 = $py1 + 20;
+        $this->SetXY($px2, $py2);
+        $this->Cell($ukuran_kolom_file, $h-20, 'Total File', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_file);
+		$py2a = $py1 + 20;
+		 $this->SetXY($px2, $py2a);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h/4, 'Total Nilai', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		$px3 = $px2-$ukuran_kolom_jenis_belanja;
+		$py2b = $py1 + 40;
+		$this->SetXY($px3, $py2b);
+		$this->Cell($ukuran_kolom_jenis_belanja, $h/4,'Total SP2D', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+		$px4 = $px2-($ukuran_kolom_jenis_belanja*2);
+		$py2c = $py1 + 60;
+		$this->SetXY($px4, $py2c);
+		$this->Cell($ukuran_kolom_jenis_belanja, $h/4,'Total Transaksi', 1, 0, 'C', true);
+        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+        $py3 = $this->GetY();
+        $this->SetY($py3 -= 80);		
+		
+		//----------
 
-		$px5 = $px4+$ukuran_kolom_jenis_belanja;
+/* 		$px5 = $px4+$ukuran_kolom_jenis_belanja;
         $py5 = $py3+20;
         $this->SetXY($px5, $py5);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Selisih Rp. (SPAN-BANK)', 1, 0, 'C', true); 
+        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Selisih Rp. (SPAN-BANK)', 1, 0, 'C', true);  */
 
-		$px6 = $px5+($ukuran_kolom_pagu_total_sisa);
+		$px6 = $px4+($ukuran_kolom_jenis_belanja);
         $py5 = $py3+20;
         $this->SetXY($px6, $py5);
         $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Total Droping', 1, 0, 'C', true); 
@@ -226,13 +258,13 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetWidths(array(30, 60,
             $ukuran_kolom_dana,$ukuran_kolom_file,
 			$ukuran_kolom_jenis_belanja,$ukuran_kolom_file,
-			$ukuran_kolom_jenis_belanja,$ukuran_kolom_pagu_total_sisa,			
+			$ukuran_kolom_jenis_belanja,$ukuran_kolom_file,$ukuran_kolom_jenis_belanja,			
 			$ukuran_kolom_pagu_total_sisa,$ukuran_kolom_pagu_total_sisa,
 			$ukuran_kolom_pagu_total_sisa1,$ukuran_kolom_ket));
         $this->SetAligns(array('C', 'C',
             'C', 'C',
             'R', 'C',
-            'R', 'R',
+            'R', 'C',
 			'R', 'R',
             'R', 'C'));
         if (count($this->data) == 0) {
@@ -252,7 +284,8 @@ class FPDF_AutoWrapTable extends FPDF {
             $no = 1;
             $this->SetFillColor(255);
             foreach ($this->data as $value) {
-			             $selisih_span_bank_amount = $value->get_jumlah_check_amount()-$value->get_jml_check_amount_bank();
+						$selisih_span_bank_file = $value->get_jumlah_ftp_file_name()-$value->get_jml_ftp_file_name_bank();
+			            $selisih_span_bank_amount = $value->get_jumlah_check_amount()-$value->get_jml_check_amount_bank();
                         $selisih_span_bank_number = $value->get_jumlah_check_number()-$value->get_jml_check_number_bank();
                         $selisih_span_bank_line_number = $value->get_jumlah_check_number_line_num()-$value->get_jml_check_number_line_num_bank();
 						$selisih_droping_span_nihil = $value->get_payment_amount()-($value->get_jumlah_check_amount()+$value->get_penihilan());
@@ -273,6 +306,7 @@ class FPDF_AutoWrapTable extends FPDF {
 							number_format($value->get_jumlah_check_amount())."\n".number_format($value->get_jumlah_check_number())."\n".number_format($value->get_jumlah_check_number_line_num()),
                             number_format($value->get_jml_ftp_file_name_bank()),
 							number_format($value->get_jml_check_amount_bank())."\n".number_format($value->get_jml_check_number_bank())."\n".number_format($value->get_jml_check_number_line_num_bank()),
+							number_format($selisih_span_bank_file),
 							number_format($selisih_span_bank_amount)."\n".number_format($selisih_span_bank_number)."\n".number_format($selisih_span_bank_line_number),
 							number_format($value->get_payment_amount()),
 							number_format($value->get_penihilan()),
@@ -287,6 +321,7 @@ class FPDF_AutoWrapTable extends FPDF {
                     $jml_check_amount_bank += $value->get_jml_check_amount_bank();
                     $jml_check_number_bank += $value->get_jml_check_number_bank();
                     $jml_check_number_line_num_bank += $value->get_jml_check_number_line_num_bank();
+					$total_selisih_span_bank_file += $selisih_span_bank_file;
                     $total_selisih_span_bank_amount += $selisih_span_bank_amount;
                     $total_selisih_span_bank_number += $selisih_span_bank_number;
                     $total_selisih_span_bank_line_number += $selisih_span_bank_line_number;
@@ -300,6 +335,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$left = $this->GetX();
 				$this->Cell($kolom_grandtotal, $h-20, 'GRAND TOTAL', 1, 0, 'L', true);
 				$this->SetX($left += $kolom_grandtotal);
+				//--------------------------
 				$px1 = $this->GetX();
 				$py1 = $this->GetY();
 				$px2 = $px1;
@@ -323,6 +359,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->SetXY($px2d, $py3d);
 				$this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($jumlah_check_number_line_num), 1, 0, 'R', true);
 				
+				//--------------------------
 				
 				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 				$px1e = $px1d+$ukuran_kolom_jenis_belanja;
@@ -335,8 +372,7 @@ class FPDF_AutoWrapTable extends FPDF {
 				$py2e = $py2;
 				$this->SetXY($px2e, $py2e);
 				$this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($jml_check_amount_bank), 1, 0, 'R', true);
-				
-				
+								
 				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
 				$px3e = $px2e;
 				$py3e = $py2+20;
@@ -349,29 +385,37 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->SetXY($px4e, $py4e);
 				$this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($jml_check_number_line_num_bank), 1, 0, 'R', true);
 				
-				
-				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);	
-				$px1f = $px3e+$ukuran_kolom_jenis_belanja;
+				//--------------------------
+
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+				$px1f = $px2e+$ukuran_kolom_jenis_belanja;
 				$py1f = $py1;
 				$this->SetXY($px1f, $py1f);
-				$this->Cell($ukuran_kolom_pagu_total_sisa, $h/4, number_format($total_selisih_span_bank_amount), 1, 0, 'R', true);
+				$this->Cell($ukuran_kolom_file, $h-20, number_format($total_selisih_span_bank_file), 1, 0, 'C', true);
+		
+				$this->SetX($px2 += $ukuran_kolom_file);	
+				$px2f = $px1f+$ukuran_kolom_file;
+				$py2f = $py2;
+				$this->SetXY($px2f, $py2f);
+				$this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($total_selisih_span_bank_amount), 1, 0, 'R', true);
 				
 				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);	
-				$px2f = $px1f;
-				$py2f = $py2+20;
-				$this->SetXY($px2f, $py2f);
-				$this->Cell($ukuran_kolom_pagu_total_sisa, $h/4, number_format($total_selisih_span_bank_number), 1, 0, 'R', true);
+				$px3f = $px2f;
+				$py3f = $py2+20;
+				$this->SetXY($px3f, $py3f);
+				$this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($total_selisih_span_bank_number), 1, 0, 'R', true);
 				
 				 $this->SetX($px2 += $ukuran_kolom_jenis_belanja);	
-				$px3f = $px2f;
-				$py3f = $py2+40;
-				$this->SetXY($px3f, $py3f);
-				$this->Cell($ukuran_kolom_pagu_total_sisa, $h/4, number_format($total_selisih_span_bank_line_number), 1, 0, 'R', true);
+				$px4f = $px3f;
+				$py4f = $py2+40;
+				$this->SetXY($px4f, $py4f);
+				$this->Cell($ukuran_kolom_jenis_belanja, $h/4, number_format($total_selisih_span_bank_line_number), 1, 0, 'R', true);
 				
-								
+ 							
+				//--------------------------
 
-				$this->SetX($px2 += $ukuran_kolom_pagu_total_sisa);
-				$px4f = $px3f+$ukuran_kolom_pagu_total_sisa;
+				$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
+				$px4f = $px3f+$ukuran_kolom_jenis_belanja;
 				$py4f = $py2;
 				$this->SetXY($px4f, $py4f);
 				$this->Cell($ukuran_kolom_pagu_total_sisa, $h-20,number_format($payment_amount) , 1, 0, 'R', true);
@@ -395,7 +439,10 @@ class FPDF_AutoWrapTable extends FPDF {
 				$py7f = $py2;
 				$this->SetXY($px7f, $py7f);
 				$this->Cell($ukuran_kolom_ket, $h-20,'', 1, 1, 'R', true);
+				/* 		
+				*/	
 				$this->Ln(3);
+				
         }
         $this->Ln(3);
     }
