@@ -151,6 +151,7 @@ $registry->auth->add_access('dataPelimpahan','kanwil',$akses['DataPelimpahanKanw
 $registry->auth->add_access('PDF','kanwil',$akses['PDFKanwil']);
 $registry->auth->add_access('panduan','kanwil',$akses['PanduanKanwil']);
 $registry->auth->add_access('pelaporan','kanwil',$akses['PelaporanKanwil']);
+$registry->auth->add_access('dataRetur','kanwil',$akses['DataReturKanwil']);
 
 //level dja
 $registry->auth->add_access('auth','dja',$akses['AuthDJA']);
