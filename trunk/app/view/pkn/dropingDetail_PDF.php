@@ -78,6 +78,8 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 4) == 'BANK') { //6
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
         }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
             $this->MultiCell(0, $h1 / 2, '');
         }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
@@ -139,49 +141,59 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(20, 80, 
 		80,100,100,$ukuran_kolom));
-        $this->SetAligns(array('C', 'C', 'C', 'C', 'R','L'));
-        $no = 1;
-        $j1 = 0;
-        $j2 = 0;
-        $j3 = 0;
-        $j4 = 0;
-        $j5 = 0;
-        $jtotal = 0;
+        $this->SetAligns(array('C', 'C', 'C', 'C', 'R','C'));
+		
+		if (count($this->data) == 0) {
+			$this->Row(
+                    array('','N I H I L',
+                        '','',
+                        '',''
+						)
+            );
+		}else{
+			$no = 1;
+			$j1 = 0;
+			$j2 = 0;
+			$j3 = 0;
+			$j4 = 0;
+			$j5 = 0;
+			$jtotal = 0;
 
-        $this->SetFillColor(255);
-        foreach ($this->data as $value) {
-            $this->Row(
-                    array($no++,
-                        $value->get_creation_date(),
-                        $value->get_payment_currency_code(),
-                        $value->get_bank_trxn_number(),
-                        number_format($value->get_payment_amount()),
-                        $value->get_attribute4()
-						));
-            //jumlah grand total
-            //-------------
-            $total+=$value->get_payment_amount();
-
-
-            //------------------
-        }
-        $this->SetFont('Arial', 'B', 7);
-        $h = 20;
-        $this->SetFillColor(200, 200, 200);
-        $left = $this->GetX();
-        $this->Cell(280, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-        $this->SetX($left += 280);
-        //$this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($total), 1, 0, 'R', true);
-        $px1 = $this->GetX();
-        $py1 = $this->GetY();
-        $px2 = $px1;
-        $py2 = $py1;
-        $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_hari, $h, number_format($total), 1, 0, 'R', true);
-        $py3 = $this->GetY();
-        $this->SetX($left += 100);
-        $this->Cell($ukuran_kolom, $h,'' , 1, 1, 'R', true);
-        $this->Ln(3);
+			$this->SetFillColor(255);
+			foreach ($this->data as $value) {
+				$this->Row(
+						array($no++,
+							$value->get_creation_date(),
+							$value->get_payment_currency_code(),
+							$value->get_bank_trxn_number(),
+							number_format($value->get_payment_amount()),
+							$value->get_attribute4()
+							));
+				//jumlah grand total
+				//-------------
+				$total+=$value->get_payment_amount();
+				//------------------
+			}
+			$this->SetFont('Arial', 'B', 7);
+			$h = 20;
+			$this->SetFillColor(200, 200, 200);
+			$left = $this->GetX();
+			$this->Cell(280, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+			$this->SetX($left += 280);
+			//$this->Cell($ukuran_kolom_pagu_total_sisa, $h, number_format($total), 1, 0, 'R', true);
+			$px1 = $this->GetX();
+			$py1 = $this->GetY();
+			$px2 = $px1;
+			$py2 = $py1;
+			$this->SetXY($px2, $py2);
+			$this->Cell($ukuran_kolom_hari, $h, number_format($total), 1, 0, 'R', true);
+			$py3 = $this->GetY();
+			$this->SetX($left += 100);
+			$this->Cell($ukuran_kolom, $h,'' , 1, 1, 'R', true);
+			$this->Ln(3);
+		
+		}
+		//---------------------------
     }
 
     //footer

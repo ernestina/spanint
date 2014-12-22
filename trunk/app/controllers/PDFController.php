@@ -1246,7 +1246,7 @@ class PDFController extends BaseController {
 //------------------------------------------------------
     //Function PDF untuk DataDropingController(DataDropingController.php)
 //------------------------------------------------------
-    public function detailDroping_PDF($id = null, $bank = null, $tanggal = null) {
+    public function detailDroping_PDF($kdid = null, $kdbank = null, $kdtanggal = null) {
         $d_sppm = new DataDroping($this->registry);
         $filter = array();
         $no = 0;
@@ -1255,19 +1255,19 @@ class PDFController extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
-        if (!is_null($id)) {
-            $filter[$no++] = "ID_DETAIL = '" . $id . "'";
-            $this->view->d_id = $id;
+        if (!is_null($kdid)) {
+            $filter[$no++] = "ID_DETAIL = '" . $kdid . "'";
+            $this->view->d_id = $kdid;
         }
-        if (!is_null($bank)) {
-            if ($bank != "SEMUA") {
-                $filter[$no++] = "BANK = '" . $bank . "'";
+        if (!is_null($kdbank)) {
+            if ($kdbank != "SEMUA") {
+                $filter[$no++] = "BANK = '" . $kdbank . "'";
             }
-            $this->view->d_bank = $bank;
+            $this->view->d_bank = $kdbank;
         }
-        if (!is_null($tanggal)) {
-            $filter[$no++] = "TO_CHAR(CREATION_DATE,'DD-MM-YYYY') = '" . $tanggal . "'";
-            $this->view->d_tanggal = $tanggal;
+        if (!is_null($kdtanggal)) {
+            $filter[$no++] = "TO_CHAR(CREATION_DATE,'DD-MM-YYYY') = '" . $kdtanggal . "'";
+            $this->view->d_tanggal = $kdtanggal;
         }
         //-------------------------
         if (Session::get('role') == SATKER) {
@@ -1371,6 +1371,44 @@ class PDFController extends BaseController {
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
+	
+	    public function detailSPAN_PDF($kdbank = null, $kdtanggal = null) {
+        $d_sppm = new DataDroping($this->registry);
+        $filter = array();
+        $no = 0;
+        
+        
+        if (Session::get('role') == BANK) {
+            $filter[$no++] = "BANK = '" . Session::get('kd_satker') . "' ";
+            $this->view->d_bank = Session::get('kd_satker');
+            //var_dump(Session::get('role'));
+        }
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        if (!is_null($kdbank)) {
+            if ($kdbank != "SEMUA") {
+                $filter[$no++] = "BANK = '" . $kdbank . "'";
+            }
+            $this->view->d_bank = $kdbank;
+        }
+        if (!is_null($kdtanggal)) {
+            $filter[$no++] = "PAYMENT_DATE = TO_DATE('" . $kdtanggal . "','DD-MM-YYYY')";
+            $this->view->d_tanggal = $kdtanggal;
+        }
+        $this->view->data = $d_sppm->get_droping_detail_span_filter($filter);
+
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table2());
+
+        $this->view->load('pkn/dropingDetailSPAN_PDF');
+		
+		$d_log->tambah_log("Sukses");
+    }
+
 
 //------------------------------------------------------
 //Function PDF untuk DataGRController(DataGRController.php)
@@ -2870,7 +2908,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function detailSp2dGaji_PDF($kdbank = null, $kdbulan = null, $kdkppn = null) {
+    public function detailSp2dGaji_PDF($kdbank = null, $kdbulan = null,$kdtahun = null, $kdkppn = null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -2899,6 +2937,10 @@ class PDFController extends BaseController {
                 $filter[$no++] = "to_char(PAYMENT_DATE,'mm') = '" . $kdbulan . "'";
             }
         }
+		if (!is_null($kdtahun)) {
+                $filter[$no++] = "to_char(PAYMENT_DATE,'yyyy') = '" . $kdtahun . "'";
+                $this->view->d_tahun = $kdtahun;
+        } 
         if (!is_null($kdkppn)) {
             $filter[$no++] = " KDKPPN = '" . $kdkppn . "'";
             $d_kppn = new DataUser($this->registry);
@@ -3126,6 +3168,12 @@ class PDFController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ($kdtahun != 'null') {
+            
+			$this->view->kdtahun = $kdtahun;
+		}
+
 
         if (Session::get('role') == ADMIN) {
             if ($kdkppn != 'null') {
@@ -3191,7 +3239,7 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         //var_dump($d_sppm->get_sppm_filter($filter));
-        $this->view->load('kppn/sp2dGajiBulanLalu_PDF');
+			$this->view->load('kppn/sp2dGajiBulanLalu_PDF');
         $d_log->tambah_log("Sukses");
     }
 

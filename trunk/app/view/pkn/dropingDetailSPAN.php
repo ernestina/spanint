@@ -18,20 +18,19 @@ if(isset($this->data)){
 		$id=$this->d_id;
 	}		
 	if($this->d_bank){
-		$bank=$this->d_bank;
+		$kdbank=$this->d_bank;
 	}
 	if (isset($this->d_tanggal)) {
-		$tanggal=$this->d_tanggal;
+		$kdtanggal=$this->d_tanggal;
 	}
     ?>	
      
-     <!--a href="<?php echo URL; ?>PDF/detailDroping_PDF/<?php echo $id . "/" .$bank . "/" . $tanggal; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a-->
 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
                 <!--button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button-->
-            <a href="<?php echo URL; ?>PDF/detailDroping_PDF/<?php echo $id . "/" .$bank . "/" . $tanggal; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+            <a href="<?php echo URL; ?>PDF/detailSPAN_PDF/<?php echo $kdbank . "/" . $kdtanggal; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
      
    <?php
 //----------------------------------------------------			
