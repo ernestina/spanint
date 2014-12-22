@@ -35,7 +35,9 @@ class DataDropingController extends BaseController {
         if (Session::get('role') == BANK) {
             $filter[$no++] = "BANK = '" . Session::get('kd_satker') . "' ";
             $this->view->d_bank = Session::get('kd_satker');
-            //var_dump(Session::get('role'));
+            $tgl_awal = date('Ymd');
+            $tgl_akhir = date('Ymd');
+            $this->view->data = $d_sppm->get_droping_filter($filter);
         }
 		
         if (isset($_POST['submit_file'])) {
@@ -46,12 +48,13 @@ class DataDropingController extends BaseController {
                 $this->view->d_bank = $_POST['bank'];
             }
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
-                $filter[$no++] = "CREATION_DATE BETWEEN TO_DATE (" . date('Ymd', strtotime($_POST['tgl_awal'])) . ",'YYYYMMDD') 
-									AND TO_DATE (" . date('Ymd', strtotime($_POST['tgl_akhir'])) . ",'YYYYMMDD')  ";
-
-                $this->view->d_tgl_awal = $_POST['tgl_awal'];
-                $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+                $tgl_awal = $_POST['tgl_awal'];
+                $tgl_akhir = $_POST['tgl_akhir'];
+                $this->view->d_tgl_awal = $tgl_awal;
+                $this->view->d_tgl_akhir = $tgl_akhir;
             }
+            $filter[$no++] = "CREATION_DATE BETWEEN TO_DATE (" . date('Ymd', strtotime($tgl_awal)) . ",'YYYYMMDD') 
+									AND TO_DATE (" . date('Ymd', strtotime($tgl_akhir)) . ",'YYYYMMDD')  ";
             $this->view->data = $d_sppm->get_droping_filter($filter);
         }
         if (Session::get('role') == ADMIN OR Session::get('role') == PKN) {
