@@ -33,6 +33,8 @@ $akses['DataDropingBank'] = array(
     'monitoringDroping',
     'detailDroping',
     'detailDroping_PDF',
+    'detailSPAN',
+    'detailSPAN_PDF',
     '__destruct'
 );
 
