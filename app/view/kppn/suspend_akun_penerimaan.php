@@ -54,12 +54,19 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-                // $nmsatker = '';
-                // foreach ($this->data as $value) {
-                    // $nmsatker = $value->get_nmsatker();
-                // }
-                // echo $nmsatker;
-                // ?>
+                if (isset($this->d_kd_kppn)){
+                    echo "KPPN : ".$this->d_kd_kppn;                
+                }
+                if (isset($this->d_bulan)){
+                    echo "BULAN : ".$this->d_bulan;                
+                }
+                if (isset($this->ntpn)){
+                    echo "NTPN : ".$this->d_ntpn;                
+                }
+                if (isset($this->d_koreksi)){
+                    echo "KOREKSI : ".$this->d_koreksi;                
+                }
+                ?>
             </div>
             
             <div class="col-md-6 col-sm-12" style="text-align: right;">
@@ -168,7 +175,7 @@
                             
                             <?php foreach ($this->kppn_list as $value1) { ?>
                             
-                                <?php if ($kode_kppn == $value1->get_kd_d_kppn()) { ?>
+                                <?php if ($this->d_kd_kppn == $value1->get_kd_d_kppn()) { ?>
                             
                                     <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
                             
@@ -234,6 +241,20 @@
                         <option value='Error' <?php //if ($this->status==Error){echo "selected";} ?>>Error</option-->
 
                     </select>
+                    <br/>
+                    <label class="isian">Koreksi: </label>
+                    <select class="form-control" type="text" name="koreksi" id="koreksi">
+                        <option value='' <?php if ($this->d_koreksi == '') {
+    echo "selected";
+} ?> >SEMUA</option>
+                        <option value='BELUM' <?php if ($this->d_koreksi == 'BELUM') {
+    echo "selected";
+} ?> >Belum Koreksi</option>
+                        <option value='SUDAH' <?php if ($this->d_koreksi == 'SUDAH') {
+    echo "selected";
+} ?> >Sudah Koreksi</option>
+                    </select>
+                    <br/>
 
                     <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
                     <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">

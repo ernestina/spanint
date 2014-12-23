@@ -54,12 +54,19 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-                // $nmsatker = '';
-                // foreach ($this->data as $value) {
-                    // $nmsatker = $value->get_nmsatker();
-                // }
-                // echo $nmsatker;
-                // ?>
+                if (isset($this->d_kd_kppn)){
+                    echo "KPPN : ".$this->d_kd_kppn."<br/>";                
+                }
+                if (isset($this->d_bulan)){
+                    echo "BULAN : ".$this->d_bulan."<br/>";                
+                }
+                if (isset($this->ntpn)){
+                    echo "NTPN : ".$this->ntpn."<br/>";                
+                }
+                if (isset($this->d_koreksi)){
+                    echo "KOREKSI : ".$this->d_koreksi;                
+                }
+                ?>
             </div>
             
             <div class="col-md-6 col-sm-12" style="text-align: right;">
@@ -170,7 +177,7 @@
                             
                             <?php foreach ($this->kppn_list as $value1) { ?>
                             
-                                <?php if ($kode_kppn == $value1->get_kd_d_kppn()) { ?>
+                                <?php if ($this->d_kd_kppn == $value1->get_kd_d_kppn()) { ?>
                             
                                     <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
                             
@@ -231,21 +238,25 @@
 
                     </select>
 					<br/>
+                    <label class="isian">Koreksi: </label>
+                    <select class="form-control" type="text" name="koreksi" id="koreksi">
+                        <option value='' <?php if ($this->d_koreksi == '') {
+    echo "selected";
+} ?> >SEMUA</option>
+                        <option value='BELUM' <?php if ($this->d_koreksi == 'BELUM') {
+    echo "selected";
+} ?> >Belum Koreksi</option>
+                        <option value='SUDAH' <?php if ($this->d_koreksi == 'SUDAH') {
+    echo "selected";
+} ?> >Sudah Koreksi</option>
+                    </select>
+                    <br/>
+                    
 					<label class="isian">NTPN: </label>
-                    <input class="form-control" type="text" name="ntpn" id="ntpn" value="<?php if (isset($this->check_number)) {
+                    <input class="form-control" type="text" name="ntpn" id="ntpn" value="<?php if (isset($this->ntpn)) {
                    echo $this->ntpn;
 					} ?>">
-                    
-
-                    <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                    <!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
-                        
-
-                </div>
+                    </div>
 
                 <div class="modal-footer">
                     <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="">Kirim</button>
