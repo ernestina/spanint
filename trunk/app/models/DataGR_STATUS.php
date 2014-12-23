@@ -197,8 +197,8 @@ class DataGR_STATUS {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        //$sql .= " order by CONT_GL_DATE, NTPN";
-        //var_dump ($sql);
+        $sql .= " order by RECEIPT_NUMBER";
+        var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {

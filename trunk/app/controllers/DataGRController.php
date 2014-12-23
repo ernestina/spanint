@@ -556,18 +556,18 @@ class DataGRController extends BaseController {
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "SEGMENT1 = 'ZZZ" . Session::get('id_user') . "'";
+            $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
         }
 
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "SEGMENT1 = 'ZZZ" . $_POST['kdkppn'] . "'";
+                $filter[$no++] = "KPPN = '" . $_POST['kdkppn'] . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
             } else {
-                $filter[$no++] = "SEGMENT1 = 'ZZZ" . Session::get('id_user') . "'";
+                $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
             }
 
             if ($_POST['bulan'] != '') {
@@ -578,6 +578,15 @@ class DataGRController extends BaseController {
             if ($_POST['ntpn'] != '') {
                 $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
                 $this->view->ntpn = $_POST['ntpn'];
+            }
+
+            if ($_POST['koreksi'] != '') {
+                if ($_POST['koreksi'] == 'BELUM'){
+                    $filter[$no++] = "RECEIPT_NUMBER = RECEIPT_NUMBER2";    
+                } else if ($_POST['koreksi'] == 'SUDAH'){
+                    $filter[$no++] = "RECEIPT_NUMBER <> RECEIPT_NUMBER2";    
+                }
+                $this->view->d_koreksi = $_POST['koreksi'];
             }
 
             $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
@@ -616,6 +625,16 @@ class DataGRController extends BaseController {
             $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
         }
         if (isset($_POST['submit_file'])) {
+            
+
+            if ($_POST['koreksi'] != '') {
+                if ($_POST['koreksi'] == 'BELUM'){
+                    $filter[$no++] = "RECEIPT_NUMBER = RECEIPT_NUMBER2";    
+                } else if ($_POST['koreksi'] == 'SUDAH'){
+                    $filter[$no++] = "RECEIPT_NUMBER <> RECEIPT_NUMBER2";    
+                }
+                $this->view->d_koreksi = $_POST['koreksi'];
+            }
 
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "KPPN = '" . $_POST['kdkppn'] . "'";
