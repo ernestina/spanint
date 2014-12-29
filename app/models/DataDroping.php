@@ -123,12 +123,12 @@ class DataDroping {
         return $data;
     }
 
-    public function get_droping_detail_span_filter($filter) {
+    public function get_droping_detail_span_filter($filter, $tanggal) {
         $sql = "SELECT PAYMENT_DATE, BANK, FTP_FILE_NAME,  JUMLAH_TRX, JUMLAH_CHECK_AMOUNT, '0' JUMLAH_SP2D
                 FROM T_SP2D_FTP WHERE ID =
                     ( 
                     SELECT MAX(ID) FROM " . $this->_table2 . " WHERE 
-                    PAYMENT_DATE = TO_DATE(TO_CHAR(SYSDATE,'YYYYMMDD'),'YYYYMMDD')
+                    PAYMENT_DATE = TO_DATE('".$tanggal."','DD-MM-YYYY')
                     )
                     ";
         $no = 0;

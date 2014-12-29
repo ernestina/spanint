@@ -142,7 +142,7 @@ class DataDropingController extends BaseController {
             $filter[$no++] = "PAYMENT_DATE = TO_DATE('" . $tanggal . "','DD-MM-YYYY')";
             $this->view->d_tanggal = $tanggal;
         }
-        $this->view->data = $d_sppm->get_droping_detail_span_filter($filter);
+        $this->view->data = $d_sppm->get_droping_detail_span_filter($filter,$tanggal);
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
