@@ -58,7 +58,8 @@ class DataRetur {
 				BANK_NAME_PENGGANTI, VENDOR_NAME_PENGGANTI, VENDOR_ACCOUNT_NUM_PENGGANTI,			
 				STATUS_RETUR
 				FROM " . $this->_table . "
-				WHERE 1=1 ";
+				WHERE 1=1 
+                AND STATEMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         //xml = 520002000990_SP2D_O_20140408_101509_367.xml
         $no = 0;
@@ -111,7 +112,8 @@ class DataRetur {
         $sql = "SELECT STATEMENT_DATE, RECEIPT_NUMBER, TGSP2D_PENGGANTI ,NOSP2D_PENGGANTI, 
 				AMOUNT, NILAI_SP2D_PENGGANTI, (AMOUNT-NILAI_SP2D_PENGGANTI) SALDO  
 				FROM " . $this->_table . "
-				WHERE 1=1 ";
+				WHERE 1=1 
+                AND STATEMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         //xml = 520002000990_SP2D_O_20140408_101509_367.xml
         $no = 0;

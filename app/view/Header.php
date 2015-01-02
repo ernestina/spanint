@@ -8,7 +8,7 @@
         <link rel="icon" href="<?php echo URL; ?>public/monster-logo-small.ico"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes">
 
-        <title>Online Monitoring SPAN</title>
+        <title>Online Monitoring SPAN </title>
 
         <!-- JQuery & Jquery Plugins -->
         <script src="<?php echo URL; ?>public/JQuery/jquery-2.1.1.min.js"></script>
@@ -774,7 +774,7 @@
                     </div>
 
                     <a id="span-logo-regular" class="navbar-brand hidden-xs hidden-sm hidden-md navbar-left" href="http://www.span.depkeu.go.id/" target="blank"><img src="<?php echo URL; ?>public/span-logo.png">&nbsp;&nbsp;</a>
-                    <a id="monster-logo-regular" class="navbar-brand navbar-left hidden-xs" href="<?php echo URL; ?>"><img src="<?php echo URL; ?>public/monster-logo-small.png">&nbsp;Online Monitoring</a>
+                    <a id="monster-logo-regular" class="navbar-brand navbar-left hidden-xs" href="<?php echo URL; ?>"><img src="<?php echo URL; ?>public/monster-logo-small.png">&nbsp;Online Monitoring : <?php echo Session::get('ta');?></a>
 
                     <a id="span-logo-small" class="navbar-brand hidden-lg" href="<?php echo URL; ?>"><img src="<?php echo URL; ?>public/span-logo-small.png"></a>
                     <a id="monster-logo-small" class="navbar-brand navbar-left visible-xs" href="http://www.span.depkeu.go.id/"><img src="<?php echo URL; ?>public/monster-logo-small.png"></a>
