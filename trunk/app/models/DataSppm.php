@@ -66,7 +66,7 @@ class DataSppm {
             $sql .= " AND " . $filter;
         }
         $sql .= " ORDER BY PAYMENT_DATE DESC, CREATION_DATE DESC";
-        var_dump ($sql);
+        //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
@@ -108,7 +108,8 @@ class DataSppm {
         $sql = "SELECT PAYMENT_DATE,
 				RETURN_DESC, RETURN_CODE, KDKPPN
 				FROM " . $this->_table . "
-				WHERE FL_VOID <> 1";
+				WHERE FL_VOID <> 1
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         //xml = 520002000990_SP2D_O_20140408_101509_367.xml
         $no = 0;
@@ -137,7 +138,8 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE FL_VOID <> 1";
+				WHERE FL_VOID <> 1
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -188,7 +190,8 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE FL_VOID <> 1 ";
+				WHERE FL_VOID <> 1 
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -239,7 +242,8 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE FL_VOID <> 1";
+				WHERE FL_VOID <> 1
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -290,7 +294,8 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE KDKPPN = '" . Session::get('id_user') . "' AND FL_VOID <> 1";
+				WHERE KDKPPN = '" . Session::get('id_user') . "' AND FL_VOID <> 1
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -341,7 +346,8 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE FL_VOID <> 1";
+				WHERE FL_VOID <> 1
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -392,7 +398,8 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE FL_VOID <> 1";
+				WHERE FL_VOID <> 1
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -444,7 +451,8 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE KDKPPN = '" . Session::get('id_user') . "' AND FL_VOID = 1";
+				WHERE KDKPPN = '" . Session::get('id_user') . "' AND FL_VOID = 1
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -495,7 +503,8 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE FL_VOID = 1";
+				WHERE FL_VOID = 1
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         $no = 0;
         //var_dump($filter);
@@ -579,6 +588,7 @@ class DataSppm {
 					  AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'"
                 . $kppn . "
 				)
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') 
 				ORDER BY KDKPPN, SATKER, INVOICE_NUM";
         $result = $this->db->select($sql);
         //var_dump ($sql);
@@ -618,6 +628,7 @@ class DataSppm {
                         'RPKBUNP.gaji-BNI@BANK NEGARA INDONESIA'
                         )        
                 )
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') 
                 ORDER BY CREATION_DATE DESC, KDKPPN ASC";
         $result = $this->db->select($sql);
         //var_dump($sql);
@@ -657,6 +668,7 @@ class DataSppm {
                       AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'    
 					  " . $kppn . "
                 )
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') 
                 ORDER BY CREATION_DATE DESC, KDKPPN ASC ";
         $result = $this->db->select($sql);
         //var_dump ($sql);
@@ -710,7 +722,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '01'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 							GROUP BY  BANK_ACCOUNT_NAME
@@ -721,7 +733,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '02' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 							GROUP BY  BANK_ACCOUNT_NAME
@@ -732,7 +744,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '03'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 							GROUP BY BANK_ACCOUNT_NAME
@@ -743,7 +755,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '04'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -754,7 +766,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '05'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -765,7 +777,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '06' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -776,7 +788,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '07' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -787,7 +799,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '08' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -798,7 +810,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '09' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -809,7 +821,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '10' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -820,7 +832,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '11'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -831,7 +843,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '12' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$tahun."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -874,13 +886,17 @@ class DataSppm {
         $sql = "SELECT DECODE(BANK_ACCOUNT_NAME,'MDRI','MANDIRI',
                 'BTN','BTN','BNI','BNI','BRI','BRI','INVALID') BANK_ACCOUNT_NAME, 
 				MAX (GAJI) GAJI, MAX (NON_GAJI) NON_GAJI, MAX (RETUR) RETUR, MAX (VOID) VOID, MAX(NILAI_GAJI) NILAI_GAJI, MAX(NILAI_NON_GAJI) NILAI_NON_GAJI, MAX(NILAI_RETUR) NILAI_RETUR,  MAX(NILAI_VOID) NILAI_VOID FROM (
-				SELECT BANK_ACCOUNT_NAME, SUM(JUMLAH_SP2D) GAJI, NULL NON_GAJI, NULL RETUR, NULL VOID, SUM(NILAI_SP2D) AS NILAI_GAJI , NULL AS NILAI_NON_GAJI , NULL AS NILAI_RETUR , NULL AS NILAI_VOID FROM REKAPITULASI_SP2D WHERE JENDOK = '1' " . $sql_tgl . " GROUP BY BANK_ACCOUNT_NAME, JENDOK 
+				SELECT BANK_ACCOUNT_NAME, SUM(JUMLAH_SP2D) GAJI, NULL NON_GAJI, NULL RETUR, NULL VOID, SUM(NILAI_SP2D) AS NILAI_GAJI , NULL AS NILAI_NON_GAJI , NULL AS NILAI_RETUR , NULL AS NILAI_VOID FROM REKAPITULASI_SP2D WHERE JENDOK = '1' " . $sql_tgl . " 
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') GROUP BY BANK_ACCOUNT_NAME, JENDOK 
 				UNION
-				SELECT BANK_ACCOUNT_NAME, NULL GAJI, SUM(JUMLAH_SP2D) NON_GAJI, NULL RETUR, NULL VOID, NULL AS NILAI_GAJI , SUM(NILAI_SP2D) AS NILAI_NON_GAJI , NULL AS NILAI_RETUR , NULL AS NILAI_VOID FROM REKAPITULASI_SP2D WHERE JENDOK = '2' " . $sql_tgl . " GROUP BY BANK_ACCOUNT_NAME, JENDOK 
+				SELECT BANK_ACCOUNT_NAME, NULL GAJI, SUM(JUMLAH_SP2D) NON_GAJI, NULL RETUR, NULL VOID, NULL AS NILAI_GAJI , SUM(NILAI_SP2D) AS NILAI_NON_GAJI , NULL AS NILAI_RETUR , NULL AS NILAI_VOID FROM REKAPITULASI_SP2D WHERE JENDOK = '2' " . $sql_tgl . " 
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') GROUP BY BANK_ACCOUNT_NAME, JENDOK 
 				UNION
-				SELECT BANK_ACCOUNT_NAME, NULL GAJI, NULL NON_GAJI, SUM(JUMLAH_SP2D) RETUR, NULL VOID, NULL AS NILAI_GAJI , NULL AS NILAI_NON_GAJI , SUM(NILAI_SP2D) AS NILAI_RETUR , NULL AS NILAI_VOID FROM REKAPITULASI_SP2D WHERE JENDOK = '3' " . $sql_tgl . " GROUP BY BANK_ACCOUNT_NAME, JENDOK 
+				SELECT BANK_ACCOUNT_NAME, NULL GAJI, NULL NON_GAJI, SUM(JUMLAH_SP2D) RETUR, NULL VOID, NULL AS NILAI_GAJI , NULL AS NILAI_NON_GAJI , SUM(NILAI_SP2D) AS NILAI_RETUR , NULL AS NILAI_VOID FROM REKAPITULASI_SP2D WHERE JENDOK = '3' " . $sql_tgl . " 
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') GROUP BY BANK_ACCOUNT_NAME, JENDOK 
 				UNION
-				SELECT BANK_ACCOUNT_NAME, NULL GAJI, NULL NON_GAJI, NULL RETUR, SUM(JUMLAH_SP2D) VOID, NULL AS NILAI_GAJI , NULL AS NILAI_NON_GAJI , NULL AS NILAI_RETUR , SUM(NILAI_SP2D) AS NILAI_VOID FROM REKAPITULASI_SP2D WHERE JENDOK = '4' " . $sql_tgl . " GROUP BY BANK_ACCOUNT_NAME, JENDOK
+				SELECT BANK_ACCOUNT_NAME, NULL GAJI, NULL NON_GAJI, NULL RETUR, SUM(JUMLAH_SP2D) VOID, NULL AS NILAI_GAJI , NULL AS NILAI_NON_GAJI , NULL AS NILAI_RETUR , SUM(NILAI_SP2D) AS NILAI_VOID FROM REKAPITULASI_SP2D WHERE JENDOK = '4' " . $sql_tgl . " 
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') GROUP BY BANK_ACCOUNT_NAME, JENDOK
 				)GROUP BY BANK_ACCOUNT_NAME ORDER BY BANK_ACCOUNT_NAME";
         $result = $this->db->select($sql);
         //var_dump ($sql);
@@ -908,6 +924,7 @@ class DataSppm {
 				CHECK_NUMBER, sum(CHECK_AMOUNT) CHECK_AMOUNT, BANK_ACCOUNT_NAME , MIN(INVOICE_DESCRIPTION) INVOICE_DESCRIPTION, MIN(RETURN_CODE) RETURN_CODE, KDKPPN
 				from XICO_ALL 
 				WHERE BANK_ACCOUNT_NAME NOT LIKE '%RETUR%' 
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') 
 				";
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
@@ -941,6 +958,7 @@ class DataSppm {
 				CHECK_NUMBER, CHECK_AMOUNT, BANK_ACCOUNT_NAME , INVOICE_DESCRIPTION, KDKPPN
 				FROM REKAPITULASI_SP2D_DETAIL
 				WHERE (CHECK_AMOUNT > 0 OR CHECK_AMOUNT < 1)
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') 
 				";
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
