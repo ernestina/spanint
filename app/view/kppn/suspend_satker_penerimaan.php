@@ -19,10 +19,15 @@
                 <?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-			    if (Session::get('role') == KPPN) {
-                    IF(isset($this->d_bulan) || isset($this->ntpn) ){
+			IF(isset($this->d_bulan) || isset($this->ntpn) || isset($this->d_kd_kppn) || isset($this->d_koreksi) ){
+				if (Session::get('role') == KPPN) {
 					
 							$kdkppn=Session::get('id_user');
+						if (isset($this->d_koreksi)) {
+							$kdkoreksi = $this->d_koreksi;
+						} else {
+							$kdkoreksi = "null";
+						}
 						if (isset($this->d_bulan)) {
 							$kdbulan = $this->d_bulan;
 						} else {
@@ -34,11 +39,43 @@
 							$kdntpn = "null";
 						}
 						
-					?>
-						<a href="<?php echo URL; ?>PDF/SuspendSatkerPenerimaan_PDF/<?php echo $kdbulan . "/" . $kdntpn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
+					
 					}
-                }
+                
+				
+				if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+					
+						if (isset($this->d_kd_kppn)) {
+							$kdkppn = $this->d_kd_kppn;
+						} else {
+							$kdkppn = "null";
+						}
+						
+						if (isset($this->d_koreksi)) {
+							$kdkoreksi = $this->d_koreksi;
+						} else {
+							$kdkoreksi = "null";
+						}
+					
+						if (isset($this->d_bulan)) {
+							$kdbulan = $this->d_bulan;
+						} else {
+							$kdbulan = "null";
+						}
+						if (isset($this->ntpn)) {
+							$kdntpn = $this->ntpn;
+						} else {
+							$kdntpn = "null";
+						}
+						
+					
+					}
+               
+			?>
+				<a href="<?php echo URL; ?>PDF/SuspendSatkerPenerimaan_PDF/<?php echo $kdbulan . "/" . $kdntpn . "/" . $kdkppn . "/" . $kdkoreksi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			<?php
+			 }
+			//---------------------------------------------------------
 			?>
 
   

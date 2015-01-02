@@ -13,10 +13,6 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : dropingDetail.php  
 
-if(isset($this->data)){
-	if($this->d_id){
-		$id=$this->d_id;
-	}		
 	if($this->d_bank){
 		$kdbank=$this->d_bank;
 	}
@@ -34,7 +30,6 @@ if(isset($this->data)){
      
    <?php
 //----------------------------------------------------			
-	}
 ?>
                 
             </div>

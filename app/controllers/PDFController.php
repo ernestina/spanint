@@ -1398,7 +1398,7 @@ class PDFController extends BaseController {
             $filter[$no++] = "PAYMENT_DATE = TO_DATE('" . $kdtanggal . "','DD-MM-YYYY')";
             $this->view->d_tanggal = $kdtanggal;
         }
-        $this->view->data = $d_sppm->get_droping_detail_span_filter($filter);
+        $this->view->data = $d_sppm->get_droping_detail_span_filter($filter,$kdtanggal);
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -1794,7 +1794,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function SuspendSatkerPenerimaan_PDF($kdbulan = null, $kdntpn = null) {
+    public function SuspendSatkerPenerimaan_PDF($kdbulan = null,$kdntpn = null,$kdkppn = null,$kdkoreksi = null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1807,14 +1807,27 @@ class PDFController extends BaseController {
         if ($kdbulan != 'null') {
             $filter[$no++] = "SUBSTR(TANGGAL,4,3) = '" . $kdbulan . "'";
         }
-
-        if (Session::get('role') == KPPN) {
-            $filter[$no++] = "SEGMENT1 = 'ZZZ" . Session::get('id_user') . "'";
-        }
-
         if ($kdntpn != 'null') {
             $filter[$no++] = "RECEIPT_NUMBER = '" . $kdntpn . "'";
         }
+		if ($kdkppn != 'null') {
+                $filter[$no++] = "KPPN = '" . $kdkppn . "'";
+        } else {
+                $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
+        }
+		if ($kdkoreksi != 'null') {
+			if ($kdkoreksi == 'BELUM'){
+				$filter[$no++] = "RECEIPT_NUMBER = RECEIPT_NUMBER2";    
+			} else if ($kdkoreksi == 'SUDAH'){
+				$filter[$no++] = "RECEIPT_NUMBER <> RECEIPT_NUMBER2";    
+			}
+
+		}
+		
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
+        }
+
 
         $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
 
@@ -1843,7 +1856,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function SuspendAkunPenerimaan_PDF($kdbulan = null) {
+    public function SuspendAkunPenerimaan_PDF($kdbulan = null,$kdkppn = null,$kdkoreksi = null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1854,11 +1867,27 @@ class PDFController extends BaseController {
 
 
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "SEGMENT2 = '" . Session::get('id_user') . "'";
+            $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
             $filter[$no++] = "SEGMENT3 = '498111'";
         }
 
+		if ($kdkoreksi != 'null') {
+			if ($kdkoreksi == 'BELUM'){
+				$filter[$no++] = "RECEIPT_NUMBER = RECEIPT_NUMBER2";    
+			} else if ($kdkoreksi == 'SUDAH'){
+				$filter[$no++] = "RECEIPT_NUMBER <> RECEIPT_NUMBER2";    
+			}
+			
+		}
 
+		if ($kdkppn != 'null') {
+			$filter[$no++] = "KPPN = '" . $kdkppn . "'";
+			$filter[$no++] = "SEGMENT3 = '498111'";
+		} else {
+			$filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
+			$filter[$no++] = "SEGMENT3 = '498111'";
+		}
+			
         if ($kdbulan != 'null') {
             $filter[$no++] = "SUBSTR(TANGGAL,4,3) = '" . $kdbulan . "'";
         }
@@ -1867,7 +1896,7 @@ class PDFController extends BaseController {
         $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
         //var_dump($d_spm->get_gr_status_filter($filter));
 
-        $this->view->load('kppn/suspend_satker_penerimaan_PDF');
+        $this->view->load('kppn/suspend_akun_penerimaan_PDF');
         $d_log->tambah_log("Sukses");
     }
 

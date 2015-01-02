@@ -199,7 +199,7 @@ class DataGR_STATUS {
             $sql .= " AND " . $filter;
         }
         $sql .= " order by RECEIPT_NUMBER";
-        var_dump ($sql);
+        //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
