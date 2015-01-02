@@ -192,13 +192,14 @@ class DataGR_STATUS {
     public function get_konfirmasi_penerimaan($filter) {
         $sql = "SELECT * FROM "
                 . $this->_table2 . "
-				WHERE 1=1";
+				WHERE 1=1 
+                AND TANGGAL BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
 
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
         $sql .= " order by RECEIPT_NUMBER";
-        //var_dump ($sql);
+        var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
@@ -366,7 +367,7 @@ class DataGR_STATUS {
         $sql = "SELECT * 
 		FROM ".$this->_table3."
 		WHERE 
-		1=1 ";
+		1=1 AND SUBSTR(BULAN,3,4) = '".Session::get('ta')."'";
 
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;

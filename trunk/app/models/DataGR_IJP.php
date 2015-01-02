@@ -170,7 +170,7 @@ class DataGR_IJP {
 				FROM "
                 . $this->_table . " a
 				WHERE 
-				1=1"
+				1=1 AND TAHUN = '".Session::get('ta')."'"
 
         ;
         $no = 0;
