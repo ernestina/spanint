@@ -67,7 +67,8 @@ class DataDroping {
 				where jumlah_check_number_line_num is not null
                 and CREATION_DATE is not null
 				and  id in (select max(id) id from " . $this->_table . " 
-				where 1=1 ";
+				where 1=1 
+                AND CREATION_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         $no = 0;
         //var_dump($filter);
         foreach ($filter as $filter) {

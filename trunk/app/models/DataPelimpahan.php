@@ -51,7 +51,8 @@ class DataPelimpahan {
 				TGL_TERIMA,KPPN_INDUK, NOREK_501, NMREK_501, AKUN_TERIMA, JML_TERIMA,
 				NOSAKTI_BS, STATUS
 				FROM  " . $this->_table . "
-				WHERE 1=1 ";
+				WHERE 1=1 
+                AND TGL_LIMPAH BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         //xml = 520002000990_SP2D_O_20140408_101509_367.xml
         $no = 0;
