@@ -56,7 +56,8 @@ class DataSppm {
 				BANK_NAME, VENDOR_EXT_BANK_ACCOUNT_NUM, VENDOR_NAME, 
 				INVOICE_DESCRIPTION, FTP_FILE_NAME, RETURN_DESC, RETURN_CODE, KDKPPN, PAYMENT_METHOD, SORBOR_NUMBER, SORBOR_DATE
 				FROM " . $this->_table . "
-				WHERE FL_VOID <> 1";
+				WHERE FL_VOID <> 1 
+                AND PAYMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         //SP2D = 140181301002823
         //xml = 520002000990_SP2D_O_20140408_101509_367.xml
         $no = 0;
@@ -65,7 +66,7 @@ class DataSppm {
             $sql .= " AND " . $filter;
         }
         $sql .= " ORDER BY PAYMENT_DATE DESC, CREATION_DATE DESC";
-        //var_dump ($sql);
+        var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
