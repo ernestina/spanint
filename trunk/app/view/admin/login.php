@@ -60,6 +60,17 @@
                                     <div class="alert alert-warning" id="wpass" style="display:none; margin-top: 10px;"></div>
                                 </p>
 
+                                <p>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon"></span></span>
+                                        <select class="form-control" type="text" name="ta" id="ta">
+                                            <option value='2014' selected>2014</option>
+                                            <option value='2015'>2015</option>
+                                        </select>
+                                    </div>
+                                    <div class="alert alert-warning" id="wpass" style="display:none; margin-top: 10px;"></div>
+                                </p>
+
                                 <p><button type="submit" id="submit-login" class="btn btn-default btn-block" >Masuk</button></p>
 
                                 <br/>

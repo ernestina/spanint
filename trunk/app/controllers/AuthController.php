@@ -23,6 +23,7 @@ class AuthController extends BaseController {
 			$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
             $user = $_POST['user'];
             $pass = hash('sha256',$_POST['pass']);
+            $ta = $_POST['ta'];
             //var_dump($_POST['user']);
             //var_dump($_POST['pass']);
             $pwd = $pass;
@@ -68,7 +69,9 @@ class AuthController extends BaseController {
                 Session::set('role', $role);
                 Session::set('id_user', $res[3]);
                 Session::set('kd_satker', $res[4]);
+                Session::set('ta', $ta);
 				$d_log->tambah_log("Sukses");
+                //var_dump(Session::get('ta'));
                 header('location:' . URL);
             } else if ((int) $res[0] == 0) {
                 $this->view->error = "user tidak ditemukan!";
