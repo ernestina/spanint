@@ -64,8 +64,8 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         <select class="form-control" type="text" name="ta" id="ta">
-                                            <option value='2014' selected>2014</option>
-                                            <option value='2015'>2015</option>
+                                            <option value='2014'>2014</option>
+                                            <option value='2015' selected>2015</option>
                                         </select>
                                     </div>
                                     <div class="alert alert-warning" id="wpass" style="display:none; margin-top: 10px;"></div>

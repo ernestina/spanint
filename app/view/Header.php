@@ -174,16 +174,6 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;Laporan SPM Akhir Tahun</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahun">Data SPM Akhir Tahun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunNihil">Data SPM GU Nihil Akhir Tahun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunBUN">Data SPM Satker BUN Akhir Tahun</a></li>
-								</ul>
-                            </div>
-                        </li>
-
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
                                 <ul>
@@ -615,16 +605,6 @@
                                     <li><a href="<?php echo URL; ?>dataRetur/monitoringReturPkn">Monitoring Penyelesaian Retur - PKN</a></li>
                                     <li><a href="<?php echo URL; ?>dataRetur/monitoringRetur">Monitoring Retur SP2D</a></li>
                                 </ul>
-                            </div>
-                        </li>
-
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;Laporan SPM Akhir Tahun</h4>
-                        <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahun">Data SPM Akhir Tahun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunNihil">Data SPM GU Nihil Akhir Tahun</a></li>
-                                    <li><a href="<?php echo URL; ?>dataPMRTPKN/DataSPMAkhirTahunBUN">Data SPM Satker BUN Akhir Tahun</a></li>
-								</ul>
                             </div>
                         </li>
                         
