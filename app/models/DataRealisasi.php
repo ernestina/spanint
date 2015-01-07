@@ -42,6 +42,7 @@ class DataRealisasi {
     private $_pagu_61;
     private $_pagu_pembiayaan;
     private $_table1 = 'GL_BALANCES_V';
+    private $_table1_lama = 'GL_BALANCES_V_TL';
     private $_table2 = 't_satker';
     private $_table3 = 't_ba';
     private $_table4 = 't_lokasi';
@@ -91,8 +92,13 @@ class DataRealisasi {
 				, sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
 				, sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
 				, sum(ENCUMBRANCE_AMT) encumbrance 
-				FROM "
-                . $this->_table1 . " a,"
+				FROM ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        $sql .= " a,"
                 . $this->_table2 . " b 
 				where 1=1
 				and a.budget_type = '2' 
@@ -165,8 +171,13 @@ class DataRealisasi {
 				, sum(decode(substr(a.akun,1,2),'58',a.actual_amt,0)) belanja_58
 				, sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
 				, sum(ENCUMBRANCE_AMT) encumbrance 
-				FROM "
-                . $this->_table1 . " a,"
+				FROM ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        $sql .= " a,"
                 . $this->_table2 . " b 
 				where 1=1
 				and a.budget_type = '2' 
@@ -238,8 +249,13 @@ class DataRealisasi {
 				, sum(decode(substr(a.akun,1,2),'72',a.actual_amt,0)) belanja_71
 				, sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
 				, sum(ENCUMBRANCE_AMT) encumbrance 
-				FROM "
-                . $this->_table1 . " a,"
+				FROM ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        $sql .= " a,"
                 . $this->_table3 . " b 
 				where 1=1
 				and a.budget_type = '2'			
@@ -299,8 +315,13 @@ class DataRealisasi {
         Session::get('id_user');
         $sql = "select distinct
 				a.lokasi , b.nmlokasi 
-				FROM "
-                . $this->_table1 . " a ,"
+				FROM ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        $sql .= " a ,"
                 . $this->_table4 . " b 
 				
 				where 
@@ -333,8 +354,13 @@ class DataRealisasi {
         Session::get('id_user');
         $sql = "select distinct
 				a.lokasi , b.nmlokasi 
-				FROM "
-                . $this->_table1 . " a ,"
+				FROM ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        $sql .= " a ,"
                 . $this->_table4 . " b 
 				
 				where 
@@ -517,8 +543,13 @@ class DataRealisasi {
 				, sum(decode(substr(a.akun,1,2),'67',a.actual_amt,0)) belanja_67
 				, sum(decode(substr(a.akun,1,2),'68',a.actual_amt,0)) belanja_68
 				, sum(decode(substr(a.akun,1,2),'69',a.actual_amt,0)) belanja_69
-				FROM "
-                . $this->_table1 . " a,"
+				FROM ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        $sql .= " a,"
                 . $this->_table2 . " b, "
                 . $this->_table4 . " c 
 				where 
