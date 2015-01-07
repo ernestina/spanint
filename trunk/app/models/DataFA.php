@@ -68,8 +68,6 @@ class DataFA {
         }
 
         $sql .= " ORDER BY A.KPPN, A.AKUN ";
-        
-        echo ($sql);
 
         //var_dump($sql);
         $result = $this->db->select($sql);
