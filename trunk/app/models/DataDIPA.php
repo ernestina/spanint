@@ -27,7 +27,6 @@ class DataDipa {
     private $_line_amount;
     private $_nm_satker;
     private $_table1 = 'SPSA_BT_DIPA_V';
-    private $_table1_lama = 'SPSA_BT_DIPA_V_TL';
     private $_table2 = 't_satker';
     public $registry;
 
@@ -38,6 +37,12 @@ class DataDipa {
     public function __construct($registry = Registry) {
         $this->db = $registry->db;
         $this->registry = $registry;
+        
+        if ((''.Session::get('ta')) == date("Y")) {
+            $this->_table1 = 'SPSA_BT_DIPA_V';
+        } else {
+            $this->_table1 = 'SPSA_BT_DIPA_V_TL';
+        }
     }
 
     /*
@@ -46,15 +51,14 @@ class DataDipa {
      * return array objek Data Tetap */
 
     public function get_dipa_filter($filter) {
-        $sql = "SELECT A.*, B.NMSATKER FROM ";
-        
-        if ((''.Session::get('ta')) == date("Y")) {
-            $sql .= $this->_table1;
-        } else {
-            $sql .= $this->_table1_lama;
-        }
-        
-        $sql .= " A, " . $this->_table2 . " B WHERE A.SATKER_CODE=B.KDSATKER";
+        $sql = "SELECT A.*, B.NMSATKER
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table2 . " B  
+				WHERE 
+				A.SATKER_CODE=B.KDSATKER"
+
+        ;
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;

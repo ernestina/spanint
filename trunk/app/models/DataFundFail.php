@@ -24,11 +24,8 @@ class DataFundFail {
     private $_blokir_kontrak;
     private $_blokir_realisasi;
     private $_table1 = 'FUND_FAIL_V';
-    private $_table1_lama = 'FUND_FAIL_TL';
     private $_table2 = 'detail_fund_fail';
-    private $_table2_lama = 'detail_fund_fail_tl';
     private $_table3 = 'DETAIL_FUND_FAIL_KD';
-    private $_table3_lama = 'DETAIL_FUND_FAIL_TL';
     public $registry;
 
     /*
@@ -38,6 +35,16 @@ class DataFundFail {
     public function __construct($registry = Registry) {
         $this->db = $registry->db;
         $this->registry = $registry;
+        
+        if ((''.Session::get('ta')) == date("Y")) {
+            $this->_table1 = 'FUND_FAIL_V';
+            $this->_table2 = 'detail_fund_fail';
+            $this->_table3 = 'DETAIL_FUND_FAIL_KD';
+        } else {
+            $this->_table1 = 'FUND_FAIL_TL';
+            $this->_table2 = 'detail_fund_fail_tl';
+            $this->_table3 = 'DETAIL_FUND_FAIL_TL';
+        }
     }
 
     /*
@@ -46,13 +53,14 @@ class DataFundFail {
      * return array objek Data Tetap */
 
     public function get_fun_fail_filter($filter) {
-        $sql = "SELECT * FROM ";
-        if ((''.Session::get('ta')) == date("Y")) {
-            $sql .= $this->_table1;
-        } else {
-            $sql .= $this->_table1_lama;
-        }
-        $sql .= " where 1=1 and nvl(realisasi,0) + nvl(BLOKIR_KONTRAK,0) > 0 and description is not null";
+        $sql = "SELECT * 
+				FROM "
+                . $this->_table1 . "
+				where 1=1 
+				and nvl(realisasi,0) + nvl(BLOKIR_KONTRAK,0) > 0
+				and description is not null
+				"
+        ;
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
@@ -81,13 +89,12 @@ class DataFundFail {
     }
 
     public function get_detail_fun_fail_filter($filter) {
-        $sql = "SELECT * FROM ";
-        if ((''.Session::get('ta')) == date("Y")) {
-            $sql .= $this->_table2;
-        } else {
-            $sql .= $this->_table2_lama;
-        }
-        $sql .= " where 1=1"
+        $sql = "SELECT * 
+				FROM "
+                . $this->_table2 . "
+				where 1=1 
+				
+				"
         ;
         $no = 0;
         foreach ($filter as $filter) {
@@ -116,14 +123,13 @@ class DataFundFail {
     }
 
     public function get_detail_fun_fail_kd_filter($filter) {
-        $sql = "SELECT * FROM ";
-        if ((''.Session::get('ta')) == date("Y")) {
-            $sql .= $this->_table3;
-        } else {
-            $sql .= $this->_table3_lama;
-        }
-        $sql .= " where 1=1";
-        
+        $sql = "SELECT * 
+				FROM "
+                . $this->_table3 . "
+				where 1=1 
+				
+				"
+        ;
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;

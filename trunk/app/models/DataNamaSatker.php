@@ -17,9 +17,7 @@ class DataNamaSatker {
     private $_table1 = 'T_SATKER';
     private $_table2 = 'AP_CHECKS_ALL_V';
     private $_table3 = 'SPSA_BT_DIPA_V';
-    private $_table3_lama = 'SPSA_BT_DIPA_V_TL';
     private $_table4 = 'satker_max_revision';
-    private $_table4_lama = 'satker_max_revision_tl';
     public $registry;
 
     /*
@@ -29,6 +27,14 @@ class DataNamaSatker {
     public function __construct($registry = Registry) {
         $this->db = $registry->db;
         $this->registry = $registry;
+        
+        if ((''.Session::get('ta')) == date("Y")) {
+            $this->_table3 = 'SPSA_BT_DIPA_V';
+            $this->_table4 = 'satker_max_revision';
+        } else {
+            $this->_table3 = 'SPSA_BT_DIPA_V_TL';
+            $this->_table4 = 'satker_max_revision_tl';
+        }
     }
 
     /*
@@ -75,13 +81,8 @@ class DataNamaSatker {
     public function get_satker_dipa_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT *
-				FROM ";
-        if ((''.Session::get('ta')) == date("Y")) {
-            $sql .= $this->_table4;
-        } else {
-            $sql .= $this->_table4_lama;
-        }
-        $sql .= " WHERE 1=1 ";
+				FROM "
+                . $this->_table4 . " WHERE 1=1 ";
 
         $no = 0;
         foreach ($filter as $filter) {
