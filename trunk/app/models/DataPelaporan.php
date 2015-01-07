@@ -121,7 +121,7 @@ class DataPelaporan {
     public function get_laporan_ikhtisar($filter) {
         $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME,ARGUMENT_TEXT
 				FROM " . $this->_table . "
-				WHERE FILE_HASH <> ' ' AND PROGRAM_SHORT_NAME= '".$filter."'";
+				WHERE FILE_HASH <> ' ' AND PROGRAM_SHORT_NAME= '".$filter."' AND substr(ARGUMENT_TEXT,1,4) = '".Session::get('ta')."'";
         $no = 0;
         //var_dump($filter);
         $sql .= " ORDER BY REQUEST_ID DESC";
@@ -143,7 +143,7 @@ class DataPelaporan {
     public function get_laporan_pkn_bm($filter) {
         $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME, TO_DATE(substr(ARGUMENT_TEXT,0,10), 'yyyy/mm/dd') TGL_AWAL_LAPORAN,TO_DATE(substr(ARGUMENT_TEXT,22,10), 'yyyy/mm/dd') TGL_AKHIR_LAPORAN
 				FROM " . $this->_table . "
-				WHERE FILE_HASH <> ' ' ";
+				WHERE FILE_HASH <> ' ' AND substr(ARGUMENT_TEXT,1,4) = '".Session::get('ta')."'";
         $no = 0;
         //var_dump($filter);
         foreach ($filter as $filter) {
@@ -169,7 +169,7 @@ class DataPelaporan {
     public function get_laporan_pkn_bb($filter) {
         $sql = "SELECT REQUEST_ID, PROGRAM_SHORT_NAME, TO_DATE(substr(ARGUMENT_TEXT,0,10), 'yyyy/mm/dd') TGL_AKHIR_LAPORAN
 				FROM " . $this->_table . "
-				WHERE FILE_HASH <> ' ' ";
+				WHERE FILE_HASH <> ' ' AND substr(ARGUMENT_TEXT,1,4) = '".Session::get('ta')."'";
         $no = 0;
         //var_dump($filter);
         foreach ($filter as $filter) {
@@ -199,7 +199,7 @@ class DataPelaporan {
                 MAX(REQUESTED_START_DATE) REQUESTED_START_DATE, 
                 MAX(ACTUAL_START_DATE) ACTUAL_START_DATE, 
                 MAX(ACTUAL_COMPLETION_DATE) ACTUAL_COMPLETION_DATE
-                FROM  " . $this->_table . "
+                FROM  " . $this->_table . " 
                 WHERE PROGRAM_SHORT_NAME in (
                 'SPGLR00008',
                 'SPGLR00016',
@@ -211,7 +211,7 @@ class DataPelaporan {
                 'SPGLR00012',
                 'SPGLR00011',
                 'SPGLR00017',
-                'SPGLR00014') AND FILE_HASH <> ' ' 
+                'SPGLR00014') AND FILE_HASH <> ' ' AND substr(ARGUMENT_TEXT,1,4) = '".Session::get('ta')."'
                 GROUP BY PROGRAM_SHORT_NAME 
                 ORDER BY PROGRAM_SHORT_NAME";
         $no = 0;
@@ -296,7 +296,7 @@ class DataPelaporan {
                 'SPCMR00065',
                 'SPCMR00066',
                 'SPCMR00067',
-                'SPCMR00002') AND FILE_HASH <> ' ' 
+                'SPCMR00002') AND FILE_HASH <> ' ' AND substr(ARGUMENT_TEXT,1,4) = '".Session::get('ta')."'
                 GROUP BY PROGRAM_SHORT_NAME 
                 ORDER BY PROGRAM_SHORT_NAME";
         $no = 0;

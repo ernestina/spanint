@@ -327,18 +327,21 @@ class PelaporanController extends BaseController {
         
             $folder = 'SPGLR00258';
             $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $filter[$no++] = " substr(ARGUMENT_TEXT, 7,4) = '".Session::get('ta')."' ";
             $this->view->page_title = "Laporan Arus Kas per Akun Tingkat KPPN"; 
             
         } else if ($tipe == 'SPGLR00264') {
             
             $folder = 'SPGLR00264';
             $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $filter[$no++] = " substr(ARGUMENT_TEXT, 7,4) = '".Session::get('ta')."' ";
             $this->view->page_title = "Laporan Realisasi Anggaran Tingkat KPPN";
             
         } else if ($tipe == 'SPCMR00051') {
             
             $folder = 'SPCMR00051';
             $filter[$no++] = " PROGRAM_SHORT_NAME = '".$folder."' ";
+            $filter[$no++] = " substr(ARGUMENT_TEXT, 1,4) = '".Session::get('ta')."' ";
             $this->view->page_title = "Laporan Konsolidasi Saldo Kas KPPN";
             
         } else {
