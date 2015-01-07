@@ -32,6 +32,7 @@ class DataFA {
     private $_cash_limit;
     private $_invoice;
     private $_table1 = 'GL_BALANCES_V';
+    private $_table1_lama = 'GL_BALANCES_V_TL';
     private $_table2 = 't_satker';
     public $registry;
 
@@ -51,23 +52,24 @@ class DataFA {
 
     public function get_fa_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT Distinct A.*, B.NMSATKER 
-				FROM "
-                . $this->_table1 . " A, "
-                . $this->_table2 . " B 
-				WHERE 1=1 AND 
-				A.BUDGET_TYPE='2' AND
-				A.SATKER=B.KDSATKER
-				AND A.SUMMARY_FLAG = 'N' 
-				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
-				
-				";
+        $sql = "SELECT Distinct A.*, B.NMSATKER FROM ";
+        
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        
+        $sql .= " A, " . $this->_table2 . " B WHERE 1=1 AND A.BUDGET_TYPE='2' AND A.SATKER=B.KDSATKER AND A.SUMMARY_FLAG = 'N' AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0";
+        
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
 
         $sql .= " ORDER BY A.KPPN, A.AKUN ";
+        
+        echo ($sql);
 
         //var_dump($sql);
         $result = $this->db->select($sql);
@@ -104,8 +106,13 @@ class DataFA {
 	public function get_fa_minus_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT Distinct A.*, B.NMSATKER 
-				FROM "
-                . $this->_table1 . " A, "
+				FROM ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        $sql .= " A, "
                 . $this->_table2 . " B 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' AND
@@ -157,8 +164,13 @@ class DataFA {
     public function get_fa_summary_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT Distinct A.*, B.NMSATKER
-				FROM "
-                . $this->_table1 . " A, "
+				FROM ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        $sql .= " A, "
                 . $this->_table2 . " B 
 				WHERE 1=1
 				AND
@@ -209,8 +221,13 @@ class DataFA {
 	public function get_fa_summary_minus_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT Distinct A.*, B.NMSATKER
-				FROM "
-                . $this->_table1 . " A, "
+				FROM ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        }
+        $sql .= " A, "
                 . $this->_table2 . " B 
 				WHERE 1=1
 				AND
@@ -275,8 +292,13 @@ class DataFA {
 				sum(a.encumbrance_amt) encumbrance_amt,
 				sum(a.actual_amt) actual_amt,
 				sum(a.balancing_amt) balancing_amt 
-				FROM  "
-                . $this->_table1 . " A, "
+				FROM  ";
+        if ((''.Session::get('ta')) == date("Y")) {
+            $sql .= $this->_table1;
+        } else {
+            $sql .= $this->_table1_lama;
+        } 
+        $sql .= " A, "
                 . $this->_table2 . " B 
 				WHERE
 				A.BUDGET_TYPE='2' AND
