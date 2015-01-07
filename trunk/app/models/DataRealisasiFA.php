@@ -30,7 +30,7 @@ class DataRealisasiFA {
         if ((''.Session::get('ta')) == date("Y")) {
             $this->_table1 = 'realisasi_inv_all_v';
         } else {
-            $this->_table1 = 'realisasi_inv_all_v_tl';
+            $this->_table1 = 't1_realisasi_inv_all_v_tl';
         }
     }
 
