@@ -26,6 +26,12 @@ class DataRealisasiFA {
     public function __construct($registry = Registry) {
         $this->db = $registry->db;
         $this->registry = $registry;
+        
+        if ((''.Session::get('ta')) == date("Y")) {
+            $this->_table1 = 'realisasi_inv_all_v';
+        } else {
+            $this->_table1 = 'realisasi_inv_all_v_tl';
+        }
     }
 
     /*
