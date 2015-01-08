@@ -141,7 +141,7 @@ class DataGRController extends BaseController {
         } else {
             $filter[$no++] = "BULAN = '" . date('m', time()) . "'";
             $this->view->d_bulan = date('m', time());
-            $this->view->data = $d_spm1->get_gr_ijp_filter($filter);
+            //$this->view->data = $d_spm1->get_gr_ijp_filter($filter);
         }
 
         $this->view->data = $d_spm1->get_gr_ijp_filter($filter);
@@ -563,6 +563,7 @@ class DataGRController extends BaseController {
 
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "KPPN = '" . $_POST['kdkppn'] . "'";
+                $filter[$no++] = "SEGMENT1 = 'ZZZ" . $_POST['kdkppn'] . "'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
@@ -638,6 +639,7 @@ class DataGRController extends BaseController {
 
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "KPPN = '" . $_POST['kdkppn'] . "'";
+                $filter[$no++] = "SEGMENT1 = 'ZZZ" . $_POST['kdkppn'] . "'";
                 $filter[$no++] = "SEGMENT3 = '498111'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
