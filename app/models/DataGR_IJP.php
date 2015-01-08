@@ -101,7 +101,6 @@ class DataGR_IJP {
      * return array objek Data Tetap */
 
     public function get_gr_ijp_filter($filter) {
-        Session::get('id_user');
         $sql = "SELECT *
 				FROM "
                 . $this->_table1 . " 
@@ -114,7 +113,7 @@ class DataGR_IJP {
             $sql .= " AND " . $filter;
         }
         $sql .= " ORDER BY BANK_CODE, BANK_ACCOUNT_NUM ";
-        //var_dump ($sql);
+        //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
