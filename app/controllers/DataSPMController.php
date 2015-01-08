@@ -434,7 +434,15 @@ class DataSPMController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
+		 }
+		
+		
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdkppn'] != '') {
@@ -461,7 +469,7 @@ class DataSPMController extends BaseController {
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
 
-            $this->view->data = $d_spm1->get_satker_filter($filter);
+            //$this->view->data = $d_spm1->get_satker_filter($filter);
             //$this->view->render('kppn/NamaSatker');			
         }
         if (Session::get('role') == KANWIL) {
@@ -475,7 +483,7 @@ class DataSPMController extends BaseController {
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
-            //$this->view->data = $d_spm1->get_satker_filter($filter);
+            $this->view->data = $d_spm1->get_satker_filter($filter);
         }
         
         $d_last_update = new DataLastUpdate($this->registry);
@@ -497,7 +505,14 @@ class DataSPMController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
+		 }
+		 
         if ($kdsatker != '') {
             if (Session::get('role') == SATKER) {
                 $filter[$no++] = " SEGMENT1 =  '" .Session::get('kd_satker'). "'";
@@ -580,6 +595,15 @@ class DataSPMController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		 
+		 if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2014'";
+		 }
+		 
+		 
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "KDKPPN IN ( '" . $_POST['kdkppn'] . "')";
@@ -601,7 +625,7 @@ class DataSPMController extends BaseController {
 			
             //$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);
         
-
+		}
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
@@ -625,7 +649,7 @@ class DataSPMController extends BaseController {
         }
         //$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);
         //var_dump($d_spm1->get_error_spm_filter ($filter));
-		}
+		
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
@@ -641,6 +665,14 @@ class DataSPMController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2014'";
+		 }
+		 
         if ($jenis_spm != '') {
             $filter[$no++] = " JENDOK =  '" . $jenis_spm . "'";
             $this->view->jendok = $jenis_spm;
