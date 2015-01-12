@@ -344,6 +344,14 @@ class DataSPMController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		/*if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(tanggal_upload,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(tanggal_upload,'YYYY') = '2014'";
+		 }*/
+		 
 
         if (isset($_POST['submit_file'])) {
 
@@ -469,7 +477,7 @@ class DataSPMController extends BaseController {
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
 
-            //$this->view->data = $d_spm1->get_satker_filter($filter);
+            $this->view->data = $d_spm1->get_satker_filter($filter);
             //$this->view->render('kppn/NamaSatker');			
         }
         if (Session::get('role') == KANWIL) {
