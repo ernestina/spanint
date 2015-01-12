@@ -568,13 +568,6 @@ if (isset($this->data)) {
             if (v_tipesup == '1' || v_tipesup == '3') {
                 document.getElementById("namasupplier").value = '<?php echo Session::get('kd_satker'); ?>';
             }
-<?php } else { ?>
-            if (v_namasupplier == '') {
-                var wnamasupplier = 'Nama Supplier / Kode Satker harus diisi';
-                $('#wnamasupplier').html(wnamasupplier);
-                $('#wnamasupplier').fadeIn(200);
-                jml++;
-            }
 <?php } ?>
 
         if ((v_tipesup == '4' || v_tipesup == '5' || v_tipesup == '6' || v_tipesup == '7') && v_npwpsupplier == '') {
