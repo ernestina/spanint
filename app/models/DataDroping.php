@@ -53,7 +53,7 @@ class DataDroping {
         $sql = "select 
 				id
 				, BANK
-				, to_char(CREATION_DATE,'dd-mm-yyyy') CREATION_DATEX
+				,  to_char(NVL(CREATION_DATE,PAYMENT_DATE),'dd-mm-yyyy') CREATION_DATEX
 				, JUMLAH_FTP_FILE_NAME
 				,JUMLAH_CHECK_NUMBER
 				,JUMLAH_CHECK_NUMBER_LINE_NUM
@@ -68,13 +68,13 @@ class DataDroping {
                 and CREATION_DATE is not null
 				and  id in (select max(id) id from " . $this->_table . " 
 				where 1=1 
-                AND CREATION_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
+                AND NVL(CREATION_DATE,PAYMENT_DATE) BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
         $no = 0;
         //var_dump($filter);
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= "GROUP BY BANK,CREATION_DATE ) ORDER BY CREATION_DATE DESC";
+        $sql .= "GROUP BY BANK,NVL(CREATION_DATE,PAYMENT_DATE)  ) ORDER BY NVL(CREATION_DATE,PAYMENT_DATE)  DESC";
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();

@@ -53,8 +53,8 @@ class DataDropingController extends BaseController {
                 $this->view->d_tgl_awal = $tgl_awal;
                 $this->view->d_tgl_akhir = $tgl_akhir;
             }
-            $filter[$no++] = "CREATION_DATE BETWEEN TO_DATE ('" . date('Ymd', strtotime($tgl_awal)) . "','YYYYMMDD') 
-									AND TO_DATE ('" . date('Ymd', strtotime($tgl_akhir)) . "','YYYYMMDD')  ";
+            $filter[$no++] = "NVL(CREATION_DATE,PAYMENT_DATE) BETWEEN TO_DATE ('" . date('Ymd', strtotime($tgl_awal)) .
+                                "','YYYYMMDD') AND TO_DATE ('" . date('Ymd', strtotime($tgl_akhir)) . "','YYYYMMDD') ";
             $this->view->data = $d_sppm->get_droping_filter($filter);
         }
         if (Session::get('role') == ADMIN OR Session::get('role') == PKN) {
