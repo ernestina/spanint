@@ -31,6 +31,12 @@ class proses_revisi {
     public function __construct($registry = Registry) {
         $this->db = $registry->db;
         $this->registry = $registry;
+        
+        if ((''.Session::get('ta')) == date("Y")) {
+            $this->_table1 = 'PROSES_REVISI';
+        } else {
+            $this->_table1 = 'PROSES_REVISI_TL';
+        }
     }
 
     /*
