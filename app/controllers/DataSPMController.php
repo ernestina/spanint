@@ -193,6 +193,12 @@ class DataSPMController extends BaseController {
             }
 
             $this->view->data = $d_spm1->get_validasi_spm_filter($filter);
+        } else {             
+
+            $filter[$no++] = "CREATION_DATE BETWEEN TO_DATE('01/01/" . Session::get('ta') . " 00:00:01','DD/MM/YYYY hh24:mi:ss') AND TO_DATE('31/12" . Session::get('ta') . " 23:59:59','DD/MM/YYYY hh24:mi:ss')";
+            $this->view->d_tgl_awal = '01-01-'.Session::get('ta');
+            $this->view->d_tgl_akhir = '31-12-'.Session::get('ta');
+            
         }
 
         if (Session::get('role') == KANWIL) {
