@@ -34,8 +34,10 @@ class proses_revisi {
         
         if ((''.Session::get('ta')) == date("Y")) {
             $this->_table1 = 'PROSES_REVISI';
+            $this->_table3 = 'DETAIL_REVISI';
         } else {
             $this->_table1 = 'PROSES_REVISI_TL';
+            $this->_table3 = 'DETAIL_REVISI_TL';
         }
     }
 
