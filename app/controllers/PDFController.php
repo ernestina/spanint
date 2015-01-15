@@ -4494,7 +4494,7 @@ class PDFController extends BaseController {
 
 
         if ($kdkppn != 'null') {
-            $filter[$no++] = "KPPN_CODE = '" . $kdkppn . "'";
+            //$filter[$no++] = "KPPN_CODE = '" . $kdkppn . "'";
         }
 
         if ($kdtipesup != 'null') {
