@@ -207,9 +207,11 @@ if (Session::get('role') == SATKER) {
 
                         if (isset($_POST['kdkppn'])) {
                             $kppn = $_POST['kdkppn'];
-                        } else{
-                            $kppn = Session::get('id_user');
-                        }
+                        } 
+						if  (Session::get('role') == KPPN) {
+							 $kppn = Session::get('id_user');
+						}
+						
                         echo "<td td align='right'><a href=" . URL . "dataSPM/detailrekapsp2d/" . $value->get_jendok() . "/" . $kppn . "/" . $_POST['tgl_awal'] . "/" . $_POST['tgl_akhir'] . ">" . number_format($value->get_jumlah_sp2d()) . "</td>";
 
                         echo "</tr>	";
