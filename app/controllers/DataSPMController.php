@@ -693,7 +693,8 @@ class DataSPMController extends BaseController {
         }
         if ($kppn != '' AND Session::get('role') == KANWIL AND $_POST['kdkppn'] != '') {
             $filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
-        } elseif ($kppn != '') {
+        } 
+		elseif ($kppn != '') {
             $filter[$no++] = " KDKPPN =  '" . $kppn . "'";
             $this->view->kppn = $kppn;
         }
