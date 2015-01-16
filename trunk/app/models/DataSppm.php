@@ -722,7 +722,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '01'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = ".Session::get('ta')." 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 							GROUP BY  BANK_ACCOUNT_NAME
@@ -733,7 +733,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '02' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 							GROUP BY  BANK_ACCOUNT_NAME
@@ -744,7 +744,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '03'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 							GROUP BY BANK_ACCOUNT_NAME
@@ -755,7 +755,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '04'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -766,7 +766,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '05'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -777,7 +777,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '06' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -788,7 +788,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '07' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -799,7 +799,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '08' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -810,7 +810,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '09' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -821,7 +821,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '10' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -832,7 +832,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '11'
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
@@ -843,7 +843,7 @@ class DataSppm {
 							BANK_ACCOUNT_NAME LIKE '%GAJI-MDRI%' OR
 							BANK_ACCOUNT_NAME LIKE '%GAJI BRI%' )
                             AND TO_CHAR(PAYMENT_DATE,'MM') = '12' 
-                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".$Session::get('ta')."' 
+                            AND TO_CHAR(PAYMENT_DATE,'YYYY') = '".Session::get('ta')."' 
 							AND BANK_ACCOUNT_NAME NOT LIKE '%RETUR%'
 							" . $kppn . "
 						GROUP BY BANK_ACCOUNT_NAME
