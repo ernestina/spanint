@@ -52,8 +52,8 @@
                             echo "<h4>".$value->get_file_hash()."</h4>";
                             echo "</div>";
                             echo "<div class='col-md-4' style='text-align: right;'>";
-                            echo "<button type='button' class='btn btn-primary'><a href=".$this->fileURLdepan.$value->get_program_short_name()." style='text-decoration: none; color: white'><span class='glyphicon glyphicon-list-alt'></span> LIST LAPORAN</a></button>";
-                            echo " &nbsp; <button type='button' class='btn btn-warning'><a href=".$this->fileURL.$value->get_request_id().".PDF style='text-decoration: none; color: white'><span class='glyphicon glyphicon-download-alt'></span>" . "&nbsp;" .$value->get_actual_completion_date()."</a></button>";
+                            echo "<a class='btn btn-primary' href=".$this->fileURLdepan.$value->get_program_short_name()." style='text-decoration: none; color: white'><span class='glyphicon glyphicon-list-alt'></span> LIST LAPORAN</a>";
+                            echo " &nbsp; <a class='btn btn-warning'href=".$this->fileURL.$value->get_request_id().".PDF style='text-decoration: none; color: white'><span class='glyphicon glyphicon-download-alt'></span>" . "&nbsp;" .$value->get_actual_completion_date()."</a>";
                             
                             /*echo "<button type='button' class='btn btn-primary'><a href=".$this->fileURLdepan.$value->get_program_short_name()."><span class='glyphicon glyphicon-list-alt'></span>LIST LAPORAN</a></button>";
                             echo "<button type='button' class='btn btn-warning'><a href=".$this->fileURL.$value->get_request_id().".PDF><span class='glyphicon glyphicon-download-alt'></span>".$value->get_actual_completion_date()."</a></button>"; */
