@@ -66,7 +66,8 @@ class DataDroping {
 				from " . $this->_table . "
 				where id in (select max(id) id from " . $this->_table . " 
 				where 1=1 
-                AND NVL(PAYMENT_DATE,CREATION_DATE) BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
+                AND NVL(PAYMENT_DATE,CREATION_DATE) BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') 
+                and BANK <> 'KPH' ";
         $no = 0;
         //var_dump($filter);
         foreach ($filter as $filter) {
