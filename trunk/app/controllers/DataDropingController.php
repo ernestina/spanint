@@ -53,7 +53,7 @@ class DataDropingController extends BaseController {
                 $this->view->d_tgl_awal = $tgl_awal;
                 $this->view->d_tgl_akhir = $tgl_akhir;
             }
-            $filter[$no++] = "NVL(CREATION_DATE,PAYMENT_DATE) BETWEEN TO_DATE ('" . date('Ymd', strtotime($tgl_awal)) .
+            $filter[$no++] = "NVL(PAYMENT_DATE,CREATION_DATE) BETWEEN TO_DATE ('" . date('Ymd', strtotime($tgl_awal)) .
                                 "','YYYYMMDD') AND TO_DATE ('" . date('Ymd', strtotime($tgl_akhir)) . "','YYYYMMDD') ";
             $this->view->data = $d_sppm->get_droping_filter($filter);
         }
@@ -102,7 +102,7 @@ class DataDropingController extends BaseController {
             $this->view->d_bank = $bank;
         }
         if (!is_null($tanggal)) {
-            $filter[$no++] = "TO_CHAR(CREATION_DATE,'DD-MM-YYYY') = '" . $tanggal . "'";
+            $filter[$no++] = "TO_CHAR(NVL(PAYMENT_DATE,CREATION_DATE),'DD-MM-YYYY') = '" . $tanggal . "'";
             $this->view->d_tanggal = $tanggal;
         }
         $this->view->data = $d_sppm->get_droping_detail_filter($filter);

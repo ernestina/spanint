@@ -74,7 +74,7 @@ class DataDroping {
             $sql .= " AND " . $filter;
         }
         $sql .= "GROUP BY BANK,NVL(PAYMENT_DATE,CREATION_DATE)  ) ORDER BY NVL(PAYMENT_DATE,CREATION_DATE)  DESC";
-        var_dump ($sql);
+        //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
