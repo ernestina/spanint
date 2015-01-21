@@ -105,7 +105,7 @@
 </div>
 
 <div id="table-container" class="wrapper">
-    <form method='POST' action='downloadkonfirmasi' enctype='multipart/form-data'>
+    <form method='POST' action='downloadSuspend' enctype='multipart/form-data'>
     <table class="footable">
         <!--baris pertama-->
         <thead>

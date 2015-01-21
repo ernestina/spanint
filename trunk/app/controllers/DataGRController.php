@@ -538,6 +538,37 @@ class DataGRController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
     }
 
+    public function downloadSuspend() {
+        $d_spm1 = new DataGR_STATUS($this->registry);
+        //$filter = array();
+        $no = 0;
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (count($_POST['checkbox1']) != 0) {
+            $array = array("checkbox" => $_POST['checkbox1']);
+            $ids = implode("','", $array['checkbox']);
+
+            $this->view->data = $d_spm1->get_download_koreksi_penerimaan($ids);
+
+            $this->view->load('kppn/downloadkoreksi');
+        }
+        
+        if (count($_POST['checkbox1']) == 0) {
+            echo "<script>alert ('Belum ada yang dipilih (centang/checkmark))</script>";
+            header('location:' . URL . 'dataGR/SuspendSatkerPenerimaan');
+        }
+        
+        $d_log->tambah_log("Sukses");
+        
+
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
+    }
+
     public function SuspendSatkerPenerimaan() {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
@@ -639,7 +670,6 @@ class DataGRController extends BaseController {
 
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "KPPN = '" . $_POST['kdkppn'] . "'";
-                $filter[$no++] = "SEGMENT1 = 'ZZZ" . $_POST['kdkppn'] . "'";
                 $filter[$no++] = "SEGMENT3 = '498111'";
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);

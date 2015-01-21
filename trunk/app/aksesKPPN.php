@@ -92,6 +92,7 @@ $akses['DataGRKPPN'] = array(
     'detailCoAPenerimaan',
     'KonfirmasiPenerimaan',
     'downloadkonfirmasi',
+    'downloadSuspend',
     'SuspendSatkerPenerimaan',
     'SuspendAkunPenerimaan',
     'NTPNGanda',
