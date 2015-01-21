@@ -123,7 +123,7 @@
 </div>
 
 <div id="table-container" class="wrapper">
-    <form method='POST' action='downloadkonfirmasi' enctype='multipart/form-data'>
+    <form method='POST' action='downloadSuspend' enctype='multipart/form-data'>
     <table class="footable">
         <!--baris pertama-->
         <thead>
@@ -158,7 +158,7 @@
 						echo "<td>" . $value->get_mata_uang() . "</td>";
                         echo "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";
                         echo "<td><input name='checkbox1[]' type='checkbox' id='checkbox1' value='".$value->get_gr_batch_num()."'> </td>";
-						//echo "<td><input name='checkbox2[]' type='checkbox' id='checkbox2' value='".$value->get_gr_batch_num()."'> </td>";
+						//echo "<td><name='checkbox2[]' type='checkbox' id='checkbox2' value='".$value->get_gr_batch_num()."'> </td>";
                         echo "</tr>	";
                     }
                 }

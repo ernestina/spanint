@@ -68,6 +68,7 @@ $akses['DataGRSatker'] = array(
     'detailPenerimaan',
     'KonfirmasiPenerimaan',
     'downloadkonfirmasi',
+    'downloadSuspend',
     '__destruct'
 );
 

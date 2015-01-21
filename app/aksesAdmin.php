@@ -110,6 +110,8 @@ $akses['DataGRAdmin'] = array(
     'SuspendAkunPenerimaan',
     'NTPNGanda',
     'DetailNTPNGanda',
+    'downloadkonfirmasi',
+    'downloadSuspend',
     '__destruct'
 );
 
