@@ -347,6 +347,7 @@ $akses['PDFAdmin'] = array(
     'DataSPMAkhirTahunBUN_PDF',
     'SuspendAkunPenerimaan_PDF',
     'SuspendSatkerPenerimaan_PDF',
+    'NTPNGanda_PDF',
     '__destruct'
 );
 ?>
