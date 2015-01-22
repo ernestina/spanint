@@ -19,7 +19,7 @@ class DataUser {
     private $_kd_unit;
     private $_error;
     private $_valid = TRUE;
-    private $_table = 'USRAPL14.d_user';
+    private $_table = 'USRAPL14.d_user2';
     private $_table2 = 'MASTERAPL.t_kppn';
     private $_table3 = 'USRAPL14.t_limpah';
     private $_table1 = 't_satker';
@@ -59,7 +59,7 @@ class DataUser {
     }
 
     public function get_kppn_kanwil($kd_kanwil = null) {
-        $sql = "SELECT * FROM " . $this->_table . " WHERE  ";
+        $sql = "SELECT kd_d_kppn, nama_user, kd_kanwil FROM " . $this->_table . " WHERE  ";
         if (!is_null($kd_kanwil)) {
             $sql .= " kd_kanwil=" . $kd_kanwil . " AND";
         }

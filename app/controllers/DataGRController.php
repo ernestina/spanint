@@ -43,7 +43,46 @@ class DataGRController extends BaseController {
         }
         if (isset($_POST['submit_file'])) {
             if ($_POST['bulan'] != '') {
-                $bulan = $_POST['bulan'];
+                
+                if ($_POST['bulan'] == '01') {
+                    $bulan = 'januari';
+                }
+                elseif ($_POST['bulan'] == '02') {
+                    $bulan = 'februari';
+                }
+                elseif ($_POST['bulan'] == '03') {
+                    $bulan = 'maret';
+                }
+                elseif ($_POST['bulan'] == '04') {
+                    $bulan = 'april';
+                }
+                elseif ($_POST['bulan'] == '05') {
+                    $bulan = 'mei';
+                }
+                elseif ($_POST['bulan'] == '06') {
+                    $bulan = 'juni';
+                }
+                elseif ($_POST['bulan'] == '07') {
+                    $bulan = 'juli';
+                }
+                elseif ($_POST['bulan'] == '08') {
+                    $bulan = 'agustus';
+                }
+                elseif ($_POST['bulan'] == '09') {
+                    $bulan = 'september';
+                }
+                elseif ($_POST['bulan'] == '10') {
+                    $bulan = 'oktober';
+                }
+                elseif ($_POST['bulan'] == '11') {
+                    $bulan = 'nopember';
+                }
+                elseif ($_POST['bulan'] == '12') {
+                    $bulan = 'desember';
+                }
+                else {
+                    $bulan = date("F"); 
+                }
                 $this->view->d_bulan = $_POST['bulan'];
             }
             if ($_POST['kdkppn'] != '') {
@@ -81,7 +120,7 @@ class DataGRController extends BaseController {
             $this->view->d_tgl = $akun;
         }
         if (!is_null($bulan)) {
-            $filter[$no++] = "TRIM(to_char(tanggal_buku,'month')) =  '" . strtolower(Tanggal::bulan_indo_eng($bulan)) . "'";
+            $filter[$no++] = "to_char(tanggal_buku,'mm')  =  '" . $bulan . "'";
             $this->view->bulan = $bulan;
         }
         if (!is_null($kppn)) {

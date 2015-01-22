@@ -99,6 +99,52 @@ class Tanggal {
 
         switch ($bulan) {
             case 'JANUARI':
+                $month = 'January';
+                break;
+            case 'FEBRUARI':
+                $month = 'February';
+                break;
+            case 'MARET':
+                $month = 'March';
+                break;
+            case 'APRIL':
+                $month = 'April';
+                break;
+            case 'MEI':
+                $month = 'May';
+                break;
+            case 'JUNI':
+                $month = 'June';
+                break;
+            case 'JULI':
+                $month = 'July';
+                break;
+            case 'AGUSTUS':
+                $month = 'August';
+                break;
+            case 'SEPTEMBER':
+                $month = 'September';
+                break;
+            case 'OKTOBER':
+                $month = 'October';
+                break;
+            case 'NOVEMBER':
+                $month = 'November';
+                break;
+            case 'DESEMBER':
+                $month = 'December';
+                break;
+        }
+
+        return $month;
+    }
+
+    public static function bulan_eng_indo($bulan) {
+        $month = '';
+        $bulan = strtoupper($bulan);
+
+        switch ($bulan) {
+            case 'JANUARI':
                 $month = 'Januari';
                 break;
             case 'FEBRUARI':

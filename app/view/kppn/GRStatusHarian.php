@@ -750,7 +750,6 @@
                             }
                         }
                         ?>
-                        <option value='PNR'>183 | PENERIMAAN</option>
                     </select>
                         
                     <?php } ?>
