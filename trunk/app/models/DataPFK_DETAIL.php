@@ -46,8 +46,7 @@ class DataPFK_DETAIL{
 				,NAMA_WAJIB_BAYAR_SETOR
 				FROM " 
 				. $this->_table1. "
-				WHERE 1=1"
-				
+				WHERE 1=1 AND to_char(tanggal_buku,'yyyy') = '".Session::get('ta')."'"				
 				;
 				
 		$no=0;

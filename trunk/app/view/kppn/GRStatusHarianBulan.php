@@ -665,9 +665,6 @@
                                     if ($value->get_kppn() == $kppn->get_kd_d_kppn()){
                                         $nama_kppn = $kppn->get_nama_user();
                                     }
-                                    if ($value->get_kppn() == "PNR"){
-                                        $nama_kppn = "PENERIMAAN";
-                                    }
                                 }
                             }
                             echo "<td style='text-align: left' >" . $nama_kppn." (".$value->get_kppn() . ")</td>";

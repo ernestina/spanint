@@ -4,7 +4,7 @@
         <div class="row">
 
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Monitoring PFK Bulan <?php echo $this->d_bulan; ?></h2>
+                <h2>Monitoring PFK Bulan <?php echo Tanggal::bulan_indo($this->d_bulan); ?></h2>
             </div>
 
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -93,41 +93,44 @@ $tot_pot_spm = 0;
 $tot_set_mpn = 0;
 $tot_total = 0;
 //var_dump ($this->data);
-if ($this->d_bulan == 'Januari') {
-    $bulan = 'january';
+if ($this->d_bulan == '01') {
+    $bulan = '01';
 }
-if ($this->d_bulan == 'Februari') {
-    $bulan = 'februari';
+elseif ($this->d_bulan == '02') {
+    $bulan = '02';
 }
-if ($this->d_bulan == 'Maret') {
-    $bulan = 'maret';
+elseif ($this->d_bulan == '03') {
+    $bulan = '03';
 }
-if ($this->d_bulan == 'April') {
-    $bulan = 'april';
+elseif ($this->d_bulan == '04') {
+    $bulan = '04';
 }
-if ($this->d_bulan == 'Mei') {
-    $bulan = 'mei';
+elseif ($this->d_bulan == '05') {
+    $bulan = '05';
 }
-if ($this->d_bulan == 'Juni') {
-    $bulan = 'juni';
+elseif ($this->d_bulan == '06') {
+    $bulan = '06';
 }
-if ($this->d_bulan == 'Juli') {
-    $bulan = 'juli';
+elseif ($this->d_bulan == '07') {
+    $bulan = '07';
 }
-if ($this->d_bulan == 'Agustus') {
-    $bulan = 'agustus';
+elseif ($this->d_bulan == '08') {
+    $bulan = '08';
 }
-if ($this->d_bulan == 'September') {
-    $bulan = 'september';
+elseif ($this->d_bulan == '09') {
+    $bulan = '09';
 }
-if ($this->d_bulan == 'Oktober') {
-    $bulan = 'oktober';
+elseif ($this->d_bulan == '10') {
+    $bulan = '10';
 }
-if ($this->d_bulan == 'November') {
-    $bulan = 'november';
+elseif ($this->d_bulan == '11') {
+    $bulan = '11';
 }
-if ($this->d_bulan == 'Desember') {
-    $bulan = 'desember';
+elseif ($this->d_bulan == '12') {
+    $bulan = '12';
+}
+else {
+    $bulan = date("m");   
 }
 if (isset($this->data)) {
     if (empty($this->data)) {
@@ -203,65 +206,65 @@ if (isset($this->data)) {
                     <br>    
                     <label class="isian">Pilih bulan: </label>
                     <select type="text" class="form-control" name="bulan" id="bulan">
-                        <option value='Januari' <?php
-                        if ($this->d_bulan == 'Januari') {
+                        <option value='01' <?php
+                        if ($this->d_bulan == '01') {
                             echo "selected";
                         }
                         ?> >Januari</option>
-                        <option value='Februari' <?php
-                        if ($this->d_bulan == 'Februari') {
+                        <option value='02' <?php
+                        if ($this->d_bulan == '02') {
                             echo "selected";
                         }
                         ?> >Februari</option>
-                        <option value='Maret' <?php
-                                if ($this->d_bulan == 'Maret') {
-                                    echo "selected";
-                                }
-                                ?> >Maret</option>
-                        <option value='April' <?php
-                        if ($this->d_bulan == 'April') {
+                        <option value='03' <?php
+                        if ($this->d_bulan == '03') {
+                            echo "selected";
+                        }
+                        ?> >Maret</option>
+                        <option value='04' <?php
+                        if ($this->d_bulan == '04') {
                             echo "selected";
                         }
                         ?> >April</option>
-                        <option value='Mei' <?php
-                        if ($this->d_bulan == 'Mei') {
+                        <option value='05' <?php
+                        if ($this->d_bulan == '05') {
                             echo "selected";
                         }
                         ?> >Mei</option>
-                        <option value='Juni' <?php
-                                if ($this->d_bulan == 'Juni') {
-                                    echo "selected";
-                                }
-                                ?> >Juni</option>
-                        <option value='Juli' <?php
-                        if ($this->d_bulan == 'Juli') {
+                        <option value='06' <?php
+                        if ($this->d_bulan == '06') {
+                            echo "selected";
+                        }
+                        ?> >Juni</option>
+                        <option value='07' <?php
+                        if ($this->d_bulan == '07') {
                             echo "selected";
                         }
                         ?> >Juli</option>
-                        <option value='Agustus' <?php
-                        if ($this->d_bulan == 'Agustus') {
+                        <option value='08' <?php
+                        if ($this->d_bulan == '08') {
                             echo "selected";
                         }
                         ?> >Agustus</option>
-                        <option value='September' <?php
-                                if ($this->d_bulan == 'September') {
-                                    echo "selected";
-                                }
+                        <option value='09' <?php
+                        if ($this->d_bulan == '09') {
+                            echo "selected";
+                        }
                         ?> >September</option>
-                        <option value='Oktober' <?php
-                                if ($this->d_bulan == 'Oktober') {
-                                    echo "selected";
-                                }
+                        <option value='10' <?php
+                        if ($this->d_bulan == '10') {
+                            echo "selected";
+                        }
                         ?> >Oktober</option>
-                        <option value='November' <?php
-                                if ($this->d_bulan == 'November') {
-                                    echo "selected";
-                                }
+                        <option value='11' <?php
+                        if ($this->d_bulan == '11') {
+                            echo "selected";
+                        }
                         ?> >November</option>
-                        <option value='Desember' <?php
-                                if ($this->d_bulan == 'Desember') {
-                                    echo "selected";
-                                }
+                        <option value='12' <?php
+                        if ($this->d_bulan == '12') {
+                            echo "selected";
+                        }
                         ?> >Desember</option>
                         <!--option value='Validated' <?php //if ($this->status==Validated){echo "selected";} ?>>Validated</option>
                         <option value='Error' <?php //if ($this->status==Error){echo "selected";} ?>>Error</option-->
