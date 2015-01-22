@@ -17,7 +17,7 @@
 				//----------------------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 
-				if (Session::get('role') == ADMIN  || Session::get('role') == DJA) {
+				if (Session::get('role') == ADMIN  || Session::get('role') == DJA || Session::get('role') == KANWIL) {
 						if (isset($this->d_nama_kppn)) {						
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
@@ -34,23 +34,6 @@
 						?>
 						<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 						<?php
-				}
-				if (Session::get('role') == KANWIL) {
-					if (isset($this->d_nama_kppn)) {
-						foreach ($this->d_nama_kppn as $kppn) {
-							$kdkppn = $kppn->get_kd_satker();
-						 }
-					} else {
-						$kdkppn ='null';
-					}
-					if (isset($this->satker_code)) {
-						$kdsatker=$this->satker_code;
-					} else {
-						$kdsatker='null';
-					}
-					?>
-					<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
 				}
 				if (Session::get('role') == KPPN) {
 					if (isset($this->d_nama_kppn)) {

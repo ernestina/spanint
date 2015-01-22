@@ -74,7 +74,7 @@ if (Session::get('role') == KPPN) {
     <a href="<?php echo URL; ?>PDF/RealisasiFA_1_Minus_51_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 	<?php
 }
-if (Session::get('role') == KANWIL || Session::get('role') == ADMIN ) {
+if (Session::get('role') == KANWIL || Session::get('role') == ADMIN || Session::get('role') == DJA ) {
 
 
 		if (isset($this->kppn_code)) {
@@ -110,38 +110,7 @@ if (Session::get('role') == KANWIL || Session::get('role') == ADMIN ) {
 	   
 
 }
-if (Session::get('role') == DJA) {
 
-		if (isset($this->kppn_code)) {
-				$kdkppn = $this->kppn_code;
-			}else{
-				$kdkppn = 'null';
-		}
-		if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			}else{
-				$kdsatker = 'null';
-		}
-		if (isset($this->account_code)) {
-				$kdakun = $this->account_code;
-			}else{
-				$kdakun ='null';
-		}
-		if (isset($this->program_code)) {
-				$kdprogram = $this->program_code;
-			}else{
-				$kdprogram = 'null';
-		}
-		if (isset($this->output_code)) {
-				$kdoutput = $this->output_code;	
-			}else{
-				$kdoutput = 'null';
-		}
-	    ?>
-    <a href="<?php echo URL; ?>PDF/RealisasiFA_1_Minus_51_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-	<?php
-
-}
 ?>
 
 
