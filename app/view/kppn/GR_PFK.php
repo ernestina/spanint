@@ -56,7 +56,7 @@ if (isset($this->d_nama_kppn)) {
     }
 }
 
-echo " Bulan " .$this->bulan;
+echo " Bulan " .Tanggal::bulan_indo($this->bulan);
 ?>
             </div>
 
