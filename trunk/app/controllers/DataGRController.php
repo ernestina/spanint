@@ -602,9 +602,16 @@ class DataGRController extends BaseController {
                 $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
             }
 
-            if ($_POST['bulan'] != '') {
+            /*if ($_POST['bulan'] != '') {
                 $filter[$no++] = "SUBSTR(TANGGAL,4,3) = '" . $_POST['bulan'] . "'";
                 $this->view->d_bulan = $_POST['bulan'];
+            }*/
+            
+            if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
+                $filter[$no++] = "TANGGAL BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') 
+								AND TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD')  ";
+                $this->view->d_tgl_awal = $_POST['tgl_awal'];
+                $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
 
             if ($_POST['ntpn'] != '') {
@@ -679,9 +686,16 @@ class DataGRController extends BaseController {
                 $filter[$no++] = "SEGMENT3 = '498111'";
             }
 
-            if ($_POST['bulan'] != '') {
+            /*if ($_POST['bulan'] != '') {
                 $filter[$no++] = "SUBSTR(TANGGAL,4,3) = '" . $_POST['bulan'] . "'";
                 $this->view->d_bulan = $_POST['bulan'];
+            }*/
+            
+            if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
+                $filter[$no++] = "TANGGAL BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') 
+								AND TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD')  ";
+                $this->view->d_tgl_awal = $_POST['tgl_awal'];
+                $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
             $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
         }

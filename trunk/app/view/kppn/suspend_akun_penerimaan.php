@@ -74,13 +74,13 @@
             <div class="col-md-6 col-sm-12">
                 <?php
                 if (isset($this->d_kd_kppn)){
-                    echo "KPPN : ".$this->d_kd_kppn;                
+                    echo "KPPN : ".$this->d_kd_kppn."<br/>";                
                 }
-                if (isset($this->d_bulan)){
-                    echo "BULAN : ".$this->d_bulan;                
+                if (isset($this->d_tgl_awal) && isset($this->d_tgl_akhir)){
+                    echo "Tanggal : ".$this->d_tgl_awal." s.d ".$this->d_tgl_akhir."<br/>";                
                 }
                 if (isset($this->ntpn)){
-                    echo "NTPN : ".$this->d_ntpn;                
+                    echo "NTPN : ".$this->d_ntpn."<br/>";                
                 }
                 if (isset($this->d_koreksi)){
                     echo "KOREKSI : ".$this->d_koreksi;                
@@ -214,7 +214,7 @@
 					
 
 					
-					<label class="isian">Pilih bulan: </label>
+					<!--<label class="isian">Pilih bulan: </label>
 					
                     <select class="form-control" type="text" name="bulan" id="bulan">
 					
@@ -256,11 +256,11 @@
                         <option value='DEC' <?php if ($this->d_bulan == 'DEC') {
     echo "selected";
 } ?> >DESEMBER</option>
-                        <!--option value='Validated' <?php //if ($this->status==Validated){echo "selected";} ?>>Validated</option>
-                        <option value='Error' <?php //if ($this->status==Error){echo "selected";} ?>>Error</option-->
+                        <!option value='Validated' <?php //if ($this->status==Validated){echo "selected";} ?>>Validated</option>
+                        <option value='Error' <?php //if ($this->status==Error){echo "selected";} ?>>Error</option>
 
                     </select>
-                    <br/>
+                    <br/-->
                     <label class="isian">Koreksi: </label>
                     <select class="form-control" type="text" name="koreksi" id="koreksi">
                         <option value='' <?php if ($this->d_koreksi == '') {
@@ -282,9 +282,18 @@
                     <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
                     <!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
                         
-
+                    <div id="wtgl" class='alert alert-danger' style='display:none;'></div>
+                    <label class="isian">Tanggal: </label>
+                    <div class="input-daterange input-group" id="datepicker" style="width: 100%">
+                        <input class="form-control" type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)) {
+                            echo $this->d_tgl_awal;
+                        } ?>">
+                        <span class="input-group-addon">s.d.</span>
+                        <input class="form-control" type="text" class="tanggal" name="tgl_akhir" id="tgl_akhir" value="<?php if (isset($this->d_tgl_akhir)) {
+                            echo $this->d_tgl_akhir;
+                        } ?>">
+                    </div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="">Kirim</button>
                 </div>
