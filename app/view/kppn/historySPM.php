@@ -12,61 +12,50 @@
                 <?php
 				//----------------------------------------------------
                 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-                if (Session::get('role') == KANWIL) {
-						if (isset($this->d_nama_kppn)) {
-							foreach ($this->d_nama_kppn as $kppn) {
-								$kdkppn = $kppn->get_kd_satker();
-							}
-						} else {
-							 $kdkppn =$this->kd_kppn;
+                if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+					if (isset($this->d_nama_kppn)) {
+						foreach ($this->d_nama_kppn as $kppn) {
+							$kdkppn = $kppn->get_kd_satker();
 						}
-						if (isset($this->d_invoice)) {
-							$invoice = $this->d_invoice;
-						} else {
-							if (isset($this->data)) {
-								foreach ($this->data as $value) {
-									$invoice =$value->get_invoice_num();
-								} 
+						$sp2d = 'null';
+						
+					} else {
+						foreach ($this->data as $value) {
+							if($value->get_check_number() != '-'){
+							$sp2d =$value->get_check_number();
+							$kdkppn = substr($sp2d, 2, 3);
 							
 							}
+						}
+						 
+					}
+					if (isset($this->invoice_num)) {
+						$invoice = $this->invoice_num;
+					} else {
+						if (isset($this->data)) {
+							foreach ($this->data as $value) {								
+								$invoice =$value->get_invoice_num();
+							} 
+						
+						}
 
- 						}
+					}
 					?>
 									
-						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $invoice . "/" . $sp2d . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
                 }
-                if (Session::get('role') == ADMIN) {
-						if (isset($this->d_nama_kppn)) {
-							foreach ($this->d_nama_kppn as $kppn) {
-								$kdkppn = $kppn->get_kd_satker();
-							}
-						}else{
-							$kdkppn =$this->kd_kppn;
-						} 
-						if (isset($this->d_invoice)) {
-							$invoice = $this->d_invoice;
-						} else {
-							//$invoice ='null';
-							if (isset($this->data)) {
-								foreach ($this->data as $value) {
-									$invoice =$value->get_invoice_num();
-								} 
-							
-							}
-						}
-					?>
-									
-						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-                }
+                
                 if (Session::get('role') == KPPN) {
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
 							}
+							$sp2d = 'null';
+
 						} else {
 							 $kdkppn=Session::get('id_user');
+							 $sp2d = 'null';
 						}
 						if (isset($this->d_invoice)) {
 							$invoice = $this->d_invoice;
@@ -81,7 +70,7 @@
 						}
 					?>
 									
-						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $invoice . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
 					
                 }
@@ -91,8 +80,11 @@
 							foreach ($this->d_nama_kppn as $kppn) {
 								$kdkppn = $kppn->get_kd_satker();
 							}
+							$sp2d = 'null';
+
 						} else {
 							 $kdkppn=Session::get('id_user');
+							 $sp2d = 'null';
 						}
 						if (isset($this->d_invoice)) {
 							$invoice = $this->d_invoice;
@@ -108,7 +100,7 @@
 						}
 					?>
 									
-						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $kdkppn . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $invoice . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
 					
                 }

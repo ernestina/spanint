@@ -21,9 +21,7 @@
                         if (isset($this->d_kd_kppn)) {
                             $kdkppn = $this->d_kd_kppn;
                         } else {
-                            foreach ($this->data as $kppn) {
-                                $kdkppn = $kppn->get_kppn_code();
-                            }
+                                $kdkppn = 'null';                 
                         }
 
                         if (isset($this->d_tipesup)) {

@@ -74,7 +74,7 @@ if (Session::get('role') == KPPN) {
     <a href="<?php echo URL; ?>PDF/RealisasiFA_1_Minus_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 	<?php
 }
-if (Session::get('role') == KANWIL || Session::get('role') == ADMIN ) {
+if (Session::get('role') == KANWIL || Session::get('role') == ADMIN || Session::get('role') == DJA ) {
 
 
 		if (isset($this->kppn_code)) {

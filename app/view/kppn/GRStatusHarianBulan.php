@@ -13,15 +13,8 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 		
-		if (Session::get('role') == KANWIL) {
-			if (isset($this->d_bulan)) {
-				$kdbulan = $this->d_bulan;
-			}else{
-				$kdbulan ='null';
-			}
-			
-        }
-        if (Session::get('role') == ADMIN) {
+		
+        if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
 				if (isset($this->d_bulan)) {
 					$kdbulan = $this->d_bulan;
 				}else{

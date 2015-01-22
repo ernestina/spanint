@@ -13,8 +13,6 @@
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 	if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
-		if(isset($this->d_invoice) || isset($this->invoice) || isset($this->JenisSP2D) ||
-		isset($this->JenisSPM) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
 
 		   foreach ($this->data as $value) {
 				$satker = substr($value->get_invoice_num(), 7, 6);
@@ -58,8 +56,8 @@
 
 			<?php
 			//----------------------------------------------------		
-	}
 
+			
 }	
  	if (Session::get('role') == KPPN) {
 

@@ -15,9 +15,8 @@
                                 <?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
-		if (Session::get('role') == KANWIL) {
+		if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
 				if (isset($this->d_nama_kppn)) {
-					//var_dump(in_array(0, $this->d_nama_kppn, true));
 					
 						foreach ($this->d_nama_kppn as $kppn) {
 							$kdkppn = $kppn->get_kd_satker();
@@ -29,20 +28,7 @@
 					 $kdkppn = 'null';
 				}        
         }
-        if (Session::get('role') == ADMIN) {
-				if (isset($this->d_nama_kppn)) {
-					//var_dump(in_array(0, $this->d_nama_kppn, true));
-					
-						foreach ($this->d_nama_kppn as $kppn) {
-							$kdkppn = $kppn->get_kd_satker();
-						}
-						if(EMPTY($kdkppn)){
-							$kdkppn = 'PNR';
-						}
-				}else{
-					 $kdkppn = 'null';
-				}        
-		}
+        
         if (Session::get('role') == KPPN) {            
 				$kdkppn = Session::get('id_user');		
 		}
