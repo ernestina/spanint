@@ -129,6 +129,7 @@ class DataGRController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kppn);
             }
+			$this->view->d_nm_kdkppn = $kppn;
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";

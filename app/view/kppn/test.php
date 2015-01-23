@@ -12,26 +12,50 @@
                 <?php
                 //----------------------------------------------------
                 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-                if (isset($this->d_bulan) || isset($this->d_kd_kppn)
-                ) {
-                    if (isset($this->d_bulan)) {
-                        $kdbulan = $this->d_bulan;
-                    } else {
-                        $kdbulan = null;
-                    }
-                    if (isset($this->d_kd_kppn)) {
-                        $kdkppn = $this->d_kd_kppn;
-                    } else {
-                        $kdkppn = Session::get('id_user');
-                    }
-					if ($kdkppn<=0){
-						$kdkppn="SEMUAKPPN";
+                
+				if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+					if (isset($this->d_bulan) || isset($this->d_kd_kppn)) {
+						if (isset($this->d_bulan)) {
+							$kdbulan = $this->d_bulan;
+							
+						} else {
+							$kdbulan = 'null';
+						}
+						if (isset($this->d_kd_kppn)) {
+							$kdkppn = $this->d_kd_kppn;
+							
+						} else {
+							$kdkppn = 'null';
+						}
+						if ($kdkppn<=0){
+								$kdkppn="SEMUAKPPN";
+						}
+						
+						?>
+						<a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<?php
+						//----------------------------------------------------		
 					}
-                    ?>
-                    <a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                    <?php
-                    //----------------------------------------------------		
-                }
+				}
+				
+				if (Session::get('role') == KPPN) {
+					if (isset($this->d_bulan)) {
+						if (isset($this->d_bulan)) {
+							$kdbulan = $this->d_bulan;
+						} else {
+							$kdbulan = null;
+						}
+						
+						$kdkppn = Session::get('id_user');
+						
+						
+						?>
+						<a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<?php
+						//----------------------------------------------------		
+					}
+				}
+
                 ?>
 
 
