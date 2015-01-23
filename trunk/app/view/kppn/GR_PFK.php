@@ -23,13 +23,18 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 
-                if (isset($this->data)) {
-                    foreach ($this->data as $value) {
-                        $kdbulan = substr($value->get_tanggal_bayar(), 3, 2);
-                        $kdakun = $value->get_akun();
-                        $kdkppn = $value->get_kppn();
-                    }
-                }
+				if (isset($this->d_nm_kdkppn)) {
+					$kdkppn =$this->d_nm_kdkppn;
+				}
+				
+				if (isset($this->bulan)) {
+					$kdbulan =$this->bulan;
+				}
+				
+				if (isset($this->d_tgl)) {
+					$kdakun =$this->d_tgl;					
+				}
+				
                 ?>
                 <a href="<?php echo URL; ?>PDF/GR_PFK_DETAIL1_PDF/<?php echo $kdakun . "/" . $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 

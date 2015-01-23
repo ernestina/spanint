@@ -22,16 +22,21 @@
 			IF(isset($this->d_bulan) || isset($this->ntpn) || isset($this->d_kd_kppn) || isset($this->d_koreksi) ){
 				if (Session::get('role') == KPPN) {
 					
-							$kdkppn=Session::get('id_user');
+							$kdkppn='null';
 						if (isset($this->d_koreksi)) {
 							$kdkoreksi = $this->d_koreksi;
 						} else {
 							$kdkoreksi = "null";
 						}
-						if (isset($this->d_bulan)) {
-							$kdbulan = $this->d_bulan;
+						if (isset($this->d_tgl_awal)) {
+							$kdtgl_awal = $this->d_tgl_awal;
 						} else {
-							$kdbulan = "null";
+							$kdtgl_awal='null'; 
+						}
+						if (isset($this->d_tgl_akhir)) {
+							$kdtgl_akhir = $this->d_tgl_akhir;
+						} else {
+							$kdtgl_akhir ='null';
 						}
 						if (isset($this->ntpn)) {
 							$kdntpn = $this->ntpn;
@@ -57,10 +62,15 @@
 							$kdkoreksi = "null";
 						}
 					
-						if (isset($this->d_bulan)) {
-							$kdbulan = $this->d_bulan;
+						if (isset($this->d_tgl_awal)) {
+							$kdtgl_awal = $this->d_tgl_awal;
 						} else {
-							$kdbulan = "null";
+							$kdtgl_awal='null'; 
+						}
+						if (isset($this->d_tgl_akhir)) {
+							$kdtgl_akhir = $this->d_tgl_akhir;
+						} else {
+							$kdtgl_akhir ='null';
 						}
 						if (isset($this->ntpn)) {
 							$kdntpn = $this->ntpn;
@@ -72,7 +82,7 @@
 					}
                
 			?>
-				<a href="<?php echo URL; ?>PDF/SuspendSatkerPenerimaan_PDF/<?php echo $kdbulan . "/" . $kdntpn . "/" . $kdkppn . "/" . $kdkoreksi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				<a href="<?php echo URL; ?>PDF/SuspendSatkerPenerimaan_PDF/<?php echo $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdntpn . "/" . $kdkppn . "/" . $kdkoreksi; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 			<?php
 			 }
 			//---------------------------------------------------------
