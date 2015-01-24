@@ -201,6 +201,7 @@ class FPDF_AutoWrapTable extends FPDF {
                         '',
                         '',
                         '',
+						'',
                         ''
             ));
 		

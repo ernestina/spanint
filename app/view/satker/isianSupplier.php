@@ -21,8 +21,12 @@
                         if (isset($this->d_kd_kppn)) {
                             $kdkppn = $this->d_kd_kppn;
                         } else {
-                                $kdkppn = 'null';                 
-                        }
+							if (isset($this->data)) {		
+								foreach ($this->data as $value) {
+									$kdkppn =$value->get_kppn_code();
+									}
+							}
+						}
 
                         if (isset($this->d_tipesup)) {
                             $kdtipesup = $this->d_tipesup;
@@ -135,9 +139,11 @@
                     if (isset($this->d_kd_kppn)) {
                         $kdkppn = $this->d_kd_kppn;
                     } else {
-                        foreach ($this->data as $kppn) {
-                                $kdkppn = $kppn->get_kppn_code();
-                            }
+                        if (isset($this->data)) {		
+								foreach ($this->data as $value) {
+									$kdkppn =$value->get_kppn_code();
+									}
+							}
                     }
 
                     if (isset($this->d_tipesup)) {

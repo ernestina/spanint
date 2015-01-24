@@ -1306,6 +1306,14 @@ class PDFController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if (Session::get('role') == BANK) {
+            $filter[$no++] = "BANK = '" . Session::get('kd_satker') . "' ";
+            $this->view->d_bank = Session::get('kd_satker');
+            $tgl_awal = date('Ymd');
+            $tgl_akhir = date('Ymd');
+            $this->view->data = $d_sppm->get_droping_filter($filter);
+        }
 
 
         if ($kdbank != 'null') {
@@ -1314,8 +1322,12 @@ class PDFController extends BaseController {
             }
         }
         if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
-            $filter[$no++] = "CREATION_DATE BETWEEN TO_DATE (" . date('Ymd', strtotime($kdtgl_awal)) . ",'YYYYMMDD') 
-									AND TO_DATE (" . date('Ymd', strtotime($kdtgl_akhir)) . ",'YYYYMMDD')  ";
+		
+			//$kdtgl1 = substr($kdtgl_awal, 6, 4) . substr($kdtgl_awal,3, 2) . substr($kdtgl_awal, 0, 2);
+			$kdtgl1 = strtotime($kdtgl_awal);
+			$kdtgl2 = strtotime($kdtgl_akhir);
+            $filter[$no++] = "NVL(PAYMENT_DATE,CREATION_DATE) BETWEEN TO_DATE ('" . date('Ymd', $kdtgl1) .
+                                "','YYYYMMDD') AND TO_DATE ('" . date('Ymd', $kdtgl2) . "','YYYYMMDD') ";
             $tglawal = array("$kdtgl_awal");
             $tglakhir = array("$kdtgl_akhir");
 
@@ -1362,6 +1374,7 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
         $this->view->load('pkn/droping_PDF');
+		//$this->view->render('pkn/droping_PDF');
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
@@ -1429,7 +1442,7 @@ class PDFController extends BaseController {
             $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
         }
         if ($kdbulan != 'null') {
-			if (Session::get('role') == ADMIN) {
+			if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
 				if ($kdbulan == '01') {
                     $kdbulan = 'januari';
                 }
@@ -1806,8 +1819,6 @@ class PDFController extends BaseController {
 			$filter[$no++] = "KPPN = '" . $kdkppn . "'";
 			$filter[$no++] = "SEGMENT1 = 'ZZZ" . $kdkppn . "'";
 				
-        } else {
-			$filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
         }
 
         if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
@@ -1963,7 +1974,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 	
-//baru	
+
     public function grStatusHarian_PDF($kdkppn = null) {
         $d_spm1 = new DataGR_IJP($this->registry);
         $filter = array();
@@ -2107,7 +2118,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-
+	
 //------------------------------------------------------
 //Function PDF untuk DataKppnController(DataKppnController.php)
 //------------------------------------------------------
@@ -4453,7 +4464,6 @@ class PDFController extends BaseController {
         }
 		if ($kdnorek != 'null') {
 				$filter[$no++] = "NOREK_PERSEPSI = '" . $kdnorek . "'";
-				$this->view->d_no_rek_persepsi = $kdnorek;
             }
 
         if ($kdstatus != 'null') {
@@ -5221,7 +5231,7 @@ class PDFController extends BaseController {
 		$this->view->load('blu/cariSP3_PDF');
     }
 	
-	public function DataRealisasiBLU_PDF($kdsatker=null, $kdsumberdana=null) {
+	public function DataRealisasiBLU_PDF($kdsatker=null, $kdsumberdana=null, $kdrumpun=null) {
         $d_spm1 = new DataBLU($this->registry);
         $filter = array();
         $no = 0;
@@ -5239,6 +5249,21 @@ class PDFController extends BaseController {
                 $filter[$no++] = "SUBSTR(A.DANA,1,1) = '" . $kdsumberdana . "'";
                 $this->view->SumberDana = $kdsumberdana;
             }
+			if ($kdrumpun == 'Kesehatan'){
+					 $filter[$no++] = "C.RUMPUN = 'Kesehatan'";
+			}
+			if ($kdrumpun == 'Pendidikan'){
+				 $filter[$no++] = "C.RUMPUN = 'Pendidikan'";
+			}
+			if ($kdrumpun == 'Pengelola'){
+				 $filter[$no++] = "C.RUMPUN = 'Pengelola Dana'";
+			}
+			if ($kdrumpun == 'Kawasan'){
+				 $filter[$no++] = "C.RUMPUN = 'Kawasan'";
+			}
+			if ($kdrumpun == 'Barang'){
+				 $filter[$no++] = "C.RUMPUN = 'Barang Jasa Lainnya'";
+			}
             			
 					 //-------------------------
         if (Session::get('role') == SATKER) {
@@ -5277,6 +5302,80 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
 		$this->view->load('blu/RealisasiBLU_PDF');
     }
+	
+		public function DataRealisasiBelanjaBLU_PDF($kdsatker=null, $kdsumberdana=null, $kdrumpun=null) {
+        $d_spm1 = new DataBLU($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+		
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+            
+
+            if ($kdsatker != 'null') {
+                $filter[$no++] = "A.SATKER = '" . $kdsatker . "'";
+            }
+			if ($kdsumberdana != 'null') {
+                $filter[$no++] = "SUBSTR(A.DANA,1,1) = '" . $kdsumberdana . "'";
+            }
+			if ($kdrumpun != 'null') {
+				
+				if ($kdrumpun == 'Kesehatan'){
+					 $filter[$no++] = "C.RUMPUN = 'Kesehatan'";
+				}
+				if ($kdrumpun == 'Pendidikan'){
+					 $filter[$no++] = "C.RUMPUN = 'Pendidikan'";
+				}
+				if ($kdrumpun == 'Pengelola'){
+					 $filter[$no++] = "C.RUMPUN = 'Pengelola Dana'";
+				}
+				if ($kdrumpun == 'Kawasan'){
+					 $filter[$no++] = "C.RUMPUN = 'Kawasan'";
+				}
+				if ($kdrumpun == 'Barang'){
+					 $filter[$no++] = "C.RUMPUN = 'Barang Jasa Lainnya'";
+				}
+
+            }
+            //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------			
+			
+        
+
+        //----------------------------------------------------
+        $this->view->data = $d_spm1->get_realisasi_belanja_blu($filter);
+
+        //$d_last_update = new DataLastUpdate($this->registry);
+        //$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $d_log->tambah_log("Sukses");
+
+        $this->view->load('BLU/RealisasiBelanjaBLU_PDF');
+    }
+	
 	//-------------------------------------------------------
 		//------------------------------------------------------
     //Function PDF untuk DataPMRTPKNController(DataPMRTPKNController.php)

@@ -585,7 +585,7 @@ if (is_array($this->kdtgl_awal)) {
         
     }
 } else {
-    echo 'bukan array';
+    //echo 'bukan array';
 }
 
 //mengambil array tanggal akhir dari controller
@@ -594,7 +594,7 @@ if (is_array($this->kdtgl_akhir)) {
         
     }
 } else {
-    echo 'bukan array';
+    //echo 'bukan array';
 }
 
 //mengambil array nama satker-kppn dari controller

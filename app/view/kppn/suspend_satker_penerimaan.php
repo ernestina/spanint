@@ -19,10 +19,10 @@
                 <?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-			IF(isset($this->d_bulan) || isset($this->ntpn) || isset($this->d_kd_kppn) || isset($this->d_koreksi) ){
+			
 				if (Session::get('role') == KPPN) {
 					
-							$kdkppn='null';
+							$kdkppn=Session::get('id_user');
 						if (isset($this->d_koreksi)) {
 							$kdkoreksi = $this->d_koreksi;
 						} else {
@@ -45,7 +45,7 @@
 						}
 						
 					
-					}
+					
                 
 				
 				if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
