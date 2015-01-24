@@ -231,7 +231,8 @@ class DataBLUController extends BaseController {
 				}
 				if ($_POST['Rumpun'] == 'Barang'){
 					 $filter[$no++] = "C.RUMPUN = 'Barang Jasa Lainnya'";
-				}				
+				}
+				$this->view->Rumpun = $_POST['Rumpun'];
                 
             }
             			

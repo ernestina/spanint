@@ -153,7 +153,7 @@ class FPDF_AutoWrapTable extends FPDF {
             $ukuran_kolom_dana,$ukuran_kolom_dana,
 			$ukuran_kolom_dana
         ));
-        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'R'));
+        $this->SetAligns(array('C', 'C', 'C', 'C', 'L', 'C', 'L', 'L', 'R',C));
 
         if (count($this->data) == 0) {
             $this->Row(

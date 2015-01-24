@@ -17,28 +17,13 @@
 						foreach ($this->d_nama_kppn as $kppn) {
 							$kdkppn = $kppn->get_kd_satker();
 						}
-						$sp2d = 'null';
-						
 					} else {
-						foreach ($this->data as $value) {
-							if($value->get_check_number() != '-'){
-							$sp2d =$value->get_check_number();
-							$kdkppn = substr($sp2d, 2, 3);
-							
-							}
-						}
-						 
+						$kdkppn = 'null';
 					}
 					if (isset($this->invoice_num)) {
 						$invoice = $this->invoice_num;
 					} else {
-						if (isset($this->data)) {
-							foreach ($this->data as $value) {								
-								$invoice =$value->get_invoice_num();
-							} 
-						
-						}
-
+						$invoice = 'null';
 					}
 					?>
 									
@@ -47,27 +32,14 @@
                 }
                 
                 if (Session::get('role') == KPPN) {
-						if (isset($this->d_nama_kppn)) {
-							foreach ($this->d_nama_kppn as $kppn) {
-								$kdkppn = $kppn->get_kd_satker();
-							}
-							$sp2d = 'null';
-
-						} else {
-							 $kdkppn=Session::get('id_user');
-							 $sp2d = 'null';
-						}
-						if (isset($this->d_invoice)) {
-							$invoice = $this->d_invoice;
-						} else {
-							if (isset($this->data)) {
-								foreach ($this->data as $value) {
-									$invoice =$value->get_invoice_num();
-								} 
-							
-							}
-
-						}
+						
+					$kdkppn=Session::get('id_user');
+						
+					if (isset($this->invoice_num)) {
+						$invoice = $this->invoice_num;
+					} else {
+						$invoice = 'null';
+					}
 					?>
 									
 						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $invoice . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
@@ -76,28 +48,13 @@
                 }
 				 if (Session::get('role') == SATKER) {
                   
-						if (isset($this->d_nama_kppn)) {
-							foreach ($this->d_nama_kppn as $kppn) {
-								$kdkppn = $kppn->get_kd_satker();
-							}
-							$sp2d = 'null';
-
-						} else {
-							 $kdkppn=Session::get('id_user');
-							 $sp2d = 'null';
-						}
-						if (isset($this->d_invoice)) {
-							$invoice = $this->d_invoice;
-						} else {
-							
-							if (isset($this->data)) {
-								foreach ($this->data as $value) {
-									$invoice =$value->get_invoice_num();
-								} 
-							
-							}
-
-						}
+					
+					$kdkppn=Session::get('id_user');
+					if (isset($this->invoice_num)) {
+						$invoice = $this->invoice_num;
+					} else {
+						$invoice = 'null';
+					}
 					?>
 									
 						<a href="<?php echo URL; ?>PDF/HistorySpm_PDF/<?php echo $invoice . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>

@@ -13,36 +13,45 @@
 				//--------------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 				if (Session::get('role') == ADMIN  || Session::get('role') == DJA) {
-						if (isset($this->d_nama_kppn)) {
-							foreach ($this->d_nama_kppn as $kppn) {
-								$kdkppn = $kppn->get_kd_satker();
-							}
-						} else {
-							$kdkppn = 'null';
-						}
-						if (isset($this->satker_code)) {
-							$kdsatker =$this->satker_code;
-						} else {
-							$kdsatker = 'null';
-						}
+					if (isset($this->satker_code)) {
+						$kdsatker = $this->satker_code;
+						  
+					} else {
+						$kdsatker = 'null';
+					}
+					if (isset($this->SumberDana)) {
+						$kdsumberdana = $this->SumberDana;
+					} else {
+						$kdsumberdana = 'null';
+					}
+					if (isset($this->Rumpun)) {
+						$kdrumpun = $this->Rumpun;
+					} else {
+						$kdrumpun = 'null';
+					}
 				}
 				if (Session::get('role') == BLU) {
-						if (isset($this->satker_code)) {
-							$kdsatker = $this->satker_code;
-							  
-						} else {
-							$kdsatker = 'null';
-						}
-						if (isset($this->SumberDana)) {
-							$kdsumberdana = $this->SumberDana;
-						} else {
-							$kdsumberdana = 'null';
-						}							
+					if (isset($this->satker_code)) {
+						$kdsatker = $this->satker_code;
+						  
+					} else {
+						$kdsatker = 'null';
+					}
+					if (isset($this->SumberDana)) {
+						$kdsumberdana = $this->SumberDana;
+					} else {
+						$kdsumberdana = 'null';
+					}
+					if (isset($this->Rumpun)) {
+						$kdrumpun = $this->Rumpun;
+					} else {
+						$kdrumpun = 'null';
+					}					
 						
 				}
 				
 			?>
-			<a href="<?php echo URL; ?>PDF/DataRealisasiBLU_PDF/<?php echo $kdsatker . "/" . $kdsumberdana; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			<a href="<?php echo URL; ?>PDF/DataRealisasiBLU_PDF/<?php echo $kdsatker . "/" . $kdsumberdana . "/" . $kdrumpun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 			<?php
 				
 				//----------------------------------------------------		

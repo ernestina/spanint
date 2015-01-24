@@ -55,11 +55,8 @@
                             $kdkppn = $kppn->get_kd_satker();
                         }
                     } else {
-                        foreach ($this->data as $value) {
-                            $filename1 = $value->get_file_name();
-                            $kdsatker = $value->get_satker_code();
-                            $kdkppn = substr($filename1, 4, 3);
-                        }
+                        
+						$kdkppn = 'null';
                     }
 
                     if (isset($this->d_tgl_awal)) {
