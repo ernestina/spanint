@@ -1406,6 +1406,30 @@ class PDFController extends BaseController {
             $this->view->d_tanggal = $kdtanggal;
         }
         $this->view->data = $d_sppm->get_droping_detail_span_filter($filter,$kdtanggal);
+		 //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+            $this->view->nm_kppn2 = $d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn2 = Session::get('user');
+        }
+        //-------------------------
 
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
