@@ -75,13 +75,13 @@ class FPDF_AutoWrapTable extends FPDF {
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 3) == 'SET') {  //1
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 3) == 'BAN') {  //1
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'ADMIN') { //1
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        } elseif (substr(trim($nm_kppn), 0, 4) == 'BANK') { //6
-            $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+        } elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
             $this->MultiCell(0, $h1 / 2, '');
         }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
             $this->MultiCell(0, $h1 / 2, '');
