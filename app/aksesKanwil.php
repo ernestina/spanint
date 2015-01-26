@@ -258,6 +258,9 @@ $akses['PDFKanwil'] = array(
     'RealisasiFA_1_Minus_51_PDF',
     'grStatusHarian_PDF',
     'grStatusHarianBulan_PDF',
+    'SuspendSatkerPenerimaan_PDF',
+    'SuspendAkunPenerimaan_PDF',
+    'NTPNGanda_PDF',
     '__destruct'
 );
 ?>

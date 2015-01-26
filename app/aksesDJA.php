@@ -92,16 +92,10 @@ $akses['PDFDJA'] = array(
     '__construct',
     'index',
     'DataRealisasiBA_PDF',
-    'daftarsp2d_PDF',
-    'DataRealisasi_PDF',
-    'DataRealisasiTransfer_PDF',
     'Detail_Fund_fail_kd_PDF',
     'Detail_Fund_fail_PDF',
     'DetailEncumbrances_PDF',
     'DetailRealisasiFA_PDF',
-    'detailrekapsp2d1_PDF',
-    'DetailRevisi_PDF',
-    'errorSpm_PDF',
     'Fund_fail_PDF',
     'monitoringUserSpan_PDF',
     'nmsatker_PDF',
@@ -109,8 +103,6 @@ $akses['PDFDJA'] = array(
     'RealisasiFA_1_PDF',
     'RealisasiFA_PDF',
     'RevisiDipa_PDF',
-    'RealisasiFA_1_Minus_PDF',
-    'RealisasiFA_1_Minus_51_PDF',
     '__destruct'
 );
 ?>
