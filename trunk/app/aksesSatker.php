@@ -163,11 +163,8 @@ $akses['PanduanSatker'] = array(
 $akses['PDFSatker'] = array(
     '__construct',
     'index',
-    'DataRealisasiBA_PDF',
     'cekSupplier_PDF',
     'daftarsp2d_PDF',
-    'DataRealisasi_PDF',
-    'DataRealisasiTransfer_PDF',
     'Detail_Fund_fail_kd_PDF',
     'Detail_Fund_fail_PDF',
     'DetailEncumbrances_PDF',
@@ -177,13 +174,10 @@ $akses['PDFSatker'] = array(
     'DetailRevisi_PDF',
     'errorSpm_PDF',
     'Fund_fail_PDF',
-    'HistorySpm_PDF',
     'HoldSpm_PDF',
     'monitoringRetur_PDF',
     'monitoringSp2d_PDF',
     'monitoringUserSpan_PDF',
-    'nmsatker_PDF',
-    'nmsatker1_PDF',
     'posisiSpm_PDF',
     'ProsesRevisi_PDF',
     'RealisasiFA_1_PDF',
@@ -191,8 +185,6 @@ $akses['PDFSatker'] = array(
     'RekapSp2d_PDF',
     'RevisiDipa_PDF',
     'ValidasiSpm_PDF',
-    'RealisasiFA_1_Minus_PDF',
-    'RealisasiFA_1_Minus_51_PDF',
     '__destruct'
 );
 ?>
