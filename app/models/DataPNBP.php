@@ -48,6 +48,12 @@ class DataPNBP {
     public function __construct($registry = Registry) {
         $this->db = $registry->db;
         $this->registry = $registry;
+        
+        if ((''.Session::get('ta')) == date("Y")) {
+            $this->_table9 = 'T_SATKER';
+        } else {
+            $this->_table9 = 'T_SATKER_TL';            
+        }
     }
 
     /*

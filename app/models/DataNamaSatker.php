@@ -29,11 +29,14 @@ class DataNamaSatker {
         $this->registry = $registry;
         
         if ((''.Session::get('ta')) == date("Y")) {
+            $this->_table1 = 'T_SATKER';
             $this->_table3 = 'SPSA_BT_DIPA_V';
             $this->_table4 = 'satker_max_revision';
         } else {
+            $this->_table1 = 'T_SATKER_TL';
             $this->_table3 = 'SPSA_BT_DIPA_V_TL';
             $this->_table4 = 'satker_max_revision_tl';
+            
         }
     }
 
