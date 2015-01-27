@@ -40,8 +40,10 @@ class DataDipa {
         
         if ((''.Session::get('ta')) == date("Y")) {
             $this->_table1 = 'SPSA_BT_DIPA_V';
+            $this->_table2 = 't_satker';
         } else {
             $this->_table1 = 'SPSA_BT_DIPA_V_TL';
+            $this->_table2 = 't_satker_tl';
         }
     }
 

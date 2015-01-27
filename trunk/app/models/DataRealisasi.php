@@ -58,8 +58,10 @@ class DataRealisasi {
         
         if ((''.Session::get('ta')) == date("Y")) {
             $this->_table1 = 'GL_BALANCES_V';
+            $this->_table2 = 't_satker';
         } else {
             $this->_table1 = 'GL_BALANCES_V_TL';
+            $this->_table2 = 't_satker_tl';
         }
     }
 

@@ -201,8 +201,14 @@ class DataBLU {
 	
 	public function get_kdsatker_blu($satker) {
         Session::get('id_user');
+        if ((''.Session::get('ta')) == date("Y")) {
+            $tabel = 'T_SATKER';
+        } else {
+            $tabel = 'T_SATKER_TL';
+        }
+        
         $sql = "SELECT A.KDSATKER ,A.NMSATKER ,A.BA ,B.NMBA
-				FROM T_SATKER A,
+				FROM " . Stabel . " A,
 				T_BA B
 				WHERE
 				A.BA=B.KDBA
