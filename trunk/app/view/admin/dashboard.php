@@ -406,7 +406,7 @@
     <div class="container-fluid">
         
         <div class="row top-padded">
-            <!--<div class="col-md-6">
+            <div class="col-md-6">
                 
                 <?php if ((($this->kodeunit[0] == 'K') || !isset($this->kodeunit)) && ((Session::get('role') == ADMIN) || (Session::get('role') == KANWIL))) { ?>
                 
@@ -423,20 +423,9 @@
 
                             foreach ($this->summaryUnit as $value) {
 
-                                $total_sp2d = 0;
-
-                                foreach ($value->data_sp2d_rekap as $sp2d_rekap_harian) {
-                                    $total_sp2d += $sp2d_rekap_harian->get_gaji();
-                                    $total_sp2d += $sp2d_rekap_harian->get_non_gaji();
-                                    $total_sp2d += $sp2d_rekap_harian->get_void();
-                                    $total_sp2d += $sp2d_rekap_harian->get_lainnya();
-                                }
-
-                                if ((($value->data_pos_spm > 0) || ($total_sp2d > 0))) {
-                                    if ($count_unit > 0) { echo " , "; }
-                                    echo '<option value="'.$value->nama_unit.'">'.$value->nama_unit.' - '.$value->nama_lengkap_unit.'</option>';
-                                    $count_unit ++;
-                                }
+                                if ($count_unit > 0) { echo " , "; }
+                                echo '<option value="'.$value->get_kode_unit().'">'.$value->get_kode_unit().' - '.$value->get_nama_unit1().'</option>';
+                                $count_unit ++;
 
                             } 
                             
@@ -457,7 +446,7 @@
                 
                 <?php } ?>
                 
-            </div>-->
+            </div>
 
             <div class="col-md-6 align-right top-padded-little">
                 
@@ -466,7 +455,7 @@
                     if (isset($this->kodeunit)) { echo "Kembali ke: &nbsp;"; }
 
                     if (isset($this->kodeunit) && (Session::get('role') == ADMIN)) {
-                        echo '<a href="'.URL.'home/dashboardPenerbitan/">DJPB</a>';
+                        echo '<a href="'.URL.'home/dashboard/' . strtolower($this->mode) . '">DJPB</a>';
                     }
 
                     if (isset($this->kodeunit) && ($this->kodeunit[0] != 'K') && ((Session::get('role') == ADMIN) || (Session::get('role') == KANWIL))) {
@@ -658,6 +647,7 @@
 
                 <thead>
                     <tr>
+                        <th rowspan="2" style="text-align: center;">No.</th>
                         <th rowspan="2" style="text-align: left;">Unit</th>
                         <th rowspan="2">SPM dalam Proses</th>
                         <th colspan="5">Penerbitan SP2D</th>
@@ -684,70 +674,76 @@
 
                     <?php if (empty($this->summaryUnit)) { ?>
 
-                        <td colspan=14 class="align-center">Tidak ada data.</td>
+                        <td colspan=15 class="align-center">Tidak ada data.</td>
 
                     <?php } else { ?>
 
                         <?php
 
                             $total_pos_spm = 0;
+                            
+                            $total_gaji = 0;
+                            $total_non_gaji = 0;
+                            $total_lainnya = 0;
+                            $total_void = 0;
+                    
+                            $total_retur_sudah_proses = 0;
+                            $total_retur_belum_proses = 0;
+
+                            $total_lhp_completed = 0;     
+                            $total_lhp_validated = 0;
+                            $total_lhp_error = 0;
+                            $total_lhp_etc = 0;
+                    
+                            $rows = 1;
 
                         ?>
 
                         <?php foreach ($this->summaryUnit as $value) { ?>
 
                             <?php
+                            
+                                $total_pos_spm += $value->get_spm_dalam_proses();
+                            
+                                $total_gaji += $value->get_gaji();
+                                $total_non_gaji += $value->get_non_gaji();
+                                $total_lainnya += $value->get_lainnya();
+                                $total_void += $value->get_void();
+                            
+                                $total_retur_sudah_proses += $value->get_retur_sudah_proses();
+                                $total_retur_belum_proses += $value->get_retur_belum_proses();
+                            
+                                $total_lhp_completed += $value->get_lhp_completed();     
+                                $total_lhp_validated += $value->get_lhp_validated();
+                                $total_lhp_error += $value->get_lhp_error();
+                                $total_lhp_etc += $value->get_lhp_etc();
 
-                                $total_row_gaji = 0;
-                                $total_row_non_gaji = 0;
-                                $total_row_lainnya = 0;
-                                $total_row_void = 0;
-
-                                foreach ($value->data_sp2d_rekap as $sp2d_rekap_harian) {
-                                    $total_row_gaji += $sp2d_rekap_harian->get_gaji();
-                                    $total_row_non_gaji += $sp2d_rekap_harian->get_non_gaji();
-                                    $total_row_void += $sp2d_rekap_harian->get_void();
-                                    $total_row_lainnya += $sp2d_rekap_harian->get_lainnya();
-                                }
-
-                                $total_row_lhp_completed = 0;
-                                $total_row_lhp_validated = 0;
-                                $total_row_lhp_error = 0;
-                                $total_row_lhp_etc = 0;
-
-                                foreach ($value->data_lhp_rekap as $lhp_rekap_harian) {
-                                    $tanggal_lhp = $lhp_rekap_harian->get_tgl_lhp();
-                                    $total_row_lhp_completed += $lhp_rekap_harian->get_lhp_completed();
-                                    $total_row_lhp_validated += $lhp_rekap_harian->get_lhp_validated();
-                                    $total_row_lhp_error += $lhp_rekap_harian->get_lhp_error();
-                                    $total_row_lhp_etc += $lhp_rekap_harian->get_lhp_etc();
-                                }
-
-                                $overtotal = $total_row_gaji + $total_row_non_gaji + $total_row_lainnya + $total_row_void + $value->data_retur->get_retur_sudah_proses() + $value->data_retur->get_retur_belum_proses() + $total_row_lhp_completed + $total_row_lhp_validated + $total_row_lhp_etc + $total_row_lhp_error;
+                                $overtotal = 0 + $value->get_spm_dalam_proses() + $value->get_gaji() + $value->get_non_gaji() + $value->get_lainnya() + $value->get_void() + $value->get_retur_sudah_proses() + $value->get_retur_belum_proses() + $value->get_lhp_completed() + $value->get_lhp_validated() + $value->get_lhp_error() + $value->get_lhp_etc();
 
                             ?>
 
-                            <?php if ($overtotal > 0 || $value->nama_unit[0] != 'K') { ?>
+                            <?php if ($overtotal > 0 || substr($value->get_kode_unit(), 0 , 1) != 'K') { ?>
 
                                 <tr>
-                                    <td><a href="<?php echo URL; ?>home/dashboard/harian/<?php echo $value->nama_unit; ?>"><?php echo $value->nama_lengkap_unit; ?></a></td>
+                                    <td class="align-center"><?php echo $rows++; ?></td>
+                                    <td><a href="<?php echo URL; ?>home/dashboard/harian/<?php echo $value->get_kode_unit(); ?>"><?php echo $value->get_nama_unit1(); ?></a></td>
 
-                                    <td class="align-center"><?php echo $value->data_pos_spm; $total_pos_spm += $value->data_pos_spm; ?></td> 
+                                    <td class="align-center"><?php echo number_format($value->get_spm_dalam_proses());  ?></td> 
 
-                                    <td class="align-center"><?php echo number_format($total_row_gaji); ?></td> 
-                                    <td class="align-center"><?php echo number_format($total_row_non_gaji); ?></td> 
-                                    <td class="align-center"><?php echo number_format($total_row_lainnya); ?></td>
-                                    <td class="align-center"><?php echo number_format($total_row_void); ?></td> 
-                                    <td class="align-center"><?php echo number_format(($total_row_gaji + $total_row_non_gaji + $total_row_lainnya + $total_row_void)); ?></td> 
+                                    <td class="align-center"><?php echo number_format($value->get_gaji()); ?></td> 
+                                    <td class="align-center"><?php echo number_format($value->get_non_gaji()); ?></td> 
+                                    <td class="align-center"><?php echo number_format($value->get_lainnya()); ?></td>
+                                    <td class="align-center"><?php echo number_format($value->get_void()); ?></td> 
+                                    <td class="align-center"><?php echo number_format(($value->get_gaji() + $value->get_non_gaji() + $value->get_lainnya() + $value->get_void())); ?></td> 
 
-                                    <td class="align-center"><?php echo number_format($value->data_retur->get_retur_sudah_proses()); ?></td> 
-                                    <td class="align-center"><?php echo number_format($value->data_retur->get_retur_belum_proses()); ?></td>
+                                    <td class="align-center"><?php echo number_format($value->get_retur_sudah_proses()); ?></td> 
+                                    <td class="align-center"><?php echo number_format($value->get_retur_belum_proses()); ?></td>
 
-                                    <td class="align-center"><?php echo number_format($total_row_lhp_completed); ?></td>
-                                    <td class="align-center"><?php echo number_format($total_row_lhp_validated); ?></td>
-                                    <td class="align-center"><?php echo number_format($total_row_lhp_etc); ?></td>
-                                    <td class="align-center"><?php echo number_format($total_row_lhp_error); ?></td>
-                                    <td class="align-center"><?php echo number_format(($total_row_lhp_completed + $total_row_lhp_validated + $total_row_lhp_etc + $total_row_lhp_error)); ?></td>
+                                    <td class="align-center"><?php echo number_format($value->get_lhp_completed()); ?></td>
+                                    <td class="align-center"><?php echo number_format($value->get_lhp_validated()); ?></td>
+                                    <td class="align-center"><?php echo number_format($value->get_lhp_etc()); ?></td>
+                                    <td class="align-center"><?php echo number_format($value->get_lhp_error()); ?></td>
+                                    <td class="align-center"><?php echo number_format(($value->get_lhp_completed() + $value->get_lhp_validated() + $value->get_lhp_etc() + $value->get_lhp_error())); ?></td>
                                 </tr>
 
                             <?php } ?>
@@ -756,7 +752,7 @@
 
                     <tfoot>
                         <tr>
-                            <td>Total</td>
+                            <td colspan=2 >Total</td>
 
                             <td class="align-center"><?php echo number_format($total_pos_spm); ?></td> 
 
