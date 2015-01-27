@@ -261,8 +261,12 @@ class homeController extends BaseController {
     private function summaryUnit($kodeunit = null, $tanggal_lhp = null) {
 
         $d_dashboard = new DataDashboard($this->registry);
+        
+        $return = $d_dashboard->get_sp2d_rekap_tabel($kodeunit, $tanggal_lhp);
+        
+        return $return;
 
-        $summary_result = (object) 'Test';
+        /*$summary_result = (object) 'Test';
         
         $summary_result->nama_unit = $kodeunit;
         $summary_result->nama_lengkap_unit = $d_dashboard->get_nama_unit($kodeunit);
@@ -309,7 +313,7 @@ class homeController extends BaseController {
             
             return $summary_result;
 
-        }
+        }*/
 
     }
 
@@ -399,32 +403,14 @@ class homeController extends BaseController {
                 if (Session::get('role')==KANWIL) {
                     
                     $d_kppn_list = new DataUser($this->registry);
-                    $this->view->unit_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
-                    
-                    $this->view->summaryUnit = array();
-                
-                    foreach ($this->view->unit_list as $unit_list) {
-
-                        if ($unit_list->get_kd_d_kppn() != 'K00') {
-                            $this->view->summaryUnit[] = $this->summaryUnit($unit_list->get_kd_d_kppn(), $this->view->pieStatusLHP[0]->get_tgl_lhp());
-                        }
-
-                    }
+                    $this->view->unit_list = $d_kppn_list->get_kppn_kanwil('K'.Session::get('id_user'));
+                    $this->view->summaryUnit = $this->summaryUnit('K'.Session::get('id_user'), $this->view->pieStatusLHP[0]->get_tgl_lhp());
                     
                 } else if (Session::get('role')==ADMIN) {
                     
                     $d_kanwil_list = new DataDashboard($this->registry);
                     $this->view->unit_list = $d_kanwil_list->get_kanwil();
-                    
-                    $this->view->summaryUnit = array();
-                
-                    foreach ($this->view->unit_list as $unit_list) {
-
-                        if ($unit_list->get_kd_d_kppn() != 'K00') {
-                            $this->view->summaryUnit[] = $this->summaryUnit($unit_list->get_kd_d_kppn(), $this->view->pieStatusLHP[0]->get_tgl_lhp());
-                        }
-
-                    }
+                    $this->view->summaryUnit = $this->summaryUnit(null, $this->view->pieStatusLHP[0]->get_tgl_lhp());
                     
                 } else {
                     
@@ -492,15 +478,7 @@ class homeController extends BaseController {
                 $this->view->pieStatusLHP = $this->pieStatusLHP(1, $kodeunit);
                 
                 if (isset($this->view->unit_list)) {
-                    $this->view->summaryUnit = array();
-
-                    foreach ($this->view->unit_list as $unit_list) {
-
-                        if ($unit_list->get_kd_d_kppn() != 'K00') {
-                            $this->view->summaryUnit[] = $this->summaryUnit($unit_list->get_kd_d_kppn(), $this->view->pieStatusLHP[0]->get_tgl_lhp());
-                        }
-
-                    }
+                    $this->view->summaryUnit = $this->summaryUnit($kodeunit, $this->view->pieStatusLHP[0]->get_tgl_lhp());
                 }
                 
                 $this->view->last_update = $this->lastUpdate();
