@@ -342,7 +342,16 @@
                     <ul>
 
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
-
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Persiapan Rollout</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Download Data Pagu</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Download Data Realisasi</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Download Aplikasi Rekonsiliasi</a></li>
+                                </ul>
+                            </div>
+                        </li>
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
                             <div class="collapse">
@@ -382,7 +391,8 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataSupplier/downloadSupplierXls">Download Supplier</a></li>
-                                    <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Data Supplier</a></li>
+                                    <li><a href="<?php echo URL; ?>dataSupplier/cekSupplier">Cek Data Supplier</a></li> 
+                                    <li><a href="<?php echo URL; ?>dataSupplier/downloadToolCekSupplier">Download Aplikasi Cek Supplier</a></li>
                                 </ul>
                             </div>
                         </li>

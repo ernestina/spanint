@@ -26,7 +26,7 @@ class DataPersiapanRolloutController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-
+        
         $this->view->ekstensi = ".csv";
         $this->view->kppn_code = Session::get('kd_satker');
         $d_log->tambah_log("Sukses");

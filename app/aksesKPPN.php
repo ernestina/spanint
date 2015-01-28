@@ -201,6 +201,7 @@ $akses['DataSupplierKPPN'] = array(
     'cekSupplier',
     'downloadSupplier',
     'downloadSupplierXls',
+    'downloadToolCekSupplier',
     '__destruct'
 );
 
