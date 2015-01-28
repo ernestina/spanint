@@ -40,11 +40,16 @@ class DataPNBPController extends BaseController {
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TAHUN = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TAHUN = '2014'";
+		 }
 		
 		if (Session::get('role') == KPPN) {
 			$this->view->data5 = $d_spm1->get_satker_pnbp(Session::get('id_user'));
         }
-		
 		
 		if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
@@ -91,6 +96,13 @@ class DataPNBPController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TAHUN = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TAHUN = '2014'";
+		 }
         
 		if (Session::get('role') == KPPN) {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
@@ -121,6 +133,13 @@ class DataPNBPController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TAHUN = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TAHUN = '2014'";
+		 }
         
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
@@ -155,6 +174,13 @@ class DataPNBPController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TAHUN = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TAHUN = '2014'";
+		 }
         
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "SEGMENT2 = '" . Session::get('id_user')."'";
@@ -189,6 +215,13 @@ class DataPNBPController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TAHUN = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TAHUN = '2014'";
+		 }
         
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "SEGMENT2 = '" . Session::get('id_user')."'";
@@ -223,6 +256,13 @@ class DataPNBPController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TAHUN = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TAHUN = '2014'";
+		 }
         
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
