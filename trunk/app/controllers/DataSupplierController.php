@@ -152,6 +152,16 @@ class DataSupplierController extends BaseController {
             $d_log->tambah_log("Sukses");
             $this->view->load('satker/downloadSupplierxls');
     }
+    
+    public function downloadToolCekSupplier() {
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        $this->view->ekstensi = ".rar";
+        $d_log->tambah_log("Sukses");
+        $this->view->load('kppn/downloadToolCekSupplier');
+    }
 
     public function __destruct() {
         
