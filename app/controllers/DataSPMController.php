@@ -657,8 +657,8 @@ class DataSPMController extends BaseController {
         }
 
         if (Session::get('role') == SATKER) {
-            $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
-            $filter[$no++] = "SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
+            //$filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+            $filter[$no++] = "SEGMENT1 = '" . Session::get('kd_satker') . "'";
             $this->view->data = $d_spm1->get_sp2d_rekap_filter($filter);
         }
         //$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);
