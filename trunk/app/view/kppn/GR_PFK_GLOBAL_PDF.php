@@ -39,7 +39,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->kdtgl_awal = $kdtgl_awal;
         $this->kdtgl_akhir = $kdtgl_akhir;
         $this->nm_kppn = $nm_kppn;
-		$this->bulan = $bulan;
+		$this->bulan1 = $bulan;
     }
 
     /*
@@ -50,7 +50,7 @@ class FPDF_AutoWrapTable extends FPDF {
         //-----------------------------------
         $judul = $this->options['judul'];
         $nm_kppn = $this->nm_kppn;
-		$bulan = $this->bulan;
+		$bulan = $this->bulan1;
         $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
         $border = 0;
         $h = 40;
@@ -107,7 +107,7 @@ class FPDF_AutoWrapTable extends FPDF {
             $kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
             $this->Cell(0, 20, 'Bulan :' . $bulan, 0, 0, 'C', false);		
         } else {
-            $this->Cell(0, 20, 'Bulan :   ' . $bulan, 0, 0, 'C', false);			 
+            $this->Cell(0, 20, 'Bulan :   ' . ucfirst($bulan), 0, 0, 'C', false);			 
         } 
 		//--------------------
 
@@ -374,7 +374,7 @@ $options = array(
     'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn, $this->bulan);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn, $this->bulan1);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();
