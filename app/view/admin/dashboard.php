@@ -432,8 +432,20 @@
                         } else {
                             
                             foreach ($this->unit_list as $value) {
+                                
+                                if ($value->get_kd_d_kppn() != 'K00') {
+                                    
+                                    $jenisunit = $value->get_kd_d_kppn();
+                                    
+                                    if ($jenisunit[0] == 'K') {
+                                        $jenisunit = 'KANWIL';
+                                    } else {
+                                        $jenisunit = 'KPPN';
+                                    }
 
-                                echo '<option value="'.$value->get_kd_d_kppn().'">KPPN '.$value->get_kd_d_kppn().'</option>';
+                                    echo '<option value="'.$value->get_kd_d_kppn().'">'.$jenisunit.' '.$value->get_nama_user().'</option>';
+                                    
+                                }
 
                             } 
                             
