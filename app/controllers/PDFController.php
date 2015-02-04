@@ -1466,7 +1466,7 @@ class PDFController extends BaseController {
             $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
         }
         if ($kdbulan != 'null') {
-			if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+			if (Session::get('role') == ADMIN || Session::get('role') == KANWIL || Session::get('role') == KPPN) {
 				if ($kdbulan == '01') {
                     $kdbulan = 'januari';
                 }
@@ -1506,6 +1506,7 @@ class PDFController extends BaseController {
                 else {
                     $kdbulan = date("F"); 
                 }
+				$this->view->bulan1 = $kdbulan;
 				
 			}
             
