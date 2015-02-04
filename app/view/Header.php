@@ -186,6 +186,14 @@
 								</ul>
                             </div>
                         </li>
+        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+								</ul>
+                            </div>
+                        </li>
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                             <div class="collapse">

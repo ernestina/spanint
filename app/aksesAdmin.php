@@ -27,6 +27,16 @@ $akses['HomeAdmin'] = array(
 );
 
 /*
+ * akses PDR
+ */
+$akses['DataPDRAdmin'] = array(
+        '__construct',
+        'index',
+        'registerDJPU',
+        '__destruct'
+);
+
+/*
  * akses PNBP
  */
 $akses['DataPNBPAdmin'] = array(
