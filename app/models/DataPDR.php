@@ -66,7 +66,8 @@ class DataPDR {
                         a.status,
                         a.d_signed,
                         a.d_effective,
-                        a.d_drawlim
+                        a.d_drawlim,
+                        a.d_period
                 FROM    " . $this->_table_djpu_reg . " a INNER JOIN " . $this->_table_djpu_cara_tarik . " b 
                 ON      a.reg_no = b.register_no
                 AND     trim(a.lg_id) = b.instrument_id
@@ -98,6 +99,7 @@ class DataPDR {
             $d_data->set_d_signed($val['D_SIGNED']);
             $d_data->set_d_effective($val['D_EFFECTIVE']);
             $d_data->set_d_drawlim($val['D_DRAWLIM']);
+            $d_data->set_d_period($val['D_PERIOD']);
             
             $data[] = $d_data;
         }

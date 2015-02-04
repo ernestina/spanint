@@ -44,10 +44,8 @@
                 
                 <?php
                 // untuk menampilkan last_update
-                if (isset($this->last_update)) {
-                    foreach ($this->last_update as $last_update) {
-                        echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
-                    }
+                if (isset($this->data)) {
+                    echo "Update Data Terakhir (Waktu Server)<br/>" . $this->data[0]->get_d_period() . "";
                 }
                 ?>
                 
@@ -78,7 +76,7 @@
                 <th class="align-center">BENEF</th>
                 <th class="align-center">STATUS</th>
                 
-                <th class="align-center">D_SIGNED</th>
+                <th class="align-center">&nbsp;D_SIGNED&nbsp;</th>
                 <th class="align-center">D_EFFECTIVE</th>
                 <th class="align-center">D_DRAWLIM</th>
             </tr>
@@ -108,9 +106,9 @@
                         <td class="align-center"><?php echo $value->get_cred_type(); ?></td>
                         <td class="align-center"><?php echo $value->get_cara_tarik(); ?></td>
 
-                        <td class="align-right"><?php echo $value->get_amt_ori(); ?></td>
-                        <td class="align-right"><?php echo $value->get_amt_amend(); ?></td>
-                        <td class="align-right"><?php echo $value->get_amt_net(); ?></td>
+                        <td class="align-right"><?php echo number_format($value->get_amt_ori()); ?></td>
+                        <td class="align-right"><?php echo number_format($value->get_amt_amend()); ?></td>
+                        <td class="align-right"><?php echo number_format($value->get_amt_net()); ?></td>
                         <td class="align-center"><?php echo $value->get_benef(); ?></td>
                         <td class="align-center"><?php echo $value->get_status(); ?></td>
 
@@ -151,16 +149,26 @@
             <form id="filter-form" method="POST" action="registerDJPU" enctype="multipart/form-data">
 
                 <div class="modal-body">
+                    
+                    <div id="wmaster" class="alert alert-danger" style="display:none;"></div><br/>
 
                     <div id="wnip" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Kode Register: </label>
 
-                    <input class="form-control" type="number" name="nip" id="nip" size="18" value="<?php if (isset($this->d_nip)) { echo $this->d_nip; } ?>">
+                    <input class="form-control" type="text" name="nip" id="nip" value="<?php if (isset($this->d_nip)) { echo $this->d_nip; } ?>"><br/>
+                    
+                    <div id="wname" class="alert alert-danger" style="display:none;"></div>
+                    <label class="isian">Nama: </label>
+
+                    <input class="form-control" type="text" name="name" id="name" value="<?php if (isset($this->d_name)) { echo $this->d_name; } ?>">
+                    
+                    <input type="hidden" name="secret" id="secret" value="secret">
 
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim Filter</button><br/><br/>
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return showAll()">Tampilkan Semua</button>
                 </div>
 
             </form>
@@ -186,20 +194,40 @@
         $('#nip').keyup(function() {
             if (document.getElementById('nip').value != '') {
                 $('#wnip').fadeOut(200);
+                $('#wmaster').fadeOut(200);
             }
         });
-
+        $('#name').keyup(function() {
+            if (document.getElementById('name').value != '') {
+                $('#wname').fadeOut(200);
+                $('#wmaster').fadeOut(200);
+            }
+        });
     }
 
     function cek_upload() {
-        var pattern = '^[0-9]+$';
         var v_nip = document.getElementById('nip').value;
+        var v_name = document.getElementById('name').value;
 
         var jml = 0;
+        
+        if (v_nip == '' && v_name == '') {
+            $('#wmaster').html('Harap isi salah satu parameter');
+            $('#wmaster').fadeIn();
+            jml++;
+        }
 
         if (jml > 0) {
             return false;
         }
     }
+    
+    function showAll() {
+        $('#nip').val('');
+        $('#name').val('');
+        
+        return true;
+    }
+        
 
 </script>
