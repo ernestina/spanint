@@ -31,6 +31,12 @@ class DataPDRController extends BaseController {
                 $filter[$no++] = " reg_no = '" . $_POST['nip'] . "'";
                 $this->view->d_nip= $_POST['nip'];
             }
+            
+            if ($_POST['name'] != '') {
+                $filter[$no++] = " name LIKE '%" . $_POST['name'] . "%'";
+                $this->view->d_name = $_POST['name'];
+            }
+            
             $this->view->data = $d_ref->get_djpu_register($filter);
         }
 
