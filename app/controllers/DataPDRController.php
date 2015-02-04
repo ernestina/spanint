@@ -33,7 +33,7 @@ class DataPDRController extends BaseController {
             }
             
             if ($_POST['name'] != '') {
-                $filter[$no++] = " name LIKE '%" . $_POST['name'] . "%'";
+                $filter[$no++] = " upper(name) LIKE '%" . strtoupper($_POST['name']) . "%'";
                 $this->view->d_name = $_POST['name'];
             }
             
