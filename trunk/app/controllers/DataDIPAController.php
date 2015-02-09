@@ -543,7 +543,7 @@ class DataDIPAController extends BaseController {
         }
         if ($akun != '') {
             $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
-			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "')"
+			AND A.AKUN IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "')"
             ;
             $this->view->account_code = $akun;
         }
