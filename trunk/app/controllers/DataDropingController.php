@@ -101,10 +101,12 @@ class DataDropingController extends BaseController {
             }
             $this->view->d_bank = $bank;
         }
+        /* buka ketika iqbal dah nambahin kolom payment date di db
         if (!is_null($tanggal)) {
-            $filter[$no++] = "TO_CHAR(CREATION_DATE,'DD-MM-YYYY') = '" . $tanggal . "'";
+            $filter[$no++] = "TO_CHAR(NVL(PAYMENT_DATE,CREATION_DATE),'DD-MM-YYYY') = '" . $tanggal . "'";
             $this->view->d_tanggal = $tanggal;
         }
+        */
         $this->view->data = $d_sppm->get_droping_detail_filter($filter);
 
         // untuk mengambil data last update 
