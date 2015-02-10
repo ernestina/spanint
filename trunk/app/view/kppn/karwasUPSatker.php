@@ -238,7 +238,7 @@ if (Session::get('role') == KPPN) {
                             echo "<td class='ratakanan'>" . number_format($value->get_ntpn()) . "</td>";
                             echo "<td class='ratakanan'>" . number_format($value->get_check_num()) . "</td>";                          
 							echo "<td>" . $value->get_tanggal_sp2d() . "</td>";
-							echo "<td><a href=" . URL . "dataSPM/daftarsp2d/" . $value->get_satker_code() . "/" . $value->get_tanggal_sp2d() ."/". $value->get_tanggal_sp2d() ."/312  >" . number_format($value->get_output_code()) . "</a></td>";		
+							echo "<td><a href=" . URL . "dataSPM/daftarsp2d/" . $value->get_satker_code() . "/" . date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/". date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/312  >" . number_format($value->get_output_code()) . "</a></td>";		
 							echo "<td>" . $value->get_tanggal() . "</td>";
 							echo "<td>" . $value->get_description() . "</td>";
                             echo "</tr>	";
