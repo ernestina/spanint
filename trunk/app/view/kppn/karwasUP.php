@@ -8,7 +8,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Daftar SPM UP/GU NIHIL</h2>
+                <h2>Karwas UP</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
@@ -68,7 +68,16 @@
                 ?>
 				<br>
                 
-             
+                <?php
+			if (isset($this->data1)) {
+					foreach ($this->data1 as $value) {
+					 $no_dipa= $value->get_dipa_no() . "</td>";
+					}
+				}
+              
+                echo $no_dipa;
+				
+				?>
             </div>
 			
             
@@ -101,8 +110,8 @@
 		<thead>
 		
 			<tr style="background: #f3f3f3;">
-				
-				
+				<th colspan=7 style="padding-top: 20px; padding-bottom: 20px; font-weight: bold;">TOTAL SP2D UP/NIHIL</th>
+				<th colspan=7 style="padding-top: 20px; padding-bottom: 20px; font-weight: bold;">UP PNBP</th>
 			</tr>
 			<tr style="background: #f3f3f3;">
 				<th>No.</th>
@@ -111,9 +120,8 @@
 				<th>Nomor Invoice</th>
 				<th>Tanggal Invoice</th>
 				<th>Nomor SP2D</th>
-				<th>Tanggal SP2D</th>
 				<th>Nilai</th>
-				<!--td>Jumlah</td>
+				<!--td>Jumlah</td-->
 				
 				<th class='mid'>No.</th>
 				<th>Kode Satker</th>
@@ -122,7 +130,7 @@
 				<th>Tanggal Invoice</th>
 				<th>Nomor SP2D</th>
 				<th>Nilai</th>
-				<td>Jumlah</td-->
+				<!--td>Jumlah</td-->
 			</tr>
 		
 		</thead>
@@ -137,23 +145,54 @@
 					$disp_rows = array();
 					
                     //var_dump ($this->data);
-                    if (isset($this->data1)) {
-                        if (empty($this->data1)) {
+                    if (isset($this->data2)) {
+                        if (empty($this->data2)) {
                             
                         } else {
-                            foreach ($this->data1 as $value) {
+                            foreach ($this->data2 as $value) {
 								$disp_rows[$no] = "<tr>	"
-								. "<td class='ratatengah'>" . $no . "</td>"
-								. "<td class='ratatengah'>" . $value->get_satker_code() . "</td>"
-                                . "<td class='ratatengah'>" . $value->get_jenis_spm() . "</td>"
-                                . "<td class='ratatengah'>" . $value->get_invoice_num() . "</td>"
-								. "<td class='ratatengah'>" . $value->get_invoice_date() . "</td>"
-								. "<td class='ratatengah'>" . $value->get_check_num() . "</td>"
-								. "<td class='ratatengah'>" . $value->get_tanggal_sp2d() . "</td>"
-                                . "<td style='text-align: right'>" . number_format($value->get_line_amount()) . "</td>";
+								. "<td>" . $no . "</td>"
+								. "<td>" . $value->get_satker_code() . "</td>"
+                                . "<td >" . $value->get_jenis_spm() . "</td>"
+                                . "<td >" . $value->get_invoice_num() . "</td>"
+								. "<td >" . $value->get_invoice_date() . "</td>"
+								. "<td >" . $value->get_check_num() . "</td>"
+                                . "<td style='text-align: right'><a href=" . URL . "dataPNBP/DetailGRPNBP/". $value->get_account_code(). "/"
+								. $_POST['kdsatker'] . " >" . number_format($value->get_line_amount()) . "</td>";
 								$total_penerimaan = $total_penerimaan + $value->get_line_amount();
 								$no++;
                             }
+							
+                        }
+                    } 
+					// else {
+                        // echo "<div class='alert alert-info'><strong>Info! </strong>Silakan masukan filter.</div>";
+                    // }
+					
+					$no = 1;
+					$total_up = 0;
+                    //var_dump ($this->data);
+                    if (isset($this->data3)) {
+                        if (empty($this->data3)) {
+                            
+                        } else {
+                            foreach ($this->data3 as $value) {
+								if ($disp_rows[$no] == "" || $disp_rows[$no] == undefined) {
+									$disp_rows[$no] = "<tr><td colspan=7></td>";
+								}
+								
+								$disp_rows[$no] .= "<td class='mid'>" . $no . "</td>"
+								. "<td>" . $value->get_satker() . "</td>"
+								. "<td>" . $value->get_attribute6() . "</td>"
+								. "<td>" . $value->get_invoice_num() . "</a></td>"
+								. "<td>" . $value->get_invoice_date() . "</td>"
+								. "<td>" . $value->get_check_number() . "</td>"
+								. "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";	
+								$total_up = $total_up + $value->get_amount();
+								$no++;
+								
+                            }
+							
 							
                         }
                     } 
@@ -164,6 +203,8 @@
 					echo "<tr> " ;	
 					echo "<td colspan='6'>GRAND TOTAL</td> ";
 					echo "<td style='text-align: right';padding-top: 20px; padding-bottom: 10px; font-weight: bold;>". number_format($total_penerimaan)."</td>";	
+					echo "<td colspan='6'>GRAND TOTAL</td> ";
+					echo "<td style='text-align: right';padding-top: 20px; padding-bottom: 10px; font-weight: bold;>". number_format($total_up)."</td>";
 					echo "</tr> " ;	
 					
 					echo "</tfoot> " ;	

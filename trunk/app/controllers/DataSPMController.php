@@ -810,7 +810,11 @@ class DataSPMController extends BaseController {
 				
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
-				
+				$this->view->d_kd_satker = $_POST['kdsatker'];
+            }
+			if ($_POST['SUMBERDANA'] != '') {
+                $filter[$no++] = "SUMBER_DANA = '" . $_POST['SUMBERDANA'] . "'";
+				$this->view->d_sumber_dana = $_POST['SUMBERDANA'];
             }
        
 		}
