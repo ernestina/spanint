@@ -417,7 +417,7 @@
                                     <li><a href="<?php echo URL; ?>dataSPM/nmsatker">Daftar SP2D per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>dataPNBP/KarwasPNBP">Karwas Maksimum Pencairan (PNBP)</a></li>
-									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP</a></li>
+									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP (Uji Coba)</a></li>
                                 </ul>
                             </div>
                         </li>
