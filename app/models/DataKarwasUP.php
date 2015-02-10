@@ -49,30 +49,22 @@ class DataKarwasUP {
      * return array objek Data Tetap */
 	
 	
-	public function get_satker_up($kppn ) {
-        $sql = "SELECT DISTINCT A.SATKER_CODE, UPPER(B.NMSATKER) NMSATKER 
-				FROM "
-                . $this->_table1 . " A, " 
-				. $this->_table9 . " B 
+	public function get_nama_satker_up($kd_satker) {
+        $sql = "SELECT DISTINCT KDSATKER, UPPER(NMSATKER) NMSATKER 
+				FROM T_SATKER
 				WHERE 
 				1=1 
-				AND A.SATKER_CODE=B.KDSATKER 
-				AND A.KPPN_CODE = '" .$kppn. "'"
+				AND KDSATKER = '" .$kd_satker. "'"
         ;
         $no = 0;
-        // foreach ($filter as $filter) {
-            // $sql .= " AND " . $filter;
-        // }
-
-        //$sql .= " ORDER BY  ";
-
+        
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_nmsatker($val['NMSATKER']);
-            $d_data->set_satker_code($val['SATKER_CODE']);
+            $d_data->set_satker_code($val['KDSATKER']);
             $data[] = $d_data;
         }
         return $data;
@@ -127,7 +119,7 @@ class DataKarwasUP {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " ORDER BY KETERANGAN, SATKER_CODE ";
+        $sql .= " ORDER BY BATAS_TEGURAN, KETERANGAN, SATKER_CODE ";
 		//$sql .= " AND " . $satker1;
 
         //var_dump ($sql);
@@ -138,9 +130,11 @@ class DataKarwasUP {
 			$d_data->set_nmsatker($val['NMSATKER']);
             $d_data->set_satker_code($val['SATKER_CODE']);
             $d_data->set_kppn_code($val['KPPN_CODE']);
+			$d_data->set_invoice_date($val['TGL_UP_AKHIR']);
 			$d_data->set_check_num($val['SISA_UP']);
             $d_data->set_line_amount($val['TOTAL_GU_NIHIL']);
 			$d_data->set_amount($val['TOTAL_UP']);
+			$d_data->set_jendok($val['SUMBER_DANA']);
 			$d_data->set_tanggal_sp2d($val['TGL_GUP_AKHIR']);
 			$d_data->set_tanggal($val['BATAS_TEGURAN']);
 			$d_data->set_description($val['KETERANGAN']);
@@ -179,6 +173,7 @@ class DataKarwasUP {
             $d_data->set_kppn_code($val['KPPN_CODE']);
 			$d_data->set_invoice_num($val['INVOICE_NUM']);
 			$d_data->set_invoice_date($val['INVOICE_DATE']);
+			$d_data->set_tanggal_sp2d($val['CHECK_DATE']);
 			$d_data->set_check_num($val['CHECK_NUMBER']);
             $d_data->set_line_amount($val['AMOUNT']);
             $data[] = $d_data;
