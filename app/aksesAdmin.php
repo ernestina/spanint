@@ -203,6 +203,8 @@ $akses['DataSPMAdmin'] = array(
     'daftarsp2d_PDF',
     'downloadSP2D',
 	'Konversi',
+	'KarwasUPSatker',
+	'UPSatker',
     '__destruct'
 );
 

@@ -119,7 +119,7 @@ class DataKarwasUP {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " ORDER BY BATAS_TEGURAN, KETERANGAN, SATKER_CODE ";
+        $sql .= " ORDER BY to_char(TO_DATE(BATAS_TEGURAN,'DD-MM-YYYY'),'yyyymmdd') asc, KETERANGAN, SATKER_CODE ";
 		//$sql .= " AND " . $satker1;
 
         //var_dump ($sql);
@@ -176,6 +176,35 @@ class DataKarwasUP {
 			$d_data->set_tanggal_sp2d($val['CHECK_DATE']);
 			$d_data->set_check_num($val['CHECK_NUMBER']);
             $d_data->set_line_amount($val['AMOUNT']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_total_sisa_up($filter) {
+        $sql = "SELECT SUM(SISA_UP) SISA_UP
+				FROM "
+                . $this->_table3 . " 
+				WHERE 
+				1=1 
+				
+				"
+
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        //$sql .= " ORDER BY INVOICE_DATE ";
+		//$sql .= " AND " . $satker1;
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_line_amount($val['SISA_UP']);
             $data[] = $d_data;
         }
         return $data;

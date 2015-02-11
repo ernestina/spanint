@@ -793,11 +793,6 @@ class DataSPMController extends BaseController {
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
         
 		
-		if (Session::get('role') == KPPN) {
-			$filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
-        }
-		
-		
 		if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
                 $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn']."'";
@@ -816,12 +811,29 @@ class DataSPMController extends BaseController {
                 $filter[$no++] = "SUMBER_DANA = '" . $_POST['SUMBERDANA'] . "'";
 				$this->view->d_sumber_dana = $_POST['SUMBERDANA'];
             }
-       
+			$this->view->data1 = $d_spm1->get_karwas_up_satker($filter);
+			$this->view->data2 = $d_spm1->get_total_sisa_up($filter);
 		}
-
-		$this->view->data1 = $d_spm1->get_karwas_up_satker($filter);
 		
-        //var_dump($d_spm->get_hist_spm_filter());
+		if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+            
+        }
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+           
+        }
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+			$this->view->data1 = $d_spm1->get_karwas_up_satker($filter);
+			$this->view->data2 = $d_spm1->get_total_sisa_up($filter);
+			
+        }
+
+		
 		
 		$d_log->tambah_log("Sukses");
         $this->view->render('kppn/karwasUPSatker');

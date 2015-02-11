@@ -149,6 +149,10 @@ if (Session::get('role') == KPPN) {
             
             <div class="col-md-6 col-sm-12">
                 <?php
+				if (isset($this->data1)) {foreach ($this->data2 as $value) {
+						$sisa_up = $value->get_line_amount();				
+					}
+					}
                     if (isset($this->d_nama_kppn)) {
                         foreach ($this->d_nama_kppn as $kppn) {
                             echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
@@ -161,6 +165,9 @@ if (Session::get('role') == KPPN) {
                             echo "Semua KPPN";
                         }
                     }
+					if (!isset($this->d_kd_satker) and !isset($this->d_sumber_dana)){
+						echo " || Total Sisa UP : " .number_format($sisa_up);					
+					}
                     if (isset($this->d_kd_satker)) {
                         echo "<br>Satker : ".$this->d_kd_satker;
                     }
@@ -204,8 +211,8 @@ if (Session::get('role') == KPPN) {
 					<th colspan=2 class='ratatengah'>Total UP</th>
 					<th colspan=2 class='ratatengah'>Pengurang UP</th>                   					
 					<th rowspan=2 class='ratatengah'>Sisa UP</th>
-					<th rowspan=2 class='ratatengah'>Tgl SP2D UP/GUP Terakhir</th>
-					<th rowspan=2 class='ratatengah'>Total SP2D GUP Terakhir</th>
+					<th rowspan=2 class='ratatengah'>Tgl SP2D GUP Terakhir</th>
+					<th colspan=2 class='ratatengah'>Total SP2D GUP Terakhir</th>
                     <th rowspan=2 class='ratatengah'>Batas Teguran</th>
 					<th rowspan=2 class='ratatengah'>Keterangan</th>
                 </tr>
@@ -215,6 +222,8 @@ if (Session::get('role') == KPPN) {
 					<th>Tanggal UP Terakhir</th>	
 					<th>Total GU Nihil</th>	
 					<th>Setoran UP</th>
+					<th>Total GUP</th>
+					<th>Persentase Dari UP</th>
 								
 				</tr>
             </thead>
@@ -237,8 +246,10 @@ if (Session::get('role') == KPPN) {
 							echo "<td class='ratakanan'><a href=" . URL . "dataSPM/UPSatker/" . $value->get_satker_code() . "/NIHIL >" . number_format($value->get_line_amount()*-1) . "</a></td>";
                             echo "<td class='ratakanan'>" . number_format($value->get_ntpn()) . "</td>";
                             echo "<td class='ratakanan'>" . number_format($value->get_check_num()) . "</td>";                          
-							echo "<td>" . $value->get_tanggal_sp2d() . "</td>";
+							echo "<td>"; if ($value->get_tanggal_sp2d() == null) {echo "-";} else { echo $value->get_tanggal_sp2d() ;} "</td>";
 							echo "<td><a href=" . URL . "dataSPM/daftarsp2d/" . $value->get_satker_code() . "/" . date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/". date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/312  >" . number_format($value->get_output_code()) . "</a></td>";		
+							echo "<td>" ;if	($value->get_output_code() == 0) { echo '0.00%'; } 
+							else { echo "(". number_format($value->get_output_code()/$value->get_check_num()*100,2)."%)"; }	"</td>";													
 							echo "<td>" . $value->get_tanggal() . "</td>";
 							echo "<td>" . $value->get_description() . "</td>";
                             echo "</tr>	";
