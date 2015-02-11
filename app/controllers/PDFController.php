@@ -3773,7 +3773,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function daftarsp2d_PDF($kdsatker = null, $check_number = null, $invoice = null, $JenisSP2D = null, $JenisSPM = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function daftarsp2d_PDF($kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null,$jendok = null, $check_number = null, $invoice = null, $JenisSP2D = null, $JenisSPM = null) {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
@@ -3791,16 +3791,22 @@ class PDFController extends BaseController {
 
         if ($kdsatker != 'null') {
             if (Session::get('role') == SATKER) {
-                if (Session::get('kd_satker') != $kdsatker) {
-                    header('location:' . URL . 'auth/logout');
-                    exit();
-                } else {
-                    $filter[$no++] = " SEGMENT1 =  '" . Session::get('kd_satker') . "'";
-                }
+				$filter[$no++] = " SEGMENT1 =  '" . Session::get('kd_satker') . "'";
             } else {
                 $filter[$no++] = " SEGMENT1 =  '" . $kdsatker . "'";
             }
         }
+        if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
+            $filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('" . $kdtgl_awal . "','DD/MM/YYYY hh:mi:ss') AND TO_DATE('" . $kdtgl_akhir . "','DD/MM/YYYY hh:mi:ss')";
+            $tglawal = array("$kdtgl_awal");
+            $tglakhir = array("$kdtgl_akhir");
+            $this->view->kdtgl_awal = $tglawal;
+            $this->view->kdtgl_akhir = $tglakhir;
+        }
+		if ($jendok != 'null') {
+            $filter[$no++] = "JENDOK = '" . $jendok . "'";
+        }
+		
         if ($check_number != 'null') {
             $filter[$no++] = "check_number = '" . $check_number . "'";
         }
@@ -3813,13 +3819,7 @@ class PDFController extends BaseController {
         if ($JenisSPM != 'null') {
             $filter[$no++] = "JENIS_SPM = '" . $JenisSPM . "'";
         }
-        if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
-            $filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('" . $kdtgl_awal . "','DD/MM/YYYY hh:mi:ss') AND TO_DATE('" . $kdtgl_akhir . "','DD/MM/YYYY hh:mi:ss')";
-            $tglawal = array("$kdtgl_awal");
-            $tglakhir = array("$kdtgl_akhir");
-            $this->view->kdtgl_awal = $tglawal;
-            $this->view->kdtgl_akhir = $tglakhir;
-        }
+
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) = '" . Session::get('id_user') . "'";
         }

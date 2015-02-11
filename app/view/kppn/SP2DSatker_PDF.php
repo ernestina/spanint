@@ -93,6 +93,7 @@ class FPDF_AutoWrapTable extends FPDF {
                 //tanggal
 		$kdtgl_awal1 = $this->kdtgl_awal;
 		$kdtgl_akhir1 = $this->kdtgl_akhir;
+		
 	    if (isset($kdtgl_awal1) && isset($kdtgl_akhir1)) {
             $thn1 = substr($kdtgl_awal1, 6, 4);
             $bln1 = substr($kdtgl_awal1, 3, 2);
@@ -102,7 +103,8 @@ class FPDF_AutoWrapTable extends FPDF {
             $bln2 = substr($kdtgl_akhir1, 3, 2);
             $tgl2 = substr($kdtgl_akhir1, 0, 2);
             $kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
-            $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);		
+            //$this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);	
+			$this->Cell(0, 20, 'Sampai Dengan  ' . $kdtgl_awal, 0, 0, 'C', false);			
         } else {
             $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);			 
         } 
