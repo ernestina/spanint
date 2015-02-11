@@ -15,31 +15,86 @@
 			<?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-			    if (Session::get('role') == KPPN) {
-                    IF(isset($this->nmsatker) || isset($this->ppp) ){
-					
-							$kdkppn=Session::get('id_user');
-						if (isset($this->ppp)) {
-							$kdppp = $this->ppp;
+			    if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+				//-----------------------------
+					IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_sumber_dana)){
+						
+						if (isset($this->d_nama_kppn)) {
+							foreach ($this->d_nama_kppn as $kppn) {
+								$kdkppn = $kppn->get_kd_satker();
+							  }
 						} else {
-							$kdppp = "null";
+							$kdkppn = 'null';
 						}
 						if (isset($this->nmsatker)) {
 							foreach ($this->nmsatker as $satker) {
-								$kdsatker = $satker->get_satker_code();
+								$kd_satker = $satker->get_satker_code();
 							}
-						}else{			
-							if (isset($this->data1)) {
-								foreach ($this->data1 as $value) {
-									$kdsatker =$value->get_satker_code();
-								}
-							}
-						} 
-				?>
-						<a href="<?php echo URL; ?>PDF/KarwasPNBP_PDF/<?php echo $kdkppn . "/" . $kdppp . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						}else{		
+							$kd_satker =	Session::get('kd_satker');					
+						}
+						if (isset($this->jendok)) {
+							$jendok = $this->jendok;
+						}else{
+							$jendok = 'null';
+						
+						}
+						
+						
+						?>
+						<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
-					}
+						}
+					//------------------------------
+				}
+
+				if (Session::get('role') == KPPN) {
+                    
+					
+							$kdkppn=Session::get('id_user');
+						if (isset($this->nmsatker)) {
+							foreach ($this->nmsatker as $satker) {
+								$kd_satker = $satker->get_satker_code();
+							}
+						}else{		
+							$kd_satker =	Session::get('kd_satker');					
+						}
+						if (isset($this->jendok)) {
+							$jendok = $this->jendok;
+						}else{
+							$jendok = 'null';
+						
+						}
+				?>
+						<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+					
                 }
+				if (Session::get('role') == SATKER) {
+				//-----------------------------
+					
+					if (isset($this->d_nama_kppn)) {
+						foreach ($this->d_nama_kppn as $kppn) {
+							$kdkppn = $kppn->get_kd_satker();
+						  }
+					} else {
+						$kdkppn = 'null';
+					}
+					
+					$kd_satker =	Session::get('kd_satker');
+					
+					if (isset($this->jendok)) {
+							$jendok = $this->jendok;
+						}else{
+							$jendok = 'null';
+						
+						}
+					?>
+						<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+				}
+				//------------------------------
+
 			?>
 
                 
