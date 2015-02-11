@@ -144,6 +144,8 @@ $akses['DataSPMKanwil'] = array(
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
 	'Konversi',
+	'KarwasUPSatker',
+	'UPSatker',
     '__destruct'
 );
 

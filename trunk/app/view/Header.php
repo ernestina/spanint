@@ -118,6 +118,7 @@
                                     <li><a href="<?php echo URL; ?>dataSPM/DurasiSpm">Durasi Penyelesaian SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/nmsatker">Daftar SP2D per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
+									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP (Uji Coba)</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -265,6 +266,7 @@
                                     <li><a href="<?php echo URL; ?>dataSPM/DurasiSpm">Durasi Penyelesaian SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/nmsatker">Daftar SP2D per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
+									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP (Uji Coba)</a></li>
                                 </ul>
                             </div>
                         </li>
