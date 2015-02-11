@@ -192,27 +192,27 @@ if (Session::get('role') == KPPN) {
     </div>
 </div>
 
-<div id="table-container" class="wrapper">
+<div id="table-container" class="wrapper" style='font-size: 90%'>
     <table class="footable">
         <!--baris pertama-->
             <thead>
                 <tr>
                     <th rowspan=2 class='ratatengah'>No.</th>
                     <th rowspan=2 class='ratatengah'>Kode Satker</th>
-                    <th rowspan=2 class='ratatengah'>Nama Satker</th>
+                    <th rowspan=2 class='ratatengah' width=20%>Nama Satker</th>
 					<th rowspan=2 class='ratatengah'>Sumber Dana</th>
 					<th colspan=2 class='ratatengah'>Total UP</th>
 					<th colspan=2 class='ratatengah'>Pengurang UP</th>                   					
 					<th rowspan=2 class='ratatengah'>Sisa UP</th>
-					<th rowspan=2 class='ratatengah'>Tgl SP2D UP/GUP Terakhir</th>
+					<th rowspan=2 class='ratatengah' width='7%'>Tgl SP2D UP/GUP<br> Terakhir</th>
 					<th rowspan=2 class='ratatengah'>Total SP2D GUP Terakhir</th>
-                    <th rowspan=2 class='ratatengah'>Batas Teguran</th>
-					<th rowspan=2 class='ratatengah'>Keterangan</th>
+                    <th rowspan=2 class='ratatengah' width='7%'>Batas Teguran</th>
+					<th rowspan=2 class='ratatengah'>Status</th>
                 </tr>
 				
 				<tr>
 					<th>Total UP</th>	
-					<th>Tanggal UP Terakhir</th>	
+					<th width='7%'>Tanggal UP Terakhir</th>	
 					<th>Total GU Nihil</th>	
 					<th>Setoran UP</th>
 								
@@ -238,7 +238,7 @@ if (Session::get('role') == KPPN) {
                             echo "<td class='ratakanan'>" . number_format($value->get_ntpn()) . "</td>";
                             echo "<td class='ratakanan'>" . number_format($value->get_check_num()) . "</td>";                          
 							echo "<td>" . $value->get_tanggal_sp2d() . "</td>";
-							echo "<td><a href=" . URL . "dataSPM/daftarsp2d/" . $value->get_satker_code() . "/" . date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/". date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/312  >" . number_format($value->get_output_code()) . "</a></td>";		
+							echo "<td class='ratakanan'><a href=" . URL . "dataSPM/daftarsp2d/" . $value->get_satker_code() . "/" . date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/". date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/312  >" . number_format($value->get_output_code()) . "</a></td>";		
 							echo "<td>" . $value->get_tanggal() . "</td>";
 							echo "<td>" . $value->get_description() . "</td>";
                             echo "</tr>	";
