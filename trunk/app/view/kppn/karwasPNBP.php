@@ -315,7 +315,7 @@
                         echo '<tr><td colspan=6 class="align-center" id="filter-first">Silahkan masukkan filer terlebih dahulu.</td></tr>';
                     }
 					$pendapatan_hitung = $this->ppp/100;
-					echo 'pendapatan_hitung :'.$pendapatan_hitung;
+					//echo 'pendapatan_hitung :'.$pendapatan_hitung;
 					$maksimum_pencairan = ($pendapatan_hitung * $total_penerimaan) - $total_belanja;
 					?>
 					<tr>
