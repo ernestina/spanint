@@ -119,25 +119,29 @@ class FPDF_AutoWrapTable extends FPDF {
         $ukuran_kolom1 = 40;
 		$ukuran_kolom2 = 100;
 		$ukuran_kolom3 = 50;
-		$ukuran_kolom4 = 80;
-		$ukuran_kolom5 = 80;
-		$ukuran_kolom6 = 80;
+		$ukuran_kolom4 = 70;
+		$ukuran_kolom5 = 70;
+		$ukuran_kolom6 = 70;
 		$ukuran_kolom7 = 50;
-		$ukuran_kolom8 = 80;
+		$ukuran_kolom8 = 60;
 		
-        $ukuran_kolom_pagu_total = 60;
-        $ukuran_kolom_jenis_belanja = 60;
-        $ukuran_kolom_1a = 80;
-        $ukuran_kolom_2a = 60;
+        $ukuran_kolom_pagu_total = 70;
+        $ukuran_kolom_jenis_belanja = 70;
+        $ukuran_kolom_1a = 70;
+        $ukuran_kolom_2a = 70;
         $ukuran_kolom_a = $ukuran_kolom_1a + $ukuran_kolom_2a;
-        $ukuran_kolom_1b = 80;
-        $ukuran_kolom_2b = 80;
+        $ukuran_kolom_1b = 70;
+        $ukuran_kolom_2b = 70;
         $ukuran_kolom_b = $ukuran_kolom_1b + $ukuran_kolom_2b;
+		$ukuran_kolom_1c = 70;
+        $ukuran_kolom_2c = 70;
+        $ukuran_kolom_c = $ukuran_kolom_1c + $ukuran_kolom_2c;
 		
 		$kolom_grandtotal1=$ukuran_kolom0+$ukuran_kolom1+$ukuran_kolom2+$ukuran_kolom3;
 		
 		$kolom_grandtotal2=$ukuran_kolom_2a;
 		$kolom_grandtotal3=$ukuran_kolom_1b+$ukuran_kolom_2b;
+		$kolom_grandtotal3a=$ukuran_kolom_1c+$ukuran_kolom_2c;
 		$kolom_grandtotal4=$ukuran_kolom_pagu_total;
 
         $this->SetFillColor(200, 200, 200);
@@ -160,6 +164,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($px2 += $ukuran_kolom_1a);
         $this->Cell($ukuran_kolom_2a, $h / 2, 'Tgl UP Terakhir', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_2a);
+		
         $py3 = $this->GetY();
         $this->SetY($py3 -= 20);
         $this->SetX($left += $ukuran_kolom_a);
@@ -181,10 +186,25 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($left += $ukuran_kolom_b);
 		$this->Cell($ukuran_kolom4, $h, 'Sisa UP', 1, 0, 'C', true);
 		$this->SetX($left += $ukuran_kolom4);
-		$this->Cell($ukuran_kolom5, $h, 'Tgl SP2D UP/GUP Terakhir', 1, 0, 'C', true);
-		$this->SetX($left += $ukuran_kolom5);		
-		$this->Cell($ukuran_kolom6, $h, 'Total SP2D GUP Terakhir', 1, 0, 'C', true);
-		$this->SetX($left += $ukuran_kolom6);
+		$this->Cell($ukuran_kolom5, $h, 'Tgl SP2D GUP Terakhir', 1, 0, 'C', true);
+		$this->SetX($left += $ukuran_kolom5);
+		
+        $this->Cell($ukuran_kolom_c, $h / 2, 'Total SP2D GUP Terakhir', 1, 0, 'C', true);
+        $py4 = $this->GetY();
+        //$px5 = $px2 + $ukuran_kolom_b+$ukuran_kolom5;
+        $px5 = $px2 + $ukuran_kolom_b;
+        $py5 = $py4 + 20;
+		
+        $this->SetXY($px5, $py5);
+		$this->SetY($py5);
+		$this->SetX($px5);
+        $this->Cell($ukuran_kolom_1c, $h / 2, 'Total GUP', 1, 0, 'C', true);
+        $this->SetX($px5 += $ukuran_kolom_1c);
+        $this->Cell($ukuran_kolom_2c, $h / 2, 'Persentase Dari UP', 1, 0, 'C', true);
+        $this->SetX($px5 += $ukuran_kolom_2c);
+        $py6 = $this->GetY();
+        $this->SetY($py6 -= 20);
+        $this->SetX($left += $ukuran_kolom_c);
 		$this->Cell($ukuran_kolom7, $h, 'Batas Teguran', 1, 0, 'C', true);
 		$this->SetX($left += $ukuran_kolom7);
 		
@@ -197,13 +217,14 @@ class FPDF_AutoWrapTable extends FPDF {
 		$ukuran_kolom_1a,$ukuran_kolom_2a,
 		$ukuran_kolom_1b,$ukuran_kolom_2b,
 		$ukuran_kolom4,$ukuran_kolom5,
-		$ukuran_kolom6,$ukuran_kolom7,
-		$ukuran_kolom8
+		$ukuran_kolom_1c,$ukuran_kolom_2c,
+		$ukuran_kolom7,$ukuran_kolom8
         ));
         $this->SetAligns(array('C', 'C',
 		'L', 'C',
 		'R', 'C',
 		'R', 'R',
+		'R', 'C',
 		'R', 'C',
 		'R', 'C',
 		 'C'));
@@ -215,6 +236,7 @@ class FPDF_AutoWrapTable extends FPDF {
                         '','',
                         '','',
 						'','',
+						'','',
                         '','',
                         ''
             ));
@@ -223,6 +245,12 @@ class FPDF_AutoWrapTable extends FPDF {
 			$no = 1;
 			$this->SetFillColor(255);
 			foreach ($this->data as $value) {
+			if	($value->get_output_code() == 0){
+								$nil2='0.00%';
+							}else{
+								$nil2a=number_format($value->get_output_code()/$value->get_check_num()*100,2);
+								$nil2=$nil2a.'%';
+							}
 				$this->Row(
 						array($no++,
 							$value->get_satker_code(),
@@ -235,6 +263,7 @@ class FPDF_AutoWrapTable extends FPDF {
 							number_format($value->get_check_num()),
 							$value->get_tanggal_sp2d(),
 							number_format($value->get_output_code()),
+							$nil2,
 							$value->get_tanggal(),
 							strtoupper($value->get_description())
 				));
@@ -270,8 +299,10 @@ class FPDF_AutoWrapTable extends FPDF {
 				$this->SetX($px2 += $ukuran_kolom4);
 				$this->Cell($ukuran_kolom5, $h, '', 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom5);
-				$this->Cell($ukuran_kolom6, $h, number_format($tot5), 1, 0, 'R', true);
-				$this->SetX($px2 += $ukuran_kolom6);
+				$this->Cell($ukuran_kolom_1c, $h, number_format($tot5), 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_1c);
+				$this->Cell($ukuran_kolom_2c, $h, '', 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom_2c);
 				$this->Cell($ukuran_kolom7, $h, '', 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom7);
 				$this->Cell($ukuran_kolom8, $h,'', 1, 1, 'R', true);

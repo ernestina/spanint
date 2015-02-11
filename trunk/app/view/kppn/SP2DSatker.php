@@ -17,7 +17,13 @@
 		   foreach ($this->data as $value) {
 				$satker = substr($value->get_invoice_num(), 7, 6);
 			}
-			   
+			
+			if (isset($this->jendok)) {
+				$jendok = $this->jendok;
+			}else{
+				$jendok = 'null';
+			}
+			
 			if (isset($this->d_invoice)) {
 				$check_number = $this->d_invoice;
 			}else{
@@ -51,8 +57,7 @@
 				 $kdtgl_akhir = 'null';
 			}
 		   ?>
-		   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
+		   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $jendok . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM; ?>" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 			<?php
 			//----------------------------------------------------		
@@ -64,6 +69,11 @@
 		   foreach ($this->data as $value) {
 				$satker = substr($value->get_invoice_num(), 7, 6);
 			}
+			if (isset($this->jendok)) {
+				$jendok = $this->jendok;
+			}else{
+				$jendok = 'null';
+			}
 			   
 			if (isset($this->d_invoice)) {
 				$check_number = $this->d_invoice;
@@ -98,8 +108,7 @@
 				 $kdtgl_akhir = 'null';
 			}
 		   ?>
-		   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
+		   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $jendok . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM; ?>" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 			<?php
 			//----------------------------------------------------		
@@ -111,6 +120,11 @@
 		   foreach ($this->data as $value) {
 				$satker = substr($value->get_invoice_num(), 7, 6);
 			}
+			if (isset($this->jendok)) {
+				$jendok = $this->jendok;
+			}else{
+				$jendok = 'null';
+			}
 			   
 			if (isset($this->d_invoice)) {
 				$check_number = $this->d_invoice;
@@ -145,10 +159,9 @@
 				 $kdtgl_akhir = 'null';
 			}
 		   ?>
-		   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $jendok . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM; ?>" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
-
-			<?php
+			<?php			
 			//----------------------------------------------------		
 	
 }  
