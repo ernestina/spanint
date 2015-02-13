@@ -146,6 +146,8 @@ $akses['DataSPMKanwil'] = array(
 	'Konversi',
 	'KarwasUPSatker',
 	'UPSatker',
+	'KarwasTUPSatker',
+	'TUPSatker',
     '__destruct'
 );
 

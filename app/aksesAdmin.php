@@ -205,6 +205,8 @@ $akses['DataSPMAdmin'] = array(
 	'Konversi',
 	'KarwasUPSatker',
 	'UPSatker',
+	'KarwasTUPSatker',
+	'TUPSatker',
     '__destruct'
 );
 
