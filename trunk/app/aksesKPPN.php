@@ -344,6 +344,7 @@ $akses['PDFKPPN'] = array(
     'RealisasiFA_1_Minus_51_PDF',
     'grStatusHarian_PDF',
     'grStatusHarianBulan_PDF',
+    'KarwasUPSatker_PDF',
     '__destruct'
 );
 ?>
