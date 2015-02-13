@@ -186,9 +186,9 @@ if (Session::get('role') == KPPN) {
 							echo "<td>" . $value->get_satker_code() . "</td>";
 							echo "<td class='align-left'>" . $value->get_nmsatker() . "</td>";
 							echo "<td class='align-center'>" . $value->get_jendok() . "</td>";
-                            echo "<td class='ratakanan'><a href=" . URL . "dataSPM/UPSatker/" . $value->get_satker_code() . "/UP >" . number_format($value->get_amount()) . "</a></td>";
+                            echo "<td class='ratakanan'><a href=" . URL . "dataSPM/UPSatker/". $value->get_jendok() ."/" . $value->get_satker_code() . "/UP >" . number_format($value->get_amount()) . "</a></td>";
 							echo "<td class='align-center'>" . $value->get_invoice_date() . "</td>";
-							echo "<td class='ratakanan'><a href=" . URL . "dataSPM/UPSatker/" . $value->get_satker_code() . "/NIHIL >" . number_format($value->get_line_amount()*-1) . "</a></td>";
+							echo "<td class='ratakanan'><a href=" . URL . "dataSPM/UPSatker/" . $value->get_jendok() ."/". $value->get_satker_code() . "/NIHIL >" . number_format($value->get_line_amount()*-1) . "</a></td>";
                             echo "<td class='ratakanan'>" . number_format($value->get_ntpn()) . "</td>";
                             echo "<td class='ratakanan'>" . number_format($value->get_check_num()) . "</td>";                          
 							echo "<td>"; if ($value->get_tanggal_sp2d() == null) {echo "-";} else { echo $value->get_tanggal_sp2d() ;} "</td>";

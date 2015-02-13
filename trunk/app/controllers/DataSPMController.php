@@ -832,14 +832,66 @@ class DataSPMController extends BaseController {
 			$this->view->data2 = $d_spm1->get_total_sisa_up($filter);
 			
         }
-
-		
-		
+				
 		$d_log->tambah_log("Sukses");
-        $this->view->render('kppn/karwasUPSatker');
+        $this->view->render('kppn/KarwasUPSatker');
     }
 	
-	public function UPSatker($kd_satker, $jendok) {
+	public function KarwasTUPSatker() {
+        $d_spm1 = new DataKarwasUP($this->registry);
+        $filter = array();
+		//$filter2 = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		
+		if (isset($_POST['submit_file'])) {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn']."'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+				
+            } else {
+                $filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+            }
+				
+            if ($_POST['kdsatker'] != '') {
+                $filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
+				$this->view->d_kd_satker = $_POST['kdsatker'];
+            }
+			if ($_POST['SUMBERDANA'] != '') {
+                $filter[$no++] = "SUMBER_DANA = '" . $_POST['SUMBERDANA'] . "'";
+				$this->view->d_sumber_dana = $_POST['SUMBERDANA'];
+            }
+			$this->view->data1 = $d_spm1->get_karwas_tup_satker($filter);
+			$this->view->data2 = $d_spm1->get_total_sisa_tup($filter);
+		}
+		
+		if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+            
+        }
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+           
+        }
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+			$this->view->data1 = $d_spm1->get_karwas_tup_satker($filter);			
+			$this->view->data2 = $d_spm1->get_total_sisa_tup($filter);
+        }	
+		
+		$d_log->tambah_log("Sukses");
+        $this->view->render('kppn/KarwasTUPSatker');
+    }
+	
+	public function UPSatker($sumber_dana, $kd_satker, $jendok) {
         $d_spm1 = new DataKarwasUP($this->registry);
         $filter = array();
 		//$filter2 = array();
@@ -869,6 +921,10 @@ class DataSPMController extends BaseController {
 				$filter[$no++] = " JENIS_SPM = 'GUP NIHIL'";
 		}
 		
+		if($sumber_dana != '') {
+			 $filter[$no++] = " SUMBER_DANA =  '" . $sumber_dana. "'";
+		
+		}
 
 		$this->view->data1 = $d_spm1->get_total_up($filter);
 		
@@ -878,6 +934,51 @@ class DataSPMController extends BaseController {
         $this->view->render('kppn/DetailUP');
     }
     //author by jhon
+	
+	public function TUPSatker($sumber_dana, $kd_satker, $tgl1 = null, $tgl2 = null) {
+        $d_spm1 = new DataKarwasUP($this->registry);
+        $filter = array();
+		//$filter2 = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+		
+		if (Session::get('role') == KPPN) {
+			$filter[$no++] = "KPPN_CODE = '" . Session::get('id_user')."'";
+        }
+		if ($kd_satker != '') {
+            if (Session::get('role') == SATKER) {
+                $filter[$no++] = " SATKER_CODE =  '" . Session::get('kd_satker'). "'";
+            } else {
+                $filter[$no++] = " SATKER_CODE =  '" . $kd_satker . "'";
+                $this->view->d_kd_satker = $kd_satker;
+            }
+			$this->view->nmsatker = $d_spm1->get_nama_satker_up($kd_satker);
+        }
+		if($sumber_dana != '') {
+			 $filter[$no++] = " SUMBER_DANA =  '" . $sumber_dana. "'";
+		
+		}
+		
+		if ($tgl1 != '' AND $tgl2 != '') {
+            $filter[$no++] = "CHECK_DATE BETWEEN TO_DATE('" . $tgl1 . "','DD/MM/YYYY hh:mi:ss') AND TO_DATE('" . $tgl2 . "','DD/MM/YYYY hh:mi:ss')";
+            $this->view->d_tgl_awal = $tgl1;
+            $this->view->d_tgl_akhir = $tgl2;
+        }
+		
+		
+		$this->view->data1 = $d_spm1->get_total_tup($filter);
+		
+        //var_dump($d_spm->get_hist_spm_filter());
+		
+		$d_log->tambah_log("Sukses");
+        $this->view->render('kppn/DetailTUP');
+    }
+	
+	
 	
 	public function Konversi() {
         $d_spm1 = new DataADKKonversi($this->registry);
