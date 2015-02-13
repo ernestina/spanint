@@ -271,7 +271,7 @@ if (Session::get('role') == KPPN) {
 
             </div>
             
-            <form id="filter-form" method="POST" action="KarwasUPSatker" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="KarwasTUPSatker" enctype="multipart/form-data">
 
                 <div class="modal-body">
 
