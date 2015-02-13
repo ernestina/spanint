@@ -265,6 +265,7 @@ $akses['PDFKanwil'] = array(
     'SuspendSatkerPenerimaan_PDF',
     'SuspendAkunPenerimaan_PDF',
     'NTPNGanda_PDF',
+    'KarwasUPSatker_PDF',
     '__destruct'
 );
 ?>
