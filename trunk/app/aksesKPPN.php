@@ -191,6 +191,8 @@ $akses['DataSPMKPPN'] = array(
 	'Konversi',
 	'KarwasUPSatker',
 	'UPSatker',
+	'KarwasTUPSatker',
+	'TUPSatker',
     '__destruct'
 );
 

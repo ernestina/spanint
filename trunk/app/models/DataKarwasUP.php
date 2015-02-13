@@ -30,6 +30,8 @@ class DataKarwasUP {
     private $_table1 = 'KARWAS_UP_DIPA_V';
     private $_table2 = 'KARWAS_TOTAL_UP_V';
 	private $_table3 = 'KARWAS_UP_V';
+	private $_table4 = 'KARWAS_TUP_V';
+	private $_table5 = 'KARWAS_TOTAL_TUP_NIHIL_V';
     public $registry;
 
     /*
@@ -145,6 +147,46 @@ class DataKarwasUP {
         return $data;
     }
 	
+	public function get_karwas_tup_satker($filter) {
+        $sql = "SELECT *
+				FROM "
+                . $this->_table4 . " 
+				WHERE 
+				1=1 
+				
+				"
+
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        $sql .= " ORDER BY SISA_HARI asc ";
+		
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);			
+			$d_data->set_kppn_code($val['KPPN_CODE']);
+            $d_data->set_satker_code($val['SATKER_CODE']);
+			$d_data->set_nmsatker($val['NMSATKER']);
+			$d_data->set_jendok($val['SUMBER_DANA']);
+			$d_data->set_check_num($val['CHECK_NUMBER']);
+			$d_data->set_invoice_num($val['TGL_TUP_TERAKHIR']);
+			$d_data->set_tanggal($val['BATAS_TUP']);
+			$d_data->set_invoice_date($val['SISA_HARI']);	
+			$d_data->set_amount($val['NILAI_TUP']);
+            $d_data->set_line_amount($val['NILAI_TUP_NIHIL']);
+			$d_data->set_ntpn($val['SETORAN']);
+			$d_data->set_output_code($val['SISA']);
+			$d_data->set_description($val['STATUS']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	
 	public function get_total_up($filter) {
         $sql = "SELECT *
 				FROM "
@@ -181,10 +223,75 @@ class DataKarwasUP {
         return $data;
     }
 	
+	public function get_total_tup($filter) {
+        $sql = "SELECT *
+				FROM "
+                . $this->_table5 . " 
+				WHERE 
+				1=1 
+				
+				"
+
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        $sql .= " ORDER BY INVOICE_NUM ";
+		//$sql .= " AND " . $satker1;
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+			$d_data->set_jenis_spm($val['JENIS_SPM']);
+            $d_data->set_satker_code($val['SATKER_CODE']);
+            $d_data->set_kppn_code($val['KPPN_CODE']);
+			$d_data->set_invoice_num($val['INVOICE_NUM']);
+			$d_data->set_invoice_date($val['INVOICE_DATE']);
+			$d_data->set_tanggal_sp2d($val['CHECK_DATE']);
+			$d_data->set_check_num($val['CHECK_NUMBER']);
+            $d_data->set_line_amount($val['NILAI_TUP_NIHIL']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
 	public function get_total_sisa_up($filter) {
         $sql = "SELECT SUM(SISA_UP) SISA_UP
 				FROM "
                 . $this->_table3 . " 
+				WHERE 
+				1=1 
+				
+				"
+
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        //$sql .= " ORDER BY INVOICE_DATE ";
+		//$sql .= " AND " . $satker1;
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_line_amount($val['SISA_UP']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_total_sisa_tup($filter) {
+        $sql = "SELECT SUM(SISA) SISA_UP
+				FROM "
+                . $this->_table4 . " 
 				WHERE 
 				1=1 
 				
