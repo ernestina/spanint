@@ -6,8 +6,14 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Monitoring SP2D Gaji Terindikasi Salah Bank</h2>
             </div>
-            
+            <?php if (isset($this->kppn_list)){ ?>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
+            </div>
+            <?php }?>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
                 
                 <?php
 			//----------------------------------------------------
@@ -21,8 +27,9 @@
 		}
 		?>
 
-		<a href="<?php echo URL; ?>PDF/sp2dSalahBank_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
+		<a href="<?php echo URL; ?>PDF/sp2dSalahBank_PDF/<?php echo $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+		<a href="<?php echo URL; ?>PDF/sp2dSalahBank_PDF/<?php echo $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 		<?php
 		//----------------------------------------------------		
 		
@@ -31,13 +38,7 @@
                 
                 
             </div>
-            <?php if (isset($this->kppn_list)){ ?>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
-            </div>
-            <?php }?>
         </div>
         
         <div class="row" style="padding-top: 10px">

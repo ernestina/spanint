@@ -6,120 +6,116 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Data Pagu Minus Belanja Pegawai</h2>
             </div>
-            
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-    <?php
-    //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA_1.php  
-if (Session::get('role') == SATKER) {
-		if (isset($this->kppn_code)) {
-				$kdkppn = $this->kppn_code;
-			}else{
-				$kdkppn = 'null';
-		}
-		if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			}else{
-				$kdsatker = Session::get('kd_satker');
-		}
-		if (isset($this->account_code)) {
-				$kdakun = $this->account_code;
-			}else{
-				$kdakun ='null';
-		}
-		if (isset($this->program_code)) {
-				$kdprogram = $this->program_code;
-			}else{
-				$kdprogram = 'null';
-		}
-		if (isset($this->output_code)) {
-				$kdoutput = $this->output_code;	
-			}else{
-				$kdoutput = 'null';
-		}
-
-	    ?>
-    <a href="<?php echo URL; ?>PDF/RealisasiFA_1_Minus_51_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-	<?php
-}
-if (Session::get('role') == KPPN) {
-
-		if (isset($this->kppn_code)) {
-				$kdkppn = $this->kppn_code;
-			}else{
-				$kdkppn = Session::get('id_user');
-		}
-		if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			}else{
-				$kdsatker = 'null';
-		}
-		if (isset($this->account_code)) {
-				$kdakun = $this->account_code;
-			}else{
-				$kdakun ='null';
-		}
-		if (isset($this->program_code)) {
-				$kdprogram = $this->program_code;
-			}else{
-				$kdprogram = 'null';
-		}
-		if (isset($this->output_code)) {
-				$kdoutput = $this->output_code;	
-			}else{
-				$kdoutput = 'null';
-		}
-				
-	    ?>
-    <a href="<?php echo URL; ?>PDF/RealisasiFA_1_Minus_51_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-	<?php
-}
-if (Session::get('role') == KANWIL || Session::get('role') == ADMIN || Session::get('role') == DJA ) {
-
-
-		if (isset($this->kppn_code)) {
-				$kdkppn = $this->kppn_code;
-			}else{
-				$kdkppn ='null';
-		}
-		if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			}else{
-				$kdsatker ='null';
-		}
-		if (isset($this->account_code)) {
-				$kdakun = $this->account_code;
-			}else{
-				$kdakun ='null';
-		}
-		if (isset($this->program_code)) {
-				$kdprogram = $this->program_code;
-			}else{
-				$kdprogram ='null';
-		}
-		if (isset($this->output_code)) {
-				$kdoutput = $this->output_code;	
-			}else{
-				$kdoutput ='null';
-		}
-
-				?>
-    <a href="<?php echo URL; ?>PDF/RealisasiFA_1_Minus_51_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-	<?php
-			
-	   
-
-}
-
-?>
-
-
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+                
+			<?php
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA_1.php  
+			if (Session::get('role') == SATKER) {
+				if (isset($this->kppn_code)) {
+						$kdkppn = $this->kppn_code;
+					}else{
+						$kdkppn = 'null';
+				}
+				if (isset($this->satker_code)) {
+						$kdsatker = $this->satker_code;
+					}else{
+						$kdsatker = Session::get('kd_satker');
+				}
+				if (isset($this->account_code)) {
+						$kdakun = $this->account_code;
+					}else{
+						$kdakun ='null';
+				}
+				if (isset($this->program_code)) {
+						$kdprogram = $this->program_code;
+					}else{
+						$kdprogram = 'null';
+				}
+				if (isset($this->output_code)) {
+						$kdoutput = $this->output_code;	
+					}else{
+						$kdoutput = 'null';
+				}
+
+					
+			}
+			if (Session::get('role') == KPPN) {
+
+					if (isset($this->kppn_code)) {
+							$kdkppn = $this->kppn_code;
+						}else{
+							$kdkppn = Session::get('id_user');
+					}
+					if (isset($this->satker_code)) {
+							$kdsatker = $this->satker_code;
+						}else{
+							$kdsatker = 'null';
+					}
+					if (isset($this->account_code)) {
+							$kdakun = $this->account_code;
+						}else{
+							$kdakun ='null';
+					}
+					if (isset($this->program_code)) {
+							$kdprogram = $this->program_code;
+						}else{
+							$kdprogram = 'null';
+					}
+					if (isset($this->output_code)) {
+							$kdoutput = $this->output_code;	
+						}else{
+							$kdoutput = 'null';
+					}
+							
+					
+			}
+			if (Session::get('role') == KANWIL || Session::get('role') == ADMIN || Session::get('role') == DJA ) {
+
+
+					if (isset($this->kppn_code)) {
+							$kdkppn = $this->kppn_code;
+						}else{
+							$kdkppn ='null';
+					}
+					if (isset($this->satker_code)) {
+							$kdsatker = $this->satker_code;
+						}else{
+							$kdsatker ='null';
+					}
+					if (isset($this->account_code)) {
+							$kdakun = $this->account_code;
+						}else{
+							$kdakun ='null';
+					}
+					if (isset($this->program_code)) {
+							$kdprogram = $this->program_code;
+						}else{
+							$kdprogram ='null';
+					}
+					if (isset($this->output_code)) {
+							$kdoutput = $this->output_code;	
+						}else{
+							$kdoutput ='null';
+					}
+
+							
+			}
+			?>
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_1_Minus_51_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_1_Minus_51_PDF/<?php echo $kdsatker . "/" . $kdkppn . "/" . $kdakun . "/" . $kdprogram . "/" . $kdoutput; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<?php
+
+			?>
+
+
+            </div>
+           
         </div>
         
         <div class="row" style="padding-top: 10px">

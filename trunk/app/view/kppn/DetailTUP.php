@@ -10,8 +10,12 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Daftar SPM TUP NIHIL</h2>
             </div>
-            
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+              <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
+            </div>
+             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 			<?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
@@ -52,7 +56,9 @@
 						
 						
 						?>
-						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 					<?php
 						}
 					//------------------------------
@@ -88,7 +94,9 @@
 						
 						
 						?>
-						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 					<?php
 					
                 }
@@ -126,7 +134,9 @@
 						
 						
 						?>
-						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 					<?php
 				}
 				//------------------------------
@@ -135,11 +145,7 @@
 
                 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
-                
-                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
-            </div>
+           
         </div>
         
         <div class="row top-padded-little">

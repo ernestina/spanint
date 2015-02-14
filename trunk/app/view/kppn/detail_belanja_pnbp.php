@@ -10,11 +10,6 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Form Pengawasan PNBP</h2>
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
-            </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 			<?php
 			//----------------------------------------------------

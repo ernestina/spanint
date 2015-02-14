@@ -6,8 +6,12 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Rekap SP2D atas SPM</h2>
             </div>
+             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                <!-- button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button -->
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
                 
                 <?php
 			//----------------------------------------------------
@@ -34,8 +38,9 @@
 			} 
 			
 				?>
-		<a href="<?php echo URL; ?>PDF/detailrekapsp2d1_PDF/<?php echo $jenis_spm."/". $kdkppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
+		<a href="<?php echo URL; ?>PDF/detailrekapsp2d1_PDF/<?php echo $jenis_spm."/". $kdkppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+		<a href="<?php echo URL; ?>PDF/detailrekapsp2d1_PDF/<?php echo $jenis_spm."/". $kdkppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 <?php			
 		?>		
 				
@@ -45,11 +50,7 @@
                 
                 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            
-                <!-- button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button -->
-                
-            </div>
+           
         </div>
         
         <div class="row" style="padding-top: 10px">

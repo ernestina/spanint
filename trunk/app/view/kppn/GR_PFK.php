@@ -16,31 +16,28 @@
                 
 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 
-    <!-- button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button -->
-<?php
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
+			<?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 
-				if (isset($this->d_nm_kdkppn)) {
-					$kdkppn =$this->d_nm_kdkppn;
-				}
-				
-				if (isset($this->bulan)) {
-					$kdbulan =$this->bulan;
-				}
-				
-				if (isset($this->d_tgl)) {
-					$kdakun =$this->d_tgl;					
-				}
-				
-                ?>
-                <a href="<?php echo URL; ?>PDF/GR_PFK_DETAIL1_PDF/<?php echo $kdakun . "/" . $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-<?php
-//----------------------------------------------------		
-?>
+			if (isset($this->d_nm_kdkppn)) {
+				$kdkppn =$this->d_nm_kdkppn;
+			}			
+			if (isset($this->bulan)) {
+				$kdbulan =$this->bulan;
+			}
+			if (isset($this->d_tgl)) {
+				$kdakun =$this->d_tgl;					
+			}
+			?>
+			<a href="<?php echo URL; ?>PDF/GR_PFK_DETAIL1_PDF/<?php echo $kdakun . "/" . $kdbulan . "/" . $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<a href="<?php echo URL; ?>PDF/GR_PFK_DETAIL1_PDF/<?php echo $kdakun . "/" . $kdbulan . "/" . $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+			<?php
+			//----------------------------------------------------		
+			?>
 
             </div>
         </div>

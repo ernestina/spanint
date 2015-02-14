@@ -15,22 +15,25 @@
 				
             </div>
             
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
                  <?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 			    
-						if (isset($this->data)) {
-							foreach ($this->data as $value) {
-								$kdntpn =$value->get_ntpn();
-								
-							}
-						}
-				
-					?>
-						<a href="<?php echo URL; ?>PDF/DetailNTPNGanda_PDF/<?php echo $kdntpn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-				
+			if($this->ntpn){
+				$kdntpn=$this->ntpn;
+			}else{
+				foreach ($this->data as $value) {
+					$kdntpn =$value->get_ntpn();
+				}
+			}
+			
+			?>
+			<a href="<?php echo URL; ?>PDF/DetailNTPNGanda_PDF/<?php echo $kdntpn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<a href="<?php echo URL; ?>PDF/DetailNTPNGanda_PDF/<?php echo $kdntpn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+			<?php
+			//---------------------------------				
                 
 			?>
   

@@ -7,10 +7,6 @@
                 <h2>Detail Alasan Penolakan PMRT</h2>
             </div>
             
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-                
-            </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 			<?php
 			//----------------------------------------------------

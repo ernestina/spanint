@@ -6,45 +6,24 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Hold Invoice</h2>
             </div>
+			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
 
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+
+            </div>
+
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 
                 <?php
                 //----------------------------------------------------
                 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-                if (Session::get('role') == KANWIL) {
-                    IF (isset($this->d_nama_kppn) || isset($this->d_invoice) || isset($this->d_status)) {
-                        if (isset($this->d_nama_kppn)) {
-                            foreach ($this->d_nama_kppn as $kppn) {
-                                $kdkppn = $kppn->get_kd_satker();
-                            }
-                        } else {
-                            echo Session::get('user');
-                        }
-                        if (isset($this->d_invoice)) {
-                            $invoice = $this->d_invoice;
-                        } else {
-                            $invoice = "null/null/null";
-                        }
-                        if (isset($this->d_status)) {
-                            $status = $this->d_status;
-                        } else {
-                            $status = "null";
-                        }
-                        ?>
-
-                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        <?php
-                    }
-                }
-                if (Session::get('role') == ADMIN) {
-                    IF (isset($this->d_nama_kppn) || isset($this->d_invoice) || isset($this->d_status)) {
-                        if (isset($this->d_nama_kppn)) {
-                            foreach ($this->d_nama_kppn as $kppn) {
-                                $kdkppn = $kppn->get_kd_satker();
-                            }
+               
+                if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+                    IF (isset($this->d_kppn) || isset($this->d_invoice) || isset($this->d_status)) {
+                        if (isset($this->d_kppn)) {
+                            $kdkppn = $this->d_kppn;
                         }else{
-							$kdkppn = $this->d_kppn;
+							$kdkppn = 'null';
 						}
                         if (isset($this->d_invoice)) {
                             $invoice = $this->d_invoice;
@@ -58,8 +37,10 @@
                         }
                         ?>
 
-                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        <?php
+                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+						<?php
                     }
                 }
                 if (Session::get('role') == SATKER) {
@@ -83,7 +64,9 @@
                     }
                     ?>
 
-                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+					<a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
                     <?php
                 }
                 if (Session::get('role') == KPPN) {
@@ -107,16 +90,13 @@
                     }
                     ?>
 
-                        <a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+					<a href="<?php echo URL; ?>PDF/HoldSpm_PDF/<?php echo $kdkppn . "/" . $status . "/" . $invoice; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
                     <?php
                 }
                 //----------------------------------------------------		
                 ?>
-
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
 
             </div>
         </div>
