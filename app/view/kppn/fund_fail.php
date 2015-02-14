@@ -10,72 +10,70 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Penolakan Revisi karena Menyebabkan Pagu Minus <em>(Fund Fail)</em></h2>
             </div>
-            
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
-                
-                <?php
-				//----------------------------------------------
-				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
-
-				if (Session::get('role') == ADMIN  || Session::get('role') == DJA || Session::get('role') == KANWIL) {
-						if (isset($this->d_nama_kppn)) {						
-							foreach ($this->d_nama_kppn as $kppn) {
-								$kdkppn = $kppn->get_kd_satker();
-							 }
-						} else {
-							$kdkppn ='null';
-						}
-						if (isset($this->satker_code)) {
-							$kdsatker=$this->satker_code;
-						} else {
-							
-							$kdsatker='null';
-						}
-						?>
-						<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-						<?php
-				}
-				if (Session::get('role') == KPPN) {
-					if (isset($this->d_nama_kppn)) {
-						$kdkppn = $this->d_nama_kppn;
-					} else {
-						$kdkppn = Session::get('id_user');
-					}
-					if (isset($this->satker_code)) {
-						$kdsatker=$this->satker_code;
-					} else {
-						foreach ($this->data as $value) {
-							$kdsatker=$value->get_satker_code();
-						}
-					}
-					?>
-					<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-				}
-				if (Session::get('role') == SATKER) {
-					if (isset($this->d_nama_kppn)) {
-						$kdkppn = $this->d_nama_kppn;
-					} else {
-						$kdkppn = Session::get('id_user');
-					}
-					if (isset($this->satker_code)) {
-						$kdsatker = $this->satker_code;
-					} else {
-						$kdsatker = Session::get('kd_satker');
-					}
-					?>
-					<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-				}
-				//------------------------------
-				?>
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php if (Session::get('role') != SATKER) { ?>
                     <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 <?php } ?>
+                
+            </div>
+
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+                
+			<?php
+			//----------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
+
+			if (Session::get('role') == ADMIN  || Session::get('role') == DJA || Session::get('role') == KANWIL) {
+				if (isset($this->d_nama_kppn)) {						
+					foreach ($this->d_nama_kppn as $kppn) {
+						$kdkppn = $kppn->get_kd_satker();
+					 }
+				} else {
+					$kdkppn ='null';
+				}
+				if (isset($this->satker_code)) {
+					$kdsatker=$this->satker_code;
+				} else {					
+					$kdsatker='null';
+				}
+				
+			}
+			if (Session::get('role') == KPPN) {
+				if (isset($this->d_nama_kppn)) {
+					$kdkppn = $this->d_nama_kppn;
+				} else {
+					$kdkppn = Session::get('id_user');
+				}
+				if (isset($this->satker_code)) {
+					$kdsatker=$this->satker_code;
+				} else {
+					foreach ($this->data as $value) {
+						$kdsatker=$value->get_satker_code();
+					}
+				}
+				
+			}
+			if (Session::get('role') == SATKER) {
+				if (isset($this->d_nama_kppn)) {
+					$kdkppn = $this->d_nama_kppn;
+				} else {
+					$kdkppn = Session::get('id_user');
+				}
+				if (isset($this->satker_code)) {
+					$kdsatker = $this->satker_code;
+				} else {
+					$kdsatker = Session::get('kd_satker');
+				}
+				
+			}
+			?>
+				<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/Fund_fail_PDF/<?php echo $kdsatker . "/" . $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<?php
+			//------------------------------
+			?>
                 
             </div>
         </div>

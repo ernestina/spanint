@@ -6,8 +6,12 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Monitoring SP2D Terbit diatas Jam 3 Tertanggal Hari yang Sama</h2>
             </div>
+             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
                 
                 <?php
 			//----------------------------------------------------
@@ -40,8 +44,9 @@ if(isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
     }
     ?>
 
-    <a href="<?php echo URL; ?>PDF/sp2dBesok_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdbank; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
+    <a href="<?php echo URL; ?>PDF/sp2dBesok_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdbank; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+	</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+    <a href="<?php echo URL; ?>PDF/sp2dBesok_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $kdbank; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 <?php
 //----------------------------------------------------		
 }
@@ -51,11 +56,7 @@ if(isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
                 
                 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
-            </div>
+           
         </div>
         
         <div class="row" style="padding-top: 10px">

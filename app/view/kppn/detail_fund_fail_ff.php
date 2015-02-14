@@ -22,26 +22,21 @@
 			if (isset($this->satker_code)) {
 				$kdsatker = $this->satker_code;
 			} else {
-					$kdsatker='null';
+				$kdsatker='null';
 			}
-      if (isset($this->output_code)) {
+			if (isset($this->output_code)) {
 				$kdoutput = $this->output_code;
 			} else {
-					$kdoutput='null';
+				$kdoutput='null';
 			}
-      if (isset($this->account_code)) {
+			if (isset($this->account_code)) {
 				$kdakun = $this->account_code;
 			} else {
-					$kdakun='null';
+				$kdakun='null';
 			}		
 
 			$kf='1';
-			?>
-	   
-		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-	<?php
-		
+			
 		}
 		
 		if (Session::get('role') == KPPN) {
@@ -49,57 +44,53 @@
 			if (isset($this->satker_code)) {
 				$kdsatker = $this->satker_code;
 			} else {
-					$kdsatker='null';
+				$kdsatker='null';
 			}
-      if (isset($this->output_code)) {
+			if (isset($this->output_code)) {
 				$kdoutput = $this->output_code;
 			} else {
-					$kdoutput='null';
+				$kdoutput='null';
 			}
-      if (isset($this->account_code)) {
+			if (isset($this->account_code)) {
 				$kdakun = $this->account_code;
 			} else {
-					$kdakun='null';
+				$kdakun='null';
 			}		
-
 			$kf='1';
-			?>
-	   
-		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-
-	<?php
+			
 		
 		}
 			
-		
 		if (Session::get('role') == DJA) {
 
 			if (isset($this->satker_code)) {
 				$kdsatker = $this->satker_code;
 			} else {
-					$kdsatker='null';
+				$kdsatker='null';
 			}
-      if (isset($this->output_code)) {
+			if (isset($this->output_code)) {
 				$kdoutput = $this->output_code;
 			} else {
-					$kdoutput='null';
+				$kdoutput='null';
 			}
-      if (isset($this->account_code)) {
+		  if (isset($this->account_code)) {
 				$kdakun = $this->account_code;
 			} else {
-					$kdakun='null';
+				$kdakun='null';
 			}		
 
-			$kf='1';
-			?>
-	   
-		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-		<?php
-		//----------------------------------------------------		
+		$kf='1';
+				
 						
 		}
+		?>
+	   
+		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+	   </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+
+		<?php
+		//----------------------------------------------------	
 
 ?>               
                

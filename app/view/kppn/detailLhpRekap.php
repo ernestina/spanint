@@ -11,32 +11,28 @@
                 
             
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
                 <!-- PDF -->
 				<?php
 				//---------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 				if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
-						
 					$kdkppn = $this->kppn;
 					if (isset($this->d_tgl)) {
 						$kdtgl = $this->d_tgl;
 					}
-					?>
-					<a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-					
 				}
 				if (Session::get('role') == KPPN) {
 					$kdkppn = Session::get('id_user');
 					if (isset($this->d_tgl)) {
 						$kdtgl = $this->d_tgl;
 					}
-					?>
-					<a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-					
 				}
+				?>
+					<a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+					<a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+					<?php
 
 				//-------------------
  			?>

@@ -7,8 +7,13 @@
                 <h2>Detail Data Pagu Minus <i>(Fund Fail)</i>
                 </h2>
             </div>
-            
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <?php if (Session::get('role') != SATKER) { ?>
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+            <?php } ?>    
+            </div>
+
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
                 
                 <?php
     //----------------------------------------------------
@@ -16,94 +21,81 @@
 	if (Session::get('role') == ADMIN || Session::get('role') == KANWIL || Session::get('role') == SATKER) {
 		
 		if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			} else {
-					$kdsatker='null';
-			}
-      if (isset($this->output_code)) {
-				$kdoutput = $this->output_code;
-			} else {
-					$kdoutput='null';
-			}
-      if (isset($this->account_code)) {
-				$kdakun = $this->account_code;
-			} else {
-					$kdakun='null';
-			}		
+			$kdsatker = $this->satker_code;
+		} else {
+			$kdsatker='null';
+		}
+		if (isset($this->output_code)) {
+			$kdoutput = $this->output_code;
+		} else {
+			$kdoutput='null';
+		}
+		if (isset($this->account_code)) {
+			$kdakun = $this->account_code;
+		} else {
+			$kdakun='null';
+		}		
 
-			$kf='2';
-			?>
-	   
-		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-
-<?php
+		$kf='2';
+			
 	
 	}
 	
 	if (Session::get('role') == KPPN) {
 		
-			if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			} else {
-					$kdsatker='null';
-			}
-      if (isset($this->output_code)) {
-				$kdoutput = $this->output_code;
-			} else {
-					$kdoutput='null';
-			}
-      if (isset($this->account_code)) {
-				$kdakun = $this->account_code;
-			} else {
-					$kdakun='null';
-			}		
+		if (isset($this->satker_code)) {
+			$kdsatker = $this->satker_code;
+		} else {
+			$kdsatker='null';
+		}
+		if (isset($this->output_code)) {
+			$kdoutput = $this->output_code;
+		} else {
+			$kdoutput='null';
+		}
+		if (isset($this->account_code)) {
+			$kdakun = $this->account_code;
+		} else {
+			$kdakun='null';
+		}		
 
-			$kf='2';
-			?>
-	   
-		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-<?php
-	
+		$kf='2';
+			
 	}
 			
-		
-		if (Session::get('role') == DJA) {
+	if (Session::get('role') == DJA) {
 
-				if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			} else {
-					$kdsatker='null';
-			}
-      if (isset($this->output_code)) {
-				$kdoutput = $this->output_code;
-			} else {
-					$kdoutput='null';
-			}
-      if (isset($this->account_code)) {
-				$kdakun = $this->account_code;
-			} else {
-					$kdakun='null';
-			}		
+		if (isset($this->satker_code)) {
+			$kdsatker = $this->satker_code;
+		} else {
+			$kdsatker='null';
+		}
+		if (isset($this->output_code)) {
+			$kdoutput = $this->output_code;
+		} else {
+			$kdoutput='null';
+		}
+		if (isset($this->account_code)) {
+			$kdakun = $this->account_code;
+		} else {
+			$kdakun='null';
+		}		
 
-			$kf='2';
-			?>
+		$kf='2';
+			
+						
+		}
+		?>
 	   
-		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 
 		<?php
 		//----------------------------------------------------		
-						
-		}
 
 	
 ?>
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            <?php if (Session::get('role') != SATKER) { ?>
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-            <?php } ?>    
             </div>
         </div>
         

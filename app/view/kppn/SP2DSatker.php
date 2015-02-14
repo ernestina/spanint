@@ -61,12 +61,7 @@
 					}else{
 						 $kdtgl_akhir = 'null';
 					}
-				   ?>
-				   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $jendok . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM; ?>/PDF" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-				</div>
-				<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-				   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $jendok . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM; ?>/XLS" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-					<?php
+				  
 					//----------------------------------------------------		
 			
 				}	
@@ -114,12 +109,7 @@
 					}else{
 						 $kdtgl_akhir = 'null';
 					}
-				   ?>
-				   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $jendok . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM; ?>/PDF" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-				</div>
-				<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-				   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $jendok . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM; ?>/XLS" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-					<?php
+				  
 					//----------------------------------------------------		
 				
 				}  
@@ -170,16 +160,17 @@
 					}else{
 						 $kdtgl_akhir = 'null';
 					}
-				   ?>
+				  		
+				
+				}  
+				 ?>
 				   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $jendok . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM; ?>/PDF" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 				</div>
 				<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 				   <a href="<?php echo URL; ?>PDF/daftarsp2d_PDF/<?php echo $satker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir . "/" . $jendok . "/" . $check_number . "/" . $invoice . "/" . $JenisSP2D . "/" . $JenisSPM; ?>/XLS" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 
 					<?php			
-					//----------------------------------------------------		
-				
-				}  
+					//----------------------------------------------------
 
 		?>
             </div>           

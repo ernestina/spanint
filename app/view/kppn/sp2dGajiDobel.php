@@ -6,46 +6,47 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Monitoring SP2D Gaji Terindikasi Dobel</h2>
             </div>
-            
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
                 
                 <?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
     
-if (isset($this->d_bank)){
-   if (isset($this->d_nama_kppn)) {
-			foreach ($this->d_nama_kppn as $kppn) {
-				$kdkppn = $kppn->get_kd_satker();
-			  }
-		} else {
-			$kdkppn = Session::get('id_user');
-		}
+			
+		   if (isset($this->d_nama_kppn)) {
+				foreach ($this->d_nama_kppn as $kppn) {
+					$kdkppn = $kppn->get_kd_satker();
+				  }
+			} else {
+				$kdkppn = Session::get('id_user');
+			}
 
-    if (isset($this->d_bank)) {
-        $kdbulan = $this->d_bank;
-    }else{
-		$kdbulan='null';
-	}
-    ?>
+			if (isset($this->d_bank)) {
+				$kdbulan = $this->d_bank;
+			}else{
+				$kdbulan='null';
+			}
+			?>
 
-    <a href="<?php echo URL; ?>PDF/sp2dGajiDobel_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
-    <?php
+			<a href="<?php echo URL; ?>PDF/sp2dGajiDobel_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<a href="<?php echo URL; ?>PDF/sp2dGajiDobel_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+			<?php
  
 
-}
+			
 
     //----------------------------------------------------		
     ?>
                 
                 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
-            </div>
         </div>
         
         <div class="row" style="padding-top: 10px">

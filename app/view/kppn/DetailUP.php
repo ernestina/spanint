@@ -10,96 +10,98 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Daftar SPM UP/GU NIHIL</h2>
             </div>
-            
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
-			<?php
-			//----------------------------------------------------
-			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-			    if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
-				//-----------------------------
-					IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->jendok)){
-						
-						if (isset($this->d_nama_kppn)) {
-							foreach ($this->d_nama_kppn as $kppn) {
-								$kdkppn = $kppn->get_kd_satker();
-							  }
-						} else {
-							$kdkppn = 'null';
-						}
-						if (isset($this->d_kd_satker)) {
-							$kd_satker = $this->d_kd_satker;
-						}else{		
-							$kd_satker =	Session::get('kd_satker');					
-						}
-						if (isset($this->jendok)) {
-							$jendok = $this->jendok;
-						}else{
-							$jendok = 'null';
-						
-						}
-						
-						
-						?>
-						<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-						}
-					//------------------------------
-				}
-
-				if (Session::get('role') == KPPN) {
-                    
-					
-							$kdkppn=Session::get('id_user');
-						if (isset($this->d_kd_satker)) {
-							$kd_satker = $this->d_kd_satker;
-						}else{		
-							$kd_satker =	Session::get('kd_satker');					
-						}
-						if (isset($this->jendok)) {
-							$jendok = $this->jendok;
-						}else{
-							$jendok = 'null';
-						
-						}
-				?>
-						<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-					
-                }
-				if (Session::get('role') == SATKER) {
-				//-----------------------------
-					
-					if (isset($this->d_nama_kppn)) {
-						foreach ($this->d_nama_kppn as $kppn) {
-							$kdkppn = $kppn->get_kd_satker();
-						  }
-					} else {
-						$kdkppn = 'null';
-					}
-					
-					$kd_satker =	Session::get('kd_satker');
-					
-					if (isset($this->jendok)) {
-							$jendok = $this->jendok;
-						}else{
-							$jendok = 'null';
-						
-						}
-					?>
-						<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-				}
-				//------------------------------
-
-			?>
-
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+			if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+			//-----------------------------
+				IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->jendok)){
+					
+					if (isset($this->d_nama_kppn)) {
+						foreach ($this->d_nama_kppn as $kppn) {
+							$kdkppn = $kppn->get_kd_satker();
+						}
+					} else {
+						$kdkppn = 'null';
+					}
+					if (isset($this->d_kd_satker)) {
+						$kd_satker = $this->d_kd_satker;
+					}else{		
+						$kd_satker =	Session::get('kd_satker');					
+					}
+					if (isset($this->jendok)) {
+						$jendok = $this->jendok;
+					}else{
+						$jendok = 'null';
+					}
+					?>
+				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<?php
+					}
+				//------------------------------
+			}
+
+			if (Session::get('role') == KPPN) {
+				
+				$kdkppn=Session::get('id_user');
+				if (isset($this->d_kd_satker)) {
+					$kd_satker = $this->d_kd_satker;
+				}else{		
+					$kd_satker =	Session::get('kd_satker');					
+				}
+				if (isset($this->jendok)) {
+					$jendok = $this->jendok;
+				}else{
+					$jendok = 'null';
+				
+				}
+			?>
+				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<?php
+				
+			}
+			if (Session::get('role') == SATKER) {
+			//-----------------------------
+				
+				if (isset($this->d_nama_kppn)) {
+					foreach ($this->d_nama_kppn as $kppn) {
+						$kdkppn = $kppn->get_kd_satker();
+					}
+				} else {
+					$kdkppn = 'null';
+				}
+				
+				$kd_satker =	Session::get('kd_satker');
+				
+				if (isset($this->jendok)) {
+						$jendok = $this->jendok;
+					}else{
+						$jendok = 'null';
+					
+					}
+				?>
+				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<?php
+			}
+			//------------------------------
+
+		?>
+
+                
+            </div>
+           
         </div>
         
         <div class="row top-padded-little">

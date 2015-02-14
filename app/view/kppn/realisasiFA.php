@@ -7,124 +7,84 @@
                 <h2>Informasi Sisa Pagu Per Akun DIPA Satker</h2>
 				<?php //echo 'kdakun:'.$value->get_akun(); ?>
             </div>
-            
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-                <?php
-			//----------------------------------------------------
-			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-
-	if (Session::get('role') == ADMIN || Session::get('role') == KANWIL  || Session::get('role') == KPPN || Session::get('role') == DJA) {
-	
-	 
-			 if (isset($this->account_code)) {	 
-				$kdakun = $this->account_code;		
-			}else{
-				if (isset($this->data)) {
-					 foreach ($this->data as $value) {
-						$kdakun =$value->get_akun();
-					}
-				}
-			}
-			if (isset($this->program_code)) {
-				$kdprogram = $this->program_code;
-			}else{
-				if (isset($this->data)) {
-					foreach ($this->data as $value) {
-						$kdprogram =$value->get_program();
-					}
-				}
-			}
-			if (isset($this->output_code)) {
-				$kdoutput = $this->output_code;
-			}else{
-				if (isset($this->data)) {
-					 foreach ($this->data as $value) {
-						$kdoutput =$value->get_output();
-					}
-				}
-			}
-			if (isset($this->satker_code)) {
-				$kdsatker = $this->satker_code;
-			}else{
-				if (isset($this->data)) {
-					foreach ($this->data as $value) {
-						$kdsatker =$value->get_satker();
-					}
-				}
-			}
-			if (isset($this->dana_code)) {
-				$kddana = $this->dana_code;
-			}else{
-				if (isset($this->data)) {
-					foreach ($this->data as $value) {
-						$kddana =$value->get_dana();
-					}
-				}
-			}
-
-			?>
-				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-			<?php
-	
-	}
-	
-	if (Session::get('role') == SATKER) {
-			 if (isset($this->account_code)) {	 
-				$kdakun = $this->account_code;		
-			}else{
-				if (isset($this->data)) {
-					 foreach ($this->data as $value) {
-						$kdakun =$value->get_akun();
-					}
-				}
-			}
-			if (isset($this->program_code)) {
-				$kdprogram = $this->program_code;
-			}else{
-				if (isset($this->data)) {
-					foreach ($this->data as $value) {
-						$kdprogram =$value->get_program();
-					}
-				}
-			}
-			if (isset($this->output_code)) {
-				$kdoutput = $this->output_code;
-			}else{
-				if (isset($this->data)) {
-					 foreach ($this->data as $value) {
-						$kdoutput =$value->get_output();
-					}
-				}
-			}
-
-			$kdsatker =Session::get('kd_satker');
-			if (isset($this->dana_code)) {
-				$kddana = $this->dana_code;
-			}else{
-				if (isset($this->data)) {
-					foreach ($this->data as $value) {
-						$kddana =$value->get_dana();
-					}
-				}
-			}
-
-			?>
-				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-			<?php
-	
-	
-	}
-
-	
-?>
-	
-            </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">                
+			<?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+
+			if (Session::get('role') == ADMIN || Session::get('role') == KANWIL  || Session::get('role') == KPPN || Session::get('role') == DJA) {
+			 
+				 if (isset($this->account_code)) {	 
+					$kdakun = $this->account_code;		
+				}else{
+					$kdakun = 'null';		
+				}
+				if (isset($this->program_code)) {
+					$kdprogram = $this->program_code;
+				}else{
+					$kdprogram = 'null';
+				}
+				if (isset($this->output_code)) {
+					$kdoutput = $this->output_code;
+				}else{
+					$kdoutput = 'null';
+				}
+				if (isset($this->satker_code)) {
+					$kdsatker = $this->satker_code;
+				}else{
+					$kdsatker = 'null';
+				}
+				if (isset($this->dana_code)) {
+					$kddana = $this->dana_code;
+				}else{
+					$kddana = 'null';
+				}
+				
+			}
+			
+			if (Session::get('role') == SATKER) {
+				 if (isset($this->account_code)) {	 
+					$kdakun = $this->account_code;		
+				}else{
+					$kdakun = 'null';		
+				}
+				if (isset($this->program_code)) {
+					$kdprogram = $this->program_code;
+				}else{
+					$kdprogram = 'null';
+				}
+				if (isset($this->output_code)) {
+					$kdoutput = $this->output_code;
+				}else{
+					$kdoutput = 'null';
+				}
+				if (isset($this->satker_code)) {
+					$kdsatker = $this->satker_code;
+				}else{
+					$kdsatker = 'null';
+				}
+				if (isset($this->dana_code)) {
+					$kddana = $this->dana_code;
+				}else{
+					$kddana = 'null';
+				}
+			}
+			?>
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<?php
+
+			
+		?>
+	
+            </div>
+            
         </div>
         
         <div class="row" style="padding-top: 10px">

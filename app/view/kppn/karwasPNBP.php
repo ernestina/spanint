@@ -10,45 +10,47 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Karwas Maksimum Pencairan (PNBP)</h2>
             </div>
-            
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
-			<?php
-			//----------------------------------------------------
-			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-			    if (Session::get('role') == KPPN) {
-                    IF(isset($this->nmsatker) || isset($this->ppp) ){
-					
-							$kdkppn=Session::get('id_user');
-						if (isset($this->ppp)) {
-							$kdppp = $this->ppp;
-						} else {
-							$kdppp = "null";
-						}
-						if (isset($this->nmsatker)) {
-							foreach ($this->nmsatker as $satker) {
-								$kdsatker = $satker->get_satker_code();
-							}
-						}else{			
-							if (isset($this->data1)) {
-								foreach ($this->data1 as $value) {
-									$kdsatker =$value->get_satker_code();
-								}
-							}
-						} 
-					?>
-						<a href="<?php echo URL; ?>PDF/KarwasPNBP_PDF/<?php echo $kdkppn . "/" . $kdppp . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-					<?php
-					}
-                }
-			?>
-
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+			if (Session::get('role') == KPPN) {
+				IF(isset($this->nmsatker) || isset($this->ppp) ){
+				
+					$kdkppn=Session::get('id_user');
+					if (isset($this->ppp)) {
+						$kdppp = $this->ppp;
+					} else {
+						$kdppp = "null";
+					}
+					if (isset($this->nmsatker)) {
+						foreach ($this->nmsatker as $satker) {
+							$kdsatker = $satker->get_satker_code();
+						}
+					}else{			
+						if (isset($this->data1)) {
+							foreach ($this->data1 as $value) {
+								$kdsatker =$value->get_satker_code();
+							}
+						}
+					} 
+				?>
+					<a href="<?php echo URL; ?>PDF/KarwasPNBP_PDF/<?php echo $kdkppn . "/" . $kdppp . "/" . $kdsatker; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+					<a href="<?php echo URL; ?>PDF/KarwasPNBP_PDF/<?php echo $kdkppn . "/" . $kdppp . "/" . $kdsatker; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<?php
+				}
+			}
+			?>
+
+                
+            </div>
+            
         </div>
         
         <div class="row top-padded-little">
