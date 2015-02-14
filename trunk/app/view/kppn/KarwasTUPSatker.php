@@ -14,84 +14,37 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 
-if (Session::get('role') == ADMIN) {
+if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
 //-----------------------------
-IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
-	
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-		  }
-	} else {
-		$kdkppn = 'null';
-	}
-	if (isset($this->d_kd_satker)) {
-		$kdsatker = $this->d_kd_satker;
-	} else {
-		$kdsatker = 'null';
-	}
-	
-	if (isset($this->d_nm_satker)) {
-		$nmsatker = $this->d_nm_satker;
-	} else {
-		$nmsatker = 'null';
-	}
-	
-	if (isset($this->d_tgl_awal)) {
-		$kdtgl_awal = $this->d_tgl_awal;
-	} else {
-		$kdtgl_awal = 'null';
-	}
-	if (isset($this->d_tgl_akhir)) {
-		$kdtgl_akhir = $this->d_tgl_akhir;
-	} else {
-		$kdtgl_akhir = 'null';
-	}
-	?>
-    <a href="<?php echo URL; ?>PDF/nmsatkerSP2D_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-    <?php
-	}
-//------------------------------
+	IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_sumber_dana)){
+		
+		if (isset($this->d_nama_kppn)) {
+			foreach ($this->d_nama_kppn as $kppn) {
+				$kdkppn = $kppn->get_kd_satker();
+			  }
+		} else {
+			$kdkppn = 'null';
+		}
+		if (isset($this->d_kd_satker)) {
+			$kdsatker = $this->d_kd_satker;
+		} else {
+			$kdsatker = 'null';
+		}
+		
+		if (isset($this->d_sumber_dana)) {
+			$kdsmbdana = $this->d_sumber_dana;
+		} else {
+			$kdsmbdana = 'null';
+		}
+		
+		
+		?>
+		<a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+		<?php
+		}
+	//------------------------------
 }
-if (Session::get('role') == KANWIL) {
-//-----------------------------
-IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)){
-	
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-		  }
-	} else {
-		$kdkppn = 'null';
-	}
-	if (isset($this->d_kd_satker)) {
-		$kdsatker = $this->d_kd_satker;
-	} else {
-		$kdsatker = 'null';
-	}
-	
-	if (isset($this->d_nm_satker)) {
-		$nmsatker = $this->d_nm_satker;
-	} else {
-		$nmsatker = 'null';
-	}
-	
-	if (isset($this->d_tgl_awal)) {
-		$kdtgl_awal = $this->d_tgl_awal;
-	} else {
-		$kdtgl_awal = 'null';
-	}
-	if (isset($this->d_tgl_akhir)) {
-		$kdtgl_akhir = $this->d_tgl_akhir;
-	} else {
-		$kdtgl_akhir = 'null';
-	}
-	?>
-    <a href="<?php echo URL; ?>PDF/nmsatkerSP2D_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-    <?php
-	}
-//------------------------------
-}
+
 if (Session::get('role') == KPPN) {
 //-----------------------------
 	
@@ -102,30 +55,22 @@ if (Session::get('role') == KPPN) {
 	} else {
 		$kdkppn = Session::get('id_user');
 	}
+	
 	if (isset($this->d_kd_satker)) {
 		$kdsatker = $this->d_kd_satker;
 	} else {
 		$kdsatker = 'null';
 	}
 	
-	if (isset($this->d_nm_satker)) {
-		$nmsatker = $this->d_nm_satker;
+	if (isset($this->d_sumber_dana)) {
+		$kdsmbdana = $this->d_sumber_dana;
 	} else {
-		$nmsatker = 'null';
+		$kdsmbdana = 'null';
 	}
 	
-	if (isset($this->d_tgl_awal)) {
-		$kdtgl_awal = $this->d_tgl_awal;
-	} else {
-		$kdtgl_awal = 'null';
-	}
-	if (isset($this->d_tgl_akhir)) {
-		$kdtgl_akhir = $this->d_tgl_akhir;
-	} else {
-		$kdtgl_akhir = 'null';
-	}
+	
 	?>
-    <a style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+    <a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
     <?php
 	
 	
@@ -133,7 +78,7 @@ if (Session::get('role') == KPPN) {
 }
 //------------------------------
 
-?>                
+?>                    
 
                 
                 

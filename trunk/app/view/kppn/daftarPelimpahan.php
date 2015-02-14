@@ -10,9 +10,12 @@
             <div class="col-lg-10 col-md-6 col-sm-12">			 
                 <h2>Monitoring Pelimpahan</h2>
             </div>
+			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">                
                 <?php
 				//---------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
@@ -88,20 +91,16 @@
 						$kdtgl_akhir ='null';
 					}
 				?>
-						
-                						    
-					
+			
 					<?php }
 					//------------------------------
         ?>
-				<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                               
+				<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                 </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
             
-                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
-            </div>
         </div>
         
         <div class="row">

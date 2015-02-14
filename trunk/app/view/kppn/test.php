@@ -7,16 +7,28 @@
                 <h2>Monitoring PFK Bulan <?php echo Tanggal::bulan_indo($this->d_bulan); ?></h2>
 				
             </div>
+			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
 
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 
                 <?php
                 //----------------------------------------------------
-                //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+                //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : test.php  
                 
 				if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
 					if (isset($this->d_bulan) || isset($this->d_kd_kppn)) {
-							if (isset($this->d_bulan)) {
+						if (isset($this->d_kd_kppn)) {
+							$kdkppn = $this->d_kd_kppn;
+						} else {
+							$kdkppn = 'null';
+						}
+						if ($kdkppn<=0){
+								$kdkppn="SEMUAKPPN";
+						}
+						if (isset($this->d_bulan)) {
 							$kdbulan1 = trim($this->d_bulan);
 							if ($kdbulan1 == 'januari') {
 								$kdbulan = '01';
@@ -67,23 +79,14 @@
 							}else{
 								$kdbulan = '12';
 							}
-							
 						}else {
 							$kdbulan = date("F");
 						}
 
-						if (isset($this->d_kd_kppn)) {
-							$kdkppn = $this->d_kd_kppn;
-							
-						} else {
-							$kdkppn = 'null';
-						}
-						if ($kdkppn<=0){
-								$kdkppn="SEMUAKPPN";
-						}
-						
 						?>
-						<a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						<a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+						<a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 						<?php
 						//----------------------------------------------------		
 					}
@@ -91,82 +94,79 @@
 				
 				if (Session::get('role') == KPPN) {
 						
-						if (isset($this->d_bulan)) {
-							$kdbulan1 = $this->d_bulan;
-							
-							if(substr($kdbulan1,0,1) != '0' || substr($kdbulan1,0,1) != '1' ){
-								if ($kdbulan1 == 'januari') {
-									$kdbulan = '01';
-								}elseif ($kdbulan1 == 'februari') {
-									$kdbulan = '02';
-								}elseif ($kdbulan1 == 'maret') {
-									$kdbulan = '03';
-								}elseif ($kdbulan1 == 'april') {
-									$kdbulan = '04';
-								}elseif ($kdbulan1 == 'mei') {
-									$kdbulan = '05';
-								}elseif ($kdbulan1 == 'juni') {
-									$kdbulan = '06';
-								}elseif ($kdbulan1 == 'juli') {
-									$kdbulan = '07';
-								}elseif ($kdbulan1 == 'agustus') {
-									$kdbulan = '08';
-								}elseif ($kdbulan1 == 'september') {
-									$kdbulan = '09';
-								}elseif ($kdbulan1 == 'oktober') {
-									$kdbulan = '10';
-								}elseif ($kdbulan1 == 'nopember') {
-									$kdbulan = '11';
-								}elseif ($kdbulan1 == 'desember') {
-									$kdbulan = '12';
-								}elseif ($kdbulan1 == '01') {
-									$kdbulan = '01';
-								}elseif ($kdbulan1 == '02') {
-									$kdbulan = '02';
-								}elseif ($kdbulan1 == '03') {
-									$kdbulan = '03';
-								}elseif ($kdbulan1 == '04') {
-									$kdbulan = '04';
-								}elseif ($kdbulan1 == '05') {
-									$kdbulan = '05';
-								}elseif ($kdbulan1 == '06') {
-									$kdbulan = '06';
-								}elseif ($kdbulan1 == '07') {
-									$kdbulan = '07';
-								}elseif ($kdbulan1 == '08') {
-									$kdbulan = '08';
-								}elseif ($kdbulan1 == '09') {
-									$kdbulan = '09';
-								}elseif ($kdbulan1 == '10') {
-									$kdbulan = '10';
-								}elseif ($kdbulan1 == '11') {
-									$kdbulan = '11';
-								}else{
-									$kdbulan = '12';
-								}
+					if (isset($this->d_bulan)) {
+						$kdbulan1 = $this->d_bulan;
+						
+						if(substr($kdbulan1,0,1) != '0' || substr($kdbulan1,0,1) != '1' ){
+							if ($kdbulan1 == 'januari') {
+								$kdbulan = '01';
+							}elseif ($kdbulan1 == 'februari') {
+								$kdbulan = '02';
+							}elseif ($kdbulan1 == 'maret') {
+								$kdbulan = '03';
+							}elseif ($kdbulan1 == 'april') {
+								$kdbulan = '04';
+							}elseif ($kdbulan1 == 'mei') {
+								$kdbulan = '05';
+							}elseif ($kdbulan1 == 'juni') {
+								$kdbulan = '06';
+							}elseif ($kdbulan1 == 'juli') {
+								$kdbulan = '07';
+							}elseif ($kdbulan1 == 'agustus') {
+								$kdbulan = '08';
+							}elseif ($kdbulan1 == 'september') {
+								$kdbulan = '09';
+							}elseif ($kdbulan1 == 'oktober') {
+								$kdbulan = '10';
+							}elseif ($kdbulan1 == 'nopember') {
+								$kdbulan = '11';
+							}elseif ($kdbulan1 == 'desember') {
+								$kdbulan = '12';
+							}elseif ($kdbulan1 == '01') {
+								$kdbulan = '01';
+							}elseif ($kdbulan1 == '02') {
+								$kdbulan = '02';
+							}elseif ($kdbulan1 == '03') {
+								$kdbulan = '03';
+							}elseif ($kdbulan1 == '04') {
+								$kdbulan = '04';
+							}elseif ($kdbulan1 == '05') {
+								$kdbulan = '05';
+							}elseif ($kdbulan1 == '06') {
+								$kdbulan = '06';
+							}elseif ($kdbulan1 == '07') {
+								$kdbulan = '07';
+							}elseif ($kdbulan1 == '08') {
+								$kdbulan = '08';
+							}elseif ($kdbulan1 == '09') {
+								$kdbulan = '09';
+							}elseif ($kdbulan1 == '10') {
+								$kdbulan = '10';
+							}elseif ($kdbulan1 == '11') {
+								$kdbulan = '11';
 							}else{
-								$kdbulan = $this->d_bulan;
+								$kdbulan = '12';
 							}
 						}else{
-							$kdbulan = date("m");
-						} 
-						$kdkppn = Session::get('id_user');
+							$kdbulan = $this->d_bulan;
+						}
+					}else{
+						$kdbulan = date("m");
+					} 
+					$kdkppn = Session::get('id_user');
 						
-						?>
-						<a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-						<?php
-						//----------------------------------------------------		
+					?>
+						<a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+						<a href="<?php echo URL; ?>PDF/GR_PFK_PDF/<?php echo $kdbulan . "/" . $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+					<?php
+					//----------------------------------------------------		
 					
 				}
               ?>
 
-
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-
-            </div>
+            
         </div>
 
         <div class="row" style="padding-top: 10px">

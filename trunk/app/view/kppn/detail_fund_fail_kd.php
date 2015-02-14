@@ -15,24 +15,27 @@
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 	if (Session::get('role') == ADMIN || Session::get('role') == KANWIL || Session::get('role') == SATKER) {
 		
-		if (isset($this->d_kd_satker)) {
-			$kdsatker = $this->d_kd_satker;
-		} else {
-			foreach ($this->data as $value) {
-				$kdsatker=$value->get_satker_code();
-				}
-		}		
+		if (isset($this->satker_code)) {
+				$kdsatker = $this->satker_code;
+			} else {
+					$kdsatker='null';
+			}
+      if (isset($this->output_code)) {
+				$kdoutput = $this->output_code;
+			} else {
+					$kdoutput='null';
+			}
+      if (isset($this->account_code)) {
+				$kdakun = $this->account_code;
+			} else {
+					$kdakun='null';
+			}		
 
-		
-		foreach ($this->data as $value) {
-				$kdoutput=$value->get_output_code();
-				$kdkppn=$value->get_kppn_code();
-		}
-		$kdakun1= $this->account_code;
-		$kf='2';
-		?>
-   
-    <a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdkppn . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			$kf='2';
+			?>
+	   
+		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
 
 <?php
 	
@@ -40,31 +43,26 @@
 	
 	if (Session::get('role') == KPPN) {
 		
-		if (isset($this->d_kd_satker)) {
-			$kdsatker = $this->d_kd_satker;
-		} else {
-			foreach ($this->data as $value) {
-				$kdsatker=$value->get_satker_code();
-				}
-		}		
-
-		
-		foreach ($this->data as $value) {
-				$kdoutput=$value->get_output_code();
-				$kdakun=$value->get_account_code();
-		}
-		if (isset($this->d_nama_kppn)) {
-			foreach ($this->d_nama_kppn as $kppn) {
-				$kdkppn = $kppn->get_kd_satker();
+			if (isset($this->satker_code)) {
+				$kdsatker = $this->satker_code;
+			} else {
+					$kdsatker='null';
 			}
-		} else {
-			$kdkppn = Session::get('id_user');
-		}
-		$kdakun1= $this->account_code1;		
-		$kf='2';
-		?>
-   
-    <a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdkppn . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+      if (isset($this->output_code)) {
+				$kdoutput = $this->output_code;
+			} else {
+					$kdoutput='null';
+			}
+      if (isset($this->account_code)) {
+				$kdakun = $this->account_code;
+			} else {
+					$kdakun='null';
+			}		
+
+			$kf='2';
+			?>
+	   
+		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 
 <?php
 	
@@ -73,38 +71,27 @@
 		
 		if (Session::get('role') == DJA) {
 
-			if (isset($this->d_nama_kppn)) {
-				foreach ($this->d_nama_kppn as $kppn) {
-					$kdkppn = $kppn->get_kd_satker();
-				  }
+				if (isset($this->satker_code)) {
+				$kdsatker = $this->satker_code;
 			} else {
-				$kdkppn = 'null';
+					$kdsatker='null';
 			}
-			if (isset($this->d_kd_satker)) {
-				$kdsatker = $this->d_kd_satker;
+      if (isset($this->output_code)) {
+				$kdoutput = $this->output_code;
 			} else {
-				$kdsatker = 'null';
+					$kdoutput='null';
+			}
+      if (isset($this->account_code)) {
+				$kdakun = $this->account_code;
+			} else {
+					$kdakun='null';
 			}		
-			if (isset($this->account_code)) {
-					$kdakun = $this->account_code;
-				}else{
-					$kdakun = 'null';
-			}
-			if (isset($this->program_code)) {
-					$kdprogram = $this->program_code;
-				}else{
-					$kdprogram = 'null';
-			}
-			if (isset($this->output_code)) {
-					$kdoutput = $this->output_code;	
-				}else{
-					$kdoutput = 'null';
-			}
-			$kf='2';
-			$kdakun1= $this->account_code1;
 
-			?>		   
-			<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdkppn . "/" . $kdakun1; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			$kf='2';
+			?>
+	   
+		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+
 		<?php
 		//----------------------------------------------------		
 						
