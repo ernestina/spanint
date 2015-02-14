@@ -17,7 +17,7 @@
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 			    if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
 				//-----------------------------
-					IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_sumber_dana)){
+					IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->jendok)){
 						
 						if (isset($this->d_nama_kppn)) {
 							foreach ($this->d_nama_kppn as $kppn) {
@@ -26,10 +26,8 @@
 						} else {
 							$kdkppn = 'null';
 						}
-						if (isset($this->nmsatker)) {
-							foreach ($this->nmsatker as $satker) {
-								$kd_satker = $satker->get_satker_code();
-							}
+						if (isset($this->d_kd_satker)) {
+							$kd_satker = $this->d_kd_satker;
 						}else{		
 							$kd_satker =	Session::get('kd_satker');					
 						}
@@ -52,10 +50,8 @@
                     
 					
 							$kdkppn=Session::get('id_user');
-						if (isset($this->nmsatker)) {
-							foreach ($this->nmsatker as $satker) {
-								$kd_satker = $satker->get_satker_code();
-							}
+						if (isset($this->d_kd_satker)) {
+							$kd_satker = $this->d_kd_satker;
 						}else{		
 							$kd_satker =	Session::get('kd_satker');					
 						}

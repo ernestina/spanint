@@ -15,31 +15,122 @@
 			<?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-			    if (Session::get('role') == KPPN) {
-                    IF(isset($this->nmsatker) || isset($this->ppp) ){
+			    if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+				//-----------------------------
+					IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->sumber_dana)){
+						
+						if (isset($this->d_nama_kppn)) {
+							foreach ($this->d_nama_kppn as $kppn) {
+								$kdkppn = $kppn->get_kd_satker();
+							  }
+						} else {
+							$kdkppn = 'null';
+						}
+						if (isset($this->d_kd_satker)) {
+							$kd_satker = $this->d_kd_satker;
+						}else{		
+							$kd_satker =	Session::get('kd_satker');					
+						}
+						if (isset($this->sumber_dana)) {
+							$sumber_dana = $this->sumber_dana;
+						}else{
+							$sumber_dana = 'null';
+						
+						}
+						if (isset($this->d_tgl_awal)) {
+							$d_tgl_awal = $this->d_tgl_awal;
+						}else{
+							$d_tgl_awal = 'null';
+						
+						}
+						if (isset($this->d_tgl_akhir)) {
+							$d_tgl_akhir = $this->d_tgl_akhir;
+						}else{
+							$d_tgl_akhir = 'null';
+						
+						}
+						
+						
+						?>
+						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+						}
+					//------------------------------
+				}
+
+				if (Session::get('role') == KPPN) {
+                    
 					
 							$kdkppn=Session::get('id_user');
-						if (isset($this->ppp)) {
-							$kdppp = $this->ppp;
-						} else {
-							$kdppp = "null";
+						if (isset($this->d_kd_satker)) {
+							$kd_satker = $this->d_kd_satker;
+						}else{		
+							$kd_satker =	Session::get('kd_satker');					
 						}
-						if (isset($this->nmsatker)) {
-							foreach ($this->nmsatker as $satker) {
-								$kdsatker = $satker->get_satker_code();
-							}
-						}else{			
-							if (isset($this->data1)) {
-								foreach ($this->data1 as $value) {
-									$kdsatker =$value->get_satker_code();
-								}
-							}
-						} 
-				?>
-						<a href="<?php echo URL; ?>PDF/KarwasPNBP_PDF/<?php echo $kdkppn . "/" . $kdppp . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+						if (isset($this->sumber_dana)) {
+							$sumber_dana = $this->sumber_dana;
+						}else{
+							$sumber_dana = 'null';
+						
+						}
+						if (isset($this->d_tgl_awal)) {
+							$d_tgl_awal = $this->d_tgl_awal;
+						}else{
+							$d_tgl_awal = 'null';
+						
+						}
+						if (isset($this->d_tgl_akhir)) {
+							$d_tgl_akhir = $this->d_tgl_akhir;
+						}else{
+							$d_tgl_akhir = 'null';
+						
+						}
+						
+						
+						?>
+						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 					<?php
-					}
+					
                 }
+				if (Session::get('role') == SATKER) {
+				//-----------------------------
+					
+					if (isset($this->d_nama_kppn)) {
+						foreach ($this->d_nama_kppn as $kppn) {
+							$kdkppn = $kppn->get_kd_satker();
+						  }
+					} else {
+						$kdkppn = 'null';
+					}
+					
+					$kd_satker =	Session::get('kd_satker');
+					
+					if (isset($this->sumber_dana)) {
+							$sumber_dana = $this->sumber_dana;
+						}else{
+							$sumber_dana = 'null';
+						
+						}
+						if (isset($this->d_tgl_awal)) {
+							$d_tgl_awal = $this->d_tgl_awal;
+						}else{
+							$d_tgl_awal = 'null';
+						
+						}
+						if (isset($this->d_tgl_akhir)) {
+							$d_tgl_akhir = $this->d_tgl_akhir;
+						}else{
+							$d_tgl_akhir = 'null';
+						
+						}
+						
+						
+						?>
+						<a href="<?php echo URL; ?>PDF/TUPSatker_PDF/<?php echo $sumber_dana . "/" . $kd_satker . "/" . $d_tgl_awal . "/" . $d_tgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					<?php
+				}
+				//------------------------------
+
 			?>
 
                 

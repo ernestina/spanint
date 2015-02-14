@@ -9,31 +9,33 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2><?php echo $this->judul; ?></h2>
             </div>
-            
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                <?php
-			//----------------------------------------------------
-			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-
-					if ($this->d_kd_kppn != 'SEMUA') {
-						$kdkppn = $this->d_kd_kppn;
-					} else {
-						$kdkppn = 'null';
-					}
-					if (isset($this->judul)) {
-						$kdjudul = $this->judul;
-					}
-					
-                ?>                
-                <a href="<?php echo URL; ?>PDF/DataSPMAkhirTahun_PDF/<?php echo $kdkppn . "/" . $kdjudul; ?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                <?php 
-			//----------------------------------------------------
-				?>  
-			
-            </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
             </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+
+			if ($this->d_kd_kppn != 'SEMUA') {
+				$kdkppn = $this->d_kd_kppn;
+			} else {
+				$kdkppn = 'null';
+			}
+			if (isset($this->judul)) {
+				$kdjudul = $this->judul;
+			}
+					
+			?>                
+			<a href="<?php echo URL; ?>PDF/DataSPMAkhirTahun_PDF/<?php echo $kdkppn . "/" . $kdjudul; ?>/PDF" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<a href="<?php echo URL; ?>PDF/DataSPMAkhirTahun_PDF/<?php echo $kdkppn . "/" . $kdjudul; ?>/XLS" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+			<?php 
+			//----------------------------------------------------
+			?>  
+			
+            </div>
+            
         </div>
         <div class="row top-padded">
             

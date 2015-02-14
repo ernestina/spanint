@@ -6,56 +6,58 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Monitoring Penyelesaian Retur - PKN</h2>
             </div>
-            
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-                <?php
-	//----------------------------------------------------
-	//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-	if(isset($this->d_nama_kppn) || isset($this->d_bank) ||
-	isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
-	){	
-		if (isset($this->d_nama_kppn)) {
-			foreach ($this->d_nama_kppn as $kppn) {
-				$kdkppn = $kppn->get_kd_satker();
-			}
-		}else{
-			$kdkppn = 'null';		
-		 }
-		
-		if (isset($this->d_bank)) {
-			$kdbank = $this->d_bank;
-		} else {
-			$kdbank = 'null';
-		}
-
-		if (isset($this->d_tgl_awal)) {
-			$kdtgl_awal = $this->d_tgl_awal;
-		} else {
-			$kdtgl_awal='null'; 
-		}
-		if (isset($this->d_tgl_akhir)) {
-			$kdtgl_akhir = $this->d_tgl_akhir;
-		} else {
-			$kdtgl_akhir ='null';
-		}
-    ?>
-            <a href="<?php echo URL; ?>PDF/monitoringReturPkn_PDF/<?php echo $kdkppn. "/" . $kdbank . "/" .$kdtgl_awal . "/" . $kdtgl_akhir; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>							
-        <?php
-	
-	
-	}
-	
-//----------------------------------------------------		
-?>
-                
-                
-            </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+                
+            <?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
+			if(isset($this->d_nama_kppn) || isset($this->d_bank) ||
+			isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
+			){	
+				if (isset($this->d_nama_kppn)) {
+					foreach ($this->d_nama_kppn as $kppn) {
+						$kdkppn = $kppn->get_kd_satker();
+					}
+				}else{
+					$kdkppn = 'null';		
+				 }
+				
+				if (isset($this->d_bank)) {
+					$kdbank = $this->d_bank;
+				} else {
+					$kdbank = 'null';
+				}
+
+				if (isset($this->d_tgl_awal)) {
+					$kdtgl_awal = $this->d_tgl_awal;
+				} else {
+					$kdtgl_awal='null'; 
+				}
+				if (isset($this->d_tgl_akhir)) {
+					$kdtgl_akhir = $this->d_tgl_akhir;
+				} else {
+					$kdtgl_akhir ='null';
+				}
+			?>
+				<a href="<?php echo URL; ?>PDF/monitoringReturPkn_PDF/<?php echo $kdkppn. "/" . $kdbank . "/" .$kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>							
+				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/monitoringReturPkn_PDF/<?php echo $kdkppn. "/" . $kdbank . "/" .$kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>							
+				<?php
+			
+			
+			}
+			
+		//----------------------------------------------------		
+		?>
+                
+                
+            </div>
+            
         </div>
         
         <div class="row" style="padding-top: 10px">

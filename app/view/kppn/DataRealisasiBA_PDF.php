@@ -601,7 +601,7 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Realisasi Belanja Per Bagian Anggaran'; //judul file laporan
+$judul = 'Laporan Realisasi Belanja Per Bagian Anggaran'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
