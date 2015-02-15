@@ -8,29 +8,27 @@
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-<?php
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : dropingDetail.php  
+              
+			</div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">			  
+			<?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : dropingDetail.php  
 
-	if($this->d_bank){
-		$kdbank=$this->d_bank;
-	}
-	if (isset($this->d_tanggal)) {
-		$kdtanggal=$this->d_tanggal;
-	}
-    ?>	
-     
-
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            
-                <!--button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button-->
-            <a href="<?php echo URL; ?>PDF/detailSPAN_PDF/<?php echo $kdbank . "/" . $kdtanggal; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-     
-   <?php
-//----------------------------------------------------			
-?>
+				if($this->d_bank){
+					$kdbank=$this->d_bank;
+				}
+				if (isset($this->d_tanggal)) {
+					$kdtanggal=$this->d_tanggal;
+				}
+				?>	
+			 
+				<a href="<?php echo URL; ?>PDF/detailSPAN_PDF/<?php echo $kdbank . "/" . $kdtanggal; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				 </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/detailSPAN_PDF/<?php echo $kdbank . "/" . $kdtanggal; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+			   <?php
+			//----------------------------------------------------			
+			?>
                 
             </div>
         </div>

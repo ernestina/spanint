@@ -615,7 +615,10 @@ $kdbulan = $this->kd_bulan;
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring Imbalan Jasa Perbankan Bulan '.$kdbulan; //judul file laporan
+//judul laporan
+$judul1= $this->judul1;
+$judul = 'Laporan '.$judul1.' '.$kdbulan; //judul file laporan
+
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 

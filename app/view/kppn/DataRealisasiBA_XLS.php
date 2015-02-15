@@ -40,8 +40,8 @@ date_default_timezone_set('Asia/Jakarta');
 
 //parameter
 //-----------------------
-$judul='Realisasi Belanja Per Bagian Anggaran';
-$nmfile=$judul;
+$judul1=$this->judul1;  //judul
+$judul='Laporan '.$judul1;
 
 //-----------------------
  
@@ -352,14 +352,16 @@ $objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setForm
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);
 
-  // Save as an Excel BIFF (xls) file 
-$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5'); 
+//-------------------------------------
+// Save as an Excel BIFF (xls) file
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 
-header('Content-Type: application/vnd.ms-excel'); 
-header('Content-Disposition: attachment;filename="Laporan "'.$nmfile); 
-header('Cache-Control: max-age=0'); 
-
-$objWriter->save('php://output'); 
-exit(); 
+ // Redirect output to a client’s web browser (Excel2007)
+header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1);
+header('Cache-Control: max-age=0');
+ 
+$objWriter->save('php://output');
+exit;
 
 ?>

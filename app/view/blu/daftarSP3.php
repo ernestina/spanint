@@ -28,7 +28,7 @@
                 <?php } ?>
         
             </div>
-           <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+           <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
             
                 <!--pdf-->
 				<?php
@@ -65,8 +65,9 @@
 				
 				 
 				?>
-				<a href="<?php echo URL; ?>PDF/DaftarSP3_PDF/<?php echo $bulan . "/" . $satker . "/" . $kdkppn . "/" . $kdsatker; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
+				<a href="<?php echo URL; ?>PDF/DaftarSP3_PDF/<?php echo $bulan . "/" . $satker . "/" . $kdkppn . "/" . $kdsatker; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/DaftarSP3_PDF/<?php echo $bulan . "/" . $satker . "/" . $kdkppn . "/" . $kdsatker; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 				<?php
 				//----------------------------------
 				?>

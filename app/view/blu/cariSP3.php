@@ -26,32 +26,29 @@
                     <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                   
             </div>
-           <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+           <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
             
-                <!--pdf-->
-				<?php
-							//----------------------------------------------------
+			<!--pdf-->
+			<?php
+			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-
-				//-----------------------------------
+			//-----------------------------------
 				if (Session::get('role') == BLU) {
 					if (isset($this->kdsatkerr)) {
 						$kdsatker = $this->kdsatkerr;
 					}else{
 						$kdsatker='null';
 					}
-					
 					if (isset($this->invoice)) {
 						$kdinvoice = $this->invoice;
 						$kdinvoice1=substr($kdinvoice,0,6);
 						$kdinvoice2=substr($kdinvoice,7,6);
 						$kdinvoice3=substr($kdinvoice,14,6);
 						$kdinvoice4=$kdinvoice1.'-'.$kdinvoice2.'-'.$kdinvoice3;
-						//$kdinvoice =00106T/651135/2014
+						
 					}else{
 						$kdinvoice4='null';
 					}
-					
 					if (isset($this->d_tgl_awal) AND isset($this->d_tgl_akhir) ) {
 						$kd_tgl_awal = $this->d_tgl_awal;
 						$kd_tgl_akhir = $this->d_tgl_akhir;
@@ -59,9 +56,6 @@
 						$kd_tgl_awal ='null';
 						$kd_tgl_akhir ='null';
 					}
-					
-					
-					
 				}
 				 if (Session::get('role') == ADMIN) {
 					if (isset($this->d_nama_kppn)) {
@@ -71,17 +65,14 @@
 					}else{
 						$kdkppn='null';
 					}
-				 
-				 
 				 }
 				   if (Session::get('role') == KPPN) {
 					  $kdkppn = Session::get('id_user');
 				   }
-				
-				 
 				?>
-				<a href="<?php echo URL; ?>PDF/CariSP3B_PDF/<?php echo $kdsatker . "/" . $kd_tgl_awal . "/" . $kd_tgl_akhir . "/" . $kdinvoice4; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-
+				<a href="<?php echo URL; ?>PDF/CariSP3B_PDF/<?php echo $kdsatker . "/" . $kd_tgl_awal . "/" . $kd_tgl_akhir . "/" . $kdinvoice4; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+				<a href="<?php echo URL; ?>PDF/CariSP3B_PDF/<?php echo $kdsatker . "/" . $kd_tgl_awal . "/" . $kd_tgl_akhir . "/" . $kdinvoice4; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 				<?php
 				//----------------------------------
 				?>

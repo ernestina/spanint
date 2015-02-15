@@ -617,7 +617,10 @@ if (is_array($this->nm_kppn2)) {
 $kd_bulan = $this->d_bulan;
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring Status LHP per Bulan'; //judul file laporan
+//judul laporan
+$judul1= $this->judul1;
+$judul = 'Laporan '.$judul1; //judul file laporan
+
 
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser

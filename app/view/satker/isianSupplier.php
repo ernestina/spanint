@@ -6,202 +6,207 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Cek Data Supplier</h2>
             </div>
-
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-
-                <!-- PDF --> 
-                <?php
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
-
-
-                if (Session::get('role') == ADMIN) {
-                    if (isset($this->d_kd_kppn) || isset($this->d_tipesup) || isset($this->d_nrs) || isset($this->d_namasupplier) || isset($this->d_npwpsupplier) || isset($this->d_nip) || isset($this->d_namapenerima) || isset($this->d_norek) || isset($this->d_namarek) || isset($this->d_npwppenerima)) {
-
-                        if (isset($this->d_kd_kppn)) {
-                            $kdkppn = $this->d_kd_kppn;
-                        } else {
-							if (isset($this->data)) {		
-								foreach ($this->data as $value) {
-									$kdkppn =$value->get_kppn_code();
-									}
-							}
-						}
-
-                        if (isset($this->d_tipesup)) {
-                            $kdtipesup = $this->d_tipesup;
-                        } else {
-                            $kdtipesup = 'null';
-                        }
-                        if (isset($this->d_nrs)) {
-                            $kdnrs = $this->d_nrs;
-                        } else {
-                            $kdnrs = 'null';
-                        }
-                        if (isset($this->d_namasupplier)) {
-                            $kdnamasupplier = $this->d_namasupplier;
-                        } else {
-                            $kdnamasupplier = 'null';
-                        }
-                        if (isset($this->d_npwpsupplier)) {
-                            $kdnpwpsupplier = $this->d_npwpsupplier;
-                        } else {
-                            $kdnpwpsupplier = 'null';
-                        }
-                        if (isset($this->d_nip)) {
-                            $kdnip = $this->d_nip;
-                        } else {
-                            $kdnip = 'null';
-                        }
-                        if (isset($this->d_namapenerima)) {
-                            $kdnamapenerima = $this->d_namapenerima;
-                        } else {
-                            $kdnamapenerima = 'null';
-                        }
-                        if (isset($this->d_norek)) {
-                            $kdnorek = $this->d_norek;
-                        } else {
-                            $kdnorek = 'null';
-                        }
-                        if (isset($this->d_namarek)) {
-                            $kdnamarek = $this->d_namarek;
-                        } else {
-                            $kdnamarek = 'null';
-                        }
-                        if (isset($this->d_npwppenerima)) {
-                            $kdnpwppenerima = $this->d_npwppenerima;
-                        } else {
-                            $kdnpwppenerima = 'null';
-                        }
-                        ?>
-                        <a href="<?php echo URL; ?>PDF/cekSupplier_PDF/<?php echo $kdkppn . "/" . $kdtipesup . "/" . $kdnrs . "/" . $kdnamasupplier . "/" . $kdnpwpsupplier . "/" . $kdnip . "/" . $kdnamapenerima . "/" . $kdnorek . "/" . $kdnamarek . "/" . $kdnpwppenerima; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        <?php
-                    }
-                }
-
-                if (Session::get('role') == KPPN) {
-                    if (isset($this->d_tipesup) || isset($this->d_nrs) || isset($this->d_namasupplier) || isset($this->d_npwpsupplier) || isset($this->d_nip) || isset($this->d_namapenerima) || isset($this->d_norek) || isset($this->d_namarek) || isset($this->d_npwppenerima)) {
-
-
-                        $kdkppn = Session::get('id_user');
-                        if (isset($this->d_tipesup)) {
-                            $kdtipesup = $this->d_tipesup;
-                        } else {
-                            $kdtipesup = 'null';
-                        }
-                        if (isset($this->d_nrs)) {
-                            $kdnrs = $this->d_nrs;
-                        } else {
-                            $kdnrs = 'null';
-                        }
-                        if (isset($this->d_namasupplier)) {
-                            $kdnamasupplier = $this->d_namasupplier;
-                        } else {
-                            $kdnamasupplier = 'null';
-                        }
-                        if (isset($this->d_npwpsupplier)) {
-                            $kdnpwpsupplier = $this->d_npwpsupplier;
-                        } else {
-                            $kdnpwpsupplier = 'null';
-                        }
-                        if (isset($this->d_nip)) {
-                            $kdnip = $this->d_nip;
-                        } else {
-                            $kdnip = 'null';
-                        }
-                        if (isset($this->d_namapenerima)) {
-                            $kdnamapenerima = $this->d_namapenerima;
-                        } else {
-                            $kdnamapenerima = 'null';
-                        }
-                        if (isset($this->d_norek)) {
-                            $kdnorek = $this->d_norek;
-                        } else {
-                            $kdnorek = 'null';
-                        }
-                        if (isset($this->d_namarek)) {
-                            $kdnamarek = $this->d_namarek;
-                        } else {
-                            $kdnamarek = 'null';
-                        }
-                        if (isset($this->d_npwppenerima)) {
-                            $kdnpwppenerima = $this->d_npwppenerima;
-                        } else {
-                            $kdnpwppenerima = 'null';
-                        }
-                        ?>
-                        <a href="<?php echo URL; ?>PDF/cekSupplier_PDF/<?php echo $kdkppn . "/" . $kdtipesup . "/" . $kdnrs . "/" . $kdnamasupplier . "/" . $kdnpwpsupplier . "/" . $kdnip . "/" . $kdnamapenerima . "/" . $kdnorek . "/" . $kdnamarek . "/" . $kdnpwppenerima; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        <?php
-                    }
-                }
-                if (Session::get('role') == SATKER) {
-
-                    if (isset($this->d_kd_kppn)) {
-                        $kdkppn = $this->d_kd_kppn;
-                    } else {
-                        if (isset($this->data)) {		
-								foreach ($this->data as $value) {
-									$kdkppn =$value->get_kppn_code();
-									}
-							}
-                    }
-
-                    if (isset($this->d_tipesup)) {
-                        $kdtipesup = $this->d_tipesup;
-                    } else {
-                        $kdtipesup = 'null';
-                    }
-                    if (isset($this->d_nrs)) {
-                        $kdnrs = $this->d_nrs;
-                    } else {
-                        $kdnrs = 'null';
-                    }
-                    if (isset($this->d_namasupplier)) {
-                        $kdnamasupplier = $this->d_namasupplier;
-                    } else {
-                        $kdnamasupplier = 'null';
-                    }
-                    if (isset($this->d_npwpsupplier)) {
-                        $kdnpwpsupplier = $this->d_npwpsupplier;
-                    } else {
-                        $kdnpwpsupplier = 'null';
-                    }
-                    if (isset($this->d_nip)) {
-                        $kdnip = $this->d_nip;
-                    } else {
-                        $kdnip = 'null';
-                    }
-                    if (isset($this->d_namapenerima)) {
-                        $kdnamapenerima = $this->d_namapenerima;
-                    } else {
-                        $kdnamapenerima = 'null';
-                    }
-                    if (isset($this->d_norek)) {
-                        $kdnorek = $this->d_norek;
-                    } else {
-                        $kdnorek = 'null';
-                    }
-                    if (isset($this->d_namarek)) {
-                        $kdnamarek = $this->d_namarek;
-                    } else {
-                        $kdnamarek = 'null';
-                    }
-                    if (isset($this->d_npwppenerima)) {
-                        $kdnpwppenerima = $this->d_npwppenerima;
-                    } else {
-                        $kdnpwppenerima = 'null';
-                    }
-                    ?>
-                    <a href="<?php echo URL; ?>PDF/cekSupplier_PDF/<?php echo $kdkppn . "/" . $kdtipesup . "/" . $kdnrs . "/" . $kdnamasupplier . "/" . $kdnpwpsupplier . "/" . $kdnip . "/" . $kdnamapenerima . "/" . $kdnorek . "/" . $kdnamarek . "/" . $kdnpwppenerima; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                    <?php
-                }
-                ?>                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
 
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
 
             </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+
+			<!-- PDF --> 
+			<?php
+			//----------------------------------------------------
+			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
+
+			if (Session::get('role') == ADMIN) {
+				if (isset($this->d_kd_kppn) || isset($this->d_tipesup) || isset($this->d_nrs) || isset($this->d_namasupplier) || isset($this->d_npwpsupplier) || isset($this->d_nip) || isset($this->d_namapenerima) || isset($this->d_norek) || isset($this->d_namarek) || isset($this->d_npwppenerima)) {
+
+					if (isset($this->d_kd_kppn)) {
+						$kdkppn = $this->d_kd_kppn;
+					} else {
+						if (isset($this->data)) {		
+							foreach ($this->data as $value) {
+								$kdkppn =$value->get_kppn_code();
+								}
+						}
+					}
+
+					if (isset($this->d_tipesup)) {
+						$kdtipesup = $this->d_tipesup;
+					} else {
+						$kdtipesup = 'null';
+					}
+					if (isset($this->d_nrs)) {
+						$kdnrs = $this->d_nrs;
+					} else {
+						$kdnrs = 'null';
+					}
+					if (isset($this->d_namasupplier)) {
+						$kdnamasupplier = $this->d_namasupplier;
+					} else {
+						$kdnamasupplier = 'null';
+					}
+					if (isset($this->d_npwpsupplier)) {
+						$kdnpwpsupplier = $this->d_npwpsupplier;
+					} else {
+						$kdnpwpsupplier = 'null';
+					}
+					if (isset($this->d_nip)) {
+						$kdnip = $this->d_nip;
+					} else {
+						$kdnip = 'null';
+					}
+					if (isset($this->d_namapenerima)) {
+						$kdnamapenerima = $this->d_namapenerima;
+					} else {
+						$kdnamapenerima = 'null';
+					}
+					if (isset($this->d_norek)) {
+						$kdnorek = $this->d_norek;
+					} else {
+						$kdnorek = 'null';
+					}
+					if (isset($this->d_namarek)) {
+						$kdnamarek = $this->d_namarek;
+					} else {
+						$kdnamarek = 'null';
+					}
+					if (isset($this->d_npwppenerima)) {
+						$kdnpwppenerima = $this->d_npwppenerima;
+					} else {
+						$kdnpwppenerima = 'null';
+					}
+					?>
+					<a href="<?php echo URL; ?>PDF/cekSupplier_PDF/<?php echo $kdkppn . "/" . $kdtipesup . "/" . $kdnrs . "/" . $kdnamasupplier . "/" . $kdnpwpsupplier . "/" . $kdnip . "/" . $kdnamapenerima . "/" . $kdnorek . "/" . $kdnamarek . "/" . $kdnpwppenerima; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+					<a href="<?php echo URL; ?>PDF/cekSupplier_PDF/<?php echo $kdkppn . "/" . $kdtipesup . "/" . $kdnrs . "/" . $kdnamasupplier . "/" . $kdnpwpsupplier . "/" . $kdnip . "/" . $kdnamapenerima . "/" . $kdnorek . "/" . $kdnamarek . "/" . $kdnpwppenerima; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+					<?php
+				}
+			}
+
+			if (Session::get('role') == KPPN) {
+				if (isset($this->d_tipesup) || isset($this->d_nrs) || isset($this->d_namasupplier) || isset($this->d_npwpsupplier) || isset($this->d_nip) || isset($this->d_namapenerima) || isset($this->d_norek) || isset($this->d_namarek) || isset($this->d_npwppenerima)) {
+
+
+					$kdkppn = Session::get('id_user');
+					if (isset($this->d_tipesup)) {
+						$kdtipesup = $this->d_tipesup;
+					} else {
+						$kdtipesup = 'null';
+					}
+					if (isset($this->d_nrs)) {
+						$kdnrs = $this->d_nrs;
+					} else {
+						$kdnrs = 'null';
+					}
+					if (isset($this->d_namasupplier)) {
+						$kdnamasupplier = $this->d_namasupplier;
+					} else {
+						$kdnamasupplier = 'null';
+					}
+					if (isset($this->d_npwpsupplier)) {
+						$kdnpwpsupplier = $this->d_npwpsupplier;
+					} else {
+						$kdnpwpsupplier = 'null';
+					}
+					if (isset($this->d_nip)) {
+						$kdnip = $this->d_nip;
+					} else {
+						$kdnip = 'null';
+					}
+					if (isset($this->d_namapenerima)) {
+						$kdnamapenerima = $this->d_namapenerima;
+					} else {
+						$kdnamapenerima = 'null';
+					}
+					if (isset($this->d_norek)) {
+						$kdnorek = $this->d_norek;
+					} else {
+						$kdnorek = 'null';
+					}
+					if (isset($this->d_namarek)) {
+						$kdnamarek = $this->d_namarek;
+					} else {
+						$kdnamarek = 'null';
+					}
+					if (isset($this->d_npwppenerima)) {
+						$kdnpwppenerima = $this->d_npwppenerima;
+					} else {
+						$kdnpwppenerima = 'null';
+					}
+					?>
+					<a href="<?php echo URL; ?>PDF/cekSupplier_PDF/<?php echo $kdkppn . "/" . $kdtipesup . "/" . $kdnrs . "/" . $kdnamasupplier . "/" . $kdnpwpsupplier . "/" . $kdnip . "/" . $kdnamapenerima . "/" . $kdnorek . "/" . $kdnamarek . "/" . $kdnpwppenerima; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+					<a href="<?php echo URL; ?>PDF/cekSupplier_PDF/<?php echo $kdkppn . "/" . $kdtipesup . "/" . $kdnrs . "/" . $kdnamasupplier . "/" . $kdnpwpsupplier . "/" . $kdnip . "/" . $kdnamapenerima . "/" . $kdnorek . "/" . $kdnamarek . "/" . $kdnpwppenerima; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+					<?php
+				}
+			}
+			if (Session::get('role') == SATKER) {
+
+				if (isset($this->d_kd_kppn)) {
+					$kdkppn = $this->d_kd_kppn;
+				} else {
+					if (isset($this->data)) {		
+							foreach ($this->data as $value) {
+								$kdkppn =$value->get_kppn_code();
+								}
+						}
+				}
+
+				if (isset($this->d_tipesup)) {
+					$kdtipesup = $this->d_tipesup;
+				} else {
+					$kdtipesup = 'null';
+				}
+				if (isset($this->d_nrs)) {
+					$kdnrs = $this->d_nrs;
+				} else {
+					$kdnrs = 'null';
+				}
+				if (isset($this->d_namasupplier)) {
+					$kdnamasupplier = $this->d_namasupplier;
+				} else {
+					$kdnamasupplier = 'null';
+				}
+				if (isset($this->d_npwpsupplier)) {
+					$kdnpwpsupplier = $this->d_npwpsupplier;
+				} else {
+					$kdnpwpsupplier = 'null';
+				}
+				if (isset($this->d_nip)) {
+					$kdnip = $this->d_nip;
+				} else {
+					$kdnip = 'null';
+				}
+				if (isset($this->d_namapenerima)) {
+					$kdnamapenerima = $this->d_namapenerima;
+				} else {
+					$kdnamapenerima = 'null';
+				}
+				if (isset($this->d_norek)) {
+					$kdnorek = $this->d_norek;
+				} else {
+					$kdnorek = 'null';
+				}
+				if (isset($this->d_namarek)) {
+					$kdnamarek = $this->d_namarek;
+				} else {
+					$kdnamarek = 'null';
+				}
+				if (isset($this->d_npwppenerima)) {
+					$kdnpwppenerima = $this->d_npwppenerima;
+				} else {
+					$kdnpwppenerima = 'null';
+				}
+				?>
+					<a href="<?php echo URL; ?>PDF/cekSupplier_PDF/<?php echo $kdkppn . "/" . $kdtipesup . "/" . $kdnrs . "/" . $kdnamasupplier . "/" . $kdnpwpsupplier . "/" . $kdnip . "/" . $kdnamapenerima . "/" . $kdnorek . "/" . $kdnamarek . "/" . $kdnpwppenerima; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+					</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+					<a href="<?php echo URL; ?>PDF/cekSupplier_PDF/<?php echo $kdkppn . "/" . $kdtipesup . "/" . $kdnrs . "/" . $kdnamasupplier . "/" . $kdnpwpsupplier . "/" . $kdnip . "/" . $kdnamapenerima . "/" . $kdnorek . "/" . $kdnamarek . "/" . $kdnpwppenerima; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<?php
+			}
+			?>                
+            </div>
+           
         </div>
 
         <div class="row" style="padding-top: 10px">

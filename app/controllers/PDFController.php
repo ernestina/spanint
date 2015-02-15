@@ -34,7 +34,9 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataDIPAController(DataDIPAController.php)
 //------------------------------------------------------
-    public function RevisiDipa_PDF($kdsatker = null, $kdakun = null, $kdoutput = null, $kdprogram = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function RevisiDipa_PDF($kdsatker = null, 
+	$kdakun = null,$kdoutput = null, $kdprogram = null, 
+	$kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
 
         $d_spm1 = new DataDIPA($this->registry);
         $filter = array();
@@ -100,18 +102,24 @@ class PDFController extends BaseController {
         }
         //-------------------------
 
-
-
-
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         $this->view->data = $d_spm1->get_dipa_filter($filter);
-        $this->view->load('kppn/revisiDIPA_PDF');
+       
+		//------------------------------------------------------------
+		$judul1='Data Revisi DIPA';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/revisiDIPA_PDF');
+		}else{
+			$this->view->load('kppn/revisiDIPA_XLS');
+		}
+		//------------------------------------------------------------
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function Fund_fail_PDF($kdsatker = null, $kdkppn = null) {
+    public function Fund_fail_PDF($kdsatker = null, $kdkppn = null,$ck=null) {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
@@ -180,13 +188,20 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
-
-        $this->view->load('kppn/fund_fail_PDF');
+		//------------------------------------------------------------
+		$judul1='Penolakan Revisi Karena Menyebabkan Pagu Minus';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/fund_fail_PDF');
+		}else{
+			$this->view->load('kppn/fund_fail_XLS');
+		}
+		//------------------------------------------------------------
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function Detail_Fund_fail_kd_PDF($kf, $kdsatker = null, $kdoutput = null, $kdakun = null , $kdkppn = null) {
+    public function Detail_Fund_fail_kd_PDF($kf, $kdsatker = null, $kdoutput = null, $kdakun = null , $kdkppn = null,$ck=null) {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
@@ -257,18 +272,36 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table3());
         if ($kf == '2') {
             $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
-            $this->view->load('kppn/detail_fund_fail_kd_PDF');
+			//------------------------------------------------------------
+			$judul1='Detail Data Pagu Minus (Fund Fail)';
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				$this->view->load('kppn/detail_fund_fail_kd_PDF');
+			}else{
+				$this->view->load('kppn/detail_fund_fail_kd_XLS');
+			}
+			//------------------------------------------------------------
+
         } elseif ($kf == '1') {
             $d_spm1 = new DataFA($this->registry);
             $this->view->data = $d_spm1->get_fa_filter($filter);
-            $this->view->load('kppn/detail_fund_fail_ff_PDF');
+			//------------------------------------------------------------
+			$judul1='Detail Data Pagu Minus Karena Fund Fail';
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				$this->view->load('kppn/detail_fund_fail_ff_PDF');
+			}else{
+				$this->view->load('kppn/detail_fund_fail_ff_XLS');
+			}
+			//------------------------------------------------------------
+
         }
 
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function RealisasiFA_PDF($kdsatker = null, $kdprogram = null, $kdoutput = null, $kdakun = null, $dana = null) {
+    public function RealisasiFA_PDF($kdsatker = null, $kdprogram = null, $kdoutput = null, $kdakun = null, $dana = null,$ck=null) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
@@ -345,12 +378,21 @@ class PDFController extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->data = $d_spm1->get_fa_filter($filter);
-        $this->view->load('kppn/realisasiFA_PDF');
+		//------------------------------------------------------------
+		$judul1='Informasi Sisa Dana DIPA Satker';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/realisasiFA_PDF');
+		}else{
+			$this->view->load('kppn/realisasiFA_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function RealisasiFA_1_PDF($kdsatker = null, $kdkppn = null, $kdakun = null, $kdprogram = null, $kdoutput = null, $kdakun1 = null) {
+    public function RealisasiFA_1_PDF($kdsatker = null, $kdkppn = null, $kdakun = null, $kdprogram = null, $kdoutput = null, $kdakun1 = null,$ck=null) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
@@ -418,13 +460,22 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_fa_summary_filter($filter);
 
-        $this->view->load('kppn/realisasiFA_1_PDF');
+		//------------------------------------------------------------
+		$judul1='Informasi Sisa Pagu Per Akun DIPA Satker';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/realisasiFA_1_PDF');
+		}else{
+			$this->view->load('kppn/realisasiFA_1_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
     //------------------------------------
-    public function DataRealisasi_PDF($kdkppn = null, $kdsatker = null) {
+    public function DataRealisasi_PDF($kdkppn = null, $kdsatker = null,$ck=null) {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
@@ -476,7 +527,17 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         //untuk mencatat log user
-        $this->view->load('kppn/DataRealisasi_PDF');
+		//------------------------------------------------------------
+		$judul1='Pagu dan Realisasi Belanja per Satker';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/DataRealisasi_PDF');
+		}else{
+			$this->view->load('kppn/DataRealisasi_XLS');
+		}
+		//------------------------------------------------------------
+
+		
         $d_log->tambah_log("Sukses");
     }
 
@@ -542,16 +603,20 @@ class PDFController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		//------------------------------------------------------------
+		$judul1='Pagu dan Realisasi Belanja per Bagian Anggaran';
+		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/DataRealisasiBA_PDF');
 		}else{
 			$this->view->load('kppn/DataRealisasiBA_XLS');
 		}
+		//------------------------------------------------------------
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function DataRealisasiTransfer_PDF($kdsatker = null, $kdlokasi = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function DataRealisasiTransfer_PDF($kdsatker = null, $kdlokasi = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
@@ -623,11 +688,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
-        $this->view->load('kppn/DataRealisasiTransfer_PDF');
+        
+		//------------------------------------------------------------
+		$judul1='Realisasi Belanja Transfer Daerah';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/DataRealisasiTransfer_PDF');
+		}else{
+			$this->view->load('kppn/DataRealisasiTransfer_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
-    public function DetailRevisi_PDF($kdsatker = null) {
+    public function DetailRevisi_PDF($kdsatker = null,$ck=null) {
         $d_spm1 = new proses_revisi($this->registry);
         $filter = array();
         $no = 0;
@@ -694,11 +769,20 @@ class PDFController extends BaseController {
         $this->view->data = $d_spm1->detail_revisi($filter);
         //untuk mencatat log user
 
-        $this->view->load('kppn/detail_revisi_PDF');
+		//------------------------------------------------------------
+		$judul1='Daftar Akun yang dikunci karena Proses Revisi';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detail_revisi_PDF');
+		}else{
+			$this->view->load('kppn/detail_revisi_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
-    public function nmsatker_PDF($kdkppn = null, $kdsatker = null, $nmsatker = null, $kdrevisi = null) {
+    public function nmsatker_PDF($kdkppn = null, $kdsatker = null, $nmsatker = null, $kdrevisi = null,$ck=null) {
         $d_spm1 = new DataNamaSatker($this->registry);
         $filter = array();
         $no = 0;
@@ -764,14 +848,32 @@ class PDFController extends BaseController {
 
 
         if (Session::get('role') == ADMIN) {
-            $this->view->load('kppn/NamaSatkerDIPA1_PDF');
+			//------------------------------------------------------------
+			$judul1='Informasi Revisi DIPA';
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				$this->view->load('kppn/NamaSatkerDIPA1_PDF');
+			}else{
+				$this->view->load('kppn/NamaSatkerDIPA1_XLS');
+			}
+			//------------------------------------------------------------
+
         } else {
-            $this->view->load('kppn/NamaSatkerDIPAkppn_PDF');
+			//------------------------------------------------------------
+			$judul1='Informasi Revisi DIPA';
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				$this->view->load('kppn/NamaSatkerDIPAkppn_PDF');
+			}else{
+				$this->view->load('kppn/NamaSatkerDIPAkppn_XLS');
+			}
+			//------------------------------------------------------------
+
         }
         $d_log->tambah_log("Sukses");
     }
 
-    public function nmsatker1_PDF($kdkppn = null, $kdsatker = null, $nmsatker = null) {
+    public function nmsatker1_PDF($kdkppn = null, $kdsatker = null, $nmsatker = null,$ck=null) {
         $d_spm1 = new DataNamaSatker($this->registry);
         $filter = array();
         $no = 0;
@@ -831,11 +933,20 @@ class PDFController extends BaseController {
         }
         //-------------------------
 
-        $this->view->load('kppn/NamaSatkerDIPA2_PDF');
+		//------------------------------------------------------------
+		$judul1='Sisa Pagu Belanja Realisasi dan Pencadangan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/NamaSatkerDIPA2_PDF');
+		}else{
+			$this->view->load('kppn/NamaSatkerDIPA2_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
-    public function ProsesRevisi_PDF($kdkppn = null, $kdsatker = null, $nmsatker = null) {
+    public function ProsesRevisi_PDF($kdkppn = null, $kdsatker = null, $nmsatker = null,$ck=null) {
         $d_spm1 = new proses_revisi($this->registry);
         $filter = array();
         $no = 0;
@@ -902,12 +1013,21 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_revisi_dipa($filter);
 
-        $this->view->load('kppn/proses_revisi_PDF');
+		//------------------------------------------------------------
+		$judul1='Daftar DIPA dalam Proses Revisi';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/proses_revisi_PDF');
+		}else{
+			$this->view->load('kppn/proses_revisi_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
 //baru
-    public function DetailEncumbrances_PDF($code_id = null) {
+    public function DetailEncumbrances_PDF($code_id = null,$ck=null) {
         $d_spm1 = new encumbrances($this->registry);
         $filter = array();
         $no = 0;
@@ -945,11 +1065,21 @@ class PDFController extends BaseController {
         //-------------------------
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_encumbrances($filter);
-        $d_log->tambah_log("Sukses");
-        $this->view->load('kppn/encumbrances_PDF');
-    }
+      
+		//------------------------------------------------------------
+		$judul1='Detail Rincian Pencadangan Dana';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/encumbrances_PDF');
+		}else{
+			$this->view->load('kppn/encumbrances_XLS');
+		}
+		//------------------------------------------------------------
+		$d_log->tambah_log("Sukses");
 
-    public function DetailRealisasiFA_PDF($code_id = null) {
+	}
+
+    public function DetailRealisasiFA_PDF($code_id = null,$ck=null) {
         $d_spm1 = new DataRealisasiFA($this->registry);
         $filter = array();
         $no = 0;
@@ -987,13 +1117,20 @@ class PDFController extends BaseController {
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_realisasi_fa_filter($filter);
 
+		//------------------------------------------------------------
+		$judul1='Detail Realisasi';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/DetailRealisasiFA_PDF');
+		}else{
+			$this->view->load('kppn/DetailRealisasiFA_XLS');
+		}
+		//------------------------------------------------------------
 
-        $d_log->tambah_log("Sukses");
-
-        $this->view->load('kppn/DetailRealisasiFA_PDF');
+		 $d_log->tambah_log("Sukses");
     }
 
-    public function Detail_Fund_fail_PDF($kdsatker = null) {
+    public function Detail_Fund_fail_PDF($kdsatker = null,$ck=null) {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
@@ -1034,12 +1171,21 @@ class PDFController extends BaseController {
 
 
         $this->view->data = $d_spm1->get_detail_fun_fail_kd_filter($filter);
-        $this->view->load('kppn/detail_fund_fail_kd_PDF');
+		//------------------------------------------------------------
+		$judul1='Detail Data Pagu Minus Karena Fund Fail';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detail_fund_fail_kd_PDF');
+		}else{
+			$this->view->load('kppn/detail_fund_fail_kd_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
 	//20-11-2014
-		public function RealisasiFA_1_Minus_PDF($kdsatker = null, $kdkppn = null, $kdakun = null, $kdprogram = null, $kdoutput = null) {
+		public function RealisasiFA_1_Minus_PDF($kdsatker = null, $kdkppn = null, $kdakun = null, $kdprogram = null, $kdoutput = null,$ck=null) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
@@ -1134,13 +1280,22 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_fa_summary_minus_filter($filter);
         //var_dump($d_spm->get_hist_spm_filter());
+		//------------------------------------------------------------
+		$judul1='Monitoring Pagu Minus Belanja Pegawai';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/realisasiFA_1_minus_PDF');
+		}else{
+			$this->view->load('kppn/realisasiFA_1_minus_XLS');
+		}
+		//------------------------------------------------------------
+
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/realisasiFA_1_minus_PDF');
     }
 	
-	public function RealisasiFA_1_Minus_51_PDF($kdsatker = null, $kdkppn = null, $kdakun = null, $kdprogram = null, $kdoutput = null) {
+	public function RealisasiFA_1_Minus_51_PDF($kdsatker = null, $kdkppn = null, $kdakun = null, $kdprogram = null, $kdoutput = null,$ck=null) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
         $no = 0;
@@ -1231,16 +1386,16 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_fa_summary_minus_filter($filter);
         //var_dump($d_spm->get_hist_spm_filter());
+        $this->view->load('kppn/realisasiFA_1_minus_51_PDF');
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/realisasiFA_1_minus_51_PDF');
     }
 
 //------------------------------------------------------
     //Function PDF untuk DataDropingController(DataDropingController.php)
 //------------------------------------------------------
-    public function detailDroping_PDF($kdid = null, $kdbank = null, $kdtanggal = null) {
+    public function detailDroping_PDF($kdid = null, $kdbank = null, $kdtanggal = null,$ck=null) {
         $d_sppm = new DataDroping($this->registry);
         $filter = array();
         $no = 0;
@@ -1294,12 +1449,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table1());
 
-        $this->view->load('pkn/dropingDetail_PDF');
+		//------------------------------------------------------------
+		$judul1='Detail Penyaluran & Droping Dana SP2D';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('pkn/dropingDetail_PDF');
+		}else{
+			$this->view->load('pkn/dropingDetail_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function monitoringDroping_PDF($kdbank = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function monitoringDroping_PDF($kdbank = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_sppm = new DataDroping($this->registry);
         $filter = array();
         $no = 0;
@@ -1373,13 +1537,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        $this->view->load('pkn/droping_PDF');
-		//$this->view->render('pkn/droping_PDF');
+		//------------------------------------------------------------
+		$judul1='Penyaluran dan Droping Dana SP2D';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('pkn/droping_PDF');
+		}else{
+			$this->view->load('pkn/droping_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 	
-	    public function detailSPAN_PDF($kdbank = null, $kdtanggal = null) {
+	    public function detailSPAN_PDF($kdbank = null, $kdtanggal = null,$ck=null) {
         $d_sppm = new DataDroping($this->registry);
         $filter = array();
         $no = 0;
@@ -1435,8 +1607,16 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table2());
 
-        $this->view->load('pkn/dropingDetailSPAN_PDF');
-		
+		//------------------------------------------------------------
+		$judul1='Daftar File XML SP2D';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('pkn/dropingDetailSPAN_PDF');
+		}else{
+			$this->view->load('pkn/dropingDetailSPAN_XLS');
+		}
+		//------------------------------------------------------------
+
 		$d_log->tambah_log("Sukses");
     }
 
@@ -1444,7 +1624,7 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataGRController(DataGRController.php)
 //------------------------------------------------------
-    public function GR_PFK_PDF($kdbulan = null, $kdkppn = null) {
+    public function GR_PFK_PDF($kdbulan = null, $kdkppn = null,$ck=null) {
         $d_spm1 = new DataPFK($this->registry);
         $filter = array();
         $bulan = 'null';
@@ -1548,12 +1728,21 @@ class PDFController extends BaseController {
 
 
         $this->view->data = $d_spm1->get_gr_pfk_filter($filter, $kdbulan);
-        $this->view->load('kppn/GR_PFK_GLOBAL_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring PFK Bulan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/GR_PFK_GLOBAL_PDF');
+		}else{
+			$this->view->load('kppn/GR_PFK_GLOBAL_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function GR_PFK_DETAIL1_PDF($kdakun = null, $kdbulan = null, $kdkppn = null) {
+    public function GR_PFK_DETAIL1_PDF($kdakun = null, $kdbulan = null, $kdkppn = null,$ck=null) {
         $d_spm1 = new DataPFK_DETAIL($this->registry);
         $filter = array();
         $no = 0;
@@ -1603,12 +1792,22 @@ class PDFController extends BaseController {
 
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
+		//------------------------------------------------------------
+		$judul1='Monitoring PFK Akun';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/GR_PFK_DETAIL1_PDF');
+		}else{
+			$this->view->load('kppn/GR_PFK_DETAIL1_XLS');
+		}
+		//------------------------------------------------------------
+
+
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/GR_PFK_DETAIL1_PDF');
     }
 
-    public function GR_IJP_PDF($kdbulan = null, $kdkppn = null) {
+    public function GR_IJP_PDF($kdbulan = null, $kdkppn = null,$ck=null) {
         $d_spm1 = new DataGR_IJP($this->registry);
         $filter = array();
         $no = 0;
@@ -1703,12 +1902,21 @@ class PDFController extends BaseController {
 
 
         $this->view->data = $d_spm1->get_gr_ijp_filter($filter);
-        $this->view->load('kppn/GR_IJP_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring Status LHP per KPPN';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/GR_IJP_PDF');
+		}else{
+			$this->view->load('kppn/GR_IJP_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function detailLhpRekap_PDF($kdtgl = null, $kdkppn = null) {
+    public function detailLhpRekap_PDF($kdtgl = null, $kdkppn = null,$ck=null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1753,13 +1961,23 @@ class PDFController extends BaseController {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
         }
         $this->view->data = $d_spm1->get_detail_lhp_rekap($filter);
-        $this->view->load('kppn/detailLhpRekap_PDF');
+		
+		//------------------------------------------------------------
+		$judul1='Status LHP Interface';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detailLhpRekap_PDF');
+		}else{
+			$this->view->load('kppn/detailLhpRekap_XLS');
+		}
+		//------------------------------------------------------------
+
 		
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function detailPenerimaan_PDF($file_name = null, $kdkppn = null) {
+    public function detailPenerimaan_PDF($file_name = null, $kdkppn = null,$ck=null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1806,11 +2024,20 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_detail_penerimaan($filter);
 
-        $this->view->load('kppn/detailPenerimaan_PDF');
+		//------------------------------------------------------------
+		$judul1='Detail Penerimaan File';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detailPenerimaan_PDF');
+		}else{
+			$this->view->load('kppn/detailPenerimaan_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
-    public function detailCoAPenerimaan_PDF($kdntpn = null) {
+    public function detailCoAPenerimaan_PDF($kdntpn = null,$ck=null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1827,11 +2054,20 @@ class PDFController extends BaseController {
         $this->view->data = $d_spm1->get_detail_coa_penerimaan($filter);
 
         //var_dump($d_spm->get_gr_status_filter($filter));
-        $this->view->load('kppn/detailCoAPenerimaan_PDF');
+		//------------------------------------------------------------
+		$judul1='Detail CoA Penerimaan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detailCoAPenerimaan_PDF');
+		}else{
+			$this->view->load('kppn/detailCoAPenerimaan_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
-    public function SuspendSatkerPenerimaan_PDF($kdtgl_awal = null,$kdtgl_akhir = null,$kdntpn = null,$kdkppn = null,$kdkoreksi = null) {
+    public function SuspendSatkerPenerimaan_PDF($kdtgl_awal = null,$kdtgl_akhir = null,$kdntpn = null,$kdkppn = null,$kdkoreksi = null,$ck=null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1875,12 +2111,21 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
 
-        $this->view->load('kppn/suspend_satker_penerimaan_PDF');
-		//$this->view->render('kppn/suspend_satker_penerimaan');
+		//------------------------------------------------------------
+		$judul1='Suspend Satker Penerimaan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/suspend_satker_penerimaan_PDF');
+		}else{
+			$this->view->load('kppn/suspend_satker_penerimaan_XLS');
+		}
+		//------------------------------------------------------------
+
+
         $d_log->tambah_log("Sukses");
     }
 
-    public function KonfirmasiPenerimaan_PDF($kdntpn = null) {
+    public function KonfirmasiPenerimaan_PDF($kdntpn = null,$ck=null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1894,14 +2139,21 @@ class PDFController extends BaseController {
             $filter[$no++] = "RECEIPT_NUMBER = '" . $kdntpn . "'";
         }
         $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
+		//------------------------------------------------------------
+		$judul1='Konfirmasi Penerimaan Berdasarkan NTPN dan AKUN';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/konfirmasi_penerimaan_PDF');
+		}else{
+			$this->view->load('kppn/konfirmasi_penerimaan_XLS');
+		}
+		//------------------------------------------------------------
 
-
-
-        $this->view->load('kppn/konfirmasi_penerimaan_PDF');
+		
         $d_log->tambah_log("Sukses");
     }
 
-    public function SuspendAkunPenerimaan_PDF($kdtgl_awal = null,$kdtgl_akhir = null,$kdkppn = null,$kdkoreksi = null) {
+    public function SuspendAkunPenerimaan_PDF($kdtgl_awal = null,$kdtgl_akhir = null,$kdkppn = null,$kdkoreksi = null,$ck=null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1946,13 +2198,21 @@ class PDFController extends BaseController {
 
 
         $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
-        //var_dump($d_spm->get_gr_status_filter($filter));
 
-        $this->view->load('kppn/suspend_akun_penerimaan_PDF');
+		//------------------------------------------------------------
+		$judul1='Suspend Akun Penerimaan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/suspend_akun_penerimaan_PDF');
+		}else{
+			$this->view->load('kppn/suspend_akun_penerimaan_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
-    public function NTPNGanda_PDF($kdbulan = null,$kdkppn = null) {
+    public function NTPNGanda_PDF($kdbulan = null,$kdkppn = null,$ck=null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1972,11 +2232,20 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_ntpn_ganda($filter);
 
-        $this->view->load('kppn/ntpn_ganda_PDF');
+		//------------------------------------------------------------
+		$judul1='Daftar NTPN Terindikasi Ganda';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/ntpn_ganda_PDF');
+		}else{
+			$this->view->load('kppn/ntpn_ganda_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
-    public function DetailNTPNGanda_PDF($kdntpn = null) {
+    public function DetailNTPNGanda_PDF($kdntpn = null,$ck=null) {
         $d_spm1 = new DataGR_STATUS($this->registry);
         $filter = array();
         $no = 0;
@@ -1995,12 +2264,22 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_detail_ntpn_ganda($filter);
 
-        $this->view->load('kppn/detail_ntpn_ganda_PDF');
+		//------------------------------------------------------------
+		$judul1='Detail NTPN Terindikasi Ganda';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detail_ntpn_ganda_PDF');
+		}else{
+			$this->view->load('kppn/detail_ntpn_ganda_XLS');
+		}
+		//------------------------------------------------------------
+
+		
         $d_log->tambah_log("Sukses");
     }
 	
 
-    public function grStatusHarian_PDF($kdkppn = null) {
+    public function grStatusHarian_PDF($kdkppn = null,$ck=null) {
         $d_spm1 = new DataGR_IJP($this->registry);
         $filter = array();
         $no = 0;
@@ -2068,11 +2347,26 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table());
 
-        $this->view->load('kppn/GRStatusHarian_PDF');
+		//------------------------------------------------------------
+		
+		if (Session::get('role') == KPPN){
+			$judul1 = 'Laporan Monitoring Status LHP per KPPN'; //judul file laporan	
+		}else{
+			$judul1 = 'Laporan Monitoring Status LHP'; //judul file laporan
+		} 
+
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/GRStatusHarian_PDF');
+		}else{
+			$this->view->load('kppn/GRStatusHarian_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
     
-    public function grStatusHarianBulan_PDF($kdbulan = null) {
+    public function grStatusHarianBulan_PDF($kdbulan = null,$ck=null) {
         $d_spm1 = new DataGR_IJP($this->registry);
         $filter = array();
         $no = 0;
@@ -2132,14 +2426,23 @@ class PDFController extends BaseController {
 			}
         
         
-        //$this->view->jml_rek = $d_spm1->get_jml_rek_dep($_POST['kdkppn']);
         $this->view->data = $d_spm1->get_gr_status_harian($filter);
         
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table());
 
-        $this->view->load('kppn/GRStatusHarianBulan_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring Status LHP per Bulan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/GRStatusHarianBulan_PDF');
+		}else{
+			$this->view->load('kppn/GRStatusHarianBulan_XLS');
+		}
+		//------------------------------------------------------------
+
+
         $d_log->tambah_log("Sukses");
     }
 
@@ -2257,13 +2560,22 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        $this->view->load('kppn/isianKppn_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring SP2D - Bank';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/isianKppn_PDF');
+		}else{
+			$this->view->load('kppn/isianKppn_XLS');
+		}
+		//------------------------------------------------------------
+
 		
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function harianBO_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null) {
+    public function harianBO_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -2335,12 +2647,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        $this->view->load('kppn/harianBo_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring Penerbitan SP2D Harian ke Bank';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/harianBo_PDF');
+		}else{
+			$this->view->load('kppn/harianBo_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dHariIni_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null) {
+    public function sp2dHariIni_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -2412,12 +2733,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        $this->view->load('kppn/sp2dHariIni_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring SP2D Terbit dan Tertanggal Hari yang Sama';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dHariIni_PDF');
+		}else{
+			$this->view->load('kppn/sp2dHariIni_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dBesok_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null) {
+    public function sp2dBesok_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -2490,12 +2820,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        $this->view->load('kppn/sp2dBesok_PDF');
+		//------------------------------------------------------------
+		$judul1='SP2D Terbit di Atas Jam 3 Tertanggal Hari yang Sama';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dBesok_PDF');
+		}else{
+			$this->view->load('kppn/sp2dBesok_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dBackdate_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null) {
+    public function sp2dBackdate_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -2567,12 +2906,22 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        $this->view->load('kppn/sp2dBackdate_PDF');
+		//------------------------------------------------------------
+		$judul1='SP2D Backdate';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dBackdate_PDF');
+		}else{
+			$this->view->load('kppn/sp2dBackdate_XLS');
+		}
+		//------------------------------------------------------------
+
+		
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dNilaiMinus_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null) {
+    public function sp2dNilaiMinus_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -2644,12 +2993,22 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        $this->view->load('kppn/sp2dNilaiMinus_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring SP2D Minus dan 0';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dNilaiMinus_PDF');
+		}else{
+			$this->view->load('kppn/sp2dNilaiMinus_XLS');
+		}
+		//------------------------------------------------------------
+
+		
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dSudahVoid_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null) {
+    public function sp2dSudahVoid_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdbank = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -2720,12 +3079,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        $this->view->load('kppn/sp2dSudahVoid_PDF');
+		//------------------------------------------------------------
+		$judul1='SP2D Void';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dSudahVoid_PDF');
+		}else{
+			$this->view->load('kppn/sp2dSudahVoid_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dGajiDobel_PDF($kdkppn = null) {
+    public function sp2dGajiDobel_PDF($kdkppn = null,$ck=null) {
 
         $d_sppm = new DataSppm($this->registry);
         //untuk mencatat log user
@@ -2782,13 +3150,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        //var_dump($d_sppm->get_sppm_filter($filter));
-        $this->view->load('kppn/sp2dGajiDobel_PDF');
+		//------------------------------------------------------------
+		$judul1='Terindikasi Dobel';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dGajiDobel_PDF');
+		}else{
+			$this->view->load('kppn/sp2dGajiDobel_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dSalahTanggal_PDF($kdkppn = null) {
+    public function sp2dSalahTanggal_PDF($kdkppn = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
 
         //untuk mencatat log user
@@ -2850,13 +3226,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        //var_dump($d_sppm->get_sppm_filter($filter));
-        $this->view->load('kppn/sp2dGajiTanggal_PDF');
+		//------------------------------------------------------------
+		$judul1='Terindikasi Salah Tanggal';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dGajiTanggal_PDF');
+		}else{
+			$this->view->load('kppn/sp2dGajiTanggal_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dSalahBank_PDF($kdkppn = null) {
+    public function sp2dSalahBank_PDF($kdkppn = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
@@ -2917,12 +3301,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        $this->view->load('kppn/sp2dGajiBank_PDF');
+		//------------------------------------------------------------
+		$judul1='Terindikasi Salah Bank';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dGajiBank_PDF');
+		}else{
+			$this->view->load('kppn/sp2dGajiBank_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dSalahRekening_PDF($kdkppn = null) {
+    public function sp2dSalahRekening_PDF($kdkppn = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
@@ -2983,13 +3376,22 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        //var_dump($d_sppm->get_sppm_filter($filter));
-        $this->view->load('kppn/sp2dGajiRekening_PDF');
+		//------------------------------------------------------------
+		$judul1='Terindikasi Salah PayGroup';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dGajiRekening_PDF');
+		}else{
+			$this->view->load('kppn/sp2dGajiRekening_XLS');
+		}
+		//------------------------------------------------------------
+
+		
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function detailSp2dGaji_PDF($kdbank = null, $kdbulan = null,$kdtahun = null, $kdkppn = null) {
+    public function detailSp2dGaji_PDF($kdbank = null, $kdbulan = null,$kdtahun = null, $kdkppn = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -3064,12 +3466,21 @@ class PDFController extends BaseController {
         } else {
             $this->view->data = '';
         }
-        $this->view->load('kppn/detailSp2dGaji_PDF');
+		//------------------------------------------------------------
+		$judul1='Perbandingan Gaji per Bulan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detailSp2dGaji_PDF');
+		}else{
+			$this->view->load('kppn/detailSp2dGaji_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function detailRekapSP2D2_PDF($kdbank = null, $kdjendok = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdkppn = null) {
+    public function detailRekapSP2D2_PDF($kdbank = null, $kdjendok = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdkppn = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -3168,15 +3579,23 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        //var_dump($d_sppm->get_sppm_filter($filter));
 
-        $this->view->load('kppn/detailSp2dRekap_PDF');
+		//------------------------------------------------------------
+		$judul1='Detail SP2D Gaji';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detailSp2dRekap_PDF');
+		}else{
+			$this->view->load('kppn/detailSp2dRekap_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
     //baru
-    public function sp2dRekap_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function sp2dRekap_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
 
         //untuk mencatat log user
@@ -3238,12 +3657,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        //var_dump($d_sppm->get_sp2d_rekap($filter));
-        $this->view->load('kppn/sp2dRekap_PDF');
+		//------------------------------------------------------------
+		$judul1='Rekap SP2D BO Pusat';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/sp2dRekap_PDF');
+		}else{
+			$this->view->load('kppn/sp2dRekap_XLS');
+		}
+		//------------------------------------------------------------
+
+		
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dCompareGaji_PDF($kdkppn = null,$kdtahun = null) {
+    public function sp2dCompareGaji_PDF($kdkppn = null,$kdtahun = null,$ck=null) {
         $d_sppm = new DataSppm($this->registry);
 
         //untuk mencatat log user
@@ -3251,10 +3679,8 @@ class PDFController extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
 		if ($kdtahun != 'null') {
-            
 			$this->view->kdtahun = $kdtahun;
 		}
-
 
         if (Session::get('role') == ADMIN) {
             if ($kdkppn != 'null') {
@@ -3286,9 +3712,7 @@ class PDFController extends BaseController {
 			if ($kdtahun != 'null') {
                 $tahun = $kdtahun;
             }
-            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn,$tahun);
-
-        
+            $this->view->data = $d_sppm->get_sp2d_gaji_bulan_lalu($kppn,$tahun);        
 		}
 
         //-------------------------
@@ -3319,15 +3743,23 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_sppm->get_table());
 
-        //var_dump($d_sppm->get_sppm_filter($filter));
+		//------------------------------------------------------------
+		$judul1='Perbandingan Gaji per Bulan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dGajiBulanLalu_PDF');
+		}else{
+			$this->view->load('kppn/sp2dGajiBulanLalu_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
 
 //------------------------------------------------------
 //Function PDF untuk DataReturController(DataReturController.php)
 //------------------------------------------------------
-    public function monitoringRetur_PDF($kdkppn = null, $kdnosp2d = null, $kdbarsp2d = null, $kdsatker = null, $kdbank = null, $kdstatus = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function monitoringRetur_PDF($kdkppn = null, $kdnosp2d = null, $kdbarsp2d = null, $kdsatker = null, $kdbank = null, $kdstatus = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_retur = new DataRetur($this->registry);
         $filter = array();
         $no = 0;
@@ -3416,14 +3848,22 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_retur->get_table());
 
-        //var_dump($d_sppm->get_sppm_filter($filter));
 
-        $this->view->load('kppn/daftarRetur_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring Retur SP2D';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/daftarRetur_PDF');
+		}else{
+			$this->view->load('kppn/daftarRetur_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function monitoringReturPkn_PDF($kdkppn = null, $kdbank = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function monitoringReturPkn_PDF($kdkppn = null, $kdbank = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_retur = new DataRetur($this->registry);
         $d_kppn_list = new DataUser($this->registry);
         $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
@@ -3488,9 +3928,17 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_retur->get_table());
 
-        //var_dump($d_sppm->get_sppm_filter($filter));
 
-        $this->view->load('kppn/daftarReturPKN_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring Penyelesaian Retur - PKN';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/daftarReturPKN_PDF');
+		}else{
+			$this->view->load('kppn/daftarReturPKN_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
@@ -3498,7 +3946,7 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataSPMController(DataSPMController.php)
 //------------------------------------------------------
-    public function posisiSpm_PDF($kdkppn = null) {
+    public function posisiSpm_PDF($kdkppn = null,$ck=null) {
         $d_spm1 = new DataHistSPM($this->registry);
         $filter = array();
         $no = 0;
@@ -3557,12 +4005,21 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_hist_spm_filter($filter);
 
-        $this->view->load('kppn/posisiSPM_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring Posisi Invoice';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/posisiSPM_PDF');
+		}else{
+			$this->view->load('kppn/posisiSPM_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function detailposisiSpm_PDF($invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null) {
+    public function detailposisiSpm_PDF($invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null,$ck=null) {
         $d_spm1 = new DataHistSPM($this->registry);
         $filter = array();
         $no = 0;
@@ -3601,12 +4058,21 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_hist_spm_filter($filter);
 
-        $this->view->load('kppn/detailposisiSPM_PDF');
+		//------------------------------------------------------------
+		$judul1='MONITORING POSISI INVOICE';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detailposisiSPM_PDF');
+		}else{
+			$this->view->load('kppn/detailposisiSPM_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function HoldSpm_PDF($kdkppn = null, $status = null,$invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null) {
+    public function HoldSpm_PDF($kdkppn = null, $status = null,$invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null,$ck=null) {
         $d_spm1 = new DataHoldSPM($this->registry);
         $filter = array();
         $no = 0;
@@ -3679,12 +4145,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 
-        $this->view->load('kppn/holdSPM_PDF');
+		//------------------------------------------------------------
+		$judul1='Hold Invoice';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/holdSPM_PDF');
+		}else{
+			$this->view->load('kppn/holdSPM_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function HistorySpm_PDF($invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null, $sp2d = null, $kdkppn = null) {
+    public function HistorySpm_PDF($invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null, $sp2d = null, $kdkppn = null,$ck=null) {
         $d_spm1 = new DataHistorySPM($this->registry);
         $filter = array();
         $invoice = '';
@@ -3767,13 +4242,21 @@ class PDFController extends BaseController {
 
 
         $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
-        $this->view->load('kppn/historySPM_PDF');
-		//$this->view->render('kppn/historySPM');
+		//------------------------------------------------------------
+		$judul1='Histori Invoice';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/historySPM_PDF');
+		}else{
+			$this->view->load('kppn/historySPM_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function daftarsp2d_PDF($kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null,$jendok = null, $check_number = null, $invoice = null, $JenisSP2D = null, $JenisSPM = null) {
+    public function daftarsp2d_PDF($kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null,$jendok = null, $check_number = null, $invoice = null, $JenisSP2D = null, $JenisSPM = null,$ck=null) {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
@@ -3868,17 +4351,35 @@ class PDFController extends BaseController {
 
         //var_dump($d_spm1->get_satker_filter($filter));
         if (Session::get('id_user') == 140) {
-            $this->view->load('kppn/SP2DSatker140_PDF');
+			//------------------------------------------------------------
+			$judul1='Daftar SP2D Satker';
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				$this->view->load('kppn/SP2DSatker140_PDF');
+			}else{
+				$this->view->load('kppn/SP2DSatker140_XLS');
+			}
+			//------------------------------------------------------------
+
             //untuk mencatat log user
             $d_log->tambah_log("Sukses");
         } else {
-            $this->view->load('kppn/SP2DSatker_PDF');
+			//------------------------------------------------------------
+			$judul1='Daftar SP2D Satker';
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				$this->view->load('kppn/SP2DSatker_PDF');
+			}else{
+				$this->view->load('kppn/SP2DSatker_XLS');
+			}
+			//------------------------------------------------------------
+
             //untuk mencatat log user
             $d_log->tambah_log("Sukses");
         }
     }
 
-    public function detailrekapsp2d1_PDF($jenis_spm = null, $kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function detailrekapsp2d1_PDF($jenis_spm = null, $kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
@@ -3947,12 +4448,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
-        $this->view->load('kppn/Rekap_PDF');
+		//------------------------------------------------------------
+		$judul1='Rekap SP2D atas SPM';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/Rekap_PDF');
+		}else{
+			$this->view->load('kppn/Rekap_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
 
-    public function ValidasiSpm_PDF($kdkppn = null, $filename = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function ValidasiSpm_PDF($kdkppn = null, $filename = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_spm1 = new DataValidasiUploadSPM($this->registry);
         $filter = array();
         $no = 0;
@@ -4038,12 +4548,22 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
+		//------------------------------------------------------------
+		$judul1='Daftar Penolakan PMRT';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/validasiuploadSPM_PDF');
+		}else{
+			$this->view->load('kppn/validasiuploadSPM_XLS');
+		}
+		//------------------------------------------------------------
+
+
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/validasiuploadSPM_PDF');
     }
 
-    public function DurasiSpm_PDF($kdkppn = null, $invoice = null, $jenisspm = null, $durasi = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdsatker = null) {
+    public function DurasiSpm_PDF($kdkppn = null, $invoice = null, $jenisspm = null, $durasi = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdsatker = null,$ck=null) {
         $d_spm1 = new DataDurasiSPM($this->registry);
         $filter = array();
         $no = 0;
@@ -4142,12 +4662,21 @@ class PDFController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
-        $this->view->load('kppn/DurasiSPM_PDF');
+		//------------------------------------------------------------
+		$judul1='Durasi Penyelesaian SP2D';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/DurasiSPM_PDF');
+		}else{
+			$this->view->load('kppn/DurasiSPM_XLS');
+		}
+		//------------------------------------------------------------
+
 
         $d_log->tambah_log("Sukses");
     }
 
-    public function nmsatkerSP2D_PDF($kdkppn = null, $kdsatker = null, $nmsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function nmsatkerSP2D_PDF($kdkppn = null, $kdsatker = null, $nmsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_spm1 = new DataNamaSatker($this->registry);
         $filter = array();
         $no = 0;
@@ -4228,11 +4757,21 @@ class PDFController extends BaseController {
             $this->view->data = $d_spm1->get_satker_filter($filter);
         }
 
-        $this->view->load('kppn/NamaSatker_PDF');
+		//------------------------------------------------------------
+		$judul1='Daftar SP2D per Satker';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/NamaSatker_PDF');
+		}else{
+			$this->view->load('kppn/NamaSatker_XLS');
+		}
+		//------------------------------------------------------------
+
+		
         $d_log->tambah_log("Sukses");
     }
 
-    public function RekapSp2d_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function RekapSp2d_PDF($kdkppn = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
@@ -4312,13 +4851,23 @@ class PDFController extends BaseController {
             $this->view->data = $d_spm1->get_sp2d_rekap_filter($filter);
         }
 
-        $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/RekapSP2D_PDF');
+		//------------------------------------------------------------
+		$judul1='Rekap Penerbitan SP2D';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/RekapSP2D_PDF');
+		}else{
+			$this->view->load('kppn/RekapSP2D_XLS');
+		}
+		//------------------------------------------------------------
+
+		$d_log->tambah_log("Sukses");
+
     }
 
     //BARU
-    public function errorSpm_PDF($file_name = null) {
+    public function errorSpm_PDF($file_name = null,$ck=null) {
         $d_spm1 = new DataUploadSPM($this->registry);
         $filter = array();
         $no = 0;
@@ -4364,14 +4913,22 @@ class PDFController extends BaseController {
 
 
         $this->view->data = $d_spm1->get_error_spm_filter($filter);
-        //var_dump($d_spm1->get_error_spm_filter ($filter));
 
-        $this->view->load('kppn/uploadSPM_PDF');
+		//------------------------------------------------------------
+		$judul1='Detail Alasan Penolakan PMRT';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/uploadSPM_PDF');
+		}else{
+			$this->view->load('kppn/uploadSPM_XLS');
+		}
+		//------------------------------------------------------------
+
 
         $d_log->tambah_log("Sukses");
     }
 	
-		public function KonversiSPM_PDF($kdkppn = null) {
+		public function KonversiSPM_PDF($kdkppn = null,$ck=null) {
         $d_spm1 = new DataADKKonversi($this->registry);
         $filter = array();
 		//$filter2 = array();
@@ -4438,14 +4995,22 @@ class PDFController extends BaseController {
 		$d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table());
 		
-        //var_dump($d_spm1->get_adk_konversi(filter));
+		//------------------------------------------------------------
+		$judul1='Daftar Invoice Hasil Konversi Yang Belum Di Proses di SPAN';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/KonversiSPM_PDF');
+		}else{
+			$this->view->load('kppn/KonversiSPM_XLS');
+		}
+		//------------------------------------------------------------
+
 		
 		$d_log->tambah_log("Sukses");
-        $this->view->load('kppn/KonversiSPM_PDF');
     }
 	
 	//10-02-2015
-		public function KarwasUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana = null) {
+		public function KarwasUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana = null,$ck=null) {
         $d_spm1 = new DataKarwasUP($this->registry);
         $filter = array();
 		//$filter2 = array();
@@ -4502,11 +5067,19 @@ class PDFController extends BaseController {
             $this->view->nm_kppn2 = Session::get('user');
         }
         //-------------------------
+		//------------------------------------------------------------
+		$judul1='Karwas UP';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/KarwasUPSatker_PDF');
+		}else{
+			$this->view->load('kppn/KarwasUPSatker_XLS');
+		}
+		//------------------------------------------------------------
+
 		
-        //var_dump($d_spm->get_hist_spm_filter());
 		
 		$d_log->tambah_log("Sukses");
-        $this->view->load('kppn/KarwasUPSatker_PDF');
     }
 	
 	public function UPSatker_PDF($kd_satker, $jendok) {
@@ -4565,16 +5138,23 @@ class PDFController extends BaseController {
             $this->view->nm_kppn2 = Session::get('user');
         }
         //-------------------------
+		//------------------------------------------------------------
+		$judul1='Daftar SPM UP/GU NIHIL';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/DetailUP_PDF');
+		}else{
+			$this->view->load('kppn/DetailUP_XLS');
+		}
+		//------------------------------------------------------------
 		
-        //var_dump($d_spm->get_hist_spm_filter());
 		
 		$d_log->tambah_log("Sukses");
-        //$this->view->render('kppn/DetailUP');
-		$this->view->load('kppn/DetailUP_PDF');
+
     }
 	
 	//14-02-2015
-public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana = null) {
+public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana = null,$ck=null) {
         $d_spm1 = new DataKarwasUP($this->registry);
         $filter = array();
 		//$filter2 = array();
@@ -4622,12 +5202,21 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$this->view->data1 = $d_spm1->get_karwas_tup_satker($filter);			
 			$this->view->data2 = $d_spm1->get_total_sisa_tup($filter);
         }	
+		//------------------------------------------------------------
+		$judul1='Karwas TUP Per Satker';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/KarwasTUPSatker_PDF');
+		}else{
+			$this->view->load('kppn/KarwasTUPSatker_XLS');
+		}
+		//------------------------------------------------------------
+
 		
 		$d_log->tambah_log("Sukses");
-        $this->view->load('kppn/KarwasTUPSatker_PDF');
     }
 	
-		public function TUPSatker_PDF($sumber_dana, $kd_satker, $tgl1 = null, $tgl2 = null) {
+		public function TUPSatker_PDF($sumber_dana, $kd_satker, $tgl1 = null, $tgl2 = null,$ck=null) {
         $d_spm1 = new DataKarwasUP($this->registry);
         $filter = array();
 		//$filter2 = array();
@@ -4668,18 +5257,25 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
 		
 		$this->view->data = $d_spm1->get_total_tup($filter);
+		//------------------------------------------------------------
+		$judul1='Daftar SPM TUP NIHIL';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/DetailTUP_PDF');
+		}else{
+			$this->view->load('kppn/DetailTUP_XLS');
+		}
+		//------------------------------------------------------------
+
 		
-        //var_dump($d_spm->get_hist_spm_filter());
 		
 		$d_log->tambah_log("Sukses");
-        $this->view->load('kppn/DetailTUP_PDF');
-         //$this->view->render('kppn/DetailTUP');
     }
 
     //------------------------------------------------------
     //Function PDF untuk DataPelimpahanController(daftarPelimpahan.php)
     //------------------------------------------------------
-    public function monitoringPelimpahan_PDF($kdkppn_anak = null, $kdkppn_induk = null, $kdstatus = null,$kdnorek= null, $kdtgl_awal = null, $kdtgl_akhir = null) {
+    public function monitoringPelimpahan_PDF($kdkppn_anak = null, $kdkppn_induk = null, $kdstatus = null,$kdnorek= null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_limpah = new DataPelimpahan($this->registry);
         $filter = array();
         $no = 0;
@@ -4767,8 +5363,16 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_limpah->get_table());
 
-        $this->view->load('kppn/daftarPelimpahan_PDF');
-		//$this->view->render('kppn/daftarPelimpahan');
+		//------------------------------------------------------------
+		$judul1='Monitoring Pelimpahan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/daftarPelimpahan_PDF');
+		}else{
+			$this->view->load('kppn/daftarPelimpahan_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
@@ -4777,7 +5381,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
     //Function PDF untuk DataSupplierController(DataSupplierController.php)
     //------------------------------------------------------
 //cekSupplier
-    public function cekSupplier_PDF($kdkppn = null, $kdtipesup = null, $kdnrs = null, $kdnamasupplier = null, $kdnpwpsupplier = null, $kdnip = null, $kdnamapenerima = null, $kdnorek = null, $kdnamarek = null, $kdnpwppenerima = null) {
+    public function cekSupplier_PDF($kdkppn = null, $kdtipesup = null, $kdnrs = null, $kdnamasupplier = null, $kdnpwpsupplier = null, $kdnip = null, $kdnamapenerima = null, $kdnorek = null, $kdnamarek = null, $kdnpwppenerima = null,$ck=null) {
         $d_supp = new DataSupplier($this->registry);
         $filter = array();
         $no = 0;
@@ -4868,7 +5472,17 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_supp->get_table());
 
-        $this->view->load('satker/isianSupplier_PDF');
+		//------------------------------------------------------------
+		$judul1='Cek Data Supplier';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('satker/isianSupplier_PDF');
+		}else{
+			$this->view->load('satker/isianSupplier_XLS');
+		}
+		//------------------------------------------------------------
+
+		
         $d_log->tambah_log("Sukses");
     }
 
@@ -4878,7 +5492,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
     //------------------------------------------------------
     //Function PDF untuk UserSpanController(UserSpanController.php)
     //------------------------------------------------------
-    public function monitoringUserSpan_PDF($kdkppn = null, $kdnip = null) {   //nama function
+    public function monitoringUserSpan_PDF($kdkppn = null, $kdnip = null,$ck=null) {   //nama function
         $d_user = new DataUserSPAN($this->registry); //model
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
@@ -4931,7 +5545,16 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 
-        $this->view->load('kppn/monitoringUser_PDF');
+		//------------------------------------------------------------
+		$judul1='Monitoring User Aktif';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/monitoringUser_PDF');
+		}else{
+			$this->view->load('kppn/monitoringUser_XLS');
+		}
+		//------------------------------------------------------------
+
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
@@ -4939,7 +5562,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
     //------------------------------------------------------
     //Function PDF untuk DataPNBPController(DataPNBPController.php)
     //------------------------------------------------------
-    public function KarwasPNBP_PDF($kdkppn = null, $kdppp = null, $kdsatker = null) {
+    public function KarwasPNBP_PDF($kdkppn = null, $kdppp = null, $kdsatker = null,$ck=null) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -5001,15 +5624,23 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
             $this->view->nm_kppn2 = Session::get('user');
         }
         //-------------------------
-        //var_dump($d_spm->get_hist_spm_filter());
+		//------------------------------------------------------------
+		$judul1='Karwas Maksimum Pencairan (PNBP)';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/karwasPNBP_PDF');
+		}else{
+			$this->view->load('kppn/karwasPNBP_XLS');
+		}
+		//------------------------------------------------------------
+
 
         $d_log->tambah_log("Sukses");
 
 
-        $this->view->load('kppn/karwasPNBP_PDF');
     }
 
-    public function DetailDipaPNBP_PDF($kdakun = null, $kdsatker = null) {
+    public function DetailDipaPNBP_PDF($kdakun = null, $kdsatker = null,$ck=null) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -5054,13 +5685,22 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
         $this->view->data = $d_spm1->get_pnbp_dipa_line($filter);
+		//------------------------------------------------------------
+		$judul1='Form Pengawasan PNBP - Pagu Dipa PNBP';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detail_dipa_pnbp_PDF');
+		}else{
+			$this->view->load('kppn/detail_dipa_pnbp_XLS');
+		}
+		//------------------------------------------------------------
+
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/detail_dipa_pnbp_PDF');
     }
 
-    public function DetailGRPNBP_PDF($kdakun = null, $kdsatker = null) {
+    public function DetailGRPNBP_PDF($kdakun = null, $kdsatker = null,$ck=null) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -5109,13 +5749,23 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+       
+		//------------------------------------------------------------
+		$judul1='Form Pengawasan PNBP - Penerimaan PNBP';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detail_gr_pnbp_PDF');
+		}else{
+			$this->view->load('kppn/detail_gr_pnbp_XLS');
+		}
+		//------------------------------------------------------------
+
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/detail_gr_pnbp_PDF');
     }
 
-    public function DetailUPPNBP_PDF($kdakun = null, $kdsatker = null) {
+    public function DetailUPPNBP_PDF($kdakun = null, $kdsatker = null,$ck=null) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -5164,13 +5814,22 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+       
+		//------------------------------------------------------------
+			$judul1='Form Pengawasan PNBP - UP PNBP';
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				$this->view->load('kppn/detail_up_pnbp_PDF');
+			}else{
+				$this->view->load('kppn/detail_up_pnbp_XLS');
+			}
+			//------------------------------------------------------------
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/detail_up_pnbp_PDF');
     }
 
-    public function DetailBelanjaPNBP_PDF($kdakun = null, $kdsatker = null) {
+    public function DetailBelanjaPNBP_PDF($kdakun = null, $kdsatker = null,$ck=null) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -5226,7 +5885,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $this->view->load('kppn/detail_belanja_pnbp_PDF');
     }
 
-    public function DetailSetoranUPPNBP_PDF($kdakun = null, $kdsatker = null) {
+    public function DetailSetoranUPPNBP_PDF($kdakun = null, $kdsatker = null,$ck=null) {
         $d_spm1 = new DataPNBP($this->registry);
         $filter = array();
         $no = 0;
@@ -5275,10 +5934,20 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+       
+		//------------------------------------------------------------
+		$judul1='Form Pengawasan PNBP - Setoran UP/TUP PNBP';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/detail_setoran_up_pnbp_PDF');
+		}else{
+			$this->view->load('kppn/detail_setoran_up_pnbp_XLS');
+		}
+		//------------------------------------------------------------
+
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/detail_setoran_up_pnbp_PDF');
     }
 	
 	//------------------------------------------------------
@@ -5339,13 +6008,22 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		$this->view->data = $d_spm1->get_rekap_sp3b($filter);
+		//------------------------------------------------------------
+		$judul1='Monitoring SP3B BLU Tahunan';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('blu/karwasBLU_PDF');
+		}else{
+			$this->view->load('blu/karwasBLU_XLS');
+		}
+		//------------------------------------------------------------
+
 		
 		$d_log->tambah_log("Sukses");
 		
-		$this->view->load('blu/karwasBLU_PDF');
     }
 	
-	public function DaftarSP3_PDF($bulan=null, $satker=null, $kdkppn=null, $kdsatker=null) {
+	public function DaftarSP3_PDF($bulan=null, $satker=null, $kdkppn=null, $kdsatker=null,$ck=null) {
         $d_spm1 = new DataBLU($this->registry);
         $filter = array();
         $no = 0;
@@ -5411,12 +6089,23 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->data = $d_spm1->get_daftar_sp3b($filter);
 		$this->view->data1 = $d_spm1->get_kdsatker_blu($satker);
 		
+		//------------------------------------------------------------
+		$judul1='Daftar SP3B';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('blu/daftarSP3_PDF');
+		}else{
+			$this->view->load('blu/daftarSP3_XLS');
+		}
+		//------------------------------------------------------------
+
+		
+		
 		$d_log->tambah_log("Sukses");
-		$this->view->load('blu/daftarSP3_PDF');
     }
 
 	
-	public function CariSP3B_PDF($kdsatker=null, $kd_tgl_awal=null, $kd_tgl_akhir=null, $kdinvoice4=null) {
+	public function CariSP3B_PDF($kdsatker=null, $kd_tgl_awal=null, $kd_tgl_akhir=null, $kdinvoice4=null,$ck=null) {
         $d_spm1 = new DataBLU($this->registry);
         $filter = array();
         $no = 0;
@@ -5482,12 +6171,21 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] = "KDKPPN = '" . Session::get('id_user')."'";			
         }
 		
+		//------------------------------------------------------------
+		$judul1='Cari SP3B BLU';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('blu/cariSP3_PDF');
+		}else{
+			$this->view->load('blu/cariSP3_XLS');
+		}
+		//------------------------------------------------------------
+
 		
 		$d_log->tambah_log("Sukses");
-		$this->view->load('blu/cariSP3_PDF');
     }
 	
-	public function DataRealisasiBLU_PDF($kdsatker=null, $kdsumberdana=null, $kdrumpun=null) {
+	public function DataRealisasiBLU_PDF($kdsatker=null, $kdsumberdana=null, $kdrumpun=null,$ck=null) {
         $d_spm1 = new DataBLU($this->registry);
         $filter = array();
         $no = 0;
@@ -5552,14 +6250,20 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
         $this->view->data = $d_spm1->get_realisasi_blu($filter);
 
-        //$d_last_update = new DataLastUpdate($this->registry);
-        //$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		//------------------------------------------------------------
+		$judul1='Realisasi Belanja Per Satker BLU';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('blu/RealisasiBLU_PDF');
+		}else{
+			$this->view->load('blu/RealisasiBLU_XLS');
+		}
+		//------------------------------------------------------------
 
         $d_log->tambah_log("Sukses");
-		$this->view->load('blu/RealisasiBLU_PDF');
     }
 	
-		public function DataRealisasiBelanjaBLU_PDF($kdsatker=null, $kdsumberdana=null, $kdrumpun=null) {
+		public function DataRealisasiBelanjaBLU_PDF($kdsatker=null, $kdsumberdana=null, $kdrumpun=null,$ck=null) {
         $d_spm1 = new DataBLU($this->registry);
         $filter = array();
         $no = 0;
@@ -5623,20 +6327,25 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         //----------------------------------------------------
         $this->view->data = $d_spm1->get_realisasi_belanja_blu($filter);
-
-        //$d_last_update = new DataLastUpdate($this->registry);
-        //$this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		//------------------------------------------------------------
+		$judul1='Realisasi Belanja 525 Per Ssatker BLU';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('blu/RealisasiBelanjaBLU_PDF');
+		}else{
+			$this->view->load('blu/RealisasiBelanjaBLU_XLS');
+		}
+		//------------------------------------------------------------
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('BLU/RealisasiBelanjaBLU_PDF');
     }
 	
 	//-------------------------------------------------------
 		//------------------------------------------------------
     //Function PDF untuk DataPMRTPKNController(DataPMRTPKNController.php)
 	//------------------------------------------------------
-    public function DataSPMAkhirTahun_PDF($kdkppn = null,$kdjudul = null) {
+    public function DataSPMAkhirTahun_PDF($kdkppn = null,$kdjudul = null,$ck=null) {
         $d_pmrtpkn = new DataPMRTPKN($this->registry);
         $filter = array();
         $no = 0;
@@ -5692,12 +6401,22 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
 
-		$this->view->load('kppn/daftarPmrtPkn_PDF');
+		//------------------------------------------------------------
+		$judul1='SPM Akhir Tahun';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/daftarPmrtPkn_PDF');
+		}else{
+			$this->view->load('kppn/daftarPmrtPkn_XLS');
+		}
+		//------------------------------------------------------------
+
+		
         $d_log->tambah_log("Sukses");
     }
 
     
-    public function DataSPMAkhirTahunNihil_PDF($kdkppn = null,$kdjudul = null) {
+    public function DataSPMAkhirTahunNihil_PDF($kdkppn = null,$kdjudul = null,$ck=null) {
         $d_pmrtpkn = new DataPMRTPKN($this->registry);
         $filter = array();
         $no = 0;
@@ -5752,12 +6471,21 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
 
-		$this->view->load('kppn/daftarPmrtPkn_PDF');
+		//------------------------------------------------------------
+		$judul1='Daftar PMRT PKN';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/daftarPmrtPkn_PDF');
+		}else{
+			$this->view->load('kppn/daftarPmrtPkn_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
     
     
-    public function DataSPMAkhirTahunBUN_PDF($kdkppn = null,$kdjudul = null) {
+    public function DataSPMAkhirTahunBUN_PDF($kdkppn = null,$kdjudul = null,$ck=null) {
         $d_pmrtpkn = new DataPMRTPKN($this->registry);
         $filter = array();
         $no = 0;
@@ -5813,7 +6541,16 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_pmrtpkn->get_table1());
 
-        $this->view->load('kppn/daftarPmrtPkn_PDF');
+		//------------------------------------------------------------
+		$judul1='Daftar PMRT PKN';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/daftarPmrtPkn_PDF');
+		}else{
+			$this->view->load('kppn/daftarPmrtPkn_XLS');
+		}
+		//------------------------------------------------------------
+
         $d_log->tambah_log("Sukses");
     }
     
