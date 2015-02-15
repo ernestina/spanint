@@ -266,55 +266,6 @@ class homeController extends BaseController {
         
         return $return;
 
-        /*$summary_result = (object) 'Test';
-        
-        $summary_result->nama_unit = $kodeunit;
-        $summary_result->nama_lengkap_unit = $d_dashboard->get_nama_unit($kodeunit);
-
-        if ($kodeunit[0] != 'K') {
-
-            //Rekap SP2D
-            $unitfilter = " KDKPPN = '" . $kodeunit . "' ";
-            $summary_result->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap(1, $unitfilter);
-
-            //Rekap Retur
-            $returfilter = " KDKPPN = '" . $kodeunit . "' ";
-            $summary_result->data_retur = $d_dashboard->get_sp2d_retur($returfilter);
-
-            //Rekap LHP
-            $lhpfilter = " KPPN='" . $kodeunit . "' ";
-            $summary_result->data_lhp_rekap = $d_dashboard->get_lhp_rekap_tanggal($tanggal_lhp, $lhpfilter);
-
-            //SPM dalam proses
-            $filter_pos_spm = array();
-            $filter_pos_spm[1] = "KDKPPN = '" . $kodeunit . "'";
-            $summary_result->data_pos_spm = $d_dashboard->get_hist_spm_count($filter_pos_spm);
-            
-            return $summary_result;
-
-        } else {
-
-            //Rekap SP2D
-            $unitfilter = " KDKPPN in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "')  ";
-            $summary_result->data_sp2d_rekap = $d_dashboard->get_sp2d_rekap(1, $unitfilter);
-
-            //Rekap Retur
-            $returfilter = " KDKPPN in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
-            $summary_result->data_retur = $d_dashboard->get_sp2d_retur($returfilter);
-
-            //Rekap LHP
-            $lhpfilter = " KPPN in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
-            $summary_result->data_lhp_rekap = $d_dashboard->get_lhp_rekap_tanggal($tanggal_lhp, $lhpfilter);
-
-            //SPM dalam proses
-            $filter_pos_spm = array();
-            $filter_pos_spm[1] = "KDKPPN in (select kdkppn from t_kppn where kdkanwil='" . substr($kodeunit, 1, 2) . "') ";
-            $summary_result->data_pos_spm = $d_dashboard->get_hist_spm_count($filter_pos_spm);
-            
-            return $summary_result;
-
-        }*/
-
     }
 
     private function lineHistSP2D($periode, $kodeunit = null) {

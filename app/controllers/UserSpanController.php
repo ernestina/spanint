@@ -76,8 +76,39 @@ class UserSpanController extends BaseController {
             }
         }
         if (isset($this->view->d_nip)) {
-            $this->view->page_subtitle  .= "NIP : " . $this->view->d_nip;
+            $this->view->page_subtitle  .= "NIP: " . $this->view->d_nip;
         }
+
+        //PDF & XLS 
+        if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+            if (isset($this->view->d_kd_kppn) || isset($this->view->d_nip)) {
+                if (isset($this->view->d_kd_kppn)) {
+                    $kdkppn = $this->view->d_kd_kppn;
+                } else {
+                    $kdkppn = 'null';
+                }
+                if (isset($this->view->d_nip)) {
+                    $kdnip = $this->view->d_nip;
+                } else {
+                    $kdnip = 'null';
+                }
+            }
+        }
+        if (Session::get('role') == KPPN) {
+            if (isset($this->view->d_kd_kppn)) {
+                $kdkppn = $this->view->d_kd_kppn;
+            } else {
+                $kdkppn = Session::get('id_user');
+            }
+            if (isset($this->view->d_nip)) {
+                $kdnip = $this->view->d_nip;
+            } else {
+                $kdnip = 'null';
+            }
+        }
+        
+        $this->view->pdf_url = URL . 'PDF/monitoringUserSpan_PDF/' . $kdkppn . '/' . $kdnip . '/PDF';
+        $this->view->xls_url = URL . 'PDF/monitoringUserSpan_PDF/' . $kdkppn . '/' . $kdnip . '/PDF';
         
         //Konfigurasi Tabel
         $this->view->table_config = 'numbered';
