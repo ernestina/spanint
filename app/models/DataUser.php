@@ -84,6 +84,26 @@ class DataUser {
         return $data;
     }
 
+    public function get_kl_es1($kd_dept = null) {
+        $sql = "SELECT kd_unit, nama_user FROM " . $this->_table . " WHERE  ";
+        if (!is_null($kd_dept)) {
+            $sql .= " kd_dept='" . $kd_dept . "' AND";
+        }
+        $sql .= " KD_R_JENIS = '12' ORDER BY KD_UNIT";
+        $result = $this->db->select($sql);
+        $data = array();
+        // var_dump($sql);
+        foreach ($result as $val) {
+            $d_user = new $this($this->registry);
+            $d_user->set_kd_unit($val['KD_UNIT']);
+            $d_user->set_nama_user($val['NAMA_USER']);
+
+            $data[] = $d_user;
+        }
+        //var_dump($data);
+        return $data;
+    }
+
 	//untuk mengambil kppn induk dari t_limpah
     public function get_induk_limpah($kd_kanwil=null) {
 		if ($kd_kanwil!=''){
