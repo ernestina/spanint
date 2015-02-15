@@ -752,6 +752,32 @@
 
                     </ul>
 
+                <?php elseif (Session::get('role') == KL): ?>
+                    
+                    
+                    <!--//////////////////////////////////////// --> 
+                    <!--/////////////// Header KL /////////// -->  
+                    <!--//////////////////////////////////////// --> 
+
+                    <ul>
+
+                        <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+
+                    </ul>
+
+                <?php elseif (Session::get('role') == ES1): ?>
+                    
+                    
+                    <!--//////////////////////////////////////// --> 
+                    <!--/////////////// Header ES1 /////////// -->  
+                    <!--//////////////////////////////////////// --> 
+
+                    <ul>
+
+                        <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+
+                    </ul>
+
                 <?php endif; ?>
 
             </div>
