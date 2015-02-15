@@ -14,7 +14,18 @@ class Bootstrap {
         $this->registry = $registry;
         Session::createSession();
         $logged = Session::get('loggedin');
-        $this->role = ($logged) ?   (Session::get('role') == ADMIN ? 'admin' : (Session::get('role') == KPPN ? 'kppn' : (Session::get('role') == PKN ? 'pkn' : (Session::get('role') == KANWIL ? 'kanwil' : (Session::get('role') == DJA ? 'dja' :  (Session::get('role') == BLU ? 'blu' : (Session::get('role') == SATKER ? 'satker' :(Session::get('role') == BANK ? 'bank' : 'guest')))))))) : 'guest';
+        $this->role = ($logged) ?   
+            (Session::get('role') == ADMIN ? 'admin' : 
+            (Session::get('role') == KPPN ? 'kppn' : 
+            (Session::get('role') == PKN ? 'pkn' : 
+            (Session::get('role') == KANWIL ? 'kanwil' : 
+            (Session::get('role') == DJA ? 'dja' :  
+            (Session::get('role') == BLU ? 'blu' : 
+            (Session::get('role') == SATKER ? 'satker' :
+            (Session::get('role') == BANK ? 'bank' :
+            (Session::get('role') == KL ? 'kl' :
+            (Session::get('role') == ES1 ? 'es1' :
+             'guest')))))))))) : 'guest';
     }
 
     /*

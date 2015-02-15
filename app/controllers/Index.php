@@ -29,6 +29,10 @@ class Index extends BaseController {
             header('location:' . URL . 'home');
         } elseif (Session::get('role') == BANK) {
             header('location:' . URL . 'dataDroping/monitoringDroping');
+        } elseif (Session::get('role') == KL) {
+            header('location:' . URL . 'home');
+        } elseif (Session::get('role') == ES1) {
+            header('location:' . URL . 'home');
         } else {
             header('location:' . URL . 'auth/login');
         }

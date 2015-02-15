@@ -517,7 +517,7 @@ class DataGRController extends BaseController {
             $filter[$no++] = "SUBSTR(RESP_NAME,1,3) = '" . Session::get('id_user') . "'";
         }
 
-        if (Sntpn != '') {
+        if ($ntpn != '') {
 
             $filter[$no++] = "NTPN = '" . $ntpn . "'";
         }
