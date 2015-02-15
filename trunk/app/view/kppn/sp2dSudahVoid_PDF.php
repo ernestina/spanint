@@ -405,7 +405,10 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring SP2D Void'; //judul file laporan
+//judul laporan
+$judul1= $this->judul1;
+$judul = 'Laporan '.$judul1; //judul file laporan
+
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 

@@ -404,7 +404,9 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-$judul = 'Laporan Monitoring SP2D terbit di atas jam 3 tertanggal hari yang sama'; //judul file laporan
+//judul laporan
+$judul1= $this->judul1;
+$judul = 'Laporan '.$judul1; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 

@@ -561,13 +561,10 @@ if (is_array($this->nm_kppn2)) {
 $nmkppn4=$this->d_nama_kppn;
 
 //--------------------------
-//pilihan
-if (Session::get('role') == KPPN){
-	$judul = 'Laporan Monitoring Status LHP per KPPN'; //judul file laporan
-}else{
-	$judul = 'Laporan Monitoring Status LHP'; //judul file laporan
-} 
-	//$judul = 'Laporan Monitoring Status LHP'; //judul file laporan
+	
+	//judul laporan
+$judul1= $this->judul1;
+$judul = 'Laporan '.$judul1; //judul file laporan
 
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
