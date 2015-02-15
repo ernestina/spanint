@@ -58,6 +58,12 @@ class AuthController extends BaseController {
                 case 8:
                     $role = 'bank';
                     break;
+                case 11:
+                    $role = 'kl';
+                    break;
+                case 12:
+                    $role = 'es1';
+                    break;
                 default:
                     $role = 'guest';
             }
@@ -69,9 +75,10 @@ class AuthController extends BaseController {
                 Session::set('role', $role);
                 Session::set('id_user', $res[3]);
                 Session::set('kd_satker', $res[4]);
+                Session::set('kd_baes1', $res[5]);
                 Session::set('ta', $ta);
 				$d_log->tambah_log("Sukses");
-                //var_dump(Session::get('ta'));
+                //var_dump(Session::get('kd_baes1'));
                 header('location:' . URL);
             } else if ((int) $res[0] == 0) {
                 $this->view->error = "user tidak ditemukan!";

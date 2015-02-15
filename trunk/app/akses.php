@@ -15,4 +15,6 @@ include 'aksesKanwil.php';
 include 'aksesDJA.php';
 include 'aksesBLU.php';
 include 'aksesBank.php';
+include 'aksesKL.php';
+include 'aksesES1.php';
 ?>

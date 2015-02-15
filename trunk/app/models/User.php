@@ -23,7 +23,7 @@ class User {
     }
 
     public function login($username, $password) {
-        $sql = "SELECT KD_R_JENIS,NAMA_USER,KD_D_KPPN,KD_SATKER FROM " . $this->_table2 . " WHERE KD_SATKER = '" . $username . "' AND SHA256 = '" . $password . "'";
+        $sql = "SELECT KD_R_JENIS,NAMA_USER,KD_D_KPPN,KD_SATKER,KD_DEPT,KD_UNIT FROM " . $this->_table2 . " WHERE KD_SATKER = '" . $username . "' AND SHA256 = '" . $password . "'";
         $result = $this->_db->select($sql);
         //var_dump($sql);
         //var_dump($result);
@@ -34,6 +34,8 @@ class User {
             $kd = $v['NAMA_USER'];
             $id = $v['KD_D_KPPN'];
             $satker = $v['KD_SATKER'];
+            $dept = $v['KD_DEPT'];
+            $unit = $v['KD_UNIT'];
         }
 
         //$return[] = 1;
@@ -46,6 +48,7 @@ class User {
         $return[] = $kd;
         $return[] = $id;
         $return[] = $satker;
+        $return[] = $dept.$unit;
         return $return;
     }
 
