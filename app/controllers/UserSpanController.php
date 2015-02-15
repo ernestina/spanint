@@ -40,19 +40,21 @@ class UserSpanController extends BaseController {
                 $filter[] = " USER_NAME = '" . $_POST['nip'] . "'";
                 $this->view->d_nip = $_POST['nip'];
             }
-            $this->view->data = $d_user->get_user_filter($filter);
+            
+            $this->data = $d_user->get_user_filter($filter);
+            
         }
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+            $kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+            $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = " KDKPPN = " . Session::get('id_user');
-            $this->view->data = $d_user->get_user_filter($filter);
+            $this->data = $d_user->get_user_filter($filter);
         }
         
         // untuk mengambil data last update 
@@ -61,7 +63,59 @@ class UserSpanController extends BaseController {
 
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
-        $this->view->render('kppn/monitoringUser');
+        
+        //Konfigurasi Template
+        //Judul dan Subjudul
+        $this->view->page_title = 'Monitoring User Aktif';
+        $this->view->page_subtitle = '';
+        
+        if (isset($this->view->d_nama_kppn)) {
+            foreach ($this->view->d_nama_kppn as $kppn) {
+                $this->view->page_subtitle = $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ") <br>";
+                $kode_kppn = $kppn->get_kd_satker();
+            }
+        }
+        if (isset($this->view->d_nip)) {
+            $this->view->page_subtitle  .= "NIP : " . $this->view->d_nip;
+        }
+        
+        //Konfigurasi Tabel
+        $this->view->table_config = 'numbered';
+        
+        //Kolom dan Konfigurasi Kolom
+        $this->view->table_columns = array();
+        
+        $this->view->table_columns[] = (object) array('title' => 'Nama', 'config' => 'align-left');
+        $this->view->table_columns[] = (object) array('title' => 'User Name', 'config' => 'align-center');
+        $this->view->table_columns[] = (object) array('title' => 'NIP', 'config' => 'align-center');
+        $this->view->table_columns[] = (object) array('title' => 'Posisi', 'config' => 'align-center');
+        $this->view->table_columns[] = (object) array('title' => 'E-Mail Depkeu', 'config' => 'align-center');
+        $this->view->table_columns[] = (object) array('title' => 'Tanggal Mulai Aktif', 'config' => 'align-center');
+        $this->view->table_columns[] = (object) array('title' => 'Tanggal Berakhir', 'config' => 'align-center');
+        
+        //Baris
+        $this->view->table_rows = array();
+        if (isset($this->data)) {
+            foreach ($this->data as $value) {
+                $this->view->table_rows[] = array($value->get_last_name(), $value->get_user_name(), $value->get_attribute1(), $value->get_name(),
+                                                  $value->get_email_address(), $value->get_start_date(), $value->get_end_date()); 
+            }
+        }
+        
+        //Filter dan Konfigurasi Filter
+        $this->view->filters = array();
+        
+        //KPPN
+        $options = array();
+        foreach ($kppn_list as $value1) {
+            $options[] = (object) array('value' => $value1->get_kd_d_kppn(), 'text' => $value1->get_kd_d_kppn() . ' | ' . $value1->get_nama_user());   
+        }
+        $this->view->filters[] = (object) array('label' => 'KPPN', 'name' => 'kdkppn', 'type' => 'select', 'options' => $options);
+        
+        //NIP
+        $this->view->filters[] = (object) array('label' => 'NIP', 'name' => 'nip', 'type' => 'number', 'size' => '18');
+        
+        $this->view->render('Template-Default');
     }
 
     public function __destruct() {
