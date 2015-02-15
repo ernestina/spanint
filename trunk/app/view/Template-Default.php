@@ -5,15 +5,23 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-lg-10 col-md-6 col-sm-12">
+            <div class="col-lg-9 col-md-6 col-sm-12">
                 <h2><?php echo $this->page_title; ?></h2>
             </div>
-
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
-
+            
+            <div class="col-lg-1 col-md-2 col-sm-12 top-padded">
+                <?php if (isset($this->xls_url)) { ?>
+                <a href="<?php echo ($this->xls_url); ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> XLS</a>
+                <?php } ?>
             </div>
 
-            <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+            <div class="col-lg-1 col-md-2 col-sm-12 top-padded">
+                <?php if (isset($this->pdf_url)) { ?>
+                <a href="<?php echo ($this->pdf_url); ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                <?php } ?>
+            </div>
+
+            <div class="col-lg-1 col-md-2 col-sm-12 top-padded">
                 <?php if (isset($this->filters)) { ?>
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 <?php } ?>
