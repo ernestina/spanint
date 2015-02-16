@@ -10,6 +10,8 @@ class DataNamaSatker {
     private $db;
     private $_kdsatker;
     private $_nmsatker;
+	private $_nmes1;
+	private $_nmba;
     private $_kppn;
     private $_rev;
     private $_tgl_rev;
@@ -85,7 +87,8 @@ class DataNamaSatker {
         Session::get('id_user');
         $sql = "SELECT *
 				FROM "
-                . $this->_table4 . " WHERE 1=1 ";
+                . $this->_table4 . 						
+				" WHERE 1=1 ";
 
         $no = 0;
         foreach ($filter as $filter) {
@@ -108,6 +111,43 @@ class DataNamaSatker {
         }
         return $data;
     }
+	
+	public function get_baes1_dipa_filter($filter) {
+        Session::get('id_user');
+        $sql = "SELECT A.*, C.NMES1, D.NMBA
+				FROM "
+                . $this->_table4 . " A, 
+				T_SATKER B ,
+				T_ESELON1 C,
+				T_BA D
+				 WHERE
+				A.KDSATKER = B.KDSATKER
+				AND B.BA = D.KDBA
+				AND B.BAES1 = C.KDES1";
+
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        $sql .= " ORDER BY a.kppn_code,a.rev desc";
+        //var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdsatker($val['KDSATKER']);
+            $d_data->set_nmsatker($val['NMSATKER']);
+			$d_data->set_nmes1($val['NMES1']);
+			$d_data->set_nmba($val['NMBA']);
+            $d_data->set_kppn($val['KPPN_CODE']);
+            $d_data->set_rev($val['REV']);
+            $d_data->set_tgl_rev($val['TANGGAL_POSTING_REVISI']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
 
     /*
      * setter
@@ -115,6 +155,12 @@ class DataNamaSatker {
 
     public function set_nmsatker($nmsatker) {
         $this->_nmsatker = $nmsatker;
+    }
+	public function set_nmes1($nmes1) {
+        $this->_nmes1 = $nmes1;
+    }
+	public function set_nmba($nmba) {
+        $this->_nmba = $nmba;
     }
 
     public function set_rev($rev) {
@@ -143,6 +189,12 @@ class DataNamaSatker {
 
     public function get_nmsatker() {
         return $this->_nmsatker;
+    }
+	public function get_nmes1() {
+        return $this->_nmes1;
+    }
+	public function get_nmba() {
+        return $this->_nmba;
     }
 
     public function get_rev() {

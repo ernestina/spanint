@@ -758,7 +758,26 @@
                     <ul>
 
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
-
+						<li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Informasi DIPA</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/nmsatker">Informasi DIPA Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/ProsesRevisi">Informasi DIPA Dalam Proses Revisi</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+						
+						
+						<li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Data Realisasi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunBA">Per Jenis Belanja</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Per Jenis Kewenangan</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
 
                 <?php elseif (Session::get('role') == ES1): ?>
@@ -771,7 +790,24 @@
                     <ul>
 
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
-
+						<li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Informasi DIPA</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/nmsatker">Informasi DIPA Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/ProsesRevisi">Informasi DIPA Dalam Proses Revisi</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Data Realisasi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Per Jenis Belanja</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Per Jenis Kewenangan</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
 
                 <?php endif; ?>
