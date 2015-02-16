@@ -353,7 +353,7 @@
 
                     <ul>
 
-                        <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+                        <!--<li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
                         
                         <li class="subnav"><h4><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Persiapan Rollout</h4>
                             <div class="collapse">
@@ -363,7 +363,7 @@
                                     <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Download Aplikasi Rekonsiliasi</a></li>
                                 </ul>
                             </div>
-                        </li>
+                        </li>-->
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
                             <div class="collapse">
@@ -491,11 +491,7 @@
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPGLR00258">Laporan Arus Kas Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPGLR00264">Laporan Realisasi Anggaran Tingkat KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>pelaporan/downloadLaporanKPPN/SPCMR00051">Laporan Konsolidasi Saldo Kas KPPN</a></li>
-									<?php if (false){
-									echo '<!--<li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Unduh Data Pagu</a>
-                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Unduh Data Realisasi</a>
-                                    <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Unduh Tool Rekonsiliasi</a>-->';
-									}?>
+									
                                 </ul>
                             </div>
                         </li>
