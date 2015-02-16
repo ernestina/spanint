@@ -470,51 +470,21 @@
 
     function hideWarning() {
 
+        $('#spm').keyup(function() {
+            if (document.getElementById('spm').value != '') {
+                $('#wspm').fadeOut(200);
+            }
+        });
+
         $('#nosp2d').keyup(function() {
             if (document.getElementById('nosp2d').value != '') {
                 $('#wsp2d').fadeOut(200);
             }
         })
 
-        $('#barsp2d').keyup(function() {
-            if (document.getElementById('barsp2d').value != '') {
-                $('#wbarsp2d').fadeOut(200);
-            }
-        });
-
         $('#kdsatker').keyup(function() {
             if (document.getElementById('kdsatker').value != '') {
                 $('#wsatker').fadeOut(200);
-            }
-        });
-
-        $('#invoice').keyup(function() {
-            if (document.getElementById('invoice').value != '') {
-                $('#winvoice').fadeOut(200);
-            }
-        });
-
-        $('#vendor_name').keyup(function() {
-            if (document.getElementById('vendor_name').value != '') {
-                $('#wvendor_name').fadeOut(200);
-            }
-        });
-
-        $('#bank').change(function() {
-            if (document.getElementById('bank').value != '') {
-                $('#wbank').fadeOut(200);
-            }
-        });
-
-        $('#status').change(function() {
-            if (document.getElementById('status').value != '') {
-                $('#wstatus').fadeOut(200);
-            }
-        });
-
-        $('#bayar').change(function() {
-            if (document.getElementById('bayar').value != '') {
-                $('#wbayar').fadeOut(200);
             }
         });
 
@@ -534,39 +504,20 @@
 
     function cek_upload() {
 
-        document.getElementById('invoice').value = document.getElementById('invoice').value.replace(/</g, '').replace(/>/g, '');
+        //document.getElementById('spm').value = document.getElementById('spm').value.replace(/</g, '').replace(/>/g, '');
 
         var pattern = '^[0-9]+$';
+        var v_spm = document.getElementById('spm').value;
         var v_nosp2d = document.getElementById('nosp2d').value;
-        var v_barsp2d = document.getElementById('barsp2d').value;
         var v_kdsatker = document.getElementById('kdsatker').value;
-        var v_invoice = document.getElementById('invoice').value;
-        var v_vendor_name = document.getElementById('vendor_name').value;
-        var v_bank = document.getElementById('bank').value;
-        var v_status = document.getElementById('status').value;
-        var v_bayar = document.getElementById('bayar').value;
         var v_tglawal = document.getElementById('tgl_awal').value;
         var v_tglakhir = document.getElementById('tgl_akhir').value;
 
         var jml = 0;
-        if (v_nosp2d == '' && v_barsp2d == '' && v_kdsatker == '' && v_invoice == '' && v_vendor_name == '' && v_bank == '' && v_status == '' && v_bayar == '' && (v_tglawal == '' || v_tglakhir == '')) {
-            $('#wsp2d').html('Harap isi salah satu parameter');
-            $('#wsp2d').fadeIn();
+        if (v_spm == '' && v_nosp2d == ''  && v_kdsatker == '' && (v_tglawal == '' || v_tglakhir == '')) {
+            $('#wspm').html('Harap isi salah satu parameter');
+            $('#wspm').fadeIn();
             jml++;
-        }
-
-        if (v_tglawal == '' || v_tglakhir == '') {
-            if (v_nosp2d == '' && v_barsp2d == '' && v_invoice == '' && v_vendor_name == '') {
-                $('#wsp2d').html('Harap isi salah satu parameter');
-                $('#wsp2d').fadeIn();
-                $('#wbarsp2d').html('Harap isi salah satu parameter');
-                $('#wbarsp2d').fadeIn();
-                $('#winvoice').html('Harap isi salah satu parameter');
-                $('#winvoice').fadeIn();
-                $('#wvendor_name').html('Harap isi salah satu parameter');
-                $('#wvendor_name').fadeIn();
-                jml++;
-            }
         }
 
         if (v_nosp2d != '' && v_nosp2d.length != 15) {
@@ -582,19 +533,6 @@
             jml++;
         }
 
-        if (v_barsp2d != '' && v_barsp2d.length != 21) {
-            $('#wbarsp2d').html('No. Transaksi harus 21 digit');
-            $('#wbarsp2d').fadeIn(200);
-            jml++;
-        }
-
-        if (v_barsp2d != '' && !v_barsp2d.match(pattern)) {
-            var wbarsp2d = 'No Transaksi harus dalam bentuk angka!';
-            $('#wbarsp2d').html(wbarsp2d);
-            $('#wbarsp2d').fadeIn(200);
-            jml++;
-        }
-
         if (v_kdsatker != '' && v_kdsatker.length != 6) {
             $('#wsatker').html('Kode Satker harus 6 digit');
             $('#wsatker').fadeIn(200);
@@ -602,15 +540,15 @@
         }
 
         if (v_kdsatker != '' && !v_kdsatker.match(pattern)) {
-            var wsatker = 'No Transaksi harus dalam bentuk angka!';
+            var wsatker = 'Kode Satker harus dalam bentuk angka!';
             $('#wsatker').html(wsatker);
             $('#wsatker').fadeIn(200);
             jml++;
         }
 
-        if (v_invoice != '' && v_invoice.length != 18) {
-            $('#winvoice').html('No. invoice harus 18 digit');
-            $('#winvoice').fadeIn(200);
+        if (v_spm != '' && v_spm.length != 18) {
+            $('#wspm').html('No. spm harus 18 digit');
+            $('#wspm').fadeIn(200);
             jml++;
         }
 

@@ -723,7 +723,7 @@
         }
 
         if (v_kdsatker != '' && !v_kdsatker.match(pattern)) {
-            var wsatker = 'No Transaksi harus dalam bentuk angka!';
+            var wsatker = 'Kode Satker harus dalam bentuk angka!';
             $('#wsatker').html(wsatker);
             $('#wsatker').fadeIn(200);
             jml++;
