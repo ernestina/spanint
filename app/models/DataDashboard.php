@@ -110,7 +110,7 @@ class DataDashboard {
                                 status_retur,
                                 count(status_retur) jumlah
                     from        retur_span_v
-                    where       kdkppn in (select kdkppn from t_kppn where kdkanwil = '" . substr($unit, 1, 2) . "'
+                    where       kdkppn in (select kdkppn from t_kppn where kdkanwil = '" . substr($unit, 1, 2) . "')
                     group by    kdkppn, status_retur
                     order by    kdkppn asc";
         }
@@ -122,20 +122,18 @@ class DataDashboard {
         }
         
         if (!isset($unit)) {
-            $sql4 = "select     t_kppn.kdkanwil,
-                                count(ap_invoices_all_v.status) jumlah 
-                    from        ap_invoices_all_v 
+            $sql4 = "select      t_kppn.kdkanwil,
+                                sum(jumlah) 
+                    from        rekap_spm_dashboard 
                     left join   t_kppn 
-                    on          ap_invoices_all_v.kdkppn=t_kppn.kdkppn
-                    where       status = 'OPEN' 
+                    on          rekap_spm_dashboard.kdkppn=t_kppn.kdkppn
                     group by    kdkanwil
                     order by    kdkanwil asc";
         } else {
             $sql4 = "select     kdkppn,
-                                count(status) jumlah 
-                    from        ap_invoices_all_v 
-                    where       status = 'OPEN' 
-                    group by    kdkppn";
+                                jumlah 
+                    from        rekap_spm_dashboard 
+                    order by    kdkppn";
         }
         
         if (!isset($unit)) {
@@ -210,6 +208,8 @@ class DataDashboard {
         }
         
         $result2 = $this->db->select($sql2);
+        
+        //echo($sql2);
         
         foreach ($result2 as $val) {
         
