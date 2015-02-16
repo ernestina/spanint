@@ -7,12 +7,8 @@
                 <h2>Informasi Sisa Pagu Per Akun DIPA Satker</h2>
 				<?php //echo 'kdakun:'.$value->get_akun(); ?>
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">                
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">                
 			<?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
@@ -75,14 +71,21 @@
 				}
 			}
 			?>
-				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-				<a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-				<?php
-
-			
-		?>
+                       
+            <div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/RealisasiFA_PDF/<?php echo $kdsatker . "/" . $kdprogram . "/" . $kdoutput . "/" . $kdakun . "/" . $kddana; ?>/XLS">EXCEL</a></li>
+                          </ul>
+            </div>
 	
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
             </div>
             
         </div>

@@ -10,14 +10,8 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Daftar DIPA dalam Proses Revisi</h2>
             </div>
+            
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-				
-                <?php if (Session::get('role') != SATKER) { ?>
-                    <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                <?php } ?>
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
                 
 			<!-- PDF -->
 			<?php
@@ -82,15 +76,28 @@
 				
 			}
 			?>
-				<a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-				<a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+                <div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/ProsesRevisi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker; ?>/XLS">EXCEL</a></li>
+                          </ul>
+                </div>
+                
+                </div>
 				<?php
 				//----------------------------------------------------		
 						?>
 				
-				</div>
-            
+				
+                <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+				
+                <?php if (Session::get('role') != SATKER) { ?>
+                    <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                <?php } ?>
+                
+                </div>
         </div>
         
         <div class="row top-padded-little">
