@@ -138,11 +138,13 @@ class UserSpanController extends BaseController {
         
         //KPPN
         $options = array();
-        foreach ($kppn_list as $value1) {
-            $options[] = (object) array('value' => $value1->get_kd_d_kppn(), 'text' => $value1->get_kd_d_kppn() . ' | ' . $value1->get_nama_user());   
+        if(isset($kppn_list)){
+            foreach ($kppn_list as $value1) {
+                $options[] = (object) array('value' => $value1->get_kd_d_kppn(), 'text' => $value1->get_kd_d_kppn() . ' | ' . $value1->get_nama_user());   
         }
-        $this->view->filters[] = (object) array('label' => 'KPPN', 'name' => 'kdkppn', 'type' => 'select', 'options' => $options);
         
+        $this->view->filters[] = (object) array('label' => 'KPPN', 'name' => 'kdkppn', 'type' => 'select', 'options' => $options);
+        }
         //NIP
         $this->view->filters[] = (object) array('label' => 'NIP', 'name' => 'nip', 'type' => 'number', 'size' => '18');
         
