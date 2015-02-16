@@ -22,7 +22,7 @@ class BA_ES1Controller extends BaseController {
         
     }
 
-    public function DataRealisaiKegiatanBA() {
+    public function DataRealisasiKegiatanBA() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -50,7 +50,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->render('baes1/DataRealisasiBA');
     }
 	
-	public function DataRealisaiKegiatanES1() {
+	public function DataRealisasiKegiatanES1() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -75,7 +75,7 @@ class BA_ES1Controller extends BaseController {
               
         $d_log->tambah_log("Sukses");
 
-        $this->view->render('baes1/DataRealisasiBA');
+        $this->view->render('baes1/DataRealisasiKegiatanBA');
     }
 	
 	public function DataRealisasiAkunBA() {
