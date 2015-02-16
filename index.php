@@ -95,6 +95,7 @@ if (Session::get('kd_satker') == andi ){
     $registry->auth->add_access('dataUser','admin',$akses['DataUserAdmin']);   
 }
 $registry->auth->add_access('dataPMRTPKN','admin',$akses['DataPMRTPKNAdmin']);
+$registry->auth->add_access('dataBPN','admin',$akses['DataBPNAdmin']);
 
 //level satker
 $registry->auth->add_access('auth','satker',$akses['AuthSatker']);
