@@ -209,7 +209,7 @@ if (isset($this->data)) {
                     <input class="form-control" type="number" name="barsp2d" id="barsp2d" value="<?php if (isset($this->d_barsp2d)) {
                         echo $this->d_barsp2d;
                     } ?>">
-
+                    <br/>
 <?php
 if (Session::get('role') != SATKER) {
     echo "<div id='wsatker' class='error'></div>";

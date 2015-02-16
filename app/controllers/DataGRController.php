@@ -431,7 +431,7 @@ class DataGRController extends BaseController {
             if ($_POST['ntpn'] != '') {
                 $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
                 $this->view->ntpn = $_POST['ntpn'];
-            } 
+            }
 			
 			if ($_POST['akun'] != '') {
 			
