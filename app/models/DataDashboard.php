@@ -122,8 +122,8 @@ class DataDashboard {
         }
         
         if (!isset($unit)) {
-            $sql4 = "select      t_kppn.kdkanwil,
-                                sum(jumlah) 
+            $sql4 = "select     t_kppn.kdkanwil,
+                                sum(jumlah) jumlah 
                     from        rekap_spm_dashboard 
                     left join   t_kppn 
                     on          rekap_spm_dashboard.kdkppn=t_kppn.kdkppn
