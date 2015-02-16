@@ -147,7 +147,7 @@
                     
                                         foreach ($configs as $config) {
 
-                                            if ($config == 'display-number') { echo number_format($cell); $displayed = true; }
+                                            if ($config == 'number-format') { echo number_format($cell); $displayed = true; }
 
                                         }
                                                            
@@ -209,7 +209,7 @@
                             <?php } else if ($filter->type == "select") { ?>
                                 <select class="form-control" type="text" name="<?php echo $filter->name; ?>" id="<?php echo 'filter'.$filterid; ?>">
                                     <?php foreach ($filter->options as $option) { ?>
-                                        <option value="<?php echo $option->value; ?>"><?php echo $option->text; ?></option>
+                                        <option value="<?php echo $option->value; ?>" <?php if ((isset($filter->selected)) && ($filter->selected == $option->value)) { echo 'selected'; } ?>><?php echo $option->text; ?></option>
                                     <?php } ?>   
                                 </select>
                             <?php } ?>
