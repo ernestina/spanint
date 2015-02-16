@@ -6,14 +6,10 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Detail Realisasi</h2>
             </div>
-            
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-                <!--pdf-->
-                <!--karena gak ada button filter, button pdf tak pindah ke kanan ya-->
 				                 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
                 <?php
 			//-----------------------------------------------
@@ -24,18 +20,22 @@
 					}
 				}
 				?>
-					
-                <a href="<?php echo URL; ?>PDF/DetailRealisasiFA_PDF/<?php echo $code_id; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-                <a href="<?php echo URL; ?>PDF/DetailRealisasiFA_PDF/<?php echo $code_id; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+            
+            <div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/DetailRealisasiFA_PDF/<?php echo $code_id; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DetailRealisasiFA_PDF/<?php echo $code_id; ?>/XLS">EXCEL</a></li>
+                          </ul>
+            </div>
+            
 				<?php
 			//--------------------------------------------------------
 			?>  
-
-                
-                <!--button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button-->
                 
             </div>
+            
         </div>
         
         <div class="row" style="padding-top: 10px">

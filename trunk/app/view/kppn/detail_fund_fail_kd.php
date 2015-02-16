@@ -13,7 +13,7 @@
             <?php } ?>    
             </div>
 
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php
     //----------------------------------------------------
@@ -86,16 +86,16 @@
 						
 		}
 		?>
-	   
-		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-		</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-		<a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 
-		<?php
-		//----------------------------------------------------		
-
-	
-?>
+                <div class="btn-group-sm">
+                            <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                            </button>
+                                  <ul class="dropdown-menu" role="menu">
+                                    <li><a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>/PDF">PDF</a></li>
+                                    <li><a href="<?php echo URL; ?>PDF/Detail_Fund_fail_kd_PDF/<?php echo $kf . "/" . $kdsatker . "/" . $kdoutput. "/" . $kdakun; ?>/XLS">EXCEL</a></li>
+                                  </ul>
+                </div>    
+        
             </div>
         </div>
         
