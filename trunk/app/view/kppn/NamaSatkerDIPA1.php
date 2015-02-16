@@ -10,12 +10,8 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Informasi Revisi DIPA</h2>
             </div>
-			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-
-                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
 
                 <!-- PDF -->   
                 <?php
@@ -48,10 +44,21 @@
                             $kdrevisi = 'null';
                         }
                         ?>
-                        <a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+                        
+                <div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; CETAK <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/XLS">EXCEL</a></li>
+                          </ul>
+                </div>
+                <!--a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
                         </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-                        <a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-						<?php
+                        <a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a-->
+						
+            
+                <?php
                     }
                 }
                 
@@ -88,8 +95,13 @@
                 }
                 //------------------------------
                 ?>
-
             </div>
+                <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+
+                </div>
+            
             
         </div>
 
