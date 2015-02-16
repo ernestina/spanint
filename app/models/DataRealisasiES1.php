@@ -63,7 +63,7 @@ class DataRealisasiES1 {
 	
 	
 	
-	----------------------------------------------------------------------------------------------------------- contekan
+	/*----------------------------------------------------------------------------------------------------------- contekan*/
 	public function get_ba_kegiatan_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI, B.NMBA , B.KDBA
@@ -86,14 +86,14 @@ class DataRealisasiES1 {
 		$sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ";
         $sql .= " ORDER BY SUBSTR(OUTPUT,1,4) ";
 
-        //var_dump($sql);
+        var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_satker($val['KDBA']);          
-            $d_data->set_program($val['KODE_KEGIATAN']);
-			$d_data->set_program($val['NMKEGIATAN']);
+            $d_data->set_kdkegiatan($val['KODE_KEGIATAN']);
+			$d_data->set_nmkegiatan($val['NMKEGIATAN']);
             $d_data->set_budget_amt($val['BUDGET_AMT']);          
             $d_data->set_actual_amt($val['ACTUAL_AMT']);          
             $d_data->set_nm_satker($val['NMBA']);
@@ -130,8 +130,8 @@ class DataRealisasiES1 {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_satker($val['KDBA']);          
-            $d_data->set_program($val['KODE_KEGIATAN']);
-			$d_data->set_program($val['NMKEGIATAN']);
+            $d_data->set_kdkegiatan($val['KODE_KEGIATAN']);
+			$d_data->set_nmkegiatan($val['NMKEGIATAN']);
             $d_data->set_budget_amt($val['BUDGET_AMT']);          
             $d_data->set_actual_amt($val['ACTUAL_AMT']);          
             $d_data->set_nm_satker($val['NMBA']);
@@ -231,6 +231,14 @@ class DataRealisasiES1 {
     public function set_balancing_amt($balancing_amt) {
         $this->_balancing_amt = $balancing_amt;
     }
+    
+    public function set_kdkegiatan($kdkegiatan) {
+        $this->_kdkegiatan = $kdkegiatan;
+    }
+    
+    public function set_nmkegiatan($nmkegiatan) {
+        $this->_nmkegiatan = $nmkegiatan;
+    }
 
     /*
      * getter
@@ -322,6 +330,14 @@ class DataRealisasiES1 {
 
     public function get_balancing_amt() {
         return $this->_balancing_amt;
+    }
+    
+    public function get_kdkegiatan() {
+        return $this->_kdkegiatan;
+    }
+    
+    public function get_nmkegiatan() {
+        return $this->_nmkegiatan;
     }
 
     public function get_table1() {
