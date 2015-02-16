@@ -66,6 +66,10 @@ class UserSpanController extends BaseController {
         
         //Konfigurasi Template
         //Judul dan Subjudul
+        
+        //$this->view->page_title ---> Judul halaman (string)
+        //$this->view->page_subtitle ---> Subjudul halaman (string)
+        
         $this->view->page_title = 'Monitoring User Aktif';
         $this->view->page_subtitle = '';
         
@@ -107,14 +111,29 @@ class UserSpanController extends BaseController {
             }
         }
         
+        //$this->view->pdf_url ---> URL untuk download PDF (string)
+        //$this->view->xls_url ---> URL untuk download XLS (string)
+        
         $this->view->pdf_url = URL . 'PDF/monitoringUserSpan_PDF/' . $kdkppn . '/' . $kdnip . '/PDF';
         $this->view->xls_url = URL . 'PDF/monitoringUserSpan_PDF/' . $kdkppn . '/' . $kdnip . '/PDF';
         
         //Konfigurasi Tabel
+        //$this->view->table_config ---> String dipisahkan spasi
+        //Parameter tersedia:
+        //numbered ---> untuk menyalakan penomoran tabel
+        //font-size:x% ---> ukuran font, dalam persentase
+        
         $this->view->table_config = 'numbered';
         
         //Kolom dan Konfigurasi Kolom
         $this->view->table_columns = array();
+        
+        //contoh: $this->view->table_columns[] = (object) array('title' => 'Nama', 'config' => 'align-left');
+        //title ---> judul kolom (string)
+        //config ---> konfigurasi kolom (string dipisah spasi)
+        //parameter tersedia untuk config:
+        //align-left, align-right, align-center ---> perataan teks
+        //number-format ---> memisahkan angka dengan pemisah desimal
         
         $this->view->table_columns[] = (object) array('title' => 'Nama', 'config' => 'align-left');
         $this->view->table_columns[] = (object) array('title' => 'User Name', 'config' => 'align-center');
@@ -126,6 +145,9 @@ class UserSpanController extends BaseController {
         
         //Baris
         $this->view->table_rows = array();
+        
+        //$this->view->table_rows ---> array dua dimensi, dimensi pertama untuk baris, dimensi kedua untuk kolom
+        
         if (isset($this->data)) {
             foreach ($this->data as $value) {
                 $this->view->table_rows[] = array($value->get_last_name(), $value->get_user_name(), $value->get_attribute1(), $value->get_name(),
@@ -143,7 +165,7 @@ class UserSpanController extends BaseController {
                 $options[] = (object) array('value' => $value1->get_kd_d_kppn(), 'text' => $value1->get_kd_d_kppn() . ' | ' . $value1->get_nama_user());   
         }
         
-        $this->view->filters[] = (object) array('label' => 'KPPN', 'name' => 'kdkppn', 'type' => 'select', 'options' => $options);
+        $this->view->filters[] = (object) array('label' => 'KPPN', 'name' => 'kdkppn', 'type' => 'select', 'options' => $options, 'selected' => $_POST['kdkppn']);
         }
         //NIP
         $this->view->filters[] = (object) array('label' => 'NIP', 'name' => 'nip', 'type' => 'number', 'size' => '18');
