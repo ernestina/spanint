@@ -159,7 +159,7 @@
 
                 <div class="modal-body">
 
-                    <div id="winvoice" class="alert alert-danger" style="display:none;"></div>
+                    <div id="wntpn" class="alert alert-danger" style="display:none;"></div>
 
                     <label class="isian">NTPN: </label>
                     <input class="form-control" type="text" name="ntpn" id="ntpn" value="<?php if (isset($this->check_number)) {
@@ -194,7 +194,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="">Kirim</button>
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
                 </div>
 
             </form>
@@ -265,21 +265,21 @@
     }
 
     function hideWarning() {
-        $('#invoice').keyup(function() {
-            if (document.getElementById('invoice').value != '') {
-                $('#winvoice').fadeOut(200);
+        $('#ntpn').keyup(function() {
+            if (document.getElementById('ntpn').value != '') {
+                $('#wntpn').fadeOut(200);
             }
         });
 
     }
 
     function cek_upload() {
-        var v_invoice = document.getElementById('invoice').value;
+        var v_ntpn = document.getElementById('ntpn').value;
 
         var jml = 0;
-        if (v_invoice == '') {
-            $('#winvoice').html('Harap isi no invoice');
-            $('#winvoice').fadeIn();
+        if (v_ntpn == '') {
+            $('#wntpn').html('Harap isi no NTPN');
+            $('#wntpn').fadeIn();
             jml++;
         }
         if (jml > 0) {
