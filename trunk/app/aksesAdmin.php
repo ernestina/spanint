@@ -294,6 +294,15 @@ $akses['PelaporanAdmin'] = array(
 );
 
 /*
+ * akses BPN
+ */
+$akses['DataBPNAdmin'] = array(
+    '__construct',
+    'DataBPN',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFAdmin'] = array(
