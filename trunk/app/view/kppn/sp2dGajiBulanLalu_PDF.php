@@ -11,9 +11,9 @@
  */
 ob_start();
 //-------------------------------------
-require_once("./././public/fpdf17/fpdf.php");
+require_once("./././public/fpdf17/fpdf.php");require_once("./././public/fpdf17/rotation.php");
 
-class FPDF_AutoWrapTable extends FPDF {
+class FPDF_AutoWrapTable extends PDF_Rotate {
 
     private $data = array();
     private $options = array(
@@ -27,7 +27,21 @@ class FPDF_AutoWrapTable extends FPDF {
     private $kdtgl_akhir = array();
     private $nm_kppn;
 	private $kdtahun;
+	function Header()
+	{
+		//Put the watermark
+		$this->SetFont('Arial','B',20);
+		$this->SetTextColor(139,192,203);
+		$this->RotatedText(200,400,'Laporan pembanding dari Online Monitoring SPAN',25);
+	}
 
+	function RotatedText($x, $y, $txt, $angle)
+	{
+		//Text rotated around its origin
+		$this->Rotate($angle,$x,$y);
+		$this->Text($x,$y,$txt);
+		$this->Rotate(0);
+	}
     /*
      * Konstruktor
      */
@@ -165,9 +179,7 @@ class FPDF_AutoWrapTable extends FPDF {
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
         $this->Cell($ukuran_kolom_jenis_belanja, $h / 2, 'Des', 1, 1, 'C', true);
         $py3 = $this->GetY();
-        //$this->SetY($py3 -= 20);
         $this->SetX($left += 660);
-        //$this->Cell($ukuran_kolom_jenis_belanja, $h/2, 'Des', 1, 1, 'C', true);
         $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);

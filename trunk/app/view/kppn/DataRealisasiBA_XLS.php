@@ -63,6 +63,7 @@ $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
 $objPHPExcel->getActiveSheet()->getStyle('A1:AZ1')->getFont()->setBold(true);
 $objPHPExcel->getActiveSheet()->getStyle('A2')->getFont()->setSize(9);
 $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
+
 //Tanggal
 
 
@@ -322,6 +323,7 @@ $objPHPExcel->getActiveSheet()->getPageMargins()->setRight(0.75);
 $objPHPExcel->getActiveSheet()->getPageMargins()->setLeft(0.75);
 $objPHPExcel->getActiveSheet()->getPageMargins()->setBottom(0.75);
 $objPHPExcel->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&B' . $objPHPExcel->getProperties()->getTitle() . '&RPage &P of &N');
+
  
 
 $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(11.1);
@@ -377,9 +379,9 @@ $objPHPExcel->getActiveSheet()->getColumnDimension('AX')->setAutoSize(true);
 $objPHPExcel->getActiveSheet()->getColumnDimension('AY')->setAutoSize(true);
 $objPHPExcel->getActiveSheet()->getColumnDimension('AZ')->setAutoSize(true);
 
-
-$objPHPExcel->getActiveSheet()->getStyle('D5:AQ1000')->getNumberFormat()->setFormatCode('#');
+$objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
 $objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
@@ -391,7 +393,7 @@ $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 
  // Redirect output to a client’s web browser (Excel2007)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1);
+header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xlsx');
 header('Cache-Control: max-age=0');
  
 $objWriter->save('php://output');

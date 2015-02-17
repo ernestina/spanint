@@ -13,8 +13,16 @@ define('DB_NAME', 'DEVSPANDB');
 define('DB_TNS', '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.100.93.56)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=DEVSPANDB)(INSTANCE_NAME= DEVSPANDB)))');
 define('DB_USER', 'USRAPL14');
 define('DB_PASS', 'Ter53r@h');
+ 
+ 
+/*  define('DB_TYPE', '');
+define('DB_HOST', '10.100.45.102');
+define('DB_NAME', 'DEVSPANDB');
+define('DB_TNS', '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.100.45.102)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=DEVSPANDB)(INSTANCE_NAME= DEVSPANDB)))');
+define('DB_USER', 'USRAPL14');
+define('DB_PASS', 'Ter53r@h'); 
 
-
+ */
 //end setting database
 
 define('PDF_EXT', 'application/pdf');
@@ -27,7 +35,7 @@ define('DIR_UPLOAD', 'upload/');
 
 date_default_timezone_set('Asia/Jakarta');
 
-define('MAX_SESSION', 1800); //dalam detik
+define('MAX_SESSION', 6000000000000000000000000000000000000000); //dalam detik
 
 define('HASH_GENERAL_KEY', 'MixitUp200');
 
