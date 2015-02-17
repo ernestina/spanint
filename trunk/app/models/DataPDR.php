@@ -28,11 +28,13 @@ class DataPDR {
     private $_reg_type;
     private $_status;
     private $_d_period;
+    private $_status_span;
     
     private $_cara_tarik;
     
     private $_table_djpu_reg = 'DJPU_REGISTER';
     private $_table_djpu_cara_tarik = 'DJPU_CARA_TARIK';
+    private $_table_join_status = 'SPPM_REGISTER';
     
     public $registry;
 
@@ -52,7 +54,8 @@ class DataPDR {
 
     public function get_djpu_register($filter) {
         Session::get('id_user');
-        $sql = "SELECT  a.reg_no,
+        $sql = "SELECT  c.register_no,
+                        a.reg_no,
                         a.name,
                         a.cred_name,
                         a.curr,
@@ -68,7 +71,10 @@ class DataPDR {
                         a.d_effective,
                         a.d_drawlim,
                         a.d_period
-                FROM    " . $this->_table_djpu_reg . " a INNER JOIN " . $this->_table_djpu_cara_tarik . " b 
+                FROM    " . $this->_table_djpu_reg . " a
+                LEFT JOIN " . $this->_table_join_status . " c
+                ON      a.reg_no = c.register_no
+                INNER JOIN " . $this->_table_djpu_cara_tarik . " b 
                 ON      a.reg_no = b.register_no
                 AND     trim(a.lg_id) = b.instrument_id
                 WHERE   1=1 ";
@@ -83,6 +89,12 @@ class DataPDR {
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
+            
+            if ($val['REGISTER_NO'] == "") {
+                $d_data->set_status_span("Belum Terdaftar");
+            } else {
+                $d_data->set_status_span("Terdaftar");
+            }
             
             $d_data->set_reg_no($val['REG_NO']);
             $d_data->set_name($val['NAME']);
@@ -109,7 +121,9 @@ class DataPDR {
     /*
      * setter
      */
-
+    public function set_status_span($status_span) {
+        $this->_status_span = $status_span;
+    }
     public function set_reg_no($reg_no) {
         $this->_reg_no = $reg_no;
     }
@@ -177,7 +191,10 @@ class DataPDR {
     /*
      * getter
      */
-
+    
+    public function get_status_span() {
+        return $this->_status_span;
+    }
     public function get_reg_no() {
         return $this->_reg_no;
     }
