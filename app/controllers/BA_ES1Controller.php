@@ -117,13 +117,19 @@ class BA_ES1Controller extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
-		$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";
+		
+		if (Session::get('role') == KL){		
+			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";			
+		}
+		if (Session::get('role') == ES1){		
+			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";			
+		}
 		
         if (isset($_POST['submit_file'])) {
             
-            if ($_POST['kdlokasi'] != '') {
-                $filter[$no++] = "a.lokasi = '" . $_POST['kdlokasi'] . "'";
-                $this->view->lokasi = $_POST['kdlokasi'];
+            if ($_POST['satker'] != '') {
+                $filter[$no++] = "b.kdsatker = '" . $_POST['satker'] . "'";
+                $this->view->satker = $_POST['satker'];
             }            
         }      
 

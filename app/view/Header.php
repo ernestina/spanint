@@ -790,7 +790,8 @@
 						<li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Data Realisasi</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunBA">Per Jenis Belanja</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunBA">Eselon 1 Per Jenis Belanja</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Satker Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Per Jenis Kewenangan</a></li>
                                    
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Jenis Kegiatan</a></li>

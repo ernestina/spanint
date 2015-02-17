@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Pagu dan Realisasi Belanja per Jenis Belanja</h2>
+                <h2>Realisasi Belanja Es1 per Jenis Belanja</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -88,7 +88,7 @@
                 <!--th>KPPN</th-->
                 <!--th>Tanggal</th-->
                 <!--th rowspan=2 class='mid'>Kode BA</th-->
-                <th rowspan=2 class='mid' width='150px'> Nama BA </th>
+                <th rowspan=2 class='mid' width='150px'> Eselon 1 </th>
                 <th rowspan=2 class='mid'> Keterangan </th>
                 <th  colspan=9 class='mid'>Jenis Belanja</th>
                 <th   rowspan=2 class='mid'>Total</th>
