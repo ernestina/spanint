@@ -149,6 +149,7 @@ $registry->auth->add_access('dataPMRTPKN','pkn',$akses['DataPMRTPKN']);
 $registry->auth->add_access('auth','kanwil',$akses['AuthKanwil']);
 $registry->auth->add_access('home','kanwil',$akses['HomeKanwil']);
 $registry->auth->add_access('dataDIPA','kanwil',$akses['DataDIPAKanwil']);
+$registry->auth->add_access('dataPDR','kanwil',$akses['DataPDRKanwil']);
 $registry->auth->add_access('dataGR','kanwil',$akses['DataGRKanwil']);
 $registry->auth->add_access('dataJSON','kanwil',$akses['DataJSONKanwil']);
 $registry->auth->add_access('dataKppn','kanwil',$akses['DataKppnKanwil']);
@@ -163,6 +164,7 @@ $registry->auth->add_access('dataRetur','kanwil',$akses['DataReturKanwil']);
 //level dja
 $registry->auth->add_access('auth','dja',$akses['AuthDJA']);
 $registry->auth->add_access('home','dja',$akses['HomeDJA']);
+$registry->auth->add_access('dataPDR','dja',$akses['DataPDRDJA']);
 $registry->auth->add_access('dataDIPA','dja',$akses['DataDIPADJA']);
 $registry->auth->add_access('dataSPM','dja',$akses['DataSPMDJA']);
 $registry->auth->add_access('userSpan','dja',$akses['UserSpanDJA']);
