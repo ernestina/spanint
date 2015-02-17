@@ -143,9 +143,10 @@ if (count($this->data) == 0) {
 	$no++;
 
  
-	$nil['p1']=$no;
-	$nil['p2']=strval($value->get_ba());
-	$nil['p3']=strtoupper($value->get_nmba());
+	$nil['p0']=$no;
+	$nil['p1']=strtoupper($value->get_ba());
+	$nil['p2']=strtoupper($value->get_satker());
+	$nil['p3']=strtoupper($value->get_dipa());
 	
 	//pengecekan
 	if ($value->get_pagu_51()==0){
