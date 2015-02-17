@@ -38,6 +38,7 @@ $akses['BaEs1ES1'] = array(
     'DataRealisasiKewenanganBAES1',
     'nmsatker',
     'ProsesRevisi',
+    'DataRealisasiOutputBA',
     '__destruct'
 );
 
