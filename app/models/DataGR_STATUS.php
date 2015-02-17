@@ -166,7 +166,7 @@ class DataGR_STATUS {
 						smc.currency_code,
 						smc.amount_dist
 						FROM GL_CODE_COMBINATIONS gcc,
-						SPGR_MPN_COA_2015 smc
+						". $this->_table2 ." smc
 						WHERE smc.CODE_COMBINATION_ID=gcc.CODE_COMBINATION_ID ";
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
@@ -276,7 +276,7 @@ class DataGR_STATUS {
 					CURRENCY_CODE,
 					AMOUNT_DIST *-1 AMOUNT,
 					TANGGAL TANGGAL2
-					 FROM SPGR_MPN_COA_2015
+					 FROM ". $this->_table2 ."
 					 WHERE 
 					 NOURUT IN ('" . $ids . "') 
 					 UNION ALL
@@ -296,7 +296,7 @@ class DataGR_STATUS {
 					CURRENCY_CODE,
 					AMOUNT_DIST AMOUNT,
 					TANGGAL TANGGAL2
-					 FROM SPGR_MPN_COA_2015
+					 FROM ". $this->_table2 ."
 					 WHERE NOURUT IN ('" . $ids . "')"
         ;
 
@@ -336,10 +336,10 @@ class DataGR_STATUS {
         $sql = "SELECT " .
                 $segment1 . " 
 		RECEIPT_NUMBER,
-		NTB, 
+		ATTRIBUTE3, 
 		SEGMENT3, 
 		AMOUNT_DIST AMOUNT 
-		FROM SPGR_MPN_COA_2015 
+		FROM ". $this->_table2 ."  
 		WHERE 
 		NOURUT IN ('" . $ids . "')";
 
