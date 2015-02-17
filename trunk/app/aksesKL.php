@@ -25,4 +25,20 @@ $akses['AuthKL'] = array(
     'logout',
     '__destruct'
 );
+
+/*
+ * akses modul BA_ES1
+ */
+$akses['BaEs1KL'] = array(
+    '__construct',
+    'DataRealisasiKegiatanBA',
+    'DataRealisasiKegiatanES1',
+    'DataRealisasiAkunBA',
+    'DataRealisasiAkunES1',
+    'DataRealisasiKewenanganBAES1',
+    'nmsatker',
+    'ProsesRevisi',
+    '__destruct'
+);
+
 ?>
