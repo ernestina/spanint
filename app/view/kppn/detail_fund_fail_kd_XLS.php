@@ -216,8 +216,8 @@ $objPHPExcel->getActiveSheet()->getColumnDimension('AY')->setAutoSize(true);
 $objPHPExcel->getActiveSheet()->getColumnDimension('AZ')->setAutoSize(true);
 
 
-$objPHPExcel->getActiveSheet()->getStyle('D5:AQ1000')->getNumberFormat()->setFormatCode('#');
-$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+$objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
+//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
@@ -229,7 +229,7 @@ $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 
  // Redirect output to a client’s web browser (Excel2007)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1);
+header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xlsx');
 header('Cache-Control: max-age=0');
  
 $objWriter->save('php://output');

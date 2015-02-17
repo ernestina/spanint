@@ -111,7 +111,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/revisiDIPA_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/revisiDIPA_XLS');
 		}
 		//------------------------------------------------------------
@@ -193,7 +193,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/fund_fail_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/fund_fail_XLS');
 		}
 		//------------------------------------------------------------
@@ -277,7 +277,7 @@ class PDFController extends BaseController {
 			$this->view->judul1=$judul1;
 			if($ck=='PDF'){
 				$this->view->load('kppn/detail_fund_fail_kd_PDF');
-			}else{
+			}elseif($ck=='XLS'){
 				$this->view->load('kppn/detail_fund_fail_kd_XLS');
 			}
 			//------------------------------------------------------------
@@ -290,7 +290,7 @@ class PDFController extends BaseController {
 			$this->view->judul1=$judul1;
 			if($ck=='PDF'){
 				$this->view->load('kppn/detail_fund_fail_ff_PDF');
-			}else{
+			}elseif($ck=='XLS'){
 				$this->view->load('kppn/detail_fund_fail_ff_XLS');
 			}
 			//------------------------------------------------------------
@@ -383,7 +383,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/realisasiFA_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/realisasiFA_XLS');
 		}
 		//------------------------------------------------------------
@@ -465,7 +465,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/realisasiFA_1_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/realisasiFA_1_XLS');
 		}
 		//------------------------------------------------------------
@@ -532,7 +532,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/DataRealisasi_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/DataRealisasi_XLS');
 		}
 		//------------------------------------------------------------
@@ -608,7 +608,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/DataRealisasiBA_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/DataRealisasiBA_XLS');
 		}
 		//------------------------------------------------------------
@@ -694,7 +694,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/DataRealisasiTransfer_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/DataRealisasiTransfer_XLS');
 		}
 		//------------------------------------------------------------
@@ -774,7 +774,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detail_revisi_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detail_revisi_XLS');
 		}
 		//------------------------------------------------------------
@@ -853,7 +853,7 @@ class PDFController extends BaseController {
 			$this->view->judul1=$judul1;
 			if($ck=='PDF'){
 				$this->view->load('kppn/NamaSatkerDIPA1_PDF');
-			}else{
+			}elseif($ck=='XLS'){
 				$this->view->load('kppn/NamaSatkerDIPA1_XLS');
 			}
 			//------------------------------------------------------------
@@ -864,7 +864,7 @@ class PDFController extends BaseController {
 			$this->view->judul1=$judul1;
 			if($ck=='PDF'){
 				$this->view->load('kppn/NamaSatkerDIPAkppn_PDF');
-			}else{
+			}elseif($ck=='XLS'){
 				$this->view->load('kppn/NamaSatkerDIPAkppn_XLS');
 			}
 			//------------------------------------------------------------
@@ -938,7 +938,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/NamaSatkerDIPA2_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/NamaSatkerDIPA2_XLS');
 		}
 		//------------------------------------------------------------
@@ -1018,7 +1018,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/proses_revisi_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/proses_revisi_XLS');
 		}
 		//------------------------------------------------------------
@@ -1071,7 +1071,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/encumbrances_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/encumbrances_XLS');
 		}
 		//------------------------------------------------------------
@@ -1122,7 +1122,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/DetailRealisasiFA_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/DetailRealisasiFA_XLS');
 		}
 		//------------------------------------------------------------
@@ -1176,7 +1176,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detail_fund_fail_kd_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detail_fund_fail_kd_XLS');
 		}
 		//------------------------------------------------------------
@@ -1285,7 +1285,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/realisasiFA_1_minus_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/realisasiFA_1_minus_XLS');
 		}
 		//------------------------------------------------------------
@@ -1454,7 +1454,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('pkn/dropingDetail_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('pkn/dropingDetail_XLS');
 		}
 		//------------------------------------------------------------
@@ -1542,7 +1542,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('pkn/droping_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('pkn/droping_XLS');
 		}
 		//------------------------------------------------------------
@@ -1612,7 +1612,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('pkn/dropingDetailSPAN_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('pkn/dropingDetailSPAN_XLS');
 		}
 		//------------------------------------------------------------
@@ -1733,7 +1733,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/GR_PFK_GLOBAL_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/GR_PFK_GLOBAL_XLS');
 		}
 		//------------------------------------------------------------
@@ -1797,7 +1797,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/GR_PFK_DETAIL1_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/GR_PFK_DETAIL1_XLS');
 		}
 		//------------------------------------------------------------
@@ -1907,7 +1907,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/GR_IJP_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/GR_IJP_XLS');
 		}
 		//------------------------------------------------------------
@@ -1967,7 +1967,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detailLhpRekap_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detailLhpRekap_XLS');
 		}
 		//------------------------------------------------------------
@@ -2029,7 +2029,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detailPenerimaan_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detailPenerimaan_XLS');
 		}
 		//------------------------------------------------------------
@@ -2059,7 +2059,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detailCoAPenerimaan_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detailCoAPenerimaan_XLS');
 		}
 		//------------------------------------------------------------
@@ -2116,7 +2116,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/suspend_satker_penerimaan_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/suspend_satker_penerimaan_XLS');
 		}
 		//------------------------------------------------------------
@@ -2144,7 +2144,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/konfirmasi_penerimaan_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/konfirmasi_penerimaan_XLS');
 		}
 		//------------------------------------------------------------
@@ -2204,7 +2204,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/suspend_akun_penerimaan_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/suspend_akun_penerimaan_XLS');
 		}
 		//------------------------------------------------------------
@@ -2237,7 +2237,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/ntpn_ganda_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/ntpn_ganda_XLS');
 		}
 		//------------------------------------------------------------
@@ -2269,7 +2269,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detail_ntpn_ganda_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detail_ntpn_ganda_XLS');
 		}
 		//------------------------------------------------------------
@@ -2358,7 +2358,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/GRStatusHarian_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/GRStatusHarian_XLS');
 		}
 		//------------------------------------------------------------
@@ -2437,7 +2437,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/GRStatusHarianBulan_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/GRStatusHarianBulan_XLS');
 		}
 		//------------------------------------------------------------
@@ -2565,7 +2565,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/isianKppn_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/isianKppn_XLS');
 		}
 		//------------------------------------------------------------
@@ -2652,7 +2652,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/harianBo_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/harianBo_XLS');
 		}
 		//------------------------------------------------------------
@@ -2738,7 +2738,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dHariIni_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dHariIni_XLS');
 		}
 		//------------------------------------------------------------
@@ -2825,7 +2825,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dBesok_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dBesok_XLS');
 		}
 		//------------------------------------------------------------
@@ -2911,7 +2911,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dBackdate_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dBackdate_XLS');
 		}
 		//------------------------------------------------------------
@@ -2998,7 +2998,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dNilaiMinus_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dNilaiMinus_XLS');
 		}
 		//------------------------------------------------------------
@@ -3084,7 +3084,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dSudahVoid_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dSudahVoid_XLS');
 		}
 		//------------------------------------------------------------
@@ -3155,7 +3155,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dGajiDobel_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dGajiDobel_XLS');
 		}
 		//------------------------------------------------------------
@@ -3231,7 +3231,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dGajiTanggal_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dGajiTanggal_XLS');
 		}
 		//------------------------------------------------------------
@@ -3306,7 +3306,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dGajiBank_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dGajiBank_XLS');
 		}
 		//------------------------------------------------------------
@@ -3381,7 +3381,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dGajiRekening_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dGajiRekening_XLS');
 		}
 		//------------------------------------------------------------
@@ -3471,7 +3471,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detailSp2dGaji_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detailSp2dGaji_XLS');
 		}
 		//------------------------------------------------------------
@@ -3585,7 +3585,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detailSp2dRekap_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detailSp2dRekap_XLS');
 		}
 		//------------------------------------------------------------
@@ -3662,7 +3662,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dRekap_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dRekap_XLS');
 		}
 		//------------------------------------------------------------
@@ -3748,7 +3748,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dGajiBulanLalu_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dGajiBulanLalu_XLS');
 		}
 		//------------------------------------------------------------
@@ -3854,7 +3854,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/daftarRetur_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/daftarRetur_XLS');
 		}
 		//------------------------------------------------------------
@@ -3934,7 +3934,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/daftarReturPKN_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/daftarReturPKN_XLS');
 		}
 		//------------------------------------------------------------
@@ -4010,7 +4010,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/posisiSPM_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/posisiSPM_XLS');
 		}
 		//------------------------------------------------------------
@@ -4063,7 +4063,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detailposisiSPM_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detailposisiSPM_XLS');
 		}
 		//------------------------------------------------------------
@@ -4150,7 +4150,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/holdSPM_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/holdSPM_XLS');
 		}
 		//------------------------------------------------------------
@@ -4247,7 +4247,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/historySPM_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/historySPM_XLS');
 		}
 		//------------------------------------------------------------
@@ -4356,7 +4356,7 @@ class PDFController extends BaseController {
 			$this->view->judul1=$judul1;
 			if($ck=='PDF'){
 				$this->view->load('kppn/SP2DSatker140_PDF');
-			}else{
+			}elseif($ck=='XLS'){
 				$this->view->load('kppn/SP2DSatker140_XLS');
 			}
 			//------------------------------------------------------------
@@ -4369,7 +4369,7 @@ class PDFController extends BaseController {
 			$this->view->judul1=$judul1;
 			if($ck=='PDF'){
 				$this->view->load('kppn/SP2DSatker_PDF');
-			}else{
+			}elseif($ck=='XLS'){
 				$this->view->load('kppn/SP2DSatker_XLS');
 			}
 			//------------------------------------------------------------
@@ -4453,7 +4453,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/Rekap_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/Rekap_XLS');
 		}
 		//------------------------------------------------------------
@@ -4553,7 +4553,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/validasiuploadSPM_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/validasiuploadSPM_XLS');
 		}
 		//------------------------------------------------------------
@@ -4667,7 +4667,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/DurasiSPM_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/DurasiSPM_XLS');
 		}
 		//------------------------------------------------------------
@@ -4762,7 +4762,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/NamaSatker_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/NamaSatker_XLS');
 		}
 		//------------------------------------------------------------
@@ -4857,7 +4857,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/RekapSP2D_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/RekapSP2D_XLS');
 		}
 		//------------------------------------------------------------
@@ -4919,7 +4919,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/uploadSPM_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/uploadSPM_XLS');
 		}
 		//------------------------------------------------------------
@@ -5000,7 +5000,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/KonversiSPM_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/KonversiSPM_XLS');
 		}
 		//------------------------------------------------------------
@@ -5072,7 +5072,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/KarwasUPSatker_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/KarwasUPSatker_XLS');
 		}
 		//------------------------------------------------------------
@@ -5143,7 +5143,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/DetailUP_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/DetailUP_XLS');
 		}
 		//------------------------------------------------------------
@@ -5207,7 +5207,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/KarwasTUPSatker_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/KarwasTUPSatker_XLS');
 		}
 		//------------------------------------------------------------
@@ -5262,7 +5262,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/DetailTUP_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/DetailTUP_XLS');
 		}
 		//------------------------------------------------------------
@@ -5368,7 +5368,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/daftarPelimpahan_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/daftarPelimpahan_XLS');
 		}
 		//------------------------------------------------------------
@@ -5477,7 +5477,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('satker/isianSupplier_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('satker/isianSupplier_XLS');
 		}
 		//------------------------------------------------------------
@@ -5550,7 +5550,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/monitoringUser_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/monitoringUser_XLS');
 		}
 		//------------------------------------------------------------
@@ -5629,7 +5629,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/karwasPNBP_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/karwasPNBP_XLS');
 		}
 		//------------------------------------------------------------
@@ -5690,7 +5690,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detail_dipa_pnbp_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detail_dipa_pnbp_XLS');
 		}
 		//------------------------------------------------------------
@@ -5755,7 +5755,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detail_gr_pnbp_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detail_gr_pnbp_XLS');
 		}
 		//------------------------------------------------------------
@@ -5820,7 +5820,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$this->view->judul1=$judul1;
 			if($ck=='PDF'){
 				$this->view->load('kppn/detail_up_pnbp_PDF');
-			}else{
+			}elseif($ck=='XLS'){
 				$this->view->load('kppn/detail_up_pnbp_XLS');
 			}
 			//------------------------------------------------------------
@@ -5940,7 +5940,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/detail_setoran_up_pnbp_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/detail_setoran_up_pnbp_XLS');
 		}
 		//------------------------------------------------------------
@@ -6013,7 +6013,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('blu/karwasBLU_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('blu/karwasBLU_XLS');
 		}
 		//------------------------------------------------------------
@@ -6094,7 +6094,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('blu/daftarSP3_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('blu/daftarSP3_XLS');
 		}
 		//------------------------------------------------------------
@@ -6176,7 +6176,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('blu/cariSP3_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('blu/cariSP3_XLS');
 		}
 		//------------------------------------------------------------
@@ -6255,7 +6255,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('blu/RealisasiBLU_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('blu/RealisasiBLU_XLS');
 		}
 		//------------------------------------------------------------
@@ -6332,7 +6332,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('blu/RealisasiBelanjaBLU_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('blu/RealisasiBelanjaBLU_XLS');
 		}
 		//------------------------------------------------------------
@@ -6406,7 +6406,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/daftarPmrtPkn_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/daftarPmrtPkn_XLS');
 		}
 		//------------------------------------------------------------
@@ -6476,7 +6476,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/daftarPmrtPkn_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/daftarPmrtPkn_XLS');
 		}
 		//------------------------------------------------------------
@@ -6546,7 +6546,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/daftarPmrtPkn_PDF');
-		}else{
+		}elseif($ck=='XLS'){
 			$this->view->load('kppn/daftarPmrtPkn_XLS');
 		}
 		//------------------------------------------------------------
