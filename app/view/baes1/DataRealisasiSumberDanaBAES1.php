@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Pagu dan Realisasi Belanja per Jenis Kewenangan</h2>
+                <h2>Pagu dan Realisasi Belanja per Sumber Dana</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -87,7 +87,7 @@
                 <!--th>KPPN</th-->
                 <!--th>Tanggal</th-->
                 <!--th rowspan=2 class='mid'>Kode BA</th-->
-                <th rowspan=2 class='mid' width='150px'> Jenis Kewenangan </th>
+                <th rowspan=2 class='mid' width='150px'> Kode Sumber Dana </th>
                 <th rowspan=2 class='mid'> Keterangan </th>
                 <th  colspan=9 class='mid'>Jenis Belanja</th>
                 <th   rowspan=2 class='mid'>Total</th>
@@ -120,7 +120,7 @@
                     foreach ($this->data as $value) {
                         echo "<tr>	";
                         echo "<td rowspan=2>" . $no++ . "</td>";
-                        echo "<td rowspan=2 class='ratakiri'>" . $value->get_nmba() . "</td>";
+                        echo "<td rowspan=2 class='ratakiri'>" . $value->get_nmba() . " (".$value->get_ba(). ") </td>";
                         echo "<td align='left'> PAGU <br> REALISASI </td>";
                         echo "<td align='right'>" . number_format($value->get_pagu_51()) ."<br>". number_format($value->get_belanja_51()). "<br>";
 						if	($value->get_pagu_51() == 0) { 
