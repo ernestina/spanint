@@ -30,7 +30,7 @@ class BA_ES1Controller extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
-		$this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
+		
 		
         if (isset($_POST['submit_file'])) {
 
@@ -40,14 +40,16 @@ class BA_ES1Controller extends BaseController {
             }           
         }
 		
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('id_user')."'";
+        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";
 		
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-              
+        
+		$this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
+		
         $d_log->tambah_log("Sukses");
 
-        $this->view->render('baes1/DataRealisasiBA');
+        $this->view->render('baes1/DataRealisasiKegiatan');
     }
 	
 	public function DataRealisasiKegiatanES1() {
@@ -68,14 +70,15 @@ class BA_ES1Controller extends BaseController {
             }           
         }
 		
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('id_user')."'";
+        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";
 		
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-              
+        
+		$this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
         $d_log->tambah_log("Sukses");
 
-        $this->view->render('baes1/DataRealisasiKegiatanBA');
+        $this->view->render('baes1/DataRealisasiKegiatan');
     }
 	
 	public function DataRealisasiAkunBA() {
@@ -127,11 +130,11 @@ class BA_ES1Controller extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());        
 		
-		$this->view->data = $d_spm1->get_realisasi_fa_global_es1_filter($filter);
+		$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 		
         $d_log->tambah_log("Sukses");
 
-        $this->view->render('kppn/DataRealisasiBA');
+        $this->view->render('baes1/DataRealisasiES1');
     }
 	
 	public function DataRealisasiKewenanganBAES1() {
@@ -165,6 +168,39 @@ class BA_ES1Controller extends BaseController {
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKewenaganBAES1');
+    }
+	
+	public function DataRealisasiSumberDanaBAES1() {
+        $d_spm1 = new DataRealisasi($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if (Session::get('role') == KL){		
+			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";			
+		}
+		if (Session::get('role') == ES1){		
+			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";			
+		}
+		
+        if (isset($_POST['submit_file'])) {
+            
+            if ($_POST['kdlokasi'] != '') {
+                $filter[$no++] = "a.lokasi = '" . $_POST['kdlokasi'] . "'";
+                $this->view->lokasi = $_POST['kdlokasi'];
+            }            
+        }      
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());        
+		
+		$this->view->data = $d_spm1->get_realisasi_fa_sumber_dana_baes1_filter($filter);
+		
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/DataRealisasiSumberDanaBAES1');
     }
 	
 	public function nmsatker() {
@@ -274,6 +310,98 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->render('baes1/proses_revisi');
         $d_log->tambah_log("Sukses");
+    }
+	
+	public function RekapSp2dBAES1() {
+        $d_spm1 = new DataCheck($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		 
+		 if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
+		 }
+		 
+		if (Session::get('role') == KL){		
+			$filter[$no++] =  "B.BA = '" . Session::get('kd_baes1')."'";			
+		}
+		if (Session::get('role') == ES1){		
+			$filter[$no++] =  "B.BAES1 = '" . Session::get('kd_baes1')."'";			
+		}
+		 
+        if (isset($_POST['submit_file'])) {
+            
+
+            if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
+                $filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' AND '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "'";
+
+                $this->view->d_tgl_awal = $_POST['tgl_awal'];
+                $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+            }			           
+        
+		}
+        
+        //$this->view->data = $d_spm1->get_sp2d_rekap_filter ($filter);
+        //var_dump($d_spm1->get_error_spm_filter ($filter));
+		
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		
+		$this->view->data = $d_spm1->get_sp2d_rekap_baes1_filter ($filter);
+		
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/RekapSP2D');
+    }
+	
+	public function detailrekapsp2dBAES1($jenis_spm = null, $kppn = null, $tgl_awal = null, $tgl_akhir = null) {
+        $d_spm1 = new DataCheck($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
+		 }
+		 
+		if (Session::get('role') == KL){		
+			$filter[$no++] =  "SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE BA = '" . Session::get('kd_baes1')."')";			
+		}
+		if (Session::get('role') == ES1){		
+			$filter[$no++] =  "SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE BAES1 = '" . Session::get('kd_baes1')."')";			
+		}
+		 
+        if ($jenis_spm != '') {
+            $filter[$no++] = " JENDOK =  '" . $jenis_spm . "'";
+            $this->view->jendok = $jenis_spm;
+        }
+        
+        if ($tgl_awal != '' AND $tgl_akhir != '') {
+
+            $filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($tgl_awal)) . "' AND '" . date('Ymd', strtotime($tgl_akhir)) . "'";
+
+            $this->view->d_tgl_awal = $tgl_awal;
+            $this->view->d_tgl_akhir = $tgl_akhir;
+        }
+
+        $this->view->data = $d_spm1->get_sp2d_satker_filter($filter);
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/Rekap');
     }
 
     //author by jhon
