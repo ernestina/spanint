@@ -787,7 +787,7 @@
                         </li>
 						
 						
-						<li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Data Realisasi</h4>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Realisasi</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunBA">Eselon 1 Per Jenis Belanja</a></li>
@@ -796,16 +796,25 @@
                                    
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Jenis Kegiatan</a></li>
 									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Per Sumber Dana</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Per Wilayah</a></li>
                                     
                                 </ul>
                             </div>
                         </li>
 						
-						<li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Informasi Pembayaran</h4>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Informasi Pembayaran</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/RekapSp2dBAES1">Rekap SP2D</a></li>
-                                                      
+                                     <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>                 
+                                </ul>
+                            </div>
+                        </li>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Informasi Pendapatan</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan</a></li>
+                                                     
                                 </ul>
                             </div>
                         </li>
@@ -830,7 +839,7 @@
                                 </ul>
                             </div>
                         </li>
-						<li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Data Realisasi</h4>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Realisasi</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Per Jenis Belanja</a></li>
@@ -838,14 +847,23 @@
                                     
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanES1">Per Jenis Kegiatan</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Per Sumber Dana</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Per Wilayah</a></li>
                                 </ul>
                             </div>
                         </li>
-						<li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Informasi Pembayaran</h4>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Informasi Pembayaran</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/RekapSp2dBAES1">Rekap SP2D</a></li>
-                                                      
+                                     <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>                  
+                                </ul>
+                            </div>
+                        </li>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Informasi Pendapatan</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan</a></li>
+                                                     
                                 </ul>
                             </div>
                         </li>
