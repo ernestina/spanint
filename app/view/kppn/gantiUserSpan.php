@@ -95,20 +95,26 @@ if (isset($this->d_nama_kppn)) {
 </div>
 
 <div id="table-container" class="wrapper">
-    <table class="footable">
+    <table class="footable align-center">
 
         <thead>
             <tr>
-                <th class="align-center">No.</th>
-                <th class="align-center">Nama Pegawai, NIP</th>
-                <th class="align-center">Posisi</th>
-                <th class="align-center">Tanggal Invoice</th>
-                <th class="align-center">No. Invoice</th>
-                <th class="align-center" width='40%'>Deskripsi Invoice</th>
-                <th class="align-center">Status</th>
-                <!--th class="align-center">NIP</th>
-                
-                <th class="align-center">Posisi</th-->
+                <th rowspan="2">No.</th>
+                <th colspan="3">Semula</th>
+                <th colspan="3">Menjadi</th>
+                <th rowspan="2">No. Surat</th>
+                <th rowspan="2">Tanggal Awal<br>Status</th>
+                <th rowspan="2">Tanggal Akhir<br>Status</th>
+                <th rowspan="2">Catatan</th>
+                <th rowspan="2">Cek Data</th>
+            </tr>
+            <tr>
+                <th >Nama, NIP</th>
+                <th >Email</th>
+                <th >Posisi</th>
+                <th >Nama, NIP</th>
+                <th >Email</th>
+                <th >Posisi</th>
             </tr>
         </thead>
 
@@ -127,18 +133,25 @@ if (isset($this->d_nama_kppn)) {
                     <?php foreach ($this->data as $value) { ?>
 
                     <tr>
-                        <td class="align-center"><?php echo $no++; ?></td>
-                        <td class="align-left"><?php echo $value->get_nama_pegawai(); echo "<br>"; 
-                            echo $value->get_username();  ?></td>
-                        <td class="align-center"><?php echo $value->get_posisi(); ?></td>
-                        <td class="align-center"><?php echo $value->get_tgl_invoice(); ?></td>
-                        <td class="align-center"><?php echo $value->get_no_invoice(); ?></td>
-                        <td class="align-left"><?php echo $value->get_desc_invoice(); ?></td>
-                        <td class="align-center"><?php echo $value->get_wfapproval_status(); echo "<br>"; 
-                            echo $value->get_status();  ?></td>
-                        <!--td class="align-center"><?php echo $value->get_username(); ?></td>
-                        
-                        <td class="align-center"><?php echo $value->get_posisi(); ?></td-->
+                        <td><?php echo $no++; ?></td>
+                        <td class="align-left"><?php echo $value->get_nama_usr_awal(); echo "<br>"; 
+                            echo $value->get_nip_usr_awal();  ?></td>
+                        <td ><?php echo $value->get_email_usr_awal(); ?></td>
+                        <td ><?php echo $value->get_posisi_user_awal(); ?></td>
+                        <td class="align-left"><?php echo $value->get_nama_usr_pengganti(); echo "<br>"; 
+                            echo $value->get_nip_usr_pengganti();  ?></td>
+                        <td ><?php echo $value->get_email_usr_pengganti(); ?></td>
+                        <td ><?php echo $value->get_posisi_user_pengganti(); ?></td>
+                        <td ><?php echo $value->get_surat(); ?></td>
+                        <td ><?php echo $value->get_tanggal_awal(); echo "<br>"; 
+                            echo $value->get_status_setup_awal();  ?></td>
+                        <td ><?php echo $value->get_tanggal_akhir(); echo "<br>"; 
+                            echo $value->get_status_setup_akhir();  ?></td>
+                        <td class="align-left"><?php echo $value->get_catatan(); ?></td>
+                        <td ><?php echo "<a href='#'>Cek Data</a>"
+                            //if ($value->get_posisi_user_awal == '')
+                                
+                                ; ?></td>
                     </tr>
 
         <?php }  ?>

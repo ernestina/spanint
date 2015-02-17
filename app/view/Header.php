@@ -79,6 +79,7 @@
                             <div class="collapse"> <!-- Class 'collapse' memberitahu bootstrap bahwa item ini disembunyikan dan bisa di-expand (lihat dokumentasi Bootstrap) -->
                                 <ul>
                                     <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring User Aktif</a></li>
+                                    <li><a href="<?php echo URL; ?>userSpan/pergantianUser">Monitoring Pergantian User</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -118,8 +119,8 @@
                                     <li><a href="<?php echo URL; ?>dataSPM/DurasiSpm">Durasi Penyelesaian SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/nmsatker">Daftar SP2D per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
-									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP (Uji Coba)</a></li>
-									<li><a href="<?php echo URL; ?>dataSPM/KarwasTUPSatker">Karwas TUP (Uji Coba)</a></li>
+									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP</a></li>
+									<li><a href="<?php echo URL; ?>dataSPM/KarwasTUPSatker">Karwas TUP</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -269,8 +270,8 @@
                                     <li><a href="<?php echo URL; ?>dataSPM/DurasiSpm">Durasi Penyelesaian SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/nmsatker">Daftar SP2D per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
-									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP (Uji Coba)</a></li>
-									<li><a href="<?php echo URL; ?>dataSPM/KarwasTUPSatker">Karwas TUP (Uji Coba)</a></li>
+									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP</a></li>
+									<li><a href="<?php echo URL; ?>dataSPM/KarwasTUPSatker">Karwas TUP</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -389,6 +390,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring User Aktif</a></li>
+                                    <li><a href="<?php echo URL; ?>userSpan/pergantianUser">Monitoring Pergantian User</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -431,8 +433,8 @@
                                     <li><a href="<?php echo URL; ?>dataSPM/nmsatker">Daftar SP2D per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataSPM/RekapSp2d">Rekap Penerbitan SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>dataPNBP/KarwasPNBP">Karwas Maksimum Pencairan (PNBP)</a></li>
-									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP (Uji Coba)</a></li>
-									<li><a href="<?php echo URL; ?>dataSPM/KarwasTUPSatker">Karwas TUP (Uji Coba)</a></li>
+									<li><a href="<?php echo URL; ?>dataSPM/KarwasUPSatker">Karwas UP</a></li>
+									<li><a href="<?php echo URL; ?>dataSPM/KarwasTUPSatker">Karwas TUP</a></li>
                                 </ul>
                             </div>
                         </li>

@@ -124,7 +124,7 @@ $registry->auth->add_access('dataKppn','kppn',$akses['DataKppnKPPN']);
 $registry->auth->add_access('dataRetur','kppn',$akses['DataReturKPPN']);
 $registry->auth->add_access('dataSPM','kppn',$akses['DataSPMKPPN']);
 $registry->auth->add_access('dataSupplier','kppn',$akses['DataSupplierKPPN']);
-$registry->auth->add_access('userSpan','kppn',$akses['UserSpanAdmin']);
+$registry->auth->add_access('userSpan','kppn',$akses['UserSpanKPPN']);
 $registry->auth->add_access('dataPelimpahan','kppn',$akses['DataPelimpahanKPPN']);
 $registry->auth->add_access('PDF','kppn',$akses['PDFKPPN']);
 $registry->auth->add_access('panduan','kppn',$akses['PanduanKPPN']);

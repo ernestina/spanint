@@ -173,7 +173,7 @@ class UserSpanController extends BaseController {
         $this->view->render('Template-Default');
     }
     
-    public function pergantianUser() {
+    public function invoiceProses() {
         $d_user = new DataUserSPAN($this->registry);
         $filter = array();
         $no = 0;
@@ -211,15 +211,61 @@ class UserSpanController extends BaseController {
 
             $this->view->data = $d_user->get_spm_gantung($filter);
         } 
-//var_dump ($d_user->get_spm_gantung($filter));
+        //var_dump ($d_user->get_spm_gantung($filter));
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_user->get_table1());
 		
+        $this->view->render('kppn/invoiceProses');
+		$d_log->tambah_log("Sukses");
+    
+    }
+    
+    public function pergantianUser(){
+        $d_user = new DataUserSPAN($this->registry);
+        $filter = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        /*
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        */
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = " KODE_UNIT = '" . Session::get('id_user') . "'";
+            $this->view->data = $d_user->get_ganti_user($filter);
+            
+        }
+
+        if (isset($_POST['submit_file'])) {
+            if ($_POST['kdkppn'] != '') {
+                $filter[$no++] = " KODE_UNIT = '" . $_POST['kdkppn'] . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            } else {
+                $filter[$no++] = " KODE_UNIT = " . Session::get('id_user');
+                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            }
+
+            $this->view->data = $d_user->get_ganti_user($filter);
+        } 
+        //var_dump ($d_user->get_spm_gantung($filter));
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_user->get_table4());
+		
         $this->view->render('kppn/gantiUserSpan');
 		$d_log->tambah_log("Sukses");
-        
-        
     }
 
     public function __destruct() {
