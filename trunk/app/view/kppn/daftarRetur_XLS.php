@@ -70,69 +70,46 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode BA");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama BA");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Pagu Pegawai");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Tgl.SP2D(SP2D Retur) ");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Realisasi Pegawai");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "No.SP2D(SP2D Retur)");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Sisa Pegawai");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "No.Transaksi(SP2D Retur)");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Pagu Barang");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Bank Pembayar(SP2D Retur)");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Realisasi Barang");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Bank Penerima(SP2D Retur)");
 //p9
-$objPHPExcel->getActiveSheet()->setCellValue('I4', "Sisa Barang");
+$objPHPExcel->getActiveSheet()->setCellValue('I4', "Nama Penerima(SP2D Retur)");
 //p10
-$objPHPExcel->getActiveSheet()->setCellValue('J4', "Pagu Modal");
+$objPHPExcel->getActiveSheet()->setCellValue('J4', "No.Rek. Penerima(SP2D Retur)");
 //p11
-$objPHPExcel->getActiveSheet()->setCellValue('K4', "Realisasi Modal");
+$objPHPExcel->getActiveSheet()->setCellValue('K4', "Jumlah(SP2D Retur) ");
 //p12
-$objPHPExcel->getActiveSheet()->setCellValue('L4', "Sisa Modal");
+$objPHPExcel->getActiveSheet()->setCellValue('L4', "Uraian SP2D(SP2D Retur)");
 //p13
-$objPHPExcel->getActiveSheet()->setCellValue('M4', "Pagu Beban Bunga");
+$objPHPExcel->getActiveSheet()->setCellValue('M4', "Alasan Retur(SP2D Retur) ");
 //p14
-$objPHPExcel->getActiveSheet()->setCellValue('N4', "Realisasi Beban Bunga");
+$objPHPExcel->getActiveSheet()->setCellValue('N4', "Tgl Proses(SP2D Pengganti) ");
 //p15
-$objPHPExcel->getActiveSheet()->setCellValue('O4', "Sisa Beban Bunga");
+$objPHPExcel->getActiveSheet()->setCellValue('O4', "Tgl. SP2D(SP2D Pengganti)");
 //p16
-$objPHPExcel->getActiveSheet()->setCellValue('P4', "Pagu Subsidi");
+$objPHPExcel->getActiveSheet()->setCellValue('P4', "No. SP2D(SP2D Pengganti)");
 //p17
-$objPHPExcel->getActiveSheet()->setCellValue('Q4', "Realisasi Subsidi");
+$objPHPExcel->getActiveSheet()->setCellValue('Q4', "Bank Penerima(SP2D Pengganti)");
 //p18
-$objPHPExcel->getActiveSheet()->setCellValue('R4', "Sisa Subsidi");
+$objPHPExcel->getActiveSheet()->setCellValue('R4', "Nama Penerima(SP2D Pengganti)");
 //p19
-$objPHPExcel->getActiveSheet()->setCellValue('S4', "Pagu Hibah");
+$objPHPExcel->getActiveSheet()->setCellValue('S4', "No.Rek Penerima(SP2D Pengganti)");
 //p20
-$objPHPExcel->getActiveSheet()->setCellValue('T4', "Realisasi Hibah");
+$objPHPExcel->getActiveSheet()->setCellValue('T4', "Jumlah Penerima(SP2D Pengganti)");
 //p21
-$objPHPExcel->getActiveSheet()->setCellValue('U4', "Sisa Hibah");
-//p22
-$objPHPExcel->getActiveSheet()->setCellValue('V4', "Pagu Bansos");
-//p23
-$objPHPExcel->getActiveSheet()->setCellValue('W4', "Realisasi Bansos");
-//p24
-$objPHPExcel->getActiveSheet()->setCellValue('X4', "Sisa Bansos");
-//p25
-$objPHPExcel->getActiveSheet()->setCellValue('Y4', "Pagu Lain-lain");
-//p26
-$objPHPExcel->getActiveSheet()->setCellValue('Z4', "Realisasi Lain-lain");
-//p27
-$objPHPExcel->getActiveSheet()->setCellValue('AA4', "Sisa Lain-lain");
-//p28
-$objPHPExcel->getActiveSheet()->setCellValue('AB4', "Pagu Transfer");
-//p29
-$objPHPExcel->getActiveSheet()->setCellValue('AC4', "Realisasi Transfer");
-//p30
-$objPHPExcel->getActiveSheet()->setCellValue('AD4', "Sisa Transfer");
-//p31
-$objPHPExcel->getActiveSheet()->setCellValue('AE4', "Pagu Total");
-//p32
-$objPHPExcel->getActiveSheet()->setCellValue('AF4', "Realisasi Total");
-//p33
-$objPHPExcel->getActiveSheet()->setCellValue('AG4', "Sisa Total");
+$objPHPExcel->getActiveSheet()->setCellValue('U4', "Status Retur(SP2D Pengganti)");
+
 //Data
 if (count($this->data) == 0) {
 	echo 'Tidak ada data'; 
@@ -144,164 +121,35 @@ if (count($this->data) == 0) {
 
  
 	$nil['p1']=$no;
-	$nil['p2']=strval($value->get_ba());
-	$nil['p3']=strtoupper($value->get_nmba());
-	
-	//pengecekan
-	if ($value->get_pagu_51()==0){
-		$nil['p4']='0';
-	}else{
-		$nil['p4']=$value->get_pagu_51();
-	}			
-	if ($value->get_belanja_51()==0){
-		$nil['p5']='0';
-	}else{
-		$nil['p5']=$value->get_belanja_51();
-	}			
-	if ($value->get_pagu_51()-$value->get_belanja_51()==0){
-		$nil['p6']='0';
-	}else{
-		$nil['p6']=$value->get_pagu_51()-$value->get_belanja_51();
-	}			
-	if ($value->get_pagu_52()==0){
-		$nil['p7']='0';
-	}else{
-		$nil['p7']=$value->get_pagu_52();
-	}			
-	if ($value->get_belanja_52()==0){
-		$nil['p8']='0';
-	}else{
-		$nil['p8']=$value->get_belanja_52();
-	}			
-
-	if ($value->get_pagu_52()-$value->get_belanja_52()==0){
-		$nil['p9']='0';
-	}else{
-		$nil['p9']=$value->get_pagu_52()-$value->get_belanja_52();
-	}			
-	if ($value->get_pagu_53()==0){
-		$nil['p10']='0';
-	}else{
-		$nil['p10']=$value->get_pagu_53();
-	}			
-	if ($value->get_belanja_53()==0){
+	$nil['p2']=$value->get_kdsatker();
+	$nil['p3']=$value->get_nmsatker();
+	$nil['p4']=$value->get_statement_date();
+	$nil['p5']=$value->get_sp2d_number();
+	$nil['p6']=$value->get_receipt_number();
+	$nil['p7']=$value->get_bank_account_name();
+	$nil['p8']=$value->get_bank_name();
+	$nil['p9']=$value->get_vendor_name();
+	$nil['p10']=$value->get_vendor_ext_bank_account_num();
+	if ($value->get_amount==0){
 		$nil['p11']='0';
 	}else{
-		$nil['p11']=$value->get_belanja_53();
+		$nil['p11']=$value->get_amount();
 	}			
-	if ($value->get_pagu_53()-$value->get_belanja_53()==0){
-		$nil['p12']='0';
-	}else{
-		$nil['p12']=$value->get_pagu_53()-$value->get_belanja_53();
-	}			
-	if ($value->get_pagu_54()==0){
-		$nil['p13']='0';
-	}else{
-		$nil['p13']=$value->get_pagu_54();
-	}								
-	if ($value->get_belanja_54()==0){
-		$nil['p14']='0';
-	}else{
-		$nil['p14']=$value->get_belanja_54();
-	}			
-	if ($value->get_pagu_54()-$value->get_belanja_54()==0){
-		$nil['p15']='0';
-	}else{
-		$nil['p15']=$value->get_pagu_54()-$value->get_belanja_54();
-	}			
-	if ($value->get_pagu_55()==0){
-		$nil['p16']='0';
-	}else{
-		$nil['p16']=$value->get_pagu_55();
-	}			
-	if ($value->get_belanja_55()==0){
-		$nil['p17']='0';
-	}else{
-		$nil['p17']=$value->get_belanja_55();
-	}			
-	if ($value->get_pagu_55()-$value->get_belanja_55()==0){
-		$nil['p18']='0';
-	}else{
-		$nil['p18']=$value->get_pagu_55()-$value->get_belanja_55();
-	}			
-	if ($value->get_pagu_56()==0){
-		$nil['p19']='0';
-	}else{
-		$nil['p19']=$value->get_pagu_56();
-	}			
-	if ($value->get_belanja_56()==0){
+	$nil['p12']=$value->get_invoice_description();
+	$nil['p13']=$value->get_keterangan_retur();
+	$nil['p14']=$value->get_tgl_proses_sp2d_pengganti();
+	
+	$nil['p15']=$value->get_tgsp2d_pengganti();
+	$nil['p16']=$value->get_nosp2d_pengganti();
+	$nil['p17']=$value->get_bank_name_pengganti();
+	$nil['p18']=$value->get_vendor_name_pengganti();
+	$nil['p19']=$value->get_vendor_account_num_pengganti();
+	if ($value->get_nilai_sp2d_pengganti()==0){
 		$nil['p20']='0';
 	}else{
-		$nil['p20']=$value->get_belanja_56();
+		$nil['p20']=$value->get_nilai_sp2d_pengganti();
 	}			
-	if ($value->get_pagu_56()-$value->get_belanja_56()==0){
-		$nil['p21']='0';
-	}else{
-		$nil['p21']=$value->get_pagu_56()-$value->get_belanja_56();
-	}			
-	if ($value->get_pagu_57()==0){
-		$nil['p22']='0';
-	}else{
-		$nil['p22']=$value->get_pagu_57();
-	}			
-	if ($value->get_belanja_57()==0){
-		$nil['p23']='0';
-	}else{
-		$nil['p23']=$value->get_belanja_57();
-	}			
-	if ($value->get_pagu_57()-$value->get_belanja_57()==0){
-		$nil['p24']='0';
-	}else{
-		$nil['p24']=$value->get_pagu_57()-$value->get_belanja_57();
-	}			
-	if ($value->get_pagu_58()==0){
-		$nil['p25']='0';
-	}else{
-		$nil['p25']=$value->get_pagu_58();
-	}			
-	if ($value->get_belanja_58()==0){
-		$nil['p26']='0';
-	}else{
-		$nil['p26']=$value->get_belanja_58();
-	}			
-	if ($value->get_pagu_58()-$value->get_belanja_58()==0){
-		$nil['p27']='0';
-	}else{
-		$nil['p27']=$value->get_pagu_58()-$value->get_belanja_58();
-	}			
-	if ($value->get_pagu_61()==0){
-		$nil['p28']='0';
-	}else{
-		$nil['p28']=$value->get_pagu_61();
-	}			
-
-	if ($value->get_belanja_61()==0){
-		$nil['p29']='0';
-	}else{
-		$nil['p29']=$value->get_belanja_61();
-	}			
-	if ($value->get_pagu_61()-$value->get_belanja_61()==0){
-		$nil['p30']='0';
-	}else{
-		$nil['p30']=$value->get_pagu_61()-$value->get_belanja_61();
-	}			
-	if ($value->get_pagu()==0){
-		$nil['p31']='0';
-	}else{
-		$nil['p31']=$value->get_pagu();
-	}			
-
-	if ($value->get_realisasi()==0){
-		$nil['p32']='0';
-	}else{
-		$nil['p32']=$value->get_realisasi();
-	}			
-
-	if ($value->get_pagu()-$value->get_realisasi()==0){
-		$nil['p33']='0';
-	}else{
-		$nil['p33']=$value->get_pagu()-$value->get_realisasi();
-	}			
+	$nil['p21']='KPPN  '.$value->get_status_retur();
 
 		array_push($dataArray,$nil);
 

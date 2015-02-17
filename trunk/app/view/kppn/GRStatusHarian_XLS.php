@@ -70,69 +70,69 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode BA");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Bulan");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama BA");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Tanggal LHP 1");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Pagu Pegawai");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Tanggal LHP 2");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Realisasi Pegawai");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Tanggal LHP 3");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Sisa Pegawai");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Tanggal LHP 4");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Pagu Barang");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal LHP 5");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Realisasi Barang");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Tanggal LHP 6");
 //p9
-$objPHPExcel->getActiveSheet()->setCellValue('I4', "Sisa Barang");
+$objPHPExcel->getActiveSheet()->setCellValue('I4', "Tanggal LHP 7");
 //p10
-$objPHPExcel->getActiveSheet()->setCellValue('J4', "Pagu Modal");
+$objPHPExcel->getActiveSheet()->setCellValue('J4', "Tanggal LHP 8");
 //p11
-$objPHPExcel->getActiveSheet()->setCellValue('K4', "Realisasi Modal");
+$objPHPExcel->getActiveSheet()->setCellValue('K4', "Tanggal LHP 9");
 //p12
-$objPHPExcel->getActiveSheet()->setCellValue('L4', "Sisa Modal");
+$objPHPExcel->getActiveSheet()->setCellValue('L4', "Tanggal LHP 10");
 //p13
-$objPHPExcel->getActiveSheet()->setCellValue('M4', "Pagu Beban Bunga");
+$objPHPExcel->getActiveSheet()->setCellValue('M4', "Tanggal LHP 11");
 //p14
-$objPHPExcel->getActiveSheet()->setCellValue('N4', "Realisasi Beban Bunga");
+$objPHPExcel->getActiveSheet()->setCellValue('N4', "Tanggal LHP 12");
 //p15
-$objPHPExcel->getActiveSheet()->setCellValue('O4', "Sisa Beban Bunga");
+$objPHPExcel->getActiveSheet()->setCellValue('O4', "Tanggal LHP 13");
 //p16
-$objPHPExcel->getActiveSheet()->setCellValue('P4', "Pagu Subsidi");
+$objPHPExcel->getActiveSheet()->setCellValue('P4', "Tanggal LHP 14");
 //p17
-$objPHPExcel->getActiveSheet()->setCellValue('Q4', "Realisasi Subsidi");
+$objPHPExcel->getActiveSheet()->setCellValue('Q4', "Tanggal LHP 15");
 //p18
-$objPHPExcel->getActiveSheet()->setCellValue('R4', "Sisa Subsidi");
+$objPHPExcel->getActiveSheet()->setCellValue('R4', "Tanggal LHP 16");
 //p19
-$objPHPExcel->getActiveSheet()->setCellValue('S4', "Pagu Hibah");
+$objPHPExcel->getActiveSheet()->setCellValue('S4', "Tanggal LHP 17");
 //p20
-$objPHPExcel->getActiveSheet()->setCellValue('T4', "Realisasi Hibah");
+$objPHPExcel->getActiveSheet()->setCellValue('T4', "Tanggal LHP 18");
 //p21
-$objPHPExcel->getActiveSheet()->setCellValue('U4', "Sisa Hibah");
+$objPHPExcel->getActiveSheet()->setCellValue('U4', "Tanggal LHP 19");
 //p22
-$objPHPExcel->getActiveSheet()->setCellValue('V4', "Pagu Bansos");
+$objPHPExcel->getActiveSheet()->setCellValue('V4', "Tanggal LHP 20");
 //p23
-$objPHPExcel->getActiveSheet()->setCellValue('W4', "Realisasi Bansos");
+$objPHPExcel->getActiveSheet()->setCellValue('W4', "Tanggal LHP 21");
 //p24
-$objPHPExcel->getActiveSheet()->setCellValue('X4', "Sisa Bansos");
+$objPHPExcel->getActiveSheet()->setCellValue('X4', "Tanggal LHP 22");
 //p25
-$objPHPExcel->getActiveSheet()->setCellValue('Y4', "Pagu Lain-lain");
+$objPHPExcel->getActiveSheet()->setCellValue('Y4', "Tanggal LHP 23");
 //p26
-$objPHPExcel->getActiveSheet()->setCellValue('Z4', "Realisasi Lain-lain");
+$objPHPExcel->getActiveSheet()->setCellValue('Z4', "Tanggal LHP 24");
 //p27
-$objPHPExcel->getActiveSheet()->setCellValue('AA4', "Sisa Lain-lain");
+$objPHPExcel->getActiveSheet()->setCellValue('AA4', "Tanggal LHP 25");
 //p28
-$objPHPExcel->getActiveSheet()->setCellValue('AB4', "Pagu Transfer");
+$objPHPExcel->getActiveSheet()->setCellValue('AB4', "Tanggal LHP 26");
 //p29
-$objPHPExcel->getActiveSheet()->setCellValue('AC4', "Realisasi Transfer");
+$objPHPExcel->getActiveSheet()->setCellValue('AC4', "Tanggal LHP 27");
 //p30
-$objPHPExcel->getActiveSheet()->setCellValue('AD4', "Sisa Transfer");
+$objPHPExcel->getActiveSheet()->setCellValue('AD4', "Tanggal LHP 28");
 //p31
-$objPHPExcel->getActiveSheet()->setCellValue('AE4', "Pagu Total");
+$objPHPExcel->getActiveSheet()->setCellValue('AE4', "Tanggal LHP 29");
 //p32
-$objPHPExcel->getActiveSheet()->setCellValue('AF4', "Realisasi Total");
+$objPHPExcel->getActiveSheet()->setCellValue('AF4', "Tanggal LHP 30");
 //p33
-$objPHPExcel->getActiveSheet()->setCellValue('AG4', "Sisa Total");
+$objPHPExcel->getActiveSheet()->setCellValue('AG4', "Tanggal LHP 31");
 //Data
 if (count($this->data) == 0) {
 	echo 'Tidak ada data'; 
@@ -144,163 +144,167 @@ if (count($this->data) == 0) {
 
  
 	$nil['p1']=$no;
-	$nil['p2']=strval($value->get_ba());
-	$nil['p3']=strtoupper($value->get_nmba());
+	$nil['p2']=$value->get_bulan();
 	
 	//pengecekan
-	if ($value->get_pagu_51()==0){
+	if ($value->get_r01()==0){
+		$nil['p3']='0';
+	}else{
+		$nil['p3']=$value->get_r01();
+	}			
+	if ($value->get_r02()==0){
 		$nil['p4']='0';
 	}else{
-		$nil['p4']=$value->get_pagu_51();
+		$nil['p4']=$value->get_r02();
 	}			
-	if ($value->get_belanja_51()==0){
+	if ($value->get_r03()==0){
 		$nil['p5']='0';
 	}else{
-		$nil['p5']=$value->get_belanja_51();
+		$nil['p5']=$value->get_r03();
 	}			
-	if ($value->get_pagu_51()-$value->get_belanja_51()==0){
+	if ($value->get_r04()==0){
 		$nil['p6']='0';
 	}else{
-		$nil['p6']=$value->get_pagu_51()-$value->get_belanja_51();
+		$nil['p6']=$value->get_r04();
 	}			
-	if ($value->get_pagu_52()==0){
+	if ($value->get_r05()==0){
 		$nil['p7']='0';
 	}else{
-		$nil['p7']=$value->get_pagu_52();
+		$nil['p7']=$value->get_r05();
 	}			
-	if ($value->get_belanja_52()==0){
+
+	if ($value->get_r06()==0){
 		$nil['p8']='0';
 	}else{
-		$nil['p8']=$value->get_belanja_52();
+		$nil['p8']=$value->get_r06();
 	}			
-
-	if ($value->get_pagu_52()-$value->get_belanja_52()==0){
+	if ($value->get_r07()==0){
 		$nil['p9']='0';
 	}else{
-		$nil['p9']=$value->get_pagu_52()-$value->get_belanja_52();
+		$nil['p9']=$value->get_r07();
 	}			
-	if ($value->get_pagu_53()==0){
+	if ($value->get_r08()==0){
 		$nil['p10']='0';
 	}else{
-		$nil['p10']=$value->get_pagu_53();
+		$nil['p10']=$value->get_r08();
 	}			
-	if ($value->get_belanja_53()==0){
+	if ($value->get_r09()==0){
 		$nil['p11']='0';
 	}else{
-		$nil['p11']=$value->get_belanja_53();
+		$nil['p11']=$value->get_r09();
 	}			
-	if ($value->get_pagu_53()-$value->get_belanja_53()==0){
+	if ($value->get_r10()==0){
 		$nil['p12']='0';
 	}else{
-		$nil['p12']=$value->get_pagu_53()-$value->get_belanja_53();
-	}			
-	if ($value->get_pagu_54()==0){
+		$nil['p12']=$value->get_r10();
+	}								
+	if ($value->get_r11()==0){
 		$nil['p13']='0';
 	}else{
-		$nil['p13']=$value->get_pagu_54();
-	}								
-	if ($value->get_belanja_54()==0){
+		$nil['p13']=$value->get_r11();
+	}			
+	if ($value->get_r12()==0){
 		$nil['p14']='0';
 	}else{
-		$nil['p14']=$value->get_belanja_54();
+		$nil['p14']=$value->get_r12();
 	}			
-	if ($value->get_pagu_54()-$value->get_belanja_54()==0){
+	if ($value->get_r13()==0){
 		$nil['p15']='0';
 	}else{
-		$nil['p15']=$value->get_pagu_54()-$value->get_belanja_54();
+		$nil['p15']=$value->get_r13();
 	}			
-	if ($value->get_pagu_55()==0){
+	if ($value->get_r14()==0){
 		$nil['p16']='0';
 	}else{
-		$nil['p16']=$value->get_pagu_55();
+		$nil['p16']=$value->get_r14();
 	}			
-	if ($value->get_belanja_55()==0){
+	if ($value->get_r15()==0){
 		$nil['p17']='0';
 	}else{
-		$nil['p17']=$value->get_belanja_55();
+		$nil['p17']=$value->get_r15();
 	}			
-	if ($value->get_pagu_55()-$value->get_belanja_55()==0){
+	if ($value->get_r16()==0){
 		$nil['p18']='0';
 	}else{
-		$nil['p18']=$value->get_pagu_55()-$value->get_belanja_55();
+		$nil['p18']=$value->get_r16();
 	}			
-	if ($value->get_pagu_56()==0){
+	if ($value->get_r17()==0){
 		$nil['p19']='0';
 	}else{
-		$nil['p19']=$value->get_pagu_56();
+		$nil['p19']=$value->get_r17();
 	}			
-	if ($value->get_belanja_56()==0){
+	if ($value->get_r18()==0){
 		$nil['p20']='0';
 	}else{
-		$nil['p20']=$value->get_belanja_56();
+		$nil['p20']=$value->get_r18();
 	}			
-	if ($value->get_pagu_56()-$value->get_belanja_56()==0){
+	if ($value->get_r19()==0){
 		$nil['p21']='0';
 	}else{
-		$nil['p21']=$value->get_pagu_56()-$value->get_belanja_56();
+		$nil['p21']=$value->get_r19();
 	}			
-	if ($value->get_pagu_57()==0){
+	if ($value->get_r20()==0){
 		$nil['p22']='0';
 	}else{
-		$nil['p22']=$value->get_pagu_57();
+		$nil['p22']=$value->get_r20();
 	}			
-	if ($value->get_belanja_57()==0){
+	if ($value->get_r21()==0){
 		$nil['p23']='0';
 	}else{
-		$nil['p23']=$value->get_belanja_57();
+		$nil['p23']=$value->get_r21();
 	}			
-	if ($value->get_pagu_57()-$value->get_belanja_57()==0){
+	if ($value->get_r22()==0){
 		$nil['p24']='0';
 	}else{
-		$nil['p24']=$value->get_pagu_57()-$value->get_belanja_57();
+		$nil['p24']=$value->get_r22();
 	}			
-	if ($value->get_pagu_58()==0){
+	if ($value->get_r23()==0){
 		$nil['p25']='0';
 	}else{
-		$nil['p25']=$value->get_pagu_58();
+		$nil['p25']=$value->get_r23();
 	}			
-	if ($value->get_belanja_58()==0){
+	if ($value->get_r24()==0){
 		$nil['p26']='0';
 	}else{
-		$nil['p26']=$value->get_belanja_58();
+		$nil['p26']=$value->get_r24();
 	}			
-	if ($value->get_pagu_58()-$value->get_belanja_58()==0){
+	if ($value->get_r25()==0){
 		$nil['p27']='0';
 	}else{
-		$nil['p27']=$value->get_pagu_58()-$value->get_belanja_58();
+		$nil['p27']=$value->get_r25();
 	}			
-	if ($value->get_pagu_61()==0){
+
+	if ($value->get_r26()==0){
 		$nil['p28']='0';
 	}else{
-		$nil['p28']=$value->get_pagu_61();
+		$nil['p28']=$value->get_r26();
 	}			
-
-	if ($value->get_belanja_61()==0){
+	if ($value->get_r27()==0){
 		$nil['p29']='0';
 	}else{
-		$nil['p29']=$value->get_belanja_61();
+		$nil['p29']=$value->get_r27();
 	}			
-	if ($value->get_pagu_61()-$value->get_belanja_61()==0){
+	if ($value->get_r28()==0){
 		$nil['p30']='0';
 	}else{
-		$nil['p30']=$value->get_pagu_61()-$value->get_belanja_61();
+		$nil['p30']=$value->get_r28();
 	}			
-	if ($value->get_pagu()==0){
+
+	if ($value->get_r29()==0){
 		$nil['p31']='0';
 	}else{
-		$nil['p31']=$value->get_pagu();
+		$nil['p31']=$value->get_r29();
 	}			
 
-	if ($value->get_realisasi()==0){
+	if ($value->get_r30()==0){
 		$nil['p32']='0';
 	}else{
-		$nil['p32']=$value->get_realisasi();
+		$nil['p32']=$value->get_r30();
 	}			
-
-	if ($value->get_pagu()-$value->get_realisasi()==0){
+	if ($value->get_r31()==0){
 		$nil['p33']='0';
 	}else{
-		$nil['p33']=$value->get_pagu()-$value->get_realisasi();
+		$nil['p33']=$value->get_r31();
 	}			
 
 		array_push($dataArray,$nil);
