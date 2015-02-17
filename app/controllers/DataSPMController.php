@@ -916,14 +916,16 @@ class DataSPMController extends BaseController {
         }
 		if ($jendok == 'UP') {
                 $filter[$no++] = " JENIS_SPM = 'UP'";
+				$this->view->jendok = $jendok;
         }
 		else {
 				$filter[$no++] = " JENIS_SPM = 'GUP NIHIL'";
+				
 		}
 		
 		if($sumber_dana != '') {
 			 $filter[$no++] = " SUMBER_DANA =  '" . $sumber_dana. "'";
-		
+			
 		}
 
 		$this->view->data1 = $d_spm1->get_total_up($filter);
@@ -960,7 +962,7 @@ class DataSPMController extends BaseController {
         }
 		if($sumber_dana != '') {
 			 $filter[$no++] = " SUMBER_DANA =  '" . $sumber_dana. "'";
-		
+			$this->view->sumber_dana = $sumber_dana;
 		}
 		
 		if ($tgl1 != '' AND $tgl2 != '') {
