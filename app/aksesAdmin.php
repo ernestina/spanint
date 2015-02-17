@@ -304,6 +304,21 @@ $akses['DataBPNAdmin'] = array(
 );
 
 /*
+ * akses modul BA_ES1
+ */
+$akses['BaEs1Admin'] = array(
+    '__construct',
+    'DataRealisasiKegiatanBA',
+    'DataRealisasiKegiatanES1',
+    'DataRealisasiAkunBA',
+    'DataRealisasiAkunES1',
+    'DataRealisasiKewenanganBAES1',
+    'nmsatker',
+    'ProsesRevisi',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFAdmin'] = array(

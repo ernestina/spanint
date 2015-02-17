@@ -26,4 +26,19 @@ $akses['AuthES1'] = array(
     '__destruct'
 );
 
+/*
+ * akses modul BA_ES1
+ */
+$akses['BaEs1ES1'] = array(
+    '__construct',
+    'DataRealisasiKegiatanBA',
+    'DataRealisasiKegiatanES1',
+    'DataRealisasiAkunBA',
+    'DataRealisasiAkunES1',
+    'DataRealisasiKewenanganBAES1',
+    'nmsatker',
+    'ProsesRevisi',
+    '__destruct'
+);
+
 ?>

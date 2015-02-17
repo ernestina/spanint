@@ -96,6 +96,7 @@ if (Session::get('kd_satker') == andi ){
 }
 $registry->auth->add_access('dataPMRTPKN','admin',$akses['DataPMRTPKNAdmin']);
 $registry->auth->add_access('dataBPN','admin',$akses['DataBPNAdmin']);
+$registry->auth->add_access('BA_ES1','admin',$akses['BaEs1Admin']);
 
 //level satker
 $registry->auth->add_access('auth','satker',$akses['AuthSatker']);
@@ -184,10 +185,12 @@ $registry->auth->add_access('PDF','bank',$akses['PDFBank']);
 //level KL
 $registry->auth->add_access('auth','kl',$akses['AuthKL']);
 $registry->auth->add_access('home','kl',$akses['HomeKL']);
+$registry->auth->add_access('BA_ES1','kl',$akses['BaEs1KL']);
 
 //level ES1
 $registry->auth->add_access('auth','es1',$akses['AuthES1']);
 $registry->auth->add_access('home','es1',$akses['HomeES1']);
+$registry->auth->add_access('BA_ES1','es1',$akses['BaEs1ES1']);
 
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
