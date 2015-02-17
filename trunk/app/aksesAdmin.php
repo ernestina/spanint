@@ -247,6 +247,7 @@ $akses['UserSpanAdmin'] = array(
     'monitoringUserSpan',
     'monitoringUserSpan_PDF',
     'pergantianUser',
+    'invoiceProses',
     '__destruct'
 );
 
