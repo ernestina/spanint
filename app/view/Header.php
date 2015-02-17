@@ -334,6 +334,14 @@
                             </div>
                         </li>
 
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+								</ul>
+                            </div>
+                        </li>
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                             <div class="collapse">
                                 <ul>
@@ -715,6 +723,14 @@
                                     <!--<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>-->
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
                                 </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+								</ul>
                             </div>
                         </li>
 

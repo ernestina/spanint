@@ -28,6 +28,16 @@ $akses['AuthKanwil'] = array(
 );
 
 /*
+ * akses PDR
+ */
+$akses['DataPDRKanwil'] = array(
+        '__construct',
+        'index',
+        'registerDJPU',
+        '__destruct'
+);
+
+/*
  * akses modul DataDIPA User
  */
 $akses['DataDIPAKanwil'] = array(

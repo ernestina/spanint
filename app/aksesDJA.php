@@ -25,6 +25,16 @@ $akses['AuthDJA'] = array(
 );
 
 /*
+ * akses PDR
+ */
+$akses['DataPDRDJA'] = array(
+        '__construct',
+        'index',
+        'registerDJPU',
+        '__destruct'
+);
+
+/*
  * akses modul DataDIPA User
  */
 $akses['DataDIPADJA'] = array(

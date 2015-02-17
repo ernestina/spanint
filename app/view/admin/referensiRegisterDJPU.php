@@ -62,6 +62,7 @@
         <thead>
             <tr>
                 <th class="align-center">No.</th>
+                <th class="align-center">Status di SPAN</th>
                 <th class="align-center">REG_NO</th>
                 <th class="align-left">NAME</th>
                 <th class="align-center">CRED_NAME</th>
@@ -97,24 +98,26 @@
                     <?php foreach ($this->data as $value) { ?>
 
                     <tr>
-                        <td class="align-center"><?php echo $no++; ?></td>
-                        <td class="align-center"><?php echo $value->get_reg_no(); ?></td>
-                        <td class="align-left"><?php echo $value->get_name(); ?></td>
-                        <td class="align-center"><?php echo $value->get_cred_name(); ?></td>
-                        <td class="align-center"><?php echo $value->get_curr(); ?></td>
-                        <td class="align-center"><?php echo $value->get_country(); ?></th>
-                        <td class="align-center"><?php echo $value->get_cred_type(); ?></td>
-                        <td class="align-center"><?php echo $value->get_cara_tarik(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $no++; ?></td>
+                        
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_status_span(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_reg_no(); ?></td>
+                        <td class="align-left" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_name(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_cred_name(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_curr(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_country(); ?></th>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_cred_type(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_cara_tarik(); ?></td>
 
-                        <td class="align-right"><?php echo number_format($value->get_amt_ori()); ?></td>
-                        <td class="align-right"><?php echo number_format($value->get_amt_amend()); ?></td>
-                        <td class="align-right"><?php echo number_format($value->get_amt_net()); ?></td>
-                        <td class="align-center"><?php echo $value->get_benef(); ?></td>
-                        <td class="align-center"><?php echo $value->get_status(); ?></td>
+                        <td class="align-right" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo number_format($value->get_amt_ori()); ?></td>
+                        <td class="align-right" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo number_format($value->get_amt_amend()); ?></td>
+                        <td class="align-right" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo number_format($value->get_amt_net()); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_benef(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_status(); ?></td>
 
-                        <td class="align-center"><?php echo $value->get_d_signed(); ?></td>
-                        <td class="align-center"><?php echo $value->get_d_effective(); ?></td>
-                        <td class="align-center"><?php echo $value->get_d_drawlim(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_d_signed(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_d_effective(); ?></td>
+                        <td class="align-center" <?php if ($value->get_status_span() == "Belum Terdaftar") { echo 'style="background:#FFC2C2"'; } ?>><?php echo $value->get_d_drawlim(); ?></td>
                         
                     </tr>
 
