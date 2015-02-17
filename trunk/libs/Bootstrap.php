@@ -74,7 +74,7 @@ class Bootstrap {
 
         $this->getAction();
 
-        /*$loggedin = $this->cek_session();
+        $loggedin = $this->cek_session();
         if ((!$loggedin && !($this->controller instanceof AuthController) && $this->method != 'index')) {
             Session::createSession();
             Session::destroySession();
@@ -91,7 +91,7 @@ class Bootstrap {
         } else if (!$this->registry->auth->is_allowed($this->role, $this->url[0], $this->method) && $this->role == 'guest') {
             $this->controller = new AuthController($this->registry);
             $this->method = 'index';
-        }*/
+        }
 
         /*         * * check if the action is callable ** */
         if (is_callable(array($this->controller, $this->method)) == false) {
