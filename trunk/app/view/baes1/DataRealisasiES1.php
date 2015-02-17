@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Pagu dan Realisasi Belanja per Jenis Belanja</h2>
+                <h2>Realisasi Belanja Satker per Jenis Belanja</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -297,9 +297,9 @@
     </table>
 </div>
 
-<?php if (isset($this->kppn_list)) { ?>
 
-<
+
+
 <div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
         
     <div class="modal-dialog">
@@ -313,37 +313,17 @@
 
             </div>
             
-            <form id="filter-form" method="POST" action="DataRealisasiBA" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="DataRealisasiAkunES1" enctype="multipart/form-data">
 
                 <div class="modal-body">
                     
                 <!-- Paste Isi Fom mulai nangkene -->
                 <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
-                <label class="isian">Kode KPPN: </label>
-                <select class="form-control" type="text" name="kdkppn" id="kdkppn">
-                    <option value='' selected>- Semua KPPN -</option>
-                    <?php
-                    foreach ($this->kppn_list as $value1)
-                        if ($kode_kppn == $value1->get_kd_d_kppn()) {
-                            echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-                        } else {
-                            echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-                        }
-                    ?>
-                    <!--/select>
-
-
-                    <div id="wkdkppn" class="error"></div>
-                    <label class="isian">Kode Lokasi: </label>
-                    <select type="text" name="kdlokasi" id="kdlokasi">
-                    <option value='' selected>- pilih -</option>
-                    <?php
-                    //foreach ($this->data2 as $value1) 
-                    //echo "<option value = '".$value1->get_lokasi()."'>".$value1->get_lokasi()."</option>";
-                    //if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
-                    //else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
-                    ?>
-                    </select--> 
+                
+				<label class="isian">Kode Satker: </label>
+                    <input class="form-control" type="text" name="satker" id="satker" value="<?php if (isset($this->satker)) {
+                   echo $this->satker;
+               } ?>">
 
 
                     <input class="form-control" type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
@@ -367,7 +347,6 @@
 
 </div>
     
-<?php } ?>
 
 <!-- Skrip -->
     
