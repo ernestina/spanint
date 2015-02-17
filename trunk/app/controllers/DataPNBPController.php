@@ -230,6 +230,7 @@ class DataPNBPController extends BaseController {
         }
         if ($akun != '') {
 			$filter[$no++] = "SUBSTR(SEGMENT3,1,2) = '" . $akun."'";
+			$this->view->akun = $akun;
         }
 		if ($satker != '') {
 			$filter[$no++] = "SATKER_CODE = '" . $satker."'";

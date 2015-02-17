@@ -309,10 +309,12 @@ class DataDIPAController extends BaseController {
         }
 		if($kppn !='' and Session::get('role') != SATKER) {
 			$filter[$no++] = " A.KPPN =  '" . $kppn . "'";
+			$this->view->kppn_code = $kppn;
 		}
 		
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "A.KPPN = '" . Session::get('id_user') . "'";
+			$this->view->kppn_code = $kppn;
 			/* if (Session::get('id_user') != '019'){
 			$filter[$no++] = "SUBSTR(AKUN,1,2) <> 'B3'";
 			}	 */
@@ -539,7 +541,7 @@ class DataDIPAController extends BaseController {
 
         if ($dana != '') {
             $filter[$no++] = " A.DANA =  '" . $dana . "'";
-            //$this->view->dana_code = $dana;
+             $this->view->dana_code = $dana;
         }
         if ($akun != '') {
             $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $akun . "') 
