@@ -34,7 +34,7 @@ class DataPDR {
     
     private $_table_djpu_reg = 'DJPU_REGISTER';
     private $_table_djpu_cara_tarik = 'DJPU_CARA_TARIK';
-    private $_table_join_status = 'SPPM_REGISTER';
+    private $_table_join_status = 'SPPM_REGISTER_LENDER';
     
     public $registry;
 
