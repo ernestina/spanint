@@ -798,7 +798,10 @@
                                    
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Jenis Kegiatan</a></li>
 									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Per Sumber Dana</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Per Wilayah</a></li>
+
+                                                                        <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputBA">Per Output</a></li>
+
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Per Wilayah</a></l
                                     
                                 </ul>
                             </div>

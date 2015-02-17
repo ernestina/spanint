@@ -33,8 +33,9 @@ class DataRealisasiES1 {
     private $_invoice;
     private $_table1 = 'GL_BALANCES_V';
     private $_table2 = 'T_BA';
-	private $_table3 = 'T_KEGIATAN';
-	private $_table4 = 'T_ESELON1';
+    private $_table3 = 'T_KEGIATAN';
+    private $_table4 = 'T_ESELON1';
+    private $_table6 = 'T_OUTPUT';
 	private $_table5 = 'T_AKUN';
     public $registry;
 
@@ -45,8 +46,8 @@ class DataRealisasiES1 {
     public function __construct($registry = Registry) {
         $this->db = $registry->db;
         $this->registry = $registry;
-        
-        if ((''.Session::get('ta')) == date("Y")) {
+
+        if (('' . Session::get('ta')) == date("Y")) {
             $this->_table1 = 'GL_BALANCES_V';
             $this->_table2 = 'T_BA';
         } else {
@@ -60,18 +61,19 @@ class DataRealisasiES1 {
      * @param limit batas default null
      * return array objek Data Tetap */
 
-    
-	
-	
-	
-	/*----------------------------------------------------------------------------------------------------------- contekan*/
-	public function get_ba_kegiatan_filter($filter) {
+
+
+
+
+    /* ----------------------------------------------------------------------------------------------------------- contekan */
+
+    public function get_ba_kegiatan_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI, B.NMBA , B.KDBA
 				FROM "
                 . $this->_table1 . " A, "
                 . $this->_table2 . " B, "
-				. $this->_table3 . " C 
+                . $this->_table3 . " C 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' AND
 				SUBSTR(A.PROGRAM,1,3)=B.KDBA
@@ -84,7 +86,7 @@ class DataRealisasiES1 {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-		$sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN, B.NMBA , B.KDBA ";
+        $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN, B.NMBA , B.KDBA ";
         $sql .= " ORDER BY SUBSTR(OUTPUT,1,4) ";
 
         //var_dump($sql);
@@ -92,25 +94,24 @@ class DataRealisasiES1 {
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_satker($val['KDBA']);          
+            $d_data->set_satker($val['KDBA']);
             $d_data->set_kdkegiatan($val['KODE_KEGIATAN']);
-			$d_data->set_nmkegiatan($val['NMKEGIATAN']);
-            $d_data->set_budget_amt($val['PAGU']);          
-            $d_data->set_actual_amt($val['REALISASI']);          
+            $d_data->set_nmkegiatan($val['NMKEGIATAN']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
             $d_data->set_nm_satker($val['NMBA']);
             $data[] = $d_data;
         }
         return $data;
     }
-	
-	
-	public function get_es1_kegiatan_filter($filter) {
+
+    public function get_es1_kegiatan_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI, B.NMES1 , B.KDES1
 				FROM "
                 . $this->_table1 . " A, "
                 . $this->_table4 . " B, "
-				. $this->_table3 . " C 
+                . $this->_table3 . " C 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' AND
 				AND SUBSTR(A.PROGRAM,1,5)=B.KDES1
@@ -123,7 +124,7 @@ class DataRealisasiES1 {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-		$sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ,B.NMES1 , B.KDES1";
+        $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ,B.NMES1 , B.KDES1";
         $sql .= " ORDER BY SUBSTR(OUTPUT,1,4) ";
 
         var_dump($sql);
@@ -131,11 +132,11 @@ class DataRealisasiES1 {
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_satker($val['KDBA']);          
+            $d_data->set_satker($val['KDBA']);
             $d_data->set_kdkegiatan($val['KODE_KEGIATAN']);
-			$d_data->set_nmkegiatan($val['NMKEGIATAN']);
-            $d_data->set_budget_amt($val['BUDGET_AMT']);          
-            $d_data->set_actual_amt($val['ACTUAL_AMT']);          
+            $d_data->set_nmkegiatan($val['NMKEGIATAN']);
+            $d_data->set_budget_amt($val['BUDGET_AMT']);
+            $d_data->set_actual_amt($val['ACTUAL_AMT']);
             $d_data->set_nm_satker($val['NMBA']);
             $data[] = $d_data;
         }
@@ -161,6 +162,7 @@ class DataRealisasiES1 {
         }
 		$sql .= " GROUP BY A.AKUN, C.DESCRIPTION, SUBSTR(A.PROGRAM,1,3) ";
         $sql .= " ORDER BY A.AKUN ";
+        
 
         //var_dump($sql);
         $result = $this->db->select($sql);
@@ -178,6 +180,60 @@ class DataRealisasiES1 {
         return $data;
     }
 
+ public function get_ba_output_filter($filter) {
+        Session::get('id_user');
+        $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI, B.NMBA , B.KDBA
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table2 . " B, "
+                . $this->_table3 . " C 
+				WHERE 1=1 AND 
+				A.BUDGET_TYPE='2' AND
+				SUBSTR(A.PROGRAM,1,3)=B.KDBA
+				AND SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
+				AND A.SUMMARY_FLAG = 'N' 
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				";
+
+        foreach ($filter as $filter1) {
+            $sql .= " AND " . $filter1;
+        }
+        $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN, B.NMBA , B.KDBA ";
+        $sql .=" union all 
+                SELECT OUTPUT KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI, B.NMBA , B.KDBA
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table2 . " B, "
+                . $this->_table6 . " C 
+				WHERE 1=1 AND 
+				A.BUDGET_TYPE='2' AND
+				SUBSTR(A.PROGRAM,1,3)=B.KDBA
+				AND OUTPUT=C.KDKEGIATAN			
+				AND A.SUMMARY_FLAG = 'N' 
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				 ";
+
+        foreach ($filter as $filter2) {
+            $sql .= " AND " . $filter2;
+        }
+        $sql .= " GROUP BY OUTPUT, C.NMKEGIATAN, B.NMBA , B.KDBA ";
+        $sql .= " ORDER BY kode_kegiatan ";
+
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);
+            $d_data->set_kdkegiatan($val['KODE_KEGIATAN']);
+            $d_data->set_nmkegiatan($val['NMKEGIATAN']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
+            $d_data->set_nm_satker($val['NMBA']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
     /*
      * setter
      */
@@ -269,11 +325,11 @@ class DataRealisasiES1 {
     public function set_balancing_amt($balancing_amt) {
         $this->_balancing_amt = $balancing_amt;
     }
-    
+
     public function set_kdkegiatan($kdkegiatan) {
         $this->_kdkegiatan = $kdkegiatan;
     }
-    
+
     public function set_nmkegiatan($nmkegiatan) {
         $this->_nmkegiatan = $nmkegiatan;
     }
@@ -369,11 +425,11 @@ class DataRealisasiES1 {
     public function get_balancing_amt() {
         return $this->_balancing_amt;
     }
-    
+
     public function get_kdkegiatan() {
         return $this->_kdkegiatan;
     }
-    
+
     public function get_nmkegiatan() {
         return $this->_nmkegiatan;
     }
