@@ -611,10 +611,10 @@ class DataSPMController extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		 
 		 if ((''.Session::get('ta')) == date("Y")) {
-			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2015'";
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2015'";
 		 }
 		 else {
-			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2014'";
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
 		 }
 		 
 		 
@@ -631,7 +631,7 @@ class DataSPMController extends BaseController {
             }
 
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
-                $filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' AND '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "'";
+                $filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' AND '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "'";
 
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
@@ -681,10 +681,10 @@ class DataSPMController extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
 		if ((''.Session::get('ta')) == date("Y")) {
-			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2015'";
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2015'";
 		 }
 		 else {
-			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2014'";
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
 		 }
 		 
         if ($jenis_spm != '') {
@@ -700,7 +700,7 @@ class DataSPMController extends BaseController {
         }
         if ($tgl_awal != '' AND $tgl_akhir != '') {
 
-            $filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($tgl_awal)) . "' AND '" . date('Ymd', strtotime($tgl_akhir)) . "'";
+            $filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($tgl_awal)) . "' AND '" . date('Ymd', strtotime($tgl_akhir)) . "'";
 
             $this->view->d_tgl_awal = $tgl_awal;
             $this->view->d_tgl_akhir = $tgl_akhir;
@@ -710,7 +710,7 @@ class DataSPMController extends BaseController {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
         }
         if (Session::get('role') == SATKER) {
-            $filter[$no++] = "SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
+            $filter[$no++] = "SEGMENT1 = '" . Session::get('kd_satker') . "'";
             $this->view->data = $d_spm1->get_sp2d_rekap_filter($filter);
         }
 

@@ -73,8 +73,8 @@ class DataRealisasiES1 {
 				. $this->_table3 . " C 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' AND
-				A.SUBSTR(PROGRAM,1,3)=B.KDBA
-				SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
+				SUBSTR(A.PROGRAM,1,3)=B.KDBA
+				AND SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N' 
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
@@ -83,10 +83,10 @@ class DataRealisasiES1 {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-		$sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ";
+		$sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN, B.NMBA , B.KDBA ";
         $sql .= " ORDER BY SUBSTR(OUTPUT,1,4) ";
 
-        var_dump($sql);
+        //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
@@ -94,8 +94,8 @@ class DataRealisasiES1 {
             $d_data->set_satker($val['KDBA']);          
             $d_data->set_kdkegiatan($val['KODE_KEGIATAN']);
 			$d_data->set_nmkegiatan($val['NMKEGIATAN']);
-            $d_data->set_budget_amt($val['BUDGET_AMT']);          
-            $d_data->set_actual_amt($val['ACTUAL_AMT']);          
+            $d_data->set_budget_amt($val['PAGU']);          
+            $d_data->set_actual_amt($val['REALISASI']);          
             $d_data->set_nm_satker($val['NMBA']);
             $data[] = $d_data;
         }
@@ -111,7 +111,7 @@ class DataRealisasiES1 {
 				. $this->_table3 . " C 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' AND
-				A.SUBSTR(PROGRAM,1,5)=B.KDES1
+				AND SUBSTR(A.PROGRAM,1,5)=B.KDES1
 				SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N' 
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
@@ -121,10 +121,10 @@ class DataRealisasiES1 {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-		$sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ";
+		$sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ,B.NMES1 , B.KDES1";
         $sql .= " ORDER BY SUBSTR(OUTPUT,1,4) ";
 
-        //var_dump($sql);
+        var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
