@@ -32,7 +32,7 @@ class DataGR_STATUS {
     private $_amount;
     private $_gr_batch_num;
     private $_table1 = 'spgr_mpn_receipts_all';
-    private $_table2 = 'spgr_mpn_coa';
+    private $_table2 = 'spgr_mpn_coa_2015';
     private $_table3 = 'SPGR_MPN_NTPN_GANDA';
     private $_table4 = 'SPGR_MPN_NTPN_GANDA_DETAIL';
     public $registry;
@@ -166,7 +166,7 @@ class DataGR_STATUS {
 						smc.currency_code,
 						smc.amount_dist
 						FROM GL_CODE_COMBINATIONS gcc,
-						SPGR_MPN_COA smc
+						SPGR_MPN_COA_2015 smc
 						WHERE smc.CODE_COMBINATION_ID=gcc.CODE_COMBINATION_ID ";
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
@@ -193,7 +193,7 @@ class DataGR_STATUS {
         $sql = "SELECT * FROM "
                 . $this->_table2 . "
 				WHERE 1=1 
-                AND TANGGAL BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
+                AND TO_DATE(TANGGAL,'YYYYMMDD') BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
 
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
@@ -260,7 +260,7 @@ class DataGR_STATUS {
 
 					RECEIPT_NUMBER ,
 					'O' TYPE
-					,TO_CHAR(TO_DATE(TANGGAL_GL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL,
+					,TANGGAL_GL TANGGAL,
 					SEGMENT1,
 					SEGMENT2,
 					SEGMENT3,
@@ -275,12 +275,12 @@ class DataGR_STATUS {
 					SEGMENT12,
 					CURRENCY_CODE,
 					AMOUNT_DIST *-1 AMOUNT,
-					TO_CHAR(TO_DATE(TANGGAL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL2
-					 FROM SPGR_MPN_COA
+					TANGGAL TANGGAL2
+					 FROM SPGR_MPN_COA_2015
 					 WHERE 
 					 NOURUT IN ('" . $ids . "') 
 					 UNION ALL
-					SELECT RECEIPT_NUMBER ,'C' TYPE,TO_CHAR(TO_DATE(TANGGAL_GL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL,
+					SELECT RECEIPT_NUMBER ,'C' TYPE,TANGGAL_GL TANGGAL,
 					SEGMENT1,
 					SEGMENT2,
 					SEGMENT3,
@@ -295,8 +295,8 @@ class DataGR_STATUS {
 					SEGMENT12,
 					CURRENCY_CODE,
 					AMOUNT_DIST AMOUNT,
-					TO_CHAR(TO_DATE(TANGGAL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL2
-					 FROM SPGR_MPN_COA
+					TANGGAL TANGGAL2
+					 FROM SPGR_MPN_COA_2015
 					 WHERE NOURUT IN ('" . $ids . "')"
         ;
 
@@ -339,7 +339,7 @@ class DataGR_STATUS {
 		NTB, 
 		SEGMENT3, 
 		AMOUNT_DIST AMOUNT 
-		FROM SPGR_MPN_COA 
+		FROM SPGR_MPN_COA_2015 
 		WHERE 
 		NOURUT IN ('" . $ids . "')";
 
