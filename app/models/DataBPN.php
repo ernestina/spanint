@@ -47,7 +47,7 @@ class DataBPN {
      * return array objek Data Tetap */
 
     public function get_bpn_filter($filter) {
-        $sql = "SELECT KPPN, TGL_SP2D, NO_SP2D, NO_SPM, TGL_SPM, NAMA2, AKUN, NILAI_ORI, DESKRIPSI_AKUN, DESCRIPTION
+        $sql = "SELECT KPPN, TGL_SP2D, NO_SP2D, NO_SPM, TGL_SPM, NAMA2, AKUN, NILAI_ORI, DESKRIPSI_AKUN, DESCRIPTION, substr(no_spm,8,6) SATKER
 				FROM ". $this->_table . " 
 				 WHERE 1=1 AND substr(TGL_SP2D,1,4) = '".Session::get('ta')."' " ;
         ;
@@ -71,10 +71,43 @@ class DataBPN {
             $d_data->set_nilai_ori($val['NILAI_ORI']);
             $d_data->set_deskripsi_akun($val['DESKRIPSI_AKUN']);
             $d_data->set_description($val['DESCRIPTION']);
+            $d_data->set_satker($val['SATKER']);
             $data[] = $d_data;
         }
         return $data;
     }
+    
+    public function get_bpn_satker_filter($filter) {
+        $sql = "SELECT KPPN, TGL_SP2D, NO_SP2D, NO_SPM, TGL_SPM, NAMA2, AKUN, NILAI_ORI, DESKRIPSI_AKUN, DESCRIPTION, SATKER
+				FROM ". $this->_table . " 
+				 WHERE 1=1 AND substr(TGL_SP2D,1,4) = '".Session::get('ta')."' " ;
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " ORDER BY TGL_SPM DESC, TGL_SP2D DESC ";
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kppn($val['KPPN']);
+            $d_data->set_tgl_sp2d(date("d-m-Y", strtotime($val['TGL_SP2D'])));
+            $d_data->set_no_sp2d($val['NO_SP2D']);
+            $d_data->set_no_spm($val['NO_SPM']);
+            $d_data->set_tgl_spm(date("d-m-Y", strtotime($val['TGL_SPM'])));
+            $d_data->set_nama2($val['NAMA2']);
+            $d_data->set_akun($val['AKUN']);
+            $d_data->set_nilai_ori($val['NILAI_ORI']);
+            $d_data->set_deskripsi_akun($val['DESKRIPSI_AKUN']);
+            $d_data->set_description($val['DESCRIPTION']);
+            $d_data->set_satker($val['SATKER']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+    
     /*
      * setter
      */

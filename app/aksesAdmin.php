@@ -299,6 +299,7 @@ $akses['PelaporanAdmin'] = array(
 $akses['DataBPNAdmin'] = array(
     '__construct',
     'DataBPN',
+    'DataBPNSatker',
     '__destruct'
 );
 

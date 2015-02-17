@@ -323,7 +323,7 @@
                 <th class='mid'>No.</th>
                 <th class='mid'>No. SPM<br>Tgl. SPM</th>
                 <th class='mid'>No. SP2D<br>Tgl. SP2D</th>
-                <th class='mid'>Satker Pembayar</th>
+                <th class='mid'>Satker Penerima</th>
                 <th class='mid'>Uraian SPM</th>
                 <th class='mid'>Atas Nama</th>
                 <th class='mid'>Setoran</th>
@@ -375,7 +375,7 @@
 
             </div>
 
-            <form id="filter-form" method="POST" action="dataBPN" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="dataBPNSatker" enctype="multipart/form-data">
 
                 <div class="modal-body">
 
