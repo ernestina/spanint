@@ -18,8 +18,19 @@ class DataUserSPAN {
     private $_start_date;
     private $_end_date;
     private $_error;
+    private $_tgl_invoice;
+    private $_wfapproval_status;
+    private $_desc_invoice;
+    private $_status;
+    private $_username;
+    private $_nama_pegawai;
+    private $_posisi;
     private $_valid = TRUE;
     private $_table = 'USER_SPAN';
+    private $_table1 = 'AP_INVOICES_ALL_V AIA';
+    private $_table2 = 'HR_OPERATING_UNITS OU';
+    private $_table3 = 'FND_USER FU';
+    
     public $registry;
 
     /*
@@ -69,6 +80,52 @@ class DataUserSPAN {
         }
         return $data;
     }
+    
+    public function get_spm_gantung($filter) {
+        Session::get('id_user');
+        $sql = "SELECT
+                AIA.KDKPPN
+                , AIA.CREATION_DATE TGL_INVOICE
+                , AIA.INVOICE_NUM
+                , AIA.DESCRIPTION DESC_INVOICE
+                , AIA.WFAPPROVAL_STATUS
+                , AIA.STATUS
+                , AIA.ORIGINAL_RECIPIENT USERNAME
+                , AIA.TO_USER NAMA_PEGAWAI
+                , FU.DESCRIPTION POSISI 
+                FROM " . $this->_table1 . " 
+                , " . $this->_table2 . "
+                , " . $this->_table3 . "
+				WHERE 
+				AIA.ORG_ID = OU.ORGANIZATION_ID
+                AND AIA.ORIGINAL_RECIPIENT = FU.USER_NAME
+                AND AIA.STATUS <> 'CLOSED'
+                ";
+
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= "  ORDER BY AIA.CREATION_DATE DESC";
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdkppn($val['KDKPPN']);
+            $d_data->set_tgl_invoice(date("d-m-Y", strtotime($val['TGL_INVOICE'])));
+            $d_data->set_no_invoice($val['INVOICE_NUM']);
+            $d_data->set_desc_invoice($val['DESC_INVOICE']);
+            $d_data->set_wfapproval_status($val['WFAPPROVAL_STATUS']);
+            $d_data->set_status($val['STATUS']);
+            $d_data->set_username($val['USERNAME']);
+            $d_data->set_nama_pegawai($val['NAMA_PEGAWAI']);
+            $d_data->set_posisi($val['POSISI']);
+            //$d_data->set_start_date(date("d-m-Y", strtotime($val['START_DATE'])));
+            
+            $data[] = $d_data;
+        }
+        return $data;
+    }
 
     /*
      * setter
@@ -108,6 +165,38 @@ class DataUserSPAN {
 
     public function set_end_date($end_date) {
         $this->_end_date = $end_date;
+    }
+    
+    public function set_tgl_invoice($tgl_invoice) {
+        $this->_tgl_invoice = $tgl_invoice;
+    }
+
+    public function set_no_invoice($no_invoice) {
+        $this->_no_invoice = $no_invoice;
+    }
+    
+    public function set_desc_invoice($desc_invoice) {
+        $this->_desc_invoice = $desc_invoice;
+    }
+
+    public function set_wfapproval_status($wfapproval_status) {
+        $this->_wfapproval_status = $wfapproval_status;
+    }
+
+    public function set_status($status) {
+        $this->_status = $status;
+    }
+
+    public function set_username($username) {
+        $this->_username = $username;
+    }
+
+    public function set_nama_pegawai($nama_pegawai) {
+        $this->_nama_pegawai = $nama_pegawai;
+    }
+
+    public function set_posisi($posisi) {
+        $this->_posisi = $posisi;
     }
 
     /*
@@ -149,9 +238,45 @@ class DataUserSPAN {
     public function get_end_date() {
         return $this->_end_date;
     }
+    
+    public function get_tgl_invoice() {
+        return $this->_tgl_invoice;
+    }
+    
+    public function get_no_invoice() {
+        return $this->_no_invoice;
+    }
+    
+    public function get_desc_invoice() {
+        return $this->_desc_invoice;
+    }
+    
+    public function get_wfapproval_status() {
+        return $this->_wfapproval_status;
+    }
+    
+    public function get_status() {
+        return $this->_status;
+    }
+    
+    public function get_username() {
+        return $this->_username;
+    }
+    
+    public function get_nama_pegawai() {
+        return $this->_nama_pegawai;
+    }
+    
+    public function get_posisi() {
+        return $this->_posisi;
+    }
 
     public function get_table() {
         return $this->_table;
+    }
+    
+    public function get_table1() {
+        return $this->_table1;
     }
 
     /*
