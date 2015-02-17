@@ -152,7 +152,7 @@ class DataBPNController extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_bpn->get_table());
 
-        $this->view->render('kppn/daftarBpnSatker');
+        $this->view->render('kppn/daftarBPNSatker');
         $d_log->tambah_log("Sukses");
     }
 
