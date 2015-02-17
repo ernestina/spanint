@@ -1,5 +1,18 @@
 /* Let's make use of our framework, and minimize our own CSS */
 
+/*Template-only CSS*/
+.overview-dashboard-big-chart-legend {
+    float: right; 
+    margin-left: 10px; 
+    padding-left: 5px; 
+    border-left: 8px solid;
+}
+
+.plain {
+    border: none;
+    background: transparent;
+}
+
 /* HTML */
 @font-face {
     font-family: "Nexa";
@@ -63,7 +76,8 @@ h4 {
 }
 
 .btn {
-    font-size: 1em;
+    font-size: 1em !important;
+    padding: 6px 12px !important;
 }
 
 .navbar-text {
