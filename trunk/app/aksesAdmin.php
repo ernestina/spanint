@@ -311,6 +311,15 @@ $akses['DataBPNAdmin'] = array(
 );
 
 /*
+ * akses MpnBi
+ */
+$akses['DataMpnBiAdmin'] = array(
+    '__construct',
+    'MpnBi',
+    '__destruct'
+);
+
+/*
  * akses modul BA_ES1
  */
 $akses['BaEs1Admin'] = array(
