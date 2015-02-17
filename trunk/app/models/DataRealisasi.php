@@ -655,7 +655,94 @@ class DataRealisasi {
         }
         return $data;
     }
+	
+	public function get_realisasi_fa_wilayah_baes1_filter($filter) {
+        Session::get('id_user');
+        $sql = "select 				
+				substr(a.lokasi,1,2) kdlokasi
+				,b.nmlokasi 
+				, sum(a.budget_amt) Pagu
+				, sum(a.actual_amt) Total_realisasi
+				, sum(decode(substr(a.akun,1,2),'72',a.budget_amt,0)) pagu_pembiayaan
+				, sum(decode(substr(a.akun,1,2),'51',a.budget_amt,0)) pagu_51
+				, sum(decode(substr(a.akun,1,2),'52',a.budget_amt,0)) pagu_52
+				, sum(decode(substr(a.akun,1,2),'53',a.budget_amt,0)) pagu_53
+				, sum(decode(substr(a.akun,1,2),'54',a.budget_amt,0)) pagu_54
+				, sum(decode(substr(a.akun,1,2),'55',a.budget_amt,0)) pagu_55
+				, sum(decode(substr(a.akun,1,2),'56',a.budget_amt,0)) pagu_56
+				, sum(decode(substr(a.akun,1,2),'57',a.budget_amt,0)) pagu_57
+				, sum(decode(substr(a.akun,1,2),'58',a.budget_amt,0)) pagu_58
+				, sum(decode(substr(a.akun,1,2),'59',a.budget_amt,0)) pagu_59
+				, sum(decode(substr(a.akun,1,1),'6',a.budget_amt,0)) pagu_61
+				, sum(decode(substr(a.akun,1,2),'51',a.actual_amt,0)) belanja_51
+				, sum(decode(substr(a.akun,1,2),'52',a.actual_amt,0)) belanja_52
+				, sum(decode(substr(a.akun,1,2),'53',a.actual_amt,0)) belanja_53
+				, sum(decode(substr(a.akun,1,2),'54',a.actual_amt,0)) belanja_54
+				, sum(decode(substr(a.akun,1,2),'55',a.actual_amt,0)) belanja_55
+				, sum(decode(substr(a.akun,1,2),'56',a.actual_amt,0)) belanja_56
+				, sum(decode(substr(a.akun,1,2),'57',a.actual_amt,0)) belanja_57
+				, sum(decode(substr(a.akun,1,2),'58',a.actual_amt,0)) belanja_58
+				, sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
+				, sum(decode(substr(a.akun,1,2),'72',a.actual_amt,0)) belanja_71
+				, sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
+				, sum(ENCUMBRANCE_AMT) encumbrance 
+				FROM "
+                . $this->_table1 . " a, "
+                . $this->_table4 . " b  
+				where 1=1
+				and a.budget_type = '2'			
+				and substr(a.lokasi,1,2) = substr(b.kdlokasi,3,2)
+				and substr(a.bank,1,1)  <= '9'
+				and substr(a.akun,1,1) in ('5','6')
+				and substr(b.kdlokasi,1,1) = 'P'
+				and a.summary_flag = 'N'
+				and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) > 0
+				"
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
 
+        $sql .= " group by substr(a.lokasi,1,2), b.nmlokasi";
+        $sql .= " ORDER by substr(a.lokasi,1,2), b.nmlokasi ";
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_nmba($val['NMLOKASI']);
+            $d_data->set_ba($val['KDLOKASI']);
+            $d_data->set_pagu($val['PAGU']);
+            $d_data->set_encumbrance($val['ENCUMBRANCE']);
+			$d_data->set_pagu_51($val['PAGU_51']);
+            $d_data->set_pagu_52($val['PAGU_52']);
+            $d_data->set_pagu_53($val['PAGU_53']);
+            $d_data->set_pagu_54($val['PAGU_54']);
+            $d_data->set_pagu_55($val['PAGU_55']);
+            $d_data->set_pagu_56($val['PAGU_56']);
+            $d_data->set_pagu_57($val['PAGU_57']);
+            $d_data->set_pagu_58($val['PAGU_58']);
+            $d_data->set_pagu_59($val['PAGU_59']);
+			$d_data->set_pagu_61($val['PAGU_61']);
+            $d_data->set_belanja_51($val['BELANJA_51']);
+            $d_data->set_belanja_52($val['BELANJA_52']);
+            $d_data->set_belanja_53($val['BELANJA_53']);
+            $d_data->set_belanja_54($val['BELANJA_54']);
+            $d_data->set_belanja_55($val['BELANJA_55']);
+            $d_data->set_belanja_56($val['BELANJA_56']);
+            $d_data->set_belanja_57($val['BELANJA_57']);
+            $d_data->set_belanja_58($val['BELANJA_58']);
+            $d_data->set_belanja_59($val['BELANJA_59']);
+            $d_data->set_belanja_71($val['BELANJA_71']);
+            $d_data->set_belanja_61($val['BELANJA_61']);
+			$d_data->set_realisasi($val['TOTAL_REALISASI']);
+            $d_data->set_pagu_pembiayaan($val['PAGU_PEMBIAYAAN']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
     public function get_realisasi_lokasi($kppn = null) {
         Session::get('id_user');
         $sql = "select distinct

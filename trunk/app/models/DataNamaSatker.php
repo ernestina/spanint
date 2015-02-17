@@ -82,6 +82,43 @@ class DataNamaSatker {
         }
         return $data;
     }
+	
+	public function get_baes1_satker_filter($filter) {
+        $sql = " SELECT SEGMENT1 KDSATKER
+				, UPPER(A.NMSATKER) NMSATKER
+				, B.BAES1 
+				, count(check_number) TOTAL_SP2D 
+				FROM "
+                . $this->_table2 . " A, "
+				. $this->_table1 . " B 
+				WHERE  A.SEGMENT1 = B.KDSATKER 
+				AND status_lookup_code <> 'VOIDED'
+				AND A.NMSATKER IS NOT NULL"
+
+        ;
+
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        $sql .= " GROUP BY A.SEGMENT1, A.NMSATKER, BAES1";
+        $sql .= " ORDER BY BAES1, A.SEGMENT1, A.NMSATKER";
+        //var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdsatker($val['KDSATKER']);
+            $d_data->set_nmsatker($val['NMSATKER']);
+            $d_data->set_kppn($val['BAES1']);
+            //$d_data->set_tgl_rev($val['TANGGAL_POSTING_REVISI']);
+            $d_data->set_total_sp2d($val['TOTAL_SP2D']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
 
     public function get_satker_dipa_filter($filter) {
         Session::get('id_user');
@@ -114,7 +151,7 @@ class DataNamaSatker {
 	
 	public function get_baes1_dipa_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT A.*, C.NMES1, D.NMBA
+        $sql = "SELECT DISTINCT A.NMSATKER, A.KDSATKER, A.REV, A.TANGGAL_POSTING_REVISI, C.NMES1, D.NMBA, B.BAES1
 				FROM "
                 . $this->_table4 . " A, 
 				T_SATKER B ,
@@ -130,7 +167,7 @@ class DataNamaSatker {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " ORDER BY a.kppn_code,a.rev desc";
+        $sql .= " ORDER BY B.BAES1, A.KDSATKER ,A.REV";
         //var_dump ($sql);
 
         $result = $this->db->select($sql);
@@ -144,6 +181,34 @@ class DataNamaSatker {
             $d_data->set_kppn($val['KPPN_CODE']);
             $d_data->set_rev($val['REV']);
             $d_data->set_tgl_rev($val['TANGGAL_POSTING_REVISI']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_es1_dipa_filter() {
+        Session::get('id_user');
+        $sql = "SELECT DISTINCT A.KDES1, A.NMES1 FROM 
+				T_SATKER B,
+				T_ESELON1 A
+				 WHERE B.BAES1 = A.KDES1
+				 and B.BA = '" . Session::get('kd_baes1').
+				"'";
+
+        $no = 0;
+        // foreach ($filter as $filter) {
+            // $sql .= " AND " . $filter;
+        // }
+
+        $sql .= " ORDER BY A.KDES1";
+        //var_dump ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+			$d_data->set_nmes1($val['NMES1']);
+			$d_data->set_nmba($val['KDES1']);           
             $data[] = $d_data;
         }
         return $data;

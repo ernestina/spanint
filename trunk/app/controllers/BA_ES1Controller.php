@@ -81,6 +81,42 @@ class BA_ES1Controller extends BaseController {
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
 	
+	public function DataRealisasiPenerimaanBA() {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if (Session::get('role') == KL){		
+			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";			
+		}
+		if (Session::get('role') == ES1){		
+			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";			
+		}
+		
+		
+        if (isset($_POST['submit_file'])) {
+
+            if ($_POST['KEGIATAN'] != '') {
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $_POST['KEGIATAN'] . "'";
+                $this->view->lokasi = $_POST['KEGIATAN'];
+            }           
+        }
+		
+        
+		
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        
+		$this->view->data = $d_spm1->get_ba_pendapatan_filter($filter);
+		
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/DataRealisasiPenerimaan');
+    }
+	
 	public function DataRealisasiAkunBA() {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
@@ -209,6 +245,39 @@ class BA_ES1Controller extends BaseController {
         $this->view->render('baes1/DataRealisasiSumberDanaBAES1');
     }
 	
+	public function DataRealisasiWilayahBAES1() {
+        $d_spm1 = new DataRealisasi($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if (Session::get('role') == KL){		
+			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";			
+		}
+		if (Session::get('role') == ES1){		
+			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";			
+		}
+		
+        if (isset($_POST['submit_file'])) {
+            
+            if ($_POST['kdlokasi'] != '') {
+                $filter[$no++] = "a.lokasi = '" . $_POST['kdlokasi'] . "'";
+                $this->view->lokasi = $_POST['kdlokasi'];
+            }            
+        }      
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());        
+		
+		$this->view->data = $d_spm1->get_realisasi_fa_wilayah_baes1_filter($filter);
+		
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/DataRealisasiLokasiBAES1');
+    }
+	
 	public function nmsatker() {
         $d_spm1 = new DataNamaSatker($this->registry);
         $filter = array();
@@ -238,6 +307,10 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = " UPPER(A.NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
                 $this->view->d_nm_satker = $_POST['nmsatker'];
             }
+			if ($_POST['eselon1'] != '') {
+                $filter[$no++] = "B.BAES1 = '" . $_POST['eselon1'] . "'";
+                $this->view->eselon1 = $_POST['eselon1'];
+            }
             if ($_POST['revisi'] != '') {
                 if ($_POST['revisi'] == '0') {
                     $filter[$no++] = "A.REV = 0";
@@ -253,7 +326,8 @@ class BA_ES1Controller extends BaseController {
         }
         
 		$this->view->data = $d_spm1->get_baes1_dipa_filter($filter);
-        
+        $this->view->data1 = $d_spm1->get_es1_dipa_filter(); 
+		
         if (Session::get('role') == ES1) {
             $this->view->render('baes1/NamaSatkerDIPA1');
         } 
@@ -408,6 +482,64 @@ class BA_ES1Controller extends BaseController {
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/Rekap');
+    }
+	
+	public function nmsatkerBAES1() {
+        $d_spm1 = new DataNamaSatker($this->registry);
+		
+        $filter = array();
+        $no = 0;
+
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
+		 }
+		
+		
+        if (isset($_POST['submit_file'])) {
+
+            if ($_POST['kdsatker'] != '') {
+                $filter[$no++] = "SEGMENT1 = '" . $_POST['kdsatker'] . "'";
+                $this->view->d_kd_satker = $_POST['kdsatker'];
+            }
+            if ($_POST['nmsatker'] != '') {
+                $filter[$no++] = " UPPER(NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
+                $this->view->d_nm_satker = $_POST['nmsatker'];
+            }
+			if ($_POST['eselon1'] != '') {
+                $filter[$no++] = "B.BAES1 = '" . $_POST['eselon1'] . "'";
+                $this->view->eselon1 = $_POST['eselon1'];
+            }
+            if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
+
+                $filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' AND '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "'";
+
+                $this->view->d_tgl_awal = $_POST['tgl_awal'];
+                $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+            }
+                     		
+        }
+        if (Session::get('role') == KL){		
+			$filter[$no++] =  "B.BA = '" . Session::get('kd_baes1')."'";			
+		}
+		if (Session::get('role') == ES1){		
+			$filter[$no++] =  "B.BAES1 = '" . Session::get('kd_baes1')."'";			
+		}
+        
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
+		
+		$this->view->data1 = $d_spm1->get_es1_dipa_filter(); 
+		$this->view->data = $d_spm1->get_baes1_satker_filter($filter);
+        
+        $this->view->render('baes1/NamaSatker');
+        $d_log->tambah_log("Sukses");
     }
 
     //author by jhon

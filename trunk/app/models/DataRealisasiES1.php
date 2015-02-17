@@ -35,6 +35,7 @@ class DataRealisasiES1 {
     private $_table2 = 'T_BA';
 	private $_table3 = 'T_KEGIATAN';
 	private $_table4 = 'T_ESELON1';
+	private $_table5 = 'T_AKUN';
     public $registry;
 
     /*
@@ -102,6 +103,7 @@ class DataRealisasiES1 {
         return $data;
     }
 	
+	
 	public function get_es1_kegiatan_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI, B.NMES1 , B.KDES1
@@ -134,6 +136,42 @@ class DataRealisasiES1 {
 			$d_data->set_nmkegiatan($val['NMKEGIATAN']);
             $d_data->set_budget_amt($val['BUDGET_AMT']);          
             $d_data->set_actual_amt($val['ACTUAL_AMT']);          
+            $d_data->set_nm_satker($val['NMBA']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_ba_pendapatan_filter($filter) {
+        Session::get('id_user');
+        $sql = "SELECT A.AKUN, C.DESCRIPTION, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI, SUBSTR(A.PROGRAM,1,3) KDBA
+				FROM "
+                . $this->_table1 . " A, "               
+				. $this->_table5 . " C 
+				WHERE 1=1 
+				AND A.AKUN =C.FLEX_VALUE			
+				AND A.SUMMARY_FLAG = 'N' 
+				AND SUBSTR(AKUN,1,1) = '4'
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				
+				";
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+		$sql .= " GROUP BY A.AKUN, C.DESCRIPTION, SUBSTR(A.PROGRAM,1,3) ";
+        $sql .= " ORDER BY A.AKUN ";
+
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);          
+            $d_data->set_kdkegiatan($val['AKUN']);
+			$d_data->set_nmkegiatan($val['DESCRIPTION']);
+            $d_data->set_budget_amt($val['PAGU']);          
+            $d_data->set_actual_amt($val['REALISASI']);          
             $d_data->set_nm_satker($val['NMBA']);
             $data[] = $d_data;
         }

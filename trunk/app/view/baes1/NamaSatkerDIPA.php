@@ -193,33 +193,36 @@
 
                 <div class="modal-body">
 
-<?php if (isset($this->kppn_list)) { ?>
+<?php if (isset($this->data)) { ?>
                         <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
-                        <label class="isian">Kode KPPN: </label>
-                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                        <label class="isian">Eselon 1: </label>
+                        <select class="form-control" type="text" name="eselon1" id="eselon1">
                             <option value='' selected>- pilih -</option>
     <?php
-    foreach ($this->kppn_list as $value1) {
-        if ($kode_kppn == $value1->get_kd_d_kppn()) {
-            echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-        } else {
-            echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-        }
-    }
+    //foreach ($this->data1 as $value1) {        
+           // echo "<option value='" . $value1->get_nmba() . "' selected>" . $value1->get_nmba() . " | " . $value1->get_nmes1() . "</option>";       
+    //}
+	
+			
     ?>
+	
+	<?php foreach ($this->data1 as $value1) { ?>
+
+                                <?php if ($this->eselon1 == $value1->get_nmba()) { ?>
+
+                                    <option value="<?php echo $value1->get_nmba(); ?>" selected><?php echo $value1->get_nmba(); ?> | <?php echo $value1->get_nmes1(); ?></option>
+
+                                <?php } else { ?>
+
+                                    <option value="<?php echo $value1->get_nmba(); ?>"><?php echo $value1->get_nmba(); ?> | <?php echo $value1->get_nmes1(); ?></option>
+
+                                <?php } ?>
+
+                            <?php } ?>
                         </select>
 <?php } ?>
 
-                    <!--label class="isian">Status Revisi: </label>
-                    <select class="form-control" type="text" name="revisi" id="revisi">
-
-                        <option value=''>- pilih -</option>
-                        <option value='= 0' <?php if ($this->status == "BELUM REVISI") {
-    echo "BELUM REVISI";
-} ?>>BELUM REVISI</option>
-                        <option value='> 0' <?php if ($this->status == "SUDAH REVISI") {
-    echo "NON GAJI";
-} ?>>SUDAH REVISI</option>
+                    
 
                     </select -->
                     <br/>
@@ -264,7 +267,7 @@
     });
 
     function cek_upload() {
-        if ($('#kdsatker').val().length != 6) {
+        if ($('#kdsatker').val().length > 0) && ($('#kdsatker').val().length != 6)  {
             $('#winvoice').html('Kode Satker harus 6 digit.');
             $('#winvoice').fadeIn();
             jml++;
