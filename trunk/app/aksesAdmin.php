@@ -14,6 +14,12 @@ $akses['DataUserAdmin'] = array(
         '__destruct'
 );
 
+$akses['OverviewPenganggaranAdmin'] = array(
+        '__construct',
+        'index',
+        '__destruct'
+);
+
 
 /*
  * akses modul Home
