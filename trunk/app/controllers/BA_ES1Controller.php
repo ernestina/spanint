@@ -544,6 +544,36 @@ class BA_ES1Controller extends BaseController {
 
     //author by jhon
 
+        public function DataRealisasiOutputBA() {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		
+		
+        if (isset($_POST['submit_file'])) {
+
+            if ($_POST['KEGIATAN'] != '') {
+                $filter[$no++] = "OUTPUT = '" . $_POST['KEGIATAN'] . "'";
+                $this->view->lokasi = $_POST['KEGIATAN'];
+            }           
+        }
+		
+        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";
+		
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        
+		$this->view->data = $d_spm1->get_ba_output_filter($filter);
+		
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/DataRealisasiOutput');
+    }
+
     public function __destruct() {
         
     }
