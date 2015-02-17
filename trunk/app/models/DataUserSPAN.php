@@ -25,11 +25,28 @@ class DataUserSPAN {
     private $_username;
     private $_nama_pegawai;
     private $_posisi;
+    private $_no_id;
+    private $_kode_unit;
+    private $_nama_usr_awal;
+    private $_nip_usr_awal;
+    private $_email_usr_awal;
+    private $_posisi_user_awal;
+    private $_nama_usr_akhir;
+    private $_nip_usr_akhir;
+    private $_email_usr_akhir;
+    private $_posisi_user_akhir;
+    private $_tanggal_awal;
+    private $_tanggal_akhir;
+    private $_surat;
+    private $_status_setup_awal;
+    private $_status_setup_akhir;
+    private $_catatan;
     private $_valid = TRUE;
     private $_table = 'USER_SPAN';
-    private $_table1 = 'AP_INVOICES_ALL_V AIA';
-    private $_table2 = 'HR_OPERATING_UNITS OU';
-    private $_table3 = 'FND_USER FU';
+    private $_table1 = 'AP_INVOICES_ALL_V';
+    private $_table2 = 'HR_OPERATING_UNITS';
+    private $_table3 = 'FND_USER';
+    private $_table4 = 'USER_HISTORY';
     
     public $registry;
 
@@ -87,25 +104,24 @@ class DataUserSPAN {
                 AIA.KDKPPN
                 , AIA.CREATION_DATE TGL_INVOICE
                 , AIA.INVOICE_NUM
-                , AIA.DESCRIPTION DESC_INVOICE
+                , AIA.INVOICE_DESCRIPTION DESC_INVOICE
                 , AIA.WFAPPROVAL_STATUS
                 , AIA.STATUS
                 , AIA.ORIGINAL_RECIPIENT USERNAME
                 , AIA.TO_USER NAMA_PEGAWAI
-                , FU.DESCRIPTION POSISI 
-                FROM " . $this->_table1 . " 
-                , " . $this->_table2 . "
-                , " . $this->_table3 . "
+                , SUBSTR(FU.DESCRIPTION, 12, 20) POSISI 
+                FROM " . $this->_table1 . " AIA
+                , " . $this->_table2 . " OU
+                , " . $this->_table3 . " FU
 				WHERE 
-				AIA.ORG_ID = OU.ORGANIZATION_ID
-                AND AIA.ORIGINAL_RECIPIENT = FU.USER_NAME
-                AND AIA.STATUS <> 'CLOSED'
+				AIA.ORIGINAL_RECIPIENT = FU.USER_NAME
+                AND AIA.STATUS = 'OPEN'
                 ";
 
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= "  ORDER BY AIA.CREATION_DATE DESC";
+        $sql .= "  ORDER BY AIA.TO_USER DESC";
         //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
@@ -120,6 +136,42 @@ class DataUserSPAN {
             $d_data->set_username($val['USERNAME']);
             $d_data->set_nama_pegawai($val['NAMA_PEGAWAI']);
             $d_data->set_posisi($val['POSISI']);
+            //$d_data->set_start_date(date("d-m-Y", strtotime($val['START_DATE'])));
+            
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+    
+    public function get_ganti_user ($filter) {
+        Session::get('id_user');
+        $sql = "SELECT * FROM " . $this->_table4 . "";
+        
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= "  ORDER BY TANGGAL_AWAL DESC";
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_no_id($val['NO_ID']);
+            $d_data->set_kode_unit($val['KODE_UNIT']);
+            $d_data->set_nama_usr_awal($val['NAMA_USR_AWAL']);
+            $d_data->set_nip_usr_awal($val['NIP_USR_AWAL']);
+            $d_data->set_email_usr_awal($val['EMAIL_USR_AWAL']);
+            $d_data->set_posisi_user_awal($val['POSISI_USER_AWAL']);
+            $d_data->set_nama_usr_pengganti($val['NAMA_USR_PENGGANTI']);
+            $d_data->set_nip_usr_pengganti($val['NIP_USR_PENGGANTI']);
+            $d_data->set_email_usr_pengganti($val['EMAIL_USR_PENGGANTI']);
+            $d_data->set_posisi_user_pengganti($val['POSISI_USER_PENGGANTI']);
+            $d_data->set_tanggal_awal(date("d-m-Y", strtotime($val['TANGGAL_AWAL'])));
+            $d_data->set_tanggal_akhir(date("d-m-Y", strtotime($val['TANGGAL_AKHIR'])));
+            $d_data->set_surat($val['SURAT']);
+            $d_data->set_status_setup_awal($val['STATUS_SETUP_AWAL']);
+            $d_data->set_status_setup_akhir($val['STATUS_SETUP_AKHIR']);
+            $d_data->set_catatan($val['CATATAN']);
             //$d_data->set_start_date(date("d-m-Y", strtotime($val['START_DATE'])));
             
             $data[] = $d_data;
@@ -198,6 +250,70 @@ class DataUserSPAN {
     public function set_posisi($posisi) {
         $this->_posisi = $posisi;
     }
+    
+    public function set_no_id($no_id) {
+        $this->_no_id = $no_id;
+    }
+    
+    public function set_kode_unit($kode_unit) {
+        $this->_kode_unit = $kode_unit;
+    }
+    
+    public function set_nama_usr_awal($nama_usr_awal) {
+        $this->_nama_usr_awal = $nama_usr_awal;
+    }
+    
+    public function set_nip_usr_awal($nip_usr_awal) {
+        $this->_nip_usr_awal = $nip_usr_awal;
+    }
+    
+    public function set_email_usr_awal($email_usr_awal) {
+        $this->_email_usr_awal = $email_usr_awal;
+    }
+    
+    public function set_posisi_user_awal($posisi_user_awal) {
+        $this->_posisi_user_awal = $posisi_user_awal;
+    }
+    
+    public function set_nama_usr_pengganti($nama_usr_pengganti) {
+        $this->_nama_usr_pengganti = $nama_usr_pengganti;
+    }
+    
+    public function set_nip_usr_pengganti($nip_usr_pengganti) {
+        $this->_nip_usr_pengganti = $nip_usr_pengganti;
+    }
+    
+    public function set_email_usr_pengganti($email_usr_pengganti) {
+        $this->_email_usr_pengganti = $email_usr_pengganti;
+    }
+    
+    public function set_posisi_user_pengganti($posisi_user_pengganti) {
+        $this->_posisi_user_pengganti = $posisi_user_pengganti;
+    }
+    
+    public function set_tanggal_awal($tanggal_awal) {
+        $this->_tanggal_awal = $tanggal_awal;
+    }
+    
+    public function set_tanggal_akhir($tanggal_akhir) {
+        $this->_tanggal_akhir = $tanggal_akhir;
+    }
+    
+    public function set_surat($surat) {
+        $this->_surat = $surat;
+    }
+    
+    public function set_status_setup_awal($status_setup_awal) {
+        $this->_status_setup_awal = $status_setup_awal;
+    }
+    
+    public function set_status_setup_akhir($status_setup_akhir) {
+        $this->_status_setup_akhir = $status_setup_akhir;
+    }
+    
+    public function set_catatan($catatan) {
+        $this->_catatan = $catatan;
+    }
 
     /*
      * getter
@@ -270,13 +386,81 @@ class DataUserSPAN {
     public function get_posisi() {
         return $this->_posisi;
     }
-
+    
+    public function get_no_id() {
+        return $this->_no_id;
+    }
+    
+    public function get_kode_unit() {
+        return $this->_kode_unit;
+    }
+    
+    public function get_nama_usr_awal() {
+        return $this->_nama_usr_awal;
+    }
+    
+    public function get_nip_usr_awal() {
+        return $this->_nip_usr_awal;
+    }
+    
+    public function get_email_usr_awal() {
+        return $this->_email_usr_awal;
+    }
+    
+    public function get_posisi_user_awal() {
+        return $this->_posisi_user_awal;
+    }
+    
+    public function get_nama_usr_pengganti() {
+        return $this->_nama_usr_pengganti;
+    }
+    
+    public function get_nip_usr_pengganti() {
+        return $this->_nip_usr_pengganti;
+    }
+    
+    public function get_email_usr_pengganti() {
+        return $this->_email_usr_pengganti;
+    }
+    
+    public function get_posisi_user_pengganti() {
+        return $this->_posisi_user_pengganti;
+    }
+    
+    public function get_tanggal_awal() {
+        return $this->_tanggal_awal;
+    }
+    
+    public function get_tanggal_akhir() {
+        return $this->_tanggal_akhir;
+    }
+    
+    public function get_surat() {
+        return $this->_surat;
+    }
+    
+    public function get_status_setup_awal() {
+        return $this->_status_setup_awal;
+    }
+        
+    public function get_status_setup_akhir() {
+        return $this->_status_setup_akhir;
+    }
+    
+    public function get_catatan() {
+        return $this->_catatan;
+    }
+    
     public function get_table() {
         return $this->_table;
     }
     
     public function get_table1() {
         return $this->_table1;
+    }
+    
+    public function get_table4() {
+        return $this->_table4;
     }
 
     /*

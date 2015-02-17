@@ -215,6 +215,8 @@ $akses['DataSupplierKPPN'] = array(
 $akses['UserSpanKPPN'] = array(
     '__construct',
     'monitoringUserSpan',
+    'invoiceProses',
+    'pergantianUser',
     '__destruct'
 );
 
