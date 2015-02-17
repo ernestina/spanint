@@ -4,17 +4,16 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Pagu dan Realisasi Belanja per Jenis Kewenangan</h2>
+                <h2>Pagu dan Realisasi Belanja per Jenis Belanja</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-                <?php if (Session::get('role') != KPPN) { ?>
-                    <!--button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button-->
-                <?php } ?>
+             
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+              
         
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
                 
                 <?php
 //----------------------------------------------------
@@ -31,7 +30,9 @@
 			} 
 			
 			?>
-            <a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+            <a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 			<?php
         }
 
@@ -39,7 +40,9 @@
             
                     $kdkppn = Session::get('id_user');
 			?>
-            <a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+            <a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 			<?php
 		}
 
@@ -51,11 +54,10 @@
         <div class="row" style="padding-top: 10px">
             
             <div class="col-md-6 col-sm-12">
-               <?php
-                				
+                <?php
+               
 				echo Session::get('user');
                 ?>
-			
                 <br>Tanggal : s.d <?php
                 echo (date('d-m-Y'));
                 ?>
@@ -87,7 +89,7 @@
                 <!--th>KPPN</th-->
                 <!--th>Tanggal</th-->
                 <!--th rowspan=2 class='mid'>Kode BA</th-->
-                <th rowspan=2 class='mid' width='150px'> Jenis Kewenangan </th>
+                <th rowspan=2 class='mid' width='150px'> Satker </th>
                 <th rowspan=2 class='mid'> Keterangan </th>
                 <th  colspan=9 class='mid'>Jenis Belanja</th>
                 <th   rowspan=2 class='mid'>Total</th>
@@ -120,7 +122,7 @@
                     foreach ($this->data as $value) {
                         echo "<tr>	";
                         echo "<td rowspan=2>" . $no++ . "</td>";
-                        echo "<td rowspan=2 class='ratakiri'>" . $value->get_nmba() . "</td>";
+                        echo "<td rowspan=2 class='ratakiri'>" . $value->get_satker() . " |  " . $value->get_dipa() . "</td>";
                         echo "<td align='left'> PAGU <br> REALISASI </td>";
                         echo "<td align='right'>" . number_format($value->get_pagu_51()) ."<br>". number_format($value->get_belanja_51()). "<br>";
 						if	($value->get_pagu_51() == 0) { 
@@ -265,8 +267,9 @@
            
 			<tr>
                     <td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
-					<td class='ratakiri'>PAGU <br> REALISASI</td>                 
-					<td class='ratakanan'><?php echo number_format($tot_pagu_51); ?><br><?php echo number_format($tot_51); ?><br><?php if ($tot_pagu_51==0){echo '(0.00%)';} else {echo "("  .number_format($tot_51/$tot_pagu_51*100,2). "%)";}?> </td>
+					<td class='ratakiri'>PAGU <br> REALISASI</td>
+                  
+					<td class='ratakanan'><?php  echo number_format($tot_pagu_51); ?><br><?php echo number_format($tot_51); ?><br><?php if ($tot_pagu_51==0){echo '(0.00%)';} else {echo "("  .number_format($tot_51/$tot_pagu_51*100,2). "%)";}?> </td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_52); ?><br><?php echo number_format($tot_52); ?><br><?php if ($tot_pagu_52==0){echo '(0.00%)';} else {echo "("  .number_format($tot_52/$tot_pagu_52*100,2). "%)";}?> </td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_53); ?><br><?php echo number_format($tot_53); ?><br><?php if ($tot_pagu_53==0){echo '(0.00%)';} else {echo "("  .number_format($tot_53/$tot_pagu_53*100,2). "%)";}?> </td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_54); ?><br><?php echo number_format($tot_54); ?><br><?php if ($tot_pagu_54==0){echo '(0.00%)';} else {echo "("  .number_format($tot_54/$tot_pagu_54*100,2). "%)";}?> </td>
@@ -296,7 +299,7 @@
 
 <?php if (isset($this->kppn_list)) { ?>
 
-<!-- Filter -->
+<
 <div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
         
     <div class="modal-dialog">
