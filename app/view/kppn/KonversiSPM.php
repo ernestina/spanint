@@ -21,7 +21,13 @@
 				<h4>Jumlah Invoice : <?php echo $jml_invoice ?>  || Jumlah PMRT : <?php echo $jml_pmrt ?> || Total Nilai Invoice : <?php echo number_format($jml_nil_invoice) ?> </h4>
 				
             </div>
-            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
+                <?php if (Session::get('role') != KPPN) { ?>
+                    <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                <?php } ?>
+        
+            </div>    
            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
 			<!--pdf-->
@@ -59,13 +65,7 @@
 			?>
                 
             </div> 
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-                <?php if (Session::get('role') != KPPN) { ?>
-                    <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                <?php } ?>
-        
-            </div>
+            
         </div>
         
         <div class="row" style="padding-top: 10px">

@@ -147,7 +147,7 @@
 
 <!-- Tabel -->
 <div id="table-container" class="wrapper">
-    <table class="footable">
+    <table class="footable" >
         
         <thead>
             <tr>
@@ -157,14 +157,14 @@
                 <th colspan="2">KPPN Anak</th>
             </tr>
             <tr>
-                <th class="align-center">Transaksi</th>
-                <th class="align-center">Nilai <?php if($this->d_kd_kppn == '183'){ echo " (USD)";} ?></th>
-                <th class="align-center">Transaksi</th>
-                <th class="align-center">Nilai<?php if($this->d_kd_kppn == '183'){ echo " (USD)";} ?></th>
+                <th >Transaksi</th>
+                <th >Nilai <?php if($this->d_kd_kppn == '183'){ echo " (USD)";} ?></th>
+                <th >Transaksi</th>
+                <th >Nilai<?php if($this->d_kd_kppn == '183'){ echo " (USD)";} ?></th>
             </tr>
         </thead>
         
-        <tbody style='font-size: 94%'>
+        <tbody class="align-center">
             
             <?php $no = 1; ?>
 
@@ -181,14 +181,14 @@
                         if($this->d_kd_kppn == '183'){ $this->d_kd_kppn = "PNR";} ?>
                         
                         <tr>
-                            <td class="align-center"><?php echo $no++; ?></td>
+                            <td ><?php echo $no++; ?></td>
                             <td class="align-left"><?php echo $value->get_tanggal_gl(); ?></td>
                             
                             <?php if ($value->get_trn_kbi()==0) { echo "<td>".number_format($value->get_trn_kbi())."</td>";} 
-                                  else { echo "<td class='align-left'> <a href=" . URL . "dataGR/detailLhpRekap/" . date('Ymd', strtotime($value->get_tanggal_gl())) . "/".$this->d_kd_kppn." >" . number_format($value->get_trn_kbi()) . "</a>";} ?></td>
-                            <td class="align-left"><?php echo number_format($value->get_rph_kbi()); ?></td>
-                            <?php if ($value->get_trn_non_kbi()==0) { echo "<td>".number_format($value->get_trn_non_kbi())."</td>";                             } else { if($this->kdkcbi==3) { echo "<td class='align-left'><a href=" . URL . "dataGR/detailLhpRekap/" . date('Ymd', strtotime($value->get_tanggal_gl())) . "/".$this->d_kd_kppn." >" . number_format($value->get_trn_non_kbi()) . "</a>";} else {echo "<td>".number_format($value->get_trn_non_kbi()); }} ?></td>
-                            <td class="align-left"><?php echo number_format($value->get_rph_non_kbi()); ?></td>
+                                  else { echo "<td > <a href=" . URL . "dataGR/detailLhpRekap/" . date('Ymd', strtotime($value->get_tanggal_gl())) . "/".$this->d_kd_kppn." >" . number_format($value->get_trn_kbi()) . "</a>";} ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_rph_kbi()); ?></td>
+                            <?php if ($value->get_trn_non_kbi()==0) { echo "<td>".number_format($value->get_trn_non_kbi())."</td>";                             } else { if($this->kdkcbi==3) { echo "<td ><a href=" . URL . "dataGR/detailLhpRekap/" . date('Ymd', strtotime($value->get_tanggal_gl())) . "/".$this->d_kd_kppn." >" . number_format($value->get_trn_non_kbi()) . "</a>";} else {echo "<td>".number_format($value->get_trn_non_kbi()); }} ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_rph_non_kbi()); ?></td>
                         </tr>
             
             <?php }
