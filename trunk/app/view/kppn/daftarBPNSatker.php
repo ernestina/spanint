@@ -335,7 +335,7 @@
                 <th class='mid'>No. SPM<br>Tgl. SPM</th>
                 <th class='mid'>No. SP2D/NTPN<br>Tgl. SP2D<br>No. Tagihan</th>
                 <th class='mid'>Satker Penerima</th>
-                <th class='mid'>Uraian SPM</th>
+                <th class='mid' width='25%'>Uraian SPM</th>
                 <th class='mid'>Atas Nama</th>
                 <th class='mid'>Setoran</th>
                 <th class='mid'>Akun</th>
@@ -355,10 +355,10 @@
                         echo "<td>" . $no++ . "</td>";
                         echo "<td>" . $value->get_no_spm()."<br>".$value->get_tgl_spm() . "</td>";
                         echo "<td>" . $value->get_no_sp2d()."<br>".$value->get_tgl_sp2d() . "<br>".$value->get_no_tagihan(). "</td>";
-                        echo "<td class='left'>" . $value->get_satker() . "</td>";
-                        echo "<td class='left'>" . $value->get_description() . "</td>";
-                        echo "<td>" . $value->get_nama2() . "</td>";
-                        echo "<td>" . $value->get_deskripsi_akun() . "</td>";
+                        echo "<td class='align-left'>" . $value->get_satker() . "</td>";
+                        echo "<td class='align-left'>" . $value->get_description() . "</td>";
+                        echo "<td class='align-left'>" . $value->get_nama2() . "</td>";
+                        echo "<td class='align-left'>" . $value->get_deskripsi_akun() . "</td>";
                         echo "<td>" . $value->get_akun() . "</td>";
                         echo "<td class='right'>" . number_format($value->get_nilai_ori()) . "</td>";
                         echo "</tr>	";
