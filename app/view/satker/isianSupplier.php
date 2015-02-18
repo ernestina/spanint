@@ -379,6 +379,29 @@ if (isset($this->data)) {
             <form id="filter-form" method="POST" action="cekSupplier" enctype="multipart/form-data">
 
                 <div class="modal-body">
+                    <?php if (isset($this->kppn_list)) { ?>
+
+                        <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
+                        <label class="isian">Kode KPPN: </label>
+
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                        <option value="SEMUAKPPN" selected>SEMUA KPPN</option>
+    <?php foreach ($this->kppn_list as $value1) { ?>
+
+        <?php if ($kode_kppn == $value1->get_kd_d_kppn()) { ?>
+
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+
+                                <?php } else { ?>
+
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>"><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+
+        <?php } ?>
+
+                            <?php } ?>
+
+                        </select>
+                        <?php } ?>
                     <br/>
                     <div id="wtipesup" class="alert alert-danger" style="display: none"></div>
                     <label class='isian'>Tipe Supplier: </label>

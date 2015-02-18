@@ -30,10 +30,10 @@ class DataSupplierController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-
+        
+        $d_kppn_list = new DataUser($this->registry);
+        $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         if (Session::get('role') == ADMIN) {
-            $d_kppn_list = new DataUser($this->registry);
-            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         if (Session::get('role') == KPPN) {
             //$filter[$no++] = "KPPN_CODE = '" . Session::get('kd_satker') . "'";
@@ -44,8 +44,10 @@ class DataSupplierController extends BaseController {
 
         if (isset($_POST['submit_file'])) {
 
-            if ($_POST['kdkppn'] != '') {
+            if ($_POST['kdkppn'] != 'SEMUAKPPN') {
                 $filter[$no++] = "KPPN_CODE = '" . $_POST['kdkppn'] . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
             }
 
