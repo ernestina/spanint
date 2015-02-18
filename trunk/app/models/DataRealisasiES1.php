@@ -129,7 +129,7 @@ class DataRealisasiES1 {
         $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ,B.NMES1 , B.KDES1";
         $sql .= " ORDER BY SUBSTR(OUTPUT,1,4) ";
 
-        var_dump($sql);
+        //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {

@@ -572,8 +572,6 @@ class BA_ES1Controller extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
-		$this->view->data = $d_spm1->get_ba_output_filter($filter);
-		
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['KEGIATAN'] != '') {

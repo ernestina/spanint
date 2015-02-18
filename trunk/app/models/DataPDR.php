@@ -29,12 +29,16 @@ class DataPDR {
     private $_status;
     private $_d_period;
     private $_status_span;
-    
     private $_cara_tarik;
-    
     private $_table_djpu_reg = 'DJPU_REGISTER';
     private $_table_djpu_cara_tarik = 'DJPU_CARA_TARIK';
     private $_table_join_status = 'SPPM_REGISTER_LENDER';
+    
+    /* 
+     * AKUN
+     */
+    private $_kdakun;
+    private $_nmakun;
     
     public $registry;
 
@@ -118,9 +122,48 @@ class DataPDR {
         return $data;
     }
 
+    public function get_akun($filter) {
+        Session::get('id_user');
+        $sql = "SELECT  flex_value kdakun,
+                        description nmakun,
+                FROM    t_akun" ;
+
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        
+        //echo($sql);
+        
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdakun($val['KDAKUN']);
+            $d_data->set_nMakun($val['NMAKUN']);
+            
+            $data[] = $d_data;
+        }
+        return $data;
+    }
     /*
      * setter
      */
+    function get_kdakun() {
+        return $this->_kdakun;
+    }
+
+    function get_nmakun() {
+        return $this->_nmakun;
+    }
+
+    function set_kdakun($_kdakun) {
+        $this->_kdakun = $_kdakun;
+    }
+
+    function set_nmakun($_nmakun) {
+        $this->_nmakun = $_nmakun;
+    }
+
     public function set_status_span($status_span) {
         $this->_status_span = $status_span;
     }
