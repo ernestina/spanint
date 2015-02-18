@@ -162,18 +162,19 @@ class DataOverview {
     
     public function sumRealisasiTertinggiBA($filter=null) {
         
-        $sql = "SELECT A.*, B.NMBA FROM 
+        $sql = "SELECT * FROM 
                 (SELECT 
-                SUBSTR(PROGRAM,1,3) BA,
-                SUM(ACTUAL_AMT) REALISASI
-                FROM " . $this->_table3 . "
-                WHERE BUDGET_TYPE = '2'
-                AND SUBSTR(BANK,1,1)  <= '9'
-                AND SUBSTR(AKUN,1,1) IN ('5','6')
-                AND SUMMARY_FLAG = 'N'
-                AND NVL(BUDGET_AMT,0) + NVL(ACTUAL_AMT,0) + NVL(ENCUMBRANCE_AMT,0) > 0
-                GROUP BY SUBSTR(PROGRAM,1,3)
-                ORDER BY SUM(ACTUAL_AMT) DESC) A LEFT JOIN " .$this->_table4. " B ON A.BA=B.KDBA
+                SUBSTR(A.PROGRAM,1,3) BA,
+                B.NMBA,
+                SUM(NVL(A.ACTUAL_AMT,0)) REALISASI
+                FROM " . $this->_table3 . " A JOIN " . $this->_table4 . " B ON SUBSTR(A.PROGRAM,1,3)=B.KDBA
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                GROUP BY SUBSTR(A.PROGRAM,1,3), B.NMBA
+                ORDER BY SUM(NVL(A.ACTUAL_AMT,0)) DESC)
                 WHERE ROWNUM <= 10
 				"
         ;
@@ -207,20 +208,20 @@ class DataOverview {
     
     public function percentageRealisasiTertinggiBA($filter=null) {
         
-        $sql = "SELECT A.*, B.NMBA FROM (SELECT * FROM
+        $sql = "SELECT * FROM 
                 (SELECT 
-                SUBSTR(PROGRAM,1,3) BA,
-                SUM(ACTUAL_AMT) REALISASI,
-                SUM(BUDGET_AMT) PAGU
-                FROM " . $this->_table3 . "
-                WHERE BUDGET_TYPE = '2'
-                AND SUBSTR(BANK,1,1)  <= '9'
-                AND SUBSTR(AKUN,1,1) IN ('5','6')
-                AND SUMMARY_FLAG = 'N'
-                AND NVL(BUDGET_AMT,0) + NVL(ACTUAL_AMT,0) + NVL(ENCUMBRANCE_AMT,0) > 0
-                GROUP BY SUBSTR(PROGRAM,1,3))
-                WHERE PAGU > 0 ORDER BY REALISASI/PAGU DESC) A LEFT JOIN " .$this->_table4. " B ON A.BA=B.KDBA
-                WHERE ROWNUM <= 10 ORDER BY REALISASI/PAGU DESC
+                SUBSTR(A.PROGRAM,1,3) BA,
+                B.NMBA,
+                SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
+                SUM(NVL(A.BUDGET_AMT,0)) PAGU
+                FROM " . $this->_table3 . " A JOIN " . $this->_table4 . " B ON SUBSTR(A.PROGRAM,1,3)=B.KDBA
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                GROUP BY SUBSTR(A.PROGRAM,1,3), B.NMBA
+                ORDER BY SUM(NVL(A.ACTUAL_AMT,0))/SUM(NVL(A.BUDGET_AMT,0)) DESC) WHERE ROWNUM <= 10
 				"
         ;
         
@@ -253,18 +254,19 @@ class DataOverview {
     
     public function sumRealisasiTerendahBA($filter=null) {
         
-        $sql = "SELECT A.*, B.NMBA FROM 
+        $sql = "SELECT * FROM 
                 (SELECT 
-                SUBSTR(PROGRAM,1,3) BA,
-                SUM(ACTUAL_AMT) REALISASI
-                FROM " . $this->_table3 . "
-                WHERE BUDGET_TYPE = '2'
-                AND SUBSTR(BANK,1,1)  <= '9'
-                AND SUBSTR(AKUN,1,1) IN ('5','6')
-                AND SUMMARY_FLAG = 'N'
-                AND NVL(BUDGET_AMT,0) + NVL(ACTUAL_AMT,0) + NVL(ENCUMBRANCE_AMT,0) > 0
-                GROUP BY SUBSTR(PROGRAM,1,3)
-                ORDER BY SUM(ACTUAL_AMT) ASC) A LEFT JOIN " .$this->_table4. " B ON A.BA=B.KDBA
+                SUBSTR(A.PROGRAM,1,3) BA,
+                B.NMBA,
+                SUM(NVL(A.ACTUAL_AMT,0)) REALISASI
+                FROM " . $this->_table3 . " A JOIN " . $this->_table4 . " B ON SUBSTR(A.PROGRAM,1,3)=B.KDBA
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                GROUP BY SUBSTR(A.PROGRAM,1,3), B.NMBA
+                ORDER BY SUM(NVL(A.ACTUAL_AMT,0)) ASC)
                 WHERE ROWNUM <= 10
 				"
         ;
@@ -296,20 +298,21 @@ class DataOverview {
     
     public function percentageRealisasiTerendahBA($filter=null) {
         
-        $sql = "SELECT A.*, B.NMBA FROM (SELECT * FROM
+        $sql = "SELECT * FROM 
                 (SELECT 
-                SUBSTR(PROGRAM,1,3) BA,
-                SUM(ACTUAL_AMT) REALISASI,
-                SUM(BUDGET_AMT) PAGU
-                FROM " . $this->_table3 . "
-                WHERE BUDGET_TYPE = '2'
-                AND SUBSTR(BANK,1,1)  <= '9'
-                AND SUBSTR(AKUN,1,1) IN ('5','6')
-                AND SUMMARY_FLAG = 'N'
-                AND NVL(BUDGET_AMT,0) + NVL(ACTUAL_AMT,0) + NVL(ENCUMBRANCE_AMT,0) > 0
-                GROUP BY SUBSTR(PROGRAM,1,3))
-                WHERE PAGU > 0 ORDER BY REALISASI/PAGU ASC) A LEFT JOIN " .$this->_table4. " B ON A.BA=B.KDBA
-                WHERE ROWNUM <= 10 ORDER BY REALISASI/PAGU ASC";
+                SUBSTR(A.PROGRAM,1,3) BA,
+                B.NMBA,
+                SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
+                SUM(NVL(A.BUDGET_AMT,0)) PAGU
+                FROM " . $this->_table3 . " A JOIN " . $this->_table4 . " B ON SUBSTR(A.PROGRAM,1,3)=B.KDBA
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                GROUP BY SUBSTR(A.PROGRAM,1,3), B.NMBA
+                ORDER BY SUM(NVL(A.ACTUAL_AMT,0))/SUM(NVL(A.BUDGET_AMT,0)) ASC) WHERE ROWNUM <= 10
+                ";
         
         if (isset($filter)) {
             foreach ($filter as $filter) {
@@ -327,6 +330,186 @@ class DataOverview {
             
             $d_data->set_ba($val['BA']);
             $d_data->set_nmsatker($val['NMBA']);
+            $d_data->set_realisasi($val['REALISASI'] / $val['PAGU'] * 100);
+            
+            $data[] = $d_data;
+        }
+        
+        return $data;
+        
+    }
+    
+    public function sumRealisasiTertinggiSatker($filter=null) {
+        
+        $sql = "SELECT * FROM 
+                (SELECT 
+                A.SATKER,
+                B.NMSATKER,
+                SUM(NVL(A.ACTUAL_AMT,0)) REALISASI
+                FROM " . $this->_table3 . " A JOIN " . $this->_table2 . " B ON A.SATKER=B.KDSATKER
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                GROUP BY A.SATKER, B.NMSATKER
+                ORDER BY SUM(NVL(A.ACTUAL_AMT,0)) DESC)
+                WHERE ROWNUM <= 10
+				"
+        ;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+        
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        $data = array();
+        
+        foreach ($result as $val) {
+            
+            $d_data = new $this($this->registry);
+            
+            $d_data->set_ba($val['SATKER']);
+            $d_data->set_nmsatker($val['NMSATKER']);
+            $d_data->set_realisasi($val['REALISASI']);
+            
+            $data[] = $d_data;
+        }
+        
+        return $data;
+        
+    }
+    
+    public function percentageRealisasiTertinggiSatker($filter=null) {
+        
+        $sql = "SELECT * FROM 
+                (SELECT 
+                A.SATKER, B.NMSATKER,
+                SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
+                SUM(NVL(A.BUDGET_AMT,0)) PAGU
+                FROM " . $this->_table3 . " A JOIN " . $this->_table2 . " B ON A.SATKER=B.KDSATKER
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                GROUP BY SATKER, NMSATKER
+                ORDER BY SUM(NVL(A.ACTUAL_AMT,0))/SUM(NVL(A.BUDGET_AMT,0)) DESC) WHERE ROWNUM <= 10
+				"
+        ;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $result = $this->db->select($sql);
+        
+        $data = array();
+        
+        foreach ($result as $val) {
+            
+            $d_data = new $this($this->registry);
+            
+            $d_data->set_ba($val['SATKER']);
+            $d_data->set_nmsatker($val['NMSATKER']);
+            $d_data->set_realisasi($val['REALISASI'] / $val['PAGU'] * 100);
+            
+            $data[] = $d_data;
+        }
+        
+        return $data;
+        
+    }
+    
+    public function sumRealisasiTerendahSatker($filter=null) {
+        
+        $sql = "SELECT * FROM 
+                (SELECT 
+                A.SATKER,
+                B.NMSATKER,
+                SUM(NVL(A.ACTUAL_AMT,0)) REALISASI
+                FROM " . $this->_table3 . " A JOIN " . $this->_table2 . " B ON A.SATKER=B.KDSATKER
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                GROUP BY A.SATKER, B.NMSATKER
+                ORDER BY SUM(NVL(A.ACTUAL_AMT,0)) ASC)
+                WHERE ROWNUM <= 10
+				"
+        ;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+        
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        $data = array();
+        
+        foreach ($result as $val) {
+            
+            $d_data = new $this($this->registry);
+            
+            $d_data->set_ba($val['SATKER']);
+            $d_data->set_nmsatker($val['NMSATKER']);
+            $d_data->set_realisasi($val['REALISASI']);
+            
+            $data[] = $d_data;
+        }
+        
+        return $data;
+        
+    }
+    
+    public function percentageRealisasiTerendahSatker($filter=null) {
+        
+        $sql = "SELECT * FROM 
+                (SELECT 
+                A.SATKER, B.NMSATKER,
+                SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
+                SUM(NVL(A.BUDGET_AMT,0)) PAGU
+                FROM " . $this->_table3 . " A JOIN " . $this->_table2 . " B ON A.SATKER=B.KDSATKER
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                GROUP BY SATKER, NMSATKER
+                ORDER BY SUM(NVL(A.ACTUAL_AMT,0))/SUM(NVL(A.BUDGET_AMT,0)) ASC) WHERE ROWNUM <= 10
+				"
+        ;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $result = $this->db->select($sql);
+        
+        $data = array();
+        
+        //echo($sql);
+        
+        foreach ($result as $val) {
+            
+            $d_data = new $this($this->registry);
+            
+            $d_data->set_ba($val['SATKER']);
+            $d_data->set_nmsatker($val['NMSATKER']);
             $d_data->set_realisasi($val['REALISASI'] / $val['PAGU'] * 100);
             
             $data[] = $d_data;
