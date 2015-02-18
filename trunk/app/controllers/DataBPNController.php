@@ -60,8 +60,6 @@ class DataBPNController extends BaseController {
                     $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                     $this->view->d_kd_kppn = $_POST['kdkppn'];
                 }
-            } else {
-                $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
             }
             
             if ($_POST['spm'] != '') {
@@ -71,7 +69,7 @@ class DataBPNController extends BaseController {
             
             if ($_POST['nosp2d'] != '') {
                 $filter[$no++] = "NO_SP2D = '" . $_POST['nosp2d'] . "'";
-                $this->view->d_sp2d = $_POST['nosp2d'];
+                $this->view->d_nosp2d = $_POST['nosp2d'];
             }
             
             if ($_POST['kdsatker'] != '') {
@@ -137,7 +135,7 @@ class DataBPNController extends BaseController {
             
             if ($_POST['nosp2d'] != '') {
                 $filter[$no++] = "NO_SP2D = '" . $_POST['nosp2d'] . "'";
-                $this->view->d_sp2d = $_POST['nosp2d'];
+                $this->view->d_nosp2d = $_POST['nosp2d'];
             }
             
             if ($_POST['kdsatker'] != '') {
