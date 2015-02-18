@@ -125,13 +125,37 @@ class DataPDR {
     public function get_akun($filter) {
         Session::get('id_user');
         $sql = "SELECT  flex_value kdakun,
-                        description nmakun,
-                FROM    t_akun" ;
+                        description nmakun
+                FROM    t_akun where 1=1 " ;
 
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
+        $sql .=" ORDER BY kdakun ";
+        //echo($sql);
         
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdakun($val['KDAKUN']);
+            $d_data->set_nMakun($val['NMAKUN']);
+            
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+    
+    public function get_kppn($filter) {
+        Session::get('id_user');
+        $sql = "SELECT  kdkppn kdakun,
+                        nmkppn nmakun
+                FROM    t_kppn where 1=1 " ;
+
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .=" ORDER BY kdakun ";
         //echo($sql);
         
         $result = $this->db->select($sql);
