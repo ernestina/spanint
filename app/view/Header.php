@@ -198,6 +198,8 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                 </ul>
                             </div>
                         </li>
