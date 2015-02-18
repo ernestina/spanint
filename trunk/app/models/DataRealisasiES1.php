@@ -194,7 +194,7 @@ class DataRealisasiES1 {
 				AND SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N' 
                                 AND SUBSTR(A.AKUN,1,1) IN('5','6')
-				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) > 0
 				";
 
         foreach ($filter as $filter1) {
@@ -212,7 +212,7 @@ class DataRealisasiES1 {
 				AND OUTPUT=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N'
                                 AND SUBSTR(A.AKUN,1,1) IN('5','6')
-				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) > 0
 				 ";
 
         foreach ($filter as $filter2) {
