@@ -25,7 +25,8 @@ class Bootstrap {
             (Session::get('role') == BANK ? 'bank' :
             (Session::get('role') == KL ? 'kl' :
             (Session::get('role') == ES1 ? 'es1' :
-             'guest')))))))))) : 'guest';
+            (Session::get('role') == UMADMIN ? 'umadmin' :
+             'guest'))))))))))) : 'guest';
     }
 
     /*

@@ -131,6 +131,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP per KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarianBulan">Monitoring Status LHP per Bulan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataMpnBi/MpnBi">Monitoring Rekap Penerimaan yang sudah Diinterface</a></li>
                                     <li><a href="<?php echo URL; ?>dataBPN/dataBPN">Monitoring Potongan SPM (Satker Pembayar)</a></li>
                                     <li><a href="<?php echo URL; ?>dataBPN/dataBPNSatker">Monitoring Potongan SPM (Satker Penerima)</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring Imbalan Jasa Perbankan</a></li>
@@ -873,6 +874,18 @@
                                 </ul>
                             </div>
                         </li>
+                    </ul>
+
+                <?php elseif (Session::get('role') == ES1): ?>
+                    
+                    
+                    <!--//////////////////////////////////////// --> 
+                    <!--/////////////// Header UMADMIN /////////// -->  
+                    <!--//////////////////////////////////////// --> 
+
+                    <ul>
+
+                        <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
                     </ul>
 
                 <?php endif; ?>
