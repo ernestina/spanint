@@ -387,7 +387,7 @@ class DataOverview {
     
     public function percentageRealisasiTertinggiSatker($filter=null) {
         
-        $sql = "SELECT * FROM 
+        $sql = "SELECT * FROM (SELECT * FROM
                 (SELECT 
                 A.SATKER, B.NMSATKER,
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
@@ -398,8 +398,7 @@ class DataOverview {
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
                 AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
-                GROUP BY SATKER, NMSATKER
-                ORDER BY SUM(NVL(A.ACTUAL_AMT,0))/SUM(NVL(A.BUDGET_AMT,0)) DESC) WHERE ROWNUM <= 10
+                GROUP BY SATKER, NMSATKER) WHERE PAGU > 0 ORDER BY REALISASI/PAGU DESC) WHERE ROWNUM <= 10
 				"
         ;
         
@@ -408,6 +407,8 @@ class DataOverview {
                 $sql .= " AND " . $filter;
             }
         }
+        
+        //echo($sql);
 
         $result = $this->db->select($sql);
         
@@ -430,7 +431,7 @@ class DataOverview {
     
     public function sumRealisasiTerendahSatker($filter=null) {
         
-        $sql = "SELECT * FROM 
+        $sql = "SELECT * FROM (SELECT * FROM
                 (SELECT 
                 A.SATKER,
                 B.NMSATKER,
@@ -442,7 +443,7 @@ class DataOverview {
                 AND A.SUMMARY_FLAG = 'N'
                 AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
                 GROUP BY A.SATKER, B.NMSATKER
-                ORDER BY SUM(NVL(A.ACTUAL_AMT,0)) ASC)
+                ORDER BY SUM(NVL(A.ACTUAL_AMT,0)) ASC) WHERE REALISASI >= 0)
                 WHERE ROWNUM <= 10
 				"
         ;
@@ -476,7 +477,7 @@ class DataOverview {
     
     public function percentageRealisasiTerendahSatker($filter=null) {
         
-        $sql = "SELECT * FROM 
+        $sql = "SELECT * FROM (SELECT * FROM
                 (SELECT 
                 A.SATKER, B.NMSATKER,
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
@@ -487,8 +488,7 @@ class DataOverview {
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
                 AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
-                GROUP BY SATKER, NMSATKER
-                ORDER BY SUM(NVL(A.ACTUAL_AMT,0))/SUM(NVL(A.BUDGET_AMT,0)) ASC) WHERE ROWNUM <= 10
+                GROUP BY SATKER, NMSATKER) WHERE PAGU > 0 AND REALISASI >= 0 ORDER BY REALISASI/PAGU ASC) WHERE ROWNUM <= 10
 				"
         ;
         
