@@ -145,7 +145,7 @@ class DataUserSPAN {
     
     public function get_ganti_user ($filter) {
         Session::get('id_user');
-        $sql = "SELECT * FROM " . $this->_table4 . "";
+        $sql = "SELECT * FROM " . $this->_table4 . " WHERE 1=1 ";
         
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
