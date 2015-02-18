@@ -297,8 +297,8 @@
                 if (isset($this->d_spm)) {
                     echo "<br>No. SPM : ".$this->d_spm;
                 }
-                if (isset($this->d_sp2d)) {
-                    echo "       No. SP2D : ".$this->d_sp2d;
+                if (isset($this->d_nosp2d)) {
+                    echo "       No. SP2D : ".$this->d_nosp2d;
                 }
                 if (isset($this->d_kdsatker)) {
                     echo "<br>Kode Satker : ".$this->d_kdsatker;
