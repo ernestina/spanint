@@ -153,9 +153,9 @@
             </tr>
             <tr>
                 <th class="align-center">Transaksi</th>
-                <th class="align-center">Nilai</th>
+                <th class="align-center">Nilai <?php if($this->d_kd_kppn == '183'){ echo " (USD)";} ?></th>
                 <th class="align-center">Transaksi</th>
-                <th class="align-center">Nilai</th>
+                <th class="align-center">Nilai<?php if($this->d_kd_kppn == '183'){ echo " (USD)";} ?></th>
             </tr>
         </thead>
         
@@ -172,7 +172,8 @@
                 <?php } else { ?>
             
                     <?php 
-						foreach ($this->data as $value) { ?>
+						foreach ($this->data as $value) {
+                        if($this->d_kd_kppn == '183'){ $this->d_kd_kppn = "PNR";} ?>
                         
                         <tr>
                             <td class="align-center"><?php echo $no++; ?></td>

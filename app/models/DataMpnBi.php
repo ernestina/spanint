@@ -88,8 +88,12 @@ class DataMpnBi {
     }
     
     public function getKdKdkcbi($kdkppn){
+        if ($kdkppn=='183'){
+            $kdkppn = "PNR";    
+        }
         $sql = "select kdkcbi from ".$this->_table1." where kdkppn = '".$kdkppn."'";
         $result = $this->db->select($sql);
+        //var_dump($sql);
         foreach ($result as $val) {
             $data = $val['KDKCBI'];   
         }

@@ -39,7 +39,11 @@ class DataBPNController extends BaseController {
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         if (Session::get('role') == KPPN) {
-            $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+            if (Session::get('id_user')=='183'){
+                $filter[$no++] = "KDKPPN = 'PNR'";    
+            } else {
+                $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+            }
         }
         if (Session::get('role') == SATKER) {
             $filter[$no++] = "substr(no_spm,8,6) = '" . Session::get('id_user') . "'";
@@ -47,7 +51,11 @@ class DataBPNController extends BaseController {
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
                 if ($_POST['kdkppn'] != 'SEMUA KPPN') {
-                    $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn'] . "'";
+                    if ($_POST['kdkppn']=='183'){
+                        $filter[$no++] = "KDKPPN = 'PNR'";    
+                    } else {
+                        $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn'] . "'";
+                    }
                     $d_kppn = new DataUser($this->registry);
                     $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                     $this->view->d_kd_kppn = $_POST['kdkppn'];

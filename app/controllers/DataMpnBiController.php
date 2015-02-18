@@ -40,7 +40,11 @@ class DataMpnBiController extends BaseController {
             if ($kdkcbi == 3) {
                 $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
             } else {
-                $filter[$no++] = "KDKPPN_KBI = '" . Session::get('id_user') . "'";
+                if (Session::get('id_user')=='183'){
+                    $filter[$no++] = "KDKPPN_KBI = 'PNR'";    
+                } else {
+                    $filter[$no++] = "KDKPPN_KBI = '" . Session::get('id_user') . "'";
+                }
             }
         }
         if (isset($_POST['submit_file'])) {
@@ -50,14 +54,16 @@ class DataMpnBiController extends BaseController {
                     if ($kdkcbi == 3) {
                         $filter[$no++] = "KDKPPN = '" . $_POST['kdkppn'] . "'";
                     } else {
-                        $filter[$no++] = "KDKPPN_KBI = '" . $_POST['kdkppn'] . "'";
+                        if ($_POST['kdkppn']=='183'){
+                            $filter[$no++] = "KDKPPN_KBI = 'PNR'";    
+                        } else {
+                            $filter[$no++] = "KDKPPN_KBI = '" .  $_POST['kdkppn'] . "'";
+                        }
                     }
                     $d_kppn = new DataUser($this->registry);
                     $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                     $this->view->d_kd_kppn = $_POST['kdkppn'];
                 }
-            } else {
-                $filter[$no++] = "KDKPPN_KBI = '" . Session::get('id_user') . "'";
             }
             
             
