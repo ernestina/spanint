@@ -17,85 +17,27 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 
-if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
-//-----------------------------
-	
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-		  }
-	} else {
-		$kdkppn = 'null';
-	}
-	
-	if (isset($this->d_tgl_awal)) {
-		$kdtgl_awal = $this->d_tgl_awal;
-	} else {
-		$kdtgl_awal = 'null';
-	}
-	if (isset($this->d_tgl_akhir)) {
-		$kdtgl_akhir = $this->d_tgl_akhir;
-	} else {
-		$kdtgl_akhir = 'null';
-	}
-	
-//------------------------------
-}
-if (Session::get('role') == KPPN) {
-//-----------------------------
-	
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-		  }
-	} else {
-		$kdkppn = Session::get('id_user');
-	}
-	
-	if (isset($this->d_tgl_awal)) {
-		$kdtgl_awal = $this->d_tgl_awal;
-	} else {
-		$kdtgl_awal = 'null';
-	}
-	if (isset($this->d_tgl_akhir)) {
-		$kdtgl_akhir = $this->d_tgl_akhir;
-	} else {
-		$kdtgl_akhir = 'null';
-	}
-	
-}
-//------------------------------
 
-
-if (Session::get('role') == SATKER) {
-//-----------------------------
-	
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-		  }
-	} else {
-		$kdkppn = 'null';
-	}
-	
-	if (isset($this->d_tgl_awal)) {
-		$kdtgl_awal = $this->d_tgl_awal;
-	} else {
-		$kdtgl_awal = 'null';
-	}
-	if (isset($this->d_tgl_akhir)) {
-		$kdtgl_akhir = $this->d_tgl_akhir;
-	} else {
-		$kdtgl_akhir = 'null';
-	}
-	
-}
-
-?>
-    <a href="<?php echo URL; ?>PDF/RekapSp2d_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-    </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-    <a href="<?php echo URL; ?>PDF/RekapSp2d_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-	<?php
+			if (isset($this->d_tgl_awal)) {
+                
+				$kdtgl_awal = $this->d_tgl_awal();
+                
+            }else{
+				$kdtgl_awal ='null';
+			} 
+			if (isset($this->d_tgl_akhir)) {
+                
+				$kdtgl_akhir = $this->d_tgl_akhir();
+                
+            }else{
+				$kdtgl_akhir ='null';
+			} 
+			
+			?>
+            <a href="<?php echo URL; ?>PDF/RekapSp2dBAES1_BAES1_PDF/<?php echo $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<a href="<?php echo URL; ?>PDF/RekapSp2dBAES1_BAES1_PDF/<?php echo $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+			<?php
 //------------------------------
 
 ?>                

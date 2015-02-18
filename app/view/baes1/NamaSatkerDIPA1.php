@@ -21,71 +21,42 @@
                 <?php
                 //----------------------------------------------------
                 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
-                if (Session::get('role') == ADMIN || Session::get('role') == DJA || Session::get('role') == KANWIL) {
-                    if (isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker) || isset($this->d_kd_revisi)) {
-                        if (isset($this->d_nama_kppn)) {
-                            foreach ($this->d_nama_kppn as $kppn) {
-                                $kdkppn = $kppn->get_kd_satker();
-                            }
-                        } else {
-                            $kdkppn = 'null';
-                        }
-                        if (isset($this->d_kd_satker)) {
-                            $kdsatker = $this->d_kd_satker;
-                        } else {
-                            $kdsatker = 'null';
-                        }
-
-                        if (isset($this->d_nm_satker)) {
-                            $nmsatker = $this->d_nm_satker;
-                        } else {
-                            $nmsatker = 'null';
-                        }
-
-                        if (isset($this->d_kd_revisi)) {
-                            $kdrevisi = $this->d_kd_revisi;
-                        } else {
-                            $kdrevisi = 'null';
-                        }
-                        ?>
-                        <a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-                        <a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-						<?php
-                    }
-                }
+             if (isset($this->d_kd_satker)) {
                 
-                if (Session::get('role') == KPPN) {
-                    if (isset($this->d_nama_kppn)) {
-                        foreach ($this->d_nama_kppn as $kppn) {
-                            $kdkppn = $kppn->get_kd_satker();
-                        }
-                    } else {
-                        $kdkppn = Session::get('id_user');
-                    }
-                    if (isset($this->d_kd_satker)) {
-                        $kdsatker = $this->d_kd_satker;
-                    } else {
-                        $kdsatker = 'null';
-                    }
+				$kdsatker = $this->d_kd_satker();
+                
+            }else{
+				$kdsatker ='null';
+			} 
+			if (isset($this->d_nm_satker)) {
+                
+				$kdnmsatker = $this->d_nm_satker();
+                
+            }else{
+				$kdnmsatker ='null';
+			} 
+			if (isset($this->eselon1)) {
+                
+				$kdeselon1 = $this->eselon1();
+                
+            }else{
+				$kdeselon1 ='null';
+			} 
+			if (isset($this->d_kd_revisi)) {
+                
+				$kdkdrevisi = $this->d_kd_revisi();
+                
+            }else{
+				$kdkdrevisi ='null';
+			} 
+			
+			
+			?>
+            <a href="<?php echo URL; ?>PDF/nmsatker_BAES1_PDF/<?php echo $kdsatker . "/" . $kdnmsatker. "/" . $kdeselon1 . "/" . $kdkdrevisi; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<a href="<?php echo URL; ?>PDF/nmsatker_BAES1_PDF/<?php echo $kdsatker . "/" . $kdnmsatker. "/" . $kdeselon1 . "/" . $kdkdrevisi; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+			<?php
 
-                    if (isset($this->d_nm_satker)) {
-                        $nmsatker = $this->d_nm_satker;
-                    } else {
-                        $nmsatker = 'null';
-                    }
-
-                    if (isset($this->d_kd_revisi)) {
-                        $kdrevisi = $this->d_kd_revisi;
-                    } else {
-                        $kdrevisi = 'null';
-                    }
-                    ?>
-                        <a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-                        <a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-                    <?php
-                }
                 //------------------------------
                 ?>
 
