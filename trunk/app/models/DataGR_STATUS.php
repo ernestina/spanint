@@ -17,6 +17,7 @@ class DataGR_STATUS {
     private $_keterangan;
     private $_mata_uang;
     private $_ntpn;
+    private $_billingcode;
     private $_segment1;
     private $_segment2;
     private $_segment3;
@@ -205,8 +206,9 @@ class DataGR_STATUS {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_ntpn($val['RECEIPT_NUMBER']);
-            $d_data->set_file_name($val['NTB']);
-            $d_data->set_gl_date($val['TANGGAL']);
+            $d_data->set_billingcode($val['BILLINGCODE']);
+            $d_data->set_file_name($val['ATTRIBUTE3']);
+            $d_data->set_gl_date(date("d-m-Y", strtotime($val['TANGGAL'])));
             $d_data->set_resp_name($val['NAMA']);
             $d_data->set_segment1($val['SEGMENT1']);
             $d_data->set_segment2($val['SEGMENT2']);
@@ -485,6 +487,10 @@ class DataGR_STATUS {
         $this->_ntpn = $ntpn;
     }
 
+    public function set_billingcode($billingcode) {
+        $this->_billingcode = $billingcode;
+    }
+
     public function set_file_name($file_name) {
         $this->_file_name = $file_name;
     }
@@ -539,6 +545,10 @@ class DataGR_STATUS {
 
     public function get_ntpn() {
         return $this->_ntpn;
+    }
+
+    public function get_billingcode() {
+        return $this->_billingcode;
     }
 
     public function get_segment1() {

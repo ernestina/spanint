@@ -420,6 +420,11 @@ class DataGRController extends BaseController {
                 $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
                 $this->view->ntpn = $_POST['ntpn'];
             }
+            
+            if ($_POST['billingcode'] != '') {
+                $filter[$no++] = "BILLINGCODE = '" . $_POST['billingcode'] . "'";
+                $this->view->billingcode = $_POST['billingcode'];
+            }
 			
 			if ($_POST['akun'] != '') {
 			

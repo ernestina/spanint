@@ -83,7 +83,7 @@
             <tr>
                 <th class='mid'>No.</th>
 				<th>NTPN</th>
-				<th>NTB</th>
+				<th>NTB<br>Kode Billing</th>
                 <th>Tanggal Penerimaan</th>
 				<th class='ratatengah'>Nama</th>
 				<th class='ratatengah'>Bagan Akun SPAN</th>
@@ -106,7 +106,7 @@
                         echo "<tr>	";
                         echo "<td class='mid'>" . $no++ . "</td>";
 						echo "<td>" . $value->get_ntpn() . "</td>";
-						echo "<td>" . $value->get_file_name() . "</td>";
+						echo "<td>" . $value->get_file_name() . "<br>".$value->get_billingcode()."</td>";
 						echo "<td>" . $value->get_gl_date() . "</td>";
 						echo "<td>" . $value->get_resp_name() . "</td>";
 						echo "<td>" . $value->get_segment1(). "." .$value->get_segment2(). "." .$value->get_segment3(). "." .$value->get_segment4()."." .$value->get_segment5(). "." .$value->get_segment6(). "." .$value->get_segment7(). "." .$value->get_segment8(). "." .$value->get_segment9(). "." .$value->get_segment10(). "." .$value->get_segment11(). "." .$value->get_segment12()."</td>";
@@ -162,8 +162,16 @@
                     <div id="wntpn" class="alert alert-danger" style="display:none;"></div>
 
                     <label class="isian">NTPN: </label>
-                    <input class="form-control" type="text" name="ntpn" id="ntpn" value="<?php if (isset($this->check_number)) {
+                    <input class="form-control" type="text" name="ntpn" id="ntpn" value="<?php if (isset($this->ntpn)) {
                    echo $this->ntpn;
+					} ?>">
+                    <br/>
+                    
+                    <div id="wbillingcode" class="alert alert-danger" style="display:none;"></div>
+
+                    <label class="isian">Kode Billing: </label>
+                    <input class="form-control" type="text" name="billingcode" id="billingcode" value="<?php if (isset($this->billingcode)) {
+                   echo $this->billingcode;
 					} ?>">
                     <br/>
 					
@@ -181,14 +189,6 @@
                        
                         ?>
                     </select>
-                    
-
-                    <input type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                    <!--input id="submit" class="sukses" type="submit" name="submit_file" value="SIMPAN" onClick=""-->
                         
 
                 </div>
@@ -275,10 +275,11 @@
 
     function cek_upload() {
         var v_ntpn = document.getElementById('ntpn').value;
+        var v_billingcode = document.getElementById('billingcode').value;
 
         var jml = 0;
-        if (v_ntpn == '') {
-            $('#wntpn').html('Harap isi no NTPN');
+        if (v_ntpn == '' && v_billingcode == '') {
+            $('#wntpn').html('Harap isi No NTPN atau Kode Billing');
             $('#wntpn').fadeIn();
             jml++;
         }
