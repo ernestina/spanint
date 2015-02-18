@@ -10,12 +10,8 @@
                 <h2>Monitoring Status LHP per KPPN</h2>
                 <?php } ?>
             </div>
-             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            <?php if (isset($this->kppn_list)) { ?>
-                    <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-            <?php } ?>
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
 			<?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
@@ -36,9 +32,14 @@
 				$kdkppn = Session::get('id_user');		
 			}
 		?>
-		<a href="<?php echo URL; ?>PDF/grStatusHarian_PDF/<?php echo $kdkppn; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-		</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-		<a href="<?php echo URL; ?>PDF/grStatusHarian_PDF/<?php echo $kdkppn; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+                <div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/grStatusHarian_PDF/<?php echo $kdkppn; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/grStatusHarian_PDF/<?php echo $kdkppn; ?>/XLS">EXCEL</a></li>
+                          </ul>
+                </div>
 		
 		<?php
 	//------------------------------
@@ -46,6 +47,11 @@
 
                 
                 
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            <?php if (isset($this->kppn_list)) { ?>
+                    <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+            <?php } ?>
             </div>
            
         </div>

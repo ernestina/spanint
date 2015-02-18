@@ -10,12 +10,7 @@
             <div class="col-lg-10 col-md-6 col-sm-12">			 
                 <h2>Monitoring Pelimpahan</h2>
             </div>
-			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-            
-                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">                
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">                
                 <?php
 				//---------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
@@ -95,10 +90,21 @@
 					<?php }
 					//------------------------------
         ?>
-				<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                 </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-				<a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+        <div class="btn-group-sm">
+            <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+            </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF">PDF</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS">EXCEL</a></li>
+                  </ul>
+        </div>
 				 
+            </div>
+            
+			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+            
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                
             </div>
             
         </div>
