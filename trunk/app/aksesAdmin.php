@@ -17,6 +17,7 @@ $akses['DataUserAdmin'] = array(
 $akses['OverviewPenganggaranAdmin'] = array(
         '__construct',
         'index',
+        'overview',
         '__destruct'
 );
 
