@@ -307,8 +307,8 @@ $akses['PelaporanAdmin'] = array(
  */
 $akses['DataBPNAdmin'] = array(
     '__construct',
-    'DataBPN',
-    'DataBPNSatker',
+    'dataBPN',
+    'dataBPNSatker',
     '__destruct'
 );
 

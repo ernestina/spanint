@@ -80,7 +80,7 @@ class DataBPNController extends BaseController {
             }
             
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
-                $filter[$no++] = "TO_DATE(TGL_SPM,'YYYYMMDD') BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') AND TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD')  ";
+                $filter[$no++] = "TO_DATE(TGL_SP2D,'YYYYMMDD') BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') AND TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD')  ";
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }
@@ -128,8 +128,6 @@ class DataBPNController extends BaseController {
                     $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                     $this->view->d_kd_kppn = $_POST['kdkppn'];
                 }
-            } else {
-                $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
             }
             
             if ($_POST['spm'] != '') {
@@ -148,7 +146,7 @@ class DataBPNController extends BaseController {
             }
             
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
-                $filter[$no++] = "TO_DATE(TGL_SPM,'YYYYMMDD') BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') AND TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD')  ";
+                $filter[$no++] = "TO_DATE(TGL_SP2D,'YYYYMMDD') BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') AND TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD')  ";
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }

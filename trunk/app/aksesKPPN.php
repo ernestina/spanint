@@ -272,6 +272,25 @@ $akses['DataPersiapanRolloutKPPN'] = array(
     '__destruct'
 );
 
+/*
+ * akses BPN
+ */
+$akses['DataBPNKPPN'] = array(
+    '__construct',
+    'dataBPN',
+    'dataBPNSatker',
+    '__destruct'
+);
+
+/*
+ * akses MpnBi
+ */
+$akses['DataMpnBiKPPN'] = array(
+    '__construct',
+    'MpnBi',
+    '__destruct'
+);
+
 
 /*
  * akses modul PDF
