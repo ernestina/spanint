@@ -47,7 +47,7 @@ class DataBPN {
      * return array objek Data Tetap */
 
     public function get_bpn_filter($filter) {
-        $sql = "SELECT KPPN, TGL_SP2D, NO_SP2D, NO_SPM, TGL_SPM, NAMA2, AKUN, NILAI_ORI, DESKRIPSI_AKUN, DESCRIPTION, substr(no_spm,8,6) SATKER
+        $sql = "SELECT KPPN, TGL_SP2D, NO_SP2D, NO_SPM, TGL_SPM, NAMA2, AKUN, NILAI_ORI, DESKRIPSI_AKUN, DESCRIPTION, substr(no_spm,8,6) SATKER, NO_TAGIHAN
 				FROM ". $this->_table . " 
 				 WHERE 1=1 AND substr(TGL_SP2D,1,4) = '".Session::get('ta')."' " ;
         ;
@@ -72,13 +72,15 @@ class DataBPN {
             $d_data->set_deskripsi_akun($val['DESKRIPSI_AKUN']);
             $d_data->set_description($val['DESCRIPTION']);
             $d_data->set_satker($val['SATKER']);
+            $d_data->set_no_tagihan($val['NO_TAGIHAN']);
             $data[] = $d_data;
         }
         return $data;
     }
     
     public function get_bpn_satker_filter($filter) {
-        $sql = "SELECT KPPN, TGL_SP2D, NO_SP2D, NO_SPM, TGL_SPM, NAMA2, AKUN, NILAI_ORI, DESKRIPSI_AKUN, DESCRIPTION, SATKER
+        $sql = "SELECT KPPN, TGL_SP2D, NO_SP2D, NO_SPM, TGL_SPM, NAMA2, AKUN, 
+                NILAI_ORI, DESKRIPSI_AKUN, DESCRIPTION, SATKER, NO_TAGIHAN
 				FROM ". $this->_table . " 
 				 WHERE 1=1 AND substr(TGL_SP2D,1,4) = '".Session::get('ta')."' " ;
         ;
@@ -103,6 +105,7 @@ class DataBPN {
             $d_data->set_deskripsi_akun($val['DESKRIPSI_AKUN']);
             $d_data->set_description($val['DESCRIPTION']);
             $d_data->set_satker($val['SATKER']);
+            $d_data->set_no_tagihan($val['NO_TAGIHAN']);
             $data[] = $d_data;
         }
         return $data;

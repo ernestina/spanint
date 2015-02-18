@@ -333,7 +333,7 @@
             <tr>
                 <th class='mid'>No.</th>
                 <th class='mid'>No. SPM<br>Tgl. SPM</th>
-                <th class='mid'>No. SP2D<br>Tgl. SP2D</th>
+                <th class='mid'>No. SP2D/NTPN<br>Tgl. SP2D<br>No. Tagihan</th>
                 <th class='mid'>Satker Penerima</th>
                 <th class='mid'>Uraian SPM</th>
                 <th class='mid'>Atas Nama</th>
@@ -354,7 +354,7 @@
                         echo "<tr>	";
                         echo "<td>" . $no++ . "</td>";
                         echo "<td>" . $value->get_no_spm()."<br>".$value->get_tgl_spm() . "</td>";
-                        echo "<td>" . $value->get_no_sp2d()."<br>".$value->get_tgl_sp2d() . "</td>";
+                        echo "<td>" . $value->get_no_sp2d()."<br>".$value->get_tgl_sp2d() . "<br>".$value->get_no_tagihan(). "</td>";
                         echo "<td class='left'>" . $value->get_satker() . "</td>";
                         echo "<td class='left'>" . $value->get_description() . "</td>";
                         echo "<td>" . $value->get_nama2() . "</td>";

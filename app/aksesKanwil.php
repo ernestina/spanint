@@ -212,6 +212,25 @@ $akses['DataReturKanwil'] = array(
 );
 
 /*
+ * akses BPN
+ */
+$akses['DataBPNKanwil'] = array(
+    '__construct',
+    'dataBPN',
+    'dataBPNSatker',
+    '__destruct'
+);
+
+/*
+ * akses MpnBi
+ */
+$akses['DataMpnBiKanwil'] = array(
+    '__construct',
+    'MpnBi',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFKanwil'] = array(
