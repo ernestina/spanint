@@ -85,7 +85,7 @@
         <thead>
             <tr>
                 <th class='mid'>No.</th>
-                <th class='mid'>Kode | Nama Kegiatan/Nama Output</th>
+                <th class='align-left'>Kode | Nama Kegiatan/Nama Output</th>
                 <th class='mid'>Pagu </th>
                 <th class='mid'>Realisasi</th>
                 <th class='mid'>Persentase<br>Realisasi</th>
@@ -101,29 +101,13 @@
                     echo '<td colspan=12 align="center">Tidak ada data.</td>';
                 } else {
                     foreach ($this->data as $value) {
-                    if (substr($value->get_kdkegiatan(),5,1)===' '){
                         echo "<tr>	";
-                        echo "<td>" . $no++ . "</td>";
-                        echo "<td align='left'>" . $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan() . "</td>";
-                        echo "<td align='right'>" . number_format($value->get_budget_amt()) . "</td> ";
-                        echo "<td align='right'>" . number_format($value->get_actual_amt()) .
+                        echo '<td '; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>' . $no++ . '</td>';
+                        echo '<td align="left"'; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>'. $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan() . "</td>";
+                        echo '<td align="right"'; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>' . number_format($value->get_budget_amt()) . "</td> ";
+                        echo '<td align="right"'; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>' . number_format($value->get_actual_amt()) .
 						"</td> ";
-						echo "<td align='right'>";
-						if($value->get_budget_amt() == 0) { 
-							echo "0.00%" ;
-						} else {
-                        echo   number_format(($value->get_actual_amt()/$value->get_budget_amt())*100, 2) ."%" ;
-                        "</td> ";
-						}
-                        echo "</strong></tr>	";
-                    }else{
-                        echo "<tr>	";
-                        echo "<td>" . $no++ . "</td>";
-                        echo "<td align='left'>" . $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan() . "</td>";
-                        echo "<td align='right'>" . number_format($value->get_budget_amt()) . "</td> ";
-                        echo "<td align='right'>" . number_format($value->get_actual_amt()) .
-						"</td> ";
-						echo "<td align='right'>";
+						echo '<td align="right"'; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>';
 						if($value->get_budget_amt() == 0) { 
 							echo "0.00%" ;
 						} else {
@@ -131,7 +115,7 @@
                         "</td> ";
 						}
                         echo "</tr>	";
-                    }
+                    
 							$tot_pagu+=$value->get_budget_amt();
 							$tot_real+=$value->get_actual_amt();
                             
