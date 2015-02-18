@@ -34,5 +34,21 @@ function _endpage()
 	}
 	parent::_endpage();
 }
+
+function Header()
+	{
+		//Put the watermark
+		$this->SetFont('Arial','B',20);
+		$this->SetTextColor(139,192,203);
+		$this->RotatedText(200,400,'Online Monitoring SPAN',25);
+	}
+
+	function RotatedText($x, $y, $txt, $angle)
+	{
+		//Text rotated around its origin
+		$this->Rotate($angle,$x,$y);
+		$this->Text($x,$y,$txt);
+		$this->Rotate(0);
+	}
 }
 ?>

@@ -21,21 +21,7 @@
     'paper_size'=>'F4',
     'orientation'=>'L'
     );
-     	function Header()
-	{
-		//Put the watermark
-		$this->SetFont('Arial','B',20);
-		$this->SetTextColor(139,192,203);
-		$this->RotatedText(200,400,'Laporan pembanding dari Online Monitoring SPAN',25);
-	}
-
-	function RotatedText($x, $y, $txt, $angle)
-	{
-		//Text rotated around its origin
-		$this->Rotate($angle,$x,$y);
-		$this->Text($x,$y,$txt);
-		$this->Rotate(0);
-	}
+     	
     function __construct($data = array(), $options = array()) {
     parent::__construct();
     $this->data = $data;

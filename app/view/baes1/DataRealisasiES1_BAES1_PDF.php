@@ -11,11 +11,10 @@
  */
 ob_start();
 //-------------------------------------
-require_once("./././public/fpdf17/fpdf.php");require_once("./././public/fpdf17/rotation.php");
-
+require_once("./././public/fpdf17/fpdf.php");
+require_once("./././public/fpdf17/rotation.php");
 class FPDF_AutoWrapTable extends PDF_Rotate {
-
-    private $data = array();
+	private $data = array();
     private $options = array(
         'judul' => '',
         'filename' => '',
@@ -26,7 +25,12 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
     private $nm_kppn;
-	
+
+
+		
+		
+
+
     /*
      * Konstruktor
      */
@@ -50,6 +54,10 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $nm_kppn = $this->nm_kppn;
         $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
         $border = 0;
+		
+		
+
+	
         $h = 40;
         $left = 10;
         //header
@@ -77,8 +85,6 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         } elseif (substr(trim($nm_kppn), 0, 5) == 'ADMIN') { //1
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
-            $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        }elseif (substr(trim($nm_kppn), 0, 5) == 'BADAN') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
             $this->MultiCell(0, $h1 / 2, '');
@@ -116,25 +122,20 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Ln(10);
         //----------------------------------------------- 
         #tableheader
-        $this->SetFont('Arial', 'B', 7);
+        $this->SetFont('Arial', 'B', 9);
         $ukuran_kolom_pagu_total_sisa = 70;
-        $ukuran_kolom_jenis_belanja = 70;
+        $ukuran_kolom_jenis_belanja = 75;
 		$ukuran_kolom_jenis_belanja1=$ukuran_kolom_jenis_belanja*9;
 		$kolom1=20;
-		$kolom2=45;
-		$kolom3=42;
-		$kolom4=40;
-		$kolom_grandtotal=$kolom1+$kolom4+$kolom3+$kolom3;
+		$kolom2=53;
+		$kolom3=80;
+		$kolom_grandtotal=$kolom1+$kolom3;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
         $this->Cell($kolom1, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += $kolom1);
-        $this->Cell($kolom4, $h, 'BA-Satker', 1, 0, 'C', true);
-        $this->SetX($left += $kolom4);
-		$this->Cell($kolom3, $h, 'Nama Satker', 1, 0, 'C', true);
-        $this->SetX($left += $kolom3);
-		$this->Cell($kolom3, $h, 'Rumpun', 1, 0, 'C', true);
+        $this->Cell($kolom3, $h, 'Satker', 1, 0, 'C', true);
         $this->SetX($left += $kolom3);
         $this->Cell($kolom2, $h, 'Keterangan', 1, 0, 'C', true);
         $this->SetX($left += $kolom2);
@@ -167,57 +168,27 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Total', 1, 1, 'C', true);
         $this->Ln(3);
 
-        $this->SetFont('Arial', '', 6);
-        $this->SetWidths(array($kolom1, $kolom4,
-		$kolom3,$kolom3, 
-		$kolom2,$ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja, 
-		$ukuran_kolom_pagu_total_sisa));
-        $this->SetAligns(array('C', 'L',
-		'L','L',
-		'L', 'R', 
-		'R', 'R', 
-		'R', 'R', 
-		'R', 'R', 
-		'R', 'R', 
-		'R'));
+        $this->SetFont('Arial', '', 7);
+        $this->SetWidths(array($kolom1, $kolom3, $kolom2,$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa));
+        $this->SetAligns(array('C', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
         if (count($this->data) == 0) {
             $this->Row(
-                    array('','N I H I L',
-                        '','',
-						'','',
-                        '','',
-                        '','',
-                        '','',
-                        '','',
+                    array('',
+                        'N I H I L',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
                         ''
             ));
         } else {
-			$tot_pagu = 0;
-			$tot_real = 0;
-			$tot_51 = 0;
-			$tot_52 = 0;
-			$tot_53 = 0;
-			$tot_54 = 0;
-			$tot_55 = 0;
-			$tot_56 = 0;
-			$tot_57 = 0;
-			$tot_58 = 0;
-			$tot_61 = 0;
-			$tot_pagu_51 = 0;
-			$tot_pagu_52 = 0;
-			$tot_pagu_53 = 0;
-			$tot_pagu_54 = 0;
-			$tot_pagu_55 = 0;
-			$tot_pagu_56 = 0;
-			$tot_pagu_57 = 0;
-			$tot_pagu_58 = 0;
-			$tot_pagu_61 = 0;
-			$tot_bel = 0;
-			$tot_sisa = 0;
             $no = 1;
             $this->SetFillColor(255);
             foreach ($this->data as $value) {
@@ -267,9 +238,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 			
                 $this->Row(
                         array($no++,
-                            $value->get_ba()."-".strtoupper($value->get_satker()),
-							$value->get_dipa(),
-							$value->get_rumpun(),
+                            $value->get_satker(),
                             'PAGU'."\n".'REALISASI'."\n".'PERSENTASE'."\n".'SISA',
                             number_format($value->get_pagu_51())."\n".number_format($value->get_belanja_51())."\n".$nil_51."\n".number_format($value->get_pagu_51()-$value->get_belanja_51()),
                             number_format($value->get_pagu_52())."\n".number_format($value->get_belanja_52())."\n".$nil_52."\n".number_format($value->get_pagu_52()-$value->get_belanja_52()),
@@ -640,7 +609,6 @@ if (is_array($this->nm_kppn2)) {
 
 //--------------------------
 //pilihan
-//judul laporan
 $judul1= $this->judul1;
 $judul = 'Laporan '.$judul1; //judul file laporan
 $tipefile = '.pdf';
