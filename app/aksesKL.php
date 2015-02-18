@@ -39,6 +39,7 @@ $akses['BaEs1KL'] = array(
     'nmsatker',
     'ProsesRevisi',
     'DataRealisasiOutputBA',
+    'DataRealisasiOutputES1',
 	'DataRealisasiWilayahBAES1',
 	'DataRealisasiSumberDanaBAES1',
 	'RekapSp2dBAES1',

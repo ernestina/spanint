@@ -36,7 +36,7 @@ class DataRealisasiES1 {
     private $_table3 = 'T_KEGIATAN';
     private $_table4 = 'T_ESELON1';
     private $_table6 = 'T_OUTPUT';
-	private $_table5 = 'T_AKUN';
+    private $_table5 = 'T_AKUN';
     public $registry;
 
     /*
@@ -144,13 +144,13 @@ class DataRealisasiES1 {
         }
         return $data;
     }
-	
-	public function get_ba_pendapatan_filter($filter) {
+
+    public function get_ba_pendapatan_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT A.AKUN, C.DESCRIPTION, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI, SUBSTR(A.PROGRAM,1,3) KDBA
 				FROM "
-                . $this->_table1 . " A, "               
-				. $this->_table5 . " C 
+                . $this->_table1 . " A, "
+                . $this->_table5 . " C 
 				WHERE 1=1 
 				AND A.AKUN =C.FLEX_VALUE			
 				AND A.SUMMARY_FLAG = 'N' 
@@ -162,36 +162,35 @@ class DataRealisasiES1 {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-		$sql .= " GROUP BY A.AKUN, C.DESCRIPTION, SUBSTR(A.PROGRAM,1,3) ";
+        $sql .= " GROUP BY A.AKUN, C.DESCRIPTION, SUBSTR(A.PROGRAM,1,3) ";
         $sql .= " ORDER BY A.AKUN ";
-        
+
 
         //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
-            $d_data->set_satker($val['KDBA']);          
+            $d_data->set_satker($val['KDBA']);
             $d_data->set_kdkegiatan($val['AKUN']);
-			$d_data->set_nmkegiatan($val['DESCRIPTION']);
-            $d_data->set_budget_amt($val['PAGU']);          
-            $d_data->set_actual_amt($val['REALISASI']);          
+            $d_data->set_nmkegiatan($val['DESCRIPTION']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
             $d_data->set_nm_satker($val['NMBA']);
             $data[] = $d_data;
         }
         return $data;
     }
 
- public function get_ba_output_filter($filter) {
+    public function get_ba_output_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI, B.NMBA , B.KDBA
+        $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI
 				FROM "
                 . $this->_table1 . " A, "
-                . $this->_table2 . " B, "
                 . $this->_table3 . " C 
 				WHERE 1=1 AND 
-				A.BUDGET_TYPE='2' AND
-				SUBSTR(A.PROGRAM,1,3)=B.KDBA
+				A.BUDGET_TYPE='2' 
+	
 				AND SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N' 
                                 AND SUBSTR(A.AKUN,1,1) IN('5','6')
@@ -201,16 +200,15 @@ class DataRealisasiES1 {
         foreach ($filter as $filter1) {
             $sql .= " AND " . $filter1;
         }
-        $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN, B.NMBA , B.KDBA ";
+        $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ";
         $sql .=" union all 
-                SELECT OUTPUT KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI, B.NMBA , B.KDBA
+                SELECT OUTPUT KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI
 				FROM "
                 . $this->_table1 . " A, "
-                . $this->_table2 . " B, "
                 . $this->_table6 . " C 
 				WHERE 1=1 AND 
-				A.BUDGET_TYPE='2' AND
-				SUBSTR(A.PROGRAM,1,3)=B.KDBA
+				A.BUDGET_TYPE='2' 
+				
 				AND OUTPUT=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N'
                                 AND SUBSTR(A.AKUN,1,1) IN('5','6')
@@ -220,7 +218,7 @@ class DataRealisasiES1 {
         foreach ($filter as $filter2) {
             $sql .= " AND " . $filter2;
         }
-        $sql .= " GROUP BY OUTPUT, C.NMKEGIATAN, B.NMBA , B.KDBA ";
+        $sql .= " GROUP BY OUTPUT, C.NMKEGIATAN";
         $sql .= " ORDER BY kode_kegiatan ";
 
         //var_dump($sql);
@@ -238,6 +236,7 @@ class DataRealisasiES1 {
         }
         return $data;
     }
+
     /*
      * setter
      */
