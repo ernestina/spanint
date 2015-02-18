@@ -36,6 +36,7 @@ define('BLU','blu');
 define('BANK','bank');
 define('KL','kl');
 define('ES1','es1');
+define('UMADMIN','umadmin');
 
 $path = array(
     ROOT.'/libs/',
@@ -45,7 +46,11 @@ $path = array(
 
 //include ROOT.'/config/config.php';
 include ROOT.'/libs/Autoloader.php';
-include ROOT.'/libs/config.php';
+$FILE = dirname(__DIR__).'/local/config.php';
+if (is_file($FILE)) {
+    include($FILE);
+}
+//include ROOT.'/libs/config.php';
 include ROOT.'/app/akses.php';
 
 Autoloader::setCacheFilePath(ROOT.'/libs/cache.txt');
@@ -97,7 +102,7 @@ if (Session::get('kd_satker') == andi ){
 $registry->auth->add_access('dataPMRTPKN','admin',$akses['DataPMRTPKNAdmin']);
 $registry->auth->add_access('dataBPN','admin',$akses['DataBPNAdmin']);
 $registry->auth->add_access('BA_ES1','admin',$akses['BaEs1Admin']);
-$registry->auth->add_access('OverviewPenganggaran','admin',$akses['OverviewPenganggaranAdmin']);
+$registry->auth->add_access('dataMpnBi','admin',$akses['DataMpnBiAdmin']);
 
 //level satker
 $registry->auth->add_access('auth','satker',$akses['AuthSatker']);
@@ -194,6 +199,10 @@ $registry->auth->add_access('BA_ES1','kl',$akses['BaEs1KL']);
 $registry->auth->add_access('auth','es1',$akses['AuthES1']);
 $registry->auth->add_access('home','es1',$akses['HomeES1']);
 $registry->auth->add_access('BA_ES1','es1',$akses['BaEs1ES1']);
+
+//level UMADMIN
+$registry->auth->add_access('auth','umadmin',$akses['AuthUmAdmin']);
+$registry->auth->add_access('home','umadmin',$akses['HomeUmAdmin']);
 
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
