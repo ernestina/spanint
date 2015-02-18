@@ -192,6 +192,7 @@ class DataRealisasiES1 {
 				SUBSTR(A.PROGRAM,1,3)=B.KDBA
 				AND SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N' 
+                                AND SUBSTR(A.AKUN,1,1) IN('5','6')
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				";
 
@@ -209,7 +210,8 @@ class DataRealisasiES1 {
 				A.BUDGET_TYPE='2' AND
 				SUBSTR(A.PROGRAM,1,3)=B.KDBA
 				AND OUTPUT=C.KDKEGIATAN			
-				AND A.SUMMARY_FLAG = 'N' 
+				AND A.SUMMARY_FLAG = 'N'
+                                AND SUBSTR(A.AKUN,1,1) IN('5','6')
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				 ";
 
