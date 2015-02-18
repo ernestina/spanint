@@ -18,33 +18,26 @@
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 			 
 			
-			if(isset($this->kppn)){
-				$kdkppn=$this->kppn;
-			}elseif(Session::get('role') == KPPN){
-				$kdkppn=Session::get('id_user');
-			}else{
-				$kdkppn='null';
-			}
-			$jenis_spm=$this->jendok;
-			 if (isset($this->d_tgl_awal)) {
-				$kdtgl_awal=$this->d_tgl_awal;
-			}else{
-				$kdtgl_awal='null';
-			}
+			if (isset($this->d_tgl_awal)) {
+                
+				$kdtgl_awal = $this->d_tgl_awal();
+                
+            }else{
+				$kdtgl_awal ='null';
+			} 
 			if (isset($this->d_tgl_akhir)) {
-				$kdtgl_akhir=$this->d_tgl_akhir;
-			}else{
-				$kdtgl_akhir='null';
+                
+				$kdtgl_akhir = $this->d_tgl_akhir();
+                
+            }else{
+				$kdtgl_akhir ='null';
 			} 
 			
-				?>
-		<a href="<?php echo URL; ?>PDF/detailrekapsp2d1_PDF/<?php echo $jenis_spm."/". $kdkppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-		</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-		<a href="<?php echo URL; ?>PDF/detailrekapsp2d1_PDF/<?php echo $jenis_spm."/". $kdkppn."/".$kdtgl_awal."/".$kdtgl_akhir;?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-<?php			
-		?>		
-				
-		<?php
+			?>
+            <a href="<?php echo URL; ?>PDF/detailrekapsp2dBAES1_BAES1_PDF/<?php echo $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+			<a href="<?php echo URL; ?>PDF/detailrekapsp2dBAES1_BAES1_PDF/<?php echo $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+			<?php
 			//----------------------------------------------------		
 		?>
                 
