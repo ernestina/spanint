@@ -27,7 +27,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
     private $nm_kppn;
 
 
-		function Header()
+ 		/* function Header()
 		{
 			//Put the watermark
 			$this->SetFont('Arial','B',20);
@@ -41,8 +41,9 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 			$this->Rotate($angle,$x,$y);
 			$this->Text($x,$y,$txt);
 			$this->Rotate(0);
-		}
+		} */
 		
+ 	
 
 
     /*
