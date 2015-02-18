@@ -10,12 +10,8 @@
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Daftar SPM UP/GU NIHIL</h2>
             </div>
+            
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                
-                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 			<?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
@@ -41,9 +37,15 @@
 						$jendok = 'null';
 					}
 					?>
-				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS">EXCEL</a></li>
+                          </ul>
+                </div>
+                
 				<?php
 					}
 				//------------------------------
@@ -64,9 +66,15 @@
 				
 				}
 			?>
-				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+				<div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS">EXCEL</a></li>
+                          </ul>
+                </div>
+                
 				<?php
 				
 			}
@@ -90,15 +98,28 @@
 					
 					}
 				?>
-				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-				</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-				<a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+                
+                <div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS">EXCEL</a></li>
+                          </ul>
+                </div>
+				
 				<?php
 			}
 			//------------------------------
 
 		?>
 
+                
+            </div>
+            
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
            
