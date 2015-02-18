@@ -79,7 +79,8 @@
         <tbody class='ratatengah'>
             <?php
             $no = 1;
-            $tot_pot = 0;
+            $tot_pagu = 0;
+			$tot_real = 0;
 			
             if (isset($this->data)) {
                 if (empty($this->data)) {
@@ -118,19 +119,10 @@
         <tfoot>
            
 			<tr>
-                    <!--td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
-					<td class='ratakiri'>PAGU <br> REALISASI</td>
-                  
-					<td class='ratakanan'><?php  echo number_format($tot_pagu_51); ?><br><?php echo number_format($tot_51); ?><br><?php if ($tot_pagu_51==0){echo '(0.00%)';} else {echo "("  .number_format($tot_51/$tot_pagu_51*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_52); ?><br><?php echo number_format($tot_52); ?><br><?php if ($tot_pagu_52==0){echo '(0.00%)';} else {echo "("  .number_format($tot_52/$tot_pagu_52*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_53); ?><br><?php echo number_format($tot_53); ?><br><?php if ($tot_pagu_53==0){echo '(0.00%)';} else {echo "("  .number_format($tot_53/$tot_pagu_53*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_54); ?><br><?php echo number_format($tot_54); ?><br><?php if ($tot_pagu_54==0){echo '(0.00%)';} else {echo "("  .number_format($tot_54/$tot_pagu_54*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_55); ?><br><?php echo number_format($tot_55); ?><br><?php if ($tot_pagu_55==0){echo '(0.00%)';} else {echo "("  .number_format($tot_55/$tot_pagu_55*100). "%)";}?> </td>
-					<td class='ratakanan'><?php echo number_format($tot_pagu_56); ?><br><?php echo number_format($tot_56); ?><br><?php if ($tot_pagu_56==0){echo '(0.00%)';} else {echo "("  .number_format($tot_56/$tot_pagu_56*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_57); ?><br><?php echo number_format($tot_57); ?><br><?php if ($tot_pagu_57==0){echo '(0.00%)';} else {echo "("  .number_format($tot_57/$tot_pagu_57*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_58); ?><br><?php echo number_format($tot_58); ?><br><?php if ($tot_pagu_58==0){echo '(0.00%)';} else {echo "("  .number_format($tot_58/$tot_pagu_58*100). "%)";}?> </td>
-					<td class='ratakanan'><?php echo number_format($tot_pagu_61); ?><br><?php echo number_format($tot_61); ?><br><?php if ($tot_pagu_61==0){echo '(0.00%)';} else {echo "("  .number_format($tot_61/$tot_pagu_61*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu); ?><br><?php echo number_format($tot_real); ?><br><?php if ($tot_pagu==0){echo '(0.00%)';} else {echo "(" .number_format($tot_real/$tot_pagu*100). "%)";}?> </td!-->
+                    <td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
+					<td align='right'><b> <?php echo number_format($tot_pagu) ;?> </b> </td>
+					<td align='right'><b> <?php echo number_format($tot_real) ;?> </b></td>
+					<td align='right'><b> <?php if($tot_pagu == 0) {echo '0.00%';} else { echo  number_format($tot_real/$tot_pagu*100,2). '%' ;}?> </b></td>
             </tr>
 
         </tfoot>

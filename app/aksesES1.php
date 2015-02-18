@@ -39,7 +39,24 @@ $akses['BaEs1ES1'] = array(
     'nmsatker',
     'ProsesRevisi',
     'DataRealisasiOutputBA',
+	'DataRealisasiWilayahBAES1',
+	'DataRealisasiSumberDanaBAES1',
+	'RekapSp2dBAES1',
+	'detailrekapsp2dBAES1',
+	'nmsatkerBAES1',
+	'DataRealisasiPenerimaanBA',
     '__destruct'
 );
 
+$akses['dataDIPAES1'] = array(
+    '__construct',
+    'RevisiDipa',
+	'DetailRevisi',
+    '__destruct'
+);
+$akses['dataSPMES1'] = array(
+    '__construct',
+    'daftarsp2d',
+    '__destruct'
+);
 ?>

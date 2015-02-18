@@ -191,12 +191,14 @@ $registry->auth->add_access('PDF','bank',$akses['PDFBank']);
 $registry->auth->add_access('auth','kl',$akses['AuthKL']);
 $registry->auth->add_access('home','kl',$akses['HomeKL']);
 $registry->auth->add_access('BA_ES1','kl',$akses['BaEs1KL']);
-
+$registry->auth->add_access('dataDIPA','kl',$akses['dataDIPAKL']);
+$registry->auth->add_access('dataSPM','kl',$akses['dataSPMKL']);
 //level ES1
 $registry->auth->add_access('auth','es1',$akses['AuthES1']);
 $registry->auth->add_access('home','es1',$akses['HomeES1']);
 $registry->auth->add_access('BA_ES1','es1',$akses['BaEs1ES1']);
-
+$registry->auth->add_access('dataDIPA','es1',$akses['dataDIPAES1']);
+$registry->auth->add_access('dataSPM','es1',$akses['dataSPMES1']);
 //level UMADMIN
 $registry->auth->add_access('auth','umadmin',$akses['AuthUmAdmin']);
 $registry->auth->add_access('home','umadmin',$akses['HomeUmAdmin']);
