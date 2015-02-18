@@ -115,21 +115,21 @@ class OverviewPenganggaranController extends BaseController {
         $this->view->switchers = array();
         
         $this->view->switchers[] = (object) array('description' => 'Nominal Realisasi Belanja Tertinggi (BA)', 
-                                                  'link' => URL.'OverviewPenganggaran/overview');
+                                                  'link' => URL.'overviewPenganggaran/overview');
         $this->view->switchers[] = (object) array('description' => 'Persentase Realisasi Belanja Tertinggi (BA)', 
-                                                  'link' => URL.'OverviewPenganggaran/overview/2');
+                                                  'link' => URL.'overviewPenganggaran/overview/2');
         $this->view->switchers[] = (object) array('description' => 'Nominal Realisasi Belanja Terendah (BA)', 
-                                                  'link' => URL.'OverviewPenganggaran/overview/3');
+                                                  'link' => URL.'overviewPenganggaran/overview/3');
         $this->view->switchers[] = (object) array('description' => 'Persentase Realisasi Belanja Terendah (BA)', 
-                                                  'link' => URL.'OverviewPenganggaran/overview/4');
+                                                  'link' => URL.'overviewPenganggaran/overview/4');
         $this->view->switchers[] = (object) array('description' => 'Nominal Realisasi Belanja Tertinggi (Satker)', 
-                                                  'link' => URL.'OverviewPenganggaran/overview/5');
+                                                  'link' => URL.'overviewPenganggaran/overview/5');
         $this->view->switchers[] = (object) array('description' => 'Persentase Realisasi Belanja Tertinggi (Satker)', 
-                                                  'link' => URL.'OverviewPenganggaran/overview/6');
+                                                  'link' => URL.'overviewPenganggaran/overview/6');
         $this->view->switchers[] = (object) array('description' => 'Nominal Realisasi Belanja Terendah (Satker)', 
-                                                  'link' => URL.'OverviewPenganggaran/overview/7');
+                                                  'link' => URL.'overviewPenganggaran/overview/7');
         $this->view->switchers[] = (object) array('description' => 'Persentase Realisasi Belanja Terendah (Satker)', 
-                                                  'link' => URL.'OverviewPenganggaran/overview/8');
+                                                  'link' => URL.'overviewPenganggaran/overview/8');
         
         $this->view->page_title = 'Overview: Modul Penganggaran';
         $this->view->page_subtitle = 'ADMIN<br/>SAMPAI DENGAN HARI INI';
