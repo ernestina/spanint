@@ -225,8 +225,6 @@ if (isset($this->d_posisi)) {
 
                         </select>
 
-                        <br/>
-
                         <?php } ?>
                     
                     <div id="wnip" class="alert alert-danger" style="display:none;"></div>
@@ -282,7 +280,6 @@ if (isset($this->d_posisi)) {
                         </select>
                     </div>
                     
-                    <br>
                     <label class="isian">No. Surat:</label>
                     
                     <input class="form-control" type="text" name="surat" id="surat" size="18" value="<?php //if (isset($this->surat)) {
@@ -314,6 +311,12 @@ if (isset($this->d_posisi)) {
                             <option value="<?php //echo $values->get_kd_posisi(); ?>">Selesai</option>
                         </select>
                     </div>
+                    
+                    <label class="isian">Catatan:</label>
+                    
+                    <input class="form-control" type="text" name="catatan" id="catatan" size="18" value="<?php //if (isset($this->catatan)) {
+                            //echo $this->catatan;
+                        //} ?>">
                 </div>
 
                 <div class="modal-footer">
@@ -330,10 +333,7 @@ if (isset($this->d_posisi)) {
 
 <!-- Skrip -->
 <script type="text/javascript" charset="utf-8">
-    
-    var v_nip1 = document.getElementById('nip1').value;
-    var v_nip2 = document.getElementById('nip2').value;
-    
+
     $(function() {
         hideErrorId();
         hideWarning();
@@ -346,30 +346,137 @@ if (isset($this->d_posisi)) {
 
     function hideWarning() {
 
+        $('#kdkppn').change(function() {
+            if (document.getElementById('kdkppn').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
         $('#nip1').keyup(function() {
-            if (v_nip1 != '') {
+            if (document.getElementById('nip1').value != '') {
                 $('#warning-all').fadeOut(200);
             }
         });
         
         $('#nip2').keyup(function() {
-            if (v_nip2 != '') {
+            if (document.getElementById('nip2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#nama1').keyup(function() {
+            if (document.getElementById('nama1').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#nama2').keyup(function() {
+            if (document.getElementById('nama2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#email1').keyup(function() {
+            if (document.getElementById('email1').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#email2').keyup(function() {
+            if (document.getElementById('email2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#status1').change(function() {
+            if (document.getElementById('status1').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#status2').change(function() {
+            if (document.getElementById('status2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#posisi1').change(function() {
+            if (document.getElementById('posisi1').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#posisi2').change(function() {
+            if (document.getElementById('posisi2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#tanggal_awal').change(function() {
+            if (document.getElementById('tanggal_awal').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#tanggal_akhir').change(function() {
+            if (document.getElementById('tanggal_akhir').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#surat').keyup(function() {
+            if (document.getElementById('surat').value != '') {
                 $('#warning-all').fadeOut(200);
             }
         });
 
-
     }
 
     function cek_upload() {
+        
+        var v_nip1 = document.getElementById('nip1').value;
+        var v_nip2 = document.getElementById('nip2').value;
+        var v_nama1 = document.getElementById('nama1').value;
+        var v_nama2 = document.getElementById('nama2').value;
+        var v_email1 = document.getElementById('email1').value;
+        var v_email2 = document.getElementById('email2').value;
+        var v_posisi1 = document.getElementById('posisi1').value;
+        var v_posisi2 = document.getElementById('posisi2').value;
+        var v_tanggal_awal = document.getElementById('tanggal_awal').value;
+        var v_tanggal_akhir = document.getElementById('tanggal_akhir').value;
+        var v_status1 = document.getElementById('status1').value;
+        var v_status2 = document.getElementById('status2').value;
+        var v_surat = document.getElementById('surat').value;
+        var v_kdkppn = document.getElementById('kdkppn').value;
 
         var pattern = '^[0-9]+$';
-        
         var jml = 0;
-        if (v_nip1 == '') {
-            $('#warning-all').html('Harap isi salah satu parameter');
+        
+        if (v_kdkppn == '' || v_nip1 == '' || v_nip2 == '' || v_nama1 == '' || v_nama2 == '' || v_email1 == '' || v_email2 == '' || v_posisi1 == '' || v_posisi2 == '' || v_tanggal_awal == '' || v_tanggal_akhir == '' || v_status1 == '' || v_status2 == '' || v_surat == '') {
+            $('#warning-all').html('Isi semua parameter, cuy');
             $('#warning-all').fadeIn();
             jml++;
+        }
+        
+        if ((v_nip1 != '' && v_nip1.length != 18) || (v_nip2 != '' && v_nip2.length != 18)) {
+            $('#warning-all').html('NIP harus 18 digit, dong!');
+            $('#warning-all').fadeIn(200);
+            jml++;
+        }
+        
+        if (v_nip1 != '' && !v_nip1.match(pattern)) {
+            var wsp2d = 'NIP harus dalam bentuk angka!';
+            $('#warning-all').html(wsp2d);
+            $('#warning-all').fadeIn(200);
+            jml++;
+        }
+        
+        if (v_tgl_awal != '' && v_tgl_akhir != ''){
+            if(v_tgl_awal > v_tgl_akhir){
+                $('#warning-all').html('Tanggal awal gak boleh lebih dari tanggal akhir');
+                $('#warning-all').fadeIn(200);
+                jml++;
+            }
         }
 
         if (jml > 0) {
