@@ -395,31 +395,18 @@ $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xlsx');
 header('Cache-Control: max-age=0');
+
+
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+$objWriter->save('php://output');
+exit;
  
- //alternatif 1
-$tmpfname = tempnam("./././tmp", "FOO");
- try{
-	 $objWriter->save($tmpfname); 
- }catch(Exception $e){
- }
- sleep(10);
-echo file_get_contents($tmpfname); 
-unlink($tmpfname);
+// Save Excel 2007 file
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+$objWriter->save(str_replace('.php', '.xlsx', __FILE__));
+
 
  
- //alternatif 2
-/*   try{
-	 $objWriter->save('php://stdout'); 
- }catch(Exception $e){
- } 
- */ 
- // sleep(10);
-// echo file_get_contents('php://stdout');
-//echo 'tes3';
-//alternatif 3
-/* $objWriter->save('php://output');
-
-exit; */
 
 
 ?>
