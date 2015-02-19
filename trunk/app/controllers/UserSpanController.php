@@ -229,6 +229,8 @@ class UserSpanController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+        
+        $this->view->posisi_user = $d_user->get_posisi_user();
 
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
@@ -249,6 +251,72 @@ class UserSpanController extends BaseController {
             $this->view->data = $d_user->get_ganti_user($filter);
             
         }
+        
+        if (isset($_POST['add_d_user'])) {
+            
+            $kdkppn = $_POST['kdkppn'];
+            $nip1 = $_POST['nip1'];
+            $nip2 = $_POST['nip2'];
+            $nama1 = $_POST['nama1'];
+            $nama2 = $_POST['nama2'];
+            $email1 = $_POST['email1'];
+            $email2 = $_POST['email2'];
+            $posisi1 = $_POST['posisi1'];
+            $posisi2 = $_POST['posisi2'];
+            $surat = $_POST['surat'];
+            $tanggal_awal = $_POST['tanggal_awal'];
+            if(isset($_POST['tanggal_akhir'])){
+                $tanggal_akhir = $_POST['tanggal_akhir'];  
+                $this->view->tanggal_akhir = $_POST['tanggal_akhir'];  
+            }
+            $status1 = $_POST['status1'];
+            $status2 = $_POST['status2'];
+            if (isset($_POST['catatan'])){
+                $catatan = $_POST['catatan'];
+                $this->view->catatan = $_POST['catatan'];
+            }
+            
+            
+            $this->view->kdkppn = $_POST['kdkppn'];
+            $this->view->nip1 = $_POST['nip1'];
+            $this->view->nip2 = $_POST['nip2'];
+            $this->view->nama1 = $_POST['nama1'];
+            $this->view->nama2 = $_POST['nama2'];
+            $this->view->email1 = $_POST['email1'];
+            $this->view->email2 = $_POST['email2'];
+            $this->view->posisi1 = $_POST['posisi1'];
+            $this->view->posisi2 = $_POST['posisi2'];
+            $this->view->surat = $_POST['surat'];
+            $this->view->tanggal_awal = $_POST['tanggal_awal'];
+            //var_dump($_POST['tanggal_awal']);
+            $this->view->status1 = $_POST['status1'];
+            $this->view->status2 = $_POST['status2'];
+            
+            
+            $d_user->set_kode_unit($kdkppn);
+            
+            $d_user->set_nama_usr_awal($nama1);
+            $d_user->set_nip_usr_awal($nip1);
+            $d_user->set_email_usr_awal($email1);
+            $d_user->set_posisi_user_awal($posisi1);
+            
+            $d_user->set_nama_usr_pengganti($nama2);
+            $d_user->set_nip_usr_pengganti($nip2);
+            $d_user->set_email_usr_pengganti($email2);
+            $d_user->set_posisi_user_pengganti($posisi2);
+            
+            $d_user->set_tanggal_awal($tanggal_awal);
+            $d_user->set_tanggal_akhir($tanggal_akhir);
+            $d_user->set_surat($surat);
+            $d_user->set_status_setup_awal($status1);
+            $d_user->set_status_setup_akhir($status2);
+            $d_user->set_catatan($catatan);
+            
+            if (!$d_user->add_d_user()) {
+                $this->view->d_rekam = $d_user;
+                $this->view->error = $d_user->get_error();
+            }
+        }
 
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
@@ -263,8 +331,9 @@ class UserSpanController extends BaseController {
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
             }
 
-            $this->view->data = $d_user->get_ganti_user($filter);
         } 
+        
+        $this->view->data = $d_user->get_ganti_user($filter);
         //var_dump ($d_user->get_spm_gantung($filter));
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -273,6 +342,112 @@ class UserSpanController extends BaseController {
         $this->view->render('kppn/gantiUserSpan');
 		$d_log->tambah_log("Sukses");
     }
+    
+    /*
+     * tambah data user
+     */
+
+    public function addDataUserSpan($id = null) {
+        
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+            
+            //$d_posisi = array();
+            //$this->view->posisi = $d_posisi->get_posisi_user();
+        }
+        
+        /*
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        */
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = " KODE_UNIT = '" . Session::get('id_user') . "'";
+            $this->view->data = $d_user->get_ganti_user($filter);
+            
+        }
+        
+        $d_user = new DataUserSPAN($this->registry);
+        $filter = array();
+        $no = 0;
+        
+        if (isset($_POST['add_d_user'])) {
+            
+            $kdkppn = $_POST['kdkppn'];
+            $nip1 = $_POST['nip1'];
+            $nip2 = $_POST['nip2'];
+            $nama1 = $_POST['nama1'];
+            $nama2 = $_POST['nama2'];
+            $email1 = $_POST['email1'];
+            $email2 = $_POST['email2'];
+            $posisi1 = $_POST['posisi1'];
+            $posisi2 = $_POST['posisi2'];
+            $surat = $_POST['surat'];
+            $tanggal_awal = $_POST['tanggal_awal'];
+            if(isset($_POST['tanggal_akhir'])){
+                $tanggal_akhir = $_POST['tanggal_akhir'];  
+                $this->view->d_tanggal_akhir = $_POST['akhir'];  
+            }
+            $status1 = $_POST['status1'];
+            $status2 = $_POST['status2'];
+            if (isset($_POST['catatan'])){
+                $catatan = $_POST['catatan'];
+                $this->view->d_catatan = $_POST['catatan'];
+            }
+            
+            
+            $this->view->d_kdkppn = $_POST['kdkppn'];
+            $this->view->d_nip1 = $_POST['nip1'];
+            $this->view->d_nip2 = $_POST['nip2'];
+            $this->view->d_nama1 = $_POST['nama1'];
+            $this->view->d_nama2 = $_POST['nama2'];
+            $this->view->d_email1 = $_POST['email1'];
+            $this->view->d_email2 = $_POST['email2'];
+            $this->view->d_posisi1 = $_POST['posisi1'];
+            $this->view->d_posisi2 = $_POST['posisi2'];
+            $this->view->d_surat = $_POST['surat'];
+            $this->view->d_tanggal_awal = $_POST['tanggal_awal'];
+            $this->view->d_status1 = $_POST['status1'];
+            $this->view->d_status2 = $_POST['status2'];
+            
+            
+            $d_user->set_kode_unit($kdkppn);
+            
+            $d_user->set_nama_usr_awal($nama1);
+            $d_user->set_nip_usr_awal($nip1);
+            $d_user->set_email_usr_awal($email1);
+            $d_user->set_posisi_user_awal($posisi1);
+            
+            $d_user->set_nama_usr_pengganti($nama2);
+            $d_user->set_nip_usr_pengganti($nip2);
+            $d_user->set_email_usr_pengganti($email2);
+            $d_user->set_posisi_user_pengganti($posisi2);
+            
+            $d_user->set_tanggal_awal($tanggal_awal);
+            $d_user->set_tanggal_akhir($tanggal_akhir);
+            $d_user->set_surat($surat);
+            $d_user->set_status_setup_awal($status1);
+            $d_user->set_status_setup_akhir($status2);
+            $d_user->set_catatan($catatan);
+            
+            if (!$d_user->add_d_user()) {
+                $this->view->d_rekam = $d_user;
+                $this->view->error = $d_user->get_error();
+            }
+        }
+        //var_dump($catatan);
+        
+        if (!is_null($id)) {
+            $d_user->set_kd_d_user($id);
+            $this->view->d_ubah = $d_user->get_d_user_by_id($d_user);
+        }
+        $this->view->data = $d_user->get_ganti_user($filter);
+        $this->view->render('kppn/gantiUserSpan');
+    }
+    
+    
 
     public function __destruct() {
         

@@ -35,10 +35,10 @@ class DataUserSPAN {
     private $_nip_usr_awal;
     private $_email_usr_awal;
     private $_posisi_user_awal;
-    private $_nama_usr_akhir;
-    private $_nip_usr_akhir;
-    private $_email_usr_akhir;
-    private $_posisi_user_akhir;
+    private $_nama_usr_pengganti;
+    private $_nip_usr_pengganti;
+    private $_email_usr_pengganti;
+    private $_posisi_user_pengganti;
     private $_tanggal_awal;
     private $_tanggal_akhir;
     private $_surat;
@@ -163,7 +163,7 @@ class DataUserSPAN {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= "  ORDER BY TANGGAL_AWAL DESC";
+        $sql .= "  ORDER BY to_date(TANGGAL_AWAL,'DD-MM-YYYY') DESC, to_date(TANGGAL_AKHIR,'DD-MM-YYYY') DESC ";
         //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
@@ -192,8 +192,8 @@ class DataUserSPAN {
         return $data;
     }
     
-    public function get_posisi_user ($filter) {
-        Session::get('id_user');
+    public function get_posisi_user () {
+        //Session::get('id_user');
         $sql = "SELECT 
                 KD_POSISI, DESKRIPSI
                 FROM " . $this->_table5 . "";
@@ -202,19 +202,58 @@ class DataUserSPAN {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= "  ORDER BY TANGGAL_AWAL DESC";
         */
+        //$sql .= "  ORDER BY NO_ID DESC";
         //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_kd_posisi($val['KD_POSISI']);
-            $d_data->set_deskripsi_posisi($val['KD_DESKRIPSI']);
+            $d_data->set_deskripsi_posisi($val['DESKRIPSI']);
 
             $data[] = $d_data;
         }
         return $data;
+    }
+    
+    
+
+    /*
+     * tambah data user
+     * param array data array key=>value, nama kolom=>data
+     */
+
+    public function add_d_user() {
+        
+        $data = array(
+            'kode_unit' => $this->get_kode_unit(),
+            
+            'nama_usr_awal' => $this->get_nama_usr_awal(),
+            'nip_usr_awal' => $this->get_nip_usr_awal(),
+            'email_usr_awal' => $this->get_email_usr_awal(),
+            'posisi_user_awal' => $this->get_posisi_user_awal(),
+            
+            'nama_usr_pengganti' => $this->get_nama_usr_pengganti(),
+            'nip_usr_pengganti' => $this->get_nip_usr_pengganti(),
+            'email_usr_pengganti' => $this->get_email_usr_pengganti(),
+            'posisi_user_pengganti' => $this->get_posisi_user_pengganti(),
+            
+            'tanggal_awal' => $this->get_tanggal_awal(),
+            'tanggal_akhir' => $this->get_tanggal_akhir(),
+            'surat' => $this->get_surat(),
+            'status_setup_awal' => $this->get_status_setup_awal(),
+            'status_setup_akhir' => $this->get_status_setup_akhir(),
+            'catatan' => $this->get_catatan()
+        );
+        
+        //var_dump($this->get_catatan());
+        if (!is_array($data)) {
+            return false;
+        }
+        //$sql = "INSERT INTO USER_HISTORY(catatan,email_usr_awal,email_usr_pengganti,kode_unit,nama_usr_awal,nama_usr_pengganti,nip_usr_awal,nip_usr_pengganti,posisi_user_awal,posisi_user_pengganti,status_setup_akhir,status_setup_awal,surat,tanggal_akhir,tanggal_awal) VALUES ('1','2','3','4','5','6','7','8','9','10','11','12','13',to_date('20150202','YYYYMMDD'),to_date('20150202','YYYYMMDD'))";
+        //$result = $this->db->insert2($sql);
+        return $this->db->insert($this->_table4, $data);
     }
 
     /*
