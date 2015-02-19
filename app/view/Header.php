@@ -816,13 +816,10 @@
                             <div class="collapse">
                                 <ul>
                                     
-
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerEs1">Per Eselon 1</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Kegiatan</a></li>
-                                    
-
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputBA">Per Output</a></li>
-
-                                    
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaSatEs1">Per Satker Menurut Eselon 1</a></li>
 
                                 </ul>
                             </div>
