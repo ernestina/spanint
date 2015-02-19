@@ -70,7 +70,7 @@ class DataMpnBi {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= " group by tanggal_gl order by tanggal_gl";
+        $sql .= " group by tanggal_gl order by tanggal_gl desc";
         //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();

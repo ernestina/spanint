@@ -394,7 +394,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring User Aktif</a></li>
-                                    <li><a href="<?php echo URL; ?>userSpan/pergantianUser">Monitoring Pergantian User</a></li>
+                                    <!--<li><a href="<?php echo URL; ?>userSpan/pergantianUser">Monitoring Pergantian User</a></li>-->
                                 </ul>
                             </div>
                         </li>
@@ -581,6 +581,8 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataGR/KonfirmasiPenerimaan">Konfirmasi Penerimaan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataBPN/dataBPN">Monitoring Potongan SPM (Satker Pembayar)</a></li>
+                                    <li><a href="<?php echo URL; ?>dataBPN/dataBPNSatker">Monitoring Potongan SPM (Satker Penerima)</a></li>
                                 </ul>
                             </div>
                         </li>

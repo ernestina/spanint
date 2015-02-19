@@ -59,7 +59,7 @@ class DataRetur {
 				STATUS_RETUR
 				FROM " . $this->_table . "
 				WHERE 1=1 
-                AND STATEMENT_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
+                 ";
         //SP2D = 140181301002823
         //xml = 520002000990_SP2D_O_20140408_101509_367.xml
         $no = 0;
