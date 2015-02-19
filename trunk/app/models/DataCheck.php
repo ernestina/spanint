@@ -246,7 +246,7 @@ class DataCheck {
                 . $this->_table1 . "
 				WHERE 
 				STATUS_LOOKUP_CODE <> 'VOIDED'
-				AND SUBSTR(CHECK_NUMBER,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')"
+				AND KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')"
         ;
 
         $no = 0;

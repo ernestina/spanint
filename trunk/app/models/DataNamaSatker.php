@@ -53,7 +53,7 @@ class DataNamaSatker {
     public function get_satker_filter($filter) {
         $sql = " SELECT SEGMENT1 KDSATKER
 				, UPPER(NMSATKER) NMSATKER
-				, substr(check_number,3,3) KPPN
+				, KDKPPN KPPN
 				, count(check_number) TOTAL_SP2D 
 				FROM "
                 . $this->_table2 . " 
@@ -68,7 +68,7 @@ class DataNamaSatker {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " GROUP BY SEGMENT1, NMSATKER, SUBSTR(CHECK_NUMBER,3,3)";
+        $sql .= " GROUP BY SEGMENT1, NMSATKER, KDKPPN";
         $sql .= " ORDER BY NMSATKER";
         //var_dump ($sql);
 
