@@ -8,6 +8,8 @@
 class DataUserSPAN {
 
     private $db;
+    
+    //untuk Monitoring User Aktif
     private $_kdkppn;
     private $_user_name;
     private $_last_name;
@@ -18,6 +20,8 @@ class DataUserSPAN {
     private $_start_date;
     private $_end_date;
     private $_error;
+    
+    //untuk Monitoring Pergantian User
     private $_tgl_invoice;
     private $_wfapproval_status;
     private $_desc_invoice;
@@ -41,12 +45,19 @@ class DataUserSPAN {
     private $_status_setup_awal;
     private $_status_setup_akhir;
     private $_catatan;
+    
+    //untuk LoV posisi
+    private $_kd_posisi;
+    private $_deskripsi_posisi;
+    
+    //global
     private $_valid = TRUE;
     private $_table = 'USER_SPAN';
     private $_table1 = 'AP_INVOICES_ALL_V';
     private $_table2 = 'HR_OPERATING_UNITS';
     private $_table3 = 'FND_USER';
     private $_table4 = 'USER_HISTORY';
+    private $_table5 = 'T_POSISI';
     
     public $registry;
 
@@ -145,7 +156,9 @@ class DataUserSPAN {
     
     public function get_ganti_user ($filter) {
         Session::get('id_user');
-        $sql = "SELECT * FROM " . $this->_table4 . " WHERE 1=1 ";
+        $sql = "SELECT 
+                NO_ID, KODE_UNIT, NAMA_USR_AWAL, NIP_USR_AWAL, EMAIL_USR_AWAL, POSISI_USER_AWAL, NAMA_USR_PENGGANTI, NIP_USR_PENGGANTI, EMAIL_USR_PENGGANTI, POSISI_USER_PENGGANTI, TANGGAL_AWAL, TANGGAL_AKHIR, SURAT, STATUS_SETUP_AWAL, STATUS_SETUP_AKHIR, CATATAN
+                FROM " . $this->_table4 . " WHERE 1=1 ";
         
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
@@ -174,6 +187,31 @@ class DataUserSPAN {
             $d_data->set_catatan($val['CATATAN']);
             //$d_data->set_start_date(date("d-m-Y", strtotime($val['START_DATE'])));
             
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+    
+    public function get_posisi_user ($filter) {
+        Session::get('id_user');
+        $sql = "SELECT 
+                KD_POSISI, DESKRIPSI
+                FROM " . $this->_table5 . "";
+        
+        /*
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= "  ORDER BY TANGGAL_AWAL DESC";
+        */
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kd_posisi($val['KD_POSISI']);
+            $d_data->set_deskripsi_posisi($val['KD_DESKRIPSI']);
+
             $data[] = $d_data;
         }
         return $data;
@@ -314,6 +352,14 @@ class DataUserSPAN {
     public function set_catatan($catatan) {
         $this->_catatan = $catatan;
     }
+    
+    public function set_kd_posisi($kd_posisi){
+        $this->_kd_posisi = $kd_posisi;
+    }
+    
+    public function set_deskripsi_posisi($deskripsi_posisi){
+        $this->_deskripsi_posisi = $deskripsi_posisi;
+    }
 
     /*
      * getter
@@ -451,6 +497,14 @@ class DataUserSPAN {
         return $this->_catatan;
     }
     
+    public function get_kd_posisi() {
+        return $this->_kd_posisi;
+    }
+    
+    public function get_deskripsi_posisi() {
+        return $this->_deskripsi_posisi;
+    }
+    
     public function get_table() {
         return $this->_table;
     }
@@ -461,6 +515,10 @@ class DataUserSPAN {
     
     public function get_table4() {
         return $this->_table4;
+    }
+    
+    public function get_table5() {
+        return $this->_table5;
     }
 
     /*
