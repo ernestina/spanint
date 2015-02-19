@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Realisasi Belanja per Wilayah</h2>
+                <h2>Realisasi Belanja per Kabupaten/Kota</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -43,7 +43,13 @@
             
             <div class="col-md-6 col-sm-12">
                <?php
-                				
+				if (isset($this->data1)) {
+                        foreach ($this->data1 as $wilayah) {
+                            echo "PROVINSI " . $wilayah->get_nmlokasi() . " <br>";
+                        }
+                    }
+			   
+                		
 				echo Session::get('user');
                 ?>
 			
@@ -78,7 +84,7 @@
                 <!--th>KPPN</th-->
                 <!--th>Tanggal</th-->
                 <!--th rowspan=2 class='mid'>Kode BA</th-->
-                <th rowspan=2 class='mid' width='150px'> Wilayah </th>
+                <th rowspan=2 class='mid' width='150px'> Kota/Kabupaten </th>
                 <th rowspan=2 class='mid'> Keterangan </th>
                 <th  colspan=9 class='mid'>Jenis Belanja</th>
                 <th   rowspan=2 class='mid'>Total</th>
@@ -111,7 +117,7 @@
                     foreach ($this->data as $value) {
                         echo "<tr>	";
                         echo "<td rowspan=2>" . $no++ . "</td>";
-                        echo "<td rowspan=2 class='ratakiri'><a href=" . URL . "BA_ES1/DataRealisasiKabupatenBAES1/" . $value->get_ba() ."/".$value->get_nmba(). ">" . $value->get_nmba() . " (".$value->get_ba(). ") </td>";
+                        echo "<td rowspan=2 class='ratakiri'>" . $value->get_nmba() . " (".$value->get_ba(). ") </td>";
                         echo "<td align='left'> PAGU <br> REALISASI </td>";
                         echo "<td align='right'>" . number_format($value->get_pagu_51()) ."<br>". number_format($value->get_belanja_51()). "<br>";
 						if	($value->get_pagu_51() == 0) { 

@@ -277,6 +277,49 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->render('baes1/DataRealisasiLokasiBAES1');
     }
+	
+	public function DataRealisasiKabupatenBAES1($wilayah = null, $nmwilayah = null) {
+        $d_spm1 = new DataRealisasi($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        }
+        if (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
+		
+		if ($wilayah != '') {
+                $filter[$no++] = "substr(a.lokasi,1,2) = '" . $wilayah . "'";
+                $this->view->wilayah = $wilayah;
+            }
+		
+		if ($nmwilayah != '') {
+                
+                $this->view->nmwilayah = $nmwilayah;
+            }
+		
+        if (isset($_POST['submit_file'])) {
+
+            if ($_POST['kdlokasi'] != '') {
+                $filter[$no++] = "a.lokasi = '" . $_POST['kdlokasi'] . "'";
+                $this->view->lokasi = $_POST['kdlokasi'];
+            }
+        }
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $this->view->data = $d_spm1->get_realisasi_fa_kabupaten_baes1_filter($filter);
+		$this->view->data1 = $d_spm1->get_wilayah($wilayah);
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/DataRealisasiKabupatenBAES1');
+    }
 
     public function nmsatker() {
         $d_spm1 = new DataNamaSatker($this->registry);
