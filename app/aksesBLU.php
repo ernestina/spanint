@@ -36,6 +36,7 @@ $akses['DataBLU'] = array(
 	'DaftarSP3',
 	'CariSP3B',
     'DataRealisasiBLU',
+    'DataRealisasiBelanjaBLU',
     '__destruct'
 );
 

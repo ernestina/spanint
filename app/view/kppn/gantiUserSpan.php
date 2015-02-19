@@ -11,9 +11,9 @@
                 <h2>Monitoring Pergantian User</h2>
             </div>
 			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-
+                <?php if (Session::get('role') == ADMIN) { ?>
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-
+                <?php } ?>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 
@@ -450,38 +450,37 @@ if (isset($this->d_posisi)) {
         var v_kdkppn = document.getElementById('kdkppn').value;
 
         var pattern = '^[0-9]+$';
-        var jml = 0;
         
         if (v_kdkppn == '' || v_nip1 == '' || v_nip2 == '' || v_nama1 == '' || v_nama2 == '' || v_email1 == '' || v_email2 == '' || v_posisi1 == '' || v_posisi2 == '' || v_tanggal_awal == '' || v_tanggal_akhir == '' || v_status1 == '' || v_status2 == '' || v_surat == '') {
+            
             $('#warning-all').html('Isi semua parameter, cuy');
-            $('#warning-all').fadeIn();
-            jml++;
+            $('#warning-all').fadeIn(200);
+            return false;
+            
         }
         
         if ((v_nip1 != '' && v_nip1.length != 18) || (v_nip2 != '' && v_nip2.length != 18)) {
             $('#warning-all').html('NIP harus 18 digit, dong!');
             $('#warning-all').fadeIn(200);
-            jml++;
+            return false;
+
         }
-        
+
         if (v_nip1 != '' && !v_nip1.match(pattern)) {
             var wsp2d = 'NIP harus dalam bentuk angka!';
             $('#warning-all').html(wsp2d);
             $('#warning-all').fadeIn(200);
-            jml++;
+            return false;
         }
-        
+
         if (v_tgl_awal != '' && v_tgl_akhir != ''){
             if(v_tgl_awal > v_tgl_akhir){
                 $('#warning-all').html('Tanggal awal gak boleh lebih dari tanggal akhir');
                 $('#warning-all').fadeIn(200);
-                jml++;
+                return false;
             }
         }
 
-        if (jml > 0) {
-            return false;
-        }
     }
 
 </script>
