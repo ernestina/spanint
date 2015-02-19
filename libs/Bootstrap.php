@@ -86,7 +86,7 @@ class Bootstrap {
         //echo $this->role.",".$this->url[0].",".$this->method;
         //var_dump($this->registry->auth->is_allowed($this->role,$this->url[0],$this->method));
 
-       if (!$this->registry->auth->is_allowed($this->role, $this->url[0], $this->method) && $this->role != 'guest') {
+        if (!$this->registry->auth->is_allowed($this->role, $this->url[0], $this->method) && $this->role != 'guest') {
             $this->controller = new Index($this->registry);
             $this->method = 'index';
         } else if (!$this->registry->auth->is_allowed($this->role, $this->url[0], $this->method) && $this->role == 'guest') {
