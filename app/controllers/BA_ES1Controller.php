@@ -34,9 +34,13 @@ class BA_ES1Controller extends BaseController {
 
         if (isset($_POST['submit_file'])) {
 
-            if ($_POST['KEGIATAN'] != '') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $_POST['KEGIATAN'] . "'";
-                $this->view->lokasi = $_POST['KEGIATAN'];
+            if ($_POST['kode'] != '') {
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $_POST['kode'] . "%'";
+                $this->view->lokasi = $_POST['kode'];
+            }
+             if ($_POST['nama'] != '') {
+                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
+                $this->view->lokasi = $_POST['nama'];
             }
         }
 
@@ -50,6 +54,8 @@ class BA_ES1Controller extends BaseController {
         $d_log->tambah_log("Sukses");
         $this->view->judul = 'Laporan Pagu Dana Per Kegiatan';
         $this->view->judulkolom = 'Kode | Nama Kegiatan';
+        $this->view->action = 'DataRealisasiKegiatanBA';
+        $this->view->kodes = 'Kode Kegiatan :';
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
 
@@ -65,9 +71,13 @@ class BA_ES1Controller extends BaseController {
 
         if (isset($_POST['submit_file'])) {
 
-            if ($_POST['KEGIATAN'] != '') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $_POST['KEGIATAN'] . "'";
-                $this->view->lokasi = $_POST['KEGIATAN'];
+            if ($_POST['kode'] != '') {
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $_POST['kode'] . "%'";
+                $this->view->lokasi = $_POST['kode'];
+            }
+             if ($_POST['nama'] != '') {
+                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
+                $this->view->lokasi = $_POST['nama'];
             }
         }
 
@@ -78,7 +88,10 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
         $d_log->tambah_log("Sukses");
-
+        $this->view->judul='Laporan Pagu Dana Per Kegiatan';
+        $this->view->judulkolom='Kode | Nama Kegiatan';
+        $this->view->action='DataRealisasiKegiatanES1';
+        $this->view->kodes='Kode Kegiatan:';
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
 
@@ -594,11 +607,9 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = "OUTPUT like '%" . $_POST['kode'] . "%'";
                 $this->view->output= $_POST['kode'];
             }
-        }
-        if (isset($_POST['submit_file'])) {
-
+        
             if ($_POST['nama'] != '') {
-                $filter[$no++] = "nmkegiatan like '%" . $_POST['nama'] . "%'";
+                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
                 $this->view->output= $_POST['kode'];
             }
         }
@@ -632,11 +643,8 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = "OUTPUT like '%" . $_POST['kode'] . "%'";
                 $this->view->kdkegiatan = $_POST['kode'];
             }
-        }
-        if (isset($_POST['submit_file'])) {
-
             if ($_POST['nama'] != '') {
-                $filter[$no++] = "nmkegiatan like '%" . $_POST['nama'] . "%'";
+                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
                 $this->view->nmkegiatan = $_POST['nama'];
             }
         }
@@ -667,11 +675,9 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = "substr(program,1,5) like '%" . $_POST['kode'] . "%'";
                 $this->view->kdkegiatan = $_POST['kode'];
             }
-        }
-        if (isset($_POST['submit_file'])) {
-
+        
             if ($_POST['nama'] != '') {
-                $filter[$no++] = "nmes1 like '%" . $_POST['nama'] . "%'";
+                $filter[$no++] = " upper(nmes1) like upper('%" . $_POST['nama'] . "%')";
                 $this->view->nmkegiatan = $_POST['nama'];
             }
         }
@@ -684,6 +690,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judul = 'Laporan Pagu Dana Per Eselon 1';
         $this->view->judulkolom = 'Kode | Nama Eselon 1';
         $this->view->action = 'DataFaBaPerEs1';
+        $this->view->kodes='Kode Eselon 1:';
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatan');

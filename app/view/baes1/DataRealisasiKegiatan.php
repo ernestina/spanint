@@ -4,17 +4,17 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2><?php echo $this->judul;?> </h2>
+                <h2><?php echo $this->judul;?></h2>
             </div>
-            
+
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-        
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <?php
 //----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
+/*Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 		
         if (isset($this->lokasi)) {
                 
@@ -37,7 +37,7 @@
 			<?php
 
 //------------------------------
-        ?>
+*/        ?>
             </div>
         </div>
         
@@ -150,9 +150,6 @@
     </table>
 </div>
 
-<?php if (isset($this->kppn_list)) { ?>
-
-<!-- Filter -->
 <div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
         
     <div class="modal-dialog">
@@ -166,46 +163,17 @@
 
             </div>
             
-            <form id="filter-form" method="POST" action="DataRealisasiBA" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action=<?php echo $this->action;?> enctype="multipart/form-data">
 
                 <div class="modal-body">
                     
-                <!-- Paste Isi Fom mulai nangkene -->
                 <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
-                <label class="isian">Kode KPPN: </label>
-                <select class="form-control" type="text" name="kdkppn" id="kdkppn">
-                    <option value='' selected>- Semua KPPN -</option>
-                    <?php
-                    foreach ($this->kppn_list as $value1)
-                        if ($kode_kppn == $value1->get_kd_d_kppn()) {
-                            echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-                        } else {
-                            echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-                        }
-                    ?>
-                    <!--/select>
-
-
-                    <div id="wkdkppn" class="error"></div>
-                    <label class="isian">Kode Lokasi: </label>
-                    <select type="text" name="kdlokasi" id="kdlokasi">
-                    <option value='' selected>- pilih -</option>
-                    <?php
-                    //foreach ($this->data2 as $value1) 
-                    //echo "<option value = '".$value1->get_lokasi()."'>".$value1->get_lokasi()."</option>";
-                    //if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
-                    //else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
-                    ?>
-                    </select--> 
-
-
-                    <input class="form-control" type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input class="form-control" type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input class="form-control" type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input class="form-control" type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input class="form-control" type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                        
-
+                
+                    <label class="isian"><?php echo $this->kodes;?> </label>
+                    <input class="form-control" type="text" name="kode" id="kode" value="<?php if (isset($this->kode)) {echo $this->kode;} ?>">
+                    <label class="isian" >Nama : </label>
+                    <input class="form-control" type="text" name="nama" id="nama" value="<?php if (isset($this->kode)) {echo $this->nama;} ?>">
+                
                 </div>
 
                 <div class="modal-footer">
@@ -215,15 +183,7 @@
             </form>
 
         </div>
-
-    </div>
-
-</div>
-    
-<?php } ?>
-
-<!-- Skrip -->
-    
+        
 <script type="text/javascript" charset="utf-8">
     $(function() {
         hideErrorId();
@@ -245,10 +205,11 @@
     }
 
     function cek_upload() {
-        var v_status = document.getElementById('status').value;
+        var v_status = document.getElementById('kode').value;
+        var v_status1 = document.getElementById('nama').value;
 
         var jml = 0;
-        if (v_status == '') {
+        if (v_status == '' and v_status1=='') {
             $('#wstatus').html('Harap pilih');
             $('#wstatus').fadeIn();
             jml++;
@@ -258,3 +219,7 @@
         }
     }
 </script>
+
+    </div>
+
+</div>
