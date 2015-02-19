@@ -36,7 +36,6 @@ define('BLU','blu');
 define('BANK','bank');
 define('KL','kl');
 define('ES1','es1');
-define('UMADMIN','umadmin');
 
 $path = array(
     ROOT.'/libs/',
@@ -45,9 +44,15 @@ $path = array(
 );
 
 //include ROOT.'/config/config.php';
-
 include ROOT.'/libs/Autoloader.php';
 include ROOT.'/libs/config.php';
+
+
+$FILE = dirname(__DIR__).'/local/config.php';
+
+if (is_file($FILE)) {
+    include($FILE);
+}
 include ROOT.'/app/akses.php';
 
 Autoloader::setCacheFilePath(ROOT.'/libs/cache.txt');
@@ -99,8 +104,9 @@ if (Session::get('kd_satker') == andi ){
 }
 $registry->auth->add_access('dataPMRTPKN','admin',$akses['DataPMRTPKNAdmin']);
 $registry->auth->add_access('dataBPN','admin',$akses['DataBPNAdmin']);
-$registry->auth->add_access('BA_ES1','admin',$akses['BaEs1Admin']);
 $registry->auth->add_access('dataMpnBi','admin',$akses['DataMpnBiAdmin']);
+$registry->auth->add_access('BA_ES1','admin',$akses['BaEs1Admin']);
+$registry->auth->add_access('OverviewPenganggaran','admin',$akses['OverviewPenganggaranAdmin']);
 
 //level satker
 $registry->auth->add_access('auth','satker',$akses['AuthSatker']);
@@ -114,6 +120,7 @@ $registry->auth->add_access('dataSPM','satker',$akses['DataSPMSatker']);
 $registry->auth->add_access('dataSupplier','satker',$akses['DataSupplierSatker']);
 $registry->auth->add_access('PDF','satker',$akses['PDFSatker']);
 $registry->auth->add_access('panduan','satker',$akses['PanduanSatker']);
+$registry->auth->add_access('dataBPN','satker',$akses['DataBPNSatker']);
 
 
 //level kppn
@@ -127,13 +134,15 @@ $registry->auth->add_access('dataKppn','kppn',$akses['DataKppnKPPN']);
 $registry->auth->add_access('dataRetur','kppn',$akses['DataReturKPPN']);
 $registry->auth->add_access('dataSPM','kppn',$akses['DataSPMKPPN']);
 $registry->auth->add_access('dataSupplier','kppn',$akses['DataSupplierKPPN']);
-$registry->auth->add_access('userSpan','kppn',$akses['UserSpanKPPN']);
+$registry->auth->add_access('userSpan','kppn',$akses['UserSpanAdmin']);
 $registry->auth->add_access('dataPelimpahan','kppn',$akses['DataPelimpahanKPPN']);
 $registry->auth->add_access('PDF','kppn',$akses['PDFKPPN']);
 $registry->auth->add_access('panduan','kppn',$akses['PanduanKPPN']);
 $registry->auth->add_access('pelaporan','kppn',$akses['PelaporanKPPN']);
 $registry->auth->add_access('dataPersiapanRollout','kppn',$akses['DataPersiapanRolloutKPPN']);
 $registry->auth->add_access('dataPMRT','kppn',$akses['DataPMRTKPPN']);
+$registry->auth->add_access('dataBPN','kppn',$akses['DataBPNKPPN']);
+$registry->auth->add_access('dataMpnBi','kppn',$akses['DataMpnBiKPPN']);
 
 //level pkn
 $registry->auth->add_access('auth','pkn',$akses['AuthPKN']);
@@ -164,6 +173,8 @@ $registry->auth->add_access('PDF','kanwil',$akses['PDFKanwil']);
 $registry->auth->add_access('panduan','kanwil',$akses['PanduanKanwil']);
 $registry->auth->add_access('pelaporan','kanwil',$akses['PelaporanKanwil']);
 $registry->auth->add_access('dataRetur','kanwil',$akses['DataReturKanwil']);
+$registry->auth->add_access('dataBPN','kanwil',$akses['DataBPNKanwil']);
+$registry->auth->add_access('dataMpnBi','kanwil',$akses['DataMpnBiKanwil']);
 
 //level dja
 $registry->auth->add_access('auth','dja',$akses['AuthDJA']);
@@ -194,15 +205,13 @@ $registry->auth->add_access('home','kl',$akses['HomeKL']);
 $registry->auth->add_access('BA_ES1','kl',$akses['BaEs1KL']);
 $registry->auth->add_access('dataDIPA','kl',$akses['dataDIPAKL']);
 $registry->auth->add_access('dataSPM','kl',$akses['dataSPMKL']);
+
 //level ES1
 $registry->auth->add_access('auth','es1',$akses['AuthES1']);
 $registry->auth->add_access('home','es1',$akses['HomeES1']);
 $registry->auth->add_access('BA_ES1','es1',$akses['BaEs1ES1']);
 $registry->auth->add_access('dataDIPA','es1',$akses['dataDIPAES1']);
 $registry->auth->add_access('dataSPM','es1',$akses['dataSPMES1']);
-//level UMADMIN
-$registry->auth->add_access('auth','umadmin',$akses['AuthUmAdmin']);
-$registry->auth->add_access('home','umadmin',$akses['HomeUmAdmin']);
 
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);

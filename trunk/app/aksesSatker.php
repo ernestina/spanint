@@ -158,6 +158,16 @@ $akses['PanduanSatker'] = array(
 );
 
 /*
+ * akses Satker
+ */
+$akses['DataBPNSatker'] = array(
+    '__construct',
+    'dataBPN',
+    'dataBPNSatker',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFSatker'] = array(

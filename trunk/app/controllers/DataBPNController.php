@@ -46,7 +46,7 @@ class DataBPNController extends BaseController {
             }
         }
         if (Session::get('role') == SATKER) {
-            $filter[$no++] = "substr(no_spm,8,6) = '" . Session::get('id_user') . "'";
+            $filter[$no++] = "substr(no_spm,8,6) = '" . Session::get('kd_satker') . "'";
         }
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
@@ -113,10 +113,9 @@ class DataBPNController extends BaseController {
         }
         if (Session::get('role') == KPPN) {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
-        }    
-        if ($_POST['kdsatker'] != '') {
-            $filter[$no++] = "SATKER = '". $_POST['kdsatker'] ."'";
-            $this->view->d_kdsatker = $_POST['kdsatker'];
+        }
+        if (Session::get('role') == SATKER) {
+            $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
         }
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
