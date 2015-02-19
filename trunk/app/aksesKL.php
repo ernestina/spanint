@@ -40,6 +40,7 @@ $akses['BaEs1KL'] = array(
     'ProsesRevisi',
     'DataRealisasiOutputBA',
     'DataFaBaSatEs1',
+    'DataFaBaPerEs1',
     'DataRealisasiOutputES1',
 	'DataRealisasiWilayahBAES1',
 	'DataRealisasiSumberDanaBAES1',
