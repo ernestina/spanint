@@ -46,6 +46,7 @@ $akses['BaEs1ES1'] = array(
 	'detailrekapsp2dBAES1',
 	'nmsatkerBAES1',
 	'DataRealisasiPenerimaanBA',
+	'DataRealisasiKabupatenBAES1',
     '__destruct'
 );
 
