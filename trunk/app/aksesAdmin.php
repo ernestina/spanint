@@ -335,6 +335,8 @@ $akses['BaEs1Admin'] = array(
     'DataRealisasiKewenanganBAES1',
     'DataRealisasiOutputBA',
     'DataRealisasiOutputES1',
+    'DataFaBaPerEs1',
+    'DataFaBaSatEs1',
     'nmsatker',
     'ProsesRevisi',
     '__destruct'

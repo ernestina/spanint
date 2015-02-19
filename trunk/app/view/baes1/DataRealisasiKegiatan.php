@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Realisasi Belanja per Kegiatan</h2>
+                <h2><?php echo $this->judul;?> </h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -70,7 +70,7 @@
         <thead>
             <tr>
                 <th class='mid'>No.</th>
-                <th class='mid'>Kode | Nama Kegiatan</th>
+                <th class='mid'><?php echo $this->judulkolom;?></th>
                 <th class='mid'>Pagu </th>
                 <th class='mid'>Realisasi</th>
                 <th class='mid'>Persentase<br>Realisasi</th>
