@@ -11,9 +11,9 @@
                 <h2>Monitoring Pergantian User</h2>
             </div>
 			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                <?php if (Session::get('role') == ADMIN) { ?>
-                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                <?php } ?>
+
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Tambah</button>
+
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
 
@@ -198,7 +198,7 @@ if (isset($this->d_posisi)) {
 
             </div>
 
-            <form id="filter-form" method="POST" action="<?php URL; ?>gantiUserSpan/addDataUser" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="pergantianUser" enctype="multipart/form-data">
 
                 <div class="modal-body">
 
@@ -211,7 +211,7 @@ if (isset($this->d_posisi)) {
 
     <?php foreach ($this->kppn_list as $value1) { ?>
 
-        <?php if ($kode_kppn == $value1->get_kd_d_kppn()) { ?>
+        <?php if ($this->kdkppn == $value1->get_kd_d_kppn()) { ?>
 
                                     <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
 
@@ -230,61 +230,61 @@ if (isset($this->d_posisi)) {
                     <div id="wnip" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">NIP</label>
                     <div class="input-group" id="nip" style="width: 100%">
-                        <input class="form-control" type="text" class="nip1" name="nip1" id="nip1" value="<?php //if (isset($this->nip_usr_awal)) {
-                            //echo $this->nip_usr_awal; } ?>">
+                        <input class="form-control" type="text" class="nip1" name="nip1" id="nip1" 
+                               value="<?php if (isset($this->nip1)) {echo $this->nip1; }?>">
                         <span class="input-group-addon">diganti</span>
-                        <input class="form-control" type="text" class="nip2" name="nip2" id="nip2" value="<?php //if (isset($this->nip_usr_pengganti)) {
-                            //echo $this->nip_usr_pengganti; } ?>">
+                        <input class="form-control" type="text" class="nip2" name="nip2" id="nip2" value="<?php if (isset($this->nip2)) {
+                            echo $this->nip2; } ?>">
                     </div>
                     
                     <label class="isian">Nama</label>
                     <div class="input-group" id="nama" style="width: 100%">
-                        <input class="form-control" type="text" class="nama1" name="nama1" id="nama1" value="<?php //if (isset($this->nama_usr_awal)) {
-                            //echo $this->nama_usr_awal; } ?>">
+                        <input class="form-control" type="text" class="nama1" name="nama1" id="nama1" value="<?php if (isset($this->nama1)) {
+                            echo $this->nama1; } ?>">
                         <span class="input-group-addon">diganti</span>
-                        <input class="form-control" type="text" class="nama2" name="nama2" id="nama2" value="<?php //if (isset($this->nama_usr_pengganti)) {
-                            //echo $this->nama_usr_pengganti; } ?>">
+                        <input class="form-control" type="text" class="nama2" name="nama2" id="nama2" value="<?php if (isset($this->nama2)) {
+                            echo $this->nama2; } ?>">
                     </div>
                     
                     <label class="isian">Email</label>
                     <div class="input-group" id="email" style="width: 100%">
-                        <input class="form-control" type="text" class="email1" name="email1" id="email1" value="<?php //if (isset($this->email_usr_awal)) {
-                            //echo $this->email_usr_awal; } ?>">
+                        <input class="form-control" type="text" class="email1" name="email1" id="email1" value="<?php if (isset($this->email1)) {
+                            echo $this->email1; } ?>">
                         <span class="input-group-addon">diganti</span>
-                        <input class="form-control" type="text" class="email2" name="email2" id="email2" value="<?php //if (isset($this->email_usr_pengganti)) {
-                            //echo $this->email_usr_pengganti; } ?>">
+                        <input class="form-control" type="text" class="email2" name="email2" id="email2" value="<?php if (isset($this->email2)) {
+                            echo $this->email2; } ?>">
                     </div>
                     
                     <label class="isian">Posisi</label>
                     <div class="input-group" id="posisi" style="width: 100%">
                         <select class="form-control" type="text" name="posisi1" id="posisi1">
-                            <?php   //foreach ($this->posisi as $values) {
-                                    //if ($posisi_user == $values->get_kd_posisi()) { ?>
-                                <option value="<?php //echo $values->get_kd_posisi(); ?>" selected><?php //echo $values->get_kd_posisi(); ?></option>
-                                <?php //} else { ?>
-                                <option value="<?php //echo $values->get_kd_posisi(); ?>"><?php //echo $value1->get_kd_posisi(); ?></option>
-                            <?php //} ?>
-                            <?php //} ?>
+                            <?php   foreach ($this->posisi_user as $posisi) {
+                                    if ($this->posisi1 == $posisi->get_deskripsi_posisi()) { ?>
+                                <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>" selected><?php echo $posisi->get_deskripsi_posisi(); ?></option>
+                                <?php } else { ?>
+                                <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>"><?php echo $posisi->get_deskripsi_posisi(); ?></option>
+                            <?php } ?>
+                            <?php } ?>
 
                         </select>
                         <span class="input-group-addon">diganti</span>
                         <select class="form-control" type="text" name="posisi2" id="posisi2">
-                            <?php   //foreach ($this->posisi as $values) {
-                                    //if ($posisi_user == $values->get_kd_posisi()) { ?>
-                                <option value="<?php //echo $values->get_kd_posisi(); ?>" selected><?php //echo $values->get_kd_posisi(); ?></option>
-                                <?php //} else { ?>
-                                <option value="<?php //echo $values->get_kd_posisi(); ?>"><?php //echo $value1->get_kd_posisi(); ?></option>
-                            <?php //} ?>
-                            <?php //} ?>
+                            <?php   foreach ($this->posisi_user as $posisi) {
+                                    if ($this->posisi2 == $posisi->get_deskripsi_posisi()) { ?>
+                                <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>" selected><?php echo $posisi->get_deskripsi_posisi(); ?></option>
+                                <?php } else { ?>
+                                <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>"><?php echo $posisi->get_deskripsi_posisi(); ?></option>
+                            <?php } ?>
+                            <?php } ?>
 
                         </select>
                     </div>
                     
                     <label class="isian">No. Surat:</label>
                     
-                    <input class="form-control" type="text" name="surat" id="surat" size="18" value="<?php //if (isset($this->surat)) {
-                            //echo $this->surat;
-                        //} ?>">
+                    <input class="form-control" type="text" name="surat" id="surat" size="18" value="<?php if (isset($this->surat)) {
+                            echo $this->surat;
+                        } ?>">
                     
                     <label class="isian">Tanggal: </label>
                     <div class="input-daterange input-group" id="datepicker" style="width: 100%">
@@ -298,29 +298,45 @@ if (isset($this->d_posisi)) {
                     </div>
                     
                     <label class="isian">Status Awal dan Akhir:</label>
-                    <div class="input-group" id="posisi" style="width: 100%">
+                    <div class="input-group" id="status" style="width: 100%">
                         <select class="form-control" type="text" name="status1" id="status1">
-                            <option selected>-- pilih --</option>    
-                            <option value="<?php //echo $values->get_kd_posisi(); ?>">Tunda</option>
-                            <option value="<?php //echo $values->get_kd_posisi(); ?>">Selesai</option>
+                            <option value ="" selected>-- pilih --</option>    
+                            <option value="tunda" <?php
+                            if ($this->status1 == tunda) {
+                                echo "selected";
+                            }
+                            ?>></optio>Tunda</option>
+                            <option value="selesai" <?php
+                            if ($this->status1 == selesai) {
+                                echo "selected";
+                            }
+                            ?>>Selesai</option>
                         </select>
                         <span class="input-group-addon">dan</span>
                         <select class="form-control" type="text" name="status2" id="status2">
-                            <option selected>-- pilih --</option>    
-                            <option value="<?php //echo $values->get_kd_posisi(); ?>">Tunda</option>
-                            <option value="<?php //echo $values->get_kd_posisi(); ?>">Selesai</option>
+                            <option value ="" selected>-- pilih --</option>    
+                            <option value="tunda" <?php
+                            if ($this->status2 == tunda) {
+                                echo "selected";
+                            }
+                            ?>>Tunda</option>
+                            <option value="selesai" <?php
+                            if ($this->status2 == selesai) {
+                                echo "selected";
+                            }
+                            ?>>Selesai</option>
                         </select>
                     </div>
                     
                     <label class="isian">Catatan:</label>
                     
-                    <input class="form-control" type="text" name="catatan" id="catatan" size="18" value="<?php //if (isset($this->catatan)) {
-                            //echo $this->catatan;
-                        //} ?>">
+                    <input class="form-control" type="text" name="catatan" id="catatan" size="18" value="<?php if (isset($this->catatan)) {
+                            echo $this->catatan;
+                        } ?>">
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
+                    <button type="submit" name="add_d_user" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
                 </div>
 
             </form>
@@ -334,153 +350,5 @@ if (isset($this->d_posisi)) {
 <!-- Skrip -->
 <script type="text/javascript" charset="utf-8">
 
-    $(function() {
-        hideErrorId();
-        hideWarning();
-    });
-
-
-    function hideErrorId() {
-        $('.error').fadeOut(0);
-    }
-
-    function hideWarning() {
-
-        $('#kdkppn').change(function() {
-            if (document.getElementById('kdkppn').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#nip1').keyup(function() {
-            if (document.getElementById('nip1').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#nip2').keyup(function() {
-            if (document.getElementById('nip2').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#nama1').keyup(function() {
-            if (document.getElementById('nama1').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#nama2').keyup(function() {
-            if (document.getElementById('nama2').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#email1').keyup(function() {
-            if (document.getElementById('email1').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#email2').keyup(function() {
-            if (document.getElementById('email2').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#status1').change(function() {
-            if (document.getElementById('status1').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#status2').change(function() {
-            if (document.getElementById('status2').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#posisi1').change(function() {
-            if (document.getElementById('posisi1').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#posisi2').change(function() {
-            if (document.getElementById('posisi2').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#tanggal_awal').change(function() {
-            if (document.getElementById('tanggal_awal').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#tanggal_akhir').change(function() {
-            if (document.getElementById('tanggal_akhir').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-        
-        $('#surat').keyup(function() {
-            if (document.getElementById('surat').value != '') {
-                $('#warning-all').fadeOut(200);
-            }
-        });
-
-    }
-
-    function cek_upload() {
-        
-        var v_nip1 = document.getElementById('nip1').value;
-        var v_nip2 = document.getElementById('nip2').value;
-        var v_nama1 = document.getElementById('nama1').value;
-        var v_nama2 = document.getElementById('nama2').value;
-        var v_email1 = document.getElementById('email1').value;
-        var v_email2 = document.getElementById('email2').value;
-        var v_posisi1 = document.getElementById('posisi1').value;
-        var v_posisi2 = document.getElementById('posisi2').value;
-        var v_tanggal_awal = document.getElementById('tanggal_awal').value;
-        var v_tanggal_akhir = document.getElementById('tanggal_akhir').value;
-        var v_status1 = document.getElementById('status1').value;
-        var v_status2 = document.getElementById('status2').value;
-        var v_surat = document.getElementById('surat').value;
-        var v_kdkppn = document.getElementById('kdkppn').value;
-
-        var pattern = '^[0-9]+$';
-        
-        if (v_kdkppn == '' || v_nip1 == '' || v_nip2 == '' || v_nama1 == '' || v_nama2 == '' || v_email1 == '' || v_email2 == '' || v_posisi1 == '' || v_posisi2 == '' || v_tanggal_awal == '' || v_tanggal_akhir == '' || v_status1 == '' || v_status2 == '' || v_surat == '') {
-            
-            $('#warning-all').html('Isi semua parameter, cuy');
-            $('#warning-all').fadeIn(200);
-            return false;
-            
-        }
-        
-        if ((v_nip1 != '' && v_nip1.length != 18) || (v_nip2 != '' && v_nip2.length != 18)) {
-            $('#warning-all').html('NIP harus 18 digit, dong!');
-            $('#warning-all').fadeIn(200);
-            return false;
-
-        }
-
-        if (v_nip1 != '' && !v_nip1.match(pattern)) {
-            var wsp2d = 'NIP harus dalam bentuk angka!';
-            $('#warning-all').html(wsp2d);
-            $('#warning-all').fadeIn(200);
-            return false;
-        }
-
-        if (v_tgl_awal != '' && v_tgl_akhir != ''){
-            if(v_tgl_awal > v_tgl_akhir){
-                $('#warning-all').html('Tanggal awal gak boleh lebih dari tanggal akhir');
-                $('#warning-all').fadeIn(200);
-                return false;
-            }
-        }
-
-    }
 
 </script>
