@@ -233,7 +233,11 @@ class UserSpanController extends BaseController {
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+            
+            //$d_posisi = array();
+            //$this->view->posisi = $d_posisi->get_posisi_user();
         }
+        
         /*
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
@@ -252,6 +256,8 @@ class UserSpanController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
+                
+                //$this->view->d_posisi = $d_posisi->get_posisi_user($_POST['kd_posisi'])
             } else {
                 $filter[$no++] = " KODE_UNIT = " . Session::get('id_user');
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
