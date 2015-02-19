@@ -394,7 +394,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring User Aktif</a></li>
-                                    <!--<li><a href="<?php echo URL; ?>userSpan/pergantianUser">Monitoring Pergantian User</a></li>-->
+                                    <li><a href="<?php echo URL; ?>userSpan/pergantianUser">Monitoring Pergantian User</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -681,7 +681,7 @@
 
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;SP3B BLU</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;SP3B BLU</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataBLU/KarwasBLU">Monitoring SP3B BLU Tahunan</a></li>
@@ -689,7 +689,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;DATA REALISASI BLU</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;DATA REALISASI BLU</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataBLU/DataRealisasiBLU">Realisasi Belanja Per Ssatker BLU</a></li>
@@ -812,7 +812,7 @@
                             </div>
                         </li>
 						
-						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Fund Available</h4>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Fund Available</h4>
                             <div class="collapse">
                                 <ul>
                                     
@@ -874,7 +874,7 @@
                                 </ul>
                             </div>
                         </li>
-						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Fund Availabl</h4>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Fund Available</h4>
                             <div class="collapse">
                                 <ul>
                                     
