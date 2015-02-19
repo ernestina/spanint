@@ -185,8 +185,8 @@
                 
                     <label class="isian"><?php echo $this->kodes;?> </label>
                     <input class="form-control" type="text" name="kode" id="kode" value="<?php if (isset($this->kode)) {echo $this->kode;} ?>">
-                    <label class="isian">Nama : </label>
-                    <input class="form-control" type="text" name="nama" id="nama" value="<?php if (isset($this->kode)) {echo $this->nama;} ?>">
+                    <!--<label class="isian" >Nama : </label>-->
+                    <input class="form-control" type="hidden" name="nama" id="nama" value="<?php if (isset($this->kode)) {echo $this->nama;} ?>">
                 
                 </div>
 
