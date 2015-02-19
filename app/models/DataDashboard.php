@@ -383,7 +383,7 @@ class DataDashboard {
     }
     
     public function get_sp2d_rekap_num($hari, $unitfilter = null) {
-        //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
+        //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where KDKPPN in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
 
         $data = array();
         for ($i = 0; $i < $hari; $i++) {
@@ -431,7 +431,7 @@ class DataDashboard {
     }
 
     public function get_sp2d_rekap($hari, $unitfilter = null) {
-        //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
+        //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where KDKPPN in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
 
         $data = array();
         for ($i = 0; $i < $hari; $i++) {
@@ -520,7 +520,7 @@ class DataDashboard {
     }
 
     public function get_list_sp2d_selesai($unitfilter = null) {
-        //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where substr(check_number,3,3) in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
+        //$sql = "select jenis_sp2d, count(check_number) jumlah, sum(amount) nominal from AP_CHECKS_ALL_V where KDKPPN in (select kdkppn from t_kppn where kdkanwil='11') and check_date between to_date('01052014','ddmmyyyy') and to_date('01062014','ddmmyyyy') group by jenis_sp2d;";
 
         $data = array();
 
@@ -531,7 +531,7 @@ class DataDashboard {
         }
         $result = $this->db->select($sql);
 
-        //select distinct(check_number), jenis_sp2d, exchange_rate, amount, currency_code, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where  substr(CHECK_NUMBER,3,3)='140' and check_date = to_date('20140630','yyyymmdd');
+        //select distinct(check_number), jenis_sp2d, exchange_rate, amount, currency_code, amount * nvl(exchange_rate,1) amount_rph from AP_CHECKS_ALL_V where  KDKPPN='140' and check_date = to_date('20140630','yyyymmdd');
 
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
