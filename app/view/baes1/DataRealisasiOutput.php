@@ -2,64 +2,60 @@
 <div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
     <div class="container-fluid">
         <div class="row">
-            
+
             <div class="col-lg-10 col-md-6 col-sm-12">
                 <h2>Realisasi Belanja per Output</h2>
             </div>
-            
+
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-        
+
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-                
+
                 <?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
-		
-         if (isset($this->lokasi)) {
-                
-				$kdlokasi = $this->lokasi();
-                
-            }else{
-				$kdlokasi ='null';
-			} 
-			
-			?>
-            <a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-			<a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-			<?php
 
+                if (isset($this->lokasi)) {
+
+                    $kdlokasi = $this->lokasi();
+                } else {
+                    $kdlokasi = 'null';
+                }
+                ?>
+                <a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+            </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
+                <a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+                <?php
 //------------------------------
-        ?>
+                ?>
             </div>
         </div>
-        
+
         <div class="row" style="padding-top: 10px">
-            
+
             <div class="col-md-6 col-sm-12">
                 <?php
-               
-				echo Session::get('user');
+                echo Session::get('user');
                 ?>
                 <br>Tanggal : s.d <?php
                 echo (date('d-m-Y'));
                 ?>
             </div>
-            
+
             <div class="col-md-6 col-sm-12" style="text-align: right;">
                 <?php
-                    // untuk menampilkan last_update
-                    if (isset($this->last_update)) {
-                        foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server) :<br> " . $last_update->get_last_update() . " WIB";
-                        }
+                // untuk menampilkan last_update
+                if (isset($this->last_update)) {
+                    foreach ($this->last_update as $last_update) {
+                        echo "Update Data Terakhir (Waktu Server) :<br> " . $last_update->get_last_update() . " WIB";
                     }
+                }
                 ?>
             </div>
-            
+
         </div>
-        
+
     </div>
 </div>
 
@@ -74,63 +70,94 @@
                 <th class='mid'>Pagu </th>
                 <th class='mid'>Realisasi</th>
                 <th class='mid'>Persentase<br>Realisasi</th>
+                <th class='mid'>Outstanding<br>Kontrak</th>
+                <th class='mid'>Block/Revise<br>Amount</th>
+                <th class='mid'>Total <br>Fund Available</th>
             </tr>
         </thead>
         <tbody class='ratatengah'>
             <?php
             $no = 1;
             $tot_pot = 0;
-			
+            $tot_real = 0;
+            $tot_kontrak = 0;
+            $tot_block = 0;
+            $tot_balance = 0;
+
             if (isset($this->data)) {
                 if (empty($this->data)) {
                     echo '<td colspan=12 align="center">Tidak ada data.</td>';
                 } else {
                     foreach ($this->data as $value) {
                         echo "<tr>	";
-                        echo '<td '; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>' . $no++ . '</td>';
-                        echo '<td align="left"'; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>'. $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan() . "</td>";
-                        echo '<td align="right"'; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>' . number_format($value->get_budget_amt()) . "</td> ";
-                        echo '<td align="right"'; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>' . number_format($value->get_actual_amt()) .
-						"</td> ";
-						echo '<td align="right"'; if (substr($value->get_kdkegiatan(),5,1)==null){ echo 'style="background:#FFC2C2"'; } echo '>';
-						if($value->get_budget_amt() == 0) { 
-							echo "0.00%" ;
-						} else {
-                        echo   number_format(($value->get_actual_amt()/$value->get_budget_amt())*100, 2) ."%" ;
+                        echo '<td ';
+                        if (substr($value->get_kdkegiatan(), 5, 1) == null) {
+                            echo 'style="background:#FFC2C2"';
+                        } echo '>' . $no++ . '</td>';
+                        echo '<td align="left"';
+                        if (substr($value->get_kdkegiatan(), 5, 1) == null) {
+                            echo 'style="background:#FFC2C2"';
+                        } echo '>' . $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan() . "</td>";
+                        echo '<td align="right"';
+                        if (substr($value->get_kdkegiatan(), 5, 1) == null) {
+                            echo 'style="background:#FFC2C2"';
+                        } echo '>' . number_format($value->get_budget_amt()) . "</td> ";
+                        echo '<td align="right"';
+                        if (substr($value->get_kdkegiatan(), 5, 1) == null) {
+                            echo 'style="background:#FFC2C2"';
+                        } echo '>' . number_format($value->get_actual_amt()) .
                         "</td> ";
-						}
+                        echo '<td align="right"';
+                        if (substr($value->get_kdkegiatan(), 5, 1) == null) {
+                            echo 'style="background:#FFC2C2"';
+                        } echo '>';
+                        if ($value->get_budget_amt() == 0) {
+                            echo "0.00%";
+                        } else {
+                            echo number_format(($value->get_actual_amt() / $value->get_budget_amt()) * 100, 2) . "%";
+                            "</td> ";
+                        }
+                        echo '<td align="right"';
+                        if (substr($value->get_kdkegiatan(), 5, 1) == null) {
+                            echo 'style="background:#FFC2C2"';
+                        } echo '>' . number_format($value->get_obligation()) . "</td> ";
+                        echo '<td align="right"';
+                        if (substr($value->get_kdkegiatan(), 5, 1) == null) {
+                            echo 'style="background:#FFC2C2"';
+                        } echo '>' . number_format($value->get_block_amount()) . "</td> ";
+                        echo '<td align="right"';
+                        if (substr($value->get_kdkegiatan(), 5, 1) == null) {
+                            echo 'style="background:#FFC2C2"';
+                        } echo '>' . number_format($value->get_balancing_amt()) . "</td> ";
                         echo "</tr>	";
-                    
-							$tot_pagu+=$value->get_budget_amt();
-							$tot_real+=$value->get_actual_amt();
-                            
+
+                        if (substr($value->get_kdkegiatan(), 5, 1) == null) {
+                        $tot_pagu+=$value->get_budget_amt();
+                        $tot_real+=$value->get_actual_amt();
+                        $tot_kontrak += $value->get_obligation();
+                        $tot_block += $value->get_block_amount() ;
+                        $tot_balance += $value->get_balancing_amt();
+                        }
                     }
-					echo "<tr>";
-					echo "</tr>";				
+                    echo "<tr>";
+                    echo "</tr>";
                 }
             } else {
-                
+
                 echo '<td colspan=12 id="filter-first" align="center">Masukkan filter terlebih dahulu.</td>';
-                
             }
             ?>
         </tbody>
         <tfoot>
            
 			<tr>
-                    <!--td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
-					<td class='ratakiri'>PAGU <br> REALISASI</td>
-                  
-					<td class='ratakanan'><?php  echo number_format($tot_pagu_51); ?><br><?php echo number_format($tot_51); ?><br><?php if ($tot_pagu_51==0){echo '(0.00%)';} else {echo "("  .number_format($tot_51/$tot_pagu_51*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_52); ?><br><?php echo number_format($tot_52); ?><br><?php if ($tot_pagu_52==0){echo '(0.00%)';} else {echo "("  .number_format($tot_52/$tot_pagu_52*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_53); ?><br><?php echo number_format($tot_53); ?><br><?php if ($tot_pagu_53==0){echo '(0.00%)';} else {echo "("  .number_format($tot_53/$tot_pagu_53*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_54); ?><br><?php echo number_format($tot_54); ?><br><?php if ($tot_pagu_54==0){echo '(0.00%)';} else {echo "("  .number_format($tot_54/$tot_pagu_54*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_55); ?><br><?php echo number_format($tot_55); ?><br><?php if ($tot_pagu_55==0){echo '(0.00%)';} else {echo "("  .number_format($tot_55/$tot_pagu_55*100). "%)";}?> </td>
-					<td class='ratakanan'><?php echo number_format($tot_pagu_56); ?><br><?php echo number_format($tot_56); ?><br><?php if ($tot_pagu_56==0){echo '(0.00%)';} else {echo "("  .number_format($tot_56/$tot_pagu_56*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_57); ?><br><?php echo number_format($tot_57); ?><br><?php if ($tot_pagu_57==0){echo '(0.00%)';} else {echo "("  .number_format($tot_57/$tot_pagu_57*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu_58); ?><br><?php echo number_format($tot_58); ?><br><?php if ($tot_pagu_58==0){echo '(0.00%)';} else {echo "("  .number_format($tot_58/$tot_pagu_58*100). "%)";}?> </td>
-					<td class='ratakanan'><?php echo number_format($tot_pagu_61); ?><br><?php echo number_format($tot_61); ?><br><?php if ($tot_pagu_61==0){echo '(0.00%)';} else {echo "("  .number_format($tot_61/$tot_pagu_61*100). "%)";}?> </td>
-                    <td class='ratakanan'><?php echo number_format($tot_pagu); ?><br><?php echo number_format($tot_real); ?><br><?php if ($tot_pagu==0){echo '(0.00%)';} else {echo "(" .number_format($tot_real/$tot_pagu*100). "%)";}?> </td!-->
+                    <td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
+					<td align='right'><b> <?php echo number_format($tot_pagu) ;?> </b> </td>
+					<td align='right'><b> <?php echo number_format($tot_real) ;?> </b></td>
+					<td align='right'><b> <?php if($tot_pagu == 0) {echo '0.00%';} else { echo  number_format($tot_real/$tot_pagu*100,2). '%' ;}?> </b></td>
+					<td align='right'><b> <?php echo number_format($tot_kontrak) ;?> </b></td>
+					<td align='right'><b> <?php echo number_format($tot_block) ;?> </b></td>
+					<td align='right'><b> <?php echo number_format($tot_balance) ;?> </b></td>
             </tr>
 
         </tfoot>
@@ -139,109 +166,109 @@
 
 <?php if (isset($this->kppn_list)) { ?>
 
-<!-- Filter -->
-<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+    <!-- Filter -->
+    <div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                    <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
+
+                </div>
+
+                <form id="filter-form" method="POST" action="DataRealisasiBA" enctype="multipart/form-data">
+
+                    <div class="modal-body">
+
+                        <!-- Paste Isi Fom mulai nangkene -->
+                        <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
+                        <label class="isian">Kode KPPN: </label>
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                            <option value='' selected>- Semua KPPN -</option>
+                            <?php
+                            foreach ($this->kppn_list as $value1)
+                                if ($kode_kppn == $value1->get_kd_d_kppn()) {
+                                    echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+                                } else {
+                                    echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
+                                }
+                            ?>
+                            <!--/select>
         
-    <div class="modal-dialog">
+        
+                            <div id="wkdkppn" class="error"></div>
+                            <label class="isian">Kode Lokasi: </label>
+                            <select type="text" name="kdlokasi" id="kdlokasi">
+                            <option value='' selected>- pilih -</option>
+                            <?php
+                            //foreach ($this->data2 as $value1) 
+                            //echo "<option value = '".$value1->get_lokasi()."'>".$value1->get_lokasi()."</option>";
+                            //if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
+                            //else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
+                            ?>
+                            </select--> 
 
-        <div class="modal-content">
 
-            <div class="modal-header">
+                            <input class="form-control" type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
+                            <input class="form-control" type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
+                            <input class="form-control" type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
+                            <input class="form-control" type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
+                            <input class="form-control" type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
 
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
-                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
+                            </div>
+
+                            </form>
+
+                    </div>
 
             </div>
-            
-            <form id="filter-form" method="POST" action="DataRealisasiBA" enctype="multipart/form-data">
-
-                <div class="modal-body">
-                    
-                <!-- Paste Isi Fom mulai nangkene -->
-                <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
-                <label class="isian">Kode KPPN: </label>
-                <select class="form-control" type="text" name="kdkppn" id="kdkppn">
-                    <option value='' selected>- Semua KPPN -</option>
-                    <?php
-                    foreach ($this->kppn_list as $value1)
-                        if ($kode_kppn == $value1->get_kd_d_kppn()) {
-                            echo "<option value='" . $value1->get_kd_d_kppn() . "' selected>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-                        } else {
-                            echo "<option value='" . $value1->get_kd_d_kppn() . "'>" . $value1->get_kd_d_kppn() . " | " . $value1->get_nama_user() . "</option>";
-                        }
-                    ?>
-                    <!--/select>
-
-
-                    <div id="wkdkppn" class="error"></div>
-                    <label class="isian">Kode Lokasi: </label>
-                    <select type="text" name="kdlokasi" id="kdlokasi">
-                    <option value='' selected>- pilih -</option>
-                    <?php
-                    //foreach ($this->data2 as $value1) 
-                    //echo "<option value = '".$value1->get_lokasi()."'>".$value1->get_lokasi()."</option>";
-                    //if ($kode_kppn==$value1->get_kd_d_kppn()){echo "<option value='".$value1->get_kd_d_kppn()."' selected>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";} 
-                    //else {echo "<option value='".$value1->get_kd_d_kppn()."'>".$value1->get_kd_d_kppn()." | ".$value1->get_nama_user()."</option>";}
-                    ?>
-                    </select--> 
-
-
-                    <input class="form-control" type="hidden" name="kd_satker" id="kd_satker" value="<?php echo $kode_satker; ?>">
-                    <input class="form-control" type="hidden" name="kd_kppn" id="kd_kppn" value="<?php echo $kode_kppn; ?>">
-                    <input class="form-control" type="hidden" name="kd_adk_name" id="kd_adk_name" value="<?php echo $_FILES['fupload']['name']; ?>">
-                    <input class="form-control" type="hidden" name="kd_jml_pdf" id="kd_jml_pdf" value="<?php echo '10'; ?>">
-                    <input class="form-control" type="hidden" name="kd_file_name" id="kd_file_name" value="<?php echo $kode_satker . "_" . $kode_kppn . "_" . date("d-m-y") . "_"; ?>">
-                        
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
-                </div>
-
-            </form>
 
         </div>
 
-    </div>
+    <?php } ?>
 
-</div>
-    
-<?php } ?>
+    <!-- Skrip -->
 
-<!-- Skrip -->
-    
-<script type="text/javascript" charset="utf-8">
-    $(function() {
-        hideErrorId();
-        hideWarning();
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            hideErrorId();
+            hideWarning();
 
-    });
-
-    function hideErrorId() {
-        $('.alert-danger').fadeOut(0);
-    }
-
-    function hideWarning() {
-        $('#status').change(function() {
-            if (document.getElementById('status').value != '') {
-                $('#wstatus').fadeOut(200);
-            }
         });
 
-    }
-
-    function cek_upload() {
-        var v_status = document.getElementById('status').value;
-
-        var jml = 0;
-        if (v_status == '') {
-            $('#wstatus').html('Harap pilih');
-            $('#wstatus').fadeIn();
-            jml++;
+        function hideErrorId() {
+            $('.alert-danger').fadeOut(0);
         }
-        if (jml > 0) {
-            return false;
+
+        function hideWarning() {
+            $('#status').change(function () {
+                if (document.getElementById('status').value != '') {
+                    $('#wstatus').fadeOut(200);
+                }
+            });
+
         }
-    }
-</script>
+
+        function cek_upload() {
+            var v_status = document.getElementById('status').value;
+
+            var jml = 0;
+            if (v_status == '') {
+                $('#wstatus').html('Harap pilih');
+                $('#wstatus').fadeIn();
+                jml++;
+            }
+            if (jml > 0) {
+                return false;
+            }
+        }
+    </script>
