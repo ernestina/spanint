@@ -75,7 +75,7 @@
                 <th class='mid'>Realisasi</th>
                 <th class='mid'>Persentase<br>Realisasi</th>
 				<th class='mid'>Outstanding<br>Kontrak</th>
-				<th class='mid'>Block<br>Amount</th>
+				<th class='mid'>Block/Revise<br>Amount</th>
 				<th class='mid'>Total <br>Fund Available</th>
             </tr>
         </thead>

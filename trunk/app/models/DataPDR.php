@@ -86,7 +86,7 @@ class DataPDR {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        
+        $sql .=" ORDER BY d_effective desc,d_signed desc ";
         //echo($sql);
         
         $result = $this->db->select($sql);

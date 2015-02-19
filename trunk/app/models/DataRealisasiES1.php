@@ -37,6 +37,7 @@ class DataRealisasiES1 {
     private $_table4 = 'T_ESELON1';
     private $_table6 = 'T_OUTPUT';
     private $_table5 = 'T_AKUN';
+    private $_table7 = 'BLOCK_REVISI';
     public $registry;
 
     /*
@@ -69,23 +70,24 @@ class DataRealisasiES1 {
 
     public function get_ba_kegiatan_filter($filter) {
         Session::get('id_user');
+        $tahun=Session::get('ta');
         $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
-				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT) BLOCK_AMOUNT, SUM(BALANCING_AMT) BALANCING_AMT  FROM "
-                . $this->_table1 . " A, "
-                . $this->_table3 . " C 
+				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
+                                FROM "
+                . $this->_table1 . " A LEFT JOIN  "
+                . $this->_table3 . " C ON SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN LEFT JOIN "
+                . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
 				WHERE 1=1 AND 
-				A.BUDGET_TYPE='2' 				
-				AND SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
+				A.BUDGET_TYPE='2' 
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(A.AKUN,1,1) IN ('5','6')
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
-				
-				";
+                                ";
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ";
+        $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN";
         $sql .= " ORDER BY SUBSTR(OUTPUT,1,4) ";
 
         //var_dump($sql);
@@ -99,9 +101,9 @@ class DataRealisasiES1 {
             $d_data->set_budget_amt($val['PAGU']);
             $d_data->set_actual_amt($val['REALISASI']);
             $d_data->set_nm_satker($val['NMBA']);
-			 $d_data->set_obligation($val['OBLIGATION']);
+            $d_data->set_obligation($val['OBLIGATION']);
             $d_data->set_block_amount($val['BLOCK_AMOUNT']);
-			$d_data->set_balancing_amt($val['BALANCING_AMT']);
+            $d_data->set_balancing_amt($val['BALANCING_AMT']);
             $data[] = $d_data;
         }
         return $data;
@@ -185,14 +187,14 @@ class DataRealisasiES1 {
 
     public function get_ba_output_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI
-				FROM "
-                . $this->_table1 . " A, "
-                . $this->_table3 . " C 
+        $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
+				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
+                                FROM "
+                . $this->_table1 . " A LEFT JOIN  "
+                . $this->_table3 . " C ON SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN LEFT JOIN "
+                . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' 
-	
-				AND SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N' 
                                 AND SUBSTR(A.AKUN,1,1) IN('5','6')
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) > 0
@@ -203,14 +205,14 @@ class DataRealisasiES1 {
         }
         $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ";
         $sql .=" union all 
-                SELECT OUTPUT KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI
-				FROM "
-                . $this->_table1 . " A, "
-                . $this->_table6 . " C 
+                SELECT OUTPUT KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
+				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
+                                FROM "
+                . $this->_table1 . " A LEFT JOIN  "
+                . $this->_table6 . " C ON OUTPUT=C.KDKEGIATAN LEFT JOIN "
+                . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' 
-				
-				AND OUTPUT=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N'
                                 AND SUBSTR(A.AKUN,1,1) IN('5','6')
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) > 0
@@ -233,6 +235,9 @@ class DataRealisasiES1 {
             $d_data->set_budget_amt($val['PAGU']);
             $d_data->set_actual_amt($val['REALISASI']);
             $d_data->set_nm_satker($val['NMBA']);
+            $d_data->set_obligation($val['OBLIGATION']);
+            $d_data->set_block_amount($val['BLOCK_AMOUNT']);
+            $d_data->set_balancing_amt($val['BALANCING_AMT']);
             $data[] = $d_data;
         }
         return $data;
@@ -424,6 +429,14 @@ class DataRealisasiES1 {
 
     public function get_actual_amt() {
         return $this->_actual_amt;
+    }
+
+    function get_block_revisi() {
+        return $this->_block_revisi;
+    }
+
+    function set_block_revisi($_block_revisi) {
+        $this->_block_revisi = $_block_revisi;
     }
 
     public function get_balancing_amt() {
