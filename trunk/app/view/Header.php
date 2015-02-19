@@ -799,12 +799,28 @@
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Satker Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Per Jenis Kewenangan</a></li>
 
-                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Kegiatan</a></li>
+                                    
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Per Sumber Dana</a></li>
+
+                                    
+
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Per Wilayah</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+						
+						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Fund Available</h4>
+                            <div class="collapse">
+                                <ul>
+                                    
+
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Kegiatan</a></li>
+                                    
 
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputBA">Per Output</a></li>
 
-                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Per Wilayah</a></l
+                                    
 
                                 </ul>
                             </div>
@@ -853,10 +869,20 @@
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Per Jenis Kewenangan</a></li>
 
-                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanES1">Per Kegiatan</a></li>
-                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputES1">Per Output</a></li>
+                                    
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Per Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Per Wilayah</a></li>
+                                </ul>
+                            </div>
+                        </li>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Fund Availabl</h4>
+                            <div class="collapse">
+                                <ul>
+                                    
+
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanES1">Per Kegiatan</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputES1">Per Output</a></li>
+                                    
                                 </ul>
                             </div>
                         </li>

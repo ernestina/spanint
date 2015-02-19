@@ -140,6 +140,7 @@
             <tbody class='ratatengah'>
                 <?php
                 $no = 1;
+				$total_dipa = 0 ;
                 //var_dump ($this->data);
                 if (isset($this->data)) {
                     if (empty($this->data)) {
@@ -165,6 +166,8 @@
                             echo "<td>" . $value->get_intraco_code() . "</td>";
                             echo "<td>" . $value->get_cadangan_code() . "</td>";
                             echo "</tr>	";
+							
+							$total_dipa += $value->get_line_amount();
                         }
                     }
                 } else {
@@ -172,6 +175,16 @@
                 }
                 ?>
             </tbody>
+			
+			<tfoot>
+			<tr>
+                    <td colspan='4' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
+					<td align='right'><b> <?php echo number_format($total_dipa) ;?> </b> </td>
+					<td colspan='10' rowspan=2 class='ratatengah'></td>
+            </tr>
+			
+			</tfoot>
+			
     </table>
 </div>
 

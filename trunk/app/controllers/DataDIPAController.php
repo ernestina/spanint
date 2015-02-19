@@ -22,7 +22,7 @@ class DataDIPAController extends BaseController {
         
     }
 
-    public function RevisiDipa($kdsatker = null) {
+    public function RevisiDipa($kdsatker = null, $revisi = null) {
         
         $d_spm1 = new DataDIPA($this->registry);
         $filter = array();
@@ -35,6 +35,10 @@ class DataDIPAController extends BaseController {
         if ($kdsatker != '') {
             $filter[$no++] = " A.SATKER_CODE =  '" . $kdsatker . "'";
             $this->view->satker_code = $kdsatker;
+        }
+		if ($revisi != '') {
+            $filter[$no++] = " A.REVISION_NO =  '" . $revisi . "'";
+            $this->view->revisi = $revisi;
         }
         if (Session::get('role') == SATKER) {
             $filter[$no++] = " A.SATKER_CODE =  '" . Session::get('kd_satker') . "'";

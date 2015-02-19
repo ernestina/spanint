@@ -53,7 +53,7 @@ class DataDipa {
      * return array objek Data Tetap */
 
     public function get_dipa_filter($filter) {
-        $sql = "SELECT A.*, B.NMSATKER
+        $sql = "SELECT distinct A.*, B.NMSATKER
 				FROM "
                 . $this->_table1 . " A, "
                 . $this->_table2 . " B  

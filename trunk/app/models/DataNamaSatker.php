@@ -16,6 +16,9 @@ class DataNamaSatker {
     private $_rev;
     private $_tgl_rev;
     private $_total_sp2d;
+	private $_dipa_no;
+	private $_total_pagu_belanja;
+	private $_total_pagu_pendapatan;
     private $_table1 = 'T_SATKER';
     private $_table2 = 'AP_CHECKS_ALL_V';
     private $_table3 = 'SPSA_BT_DIPA_V';
@@ -151,7 +154,7 @@ class DataNamaSatker {
 	
 	public function get_baes1_dipa_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT DISTINCT A.NMSATKER, A.KDSATKER, A.REV, A.TANGGAL_POSTING_REVISI, C.NMES1, D.NMBA, B.BAES1
+        $sql = "SELECT DISTINCT A.NMSATKER, A.KDSATKER, A.REV, A.TANGGAL_POSTING_REVISI, C.NMES1, D.NMBA, B.BAES1, A.DIPA_NO, SUM(A.PAGU_PENDAPATAN) * -1 PAGU_PENDAPATAN, SUM(A.PAGU_BELANJA) PAGU_BELANJA
 				FROM "
                 . $this->_table4 . " A, 
 				T_SATKER B ,
@@ -166,7 +169,7 @@ class DataNamaSatker {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-
+		$sql .= " GROUP BY A.NMSATKER, A.KDSATKER, A.REV, A.TANGGAL_POSTING_REVISI, C.NMES1, D.NMBA, B.BAES1, A.DIPA_NO";
         $sql .= " ORDER BY B.BAES1, A.KDSATKER ,A.REV";
         //var_dump ($sql);
 
@@ -181,6 +184,9 @@ class DataNamaSatker {
             $d_data->set_kppn($val['KPPN_CODE']);
             $d_data->set_rev($val['REV']);
             $d_data->set_tgl_rev($val['TANGGAL_POSTING_REVISI']);
+			$d_data->set_dipa_no($val['DIPA_NO']);
+			$d_data->set_total_pagu_belanja($val['PAGU_BELANJA']);
+			$d_data->set_total_pagu_pendapatan($val['PAGU_PENDAPATAN']);
             $data[] = $d_data;
         }
         return $data;
@@ -247,6 +253,15 @@ class DataNamaSatker {
     public function set_total_sp2d($total_sp2d) {
         $this->_total_sp2d = $total_sp2d;
     }
+	public function set_dipa_no($dipa_no) {
+        $this->_dipa_no = $dipa_no;
+    }
+	public function set_total_pagu_belanja($total_pagu_belanja) {
+        $this->_total_pagu_belanja = $total_pagu_belanja;
+    }
+	public function set_total_pagu_pendapatan($total_pagu_pendapatan) {
+        $this->_total_pagu_pendapatan = $total_pagu_pendapatan;
+    }
 
     /*
      * getter
@@ -276,6 +291,15 @@ class DataNamaSatker {
 
     public function get_kppn() {
         return $this->_kppn;
+    }
+	public function get_dipa_no() {
+        return $this->_dipa_no;
+    }
+	public function get_total_pagu_pendapatan() {
+        return $this->_total_pagu_pendapatan;
+    }
+	public function get_total_pagu_belanja() {
+        return $this->_total_pagu_belanja;
     }
 
     public function get_total_sp2d() {

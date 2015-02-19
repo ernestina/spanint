@@ -21,7 +21,7 @@
 		
 			if (isset($this->satker)) {
                 
-				$kdsatker = $this->satker();
+				$kdsatker = $this->satker;
                 
             }else{
 				$kdsatker ='null';
