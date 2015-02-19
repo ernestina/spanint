@@ -74,6 +74,9 @@
                 <th class='mid'>Pagu </th>
                 <th class='mid'>Realisasi</th>
                 <th class='mid'>Persentase<br>Realisasi</th>
+				<th class='mid'>Outstanding<br>Kontrak</th>
+				<th class='mid'>Block<br>Amount</th>
+				<th class='mid'>Total <br>Fund Available</th>
             </tr>
         </thead>
         <tbody class='ratatengah'>
@@ -81,6 +84,9 @@
             $no = 1;
             $tot_pagu = 0;
 			$tot_real = 0;
+			$tot_kontrak = 0;
+			$tot_block = 0;
+			$tot_balance = 0;
 			
             if (isset($this->data)) {
                 if (empty($this->data)) {
@@ -100,10 +106,16 @@
                         echo   number_format(($value->get_actual_amt()/$value->get_budget_amt())*100, 2) ."%" ;
                         "</td> ";
 						}
+						echo "<td align='right'>" . number_format($value->get_obligation()) . "</td> ";
+						echo "<td align='right'>" . number_format($value->get_block_amount()) . "</td> ";
+						echo "<td align='right'>" . number_format($value->get_balancing_amt()) . "</td> ";
                         echo "</tr>	";
                         
 							$tot_pagu+=$value->get_budget_amt();
 							$tot_real+=$value->get_actual_amt();
+							$tot_kontrak += $value->get_obligation();
+							$tot_block += $value->get_block_amount();
+							$tot_balance += $value->get_balancing_amt();
                             
                     }
 					echo "<tr>";
@@ -123,6 +135,9 @@
 					<td align='right'><b> <?php echo number_format($tot_pagu) ;?> </b> </td>
 					<td align='right'><b> <?php echo number_format($tot_real) ;?> </b></td>
 					<td align='right'><b> <?php if($tot_pagu == 0) {echo '0.00%';} else { echo  number_format($tot_real/$tot_pagu*100,2). '%' ;}?> </b></td>
+					<td align='right'><b> <?php echo number_format($tot_kontrak) ;?> </b></td>
+					<td align='right'><b> <?php echo number_format($tot_block) ;?> </b></td>
+					<td align='right'><b> <?php echo number_format($tot_balance) ;?> </b></td>
             </tr>
 
         </tfoot>

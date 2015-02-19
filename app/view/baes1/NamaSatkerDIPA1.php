@@ -113,9 +113,11 @@
 
             <tr>
                 <th class="align-center">No.</th>
-                <th class="align-center">KPPN</th>
                 <th class="align-center">Kode Satker</th>
                 <th>Nama Satker</th>
+				<th>No. DIPA</th>
+				<th>Total Pagu <br>Belanja </th>
+				<th>Total Pagu <br>Pendapatan </th>
                 <th class="align-center">Tanggal Posting Revisi</th>
                 <th class="align-center">No. Revisi Terakhir</th>
             </tr>
@@ -138,9 +140,10 @@
 
                     <tr>
                         <td class="align-center"><?php echo $no++; ?></td>
-                        <td class="align-center"><?php echo $value->get_kppn(); ?></td>
-                        <td class="align-center"><a href="<?php echo URL; ?>dataDIPA/RevisiDipa/<?php echo $value->get_kdsatker(); ?>"><?php echo $value->get_kdsatker(); ?></a></td>
-                        <td><?php echo $value->get_nmsatker(); ?></td>
+                        <td class="align-center"><a href="<?php echo URL; ?>dataDIPA/RevisiDipa/<?php echo $value->get_kdsatker() ."/". echo $value->get_rev(); ?>"><?php echo $value->get_kdsatker(); ?></a></td>
+                        <td><?php echo $value->get_dipa_no(); ?></td>
+						<td><?php echo number_format($value->get_total_pagu_belanja()); ?></td>
+						<td><?php echo number_format($value->get_total_pagu_pendapatan()); ?></td>
                         <td class="align-center"><?php echo $value->get_tgl_rev(); ?></td>
                         <td class="align-center"><?php echo $value->get_rev(); ?></td>
                     </tr></a>

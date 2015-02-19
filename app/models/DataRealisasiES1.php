@@ -69,14 +69,12 @@ class DataRealisasiES1 {
 
     public function get_ba_kegiatan_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI, B.NMBA , B.KDBA
-				FROM "
+        $sql = "SELECT SUBSTR(OUTPUT,1,4) KODE_KEGIATAN, C.NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
+				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT) BLOCK_AMOUNT, SUM(BALANCING_AMT) BALANCING_AMT  FROM "
                 . $this->_table1 . " A, "
-                . $this->_table2 . " B, "
                 . $this->_table3 . " C 
 				WHERE 1=1 AND 
-				A.BUDGET_TYPE='2' AND
-				SUBSTR(A.PROGRAM,1,3)=B.KDBA
+				A.BUDGET_TYPE='2' 				
 				AND SUBSTR(A.OUTPUT,1,4)=C.KDKEGIATAN			
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(A.AKUN,1,1) IN ('5','6')
@@ -87,7 +85,7 @@ class DataRealisasiES1 {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN, B.NMBA , B.KDBA ";
+        $sql .= " GROUP BY SUBSTR(OUTPUT,1,4), C.NMKEGIATAN ";
         $sql .= " ORDER BY SUBSTR(OUTPUT,1,4) ";
 
         //var_dump($sql);
@@ -101,6 +99,9 @@ class DataRealisasiES1 {
             $d_data->set_budget_amt($val['PAGU']);
             $d_data->set_actual_amt($val['REALISASI']);
             $d_data->set_nm_satker($val['NMBA']);
+			 $d_data->set_obligation($val['OBLIGATION']);
+            $d_data->set_block_amount($val['BLOCK_AMOUNT']);
+			$d_data->set_balancing_amt($val['BALANCING_AMT']);
             $data[] = $d_data;
         }
         return $data;

@@ -107,6 +107,9 @@
                 <th class='align-center'>Kode Satker</th>
                 <th>Nama Satker</th>
 				<th>Eselon 1</th>
+				<th>No. DIPA</th>
+				<th>Total Pagu <br>Belanja </th>
+				<th>Total Pagu <br>Pendapatan </th>
                 <th class="align-center">Tanggal Posting Revisi</th>
                 <th class="align-center">No. Revisi Terakhir</th>
                 <!--th>KPPN</th-->
@@ -124,10 +127,13 @@
                         echo "<tr>	";
                         echo "<td class='align-center'>" . $no++ . "</td>";
                         //echo "<td>" . $value->get_kppn() . "</td>";
-                        echo "<td class='align-center'><a href=" . URL . "dataDIPA/RevisiDipa/" . $value->get_kdsatker() . " >" . $value->get_kdsatker() . "</a></td>";
+                        echo "<td class='align-center'><a href=" . URL . "dataDIPA/RevisiDipa/" . $value->get_kdsatker() . "/" . $value->get_rev() . " >" . $value->get_kdsatker() . "</a></td>";
                         //echo "<td>" . $value->get_kdsatker() . "</td>";
                         echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
 						echo "<td class='ratakiri'>" . $value->get_nmes1() . "</td>";
+						echo "<td class='align-left'>" .$value->get_dipa_no(). "</td>";
+						echo "<td class='align-right'>" .number_format($value->get_total_pagu_belanja()). "</td>";
+						echo "<td class='align-right'>" .number_format($value->get_total_pagu_pendapatan()). "</td>";
                         echo "<td class='align-center'>" . $value->get_tgl_rev() . "</td>";
                         echo "<td class='align-center'>" . $value->get_rev() . "</td>";
                         //echo "<td class='ratakanan'>" . $value->get_total_sp2d() . "</td>";

@@ -172,7 +172,7 @@ class BA_ES1Controller extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
-        $this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+        $this->view->data = $d_spm1->get_realisasi_fa_baes1_filter($filter);
 
         $d_log->tambah_log("Sukses");
 
@@ -301,7 +301,7 @@ class BA_ES1Controller extends BaseController {
 
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "A.KDSATKER = '" . $_POST['kdsatker'] . "'";
-                $this->view->d_kd_satker = $_POST['kdsatker'];
+                $this->view->kdsatker = $_POST['kdsatker'];
             }
             if ($_POST['nmsatker'] != '') {
                 $filter[$no++] = " UPPER(A.NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
@@ -309,7 +309,7 @@ class BA_ES1Controller extends BaseController {
             }
             if ($_POST['eselon1'] != '') {
                 $filter[$no++] = "B.BAES1 = '" . $_POST['eselon1'] . "'";
-                $this->view->eselon1 = $_POST['eselon1'];
+                $this->view->kdeselon1 = $_POST['eselon1'];
             }
             if ($_POST['revisi'] != '') {
                 if ($_POST['revisi'] == '0') {

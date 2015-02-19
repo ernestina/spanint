@@ -79,6 +79,38 @@ class proses_revisi {
         }
         return $data;
     }
+	
+	public function get_revisi_dipa_baes1($filter) {
+        $sql = "SELECT DISTINCT A.SATKER_CODE , A.REVISION_NO, A.MEANING, A.LAST_UPDATE_DATE, B.NMSATKER 
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table2 . " B 
+				where 1=1
+				AND A.MEANING IS NOT NULL
+				AND A.SATKER_CODE=B.KDSATKER
+				";
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        $sql .= " ORDER BY TO_DATE(substr(A.LAST_UPDATE_DATE,0,10),'dd-mm-YYYY') DESC,  A.SATKER_CODE ASC ";
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker_code($val['SATKER_CODE']);
+            $d_data->set_nmsatker($val['NMSATKER']);
+			$d_data->set_kppn($val['KPPN_CODE']);
+            $d_data->set_revision_no($val['REVISION_NO']);
+            $d_data->set_meaning($val['MEANING']);
+            $d_data->set_last_update_date($val['LAST_UPDATE_DATE']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
 
     public function detail_revisi($filter) {
         Session::get('id_user');
