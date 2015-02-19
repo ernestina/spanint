@@ -607,7 +607,7 @@
             if (document.getElementById('nosp2d').value != '') {
                 $('#wsp2d').fadeOut(200);
             }
-        })
+        });
 
         $('#barsp2d').keyup(function() {
             if (document.getElementById('barsp2d').value != '') {
