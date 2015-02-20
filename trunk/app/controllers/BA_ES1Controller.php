@@ -36,11 +36,11 @@ class BA_ES1Controller extends BaseController {
 
             if ($_POST['kode'] != '') {
                 $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $_POST['kode'] . "%'";
-                $this->view->lokasi = $_POST['kode'];
+                $this->view->kdkegiatan = $_POST['kode'];
             }
              if ($_POST['nama'] != '') {
                 $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
-                $this->view->lokasi = $_POST['nama'];
+                $this->view->nmkegiatan = $_POST['nama'];
             }
         }
 
@@ -73,11 +73,11 @@ class BA_ES1Controller extends BaseController {
 
             if ($_POST['kode'] != '') {
                 $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $_POST['kode'] . "%'";
-                $this->view->lokasi = $_POST['kode'];
+                $this->view->kdkegiatan = $_POST['kode'];
             }
              if ($_POST['nama'] != '') {
                 $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
-                $this->view->lokasi = $_POST['nama'];
+                $this->view->nmkegiatan = $_POST['nama'];
             }
         }
 
@@ -552,7 +552,9 @@ class BA_ES1Controller extends BaseController {
 
         if ($jenis_spm != '') {
             $filter[$no++] = " JENDOK =  '" . $jenis_spm . "'";
-            $this->view->jendok = $jenis_spm;
+            $this->view->jendok1 = $jenis_spm;
+			
+			
         }
 
         if ($tgl_awal != '' AND $tgl_akhir != '') {

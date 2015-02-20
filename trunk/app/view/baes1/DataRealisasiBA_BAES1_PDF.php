@@ -25,6 +25,8 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
     private $nm_kppn;
+	private $nm_kppn2;
+	private $nm_kppn3;
 
 
 		
@@ -35,13 +37,15 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
      * Konstruktor
      */
 
-    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn) {
+    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(),$nm_kppn,$nm_kppn2,$nm_kppn3) {
         parent::__construct();
         $this->data = $data;
         $this->options = $options;
         $this->kdtgl_awal = $kdtgl_awal;
         $this->kdtgl_akhir = $kdtgl_akhir;
         $this->nm_kppn = $nm_kppn;
+		$this->nm_kppn2 = $nm_kppn2;
+		$this->nm_kppn3 = $nm_kppn3;
     }
 
     /*
@@ -609,7 +613,7 @@ if (is_array($this->kdtgl_akhir)) {
 }
 
 
-$nm_kppn2 = $this->nm_kppn2;$nm_kppn = $this->nm_kppn;
+$nm_kppn2 = $this->nm_kppn2;
  $nm_kppn3 = $this->nm_kppn3;
 
 //--------------------------
@@ -626,7 +630,7 @@ $options = array(
     'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir,$nm_kppn,$nm_kppn2,$nm_kppn3);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();

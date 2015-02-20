@@ -16,27 +16,38 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 
-                if (isset($this->lokasi)) {
+                if (isset($this->kdoutput)) {
 
-                    $kdlokasi = $this->lokasi();
+                    $kdoutput = $this->kdoutput();
                 } else {
-                    $kdlokasi = 'null';
+                    $kdoutput = 'null';
                 }
-				
+				if (isset($this->nmoutput)) {
+
+                    $nmoutput = $this->nmoutput();
+                } else {
+                    $nmoutput = 'null';
+                }
 				if (Session::get('role') == KL) {
+					if($this->action='DataRealisasiOutputBA'){
+						<?
+						<div class="btn-group-sm">
+							<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+							</button>
+							  <ul class="dropdown-menu" role="menu">
+								<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
+								<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+							  </ul>
+						</div>						
+						<?php
+					}
+					
 					?>
-					<div class="btn-group-sm">
-						<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-						</button>
-						  <ul class="dropdown-menu" role="menu">
-							<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-							<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
-						  </ul>
-					</div>
 
 					<?php
 				}
 				if (Session::get('role') == ES1) {
+					if($this->action='DataRealisasiOutputES1'){
 					?>
 					<div class="btn-group-sm">
 						<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
@@ -46,6 +57,10 @@
 							<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputES1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
 						  </ul>
 					</div>
+					
+					<?php
+					}
+					?>
 
 					
 					<?php
