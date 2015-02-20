@@ -122,7 +122,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
             $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);
         $this->Ln(20);
         $this->SetFont("", "B", 8);
-         $this->Ln(10);*/
+         $this->Ln(10);
         //----------------------------------------------- 
         #tableheader
         $this->SetFont('Arial', 'B', 6);
@@ -262,7 +262,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $py5 = $py3+20;
         $this->SetXY($px9, $py5);
         $this->Cell($ukuran_kolom_ket, $h, 'Keterangan', 1, 1, 'C', true); 
-         $this->Ln(10);*/
+         $this->Ln(10);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(30, 60,
