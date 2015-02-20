@@ -159,9 +159,11 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $left = $this->GetX();
         $this->Cell(20, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += 20);
+		  $px1 = $this->GetX();
         $this->Cell($ukuran_kolom_a, $h / 2, 'Pencatatan Pelimpahan oleh KPPN', 1, 0, 'C', true);
-        $py1 = $this->GetY();
-        $px2 = $px1+19;
+       
+		$py1 = $this->GetY();
+        $px2 = $px1;
         $py2 = $py1 + 20;
         $this->SetXY($px2, $py2);
         $this->Cell($ukuran_kolom_1a, $h / 2, 'No-Nama Rek', 1, 0, 'C', true);
@@ -180,7 +182,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->SetX($left += $ukuran_kolom_a);
         $this->Cell($ukuran_kolom_b, $h / 2, 'Penerimaan pada Rekening Sub RKUN501', 1, 0, 'C', true);
         $py1 = $this->GetY();
-        $px2 = $px1 + $ukuran_kolom_a+19;
+        $px2 = $px1 + $ukuran_kolom_a;
         $py2 = $py1 + 20;
         $this->SetXY($px2, $py2);
 
