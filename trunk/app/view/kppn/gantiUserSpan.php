@@ -12,7 +12,12 @@
             </div>
 			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
 
-                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Tambah</button>
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-tambah"><span class="glyphicon glyphicon-filter"></span> Tambah</button>
+
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
@@ -74,15 +79,14 @@ if (isset($this->d_nama_kppn)) {
         $kode_kppn = $kppn->get_kd_satker();
     }
 }
-//buat ambil LoV posisi user dari tabel T_POSISI
-/*
-if (isset($this->d_posisi)) {
-    foreach ($this->d_posisi as $posisi) {
-        echo $posisi->get_kd_posisi();
-        $posisi_user = $posisi->get_kd_posisi();
-    }
+
+if (isset($this->d_nip1)) {
+    echo "<br>NIP Semula : ".$this->d_nip1;
 }
-*/
+
+if (isset($this->d_nip2)) {
+    echo "<br>NIP Menjadi : ".$this->d_nip2;
+}
 ?>
             </div>
 
@@ -156,16 +160,8 @@ if (isset($this->d_posisi)) {
                         <td ><?php echo $value->get_tanggal_akhir(); echo "<br>"; 
                             echo $value->get_status_setup_akhir();  ?></td>
                         <td class="align-left"><?php echo $value->get_catatan(); ?></td>
-                        <td ><?php 
-                            //$posisi = {"KASI PD, KASI BANK, dsb"}                               
-                            //if($value->get_posisi_user_awal == $posisi) { ?>
-                                <a href="<?php echo URL; ?>userSpan/invoiceProses">Cek Data</a>
-                            <?php //} else {
-                                //echo "OK";
-                            //}
-                            
-                            ?>
-                        
+                        <td >
+                        <a href="<?php echo URL; ?>userSpan/invoiceProses/<?php echo $value->get_kode_unit();?>">Cek Data</a>
                         </td>
                         
                     </tr>
@@ -185,7 +181,9 @@ if (isset($this->d_posisi)) {
     </table>
 </div>
 
-<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+
+<!-- Tambah Data -->
+<div class="modal fade" id="modal-app-tambah" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
 
     <div class="modal-dialog">
 
@@ -337,6 +335,78 @@ if (isset($this->d_posisi)) {
 
                 <div class="modal-footer">
                     <button type="submit" name="add_d_user" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Filter -->
+<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Filter Data</h4>
+
+            </div>
+
+            <form id="filter-form" method="POST" action="pergantianUser" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    <?php if (isset($this->kppn_list)) { ?>
+
+                        <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
+                        <label class="isian">Kode KPPN: </label>
+
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                        <option value="SEMUAKPPN" selected>SEMUA KPPN</option>
+    <?php foreach ($this->kppn_list as $value1) { ?>
+
+        <?php if ($kode_kppn == $value1->get_kd_d_kppn()) { ?>
+
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+
+                                <?php } else { ?>
+
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>"><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+
+        <?php } ?>
+
+                            <?php } ?>
+
+                        </select>
+                        <?php } ?>
+                    <br/>
+                    <div id="wnip1" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">NIP Semula: </label>
+                    <input class='form-control' type="number" name="d_nip1" id="d_nip1" size="18" value="<?php if (isset($this->d_nip1)) {
+                            echo $this->d_nip1;
+                        } ?>">
+                    <br/>
+                    <div id="wnip2" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">NIP Menjadi: </label>
+                    <input class='form-control' type="number" name="d_nip2" id="d_nip2" size="18" value="<?php if (isset($this->d_nip2)) {
+                            echo $this->d_nip2;
+                        } ?>">
+                    <br/>
+                    <div id="wcatatan" class="alert alert-danger" style="display: none"></div>
+                    <label class="isian">Catatan: </label>
+                    <input class='form-control' type="text" name="d_catatan" id="d_catatan" size="18" value="<?php if (isset($this->d_catatan)) {
+                            echo $this->d_catatan;
+                        } ?>">
+                    <br/>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="submit_file" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
                 </div>
 
             </form>

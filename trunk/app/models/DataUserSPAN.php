@@ -111,7 +111,8 @@ class DataUserSPAN {
     
     public function get_spm_gantung($filter) {
         Session::get('id_user');
-        $sql = "SELECT
+        $sql = "SELECT DISTINCT * FROM 
+                ( SELECT
                 AIA.KDKPPN
                 , AIA.CREATION_DATE TGL_INVOICE
                 , AIA.INVOICE_NUM
@@ -124,7 +125,7 @@ class DataUserSPAN {
                 FROM " . $this->_table1 . " AIA
                 , " . $this->_table2 . " OU
                 , " . $this->_table3 . " FU
-				WHERE 
+				WHERE 1=1 AND
 				AIA.ORIGINAL_RECIPIENT = FU.USER_NAME
                 AND AIA.STATUS = 'OPEN'
                 ";
@@ -132,7 +133,7 @@ class DataUserSPAN {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= "  ORDER BY AIA.TO_USER DESC";
+        $sql .= ")  ORDER BY NAMA_PEGAWAI";
         //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
