@@ -80,7 +80,7 @@ class UserSpanController extends BaseController {
             }
         }
         if (isset($this->view->d_nip)) {
-            $this->view->page_subtitle  .= "NIP: " . $this->view->d_nip;
+            $this->view->page_subtitle  .= "NIP: " . $this->view->d_nip1;
         }
 
         //PDF & XLS 
@@ -173,7 +173,7 @@ class UserSpanController extends BaseController {
         $this->view->render('Template-Default');
     }
     
-    public function invoiceProses() {
+    public function invoiceProses($kdkppn=null) {
         $d_user = new DataUserSPAN($this->registry);
         $filter = array();
         $no = 0;
@@ -194,7 +194,11 @@ class UserSpanController extends BaseController {
         */
         if (Session::get('role') == KPPN) {
             $filter[$no++] = " KDKPPN = '" . Session::get('id_user') . "'";
-            $this->view->data = $d_user->get_spm_gantung($filter);
+        }
+        
+        if (isset($kdkppn)) {
+            $filter[$no++] = " KDKPPN = '" . $kdkppn . "'";
+                $this->view->d_kd_kppn = $kdkppn;
             
         }
 
@@ -204,13 +208,10 @@ class UserSpanController extends BaseController {
                 $d_kppn = new DataUser($this->registry);
                 $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
                 $this->view->d_kd_kppn = $_POST['kdkppn'];
-            } else {
-                $filter[$no++] = " KDKPPN = " . Session::get('id_user');
-                $this->view->d_kd_kppn = $_POST['kdkppn'];
             }
-
-            $this->view->data = $d_user->get_spm_gantung($filter);
         } 
+        
+        $this->view->data = $d_user->get_spm_gantung($filter);
         //var_dump ($d_user->get_spm_gantung($filter));
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -319,16 +320,29 @@ class UserSpanController extends BaseController {
         }
 
         if (isset($_POST['submit_file'])) {
-            if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = " KODE_UNIT = '" . $_POST['kdkppn'] . "'";
-                $d_kppn = new DataUser($this->registry);
-                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
-                $this->view->d_kd_kppn = $_POST['kdkppn'];
-                
+            if(isset($_POST['kdkppn'])){
+                if ($_POST['kdkppn'] != 'SEMUAKPPN') {
+                    $filter[$no++] = " KODE_UNIT = '" . $_POST['kdkppn'] . "'";
+                    $d_kppn = new DataUser($this->registry);
+                    $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                    $this->view->d_kd_kppn = $_POST['kdkppn'];
+                }
                 //$this->view->d_posisi = $d_posisi->get_posisi_user($_POST['kd_posisi'])
-            } else {
-                $filter[$no++] = " KODE_UNIT = " . Session::get('id_user');
-                $this->view->d_kd_kppn = $_POST['kdkppn'];
+            } 
+
+            if ($_POST['d_nip1'] != '') {
+                $filter[$no++] = " NIP_USR_AWAL = '". $_POST['d_nip1'] . "'";
+                $this->view->d_nip1 = $_POST['d_nip1'];
+            }
+
+            if ($_POST['d_nip2'] != '') {
+                $filter[$no++] = " NIP_USR_PENGGANTI = '". $_POST['d_nip2'] . "'";
+                $this->view->d_nip2 = $_POST['d_nip2'];
+            }
+
+            if ($_POST['d_catatan'] != '') {
+                $filter[$no++] = " upper(CATATAN) like upper('%" . $_POST['d_catatan'] . "%')";
+                $this->view->d_catatan = $_POST['d_catatan'];
             }
 
         } 
