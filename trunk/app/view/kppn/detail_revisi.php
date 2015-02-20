@@ -15,11 +15,10 @@
                 <?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-
-           if(isset($this->d_kdsatker)){
                 $kdkppn = Session::get('id_user');
-                if (isset($this->d_kdsatker)) {
-                    $kdsatker = $this->d_kdsatker;
+
+				if(isset($this->satker_code)){
+                    $kdsatker = $this->satker_code;
                 }
                 ?>
             
@@ -35,7 +34,7 @@
 			<?php
             //----------------------------------------------------		
 
-           }
+           
 
             ?>
                 

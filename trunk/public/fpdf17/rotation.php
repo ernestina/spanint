@@ -124,7 +124,7 @@ function _endpage()
 				$bln2 = substr($kdtgl_akhir1, 3, 2);
 				$tgl2 = substr($kdtgl_akhir1, 0, 2);
 				$kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
-				$this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);		
+				$this->Cell(0, 20, '', 0, 0, 'C', false);		
 			} else {
 					$this->Cell(0, 20, '', 0, 0, 'C', false);			 
 			} 
@@ -141,7 +141,11 @@ function _endpage()
         #tableheader
 		if (Session::get('role') == ADMIN  || Session::get('role') == DJA  || Session::get('role') == KANWIL){
 			
-		}elseif(Session::get('role') == KL || Session::get('role') == ES1){
+		}elseif(Session::get('role') == KL){
+			$this->Cell(0,0,'KL   : '.trim($nm_kppn2), 0, 0, 'L', false);
+			$this->Ln(20);
+			
+		}elseif(Session::get('role') == ES1){
 			$this->Cell(0,0,'KL   : '.trim($nm_kppn3), 0, 0, 'L', false);
 			$this->Ln(12);
 			$this->Cell(0,0,'ES1 : '.trim($nm_kppn2), 0, 0, 'L', false);

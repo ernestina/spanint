@@ -27,14 +27,18 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
     private $nm_kppn;
-	
-    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn) {
+	private $nm_kppn2;
+	private $nm_kppn3;
+			
+    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(),$nm_kppn,$nm_kppn2,$nm_kppn3) {
         parent::__construct();
         $this->data = $data;
         $this->options = $options;
         $this->kdtgl_awal = $kdtgl_awal;
         $this->kdtgl_akhir = $kdtgl_akhir;
         $this->nm_kppn = $nm_kppn;
+		$this->nm_kppn2 = $nm_kppn2;
+		$this->nm_kppn3 = $nm_kppn3;
     }
 
     public function rptDetailData() {
@@ -98,7 +102,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         //tanggal
 		/* $kdtgl_awal1 = $this->kdtgl_awal;
 		$kdtgl_akhir1 = $this->kdtgl_akhir; */
-	    if (isset($kdtgl_awal1) && isset($kdtgl_akhir1)) {
+	   /*  if (isset($kdtgl_awal1) && isset($kdtgl_akhir1)) {
             $thn1 = substr($kdtgl_awal1, 6, 4);
             $bln1 = substr($kdtgl_awal1, 3, 2);
             $tgl1 = substr($kdtgl_awal1, 0, 2);
@@ -110,12 +114,12 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
             $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);		
         } else {
             $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);			 
-        } 
+        }  */
 		//--------------------
 
         $this->Ln(20);
         $this->SetFont("", "B", 8);
-         $this->Ln(10);*/
+         $this->Ln(10);
 
 
         #tableheader
@@ -357,15 +361,12 @@ if (is_array($this->data)) {
     //echo 'bukan array';
 }
 
-//mengambil array nama satker-kppn dari controller
-if (is_array($this->nm_kppn2)) {
-    foreach ($this->nm_kppn2 as $nm_kppn1) {
-        $nm_kppn = $nm_kppn1->get_nama_kppn();
-    }
-} else {
-    //echo 'bukan array';
-    $nm_kppn = $this->nm_kppn2;
-}
+
+
+   $nm_kppn2 = $this->nm_kppn2;$nm_kppn = $this->nm_kppn;
+	$nm_kppn3 = $this->nm_kppn3;
+
+
 //mengambil array tanggal awal dari controller
 if (is_array($this->kdtgl_awal)) {
     foreach ($this->kdtgl_awal as $kdtgl_awal) {
@@ -387,7 +388,7 @@ if (is_array($this->kdtgl_akhir)) {
 //--------------------------
 //pilihan
 //judul laporan
-$judul1= $this->judul1;
+$judul1= $this->judul1;$nm_kppn = $this->nm_kppn;
 $judul = 'Laporan '.$judul1; //judul file laporan
 
 $tipefile = '.pdf';
@@ -401,7 +402,7 @@ $options = array(
     'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
 
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir,$nm_kppn,$nm_kppn2,$nm_kppn3);
 $tabel->printPDF();
 
 
