@@ -820,6 +820,7 @@
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Kegiatan</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputBA">Per Output</a></li>                                   
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerJenbel">Per Jenis Belanja</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerSdana">Per Sumber Dana</a></li>
                                     
 
                                 </ul>
