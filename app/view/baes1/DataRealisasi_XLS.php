@@ -388,11 +388,10 @@ $objPHPExcel->setActiveSheetIndex(0);
 
 //-------------------------------------
 // Save as an Excel BIFF (xls) file
-$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-
- // Redirect output to a client’s web browser (Excel2007)
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xlsx');
+// Redirect output to a client’s web browser (Excel5)
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+header('Content-Type: application/vnd.ms-excel');
+header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');
 header('Cache-Control: max-age=0');
  
 $objWriter->save('php://output');

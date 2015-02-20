@@ -17,7 +17,14 @@
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 			 
-			
+			$kdjendok = $this->jendok1;
+			if (isset($this->kppn)) {
+                
+				$kdkppn = $this->kppn();
+                
+            }else{
+				$kdkppn ='null';
+			}
 			if (isset($this->d_tgl_awal)) {
                 
 				$kdtgl_awal = $this->d_tgl_awal();
@@ -38,8 +45,8 @@
                 <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                 </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?php echo URL; ?>PDF/detailrekapsp2dBAES1_BAES1_PDF/<?php echo $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF">PDF</a></li>
-                        <li><a href="<?php echo URL; ?>PDF/detailrekapsp2dBAES1_BAES1_PDF/<?php echo $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS">EXCEL</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/detailrekapsp2dBAES1_BAES1_PDF/<?php echo $kdjendok . "/" . $kdkppn . "/" .$kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF">PDF</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/detailrekapsp2dBAES1_BAES1_PDF/<?php echo $kdjendok . "/" . $kdkppn . "/" .$kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS">EXCEL</a></li>
                       </ul>
             </div>
             

@@ -15,7 +15,7 @@
      
     class FPDF_AutoWrapTable extends PDF_Rotate {
     private $data = array();
-    private $options = array(
+    protected $options = array(
     'filename' => '',
     'destinationfile' => '',
     'paper_size'=>'F4',
@@ -30,8 +30,19 @@
      
     public function rptDetailData () {
 	
-	
-    $border = 0;
+	//------------------------------
+		$judul=$this->options['judul'];
+		$nm_kppn = $this->nm_kppn;
+		$nm_kppn2 = $this->nm_kppn2;
+		$nm_kppn3 = $this->nm_kppn3;
+		$kdtgl_awal1 = $this->kdtgl_awal;
+		$kdtgl_akhir1 = $this->kdtgl_akhir;
+		 $border = 0;
+        $h = 40;
+        $left = 10;
+		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
+        //-----------------------------------
+/*     $border = 0;
     $h = 40;
     $left = 10;
     //header
@@ -50,9 +61,9 @@
 	$this->MultiCell(0, $h/2, 'Sampai Dengan  '.date('d-m-Y'));
 	
     $this->Cell(0, 1, " ", "B");
-    $this->Ln(10);
-    $this->SetFont("", "B", 8);
-    $this->Ln(10);
+     $this->Ln(10);*/
+	$this->SetFont("", "B", 8);
+     $this->Ln(10);*/
      
     #tableheader
     $this->SetFont('Arial','B',7);

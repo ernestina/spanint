@@ -13,7 +13,9 @@
 				//----------------------------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : SP2DSatker.php  
 				if (Session::get('role') == ADMIN ||
-					Session::get('role') == KANWIL ) {
+					Session::get('role') == KANWIL ||
+					Session::get('role') == KL || 
+					Session::get('role') == ES1 ) {
 
 					if (isset($this->d_kd_satker)) {
 						$satker = $this->d_kd_satker;
@@ -160,6 +162,7 @@
 				
 				}  
 				 ?>
+				 
 				   
                 <div class="btn-group-sm">
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
