@@ -14,37 +14,91 @@
                 
                 <?php
 //----------------------------------------------------
-/*Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 		
-        if (isset($this->lokasi)) {
-			$kdlokasi = $this->lokasi();
+        if (isset($this->kdkegiatan)) {
+			$kdkegiatan = $this->kdkegiatan();
                 
         }else{
-			$kdlokasi ='null';
-		} 
+			$kdkegiatan ='null';
+		}
+		if (isset($this->nmkegiatan)) {
+			$nmkegiatan = $this->nmkegiatan();
+                
+        }else{
+			$nmkegiatan ='null';
+		}		
 		if (Session::get('role') == KL) {
+			
+			if($this->action='DataRealisasiKegiatanBA'){
+				?>
+				<div class="btn-group-sm">
+					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+					</ul>
+				</div>
+			
+				<?php
+			}elseif($this->action='DataFaBaPerJenbel'){
+				?>
+				<div class="btn-group-sm">
+					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerJenbel_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerJenbel_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+					</ul>
+				</div>
+			
+				<?php
+				
+			}elseif($this->action='DataFaBaPerSdana'){
+				?>
+				<div class="btn-group-sm">
+					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerSdana_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerSdana_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+					</ul>
+				</div>
+			
+				<?php
+				
+			}
 		?>	
-			<div class="btn-group-sm">
-				<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-					<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
-				</ul>
-			</div>
 
 		<?php
 		}
 		if (Session::get('role') == ES1) {
+			if($this->action='DataRealisasiKegiatanES1'){
+				?>
+				<div class="btn-group-sm">
+					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+					</ul>
+				</div>				
+				<?php
+			}elseif($this->action='DataFaBaPerEs1'){
+				?>
+				<div class="btn-group-sm">
+					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerEs1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerEs1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+					</ul>
+				</div>				
+				<?php
+				
+			}
 		?>	
-			<div class="btn-group-sm">
-				<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-					<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
-				</ul>
-			</div>
 			
 		<?php	
 		}
@@ -53,7 +107,7 @@
 			<?php
 
 //------------------------------
-*/        ?>
+        ?>
             </div>
         </div>
         
