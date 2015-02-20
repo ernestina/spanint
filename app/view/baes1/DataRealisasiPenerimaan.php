@@ -24,13 +24,24 @@
 				$kdlokasi ='null';
 			} 
 			
+                
+				$kdeselon1 = $this->eselon1;
+                
+			 if (isset($this->lokasi)) {
+                
+				$kdlokasi = $this->lokasi();
+                
+            }else{
+				$kdlokasi ='null';
+			} 
+			
 			?>
             <div class="btn-group-sm">
                 <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                 </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanBA_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanBA_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanBA_BAES1_PDF/<?php echo $kdeselon1 . "/" . $kdlokasi; ?>/PDF">PDF</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanBA_BAES1_PDF/<?php echo $kdeselon1 . "/" . $kdlokasi; ?>/XLS">EXCEL</a></li>
                       </ul>
             </div>
             

@@ -70,19 +70,13 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode ES1");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Kode Satker");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "No. DIPA");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Nama Satker");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Total Pagu Belanja");
-//p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Total Pagu Pendapatan");
-//p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal Posting Revisi");
-//p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "No. Revisi Terakhir");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Total SP2D");
 
 //Data
 if (count($this->data) == 0) {
@@ -95,20 +89,10 @@ if (count($this->data) == 0) {
 
  
 	$nil['p1']=$no;
-	$nil['p2']=$value->get_kdsatker();
-	$nil['p3']=$value->get_nmsatker();
-	$nil['p4']=$value->get_dipa_no();
-	if ($value->get_total_pagu_belanja()==0){
-		$nil['p5']='0';
-	}else{
-		$nil['p5']=$value->get_total_pagu_belanja();
-	}
-	if ($value->get_total_pagu_pendapatan()==0){
-		$nil['p6']='0';
-	}else{
-		$nil['p6']=$value->get_total_pagu_pendapatan();
-	$nil['p7']=$value->get_tgl_rev();
-	$nil['p8']=$value->get_rev();
+	$nil['p2']=$value->get_kppn();
+	$nil['p3']=$value->get_kdsatker();
+	$nil['p4']=$value->get_nmsatker();
+	$nil['p5']=$value->get_total_sp2d();
 	array_push($dataArray,$nil);
 
 	}

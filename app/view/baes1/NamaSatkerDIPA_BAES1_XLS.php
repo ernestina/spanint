@@ -74,15 +74,17 @@ $objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
 //p3
 $objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "No. DIPA");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Eselon 1");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Total Pagu Belanja");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "No. DIPA");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Total Pagu Pendapatan");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Total Pagu Belanja");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal Posting Revisi");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Total Pagu Pendapatan");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "No. Revisi Terakhir");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Tanggal Posting Revisi");
+//p9
+$objPHPExcel->getActiveSheet()->setCellValue('I4', "No. Revisi Terakhir");
 
 //Data
 if (count($this->data) == 0) {
@@ -97,18 +99,19 @@ if (count($this->data) == 0) {
 	$nil['p1']=$no;
 	$nil['p2']=$value->get_kdsatker();
 	$nil['p3']=$value->get_nmsatker();
-	$nil['p4']=$value->get_dipa_no();
+	$nil['p4']=$value->get_nmes1();
+	$nil['p5']=$value->get_dipa_no();
 	if ($value->get_total_pagu_belanja()==0){
-		$nil['p5']='0';
-	}else{
-		$nil['p5']=$value->get_total_pagu_belanja();
-	}
-	if ($value->get_total_pagu_pendapatan()==0){
 		$nil['p6']='0';
 	}else{
-		$nil['p6']=$value->get_total_pagu_pendapatan();
-	$nil['p7']=$value->get_tgl_rev();
-	$nil['p8']=$value->get_rev();
+		$nil['p6']=$value->get_total_pagu_belanja();
+	}
+	if ($value->get_total_pagu_pendapatan()==0){
+		$nil['p7']='0';
+	}else{
+		$nil['p7']=$value->get_total_pagu_pendapatan();
+	$nil['p8']=$value->get_tgl_rev();
+	$nil['p9']=$value->get_rev();
 	array_push($dataArray,$nil);
 
 	}

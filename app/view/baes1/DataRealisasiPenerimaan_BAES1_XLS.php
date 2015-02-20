@@ -70,15 +70,13 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "KPPN");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Akun| Jenis Pendapatan");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Kode Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Pagu");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Nama Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Realisasi");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Tanggal Posting Revisi");
-//p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "No. Revisi Terakhir");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Persentase Realisasi");
 
 //Data
 if (count($this->data) == 0) {
@@ -87,16 +85,28 @@ if (count($this->data) == 0) {
 	$no=0;
 	$dataArray= array();
 	foreach ($this->data as $value) {
+	if($value->get_budget_amt() == 0) { 
+		$nil1="0.00%" ;
+	} else {
+       $nil1=number_format(($value->get_actual_amt()/$value->get_budget_amt())*100, 2) ."%" ;
+				}
 	$no++;
-
- 
 	$nil['p1']=$no;
-	$nil['p2']=$value->get_kppn();
-	$nil['p3']=$value->get_kdsatker();
-	$nil['p4']=$value->get_nmsatker();
-	$nil['p5']=$value->get_tgl_rev();
-	$nil['p6']=$value->get_rev();
-	array_push($dataArray,$nil);
+	$nil['p2']=$value->get_kdkegiatan().'|'.$value->get_nmkegiatan();
+	
+	if ($value->get_budget_amt()==0){
+		$nil['p3']='0';
+	}else{
+		$nil['p3']=$value->get_budget_amt();
+	}		
+	if ($value->get_actual_amt()==0){
+		$nil['p4']='0';
+	}else{
+		$nil['p4']=$value->get_actual_amt();
+	}
+$nil['p5']=$nil1;	
+	
+		array_push($dataArray,$nil);
 
 	}
     
