@@ -19,7 +19,8 @@
                 <?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
-		
+		$kdwilayah =$this->wilayah;
+		$nmwilayah ='null';
        if (isset($this->lokasi)) {
                 
 				$kdlokasi = $this->lokasi();
@@ -28,10 +29,18 @@
 				$kdlokasi ='null';
 			} 
 			
+			if (isset($this->lokasi)) {
+                
+				$kdlokasi = $this->lokasi();
+                
+            }else{
+				$kdlokasi ='null';
+			} 
+			
 			?>
-            <a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
+            <a href="<?php echo URL; ?>PDF/DataRealisasiKabupatenBAES1_BAES1_PDF/<?php echo $kdwilayah . "/" . $nmwilayah . "/" . $kdlokasi; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
 			</div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-			<a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
+			<a href="<?php echo URL; ?>PDF/DataRealisasiKabupatenBAES1_BAES1_PDF/<?php echo $kdwilayah . "/" . $nmwilayah . "/" . $kdlokasi; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
 			<?php
 
 //------------------------------

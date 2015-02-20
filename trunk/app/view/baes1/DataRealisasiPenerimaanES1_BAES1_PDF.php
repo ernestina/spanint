@@ -11,8 +11,7 @@
  */
 ob_start();
 //-------------------------------------
-require_once("./././public/fpdf17/fpdf.php");
-require_once("./././public/fpdf17/rotation.php");
+require_once("./././public/fpdf17/fpdf.php");require_once("./././public/fpdf17/rotation.php");
 
 class FPDF_AutoWrapTable extends PDF_Rotate {
 
@@ -32,13 +31,15 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
      * Konstruktor
      */
 
-    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn) {
+    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(),$nm_kppn,$nm_kppn2,$nm_kppn3) {
         parent::__construct();
         $this->data = $data;
         $this->options = $options;
         $this->kdtgl_awal = $kdtgl_awal;
         $this->kdtgl_akhir = $kdtgl_akhir;
         $this->nm_kppn = $nm_kppn;
+		$this->nm_kppn2 = $nm_kppn2;
+		$this->nm_kppn3 = $nm_kppn3;
     }
 
     /*
@@ -47,7 +48,19 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 
     public function rptDetailData() {
         //-----------------------------------
-        $judul = $this->options['judul'];
+		//------------------------------
+		$judul=$this->options['judul'];
+		$nm_kppn = $this->nm_kppn;
+		$nm_kppn2 = $this->nm_kppn2;
+		$nm_kppn3 = $this->nm_kppn3;
+		$kdtgl_awal1 = $this->kdtgl_awal;
+		$kdtgl_akhir1 = $this->kdtgl_akhir;
+		 $border = 0;
+        $h = 40;
+        $left = 10;
+		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
+        //-----------------------------------
+         /*$judul = $this->options['judul'];
         $nm_kppn = $this->nm_kppn;
         $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
         $border = 0;
@@ -67,7 +80,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->SetXY($px2, $py2);
         $this->SetX($left + 50);
 
-                if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
+        if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 6) == 'KANWIL') { //5
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
@@ -87,10 +100,9 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
 
-
         $this->Cell(0, 1, " ", "B");
-        $this->Ln(10);
-        $this->Cell(0, 20, $judul, 0, 0, 'C', false);
+         $this->Ln(10);*/
+         /*$this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
                 //tanggal
 		$kdtgl_awal1 = $this->kdtgl_awal;
@@ -112,42 +124,46 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 
         $this->Ln(20);
         $this->SetFont("", "B", 8);
-        $this->Ln(10);
+         $this->Ln(10);*/
         //----------------------------------------------- 
         #tableheader
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_jenis_belanja = 60;
-        $ukuran_kolom_akun = 360;
-        $ukuran_kolom_dana = 86;
-		$ukuran_kolom_dana1 = 60;
-		$kolom_grandtotal=30+$ukuran_kolom_dana+$ukuran_kolom_akun;
+        $ukuran_kolom_jenis_belanja = 100;
+        $ukuran_kolom_akun = 90;
+        $ukuran_kolom_dana = 90;
+		$ukuran_kolom_dana1 = 230;
+		$kolom1=20;
+		$kolom_grandtotal=$kolom1+$ukuran_kolom_dana1;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(30, $h, 'No', 1, 0, 'C', true);
-        $this->SetX($left += 30);
-        $this->Cell($ukuran_kolom_dana, $h, 'Kode Satker', 1, 0, 'C', true);
+        $this->Cell($kolom1, $h, 'No', 1, 0, 'C', true);
+        $this->SetX($left += $kolom1);
+        $this->Cell($ukuran_kolom_dana1, $h, 'Kode Es. 1| Nama Eselon1', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_dana1);
+        $this->Cell($ukuran_kolom_dana, $h, 'Pagu', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_akun, $h, 'Nama Satker', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_akun, $h, 'Realisasi', 1, 0, 'C', true);
         $px1 = $this->GetX();
         $this->SetX($left += $ukuran_kolom_akun);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Total SP2D', 1, 1, 'C', true);
+        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Persentase Realisasi', 1, 1, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
         $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(30, $ukuran_kolom_dana,$ukuran_kolom_akun, $ukuran_kolom_jenis_belanja));
-        $this->SetAligns(array('C', 'C','L','R'));
+        $this->SetWidths(array($kolom1, $ukuran_kolom_dana1,$ukuran_kolom_dana,$ukuran_kolom_akun,$ukuran_kolom_jenis_belanja));
+        $this->SetAligns(array('C', 'L','R','R','R'));
 
         if (count($this->data) == 0) {
             $this->Row(
                     array('',
                         'N I H I L',
                         '',
+                        '', 
                         ''
                     )
             );
@@ -155,36 +171,47 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
             $no = 1;
             $this->SetFillColor(255);
             foreach ($this->data as $value) {
+				if($value->get_budget_amt() == 0) { 
+					$nil1="0.00%" ;
+				} else {
+					$nil1=number_format(($value->get_actual_amt()/$value->get_budget_amt())*100, 2) ."%" ;
+                        
+				}
+				
                 $this->Row(
                         array($no++,
-                            $value->get_kdsatker(),
-                            $value->get_nmsatker(),
-                            $value->get_total_sp2d()
+                            $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan(),
+                            number_format($value->get_budget_amt()),
+                            number_format($value->get_actual_amt()),
+							$nil1
 							)
-                        
-                );
-				$tot_pot = $tot_pot + $value->get_total_sp2d();	
-            }
-				$this->SetFont('Arial', 'B', 7);
-				$h = 20;
-				$this->SetFillColor(200, 200, 200);
-				$left = $this->GetX();
-				$this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-				$this->SetX($left += $kolom_grandtotal);
-				$px1 = $this->GetX();
-				$py1 = $this->GetY();
-				$px2 = $px1;
-				$py2 = $py1;
-				$this->SetXY($px2, $py2);
-				$py3 = $this->GetY();
-				$this->Cell($ukuran_kolom_jenis_belanja, $h, number_format($tot_pot), 1, 1, 'R', true);
-				$this->Ln(3);
+                        );
+							$tot_pagu+=$value->get_budget_amt();
+							$tot_real+=$value->get_actual_amt();
+					}
+						
         }
+		$this->SetFont('Arial', 'B', 7);
+            $h = 20;
+            $this->SetFillColor(200, 200, 200);
+            $left = $this->GetX();
+            $this->Cell($kolom_grandtotal, $h, 'GRAND TOTAL', 1, 0, 'L', true);
+            $this->SetX($left += $kolom_grandtotal);
+            $px1 = $this->GetX();
+            $py1 = $this->GetY();
+            $px2 = $px1;
+            $py2 = $py1;
+            $this->SetXY($px2, $py2);
+			$this->Cell($ukuran_kolom_dana, $h, number_format($tot_pagu), 1, 0, 'R', true);
+			$this->SetX($px2 += $ukuran_kolom_dana);
+			$this->Cell($ukuran_kolom_akun, $h, number_format($tot_real), 1, 0, 'R', true);
+			$this->SetX($px2 += $ukuran_kolom_akun);
+            $this->Cell($ukuran_kolom_jenis_belanja, $h, '', 1, 1, 'R', true);
 
         $this->Ln(3);
     }
 
-    //footer
+    /* //footer
     function Footer() {
 
         // Go to 1.5 cm from bottom
@@ -195,7 +222,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell(0, 10, 'Hal : ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
         $hari_ini =  Date("Y-m-d H:i:s");
         $this->Cell(0, 10, 'Dicetak : ' . $hari_ini, 0, 0, 'R');
-    }
+    } */
 
     public function printPDF() {
 
@@ -217,7 +244,8 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Output($this->options['filename'], $this->options['destinationfile']);
     }
 
-    private $widths;
+	
+   /*  private $widths;
     private $aligns;
 
     function SetWidths($w) {
@@ -305,9 +333,10 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         }
         return $nl;
     }
+	*/
 
 }
-
+ 
 //end of class
 //-----------------------
 //mengambil array data dari controller
@@ -335,7 +364,8 @@ if (is_array($this->kdtgl_akhir)) {
 }
 
 
-
+$nm_kppn2 = $this->nm_kppn2;$nm_kppn = $this->nm_kppn;
+  $nm_kppn3 = $this->nm_kppn3;
 
 //--------------------------
 //pilihan
@@ -352,7 +382,7 @@ $options = array(
     'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn, $nm_kppn2, $nm_kppn3);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();

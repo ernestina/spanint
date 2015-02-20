@@ -16,6 +16,9 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 		
+			$kdaksi = $this->aksi;
+            
+        
         if (isset($this->kdkegiatan)) {
 			$kdkegiatan = $this->kdkegiatan();
                 
@@ -28,86 +31,22 @@
         }else{
 			$nmkegiatan ='null';
 		}
-		$kdaksi=$this->action();		
-		if (Session::get('role') == KL) {
-			
-			if($kdaksi='DataRealisasiKegiatanBA'){
+			$kdaksi = $this->action;
+				//var_dump($kdaksi);
+			  $kdaksi1=$kdaksi.'_BAES1_PDF';
+			  $kdaksi2=$kdaksi.'_BAES1_XLS';
 				
-				?>
-				<div class="btn-group-sm">
-					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
-					</ul>
-				</div>
-			
-				<?php
-			}elseif($kdaksi='DataFaBaPerJenbel'){
-				?>
-				<div class="btn-group-sm">
-					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerJenbel_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerJenbel_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
-					</ul>
-				</div>
-			
-				<?php
-				
-			}elseif($kdaksi='DataFaBaPerSdana'){
-				?>
-				<div class="btn-group-sm">
-					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerSdana_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerSdana_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
-					</ul>
-				</div>
-			
-				<?php
-				
-			}
-		?>	
-
-		<?php
-		}
-		if (Session::get('role') == ES1) {
-			if($kdaksi='DataRealisasiKegiatanES1'){
-				?>
-				<div class="btn-group-sm">
-					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
-					</ul>
-				</div>
-				<?php
-			}elseif($kdaksi='DataFaBaPerEs1'){
-				?>
-				<div class="btn-group-sm">
-					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerEs1_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDFDataFaBaPerEs1_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
-					</ul>
-				</div>
-				<?php
-				
-			}
-		?>	
-			
-		<?php	
-		}
-			?>
-            
-			<?php
-
+						?>
+						<div class="btn-group-sm">
+							<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+							</button>
+							  <ul class="dropdown-menu" role="menu">
+								<li><a href="<?php echo URL; ?>PDF/<?php echo $kdaksi1;?>/<?php echo $kdkegiatan . "/" . $nmkegiatan;?>/PDF">PDF</a></li>
+								<li><a href="<?php echo URL; ?>PDF/<?php echo $kdaksi2;?>/<?php echo $kdkegiatan . "/" . $nmkegiatan; ?>/XLS">EXCEL</a></li>																	
+								  </ul>
+							</div>						
+						
+					<?php
 //------------------------------
         ?>
             </div>

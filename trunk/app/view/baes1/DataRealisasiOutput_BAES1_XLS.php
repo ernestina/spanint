@@ -70,19 +70,19 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode | Nama Kegiatan/Nama Output");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Pagu");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "No. DIPA");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Realisasi");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Total Pagu Belanja");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Persentase Realisasi");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Total Pagu Pendapatan");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Outstanding Kontrak");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal Posting Revisi");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Block Amount");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "No. Revisi Terakhir");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Total Fund Available");
 
 //Data
 if (count($this->data) == 0) {
@@ -91,25 +91,44 @@ if (count($this->data) == 0) {
 	$no=0;
 	$dataArray= array();
 	foreach ($this->data as $value) {
+	if($value->get_budget_amt() == 0) { 
+		$nil1="0.00%" ;
+	} else {
+       $nil1=number_format(($value->get_actual_amt()/$value->get_budget_amt())*100, 2) ."%" ;
+				}
 	$no++;
-
- 
 	$nil['p1']=$no;
-	$nil['p2']=$value->get_kdsatker();
-	$nil['p3']=$value->get_nmsatker();
-	$nil['p4']=$value->get_dipa_no();
-	if ($value->get_total_pagu_belanja()==0){
-		$nil['p5']='0';
+	$nil['p2']=$value->get_kdkegiatan().'|'.$value->get_nmkegiatan();
+	
+	if ($value->get_budget_amt()==0){
+		$nil['p3']='0';
 	}else{
-		$nil['p5']=$value->get_total_pagu_belanja();
+		$nil['p3']=$value->get_budget_amt();
+	}		
+	if ($value->get_actual_amt()==0){
+		$nil['p4']='0';
+	}else{
+		$nil['p4']=$value->get_actual_amt();
 	}
-	if ($value->get_total_pagu_pendapatan()==0){
+$nil['p5']=$nil1;	
+if ($value->get_obligation()==0){
 		$nil['p6']='0';
 	}else{
-		$nil['p6']=$value->get_total_pagu_pendapatan();
-	$nil['p7']=$value->get_tgl_rev();
-	$nil['p8']=$value->get_rev();
-	array_push($dataArray,$nil);
+		$nil['p6']=$value->get_obligation();
+	}		
+	if ($value->get_block_amount()==0){
+		$nil['p7']='0';
+	}else{
+		$nil['p7']=$value->get_block_amount();
+	}
+	if ($value->get_balancing_amt()==0){
+		$nil['p8']='0';
+	}else{
+		$nil['p8']=$value->get_balancing_amt();
+	}
+
+	
+		array_push($dataArray,$nil);
 
 	}
     

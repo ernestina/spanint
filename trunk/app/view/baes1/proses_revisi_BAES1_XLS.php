@@ -73,6 +73,12 @@ $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 $objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
 //p3
 $objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
+//p5
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Revisi Ke");
+//p6
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Tahapan Proses");
+//p7
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal");
 
 //Data
 if (count($this->data) == 0) {
@@ -82,12 +88,14 @@ if (count($this->data) == 0) {
 	$dataArray= array();
 	foreach ($this->data as $value) {
 	$no++;
-
- 
 	$nil['p1']=$no;
-	$nil['p2']=$value->get_kdsatker();
+	$nil['p2']=$value->get_satker_code();
 	$nil['p3']=$value->get_nmsatker();
-	array_push($dataArray,$nil);
+	$nil['p5']=$value->get_revision_no();
+	$nil['p6']=$value->get_meaning();
+	$nil['p7']=$value->get_last_update_date();
+	
+		array_push($dataArray,$nil);
 
 	}
     

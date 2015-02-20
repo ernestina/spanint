@@ -63,6 +63,7 @@ $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
 $objPHPExcel->getActiveSheet()->getStyle('A1:AZ1')->getFont()->setBold(true);
 $objPHPExcel->getActiveSheet()->getStyle('A2')->getFont()->setSize(9);
 $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
+
 //Tanggal
 
 
@@ -70,9 +71,9 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode BA");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kota/Kabupaten");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama BA");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Keterangan");
 //p4
 $objPHPExcel->getActiveSheet()->setCellValue('D4', "Pagu Pegawai");
 //p5
@@ -143,10 +144,9 @@ if (count($this->data) == 0) {
 	$no++;
 
  
-	$nil['p0']=$no;
-	$nil['p1']=strtoupper($value->get_ba());
-	$nil['p2']=strtoupper($value->get_satker());
-	$nil['p3']=strtoupper($value->get_dipa());
+	$nil['p1']=$no;
+	$nil['p2']=strval($value->get_ba());
+	$nil['p3']=strtoupper($value->get_nmba());
 	
 	//pengecekan
 	if ($value->get_pagu_51()==0){
@@ -323,6 +323,7 @@ $objPHPExcel->getActiveSheet()->getPageMargins()->setRight(0.75);
 $objPHPExcel->getActiveSheet()->getPageMargins()->setLeft(0.75);
 $objPHPExcel->getActiveSheet()->getPageMargins()->setBottom(0.75);
 $objPHPExcel->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&B' . $objPHPExcel->getProperties()->getTitle() . '&RPage &P of &N');
+
  
 
 $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(11.1);
@@ -378,9 +379,9 @@ $objPHPExcel->getActiveSheet()->getColumnDimension('AX')->setAutoSize(true);
 $objPHPExcel->getActiveSheet()->getColumnDimension('AY')->setAutoSize(true);
 $objPHPExcel->getActiveSheet()->getColumnDimension('AZ')->setAutoSize(true);
 
-
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
@@ -388,13 +389,13 @@ $objPHPExcel->setActiveSheetIndex(0);
 
 //-------------------------------------
 // Save as an Excel BIFF (xls) file
-// Redirect output to a client’s web browser (Excel5)
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+ // Redirect output to a client’s web browser (Excel2007)
 header('Content-Type: application/vnd.ms-excel');
 header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');
-header('Cache-Control: max-age=0');
  
-$objWriter->save('php://output');
+ $objWriter->save('php://output');
 exit;
+
 
 ?>

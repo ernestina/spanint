@@ -70,19 +70,23 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Nomor SP2D");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Tanggal Selesai SP2D");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "No. DIPA");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Tanggal SP2D ");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Total Pagu Belanja");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Nilai SP2D");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Total Pagu Pendapatan");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Nomor Invoice");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal Posting Revisi");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal Invoice");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "No. Revisi Terakhir");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Jenis SPM");
+//p9
+$objPHPExcel->getActiveSheet()->setCellValue('I4', "Jenis SP2D");
+//p10
+$objPHPExcel->getActiveSheet()->setCellValue('J4', "Deskripsi");
 
 //Data
 if (count($this->data) == 0) {
@@ -95,21 +99,22 @@ if (count($this->data) == 0) {
 
  
 	$nil['p1']=$no;
-	$nil['p2']=$value->get_kdsatker();
-	$nil['p3']=$value->get_nmsatker();
-	$nil['p4']=$value->get_dipa_no();
-	if ($value->get_total_pagu_belanja()==0){
+	$nil['p2']=$value->get_check_number();
+	$nil['p3']=$value->get_creation_date();
+	$nil['p4']=$value->get_check_date();
+	if ($value->get_amount==0){
 		$nil['p5']='0';
 	}else{
-		$nil['p5']=$value->get_total_pagu_belanja();
-	}
-	if ($value->get_total_pagu_pendapatan()==0){
-		$nil['p6']='0';
-	}else{
-		$nil['p6']=$value->get_total_pagu_pendapatan();
-	$nil['p7']=$value->get_tgl_rev();
-	$nil['p8']=$value->get_rev();
-	array_push($dataArray,$nil);
+		$nil['p5']=$value->get_amount();
+	}			
+	
+	$nil['p6']=$value->get_invoice_num();
+	$nil['p7']=$value->get_invoice_date();
+	$nil['p8']=$value->get_attribute6();
+	$nil['p9']=$value->get_jenis_sp2d();
+	$nil['p10']=$value->get_description();
+
+		array_push($dataArray,$nil);
 
 	}
     

@@ -19,7 +19,7 @@
                 <?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
-		
+		$kdwilayah = $this->wilayah;
        if (isset($this->lokasi)) {
                 
 				$kdlokasi = $this->lokasi();
@@ -27,14 +27,15 @@
             }else{
 				$kdlokasi ='null';
 			} 
+			$nmwilayah='null';
 			
 			?>
         <div class="btn-group-sm">
             <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
             </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-                    <li><a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdwilayah . "/" . $nmwilayah . "/" . $kdlokasi; ?>/PDF">PDF</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdwilayah . "/" . $nmwilayah . "/" . $kdlokasi; ?>/XLS">EXCEL</a></li>
                   </ul>
         </div>
             
