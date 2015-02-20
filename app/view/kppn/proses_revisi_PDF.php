@@ -347,21 +347,13 @@ if (is_array($this->kdtgl_akhir)) {
     //echo 'bukan array';
 }
 
-//mengambil array nama satker-kppn dari controller
-if (is_array($this->nm_kppn2)) {
-    foreach ($this->nm_kppn2 as $nm_kppn1) {
-        $nm_kppn = $nm_kppn1->get_nama_kppn();
-    }
-} else {
-    //echo 'bukan array';
-    $nm_kppn = $this->nm_kppn2;
-}
+
 
 
 //--------------------------
 //pilihan
 //judul laporan
-$judul1= $this->judul1;
+$judul1= $this->judul1;$nm_kppn = $this->nm_kppn;
 $judul = 'Laporan '.$judul1; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser

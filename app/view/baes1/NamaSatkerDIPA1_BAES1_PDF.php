@@ -27,18 +27,20 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
     );
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
+	 private $nm_kppn;
     private $nm_kppn2;
 	private $nm_kppn3;
     /*
      * Konstruktor
      */
 
-    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn2, $nm_kppn3) {
+    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn, $nm_kppn2, $nm_kppn3) {
         parent::__construct();
         $this->data = $data;
         $this->options = $options;
         $this->kdtgl_awal = $kdtgl_awal;
         $this->kdtgl_akhir = $kdtgl_akhir;
+		 $this->nm_kppn = $nm_kppn;
         $this->nm_kppn2 = $nm_kppn2;
 		$this->nm_kppn3 = $nm_kppn3;
     }
@@ -128,7 +130,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 				$this->Row(
 						array($no++,
 							$value->get_kdsatker(),
-							'',
+							$value->get_nmsatker(),
 							$value->get_dipa_no(),
 							number_format($value->get_total_pagu_belanja()),
 							number_format($value->get_total_pagu_pendapatan()),
@@ -194,32 +196,16 @@ if (is_array($this->kdtgl_akhir)) {
 }
 
 //mengambil array nama satker-kppn dari controller
- $nm_kppn2 = $this->nm_kppn2;
+ $nm_kppn = $this->nm_kppn;
+$nm_kppn2 = $this->nm_kppn2;$nm_kppn = $this->nm_kppn;
  $nm_kppn3 = $this->nm_kppn3;
  
-/* if (is_array($this->nm_kppn2)) {
-    foreach ($this->nm_kppn2 as $nm_kppn2) {
-        $nm_kppn2 = $nm_kppn2->get_nama_kppn2();
-    }
-} else {
-    //echo 'bukan array';
-    $nm_kppn2 = $this->nm_kppn2;
-}
-
-if (is_array($this->nm_kppn3)) {
-    foreach ($this->nm_kppn3 as $nm_kppn3) {
-        $nm_kppn3 = $nm_kppn3->get_nama_kppn3();
-    }
-} else {
-    //echo 'bukan array';
-    $nm_kppn3 = $this->nm_kppn3;
-} */
 
 
 //--------------------------
 //pilihan
 //judul laporan
-$judul1= $this->judul1;
+$judul1= $this->judul1;$nm_kppn = $this->nm_kppn;
 $judul = 'Laporan '.$judul1; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
@@ -231,7 +217,7 @@ $options = array(
     'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn2, $nm_kppn3);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn, $nm_kppn2, $nm_kppn3);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();

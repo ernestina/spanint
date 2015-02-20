@@ -279,7 +279,7 @@
 	}
  
  //judul laporan
-$judul1= $this->judul1;
+$judul1= $this->judul1;$nm_kppn = $this->nm_kppn;
 $judul = 'Laporan '.$judul1; //judul file laporan
 
 $options = array(
