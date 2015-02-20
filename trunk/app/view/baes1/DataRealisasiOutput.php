@@ -28,15 +28,16 @@
                 } else {
                     $nmoutput = 'null';
                 }
+				$kdaksi=$this->action();
 				if (Session::get('role') == KL) {
-					if($this->action='DataRealisasiOutputBA'){
-						<?
+					if($kdaksi='DataRealisasiOutputBA'){
+						?>
 						<div class="btn-group-sm">
 							<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
 							</button>
 							  <ul class="dropdown-menu" role="menu">
-								<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-								<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+								<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdoutput . "/" . $nmoutput . "/" . $kdaksi; ?>/PDF">PDF</a></li>
+								<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputBA_BAES1_PDF/<?php echo $kdoutput . "/" . $nmoutput . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
 							  </ul>
 						</div>						
 						<?php
@@ -47,14 +48,14 @@
 					<?php
 				}
 				if (Session::get('role') == ES1) {
-					if($this->action='DataRealisasiOutputES1'){
+					if($kdaksi='DataRealisasiOutputES1'){
 					?>
 					<div class="btn-group-sm">
 						<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
 						</button>
 						  <ul class="dropdown-menu" role="menu">
-							<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputES1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-							<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputES1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+							<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputES1_BAES1_PDF/<?php echo $kdoutput . "/" . $nmoutput . "/" . $kdaksi; ?>/PDF">PDF</a></li>
+							<li><a href="<?php echo URL; ?>PDF/DataRealisasiOutputES1_BAES1_PDF/<?php echo $kdoutput . "/" . $nmoutput . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
 						  </ul>
 					</div>
 					
