@@ -26,4 +26,16 @@ $akses['AuthUmAdmin'] = array(
     '__destruct'
 );
 
+/*
+ * akses modul DataDIPA User
+ */
+$akses['DataUMAdmin'] = array(
+    '__construct',
+    'monitoringUserSpan',
+    'pergantianuser',
+    'invoiceProses',
+    'addDataUserSpan',
+    '__destruct'
+);
+
 ?>

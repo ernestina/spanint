@@ -12,7 +12,7 @@
             </div>
 			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
 
-                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-tambah"><span class="glyphicon glyphicon-filter"></span> Tambah</button>
+                <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-tambah"><span class="glyphicon glyphicon-headphones"></span> Tambah</button>
 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -112,6 +112,7 @@ if (isset($this->d_nip2)) {
         <thead>
             <tr>
                 <th rowspan="2">No.</th>
+                <th rowspan="2">KPPN</th>
                 <th colspan="3">Semula</th>
                 <th colspan="3">Menjadi</th>
                 <th rowspan="2">No. Surat</th>
@@ -146,6 +147,7 @@ if (isset($this->d_nip2)) {
 
                     <tr>
                         <td><?php echo $no++; ?></td>
+                        <td><?php echo $value->get_kode_unit(); ?></td>
                         <td class="align-left"><?php echo $value->get_nama_usr_awal(); echo "<br>"; 
                             echo $value->get_nip_usr_awal();  ?></td>
                         <td ><?php echo $value->get_email_usr_awal(); ?></td>
@@ -160,8 +162,17 @@ if (isset($this->d_nip2)) {
                         <td ><?php echo $value->get_tanggal_akhir(); echo "<br>"; 
                             echo $value->get_status_setup_akhir();  ?></td>
                         <td class="align-left"><?php echo $value->get_catatan(); ?></td>
-                        <td >
-                        <a href="<?php echo URL; ?>userSpan/invoiceProses/<?php echo $value->get_kode_unit();?>">Cek Data</a>
+                        <td ><?php foreach ($this->posisi_user as $posisi) {
+                                if ($value->get_posisi_user_awal() == $posisi->get_deskripsi_posisi()) {
+                                    if ($posisi->get_flag() == "1"){
+                                    //echo " " . $posisi->get_flag();
+                                        ?> <a href="<?php echo URL; ?>userSpan/invoiceProses/<?php echo $value->get_kode_unit();?>">Cek Data</a>
+                                    <?php } else {
+                                        echo "OK";
+                                    }
+                                }
+                            } ?>
+                        
                         </td>
                         
                     </tr>
@@ -192,7 +203,7 @@ if (isset($this->d_nip2)) {
             <div class="modal-header">
 
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
-                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-filter"></span> Tambah Data Pergantian User</h4>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-headphones"></span> Tambah Data Pergantian User</h4>
 
             </div>
 
@@ -259,12 +270,13 @@ if (isset($this->d_nip2)) {
                             <?php   foreach ($this->posisi_user as $posisi) {
                                     if ($this->posisi1 == $posisi->get_deskripsi_posisi()) { ?>
                                 <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>" selected><?php echo $posisi->get_deskripsi_posisi(); ?></option>
+                            
                                 <?php } else { ?>
                                 <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>"><?php echo $posisi->get_deskripsi_posisi(); ?></option>
                             <?php } ?>
                             <?php } ?>
-
                         </select>
+                        
                         <span class="input-group-addon">diganti</span>
                         <select class="form-control" type="text" name="posisi2" id="posisi2">
                             <?php   foreach ($this->posisi_user as $posisi) {
@@ -420,5 +432,153 @@ if (isset($this->d_nip2)) {
 <!-- Skrip -->
 <script type="text/javascript" charset="utf-8">
 
+    $(function() {
+        hideErrorId();
+        hideWarning();
+    });
+
+
+    function hideErrorId() {
+        $('.error').fadeOut(0);
+    }
+
+    function hideWarning() {
+
+        $('#kdkppn').change(function() {
+            if (document.getElementById('kdkppn').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#nip1').keyup(function() {
+            if (document.getElementById('nip1').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#nip2').keyup(function() {
+            if (document.getElementById('nip2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#nama1').keyup(function() {
+            if (document.getElementById('nama1').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#nama2').keyup(function() {
+            if (document.getElementById('nama2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#email1').keyup(function() {
+            if (document.getElementById('email1').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#email2').keyup(function() {
+            if (document.getElementById('email2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#status1').change(function() {
+            if (document.getElementById('status1').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#status2').change(function() {
+            if (document.getElementById('status2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#posisi1').change(function() {
+            if (document.getElementById('posisi1').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#posisi2').change(function() {
+            if (document.getElementById('posisi2').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#tanggal_awal').change(function() {
+            if (document.getElementById('tanggal_awal').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#tanggal_akhir').change(function() {
+            if (document.getElementById('tanggal_akhir').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+        
+        $('#surat').keyup(function() {
+            if (document.getElementById('surat').value != '') {
+                $('#warning-all').fadeOut(200);
+            }
+        });
+
+    }
+
+    function cek_upload() {
+        
+        var v_nip1 = document.getElementById('nip1').value;
+        var v_nip2 = document.getElementById('nip2').value;
+        var v_nama1 = document.getElementById('nama1').value;
+        var v_nama2 = document.getElementById('nama2').value;
+        var v_email1 = document.getElementById('email1').value;
+        var v_email2 = document.getElementById('email2').value;
+        var v_posisi1 = document.getElementById('posisi1').value;
+        var v_posisi2 = document.getElementById('posisi2').value;
+        var v_tanggal_awal = document.getElementById('tanggal_awal').value;
+        var v_tanggal_akhir = document.getElementById('tanggal_akhir').value;
+        var v_status1 = document.getElementById('status1').value;
+        var v_status2 = document.getElementById('status2').value;
+        var v_surat = document.getElementById('surat').value;
+        var v_kdkppn = document.getElementById('kdkppn').value;
+
+        var pattern = '^[0-9]+$';
+        
+        if (v_kdkppn == '' || v_nip1 == '' || v_nip2 == '' || v_nama1 == '' || v_nama2 == '' || v_email1 == '' || v_email2 == '' || v_posisi1 == '' || v_posisi2 == '' || v_tanggal_awal == '' || v_tanggal_akhir == '' || v_status1 == '' || v_status2 == '' || v_surat == '') {
+            
+            $('#warning-all').html('Isi semua parameter, cuy');
+            $('#warning-all').fadeIn(200);
+            return false;
+            
+        }
+        
+        if ((v_nip1 != '' && v_nip1.length != 18) || (v_nip2 != '' && v_nip2.length != 18)) {
+            $('#warning-all').html('NIP harus 18 digit, dong!');
+            $('#warning-all').fadeIn(200);
+            return false;
+
+        }
+
+        if (v_nip1 != '' && !v_nip1.match(pattern)) {
+            var wsp2d = 'NIP harus dalam bentuk angka!';
+            $('#warning-all').html(wsp2d);
+            $('#warning-all').fadeIn(200);
+            return false;
+        }
+
+        if (v_tgl_awal != '' && v_tgl_akhir != ''){
+            if(v_tgl_awal > v_tgl_akhir){
+                $('#warning-all').html('Tanggal awal gak boleh lebih dari tanggal akhir');
+                $('#warning-all').fadeIn(200);
+                return false;
+            }
+        }
+
+    }
 
 </script>

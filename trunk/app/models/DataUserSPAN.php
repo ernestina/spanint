@@ -29,6 +29,8 @@ class DataUserSPAN {
     private $_username;
     private $_nama_pegawai;
     private $_posisi;
+    
+    //untuk Monitoring Invoice Proses
     private $_no_id;
     private $_kode_unit;
     private $_nama_usr_awal;
@@ -49,6 +51,7 @@ class DataUserSPAN {
     //untuk LoV posisi
     private $_kd_posisi;
     private $_deskripsi_posisi;
+    private $_flag;
     
     //global
     private $_valid = TRUE;
@@ -196,7 +199,7 @@ class DataUserSPAN {
     public function get_posisi_user () {
         //Session::get('id_user');
         $sql = "SELECT 
-                KD_POSISI, DESKRIPSI
+                KD_POSISI, DESKRIPSI, FLAG
                 FROM " . $this->_table5 . "";
         
         /*
@@ -212,6 +215,7 @@ class DataUserSPAN {
             $d_data = new $this($this->registry);
             $d_data->set_kd_posisi($val['KD_POSISI']);
             $d_data->set_deskripsi_posisi($val['DESKRIPSI']);
+            $d_data->set_flag($val['FLAG']);
 
             $data[] = $d_data;
         }
@@ -400,6 +404,10 @@ class DataUserSPAN {
     public function set_deskripsi_posisi($deskripsi_posisi){
         $this->_deskripsi_posisi = $deskripsi_posisi;
     }
+    
+    public function set_flag($flag){
+        $this->_flag = $flag;
+    }
 
     /*
      * getter
@@ -543,6 +551,10 @@ class DataUserSPAN {
     
     public function get_deskripsi_posisi() {
         return $this->_deskripsi_posisi;
+    }
+    
+    public function get_flag() {
+        return $this->_flag;
     }
     
     public function get_table() {

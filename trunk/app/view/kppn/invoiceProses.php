@@ -19,65 +19,21 @@
                 
                 <a href="#" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-hand-right"></span> Kontrak</a>
 
-                <?php
-                /*---------------------------------
-                //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
-                if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
-                    if (isset($this->d_kd_kppn) || isset($this->d_nip)) {
-                        if (isset($this->d_kd_kppn)) {
-                            $kdkppn = $this->d_kd_kppn;
-                        } else {
-                            $kdkppn = 'null';
-                        }
-                        if (isset($this->d_nip)) {
-                            $kdnip = $this->d_nip;
-                        } else {
-                            $kdnip = 'null';
-                        }
-                        ?>
-                        <a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-                        <a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-						<?php
-                    }
-                }
-                if (Session::get('role') == KPPN) {
-                    if (isset($this->d_kd_kppn)) {
-                        $kdkppn = $this->d_kd_kppn;
-                    } else {
-                        $kdkppn = Session::get('id_user');
-                    }
-                    if (isset($this->d_nip)) {
-                        $kdnip = $this->d_nip;
-                    } else {
-                        $kdnip = 'null';
-                    }
-                    ?>
-                        <a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-                        <a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-                    <?php
-                }
-                //------------------------------*/
-                ?>
-
             </div>
 
-            
         </div>
 
         <div class="row">
 
             <div class="col-md-6 col-sm-12">
-<?php
-if (isset($this->d_nama_kppn)) {
-    foreach ($this->d_nama_kppn as $kppn) {
-        echo $kppn->get_nama_user() . " (" . $kppn->get_kd_satker() . ")";
-        $kode_kppn = $kppn->get_kd_satker();
-    }
-}
+                <?php
+                foreach ($this->kppn_list as $value1) {
+                    if ($this->d_kd_kppn == $value1->get_kd_d_kppn()) {
+                        echo "KPPN " . $value1->get_nama_user() . " (" . $value1->get_kd_d_kppn() . ")";
+                    }
+                }
+                ?>
 
-?>
             </div>
 
             <div class="col-md-6 col-sm-12 align-right">
