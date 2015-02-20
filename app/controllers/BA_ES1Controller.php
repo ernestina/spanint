@@ -876,6 +876,42 @@ class BA_ES1Controller extends BaseController {
         $this->view->render('baes1/DataRealisasiOutput');
     }
     
+    public function DataFaBaEs1Sdana() {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (isset($_POST['submit_file'])) {
+
+            if ($_POST['kode'] != '') {
+                $filter[$no++] = "SUBSTR(program,1,5) like '%" . $_POST['kode'] . "%'";
+                $this->view->kdkegiatan = $_POST['kode'];
+            }
+        }
+        /*if (isset($_POST['submit_file'])) {
+
+            if ($_POST['nama'] != '') {
+                $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
+                $this->view->nmkegiatan = $_POST['nama'];
+            }
+        }*/
+        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $this->view->data = $d_spm1->get_ba_peres1sdana_filter($filter);
+        $d_log->tambah_log("Sukses");
+        $this->view->judul = 'Laporan Pagu Dana Per Eselon 1 - Sumber Dana';
+        $this->view->judulkolom = 'Kode | Nama Eselon 1 / Sumber Dana';
+        $this->view->action = 'DataFaBaEs1Sdana';
+        $this->view->kodes = 'Kode Eselon 1 :';
+        $this->view->render('baes1/DataRealisasiOutput');
+    }
+    
     public function __destruct() {
         
     }
