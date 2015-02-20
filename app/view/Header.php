@@ -368,17 +368,17 @@
 
                     <ul>
 
-                            <!--<li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
-                            
-                            <li class="subnav"><h4><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Persiapan Rollout</h4>
-                                <div class="collapse">
-                                    <ul>
-                                        <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Download Data Pagu</a></li>
-                                        <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Download Data Realisasi</a></li>
-                                        <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Download Aplikasi Rekonsiliasi</a></li>
-                                    </ul>
-                                </div>
-                            </li>-->
+                                <!--<li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+                                
+                                <li class="subnav"><h4><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Persiapan Rollout</h4>
+                                    <div class="collapse">
+                                        <ul>
+                                            <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Download Data Pagu</a></li>
+                                            <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Download Data Realisasi</a></li>
+                                            <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Download Aplikasi Rekonsiliasi</a></li>
+                                        </ul>
+                                    </div>
+                                </li>-->
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
                             <div class="collapse">
@@ -596,14 +596,14 @@
                             </div>
                         </li>
 
-                        <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                    <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
-                                </ul>
-                            </div>
-                        </li-->
+                            <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                                <div class="collapse">
+                                    <ul>
+                                        <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                                        <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
+                                    </ul>
+                                </div>
+                            </li-->
 
                     </ul>
 
@@ -659,13 +659,13 @@
                             </div>
                         </li>
 
-                        <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                </ul>
-                            </div>
-                        </li-->
+                            <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                                <div class="collapse">
+                                    <ul>
+                                        <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                                    </ul>
+                                </div>
+                            </li-->
 
                     </ul>
 
@@ -698,13 +698,13 @@
                             </div>
                         </li>
 
-                        <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                </ul>
-                            </div>
-                        </li-->
+                            <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                                <div class="collapse">
+                                    <ul>
+                                        <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                                    </ul>
+                                </div>
+                            </li-->
 
                     </ul>
 
@@ -741,13 +741,13 @@
                             </div>
                         </li>
 
-                        <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                </ul>
-                            </div>
-                        </li-->
+                            <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                                <div class="collapse">
+                                    <ul>
+                                        <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                                    </ul>
+                                </div>
+                            </li-->
 
                     </ul>
 
@@ -801,27 +801,27 @@
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Satker Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Kewenangan per Jenis Belanja </a></li>
 
-                                    
+
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Sumber Dana per Jenis Belanja</a></li>
 
-                                    
+
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Wilayah per Jenis Belanja</a></li>
 
                                 </ul>
                             </div>
                         </li>
-						
-						<li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Ketersediaan Dana  <br><i>(Fund Available)</i></br></h4>
+
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Ketersediaan Dana  <br><i>(Fund Available)</i></br></h4>
                             <div class="collapse">
                                 <ul>
-                                    
+
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerEs1">Per Eselon 1</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataFaBaSatEs1">Per Satker </a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaSatEs1">Per Satker </a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Kegiatan</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputBA">Per Output</a></li>                                   
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerJenbel">Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerSdana">Per Sumber Dana</a></li>
-                                    
+
 
                                 </ul>
                             </div>
@@ -839,7 +839,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerES1">Realisasi Pendapatan Per Eselon 1</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerES1">Realisasi Pendapatan Per Eselon 1</a></li>
 
                                 </ul>
                             </div>
@@ -871,20 +871,20 @@
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Satker Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1"> Kewenangan Per Jenis Belanja</a></li>
 
-                                    
+
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Sumber Dana  Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Wilayah Per Jenis Belanja</a></li>
                                 </ul>
                             </div>
                         </li>
-						<li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Ketersediaan Dana <br> <i>Fund Available</i> </br></h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Ketersediaan Dana <br> <i>Fund Available</i> </br></h4>
                             <div class="collapse">
                                 <ul>
-                                    
+
 
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanES1">Per Kegiatan</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputES1">Per Output</a></li>
-                                    
+
                                 </ul>
                             </div>
                         </li>
