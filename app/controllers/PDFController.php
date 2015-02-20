@@ -6650,7 +6650,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		    //-----------------------------------------------------
     //Function PDF untuk BA_ES1Controller(BA_ES1Controller.php)
     //------------------------------------------------------
-    public function DataRealisasiKegiatanBA_BAES1_PDF($kdlokasi=null,$ck=null) {
+    public function DataRealisasiKegiatanBA_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -6658,9 +6658,13 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
-		if ($kdlokasi != 'null') {
-			$filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $kdlokasi . "'";
-			$this->view->lokasi = $kdlokasi;
+		if ($kdkegiatan != 'null') {
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $kdkegiatan . "%'";
+                $this->view->kdkegiatan = $kdkegiatan;
+        }
+		 if ($nmkegiatan != 'null') {
+			$filter[$no++] = " upper(nmkegiatan) like upper('%" . $nmkegiatan . "%')";
+			$this->view->nmkegiatan = $nmkegiatan;
 		}           
 		
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";
@@ -6722,9 +6726,9 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         }
         //-------------------------
 
-		
+		$this->view->kdjk='Kode | Nama Kegiatan';
 		//------------------------------------------------------------
-		$judul1='Realisasi Belanja per Kegiatan';
+		$judul1='Pagu Dana Per Kegiatan';
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('baes1/DataRealisasiKegiatan_BAES1_PDF');
@@ -6737,7 +6741,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
 	}
 	
-	public function DataRealisasiKegiatanES1_BAES1_PDF($kdlokasi=null,$ck=null) {
+	public function DataRealisasiKegiatanES1_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -6748,9 +6752,13 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
 		
 
-            if ($kdlokasi != 'null') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $kdlokasi . "'";
-                $this->view->lokasi = $kdlokasi;
+            if ($kdkegiatan != 'null') {
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $kdkegiatan . "%'";
+                $this->view->kdkegiatan = $kdkegiatan;
+            }
+             if ($nmkegiatan != 'null') {
+                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $nmkegiatan . "%')";
+                $this->view->nmkegiatan = $nmkegiatan;
             }           
 		
         $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";
@@ -6811,7 +6819,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         }
         //-------------------------
-
+		$this->view->kdjk='Kode | Nama Kegiatan';
 		//------------------------------------------------------------
 		$judul1='Realisasi Belanja per Kegiatan';
 		$this->view->judul1=$judul1;
@@ -7927,7 +7935,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
     }
 
 
-        public function DataRealisasiOutputBA_BAES1_PDF($kdlokasi=null,$ck=null) {
+        public function DataRealisasiOutputBA_BAES1_PDF($kdoutput=null,$nmoutput=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -7938,9 +7946,14 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
 		
 
-            if ($kdlokasi != 'null') {
-                $filter[$no++] = "OUTPUT = '" . $kdlokasi . "'";
-                $this->view->lokasi = $kdlokasi;
+           if ($kdoutput != 'null') {
+                $filter[$no++] = "OUTPUT like '%" . $kdoutput . "%'";
+                $this->view->kdoutput= $kdoutput;
+            }
+        
+            if ($nmoutput != 'null') {
+                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $nmoutput . "%')";
+                $this->view->nmoutput= $nmoutput;
             }           
         
 		
@@ -7999,10 +8012,10 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         }
         //-------------------------
-
+		$this->view->kdjk='Kode | Nama Kegiatan / Output';
 		$this->view->data = $d_spm1->get_ba_output_filter($filter);
 		//------------------------------------------------------------
-		$judul1='Realisasi Belanja per Output';
+		$judul1='Pagu Dana Per Output';
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('baes1/DataRealisasiOutput_BAES1_PDF');
@@ -8014,7 +8027,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 
-	public function DataRealisasiOutputES1_BAES1_PDF($kdlokasi=null,$ck=null) {
+	public function DataRealisasiOutputES1_BAES1_PDF($kdoutput=null,$nmoutput=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -8025,10 +8038,14 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
 		
 
-            if ($kdlokasi != 'null') {
-                $filter[$no++] = "OUTPUT = '" . $kdlokasi . "'";
-                $this->view->lokasi = $kdlokasi;
-            }           
+             if ($kdoutput != 'null') {
+                $filter[$no++] = "OUTPUT like '%" . $kdoutput . "%'";
+                $this->view->kdoutput = $kdoutput;
+            }
+            if ($nmoutput != 'null') {
+                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $nmoutput . "%')";
+                $this->view->nmoutput = $nmoutput;
+            }         
         
 		
         $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";
@@ -8086,7 +8103,6 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         }
         //-------------------------
-
 		$this->view->data = $d_spm1->get_ba_output_filter($filter);
 		//------------------------------------------------------------
 		$judul1='Realisasi Belanja per Output';
@@ -8101,7 +8117,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 	
-	    public function DataFaBaPerEs1_BAES1_PDF($kdlokasi=null,$ck=null) {
+	    public function DataFaBaPerEs1_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -8109,18 +8125,17 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
-        if (isset($_POST['submit_file'])) {
 
-            if ($_POST['kode'] != '') {
-                $filter[$no++] = "substr(program,1,5) like '%" . $_POST['kode'] . "%'";
-                $this->view->kdkegiatan = $_POST['kode'];
+            if ($kdkegiatan != 'null') {
+                $filter[$no++] = "substr(program,1,5) like '%" . $kdkegiatan . "%'";
+                $this->view->kdkegiatan = $kdkegiatan;
             }
         
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = " upper(nmes1) like upper('%" . $_POST['nama'] . "%')";
-                $this->view->nmkegiatan = $_POST['nama'];
+            if ($nmkegiatan != 'null') {
+                $filter[$no++] = " upper(nmes1) like upper('%" . $nmkegiatan . "%')";
+                $this->view->nmkegiatan = $nmkegiatan;
             }
-        }
+        
 
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
 
@@ -8178,6 +8193,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         }
         //-------------------------
+		$this->view->kdjk='Kode | Nama Eselon 1;
 		//------------------------------------------------------------
 		$judul1='Laporan Pagu Dana Per Eselon 1';
 		$this->view->judul1=$judul1;
@@ -8192,7 +8208,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 
-    public function DataFaBaSatEs1_BAES1_PDF($kdlokasi=null,$ck=null) {
+    public function DataFaBaSatEs1_BAES1_PDF($kdsatker=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -8200,13 +8216,12 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
-        if (isset($_POST['submit_file'])) {
 
-            if ($_POST['kode'] != '') {
-                $filter[$no++] = "satker like '%" . $_POST['kode'] . "%'";
-                $this->view->kdkegiatan = $_POST['kode'];
+            if ($kdsatker != 'null') {
+                $filter[$no++] = "satker like '%" . $kdsatker . "%'";
+                $this->view->kdsatker = $kdsatker;
             }
-        }
+        
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -8264,6 +8279,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         }
         //-------------------------
+		$this->view->kdjk='Kode | Nama Eselon 1 / Satker';
 		//------------------------------------------------------------
 		$judul1='Laporan Pagu Dana Per Satker';
 		$this->view->judul1=$judul1;
@@ -8276,7 +8292,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
     }
 
-    public function DataFaBaPerJenbel_BAES1_PDF($kdlokasi=null,$ck=null) {
+    public function DataFaBaPerJenbel_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -8286,13 +8302,13 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         if (isset($_POST['submit_file'])) {
 
-            if ($_POST['kode'] != '') {
-                $filter[$no++] = "substr(akun,1,2) like '%" . $_POST['kode'] . "%'";
+            if ($kdkegiatan != 'null') {
+                $filter[$no++] = "substr(akun,1,2) like '%" . $kdkegiatan . "%'";
                 //$this->view->kdkegiatan = $_POST['kode'];
             }
         
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = " upper(nmakun) like upper('%" . $_POST['nama'] . "%')";
+            if ($nmkegiatan != 'null') {
+                $filter[$no++] = " upper(nmakun) like upper('%" . $nmkegiatan . "%')";
                 //$this->view->nmkegiatan = $_POST['nama'];
             }
         }
@@ -8353,6 +8369,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         }
         //-------------------------
+		$this->view->kdjk='Kode | Nama Jenis Belanja';
 		//------------------------------------------------------------
 		$judul1='Laporan Pagu Dana Per Jenis Belanja';
 		$this->view->judul1=$judul1;
@@ -8366,7 +8383,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
     
-    public function DataFaBaPerSdana_BAES1_PDF($kdlokasi=null,$ck=null) {
+    public function DataFaBaPerSdana_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -8374,18 +8391,17 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
-        if (isset($_POST['submit_file'])) {
 
-            if ($_POST['kode'] != '') {
-                $filter[$no++] = "substr(dana,1,1) like '%" . $_POST['kode'] . "%'";
+            if ($kdkegiatan != 'null') {
+                $filter[$no++] = "substr(dana,1,1) like '%" . $kdkegiatan . "%'";
                 //$this->view->kdkegiatan = $_POST['kode'];
             }
         
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = " upper(deskripsi) like upper('%" . $_POST['nama'] . "%')";
+            if ($nmkegiatan != 'null') {
+                $filter[$no++] = " upper(deskripsi) like upper('%" . $nmkegiatan . "%')";
                 //$this->view->nmkegiatan = $_POST['nama'];
             }
-        }
+        
 
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
 
@@ -8443,6 +8459,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         }
         //-------------------------
+		$this->view->kdjk='Kode | Nama Sumber Dana';
 		//------------------------------------------------------------
 		$judul1='Laporan Pagu Dana Per Sumber Dana';
 		$this->view->judul1=$judul1;
@@ -8456,7 +8473,174 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 
+    public function DataFaBaEs1Jenbel_BAES1_PDF($kdkegiatan=null,$ck=null) {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
+
+            if ($kdkegiatan != 'null') {
+                $filter[$no++] = "SUBSTR(program,1,5) like '%" . $kdkegiatan . "%'";
+                $this->view->kdkegiatan = $kdkegiatan;
+            }
+        
+        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        $this->view->data = $d_spm1->get_ba_per_sdana_filter($filter);
+        //-------------------------
+
+		if (Session::get('role') == ADMIN) {
+		$kdbaes1=Session::get('kd_satker');
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			$kdbaes1=Session::get('kd_satker');
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();		
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }	
+		}elseif (Session::get('role') == ES1) {
+		$kdbaes1=Session::get('kd_satker');
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+		$this->view->kdjk='Kode | Nama Eselon 1 / Jenis Belanja';
+		//------------------------------------------------------------
+		$judul1='Laporan Pagu Dana Per Eselon 1 - Jenis Belanja';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('baes1/DataRealisasiOutput_BAES1_PDF');
+		}elseif($ck=='XLS'){
+			$this->view->load('baes1/DataRealisasiOutput_BAES1_XLS');
+		}
+		//------------------------------------------------------------
+        $d_log->tambah_log("Sukses");
+
+    }
+
+    
+    public function DataFaBaEs1Sdana_BAES1_PDF($kdkegiatan=null,$ck=null) {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+
+            if ($kdkegiatan != 'null') {
+                $filter[$no++] = "SUBSTR(program,1,5) like '%" . $kdkegiatan . "%'";
+                $this->view->kdkegiatan = $kdkegiatan;
+            }
+        
+        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+
+         $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        $this->view->data = $d_spm1->get_ba_per_sdana_filter($filter);
+        //-------------------------
+
+		if (Session::get('role') == ADMIN) {
+		$kdbaes1=Session::get('kd_satker');
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			$kdbaes1=Session::get('kd_satker');
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();		
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }	
+		}elseif (Session::get('role') == ES1) {
+		$kdbaes1=Session::get('kd_satker');
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+		$this->view->kdjk='Kode | Nama Eselon 1 / Sumber Dana';
+		//------------------------------------------------------------
+		$judul1='Laporan Pagu Dana Per Eselon 1 - Sumber Dana';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('baes1/DataRealisasiOutput_BAES1_PDF');
+		}elseif($ck=='XLS'){
+			$this->view->load('baes1/DataRealisasiOutput_BAES1_XLS');
+		}
+		//------------------------------------------------------------
+        $d_log->tambah_log("Sukses");
+
+    }
 
 	
     

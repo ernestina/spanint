@@ -27,42 +27,44 @@
                 
         }else{
 			$nmkegiatan ='null';
-		}		
+		}
+		$kdaksi=$this->action();		
 		if (Session::get('role') == KL) {
 			
-			if($this->action='DataRealisasiKegiatanBA'){
+			if($kdaksi='DataRealisasiKegiatanBA'){
+				
 				?>
 				<div class="btn-group-sm">
 					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBA_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
 					</ul>
 				</div>
 			
 				<?php
-			}elseif($this->action='DataFaBaPerJenbel'){
+			}elseif($kdaksi='DataFaBaPerJenbel'){
 				?>
 				<div class="btn-group-sm">
 					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerJenbel_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerJenbel_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerJenbel_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerJenbel_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
 					</ul>
 				</div>
 			
 				<?php
 				
-			}elseif($this->action='DataFaBaPerSdana'){
+			}elseif($kdaksi='DataFaBaPerSdana'){
 				?>
 				<div class="btn-group-sm">
 					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerSdana_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerSdana_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerSdana_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerSdana_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
 					</ul>
 				</div>
 			
@@ -74,27 +76,27 @@
 		<?php
 		}
 		if (Session::get('role') == ES1) {
-			if($this->action='DataRealisasiKegiatanES1'){
+			if($kdaksi='DataRealisasiKegiatanES1'){
 				?>
 				<div class="btn-group-sm">
 					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanES1_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
 					</ul>
-				</div>				
+				</div>
 				<?php
-			}elseif($this->action='DataFaBaPerEs1'){
+			}elseif($kdaksi='DataFaBaPerEs1'){
 				?>
 				<div class="btn-group-sm">
 					<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerEs1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerEs1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+						<li><a href="<?php echo URL; ?>PDF/DataFaBaPerEs1_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/PDF">PDF</a></li>
+						<li><a href="<?php echo URL; ?>PDFDataFaBaPerEs1_BAES1_PDF/<?php echo $kdkegiatan . "/" . $nmkegiatan . "/" . $kdaksi; ?>/XLS">EXCEL</a></li>
 					</ul>
-				</div>				
+				</div>
 				<?php
 				
 			}
