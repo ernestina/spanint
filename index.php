@@ -36,6 +36,7 @@ define('BLU','blu');
 define('BANK','bank');
 define('KL','kl');
 define('ES1','es1');
+define('UMADMIN','umadmin');
 
 $path = array(
     ROOT.'/libs/',
@@ -76,6 +77,7 @@ $registry->auth->add_roles('blu'); //blu
 $registry->auth->add_roles('bank'); //bank
 $registry->auth->add_roles('kl'); //blu
 $registry->auth->add_roles('es1'); //bank
+$registry->auth->add_roles('umadmin'); //bank
 $registry->auth->add_roles('guest'); //guest
 
 //menambahkan akses ke level user
@@ -212,6 +214,11 @@ $registry->auth->add_access('home','es1',$akses['HomeES1']);
 $registry->auth->add_access('BA_ES1','es1',$akses['BaEs1ES1']);
 $registry->auth->add_access('dataDIPA','es1',$akses['dataDIPAES1']);
 $registry->auth->add_access('dataSPM','es1',$akses['dataSPMES1']);
+
+//level UMADMIN
+$registry->auth->add_access('auth','umadmin',$akses['AuthUmAdmin']);
+$registry->auth->add_access('home','umadmin',$akses['HomeUmAdmin']);
+$registry->auth->add_access('userSpan','umadmin',$akses['DataUMAdmin']);
 
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
