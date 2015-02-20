@@ -50,6 +50,7 @@ $akses['BaEs1KL'] = array(
 	'nmsatkerBAES1',
 	'DataRealisasiPenerimaanBA',
 	'DataRealisasiKabupatenBAES1',
+	'DataRealisasiPenerimaanPerES1',
     '__destruct'
 );
 

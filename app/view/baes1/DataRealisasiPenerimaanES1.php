@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Realisasi Pendapatan</h2>
+                <h2>Realisasi Pendapatan Per Eselon 1</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -47,9 +47,7 @@
             <div class="col-md-6 col-sm-12">
                 <?php
                
-				
-				if (isset ($this->eselon1)) { echo " KODE ESELON1 : " . $this->eselon1;}
-				else {echo Session::get('user');};
+				echo Session::get('user');
                 ?>
                 <br>Tanggal : s.d <?php
                 echo (date('d-m-Y'));
@@ -79,7 +77,7 @@
         <thead>
             <tr>
                 <th class='mid'>No.</th>
-                <th class='mid'>Kode Akun| Jenis Pendapatan</th>
+                <th class='mid'>Kode Es. 1| Nama Eselon1</th>
                 <th class='mid'>Pagu </th>
                 <th class='mid'>Realisasi</th>
                 <th class='mid'>Persentase<br>Realisasi</th>
@@ -98,7 +96,7 @@
                     foreach ($this->data as $value) {
                         echo "<tr>	";
                         echo "<td>" . $no++ . "</td>";
-                        echo "<td align='left'>" . $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan() . "</td>";
+						echo "<td class='ratakiri'><a href=" . URL . "BA_ES1/DataRealisasiPenerimaanBA/" . $value->get_kdkegiatan(). ">" . $value->get_kdkegiatan() . " | ".$value->get_nmkegiatan(). " </td>";
                         echo "<td align='right'>" . number_format($value->get_budget_amt()) . "</td> ";
                         echo "<td align='right'>" . number_format($value->get_actual_amt()) .
 						"</td> ";

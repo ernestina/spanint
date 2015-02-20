@@ -95,7 +95,47 @@ class BA_ES1Controller extends BaseController {
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
 
-    public function DataRealisasiPenerimaanBA() {
+    public function DataRealisasiPenerimaanBA($eselon1 = null, $satker = null) {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        }
+        if (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
+		if ($eselon1 != null) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . $eselon1 . "'";
+			$this->view->eselon1 = $eselon1;
+        }
+		if ($satker != null) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . $satker . "'";
+        }
+
+        if (isset($_POST['submit_file'])) {
+
+            if ($_POST['KEGIATAN'] != '') {
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $_POST['KEGIATAN'] . "'";
+                $this->view->lokasi = $_POST['KEGIATAN'];
+            }
+        }
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $this->view->data = $d_spm1->get_ba_pendapatan_filter($filter);
+
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/DataRealisasiPenerimaan');
+    }
+	
+	public function DataRealisasiPenerimaanPerES1() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -119,16 +159,14 @@ class BA_ES1Controller extends BaseController {
             }
         }
 
-
-
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
-        $this->view->data = $d_spm1->get_ba_pendapatan_filter($filter);
+        $this->view->data = $d_spm1->get_ba_per_es1_pendapatan_filter($filter);
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->render('baes1/DataRealisasiPenerimaan');
+        $this->view->render('baes1/DataRealisasiPenerimaanES1');
     }
 
     public function DataRealisasiAkunBA() {

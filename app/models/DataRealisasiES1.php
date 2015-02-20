@@ -184,6 +184,43 @@ class DataRealisasiES1 {
         }
         return $data;
     }
+	
+	public function get_ba_per_es1_pendapatan_filter($filter) {
+        Session::get('id_user');
+        $sql = "SELECT C.NMES1, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI, SUBSTR(A.PROGRAM,1,5) KDES1
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table4 . " C 
+				WHERE 1=1 
+				AND SUBSTR(A.PROGRAM,1,5) =C.KDES1			
+				AND A.SUMMARY_FLAG = 'N' 
+				AND SUBSTR(AKUN,1,1) = '4'
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				
+				";
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " GROUP BY SUBSTR(A.PROGRAM,1,5), C.NMES1 ";
+        $sql .= " ORDER BY SUBSTR(A.PROGRAM,1,5) ";
+
+
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);
+            $d_data->set_kdkegiatan($val['KDES1']);
+            $d_data->set_nmkegiatan($val['NMES1']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
+            
+            $data[] = $d_data;
+        }
+        return $data;
+    }
     
 /* fungsi di bawah ini dipakai juga utk eselon1 per output*/
     public function get_ba_output_filter($filter) {
