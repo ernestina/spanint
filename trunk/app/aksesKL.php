@@ -44,6 +44,7 @@ $akses['BaEs1KL'] = array(
     'DataFaBaPerJenbel',
     'DataFaBaPerSdana',
     'DataFaBaEs1Jenbel',
+    'DataFaBaEs1Sdana',
     'DataRealisasiOutputES1',
 	'DataRealisasiWilayahBAES1',
 	'DataRealisasiSumberDanaBAES1',
