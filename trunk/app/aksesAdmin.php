@@ -416,6 +416,18 @@ $akses['PDFAdmin'] = array(
     'SuspendSatkerPenerimaan_PDF',
     'NTPNGanda_PDF',
     'KarwasUPSatker_PDF',
+	'DataRealisasiAkunES1_BAES1_PDF',
+    'DataRealisasiKewenanganBAES1_BAES1_PDF',
+    'DataRealisasiSumberDanaBAES1_BAES1_PDF',
+	'DataRealisasiWilayahBAES1_BAES1_PDF',
+	'DataRealisasiKegiatanES1_BAES1_PDF',
+	'DataRealisasiOutputES1_BAES1_PDF',
+    'DataRealisasiPenerimaanBA_BAES1_PDF',
+	'detailrekapsp2dBAES1_BAES1_PDF',
+    'nmsatker_BAES1_PDF',
+    'ProsesRevisi_BAES1_PDF',
+	'nmsatkerBAES1_BAES1_PDF',
+    'RekapSp2dBAES1_BAES1_PDF',
     '__destruct'
 );
 ?>

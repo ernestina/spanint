@@ -64,6 +64,23 @@ $akses['dataSPMKL'] = array(
     'daftarsp2d',
     '__destruct'
 );
-
+/*
+ * akses modul PDF
+ */
+$akses['PDFKL'] = array(
+    '__construct',
+    'index',
+    'DataRealisasiAkunBA_BAES1_PDF',
+    'DataRealisasiAkunES1_BAES1_PDF',
+    'DataRealisasiKewenanganBAES1_BAES1_PDF',
+    'DataRealisasiSumberDanaBAES1_BAES1_PDF',
+	'DataRealisasiWilayahBAES1_BAES1_PDF',
+    'DataRealisasiPenerimaanBA_BAES1_PDF',
+    'nmsatker_BAES1_PDF',
+    'ProsesRevisi_BAES1_PDF',
+	'nmsatkerBAES1_BAES1_PDF',
+    'RekapSp2dBAES1_BAES1_PDF',
+    '__destruct'
+);
 
 ?>

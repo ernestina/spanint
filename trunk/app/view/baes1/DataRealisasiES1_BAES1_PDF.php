@@ -15,7 +15,7 @@ require_once("./././public/fpdf17/fpdf.php");
 require_once("./././public/fpdf17/rotation.php");
 class FPDF_AutoWrapTable extends PDF_Rotate {
 	private $data = array();
-    private $options = array(
+    protected $options = array(
         'judul' => '',
         'filename' => '',
         'destinationfile' => '',
@@ -25,6 +25,8 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
     private $nm_kppn;
+	private $nm_kppn2;
+	private $nm_kppn3;
 
 
 		
@@ -35,13 +37,15 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
      * Konstruktor
      */
 
-    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn) {
+    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(),$nm_kppn,$nm_kppn2,$nm_kppn3) {
         parent::__construct();
         $this->data = $data;
         $this->options = $options;
         $this->kdtgl_awal = $kdtgl_awal;
         $this->kdtgl_akhir = $kdtgl_akhir;
         $this->nm_kppn = $nm_kppn;
+		$this->nm_kppn2 = $nm_kppn2;
+		$this->nm_kppn3 = $nm_kppn3;
     }
 
     /*
@@ -50,7 +54,19 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 
     public function rptDetailData() {
         //-----------------------------------
-        $judul = $this->options['judul'];
+		//------------------------------
+		$judul=$this->options['judul'];
+		$nm_kppn = $this->nm_kppn;
+		$nm_kppn2 = $this->nm_kppn2;
+		$nm_kppn3 = $this->nm_kppn3;
+		$kdtgl_awal1 = $this->kdtgl_awal;
+		$kdtgl_akhir1 = $this->kdtgl_akhir;
+		 $border = 0;
+        $h = 40;
+        $left = 10;
+		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
+        //-----------------------------------
+         /*$judul = $this->options['judul'];
         $nm_kppn = $this->nm_kppn;
         $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
         $border = 0;
@@ -96,8 +112,8 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 
 
         $this->Cell(0, 1, " ", "B");
-        $this->Ln(10);
-        $this->Cell(0, 20, $judul, 0, 0, 'C', false);
+         $this->Ln(10);*/
+         /*$this->Cell(0, 20, $judul, 0, 0, 'C', false);
         $this->Ln(15);
          //tanggal
 		$kdtgl_awal1 = $this->kdtgl_awal;
@@ -119,7 +135,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 
         $this->Ln(20);
         $this->SetFont("", "B", 8);
-        $this->Ln(10);
+         $this->Ln(10);*/
         //----------------------------------------------- 
         #tableheader
         $this->SetFont('Arial', 'B', 9);
@@ -238,7 +254,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 			
                 $this->Row(
                         array($no++,
-                            $value->get_satker(),
+                            $value->get_satker() . " |  " . $value->get_dipa(),
                             'PAGU'."\n".'REALISASI'."\n".'PERSENTASE'."\n".'SISA',
                             number_format($value->get_pagu_51())."\n".number_format($value->get_belanja_51())."\n".$nil_51."\n".number_format($value->get_pagu_51()-$value->get_belanja_51()),
                             number_format($value->get_pagu_52())."\n".number_format($value->get_belanja_52())."\n".$nil_52."\n".number_format($value->get_pagu_52()-$value->get_belanja_52()),
@@ -603,9 +619,11 @@ if (is_array($this->nm_kppn2)) {
     }
 } else {
     //echo 'bukan array';
-    $nm_kppn = $this->nm_kppn2;
+    $nm_kppn = $this->nm_kppn;
 }
 
+$nm_kppn2 = $this->nm_kppn2;
+$nm_kppn3 = $this->nm_kppn3;
 
 //--------------------------
 //pilihan
@@ -621,7 +639,7 @@ $options = array(
     'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir,$nm_kppn,$nm_kppn2,$nm_kppn3);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();

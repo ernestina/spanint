@@ -97,7 +97,41 @@ class PDFController extends BaseController {
             foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
                 $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
-        } else {
+        }elseif (Session::get('role') == KL) {
+			$kdbaes1=Session::get('kd_satker');
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			$kdbaes1=Session::get('kd_satker');
+			//var_dump($kdbaes1);
+			if ($kdbaes1 != 'null') {
+				//ES1
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//KL
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+					//var_dump($kppn1->get_nama_user1());
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
             $this->view->nm_kppn2 = Session::get('user');
         }
         //-------------------------
@@ -107,6 +141,7 @@ class PDFController extends BaseController {
         $this->view->data = $d_spm1->get_dipa_filter($filter);
        
 		//------------------------------------------------------------
+		//var_dump($this->view->nm_kppn3);
 		$judul1='Data Revisi DIPA';
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
@@ -603,6 +638,7 @@ class PDFController extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		 
 		//------------------------------------------------------------
 		$judul1='Pagu dan Realisasi Belanja per Bagian Anggaran';
 		$this->view->judul1=$judul1;
@@ -613,7 +649,7 @@ class PDFController extends BaseController {
 		}
 		//------------------------------------------------------------
         //untuk mencatat log user
-        $d_log->tambah_log("Sukses");
+       //$d_log->tambah_log("Sukses");
     }
 
     public function DataRealisasiTransfer_PDF($kdsatker = null, $kdlokasi = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
@@ -4334,7 +4370,41 @@ class PDFController extends BaseController {
             foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
                 $this->view->nm_kppn2 = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
-        } else {
+        } elseif (Session::get('role') == KL) {
+			$kdbaes1=Session::get('kd_satker');
+
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			$kdbaes1=Session::get('kd_satker');
+
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		}else {
             $this->view->nm_kppn2 = Session::get('user');
         }
         //-------------------------
@@ -6531,7 +6601,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
             } else {
                 $this->view->nm_kppn2 = 'null';
             }
-        } else {
+        }else {
             $this->view->nm_kppn2 = 'null';
         }
         //-------------------------
@@ -6554,26 +6624,21 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
     }
 	
-	    //------------------------------------------------------
+	    //-----------------------------------------------------
     //Function PDF untuk BA_ES1Controller(BA_ES1Controller.php)
     //------------------------------------------------------
-    public function DataRealisasiKegiatanBA_BAES1_PDF() {
+    public function DataRealisasiKegiatanBA_BAES1_PDF($kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
-		
-		
-        if (isset($_POST['submit_file'])) {
 
-            if ($_POST['KEGIATAN'] != '') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $_POST['KEGIATAN'] . "'";
-                $this->view->lokasi = $_POST['KEGIATAN'];
-            }           
-        }
+		if ($kdlokasi != 'null') {
+			$filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $kdlokasi . "'";
+			$this->view->lokasi = $kdlokasi;
+		}           
 		
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";
 		
@@ -6581,6 +6646,57 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         
 		$this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
+		
+		//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+
 		
 		//------------------------------------------------------------
 		$judul1='Realisasi Belanja per Kegiatan';
@@ -6596,7 +6712,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
 	}
 	
-	public function DataRealisasiKegiatanES1_BAES1_PDF() {
+	public function DataRealisasiKegiatanES1_BAES1_PDF($kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -6606,13 +6722,11 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
 		$this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
 		
-        if (isset($_POST['submit_file'])) {
 
-            if ($_POST['KEGIATAN'] != '') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $_POST['KEGIATAN'] . "'";
-                $this->view->lokasi = $_POST['KEGIATAN'];
+            if ($kdlokasi != 'null') {
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $kdlokasi . "'";
+                $this->view->lokasi = $kdlokasi;
             }           
-        }
 		
         $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";
 		
@@ -6621,6 +6735,55 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         
 		$this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
         
+//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
 
 		//------------------------------------------------------------
 		$judul1='Realisasi Belanja per Kegiatan';
@@ -6634,7 +6797,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$d_log->tambah_log("Sukses");
     }
 	
-	public function DataRealisasiPenerimaanBA_BAES1_PDF() {
+	public function DataRealisasiPenerimaanBA_BAES1_PDF($kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -6650,16 +6813,64 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		}
 		
 		
-        if (isset($_POST['submit_file'])) {
-
-            if ($_POST['KEGIATAN'] != '') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $_POST['KEGIATAN'] . "'";
-                $this->view->lokasi = $_POST['KEGIATAN'];
+        
+            if ($kdlokasi != 'null') {
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $kdlokasi . "'";
+                $this->view->lokasi = $kdlokasi;
             }           
-        }
-		
         
 		
+        
+		//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         
@@ -6677,8 +6888,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
 
     }
-	
-	public function DataRealisasiAkunBA_BAES1_PDF() {
+	//belum
+	public function DataRealisasiAkunBA_BAES1_PDF($kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
@@ -6688,17 +6899,65 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
 		$filter[$no++] =  "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";
 		
-        if (isset($_POST['submit_file'])) {
             
-            if ($_POST['kdlokasi'] != '') {
-                $filter[$no++] = "a.lokasi = '" . $_POST['kdlokasi'] . "'";
-                $this->view->lokasi = $_POST['kdlokasi'];
+            if ($kdlokasi != 'null') {
+                $filter[$no++] = "a.lokasi = '" . $kdlokasi . "'";
+                $this->view->lokasi = $kdlokasi;
             }            
-        }      
+              
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());        
-		
+		//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+
 		$this->view->data = $d_spm1->get_realisasi_fa_global_kl_filter($filter);
 		//------------------------------------------------------------
 		$judul1='Realisasi Belanja Es1 per Jenis Belanja';
@@ -6713,7 +6972,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 	
-	public function DataRealisasiAkunES1_BAES1_PDF() {
+	public function DataRealisasiAkunES1_BAES1_PDF($kdsatker=null,$ck=null) {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
@@ -6729,18 +6988,67 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";			
 		}
 		
-        if (isset($_POST['submit_file'])) {
+       
             
-            if ($_POST['satker'] != '') {
-                $filter[$no++] = "b.kdsatker = '" . $_POST['satker'] . "'";
-                $this->view->satker = $_POST['satker'];
+            if ($kdsatker != 'null') {
+                $filter[$no++] = "b.kdsatker = '" . $kdsatker . "'";
+                $this->view->satker = $kdsatker;
             }            
-        }      
+        
 
+		//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());        
-		
-		$this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+
+        $this->view->data = $d_spm1->get_realisasi_fa_baes1_filter($filter);
 		//------------------------------------------------------------
 		$judul1='Realisasi Belanja Satker per Jenis Belanja';
 		$this->view->judul1=$judul1;
@@ -6754,7 +7062,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 	
-	public function DataRealisasiKewenanganBAES1_BAES1_PDF() {
+	public function DataRealisasiKewenanganBAES1_BAES1_PDF($kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
@@ -6769,17 +7077,65 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";			
 		}
 		
-        if (isset($_POST['submit_file'])) {
             
-            if ($_POST['kdlokasi'] != '') {
-                $filter[$no++] = "a.lokasi = '" . $_POST['kdlokasi'] . "'";
-                $this->view->lokasi = $_POST['kdlokasi'];
+            if ($kdlokasi != 'null') {
+                $filter[$no++] = "a.lokasi = '" . $kdlokasi . "'";
+                $this->view->lokasi = $kdlokasi;
             }            
-        }      
+              
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());        
-		
+		//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+
 		$this->view->data = $d_spm1->get_realisasi_fa_kewenangan_baes1_filter($filter);
 		//------------------------------------------------------------
 		$judul1='Realisasi Belanja per Jenis Kewenangan';
@@ -6794,7 +7150,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 	
-	public function DataRealisasiSumberDanaBAES1_BAES1_PDF() {
+	public function DataRealisasiSumberDanaBAES1_BAES1_PDF($kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
@@ -6809,13 +7165,61 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";			
 		}
 		
-        if (isset($_POST['submit_file'])) {
             
-            if ($_POST['kdlokasi'] != '') {
-                $filter[$no++] = "a.lokasi = '" . $_POST['kdlokasi'] . "'";
-                $this->view->lokasi = $_POST['kdlokasi'];
+            if ($kdlokasi != 'null') {
+                $filter[$no++] = "a.lokasi = '" . $kdlokasi . "'";
+                $this->view->lokasi = $kdlokasi;
             }            
-        }      
+              
+//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());        
@@ -6834,7 +7238,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 	
-	public function DataRealisasiWilayahBAES1_BAES1_PDF() {
+	public function DataRealisasiWilayahBAES1_BAES1_PDF($kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
@@ -6849,17 +7253,65 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";			
 		}
 		
-        if (isset($_POST['submit_file'])) {
             
-            if ($_POST['kdlokasi'] != '') {
-                $filter[$no++] = "a.lokasi = '" . $_POST['kdlokasi'] . "'";
-                $this->view->lokasi = $_POST['kdlokasi'];
+            if ($kdlokasi != 'null') {
+                $filter[$no++] = "a.lokasi = '" . $kdlokasi . "'";
+                $this->view->lokasi = $kdlokasi;
             }            
-        }      
+              
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());        
-		
+		//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+
 		$this->view->data = $d_spm1->get_realisasi_fa_wilayah_baes1_filter($filter);
 		//------------------------------------------------------------
 		$judul1='Realisasi Belanja per Wilayah';
@@ -6874,7 +7326,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 	
-	public function nmsatker_BAES1_PDF() {
+	public function nmsatker_BAES1_PDF($kdsatker=null,$kdnmsatker=null,$kdeselon1=null,$kdkdrevisi=null,$ck=null) {
         $d_spm1 = new DataNamaSatker($this->registry);
         $filter = array();
         $no = 0;
@@ -6893,59 +7345,111 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] =  "B.BAES1 = '" . Session::get('kd_baes1')."'";			
 		}
 		
-        if (isset($_POST['submit_file'])) {           
 
-            if ($_POST['kdsatker'] != '') {
-                $filter[$no++] = "A.KDSATKER = '" . $_POST['kdsatker'] . "'";
-                $this->view->d_kd_satker = $_POST['kdsatker'];
+		if ($kdsatker != 'null') {
+			$filter[$no++] = "A.KDSATKER = '" . $kdsatker . "'";
+			$this->view->d_kd_satker = $kdsatker;
+		}
+		if ($kdnmsatker != 'null') {
+			$filter[$no++] = " UPPER(A.NMSATKER) LIKE UPPER('%" . $kdnmsatker . "%')";
+			$this->view->d_nm_satker = $kdnmsatker;
+		}
+		if ($kdeselon1 != 'null') {
+			$filter[$no++] = "B.BAES1 = '" . $kdeselon1 . "'";
+			$this->view->eselon1 = $kdeselon1;
+		}
+		if ($kdkdrevisi != 'null') {
+			if ($kdkdrevisi == '0') {
+				$filter[$no++] = "A.REV = 0";
+				$this->view->d_kd_revisi = $kdkdrevisi;
+			}
+			
+			elseif ($kdkdrevisi == '1') {
+				$filter[$no++] = "A.REV > 0";
+				$this->view->d_kd_revisi = $kdkdrevisi;
+			}
+		}                                   
+                      		
+//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
             }
-            if ($_POST['nmsatker'] != '') {
-                $filter[$no++] = " UPPER(A.NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
-                $this->view->d_nm_satker = $_POST['nmsatker'];
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
             }
-			if ($_POST['eselon1'] != '') {
-                $filter[$no++] = "B.BAES1 = '" . $_POST['eselon1'] . "'";
-                $this->view->eselon1 = $_POST['eselon1'];
-            }
-            if ($_POST['revisi'] != '') {
-                if ($_POST['revisi'] == '0') {
-                    $filter[$no++] = "A.REV = 0";
-                    $this->view->d_kd_revisi = $_POST['revisi'];
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
                 }
 				
-                elseif ($_POST['revisi'] == '1') {
-                    $filter[$no++] = "A.REV > 0";
-                    $this->view->d_kd_revisi = $_POST['revisi'];
-                }
-            }                                   
-                      		
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
         }
+        //-------------------------
         
-		$this->view->data = $d_spm1->get_baes1_dipa_filter($filter);
-        $this->view->data1 = $d_spm1->get_es1_dipa_filter(); 
 		
         if (Session::get('role') == ES1) {
 			//------------------------------------------------------------
-		$judul1='Informasi DIPA';
-		$this->view->judul1=$judul1;
-		if($ck=='PDF'){
-			$this->view->load('baes1/NamaSatkerDIPA1_BAES1_PDF');
-		}elseif($ck=='XLS'){
-			$this->view->load('baes1/NamaSatkerDIPA1_BAES1_XLS');
-		}
+			$this->view->data = $d_spm1->get_baes1_dipa_filter($filter);
+			
+			$judul1='Informasi DIPA';
+			
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				$this->view->load('baes1/NamaSatkerDIPA1_BAES1_PDF');
+				//$this->view->render('baes1/NamaSatkerDIPA1');
+			}elseif($ck=='XLS'){
+				$this->view->load('baes1/NamaSatkerDIPA1_BAES1_XLS');
+			}
 		//------------------------------------------------------------
           
         } 
 		
 		if (Session::get('role') == KL) {
 			//------------------------------------------------------------
-		$judul1='Informasi DIPA Satker';
-		$this->view->judul1=$judul1;
-		if($ck=='PDF'){
-			$this->view->load('baes1/NamaSatkerDIPA_BAES1_PDF');
-		}elseif($ck=='XLS'){
-			$this->view->load('baes1/NamaSatkerDIPA_BAES1_XLS');
-		}
+			$judul1='Informasi DIPA Satker';
+			$this->view->data = $d_spm1->get_es1_dipa_filter(); 
+			
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				//var_dump($ck);
+				$this->view->load('baes1/NamaSatkerDIPA1_BAES1_PDF');
+			}elseif($ck=='XLS'){
+				$this->view->load('baes1/NamaSatkerDIPA1_BAES1_XLS');
+			}
 		//------------------------------------------------------------
             
         }
@@ -6954,7 +7458,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
     }
 	
-	public function ProsesRevisi_BAES1_PDF($satker = NULL) {
+	public function ProsesRevisi_BAES1_PDF($satker = NULL,$kdkppn=null,$kdsatker=null,$kdnmsatker=null,$ck=null) {
         $d_spm1 = new proses_revisi($this->registry);
         $filter = array();
         $no = 0;
@@ -6970,33 +7474,80 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] =  "B.BAES1 = '" . Session::get('kd_baes1')."'";			
 		}
 		
-        if ($satker != '') {
+        if ($satker != 'null') {
             $filter[$no++] = " A.SATKER_CODE =  '" . $satker . "'";
             $this->view->satker_code = $satker;
         }
-        if (isset($_POST['submit_file'])) {
 
-            if ($_POST['kdkppn'] != '') {
-                $filter[$no++] = "A.KPPN_CODE = '" . $_POST['kdkppn'] . "'";
+            if ($kdkppn != 'null') {
+                $filter[$no++] = "A.KPPN_CODE = '" . $kdkppn . "'";
                 $d_kppn = new DataUser($this->registry);
-                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
             }
             
 
-            if ($_POST['satker'] != '') {
-                $filter[$no++] = "A.SATKER_CODE = '" . $_POST['satker'] . "'";
-                $this->view->d_kd_satker = $_POST['satker'];
+            if ($kdsatker != 'null') {
+                $filter[$no++] = "A.SATKER_CODE = '" . $kdsatker . "'";
+                $this->view->d_kd_satker = $kdsatker;
             }
-            if ($_POST['nmsatker'] != '') {
-                $filter[$no++] = " UPPER(B.NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
-                $this->view->d_nm_satker = $_POST['nmsatker'];
+            if ($kdnmsatker != 'null') {
+                $filter[$no++] = " UPPER(B.NMSATKER) LIKE UPPER('%" . $kdnmsatker . "%')";
+                $this->view->d_nm_satker = $kdnmsatker;
             }
-        }
         
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->data = $d_spm1->get_revisi_dipa($filter);
+//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
 
 		//------------------------------------------------------------
 		$judul1='Daftar DIPA dalam Proses Revisi';
@@ -7010,7 +7561,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
     }
 	
-	public function RekapSp2dBAES1_BAES1_PDF() {
+	public function RekapSp2dBAES1_BAES1_PDF($kdtgl_awal=null,$kdtgl_akhir=null,$ck=null) {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
@@ -7032,21 +7583,69 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] =  "B.BAES1 = '" . Session::get('kd_baes1')."'";			
 		}
 		 
-        if (isset($_POST['submit_file'])) {
             
-            if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
-                $filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' AND '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "'";
+            if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
+                $filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($kdtgl_awal)) . "' AND '" . date('Ymd', strtotime($kdtgl_akhir)) . "'";
 
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }			           
         
-		}
+		
         
 		
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		
+		//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+
 		$this->view->data = $d_spm1->get_sp2d_rekap_baes1_filter ($filter);
 		//------------------------------------------------------------
 		$judul1='Rekap Penerbitan SP2D';
@@ -7061,7 +7660,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 	
-	public function detailrekapsp2dBAES1_BAES1_PDF($jenis_spm = null, $kppn = null, $tgl_awal = null, $tgl_akhir = null) {
+	public function detailrekapsp2dBAES1_BAES1_PDF($jenis_spm = null, $kppn = null, $tgl_awal = null, $tgl_akhir = null,$ck=null) {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
@@ -7083,12 +7682,12 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] =  "SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE BAES1 = '" . Session::get('kd_baes1')."')";			
 		}
 		 
-        if ($jenis_spm != '') {
+        if ($jenis_spm != 'null') {
             $filter[$no++] = " JENDOK =  '" . $jenis_spm . "'";
             $this->view->jendok = $jenis_spm;
         }
         
-        if ($tgl_awal != '' AND $tgl_akhir != '') {
+        if ($tgl_awal != 'null' AND $tgl_akhir != 'null') {
 
             $filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($tgl_awal)) . "' AND '" . date('Ymd', strtotime($tgl_akhir)) . "'";
 
@@ -7097,6 +7696,55 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         }
 
         $this->view->data = $d_spm1->get_sp2d_satker_filter($filter);
+//-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -7113,7 +7761,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 	
-	public function nmsatkerBAES1_BAES1_PDF() {
+	public function nmsatkerBAES1_BAES1_PDF($kdsatker=null,$kdnmsatker=null,$kdeselon1=null,$kdtgl_awal=null,$kdtgl_akhir=null,$ck=null) {
         $d_spm1 = new DataNamaSatker($this->registry);
 		
         $filter = array();
@@ -7130,37 +7778,85 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
 		 }
 		
-		
-        if (isset($_POST['submit_file'])) {
+        
 
-            if ($_POST['kdsatker'] != '') {
-                $filter[$no++] = "SEGMENT1 = '" . $_POST['kdsatker'] . "'";
-                $this->view->d_kd_satker = $_POST['kdsatker'];
+            if ($kdsatker != 'null') {
+                $filter[$no++] = "SEGMENT1 = '" . $kdsatker . "'";
+                $this->view->d_kd_satker = $kdsatker;
             }
-            if ($_POST['nmsatker'] != '') {
-                $filter[$no++] = " UPPER(NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
-                $this->view->d_nm_satker = $_POST['nmsatker'];
+            if ($kdnmsatker != 'null') {
+                $filter[$no++] = " UPPER(NMSATKER) LIKE UPPER('%" . $kdnmsatker . "%')";
+                $this->view->d_nm_satker = $kdnmsatker;
             }
-			if ($_POST['eselon1'] != '') {
-                $filter[$no++] = "B.BAES1 = '" . $_POST['eselon1'] . "'";
-                $this->view->eselon1 = $_POST['eselon1'];
+			if ($kdeselon1 != 'null') {
+                $filter[$no++] = "B.BAES1 = '" . $kdeselon1 . "'";
+                $this->view->eselon1 = $kdeselon1;
             }
-            if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
+            if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
 
-                $filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' AND '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "'";
+                $filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($kdtgl_awal)) . "' AND '" . date('Ymd', strtotime($kdtgl_akhir)) . "'";
 
-                $this->view->d_tgl_awal = $_POST['tgl_awal'];
-                $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
+                $this->view->d_tgl_awal = $kdtgl_awal;
+                $this->view->d_tgl_akhir = $kdtgl_akhir;
             }
                      		
-        }
+        
         if (Session::get('role') == KL){		
 			$filter[$no++] =  "B.BA = '" . Session::get('kd_baes1')."'";			
 		}
 		if (Session::get('role') == ES1){		
 			$filter[$no++] =  "B.BAES1 = '" . Session::get('kd_baes1')."'";			
 		}
-        
+        //-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
 		
@@ -7179,9 +7875,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
     }
 
-    //author by jhon
 
-        public function DataRealisasiOutputBA_BAES1_PDF() {
+        public function DataRealisasiOutputBA_BAES1_PDF($kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -7191,19 +7886,152 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
 		
 		
-        if (isset($_POST['submit_file'])) {
 
-            if ($_POST['KEGIATAN'] != '') {
-                $filter[$no++] = "OUTPUT = '" . $_POST['KEGIATAN'] . "'";
-                $this->view->lokasi = $_POST['KEGIATAN'];
+            if ($kdlokasi != 'null') {
+                $filter[$no++] = "OUTPUT = '" . $kdlokasi . "'";
+                $this->view->lokasi = $kdlokasi;
             }           
-        }
+        
 		
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";
 		
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        //-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+
+		$this->view->data = $d_spm1->get_ba_output_filter($filter);
+		//------------------------------------------------------------
+		$judul1='Realisasi Belanja per Output';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('baes1/DataRealisasiOutput_BAES1_PDF');
+		}elseif($ck=='XLS'){
+			$this->view->load('baes1/DataRealisasiOutput_BAES1_XLS');
+		}
+		//------------------------------------------------------------
+        $d_log->tambah_log("Sukses");
+
+    }
+
+	public function DataRealisasiOutputES1_BAES1_PDF($kdlokasi=null,$ck=null) {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		
+		
+
+            if ($kdlokasi != 'null') {
+                $filter[$no++] = "OUTPUT = '" . $kdlokasi . "'";
+                $this->view->lokasi = $kdlokasi;
+            }           
         
+		
+        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";
+		
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        //-------------------------
+		$kdbaes1=Session::get('kd_satker');
+
+		if (Session::get('role') == ADMIN) {
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+		}elseif (Session::get('role') == ES1) {
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		} else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+
 		$this->view->data = $d_spm1->get_ba_output_filter($filter);
 		//------------------------------------------------------------
 		$judul1='Realisasi Belanja per Output';

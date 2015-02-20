@@ -17,7 +17,7 @@ require_once("./././public/fpdf17/rotation.php");
 class FPDF_AutoWrapTable extends PDF_Rotate {
 
     private $data = array();
-    private $options = array(
+    protected $options = array(
         'judul' => '',
         'filename' => '',
         'destinationfile' => '',
@@ -47,73 +47,17 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 
     public function rptDetailData() {
         //-----------------------------------
-        $judul = $this->options['judul'];
-        $nm_kppn = $this->nm_kppn;
-		//echo '$nm_kppn:'.$nm_kppn;
-        $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
-        $border = 0;
-        $h = 40;
-        $left = 10;
-        //header
-        $h1 = 35;
-        $this->SetFont("", "B", 12);
-        $this->SetX($left + 20);
-        $this->Image("./././public/img/depkeu.png", 30, 30, 30, 30);
-        $px1 = $this->GetX();
-        $this->SetX($left + 50);
-        $this->MultiCell(0, $h1 / 2, $kemenkeu);
-        $py1 = $this->GetY();
-        $px2 = $px1;
-        $py2 = $py1;
-        $this->SetXY($px2, $py2);
-        $this->SetX($left + 50);
-
-        if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
-            $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        } elseif (substr(trim($nm_kppn), 0, 6) == 'KANWIL') { //5
-            $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        } elseif (substr(trim($nm_kppn), 0, 3) == 'DIT') {  //1 & 4
-            $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        } elseif (substr(trim($nm_kppn), 0, 3) == 'SET') {  //1
-            $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        } elseif (substr(trim($nm_kppn), 0, 5) == 'ADMIN') { //1
-            $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
-            $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
-            $this->MultiCell(0, $h1 / 2, '');
-        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
-            $this->MultiCell(0, $h1 / 2, '');
-        } else {
-            $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
-        }
-
-
-        $this->Cell(0, 1, " ", "B");
-        $this->Ln(10);
-        $this->Cell(0, 20, $judul, 0, 0, 'C', false);
-        $this->Ln(15);
-         //tanggal
+      $judul=$this->options['judul'];
+		$nm_kppn = $this->nm_kppn;
+		$nm_kppn2 = $this->nm_kppn2;
+		$nm_kppn3 = $this->nm_kppn3;
 		$kdtgl_awal1 = $this->kdtgl_awal;
 		$kdtgl_akhir1 = $this->kdtgl_akhir;
-	    if (isset($kdtgl_awal1) && isset($kdtgl_akhir1)) {
-            $thn1 = substr($kdtgl_awal1, 6, 4);
-            $bln1 = substr($kdtgl_awal1, 3, 2);
-            $tgl1 = substr($kdtgl_awal1, 0, 2);
-            $kdtgl_awal = $tgl1 . '-' . $bln1 . '-' . $thn1;
-            $thn2 = substr($kdtgl_akhir1, 6, 4);
-            $bln2 = substr($kdtgl_akhir1, 3, 2);
-            $tgl2 = substr($kdtgl_akhir1, 0, 2);
-            $kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
-            $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);		
-        } else {
-            $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);			 
-        } 
-		//--------------------
-
-        $this->Ln(20);
-        $this->SetFont("", "B", 8);
-        $this->Ln(10);
+		 $border = 0;
+        $h = 40;
+        $left = 10;
+		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
+       
         //-----------------untuk header atas------------------------------ 
         #tableheader
         $this->SetFont('Arial', 'B', 9);

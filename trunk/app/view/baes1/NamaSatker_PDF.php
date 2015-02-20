@@ -17,7 +17,7 @@ require_once("./././public/fpdf17/rotation.php");
 class FPDF_AutoWrapTable extends PDF_Rotate {
 
     private $data = array();
-    private $options = array(
+    protected $options = array(
         'judul' => '',
         'filename' => '',
         'destinationfile' => '',
