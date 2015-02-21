@@ -11,13 +11,16 @@
                 <h2>Invoice Menggantung</h2>
             </div>
 			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-
-                <a href="#" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-thumbs-up"></span> Supplier</a>
+                <?php
+                foreach ($this->kppn_list as $value1) {
+                    if ($this->d_kd_kppn == $value1->get_kd_d_kppn()) { ?>
+                <a href="<?php echo URL; ?>userSpan/supplierProses/<?php echo $value1->get_kd_d_kppn();?>" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-chevron-left" style='margin-left: -5px'></span> Supplier</a>
+                
 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+                <a href="<?php echo URL; ?>userSpan/kontrakProses/<?php echo $value1->get_kd_d_kppn();?>" class="btn btn-default fullwidth">Kontrak <span class="glyphicon glyphicon-chevron-right"></span></a>
                 
-                <a href="#" class="btn btn-default fullwidth"><span class="glyphicon glyphicon-hand-right"></span> Kontrak</a>
 
             </div>
 
@@ -26,10 +29,7 @@
         <div class="row">
 
             <div class="col-md-6 col-sm-12">
-                <?php
-                foreach ($this->kppn_list as $value1) {
-                    if ($this->d_kd_kppn == $value1->get_kd_d_kppn()) {
-                        echo "KPPN " . $value1->get_nama_user() . " (" . $value1->get_kd_d_kppn() . ")";
+                <?php echo "KPPN " . $value1->get_nama_user() . " (" . $value1->get_kd_d_kppn() . ")";
                     }
                 }
                 ?>
@@ -114,7 +114,7 @@
     </table>
 </div>
 
-<div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+<!--div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
 
     <div class="modal-dialog">
 
@@ -163,7 +163,7 @@
 
                     <input class="form-control" type="number" name="nip" id="nip" size="18" value="<?php if (isset($this->d_nip)) {
                             echo $this->d_nip;
-                        } ?>"-->
+                        } ?>">
 
                 </div>
 
@@ -177,7 +177,7 @@
 
     </div>
 
-</div>
+</div-->
 
 <script type="text/javascript" charset="utf-8">
 
