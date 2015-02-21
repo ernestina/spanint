@@ -30,7 +30,7 @@ class DataUserSPAN {
     private $_nama_pegawai;
     private $_posisi;
     
-    //untuk Monitoring Invoice Proses
+    //untuk Monitoring Invoice Gantung
     private $_no_id;
     private $_kode_unit;
     private $_nama_usr_awal;
@@ -53,6 +53,25 @@ class DataUserSPAN {
     private $_deskripsi_posisi;
     private $_flag;
     
+    //untuk Kontrak Gantung
+    private $_no_po;
+	private $_creation_date;
+	private $_status_kontrak;
+	private $_nip_user;
+	private $_nama;
+	private $_pos_user;
+	private $_kppn;
+    
+    //untuk Supplier Gantung
+    private $_file;
+    private $_tgl_supplier;
+    private $_status_supplier;
+    private $_nip_id;
+    private $_nama_id;
+    private $_pos_id;
+    private $_vendor;
+    private $_kppn_id;
+    
     //global
     private $_valid = TRUE;
     private $_table = 'USER_SPAN';
@@ -61,6 +80,8 @@ class DataUserSPAN {
     private $_table3 = 'FND_USER';
     private $_table4 = 'USER_HISTORY';
     private $_table5 = 'T_POSISI';
+    private $_table6 = 'T_KONTRAK_GANTUNG';
+    private $_table7 = 'T_SUPPLIER_GANTUNG';
     
     public $registry;
 
@@ -112,6 +133,7 @@ class DataUserSPAN {
         return $data;
     }
     
+    //Invoice gantung
     public function get_spm_gantung($filter) {
         Session::get('id_user');
         $sql = "SELECT DISTINCT * FROM 
@@ -167,7 +189,8 @@ class DataUserSPAN {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= "  ORDER BY to_date(TANGGAL_AWAL,'DD-MM-YYYY') DESC, to_date(TANGGAL_AKHIR,'DD-MM-YYYY') DESC ";
+        $sql .= " ORDER BY NO_ID DESC";
+        //$sql .= "  ORDER BY to_date(TANGGAL_AWAL,'DD-MM-YYYY') DESC, to_date(TANGGAL_AKHIR,'DD-MM-YYYY') DESC ";
         //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
@@ -222,6 +245,80 @@ class DataUserSPAN {
         return $data;
     }
     
+    //Kontrak Gantung
+    public function get_kontrak_gantung($filter) {
+        Session::get('id_user');
+        $sql = "SELECT
+                NO_PO
+                , CREATION_DATE
+                , STATUS
+                , NIP_USER
+                , NAMA_PEGAWAI
+                , SUBSTR(POSITION, 12, 20) POSISI 
+                , KPPN
+                FROM " . $this->_table6 . "
+                WHERE 1=1"
+            ;
+
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= "  ORDER BY NIP_USER DESC";
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_no_po($val['NO_PO']);
+            $d_data->set_creation_date(date("d-m-Y", strtotime($val['CREATION_DATE'])));
+            $d_data->set_status_kontrak($val['STATUS']);
+            $d_data->set_nip_user($val['NIP_USER']);
+            $d_data->set_nama($val['NAMA_PEGAWAI']);
+            $d_data->set_pos_user($val['POSISI']);
+            $d_data->set_kppn($val['KPPN']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+    
+    //Supplier Gantung
+    public function get_supplier_gantung($filter) {
+        Session::get('id_user');
+        $sql = "SELECT
+                DISTINCT FILE_NAME
+                , VENDOR_NAME
+                , CREATION_DATE
+                , STATUS
+                , USER_LOGIN_ID
+                , SUBSTR(EMP_POSITION, 12, 7) POSISI
+                , SUBSTR(EMP_POSITION, 20) NAMA
+                , SUBSTR(POSITION_HIERARCHY, 1, 3) KPPN
+                FROM " . $this->_table7 . " 
+                WHERE 1=1
+                "
+            ;
+
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " ORDER BY FILE_NAME DESC";
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_file($val['FILE_NAME']);
+            $d_data->set_tgl_supplier(date("d-m-Y", strtotime($val['CREATION_DATE'])));
+            $d_data->set_status_supplier($val['STATUS']);
+            $d_data->set_nip_id($val['USER_LOGIN_ID']);
+            $d_data->set_pos_id($val['POSISI']);
+            $d_data->set_nama_id($val['NAMA']);
+            $d_data->set_vendor($val['VENDOR_NAME']);
+            $d_data->set_kppn_id($val['KPPN']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
     
 
     /*
@@ -408,6 +505,67 @@ class DataUserSPAN {
     public function set_flag($flag){
         $this->_flag = $flag;
     }
+    
+    public function set_no_po($no_po) {
+        $this->_no_po = $no_po;
+    }
+	
+	public function set_creation_date($creation_date) {
+        $this->_creation_date = $creation_date;
+    }
+    
+    public function set_status_kontrak($status_kontrak) {
+        $this->_status_kontrak = $status_kontrak;
+    }
+	
+	public function set_nip_user($nip_user) {
+        $this->_nip_user = $nip_user;
+    }
+    
+    public function set_nama($nama) {
+        $this->_nama = $nama;
+    }
+    
+    public function set_pos_user($pos_user) {
+        $this->_pos_user = $pos_user;
+    }
+    
+	public function set_kppn($kppn) {
+        $this->_kppn = $kppn;
+    }
+    
+    public function set_file($file) {
+        $this->_file = $file;
+    }
+    
+    public function set_tgl_supplier($tgl_supplier) {
+        $this->_tgl_supplier = $tgl_supplier;
+    }
+    
+    public function set_status_supplier($status_supplier) {
+        $this->_status_supplier = $status_supplier;
+    }
+    
+    public function set_nip_id($nip_id) {
+        $this->_nip_id = $nip_id;
+    }
+    
+    public function set_nama_id($nama_id) {
+        $this->_nama_id = $nama_id;
+    }
+    
+    public function set_pos_id($pos_id) {
+        $this->_pos_id = $pos_id;
+    }
+    
+    public function set_vendor($vendor) {
+        $this->_vendor = $vendor;
+    }
+    
+    public function set_kppn_id($kppn_id) {
+        $this->_kppn_id = $kppn_id;
+    }
+    	
 
     /*
      * getter
@@ -557,6 +715,66 @@ class DataUserSPAN {
         return $this->_flag;
     }
     
+    public function get_no_po() {
+        return $this->_no_po;
+    }
+    
+    public function get_creation_date() {
+        return $this->_creation_date;
+    }
+    
+    public function get_status_kontrak() {
+        return $this->_status_kontrak;
+    }
+    
+    public function get_nip_user() {
+        return $this->_nip_user;
+    }
+    
+    public function get_nama() {
+        return $this->_nama;
+    }
+    
+    public function get_pos_user() {
+        return $this->_pos_user;
+    }
+    
+    public function get_kppn() {
+        return $this->_kppn;
+    }
+    
+    public function get_file() {
+        return $this->_file;
+    }
+    
+    public function get_tgl_supplier() {
+        return $this->_tgl_supplier;
+    }
+    
+    public function get_status_supplier() {
+        return $this->_status_supplier;
+    }
+    
+    public function get_nip_id() {
+        return $this->_nip_id;
+    }
+    
+    public function get_nama_id() {
+        return $this->_nama_id;
+    }
+    
+    public function get_pos_id() {
+        return $this->_pos_id;
+    }
+    
+    public function get_vendor() {
+        return $this->_vendor;
+    }
+    
+    public function get_kppn_id() {
+        return $this->_kppn_id;
+    }
+    
     public function get_table() {
         return $this->_table;
     }
@@ -571,6 +789,14 @@ class DataUserSPAN {
     
     public function get_table5() {
         return $this->_table5;
+    }
+    
+    public function get_table6() {
+        return $this->_table6;
+    }
+    
+    public function get_table7() {
+        return $this->_table7;
     }
 
     /*

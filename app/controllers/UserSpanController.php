@@ -194,6 +194,8 @@ class UserSpanController extends BaseController {
         */
         if (Session::get('role') == KPPN) {
             $filter[$no++] = " KDKPPN = '" . Session::get('id_user') . "'";
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
         
         if (isset($kdkppn)) {
@@ -253,8 +255,8 @@ class UserSpanController extends BaseController {
         if (Session::get('role') == KPPN) {
             $filter[$no++] = " KODE_UNIT = '" . Session::get('id_user') . "'";
             $this->view->data = $d_user->get_ganti_user($filter);
-            
         }
+        //var_dump($this->view->data);
         
         if (isset($_POST['add_d_user'])) {
             
@@ -462,6 +464,108 @@ class UserSpanController extends BaseController {
         }
         $this->view->data = $d_user->get_ganti_user($filter);
         $this->view->render('kppn/gantiUserSpan');
+    }
+    
+    public function kontrakProses($kdkppn=null) {
+        $d_user = new DataUserSPAN($this->registry);
+        $filter = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        /*
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        */
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = " KPPN = '" . Session::get('id_user') . "'";
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        
+        if (isset($kdkppn)) {
+            $filter[$no++] = " KPPN = '" . $kdkppn . "'";
+            $this->view->d_kd_kppn = $kdkppn;
+        }
+
+        if (isset($_POST['submit_file'])) {
+            if ($_POST['kppn'] != '') {
+                $filter[$no++] = " KPPN = '" . $_POST['kppn'] . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_kd_kppn = $_POST['kppn'];
+                
+            }
+        } 
+        $this->view->data = $d_user->get_kontrak_gantung($filter);
+        //var_dump ($d_user->get_spm_gantung($filter));
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_user->get_table1());
+		
+        $this->view->render('kppn/kontrakProses');
+		$d_log->tambah_log("Sukses");
+    
+    }
+    
+    public function supplierProses($kdkppn=null) {
+        $d_user = new DataUserSPAN($this->registry);
+        $filter = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        /*
+        if (Session::get('role') == KANWIL) {
+            $d_kppn_list = new DataUser($this->registry);
+            $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
+        }
+        */
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = " SUBSTR(POSITION_HIERARCHY, 1, 3) = '" . Session::get('id_user') . "'";
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        
+        if (isset($kdkppn)) {
+            $filter[$no++] = " SUBSTR(POSITION_HIERARCHY, 1, 3) = '" . $kdkppn . "'";
+            $this->view->d_kd_kppn = $kdkppn;
+        }
+
+        if (isset($_POST['submit_file'])) {
+            if ($_POST['kppn'] != '') {
+                $filter[$no++] = " KPPN = '" . $_POST['kppn'] . "'";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($_POST['kdkppn']);
+                $this->view->d_kd_kppn = $_POST['kppn'];
+                
+            }
+        } 
+        $this->view->data = $d_user->get_supplier_gantung($filter);
+        //var_dump ($d_user->get_spm_gantung($filter));
+        
+        // untuk mengambil data last update 
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_user->get_table1());
+		
+        $this->view->render('kppn/supplierProses');
+		$d_log->tambah_log("Sukses");
+    
     }
     
     

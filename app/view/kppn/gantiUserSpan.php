@@ -11,8 +11,9 @@
                 <h2>Monitoring Pergantian User</h2>
             </div>
 			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-
+                <?php if(Session::get('role') == ADMIN) {?>
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-tambah"><span class="glyphicon glyphicon-headphones"></span> Tambah</button>
+                <?php } ?>
 
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
