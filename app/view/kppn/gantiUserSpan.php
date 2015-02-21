@@ -114,20 +114,23 @@ if (isset($this->d_nip2)) {
             <tr>
                 <th rowspan="2">No.</th>
                 <th rowspan="2">KPPN</th>
-                <th colspan="3">Semula</th>
-                <th colspan="3">Menjadi</th>
+                <th colspan="2">Semula</th>
+                <th colspan="2">Menjadi</th>
                 <th rowspan="2">No. Surat</th>
                 <th rowspan="2">Tanggal Awal<br>Status</th>
                 <th rowspan="2">Tanggal Akhir<br>Status</th>
                 <th rowspan="2">Catatan</th>
                 <th rowspan="2">Cek Data</th>
+                <?php if (Session::get('role') == ADMIN) {
+                    echo "<th rowspan='2' width='9%'>Ubah/Hapus</th>" ;
+                } ?>
             </tr>
             <tr>
-                <th >Nama, NIP</th>
-                <th >Email</th>
+                <th >Nama, NIP, Email</th>
+                
                 <th >Posisi</th>
-                <th >Nama, NIP</th>
-                <th >Email</th>
+                <th >Nama, NIP, Email</th>
+                
                 <th >Posisi</th>
             </tr>
         </thead>
@@ -149,13 +152,10 @@ if (isset($this->d_nip2)) {
                     <tr>
                         <td><?php echo $no++; ?></td>
                         <td><?php echo $value->get_kode_unit(); ?></td>
-                        <td class="align-left"><?php echo $value->get_nama_usr_awal(); echo "<br>"; 
-                            echo $value->get_nip_usr_awal();  ?></td>
-                        <td ><?php echo $value->get_email_usr_awal(); ?></td>
+                        <td class="align-left"><?php echo $value->get_nama_usr_awal() . "<br>" . $value->get_nip_usr_awal() . "<br>" . $value->get_email_usr_awal() ;?></td>
+                        <!--td ><?php //echo  ?></td-->
                         <td ><?php echo $value->get_posisi_user_awal(); ?></td>
-                        <td class="align-left"><?php echo $value->get_nama_usr_pengganti(); echo "<br>"; 
-                            echo $value->get_nip_usr_pengganti();  ?></td>
-                        <td ><?php echo $value->get_email_usr_pengganti(); ?></td>
+                        <td class="align-left"><?php echo $value->get_nama_usr_pengganti() . "<br>" . $value->get_nip_usr_pengganti() . "<br>" . $value->get_email_usr_pengganti(); ?></td>
                         <td ><?php echo $value->get_posisi_user_pengganti(); ?></td>
                         <td ><?php echo $value->get_surat(); ?></td>
                         <td ><?php echo $value->get_tanggal_awal(); echo "<br>"; 
@@ -175,6 +175,9 @@ if (isset($this->d_nip2)) {
                             } ?>
                         
                         </td>
+                        <?php if (Session::get('role') == ADMIN) { ?>
+                        <td ><a href='#' class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;<a href='#' class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a></td>
+                        <?php } ?>
                         
                     </tr>
 
