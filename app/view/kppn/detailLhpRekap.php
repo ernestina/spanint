@@ -33,8 +33,8 @@
                         <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                         </button>
                               <ul class="dropdown-menu" role="menu">
-                                <li><a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/PDF">PDF</a></li>
-                                <li><a href="<?php echo URL; ?>PDF/nmsatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $nmsatker . "/" . $kdrevisi; ?>/XLS">EXCEL</a></li>
+                                <li><a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>/PDF">PDF</a></li>
+                                <li><a href="<?php echo URL; ?>PDF/detailLhpRekap_PDF/<?php echo $kdtgl . "/" . $kdkppn; ?>/XLS">EXCEL</a></li>
                               </ul>
                     </div>		
                 

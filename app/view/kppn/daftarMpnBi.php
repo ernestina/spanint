@@ -17,25 +17,10 @@
 
 				if (Session::get('role') == ADMIN || Session::get('role') == KANWIL || Session::get('role') == PKN) {
 
-					if (isset($this->d_status)) {
-							$kdstatus = $this->d_status;
+					if (isset($this->d_kd_kppn)) {
+						$kdkppn = $this->d_kd_kppn;
 					} else {
-							$kdstatus = 'null';
-					}
-					if (isset($this->d_no_rek_persepsi)) {
-							$kdnorek = $this->d_no_rek_persepsi;
-					} else {
-							$kdnorek = 'null';
-					}
-					if (isset($this->d_kppn_anak)) {
-						$kdkppn_anak = $this->d_kppn_anak;
-					} else {
-						$kdkppn_anak = 'null';
-					}
-					if (isset($this->d_kppn_induk)) {
-						$kdkppn_induk = $this->d_kppn_induk;
-					} else {
-						$kdkppn_induk = 'null';
+						$kdkppn = 'null';
 					}
 					if (isset($this->d_tgl_awal)) {
 						$kdtgl_awal = $this->d_tgl_awal;
@@ -53,27 +38,10 @@
 			if (Session::get('role') == KPPN) {
             
 
-					if (isset($this->d_status)) {
-						$kdstatus = $this->d_status;
+					if (isset($this->d_kd_kppn)) {
+						$kdkppn = $this->d_kd_kppn;
 					} else {
-						$kdstatus = 'null';
-					}
-					if (isset($this->d_no_rek_persepsi)) {
-							$kdnorek = $this->d_no_rek_persepsi;
-					} else {
-							$kdnorek = 'null';
-					}
-
-					if (isset($this->d_kppn_anak)) {
-						$kdkppn_anak = $this->d_kppn_anak;
-					} else {
-						
-						$kdkppn_anak = Session::get('id_user');			
-					}
-					if (isset($this->d_kppn_induk)) {
-						$kdkppn_induk = 'null';
-					} else {
-						$kdkppn_induk = 'null';
+						$kdkppn = 'null';
 					}
 					if (isset($this->d_tgl_awal)) {
 						$kdtgl_awal = $this->d_tgl_awal;
@@ -94,8 +62,8 @@
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                     </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/monitoringPelimpahan_PDF/<?php echo $kdkppn_anak . "/" . $kdkppn_induk. "/" . $kdstatus . "/" .$kdnorek . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS">EXCEL</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/MpnBi_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/MpnBi_PDF/<?php echo $kdkppn . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS">EXCEL</a></li>
                           </ul>
                 </div>
 				 
