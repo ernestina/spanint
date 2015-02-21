@@ -27,6 +27,16 @@
 						} else {
 							$kdntpn = "null";
 						}
+						if (isset($this->billingcode)) {
+							$kdbillingcode = $this->billingcode;
+						} else {
+							$kdbillingcode = "null";
+						}
+						if (isset($this->akun)) {
+							$kdakun = $this->akun;
+						} else {
+							$kdakun = "null";
+						}
 						
 					?>
                 
@@ -34,8 +44,8 @@
             <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
             </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="<?php echo URL; ?>PDF/KonfirmasiPenerimaan_PDF/<?php echo $kdntpn; ?>/PDF">PDF</a></li>
-                    <li><a href="<?php echo URL; ?>PDF/KonfirmasiPenerimaan_PDF/<?php echo $kdntpn; ?>/XLS">EXCEL</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/KonfirmasiPenerimaan_PDF/<?php echo $kdntpn . "/" . $kdbillingcode. "/" . $kdakun; ?>/PDF">PDF</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/KonfirmasiPenerimaan_PDF/<?php echo $kdntpn . "/" . $kdbillingcode. "/" . $kdakun; ?>/XLS">EXCEL</a></li>
                   </ul>
         </div>
 					<?php
