@@ -70,45 +70,82 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Nomor Invoice");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Status di SPAN");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nilai Invoice Rp");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "REG_NO");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Deskripsi Invoice");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "NAME");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Approval Status");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "CRED_NAME");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Status");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "CURR");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "User");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "COUNTRY");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Mulai");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "CRED_TYPE");
+//p9
+$objPHPExcel->getActiveSheet()->setCellValue('I4', "CARA_TARIK");
+//p10
+$objPHPExcel->getActiveSheet()->setCellValue('J4', "AMT_ORI");
+//p11
+$objPHPExcel->getActiveSheet()->setCellValue('K4', "AMT_AMEND");
+//p12
+$objPHPExcel->getActiveSheet()->setCellValue('L4', "AMT_NET");
+//p13
+$objPHPExcel->getActiveSheet()->setCellValue('M4', "BENEF");
+//p14
+$objPHPExcel->getActiveSheet()->setCellValue('N4', "STATUS");
+//p15
+$objPHPExcel->getActiveSheet()->setCellValue('O4', "D_SIGNED");
+//p16
+$objPHPExcel->getActiveSheet()->setCellValue('P4', "D_EFFECTIVE");
+//p17
+$objPHPExcel->getActiveSheet()->setCellValue('Q4', "D_DRAWLIM");
 
 //Data
 if (count($this->data) == 0) {
-	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
-}else{
+
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data");
+ }else{
 	$no=0;
 	$dataArray= array();
 	foreach ($this->data as $value) {
 	$no++;
 	$nil['p1']=$no;
-	$nil['p2']=$value->get_invoice_num();
-	if ($value->get_invoice_amount()==0){
-		$nil['p3']='0';
+	$nil['p2']=$value->get_status_span();
+	$nil['p3']=$value->get_reg_no();
+	$nil['p4']=$value->get_name();
+	$nil['p5']=$value->get_cred_name();
+	$nil['p6']=$value->get_curr();
+	$nil['p7']=$value->get_country();
+	$nil['p8']=$value->get_cred_type();
+	$nil['p9']=$value->get_cara_tarik();
+	if ($value->get_amt_ori()==0){
+		$nil['p10']='0';
 	}else{
-		$nil['p3']=$value->get_invoice_amount();
+		$nil['p10']=$value->get_amt_ori();
 	}		
-	$nil['p4']=$value->get_invoice_description();
-	$nil['p5']=$value->get_wfapproval_status();
-	$nil['p6']=$value->get_status();
-	$nil['p7']=$value->get_to_user();
-	$nil['p8']=$value->get_fu_description();
-	$nil['p9']=$value->get_begin_date();
+	if ($value->get_amt_amend()==0){
+		$nil['p11']='0';
+	}else{
+		$nil['p11']=$value->get_amt_amend();
+	}		
+	if ($value->get_amt_net()==0){
+		$nil['p12']='0';
+	}else{
+		$nil['p12']=$value->get_amt_net();
+	}		
 	
 	
+	$nil['p13']=$value->get_benef();
+	$nil['p14']=$value->get_status();
+	$nil['p15']=$value->get_d_signed();
+	$nil['p16']=$value->get_d_effective();
+	$nil['p17']=$value->get_d_drawlim();
 	
-			
+
+	
+	
 	
 		array_push($dataArray,$nil);
 

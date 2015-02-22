@@ -54,14 +54,15 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		$nm_kppn3 = $this->nm_kppn3;
 		$kdtgl_awal1 = $this->kdtgl_awal;
 		$kdtgl_akhir1 = $this->kdtgl_akhir;
-		 $border = 0;
-        $h = 40;
-        $left = 10;
+		
+        
 		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
         //-----------------------------------
         //----------------------------------------------- 
 
-        #tableheader
+        #pengaturan khusus
+		 $border = 0;
+        $h = 40;
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 140;
@@ -106,7 +107,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->SetX($px2 += $ukuran_kolom_norek_penerima);
         $this->Cell($ukuran_kolom_norek_penerima, $h, 'Jumlah', 1, 1, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_norek_penerima);
-        $this->Ln(8);
+        $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(

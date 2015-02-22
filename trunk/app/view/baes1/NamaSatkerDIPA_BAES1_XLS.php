@@ -110,12 +110,13 @@ if (count($this->data) == 0) {
 		$nil['p7']='0';
 	}else{
 		$nil['p7']=$value->get_total_pagu_pendapatan();
+	}
 	$nil['p8']=$value->get_tgl_rev();
 	$nil['p9']=$value->get_rev();
+	
 	array_push($dataArray,$nil);
-
 	}
-    
+   
 	$nox=$no+3;
 	$objPHPExcel->getActiveSheet()->fromArray($dataArray, NULL, 'A5');
 

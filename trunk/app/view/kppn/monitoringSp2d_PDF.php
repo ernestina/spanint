@@ -37,35 +37,15 @@
 		$nm_kppn3 = $this->nm_kppn3;
 		$kdtgl_awal1 = $this->kdtgl_awal;
 		$kdtgl_akhir1 = $this->kdtgl_akhir;
-		 $border = 0;
-        $h = 40;
-        $left = 10;
+		
+        
 		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
         //-----------------------------------
-/*     $border = 0;
-    $h = 40;
-    $left = 10;
-    //header
-    $this->SetFont("", "B", 12);
-	
-	$this->SetX($left+20); 
-	$this->Image("./././public/img/depkeu.png",30,30,30,30);
-	$px1 = $this->GetX();
-	$this->SetX($left+50); 
-	$this->MultiCell(0, $h/2, 'Laporan Monitoring PFK ');
-	$py1 = $this->GetY();
-	$px2 = $px1;
-	$py2 = $py1;
-	$this->SetXY($px2,$py2);
-	$this->SetX($left+50); 
-	$this->MultiCell(0, $h/2, 'Sampai Dengan  '.date('d-m-Y'));
-	
-    $this->Cell(0, 1, " ", "B");
-     $this->Ln(10);*/
-	$this->SetFont("", "B", 8);
-     $this->Ln(10);*/
+
      
-    #tableheader
+    #pengaturan khusus
+	 $border = 0;
+        $h = 40;
     $this->SetFont('Arial','B',7);
 	$ukuran_kolom_pagu_total_sisa=70;
 	$ukuran_kolom_jenis_belanja=65;	
@@ -103,7 +83,7 @@
 	$this->SetX($px2 += $ukuran_kolom_dana);
 	$this->Cell($ukuran_kolom_jenis_belanja, $h, 'Status', 1, 1, 'C',true);
 	$this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-	$this->Ln(8);  
+	$this->Ln(3);  
 	
     $this->SetFont('Arial','',7);	
     $this->SetWidths(array(30,50,$ukuran_kolom_jenis_belanja,$ukuran_kolom_satker,$ukuran_kolom_dana,$ukuran_kolom_jenis_belanja));
@@ -167,8 +147,7 @@
     $this->Output($this->options['filename'],$this->options['destinationfile']);
     }
      
-    private $widths;
-    private $aligns;
+    
      
     function SetWidths($w)
     {

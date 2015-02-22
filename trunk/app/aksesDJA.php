@@ -113,6 +113,7 @@ $akses['PDFDJA'] = array(
     'RealisasiFA_1_PDF',
     'RealisasiFA_PDF',
     'RevisiDipa_PDF',
+	'registerDJPU_PDF',
     '__destruct'
 );
 ?>

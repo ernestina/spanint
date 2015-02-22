@@ -79,11 +79,20 @@ $akses['PDFKL'] = array(
     'DataRealisasiKewenanganBAES1_BAES1_PDF',
     'DataRealisasiSumberDanaBAES1_BAES1_PDF',
 	'DataRealisasiWilayahBAES1_BAES1_PDF',
-    'DataRealisasiPenerimaanBA_BAES1_PDF',
-    'nmsatker_BAES1_PDF',
-    'ProsesRevisi_BAES1_PDF',
+	'DataFaBaPerEs1_BAES1_PDF',
+	'DataFaBaSatEs1_BAES1_PDF',
+	'DataRealisasiKegiatanBA_BAES1_PDF',
+	'DataRealisasiOutputBA_BAES1_PDF',
+	'DataFaBaPerJenbel_BAES1_PDF',
+	'DataFaBaPerSdana_BAES1_PDF',
+	'DataFaBaEs1Jenbel_BAES1_PDF',
+	'DataFaBaEs1Sdana_BAES1_PDF',
 	'nmsatkerBAES1_BAES1_PDF',
     'RekapSp2dBAES1_BAES1_PDF',
+    'DataRealisasiPenerimaanBA_BAES1_PDF',
+	'DataRealisasiPenerimaanPerES1_BAES1_PDF',
+    'nmsatker_BAES1_PDF',
+    'ProsesRevisi_BAES1_PDF',
     '__destruct'
 );
 

@@ -82,7 +82,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('F4', "Nomor SP2D");
 //p7
 $objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal SP2D");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Nilai");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Nilai");
 
 //Data
 if (count($this->data) == 0) {

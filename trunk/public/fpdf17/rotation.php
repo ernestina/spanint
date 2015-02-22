@@ -57,7 +57,10 @@ function _endpage()
 	}
 	function HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1){
  //-----------------------------------
-        $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
+       
+		 
+		
+		$kemenkeu = 'Kementerian Keuangan Republik Indonesia';
 		$left=20;
 		$h1 = 35;
         $this->SetFont("", "B", 10);
@@ -71,8 +74,18 @@ function _endpage()
         $py2 = $py1;
         $this->SetXY($px2, $py2);
         $this->SetX($left + 50);
-
-        if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
+ 
+        if (Session::get('role') == ADMIN  
+		|| Session::get('role') == DJA  
+		|| Session::get('role') == KANWIL
+		|| Session::get('role') == KPPN
+		|| Session::get('role') == SATKER
+		|| Session::get('role') == BLU
+		){
+			
+			
+		
+		if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 6) == 'KANWIL') { //5
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
@@ -82,7 +95,34 @@ function _endpage()
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'ADMIN') { //1
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
-        } elseif (substr(trim($nm_kppn), 0,10) == 'Direktorat') { //6
+        } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 4) == 'BANK') { //6
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        } else {
+            $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
+        }
+			
+			
+		}elseif(Session::get('role') == KL || Session::get('role') == ES1){
+			
+			if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 6) == 'KANWIL') { //5
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 3) == 'DIT') {  //1 & 4
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 3) == 'SET') {  //1
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 5) == 'ADMIN') { //1
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 4) == 'BANK') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
             $this->MultiCell(0, $h1 / 2, '');
@@ -91,13 +131,24 @@ function _endpage()
         } else {
             $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
         }
+		}
+		
+		
+		
+
 
         $this->Cell(0, 1, " ", "B");
         $this->Ln(20);
         $this->Cell(0,0, strtoupper($judul), 0, 0, 'C', false);
         $this->Ln(5);
                 //tanggal
-		if (Session::get('role') == ADMIN  || Session::get('role') == DJA  || Session::get('role') == KANWIL){
+		if (Session::get('role') == ADMIN  
+		|| Session::get('role') == DJA  
+		|| Session::get('role') == KANWIL
+		|| Session::get('role') == KPPN
+		|| Session::get('role') == SATKER
+		|| Session::get('role') == BLU
+		){
 			if (isset($kdtgl_awal1) && isset($kdtgl_akhir1)) {
 				$thn1 = substr($kdtgl_awal1, 6, 4);
 				$bln1 = substr($kdtgl_awal1, 3, 2);
