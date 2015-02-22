@@ -34,8 +34,8 @@
             <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
             </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdwilayah . "/" . $nmwilayah . "/" . $kdlokasi; ?>/PDF">PDF</a></li>
-                    <li><a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdwilayah . "/" . $nmwilayah . "/" . $kdlokasi; ?>/XLS">EXCEL</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/DataRealisasiWilayahBAES1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
                   </ul>
         </div>
             

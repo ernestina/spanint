@@ -76,7 +76,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
 
 //Data
 if (count($this->data) == 0) {
-	echo 'Tidak ada data'; 
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
 }else{
 	$no=0;
 	$dataArray= array();

@@ -99,7 +99,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('N4', "Sisa Pagu");
 
 //Data
 if (count($this->data) == 0) {
-	echo 'Tidak ada data'; 
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
 }else{
 	$no=0;
 	$dataArray= array();

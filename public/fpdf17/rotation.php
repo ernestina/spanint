@@ -138,7 +138,7 @@ function _endpage()
          //----------------------------------------------- 
         $this->SetFont('Arial', 'B', 8);
 
-        #tableheader
+        #pengaturan umum
 		if (Session::get('role') == ADMIN  || Session::get('role') == DJA  || Session::get('role') == KANWIL){
 			
 		}elseif(Session::get('role') == KL){
