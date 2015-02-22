@@ -4,6 +4,7 @@
 <script type="text/javascript" charset="utf-8">
     
     dashMode = true;
+    overviewMode = true;
     
     Chart.defaults.global.responsive = true;
     Chart.defaults.global.showTooltips = false;
@@ -41,6 +42,8 @@
     <?php } ?>
                 
     <?php if (isset($this->main_chart)) { ?>
+                
+        var mainChartOptions = { datasetStrokeWidth : 1, barStrokeWidth : 1 };
     
         var mainChartData = {
             
@@ -51,7 +54,7 @@
                         <?php foreach ($this->main_chart->labels as $label) { ?>
 
                             <?php if ($i > 0) { echo ','; } ?>
-                            <?php echo '"' . $label . '"'; $i++; ?>
+                            <?php echo '"' . $label->text . '"'; $i++; ?>
 
                         <?php } ?>
                     
@@ -107,28 +110,14 @@
                 <h2><?php echo $this->page_title; ?></h2>
             </div>
             
-            <div class="col-lg-4 col-md-6 col-sm-12 top-padded">
-                
-            </div>
-            
-        </div>
-        
-        <div class="row">
-
-            <div class="col-md-6 col-sm-12">
+            <div class="hidden-xs hidden-sm col-lg-4 col-md-6 col-sm-12 top-padded align-right">
                 <?php echo $this->page_subtitle; ?>
             </div>
-
-            <div class="col-md-6 col-sm-12 align-right">
-                <?php
-                    if (isset($this->last_update)) {
-                        foreach ($this->last_update as $last_update) {
-                            echo "Update Data Terakhir (Waktu Server)<br/>" . $last_update->get_last_update() . " WIB";
-                        }
-                    }
-                ?>
+            
+            <div class="hidden-md hidden-lg col-sm-12 top-padded">
+                <?php echo $this->page_subtitle; ?>
             </div>
-
+            
         </div>
 
     </div>
@@ -181,6 +170,27 @@
                                 </div>
                             </div>
                         
+                        <?php } else if ($tile->type == 'gauge') { ?>
+                
+                            <div class="col-lg-3 col-md-6 col-sm-12 pie-segment-container">
+                                <div class="pie-segment">
+                                    <div class="pie-canvas"><canvas id="pieCanvas<?php echo $tileid; ?>"></canvas></div>
+                                    <div class="pie-legend">
+                                        <h4><?php echo $tile->title; ?></h4>
+                                        
+                                        <?php foreach ($tile->values as $value) { ?>
+                                        
+                                            <div style="width: 50%; float: left; border-left: 4px solid <?php echo $value->color; ?>">
+                                                <p><?php echo number_format($value->value); if (isset($value->unit)) { echo ' ' . $value->unit; } ?></p>
+                                                <p class="sub"><?php echo $value->name; ?></p>
+                                            </div>
+                                        
+                                        <?php } ?>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
                         <?php } ?>
                 
                     <?php } ?>
@@ -206,11 +216,11 @@
                 </div>
                 
                 <div class="col-sm-12 col-md-6 col-lg-6 align-right">
-                    
+                    <div class="hidden-md hidden-lg" style="height: 10px; border-top: 1px solid #e5e5e5"></div>
                     <?php if (isset($this->switchers)) { ?>
                     
                         <h4>Tampilkan: &nbsp;
-                            <select id="switchers">
+                            <select id="switchers" style="max-width: 150px; overflow: hidden;">
                                 <option value="0">Pilih salah satu...</option>
                                 <?php foreach ($this->switchers as $sid=>$switcher) { ?>
                                     <option value="<?php echo $sid; ?>"><?php echo $switcher->description; ?></option>
@@ -224,21 +234,24 @@
                 </div>
 
             </div>
+            
+            <div class="row hidden-sm hidden-xs" style="border-bottom: 1px solid #e5e5e5;"></div>
 
-            <div class="row" style="border-top: 1px solid #e5e5e5;">
+            <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-9">
                     <div id="dashboard-line" class="top-padded">
                         <canvas id="overviewMainChartCanvas"></canvas>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-3">
-                    <div class="top-padded">
+                    <div class="hidden-md hidden-lg" style="height: 20px;"></div>
+                    <div id="dashboard-legend" class="top-padded">
                         <?php if (isset($this->main_chart->legends)) { ?>
                         
                             <?php foreach($this->main_chart->legends as $lid=>$legend) { ?>
-                            <div style="border: none; padding-bottom: 5px; display: table;">
+                            <div style="border: none; padding-bottom: 5px; display: table; font-size: 12px;">
                                 <div style="border: none; display: table-row;">
-                                    <div style="padding: 3px 5px; background: #999; color: #fff; border: none; display: table-cell;"><?php echo ($this->main_chart->labels[$lid]); ?></div>
+                                    <div style="padding: 3px 5px; background: <?php echo ($this->main_chart->labels[$lid]->color); ?>; color: #fff; border: none; display: table-cell;"><?php echo ($this->main_chart->labels[$lid]->text); ?></div>
                                     <div style="padding: 3px 5px; border: none; display: table-cell;"><?php echo ($legend); ?></div>
                                 </div>
                             </div>
@@ -285,6 +298,34 @@
                         var tilePieChart<?php echo $tileid; ?>Canvas = document.getElementById("pieCanvas<?php echo $tileid; ?>").getContext("2d");
                         var tilePieChart<?php echo $tileid; ?> = new Chart(tilePieChart<?php echo $tileid; ?>Canvas).Doughnut(tilePieData<?php echo $tileid; ?>);
             
+                    <?php } else if ($tile->type == 'gauge') { ?>
+            
+                        var opts<?php echo $tileid; ?> = {
+                                        lines: 12, // The number of lines to draw
+                                        angle: 0.15, // The length of each line
+                                        lineWidth: 0.44, // The line thickness
+                            
+                                        pointer: {
+                                                    length: 0.9, // The radius of the inner circle
+                                                    strokeWidth: 0.035, // The rotation offset
+                                                    color: '#000000' // Fill color
+                                        },
+                            
+                                        limitMax: 'false',   // If true, the pointer will not go past the end of the gauge
+                                        colorStart: '#6FADCF',   // Colors
+                                        colorStop: '#8FC0DA',    // just experiment with them
+                                        strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                        generateGradient: true
+                            
+                        };
+            
+                        var gaugeCanvas<?php echo $tileid; ?> = document.getElementById('pieCanvas<?php echo $tileid; ?>'); // your canvas element
+                        var gauge<?php echo $tileid; ?> = new Gauge(gaugeCanvas<?php echo $tileid; ?>).setOptions(opts<?php echo $tileid; ?>); // create sexy gauge!
+            
+                        gauge<?php echo $tileid; ?>.maxValue = 3000; // set max gauge value
+                        gauge<?php echo $tileid; ?>.animationSpeed = 32; // set animation speed (32 is default value)
+                        gauge<?php echo $tileid; ?>.set(1250); // set actual value
+            
                     <?php } ?>
             
                 <?php } ?>
@@ -297,9 +338,9 @@
                 var mainChartCanvas = document.getElementById("overviewMainChartCanvas").getContext("2d");
             
                 <?php if ($this->main_chart->type == 'line') { ?>
-                    var mainChart = new Chart(mainChartCanvas).Line(mainChartData);
+                    var mainChart = new Chart(mainChartCanvas).Line(mainChartData, mainChartOptions);
                 <?php } else { ?>
-                    var mainChart = new Chart(mainChartCanvas).Bar(mainChartData);
+                    var mainChart = new Chart(mainChartCanvas).Bar(mainChartData, mainChartOptions);
                 <?php } ?>
             
             <?php } ?>

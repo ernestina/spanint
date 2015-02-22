@@ -1,6 +1,6 @@
 <?php
 
-class OverviewPenganggaranController extends BaseController {
+class DashboardControllerController extends BaseController {
 
     public function __construct($registry) {
         parent::__construct($registry);
@@ -10,7 +10,7 @@ class OverviewPenganggaranController extends BaseController {
         
     }
 
-    public function overview($mode=null) {
+    public function dashboard($mode=null) {
         
         $fetch = new DataOverview($this->registry);
         $this->view->tiles = array();
@@ -23,7 +23,6 @@ class OverviewPenganggaranController extends BaseController {
                   'subtitle' => 'Persentase terhadap pagu',
                   'type' => 'notification',
                   'value' => $fetch->percentageRealisasiBelanja(),
-                  'max-value' => 100,
                   'unit' => '%');
         
         //Count Jumlah Realisasi

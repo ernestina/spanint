@@ -429,6 +429,13 @@ function resizePage() { //Fungsi untuk mengatur ukuran jendela-jendela aplikasi 
         $('#dashboard-line').css('height', remainingTableSpace - 120);
     }
     
+    if (($('#dashboard-legend').html() != '') && ($('#dashboard-line').innerHeight() < $('#dashboard-legend').innerHeight())) {
+            
+        $('#dashboard-line').css('height', $('#dashboard-legend').innerHeight());
+        $('#dashboard-line').css('min-height', $('#dashboard-legend').innerHeight());
+
+    }
+    
     //Table Reset
     wrapRewrapTable();
     wrapRewrapDashTable();
