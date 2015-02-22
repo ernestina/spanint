@@ -12,6 +12,38 @@
             </div>
 
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
+			<?php
+			 if (Session::get('role') == ADMIN || Session::get('role') == KANWIL || Session::get('role') == DJA) {
+                   
+                        
+						if (isset($this->d_nip)) {
+						$kdnip = $this->d_nip;
+                    } else {
+						$kdnip = 'null';
+                     }
+
+                    if (isset($this->d_name)) {
+                        $kdnama = $this->d_name;
+                    } else {
+                        $kdnama = 'null';
+                    }
+					?>
+						<div class="btn-group-sm">
+						<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+						</button>
+							  <ul class="dropdown-menu" role="menu">
+								<li><a href="<?php echo URL; ?>PDF/registerDJPU_PDF/<?php echo $kdnip . "/" . $kdnama; ?>/PDF">PDF</a></li>
+								<li><a href="<?php echo URL; ?>PDF/registerDJPU_PDF/<?php echo $kdnip . "/" . $kdnama; ?>/XLS">EXCEL</a></li>
+							  </ul>
+                </div>
+
+					
+					<?php
+				
+			 }
+			
+			
+			?>
 
             </div>
 

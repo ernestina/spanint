@@ -107,7 +107,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Jenis SP2D', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
         $this->Cell($ukuran_kolom_deskripsi, $h, 'Deskripsi', 1, 1, 'C', true);
-        $this->Ln(8);
+        $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(30, $ukuran_kolom_pagu_total_sisa, $ukuran_kolom_pagu_total, $ukuran_kolom_pagu_total, $ukuran_kolom_jenis_belanja, $ukuran_kolom_satker, $ukuran_kolom_dana, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_deskripsi));

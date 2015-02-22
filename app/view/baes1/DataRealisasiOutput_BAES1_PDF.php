@@ -99,7 +99,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->SetXY($px2, $py2);
         $this->Cell($ukuran_kolom_dana1, $h, 'Total Fund Available', 1, 1, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_dana1);
-        $this->Ln(8);
+        $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array($kolom1, $ukuran_kolom_akun,

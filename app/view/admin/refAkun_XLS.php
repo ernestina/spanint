@@ -70,45 +70,25 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Nomor Invoice");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nilai Invoice Rp");
-//p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Deskripsi Invoice");
-//p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Approval Status");
-//p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Status");
-//p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "User");
-//p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Mulai");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama");
 
 //Data
 if (count($this->data) == 0) {
-	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
-}else{
+
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data");
+ }else{
 	$no=0;
 	$dataArray= array();
 	foreach ($this->data as $value) {
 	$no++;
 	$nil['p1']=$no;
-	$nil['p2']=$value->get_invoice_num();
-	if ($value->get_invoice_amount()==0){
-		$nil['p3']='0';
-	}else{
-		$nil['p3']=$value->get_invoice_amount();
-	}		
-	$nil['p4']=$value->get_invoice_description();
-	$nil['p5']=$value->get_wfapproval_status();
-	$nil['p6']=$value->get_status();
-	$nil['p7']=$value->get_to_user();
-	$nil['p8']=$value->get_fu_description();
-	$nil['p9']=$value->get_begin_date();
+	$nil['p2']=$value->get_kdakun();
+	$nil['p3']=$value->get_nmakun();
+
 	
 	
-	
-			
 	
 		array_push($dataArray,$nil);
 

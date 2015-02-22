@@ -195,6 +195,9 @@ $akses['PDFSatker'] = array(
     'RekapSp2d_PDF',
     'RevisiDipa_PDF',
     'ValidasiSpm_PDF',
+	'dataBPN_PDF',
+    'dataBPNSatker_PDF',
+	'MpnBi_BAES1_PDF',
     '__destruct'
 );
 ?>
