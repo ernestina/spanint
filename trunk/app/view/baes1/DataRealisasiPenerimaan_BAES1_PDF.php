@@ -57,14 +57,14 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		$kdtgl_akhir1 = $this->kdtgl_akhir;
 		 $border = 0;
         $h = 40;
-        $left = 10;
+        
 		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
         //-----------------------------------
         //----------------------------------------------- 
         #pengaturan khusus
 		 $border = 0;
         $h = 40;
-        $left = 10;
+        
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_jenis_belanja = 100;
         $ukuran_kolom_akun = 90;

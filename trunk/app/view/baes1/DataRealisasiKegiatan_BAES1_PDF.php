@@ -65,7 +65,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         #pengaturan khusus
         $h = 40;
 		 $border = 0;
-		 $left = 10;
+		 
 
         $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_jenis_belanja = 200;
