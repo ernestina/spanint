@@ -112,7 +112,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('U4', "Status Retur(SP2D Pengganti)
 
 //Data
 if (count($this->data) == 0) {
-	echo 'Tidak ada data'; 
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
 }else{
 	$no=0;
 	$dataArray= array();

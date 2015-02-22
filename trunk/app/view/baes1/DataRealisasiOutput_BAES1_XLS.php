@@ -76,26 +76,19 @@ $objPHPExcel->getActiveSheet()->setCellValue('C4', "Pagu");
 //p4
 $objPHPExcel->getActiveSheet()->setCellValue('D4', "Realisasi");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Persentase Realisasi");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Outstanding Kontrak");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Outstanding Kontrak");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Block Amount");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Block Amount");
-//p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Total Fund Available");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Total Fund Available");
 
 //Data
 if (count($this->data) == 0) {
-	echo 'Tidak ada data'; 
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
 }else{
 	$no=0;
 	$dataArray= array();
 	foreach ($this->data as $value) {
-	if($value->get_budget_amt() == 0) { 
-		$nil1="0.00%" ;
-	} else {
-       $nil1=number_format(($value->get_actual_amt()/$value->get_budget_amt())*100, 2) ."%" ;
-				}
 	$no++;
 	$nil['p1']=$no;
 	$nil['p2']=$value->get_kdkegiatan().'|'.$value->get_nmkegiatan();
@@ -110,21 +103,20 @@ if (count($this->data) == 0) {
 	}else{
 		$nil['p4']=$value->get_actual_amt();
 	}
-$nil['p5']=$nil1;	
 if ($value->get_obligation()==0){
-		$nil['p6']='0';
+		$nil['p5']='0';
 	}else{
-		$nil['p6']=$value->get_obligation();
+		$nil['p5']=$value->get_obligation();
 	}		
 	if ($value->get_block_amount()==0){
-		$nil['p7']='0';
+		$nil['p6']='0';
 	}else{
-		$nil['p7']=$value->get_block_amount();
+		$nil['p6']=$value->get_block_amount();
 	}
 	if ($value->get_balancing_amt()==0){
-		$nil['p8']='0';
+		$nil['p7']='0';
 	}else{
-		$nil['p8']=$value->get_balancing_amt();
+		$nil['p7']=$value->get_balancing_amt();
 	}
 
 	

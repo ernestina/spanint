@@ -86,7 +86,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('H4', "No. Revisi Terakhir");
 
 //Data
 if (count($this->data) == 0) {
-	echo 'Tidak ada data'; 
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
 }else{
 	$no=0;
 	$dataArray= array();
@@ -109,15 +109,17 @@ if (count($this->data) == 0) {
 		$nil['p6']=$value->get_total_pagu_pendapatan();
 	$nil['p7']=$value->get_tgl_rev();
 	$nil['p8']=$value->get_rev();
-	array_push($dataArray,$nil);
+	
 
+	}
+	array_push($dataArray,$nil);
 	}
     
 	$nox=$no+3;
 	$objPHPExcel->getActiveSheet()->fromArray($dataArray, NULL, 'A5');
 
+	
 }
-
 
 //pengaturan
 // Set page orientation and size

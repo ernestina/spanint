@@ -57,13 +57,13 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		$nm_kppn3 = $this->nm_kppn3;
 		$kdtgl_awal1 = $this->kdtgl_awal;
 		$kdtgl_akhir1 = $this->kdtgl_akhir;
-		 $border = 0;
-        $h = 40;
-        $left = 10;
 		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
         //-----------------------------------
        
 		//------------------------------------------------------------------
+		 $border = 0;
+        $h = 40;
+        $left = 10;
         $this->SetFont('Arial', 'B', 7);
 
         $ukuran_kolom_pagu_total_sisa = 35;
@@ -147,25 +147,6 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Ln(3);
     }
 
-	public function printPDF() {
-
-        if ($this->options['paper_size'] == "F4") {
-            $a = 8.3 * 72; //1 inch = 72 pt
-            $b = 13.0 * 72;
-            $this->FPDF($this->options['orientation'], "pt", array($a, $b));
-        } else {
-            $this->FPDF($this->options['orientation'], "pt", $this->options['paper_size']);
-        }
-
-        $this->SetAutoPageBreak(false, 30);
-        $this->AliasNbPages();
-        $this->SetFont("helvetica", "B", 10);
-        $this->AddPage();
-
-        $this->rptDetailData();
-        $this->Footer();
-        $this->Output($this->options['filename'], $this->options['destinationfile']);
-    }
    
 
   

@@ -107,7 +107,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('R4', "Selisih Rp.(DROPING-(SPAN+PE
 $objPHPExcel->getActiveSheet()->setCellValue('S4', "Keterangan");
 //Data
 if (count($this->data) == 0) {
-	echo 'Tidak ada data'; 
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
 }else{
 	$selisih_span_bank_file = $value->get_jumlah_ftp_file_name()-$value->get_jml_ftp_file_name_bank();
 	$selisih_span_bank_amount = $value->get_jumlah_check_amount()-$value->get_jml_check_amount_bank();

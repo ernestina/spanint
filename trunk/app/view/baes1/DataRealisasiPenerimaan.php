@@ -16,16 +16,16 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 		
-         if (isset($this->lokasi)) {
+				$kdsatker ='null';
+			
+			if (isset($this->eselon1)) {
                 
-				$kdlokasi = $this->lokasi();
+				$kdeselon1 = $this->eselon1();
                 
             }else{
-				$kdlokasi ='null';
+				$kdeselon1 ='null';
 			} 
-			
                 
-				$kdeselon1 = $this->eselon1;
                 
 			 if (isset($this->lokasi)) {
                 
@@ -40,8 +40,8 @@
                 <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                 </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanBA_BAES1_PDF/<?php echo $kdeselon1 . "/" . $kdlokasi; ?>/PDF">PDF</a></li>
-                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanBA_BAES1_PDF/<?php echo $kdeselon1 . "/" . $kdlokasi; ?>/XLS">EXCEL</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanBA_BAES1_PDF/<?php echo $kdeselon1 . "/" . $kdsatker . "/" . $kdlokasi; ?>/PDF">PDF</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanBA_BAES1_PDF/<?php echo $kdeselon1 . "/" . $kdsatker . "/" . $kdlokasi; ?>/XLS">EXCEL</a></li>
                       </ul>
             </div>
             

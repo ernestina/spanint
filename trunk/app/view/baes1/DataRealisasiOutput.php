@@ -15,7 +15,7 @@
                 <?php
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
-				$kdaksi = $this->aksi1;
+				
 				
                 if (isset($this->kdoutput)) {
 
@@ -30,9 +30,7 @@
                     $nmoutput = 'null';
                 }
 			  $kdaksi = $this->action;
-				//var_dump($kdaksi);
 			  $kdaksi1=$kdaksi.'_BAES1_PDF';
-			  $kdaksi2=$kdaksi.'_BAES1_XLS';
 				
 						?>
 						<div class="btn-group-sm">
@@ -40,7 +38,7 @@
 							</button>
 							  <ul class="dropdown-menu" role="menu">
 								<li><a href="<?php echo URL; ?>PDF/<?php echo $kdaksi1;?>/<?php echo $kdoutput . "/" . $nmoutput;?>/PDF">PDF</a></li>
-								<li><a href="<?php echo URL; ?>PDF/<?php echo $kdaksi2;?>/<?php echo $kdoutput . "/" . $nmoutput; ?>/XLS">EXCEL</a></li>																	
+								<li><a href="<?php echo URL; ?>PDF/<?php echo $kdaksi1;?>/<?php echo $kdoutput . "/" . $nmoutput; ?>/XLS">EXCEL</a></li>																	
 								  </ul>
 							</div>						
 						

@@ -6848,7 +6848,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$d_log->tambah_log("Sukses");
     }
 	
-	public function DataRealisasiPenerimaanBA_BAES1_PDF($eselon1=null,$kdlokasi=null,$ck=null) {
+	public function DataRealisasiPenerimaanBA_BAES1_PDF($eselon1=null,$satker=null,$kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -6862,20 +6862,18 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		if (Session::get('role') == ES1){		
 			$filter[$no++] =  "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";			
 		}
-		
-		
-        
-            if ($eselon1 != null) {
+	
+        if ($eselon1 != 'null') {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . $eselon1 . "'";
-			$this->view->eselon1 = $eselon1;
+			
         }
-		if ($satker != null) {
+		if ($satker != 'null') {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . $satker . "'";
         }
 
 
             if ($kdlokasi != 'null') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $kdkegiatan . "'";
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $kdlokasi . "'";
                 $this->view->lokasi = $kdlokasi;
             }
                 
@@ -6943,6 +6941,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('baes1/DataRealisasiPenerimaan_BAES1_PDF');
+			
 		}elseif($ck=='XLS'){
 			$this->view->load('baes1/DataRealisasiPenerimaan_BAES1_XLS');
 		}
@@ -8269,6 +8268,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		$this->view->data = $d_spm1->get_ba_output_filter($filter);
         //-------------------------
 
 		if (Session::get('role') == ADMIN) {
@@ -8320,8 +8320,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         }
         //-------------------------
-		$this->view->data = $d_spm1->get_ba_output_filter($filter);
 		//------------------------------------------------------------
+		$this->view->kdjk='Kode | Nama Kegiatan / Output';
 		$judul1='Realisasi Belanja per Output';
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
