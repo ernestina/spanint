@@ -64,7 +64,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		//------------------------------------------------------------------
          $border = 0;
         $h = 40;
-        $left = 10;
+        
 		$this->SetFont('Arial', 'B', 7);
 
         $ukuran_kolom_pagu_total_sisa = 35;
