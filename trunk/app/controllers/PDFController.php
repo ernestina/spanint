@@ -5050,10 +5050,10 @@ class PDFController extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 		
 		if ((''.Session::get('ta')) == date("Y")) {
-			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2015'";
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2015'";
 		 }
 		 else {
-			$filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYY') = '2014'";
+			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
 		 }
         if ($kdkppn != 'null') {
             $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) IN ( '" . $kdkppn . "')";
@@ -5064,7 +5064,7 @@ class PDFController extends BaseController {
         }
 
         if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
-            $filter[$no++] = "TO_CHAR(CREATION_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($kdtgl_awal)) . "' AND '" . date('Ymd', strtotime($kdtgl_akhir)) . "'";
+            $filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($kdtgl_awal)) . "' AND '" . date('Ymd', strtotime($kdtgl_akhir)) . "'";
 
             $tglawal = array("$kdtgl_awal");
             $tglakhir = array("$kdtgl_akhir");
