@@ -46,9 +46,7 @@ $path = array(
 
 //include ROOT.'/config/config.php';
 include ROOT.'/libs/Autoloader.php';
-include ROOT.'/libs/config.php';
-
-
+//include ROOT.'/libs/config.php';
 $FILE = dirname(__DIR__).'/local/config.php';
 
 if (is_file($FILE)) {
