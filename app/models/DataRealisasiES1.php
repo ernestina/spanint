@@ -150,14 +150,19 @@ class DataRealisasiES1 {
 
     public function get_ba_pendapatan_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT A.AKUN, C.DESCRIPTION, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI, SUBSTR(A.PROGRAM,1,3) KDBA
+        $sql = " SELECT A.AKUN, A.DESCRIPTION, SUM(PAGU) PAGU	,SUM(D.TOTAL) POTONGAN, SUM(REALISASI) - SUM(D.TOTAL) SETORAN, SUM(REALISASI) REALISASI, A.KDBA
+		FROM (
+		SELECT A.SATKER, A.AKUN, C.DESCRIPTION, SUM(BUDGET_AMT) PAGU
+		,  SUM(ACTUAL_AMT) * -1 REALISASI, B.BA KDBA
 				FROM "
                 . $this->_table1 . " A, "
-                . $this->_table5 . " C 
+                . $this->_table5 . " C , 
+				( SELECT DISTINCT KDSATKER, BA, BAES1 FROM " . $this->_table8 . " ) B  				
 				WHERE 1=1 
 				AND A.AKUN =C.FLEX_VALUE			
 				AND A.SUMMARY_FLAG = 'N' 
-				AND SUBSTR(AKUN,1,1) = '4'
+				AND SUBSTR(A.AKUN,1,1) = '4'
+				AND A.SATKER = B.KDSATKER								
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
 				";
@@ -165,7 +170,13 @@ class DataRealisasiES1 {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= " GROUP BY A.AKUN, C.DESCRIPTION, SUBSTR(A.PROGRAM,1,3) ";
+        $sql .= " GROUP BY A.AKUN, C.DESCRIPTION, B.BA, A.SATKER )A  ";
+		$sql .= " LEFT JOIN
+					( SELECT DISTINCT AKUN, SATKER, SUM(NILAI_ORI)TOTAL FROM SPPM_BPN WHERE SUBSTR(JENDOK_EXIS,1,1) NOT IN ('3','4','5','6') GROUP BY AKUN, SATKER ) D
+					ON A.SATKER = D.SATKER
+					AND A.AKUN = D.AKUN ";
+		 $sql .= " GROUP BY A.AKUN,  A.DESCRIPTION,  A.KDBA ";
+
         $sql .= " ORDER BY A.AKUN ";
 
 
@@ -180,6 +191,8 @@ class DataRealisasiES1 {
             $d_data->set_budget_amt($val['PAGU']);
             $d_data->set_actual_amt($val['REALISASI']);
             $d_data->set_nm_satker($val['NMBA']);
+			$d_data->set_dana($val['POTONGAN']);
+			$d_data->set_bank($val['SETORAN']);
             $data[] = $d_data;
         }
         return $data;
@@ -224,12 +237,15 @@ class DataRealisasiES1 {
     
 	public function get_ba_per_es1_pendapatan_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT C.NMES1, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI, SUBSTR(A.PROGRAM,1,5) KDES1
+        $sql = "SELECT C.NMES1, SUM(BUDGET_AMT) PAGU
+		, SUM(ACTUAL_AMT) * -1 REALISASI, B.BAES1 KDES1
 				FROM "
                 . $this->_table1 . " A, "
-                . $this->_table4 . " C 
+                . $this->_table4 . " C , 
+				( SELECT DISTINCT KDSATKER, BA, BAES1 FROM " . $this->_table8 . " ) B
 				WHERE 1=1 
-				AND SUBSTR(A.PROGRAM,1,5) =C.KDES1			
+				AND B.BAES1 =C.KDES1	
+				AND A.SATKER = B.KDSATKER				
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(AKUN,1,1) = '4'
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
@@ -239,8 +255,8 @@ class DataRealisasiES1 {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-        $sql .= " GROUP BY SUBSTR(A.PROGRAM,1,5), C.NMES1 ";
-        $sql .= " ORDER BY SUBSTR(A.PROGRAM,1,5) ";
+        $sql .= " GROUP BY B.BAES1, C.NMES1 ";
+        $sql .= " ORDER BY B.BAES1 ";
 
 
         //var_dump($sql);

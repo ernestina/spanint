@@ -20,7 +20,7 @@
 			
 			if (isset($this->eselon1)) {
                 
-				$kdeselon1 = $this->eselon1();
+				$kdeselon1 = $this->eselon1;
                 
             }else{
 				$kdeselon1 ='null';
@@ -92,6 +92,8 @@
                 <th class='mid'>No.</th>
                 <th class='mid'>Kode Akun| Jenis Pendapatan</th>
                 <th class='mid'>Pagu </th>
+				<th class='mid'>Setoran MPN </th>
+				<th class='mid'>Potongan SPM </th>
                 <th class='mid'>Realisasi</th>
                 <th class='mid'>Persentase<br>Realisasi</th>
             </tr>
@@ -101,6 +103,8 @@
             $no = 1;
             $tot_pagu = 0;
 			$tot_real = 0;
+			$tot_spm = 0;
+			$tot_mpn = 0;
 			
             if (isset($this->data)) {
                 if (empty($this->data)) {
@@ -111,6 +115,8 @@
                         echo "<td>" . $no++ . "</td>";
                         echo "<td align='left'>" . $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan() . "</td>";
                         echo "<td align='right'>" . number_format($value->get_budget_amt()) . "</td> ";
+						echo "<td align='right'>" . number_format($value->get_bank()) . "</td> ";
+						echo "<td align='right'>" . number_format($value->get_dana()) . "</td> ";
                         echo "<td align='right'>" . number_format($value->get_actual_amt()) .
 						"</td> ";
 						echo "<td align='right'>";
@@ -124,6 +130,8 @@
                         
 							$tot_pagu+=$value->get_budget_amt();
 							$tot_real+=$value->get_actual_amt();
+							$tot_spm+=$value->get_dana();
+							$tot_mpn+=$value->get_bank();
                             
                     }
 					echo "<tr>";
@@ -141,6 +149,8 @@
 			<tr>
                     <td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
 					<td align='right'><b> <?php echo number_format($tot_pagu) ;?> </b> </td>
+					<td align='right'><b> <?php echo number_format($tot_bank) ;?> </b> </td>
+					<td align='right'><b> <?php echo number_format($tot_dana) ;?> </b> </td>
 					<td align='right'><b> <?php echo number_format($tot_real) ;?> </b></td>
 					<td align='right'><b> <?php if($tot_pagu == 0) {echo '0.00%';} else { echo  number_format($tot_real/$tot_pagu*100,2). '%' ;}?> </b></td>
             </tr>

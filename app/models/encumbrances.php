@@ -74,7 +74,7 @@ class encumbrances {
 	
 	public function get_encumbrances_baes1($filter) {
         Session::get('id_user');
-        $sql = "SELECT DISTINCT A.*, B.SEGMENT1  SATKER
+        $sql = "SELECT DISTINCT A.SEGMENT1, APPROVED_DATE, A.ATTRIBUTE11, A.ATTRIBUTE1, COMMENTS , SUM(ENCUMBERED_AMOUNT) ENCUMBERED_AMOUNT, SUM(EQ_AMOUNT_BILLED) EQ_AMOUNT_BILLED, SUM(SISA_ENCUMBRANCE) SISA_ENCUMBRANCE,   B.SEGMENT1  SATKER
 				FROM "
                 . $this->_table1 . " A,"
 				. $this->_table2 . " B 
@@ -85,8 +85,9 @@ class encumbrances {
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-
-        $sql .= " ORDER BY A.SEGMENT1, A.CREATION_DATE, description  ";
+		
+		$sql .= " GROUP BY A.SEGMENT1,A.ATTRIBUTE11,APPROVED_DATE,  A.ATTRIBUTE1, COMMENTS, B.SEGMENT1  ";
+        $sql .= " ORDER BY A.SEGMENT1 ";
 
         //var_dump ($sql);
         $result = $this->db->select($sql);
@@ -96,7 +97,7 @@ class encumbrances {
             $d_data->set_segment1($val['SEGMENT1']);
             $d_data->set_attribute11($val['ATTRIBUTE11']);
             $d_data->set_code_id($val['CODE_COMBINATION_ID']);
-            $d_data->set_status($val['APPROVED_FLAG']);
+            $d_data->set_status($val['SATKER']);
             $d_data->set_encumbered_amount($val['ENCUMBERED_AMOUNT']);
 			$d_data->set_billed_amount($val['EQ_AMOUNT_BILLED']);
 			$d_data->set_sisa_encumbrence($val['SISA_ENCUMBRANCE']);

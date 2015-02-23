@@ -104,13 +104,13 @@ class BA_ES1Controller extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
         if (Session::get('role') == KL) {
-            $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+            $filter[$no++] = "B.BA = '" . Session::get('kd_baes1') . "'";
         }
         if (Session::get('role') == ES1) {
-            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+            $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
         }
 		if ($eselon1 != null) {
-            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . $eselon1 . "'";
+            $filter[$no++] = "B.BAES1 = '" . $eselon1 . "'";
 			$this->view->eselon1 = $eselon1;
         }
 		if ($satker != null) {
@@ -144,10 +144,10 @@ class BA_ES1Controller extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
         if (Session::get('role') == KL) {
-            $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+            $filter[$no++] = "B.BA = '" . Session::get('kd_baes1') . "'";
         }
         if (Session::get('role') == ES1) {
-            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+            $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
         }
 
 
@@ -321,7 +321,7 @@ class BA_ES1Controller extends BaseController {
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->render('kppn/encumbrances');
+        $this->view->render('baes1/encumbrances');
     }
 	
 	public function DataRealisasiKegiatanBAES1() {

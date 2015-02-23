@@ -120,6 +120,7 @@
             <tbody class='ratatengah'>
                 <?php
                 $no = 1;
+				$total = 0;
                 //var_dump ($this->data);
                 if (isset($this->data)) {
                     if (empty($this->data)) {
@@ -135,6 +136,7 @@
                             //echo "<td>" . $value->get_kppn() . "</td>";
                             echo "<td class='ratakanan'>" . $value->get_total_sp2d() . "</td>";
                             echo "</tr>	";
+							$total += $value->get_total_sp2d();
                         }
                     }
                 } else {
@@ -142,6 +144,13 @@
                 }
                 ?>
             </tbody>
+			<tfoot> <?php
+				echo "<tr>	";
+					echo "<td colspan = 4></td>";
+					echo "<td class='ratakanan'>" . number_format($total) . "</td>";
+				echo "</tr>	";
+				?>
+			</tfoot>
     </table>
 </div>
 
