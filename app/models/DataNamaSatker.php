@@ -160,8 +160,9 @@ class DataNamaSatker {
 				T_SATKER B ,
 				T_ESELON1 C,
 				T_BA D
-				 WHERE
-				A.KDSATKER = B.KDSATKER
+				 WHERE 1=1
+				AND A.KDSATKER = B.KDSATKER
+				AND A.KPPN_CODE = B.KPPN
 				AND B.BA = D.KDBA
 				AND B.BAES1 = C.KDES1";
 

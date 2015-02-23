@@ -1003,12 +1003,22 @@ class DataDIPAController extends BaseController {
     }
 
     public function DetailEncumbrances($code_id = null) {
+	
+	
         $d_spm1 = new encumbrances($this->registry);
         $filter = array();
         $no = 0;
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') = '2014'";
+		 }
+		 
         if ($code_id != '') {
             $filter[$no++] = " CODE_COMBINATION_ID =  '" . $code_id . "'";
             //$this->view->invoice_num = $invoice_num;	

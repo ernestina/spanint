@@ -20,6 +20,7 @@ class encumbrances {
 	private $_app_date;
 	private $_description;
     private $_table1 = 'ENCUMBRANCES';
+	private $_table2 = 'GL_CODE_COMBINATIONS';
     public $registry;
 
     /*
@@ -48,7 +49,44 @@ class encumbrances {
             $sql .= " AND " . $filter;
         }
 
-        $sql .= " ORDER BY SEGMENT1, CREATION_DATE, description  ";
+        $sql .= " ORDER BY SEGMENT1, description ASC ";
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_segment1($val['SEGMENT1']);
+            $d_data->set_attribute11($val['ATTRIBUTE11']);
+            $d_data->set_code_id($val['CODE_COMBINATION_ID']);
+            $d_data->set_status($val['APPROVED_FLAG']);
+            $d_data->set_encumbered_amount($val['ENCUMBERED_AMOUNT']);
+			$d_data->set_billed_amount($val['EQ_AMOUNT_BILLED']);
+			$d_data->set_sisa_encumbrence($val['SISA_ENCUMBRANCE']);
+            $d_data->set_comments($val['COMMENTS']);
+            $d_data->set_attribute1($val['ATTRIBUTE1']);
+            $d_data->set_app_date($val['APPROVED_DATE']);
+            $d_data->set_description($val['DESCRIPTION']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_encumbrances_baes1($filter) {
+        Session::get('id_user');
+        $sql = "SELECT DISTINCT A.*, B.SEGMENT1  SATKER
+				FROM "
+                . $this->_table1 . " A,"
+				. $this->_table2 . " B 
+				where 1=1
+				AND A.CODE_COMBINATION_ID = B.CODE_COMBINATION_ID
+				";
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        $sql .= " ORDER BY A.SEGMENT1, A.CREATION_DATE, description  ";
 
         //var_dump ($sql);
         $result = $this->db->select($sql);

@@ -185,6 +185,43 @@ class DataRealisasiES1 {
         return $data;
     }
 	
+	public function get_ba_per_satker_pendapatan_filter($filter) {
+        Session::get('id_user');
+        $sql = "SELECT C.NMSATKER, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI, A.SATKER, SUBSTR(PROGRAM,1,5) KDBA
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table8 . " C 
+				WHERE 1=1 
+				AND A.SATKER =C.KDSATKER			
+				AND A.SUMMARY_FLAG = 'N' 
+				AND SUBSTR(AKUN,1,1) = '4'
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				
+				";
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " GROUP BY A.SATKER, C.NMSATKER ";
+        $sql .= " ORDER BY A.SATKER ";
+
+
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);
+            $d_data->set_kdkegiatan($val['SATKER']);
+            $d_data->set_nmkegiatan($val['NMSATKER']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
+            
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+    
 	public function get_ba_per_es1_pendapatan_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT C.NMES1, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI, SUBSTR(A.PROGRAM,1,5) KDES1
@@ -221,7 +258,59 @@ class DataRealisasiES1 {
         }
         return $data;
     }
-    
+	
+	public function get_kl_per_es1satker_pendapatan_filter($filter) {
+        Session::get('id_user');
+        $sql = "SELECT SUBSTR(A.PROGRAM,1,5) KODE, C.NMES1 NAMA, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI 
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table4 . " C 
+				WHERE 1=1 
+				AND SUBSTR(A.PROGRAM,1,5) =C.KDES1			
+				AND A.SUMMARY_FLAG = 'N' 
+				AND SUBSTR(AKUN,1,1) = '4'
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				
+				";
+        $no = 0;
+        foreach ($filter as $filter1) {
+            $sql .= " AND " . $filter1;
+        }
+        $sql .= " GROUP BY SUBSTR(A.PROGRAM,1,5), C.NMES1 ";
+		$sql .= " UNION ALL ";
+		$sql .= "SELECT SUBSTR(PROGRAM,1,5) || '-' || A.SATKER KODE, C.NMSATKER NAMA, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI 
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table8 . " C 
+				WHERE 1=1 
+				AND A.SATKER =C.KDSATKER			
+				AND A.SUMMARY_FLAG = 'N' 
+				AND SUBSTR(AKUN,1,1) = '4'
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				
+				";
+        $no = 0;
+        foreach ($filter as $filter2) {
+            $sql .= " AND " . $filter2;
+        }
+        $sql .= " GROUP BY SUBSTR(PROGRAM,1,5), A.SATKER, C.NMSATKER ";
+        $sql .= " ORDER BY KODE ";
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);
+            $d_data->set_kdkegiatan($val['KODE']);
+            $d_data->set_nmkegiatan($val['NAMA']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
+            
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
 /* fungsi di bawah ini dipakai juga utk eselon1 per output*/
     public function get_ba_output_filter($filter) {
         Session::get('id_user');
