@@ -55,7 +55,7 @@ class DataLog {
         //$this->set_kd_log('');
 		$this->set_kd_d_user(Session::get('kd_satker'));
 		$this->set_activity("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
-		$this->set_activity_time_end(date("d-m-Y h:i:s"));
+		$this->set_activity_time_end(date("d-m-Y h:i:s A"));
 		$mulai = strtotime($this->get_activity_time_start());
 		$selesai = strtotime($this->get_activity_time_end());
 		$this->set_duration($selesai - $mulai);
@@ -135,7 +135,7 @@ class DataLog {
     }
 
     public function set_activity_time_start($activity_time_start) {
-        $this->_activity_time_start = $activity_time_start;
+        $this->_activity_time_start = date("d-m-Y h:i:s A");
     }
 
     public function set_activity_time_end($activity_time_end) {
