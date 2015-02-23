@@ -52,6 +52,8 @@ $akses['BaEs1ES1'] = array(
     'DataFaBaPerJenbel',
     'DataFaBaPerSdana',
     'DataFaEs1PerSat',
+    'DataFaEs1SatJenbel',
+    'DataFaEs1SatSdana',
     
     '__destruct'
 );
