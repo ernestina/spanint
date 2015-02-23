@@ -799,7 +799,9 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunBA">Eselon 1 Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Satker Per Jenis Belanja</a></li>
-                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Kewenangan per Jenis Belanja </a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBAES1">Kegiatan per Jenis Belanja </a></li>
+									
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Kewenangan per Jenis Belanja </a></li>
 
 
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Sumber Dana per Jenis Belanja</a></li>
@@ -871,6 +873,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Satker Per Jenis Belanja</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBAES1">Kegiatan per Jenis Belanja </a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1"> Kewenangan Per Jenis Belanja</a></li>
 
 

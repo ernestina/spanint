@@ -168,6 +168,40 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->render('baes1/DataRealisasiPenerimaanES1');
     }
+	
+	public function DataRealisasiPenerimaanPerSatkerES1() {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        }
+        if (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
+
+
+        if (isset($_POST['submit_file'])) {
+
+            if ($_POST['KEGIATAN'] != '') {
+                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $_POST['KEGIATAN'] . "'";
+                $this->view->lokasi = $_POST['KEGIATAN'];
+            }
+        }
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $this->view->data = $d_spm1->get_kl_per_es1satker_pendapatan_filter($filter);
+
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/DataRealisasiPenerimaanES1');
+    }
 
     public function DataRealisasiAkunBA() {
         $d_spm1 = new DataRealisasi($this->registry);
@@ -262,6 +296,68 @@ class BA_ES1Controller extends BaseController {
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKewenaganBAES1');
+    }
+	public function DetailEncumbrances($code_id = null) {
+        $d_spm1 = new encumbrances($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if ((''.Session::get('ta')) == date("Y")) {
+			$filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') = '2015'";
+		 }
+		 else {
+			$filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') = '2014'";
+		 }
+		 
+        if ($code_id != '') {
+            $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . $code_id . "'";
+            //$this->view->invoice_num = $invoice_num;	
+        }
+        //var_dump($d_spm->get_hist_spm_filter());
+        $this->view->data = $d_spm1->get_encumbrances_baes1($filter);
+
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('kppn/encumbrances');
+    }
+	
+	public function DataRealisasiKegiatanBAES1() {
+        $d_spm1 = new DataRealisasi($this->registry);
+        $filter = array();
+		$filter1 = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+			$filter1[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        }
+        if (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+			$filter1[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
+
+        if (isset($_POST['kegiatan'])) {
+
+            if ($_POST['kegiatan'] != '') {
+                $filter[$no++] = "substr(a.output,1,4) = '" . $_POST['kegiatan'] . "'";
+                $this->view->kegiatan = $_POST['kegiatan'];
+            }
+        }
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $this->view->data = $d_spm1->get_realisasi_fa_kegiatan_baes1_filter($filter);
+		$this->view->data1 = $d_spm1->get_nama_kegiatan_filter($filter1);
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/DataRealisasiKegiatanBAES1');
     }
 
     public function DataRealisasiSumberDanaBAES1() {
