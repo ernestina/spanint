@@ -909,7 +909,7 @@
                         </li>
                     </ul>
 
-                <?php elseif (Session::get('role') == ES1): ?>
+                <?php elseif (Session::get('role') == UMADMIN): ?>
 
 
                     <!--//////////////////////////////////////// --> 
