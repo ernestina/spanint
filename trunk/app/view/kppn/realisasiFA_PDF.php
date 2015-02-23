@@ -59,22 +59,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         //-----------------------------------
          
        
-        
-        
-        
-
-        $this->Cell(0, 1, " ", "B");
-         $this->Ln(3);*/
-         /*$this->Cell(0, 20, $judul, 0, 0, 'C', false);
-        $this->Ln(15);
-                //tanggal
-		/* $kdtgl_awal1 = $this->kdtgl_awal;
-		$kdtgl_akhir1 = $this->kdtgl_akhir; */
-	    if (isset($kdtgl_awal1) && isset($kdtgl_akhir1)) {
-            $thn1 = substr($kdtgl_awal1, 6, 4);
-            $bln1 = substr($kdtgl_awal1, 3, 2);
-            $tgl1 = substr($kdtgl_awal1, 0, 2);
-           
+     
 		//--------------------
 
         

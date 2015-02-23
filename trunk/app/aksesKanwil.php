@@ -294,10 +294,13 @@ $akses['PDFKanwil'] = array(
     'SuspendSatkerPenerimaan_PDF',
     'SuspendAkunPenerimaan_PDF',
     'NTPNGanda_PDF',
-    'KarwasUPSatker_PDF',
-	'dataBPN_PDF',
-    'dataBPNSatker_PDF',
-	'MpnBi_BAES1_PDF',
+	'KarwasUPSatker_PDF',
+	'UPSatker_PDF',
+	'KarwasTUPSatker_PDF',
+	'TUPSatker_PDF',
+	'DataBPN_PDF',
+    'DataBPNSatker_PDF',
+	'MpnBi_PDF',
 	'registerDJPU_PDF',
     '__destruct'
 );

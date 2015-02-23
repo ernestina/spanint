@@ -63,24 +63,24 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         #pengaturan khusus
 		$border = 0;
         $h = 40;
-        $this->SetFont('Arial', 'B', 7);
+        $this->SetFont('Arial', 'B', 6);
 		$ukuran_kolom1 = 30;
-        $ukuran_kolom2 = 100;
-		$ukuran_kolom3 = 100;
-        $ukuran_kolom4 = 100;
-		$ukuran_kolom5 = 100;
-		$ukuran_kolom6 = 100;
-        $ukuran_kolom7 = 100;
-        $ukuran_kolom8 = 100;
-        $ukuran_kolom9 = 100;
-		$ukuran_kolom10 = 90;
-		$ukuran_kolom11 = 90;
-		$ukuran_kolom12 = 90;
-		$ukuran_kolom13 = 100;
-        $ukuran_kolom14 = 100;
-        $ukuran_kolom15 = 100;
-        $ukuran_kolom16 = 100;
-        $ukuran_kolom17 = 100;
+        $ukuran_kolom2 = 50;
+		$ukuran_kolom3 = 50;
+        $ukuran_kolom4 = 60;
+		$ukuran_kolom5 = 60;
+		$ukuran_kolom6 = 40;
+        $ukuran_kolom7 = 60;
+        $ukuran_kolom8 = 60;
+        $ukuran_kolom9 = 50;
+		$ukuran_kolom10 = 60;
+		$ukuran_kolom11 = 60;
+		$ukuran_kolom12 = 60;
+		$ukuran_kolom13 = 50;
+        $ukuran_kolom14 = 50;
+        $ukuran_kolom15 = 50;
+        $ukuran_kolom16 = 50;
+        $ukuran_kolom17 = 50;
 		
 		$kolom_grandtotal1=$ukuran_kolom1+ukuran_kolom2+
 		$ukuran_kolom3+$ukuran_kolom4+
@@ -133,7 +133,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->SetX($px2 += $ukuran_kolom17);
         $this->Ln(3);
 
-        $this->SetFont('Arial', '', 7);
+        $this->SetFont('Arial', '', 5);
         $this->SetWidths(array(
             $ukuran_kolom1, $ukuran_kolom2,
             $ukuran_kolom3, $ukuran_kolom4,
@@ -148,11 +148,11 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->SetAligns(array(
 		'C', 'C',
 		'C', 'C',
-		'C', 'C',
-		'C', 'C',
+		'L', 'L',
+		'C', 'L',
 		'C', 'R',
 		'R', 'R',
-		'C', 'C',
+		'L', 'C',
 		'C', 'C', 
 		'C'
 		));
@@ -187,7 +187,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
                         $value->get_cara_tarik(),
 						number_format($value->get_amt_ori()),
 						number_format($value->get_amt_amend()),
-						 number_format($value->get_amt_net())
+						 number_format($value->get_amt_net()),
 						 $value->get_benef(),
                         $value->get_status(),
 						$value->get_d_signed(),
@@ -199,7 +199,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 			$tot2 = $tot2 + $value->get_amt_amend();
 			$tot3 = $tot3 + $value->get_amt_net();			
         }
-				$this->SetFont('Arial', 'B', 7);
+				$this->SetFont('Arial', 'B', 5);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
 				$left = $this->GetX();

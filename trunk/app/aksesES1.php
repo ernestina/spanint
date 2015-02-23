@@ -86,7 +86,15 @@ $akses['PDFES1'] = array(
     'nmsatker_BAES1_PDF',
     'ProsesRevisi_BAES1_PDF',
     'nmsatkerBAES1_BAES1_PDF',
-    'RekapSp2dBAES1_BAES1_PDF',
+    'RekapSp2dBAES1_BAES1_PDF',	
+	'DataRealisasiKegiatanBA_BAES1_PDF',
+    'DataRealisasiAkunBA_BAES1_PDF',
+    'DataRealisasiOutputBA_BAES1_PDF',
+	'detailrekapsp2dBAES1_BAES1_PDF',
+	'nmsatkerBAES1_BAES1_PDF',
+	'DataRealisasiKabupatenBAES1_BAES1_PDF',
+	'DataRealisasiPenerimaanPerES1_BAES1_PDF',
+	'DataRealisasiKegiatanBAES1_BAES1_PDF',
     '__destruct'
 );
 ?>

@@ -368,6 +368,9 @@ $akses['PDFKPPN'] = array(
     'grStatusHarian_PDF',
     'grStatusHarianBulan_PDF',
     'KarwasUPSatker_PDF',
+	'UPSatker_PDF',
+	'KarwasTUPSatker_PDF',
+	'TUPSatker_PDF',
 	'DataRealisasiAkunBA_BAES1_PDF',
     'DataRealisasiAkunES1_BAES1_PDF',
     'DataRealisasiKewenanganBAES1_BAES1_PDF',
@@ -387,9 +390,9 @@ $akses['PDFKPPN'] = array(
 	'DataRealisasiPenerimaanPerES1_BAES1_PDF',
     'nmsatker_BAES1_PDF',
     'ProsesRevisi_BAES1_PDF',
-	'dataBPN_PDF',
-    'dataBPNSatker_PDF',
-	'MpnBi_BAES1_PDF',
+	'DataBPN_PDF',
+    'DataBPNSatker_PDF',
+	'MpnBi_PDF',
     '__destruct'
 );
 ?>

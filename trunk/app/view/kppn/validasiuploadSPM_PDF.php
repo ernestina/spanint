@@ -172,7 +172,7 @@ if (is_array($this->kdtgl_akhir)) {
 //judul laporan
 $judul1= $this->judul1;$nm_kppn = $this->nm_kppn;
 $judul = 'Laporan '.$judul1; //judul file laporan
-
+$tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
 $options = array(

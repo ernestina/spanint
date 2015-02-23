@@ -415,7 +415,7 @@ $options = array(
     'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
     'orientation' => 'L' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn,$nm_kppn4);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn,$nm_kppn2,$nm_kppn3);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();

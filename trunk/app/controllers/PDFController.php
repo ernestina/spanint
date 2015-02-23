@@ -243,7 +243,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function Detail_Fund_fail_kd_PDF($kf, $kdsatker = null, $kdoutput = null, $kdakun = null , $kdkppn = null,$ck=null) {
+    public function Detail_Fund_fail_kd_PDF($kf, $kdsatker = null, $kdoutput = null, $kdakun = null ,$ck=null) {
         $d_spm1 = new DataFundFail($this->registry);
         $filter = array();
         $no = 0;
@@ -345,7 +345,6 @@ class PDFController extends BaseController {
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
-
     public function RealisasiFA_PDF($kdsatker = null, $kdprogram = null, $kdoutput = null, $kdakun = null, $dana = null,$ck=null) {
         $d_spm1 = new DataFA($this->registry);
         $filter = array();
@@ -366,14 +365,7 @@ class PDFController extends BaseController {
             $filter[$no++] = "A.KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
         }
 
-        if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
-            //$filter[$no++] = " A.TANGGAL_POSTING_REVISI BETWEEN '".$kdtgl_awal."' AND '".$kdtgl_akhir."'";
-            $tglawal = array("$kdtgl_awal");
-            $tglakhir = array("$kdtgl_akhir");
-
-            $this->view->kdtgl_awal = $tglawal;
-            $this->view->kdtgl_akhir = $tglakhir;
-        }
+        
 
         if ($kdsatker != 'null') {
             $filter[$no++] = " A.SATKER =  '" . $kdsatker . "'";
@@ -674,7 +666,7 @@ class PDFController extends BaseController {
        //$d_log->tambah_log("Sukses");
     }
 
-    public function DataRealisasiTransfer_PDF($kdsatker = null, $kdlokasi = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
+    public function DataRealisasiTransfer_PDF($kdsatker = null,$kdlokasi = null,$ck=null) {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
@@ -1499,7 +1491,16 @@ class PDFController extends BaseController {
 
         $this->view->data = $d_spm1->get_fa_summary_minus_filter($filter);
         //var_dump($d_spm->get_hist_spm_filter());
-        $this->view->load('kppn/realisasiFA_1_minus_51_PDF');
+		//------------------------------------------------------------
+		$judul1='Data Pagu Minus Belanja Pegawai';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/realisasiFA_1_minus_51_PDF');
+		}elseif($ck=='XLS'){
+			$this->view->load('kppn/realisasiFA_1_minus_51_XLS');
+		}
+		//------------------------------------------------------------
+
 
         $d_log->tambah_log("Sukses");
 
@@ -1508,7 +1509,7 @@ class PDFController extends BaseController {
 //------------------------------------------------------
     //Function PDF untuk DataDropingController(DataDropingController.php)
 //------------------------------------------------------
-    public function detailDroping_PDF($kdid = null, $kdbank = null, $kdtanggal = null,$ck=null) {
+    public function detailDroping_PDF($kdid = null, $kdbank = null,$ck=null) {
         $d_sppm = new DataDroping($this->registry);
         $filter = array();
         $no = 0;
@@ -1527,10 +1528,7 @@ class PDFController extends BaseController {
             }
             $this->view->d_bank = $kdbank;
         }
-        if (!is_null($kdtanggal)) {
-            $filter[$no++] = "TO_CHAR(CREATION_DATE,'DD-MM-YYYY') = '" . $kdtanggal . "'";
-            $this->view->d_tanggal = $kdtanggal;
-        }
+        
         //-------------------------
         if (Session::get('role') == SATKER) {
            $d_nm_kppn1 = new DataUser($this->registry);
@@ -2609,7 +2607,10 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataKppnController(DataKppnController.php)
 //------------------------------------------------------
-    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null, $kdnoinvoice = null, $kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdbank = null,$kd_vendor_name=null,$kd_fxml=null ) {
+    public function monitoringSp2d_PDF($kdkppn = null, $kdsatker = null, 
+	$kdtgl_awal = null, $kdtgl_akhir = null, $kdnosp2d = null, $kdnoinvoice = null, 
+	$kdbarsp2d = null, $kdstatus = null, $kdbayar = null, $kdbank = null,
+	$kd_vendor_name=null,$kd_fxml=null,$ck=null ) {
         $d_sppm = new DataSppm($this->registry);
         $filter = array();
         $no = 0;
@@ -3273,7 +3274,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function sp2dGajiDobel_PDF($kdkppn = null,$ck=null) {
+    public function sp2dGajiDobel_PDF($kdbulan=null,$kdkppn = null,$ck=null) {
 
         $d_sppm = new DataSppm($this->registry);
         //untuk mencatat log user
@@ -3290,6 +3291,7 @@ class PDFController extends BaseController {
         if ($kdbulan != 13) {
             $bulan = $kdbulan;
         }
+        $this->view->data = $d_sppm->get_sp2d_gaji_dobel($bulan, $kppn);
 
         //-------------------------
         if (Session::get('role') == SATKER) {
@@ -3319,7 +3321,6 @@ class PDFController extends BaseController {
         }
         //-------------------------
 
-        $this->view->data = $d_sppm->get_sp2d_gaji_dobel($bulan, $kppn);
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
@@ -3338,6 +3339,7 @@ class PDFController extends BaseController {
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/sp2dGajiDobel_PDF');
+			//$this->view->render('kppn/sp2dGajiDobel');
 		}elseif($ck=='XLS'){
 			$this->view->load('kppn/sp2dGajiDobel_XLS');
 		}
@@ -3963,7 +3965,9 @@ class PDFController extends BaseController {
 //------------------------------------------------------
 //Function PDF untuk DataReturController(DataReturController.php)
 //------------------------------------------------------
-    public function monitoringRetur_PDF($kdkppn = null, $kdnosp2d = null, $kdbarsp2d = null, $kdsatker = null, $kdbank = null, $kdstatus = null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
+    public function monitoringRetur_PDF($kdkppn = null, $kdnosp2d = null, 
+	$kdbarsp2d = null, $kdsatker = null, $kdbank = null, $kdstatus = null, 
+	$kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_retur = new DataRetur($this->registry);
         $filter = array();
         $no = 0;
@@ -4378,7 +4382,7 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function HistorySpm_PDF($invoice_num1 = null, $invoice_num2 = null, $invoice_num3 = null, $sp2d = null, $kdkppn = null,$ck=null) {
+    public function HistorySpm_PDF($invoice_num1=null,$invoice_num2=null,$invoice_num3=null,$sp2d=null,$kdkppn=null,$ck=null) {
         $d_spm1 = new DataHistorySPM($this->registry);
         $filter = array();
         $invoice = '';
@@ -4416,11 +4420,8 @@ class PDFController extends BaseController {
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
         } elseif (!is_null($invoice_num1) and ( Session::get('role') == KANWIL OR Session::get('role') == ADMIN)) {
             $invoice = "'" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "'";
-			//var_dump($invoice);
             $kppn = substr($sp2d, 2, 3);
-			//$kppn = substr($invoice_num1, 2, 3);
             $filter[$no++] = $kdkppn;
-            //$filter_kanwil = "SUBSTR(NO_SP2D,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
             $this->view->invoice_num = $invoice_num;
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
         }
@@ -4478,7 +4479,8 @@ class PDFController extends BaseController {
         $d_log->tambah_log("Sukses");
     }
 
-    public function daftarsp2d_PDF($kdsatker = null, $kdtgl_awal = null, $kdtgl_akhir = null,$jendok = null, $check_number = null, $invoice = null, $JenisSP2D = null, $JenisSPM = null,$ck=null) {
+    public function daftarsp2d_PDF($kdsatker = null, $kdtgl_awal = null, 
+	$kdtgl_akhir = null,$jendok = null, $check_number = null, $invoice = null, $JenisSP2D = null, $JenisSPM = null,$ck=null) {
         $d_spm1 = new DataCheck($this->registry);
         $filter = array();
         $no = 0;
@@ -4827,7 +4829,8 @@ class PDFController extends BaseController {
 
     }
 
-    public function DurasiSpm_PDF($kdkppn = null, $invoice = null, $jenisspm = null, $durasi = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdsatker = null,$ck=null) {
+    public function DurasiSpm_PDF($kdkppn = null, $invoice = null, $jenisspm = null, 
+	$durasi = null, $kdtgl_awal = null, $kdtgl_akhir = null, $kdsatker = null,$ck=null) {
         $d_spm1 = new DataDurasiSPM($this->registry);
         $filter = array();
         $no = 0;
@@ -5364,7 +5367,7 @@ class PDFController extends BaseController {
 		$d_log->tambah_log("Sukses");
     }
 	
-	public function UPSatker_PDF($kd_satker, $jendok) {
+	public function UPSatker_PDF($kd_satker,$jendok,$ck) {
         $d_spm1 = new DataKarwasUP($this->registry);
         $filter = array();
 		//$filter2 = array();
@@ -5487,6 +5490,33 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$this->view->data1 = $d_spm1->get_karwas_tup_satker($filter);			
 			$this->view->data2 = $d_spm1->get_total_sisa_tup($filter);
         }	
+		//-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+			$d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+			foreach ($d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker')) as $kppn) {
+                    $this->view->nm_kppn = $kppn->get_nama_kppn();
+                }
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn = Session::get('user');
+        }
+        //-------------------------
 		//------------------------------------------------------------
 		$judul1='Karwas TUP Per Satker';
 		$this->view->judul1=$judul1;
@@ -5542,6 +5572,33 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
 		
 		$this->view->data = $d_spm1->get_total_tup($filter);
+		//-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+			$d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+			foreach ($d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker')) as $kppn) {
+                    $this->view->nm_kppn = $kppn->get_nama_kppn();
+                }
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn = Session::get('user');
+        }
+        //-------------------------
 		//------------------------------------------------------------
 		$judul1='Daftar SPM TUP NIHIL';
 		$this->view->judul1=$judul1;
@@ -5560,7 +5617,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
     //------------------------------------------------------
     //Function PDF untuk DataPelimpahanController(daftarPelimpahan.php)
     //------------------------------------------------------
-    public function monitoringPelimpahan_PDF($kdkppn_anak = null, $kdkppn_induk = null, $kdstatus = null,$kdnorek= null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
+    public function monitoringPelimpahan_PDF($kdkppn_anak = null, $kdkppn_induk = null, 
+	$kdstatus = null,$kdnorek= null, $kdtgl_awal = null, $kdtgl_akhir = null,$ck=null) {
         $d_limpah = new DataPelimpahan($this->registry);
         $filter = array();
         $no = 0;
@@ -5669,7 +5727,10 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
     //Function PDF untuk DataSupplierController(DataSupplierController.php)
     //------------------------------------------------------
 //cekSupplier
-    public function cekSupplier_PDF($kdkppn = null, $kdtipesup = null, $kdnrs = null, $kdnamasupplier = null, $kdnpwpsupplier = null, $kdnip = null, $kdnamapenerima = null, $kdnorek = null, $kdnamarek = null, $kdnpwppenerima = null,$ck=null) {
+    public function cekSupplier_PDF($kdkppn = null, $kdtipesup = null, 
+	$kdnrs = null, $kdnamasupplier = null, $kdnpwpsupplier = null, 
+	$kdnip = null, $kdnamapenerima = null, $kdnorek = null, 
+	$kdnamarek = null, $kdnpwppenerima = null,$ck=null) {
         $d_supp = new DataSupplier($this->registry);
         $filter = array();
         $no = 0;
@@ -5690,8 +5751,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         }
 
 
-        if ($kdkppn != 'null') {
-            //$filter[$no++] = "KPPN_CODE = '" . $kdkppn . "'";
+        if ($kdkppn != 'SEMUAKPPN') {
+            $filter[$no++] = "KPPN_CODE = '" . $kdkppn . "'";
         }
 
         if ($kdtipesup != 'null') {
@@ -6188,10 +6249,18 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+		//------------------------------------------------------------
+			$judul1='Form Pengawasan PNBP';
+			$this->view->judul1=$judul1;
+			if($ck=='PDF'){
+				$this->view->load('kppn/detail_belanja_pnbp_PDF');
+			}elseif($ck=='XLS'){
+				$this->view->load('kppn/detail_belanja_pnbp_XLS');
+			}
+			//------------------------------------------------------------
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->load('kppn/detail_belanja_pnbp_PDF');
     }
 
     public function DetailSetoranUPPNBP_PDF($kdakun = null, $kdsatker = null,$ck=null) {
@@ -6266,7 +6335,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
     //Function PDF untuk DataBLUController(DataBLUController.php)
 	//------------------------------------------------------
 	
-	    public function KarwasBLU_PDF($kdkppn = null, $kdsatker = null,$kdppp = null ) {
+	    public function KarwasBLU_PDF($kdkppn = null, $kdsatker = null,$kdppp = null,$ck = null ) {
         $d_spm1 = new DataBLU($this->registry);
         $filter = array();
         $no = 0;

@@ -198,7 +198,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 // Save as an Excel BIFF (xls) file
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');
+header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');header('Cache-Control: max-age=0');header("Pragma: no-cache");header("Expires: 0");ob_clean();flush();
  
 $objWriter->save('php://output');
 exit;
