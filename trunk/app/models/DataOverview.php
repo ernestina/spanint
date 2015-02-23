@@ -197,7 +197,7 @@ class DataOverview {
             
             $d_data->set_ba($val['BA']);
             $d_data->set_nmsatker($val['NMBA']);
-            $d_data->set_realisasi($val['REALISASI']);
+            $d_data->set_realisasi(round($val['REALISASI'] / 10000000000) / 100);
             
             $data[] = $d_data;
         }
@@ -243,7 +243,7 @@ class DataOverview {
             
             $d_data->set_ba($val['BA']);
             $d_data->set_nmsatker($val['NMBA']);
-            $d_data->set_realisasi($val['REALISASI'] / $val['PAGU'] * 100);
+            $d_data->set_realisasi(round($val['REALISASI'] / $val['PAGU'] * 10000) / 100);
             
             $data[] = $d_data;
         }
@@ -287,7 +287,7 @@ class DataOverview {
             
             $d_data->set_ba($val['BA']);
             $d_data->set_nmsatker($val['NMBA']);
-            $d_data->set_realisasi($val['REALISASI']);
+            $d_data->set_realisasi(round($val['REALISASI'] / 10000000000) / 100);
             
             $data[] = $d_data;
         }
@@ -330,7 +330,7 @@ class DataOverview {
             
             $d_data->set_ba($val['BA']);
             $d_data->set_nmsatker($val['NMBA']);
-            $d_data->set_realisasi($val['REALISASI'] / $val['PAGU'] * 100);
+            $d_data->set_realisasi(round($val['REALISASI'] / $val['PAGU'] * 10000) / 100);
             
             $data[] = $d_data;
         }
@@ -376,7 +376,7 @@ class DataOverview {
             
             $d_data->set_ba($val['SATKER']);
             $d_data->set_nmsatker($val['NMSATKER']);
-            $d_data->set_realisasi($val['REALISASI']);
+            $d_data->set_realisasi(round($val['REALISASI'] / 10000000000) / 100);
             
             $data[] = $d_data;
         }
@@ -420,7 +420,7 @@ class DataOverview {
             
             $d_data->set_ba($val['SATKER']);
             $d_data->set_nmsatker($val['NMSATKER']);
-            $d_data->set_realisasi($val['REALISASI'] / $val['PAGU'] * 100);
+            $d_data->set_realisasi(round($val['REALISASI'] / $val['PAGU'] * 10000) / 100);
             
             $data[] = $d_data;
         }
@@ -466,7 +466,7 @@ class DataOverview {
             
             $d_data->set_ba($val['SATKER']);
             $d_data->set_nmsatker($val['NMSATKER']);
-            $d_data->set_realisasi($val['REALISASI']);
+            $d_data->set_realisasi(round($val['REALISASI'] / 10000000000) / 100);
             
             $data[] = $d_data;
         }
@@ -510,7 +510,7 @@ class DataOverview {
             
             $d_data->set_ba($val['SATKER']);
             $d_data->set_nmsatker($val['NMSATKER']);
-            $d_data->set_realisasi($val['REALISASI'] / $val['PAGU'] * 100);
+            $d_data->set_realisasi(round($val['REALISASI'] / $val['PAGU'] * 10000) / 100);
             
             $data[] = $d_data;
         }

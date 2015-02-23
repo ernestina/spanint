@@ -82,6 +82,7 @@ $registry->auth->add_roles('guest'); //guest
 //level admin
 $registry->auth->add_access('auth','admin',$akses['AuthAdmin']);
 $registry->auth->add_access('home','admin',$akses['HomeAdmin']);
+$registry->auth->add_access('dashboard','admin',$akses['DashboardAdmin']);
 $registry->auth->add_access('dataDIPA','admin',$akses['DataDIPAAdmin']);
 $registry->auth->add_access('overviewPenganggaran','admin',$akses['OverviewPenganggaranAdmin']);
 $registry->auth->add_access('dataPDR','admin',$akses['DataPDRAdmin']);

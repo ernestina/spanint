@@ -177,16 +177,7 @@
                                     <div class="pie-canvas"><canvas id="pieCanvas<?php echo $tileid; ?>"></canvas></div>
                                     <div class="pie-legend">
                                         <h4><?php echo $tile->title; ?></h4>
-                                        
-                                        <?php foreach ($tile->values as $value) { ?>
-                                        
-                                            <div style="width: 50%; float: left; border-left: 4px solid <?php echo $value->color; ?>">
-                                                <p><?php echo number_format($value->value); if (isset($value->unit)) { echo ' ' . $value->unit; } ?></p>
-                                                <p class="sub"><?php echo $value->name; ?></p>
-                                            </div>
-                                        
-                                        <?php } ?>
-                                        
+                                        <p style="margin-left:0; padding-left:0" class="sub"><?php echo $tile->subtitle; ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -299,32 +290,36 @@
                         var tilePieChart<?php echo $tileid; ?> = new Chart(tilePieChart<?php echo $tileid; ?>Canvas).Doughnut(tilePieData<?php echo $tileid; ?>);
             
                     <?php } else if ($tile->type == 'gauge') { ?>
+
+                        $('#pieCanvas<?php echo $tileid; ?>').attr('width',$('#pieCanvas<?php echo $tileid; ?>').parent().width());
+                        $('#pieCanvas<?php echo $tileid; ?>').attr('height',$('#pieCanvas<?php echo $tileid; ?>').parent().height());
             
                         var opts<?php echo $tileid; ?> = {
-                                        lines: 12, // The number of lines to draw
-                                        angle: 0.15, // The length of each line
-                                        lineWidth: 0.44, // The line thickness
+
+                                        lines: 24,
+                                        angle: 0.1,
+                                        lineWidth: 0.1,
                             
                                         pointer: {
-                                                    length: 0.9, // The radius of the inner circle
-                                                    strokeWidth: 0.035, // The rotation offset
-                                                    color: '#000000' // Fill color
+                                                    length: 0.9,
+                                                    strokeWidth: 0.035,
+                                                    color: '#000000'
                                         },
                             
-                                        limitMax: 'false',   // If true, the pointer will not go past the end of the gauge
-                                        colorStart: '#6FADCF',   // Colors
-                                        colorStop: '#8FC0DA',    // just experiment with them
-                                        strokeColor: '#E0E0E0',   // to see which ones work best for you
+                                        limitMax: 'true',
+                                        colorStart: '#CCFF66', 
+                                        colorStop: '#CCFF66', 
+                                        strokeColor: '#E5E5E5',
                                         generateGradient: true
                             
                         };
             
                         var gaugeCanvas<?php echo $tileid; ?> = document.getElementById('pieCanvas<?php echo $tileid; ?>'); // your canvas element
-                        var gauge<?php echo $tileid; ?> = new Gauge(gaugeCanvas<?php echo $tileid; ?>).setOptions(opts<?php echo $tileid; ?>); // create sexy gauge!
+                        var gauge<?php echo $tileid; ?> = new Donut(gaugeCanvas<?php echo $tileid; ?>).setOptions(opts<?php echo $tileid; ?>); // create sexy gauge!
             
-                        gauge<?php echo $tileid; ?>.maxValue = 3000; // set max gauge value
+                        gauge<?php echo $tileid; ?>.maxValue = <?php echo $tile->max_value; ?>; // set max gauge value
                         gauge<?php echo $tileid; ?>.animationSpeed = 32; // set animation speed (32 is default value)
-                        gauge<?php echo $tileid; ?>.set(1250); // set actual value
+                        gauge<?php echo $tileid; ?>.set(<?php echo $tile->value; ?>); // set actual value
             
                     <?php } ?>
             

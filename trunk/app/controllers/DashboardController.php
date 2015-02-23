@@ -1,6 +1,6 @@
 <?php
 
-class DashboardControllerController extends BaseController {
+class DashboardController extends BaseController {
 
     public function __construct($registry) {
         parent::__construct($registry);
@@ -10,7 +10,7 @@ class DashboardControllerController extends BaseController {
         
     }
 
-    public function dashboard($mode=null) {
+    public function overviewAdmin($mode=null) {
         
         $fetch = new DataOverview($this->registry);
         $this->view->tiles = array();
@@ -21,8 +21,9 @@ class DashboardControllerController extends BaseController {
             
             array('title'  => 'Realisasi Belanja',
                   'subtitle' => 'Persentase terhadap pagu',
-                  'type' => 'notification',
-                  'value' => $fetch->percentageRealisasiBelanja(),
+                  'type' => 'gauge',
+                  'value' => round($fetch->percentageRealisasiBelanja() * 100) / 100,
+                  'max_value' => 100,
                   'unit' => '%');
         
         //Count Jumlah Realisasi
@@ -58,32 +59,32 @@ class DashboardControllerController extends BaseController {
         if (isset($mode)) {
             if ($mode == 1) {
                 $mainChartData = $fetch->sumRealisasiTertinggiBA();
-                $title = 'Nominal Realisasi Belanja Tertinggi (BA)';
+                $title = 'BA dengan Nominal Realisasi Belanja Tertinggi';
             } else if ($mode == 2) {
                 $mainChartData = $fetch->percentageRealisasiTertinggiBA();
-                $title = 'Persentase Realisasi Belanja Tertinggi (BA)';
+                $title = 'BA dengan Persentase Realisasi Belanja Tertinggi';
             } else if ($mode == 3) {
                 $mainChartData = $fetch->sumRealisasiTerendahBA();
-                $title = 'Nominal Realisasi Belanja Terendah (BA)';
+                $title = 'BA dengan Nominal Realisasi Belanja Terendah';
             } else if ($mode == 4) {
                 $mainChartData = $fetch->percentageRealisasiTerendahBA();
-                $title = 'Persentase Realisasi Belanja Terendah (BA)';
+                $title = 'BA dengan Persentase Realisasi Belanja Terendah';
             } else if ($mode == 5) {
                 $mainChartData = $fetch->sumRealisasiTertinggiSatker();
-                $title = 'Nominal Realisasi Belanja Tertinggi (Satker)';
+                $title = 'Satker dengan Nominal Realisasi Belanja Tertinggi';
             } else if ($mode == 6) {
                 $mainChartData = $fetch->percentageRealisasiTertinggiSatker();
-                $title = 'Persentase Realisasi Belanja Tertinggi (Satker)';
+                $title = 'Satker dengan Persentase Realisasi Belanja Tertinggi';
             } else if ($mode == 7) {
                 $mainChartData = $fetch->sumRealisasiTerendahSatker();
-                $title = 'Nominal Realisasi Belanja Terendah (Satker)';
+                $title = 'Satker dengan Nominal Realisasi Belanja Terendah';
             } else {
                 $mainChartData = $fetch->percentageRealisasiTerendahSatker();
-                $title = 'Persentase Realisasi Belanja Terendah (Satker)';
+                $title = 'Satker dengan Persentase Realisasi Belanja Terendah';
             }
         } else {
             $mainChartData = $fetch->sumRealisasiTertinggiBA();
-            $title = 'Nominal Realisasi Belanja Tertinggi (BA)';
+            $title = 'BA dengan Nominal Realisasi Belanja Tertinggi';
         }
         
         $labels = array();
@@ -131,7 +132,7 @@ class DashboardControllerController extends BaseController {
         $this->view->switchers[] = (object) array('description' => 'Persentase Realisasi Belanja Terendah (Satker)', 
                                                   'link' => URL.'overviewPenganggaran/overview/8');
         
-        $this->view->page_title = 'Overview: Modul Penganggaran';
+        $this->view->page_title = 'Dashboard';
         $this->view->page_subtitle = 'ADMIN<br/>SAMPAI DENGAN HARI INI';
         
         $this->view->render('Template-Overview');
