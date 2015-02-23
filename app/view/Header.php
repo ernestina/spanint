@@ -28,6 +28,9 @@
         <!-- ChartJS -->
         <script src="<?php echo URL; ?>public/ChartJS/Chart.min.js"></script>
 
+        <!-- GaugeJS -->
+        <script src="<?php echo URL; ?>public/js/gauge.min.js"></script>
+
         <!-- Application CSS -->
         <link href="<?php echo URL; ?>public/monster.css" rel="stylesheet">
 
