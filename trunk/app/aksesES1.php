@@ -40,22 +40,26 @@ $akses['BaEs1ES1'] = array(
     'ProsesRevisi',
     'DataRealisasiOutputBA',
     'DataRealisasiOutputES1',
-	'DataRealisasiWilayahBAES1',
-	'DataRealisasiSumberDanaBAES1',
-	'RekapSp2dBAES1',
-	'detailrekapsp2dBAES1',
-	'nmsatkerBAES1',
-	'DataRealisasiPenerimaanBA',
-	'DataRealisasiKabupatenBAES1',
-	'DataRealisasiPenerimaanPerES1',
-	'DataRealisasiKegiatanBAES1',
+    'DataRealisasiWilayahBAES1',
+    'DataRealisasiSumberDanaBAES1',
+    'RekapSp2dBAES1',
+    'detailrekapsp2dBAES1',
+    'nmsatkerBAES1',
+    'DataRealisasiPenerimaanBA',
+    'DataRealisasiKabupatenBAES1',
+    'DataRealisasiPenerimaanPerES1',
+    'DataRealisasiKegiatanBAES1',
+    'DataFaBaPerJenbel',
+    'DataFaBaPerSdana',
+    'DataFaEs1PerSat',
+    
     '__destruct'
 );
 
 $akses['dataDIPAES1'] = array(
     '__construct',
     'RevisiDipa',
-	'DetailRevisi',
+    'DetailRevisi',
     '__destruct'
 );
 $akses['dataSPMES1'] = array(
@@ -72,14 +76,14 @@ $akses['PDFES1'] = array(
     'DataRealisasiAkunES1_BAES1_PDF',
     'DataRealisasiKewenanganBAES1_BAES1_PDF',
     'DataRealisasiSumberDanaBAES1_BAES1_PDF',
-	'DataRealisasiWilayahBAES1_BAES1_PDF',
-	'DataRealisasiKegiatanES1_BAES1_PDF',
-	'DataRealisasiOutputES1_BAES1_PDF',
+    'DataRealisasiWilayahBAES1_BAES1_PDF',
+    'DataRealisasiKegiatanES1_BAES1_PDF',
+    'DataRealisasiOutputES1_BAES1_PDF',
     'DataRealisasiPenerimaanBA_BAES1_PDF',
-	'detailrekapsp2dBAES1_BAES1_PDF',
+    'detailrekapsp2dBAES1_BAES1_PDF',
     'nmsatker_BAES1_PDF',
     'ProsesRevisi_BAES1_PDF',
-	'nmsatkerBAES1_BAES1_PDF',
+    'nmsatkerBAES1_BAES1_PDF',
     'RekapSp2dBAES1_BAES1_PDF',
     '__destruct'
 );

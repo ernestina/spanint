@@ -25,7 +25,7 @@
 			$kdkegiatan ='null';
 		}
 		if (isset($this->nmkegiatan)) {
-			$nmkegiatan = $this->nmkegiatan();
+			$nmkegiatan = $this->nmkegiatan;
                 
         }else{
 			$nmkegiatan ='null';
