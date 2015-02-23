@@ -395,7 +395,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 // Redirect output to a client’s web browser (Excel5)
 header('Content-Type: application/vnd.ms-excel');
 header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');
-header('Cache-Control: max-age=0');
+header('Cache-Control: max-age=0');header("Pragma: no-cache");header("Expires: 0");ob_clean();flush(); 
  
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 $objWriter->save('php://output');

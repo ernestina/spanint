@@ -109,11 +109,11 @@ $objPHPExcel->getActiveSheet()->setCellValue('S4', "Keterangan");
 if (count($this->data) == 0) {
 	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
 }else{
-	$selisih_span_bank_file = $value->get_jumlah_ftp_file_name()-$value->get_jml_ftp_file_name_bank();
-	$selisih_span_bank_amount = $value->get_jumlah_check_amount()-$value->get_jml_check_amount_bank();
-	$selisih_span_bank_number = $value->get_jumlah_check_number()-$value->get_jml_check_number_bank();
-	$selisih_span_bank_line_number = $value->get_jumlah_check_number_line_num()-$value->get_jml_check_number_line_num_bank();
-	$selisih_droping_span_nihil = $value->get_payment_amount()-($value->get_jumlah_check_amount()+$value->get_penihilan());
+	$selisih_span_bank_file = 0;
+	$selisih_span_bank_amount = 0;
+	$selisih_span_bank_number = 0;
+	$selisih_span_bank_line_number = 0;
+	$selisih_droping_span_nihil = 0;
 	if ($selisih_droping_span_nihil<0){ 
 		$ket="Kurang Droping"; 
 	}elseif($selisih_droping_span_nihil > 0){
@@ -299,7 +299,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
  // Redirect output to a client’s web browser (Excel2007)
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');
+header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');header('Cache-Control: max-age=0');header("Pragma: no-cache");header("Expires: 0");ob_clean();flush();
  
 $objWriter->save('php://output');
 exit;

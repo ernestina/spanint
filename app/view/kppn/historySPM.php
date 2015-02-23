@@ -18,12 +18,17 @@
 					$kdkppn = $kppn->get_kd_satker();
 				}
 			} else {
-				$kdkppn = 'null';
+				$kdkppn = $this->d_nama_kppn1;
 			}
 			if (isset($this->invoice_num)) {
 				$invoice = $this->invoice_num;
 			} else {
-				$invoice = 'null';
+				$invoice = $this->d_invoice;
+			}
+			if (isset($this->d_kode_sp2d)) {
+				$sp2d = $this->d_kode_sp2d;
+			} else {
+				$sp2d = 'null';
 			}
 			
 		}
@@ -33,7 +38,12 @@
 			if (isset($this->invoice_num)) {
 				$invoice = $this->invoice_num;
 			} else {
-				$invoice = 'null';
+				$invoice = $this->d_invoice;
+			}
+			if (isset($this->d_kode_sp2d)) {
+				$sp2d = $this->d_kode_sp2d;
+			} else {
+				$sp2d = 'null';
 			}
 			
 			
@@ -43,7 +53,12 @@
 			if (isset($this->invoice_num)) {
 				$invoice = $this->invoice_num;
 			} else {
-				$invoice = 'null';
+				$invoice = $this->d_invoice;
+			}
+			if (isset($this->d_kode_sp2d)) {
+				$sp2d = $this->d_kode_sp2d;
+			} else {
+				$sp2d = 'null';
 			}
 			
 			

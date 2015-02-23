@@ -104,10 +104,8 @@ $akses['DataDropingAdmin'] = array(
     '__construct',
     'index',
     'monitoringDroping',
-    'detailDroping',
-    'detailDroping_PDF',
+    'detailDroping',  
     'detailSPAN',
-    'detailSPAN_PDF',
     '__destruct'
 );
 
@@ -370,6 +368,8 @@ $akses['PDFAdmin'] = array(
     'detailRekapSP2D2_PDF',
     'DetailRevisi_PDF',
     'detailSp2dGaji_PDF',
+	'detailDroping_PDF',
+	'detailSPAN_PDF',
     'DurasiSpm_PDF',
     'errorSpm_PDF',
     'Fund_fail_PDF',
@@ -418,6 +418,9 @@ $akses['PDFAdmin'] = array(
     'SuspendSatkerPenerimaan_PDF',
     'NTPNGanda_PDF',
     'KarwasUPSatker_PDF',
+	'UPSatker_PDF',
+	'KarwasTUPSatker_PDF',
+	'TUPSatker_PDF',
 	'DataRealisasiKegiatanBA_BAES1_PDF',
 	'DataRealisasiKegiatanES1_BAES1_PDF',
 	'DataRealisasiAkunBA_BAES1_PDF',
@@ -430,12 +433,12 @@ $akses['PDFAdmin'] = array(
 	'DataFaBaPerEs1_BAES1_PDF',
     'DataFaBaSatEs1_BAES1_PDF',
     'DataFaBaPerJenbel_BAES1_PDF',
-	'dataBPN_PDF',
-    'dataBPNSatker_PDF',
-	'MpnBi_BAES1_PDF',
+	'DataBPN_PDF',
+    'DataBPNSatker_PDF',
+	'MpnBi_PDF',
 	'registerDJPU_PDF',
 	'refAkun_PDF',
-	'refKppn_PDF',
+	'refKppn_PDF',		
     '__destruct'
 );
 ?>

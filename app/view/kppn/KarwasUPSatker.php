@@ -37,7 +37,6 @@
 						$kdsmbdana = 'null';
 					}
 					
-					
 					?>
 				<div class="btn-group-sm">
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>

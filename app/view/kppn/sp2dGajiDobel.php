@@ -23,6 +23,7 @@
 
 			if (isset($this->d_bank)) {
 				$kdbulan = $this->d_bank;
+				
 			}else{
 				$kdbulan='null';
 			}

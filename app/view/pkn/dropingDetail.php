@@ -22,16 +22,14 @@
 				if($this->d_bank){
 					$kdbank=$this->d_bank;
 				}
-				if (isset($this->d_tanggal)) {
-					$kdtanggal=$this->d_tanggal;
-				}
+				
 				?>	
          <div class="btn-group-sm">
             <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
             </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="<?php echo URL; ?>PDF/detailDroping_PDF/<?php echo $kdid . "/" .$kdbank . "/" . $kdtanggal; ?>/PDF">PDF</a></li>
-                    <li><a href="<?php echo URL; ?>PDF/detailDroping_PDF/<?php echo $kdid . "/" .$kdbank . "/" . $kdtanggal; ?>/XLS">EXCEL</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/detailDroping_PDF/<?php echo $kdid . "/" .$kdbank; ?>/PDF">PDF</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/detailDroping_PDF/<?php echo $kdid . "/" .$kdbank; ?>/XLS">EXCEL</a></li>
                   </ul>
         </div>
 				
