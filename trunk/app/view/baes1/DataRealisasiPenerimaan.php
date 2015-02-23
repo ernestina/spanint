@@ -149,8 +149,8 @@
 			<tr>
                     <td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
 					<td align='right'><b> <?php echo number_format($tot_pagu) ;?> </b> </td>
-					<td align='right'><b> <?php echo number_format($tot_bank) ;?> </b> </td>
-					<td align='right'><b> <?php echo number_format($tot_dana) ;?> </b> </td>
+					<td align='right'><b> <?php echo number_format($tot_spm) ;?> </b> </td>
+					<td align='right'><b> <?php echo number_format($tot_mpn) ;?> </b> </td>
 					<td align='right'><b> <?php echo number_format($tot_real) ;?> </b></td>
 					<td align='right'><b> <?php if($tot_pagu == 0) {echo '0.00%';} else { echo  number_format($tot_real/$tot_pagu*100,2). '%' ;}?> </b></td>
             </tr>
