@@ -71,13 +71,26 @@ class Database extends PDO {
         $sql = "INSERT INTO $table($fieldName) VALUES ($fieldValue)";
 
         $sth = $this->prepare($sql);
-
+        //var_dump($sql);
         foreach ($data as $key => $value) {
             $sth->bindValue(":$key", $value);
         }
 
         $sth->execute();
+        $sth = $this->prepare("commit;");
+        $sth->execute();
 
+        return true;
+    }
+
+    public function insert2($sql, $array = array()) {
+        $sth = $this->prepare($sql);
+        foreach ($array as $key => $value) {
+            $sth->bindValue("$key", $value);
+        }
+        $sth->execute();
+        $sth = $this->prepare("commit;");
+        $sth->execute();
         return true;
     }
 
