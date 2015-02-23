@@ -658,7 +658,46 @@ class DataRealisasiES1 {
         }
         return $data;
     }
-    
+
+       public function get_es1_persat_filter($filter) {
+        Session::get('id_user');
+        $sql = " SELECT satker KODE_KEGIATAN, C.nmsatker NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
+				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
+                                FROM "
+                . $this->_table1 . " A LEFT JOIN  "
+                . $this->_table8 . " C ON A.satker=C.kdsatker LEFT JOIN "
+                . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
+				WHERE 1=1 AND 
+				A.BUDGET_TYPE='2' 
+				AND A.SUMMARY_FLAG = 'N' 
+				AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) > 0
+                                ";
+        foreach ($filter as $filter2) {
+            $sql .= " AND " . $filter2;
+        }
+        $sql .= " GROUP BY satker, C.nmsatker";
+        $sql .= " ORDER BY kode_kegiatan ";
+
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);
+            $d_data->set_kdkegiatan($val['KODE_KEGIATAN']);
+            $d_data->set_nmkegiatan($val['NMKEGIATAN']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
+            $d_data->set_nm_satker($val['NMBA']);
+            $d_data->set_obligation($val['OBLIGATION']);
+            $d_data->set_block_amount($val['BLOCK_AMOUNT']);
+            $d_data->set_balancing_amt($val['BALANCING_AMT']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+
     /*
      * setter
      */

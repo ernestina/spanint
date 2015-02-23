@@ -793,6 +793,8 @@ class BA_ES1Controller extends BaseController {
         $this->view->data = $d_spm1->get_ba_output_filter($filter);
         $d_log->tambah_log("Sukses");
         $this->view->action='DataRealisasiOutputES1';
+        $this->view->judul = 'Laporan Pagu Dana Per Output :';
+        $this->view->judulkolom = 'Kode | Nama Kegiatan / Output';
         $this->view->kodes = 'Kode Output :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
@@ -854,11 +856,14 @@ class BA_ES1Controller extends BaseController {
                 $this->view->nmkegiatan = $_POST['nama'];
             }
         }*/
+        
+        if (Session::get('role') == KL){
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
-
+        }elseif (Session::get('role') == ES1){
+        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-
         $this->view->data = $d_spm1->get_ba_persates1_filter($filter);
         $d_log->tambah_log("Sukses");
         $this->view->judul = 'Laporan Pagu Dana Per Satker';
@@ -888,9 +893,13 @@ class BA_ES1Controller extends BaseController {
                 $this->view->nmkegiatan = $_POST['nama'];
             }
         }
-
+         
+        if (Session::get('role') == KL){
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
-
+        }elseif (Session::get('role') == ES1){
+        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
+                 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         $this->view->data = $d_spm1->get_ba_per_jenbel_filter($filter);
@@ -924,7 +933,11 @@ class BA_ES1Controller extends BaseController {
             }
         }
 
+        if (Session::get('role') == KL){
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        }elseif (Session::get('role') == ES1){
+        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -1008,6 +1021,41 @@ class BA_ES1Controller extends BaseController {
         $this->view->action = 'DataFaBaEs1Sdana';
         $this->view->kodes = 'Kode Eselon 1 :';
         $this->view->render('baes1/DataRealisasiOutput');
+    }
+    
+    public function DataFaEs1PerSat() {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (isset($_POST['submit_file'])) {
+
+            if ($_POST['kode'] != '') {
+                $filter[$no++] = "satker like '%" . $_POST['kode'] . "%'";
+                $this->view->kdkegiatan = $_POST['kode'];
+            }
+        
+            if ($_POST['nama'] != '') {
+                $filter[$no++] = " nmsatker like upper('%" . $_POST['nama'] . "%')";
+                $this->view->nmkegiatan = $_POST['nama'];
+            }
+        }
+
+        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+        $this->view->data = $d_spm1->get_es1_persat_filter($filter);
+        $this->view->judul = 'Laporan Pagu Dana Per Satker';
+        $this->view->judulkolom = 'Kode | Nama Satker';
+        $this->view->action = 'DataFaEs1PerSat';
+        $this->view->kodes='Kode Satker:';
+        $d_log->tambah_log("Sukses");
+
+        $this->view->render('baes1/DataRealisasiKegiatan');
     }
     
     public function __destruct() {
