@@ -903,7 +903,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerES1">Realisasi Pendapatan Per Eselon 1</a></li>
-
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
                                 </ul>
                             </div>
                         </li>
