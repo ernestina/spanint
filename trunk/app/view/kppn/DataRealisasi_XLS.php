@@ -72,67 +72,69 @@ $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
 $objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode BA");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama BA");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Kode Satker");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Pagu Pegawai");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Nama BA");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Realisasi Pegawai");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Pagu Pegawai");
+//p5
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Realisasi Pegawai");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Sisa Pegawai");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Sisa Pegawai");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Pagu Barang");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Pagu Barang");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Realisasi Barang");
+$objPHPExcel->getActiveSheet()->setCellValue('I4', "Realisasi Barang");
 //p9
-$objPHPExcel->getActiveSheet()->setCellValue('I4', "Sisa Barang");
+$objPHPExcel->getActiveSheet()->setCellValue('J4', "Sisa Barang");
 //p10
-$objPHPExcel->getActiveSheet()->setCellValue('J4', "Pagu Modal");
+$objPHPExcel->getActiveSheet()->setCellValue('K4', "Pagu Modal");
 //p11
-$objPHPExcel->getActiveSheet()->setCellValue('K4', "Realisasi Modal");
+$objPHPExcel->getActiveSheet()->setCellValue('L4', "Realisasi Modal");
 //p12
-$objPHPExcel->getActiveSheet()->setCellValue('L4', "Sisa Modal");
+$objPHPExcel->getActiveSheet()->setCellValue('M4', "Sisa Modal");
 //p13
-$objPHPExcel->getActiveSheet()->setCellValue('M4', "Pagu Beban Bunga");
+$objPHPExcel->getActiveSheet()->setCellValue('N4', "Pagu Beban Bunga");
 //p14
-$objPHPExcel->getActiveSheet()->setCellValue('N4', "Realisasi Beban Bunga");
+$objPHPExcel->getActiveSheet()->setCellValue('O4', "Realisasi Beban Bunga");
 //p15
-$objPHPExcel->getActiveSheet()->setCellValue('O4', "Sisa Beban Bunga");
+$objPHPExcel->getActiveSheet()->setCellValue('P4', "Sisa Beban Bunga");
 //p16
-$objPHPExcel->getActiveSheet()->setCellValue('P4', "Pagu Subsidi");
+$objPHPExcel->getActiveSheet()->setCellValue('Q4', "Pagu Subsidi");
 //p17
-$objPHPExcel->getActiveSheet()->setCellValue('Q4', "Realisasi Subsidi");
+$objPHPExcel->getActiveSheet()->setCellValue('R4', "Realisasi Subsidi");
 //p18
-$objPHPExcel->getActiveSheet()->setCellValue('R4', "Sisa Subsidi");
+$objPHPExcel->getActiveSheet()->setCellValue('S4', "Sisa Subsidi");
 //p19
-$objPHPExcel->getActiveSheet()->setCellValue('S4', "Pagu Hibah");
+$objPHPExcel->getActiveSheet()->setCellValue('T4', "Pagu Hibah");
 //p20
-$objPHPExcel->getActiveSheet()->setCellValue('T4', "Realisasi Hibah");
+$objPHPExcel->getActiveSheet()->setCellValue('U4', "Realisasi Hibah");
 //p21
-$objPHPExcel->getActiveSheet()->setCellValue('U4', "Sisa Hibah");
+$objPHPExcel->getActiveSheet()->setCellValue('V4', "Sisa Hibah");
 //p22
-$objPHPExcel->getActiveSheet()->setCellValue('V4', "Pagu Bansos");
+$objPHPExcel->getActiveSheet()->setCellValue('W4', "Pagu Bansos");
 //p23
-$objPHPExcel->getActiveSheet()->setCellValue('W4', "Realisasi Bansos");
+$objPHPExcel->getActiveSheet()->setCellValue('X4', "Realisasi Bansos");
 //p24
-$objPHPExcel->getActiveSheet()->setCellValue('X4', "Sisa Bansos");
+$objPHPExcel->getActiveSheet()->setCellValue('Y4', "Sisa Bansos");
 //p25
-$objPHPExcel->getActiveSheet()->setCellValue('Y4', "Pagu Lain-lain");
+$objPHPExcel->getActiveSheet()->setCellValue('Z4', "Pagu Lain-lain");
 //p26
-$objPHPExcel->getActiveSheet()->setCellValue('Z4', "Realisasi Lain-lain");
+$objPHPExcel->getActiveSheet()->setCellValue('AA4', "Realisasi Lain-lain");
 //p27
-$objPHPExcel->getActiveSheet()->setCellValue('AA4', "Sisa Lain-lain");
+$objPHPExcel->getActiveSheet()->setCellValue('AB4', "Sisa Lain-lain");
 //p28
-$objPHPExcel->getActiveSheet()->setCellValue('AB4', "Pagu Transfer");
+$objPHPExcel->getActiveSheet()->setCellValue('AC4', "Pagu Transfer");
 //p29
-$objPHPExcel->getActiveSheet()->setCellValue('AC4', "Realisasi Transfer");
+$objPHPExcel->getActiveSheet()->setCellValue('AD4', "Realisasi Transfer");
 //p30
-$objPHPExcel->getActiveSheet()->setCellValue('AD4', "Sisa Transfer");
+$objPHPExcel->getActiveSheet()->setCellValue('AE4', "Sisa Transfer");
 //p31
-$objPHPExcel->getActiveSheet()->setCellValue('AE4', "Pagu Total");
+$objPHPExcel->getActiveSheet()->setCellValue('AF4', "Pagu Total");
 //p32
-$objPHPExcel->getActiveSheet()->setCellValue('AF4', "Realisasi Total");
+$objPHPExcel->getActiveSheet()->setCellValue('AG4', "Realisasi Total");
 //p33
-$objPHPExcel->getActiveSheet()->setCellValue('AG4', "Sisa Total");
+$objPHPExcel->getActiveSheet()->setCellValue('AH4', "Sisa Total");
 //Data
 if (count($this->data) == 0) {
 	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
@@ -324,8 +326,8 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
-
+$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+$objPHPExcel->getActiveSheet()->getStyle('C5:C1000')->getNumberFormat()->setFormatCode('000000');
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);
@@ -334,8 +336,8 @@ $objPHPExcel->setActiveSheetIndex(0);
 // Save as an Excel BIFF (xls) file
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
  // Redirect output to a client’s web browser (Excel2007)
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');header('Cache-Control: max-age=0');header("Pragma: no-cache");header("Expires: 0");header("Cache-Control: no-cache");
+
+header('Cache-Control: no-store, no-cache,must-revalidate');header('Cache-Control: pre-check=0, post-check=0, max-age=0');header('Pragma: no-cache');header('Expires: 0');header('Content-Transfer-Encoding: none');header('Content-Type: application/vnd.ms-excel;');header('Content-type: application/x-msexcel');header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');
  
 $objWriter->save('php://output');
 exit;

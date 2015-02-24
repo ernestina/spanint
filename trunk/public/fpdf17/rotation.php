@@ -279,6 +279,133 @@ function _endpage()
         //Go to the next line
         $this->Ln($h);
     }
+	function Row1($data1) {
+        //Calculate the height of the row
+        $nb = 0;
+        for ($i = 0; $i < count($data1); $i++)
+            $nb = max($nb, $this->NbLines($this->widths[$i], $data1[$i]));
+        $h = 10 * $nb;
+        //Issue a page break first if needed
+        $this->CheckPageBreak($h);
+        //Draw the cells of the row
+        for ($i = 0; $i < count($data1); $i++) {
+            $w = $this->widths[$i];
+            $a = isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+            //Save the current position
+            $x = $this->GetX();
+            $y = $this->GetY();
+            //Draw the border
+            $this->Rect($x, $y, $w, $h);
+            //Print the text
+            $this->MultiCell($w, 10, $data1[$i], 0, $a);
+            //Put the position to the right of the cell
+            $this->SetXY($x + $w, $y);
+        }
+        //Go to the next line
+        $this->Ln($h);
+    }
+	function Row2($data2) {
+        //Calculate the height of the row
+        $nb = 0;
+        for ($i = 0; $i < count($data2); $i++)
+            $nb = max($nb, $this->NbLines($this->widths[$i], $data2[$i]));
+        $h = 10 * $nb;
+        //Issue a page break first if needed
+        $this->CheckPageBreak($h);
+        //Draw the cells of the row
+        for ($i = 0; $i < count($data2); $i++) {
+            $w = $this->widths[$i];
+            $a = isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+            //Save the current position
+            $x = $this->GetX();
+            $y = $this->GetY();
+            //Draw the border
+            $this->Rect($x, $y, $w, $h);
+            //Print the text
+            $this->MultiCell($w, 10, $data2[$i], 0, $a);
+            //Put the position to the right of the cell
+            $this->SetXY($x + $w, $y);
+        }
+        //Go to the next line
+        $this->Ln($h);
+    }
+	function Row3($data3) {
+        //Calculate the height of the row
+        $nb = 0;
+        for ($i = 0; $i < count($data3); $i++)
+            $nb = max($nb, $this->NbLines($this->widths[$i], $data3[$i]));
+        $h = 10 * $nb;
+        //Issue a page break first if needed
+        $this->CheckPageBreak($h);
+        //Draw the cells of the row
+        for ($i = 0; $i < count($data3); $i++) {
+            $w = $this->widths[$i];
+            $a = isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+            //Save the current position
+            $x = $this->GetX();
+            $y = $this->GetY();
+            //Draw the border
+            $this->Rect($x, $y, $w, $h);
+            //Print the text
+            $this->MultiCell($w, 10, $data3[$i], 0, $a);
+            //Put the position to the right of the cell
+            $this->SetXY($x + $w, $y);
+        }
+        //Go to the next line
+        $this->Ln($h);
+    }
+	
+	function Row4($data4) {
+        //Calculate the height of the row
+        $nb = 0;
+        for ($i = 0; $i < count($data4); $i++)
+            $nb = max($nb, $this->NbLines($this->widths[$i], $data4[$i]));
+        $h = 10 * $nb;
+        //Issue a page break first if needed
+        $this->CheckPageBreak($h);
+        //Draw the cells of the row
+        for ($i = 0; $i < count($data4); $i++) {
+            $w = $this->widths[$i];
+            $a = isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+            //Save the current position
+            $x = $this->GetX();
+            $y = $this->GetY();
+            //Draw the border
+            $this->Rect($x, $y, $w, $h);
+            //Print the text
+            $this->MultiCell($w, 10, $data4[$i], 0, $a);
+            //Put the position to the right of the cell
+            $this->SetXY($x + $w, $y);
+        }
+        //Go to the next line
+        $this->Ln($h);
+    }
+
+		function Row6($data6) {
+        //Calculate the height of the row
+        $nb = 0;
+        for ($i = 0; $i < count($data6); $i++)
+            $nb = max($nb, $this->NbLines($this->widths[$i], $data6[$i]));
+        $h = 10 * $nb;
+        //Issue a page break first if needed
+        $this->CheckPageBreak($h);
+        //Draw the cells of the row
+        for ($i = 0; $i < count($data6); $i++) {
+            $w = $this->widths[$i];
+            $a = isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+            //Save the current position
+            $x = $this->GetX();
+            $y = $this->GetY();
+            //Draw the border
+            $this->Rect($x, $y, $w, $h);
+            //Print the text
+            $this->MultiCell($w, 10, $data6[$i], 0, $a);
+            //Put the position to the right of the cell
+            $this->SetXY($x + $w, $y);
+        }
+        //Go to the next line
+        $this->Ln($h);
+    }
 
     function CheckPageBreak($h) {
         //If the height h would cause an overflow, add a new page immediately

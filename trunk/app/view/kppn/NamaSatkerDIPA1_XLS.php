@@ -1,5 +1,4 @@
 <?php
-//echo memory_get_usage() . "\n"; // 57960
 
 /**
  * PHPExcel
@@ -124,14 +123,13 @@ $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFor
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);
-//echo memory_get_usage() . "\n"; // 57960
 
 //-------------------------------------
 // Save as an Excel BIFF (xls) file
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
  // Redirect output to a client’s web browser (Excel2007)
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');header('Cache-Control: max-age=0');header("Pragma: no-cache");header("Expires: 0");header("Cache-Control: no-cache");
+
+header('Cache-Control: no-store, no-cache,must-revalidate');header('Cache-Control: pre-check=0, post-check=0, max-age=0');header('Pragma: no-cache');header('Expires: 0');header('Content-Transfer-Encoding: none');header('Content-Type: application/vnd.ms-excel;');header('Content-type: application/x-msexcel');header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');
 
 $objWriter->save('php://output');
 exit; 

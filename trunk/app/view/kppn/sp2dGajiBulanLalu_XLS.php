@@ -72,7 +72,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
 $objPHPExcel->getActiveSheet()->setCellValue('B4', "Bank");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "'Des'.$kdtahun.'(Jumlah SP2D)'");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Des".$kdtahun."(Jumlah SP2D)");
 //p4
 $objPHPExcel->getActiveSheet()->setCellValue('D4', "Jan(Jumlah SP2D)");
 //p5
@@ -215,8 +215,8 @@ $objPHPExcel->setActiveSheetIndex(0);
 // Save as an Excel BIFF (xls) file
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
  // Redirect output to a client’s web browser (Excel2007)
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');header('Cache-Control: max-age=0');header("Pragma: no-cache");header("Expires: 0");header("Cache-Control: no-cache");
+
+header('Cache-Control: no-store, no-cache,must-revalidate');header('Cache-Control: pre-check=0, post-check=0, max-age=0');header('Pragma: no-cache');header('Expires: 0');header('Content-Transfer-Encoding: none');header('Content-Type: application/vnd.ms-excel;');header('Content-type: application/x-msexcel');header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');
  
 $objWriter->save('php://output');
 exit;
