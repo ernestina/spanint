@@ -201,4 +201,18 @@ $akses['PDFSatker'] = array(
 	'KarwasUPSatker_PDF',
     '__destruct'
 );
+
+/*
+ * akses PDR
+ */
+$akses['DataPDRSatker'] = array(
+        '__construct',
+        'index',
+        'registerDJPU',
+        'refAkun',
+        'refKppn',
+        'refSdana',
+        'refLokasi',
+        '__destruct'
+);
 ?>

@@ -106,4 +106,18 @@ $akses['PDFKL'] = array(
     '__destruct'
 );
 
+/*
+ * akses PDR
+ */
+$akses['DataPDRKL'] = array(
+        '__construct',
+        'index',
+        'registerDJPU',
+        'refAkun',
+        'refKppn',
+        'refSdana',
+        'refLokasi',
+        '__destruct'
+);
+
 ?>

@@ -140,4 +140,19 @@ $akses['PDFPKN'] = array(
     'grStatusHarianBulan_PDF',
     '__destruct'
 );
+
+/*
+ * akses PDR
+ */
+$akses['DataPDRPKN'] = array(
+        '__construct',
+        'index',
+        'registerDJPU',
+        'refAkun',
+        'refKppn',
+        'refSdana',
+        'refLokasi',
+        '__destruct'
+);
+
 ?>

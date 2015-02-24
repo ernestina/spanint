@@ -31,8 +31,13 @@ $akses['DataPDRDJA'] = array(
         '__construct',
         'index',
         'registerDJPU',
+        'refAkun',
+        'refKppn',
+        'refSdana',
+        'refLokasi',
         '__destruct'
 );
+
 
 /*
  * akses modul DataDIPA User
