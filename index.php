@@ -145,7 +145,7 @@ $registry->auth->add_access('dataPersiapanRollout','kppn',$akses['DataPersiapanR
 $registry->auth->add_access('dataPMRT','kppn',$akses['DataPMRTKPPN']);
 $registry->auth->add_access('dataBPN','kppn',$akses['DataBPNKPPN']);
 $registry->auth->add_access('dataMpnBi','kppn',$akses['DataMpnBiKPPN']);
-$registry->auth->add_access('dataPDR','kppn',$akses['DataPDRKppn']);
+$registry->auth->add_access('dataPDR','kppn',$akses['DataPDRKPPN']);
 
 //level pkn
 $registry->auth->add_access('auth','pkn',$akses['AuthPKN']);
