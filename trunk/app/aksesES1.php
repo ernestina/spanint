@@ -98,4 +98,18 @@ $akses['PDFES1'] = array(
 	'DataRealisasiKegiatanBAES1_BAES1_PDF',
     '__destruct'
 );
+
+/*
+ * akses PDR
+ */
+$akses['DataPDREs1'] = array(
+        '__construct',
+        'index',
+        'registerDJPU',
+        'refAkun',
+        'refKppn',
+        'refSdana',
+        'refLokasi',
+        '__destruct'
+);
 ?>

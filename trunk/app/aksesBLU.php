@@ -56,4 +56,19 @@ $akses['PDFBLU'] = array(
     'DataRealisasiBelanjaBLU_PDF',
     '__destruct'
 );
+
+/*
+ * akses PDR
+ */
+$akses['DataPDRBLU'] = array(
+        '__construct',
+        'index',
+        'registerDJPU',
+        'refAkun',
+        'refKppn',
+        'refSdana',
+        'refLokasi',
+        '__destruct'
+);
+
 ?>

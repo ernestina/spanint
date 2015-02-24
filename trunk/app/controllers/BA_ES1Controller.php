@@ -38,7 +38,7 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $_POST['kode'] . "%'";
                 $this->view->kdkegiatan = $_POST['kode'];
             }
-             if ($_POST['nama'] != '') {
+            if ($_POST['nama'] != '') {
                 $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
                 $this->view->nmkegiatan = $_POST['nama'];
             }
@@ -75,7 +75,7 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $_POST['kode'] . "%'";
                 $this->view->kdkegiatan = $_POST['kode'];
             }
-             if ($_POST['nama'] != '') {
+            if ($_POST['nama'] != '') {
                 $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
                 $this->view->nmkegiatan = $_POST['nama'];
             }
@@ -88,10 +88,10 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
         $d_log->tambah_log("Sukses");
-        $this->view->judul='Laporan Pagu Dana Per Kegiatan';
-        $this->view->judulkolom='Kode | Nama Kegiatan';
-        $this->view->action='DataRealisasiKegiatanES1';
-        $this->view->kodes='Kode Kegiatan:';
+        $this->view->judul = 'Laporan Pagu Dana Per Kegiatan';
+        $this->view->judulkolom = 'Kode | Nama Kegiatan';
+        $this->view->action = 'DataRealisasiKegiatanES1';
+        $this->view->kodes = 'Kode Kegiatan:';
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
 
@@ -109,11 +109,11 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == ES1) {
             $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
         }
-		if ($eselon1 != null) {
+        if ($eselon1 != null) {
             $filter[$no++] = "B.BAES1 = '" . $eselon1 . "'";
-			$this->view->eselon1 = $eselon1;
+            $this->view->eselon1 = $eselon1;
         }
-		if ($satker != null) {
+        if ($satker != null) {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . $satker . "'";
         }
 
@@ -134,8 +134,8 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->render('baes1/DataRealisasiPenerimaan');
     }
-	
-	public function DataRealisasiPenerimaanPerES1() {
+
+    public function DataRealisasiPenerimaanPerES1() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -168,8 +168,8 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->render('baes1/DataRealisasiPenerimaanES1');
     }
-	
-	public function DataRealisasiPenerimaanPerSatkerES1() {
+
+    public function DataRealisasiPenerimaanPerSatkerES1() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -297,21 +297,21 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->render('baes1/DataRealisasiKewenaganBAES1');
     }
-	public function DetailEncumbrances($code_id = null) {
+
+    public function DetailEncumbrances($code_id = null) {
         $d_spm1 = new encumbrances($this->registry);
         $filter = array();
         $no = 0;
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
-		if ((''.Session::get('ta')) == date("Y")) {
-			$filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') = '2015'";
-		 }
-		 else {
-			$filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') = '2014'";
-		 }
-		 
+
+        if (('' . Session::get('ta')) == date("Y")) {
+            $filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') =" . Session::get('ta');
+        } else {
+            $filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') =" . Session::get('ta') - 1;
+        }
+
         if ($code_id != '') {
             $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . $code_id . "'";
             //$this->view->invoice_num = $invoice_num;	
@@ -323,11 +323,11 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->render('baes1/encumbrances');
     }
-	
-	public function DataRealisasiKegiatanBAES1() {
+
+    public function DataRealisasiKegiatanBAES1() {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
-		$filter1 = array();
+        $filter1 = array();
         $no = 0;
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
@@ -335,11 +335,11 @@ class BA_ES1Controller extends BaseController {
 
         if (Session::get('role') == KL) {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
-			$filter1[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+            $filter1[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
         }
         if (Session::get('role') == ES1) {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
-			$filter1[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+            $filter1[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         }
 
         if (isset($_POST['kegiatan'])) {
@@ -354,7 +354,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->data = $d_spm1->get_realisasi_fa_kegiatan_baes1_filter($filter);
-		$this->view->data1 = $d_spm1->get_nama_kegiatan_filter($filter1);
+        $this->view->data1 = $d_spm1->get_nama_kegiatan_filter($filter1);
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatanBAES1');
@@ -425,8 +425,8 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->render('baes1/DataRealisasiLokasiBAES1');
     }
-	
-	public function DataRealisasiKabupatenBAES1($wilayah = null, $nmwilayah = null) {
+
+    public function DataRealisasiKabupatenBAES1($wilayah = null, $nmwilayah = null) {
         $d_spm1 = new DataRealisasi($this->registry);
         $filter = array();
         $no = 0;
@@ -440,17 +440,17 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == ES1) {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         }
-		
-		if ($wilayah != '') {
-                $filter[$no++] = "substr(a.lokasi,1,2) = '" . $wilayah . "'";
-                $this->view->wilayah = $wilayah;
-            }
-		
-		if ($nmwilayah != '') {
-                
-                $this->view->nmwilayah = $nmwilayah;
-            }
-		
+
+        if ($wilayah != '') {
+            $filter[$no++] = "substr(a.lokasi,1,2) = '" . $wilayah . "'";
+            $this->view->wilayah = $wilayah;
+        }
+
+        if ($nmwilayah != '') {
+
+            $this->view->nmwilayah = $nmwilayah;
+        }
+
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdlokasi'] != '') {
@@ -463,7 +463,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
         $this->view->data = $d_spm1->get_realisasi_fa_kabupaten_baes1_filter($filter);
-		$this->view->data1 = $d_spm1->get_wilayah($wilayah);
+        $this->view->data1 = $d_spm1->get_wilayah($wilayah);
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKabupatenBAES1');
@@ -649,8 +649,6 @@ class BA_ES1Controller extends BaseController {
         if ($jenis_spm != '') {
             $filter[$no++] = " JENDOK =  '" . $jenis_spm . "'";
             $this->view->jendok1 = $jenis_spm;
-			
-			
         }
 
         if ($tgl_awal != '' AND $tgl_akhir != '') {
@@ -741,12 +739,12 @@ class BA_ES1Controller extends BaseController {
 
             if ($_POST['kode'] != '') {
                 $filter[$no++] = "OUTPUT like '%" . $_POST['kode'] . "%'";
-                $this->view->output= $_POST['kode'];
+                $this->view->output = $_POST['kode'];
             }
-        
+
             if ($_POST['nama'] != '') {
                 $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
-                $this->view->output= $_POST['kode'];
+                $this->view->output = $_POST['kode'];
             }
         }
 
@@ -760,7 +758,7 @@ class BA_ES1Controller extends BaseController {
         $d_log->tambah_log("Sukses");
         $this->view->judul = 'Laporan Pagu Dana Per Output';
         $this->view->judulkolom = 'Kode | Nama Kegiatan / Output';
-        $this->view->action='DataRealisasiOutputBA';
+        $this->view->action = 'DataRealisasiOutputBA';
         $this->view->kodes = 'Kode Output :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
@@ -792,7 +790,7 @@ class BA_ES1Controller extends BaseController {
 
         $this->view->data = $d_spm1->get_ba_output_filter($filter);
         $d_log->tambah_log("Sukses");
-        $this->view->action='DataRealisasiOutputES1';
+        $this->view->action = 'DataRealisasiOutputES1';
         $this->view->judul = 'Laporan Pagu Dana Per Output :';
         $this->view->judulkolom = 'Kode | Nama Kegiatan / Output';
         $this->view->kodes = 'Kode Output :';
@@ -813,7 +811,7 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = "substr(program,1,5) like '%" . $_POST['kode'] . "%'";
                 $this->view->kdkegiatan = $_POST['kode'];
             }
-        
+
             if ($_POST['nama'] != '') {
                 $filter[$no++] = " upper(nmes1) like upper('%" . $_POST['nama'] . "%')";
                 $this->view->nmkegiatan = $_POST['nama'];
@@ -828,7 +826,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judul = 'Laporan Pagu Dana Per Eselon 1';
         $this->view->judulkolom = 'Kode | Nama Eselon 1';
         $this->view->action = 'DataFaBaPerEs1';
-        $this->view->kodes='Kode Eselon 1:';
+        $this->view->kodes = 'Kode Eselon 1:';
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatan');
@@ -849,18 +847,18 @@ class BA_ES1Controller extends BaseController {
                 $this->view->kdkegiatan = $_POST['kode'];
             }
         }
-        /*if (isset($_POST['submit_file'])) {
+        /* if (isset($_POST['submit_file'])) {
 
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
-                $this->view->nmkegiatan = $_POST['nama'];
-            }
-        }*/
-        
-        if (Session::get('role') == KL){
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
-        }elseif (Session::get('role') == ES1){
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+          if ($_POST['nama'] != '') {
+          $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
+          $this->view->nmkegiatan = $_POST['nama'];
+          }
+          } */
+
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         }
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -887,31 +885,31 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = "substr(akun,1,2) like '%" . $_POST['kode'] . "%'";
                 $this->view->kdkegiatan = $_POST['kode'];
             }
-        
+
             if ($_POST['nama'] != '') {
                 $filter[$no++] = " upper(nmakun) like upper('%" . $_POST['nama'] . "%')";
                 $this->view->nmkegiatan = $_POST['nama'];
             }
         }
-         
-        if (Session::get('role') == KL){
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
-        }elseif (Session::get('role') == ES1){
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         }
-                 
+
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         $this->view->data = $d_spm1->get_ba_per_jenbel_filter($filter);
         $this->view->judul = 'Laporan Pagu Dana Per Jenis Belanja';
         $this->view->judulkolom = 'Kode | Nama Jenis Belanja';
         $this->view->action = 'DataFaBaPerJenbel';
-        $this->view->kodes='Kode Jenis Belanja:';
+        $this->view->kodes = 'Kode Jenis Belanja:';
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
-    
+
     public function DataFaBaPerSdana() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
@@ -926,17 +924,17 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = "substr(dana,1,1) like '%" . $_POST['kode'] . "%'";
                 $this->view->kdkegiatan = $_POST['kode'];
             }
-        
+
             if ($_POST['nama'] != '') {
                 $filter[$no++] = " upper(deskripsi) like upper('%" . $_POST['nama'] . "%')";
                 $this->view->nmkegiatan = $_POST['nama'];
             }
         }
 
-        if (Session::get('role') == KL){
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
-        }elseif (Session::get('role') == ES1){
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         }
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -945,12 +943,12 @@ class BA_ES1Controller extends BaseController {
         $this->view->judul = 'Laporan Pagu Dana Per Sumber Dana';
         $this->view->judulkolom = 'Kode | Nama Sumber Dana';
         $this->view->action = 'DataFaBaPerSdana';
-        $this->view->kodes='Kode Sumber Dana:';
+        $this->view->kodes = 'Kode Sumber Dana:';
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
-    
+
     public function DataFaBaEs1Jenbel() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
@@ -966,13 +964,13 @@ class BA_ES1Controller extends BaseController {
                 $this->view->kdkegiatan = $_POST['kode'];
             }
         }
-        /*if (isset($_POST['submit_file'])) {
+        /* if (isset($_POST['submit_file'])) {
 
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
-                $this->view->nmkegiatan = $_POST['nama'];
-            }
-        }*/
+          if ($_POST['nama'] != '') {
+          $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
+          $this->view->nmkegiatan = $_POST['nama'];
+          }
+          } */
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -986,7 +984,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->kodes = 'Kode Eselon 1 :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
-    
+
     public function DataFaBaEs1Sdana() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
@@ -1002,13 +1000,13 @@ class BA_ES1Controller extends BaseController {
                 $this->view->kdkegiatan = $_POST['kode'];
             }
         }
-        /*if (isset($_POST['submit_file'])) {
+        /* if (isset($_POST['submit_file'])) {
 
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
-                $this->view->nmkegiatan = $_POST['nama'];
-            }
-        }*/
+          if ($_POST['nama'] != '') {
+          $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
+          $this->view->nmkegiatan = $_POST['nama'];
+          }
+          } */
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -1022,7 +1020,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->kodes = 'Kode Eselon 1 :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
-    
+
     public function DataFaEs1PerSat() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
@@ -1037,7 +1035,7 @@ class BA_ES1Controller extends BaseController {
                 $filter[$no++] = "satker like '%" . $_POST['kode'] . "%'";
                 $this->view->kdkegiatan = $_POST['kode'];
             }
-        
+
             if ($_POST['nama'] != '') {
                 $filter[$no++] = " nmsatker like upper('%" . $_POST['nama'] . "%')";
                 $this->view->nmkegiatan = $_POST['nama'];
@@ -1045,19 +1043,19 @@ class BA_ES1Controller extends BaseController {
         }
 
         $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
-        
+
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         $this->view->data = $d_spm1->get_es1_persat_filter($filter);
         $this->view->judul = 'Laporan Pagu Dana Per Satker';
         $this->view->judulkolom = 'Kode | Nama Satker';
         $this->view->action = 'DataFaEs1PerSat';
-        $this->view->kodes='Kode Satker:';
+        $this->view->kodes = 'Kode Satker:';
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
-    
+
     public function DataFaEs1SatJenbel() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
@@ -1073,13 +1071,13 @@ class BA_ES1Controller extends BaseController {
                 $this->view->kdkegiatan = $_POST['kode'];
             }
         }
-        /*if (isset($_POST['submit_file'])) {
+        /* if (isset($_POST['submit_file'])) {
 
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
-                $this->view->nmkegiatan = $_POST['nama'];
-            }
-        }*/
+          if ($_POST['nama'] != '') {
+          $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
+          $this->view->nmkegiatan = $_POST['nama'];
+          }
+          } */
         $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -1093,7 +1091,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->kodes = 'Kode Satker :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
-    
+
     public function DataFaEs1SatSdana() {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
@@ -1109,13 +1107,13 @@ class BA_ES1Controller extends BaseController {
                 $this->view->kdkegiatan = $_POST['kode'];
             }
         }
-        /*if (isset($_POST['submit_file'])) {
+        /* if (isset($_POST['submit_file'])) {
 
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
-                $this->view->nmkegiatan = $_POST['nama'];
-            }
-        }*/
+          if ($_POST['nama'] != '') {
+          $filter[$no++] = "nmsatker like '%" . $_POST['nama'] . "%'";
+          $this->view->nmkegiatan = $_POST['nama'];
+          }
+          } */
         $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -1129,7 +1127,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->kodes = 'Kode Satker :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
-    
+
     public function __destruct() {
         
     }

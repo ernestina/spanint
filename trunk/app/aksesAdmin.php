@@ -48,6 +48,8 @@ $akses['DataPDRAdmin'] = array(
         'registerDJPU',
         'refAkun',
         'refKppn',
+        'refSdana',
+        'refLokasi',
         '__destruct'
 );
 

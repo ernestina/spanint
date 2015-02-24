@@ -203,6 +203,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -346,6 +348,10 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -516,6 +522,18 @@
                                 </ul>
                             </div>
                         </li>
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                </ul>
+                            </div>
+                        </li>
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                             <div class="collapse">
@@ -600,6 +618,18 @@
                                 </ul>
                             </div>
                         </li>
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                </ul>
+                            </div>
+                        </li>
 
                             <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                                 <div class="collapse">
@@ -663,7 +693,18 @@
                                 </ul>
                             </div>
                         </li>
-
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                </ul>
+                            </div>
+                        </li>
                             <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                                 <div class="collapse">
                                     <ul>
@@ -702,7 +743,18 @@
                                 </ul>
                             </div>
                         </li>
-
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                </ul>
+                            </div>
+                        </li>
                             <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
                                 <div class="collapse">
                                     <ul>
@@ -732,7 +784,7 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Detail_Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus Seluruh Satker</a></li>
-                                    <!--<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>-->
+                                    <a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
                                 </ul>
                             </div>
@@ -742,6 +794,10 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -851,6 +907,18 @@
                                 </ul>
                             </div>
                         </li>
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
 
                 <?php elseif (Session::get('role') == ES1): ?>
@@ -913,6 +981,18 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan</a></li>
 
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataPDR/registerDJPU">Register DJPU</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
                                 </ul>
                             </div>
                         </li>

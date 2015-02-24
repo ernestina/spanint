@@ -30,10 +30,17 @@ $akses['AuthKanwil'] = array(
 /*
  * akses PDR
  */
+/*
+ * akses PDR
+ */
 $akses['DataPDRKanwil'] = array(
         '__construct',
         'index',
         'registerDJPU',
+        'refAkun',
+        'refKppn',
+        'refSdana',
+        'refLokasi',
         '__destruct'
 );
 
