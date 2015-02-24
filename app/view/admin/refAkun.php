@@ -15,7 +15,6 @@
 			<?php
 			$kdaksi=$this->action;
 			$kdaksi1=$kdaksi.'_PDF';
-			 if (Session::get('role') == ADMIN || Session::get('role') == KANWIL || Session::get('role') == DJA) {
                     
                         
 						if (isset($this->d_nip)) {
@@ -40,7 +39,6 @@
 						</div>
 					<?php		
 				
-			}
 			
 ?>			
 

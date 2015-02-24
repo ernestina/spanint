@@ -96,6 +96,11 @@ $akses['PDFES1'] = array(
 	'DataRealisasiKabupatenBAES1_BAES1_PDF',
 	'DataRealisasiPenerimaanPerES1_BAES1_PDF',
 	'DataRealisasiKegiatanBAES1_BAES1_PDF',
+	'registerDJPU_PDF',
+	'refAkun_PDF',
+	'refKppn_PDF',	
+	'refSdana_PDF',
+	'refLokasi_PDF',
     '__destruct'
 );
 

@@ -441,12 +441,18 @@ $akses['PDFAdmin'] = array(
 	'DataFaBaPerEs1_BAES1_PDF',
     'DataFaBaSatEs1_BAES1_PDF',
     'DataFaBaPerJenbel_BAES1_PDF',
+	'DataFaEs1PerSat_BAES1_PDF',
+	'DataFaEs1SatJenbel_BAES1_PDF',
+	'DataFaEs1SatSdana_BAES1_PDF',
 	'DataBPN_PDF',
     'DataBPNSatker_PDF',
 	'MpnBi_PDF',
 	'registerDJPU_PDF',
 	'refAkun_PDF',
-	'refKppn_PDF',		
+	'refKppn_PDF',	
+	'refSdana_PDF',
+	'refLokasi_PDF',
+	
     '__destruct'
 );
 ?>

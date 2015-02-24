@@ -393,6 +393,11 @@ $akses['PDFKPPN'] = array(
 	'DataBPN_PDF',
     'DataBPNSatker_PDF',
 	'MpnBi_PDF',
+	'registerDJPU_PDF',
+	'refAkun_PDF',
+	'refKppn_PDF',	
+	'refSdana_PDF',
+	'refLokasi_PDF',
     '__destruct'
 );
 
