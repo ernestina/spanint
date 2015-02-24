@@ -393,12 +393,18 @@ class DataGRController extends BaseController {
             $filter[$no++] = "RECEIPT_NUMBER =  '" . $ntpn . "'";
             $this->view->d_tgl = $ntpn;
         }
-		
+        // if (!is_null($kppn)) {
+        // $filter[$no++] = "KDKPPN = '" . $kppn . "'";
+        // $this->view->kppn = $kppn;
+        // } else {
+        // $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+        // $this->view->kppn =  Session::get('id_user');
+        // }
         $this->view->data = $d_spm1->get_detail_coa_penerimaan($filter);
         
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table2());
+        $this->view->last_update = $d_last_update->get_last_updatenya("SPGR_MPN_COA");
 
         //var_dump($d_spm->get_gr_status_filter($filter));
         $this->view->render('kppn/detailCoAPenerimaan');
@@ -413,18 +419,19 @@ class DataGRController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		/* if (Session::get('role') == SATKER) {
+            $filter[$no++] = "SUBSTR(INVOICE_NUM,8,6) = '" . Session::get('kd_satker') . "'";
+            $this->view->data = $d_spm1->get_sp2d_rekap_filter($filter);
+        }
+		 */
 		$this->view->data2 = $d_spm1->get_akun_pnbp($filter);
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['ntpn'] != '') {
                 $filter[$no++] = "RECEIPT_NUMBER = '" . $_POST['ntpn'] . "'";
                 $this->view->ntpn = $_POST['ntpn'];
-            }
-            
-            if ($_POST['billingcode'] != '') {
-                $filter[$no++] = "BILLINGCODE = '" . $_POST['billingcode'] . "'";
-                $this->view->billingcode = $_POST['billingcode'];
-            }
+            } 
 			
 			if ($_POST['akun'] != '') {
 			
@@ -441,6 +448,8 @@ class DataGRController extends BaseController {
 			$this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
 
         }
+           
+           // $this->view->data = $d_spm1->get_konfirmasi_penerimaan($filter);
         
         // untuk mengambil data last update 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -508,7 +517,7 @@ class DataGRController extends BaseController {
             $filter[$no++] = "SUBSTR(RESP_NAME,1,3) = '" . Session::get('id_user') . "'";
         }
 
-        if ($ntpn != '') {
+        if (Sntpn != '') {
 
             $filter[$no++] = "NTPN = '" . $ntpn . "'";
         }
@@ -638,7 +647,7 @@ class DataGRController extends BaseController {
             }*/
             
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
-                $filter[$no++] = "TO_DATE(TANGGAL,'YYYYMMDD') BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') 
+                $filter[$no++] = "TANGGAL BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') 
 								AND TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD')  ";
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
