@@ -40,17 +40,13 @@
 				
 			}
 			if (Session::get('role') == KPPN) {
-				if (isset($this->d_nama_kppn)) {
-					$kdkppn = $this->d_nama_kppn;
-				} else {
+				
 					$kdkppn = Session::get('id_user');
-				}
+				
 				if (isset($this->satker_code)) {
 					$kdsatker=$this->satker_code;
 				} else {
-					foreach ($this->data as $value) {
-						$kdsatker=$value->get_satker_code();
-					}
+					$kdsatker='null';
 				}
 				
 			}

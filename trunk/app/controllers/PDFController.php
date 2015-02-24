@@ -939,6 +939,8 @@ class PDFController extends BaseController {
 				$this->view->load('kppn/NamaSatkerDIPA1_PDF');
 			}elseif($ck=='XLS'){
 				$this->view->load('kppn/NamaSatkerDIPA1_XLS');
+				//$this->view->render('kppn/NamaSatkerDIPA1_XLS');
+				
 			}
 			//------------------------------------------------------------
 

@@ -24,12 +24,18 @@
 
 			if (isset($this->d_nm_kdkppn)) {
 				$kdkppn =$this->d_nm_kdkppn;
+			}else{
+				$kdkppn =Session::get('id_user');
 			}			
 			if (isset($this->bulan)) {
 				$kdbulan =$this->bulan;
+			}else{
+				$kdbulan ='null';
 			}
 			if (isset($this->d_tgl)) {
 				$kdakun =$this->d_tgl;					
+			}else{
+				$kdakun ='null';	
 			}
 			?>
                 <div class="btn-group-sm">
