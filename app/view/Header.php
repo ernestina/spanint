@@ -397,7 +397,6 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>userSpan/monitoringUserSpan">Monitoring User Aktif</a></li>
-                                    <li><a href="<?php echo URL; ?>userSpan/pergantianUser">Monitoring Pergantian User</a></li>
                                 </ul>
                             </div>
                         </li>
