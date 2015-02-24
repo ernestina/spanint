@@ -5058,13 +5058,19 @@ class PDFController extends BaseController {
 		 else {
 			$filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYY') = '2014'";
 		 }
-        if ($kdkppn != 'null') {
-            $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) IN ( '" . $kdkppn . "')";
-        } elseif (Session::get('role') == KANWIL) {
-            $filter[$no++] = "SUBSTR(CHECK_NUMBER,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
-        } elseif (Session::get('role') == ADMIN) {
-            
-        }
+		 
+		 
+		    if ($kdkppn != 'null') {
+                $filter[$no++] = "KDKPPN IN ( '" . $kdkppn . "')";
+                $d_kppn = new DataUser($this->registry);
+                $this->view->d_nama_kppn = $d_kppn->get_d_user_kppn($kdkppn);
+            } elseif (Session::get('role') == KANWIL) {
+                $filter[$no++] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . Session::get('id_user') . "')";
+            } elseif (Session::get('role') == ADMIN) {
+
+            }
+
+			
 
         if ($kdtgl_awal != 'null' AND $kdtgl_akhir != 'null') {
             $filter[$no++] = "TO_CHAR(CHECK_DATE,'YYYYMMDD') BETWEEN '" . date('Ymd', strtotime($kdtgl_awal)) . "' AND '" . date('Ymd', strtotime($kdtgl_akhir)) . "'";
