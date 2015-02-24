@@ -121,7 +121,7 @@
                         "</td> ";
 						}
 						//echo "<td align='right'>" . number_format($value->get_obligation()) . "</td> ";
-						echo "<td class='ratakiri'><a href=" . URL . "BA_ES1/DetailEncumbrances/" . $value->get_kdkegiatan() . ">" . number_format($value->get_obligation()). "</td>";
+						echo "<td class='align-right'><a href=" . URL . "BA_ES1/DetailEncumbrances/" . $value->get_kdkegiatan() . ">" . number_format($value->get_obligation()). "</td>";
 						echo "<td align='right'>" . number_format($value->get_block_amount()) . "</td> ";
 						echo "<td align='right'>" . number_format($value->get_balancing_amt()) . "</td> ";
                         echo "</tr>	";
