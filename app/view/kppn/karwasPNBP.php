@@ -32,12 +32,8 @@
 						foreach ($this->nmsatker as $satker) {
 							$kdsatker = $satker->get_satker_code();
 						}
-					}else{			
-						if (isset($this->data1)) {
-							foreach ($this->data1 as $value) {
-								$kdsatker =$value->get_satker_code();
-							}
-						}
+					}else{
+						$kdsatker ='null';
 					} 
 				?>
 					<a href="<?php echo URL; ?>PDF/KarwasPNBP_PDF/<?php echo $kdkppn . "/" . $kdppp . "/" . $kdsatker; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>

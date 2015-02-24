@@ -12,16 +12,15 @@
 ob_start();
 //-------------------------------------
 require_once("./././public/fpdf17/fpdf.php");
-require_once("./././public/fpdf17/rotation.php");
 
-class FPDF_AutoWrapTable extends PDF_Rotate {
+class FPDF_AutoWrapTable extends FPDF {
 
     private $data1 = array();
     private $data2 = array();
     private $data3 = array();
     private $data4 = array();
     private $data6 = array();
-    protected $options = array(
+    private $options = array(
         'judul' => '',
         'filename' => '',
         'destinationfile' => '',
@@ -32,7 +31,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
     private $kdtgl_akhir = array();
     private $nm_kppn;
 	private $kd_ppp;
-	
+
     /*
      * Konstruktor
      */
@@ -57,24 +56,75 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 
     public function rptDetailData() {
         //-----------------------------------
-		//------------------------------
-		$judul=$this->options['judul'];
-		$nm_kppn = $this->nm_kppn;
-		$nm_kppn2 = $this->nm_kppn2;
-		$nm_kppn3 = $this->nm_kppn3;
+        $judul = $this->options['judul'];
+        $nm_kppn = $this->nm_kppn;
+		$kd_ppp= $this->kd_ppp;
+    //}
+        $kemenkeu = 'Kementerian Keuangan Republik Indonesia';
+        $border = 0;
+        $h = 40;
+        $left = 10;
+        //header
+        $h1 = 35;
+        $this->SetFont("", "B", 12);
+        $this->SetX($left + 20);
+        $this->Image("./././public/img/depkeu.png", 30, 30, 30, 30);
+        $px1 = $this->GetX();
+        $this->SetX($left + 50);
+        $this->MultiCell(0, $h1 / 2, $kemenkeu);
+        $py1 = $this->GetY();
+        $px2 = $px1;
+        $py2 = $py1;
+        $this->SetXY($px2, $py2);
+        $this->SetX($left + 50);
+        if (substr(trim($nm_kppn), 0, 4) == 'KPPN') { //3
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 6) == 'KANWIL') { //5
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 3) == 'DIT') {  //1 & 4
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 3) == 'SET') {  //1
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 5) == 'ADMIN') { //1
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        }elseif (substr(trim($nm_kppn), 0, 5) == 'null') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        }elseif (substr(trim($nm_kppn), 0, 5) == '') { //6
+            $this->MultiCell(0, $h1 / 2, '');
+        } else {
+            $this->MultiCell(0, $h1 / 2, 'KPPN ' . $nm_kppn);
+        }
+
+
+        $this->Cell(0, 1, " ", "B");
+        $this->Ln(10);
+        $this->Cell(0, 20, $judul, 0, 0, 'C', false);
+        $this->Ln(15);
+                //tanggal
 		$kdtgl_awal1 = $this->kdtgl_awal;
 		$kdtgl_akhir1 = $this->kdtgl_akhir;
-		
-        
-		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
-        //-----------------------------------
-       
+	    if (isset($kdtgl_awal1) && isset($kdtgl_akhir1)) {
+            $thn1 = substr($kdtgl_awal1, 6, 4);
+            $bln1 = substr($kdtgl_awal1, 3, 2);
+            $tgl1 = substr($kdtgl_awal1, 0, 2);
+            $kdtgl_awal = $tgl1 . '-' . $bln1 . '-' . $thn1;
+            $thn2 = substr($kdtgl_akhir1, 6, 4);
+            $bln2 = substr($kdtgl_akhir1, 3, 2);
+            $tgl2 = substr($kdtgl_akhir1, 0, 2);
+            $kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
+            $this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);		
+        } else {
+            $this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);			 
+        } 
+		//--------------------
 
-        
+        $this->Ln(20);
+        $this->SetFont("", "B", 8);
+        $this->Ln(10);
         //----------------------------------------------- 
-        #pengaturan khusus
-		 $border = 0;
-        $h = 40;
+        #tableheader
         $this->SetFont('Arial', 'B', 7);
        $this->SetFillColor(200, 200, 200);
 	   //---------------------BAGIAN 1-----------------------------------
@@ -108,7 +158,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Jenis Belanja', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
         $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Jumlah', 1, 1, 'C', true);
-        $this->Ln(3);
+        $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array($kolom1,$kolom2,$kolom3,$kolom4,$ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja));
@@ -191,7 +241,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Kode Akun', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
         $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Jumlah', 1, 1, 'C', true);
-        $this->Ln(3);
+        $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array($kolom1,$kolom2,$kolom4,$ukuran_kolom_jenis_belanja1,$ukuran_kolom_jenis_belanja));
@@ -270,7 +320,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Jenis SPM', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
         $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Jumlah', 1, 1, 'C', true);
-        $this->Ln(3);
+        $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array($kolom1,$kolom2,$kolom4,$ukuran_kolom_jenis_belanja1,$ukuran_kolom_jenis_belanja));
@@ -350,7 +400,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Akun', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
         $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Jumlah', 1, 1, 'C', true);
-        $this->Ln(3);
+        $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array($kolom1,$kolom2,$kolom4,$ukuran_kolom_jenis_belanja1,$ukuran_kolom_jenis_belanja));
@@ -429,7 +479,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell($ukuran_kolom_jenis_belanja1, $h, 'Akun', 1, 0, 'C', true);
         $this->SetX($px2 += $ukuran_kolom_jenis_belanja1);
         $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Jumlah', 1, 1, 'C', true);
-        $this->Ln(3);
+        $this->Ln(8);
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array($kolom1,$kolom2,$kolom4,$ukuran_kolom_jenis_belanja1,$ukuran_kolom_jenis_belanja));
@@ -505,15 +555,51 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 	//----------------------------------------------------------
     }
 
-    
+    //footer
+    function Footer() {
 
-    
+        // Go to 1.5 cm from bottom
+        $this->SetY(-15);
+        // Select Arial italic 8
+        $this->SetFont('Arial', 'I', 8);
+        // Print centered page number
+        $this->Cell(0, 10, 'Hal : ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
+        $hari_ini =  Date("Y-m-d H:i:s");
+        $this->Cell(0, 10, 'Dicetak : ' . $hari_ini, 0, 0, 'R');
+    }
 
-    
+    public function printPDF() {
 
-    
+        if ($this->options['paper_size'] == "F4") {
+            $a = 8.3 * 72; //1 inch = 72 pt
+            $b = 13.0 * 72;
+            $this->FPDF($this->options['orientation'], "pt", array($a, $b));
+        } else {
+            $this->FPDF($this->options['orientation'], "pt", $this->options['paper_size']);
+        }
 
-    
+        $this->SetAutoPageBreak(false, 30);
+        $this->AliasNbPages();
+        $this->SetFont("helvetica", "B", 10);
+        $this->AddPage();
+
+        $this->rptDetailData();
+        $this->Footer();
+        $this->Output($this->options['filename'], $this->options['destinationfile']);
+    }
+
+    private $widths;
+    private $aligns;
+
+    function SetWidths($w) {
+        //Set the array of column widths
+        $this->widths = $w;
+    }
+
+    function SetAligns($a) {
+        //Set the array of column alignments
+        $this->aligns = $a;
+    }
 
     function Row1($data1) {
         //Calculate the height of the row
@@ -647,9 +733,55 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 
 		}
 
+    function CheckPageBreak($h) {
+        //If the height h would cause an overflow, add a new page immediately
+        if ($this->GetY() + $h > $this->PageBreakTrigger)
+            $this->AddPage($this->CurOrientation);
+    }
 
-
-    
+    function NbLines($w, $txt) {
+        //Computes the number of lines a MultiCell of width w will take
+        $cw = &$this->CurrentFont['cw'];
+        if ($w == 0)
+            $w = $this->w - $this->rMargin - $this->x;
+        $wmax = ($w - 2 * $this->cMargin) * 1000 / $this->FontSize;
+        $s = str_replace("\r", '', $txt);
+        $nb = strlen($s);
+        if ($nb > 0 and $s[$nb - 1] == "\n")
+            $nb--;
+        $sep = -1;
+        $i = 0;
+        $j = 0;
+        $l = 0;
+        $nl = 1;
+        while ($i < $nb) {
+            $c = $s[$i];
+            if ($c == "\n") {
+                $i++;
+                $sep = -1;
+                $j = $i;
+                $l = 0;
+                $nl++;
+                continue;
+            }
+            if ($c == ' ')
+                $sep = $i;
+            $l+=$cw[$c];
+            if ($l > $wmax) {
+                if ($sep == -1) {
+                    if ($i == $j)
+                        $i++;
+                } else
+                    $i = $sep + 1;
+                $sep = -1;
+                $j = $i;
+                $l = 0;
+                $nl++;
+            } else
+                $i++;
+        }
+        return $nl;
+    }
 
 }
 
@@ -700,13 +832,11 @@ if (is_array($this->kdtgl_akhir)) {
     //echo 'bukan array';
 }
 
-
+$nm_kppn = $this->nm_kppn;
 
 //--------------------------
 //pilihan
-//judul laporan
-$judul1= $this->judul1;$nm_kppn = $this->nm_kppn;
-$judul = 'Laporan '.$judul1; //judul file laporan
+$judul = 'Laporan Karwas Maksimum Pencairan (PNBP)'; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
 
