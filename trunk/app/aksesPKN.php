@@ -138,6 +138,11 @@ $akses['PDFPKN'] = array(
     'DataSPMAkhirTahunNihil_PDF',
     'DataSPMAkhirTahunBUN_PDF',
     'grStatusHarianBulan_PDF',
+	'registerDJPU_PDF',
+	'refAkun_PDF',
+	'refKppn_PDF',	
+	'refSdana_PDF',
+	'refLokasi_PDF',
     '__destruct'
 );
 

@@ -13,7 +13,6 @@
 
             <div class="col-lg-1 col-md-3 col-sm-12 top-padded">
 			<?php
-			 if (Session::get('role') == ADMIN || Session::get('role') == KANWIL || Session::get('role') == DJA) {
                    
                         
 						if (isset($this->d_nip)) {
@@ -40,7 +39,6 @@
 					
 					<?php
 				
-			 }
 			
 			
 			?>

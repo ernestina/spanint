@@ -87,7 +87,10 @@ $akses['PDFKL'] = array(
 	'DataFaBaPerJenbel_BAES1_PDF',
 	'DataFaBaPerSdana_BAES1_PDF',
 	'DataFaBaEs1Jenbel_BAES1_PDF',
-	'DataFaBaEs1Sdana_BAES1_PDF',
+	'DataFaBaEs1Sdana_BAES1_PDF',	
+	'DataFaEs1PerSat_BAES1_PDF',
+	'DataFaEs1SatJenbel_BAES1_PDF',
+	'DataFaEs1SatSdana_BAES1_PDF',
 	'DataRealisasiKegiatanBA_BAES1_PDF',
     'DataRealisasiKegiatanES1_BAES1_PDF',
 	'DataRealisasiOutputBA_BAES1_PDF',
@@ -103,6 +106,11 @@ $akses['PDFKL'] = array(
 	'DataRealisasiPenerimaanPerSatkerES1_BAES1_PDF',
 	'DataRealisasiKegiatanBAES1_BAES1_PDF',
 	'DetailEncumbrances_BAES1_PDF',
+	'registerDJPU_PDF',
+	'refAkun_PDF',
+	'refKppn_PDF',	
+	'refSdana_PDF',
+	'refLokasi_PDF',
     '__destruct'
 );
 

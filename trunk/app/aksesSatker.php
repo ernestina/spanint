@@ -199,6 +199,11 @@ $akses['PDFSatker'] = array(
     'DataBPNSatker_PDF',
 	'MpnBi_PDF',
 	'KarwasUPSatker_PDF',
+	'registerDJPU_PDF',
+	'refAkun_PDF',
+	'refKppn_PDF',	
+	'refSdana_PDF',
+	'refLokasi_PDF',
     '__destruct'
 );
 

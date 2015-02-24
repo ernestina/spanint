@@ -54,6 +54,11 @@ $akses['PDFBLU'] = array(
     'CariSP3B_PDF',
     'DataRealisasiBLU_PDF',
     'DataRealisasiBelanjaBLU_PDF',
+	'registerDJPU_PDF',
+	'refAkun_PDF',
+	'refKppn_PDF',	
+	'refSdana_PDF',
+	'refLokasi_PDF',
     '__destruct'
 );
 
