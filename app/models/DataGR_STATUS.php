@@ -17,7 +17,6 @@ class DataGR_STATUS {
     private $_keterangan;
     private $_mata_uang;
     private $_ntpn;
-    private $_billingcode;
     private $_segment1;
     private $_segment2;
     private $_segment3;
@@ -33,7 +32,7 @@ class DataGR_STATUS {
     private $_amount;
     private $_gr_batch_num;
     private $_table1 = 'spgr_mpn_receipts_all';
-    private $_table2 = 'spgr_mpn_coa_2015';
+    private $_table2 = 'spgr_mpn_coa';
     private $_table3 = 'SPGR_MPN_NTPN_GANDA';
     private $_table4 = 'SPGR_MPN_NTPN_GANDA_DETAIL';
     public $registry;
@@ -167,7 +166,7 @@ class DataGR_STATUS {
 						smc.currency_code,
 						smc.amount_dist
 						FROM GL_CODE_COMBINATIONS gcc,
-						". $this->_table2 ." smc
+						SPGR_MPN_COA smc
 						WHERE smc.CODE_COMBINATION_ID=gcc.CODE_COMBINATION_ID ";
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
@@ -194,7 +193,7 @@ class DataGR_STATUS {
         $sql = "SELECT * FROM "
                 . $this->_table2 . "
 				WHERE 1=1 
-                AND TO_DATE(TANGGAL,'YYYYMMDD') BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
+                AND TANGGAL BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
 
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
@@ -206,9 +205,8 @@ class DataGR_STATUS {
         foreach ($result as $val) {
             $d_data = new $this($this->registry);
             $d_data->set_ntpn($val['RECEIPT_NUMBER']);
-            $d_data->set_billingcode($val['BILLINGCODE']);
-            $d_data->set_file_name($val['ATTRIBUTE3']);
-            $d_data->set_gl_date(date("d-m-Y", strtotime($val['TANGGAL'])));
+            $d_data->set_file_name($val['NTB']);
+            $d_data->set_gl_date($val['TANGGAL']);
             $d_data->set_resp_name($val['NAMA']);
             $d_data->set_segment1($val['SEGMENT1']);
             $d_data->set_segment2($val['SEGMENT2']);
@@ -262,7 +260,7 @@ class DataGR_STATUS {
 
 					RECEIPT_NUMBER ,
 					'O' TYPE
-					,TANGGAL_GL TANGGAL,
+					,TO_CHAR(TO_DATE(TANGGAL_GL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL,
 					SEGMENT1,
 					SEGMENT2,
 					SEGMENT3,
@@ -277,12 +275,12 @@ class DataGR_STATUS {
 					SEGMENT12,
 					CURRENCY_CODE,
 					AMOUNT_DIST *-1 AMOUNT,
-					TANGGAL TANGGAL2
-					 FROM ". $this->_table2 ."
+					TO_CHAR(TO_DATE(TANGGAL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL2
+					 FROM SPGR_MPN_COA
 					 WHERE 
 					 NOURUT IN ('" . $ids . "') 
 					 UNION ALL
-					SELECT RECEIPT_NUMBER ,'C' TYPE,TANGGAL_GL TANGGAL,
+					SELECT RECEIPT_NUMBER ,'C' TYPE,TO_CHAR(TO_DATE(TANGGAL_GL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL,
 					SEGMENT1,
 					SEGMENT2,
 					SEGMENT3,
@@ -297,8 +295,8 @@ class DataGR_STATUS {
 					SEGMENT12,
 					CURRENCY_CODE,
 					AMOUNT_DIST AMOUNT,
-					TANGGAL TANGGAL2
-					 FROM ". $this->_table2 ."
+					TO_CHAR(TO_DATE(TANGGAL,'DD-MON-YYYY'),'YYYYMMDD')TANGGAL2
+					 FROM SPGR_MPN_COA
 					 WHERE NOURUT IN ('" . $ids . "')"
         ;
 
@@ -338,10 +336,10 @@ class DataGR_STATUS {
         $sql = "SELECT " .
                 $segment1 . " 
 		RECEIPT_NUMBER,
-		ATTRIBUTE3, 
+		NTB, 
 		SEGMENT3, 
 		AMOUNT_DIST AMOUNT 
-		FROM ". $this->_table2 ."  
+		FROM SPGR_MPN_COA 
 		WHERE 
 		NOURUT IN ('" . $ids . "')";
 
@@ -487,10 +485,6 @@ class DataGR_STATUS {
         $this->_ntpn = $ntpn;
     }
 
-    public function set_billingcode($billingcode) {
-        $this->_billingcode = $billingcode;
-    }
-
     public function set_file_name($file_name) {
         $this->_file_name = $file_name;
     }
@@ -545,10 +539,6 @@ class DataGR_STATUS {
 
     public function get_ntpn() {
         return $this->_ntpn;
-    }
-
-    public function get_billingcode() {
-        return $this->_billingcode;
     }
 
     public function get_segment1() {

@@ -451,6 +451,9 @@
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring Imbalan Jasa Perbankan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring Perhitungan Fihak Ketiga</a></li>
+                                    <li><a href="<?php echo URL; ?>dataMpnBi/MpnBi">Monitoring Rekap Penerimaan yang sudah Diinterface</a></li>
+                                    <li><a href="<?php echo URL; ?>dataBPN/dataBPN">Monitoring Potongan SPM (Satker Pembayar)</a></li>
+                                    <li><a href="<?php echo URL; ?>dataBPN/dataBPNSatker">Monitoring Potongan SPM (Satker Penerima)</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/KonfirmasiPenerimaan">Konfirmasi Penerimaan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker Penerimaan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun Penerimaan</a></li>
