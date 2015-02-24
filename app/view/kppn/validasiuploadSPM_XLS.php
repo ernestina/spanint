@@ -109,65 +109,9 @@ if (count($this->data) == 0) {
 // Set page orientation and size
 $objPHPExcel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
 $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL);
-$objPHPExcel->getActiveSheet()->getPageMargins()->setTop(0.75);
-$objPHPExcel->getActiveSheet()->getPageMargins()->setRight(0.75);
-$objPHPExcel->getActiveSheet()->getPageMargins()->setLeft(0.75);
-$objPHPExcel->getActiveSheet()->getPageMargins()->setBottom(0.75);
-$objPHPExcel->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&B' . $objPHPExcel->getProperties()->getTitle() . '&RPage &P of &N');
+
  
 
-$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(11.1);
-$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('M')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('N')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('O')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('P')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('Q')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('R')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('S')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('T')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('U')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('V')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('W')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('X')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('Y')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('Z')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AA')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AB')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AC')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AD')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AE')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AF')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AG')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AH')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AI')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AJ')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AK')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AL')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AM')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AN')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AO')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AP')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AQ')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AR')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AS')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AT')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AU')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AV')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AW')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AX')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AY')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('AZ')->setAutoSize(true);
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
@@ -182,7 +126,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
  // Redirect output to a client’s web browser (Excel2007)
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');header('Cache-Control: max-age=0');header("Pragma: no-cache");header("Expires: 0");ob_clean();flush();
+header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');header('Cache-Control: max-age=0');header("Pragma: no-cache");header("Expires: 0");header("Cache-Control: no-cache");
  
 $objWriter->save('php://output');
 exit;
