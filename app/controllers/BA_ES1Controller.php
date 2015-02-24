@@ -114,7 +114,7 @@ class BA_ES1Controller extends BaseController {
             $this->view->eselon1 = $eselon1;
         }
         if ($satker != null) {
-            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . $satker . "'";
+            $filter[$no++] = "B.KDSATKER = '" . $satker . "'";
         }
 
         if (isset($_POST['submit_file'])) {
@@ -178,29 +178,39 @@ class BA_ES1Controller extends BaseController {
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
         if (Session::get('role') == KL) {
-            $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+            $filter[$no++] = "B.BA = '" . Session::get('kd_baes1') . "'";
         }
         if (Session::get('role') == ES1) {
-            $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+            $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
         }
 
 
         if (isset($_POST['submit_file'])) {
 
-            if ($_POST['KEGIATAN'] != '') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) = '" . $_POST['KEGIATAN'] . "'";
-                $this->view->lokasi = $_POST['KEGIATAN'];
+            if ($_POST['kdsatker'] != '') {
+                $filter[$no++] = "B.KDSATKER = '" . $_POST['kdsatker'] . "'";
+                $this->view->kdsatker = $_POST['kdsatker'];
+            }
+            if ($_POST['nmsatker'] != '') {
+                $filter[$no++] = " UPPER(B.NMSATKER) LIKE UPPER('%" . $_POST['nmsatker'] . "%')";
+                $this->view->d_nm_satker = $_POST['nmsatker'];
+            }
+            if ($_POST['eselon1'] != '') {
+                $filter[$no++] = "B.BAES1 = '" . $_POST['eselon1'] . "'";
+                $this->view->kdeselon1 = $_POST['eselon1'];
             }
         }
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-
+		
+		$d_spm = new DataNamaSatker($this->registry);
+		$this->view->data1 = $d_spm->get_es1_dipa_filter();
         $this->view->data = $d_spm1->get_kl_per_es1satker_pendapatan_filter($filter);
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->render('baes1/DataRealisasiPenerimaanES1');
+        $this->view->render('baes1/DataRealisasiPenerimaanSatkerES1');
     }
 
     public function DataRealisasiAkunBA() {
