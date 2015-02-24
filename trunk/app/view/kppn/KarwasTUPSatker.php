@@ -194,20 +194,30 @@ if (Session::get('role') == KPPN) {
                         echo '<td colspan=12 align="center">Tidak ada data.</td>';
                     } else {
                         foreach ($this->data1 as $value) {
+
+                            $style = '';
+
+                            if ($value->get_description() == 'TERLAMBAT') {
+
+                                $style = ' style="background: #FFC2C2" ';
+
+                            }
+
+
                             echo "<tr>	";
-                            echo "<td class='align-center'>" . $no++ . "</td>";
-							echo "<td>" . $value->get_satker_code() . "</td>";
-							echo "<td class='align-left'>" . $value->get_nmsatker() . "</td>";
-							echo "<td class='align-center'>" . $value->get_jendok() . "</td>";
-							echo "<td class='align-center'>" . $value->get_check_num() . "</td>";
-							echo "<td class='align-center'>" . $value->get_invoice_num() . "</td>";
-							echo "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";
-							echo "<td class='align-center'>" . $value->get_tanggal() . "</td>";
-							echo "<td class='align-center'>" . $value->get_invoice_date() . "</td>";
-							echo "<td><a href=" . URL . "dataSPM/TUPSatker/" . $value->get_jendok() ."/". $value->get_satker_code() . "/" . date('d-m-Y', strtotime($value->get_invoice_num())) ."/". date('d-m-Y', strtotime("now")) ." >" . number_format($value->get_line_amount()) . "</a></td>";
-							echo "<td class='align-center'>" . number_format($value->get_ntpn()) . "</td>";
-							echo "<td class='ratakanan'>" . number_format($value->get_output_code()) . "</td>";
-							echo "<td class='align-center'>" . $value->get_description() . "</td>";                          
+                            echo "<td class='align-center' " . $style . ">" . $no++ . "</td>";
+							echo "<td " . $style . ">" . $value->get_satker_code() . "</td>";
+							echo "<td class='align-left' " . $style . ">" . $value->get_nmsatker() . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_jendok() . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_check_num() . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_invoice_num() . "</td>";
+							echo "<td class='ratakanan' " . $style . ">" . number_format($value->get_amount()) . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_tanggal() . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_invoice_date() . "</td>";
+							echo "<td " . $style . "><a href=" . URL . "dataSPM/TUPSatker/" . $value->get_jendok() ."/". $value->get_satker_code() . "/" . date('d-m-Y', strtotime($value->get_invoice_num())) ."/". date('d-m-Y', strtotime("now")) ." >" . number_format($value->get_line_amount()) . "</a></td>";
+							echo "<td class='align-center' " . $style . ">" . number_format($value->get_ntpn()) . "</td>";
+							echo "<td class='ratakanan' " . $style . ">" . number_format($value->get_output_code()) . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_description() . "</td>";                          
                             echo "</tr>	";
                         }
                     }
