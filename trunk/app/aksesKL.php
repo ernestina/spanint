@@ -111,6 +111,8 @@ $akses['PDFKL'] = array(
 	'refKppn_PDF',	
 	'refSdana_PDF',
 	'refLokasi_PDF',
+	'RevisiDipa_PDF',
+	'DetailRevisi_PDF',
     '__destruct'
 );
 

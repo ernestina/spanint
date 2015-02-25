@@ -74,10 +74,8 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $ukuran_kolom_bank_pembayar = 60;
         $ukuran_kolom_norek_penerima = 80;
 		
-		$kolom_grandtotal1=$ukuran_kolom1+ukuran_kolom_dana+
-		$ukuran_kolom_jenis_belanja+
-		$ukuran_kolom_satker+$ukuran_kolom_satker1
-		+$ukuran_kolom_jenis_belanja+
+		$kolom_grandtotal1=$ukuran_kolom1+$ukuran_kolom_dana+$ukuran_kolom_jenis_belanja+$ukuran_kolom_satker+
+		$ukuran_kolom_satker1+$ukuran_kolom_jenis_belanja+
 		$ukuran_kolom_bank_pembayar+$ukuran_kolom_norek_penerima;
 		
 		
@@ -163,7 +161,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 				$py2 = $py1;
 				$this->SetXY($px2, $py2);
 				$py3 = $this->GetY();
-				$this->Cell($ukuran_kolom_jenis_belanja, $h,number_format($tot_pot), 1, 1, 'R', true);
+				$this->Cell($ukuran_kolom_norek_penerima, $h,number_format($tot_pot), 1, 1, 'R', true);
 				$this->Ln(3);
 
 		}

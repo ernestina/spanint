@@ -74,7 +74,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $ukuran_kolom_bank_pembayar = 60;
         $ukuran_kolom_norek_penerima = 80;
 		
-		$kolom_grandtotal1=$ukuran_kolom1+ukuran_kolom_dana+
+		$kolom_grandtotal1=$ukuran_kolom1+$ukuran_kolom_dana+
 		$ukuran_kolom_jenis_belanja+
 		$ukuran_kolom_satker+$ukuran_kolom_satker1
 		+$ukuran_kolom_jenis_belanja+

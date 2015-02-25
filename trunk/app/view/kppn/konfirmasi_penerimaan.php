@@ -18,7 +18,7 @@
                                <?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
-			    if (Session::get('role') == KPPN) {
+			    
                     IF(isset($this->ntpn) ){
 					
 							$kdkppn=Session::get('id_user');
@@ -50,7 +50,7 @@
         </div>
 					<?php
 					}
-                }
+                
 			?>
 
   
