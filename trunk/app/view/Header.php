@@ -205,6 +205,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+
                                 </ul>
                             </div>
                         </li>
@@ -352,6 +354,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+
                                 </ul>
                             </div>
                         </li>
@@ -531,6 +535,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+
                                 </ul>
                             </div>
                         </li>
@@ -628,6 +634,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+
                                 </ul>
                             </div>
                         </li>
@@ -702,6 +710,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+
                                 </ul>
                             </div>
                         </li>
@@ -752,6 +762,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+
                                 </ul>
                             </div>
                         </li>
@@ -798,6 +810,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+
                                 </ul>
                             </div>
                         </li>
@@ -917,6 +931,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+
                                 </ul>
                             </div>
                         </li>
@@ -995,6 +1011,8 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
+                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+
                                 </ul>
                             </div>
                         </li>
