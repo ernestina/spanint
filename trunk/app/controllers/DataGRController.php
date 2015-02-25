@@ -520,7 +520,9 @@ class DataGRController extends BaseController {
         if (Sntpn != '') {
 
             $filter[$no++] = "NTPN = '" . $ntpn . "'";
+			$this->view->ntpn = $ntpn;
         }
+		
 
         $this->view->data = $d_spm1->get_detail_ntpn_ganda($filter);
 

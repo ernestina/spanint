@@ -300,6 +300,7 @@ class DataSPMController extends BaseController {
             $kppn = Session::get('id_user');
             $filter[$no++] = $kppn;
             $this->view->invoice_num = $invoice_num;
+			 $this->view->d_invoice = "" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "";
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
         } elseif (!is_null($invoice_num1) and Session::get('role') == SATKER) {
             $satker = Session::get('kd_satker');
@@ -307,13 +308,17 @@ class DataSPMController extends BaseController {
             $kppn = Session::get('id_user');
             $filter[$no++] = $kppn;
             $this->view->invoice_num = $invoice_num;
+			 $this->view->d_invoice = "" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "";
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
         } elseif (!is_null($invoice_num1) and ( Session::get('role') == KANWIL OR Session::get('role') == ADMIN)) {
             $invoice = "'" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "'";
             $kppn = substr($sp2d, 2, 3);
             $filter[$no++] = $kppn;
             //$filter_kanwil = "SUBSTR(NO_SP2D,3,3) IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '". Session::get('id_user') . "')";
-            $this->view->invoice_num = $invoice_num;
+            $this->view->d_invoice = "" . $invoice_num1 . "/" . $invoice_num2 . "/" . $invoice_num3 . "";
+			$this->view->d_nama_kppn1 = $kppn;
+			$this->view->d_kode_sp2d = $sp2d;
+			
             $this->view->data = $d_spm1->get_history_spm_filter($filter, $invoice);
         }
 
