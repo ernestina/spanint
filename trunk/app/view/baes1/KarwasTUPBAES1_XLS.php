@@ -72,17 +72,27 @@ $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
 $objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Jenis SPM");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Nomor Invoice");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Sumber Dana");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Tanggal Invoice");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Nomor SP2D TUP(TUP Terakhir)");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Nomor SP2D");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Tanggal TUP(TUP Terakhir)");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal SP2D");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Nilai TUP");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Nilai");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Batas TUP");
+//p9
+$objPHPExcel->getActiveSheet()->setCellValue('I4', "Sisa Hari");
+//p10
+$objPHPExcel->getActiveSheet()->setCellValue('J4', "Total GTUP Nihil(Pertanggungjawaban TUP)");
+//p11
+$objPHPExcel->getActiveSheet()->setCellValue('K4', "Setoran TUP(Pertanggungjawaban TUP)");
+//p12
+$objPHPExcel->getActiveSheet()->setCellValue('L4', "Sisa TUP");
+//p13
+$objPHPExcel->getActiveSheet()->setCellValue('M4', "Status");
 
 //Data
 if (count($this->data) == 0) {
@@ -96,18 +106,36 @@ if (count($this->data) == 0) {
  
 	$nil['p1']=$no;
 	$nil['p2']=$value->get_satker_code();
-	$nil['p3']=$value->get_jenis_spm();
-	$nil['p4']=$value->get_invoice_num();
-	$nil['p5']=$value->get_invoice_date();
-	$nil['p6']=$value->get_check_num();
-	$nil['p7']=$value->get_tanggal_sp2d();
-	
-	//pengecekan
-	if ($value->get_line_amount()==0){
-		$nil['p8']='0';
+	$nil['p3']=$value->get_nmsatker();
+	$nil['p4']=$value->get_jendok();
+	$nil['p5']=$value->get_check_num();
+	$nil['p6']=$value->get_invoice_num();
+	if ($value->get_amount()==0){
+		$nil['p7']='0';
 	}else{
-		$nil['p8']=$value->get_line_amount();
+		$nil['p7']=$value->get_amount();
 	}			
+	
+	$nil['p8']=$value->get_tanggal();
+	$nil['p9']=$value->get_invoice_date();
+	
+	
+	if ($value->get_line_amount()==0){
+		$nil['p10']='0';
+	}else{
+		$nil['p10']=$value->get_line_amount();
+	}			
+	if ($value->get_ntpn()==0){
+		$nil['p11']='0';
+	}else{
+		$nil['p11']=$value->get_ntpn();
+	}			
+	if ($value->get_output_code()==0){
+		$nil['p12']='0';
+	}else{
+		$nil['p12']=$value->get_output_code();
+	}			
+	$nil['p13']=$value->get_description();
 
 		array_push($dataArray,$nil);
 
@@ -129,7 +157,7 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000000');
+//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet

@@ -16,7 +16,15 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 		
+				
+			
+			if (isset($this->d_kd_satker)) {
+                
+				$kdsatker = $this->d_kd_satker;
+                
+            }else{
 				$kdsatker ='null';
+			} 
 			
 			if (isset($this->eselon1)) {
                 

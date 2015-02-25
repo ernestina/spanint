@@ -10,90 +10,63 @@
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-<?php
-//----------------------------------------------------
-//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
-
-if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
-//-----------------------------
-	IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_sumber_dana)){
-		
-		if (isset($this->d_nama_kppn)) {
-			foreach ($this->d_nama_kppn as $kppn) {
-				$kdkppn = $kppn->get_kd_satker();
-			  }
-		} else {
-			$kdkppn = 'null';
-		}
-		if (isset($this->d_kd_satker)) {
-			$kdsatker = $this->d_kd_satker;
-		} else {
-			$kdsatker = 'null';
-		}
-		
-		if (isset($this->d_sumber_dana)) {
-			$kdsmbdana = $this->d_sumber_dana;
-		} else {
-			$kdsmbdana = 'null';
-		}
-		
-		
-		?>
-		<div class="btn-group-sm">
-            <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-            </button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/PDF">PDF</a></li>
-                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/XLS">EXCEL</a></li>
-                  </ul>
-        </div>
-
 		<?php
-		}
-	//------------------------------
-}
+		//----------------------------------------------------
+		//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 
-if (Session::get('role') == KPPN) {
-//-----------------------------
-	
-	if (isset($this->d_nama_kppn)) {
-		foreach ($this->d_nama_kppn as $kppn) {
-			$kdkppn = $kppn->get_kd_satker();
-		  }
-	} else {
-		$kdkppn = Session::get('id_user');
-	}
-	
-	if (isset($this->d_kd_satker)) {
-		$kdsatker = $this->d_kd_satker;
-	} else {
-		$kdsatker = 'null';
-	}
-	
-	if (isset($this->d_sumber_dana)) {
-		$kdsmbdana = $this->d_sumber_dana;
-	} else {
-		$kdsmbdana = 'null';
-	}
-	
-	
+		if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+		//-----------------------------
+			IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_sumber_dana)){
+				
+				
+				if (isset($this->d_kd_satker)) {
+					$kdsatker = $this->d_kd_satker;
+				} else {
+					$kdsatker = 'null';
+				}
+				
+				if (isset($this->d_sumber_dana)) {
+					$kdsmbdana = $this->d_sumber_dana;
+				} else {
+					$kdsmbdana = 'null';
+				}
+				
+				
+			}
+			//------------------------------
+		}
+
+		if (Session::get('role') == KPPN || Session::get('role') == KL || Session::get('role') == ES1) {
+		//-----------------------------
+			
+					
+			if (isset($this->d_kd_satker)) {
+				$kdsatker = $this->d_kd_satker;
+			} else {
+				$kdsatker = 'null';
+			}
+			
+			if (isset($this->d_sumber_dana)) {
+				$kdsmbdana = $this->d_sumber_dana;
+			} else {
+				$kdsmbdana = 'null';
+			}
+			
+		//------------------------------
+		}
+		//------------------------------
 	?>
     
         <div class="btn-group-sm">
             <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
             </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/PDF">PDF</a></li>
-                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/XLS">EXCEL</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPBaes1_PDF/<?php echo $kdsatker . "/" . $kdsmbdana; ?>/PDF">PDF</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPBaes1_PDF/<?php echo $kdsatker . "/" . $kdsmbdana; ?>/XLS">EXCEL</a></li>
                   </ul>
         </div>
 		
     <?php
-	
-	
-//------------------------------
-}
-//------------------------------
 
 ?>                    
 

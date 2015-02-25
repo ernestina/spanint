@@ -72,17 +72,27 @@ $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
 $objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Jenis SPM");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Nomor Invoice");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Sumber Dana");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Tanggal Invoice");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Total UP(Total UP)");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Nomor SP2D");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Tgl UP Terakhir(Total UP)");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal SP2D");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Total GU Nihil(Pengurang UP)");
 //p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Nilai");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Setoran UP(Pengurang UP)");
+//p9
+$objPHPExcel->getActiveSheet()->setCellValue('I4', "Sisa UP");
+//p10
+$objPHPExcel->getActiveSheet()->setCellValue('J4', "Tgl SP2D GUP Terakhir");
+//p11
+$objPHPExcel->getActiveSheet()->setCellValue('K4', "Total GUP(Total SP2D GUP Terakhir)");
+//p12
+$objPHPExcel->getActiveSheet()->setCellValue('M4', "Batas Teguran");
+//p13
+$objPHPExcel->getActiveSheet()->setCellValue('N4', "Keterangan");
 
 //Data
 if (count($this->data) == 0) {
@@ -96,18 +106,40 @@ if (count($this->data) == 0) {
  
 	$nil['p1']=$no;
 	$nil['p2']=$value->get_satker_code();
-	$nil['p3']=$value->get_jenis_spm();
-	$nil['p4']=$value->get_invoice_num();
-	$nil['p5']=$value->get_invoice_date();
-	$nil['p6']=$value->get_check_num();
-	$nil['p7']=$value->get_tanggal_sp2d();
-	
-	//pengecekan
-	if ($value->get_line_amount()==0){
+	$nil['p3']=$value->get_nmsatker();
+	$nil['p4']=$value->get_jendok();
+	if ($value->get_amount()==0){
+		$nil['p5']='0';
+	}else{
+		$nil['p5']=$value->get_amount();
+	}
+
+	$nil['p6']=$value->get_invoice_date();
+	if ($value->get_line_amount()*-1==0){
+		$nil['p7']='0';
+	}else{
+		$nil['p7']=$value->get_line_amount()*-1;
+	}
+	if ($value->get_ntpn()==0){
 		$nil['p8']='0';
 	}else{
-		$nil['p8']=$value->get_line_amount();
-	}			
+		$nil['p8']=$value->get_ntpn();
+	}
+	if ($value->get_check_num()==0){
+		$nil['p9']='0';
+	}else{
+		$nil['p9']=$value->get_check_num();
+	}
+	$nil['p10']=$value->get_tanggal_sp2d();
+	
+	//pengecekan
+	if ($value->get_output_code()==0){
+		$nil['p11']='0';
+	}else{
+		$nil['p11']=$value->get_output_code();
+	}
+	$nil['p12']=$value->get_tanggal();
+	$nil['p13']=$value->get_description();
 
 		array_push($dataArray,$nil);
 

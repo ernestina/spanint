@@ -1,5 +1,6 @@
 <?php
 
+
 /* //----------------------------------------------------
   //Development history
   //Revisi : 0
@@ -26,30 +27,29 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
     );
     private $kdtgl_awal = array();
     private $kdtgl_akhir = array();
-    private $nm_kppn;
-	private $nm_kppn2;
+	 private $nm_kppn;
+    private $nm_kppn2;
 	private $nm_kppn3;
     /*
      * Konstruktor
      */
 
-    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(),$nm_kppn,$nm_kppn2,$nm_kppn3) {
+    function __construct($data = array(), $options = array(), $kdtgl_awal = array(), $kdtgl_akhir = array(), $nm_kppn, $nm_kppn2, $nm_kppn3) {
         parent::__construct();
         $this->data = $data;
         $this->options = $options;
         $this->kdtgl_awal = $kdtgl_awal;
         $this->kdtgl_akhir = $kdtgl_akhir;
-        $this->nm_kppn = $nm_kppn;
-		$this->nm_kppn2 = $nm_kppn2;
+		 $this->nm_kppn = $nm_kppn;
+        $this->nm_kppn2 = $nm_kppn2;
 		$this->nm_kppn3 = $nm_kppn3;
     }
 
     /*
      * Index
      */
-
+	
     public function rptDetailData() {
-        //-----------------------------------
 		//------------------------------
 		$judul=$this->options['judul'];
 		$nm_kppn = $this->nm_kppn;
@@ -58,59 +58,48 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		$kdtgl_awal1 = $this->kdtgl_awal;
 		$kdtgl_akhir1 = $this->kdtgl_akhir;
 		
-        
 		$this->HeaderAtas1($judul,$nm_kppn,$nm_kppn2,$nm_kppn3,$kdtgl_awal1,$kdtgl_akhir1);
         //-----------------------------------
-         
        
-        //----------------------------------------------- 
-
-        #pengaturan khusus
-		 $border = 0;
+		//------------------------------------------------------------------
+         $border = 0;
         $h = 40;
-        $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_pagu_total_sisa = 120;
-        $ukuran_kolom_pagu_total = 340;
-        $ukuran_kolom_jenis_belanja = 80;
+        
+		$this->SetFont('Arial', 'B', 7);
+
+        $ukuran_kolom_pagu_total_sisa = 35;
+        $ukuran_kolom_pagu_total = 100;
+        $ukuran_kolom_jenis_belanja = 100;
         $ukuran_kolom_satker = 75;
         $ukuran_kolom_akun = 40;
-        $ukuran_kolom_dana = 70;
+        $ukuran_kolom_dana = 220;
+		$ukuran_kolom_dana1= 100;
+		$ukuran_kolom_dana2= 120;
         $ukuran_kolom_deskripsi = 160;
-		$kolom_grandtotal1=30+$ukuran_kolom_pagu_total_sisa
-		+$ukuran_kolom_dana+$ukuran_kolom_pagu_total+
-		$ukuran_kolom_jenis_belanja+$ukuran_kolom_jenis_belanja
-		+$ukuran_kolom_jenis_belanja;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
         $this->Cell(30, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += 30);
-        $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Kode Satker', 1, 0, 'C', true);
-        $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
-        $this->Cell($ukuran_kolom_dana, $h, 'Jenis SPM', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_dana, $h, 'Kode Satker | Nama Satker', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_pagu_total, $h, 'Nomor Invoice', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_dana1, $h, 'Pagu', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_dana1);
+        $this->Cell($ukuran_kolom_pagu_total, $h, 'Realisasi', 1, 0, 'C', true);
         $px1 = $this->GetX();
         $this->SetX($left += $ukuran_kolom_pagu_total);
         $py1 = $this->GetY();
         $px2 = $px1;
         $py2 = $py1;
         $this->SetXY($px2, $py2);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Tanggal Invoice', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Nomor SP2D', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_jenis_belanja, $h, 'Tanggal SP2D', 1, 0, 'C', true);
-        $this->SetX($px2 += $ukuran_kolom_jenis_belanja);
-        $this->Cell($ukuran_kolom_satker, $h, 'Nilai', 1, 1, 'C', true);
-        $this->Ln(3);
+        $this->Cell($ukuran_kolom_satker, $h, 'Persentase Realisasi', 1, 1, 'C', true);
+        $this->Ln(2);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(30, $ukuran_kolom_pagu_total_sisa,
-		$ukuran_kolom_dana, $ukuran_kolom_pagu_total,
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja,
-		$ukuran_kolom_jenis_belanja, $ukuran_kolom_satker));
-        $this->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'R'));
+        $this->SetWidths(array(30,
+		$ukuran_kolom_dana,$ukuran_kolom_dana1,
+		$ukuran_kolom_pagu_total,$ukuran_kolom_satker));
+        $this->SetAligns(array('C', 'L', 'R', 'R', 'C'));
        
 	   if (count($this->data) == 0) {
 			$this->Row(
@@ -118,10 +107,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
                         'N I H I L',
                         '',
                         '',
-                        '',
-                        '',
-						'',
-						''
+                        ''
                     )
             );
 	   
@@ -131,54 +117,27 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 	   
 		   $no = 1;$this->SetFillColor(255);
 			foreach ($this->data as $value) {
+				if($value->get_budget_amt() == 0) { 
+							$nil="0.00%" ;
+						} else {
+                        $nil=number_format(($value->get_actual_amt()/$value->get_budget_amt())*100, 2) ."%" ;
+                        
+						}
 				$this->Row(
 						array($no++,
-							$value->get_satker_code(),
-							$value->get_jenis_spm(),
-							$value->get_invoice_num(),
-							$value->get_invoice_date(),
-							$value->get_check_num(),
-							$value->get_tanggal_sp2d(),
-							number_format($value->get_line_amount())
+							$value->get_kdkegiatan() . " | ".$value->get_nmkegiatan(),
+							number_format($value->get_budget_amt()),
+							number_format($value->get_actual_amt()),
+							$nil
 						)
 				);
-				$total_penerimaan = $total_penerimaan + $value->get_line_amount();
 			}
-				$this->SetFont('Arial', 'B', 7);
-				$h = 20;
-				$this->SetFillColor(200, 200, 200);
-				$left = $this->GetX();
-				$this->Cell($kolom_grandtotal1, $h, 'GRAND TOTAL', 1, 0, 'L', true);
-				$this->SetX($left += $kolom_grandtotal1);
-				$px1 = $this->GetX();
-				$py1 = $this->GetY();
-				$px2 = $px1;
-				$py2 = $py1;
-				$this->SetXY($px2, $py2);
-				$this->Cell($ukuran_kolom_satker, $h, number_format($total_penerimaan), 1, 1, 'R', true);
-				$this->Ln(3);
-
 	   
 	   }		
         $this->Ln(3);
     }
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-
-
-    
-
+	
 }
 
 //end of class
@@ -207,15 +166,17 @@ if (is_array($this->kdtgl_akhir)) {
     //echo 'bukan array';
 }
 
+//mengambil array nama satker-kppn dari controller
+ $nm_kppn = $this->nm_kppn;
+$nm_kppn2 = $this->nm_kppn2;$nm_kppn = $this->nm_kppn;
+ $nm_kppn3 = $this->nm_kppn3;
+ 
 
 
-$nm_kppn = $this->nm_kppn;
-$nm_kppn2 = $this->nm_kppn2;
-$nm_kppn3 = $this->nm_kppn3;
 //--------------------------
 //pilihan
 //judul laporan
-$judul1= $this->judul1;
+$judul1= $this->judul1;$nm_kppn = $this->nm_kppn;
 $judul = 'Laporan '.$judul1; //judul file laporan
 $tipefile = '.pdf';
 $nmfile = $judul . $tipefile; //nama file penyimpanan, kosongkan jika output ke browser
@@ -224,10 +185,10 @@ $options = array(
     'judul' => $judul, //judul file laporan
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
     'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
-    'paper_size' => 'F4', //paper size: F4, A3, A4, A5, Letter, Legal
-    'orientation' => 'L' //orientation: P=portrait, L=landscape
+    'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
+    'orientation' => 'P' //orientation: P=portrait, L=landscape
 );
-$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir,$nm_kppn,$nm_kppn2,$nm_kppn3);
+$tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn, $nm_kppn2, $nm_kppn3);
 $tabel->printPDF();
 //-------------------------------------
 ob_flush();

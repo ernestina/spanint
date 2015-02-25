@@ -73,10 +73,14 @@ $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 $objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Akun| Jenis Pendapatan");
 //p3
 $objPHPExcel->getActiveSheet()->setCellValue('C4', "Pagu");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Setoran MPN");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Potongan SPM");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Realisasi");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Realisasi");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Persentase Realisasi");
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Persentase Realisasi");
 
 //Data
 if (count($this->data) == 0) {
@@ -99,12 +103,22 @@ if (count($this->data) == 0) {
 	}else{
 		$nil['p3']=$value->get_budget_amt();
 	}		
-	if ($value->get_actual_amt()==0){
+	if ($value->get_bank()==0){
 		$nil['p4']='0';
 	}else{
-		$nil['p4']=$value->get_actual_amt();
+		$nil['p4']=$value->get_bank();
 	}
-$nil['p5']=$nil1;	
+	if ($value->get_dana()==0){
+		$nil['p5']='0';
+	}else{
+		$nil['p5']=$value->get_dana();
+	}
+	if ($value->get_actual_amt()==0){
+		$nil['p6']='0';
+	}else{
+		$nil['p6']=$value->get_actual_amt();
+	}
+	$nil['p7']=$nil1;	
 	
 		array_push($dataArray,$nil);
 

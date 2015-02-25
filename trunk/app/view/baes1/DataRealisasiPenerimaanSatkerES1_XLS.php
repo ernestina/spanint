@@ -72,17 +72,13 @@ $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
 $objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Jenis SPM");
-//p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Nomor Invoice");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Tanggal Invoice");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Pagu");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Nomor SP2D");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Realisasi");
 //p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal SP2D");
-//p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Nilai");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Persentase Realisasi");
 
 //Data
 if (count($this->data) == 0) {
@@ -95,29 +91,28 @@ if (count($this->data) == 0) {
 
  
 	$nil['p1']=$no;
-	$nil['p2']=$value->get_satker_code();
-	$nil['p3']=$value->get_jenis_spm();
-	$nil['p4']=$value->get_invoice_num();
-	$nil['p5']=$value->get_invoice_date();
-	$nil['p6']=$value->get_check_num();
-	$nil['p7']=$value->get_tanggal_sp2d();
-	
-	//pengecekan
-	if ($value->get_line_amount()==0){
-		$nil['p8']='0';
+	$nil['p2']=$value->get_kdkegiatan();
+	$nil['p3']=$value->get_nmkegiatan();
+	if ($value->get_budget_amt()==0){
+		$nil['p4']='0';
 	}else{
-		$nil['p8']=$value->get_line_amount();
-	}			
+		$nil['p4']=$value->get_budget_amt();
+	}
+	if ($value->get_actual_amt()==0){
+		$nil['p5']='0';
+	}else{
+		$nil['p5']=$value->get_actual_amt();
+	
 
-		array_push($dataArray,$nil);
-
+	}
+	array_push($dataArray,$nil);
 	}
     
 	$nox=$no+3;
 	$objPHPExcel->getActiveSheet()->fromArray($dataArray, NULL, 'A5');
 
+	
 }
-
 
 //pengaturan
 // Set page orientation and size
@@ -129,7 +124,7 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000000');
+//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet

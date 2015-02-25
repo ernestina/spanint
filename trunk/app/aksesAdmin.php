@@ -452,7 +452,7 @@ $akses['PDFAdmin'] = array(
 	'refKppn_PDF',	
 	'refSdana_PDF',
 	'refLokasi_PDF',
-	
+	'refSatker_PDF',
     '__destruct'
 );
 ?>

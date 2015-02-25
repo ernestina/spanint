@@ -120,6 +120,8 @@ class BA_ES1Controller extends BaseController {
         }
         if ($satker != null) {
             $filter[$no++] = "B.KDSATKER = '" . $satker . "'";
+			$this->view->d_kd_satker = $satker;
+			
         }
 
         if (isset($_POST['submit_file'])) {
@@ -327,40 +329,41 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') =" . Session::get('ta') - 1;
         }
 
+		 $this->view->kd_detil = $detil;
         //detil encumbrance ba
         if (Session::get('role') == KL) {
             $filter[$no++] = " SUBSTR(B.SEGMENT4,1,3) =  '" . Session::get('kd_baes1') . "'";
             if ($detil == 'eselon') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'satker') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||B.SEGMENT1 =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'kegiatan') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT5,1,4) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'output') {
                 $filter[$no++] = " B.SEGMENT5 =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'jenbel') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'sdana') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'es1jenbel') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'es1sdana') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
         }
         
@@ -370,31 +373,31 @@ class BA_ES1Controller extends BaseController {
             
             if ($detil == 'satker') {
                 $filter[$no++] = " B.SEGMENT1 =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'kegiatan') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT5,1,4) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'output') {
                 $filter[$no++] = " B.SEGMENT5 =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'jenbel') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'sdana') {
                 $filter[$no++] = " SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'satjenbel') {
                 $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
             if ($detil == 'satsdana') {
                 $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
-                //$this->view->invoice_num = $invoice_num;
+                $this->view->kd_code_id = $code_id;
             }
         }
         //var_dump($d_spm->get_hist_spm_filter());

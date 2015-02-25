@@ -32,9 +32,7 @@ $akses['DataDropingBank'] = array(
     'index',
     'monitoringDroping',
     'detailDroping',
-    'detailDroping_PDF',
     'detailSPAN',
-    'detailSPAN_PDF',
     '__destruct'
 );
 
@@ -46,6 +44,8 @@ $akses['DataDropingBank'] = array(
 $akses['PDFBank'] = array(
     '__construct',
     'index',
+	'detailDroping_PDF',
+	'detailSPAN_PDF',
     '__destruct'
 );
 ?>

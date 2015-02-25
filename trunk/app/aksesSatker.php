@@ -204,6 +204,7 @@ $akses['PDFSatker'] = array(
 	'refKppn_PDF',	
 	'refSdana_PDF',
 	'refLokasi_PDF',
+	'refSatker_PDF',
 	'KonfirmasiPenerimaan_PDF',
     '__destruct'
 );
