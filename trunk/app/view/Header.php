@@ -895,7 +895,8 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/RekapSp2dBAES1">Rekap SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataUPBAES1">Informasi Uang Persediaan Satker</a></li>									
+									<li><a href="<?php echo URL; ?>BA_ES1/DataUPBAES1">Informasi Uang Persediaan Satker</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/KarwasTUPBaes1">Informasi Tambahan Uang Persediaan Satker</a></li>									
                                 </ul>
                             </div>
                         </li>
@@ -974,6 +975,7 @@
                                     <li><a href="<?php echo URL; ?>BA_ES1/RekapSp2dBAES1">Rekap SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>   
 									<li><a href="<?php echo URL; ?>BA_ES1/DataUPBAES1">Informasi Uang Persediaan Satker</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/KarwasTUPBaes1">Informasi Tambahan Uang Persediaan Satker</a></li>
                                 </ul>
                             </div>
                         </li>
