@@ -14,8 +14,12 @@
                  <?php
 			//-----------------------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA.php  
-				
-					$code_id=$this->kdcode_id;	
+				if(isset($this->kdcode_id)){
+					$code_id=$this->kdcode_id;
+				}else{
+					$code_id='null';
+				}
+						
 				
 				?>
             

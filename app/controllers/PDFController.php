@@ -9937,6 +9937,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
 		$judul1='Referensi KPPN';
 		$this->view->judul1=$judul1;
+		$this->view->nmk='KPPN';
 		if($ck=='PDF'){
 			$this->view->load('admin/refAkun_PDF');
 		}elseif($ck=='XLS'){
@@ -10235,6 +10236,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		
 		$judul1='Referensi Lokasi';
 		$this->view->judul1=$judul1;
+		$this->view->nmk='LOKASI';
 		if($ck=='PDF'){
 			$this->view->load('admin/refAkun_PDF');
 		}elseif($ck=='XLS'){
