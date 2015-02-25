@@ -214,7 +214,6 @@ $akses['PDFSatker'] = array(
 $akses['DataPDRSatker'] = array(
         '__construct',
         'index',
-        'registerDJPU',
         'refAkun',
         'refKppn',
         'refSdana',

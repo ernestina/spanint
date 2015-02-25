@@ -807,10 +807,10 @@ class DataRealisasiES1 {
         foreach ($filter as $filter2) {
             $sql .= " AND " . $filter2;
         }
-        $sql .= " GROUP BY satker,SUBSTR(A.AKUN,1,2), C.NMAKUN";
+        $sql .= " GROUP BY satker,SUBSTR(A.dana,1,1), C.deskripsi";
         $sql .= " ORDER BY kode_kegiatan ";
 
-        //var_dump($sql);
+        var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {

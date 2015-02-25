@@ -89,7 +89,7 @@ class encumbrances {
 		$sql .= " GROUP BY A.SEGMENT1,A.ATTRIBUTE11,APPROVED_DATE,  A.ATTRIBUTE1, COMMENTS, B.SEGMENT1  ";
         $sql .= " ORDER BY A.SEGMENT1 ";
 
-        //var_dump ($sql);
+       //var_dump ($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {
