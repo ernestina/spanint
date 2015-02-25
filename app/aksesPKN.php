@@ -144,6 +144,9 @@ $akses['PDFPKN'] = array(
 	'refSdana_PDF',
 	'refLokasi_PDF',
 	'refSatker_PDF',
+	'detailLhpRekap_PDF',
+	'detailPenerimaan_PDF',
+	'detailSPAN_PDF',
     '__destruct'
 );
 
