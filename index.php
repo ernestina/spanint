@@ -112,6 +112,7 @@ $registry->auth->add_access('OverviewPenganggaran','admin',$akses['OverviewPenga
 //level satker
 $registry->auth->add_access('auth','satker',$akses['AuthSatker']);
 $registry->auth->add_access('home','satker',$akses['HomeSatker']);
+$registry->auth->add_access('dashboard','satker',$akses['DashboardSatker']);
 $registry->auth->add_access('dataDIPA','satker',$akses['DataDIPASatker']);
 $registry->auth->add_access('dataJSON','satker',$akses['DataJSONSatker']);
 $registry->auth->add_access('dataKppn','satker',$akses['DataKppnSatker']);

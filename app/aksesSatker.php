@@ -14,6 +14,15 @@ $akses['HomeSatker'] = array(
     '__destruct'
 );
 
+/*
+ * akses modul Dash
+ */
+$akses['DashboardSatker'] = array(
+        '__construct',
+        'index',
+        'overviewSatker',
+        '__destruct'
+);
 
 /*
  * akses modul auth
