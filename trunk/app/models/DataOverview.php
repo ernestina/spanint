@@ -6,13 +6,24 @@ class DataOverview {
     
     private $_ba;
     private $_realisasi;
+    private $_pagu;
     private $_nmsatker;
+
+    private $_open;
+    private $_closed;
+    private $_canceled;
+
+    private $_nilai_kontrak;
+    private $_pencairan;
     
     private $_table1 = 'PROSES_REVISI';
     private $_table2 = 'T_SATKER';
     private $_table3 = 'GL_BALANCES_V';
     private $_table4 = 'T_BA';
     private $_table5 = 'T_LOKASI';
+    private $_table6 = 'AP_INVOICES_ALL_V';
+    private $_table7 = 'ENCUMBRANCES';
+    private $_table8 = 'GL_CODE_COMBINATIONS';
     
     public $registry;
     
@@ -30,8 +41,157 @@ class DataOverview {
         }
         
     }
+
+    //Kontrak
+
+    public function fetchStatusRealisasiKontrak($filter=null) {
+
+        $sql = "SELECT A.SEGMENT1, 
+                    SUM(B.ENCUMBERED_AMOUNT) NILAI_KONTRAK, 
+                    SUM(B.EQ_AMOUNT_BILLED) PENCAIRAN 
+
+                FROM " . $this->_table8 ." A, 
+                    " . $this->_table7 ." B 
+
+                WHERE A.CODE_COMBINATION_ID = B.CODE_COMBINATION_ID ";
+
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= "GROUP BY A.SEGMENT1";
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+
+        $data = new $this($this->registry);
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+            
+            $data->set_nilai_kontrak($val['NILAI_KONTRAK']);
+            $data->set_pencairan($val['PENCAIRAN']);
+
+        }
+        
+        return $data;
+
+    }
+
+
+    //SPM
+
+    public function fetchStatusAntrianSPM($filter=null) {
+
+        $sql = "SELECT STATUS, COUNT(STATUS) JUMLAH 
+                FROM " . $this->_table6 . " 
+                WHERE 1=1 ";
+
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= " GROUP BY STATUS";
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+
+        $data = new $this($this->registry);
+        
+        foreach ($result as $val) {
+            if ($val['STATUS'] == 'OPEN') {
+                $data->set_open($val['JUMLAH']);
+            } else if ($val['STATUS'] == 'CLOSED') {
+                $data->set_closed($val['JUMLAH']);
+            } else if ($val['STATUS'] == 'CANCELLED') {
+                $data->set_cancelled($val['JUMLAH']);
+            }
+        }
+        
+        return $data;
+
+    }
     
     //Anggaran
+
+    public function fetchRealisasiPaguBelanja($filter=null) {
+        
+        $sql = "SELECT SUM(A.ACTUAL_AMT) REALISASI, 
+                SUM(A.BUDGET_AMT) PAGU
+                FROM "
+                . $this->_table3 . " A
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+            
+            $data->set_realisasi($val['REALISASI']);
+            $data->set_pagu($val['PAGU']);
+
+        }
+        
+        return $data;
+        
+    }
+
+    public function sumRealisasiPenerimaan($filter=null) {
+        
+        $sql = "SELECT SUM(A.ACTUAL_AMT) REALISASI
+                FROM "
+                . $this->_table3 . " A
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('4')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) <> 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+            $data = $val['REALISASI'] * -1;
+        }
+        
+        return $data;
+        
+    }
     
     public function sumRealisasiBelanja($filter=null) {
         
@@ -53,6 +213,8 @@ class DataOverview {
                 $sql .= " AND " . $filter;
             }
         }
+
+        //echo ($sql);
 
         $result = $this->db->select($sql);
         
@@ -85,6 +247,8 @@ class DataOverview {
                 $sql .= " AND " . $filter;
             }
         }
+
+        //echo ($sql);
 
         $result = $this->db->select($sql);
         
@@ -518,6 +682,8 @@ class DataOverview {
         return $data;
         
     }
+
+    //Set
     
     private function set_ba($ba) {
         $this->_ba = $ba;
@@ -530,6 +696,32 @@ class DataOverview {
     private function set_nmsatker($nmsatker) {
         $this->_nmsatker = $nmsatker;    
     }
+
+    private function set_open($open) {
+        $this->_open = $open;    
+    }
+
+    private function set_closed($closed) {
+        $this->_closed = $closed;    
+    }
+
+    private function set_pagu($pagu) {
+        $this->_pagu = $pagu;    
+    }
+
+    private function set_canceled($canceled) {
+        $this->_canceled = $canceled;    
+    }
+
+    private function set_nilai_kontrak($nilai_kontrak) {
+        $this->_nilai_kontrak = $nilai_kontrak;    
+    }
+
+    private function set_pencairan($pencairan) {
+        $this->_pencairan = $pencairan;    
+    }
+
+    //Get
     
     public function get_ba() {
         return $this->_ba;
@@ -541,6 +733,30 @@ class DataOverview {
     
     public function get_nmsatker() {
         return $this->_nmsatker;    
+    }
+
+    public function get_open() {
+        return $this->_open;    
+    }
+
+    public function get_closed() {
+        return $this->_closed;    
+    }
+
+    public function get_canceled() {
+        return $this->_canceled;    
+    }
+
+    public function get_pagu() {
+        return $this->_pagu;    
+    }
+
+    public function get_nilai_kontrak() {
+        return $this->_nilai_kontrak;    
+    }
+
+    public function get_pencairan() {
+        return $this->_pencairan;    
     }
     
     public function __destruct() {

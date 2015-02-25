@@ -25,11 +25,10 @@
         <script src="<?php echo URL; ?>public/Bootstrap/plugins/bootstrap-datepicker.id.js"></script>
         <link href="<?php echo URL; ?>public/Bootstrap/plugins/datepicker3.css" rel="stylesheet">
 
-        <!-- ChartJS -->
-        <script src="<?php echo URL; ?>public/ChartJS/Chart.min.js"></script>
-
-        <!-- GaugeJS -->
-        <script src="<?php echo URL; ?>public/js/gauge.min.js"></script>
+        <!-- D3 & C3 -->
+        <script src="<?php echo URL; ?>public/D3/d3.min.js"></script>
+        <script src="<?php echo URL; ?>public/C3/c3.min.js"></script>
+        <link href="<?php echo URL; ?>public/C3/c3.min.css" rel="stylesheet">
 
         <!-- Application CSS -->
         <link href="<?php echo URL; ?>public/monster.css" rel="stylesheet">
@@ -90,7 +89,6 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul Penganggaran</h4>
                             <div class="collapse">
                                 <ul>
-                                    <li><a href="<?php echo URL; ?>overviewPenganggaran/overview">Overview</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Daftar DIPA dalam Proses Revisi</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>

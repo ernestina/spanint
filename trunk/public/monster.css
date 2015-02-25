@@ -1,16 +1,114 @@
 /* Let's make use of our framework, and minimize our own CSS */
 
 /*Template-only CSS*/
-.overview-dashboard-big-chart-legend {
-    float: right; 
-    margin-left: 10px; 
-    padding-left: 5px; 
-    border-left: 8px solid;
+.header-parameters {
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid #fff;
 }
 
-.plain {
-    border: none;
-    background: transparent;
+.parameter-name {
+    display: inline-block;
+    background: #fff;
+    color: #39c;
+    padding: 2px 5px;
+    text-transform: uppercase;
+}
+
+.parameter-value {
+    display: inline-block;
+    color: #fff;
+    padding: 2px 5px;
+}
+
+.status-tile {
+    margin-top: 15px;
+    display: block;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 10px;
+    background: #fff;
+}
+
+.status-tile-canvas-container {
+    margin: 0;
+    padding: 0;
+}
+
+#notification-tile {
+    margin-top: 15px;
+    display: block;
+    float: left;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#main-tile {
+    margin-top: 15px;
+    display: block;
+    float: left;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+#main-tile-canvas {
+    margin-top: 10px;
+}
+
+#main-tile-legend {
+    margin-top: 10px;
+    display: block;
+    float: left;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tile-header {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.tile-header select {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 7px 0 0 0;
+}
+
+.segment-spacer {
+    height: 15px;
+}
+
+.status-tile-info-container {
+    padding: 0px 10px;
+}
+
+.status-tile-info-container h4 {
+    font-size: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.status-tile-info-container p {
+    font-size: 11px;
+    text-transform: uppercase;
+    margin: 0px 0px 5px 0px;
+    padding: 0px;
+}
+
+.status-pie-bullet {
+    display: inline-block;
+    border-radius: 20px;
+    width: 8px;
+    height: 8px;
 }
 
 /* HTML */
