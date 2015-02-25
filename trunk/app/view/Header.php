@@ -575,6 +575,7 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi/<?php Session::get('kd_satker'); ?>"></i>Daftar DIPA dalam Proses Revisi</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1/<?php Session::get('kd_satker'); ?>"></i>Sisa Pagu</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail/<?php Session::get('kd_satker'); ?>"></i>Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
+									<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -606,6 +607,7 @@
                                     <li><a href="<?php echo URL; ?>dataGR/KonfirmasiPenerimaan">Konfirmasi Penerimaan</a></li>
                                     <li><a href="<?php echo URL; ?>dataBPN/dataBPN">Monitoring Potongan SPM (Satker Pembayar)</a></li>
                                     <li><a href="<?php echo URL; ?>dataBPN/dataBPNSatker">Monitoring Potongan SPM (Satker Penerima)</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -894,7 +896,8 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/RekapSp2dBAES1">Rekap SP2D</a></li>
-                                    <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>                 
+                                    <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataUPBAES1">Informasi Uang Persediaan Satker</a></li>									
                                 </ul>
                             </div>
                         </li>
@@ -972,7 +975,8 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/RekapSp2dBAES1">Rekap SP2D</a></li>
-                                    <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>                  
+                                    <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>   
+									<li><a href="<?php echo URL; ?>BA_ES1/DataUPBAES1">Informasi Uang Persediaan Satker</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -980,7 +984,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan</a></li>
-
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
                                 </ul>
                             </div>
                         </li>
