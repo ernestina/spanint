@@ -124,7 +124,6 @@ $akses['PDFKL'] = array(
 $akses['DataPDRKL'] = array(
         '__construct',
         'index',
-        'registerDJPU',
         'refAkun',
         'refKppn',
         'refSdana',

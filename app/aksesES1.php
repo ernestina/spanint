@@ -112,7 +112,6 @@ $akses['PDFES1'] = array(
 $akses['DataPDREs1'] = array(
         '__construct',
         'index',
-        'registerDJPU',
         'refAkun',
         'refKppn',
         'refSdana',

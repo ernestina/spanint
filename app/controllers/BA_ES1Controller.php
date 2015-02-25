@@ -56,6 +56,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Kegiatan';
         $this->view->action = 'DataRealisasiKegiatanBA';
         $this->view->kodes = 'Kode Kegiatan :';
+        $this->view->detil = "kegiatan";
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
 
@@ -92,6 +93,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Kegiatan';
         $this->view->action = 'DataRealisasiKegiatanES1';
         $this->view->kodes = 'Kode Kegiatan:';
+        $this->view->detil = "kegiatan";
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
 
@@ -206,9 +208,9 @@ class BA_ES1Controller extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-		
-		$d_spm = new DataNamaSatker($this->registry);
-		$this->view->data1 = $d_spm->get_es1_dipa_filter();
+
+        $d_spm = new DataNamaSatker($this->registry);
+        $this->view->data1 = $d_spm->get_es1_dipa_filter();
         $this->view->data = $d_spm1->get_kl_per_es1satker_pendapatan_filter($filter);
 
         $d_log->tambah_log("Sukses");
@@ -311,7 +313,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->render('baes1/DataRealisasiKewenaganBAES1');
     }
 
-    public function DetailEncumbrances($code_id = null) {
+    public function DetailEncumbrances($code_id = null, $detil) {
         $d_spm1 = new encumbrances($this->registry);
         $filter = array();
         $no = 0;
@@ -325,9 +327,75 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') =" . Session::get('ta') - 1;
         }
 
-        if ($code_id != '') {
-            $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . $code_id . "'";
-            //$this->view->invoice_num = $invoice_num;	
+        //detil encumbrance ba
+        if (Session::get('role') == KL) {
+            $filter[$no++] = " SUBSTR(B.SEGMENT4,1,3) =  '" . Session::get('kd_baes1') . "'";
+            if ($detil == 'eselon') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'satker') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||B.SEGMENT1 =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'kegiatan') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT5,1,4) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'output') {
+                $filter[$no++] = " B.SEGMENT5 =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'jenbel') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'sdana') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'es1jenbel') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'es1sdana') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+        }
+        
+        //detil encumbrance level eselon1
+        if (Session::get('role') == ES1) {
+            $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . Session::get('kd_baes1') . "'";
+            
+            if ($detil == 'satker') {
+                $filter[$no++] = " B.SEGMENT1 =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'kegiatan') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT5,1,4) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'output') {
+                $filter[$no++] = " B.SEGMENT5 =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'jenbel') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'sdana') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'satjenbel') {
+                $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
+            if ($detil == 'satsdana') {
+                $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
+                //$this->view->invoice_num = $invoice_num;
+            }
         }
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_encumbrances_baes1($filter);
@@ -773,6 +841,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Kegiatan / Output';
         $this->view->action = 'DataRealisasiOutputBA';
         $this->view->kodes = 'Kode Output :';
+        $this->view->detil = 'output :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
 
@@ -807,6 +876,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judul = 'Laporan Pagu Dana Per Output :';
         $this->view->judulkolom = 'Kode | Nama Kegiatan / Output';
         $this->view->kodes = 'Kode Output :';
+        $this->view->detil = 'output :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
 
@@ -840,6 +910,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Eselon 1';
         $this->view->action = 'DataFaBaPerEs1';
         $this->view->kodes = 'Kode Eselon 1:';
+        $this->view->detil = "eselon";
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatan');
@@ -881,6 +952,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Eselon 1 / Satker';
         $this->view->action = 'DataFaBaSatEs1';
         $this->view->kodes = 'Kode Satker :';
+        $this->view->detil = 'satker :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
 
@@ -918,6 +990,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Jenis Belanja';
         $this->view->action = 'DataFaBaPerJenbel';
         $this->view->kodes = 'Kode Jenis Belanja:';
+        $this->view->detil = "jenbel";
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatan');
@@ -957,6 +1030,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Sumber Dana';
         $this->view->action = 'DataFaBaPerSdana';
         $this->view->kodes = 'Kode Sumber Dana:';
+        $this->view->detil = "sdana";
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatan');
@@ -995,6 +1069,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Eselon 1 / Jenis Belanja';
         $this->view->action = 'DataFaBaEs1Jenbel';
         $this->view->kodes = 'Kode Eselon 1 :';
+        $this->view->detil = 'es1jenbel :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
 
@@ -1031,6 +1106,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Eselon 1 / Sumber Dana';
         $this->view->action = 'DataFaBaEs1Sdana';
         $this->view->kodes = 'Kode Eselon 1 :';
+        $this->view->detil = 'es1sdana :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
 
@@ -1064,6 +1140,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Satker';
         $this->view->action = 'DataFaEs1PerSat';
         $this->view->kodes = 'Kode Satker:';
+        $this->view->detil = "satker";
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiKegiatan');
@@ -1102,6 +1179,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Satker / Jenis Belanja';
         $this->view->action = 'DataFaEs1SatJenbel';
         $this->view->kodes = 'Kode Satker :';
+        $this->view->detil = 'satjenbel :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
 
@@ -1138,6 +1216,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Satker / Sumber Dana';
         $this->view->action = 'DataFaEs1SatSdana';
         $this->view->kodes = 'Kode Satker :';
+        $this->view->detil = 'satsdana :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
 	
