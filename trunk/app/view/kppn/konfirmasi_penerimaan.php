@@ -99,7 +99,7 @@
             <tr>
                 <th class='mid'>No.</th>
 				<th>NTPN</th>
-				<th>NTB<br>Kode Billing</th>
+				 <th>NTB<!--buat tabel mpncoa 2015<br>Kode Billing--></th>
                 <th>Tanggal Penerimaan</th>
 				<th class='ratatengah'>Nama</th>
 				<th class='ratatengah'>Bagan Akun SPAN</th>
@@ -114,6 +114,7 @@
             <?php
             $no = 1;
             //var_dump ($this->data);
+            /* buat tabel mpncoa2015
             if (isset($this->data)) {
                 if (empty($this->data)) {
                     echo '<td colspan=8 class="align-center">Tidak ada data.</td>';
@@ -123,6 +124,29 @@
                         echo "<td class='mid'>" . $no++ . "</td>";
 						echo "<td>" . $value->get_ntpn() . "</td>";
 						echo "<td>" . $value->get_file_name() . "<br>".$value->get_billingcode()."</td>";
+						echo "<td>" . $value->get_gl_date() . "</td>";
+						echo "<td>" . $value->get_resp_name() . "</td>";
+						echo "<td>" . $value->get_segment1(). "." .$value->get_segment2(). "." .$value->get_segment3(). "." .$value->get_segment4()."." .$value->get_segment5(). "." .$value->get_segment6(). "." .$value->get_segment7(). "." .$value->get_segment8(). "." .$value->get_segment9(). "." .$value->get_segment10(). "." .$value->get_segment11(). "." .$value->get_segment12()."</td>";
+						echo "<td>" . $value->get_mata_uang() . "</td>";
+                        echo "<td class='ratakanan'>" . number_format($value->get_amount()) . "</td>";
+                        echo "<td><input class='check-box-1' name='checkbox1[]' type='checkbox' id='checkbox1' value='".$value->get_gr_batch_num()."'> </td>";
+						echo "<td><input class='check-box-2' name='checkbox2[]' type='checkbox' id='checkbox2' value='".$value->get_gr_batch_num()."'> </td>";
+                        echo "</tr>	";
+                    }
+                }
+            } else {
+                echo '<td colspan=8 class="align-center" id="filter-first">Silahkan masukkan filter terlebih dahulu.</td>';
+            }
+            */
+            if (isset($this->data)) {
+                if (empty($this->data)) {
+                    echo '<td colspan=8 class="align-center">Tidak ada data.</td>';
+                } else {
+                    foreach ($this->data as $value) {
+                        echo "<tr>	";
+                        echo "<td class='mid'>" . $no++ . "</td>";
+						echo "<td>" . $value->get_ntpn() . "</td>";
+						echo "<td>" . $value->get_file_name() . "</td>";
 						echo "<td>" . $value->get_gl_date() . "</td>";
 						echo "<td>" . $value->get_resp_name() . "</td>";
 						echo "<td>" . $value->get_segment1(). "." .$value->get_segment2(). "." .$value->get_segment3(). "." .$value->get_segment4()."." .$value->get_segment5(). "." .$value->get_segment6(). "." .$value->get_segment7(). "." .$value->get_segment8(). "." .$value->get_segment9(). "." .$value->get_segment10(). "." .$value->get_segment11(). "." .$value->get_segment12()."</td>";
@@ -183,13 +207,13 @@
 					} ?>">
                     <br/>
                     
-                    <div id="wbillingcode" class="alert alert-danger" style="display:none;"></div>
+                    <!--<div id="wbillingcode" class="alert alert-danger" style="display:none;"></div>
 
                     <label class="isian">Kode Billing: </label>
                     <input class="form-control" type="text" name="billingcode" id="billingcode" value="<?php if (isset($this->billingcode)) {
                    echo $this->billingcode;
 					} ?>">
-                    <br/>
+                    <br/>-->
 					
 					<div id="winvoice" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Akun PNBP: </label>
