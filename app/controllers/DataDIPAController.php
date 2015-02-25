@@ -758,7 +758,7 @@ class DataDIPAController extends BaseController {
         
         if ($code_id != '') {
             $filter[$no++] = " DIST_CODE_COMBINATION_ID =  '" . $code_id . "'";
-            //$this->view->invoice_num = $invoice_num;	
+            $this->view->kd_code_id = $code_id;	
         }
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_realisasi_fa_filter($filter);
@@ -1021,7 +1021,7 @@ class DataDIPAController extends BaseController {
 		 
         if ($code_id != '') {
             $filter[$no++] = " CODE_COMBINATION_ID =  '" . $code_id . "'";
-            //$this->view->invoice_num = $invoice_num;	
+            $this->view->kdcode_id = $code_id;	
         }
         //var_dump($d_spm->get_hist_spm_filter());
         $this->view->data = $d_spm1->get_encumbrances($filter);
