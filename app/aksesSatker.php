@@ -221,4 +221,10 @@ $akses['DataPDRSatker'] = array(
         'refLokasi',
         '__destruct'
 );
+
+$akses['BaEs1Satker'] = array(
+        '__construct',
+        'DataRealisasiPenerimaanBA',
+        '__destruct'
+);
 ?>

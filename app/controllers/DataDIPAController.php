@@ -775,6 +775,13 @@ class DataDIPAController extends BaseController {
         //untuk mencatat log user
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+		if (Session::get('role') == SATKER) {
+            $filter[$no++] = "A.SATKER = '" . Session::get('kd_satker') . "'";
+            $this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
+			//$this->view->data2 = $d_spm1->get_nama_BA(Session::get('id_user'));
+        }
+		
         if (isset($_POST['submit_file'])) {
             if ($_POST['kdkppn'] != '') {
 				if ($_POST['kdkppn'] != 'SEMUA') {
@@ -815,6 +822,8 @@ class DataDIPAController extends BaseController {
             $this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 			$this->view->data2 = $d_spm1->get_nama_BA(Session::get('id_user'));
         }
+		
+		
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());

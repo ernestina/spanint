@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Pagu dan Realisasi Belanja per Satker </h2>
+                <h2>Pagu dan Realisasi Belanja <?php if (Session::get('role') != SATKER) { echo "per Satker";} ?> </h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -65,12 +65,14 @@
 				//----------------------------------------------------		
 ?>                
             </div>
+			
+			<?php if (Session::get('role') != SATKER) { ?>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 
             </div>
-            
+            <?php } ?>
         </div>
         
         <div class="row top-padded-little">
@@ -346,6 +348,7 @@
             }
             ?>
             </tbody>
+			<?php if (Session::get('role') != SATKER) { ?>
             <tfoot>
                 <tr>
                     <td colspan=3 rowspan=2 class='mid'><b>GRAND TOTAL<b></td>
@@ -378,6 +381,7 @@
                 </tr>
 
             </tfoot>
+			<?php } ?>
         </tbody>
     </table>
 </div>

@@ -123,6 +123,7 @@ $registry->auth->add_access('PDF','satker',$akses['PDFSatker']);
 $registry->auth->add_access('panduan','satker',$akses['PanduanSatker']);
 $registry->auth->add_access('dataBPN','satker',$akses['DataBPNSatker']);
 $registry->auth->add_access('dataPDR','satker',$akses['DataPDRSatker']);
+$registry->auth->add_access('BA_ES1','satker',$akses['BaEs1Satker']);
 
 
 //level kppn

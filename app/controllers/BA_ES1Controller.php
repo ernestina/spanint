@@ -109,6 +109,9 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == ES1) {
             $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
         }
+		if (Session::get('role') == SATKER) {
+            $filter[$no++] = "B.KDSATKER = '" . Session::get('kd_satker') . "'";
+        }
         if ($eselon1 != null) {
             $filter[$no++] = "B.BAES1 = '" . $eselon1 . "'";
             $this->view->eselon1 = $eselon1;
@@ -1136,6 +1139,46 @@ class BA_ES1Controller extends BaseController {
         $this->view->action = 'DataFaEs1SatSdana';
         $this->view->kodes = 'Kode Satker :';
         $this->view->render('baes1/DataRealisasiOutput');
+    }
+	
+	public function DataUPBAES1() {
+        $d_spm1 = new DataKarwasUP($this->registry);
+        $filter = array();
+		//$filter2 = array();
+        $no = 0;
+		
+		//untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+		
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "B.BA = '" . Session::get('kd_baes1') . "'";
+        }
+        if (Session::get('role') == ES1) {
+            $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
+        }
+		
+		if (isset($_POST['submit_file'])) {
+		
+		
+            
+				
+            if ($_POST['kdsatker'] != '') {
+                $filter[$no++] = "A.SATKER_CODE = '" . $_POST['kdsatker'] . "'";
+				$this->view->d_kd_satker = $_POST['kdsatker'];
+            }
+			if ($_POST['SUMBERDANA'] != '') {
+                $filter[$no++] = "SUMBER_DANA = '" . $_POST['SUMBERDANA'] . "'";
+				$this->view->d_sumber_dana = $_POST['SUMBERDANA'];
+            }
+			
+		}
+		
+		$this->view->data1 = $d_spm1->get_karwas_up_baes1($filter);
+		$this->view->data2 = $d_spm1->get_total_sisa_up_baes1($filter);
+				
+		$d_log->tambah_log("Sukses");
+        $this->view->render('baes1/KarwasUPBAES1');
     }
 
     public function __destruct() {

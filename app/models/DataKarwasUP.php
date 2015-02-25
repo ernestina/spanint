@@ -32,6 +32,7 @@ class DataKarwasUP {
 	private $_table3 = 'KARWAS_UP_V';
 	private $_table4 = 'KARWAS_TUP_V';
 	private $_table5 = 'KARWAS_TOTAL_TUP_NIHIL_V';
+	private $_table6 = 'T_SATKER';
     public $registry;
 
     /*
@@ -113,6 +114,48 @@ class DataKarwasUP {
 				WHERE 
 				1=1 
 				
+				"
+
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        $sql .= " ORDER BY to_char(TO_DATE(BATAS_TEGURAN,'DD-MM-YYYY'),'yyyymmdd') asc, KETERANGAN, SATKER_CODE ";
+		//$sql .= " AND " . $satker1;
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+			$d_data->set_nmsatker($val['NMSATKER']);
+            $d_data->set_satker_code($val['SATKER_CODE']);
+            $d_data->set_kppn_code($val['KPPN_CODE']);
+			$d_data->set_invoice_date($val['TGL_UP_AKHIR']);
+			$d_data->set_check_num($val['SISA_UP']);
+            $d_data->set_line_amount($val['TOTAL_GU_NIHIL']);
+			$d_data->set_amount($val['TOTAL_UP']);
+			$d_data->set_jendok($val['SUMBER_DANA']);
+			$d_data->set_tanggal_sp2d($val['TGL_GUP_AKHIR']);
+			$d_data->set_tanggal($val['BATAS_TEGURAN']);
+			$d_data->set_description($val['KETERANGAN']);
+			$d_data->set_ntpn($val['SETORAN_UP']);
+			$d_data->set_output_code($val['TOTAL_GUP_AKHIR']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_karwas_up_baes1($filter) {
+        $sql = "SELECT A.*
+				FROM "
+                . $this->_table3 . " A, 
+				( SELECT DISTINCT KDSATKER, BA, BAES1 FROM  ". $this->_table6 . " ) B  
+				WHERE 
+				1=1 
+				AND A.SATKER_CODE = B.KDSATKER
 				"
 
         ;
@@ -265,6 +308,37 @@ class DataKarwasUP {
                 . $this->_table3 . " 
 				WHERE 
 				1=1 
+				
+				"
+
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        //$sql .= " ORDER BY INVOICE_DATE ";
+		//$sql .= " AND " . $satker1;
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_line_amount($val['SISA_UP']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_total_sisa_up_baes1($filter) {
+        $sql = "SELECT SUM(SISA_UP) SISA_UP
+				FROM "
+                . $this->_table3 . " A ,
+				( SELECT DISTINCT KDSATKER, BA, BAES1 FROM  ". $this->_table6 . " ) B  
+				WHERE 
+				1=1 
+				AND A.SATKER_CODE = B.KDSATKER
 				
 				"
 

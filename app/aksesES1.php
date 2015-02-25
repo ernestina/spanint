@@ -55,6 +55,8 @@ $akses['BaEs1ES1'] = array(
     'DataFaEs1SatJenbel',
     'DataFaEs1SatSdana',
     'DetailEncumbrances',
+	'DataRealisasiPenerimaanPerSatkerES1',
+	'DataUPBAES1',
     
     '__destruct'
 );
