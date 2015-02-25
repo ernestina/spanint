@@ -814,7 +814,7 @@ class DataRealisasiES1 {
         $sql .= " GROUP BY satker,SUBSTR(A.dana,1,1), C.deskripsi";
         $sql .= " ORDER BY kode_kegiatan ";
 
-        var_dump($sql);
+        //var_dump($sql);
         $result = $this->db->select($sql);
         $data = array();
         foreach ($result as $val) {

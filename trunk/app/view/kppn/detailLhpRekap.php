@@ -16,7 +16,7 @@
 				<?php
 				//---------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
-				if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+				if (Session::get('role') == ADMIN || Session::get('role') == KANWIL  || Session::get('role') == PKN) {
 					$kdkppn = $this->kppn;
 					if (isset($this->d_tgl)) {
 						$kdtgl = $this->d_tgl;

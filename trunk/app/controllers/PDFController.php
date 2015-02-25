@@ -9416,8 +9416,11 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
             }
         }
 
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
-
+		if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         $this->view->data = $d_spm1->get_ba_per_jenbel_filter($filter);
@@ -9506,7 +9509,11 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
             }
         
 
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -9839,7 +9846,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 
-    public function DataFaEs1SatJenbel_BAES1_PDF($kdkegiatan=null,$ck=null) {
+    public function DataFaEs1SatJenbel_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -9848,7 +9855,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
 
-            if ($kdkegiatan != '') {
+            if ($kdkegiatan != 'null') {
                 $filter[$no++] = "satker like '%" . $kdkegiatan . "%'";
                 $this->view->kdkegiatan = $kdkegiatan;
             }
@@ -9924,7 +9931,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
     }
 
-    public function DataFaEs1SatSdana_BAES1_PDF($kdkegiatan=null,$ck=null) {
+    public function DataFaEs1SatSdana_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -10696,6 +10703,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
             }
 		} else {
             $this->view->nm_kppn = Session::get('user');
+			$this->view->nm_kppn2 = Session::get('user');
+			$this->view->nm_kppn3 = Session::get('user');
         }
         //-------------------------
 		//------------------------------------------------------------

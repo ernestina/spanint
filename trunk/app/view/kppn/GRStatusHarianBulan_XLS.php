@@ -144,7 +144,7 @@ if (count($this->data) == 0) {
 
  
 	$nil['p1']=$no;
-	$nil['p2']=$nama_kppn.' ('.$value->get_kppn().')',;
+	$nil['p2']=$nama_kppn.'|'.$value->get_kppn();
 	
 	//pengecekan
 	if ($value->get_r01()==0){
