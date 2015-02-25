@@ -30,6 +30,9 @@
         <script src="<?php echo URL; ?>public/C3/c3.min.js"></script>
         <link href="<?php echo URL; ?>public/C3/c3.min.css" rel="stylesheet">
 
+        <!-- ChartJS -->
+        <script src="<?php echo URL; ?>public/ChartJS/Chart.min.js"></script>
+
         <!-- Application CSS -->
         <link href="<?php echo URL; ?>public/monster.css" rel="stylesheet">
 
