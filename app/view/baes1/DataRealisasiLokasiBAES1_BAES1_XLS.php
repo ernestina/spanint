@@ -145,8 +145,9 @@ if (count($this->data) == 0) {
 
  
 	$nil['p0']=$no;
-	$nil['p1']=$value->get_nmba();
-	$nil['p2']=$value->get_ba();
+	$nil['p1']=$value->get_ba();
+	$nil['p2']=$value->get_nmba();
+	
 	
 	//pengecekan
 	if ($value->get_pagu_51()==0){
@@ -324,7 +325,7 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('00');
 
 
 

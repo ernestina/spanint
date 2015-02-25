@@ -14,15 +14,15 @@
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 				
 				
-                if (isset($this->kdoutput)) {
+                if (isset($this->kdkegiatan)) {
 
-                    $kdoutput = $this->kdoutput();
+                    $kdoutput = $this->kdkegiatan;
                 } else {
                     $kdoutput = 'null';
                 }
-				if (isset($this->nmoutput)) {
+				if (isset($this->nmkegiatan)) {
 
-                    $nmoutput = $this->nmoutput();
+                    $nmoutput = $this->nmkegiatan();
                 } else {
                     $nmoutput = 'null';
                 }

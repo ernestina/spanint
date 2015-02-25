@@ -11,9 +11,9 @@
             <?php
 			//----------------------------------------------------
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
-			if (isset($this->d_kd_satker)) {
+			if (isset($this->kdsatker)) {
                 
-				$kdsatker = $this->d_kd_satker();
+				$kdsatker = $this->kdsatker;
                 
             }else{
 				$kdsatker ='null';
@@ -25,20 +25,14 @@
             }else{
 				$kdnmsatker ='null';
 			} 
-			if (isset($this->eselon1)) {
+			if (isset($this->kdeselon1)) {
                 
-				$kdeselon1 = $this->eselon1();
+				$kdeselon1 = $this->kdeselon1;
                 
             }else{
 				$kdeselon1 ='null';
 			} 
-			if (isset($this->d_kd_revisi)) {
-                
-				$kdkdrevisi = $this->d_kd_revisi();
-                
-            }else{
-				$kdkdrevisi ='null';
-			} 
+			
 			
 			
 			?>
@@ -46,8 +40,8 @@
                 <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                 </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?php echo URL; ?>PDF/nmsatker_BAES1_PDF/<?php echo $kdsatker . "/" . $kdnmsatker. "/" . $kdeselon1 . "/" . $kdkdrevisi; ?>/PDF">PDF</a></li>
-                        <li><a href="<?php echo URL; ?>PDF/nmsatker_BAES1_PDF/<?php echo $kdsatker . "/" . $kdnmsatker. "/" . $kdeselon1 . "/" . $kdkdrevisi; ?>/XLS">EXCEL</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanPerSatkerES1_PDF/<?php echo $kdsatker . "/" . $kdnmsatker. "/" . $kdeselon1; ?>/PDF">PDF</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiPenerimaanPerSatkerES1_PDF/<?php echo $kdsatker . "/" . $kdnmsatker. "/" . $kdeselon1; ?>/XLS">EXCEL</a></li>
                       </ul>
             </div>
             

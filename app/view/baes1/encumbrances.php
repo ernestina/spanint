@@ -14,19 +14,20 @@
                  <?php
 			//-----------------------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : realisasiFA.php  
-				if (isset($this->data)) { 
-					foreach ($this->data as $value) {
-						$code_id=$value->get_code_id();						
-					}
+				if(isset($this->kd_code_id)){
+					$code_id=$this->kd_code_id;
+				}else{
+					$code_id='null';
 				}
+				$kddetil=$this->kd_detil;
 				?>
             
             <div class="btn-group-sm">
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                     </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/DetailEncumbrances_PDF/<?php echo $code_id; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/DetailEncumbrances_PDF/<?php echo $code_id; ?>/XLS">EXCEL</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DetailEncumbrances_BAES1_PDF/<?php echo $code_id . "/" . $kddetil; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DetailEncumbrances_BAES1_PDF/<?php echo $code_id . "/" . $kddetil; ?>/XLS">EXCEL</a></li>
                           </ul>
             </div>
             

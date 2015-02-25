@@ -38,22 +38,12 @@ if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
 		}
 		
 		
-		?>
-		<div class="btn-group-sm">
-            <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-            </button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/PDF">PDF</a></li>
-                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/XLS">EXCEL</a></li>
-                  </ul>
-        </div>
-
-		<?php
+		
 		}
 	//------------------------------
 }
 
-if (Session::get('role') == KPPN) {
+if (Session::get('role') == KPPN || Session::get('role') == KL || Session::get('role') == ES1) {
 //-----------------------------
 	
 	if (isset($this->d_nama_kppn)) {
@@ -77,7 +67,13 @@ if (Session::get('role') == KPPN) {
 	}
 	
 	
-	?>
+	
+	
+	
+//------------------------------
+}
+
+?>
     
         <div class="btn-group-sm">
             <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
@@ -89,10 +85,6 @@ if (Session::get('role') == KPPN) {
         </div>
 		
     <?php
-	
-	
-//------------------------------
-}
 //------------------------------
 
 ?>                    

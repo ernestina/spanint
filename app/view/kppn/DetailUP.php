@@ -17,15 +17,9 @@
 			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : posisiSPM.php  
 			if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
 			//-----------------------------
-				IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->jendok)){
+				IF(isset($this->d_kd_satker) || isset($this->jendok) || isset($this->kd_sumber_dana)){
 					
-					if (isset($this->d_nama_kppn)) {
-						foreach ($this->d_nama_kppn as $kppn) {
-							$kdkppn = $kppn->get_kd_satker();
-						}
-					} else {
-						$kdkppn = 'null';
-					}
+					
 					if (isset($this->d_kd_satker)) {
 						$kd_satker = $this->d_kd_satker;
 					}else{		
@@ -36,28 +30,26 @@
 					}else{
 						$jendok = 'null';
 					}
+					
+					if (isset($this->kd_sumber_dana)) {
+						$kdsmbdana = $this->kd_sumber_dana;
+					}else{
+						$kdsmbdana = 'null';
+					}
 					?>
-				<div class="btn-group-sm">
-                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-                    </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS">EXCEL</a></li>
-                          </ul>
-                </div>
                 
 				<?php
-					}
+					
 				//------------------------------
+				}
 			}
 
-			if (Session::get('role') == KPPN) {
+			if (Session::get('role') == KPPN || Session::get('role') == KL || Session::get('role') == ES1) {
 				
-				$kdkppn=Session::get('id_user');
 				if (isset($this->d_kd_satker)) {
 					$kd_satker = $this->d_kd_satker;
 				}else{		
-					$kd_satker =	Session::get('kd_satker');					
+					$kd_satker ='null';					
 				}
 				if (isset($this->jendok)) {
 					$jendok = $this->jendok;
@@ -65,30 +57,19 @@
 					$jendok = 'null';
 				
 				}
+				if (isset($this->kd_sumber_dana)) {
+						$kdsmbdana = $this->kd_sumber_dana;
+					}else{
+						$kdsmbdana = 'null';
+				}
+
 			?>
-				<div class="btn-group-sm">
-                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-                    </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS">EXCEL</a></li>
-                          </ul>
-                </div>
                 
 				<?php
 				
 			}
 			if (Session::get('role') == SATKER) {
 			//-----------------------------
-				
-				if (isset($this->d_nama_kppn)) {
-					foreach ($this->d_nama_kppn as $kppn) {
-						$kdkppn = $kppn->get_kd_satker();
-					}
-				} else {
-					$kdkppn = 'null';
-				}
-				
 				$kd_satker =	Session::get('kd_satker');
 				
 				if (isset($this->jendok)) {
@@ -97,22 +78,23 @@
 						$jendok = 'null';
 					
 					}
-				?>
-                
-                <div class="btn-group-sm">
-                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-                    </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kd_satker . "/" . $jendok; ?>/XLS">EXCEL</a></li>
-                          </ul>
-                </div>
-				
-				<?php
+				if (isset($this->kd_sumber_dana)) {
+						$kdsmbdana = $this->kd_sumber_dana;
+					}else{
+						$kdsmbdana = 'null';
+				}
 			}
 			//------------------------------
 
 		?>
+				<div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kdsmbdana . "/" . $kd_satker . "/" . $jendok; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/UPSatker_PDF/<?php echo $kdsmbdana . "/" . $kd_satker . "/" . $jendok; ?>/XLS">EXCEL</a></li>
+                          </ul>
+                </div>
 
                 
             </div>

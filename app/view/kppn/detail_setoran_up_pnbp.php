@@ -32,8 +32,8 @@
 							}
 						}
 					}
-					if (isset($this->akun)) {
-						$kdakun =$this->akun;
+					if (isset($this->d_akun)) {
+						$kdakun =$this->d_akun;
 					}
 						
 					?>

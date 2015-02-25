@@ -71,9 +71,9 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kota/Kabupaten");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Jenis Kewenangan");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Keterangan");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Jenis Kewenangan");
 //p4
 $objPHPExcel->getActiveSheet()->setCellValue('D4', "Pagu Pegawai");
 //p5

@@ -70,45 +70,29 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Jenis SPM");
-//p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Nomor Invoice");
-//p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Tanggal Invoice");
-//p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Nomor SP2D");
-//p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Tanggal SP2D");
-//p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Nilai");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "NAMA BAGIAN ANGGARAN / Eselon 1 / Satuan Kerja");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Kode KPPN");
 
 //Data
 if (count($this->data) == 0) {
-	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
-}else{
+
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data");
+ }else{
 	$no=0;
 	$dataArray= array();
 	foreach ($this->data as $value) {
 	$no++;
-
- 
 	$nil['p1']=$no;
-	$nil['p2']=$value->get_satker_code();
-	$nil['p3']=$value->get_jenis_spm();
-	$nil['p4']=$value->get_invoice_num();
-	$nil['p5']=$value->get_invoice_date();
-	$nil['p6']=$value->get_check_num();
-	$nil['p7']=$value->get_tanggal_sp2d();
-	
-	//pengecekan
-	if ($value->get_line_amount()==0){
-		$nil['p8']='0';
-	}else{
-		$nil['p8']=$value->get_line_amount();
-	}			
+	$nil['p2']=$value->get_kdakun();
+	$nil['p3']=$value->get_nmakun();
+	$nil['p4']=$value->get_kdkppn();
 
+	
+	
+	
 		array_push($dataArray,$nil);
 
 	}
@@ -129,7 +113,11 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000000');
+if($this->nmk=='KPPN'){
+	$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+}elseif($this->nmk=='LOKASI'){
+$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('0000');	
+}
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
@@ -140,7 +128,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
  // Redirect output to a client’s web browser (Excel2007)
 
-header('Cache-Control: no-store, no-cache,must-revalidate');header('Cache-Control: pre-check=0, post-check=0, max-age=0');header('Pragma: no-cache');header('Expires: 0');header('Content-Transfer-Encoding: none');header('Content-Type: application/vnd.ms-excel;');header('Content-type: application/x-msexcel');header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');
+header('Cache-Control: no-store, no-cache,must-revalidate');header('Cache-Control: pre-check=0, post-check=0, max-age=0');header('Pragma: no-cache');header('Expires: 0');header('Content-Transfer-Encoding: none');header('Content-Type: application/vnd.ms-excel;');header('Content-type: application/x-msexcel');header('Content-Disposition: attachment;filename="Laporan"'.' '.$judul1.'.xls');header('Cache-Control: max-age=0');header("Pragma: no-cache");header("Expires: 0");ob_clean();flush();
  
 $objWriter->save('php://output');
 exit;

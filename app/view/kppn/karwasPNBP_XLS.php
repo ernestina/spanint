@@ -67,56 +67,216 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 
 
 // Header
+//Data DIPA
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker(DIPA PNBP)");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Kode KPPN");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Kode KPPN(DIPA PNBP)");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "No. DIPA");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "No. DIPA(DIPA PNBP)");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Jenis Belanja");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Jenis Belanja(DIPA PNBP)");
 //p6
-$objPHPExcel->getActiveSheet()->setCellValue('F4', "Kode Akun");
-//p7
-$objPHPExcel->getActiveSheet()->setCellValue('G4', "Jenis SPM");
-//p8
-$objPHPExcel->getActiveSheet()->setCellValue('H4', "Jumlah");
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Jumlah(DIPA PNBP)");
 
+
+
+/*
+ */
 //Data
-if (count($this->data) == 0) {
+if (count($this->data1) == 0) {
 	$objPHPExcel->getActiveSheet()->setCellValue('B5', "Tidak Ada Data"); 
 }else{
-	$no=0;
-	$dataArray= array();
-	foreach ($this->data as $value) {
-	$no++;
+		$no1=0;
+	$dataArray1= array();
+	foreach ($this->data1 as $value) {
+		$no1++;
+		$nil1['p1']=$no1;
+		$nil1['p2']=$value->get_satker_code();
+		$nil1['p3']=$value->get_kppn_code();
+		$nil1['p4']=$value->get_dipa_no();
+		$nil1['p5']=$value->get_jenis_belanja();
+		
+		//pengecekan
+		if ($value->get_line_amount()==0){
+			$nil1['p6']='0';
+		}else{
+			$nil1['p6']=$value->get_line_amount();
+		}
 
- 
-	$nil['p1']=$no;
-	$nil['p2']=$value->get_satker_code();
-	$nil['p3']=$value->get_kppn_code();
-	$nil['p4']=$value->get_dipa_no();
-	$nil['p5']=$value->get_jenis_belanja();
-	$nil['p6']=$value->get_account_code();
-	$nil['p7']=$value->get_jenis_spm();
-	
-	//pengecekan
-	if ($value->get_line_amount()==0){
-		$nil['p8']='0';
-	}else{
-		$nil['p8']=$value->get_line_amount();
+		array_push($dataArray1,$nil1);
+
 	}
+	$nox1=$no1+3;
+	$objPHPExcel->getActiveSheet()->fromArray($dataArray1, NULL, 'A5');
 
-		array_push($dataArray,$nil);
+}
+//Penerimaan PNBP
+$nok1=$nox1+4;
+//echo 'no:'.$nok1;
+//p1
+$objPHPExcel->getActiveSheet()->setCellValue('A'.$nok1, "No");
+//p2
+$objPHPExcel->getActiveSheet()->setCellValue('B'.$nok1, "Kode Satker(Penerimaan PNBP)");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('C'.$nok1, "Kode KPPN(Penerimaan PNBP)");
+//p4
+$objPHPExcel->getActiveSheet()->setCellValue('D'.$nok1, "Kode Akun(Penerimaan PNBP)");
+//p5
+$objPHPExcel->getActiveSheet()->setCellValue('E'.$nok1, "Jumlah(Penerimaan PNBP)");
+
+$nok2=$nok1+1;
+if (count($this->data2) == 0) {
+	$objPHPExcel->getActiveSheet()->setCellValue('B'.$nok2, "Tidak Ada Data"); 
+}else{
+	$no2=0;	
+	$dataArray2= array();
+	foreach ($this->data2 as $value) {
+		$no2++;
+		$nil2['p1']=$no2;
+		$nil2['p2']=$value->get_satker_code();
+		$nil2['p3']=$value->get_kppn_code();
+		$nil2['p4']=$value->get_account_code();
+		
+		//pengecekan
+		if ($value->get_line_amount()==0){
+			$nil2['p5']='0';
+		}else{
+			$nil2['p5']=$value->get_line_amount();
+		}
+
+		array_push($dataArray2,$nil2);
+
+	}
+	$nox2=$no2+3;
+		$objPHPExcel->getActiveSheet()->fromArray($dataArray2, NULL, 'A'.$nok2);
+	
+}
+//BELANJA PNBP
+$nok3=$nok2+4;
+//p1
+$objPHPExcel->getActiveSheet()->setCellValue('A'.$nok3, "No");
+//p2
+$objPHPExcel->getActiveSheet()->setCellValue('B'.$nok3, "Kode Satker(BELANJA PNBP)");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('C'.$nok3, "Kode KPPN(BELANJA PNBP)");
+//p4
+$objPHPExcel->getActiveSheet()->setCellValue('D'.$nok3, "Akun(BELANJA PNBP)");
+//p5
+$objPHPExcel->getActiveSheet()->setCellValue('E'.$nok3, "Jumlah(BELANJA PNBP)");
+
+ $nok4=$nok3+1;
+if (count($this->data3) == 0) {
+	$objPHPExcel->getActiveSheet()->setCellValue('B'.$nok4, "Tidak Ada Data"); 
+}else{
+	$no3=0;	
+	$dataArray3= array();
+	foreach ($this->data3 as $value) {
+		$no3++;
+		$nil3['p1']=$no3;
+		$nil3['p2']=$value->get_satker_code();
+		$nil3['p3']=$value->get_kppn_code();
+		$nil3['p4']=$value->get_account_code();
+		
+		//pengecekan
+		if ($value->get_line_amount()==0){
+			$nil3['p5']='0';
+		}else{
+			$nil3['p5']=$value->get_line_amount();
+		}
+
+		array_push($dataArray3,$nil3);
 
 	}
     
-	$nox=$no+3;
-	$objPHPExcel->getActiveSheet()->fromArray($dataArray, NULL, 'A5');
-
+	$nox3=$no3+3;
+	$objPHPExcel->getActiveSheet()->fromArray($dataArray3, NULL, 'A'.$nok4);
+	
 }
+
+//UP PNBP
+$nok5=$nok4+4;
+ //p1
+$objPHPExcel->getActiveSheet()->setCellValue('A'.$nok5, "No");
+//p2
+$objPHPExcel->getActiveSheet()->setCellValue('B'.$nok5, "Kode Satker(UP PNBP)");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('C'.$nok5, "Kode KPPN(UP PNBP)");
+//p4
+$objPHPExcel->getActiveSheet()->setCellValue('D'.$nok5, "Jenis SPM(UP PNBP)");
+//p5
+$objPHPExcel->getActiveSheet()->setCellValue('E'.$nok5, "Jumlah(UP PNBP)");
+$nok6=$nok5+1;
+if (count($this->data4) == 0) {
+	$objPHPExcel->getActiveSheet()->setCellValue('B'.$nok6, "Tidak Ada Data"); 
+}else{
+	$no4=0;		
+	$dataArray4= array();
+	foreach ($this->data4 as $value) {
+		$no4++;
+		$nil4['p1']=$no4;
+		$nil4['p2']=$value->get_satker_code();
+		$nil4['p3']=$value->get_kppn_code();
+		$nil4['p4']=$value->get_jenis_spm();		
+		//pengecekan
+		if ($value->get_line_amount()==0){
+			$nil4['p5']='0';
+		}else{
+			$nil4['p5']=$value->get_line_amount();
+		}
+
+		array_push($dataArray4,$nil4);
+
+	}
+		$nox4=$no4+3;
+		$objPHPExcel->getActiveSheet()->fromArray($dataArray4, NULL, 'A'.$nok6);
+	
+}
+ 
+//SETORAN UP/TUP PNBP
+$nok7=$nok6+4;
+ //p1
+$objPHPExcel->getActiveSheet()->setCellValue('A'.$nok7, "No");
+//p2
+$objPHPExcel->getActiveSheet()->setCellValue('B'.$nok7, "Kode Satker(SETORAN UP/TUP PNBP)");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('C'.$nok7, "Kode KPPN(SETORAN UP/TUP PNBP)");
+//p4
+$objPHPExcel->getActiveSheet()->setCellValue('D'.$nok7, "Akun(SETORAN UP/TUP PNBP)");
+//p5
+$objPHPExcel->getActiveSheet()->setCellValue('E'.$nok7, "Jumlah(SETORAN UP/TUP PNBP)");
+$nok8=$nok7+1;
+if (count($this->data6) == 0) {
+	$objPHPExcel->getActiveSheet()->setCellValue('B'.$nok8, "Tidak Ada Data"); 
+}else{
+	$no5=0;		
+	$dataArray5= array();
+	foreach ($this->data6 as $value) {
+		$no5++;
+		$nil5['p1']=$no5;
+		$nil5['p2']=$value->get_satker_code();
+		$nil5['p3']=$value->get_kppn_code();
+		$nil5['p4']=$value->get_account_code();
+		//pengecekan
+		if ($value->get_line_amount()==0){
+			$nil5['p5']='0';
+		}else{
+			$nil5['p5']=$value->get_line_amount();
+		}
+
+		array_push($dataArray5,$nil5);
+
+	}
+		$nox4=$no4+3;
+		$objPHPExcel->getActiveSheet()->fromArray($dataArray4, NULL, 'A'.$nok8);
+	
+}
+
+
+
+
 
 
 //pengaturan
@@ -129,8 +289,8 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
-
+$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000000');
+$objPHPExcel->getActiveSheet()->getStyle('C5:C1000')->getNumberFormat()->setFormatCode('000');
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);

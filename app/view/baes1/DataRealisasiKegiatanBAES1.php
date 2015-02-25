@@ -13,12 +13,12 @@
 //----------------------------------------------------
 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : fund_fail.php  
 		
-        if (isset($this->lokasi)) {
+        if (isset($this->kegiatan)) {
                 
-				$kdlokasi = $this->lokasi();
+				$kdkegiatan = $this->kegiatan;
                 
             }else{
-				$kdlokasi ='null';
+				$kdkegiatan ='null';
 			} 
 			
 			?>
@@ -26,8 +26,8 @@
                 <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                 </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiKewenanganBAES1_BAES1_PDF/<?php echo $kdlokasi; ?>/PDF">PDF</a></li>
-                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiKewenanganBAES1_BAES1_PDF/<?php echo $kdlokasi; ?>/XLS">EXCEL</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBAES1_BAES1_PDF/<?php echo $kdkegiatan; ?>/PDF">PDF</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBAES1_BAES1_PDF/<?php echo $kdkegiatan; ?>/XLS">EXCEL</a></li>
                       </ul>
             </div>
             

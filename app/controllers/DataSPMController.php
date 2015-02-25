@@ -925,12 +925,13 @@ class DataSPMController extends BaseController {
         }
 		else {
 				$filter[$no++] = " JENIS_SPM = 'GUP NIHIL'";
+				$this->view->jendok = $jendok;
 				
 		}
 		
 		if($sumber_dana != '') {
 			 $filter[$no++] = " SUMBER_DANA =  '" . $sumber_dana. "'";
-			
+			$this->view->kd_sumber_dana=$sumber_dana;
 		}
 
 		$this->view->data1 = $d_spm1->get_total_up($filter);
