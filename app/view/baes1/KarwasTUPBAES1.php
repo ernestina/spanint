@@ -6,118 +6,118 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Informasi Uang Persediaan Satker</h2>				
+                <h2>Informasi TUP Satker</h2>				
             </div>
-             
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-			<?php
-			//----------------------------------------------------
-			//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
-
-			if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
-			//-----------------------------
-				IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_sumber_dana)){
-					
-					if (isset($this->d_nama_kppn)) {
-						foreach ($this->d_nama_kppn as $kppn) {
-							$kdkppn = $kppn->get_kd_satker();
-						  }
-					} else {
-						$kdkppn = 'null';
-					}
-					if (isset($this->d_kd_satker)) {
-						$kdsatker = $this->d_kd_satker;
-					} else {
-						$kdsatker = 'null';
-					}
-					
-					if (isset($this->d_sumber_dana)) {
-						$kdsmbdana = $this->d_sumber_dana;
-					} else {
-						$kdsmbdana = 'null';
-					}
-					
-					?>
-				<div class="btn-group-sm">
-                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-                    </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/KarwasUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/KarwasUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/XLS">EXCEL</a></li>
-                          </ul>
-                </div>	
-					<?php
-					}
-				//------------------------------
-			}
-
-			if (Session::get('role') == KPPN) {
-			//-----------------------------
-				
-				if (isset($this->d_nama_kppn)) {
-					foreach ($this->d_nama_kppn as $kppn) {
-						$kdkppn = $kppn->get_kd_satker();
-					  }
-				} else {
-					$kdkppn = Session::get('id_user');
-				}
-				
-				if (isset($this->d_kd_satker)) {
-					$kdsatker = $this->d_kd_satker;
-				} else {
-					$kdsatker = 'null';
-				}
-				
-				if (isset($this->d_sumber_dana)) {
-					$kdsmbdana = $this->d_sumber_dana;
-				} else {
-					$kdsmbdana = 'null';
-				}
-				
-				
-				?>
-					
-                <div class="btn-group-sm">
-                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-                    </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/KarwasUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/KarwasUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/XLS">EXCEL</a></li>
-                          </ul>
-                </div>
-                
-				<?php
-				
-				
-			//------------------------------
-			}
-			//------------------------------
-
-			?>                
-
-                
-                
-            </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
             
-                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+<?php
+//----------------------------------------------------
+//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
+
+if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
+//-----------------------------
+	IF(isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_sumber_dana)){
+		
+		if (isset($this->d_nama_kppn)) {
+			foreach ($this->d_nama_kppn as $kppn) {
+				$kdkppn = $kppn->get_kd_satker();
+			  }
+		} else {
+			$kdkppn = 'null';
+		}
+		if (isset($this->d_kd_satker)) {
+			$kdsatker = $this->d_kd_satker;
+		} else {
+			$kdsatker = 'null';
+		}
+		
+		if (isset($this->d_sumber_dana)) {
+			$kdsmbdana = $this->d_sumber_dana;
+		} else {
+			$kdsmbdana = 'null';
+		}
+		
+		
+		?>
+		<div class="btn-group-sm">
+            <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+            </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/PDF">PDF</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/XLS">EXCEL</a></li>
+                  </ul>
+        </div>
+
+		<?php
+		}
+	//------------------------------
+}
+
+if (Session::get('role') == KPPN) {
+//-----------------------------
+	
+	if (isset($this->d_nama_kppn)) {
+		foreach ($this->d_nama_kppn as $kppn) {
+			$kdkppn = $kppn->get_kd_satker();
+		  }
+	} else {
+		$kdkppn = Session::get('id_user');
+	}
+	
+	if (isset($this->d_kd_satker)) {
+		$kdsatker = $this->d_kd_satker;
+	} else {
+		$kdsatker = 'null';
+	}
+	
+	if (isset($this->d_sumber_dana)) {
+		$kdsmbdana = $this->d_sumber_dana;
+	} else {
+		$kdsmbdana = 'null';
+	}
+	
+	
+	?>
+    
+        <div class="btn-group-sm">
+            <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+            </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/PDF">PDF</a></li>
+                    <li><a href="<?php echo URL; ?>PDF/KarwasTUPSatker_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdsmbdana; ?>/XLS">EXCEL</a></li>
+                  </ul>
+        </div>
+		
+    <?php
+	
+	
+//------------------------------
+}
+//------------------------------
+
+?>                    
+
             </div>
-           
+            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+
+                <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+
+            </div>
+            
         </div>
         
         <div class="row" style="padding-top: 10px">
             
             <div class="col-md-6 col-sm-12">
                 <?php
-				if (isset($this->data1)) {foreach ($this->data2 as $value) {
-						$sisa_up = $value->get_line_amount();				
+					if (isset($this->data2)) {foreach ($this->data2 as $value) {
+						$sisa_tup = $value->get_line_amount();				
 					}
 					}
                     
 					echo session::get('user');
 					if (!isset($this->d_kd_satker) and !isset($this->d_sumber_dana)){
-						echo " || Total Sisa UP : " .number_format($sisa_up);					
+						echo " || Total Sisa TUP : " .number_format($sisa_tup);					
 					}
                     if (isset($this->d_kd_satker)) {
                         echo "<br>Satker : ".$this->d_kd_satker;
@@ -141,7 +141,7 @@
                         }
                     }
                 ?>
-				<h4>Acuan  :  PMK 190/PMK.05/2012 </h4>
+				<h4>Acuan  :  PMK 190/PMK.05/2012  </h4>
 				
             </div>
             
@@ -159,23 +159,20 @@
                     <th rowspan=2 class='ratatengah'>Kode Satker</th>
                     <th rowspan=2 class='ratatengah'>Nama Satker</th>
 					<th rowspan=2 class='ratatengah'>Sumber Dana</th>
-					<th colspan=2 class='ratatengah'>Total UP</th>
-					<th colspan=2 class='ratatengah'>Pengurang UP</th>                   					
-					<th rowspan=2 class='ratatengah'>Sisa UP</th>
-					<th rowspan=2 class='ratatengah'>Tgl SP2D GUP Terakhir</th>
-					<th colspan=2 class='ratatengah'>Total SP2D GUP Terakhir</th>
-                    <th rowspan=2 class='ratatengah'>Batas Teguran</th>
-					<th rowspan=2 class='ratatengah'>Keterangan</th>
+					<th colspan=2 class='ratatengah'>TUP Terakhir</th>
+					<th rowspan=2 class='ratatengah'>Nilai TUP</th>                   					
+					<th rowspan=2 class='ratatengah'>Batas TUP</th>
+					<th rowspan=2 class='ratatengah'>Sisa Hari</th>
+					<th colspan=2 class='ratatengah'>Pertanggungjawaban TUP</th>
+                    <th rowspan=2 class='ratatengah'>Sisa TUP</th>
+					<th rowspan=2 class='ratatengah'>Status</th>
                 </tr>
 				
 				<tr>
-					<th>Total UP</th>	
-					<th>Tanggal UP Terakhir</th>	
-					<th>Total GU Nihil</th>	
-					<th>Setoran UP</th>
-					<th>Total GUP</th>
-					<th>Persentase Dari UP</th>
-								
+					<th>Nomor SP2D TUP</th>	
+					<th>Tanggal TUP</th>	
+					<th>Total GTUP Nihil</th>	
+					<th>Setoran TUP</th>													
 				</tr>
             </thead>
             <tbody class='ratatengah'>
@@ -187,22 +184,30 @@
                         echo '<td colspan=12 align="center">Tidak ada data.</td>';
                     } else {
                         foreach ($this->data1 as $value) {
+
+                            $style = '';
+
+                            if ($value->get_description() == 'TERLAMBAT') {
+
+                                $style = ' style="background: #FFC2C2" ';
+
+                            }
+
+
                             echo "<tr>	";
-                            echo "<td class='align-center'>" . $no++ . "</td>";
-							echo "<td>" . $value->get_satker_code() . "</td>";
-							echo "<td class='align-left'>" . $value->get_nmsatker() . "</td>";
-							echo "<td class='align-center'>" . $value->get_jendok() . "</td>";
-                            echo "<td class='ratakanan'><a href=" . URL . "dataSPM/UPSatker/". $value->get_jendok() ."/" . $value->get_satker_code() . "/UP >" . number_format($value->get_amount()) . "</a></td>";
-							echo "<td class='align-center'>" . $value->get_invoice_date() . "</td>";
-							echo "<td class='ratakanan'><a href=" . URL . "dataSPM/UPSatker/" . $value->get_jendok() ."/". $value->get_satker_code() . "/NIHIL >" . number_format($value->get_line_amount()*-1) . "</a></td>";
-                            echo "<td class='ratakanan'>" . number_format($value->get_ntpn()) . "</td>";
-                            echo "<td class='ratakanan'>" . number_format($value->get_check_num()) . "</td>";                          
-							echo "<td>"; if ($value->get_tanggal_sp2d() == null) {echo "-";} else { echo $value->get_tanggal_sp2d() ;} "</td>";
-							echo "<td><a href=" . URL . "dataSPM/daftarsp2d/" . $value->get_satker_code() . "/" . date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/". date('d-m-Y', strtotime($value->get_tanggal_sp2d())) ."/312  >" . number_format($value->get_output_code()) . "</a></td>";		
-							echo "<td>" ;if	($value->get_output_code() == 0) { echo '0.00%'; } 
-							else { echo "(". number_format($value->get_output_code()/$value->get_check_num()*100,2)."%)"; }	"</td>";													
-							echo "<td>" . $value->get_tanggal() . "</td>";
-							echo "<td>" . $value->get_description() . "</td>";
+                            echo "<td class='align-center' " . $style . ">" . $no++ . "</td>";
+							echo "<td " . $style . ">" . $value->get_satker_code() . "</td>";
+							echo "<td class='align-left' " . $style . ">" . $value->get_nmsatker() . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_jendok() . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_check_num() . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_invoice_num() . "</td>";
+							echo "<td class='ratakanan' " . $style . ">" . number_format($value->get_amount()) . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_tanggal() . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_invoice_date() . "</td>";
+							echo "<td " . $style . "><a href=" . URL . "dataSPM/TUPSatker/" . $value->get_jendok() ."/". $value->get_satker_code() . "/" . date('d-m-Y', strtotime($value->get_invoice_num())) ."/". date('d-m-Y', strtotime("now")) ." >" . number_format($value->get_line_amount()) . "</a></td>";
+							echo "<td class='align-center' " . $style . ">" . number_format($value->get_ntpn()) . "</td>";
+							echo "<td class='ratakanan' " . $style . ">" . number_format($value->get_output_code()) . "</td>";
+							echo "<td class='align-center' " . $style . ">" . $value->get_description() . "</td>";                          
                             echo "</tr>	";
                         }
                     }
@@ -227,7 +232,7 @@
 
             </div>
             
-            <form id="filter-form" method="POST" action="DataUPBAES1" enctype="multipart/form-data">
+            <form id="filter-form" method="POST" action="KarwasTUPBaes1" enctype="multipart/form-data">
 
                 <div class="modal-body">
 

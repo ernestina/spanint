@@ -58,6 +58,7 @@ $akses['BaEs1KL'] = array(
 	'DataRealisasiKegiatanBAES1',
 	'DetailEncumbrances',
 	'DataUPBAES1',
+	'KarwasTUPBaes1',
     '__destruct'
 );
 
@@ -71,6 +72,7 @@ $akses['dataSPMKL'] = array(
     '__construct',
     'daftarsp2d',
 	'UPSatker',
+	'TUPSatker',
     '__destruct'
 );
 /*

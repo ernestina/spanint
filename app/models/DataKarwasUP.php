@@ -229,6 +229,47 @@ class DataKarwasUP {
         return $data;
     }
 	
+	public function get_karwas_tup_baes1($filter) {
+        $sql = "SELECT *
+				FROM "
+                . $this->_table4 . " A, 
+				( SELECT DISTINCT KDSATKER, BA, BAES1 FROM  ". $this->_table6 . " ) B  
+				WHERE 
+				1=1 
+				AND A.SATKER_CODE = B.KDSATKER
+				
+				"
+
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        $sql .= " ORDER BY SISA_HARI asc ";
+		
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);			
+			$d_data->set_kppn_code($val['KPPN_CODE']);
+            $d_data->set_satker_code($val['SATKER_CODE']);
+			$d_data->set_nmsatker($val['NMSATKER']);
+			$d_data->set_jendok($val['SUMBER_DANA']);
+			$d_data->set_check_num($val['CHECK_NUMBER']);
+			$d_data->set_invoice_num($val['TGL_TUP_TERAKHIR']);
+			$d_data->set_tanggal($val['BATAS_TUP']);
+			$d_data->set_invoice_date($val['SISA_HARI']);	
+			$d_data->set_amount($val['NILAI_TUP']);
+            $d_data->set_line_amount($val['NILAI_TUP_NIHIL']);
+			$d_data->set_ntpn($val['SETORAN']);
+			$d_data->set_output_code($val['SISA']);
+			$d_data->set_description($val['STATUS']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
 	
 	public function get_total_up($filter) {
         $sql = "SELECT *
@@ -368,6 +409,37 @@ class DataKarwasUP {
                 . $this->_table4 . " 
 				WHERE 
 				1=1 
+				
+				"
+
+        ;
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+
+        //$sql .= " ORDER BY INVOICE_DATE ";
+		//$sql .= " AND " . $satker1;
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_line_amount($val['SISA_UP']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_total_sisa_tup_baes1($filter) {
+        $sql = "SELECT SUM(SISA) SISA_UP
+				FROM "
+                . $this->_table4 . " A, 
+				( SELECT DISTINCT KDSATKER, BA, BAES1 FROM  ". $this->_table6 . " ) B  
+				WHERE 
+				1=1 
+				AND A.SATKER_CODE = B.KDSATKER
 				
 				"
 
