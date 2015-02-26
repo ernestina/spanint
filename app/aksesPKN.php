@@ -48,7 +48,7 @@ $akses['DataDropingPKN'] = array(
     'detailSPAN',
     'detailSPAN_PDF',
     '__destruct'
-);/*
+); /*
  * akses modul DataGR
  */
 $akses['DataGRPKN'] = array(
@@ -119,8 +119,8 @@ $akses['DataPMRTPKN'] = array(
     'DataSPMAkhirTahunBUNXls',
     '__destruct'
 );
-    
-    
+
+
 
 /*
  * akses modul PDF
@@ -138,11 +138,11 @@ $akses['PDFPKN'] = array(
     'DataSPMAkhirTahunNihil_PDF',
     'DataSPMAkhirTahunBUN_PDF',
     'grStatusHarianBulan_PDF',
-	'registerDJPU_PDF',
-	'refAkun_PDF',
-	'refKppn_PDF',	
-	'refSdana_PDF',
-	'refLokasi_PDF',
+    'registerDJPU_PDF',
+    'refAkun_PDF',
+    'refKppn_PDF',
+    'refSdana_PDF',
+    'refLokasi_PDF',
 	'refSatker_PDF',
 	'detailLhpRekap_PDF',
 	'detailPenerimaan_PDF',
@@ -154,14 +154,14 @@ $akses['PDFPKN'] = array(
  * akses PDR
  */
 $akses['DataPDRPKN'] = array(
-        '__construct',
-        'index',
-        'registerDJPU',
-        'refAkun',
-        'refKppn',
-        'refSdana',
-        'refLokasi',
-        '__destruct'
+    '__construct',
+    'index',
+    'registerDJPU',
+    'refAkun',
+    'refKppn',
+    'refSdana',
+    'refLokasi',
+    'refSatker',
+    '__destruct'
 );
-
 ?>
