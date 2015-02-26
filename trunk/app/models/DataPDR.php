@@ -32,6 +32,7 @@ class DataPDR {
     private $_table_djpu_reg = 'DJPU_REGISTER';
     private $_table_djpu_cara_tarik = 'DJPU_CARA_TARIK';
     private $_table_join_status = 'SPPM_REGISTER_LENDER';
+    private $_table8;
 
     /*
      * AKUN
@@ -48,6 +49,11 @@ class DataPDR {
     public function __construct($registry = Registry) {
         $this->db = $registry->db;
         $this->registry = $registry;
+        if (('' . Session::get('ta')) == date("Y")) {
+            $this->_table8 = 'T_SATKER';
+        } else {
+            $this->_table8 = 't_satker_tl';
+        }
     }
 
     /*
@@ -219,20 +225,20 @@ class DataPDR {
 
     public function get_satker($filter) {
         Session::get('id_user');
-        $sql = "SELECT distinct kdba kdakun,nmba nmakun,'' kdkppn from t_ba a, t_satker b where a.kdba=b.ba  
+        $sql = "SELECT distinct kdba kdakun,nmba nmakun,'' kdkppn from t_ba a,". $this->_table8." b where a.kdba=b.ba  
             and kdsatker not like '%Z%'";
         foreach ($filter as $filter1) {
             $sql .= " AND " . $filter1;
         }
         $sql.=" union
-            select distinct kdes1 kdakun,nmes1 nmakun,'' kdkppn from t_eselon1 a,t_satker b where a.kdes1=b.baes1 
+            select distinct kdes1 kdakun,nmes1 nmakun,'' kdkppn from t_eselon1 a,". $this->_table8." b where a.kdes1=b.baes1 
             and kdsatker not like '%Z%'";
         foreach ($filter as $filter2) {
             $sql .= " AND " . $filter2;
         }
         $sql.=" union
             select distinct baes1||'-'||kdsatker kdakun,nmsatker nmakun,kppn kdkppn
-            from t_satker 
+            from ". $this->_table8." 
             where kdsatker not like '%Z%'";
 
         foreach ($filter as $filter3) {

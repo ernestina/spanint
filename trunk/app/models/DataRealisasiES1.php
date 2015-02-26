@@ -203,8 +203,8 @@ class DataRealisasiES1 {
         Session::get('id_user');
         $sql = "SELECT C.NMSATKER, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI, A.SATKER, SUBSTR(PROGRAM,1,5) KDBA
 				FROM "
-                . $this->_table1 . " A, "
-                . $this->_table8 . " C 
+                . $this->_table1 . " A, 
+                ( SELECT DISTINCT KDSATKER, nmsatker,BA, BAES1 FROM " . $this->_table8.")  C 
 				WHERE 1=1 
 				AND A.SATKER =C.KDSATKER			
 				AND A.SUMMARY_FLAG = 'N' 
@@ -456,8 +456,8 @@ class DataRealisasiES1 {
                 SELECT SUBSTR(program,1,5)||'-'||satker KODE_KEGIATAN, C.nmsatker NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
 				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
                                 FROM "
-                . $this->_table1 . " A LEFT JOIN  "
-                . $this->_table8 . " C ON A.satker=C.kdsatker LEFT JOIN "
+                . $this->_table1 . " A LEFT JOIN  
+                ( SELECT DISTINCT KDSATKER, nmsatker,BA, BAES1 FROM " . $this->_table8.") C ON A.satker=C.kdsatker LEFT JOIN "
                 . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' 
@@ -687,8 +687,8 @@ class DataRealisasiES1 {
         $sql = " SELECT satker KODE_KEGIATAN, C.nmsatker NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
 				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
                                 FROM "
-                . $this->_table1 . " A LEFT JOIN  "
-                . $this->_table8 . " C ON A.satker=C.kdsatker LEFT JOIN "
+                . $this->_table1 . " A LEFT JOIN  
+                ( SELECT DISTINCT KDSATKER, nmsatker,BA, BAES1 FROM " . $this->_table8.") C ON A.satker=C.kdsatker LEFT JOIN "
                 . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' 
@@ -726,8 +726,8 @@ class DataRealisasiES1 {
         $sql = "SELECT satker KODE_KEGIATAN, C.nmsatker NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
 				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
                                 FROM "
-                . $this->_table1 . " A LEFT JOIN  "
-                . $this->_table8 . " C ON a.satker=C.kdsatker LEFT JOIN "
+                . $this->_table1 . " A LEFT JOIN  
+                ( SELECT DISTINCT KDSATKER, nmsatker,BA, BAES1 FROM " . $this->_table8.") C ON a.satker=C.kdsatker LEFT JOIN "
                 . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' 
@@ -782,8 +782,8 @@ class DataRealisasiES1 {
         $sql = "SELECT satker KODE_KEGIATAN, C.nmsatker NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
 				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
                                 FROM "
-                . $this->_table1 . " A LEFT JOIN  "
-                . $this->_table8 . " C ON a.satker=C.kdsatker LEFT JOIN "
+                . $this->_table1 . " A LEFT JOIN  
+                ( SELECT DISTINCT KDSATKER, nmsatker,BA, BAES1 FROM " . $this->_table8.") C ON a.satker=C.kdsatker LEFT JOIN "
                 . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' 
