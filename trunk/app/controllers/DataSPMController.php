@@ -551,6 +551,7 @@ class DataSPMController extends BaseController {
 		if ($jendok != '') {
 		
             $filter[$no++] = "JENDOK = '" . $jendok . "'";
+			$this->view->d_jendok = $jendok;
         }
 		
         if (isset($_POST['submit_file'])) {
@@ -589,7 +590,7 @@ class DataSPMController extends BaseController {
             ;
         }
 
-        if (kdsatker != '') {
+        if ($kdsatker != '') {
             $this->view->data = $d_spm1->get_sp2d_satker_filter($filter);
         }
 

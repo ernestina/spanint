@@ -22,17 +22,17 @@
 				$kdntpn=$this->d_tgl;
 				?>
 			
-			<div class="btn-group-sm">
-                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
-                    </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/detailCoAPenerimaan_PDF/<?php echo $kdntpn; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/detailCoAPenerimaan_PDF/<?php echo $kdntpn; ?>/XLS">EXCEL</a></li>
-                          </ul>
-            </div>
+				<div class="btn-group-sm">
+						<button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+						</button>
+							  <ul class="dropdown-menu" role="menu">
+								<li><a href="<?php echo URL; ?>PDF/detailCoAPenerimaan_PDF/<?php echo $kdntpn; ?>/PDF">PDF</a></li>
+								<li><a href="<?php echo URL; ?>PDF/detailCoAPenerimaan_PDF/<?php echo $kdntpn; ?>/XLS">EXCEL</a></li>
+							  </ul>
+				</div>
 			
+			</div>
         </div>
-        
         <div class="row" style="padding-top: 10px">
             
             <div class="col-md-6 col-sm-12">

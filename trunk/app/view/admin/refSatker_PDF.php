@@ -69,7 +69,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->SetFont('Arial', 'B', 7);
 		$ukuran_kolom1 = 30;
         $ukuran_kolom2 = 100;
-		$ukuran_kolom3 = 400;
+		$ukuran_kolom3 = 300;
         
 		
 		

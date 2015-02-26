@@ -24,8 +24,8 @@
 							$satker = substr($value->get_invoice_num(), 7, 6);
 						}
 					}
-					if (isset($this->jendok)) {
-						$jendok = $this->jendok;
+					if (isset($this->d_jendok)) {
+						$jendok = $this->d_jendok;
 					}else{
 						$jendok = 'null';
 					}
@@ -72,8 +72,8 @@
 							$satker = substr($value->get_invoice_num(), 7, 6);
 						}
 					}
-					if (isset($this->jendok)) {
-						$jendok = $this->jendok;
+					if (isset($this->d_jendok)) {
+						$jendok = $this->d_jendok;
 					}else{
 						$jendok = 'null';
 					}	   
@@ -120,8 +120,8 @@
 					}else{
 						$satker = Session::get('kd_satker');
 					}
-					if (isset($this->jendok)) {
-						$jendok = $this->jendok;
+					if (isset($this->d_jendok)) {
+						$jendok = $this->d_jendok;
 					}else{
 						$jendok = 'null';
 					}

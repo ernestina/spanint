@@ -151,7 +151,17 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+$objPHPExcel->getActiveSheet()->getStyle('D5:D1000')->getNumberFormat()->setFormatCode('000');
+$objPHPExcel->getActiveSheet()->getStyle('E5:E1000')->getNumberFormat()->setFormatCode('000000');
+$objPHPExcel->getActiveSheet()->getStyle('F5:F1000')->getNumberFormat()->setFormatCode('0000000');
+$objPHPExcel->getActiveSheet()->getStyle('G5:G1000')->getNumberFormat()->setFormatCode('0000000');
+$objPHPExcel->getActiveSheet()->getStyle('H5:H1000')->getNumberFormat()->setFormatCode('0000000000');
+$objPHPExcel->getActiveSheet()->getStyle('I5:I1000')->getNumberFormat()->setFormatCode('00000');
+$objPHPExcel->getActiveSheet()->getStyle('J5:J1000')->getNumberFormat()->setFormatCode('0');
+$objPHPExcel->getActiveSheet()->getStyle('K5:K1000')->getNumberFormat()->setFormatCode('0000');
+$objPHPExcel->getActiveSheet()->getStyle('L5:L1000')->getNumberFormat()->setFormatCode('0');
+$objPHPExcel->getActiveSheet()->getStyle('M5:M1000')->getNumberFormat()->setFormatCode('000000');
+$objPHPExcel->getActiveSheet()->getStyle('N5:N1000')->getNumberFormat()->setFormatCode('000000');
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
