@@ -16,7 +16,7 @@
 
 
                 if (isset($this->kdkegiatan)) {
-                    $kdkegiatan = $this->kdkegiatan();
+                    $kdkegiatan = $this->kdkegiatan;
                 } else {
                     $kdkegiatan = 'null';
                 }
