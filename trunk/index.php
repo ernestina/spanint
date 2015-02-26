@@ -223,7 +223,7 @@ $registry->auth->add_access('BA_ES1','es1',$akses['BaEs1ES1']);
 $registry->auth->add_access('dataDIPA','es1',$akses['dataDIPAES1']);
 $registry->auth->add_access('dataSPM','es1',$akses['dataSPMES1']);
 $registry->auth->add_access('PDF','es1',$akses['PDFES1']);
-$registry->auth->add_access('dataPDR','es1',$akses['DataPDRES1']);
+$registry->auth->add_access('dataPDR','es1',$akses['DataPDREs1']);
 
 //level UMADMIN
 $registry->auth->add_access('auth','umadmin',$akses['AuthUmAdmin']);

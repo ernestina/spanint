@@ -413,6 +413,7 @@ $akses['DataPDRKPPN'] = array(
         'refKppn',
         'refSdana',
         'refLokasi',
+    'refSatker',
         '__destruct'
 );
 ?>

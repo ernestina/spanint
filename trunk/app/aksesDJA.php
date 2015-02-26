@@ -35,6 +35,7 @@ $akses['DataPDRDJA'] = array(
         'refKppn',
         'refSdana',
         'refLokasi',
+    'refSatker',
         '__destruct'
 );
 

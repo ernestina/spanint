@@ -38,6 +38,7 @@ class DataPDR {
      */
     private $_kdakun;
     private $_nmakun;
+    private $_kdkppn;
     public $registry;
 
     /*
@@ -216,6 +217,43 @@ class DataPDR {
         return $data;
     }
 
+    public function get_satker($filter) {
+        Session::get('id_user');
+        $sql = "SELECT distinct kdba kdakun,nmba nmakun,'' kdkppn from t_ba a, t_satker b where a.kdba=b.ba  
+            and kdsatker not like '%Z%'";
+        foreach ($filter as $filter1) {
+            $sql .= " AND " . $filter1;
+        }
+        $sql.=" union
+            select distinct kdes1 kdakun,nmes1 nmakun,'' kdkppn from t_eselon1 a,t_satker b where a.kdes1=b.baes1 
+            and kdsatker not like '%Z%'";
+        foreach ($filter as $filter2) {
+            $sql .= " AND " . $filter2;
+        }
+        $sql.=" union
+            select distinct baes1||'-'||kdsatker kdakun,nmsatker nmakun,kppn kdkppn
+            from t_satker 
+            where kdsatker not like '%Z%'";
+
+        foreach ($filter as $filter3) {
+            $sql .= " AND " . $filter3;
+        }
+        $sql .=" ORDER BY kdakun,nmakun ";
+       // echo($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_kdakun($val['KDAKUN']);
+            $d_data->set_nMakun($val['NMAKUN']);
+            $d_data->set_kdkppn($val['KDKPPN']);
+
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+
     /*
      * setter
      */
@@ -306,6 +344,30 @@ class DataPDR {
 
     public function set_lg_id($lg_id) {
         $this->_lg_id = $lg_id;
+    }
+
+    function get_kdba() {
+        return $this->_kdba;
+    }
+
+    function get_nmba() {
+        return $this->_nmba;
+    }
+
+    function get_kdkppn() {
+        return $this->_kdkppn;
+    }
+
+    function set_kdba($_kdba) {
+        $this->_kdba = $_kdba;
+    }
+
+    function set_nmba($_nmba) {
+        $this->_nmba = $_nmba;
+    }
+
+    function set_kdkppn($_kdkppn) {
+        $this->_kdkppn = $_kdkppn;
     }
 
     public function set_reg_type($reg_type) {

@@ -34,14 +34,15 @@ $akses['AuthKanwil'] = array(
  * akses PDR
  */
 $akses['DataPDRKanwil'] = array(
-        '__construct',
-        'index',
-        'registerDJPU',
-        'refAkun',
-        'refKppn',
-        'refSdana',
-        'refLokasi',
-        '__destruct'
+    '__construct',
+    'index',
+    'registerDJPU',
+    'refAkun',
+    'refKppn',
+    'refSdana',
+    'refLokasi',
+    'refSatker',
+    '__destruct'
 );
 
 /*
@@ -69,8 +70,8 @@ $akses['DataDIPAKanwil'] = array(
     'DataRealisasiBA_PDF',
     'DataRealisasiTransfer_PDF',
     'DetailRevisi_PDF',
-	'RealisasiFA_1_minus_51',
-	'RealisasiFA_1_minus',
+    'RealisasiFA_1_minus_51',
+    'RealisasiFA_1_minus',
     '__destruct'
 );
 
@@ -160,11 +161,11 @@ $akses['DataSPMKanwil'] = array(
     'HoldSPM_PDF',
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
-	'Konversi',
-	'KarwasUPSatker',
-	'UPSatker',
-	'KarwasTUPSatker',
-	'TUPSatker',
+    'Konversi',
+    'KarwasUPSatker',
+    'UPSatker',
+    'KarwasTUPSatker',
+    'TUPSatker',
     '__destruct'
 );
 
@@ -301,18 +302,18 @@ $akses['PDFKanwil'] = array(
     'SuspendSatkerPenerimaan_PDF',
     'SuspendAkunPenerimaan_PDF',
     'NTPNGanda_PDF',
-	'KarwasUPSatker_PDF',
-	'UPSatker_PDF',
-	'KarwasTUPSatker_PDF',
-	'TUPSatker_PDF',
-	'DataBPN_PDF',
+    'KarwasUPSatker_PDF',
+    'UPSatker_PDF',
+    'KarwasTUPSatker_PDF',
+    'TUPSatker_PDF',
+    'DataBPN_PDF',
     'DataBPNSatker_PDF',
-	'MpnBi_PDF',
-	'registerDJPU_PDF',
-	'refAkun_PDF',
-	'refKppn_PDF',	
-	'refSdana_PDF',
-	'refLokasi_PDF',
+    'MpnBi_PDF',
+    'registerDJPU_PDF',
+    'refAkun_PDF',
+    'refKppn_PDF',
+    'refSdana_PDF',
+    'refLokasi_PDF',
 	'refSatker_PDF',
     '__destruct'
 );
