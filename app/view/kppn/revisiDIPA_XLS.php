@@ -149,37 +149,19 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
  
 
-$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(11.1);
-/* $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('M')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('N')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('O')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('P')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('Q')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('R')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('S')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('T')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('U')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('V')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('W')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('X')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('Y')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimension('Z')->setAutoSize(true);
-$objPHPExcel->getActiveSheet()->getColumnDimens */
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+$objPHPExcel->getActiveSheet()->getStyle('F5:F1000')->getNumberFormat()->setFormatCode('000000');
+$objPHPExcel->getActiveSheet()->getStyle('G5:G1000')->getNumberFormat()->setFormatCode('000000');
+$objPHPExcel->getActiveSheet()->getStyle('H5:H1000')->getNumberFormat()->setFormatCode('0000000');
+$objPHPExcel->getActiveSheet()->getStyle('I5:I1000')->getNumberFormat()->setFormatCode('0000000');
 
+$objPHPExcel->getActiveSheet()->getStyle('J5:J1000')->getNumberFormat()->setFormatCode('0000000000');
+$objPHPExcel->getActiveSheet()->getStyle('K5:K1000')->getNumberFormat()->setFormatCode('00000');
+$objPHPExcel->getActiveSheet()->getStyle('L5:L1000')->getNumberFormat()->setFormatCode('0');
+$objPHPExcel->getActiveSheet()->getStyle('M5:M1000')->getNumberFormat()->setFormatCode('0');
+
+$objPHPExcel->getActiveSheet()->getStyle('O5:O1000')->getNumberFormat()->setFormatCode('000000');
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);
