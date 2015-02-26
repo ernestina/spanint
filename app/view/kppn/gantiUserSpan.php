@@ -21,53 +21,6 @@
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
 
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-
-                <?php
-                /*---------------------------------
-                //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
-                if (Session::get('role') == ADMIN || Session::get('role') == KANWIL) {
-                    if (isset($this->d_kd_kppn) || isset($this->d_nip)) {
-                        if (isset($this->d_kd_kppn)) {
-                            $kdkppn = $this->d_kd_kppn;
-                        } else {
-                            $kdkppn = 'null';
-                        }
-                        if (isset($this->d_nip)) {
-                            $kdnip = $this->d_nip;
-                        } else {
-                            $kdnip = 'null';
-                        }
-                        ?>
-                        <a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-                        <a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-						<?php
-                    }
-                }
-                if (Session::get('role') == KPPN) {
-                    if (isset($this->d_kd_kppn)) {
-                        $kdkppn = $this->d_kd_kppn;
-                    } else {
-                        $kdkppn = Session::get('id_user');
-                    }
-                    if (isset($this->d_nip)) {
-                        $kdnip = $this->d_nip;
-                    } else {
-                        $kdnip = 'null';
-                    }
-                    ?>
-                        <a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>/PDF" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                        </div><div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 10px;">
-                        <a href="<?php echo URL; ?>PDF/monitoringUserSpan_PDF/<?php echo $kdkppn . "/" . $kdnip; ?>/XLS" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print-xls"></span> XLS</a>
-                    <?php
-                }
-                //------------------------------*/
-                ?>
-
-            </div>
-
-            
         </div>
 
         <div class="row">
@@ -122,7 +75,7 @@ if (isset($this->d_nip2)) {
                 <th rowspan="2">Catatan</th>
                 <th rowspan="2">Cek Data</th>
                 <?php if (Session::get('role') == ADMIN) {
-                    echo "<th rowspan='2' width='9%'>Ubah/Hapus</th>" ;
+                    echo "<th rowspan='2'>Ubah</th>" ;
                 } ?>
             </tr>
             <tr>
@@ -150,7 +103,7 @@ if (isset($this->d_nip2)) {
                     <?php foreach ($this->data as $value) { ?>
 
                     <tr>
-                        <td><?php echo $no++; ?></td>
+                        <td><?php echo $no; ?></td>
                         <td><?php echo $value->get_kode_unit(); ?></td>
                         <td class="align-left"><?php echo $value->get_nama_usr_awal() . "<br>" . $value->get_nip_usr_awal() . "<br>" . $value->get_email_usr_awal() ;?></td>
                         <!--td ><?php //echo  ?></td-->
@@ -176,10 +129,157 @@ if (isset($this->d_nip2)) {
                         
                         </td>
                         <?php if (Session::get('role') == ADMIN) { ?>
-                        <td ><a href='#' class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;<a href='#' class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a></td>
-                        <?php } ?>
-                        
+                        <td ><a class="btn btn-default" data-toggle="modal" data-target="#modal-app-update<?php echo $no;?>" name="upd_d_user"><span class="glyphicon glyphicon-pencil"></span></a><!--&nbsp;<a href='#' class="btn btn-default"><span class="glyphicon glyphicon-trash">--></span></a></td>
+
                     </tr>
+
+<!--Update Data-->
+<div class="modal fade" id="modal-app-update<?php echo $no++;?>" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">   <span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-headphones"></span> Update Data</h4>
+
+            </div>
+<!--test--> <?php  echo $value->get_no_id();?>
+            
+            <form id="filter-form" method="POST" action="pergantianUser" enctype="multipart/form-data">
+
+                <div class="modal-body">
+
+<?php if (isset($this->kppn_list)) { ?>
+
+                        <div id="warning-all" class="alert alert-danger" style="display:none;"></div>
+                        <label class="isian">KPPN: </label>
+
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+
+    <?php foreach ($this->kppn_list as $value1) { ?>
+
+        <?php if ($value->get_kode_unit() == $value1->get_kd_d_kppn()) { ?>
+
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+
+                                <?php } else { ?>
+
+                                    <option value="<?php echo $value1->get_kd_d_kppn(); ?>"><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
+
+        <?php } ?>
+
+                            <?php } ?>
+
+                        </select>
+
+                        <?php } ?>
+                    <div id="wnip" class="alert alert-danger" style="display:none;"></div>
+                    <label class="isian">NIP</label>
+                    <div class="input-group" id="nip" style="width: 100%">
+                        <input class="form-control" type="text" class="nip1" name="nip1" id="nip1" 
+                               value="<?php echo $value->get_nip_usr_awal()?>">
+                        <span class="input-group-addon">diganti</span>
+                        <input class="form-control" type="text" class="nip2" name="nip2" id="nip2" value="<?php echo $value->get_nip_usr_pengganti()?>">
+                    </div>
+                    
+                    <label class="isian">Nama</label>
+                    <div class="input-group" id="nama" style="width: 100%">
+                        <input class="form-control" type="text" class="nama1" name="nama1" id="nama1" value="<?php echo $value->get_nama_usr_awal()?>">
+                        <span class="input-group-addon">diganti</span>
+                        <input class="form-control" type="text" class="nama2" name="nama2" id="nama2" value="<?php echo $value->get_nama_usr_pengganti()?>">
+                    </div>
+                    
+                    <label class="isian">Email</label>
+                    <div class="input-group" id="email" style="width: 100%">
+                        <input class="form-control" type="text" class="email1" name="email1" id="email1" value="<?php echo $value->get_email_usr_awal()?>">
+                        <span class="input-group-addon">diganti</span>
+                        <input class="form-control" type="text" class="email2" name="email2" id="email2" value="<?php echo $value->get_email_usr_pengganti()?>">
+                    </div>
+                    
+                    <label class="isian">Posisi</label>
+                    <div class="input-group" id="posisi" style="width: 100%">
+                        <select class="form-control" type="text" name="posisi1" id="posisi1">
+                            <?php   foreach ($this->posisi_user as $posisi) {
+                                    if ($value->get_posisi_user_awal() == $posisi->get_deskripsi_posisi()) { ?>
+                                <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>" selected><?php echo $posisi->get_deskripsi_posisi(); ?></option>
+                            
+                                <?php } else { ?>
+                                <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>"><?php echo $posisi->get_deskripsi_posisi(); ?></option>
+                            <?php } ?>
+                            <?php } ?>
+                        </select>
+                        
+                        <span class="input-group-addon">diganti</span>
+                        <select class="form-control" type="text" name="posisi2" id="posisi2">
+                            <?php   foreach ($this->posisi_user as $posisi) {
+                                    if ($value->get_posisi_user_pengganti() == $posisi->get_deskripsi_posisi()) { ?>
+                                <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>" selected><?php echo $posisi->get_deskripsi_posisi(); ?></option>
+                                <?php } else { ?>
+                                <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>"><?php echo $posisi->get_deskripsi_posisi(); ?></option>
+                            <?php } ?>
+                            <?php } ?>
+
+                        </select>
+                    </div>
+                    
+                    <label class="isian">No. Surat:</label>
+                    
+                    <input class="form-control" type="text" name="surat" id="surat" size="18" value="<?php echo $value->get_surat()?>">
+                    
+                    <label class="isian">Tanggal: </label>
+                    <div class="input-daterange input-group" id="datepicker" style="width: 100%">
+                        <input class="form-control" type="text" class="tanggal" name="tanggal_awal" id="tanggal_awal" value="<?php echo $value->get_tanggal_awal(); ?>">
+                        <span class="input-group-addon">s.d.</span>
+                        <input class="form-control" type="text" class="tanggal" name="tanggal_akhir" id="tanggal_akhir" value="<?php echo $value->get_tanggal_akhir(); ?>">
+                    </div>
+                    
+                    <label class="isian">Status Awal dan Akhir:</label>
+                    <div class="input-group" id="status" style="width: 100%">
+                        <select class="form-control" type="text" name="status1" id="status1">
+                            <option value="" selected>-- pilih --</option>
+                            <?php if ($value->get_status_setup_awal() == "tunda") { ?>
+                            <option value="tunda" selected>Tunda</option>
+                            <option value="selesai">Selesai</option>
+                            <?php } else { ?>
+                            <option value="tunda">Tunda</option>    
+                            <option value="selesai" selected>Selesai</option>
+                            <?php } ?>
+                        </select>
+                        <span class="input-group-addon">dan</span>
+                        <select class="form-control" type="text" name="status2" id="status2">
+                            <option value="" selected>-- pilih --</option>
+                            <?php if ($value->get_status_setup_akhir() == "tunda") { ?>
+                            <option value="tunda" selected>Tunda</option>
+                            <option value="selesai">Selesai</option>
+                            <?php } else { ?>
+                            <option value="tunda">Tunda</option>    
+                            <option value="selesai" selected>Selesai</option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    
+                    <label class="isian">Catatan:</label>
+                    
+                    <input class="form-control" type="text" name="catatan" id="catatan" size="18" value="<?php echo $value->get_catatan(); ?>">
+                
+                    <input class="form-control" type="hidden" name="no_id" id="no_id" size="18" value="<?php echo $value->get_no_id(); ?>">
+                
+                    </div> <!--end modal body-->
+
+                                <div class="modal-footer">
+                    <button type="submit" name="update_d_user" class="btn btn-primary" style="width: 100%" onClick="return cek_upload2()">Kirim</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+                        <?php } ?>
 
         <?php }  ?>
 
@@ -194,7 +294,7 @@ if (isset($this->d_nip2)) {
         </tbody>
 
     </table>
-</div>
+</div> <!--end table-->
 
 
 <!-- Tambah Data -->
@@ -207,7 +307,7 @@ if (isset($this->d_nip2)) {
             <div class="modal-header">
 
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
-                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-headphones"></span> Tambah Data Pergantian User</h4>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-headphones"></span> Tambah Data</h4>
 
             </div>
 
@@ -347,7 +447,9 @@ if (isset($this->d_nip2)) {
                     <input class="form-control" type="text" name="catatan" id="catatan" size="18" value="<?php if (isset($this->catatan)) {
                             echo $this->catatan;
                         } ?>">
-                </div>
+                
+        
+                </div> <!--end modal body-->
 
                 <div class="modal-footer">
                     <button type="submit" name="add_d_user" class="btn btn-primary" style="width: 100%" onClick="return cek_upload()">Kirim</button>
@@ -359,7 +461,7 @@ if (isset($this->d_nip2)) {
 
     </div>
 
-</div>
+</div> <!--end modal tambah-->
 
 <!-- Filter -->
 <div class="modal fade" id="modal-app-filter" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
@@ -431,7 +533,7 @@ if (isset($this->d_nip2)) {
 
     </div>
 
-</div>
+</div> <!--end filter-->
 
 <!-- Skrip -->
 <script type="text/javascript" charset="utf-8">

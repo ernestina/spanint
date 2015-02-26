@@ -357,6 +357,41 @@ class DataUserSPAN {
         //$result = $this->db->insert2($sql);
         return $this->db->insert($this->_table4, $data);
     }
+    
+    public function update_d_user() {
+        $data = array(
+            'no_id' => $this->get_no_id(),
+            'kode_unit' => $this->get_kode_unit(),
+            
+            'nama_usr_awal' => $this->get_nama_usr_awal(),
+            'nip_usr_awal' => $this->get_nip_usr_awal(),
+            'email_usr_awal' => $this->get_email_usr_awal(),
+            'posisi_user_awal' => $this->get_posisi_user_awal(),
+            
+            'nama_usr_pengganti' => $this->get_nama_usr_pengganti(),
+            'nip_usr_pengganti' => $this->get_nip_usr_pengganti(),
+            'email_usr_pengganti' => $this->get_email_usr_pengganti(),
+            'posisi_user_pengganti' => $this->get_posisi_user_pengganti(),
+            
+            'tanggal_awal' => $this->get_tanggal_awal(),
+            'tanggal_akhir' => $this->get_tanggal_akhir(),
+            'surat' => $this->get_surat(),
+            'status_setup_awal' => $this->get_status_setup_awal(),
+            'status_setup_akhir' => $this->get_status_setup_akhir(),
+            'catatan' => $this->get_catatan()
+        );
+        
+        if (!is_array($data)) {
+            return false;
+        }
+        $where = ' no_id=' . $this->get_no_id();
+        return $this->db->update($this->_table4, $data, $where);
+    }
+
+    public function delete_d_user() {
+        $where = ' no_id=' . $this->get_no_id();
+        $this->db->delete($this->_table4, $where);
+    }
 
     /*
      * setter
