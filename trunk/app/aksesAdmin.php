@@ -6,26 +6,26 @@
 
 
 $akses['DataUserAdmin'] = array(
-        '__construct',
-        'index',
-        'addDataUser',
-        'updDataUser',
-        'delDataUser',
-        '__destruct'
+    '__construct',
+    'index',
+    'addDataUser',
+    'updDataUser',
+    'delDataUser',
+    '__destruct'
 );
 
 $akses['OverviewPenganggaranAdmin'] = array(
-        '__construct',
-        'index',
-        'overview',
-        '__destruct'
+    '__construct',
+    'index',
+    'overview',
+    '__destruct'
 );
 
 $akses['DashboardAdmin'] = array(
-        '__construct',
-        'index',
-        'overviewAdmin',
-        '__destruct'
+    '__construct',
+    'index',
+    'overviewAdmin',
+    '__destruct'
 );
 
 /*
@@ -43,14 +43,15 @@ $akses['HomeAdmin'] = array(
  * akses PDR
  */
 $akses['DataPDRAdmin'] = array(
-        '__construct',
-        'index',
-        'registerDJPU',
-        'refAkun',
-        'refKppn',
-        'refSdana',
-        'refLokasi',
-        '__destruct'
+    '__construct',
+    'index',
+    'registerDJPU',
+    'refAkun',
+    'refKppn',
+    'refSdana',
+    'refLokasi',
+    'refSatker',
+    '__destruct'
 );
 
 /*
@@ -100,8 +101,8 @@ $akses['DataDIPAAdmin'] = array(
     'DataRealisasiBA_PDF',
     'DataRealisasiTransfer_PDF',
     'DetailRevisi_PDF',
-	'RealisasiFA_1_minus_51',
-	'RealisasiFA_1_minus',
+    'RealisasiFA_1_minus_51',
+    'RealisasiFA_1_minus',
     '__destruct'
 );
 
@@ -112,7 +113,7 @@ $akses['DataDropingAdmin'] = array(
     '__construct',
     'index',
     'monitoringDroping',
-    'detailDroping',  
+    'detailDroping',
     'detailSPAN',
     '__destruct'
 );
@@ -217,11 +218,11 @@ $akses['DataSPMAdmin'] = array(
     'HistorySpm_PDF',
     'daftarsp2d_PDF',
     'downloadSP2D',
-	'Konversi',
-	'KarwasUPSatker',
-	'UPSatker',
-	'KarwasTUPSatker',
-	'TUPSatker',
+    'Konversi',
+    'KarwasUPSatker',
+    'UPSatker',
+    'KarwasTUPSatker',
+    'TUPSatker',
     '__destruct'
 );
 
@@ -376,8 +377,8 @@ $akses['PDFAdmin'] = array(
     'detailRekapSP2D2_PDF',
     'DetailRevisi_PDF',
     'detailSp2dGaji_PDF',
-	'detailDroping_PDF',
-	'detailSPAN_PDF',
+    'detailDroping_PDF',
+    'detailSPAN_PDF',
     'DurasiSpm_PDF',
     'errorSpm_PDF',
     'Fund_fail_PDF',
@@ -426,33 +427,33 @@ $akses['PDFAdmin'] = array(
     'SuspendSatkerPenerimaan_PDF',
     'NTPNGanda_PDF',
     'KarwasUPSatker_PDF',
-	'UPSatker_PDF',
-	'KarwasTUPSatker_PDF',
-	'TUPSatker_PDF',
-	'DataRealisasiKegiatanBA_BAES1_PDF',
-	'DataRealisasiKegiatanES1_BAES1_PDF',
-	'DataRealisasiAkunBA_BAES1_PDF',
-	'DataRealisasiAkunES1_BAES1_PDF',
+    'UPSatker_PDF',
+    'KarwasTUPSatker_PDF',
+    'TUPSatker_PDF',
+    'DataRealisasiKegiatanBA_BAES1_PDF',
+    'DataRealisasiKegiatanES1_BAES1_PDF',
+    'DataRealisasiAkunBA_BAES1_PDF',
+    'DataRealisasiAkunES1_BAES1_PDF',
     'DataRealisasiKewenanganBAES1_BAES1_PDF',
-	'DataRealisasiOutputBA_BAES1_PDF',
-	'DataRealisasiOutputES1_BAES1_PDF',
+    'DataRealisasiOutputBA_BAES1_PDF',
+    'DataRealisasiOutputES1_BAES1_PDF',
     'nmsatker_BAES1_PDF',
     'ProsesRevisi_BAES1_PDF',
-	'DataFaBaPerEs1_BAES1_PDF',
+    'DataFaBaPerEs1_BAES1_PDF',
     'DataFaBaSatEs1_BAES1_PDF',
     'DataFaBaPerJenbel_BAES1_PDF',
-	'DataFaEs1PerSat_BAES1_PDF',
-	'DataFaEs1SatJenbel_BAES1_PDF',
-	'DataFaEs1SatSdana_BAES1_PDF',
-	'DataBPN_PDF',
+    'DataFaEs1PerSat_BAES1_PDF',
+    'DataFaEs1SatJenbel_BAES1_PDF',
+    'DataFaEs1SatSdana_BAES1_PDF',
+    'DataBPN_PDF',
     'DataBPNSatker_PDF',
-	'MpnBi_PDF',
-	'registerDJPU_PDF',
-	'refAkun_PDF',
-	'refKppn_PDF',	
-	'refSdana_PDF',
-	'refLokasi_PDF',
-	'refSatker_PDF',
+    'MpnBi_PDF',
+    'registerDJPU_PDF',
+    'refAkun_PDF',
+    'refKppn_PDF',
+    'refSdana_PDF',
+    'refLokasi_PDF',
+    'refSatker_PDF',
     '__destruct'
 );
 ?>
