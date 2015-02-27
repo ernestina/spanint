@@ -74,7 +74,7 @@
                 
                 <?php
                 // untuk menampilkan last_update
-                if (isset($this->data)) {
+                if (isset($this->data) && (count($this->data) > 0)) {
                     echo "Update Data Terakhir (Waktu Server)<br/>" . $this->data[0]->get_d_period() . "";
                 }
                 ?>
