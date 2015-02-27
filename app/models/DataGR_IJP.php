@@ -105,7 +105,7 @@ class DataGR_IJP {
 				FROM "
                 . $this->_table1 . " 
 				 WHERE 
-				1=1"
+				1=1 AND TAHUN = '".Session::get('ta')."'"
 
         ;
         $no = 0;
