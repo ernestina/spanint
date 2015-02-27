@@ -416,4 +416,15 @@ $akses['DataPDRKPPN'] = array(
     'refSatker',
         '__destruct'
 );
+
+/*
+ * akses modul NOD
+ */
+$akses['DataNODKPPN'] = array(
+    '__construct',
+    'index',
+    'daftarNOD',
+    'downloadNOD',
+    '__destruct'
+);
 ?>
