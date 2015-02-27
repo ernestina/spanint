@@ -42,8 +42,7 @@ class DataPFK {
 				sum(case when trx = 2 then " . $bulan . " * (-1) end) setoran_mpn
 				from "
                 . $this->_table1 . "
-				WHERE 1=1"
-
+				WHERE 1=1 AND TAHUN = '".Session::get('ta')."'"
         ;
 
         $no = 0;
