@@ -153,15 +153,15 @@ if (isset($this->d_nip2)) {
 
 <?php if (isset($this->kppn_list)) { ?>
 
-                        <div id="warning-all" class="alert alert-danger" style="display:none;"></div>
+                        <div id="warning0" class="alert alert-danger" style="display:none;"></div>
                         <label class="isian">KPPN: </label>
 
-                        <select class="form-control" type="text" name="kdkppn" id="kdkppn">
+                        <select class="form-control" type="text" name="kdkppn" id="kdkppn0">
 
     <?php foreach ($this->kppn_list as $value1) { ?>
 
         <?php if ($value->get_kode_unit() == $value1->get_kd_d_kppn()) { ?>
-
+                                    
                                     <option value="<?php echo $value1->get_kd_d_kppn(); ?>" selected><?php echo $value1->get_kd_d_kppn(); ?> | <?php echo $value1->get_nama_user(); ?></option>
 
                                 <?php } else { ?>
@@ -175,32 +175,33 @@ if (isset($this->d_nip2)) {
                         </select>
 
                         <?php } ?>
-                    <div id="wnip" class="alert alert-danger" style="display:none;"></div>
+                    <div id="wnip0" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">NIP</label>
-                    <div class="input-group" id="nip" style="width: 100%">
-                        <input class="form-control" type="text" class="nip1" name="nip1" id="nip1" 
-                               value="<?php echo $value->get_nip_usr_awal()?>">
+                    <div class="input-group" id="nip0" style="width: 100%">
+                        <input class="form-control" type="text" class="nip1" name="nip1" id="nip_1" 
+                               <?php //if (isset($this->nip1)) {echo $this->nip1; }?>
+                               value="<?php echo $value->get_nip_usr_awal(); ?>">
                         <span class="input-group-addon">diganti</span>
-                        <input class="form-control" type="text" class="nip2" name="nip2" id="nip2" value="<?php echo $value->get_nip_usr_pengganti()?>">
+                        <input class="form-control" type="text" class="nip2" name="nip2" id="nip_2" value="<?php echo $value->get_nip_usr_pengganti()?>">
                     </div>
                     
                     <label class="isian">Nama</label>
-                    <div class="input-group" id="nama" style="width: 100%">
-                        <input class="form-control" type="text" class="nama1" name="nama1" id="nama1" value="<?php echo $value->get_nama_usr_awal()?>">
+                    <div class="input-group" id="nama0" style="width: 100%">
+                        <input class="form-control" type="text" class="nama1" name="nama1" id="nama_1" value="<?php echo $value->get_nama_usr_awal()?>">
                         <span class="input-group-addon">diganti</span>
-                        <input class="form-control" type="text" class="nama2" name="nama2" id="nama2" value="<?php echo $value->get_nama_usr_pengganti()?>">
+                        <input class="form-control" type="text" class="nama2" name="nama2" id="nama_2" value="<?php echo $value->get_nama_usr_pengganti()?>">
                     </div>
                     
                     <label class="isian">Email</label>
-                    <div class="input-group" id="email" style="width: 100%">
-                        <input class="form-control" type="text" class="email1" name="email1" id="email1" value="<?php echo $value->get_email_usr_awal()?>">
+                    <div class="input-group" id="email0" style="width: 100%">
+                        <input class="form-control" type="text" class="email1" name="email1" id="email_1" value="<?php echo $value->get_email_usr_awal()?>">
                         <span class="input-group-addon">diganti</span>
-                        <input class="form-control" type="text" class="email2" name="email2" id="email2" value="<?php echo $value->get_email_usr_pengganti()?>">
+                        <input class="form-control" type="text" class="email2" name="email2" id="email_2" value="<?php echo $value->get_email_usr_pengganti()?>">
                     </div>
                     
                     <label class="isian">Posisi</label>
-                    <div class="input-group" id="posisi" style="width: 100%">
-                        <select class="form-control" type="text" name="posisi1" id="posisi1">
+                    <div class="input-group" id="posisi0" style="width: 100%">
+                        <select class="form-control" type="text" name="posisi1" id="posisi_1">
                             <?php   foreach ($this->posisi_user as $posisi) {
                                     if ($value->get_posisi_user_awal() == $posisi->get_deskripsi_posisi()) { ?>
                                 <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>" selected><?php echo $posisi->get_deskripsi_posisi(); ?></option>
@@ -212,7 +213,7 @@ if (isset($this->d_nip2)) {
                         </select>
                         
                         <span class="input-group-addon">diganti</span>
-                        <select class="form-control" type="text" name="posisi2" id="posisi2">
+                        <select class="form-control" type="text" name="posisi2" id="posisi_2">
                             <?php   foreach ($this->posisi_user as $posisi) {
                                     if ($value->get_posisi_user_pengganti() == $posisi->get_deskripsi_posisi()) { ?>
                                 <option value="<?php echo $posisi->get_deskripsi_posisi(); ?>" selected><?php echo $posisi->get_deskripsi_posisi(); ?></option>
@@ -226,18 +227,18 @@ if (isset($this->d_nip2)) {
                     
                     <label class="isian">No. Surat:</label>
                     
-                    <input class="form-control" type="text" name="surat" id="surat" size="18" value="<?php echo $value->get_surat()?>">
+                    <input class="form-control" type="text" name="surat" id="surat0" size="18" value="<?php echo $value->get_surat()?>">
                     
                     <label class="isian">Tanggal: </label>
-                    <div class="input-daterange input-group" id="datepicker" style="width: 100%">
-                        <input class="form-control" type="text" class="tanggal" name="tanggal_awal" id="tanggal_awal" value="<?php echo $value->get_tanggal_awal(); ?>">
+                    <div class="input-daterange input-group" id="datepicker0" style="width: 100%">
+                        <input class="form-control" type="text" class="tanggal" name="tanggal_awal" id="tanggal_1" value="<?php echo $value->get_tanggal_awal(); ?>">
                         <span class="input-group-addon">s.d.</span>
-                        <input class="form-control" type="text" class="tanggal" name="tanggal_akhir" id="tanggal_akhir" value="<?php echo $value->get_tanggal_akhir(); ?>">
+                        <input class="form-control" type="text" class="tanggal" name="tanggal_akhir" id="tanggal_2" value="<?php echo $value->get_tanggal_akhir(); ?>">
                     </div>
                     
                     <label class="isian">Status Awal dan Akhir:</label>
-                    <div class="input-group" id="status" style="width: 100%">
-                        <select class="form-control" type="text" name="status1" id="status1">
+                    <div class="input-group" id="status0" style="width: 100%">
+                        <select class="form-control" type="text" name="status1" id="status_1">
                             <option value="" selected>-- pilih --</option>
                             <?php if ($value->get_status_setup_awal() == "tunda") { ?>
                             <option value="tunda" selected>Tunda</option>
@@ -248,7 +249,7 @@ if (isset($this->d_nip2)) {
                             <?php } ?>
                         </select>
                         <span class="input-group-addon">dan</span>
-                        <select class="form-control" type="text" name="status2" id="status2">
+                        <select class="form-control" type="text" name="status2" id="status_2">
                             <option value="" selected>-- pilih --</option>
                             <?php if ($value->get_status_setup_akhir() == "tunda") { ?>
                             <option value="tunda" selected>Tunda</option>
@@ -262,7 +263,7 @@ if (isset($this->d_nip2)) {
                     
                     <label class="isian">Catatan:</label>
                     
-                    <input class="form-control" type="text" name="catatan" id="catatan" size="18" value="<?php echo $value->get_catatan(); ?>">
+                    <input class="form-control" type="text" name="catatan" id="catatan0" size="18" value="<?php echo $value->get_catatan(); ?>">
                 
                     <input class="form-control" type="hidden" name="no_id" id="no_id" size="18" value="<?php echo $value->get_no_id(); ?>">
                 
@@ -652,6 +653,7 @@ if (isset($this->d_nip2)) {
         var v_status2 = document.getElementById('status2').value;
         var v_surat = document.getElementById('surat').value;
         var v_kdkppn = document.getElementById('kdkppn').value;
+        
 
         var pattern = '^[0-9]+$';
         
