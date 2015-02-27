@@ -148,6 +148,8 @@ $registry->auth->add_access('dataPMRT','kppn',$akses['DataPMRTKPPN']);
 $registry->auth->add_access('dataBPN','kppn',$akses['DataBPNKPPN']);
 $registry->auth->add_access('dataMpnBi','kppn',$akses['DataMpnBiKPPN']);
 $registry->auth->add_access('dataPDR','kppn',$akses['DataPDRKPPN']);
+$registry->auth->add_access('dataNOD','kppn',$akses['DataNODKPPN']);   
+
 
 //level pkn
 $registry->auth->add_access('auth','pkn',$akses['AuthPKN']);
