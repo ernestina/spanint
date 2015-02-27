@@ -83,7 +83,7 @@ class DataPDR {
                 FROM    " . $this->_table_djpu_reg . " a
                 LEFT JOIN " . $this->_table_join_status . " c
                 ON      a.reg_no = c.register_no
-                INNER JOIN " . $this->_table_djpu_cara_tarik . " b 
+                LEFT JOIN " . $this->_table_djpu_cara_tarik . " b 
                 ON      a.reg_no = b.register_no
                 AND     trim(a.lg_id) = b.instrument_id
                 WHERE   1=1 ";
@@ -92,6 +92,7 @@ class DataPDR {
             $sql .= " AND " . $filter;
         }
         $sql .=" ORDER BY d_effective desc,d_signed desc ";
+        
         //echo($sql);
 
         $result = $this->db->select($sql);
