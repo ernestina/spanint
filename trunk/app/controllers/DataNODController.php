@@ -46,14 +46,21 @@ class DataNODController extends BaseController {
                 $this->view->d_sp4hln_number = $_POST['sp4hln_number'];
             } 
 
-            if ($_POST['apdpl_number'] != '') {
-                $filter[$no++] = "APDPL_NUMBER  = '".$_POST['apdpl_number']."'";
-                $this->view->d_apdpl_number = $_POST['apdpl_number'];
+            if ($_POST['register_number'] != '') {
+                $filter[$no++] = "REGISTER_NUMBER  = '".$_POST['register_number']."'";
+                $this->view->d_register_number = $_POST['register_number'];
             } 
 
+            if ($_POST['type'] != '') {
+                if ($_POST['type'] != 'SEMUA') {
+                    $filter[$no++] = "TYPE = '" . $_POST['type'] . "'";
+                }
+                $this->view->d_type = $_POST['type'];
+            }
+        
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
                 
-                $filter[$no++] = "TO_DATE(PAYMENT_DATE,'YYYYMMDD') BETWEEN TO_DATE('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' ,'YYYYMMDD') AND TO_DATE( '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD') ";
+                $filter[$no++] = "TO_DATE(BOOK_DATE,'YYYYMMDD') BETWEEN TO_DATE('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' ,'YYYYMMDD') AND TO_DATE( '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD') ";
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }

@@ -481,6 +481,17 @@
                             </div>
                         </li>
 
+                        
+                        <?php if(Session::get('kd_satker') == 140) { ?>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;NOD</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dataNOD/daftarNOD"></i>Monitoring NOD</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <?php }  ?>
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                             <div class="collapse">
                                 <ul>

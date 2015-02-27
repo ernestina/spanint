@@ -158,13 +158,44 @@
                    echo $this->d_sp4hln_number;
                } ?>">
                     <br/>
-                    <label class="isian">APDPL_NUMBER: </label>
-                    <input class="form-control" type="text" name="apdpl_number" id="apdpl_number" value="<?php if (isset($this->d_apdpl_number)) {
-                   echo $this->d_apdpl_number;
+                    <label class="isian">REGISTER_NUMBER: </label>
+                    <input class="form-control" type="text" name="register_number" id="register_number" value="<?php if (isset($this->d_register_number)) {
+                   echo $this->d_register_number;
                } ?>">
-                    <br/>
+                    <br>
+                    <div id='wtype' class='alert alert-danger' style='display:none;'></div>
+                        <label class='isian'>Type: </label>
+                        <select class='form-control' type='text' name='type' id='type'>
+                        ?>  <option value=''>- pilih -</option>
+                        <option value='PL' <?php
+                        if ($this->d_type == PL) {
+                            echo "selected";
+                        }
+                        ?>>PL</option>
+                        <option value='LC' <?php
+                        if ($this->d_type == LC) {
+                            echo "selected";
+                        }
+                        ?>>LC</option>
+                        <option value='RK' <?php
+                        if ($this->d_type == RK) {
+                            echo "selected";
+                        }
+                        ?>>RK</option>
+                        <option value='PP' <?php
+                        if ($this->d_type == PP) {
+                            echo "selected";
+                        }
+                        ?>>PP</option>
+                        <option value='SEMUA' <?php
+                            if ($this->d_bank == SEMUA) {
+                                echo "selected";
+                            }
+                            ?>>SEMUA</option>
+                        </select>
+                    <br>
                     <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
-                    <label class="isian">Tanggal SP2D: </label>
+                    <label class="isian">Tanggal Buku: </label>
                     <div class="input-daterange input-group" id="datepicker" style="width: 100%">
                         <input class="form-control" type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
                         <span class="input-group-addon">s.d.</span>
