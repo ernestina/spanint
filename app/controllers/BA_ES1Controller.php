@@ -813,12 +813,12 @@ class BA_ES1Controller extends BaseController {
 
             if ($_POST['kode'] != '') {
                 $filter[$no++] = "OUTPUT like '%" . $_POST['kode'] . "%'";
-                $this->view->output = $_POST['kode'];
+                $this->view->kdoutput = $_POST['kode'];
             }
 
             if ($_POST['nama'] != '') {
                 $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
-                $this->view->output = $_POST['kode'];
+                $this->view->nmoutput = $_POST['nama'];
             }
         }
 

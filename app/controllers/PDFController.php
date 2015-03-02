@@ -7188,8 +7188,13 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$this->view->nmkegiatan = $nmkegiatan;
 		}           
 		
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";
-		
+		if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == SATKER) {
+            $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
+        }		
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         
@@ -7261,97 +7266,6 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
 
 	}
-	
-	public function DataRealisasiKegiatanES1_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
-        $d_spm1 = new DataRealisasiES1($this->registry);
-        $filter = array();
-        $no = 0;
-        //untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
-		$this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
-		
-
-            if ($kdkegiatan != 'null') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $kdkegiatan . "%'";
-                $this->view->kdkegiatan = $kdkegiatan;
-            }
-             if ($nmkegiatan != 'null') {
-                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $nmkegiatan . "%')";
-                $this->view->nmkegiatan = $nmkegiatan;
-            }           
-		
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1')."'";
-		
-        $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-        
-		$this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
-        
-//-------------------------
-
-		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
-            } else {
-                $this->view->nm_kppn2 = 'null';
-            }
-        }elseif (Session::get('role') == KL) {
-			$kdbaes1=Session::get('kd_satker');
-			if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user();		
-                }
-            } else {
-                $this->view->nm_kppn2 = 'null';
-            }	
-		}elseif (Session::get('role') == ES1) {
-		$kdbaes1=Session::get('kd_satker');
-			if ($kdbaes1 != 'null') {
-				//KL
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user();
-                }
-				//ES1
-				$kppn1='KL'.substr($kdbaes1,1,3);
-				$d_kppn1 = new DataUser($this->registry);
-				$d_kppn1->get_d_user_kppn2($kppn1);
-                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
-                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
-                }
-				
-            } else {
-                $this->view->nm_kppn2 = 'null';
-				$this->view->nm_kppn3 = 'null';
-            }
-		} else {
-                $this->view->nm_kppn2 = 'null';
-				$this->view->nm_kppn3 = 'null';
-
-        }
-        //-------------------------
-		$this->view->kdjk='Kode | Nama Kegiatan';
-		//------------------------------------------------------------
-		$judul1='Realisasi Belanja per Kegiatan';
-		$this->view->judul1=$judul1;
-		if($ck=='PDF'){
-			$this->view->load('baes1/DataRealisasiKegiatan_BAES1_PDF');
-		}elseif($ck=='XLS'){
-			$this->view->load('baes1/DataRealisasiKegiatan_BAES1_XLS');
-		}
-		//------------------------------------------------------------
-		$d_log->tambah_log("Sukses");
-    }
 	
 	public function DataRealisasiPenerimaanBA_BAES1_PDF($eselon1=null,$satker=null,$kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
@@ -9131,8 +9045,13 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nmoutput= $nmoutput;
             }           
         
-		
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1')."'";
+		if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == SATKER) {
+            $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
+        }
 		
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -9202,7 +9121,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 
-	public function DataRealisasiOutputES1_BAES1_PDF($kdoutput=null,$nmoutput=null,$ck=null) {
+/* 	public function DataRealisasiOutputES1_BAES1_PDF($kdoutput=null,$nmoutput=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
         $no = 0;
@@ -9292,7 +9211,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
 
     }
-	
+ */	
 	    public function DataFaBaPerEs1_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
         $d_spm1 = new DataRealisasiES1($this->registry);
         $filter = array();
