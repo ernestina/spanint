@@ -8,6 +8,59 @@
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
+			<?php
+			if (Session::get('role') == KPPN) {
+			//-----------------------------
+				if (isset($this->d_wa_number)) {
+					$kdwanumber = $this->d_wa_number;
+				} else {
+					$kdwanumber = 'null';
+				}
+				if (isset($this->d_sp4hln_number)) {
+					$kdsp4hln = $this->d_sp4hln_number;
+				} else {
+					$kdsp4hln = 'null';
+				}
+
+				if (isset($this->d_register_number)) {
+					$kdregister = $this->d_register_number;
+				} else {
+					$kdregister = 'null';
+				}
+
+				if (isset($this->d_type)) {
+					$kdtype = $this->d_type;
+				} else {
+					$kdtype = 'null';
+				}
+				
+				if (isset($this->d_tgl_awal)) {
+					$kdtglawal = $this->d_tgl_awal;
+				} else {
+					$kdtglawal = 'null';
+				}
+
+				if (isset($this->d_tgl_akhir)) {
+					$kdtglakhir = $this->d_tgl_akhir;
+				} else {
+					$kdtglakhir = 'null';
+				}
+				?>
+                
+                <div class="btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                    </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo URL; ?>PDF/daftarNOD_PDF/<?php echo $kdwanumber . "/" . $kdsp4hln . "/" . $kdregister . "/" . $kdtype . "/" . $kdtglawal . "/" . $kdtglakhir; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/daftarNOD_PDF/<?php echo $kdwanumber . "/" . $kdsp4hln . "/" . $kdregister . "/" . $kdtype . "/" . $kdtglawal . "/" . $kdtglakhir; ?>/XLS">EXCEL</a></li>
+                          </ul>
+                </div>
+					
+				<?php
+//------------------------------
+			}
+			?>
+
                 
             </div>
             

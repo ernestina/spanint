@@ -11209,6 +11209,93 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //untuk mencatat log user
         $d_log->tambah_log("Sukses");
     }
+	
+	//DataNODController
+	    public function daftarNOD_PDF($kdwanumber=null,$kdsp4hln=null,
+		$kdregister=null,$kdtype=null,$kdtglawal=null,
+		$kdtglakhir=null,$ck=null) {
+        $d_nod = new DataNOD($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == KPPN) {
+            $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
+        }
+
+        //if (isset($_POST['submit_file'])) {
+        
+            if ($kdwanumber != 'null') {
+                $filter[$no++] = "WA_NUMBER  = '".$kdwanumber."'";
+            } 
+
+            if ($kdsp4hln != 'null') {
+                $filter[$no++] = "SP4HLN_NUMBER  = '".$kdsp4hln."'";
+            } 
+
+            if ($kdregister != 'null') {
+                $filter[$no++] = "REGISTER_NUMBER  = '".$kdregister."'";
+            } 
+
+            if ($kdtype != 'null') {
+                if ($_POST['type'] != 'SEMUA') {
+                    $filter[$no++] = "TYPE = '" . $kdtype . "'";
+                }
+            }
+        
+            if ($kdtglawal != 'null' AND $kdtglakhir != 'null') {
+                
+                $filter[$no++] = "TO_DATE(BOOK_DATE,'YYYYMMDD') BETWEEN TO_DATE('" . date('Ymd', strtotime($kdtglawal)) . "' ,'YYYYMMDD') AND TO_DATE( '" . date('Ymd', strtotime($kdtglakhir)) . "','YYYYMMDD') ";
+            }
+        //}
+        
+        $this->view->data = $d_nod->get_nod_filter($filter);
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_nod->get_table());
+        //-------------------------
+        if (Session::get('role') == SATKER) {
+            $d_nm_kppn1 = new DataUser($this->registry);
+			$d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker'));
+			foreach ($d_nm_kppn1->get_d_user_nmkppn(Session::get('kd_satker')) as $kppn) {
+                    $this->view->nm_kppn = $kppn->get_nama_kppn();
+                }
+        } elseif (Session::get('role') == ADMIN) {
+            if ($kdkppn != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdkppn);
+                foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                    $this->view->nm_kppn = $kppn->get_nama_user();
+                }
+            } else {
+                $this->view->nm_kppn = 'null';
+            }
+        } elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+			$kdkppn=Session::get('kd_satker');
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        } else {
+            $this->view->nm_kppn = Session::get('user');
+        }
+        //-------------------------
+		//------------------------------------------------------------
+		$judul1='Daftar NOD';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('kppn/daftarNOD_PDF');
+		}elseif($ck=='XLS'){
+			$this->view->load('kppn/daftarNOD_XLS');
+		}
+		//------------------------------------------------------------
+
+        $d_log->tambah_log("Sukses");
+
+    }
 
 
 

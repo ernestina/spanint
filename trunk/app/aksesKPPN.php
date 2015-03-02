@@ -399,6 +399,7 @@ $akses['PDFKPPN'] = array(
 	'refSdana_PDF',
 	'refLokasi_PDF',
 	'refSatker_PDF',
+	'daftarNOD_PDF',
     '__destruct'
 );
 
