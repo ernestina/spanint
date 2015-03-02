@@ -32,6 +32,8 @@ class Database extends PDO {
 
         ksort($data);
 
+        //var_dump($data);
+
         $field = null;
         foreach ($data as $key => $value) {
             $field .= "$key = :$key,";
@@ -56,6 +58,7 @@ class Database extends PDO {
         }
 
         $sth->execute();
+        $sth = $this->prepare("commit;");
 
         return true;
     }
