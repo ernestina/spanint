@@ -597,7 +597,18 @@
                                 </ul>
                             </div>
                         </li>
-
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Ketersediaan Dana  <br><i>(Fund Available)</i></h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Kegiatan</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputBA">Per Output</a></li>                                   
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerJenbel">Per Jenis Belanja</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerSdana">Per Sumber Dana</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
                         <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Modul Komitmen</h4>
                             <div class="collapse">
                                 <ul>
@@ -987,8 +998,8 @@
                                 <ul>
 
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataFaEs1PerSat">Per Satker </a></li>
-                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanES1">Per Kegiatan</a></li>
-                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputES1">Per Output</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Kegiatan</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputBA">Per Output</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerJenbel">Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerSdana">Per Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataFaEs1SatJenbel">Per Satker - Jenis Belanja</a></li>

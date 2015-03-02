@@ -44,7 +44,13 @@ class BA_ES1Controller extends BaseController {
             }
         }
 
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == SATKER) {
+            $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
+        }
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -56,43 +62,6 @@ class BA_ES1Controller extends BaseController {
         $this->view->judulkolom = 'Kode | Nama Kegiatan';
         $this->view->action = 'DataRealisasiKegiatanBA';
         $this->view->kodes = 'Kode Kegiatan :';
-        $this->view->detil = "kegiatan";
-        $this->view->render('baes1/DataRealisasiKegiatan');
-    }
-
-    public function DataRealisasiKegiatanES1() {
-        $d_spm1 = new DataRealisasiES1($this->registry);
-        $filter = array();
-        $no = 0;
-        //untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-
-        $this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
-
-        if (isset($_POST['submit_file'])) {
-
-            if ($_POST['kode'] != '') {
-                $filter[$no++] = "SUBSTR(OUTPUT,1,4) like '%" . $_POST['kode'] . "%'";
-                $this->view->kdkegiatan = $_POST['kode'];
-            }
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
-                $this->view->nmkegiatan = $_POST['nama'];
-            }
-        }
-
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
-
-        $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-
-        $this->view->data = $d_spm1->get_ba_kegiatan_filter($filter);
-        $d_log->tambah_log("Sukses");
-        $this->view->judul = 'Laporan Pagu Dana Per Kegiatan';
-        $this->view->judulkolom = 'Kode | Nama Kegiatan';
-        $this->view->action = 'DataRealisasiKegiatanES1';
-        $this->view->kodes = 'Kode Kegiatan:';
         $this->view->detil = "kegiatan";
         $this->view->render('baes1/DataRealisasiKegiatan');
     }
@@ -111,7 +80,7 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == ES1) {
             $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
         }
-		if (Session::get('role') == SATKER) {
+        if (Session::get('role') == SATKER) {
             $filter[$no++] = "B.KDSATKER = '" . Session::get('kd_satker') . "'";
         }
         if ($eselon1 != null) {
@@ -120,8 +89,7 @@ class BA_ES1Controller extends BaseController {
         }
         if ($satker != null) {
             $filter[$no++] = "B.KDSATKER = '" . $satker . "'";
-			$this->view->d_kd_satker = $satker;
-			
+            $this->view->d_kd_satker = $satker;
         }
 
         if (isset($_POST['submit_file'])) {
@@ -329,7 +297,7 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "TO_CHAR(NEED_BY_DATE,'YYYY') =" . Session::get('ta') - 1;
         }
 
-		 $this->view->kd_detil = $detil;
+        $this->view->kd_detil = $detil;
         //detil encumbrance ba
         if (Session::get('role') == KL) {
             $filter[$no++] = " SUBSTR(B.SEGMENT4,1,3) =  '" . Session::get('kd_baes1') . "'";
@@ -366,11 +334,11 @@ class BA_ES1Controller extends BaseController {
                 $this->view->kd_code_id = $code_id;
             }
         }
-        
+
         //detil encumbrance level eselon1
         if (Session::get('role') == ES1) {
             $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . Session::get('kd_baes1') . "'";
-            
+
             if ($detil == 'satker') {
                 $filter[$no++] = " B.SEGMENT1 =  '" . $code_id . "'";
                 $this->view->kd_code_id = $code_id;
@@ -397,6 +365,28 @@ class BA_ES1Controller extends BaseController {
             }
             if ($detil == 'satsdana') {
                 $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
+                $this->view->kd_code_id = $code_id;
+            }
+        }
+
+        //detil encumbrance level eselon1
+        if (Session::get('role') == SATKER) {
+            $filter[$no++] = " B.SEGMENT1) =  '" . Session::get('kd_satker') . "'";
+
+            if ($detil == 'kegiatan') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT5,1,4) =  '" . $code_id . "'";
+                $this->view->kd_code_id = $code_id;
+            }
+            if ($detil == 'output') {
+                $filter[$no++] = " B.SEGMENT5 =  '" . $code_id . "'";
+                $this->view->kd_code_id = $code_id;
+            }
+            if ($detil == 'jenbel') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
+                $this->view->kd_code_id = $code_id;
+            }
+            if ($detil == 'sdana') {
+                $filter[$no++] = " SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
                 $this->view->kd_code_id = $code_id;
             }
         }
@@ -832,7 +822,13 @@ class BA_ES1Controller extends BaseController {
             }
         }
 
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        if (Session::get('role') == KL) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == SATKER) {
+            $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
+        }
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -843,41 +839,6 @@ class BA_ES1Controller extends BaseController {
         $this->view->judul = 'Laporan Pagu Dana Per Output';
         $this->view->judulkolom = 'Kode | Nama Kegiatan / Output';
         $this->view->action = 'DataRealisasiOutputBA';
-        $this->view->kodes = 'Kode Output :';
-        $this->view->detil = 'output :';
-        $this->view->render('baes1/DataRealisasiOutput');
-    }
-
-    public function DataRealisasiOutputES1() {
-        $d_spm1 = new DataRealisasiES1($this->registry);
-        $filter = array();
-        $no = 0;
-        //untuk mencatat log user
-        $d_log = new DataLog($this->registry);
-        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-
-        if (isset($_POST['submit_file'])) {
-
-            if ($_POST['kode'] != '') {
-                $filter[$no++] = "OUTPUT like '%" . $_POST['kode'] . "%'";
-                $this->view->kdkegiatan = $_POST['kode'];
-            }
-            if ($_POST['nama'] != '') {
-                $filter[$no++] = " upper(nmkegiatan) like upper('%" . $_POST['nama'] . "%')";
-                $this->view->nmkegiatan = $_POST['nama'];
-            }
-        }
-
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
-
-        $d_last_update = new DataLastUpdate($this->registry);
-        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-
-        $this->view->data = $d_spm1->get_ba_output_filter($filter);
-        $d_log->tambah_log("Sukses");
-        $this->view->action = 'DataRealisasiOutputES1';
-        $this->view->judul = 'Laporan Pagu Dana Per Output :';
-        $this->view->judulkolom = 'Kode | Nama Kegiatan / Output';
         $this->view->kodes = 'Kode Output :';
         $this->view->detil = 'output :';
         $this->view->render('baes1/DataRealisasiOutput');
@@ -984,6 +945,8 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == ES1) {
             $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == SATKER) {
+            $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
         }
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -1024,6 +987,8 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == ES1) {
             $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == SATKER) {
+            $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
         }
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -1222,82 +1187,80 @@ class BA_ES1Controller extends BaseController {
         $this->view->detil = 'satsdana :';
         $this->view->render('baes1/DataRealisasiOutput');
     }
-	
-	public function DataUPBAES1() {
+
+    public function DataUPBAES1() {
         $d_spm1 = new DataKarwasUP($this->registry);
         $filter = array();
-		//$filter2 = array();
+        //$filter2 = array();
         $no = 0;
-		
-		//untuk mencatat log user
+
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-		
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
         if (Session::get('role') == KL) {
             $filter[$no++] = "B.BA = '" . Session::get('kd_baes1') . "'";
         }
         if (Session::get('role') == ES1) {
             $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
         }
-		
-		if (isset($_POST['submit_file'])) {
-		
-		
-            
-				
+
+        if (isset($_POST['submit_file'])) {
+
+
+
+
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "A.SATKER_CODE = '" . $_POST['kdsatker'] . "'";
-				$this->view->d_kd_satker = $_POST['kdsatker'];
+                $this->view->d_kd_satker = $_POST['kdsatker'];
             }
-			if ($_POST['SUMBERDANA'] != '') {
+            if ($_POST['SUMBERDANA'] != '') {
                 $filter[$no++] = "SUMBER_DANA = '" . $_POST['SUMBERDANA'] . "'";
-				$this->view->d_sumber_dana = $_POST['SUMBERDANA'];
+                $this->view->d_sumber_dana = $_POST['SUMBERDANA'];
             }
-			
-		}
-		
-		$this->view->data1 = $d_spm1->get_karwas_up_baes1($filter);
-		$this->view->data2 = $d_spm1->get_total_sisa_up_baes1($filter);
-				
-		$d_log->tambah_log("Sukses");
+        }
+
+        $this->view->data1 = $d_spm1->get_karwas_up_baes1($filter);
+        $this->view->data2 = $d_spm1->get_total_sisa_up_baes1($filter);
+
+        $d_log->tambah_log("Sukses");
         $this->view->render('baes1/KarwasUPBAES1');
     }
-	
-	public function KarwasTUPBaes1() {
+
+    public function KarwasTUPBaes1() {
         $d_spm1 = new DataKarwasUP($this->registry);
         $filter = array();
-		//$filter2 = array();
+        //$filter2 = array();
         $no = 0;
-		
-		//untuk mencatat log user
+
+        //untuk mencatat log user
         $d_log = new DataLog($this->registry);
-		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-        
-		if (Session::get('role') == KL) {
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+        if (Session::get('role') == KL) {
             $filter[$no++] = "B.BA = '" . Session::get('kd_baes1') . "'";
         }
         if (Session::get('role') == ES1) {
             $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
         }
-		
-		if (isset($_POST['submit_file'])) {
-           
-				
+
+        if (isset($_POST['submit_file'])) {
+
+
             if ($_POST['kdsatker'] != '') {
                 $filter[$no++] = "SATKER_CODE = '" . $_POST['kdsatker'] . "'";
-				$this->view->d_kd_satker = $_POST['kdsatker'];
+                $this->view->d_kd_satker = $_POST['kdsatker'];
             }
-			if ($_POST['SUMBERDANA'] != '') {
+            if ($_POST['SUMBERDANA'] != '') {
                 $filter[$no++] = "SUMBER_DANA = '" . $_POST['SUMBERDANA'] . "'";
-				$this->view->d_sumber_dana = $_POST['SUMBERDANA'];
+                $this->view->d_sumber_dana = $_POST['SUMBERDANA'];
             }
-			
-		}
-		
-		$this->view->data1 = $d_spm1->get_karwas_tup_baes1($filter);
-		$this->view->data2 = $d_spm1->get_total_sisa_tup_baes1($filter);
-		
-		$d_log->tambah_log("Sukses");
+        }
+
+        $this->view->data1 = $d_spm1->get_karwas_tup_baes1($filter);
+        $this->view->data2 = $d_spm1->get_total_sisa_tup_baes1($filter);
+
+        $d_log->tambah_log("Sukses");
         $this->view->render('baes1/KarwasTUPBAES1');
     }
 

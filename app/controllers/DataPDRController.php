@@ -28,7 +28,7 @@ class DataPDRController extends BaseController {
 
         if (isset($_POST['submit_file'])) {
             if ($_POST['nip'] != '') {
-                $filter[$no++] = " reg_no = '" . $_POST['nip'] . "'";
+                $filter[$no++] = " reg_no like '%" . $_POST['nip'] . "%'";
                 $this->view->d_nip = $_POST['nip'];
             }
 

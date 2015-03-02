@@ -235,6 +235,11 @@ $akses['DataPDRSatker'] = array(
 $akses['BaEs1Satker'] = array(
         '__construct',
         'DataRealisasiPenerimaanBA',
+    'DataRealisasiKegiatanBA',
+    'DataRealisasiOutputBA',
+    'DataFaBaPerJenbel',
+    'DataFaBaPerSdana',
+    'DetailEncumbrances',
         '__destruct'
 );
 ?>
