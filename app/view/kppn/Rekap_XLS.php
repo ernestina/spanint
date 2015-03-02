@@ -102,12 +102,7 @@ if (count($this->data) == 0) {
 	$nil['p2']=$value->get_check_number();
 	$nil['p3']=$value->get_creation_date();
 	$nil['p4']=$value->get_check_date();
-	if ($value->get_amount==0){
-		$nil['p5']='0';
-	}else{
-		$nil['p5']=$value->get_amount();
-	}			
-	
+	$nil['p5']=$value->get_amount();
 	$nil['p6']=$value->get_invoice_num();
 	$nil['p7']=$value->get_invoice_date();
 	$nil['p8']=$value->get_attribute6();
