@@ -115,7 +115,7 @@ class UserSpanController extends BaseController {
         //$this->view->xls_url ---> URL untuk download XLS (string)
         
          $this->view->pdf_url = URL . 'PDF/monitoringUserSpan_PDF/' . $kdkppn . '/' . $kdnip . '/PDF';
-        $this->view->xls_url = URL . 'PDF/monitoringUserSpan_PDF/' . $kdkppn . '/' . $kdnip . '/PDF';
+        $this->view->xls_url = URL . 'PDF/monitoringUserSpan_PDF/' . $kdkppn . '/' . $kdnip . '/XLS';
         
         //Konfigurasi Tabel
         //$this->view->table_config ---> String dipisahkan spasi
