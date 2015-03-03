@@ -59,13 +59,12 @@ class DataFA {
 
     public function get_fa_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT Distinct A.*, B.NMSATKER 
+        $sql = "SELECT Distinct A.*
 				FROM "
-                . $this->_table1 . " A, "
-                . $this->_table2 . " B 
+                . $this->_table1 . " A 
 				WHERE 1=1 AND 
-				A.BUDGET_TYPE='2' AND
-				A.SATKER=B.KDSATKER
+				A.BUDGET_TYPE='2'
+				
 				AND A.SUMMARY_FLAG = 'N' 
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
@@ -111,13 +110,12 @@ class DataFA {
 	
 	public function get_fa_minus_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT Distinct A.*, B.NMSATKER 
+        $sql = "SELECT Distinct A.*
 				FROM "
-                . $this->_table1 . " A, "
-                . $this->_table2 . " B 
+                . $this->_table1 . " A 
+               
 				WHERE 1=1 AND 
-				A.BUDGET_TYPE='2' AND
-				A.SATKER=B.KDSATKER
+				A.BUDGET_TYPE='2' 
 				AND A.SUMMARY_FLAG = 'N' 
 				AND A.BALANCING_AMT < 0 
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
@@ -164,13 +162,12 @@ class DataFA {
 
     public function get_fa_summary_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT Distinct A.*, B.NMSATKER
+        $sql = "SELECT Distinct A.*
 				FROM "
-                . $this->_table1 . " A, "
-                . $this->_table2 . " B 
+                . $this->_table1 . " A
+                
 				WHERE 1=1
-				AND
-				A.SATKER=B.KDSATKER 
+				
 				AND A.SUMMARY_FLAG = 'Y' 
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
@@ -216,13 +213,11 @@ class DataFA {
 	
 	public function get_fa_summary_minus_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT Distinct A.*, B.NMSATKER
+        $sql = "SELECT Distinct A.*
 				FROM "
-                . $this->_table1 . " A, "
-                . $this->_table2 . " B 
+                . $this->_table1 . " A 
 				WHERE 1=1
-				AND
-				A.SATKER=B.KDSATKER 
+				
 				AND A.BALANCING_AMT < 0 
 				AND A.SUMMARY_FLAG = 'Y' 
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
