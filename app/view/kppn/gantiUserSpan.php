@@ -11,7 +11,7 @@
                 <h2>Monitoring Pergantian User</h2>
             </div>
 			<div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
-                <?php if(Session::get('role') == ADMIN) {?>
+                <?php if(Session::get('role') == UMADMIN) {?>
                 <button type="button" class="btn btn-default fullwidth" data-toggle="modal" data-target="#modal-app-tambah"><span class="glyphicon glyphicon-headphones"></span> Tambah</button>
                 <?php } ?>
 
@@ -74,7 +74,7 @@ if (isset($this->d_nip2)) {
                 <th rowspan="2">Tanggal Akhir<br>Status</th>
                 <th rowspan="2">Catatan</th>
                 <th rowspan="2">Cek Data</th>
-                <?php if (Session::get('role') == ADMIN) {
+                <?php if (Session::get('role') == UMADMIN) {
                     echo "<th rowspan='2'>Ubah</th>" ;
                 } ?>
             </tr>
@@ -128,7 +128,7 @@ if (isset($this->d_nip2)) {
                             } ?>
                         
                         </td>
-                        <?php if (Session::get('role') == ADMIN) { ?>
+                        <?php if (Session::get('role') == UMADMIN) { ?>
                         <td ><a class="btn btn-default" data-toggle="modal" data-target="#modal-app-update<?php echo $no;?>" name="upd_d_user"><span class="glyphicon glyphicon-pencil"></span></a><!--&nbsp;<a href='#' class="btn btn-default"><span class="glyphicon glyphicon-trash">--></span></a></td>
 
                     </tr>

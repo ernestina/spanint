@@ -32,9 +32,13 @@ $akses['AuthUmAdmin'] = array(
 $akses['DataUMAdmin'] = array(
     '__construct',
     'monitoringUserSpan',
-    'pergantianuser',
-    'invoiceProses',
+    'monitoringUserSpan_PDF',
+    'pergantianUser',
     'addDataUserSpan',
+    'updDataUserSpan',
+    'invoiceProses',
+    'supplierProses',
+    'kontrakProses',
     '__destruct'
 );
 

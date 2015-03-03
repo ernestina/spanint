@@ -48,6 +48,10 @@ class UserSpanController extends BaseController {
             $d_kppn_list = new DataUser($this->registry);
             $kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
+        if (Session::get('role') == UMADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
             $kppn_list = $d_kppn_list->get_kppn_kanwil(Session::get('id_user'));
@@ -181,8 +185,13 @@ class UserSpanController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-
+        
         if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        
+        if (Session::get('role') == UMADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
@@ -236,7 +245,7 @@ class UserSpanController extends BaseController {
         
         $this->view->posisi_user = $d_user->get_posisi_user();
 
-        if (Session::get('role') == ADMIN) {
+        if (Session::get('role') == UMADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
@@ -265,8 +274,8 @@ class UserSpanController extends BaseController {
             $nip2 = $_POST['nip2'];
             $nama1 = $_POST['nama1'];
             $nama2 = $_POST['nama2'];
-            $email1 = $_POST['email1'];
-            $email2 = $_POST['email2'];
+            $email1 = $_POST['email1'] . "@depkeu.go.id";
+            $email2 = $_POST['email2'] . "@depkeu.go.id";
             $posisi1 = $_POST['posisi1'];
             $posisi2 = $_POST['posisi2'];
             $surat = $_POST['surat'];
@@ -288,8 +297,8 @@ class UserSpanController extends BaseController {
             $this->view->nip2 = $_POST['nip2'];
             $this->view->nama1 = $_POST['nama1'];
             $this->view->nama2 = $_POST['nama2'];
-            $this->view->email1 = $_POST['email1'];
-            $this->view->email2 = $_POST['email2'];
+            $this->view->email1 = $_POST['email1'] . "@depkeu.go.id";
+            $this->view->email2 = $_POST['email2'] . "@depkeu.go.id";
             $this->view->posisi1 = $_POST['posisi1'];
             $this->view->posisi2 = $_POST['posisi2'];
             $this->view->surat = $_POST['surat'];
@@ -332,8 +341,8 @@ class UserSpanController extends BaseController {
             $nip2 = $_POST['nip2'];
             $nama1 = $_POST['nama1'];
             $nama2 = $_POST['nama2'];
-            $email1 = $_POST['email1'];
-            $email2 = $_POST['email2'];
+            $email1 = $_POST['email1'] . "@depkeu.go.id";
+            $email2 = $_POST['email2'] . "@depkeu.go.id";
             $posisi1 = $_POST['posisi1'];
             $posisi2 = $_POST['posisi2'];
             $surat = $_POST['surat'];
@@ -422,7 +431,7 @@ class UserSpanController extends BaseController {
 
     public function addDataUserSpan($id = null) {
         
-        if (Session::get('role') == ADMIN) {
+        if (Session::get('role') == UMADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
             
@@ -528,8 +537,13 @@ class UserSpanController extends BaseController {
 		//untuk mencatat log user
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
-
+        
         if (Session::get('role') == ADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
+        
+        if (Session::get('role') == UMADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
@@ -580,6 +594,10 @@ class UserSpanController extends BaseController {
         $d_log = new DataLog($this->registry);
 		$d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
+        if (Session::get('role') == UMADMIN) {
+            $d_kppn_list = new DataUser($this->registry);
+            $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
+        }
         if (Session::get('role') == ADMIN) {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
