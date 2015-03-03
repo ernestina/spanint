@@ -130,6 +130,7 @@ $registry->auth->add_access('BA_ES1','satker',$akses['BaEs1Satker']);
 //level kppn
 $registry->auth->add_access('auth','kppn',$akses['AuthKPPN']);
 $registry->auth->add_access('home','kppn',$akses['HomeKPPN']);
+$registry->auth->add_access('dashboard','kppn',$akses['DashboardKPPN']);
 $registry->auth->add_access('dataPNBP','kppn',$akses['DataPNBPKPPN']);
 $registry->auth->add_access('dataDIPA','kppn',$akses['DataDIPAKPPN']);
 $registry->auth->add_access('dataGR','kppn',$akses['DataGRKPPN']);
@@ -169,6 +170,7 @@ $registry->auth->add_access('dataPDR','pkn',$akses['DataPDRPKN']);
 //level kanwil
 $registry->auth->add_access('auth','kanwil',$akses['AuthKanwil']);
 $registry->auth->add_access('home','kanwil',$akses['HomeKanwil']);
+$registry->auth->add_access('dashboard','kanwil',$akses['DashboardKanwil']);
 $registry->auth->add_access('dataDIPA','kanwil',$akses['DataDIPAKanwil']);
 $registry->auth->add_access('dataPDR','kanwil',$akses['DataPDRKanwil']);
 $registry->auth->add_access('dataGR','kanwil',$akses['DataGRKanwil']);
@@ -212,6 +214,7 @@ $registry->auth->add_access('PDF','bank',$akses['PDFBank']);
 //level KL
 $registry->auth->add_access('auth','kl',$akses['AuthKL']);
 $registry->auth->add_access('home','kl',$akses['HomeKL']);
+$registry->auth->add_access('dashboard','kl',$akses['DashboardKL']);
 $registry->auth->add_access('BA_ES1','kl',$akses['BaEs1KL']);
 $registry->auth->add_access('dataDIPA','kl',$akses['dataDIPAKL']);
 $registry->auth->add_access('dataSPM','kl',$akses['dataSPMKL']);
@@ -221,6 +224,7 @@ $registry->auth->add_access('dataPDR','kl',$akses['DataPDRKL']);
 //level ES1
 $registry->auth->add_access('auth','es1',$akses['AuthES1']);
 $registry->auth->add_access('home','es1',$akses['HomeES1']);
+$registry->auth->add_access('dashboard','es1',$akses['DashboardES1']);
 $registry->auth->add_access('BA_ES1','es1',$akses['BaEs1ES1']);
 $registry->auth->add_access('dataDIPA','es1',$akses['dataDIPAES1']);
 $registry->auth->add_access('dataSPM','es1',$akses['dataSPMES1']);

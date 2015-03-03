@@ -119,11 +119,11 @@
                                         
                                         <h4><?php echo ($status_tile->title); ?></h4>
 
-                                        <?php if (isset($status_tile->datasets)) { ?>
+                                        <?php if (isset($status_tile->datasets) && ($status_tile->type != 'bar')) { ?>
 
                                             <?php foreach ($status_tile->datasets as $stdid=>$stdataset) { ?>
 
-                                                <p><span class="status-pie-bullet" style="background: <?php echo $status_tile->colors[$stdid]; ?>"></span>&nbsp;&nbsp;<?php echo $stdataset->name; ?></p>
+                                                <p><span class="status-pie-bullet" style="background: <?php echo $status_tile->colors[$stdid]; ?>"></span>&nbsp;&nbsp;<?php echo $stdataset->name; ?> <?php if ($stdataset->value <> 0) { echo '(' . $stdataset->value . ')'; } ?></p>
 
                                             <?php } ?>
 
@@ -201,21 +201,30 @@
 
                                 <div class="row">
 
-                                    <div class="col-lg-8 col-md-12">
+                                    <div class="col-lg-6 col-md-12">
 
                                         <h4><?php echo ($this->content->main_tile->title); ?></h4>
 
                                     </div>
 
-                                    <div class="col-lg-4 col-md-12 align-right">
+                                    <div class="col-lg-6 col-md-12 align-right">
 
-                                        <select>
+                                    <?php if (isset($this->switchers)) { ?>
+
+                                        <select id="switcher">
                                             <option>Tampilkan data lainnya...</option>
-                                            <option>Data 1</option>
-                                            <option>Data 2</option>
+
+                                            <?php foreach($this->switchers as $swid=>$switcher) { ?>
+
+                                                <option value=<?php echo ($swid + 1); ?>><?php echo $switcher; ?></option>
+
+                                            <?php } ?>
+                                            
                                         </select>
 
                                         <div class="hidden-lg" style="height: 10px;"></div>
+
+                                    <?php } ?>
 
                                     </div>
 
@@ -239,7 +248,7 @@
 
                                 </div>
 
-                                <div class="row top-padded-little">
+                                <!--div class="row top-padded-little">
 
                                     <div class="col-md-12">
 
@@ -256,7 +265,7 @@
 
                                     </div>
 
-                                </div>
+                                </div-->
 
                             </div>
 
@@ -277,7 +286,34 @@
                         </div>
 
                         <div class="tile-content">
+
+                            <?php if (isset($this->notifications) && (count($this->notifications) > 0)) { ?>
+
+                                <?php foreach ($this->notifications as $notid=>$notification) { ?>
+
+                                    <?php
+
+                                    $notification_icon = $notification->type;
+
+                                    if ($notification->type == 'danger') {
+
+                                        $notification_icon = 'remove';
+
+                                    }
+
+                                    ?>
                             
+                                    <div class="notification-item notification-<?php echo $notification->type; ?>">
+
+                                        <div class="notification-icon"><span class="glyphicon glyphicon-<?php echo $notification_icon; ?>-sign"></span></div>
+
+                                        <div class="notification-text"><?php echo $notification->message; ?> <?php if (isset($notification->link)) { ?> <a href="<?php echo $notification->link; ?>">Selengkapnya...</a> <?php } ?></div>
+
+                                    </div>
+
+                                <?php } ?>
+
+                            <?php } ?>
 
                         </div>
 
@@ -294,6 +330,12 @@
 <?php } ?>
 
 <script type="text/javascript">
+
+$('#switcher').change(function() {
+
+    window.location.assign('<?php echo $this->baseURL; ?>' + $(this).val() + '')
+
+});
 
 rotateChart = false;
 
@@ -459,7 +501,7 @@ function generateChart() {
 
                 size: {
 
-                    height: $('#status-tile-canvas-<?php echo $stid; ?>').attr('height')
+                    height: $('#status-tile-canvas-<?php echo $stid; ?>').attr('height') - 10
 
                 }
 
@@ -495,17 +537,17 @@ function generateChart() {
                     show: false
                 },
 
-                <?php if (isset($this->content->main_tile->colors)) { ?>
+                <?php if (isset($status_tile->colors)) { ?>
 
                     color: {
 
                         pattern: [
 
-                            <?php foreach ($this->content->main_tile->colors as $mccol=>$mcolors) { ?>
+                            <?php foreach ($status_tile->colors as $stcol=>$stcolors) { ?>
 
-                                <?php if ($mccol > 0) { echo ','; } ?>
+                                <?php if ($stcol > 0) { echo ','; } ?>
 
-                                <?php echo "'" . $mcolors . "'" ?>
+                                <?php echo "'" . $stcolors . "'" ?>
 
                             <?php } ?>
 
@@ -520,6 +562,97 @@ function generateChart() {
                         format: function (value, ratio, id) {
                             return;
                         }
+                    }
+                },
+
+                size: {
+
+                    height: $('#status-tile-canvas-<?php echo $stid; ?>').attr('height')
+
+                }
+
+            });
+
+        <?php } else if ($status_tile->type == 'bar') { ?>
+
+            var statchart<?php echo $stid; ?> = c3.generate({
+
+                bindto: '#status-tile-canvas-<?php echo $stid; ?>',
+
+                data: {
+                    columns: [
+
+                        <?php foreach ($status_tile->datasets as $stdid=>$stdataset) { ?>
+
+                            <?php if ($stdid > 0) { echo ','; } ?>
+
+                            [
+
+                                <?php if (isset($stdataset->name)) { echo "'" . $stdataset->name . "', "; } ?>
+
+                                <?php foreach ($stdataset->values as $stdv=>$stdatasetvalue) { ?>
+
+                                    <?php if ($stdv > 0) { echo ','; } ?>
+
+                                    <?php echo $stdatasetvalue; ?>
+
+                                <?php } ?>
+
+                            ]
+
+                        <?php } ?>
+
+                    ],
+                    type: 'bar'
+                },
+
+                axis: {
+
+                    rotated: true,
+
+                    <?php if (isset($status_tile->categories)) { ?>
+
+                        x: {
+                            type: 'category',
+                            categories: [
+
+                                <?php foreach ($status_tile->categories as $stcatid=>$stcategory) { ?>
+
+                                    <?php if ($stcatid > 0) { echo ','; } ?>
+
+                                    <?php echo "'" . $stcategory . "'" ?>
+
+                                <?php } ?>
+
+                            ]
+                        }
+
+                    <?php } ?>
+                },
+
+                <?php if (isset($status_tile->colors)) { ?>
+
+                color: {
+
+                    pattern: [
+
+                        <?php foreach ($status_tile->colors as $stcol=>$stcolor) { ?>
+
+                            <?php if ($stcol > 0) { echo ','; } ?>
+
+                            <?php echo "'" . $stcolor . "'" ?>
+
+                        <?php } ?>
+
+                        ]
+
+                },
+
+                <?php } ?>
+
+                bar: {
+                    width: {
+                        ratio: 0.8
                     }
                 },
 

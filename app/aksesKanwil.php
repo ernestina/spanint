@@ -14,7 +14,14 @@ $akses['HomeKanwil'] = array(
     '__destruct'
 );
 
-
+$akses['DashboardKanwil'] = array(
+    '__construct',
+    'index',
+    'overviewKanwil',
+    'overviewKPPN',
+    'overviewSatker',
+    '__destruct'
+);
 
 /*
  * akses modul auth

@@ -15,6 +15,39 @@ class DataOverview {
 
     private $_nilai_kontrak;
     private $_pencairan;
+
+    private $_sisa_hari_up;
+    private $_sisa_hari_tup;
+
+    private $_retur_sudah_proses;
+    private $_retur_belum_proses;
+
+    private $_belanja_51;
+    private $_belanja_52;
+    private $_belanja_53;
+    private $_belanja_54;
+    private $_belanja_55;
+    private $_belanja_56;
+    private $_belanja_57;
+    private $_belanja_58;
+    private $_belanja_59;
+    private $_belanja_71;
+    private $_belanja_61;
+
+    private $_pagu_51;
+    private $_pagu_52;
+    private $_pagu_53;
+    private $_pagu_54;
+    private $_pagu_55;
+    private $_pagu_56;
+    private $_pagu_57;
+    private $_pagu_58;
+    private $_pagu_59;
+    private $_pagu_71;
+    private $_pagu_61;
+
+    private $_penerimaan_41;
+    private $_penerimaan_42;
     
     private $_table1 = 'PROSES_REVISI';
     private $_table2 = 'T_SATKER';
@@ -24,6 +57,10 @@ class DataOverview {
     private $_table6 = 'AP_INVOICES_ALL_V';
     private $_table7 = 'ENCUMBRANCES';
     private $_table8 = 'GL_CODE_COMBINATIONS';
+    private $_table9 = 'KARWAS_UP_V';
+    private $_table10 = 'RETUR_SPAN_V';
+    private $_table11 = 'T_KPPN';
+    private $_table12 = 'KARWAS_TUP_V';
     
     public $registry;
     
@@ -42,18 +79,159 @@ class DataOverview {
         
     }
 
-    //Kontrak
+    //Details
 
-    public function fetchStatusRealisasiKontrak($filter=null) {
+    public function get_realisasi_numbers_dash_filter($filter=null) {
+        
+        $sql = "select sum(decode(substr(a.akun,1,2),'51',a.actual_amt,0)) belanja_51
+                , sum(decode(substr(a.akun,1,2),'52',a.actual_amt,0)) belanja_52
+                , sum(decode(substr(a.akun,1,2),'53',a.actual_amt,0)) belanja_53
+                , sum(decode(substr(a.akun,1,2),'54',a.actual_amt,0)) belanja_54
+                , sum(decode(substr(a.akun,1,2),'55',a.actual_amt,0)) belanja_55
+                , sum(decode(substr(a.akun,1,2),'56',a.actual_amt,0)) belanja_56
+                , sum(decode(substr(a.akun,1,2),'57',a.actual_amt,0)) belanja_57
+                , sum(decode(substr(a.akun,1,2),'58',a.actual_amt,0)) belanja_58
+                , sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
+                , sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
+                , sum(decode(substr(a.akun,1,2),'41',a.actual_amt,0)) penerimaan_41
+                , sum(decode(substr(a.akun,1,2),'42',a.actual_amt,0)) penerimaan_42
+                FROM "
+                . $this->_table3 . " a,"
+                . $this->_table2 . " b 
+                where 1=1
+                and a.budget_type = '2' 
+                and a.satker=b.kdsatker 
+                and a.kppn=b.kppn
+                AND SUBSTR(a.akun,1,1) in ('4','5','6')
+                and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) <> 0
+                
+                "
+        ;
+        
+        $no = 0;
 
-        $sql = "SELECT A.SEGMENT1, 
-                    SUM(B.ENCUMBERED_AMOUNT) NILAI_KONTRAK, 
-                    SUM(B.EQ_AMOUNT_BILLED) PENCAIRAN 
+        if (isset($filter)) {
 
-                FROM " . $this->_table8 ." A, 
-                    " . $this->_table7 ." B 
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
 
-                WHERE A.CODE_COMBINATION_ID = B.CODE_COMBINATION_ID ";
+        }
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+
+            $d_data->set_belanja_51($val['BELANJA_51']);
+            $d_data->set_belanja_52($val['BELANJA_52']);
+            $d_data->set_belanja_53($val['BELANJA_53']);
+            $d_data->set_belanja_54($val['BELANJA_54']);
+            $d_data->set_belanja_55($val['BELANJA_55']);
+            $d_data->set_belanja_56($val['BELANJA_56']);
+            $d_data->set_belanja_57($val['BELANJA_57']);
+            $d_data->set_belanja_58($val['BELANJA_58']);
+            $d_data->set_belanja_59($val['BELANJA_59']);
+            $d_data->set_belanja_61($val['BELANJA_61']);
+
+            $d_data->set_penerimaan_41($val['PENERIMAAN_41']);
+            $d_data->set_penerimaan_42($val['PENERIMAAN_42']);
+
+            $data[] = $d_data;
+        }
+
+        return $data;
+
+    }
+
+    public function get_realisasi_dash_filter($filter=null) {
+        Session::get('id_user');
+        $sql = "select sum(decode(substr(a.akun,1,2),'51',a.budget_amt,0)) pagu_51
+                , sum(decode(substr(a.akun,1,2),'52',a.budget_amt,0)) pagu_52
+                , sum(decode(substr(a.akun,1,2),'53',a.budget_amt,0)) pagu_53
+                , sum(decode(substr(a.akun,1,2),'54',a.budget_amt,0)) pagu_54
+                , sum(decode(substr(a.akun,1,2),'55',a.budget_amt,0)) pagu_55
+                , sum(decode(substr(a.akun,1,2),'56',a.budget_amt,0)) pagu_56
+                , sum(decode(substr(a.akun,1,2),'57',a.budget_amt,0)) pagu_57
+                , sum(decode(substr(a.akun,1,2),'58',a.budget_amt,0)) pagu_58
+                , sum(decode(substr(a.akun,1,2),'59',a.budget_amt,0)) pagu_59
+                , sum(decode(substr(a.akun,1,1),'6',a.budget_amt,0)) pagu_61
+                , sum(decode(substr(a.akun,1,2),'51',a.actual_amt,0)) belanja_51
+                , sum(decode(substr(a.akun,1,2),'52',a.actual_amt,0)) belanja_52
+                , sum(decode(substr(a.akun,1,2),'53',a.actual_amt,0)) belanja_53
+                , sum(decode(substr(a.akun,1,2),'54',a.actual_amt,0)) belanja_54
+                , sum(decode(substr(a.akun,1,2),'55',a.actual_amt,0)) belanja_55
+                , sum(decode(substr(a.akun,1,2),'56',a.actual_amt,0)) belanja_56
+                , sum(decode(substr(a.akun,1,2),'57',a.actual_amt,0)) belanja_57
+                , sum(decode(substr(a.akun,1,2),'58',a.actual_amt,0)) belanja_58
+                , sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
+                , sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
+                FROM "
+                . $this->_table3 . " a,"
+                . $this->_table2 . " b 
+                where 1=1
+                and a.budget_type = '2' 
+                and a.satker=b.kdsatker 
+                and a.kppn=b.kppn
+                AND SUBSTR(a.akun,1,1) in ('5','6')
+                and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) <> 0
+                
+                "
+        ;
+
+        $no = 0;
+
+        if (isset($filter)) {
+
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+
+        }
+
+        //var_dump ($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+
+            $d_data->set_pagu_51($val['PAGU_51']);
+            $d_data->set_pagu_52($val['PAGU_52']);
+            $d_data->set_pagu_53($val['PAGU_53']);
+            $d_data->set_pagu_54($val['PAGU_54']);
+            $d_data->set_pagu_55($val['PAGU_55']);
+            $d_data->set_pagu_56($val['PAGU_56']);
+            $d_data->set_pagu_57($val['PAGU_57']);
+            $d_data->set_pagu_58($val['PAGU_58']);
+            $d_data->set_pagu_59($val['PAGU_59']);
+            $d_data->set_pagu_61($val['PAGU_61']);
+
+            $d_data->set_belanja_51($val['BELANJA_51']);
+            $d_data->set_belanja_52($val['BELANJA_52']);
+            $d_data->set_belanja_53($val['BELANJA_53']);
+            $d_data->set_belanja_54($val['BELANJA_54']);
+            $d_data->set_belanja_55($val['BELANJA_55']);
+            $d_data->set_belanja_56($val['BELANJA_56']);
+            $d_data->set_belanja_57($val['BELANJA_57']);
+            $d_data->set_belanja_58($val['BELANJA_58']);
+            $d_data->set_belanja_59($val['BELANJA_59']);
+            $d_data->set_belanja_61($val['BELANJA_61']);
+
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+
+    //SP2D
+
+    public function fetchStatusRetur($filter=null) {
+
+        $sql = "SELECT      STATUS_RETUR,
+                            COUNT(STATUS_RETUR) JUMLAH
+                FROM        " . $this->_table10 . " 
+                WHERE 1=1 ";
 
         if (isset($filter)) {
             foreach ($filter as $filter) {
@@ -61,7 +239,90 @@ class DataOverview {
             }
         }
 
-        $sql .= "GROUP BY A.SEGMENT1";
+        $sql .= " GROUP BY STATUS_RETUR ";
+
+        //echo($sql);
+
+        $result = $this->db->select($sql);
+
+        $data = new $this($this->registry);
+
+        $data->set_retur_sudah_proses(0);
+        $data->set_retur_belum_proses(0);
+        
+        foreach ($result as $val) {
+
+            if ($val["STATUS_RETUR"] == "SUDAH PROSES") {
+                $data->set_retur_sudah_proses($data->get_retur_sudah_proses() + $val["JUMLAH"]);
+            } else {
+                $data->set_retur_belum_proses($data->get_retur_belum_proses() + $val["JUMLAH"]);
+            }
+
+        }
+        
+        return $data;
+
+    }
+
+    //UP
+
+    public function fetchTimerUP($filter=null) {
+
+        $sql = "SELECT (TO_DATE(BATAS_TEGURAN, 'DD-MM-YYYY') - TO_DATE('20150302', 'YYYYMMDD')) SISA_HARI
+                FROM " . $this->_table9 . " 
+                WHERE 1=1 ";
+
+        $sql2 = "SELECT SISA_HARI 
+                 FROM " . $this->_table12 . " 
+                 WHERE SISA > 0 ";
+
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+                $sql2 .= " AND " . $filter;
+            }
+        }
+
+        $result = $this->db->select($sql);
+        $result2 = $this->db->select($sql2);
+
+        $data = new $this($this->registry);
+        
+        foreach ($result as $val) {
+            $data->set_sisa_hari_up($val["SISA_HARI"]);
+        }
+
+        foreach ($result2 as $val) {
+            $data->set_sisa_hari_tup($val["SISA_HARI"]);
+        }
+
+        //var_dump($data);
+        
+        return $data;
+
+    }
+
+    //Kontrak
+
+    public function fetchStatusRealisasiKontrak($filter=null) {
+
+        $sql = "SELECT 
+                    SUM(B.ENCUMBERED_AMOUNT) NILAI_KONTRAK, 
+                    SUM(B.EQ_AMOUNT_BILLED) PENCAIRAN 
+
+                FROM " . $this->_table8 ." A, 
+                    " . $this->_table7 ." B 
+
+                WHERE A.CODE_COMBINATION_ID = B.CODE_COMBINATION_ID 
+                AND NEED_BY_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') 
+                AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD') ";
+
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
 
         //echo ($sql);
 
@@ -89,7 +350,8 @@ class DataOverview {
 
         $sql = "SELECT STATUS, COUNT(STATUS) JUMLAH 
                 FROM " . $this->_table6 . " 
-                WHERE 1=1 ";
+                WHERE CREATION_DATE BETWEEN TO_DATE ('".Session::get('ta')."0101','YYYYMMDD') 
+                AND TO_DATE ('".Session::get('ta')."1231','YYYYMMDD')";
 
         if (isset($filter)) {
             foreach ($filter as $filter) {
@@ -131,7 +393,7 @@ class DataOverview {
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
-                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) <> 0
                 "
         ;
         
@@ -721,6 +983,138 @@ class DataOverview {
         $this->_pencairan = $pencairan;    
     }
 
+    private function set_total_up($total_up) {
+        $this->_total_up = $total_up;    
+    }
+
+    private function set_pemakaian_up($pemakaian_up) {
+        $this->_pemakaian_up = $pemakaian_up;    
+    }
+
+    private function set_sp2d_sukses($sp2d_sukses) {
+        $this->_sp2d_sukses = $sp2d_sukses;    
+    }
+
+    private function set_sp2d_tunggu($sp2d_tunggu) {
+        $this->_sp2d_tunggu = $sp2d_tunggu;    
+    }
+
+    private function set_sp2d_lainnya($sp2d_lainnya) {
+        $this->_sp2d_lainnya = $sp2d_lainnya;    
+    }
+
+    public function set_retur_sudah_proses($retur_sudah_proses) {
+        $this->_retur_sudah_proses = $retur_sudah_proses;
+    }
+
+    public function set_retur_belum_proses($retur_belum_proses) {
+        $this->_retur_belum_proses = $retur_belum_proses;
+    }
+
+    public function set_sisa_hari_up($sisa_hari_up) {
+        $this->_sisa_hari_up = $sisa_hari_up;
+    }
+
+    public function set_sisa_hari_tup($sisa_hari_tup) {
+        $this->_sisa_hari_tup = $sisa_hari_tup;
+    }
+
+    public function set_pagu_51($pagu_51) {
+        $this->_pagu_51 = $pagu_51;
+    }
+
+    public function set_pagu_52($pagu_52) {
+        $this->_pagu_52 = $pagu_52;
+    }
+
+    public function set_pagu_53($pagu_53) {
+        $this->_pagu_53 = $pagu_53;
+    }
+
+    public function set_pagu_54($pagu_54) {
+        $this->_pagu_54 = $pagu_54;
+    }
+
+    public function set_pagu_55($pagu_55) {
+        $this->_pagu_55 = $pagu_55;
+    }
+
+    public function set_pagu_56($pagu_56) {
+        $this->_pagu_56 = $pagu_56;
+    }
+
+    public function set_pagu_57($pagu_57) {
+        $this->_pagu_57 = $pagu_57;
+    }
+
+    public function set_pagu_58($pagu_58) {
+        $this->_pagu_58 = $pagu_58;
+    }
+
+    public function set_pagu_59($pagu_59) {
+        $this->_pagu_59 = $pagu_59;
+    }
+
+    public function set_pagu_71($pagu_71) {
+        $this->_pagu_71 = $pagu_71;
+    }
+
+    public function set_pagu_61($pagu_61) {
+        $this->_pagu_61 = $pagu_61;
+    }
+
+    public function set_belanja_51($belanja_51) {
+        $this->_belanja_51 = $belanja_51;
+    }
+
+    public function set_belanja_52($belanja_52) {
+        $this->_belanja_52 = $belanja_52;
+    }
+
+    public function set_belanja_53($belanja_53) {
+        $this->_belanja_53 = $belanja_53;
+    }
+
+    public function set_belanja_54($belanja_54) {
+        $this->_belanja_54 = $belanja_54;
+    }
+
+    public function set_belanja_55($belanja_55) {
+        $this->_belanja_55 = $belanja_55;
+    }
+
+    public function set_belanja_56($belanja_56) {
+        $this->_belanja_56 = $belanja_56;
+    }
+
+    public function set_belanja_57($belanja_57) {
+        $this->_belanja_57 = $belanja_57;
+    }
+
+    public function set_belanja_58($belanja_58) {
+        $this->_belanja_58 = $belanja_58;
+    }
+
+    public function set_belanja_59($belanja_59) {
+        $this->_belanja_59 = $belanja_59;
+    }
+
+    public function set_belanja_71($belanja_71) {
+        $this->_belanja_71 = $belanja_71;
+    }
+
+    public function set_belanja_61($belanja_61) {
+        $this->_belanja_61 = $belanja_61;
+    }
+
+    public function set_penerimaan_41($penerimaan_41) {
+        $this->_penerimaan_41 = $penerimaan_41;
+    }
+
+    public function set_penerimaan_42($penerimaan_42) {
+        $this->_penerimaan_42 = $penerimaan_42;
+    }
+
     //Get
     
     public function get_ba() {
@@ -757,6 +1151,138 @@ class DataOverview {
 
     public function get_pencairan() {
         return $this->_pencairan;    
+    }
+
+    public function get_total_up() {
+        return $this->_total_up;    
+    }
+
+    public function get_pemakaian_up() {
+        return $this->_pemakaian_up;    
+    }
+
+    public function get_sp2d_sukses() {
+        return $this->_sp2d_sukses;    
+    }
+
+    public function get_sp2d_tunggu() {
+        return $this->_sp2d_tunggu;    
+    }
+
+    public function get_sp2d_lainnya() {
+        return $this->_sp2d_lainnya;    
+    }
+
+    public function get_retur_sudah_proses() {
+        return $this->_retur_sudah_proses;
+    }
+
+    public function get_retur_belum_proses() {
+        return $this->_retur_belum_proses;
+    }
+
+    public function get_sisa_hari_up() {
+        return $this->_sisa_hari_up;
+    }
+
+    public function get_sisa_hari_tup() {
+        return $this->_sisa_hari_tup;
+    }
+
+    public function get_pagu_51() {
+        return $this->_pagu_51;
+    }
+
+    public function get_pagu_52() {
+        return $this->_pagu_52;
+    }
+
+    public function get_pagu_53() {
+        return $this->_pagu_53;
+    }
+
+    public function get_pagu_54() {
+        return $this->_pagu_54;
+    }
+
+    public function get_pagu_55() {
+        return $this->_pagu_55;
+    }
+
+    public function get_pagu_56() {
+        return $this->_pagu_56;
+    }
+
+    public function get_pagu_57() {
+        return $this->_pagu_57;
+    }
+
+    public function get_pagu_58() {
+        return $this->_pagu_58;
+    }
+
+    public function get_pagu_59() {
+        return $this->_pagu_59;
+    }
+
+    public function get_pagu_71() {
+        return $this->_pagu_71;
+    }
+
+    public function get_pagu_61() {
+        return $this->_pagu_61;
+    }
+
+    public function get_belanja_51() {
+        return $this->_belanja_51;
+    }
+
+    public function get_belanja_52() {
+        return $this->_belanja_52;
+    }
+
+    public function get_belanja_53() {
+        return $this->_belanja_53;
+    }
+
+    public function get_belanja_54() {
+        return $this->_belanja_54;
+    }
+
+    public function get_belanja_55() {
+        return $this->_belanja_55;
+    }
+
+    public function get_belanja_56() {
+        return $this->_belanja_56;
+    }
+
+    public function get_belanja_57() {
+        return $this->_belanja_57;
+    }
+
+    public function get_belanja_58() {
+        return $this->_belanja_58;
+    }
+
+    public function get_belanja_59() {
+        return $this->_belanja_59;
+    }
+
+    public function get_belanja_71() {
+        return $this->_belanja_71;
+    }
+
+    public function get_belanja_61() {
+        return $this->_belanja_61;
+    }
+
+    public function get_penerimaan_41() {
+        return $this->_penerimaan_41;
+    }
+
+    public function get_penerimaan_42() {
+        return $this->_penerimaan_42;
     }
     
     public function __destruct() {

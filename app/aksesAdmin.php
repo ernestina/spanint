@@ -25,6 +25,11 @@ $akses['DashboardAdmin'] = array(
     '__construct',
     'index',
     'overviewAdmin',
+    'overviewKanwil',
+    'overviewKPPN',
+    'overviewSatker',
+    'overviewKL',
+    'overviewES1',
     '__destruct'
 );
 
