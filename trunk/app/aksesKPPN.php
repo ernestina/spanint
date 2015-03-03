@@ -16,6 +16,17 @@ $akses['HomeKPPN'] = array(
 );
 
 /*
+ * akses modul Dash
+ */
+$akses['DashboardKPPN'] = array(
+        '__construct',
+        'index',
+        'overviewKPPN',
+        'overviewSatker',
+        '__destruct'
+);
+
+/*
  * akses PNBP
  */
 $akses['DataPNBPKPPN'] = array(
@@ -27,7 +38,6 @@ $akses['DataPNBPKPPN'] = array(
     'DetailBelanjaPNBP',
     '__destruct'
 );
-
 
 /*
  * akses modul auth

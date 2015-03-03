@@ -14,6 +14,16 @@ $akses['HomeES1'] = array(
     '__destruct'
 );
 
+/*
+ * akses modul Dash
+ */
+$akses['DashboardES1'] = array(
+        '__construct',
+        'index',
+        'overviewES1',
+        'overviewSatker',
+        '__destruct'
+);
 
 /*
  * akses modul auth

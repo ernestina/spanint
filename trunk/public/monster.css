@@ -1,6 +1,77 @@
 /* Let's make use of our framework, and minimize our own CSS */
 
 /*Template-only CSS*/
+.notification-icon {
+    display: table-cell;
+    font-size: 16px;
+    padding-right: 10px;
+}
+
+.notification-text {
+    display: table-cell;
+    font-size: 12px;
+    vertical-align: middle;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.notification-text a {
+    padding: 2px 7px;
+    border-radius: 3px;
+    text-decoration: none;
+    background: #333;
+    color: #fff;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.notification-item {
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    padding: 7px;
+}
+
+.notification-neutral {
+    border: 1px solid #e5e5e5;
+}
+
+.notification-info {
+    border: 1px solid #0077B6;
+    background: #99CCFF;
+    color: #0077B6;
+}
+
+.notification-info a {
+    background: #0077B6;
+    color: #99CCFF;;
+}
+
+.notification-warning {
+    border: 1px solid #FFA700;
+    background: #FFFFCC;
+    color: #FFA700;
+}
+
+.notification-warning a {
+    background: #FFA700;
+    color: #FFFFCC;;
+}
+
+.notification-danger {
+    border: 1px solid #CC3333;
+    color: #CC3333;
+    background: #FFCCCC;
+}
+
+.notification-danger a {
+    background: #CC3333;
+    color: #FFCCCC;;
+}
+
 .header-parameters {
     margin-top: 5px;
     display: inline-block;
