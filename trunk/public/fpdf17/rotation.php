@@ -95,6 +95,8 @@ function _endpage()
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'ADMIN') { //1
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
+        } elseif (substr(trim($nm_kppn), 0, 5) == 'BADAN') { //1
+            $this->MultiCell(0, $h1 / 2, $nm_kppn);
         } elseif (substr(trim($nm_kppn), 0, 5) == 'Direktorat') { //6
             $this->MultiCell(0, $h1 / 2, $nm_kppn);
         }elseif (substr(trim($nm_kppn), 0, 4) == 'BANK') { //6
