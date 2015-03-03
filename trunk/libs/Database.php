@@ -50,7 +50,7 @@ class Database extends PDO {
 
         $sql = "UPDATE $table SET $field WHERE $wheres";
 
-//        echo $sql;
+        //echo $sql;
         $sth = $this->prepare($sql);
 
         foreach ($data as $key => $value) {
@@ -59,6 +59,7 @@ class Database extends PDO {
 
         $sth->execute();
         $sth = $this->prepare("commit;");
+        $sth->execute();
 
         return true;
     }

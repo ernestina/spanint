@@ -325,8 +325,9 @@ class UserSpanController extends BaseController {
         }
         
         if (isset($_POST['update_d_user'])) {
+            
             $no_id = $_POST['no_id'];
-            $kdkppn = $_POST['kode_unit'];
+            $kdkppn = $_POST['kdkppn'];
             $nip1 = $_POST['nip1'];
             $nip2 = $_POST['nip2'];
             $nama1 = $_POST['nama1'];
@@ -335,12 +336,18 @@ class UserSpanController extends BaseController {
             $email2 = $_POST['email2'];
             $posisi1 = $_POST['posisi1'];
             $posisi2 = $_POST['posisi2'];
+            $surat = $_POST['surat'];
             $tanggal_awal = $_POST['tanggal_awal'];
-            $tanggal_akhir = $_POST['tanggal_akhir'];
+            if(isset($_POST['tanggal_akhir'])){
+                $tanggal_akhir = $_POST['tanggal_akhir'];  
+                $this->view->tanggal_akhir = $_POST['tanggal_akhir'];  
+            }
             $status1 = $_POST['status1'];
             $status2 = $_POST['status2'];
-            $surat = $_POST['surat'];
-            $catatan = $_POST['catatan'];
+            if (isset($_POST['catatan'])){
+                $catatan = $_POST['catatan'];
+                $this->view->catatan = $_POST['catatan'];
+            }
             
             
             $d_user->set_no_id($no_id);
@@ -365,9 +372,9 @@ class UserSpanController extends BaseController {
             
             if (!$d_user->update_d_user()) {
                 $this->view->update_d_user = $d_user;
-                $this->view->error = $d_user->get_error();
-                $this->view->data = $d_user->get_d_user();
-                //$this->view->render('kppn/gantiUserSpan');
+                //$this->view->error = $d_user->get_error();
+                $this->view->data = $d_user->update_d_user();
+                $this->view->render('kppn/gantiUserSpan');
             }
         }
 
@@ -511,56 +518,6 @@ class UserSpanController extends BaseController {
         }
         $this->view->data = $d_user->get_ganti_user($filter);
         $this->view->render('kppn/gantiUserSpan');
-    }
-    
-    public function updDataUserSpan($no_id = null) {
-        $d_user = new DataUserSPAN($this->registry);
-        if (isset($_POST['update_d_user'])) {
-            $no_id = $_POST['no_id'];
-            $kdkppn = $_POST['kode_unit'];
-            $nip1 = $_POST['nip1'];
-            $nip2 = $_POST['nip2'];
-            $nama1 = $_POST['nama1'];
-            $nama2 = $_POST['nama2'];
-            $email1 = $_POST['email1'];
-            $email2 = $_POST['email2'];
-            $posisi1 = $_POST['posisi1'];
-            $posisi2 = $_POST['posisi2'];
-            $tanggal_awal = $_POST['tanggal_awal'];
-            $tanggal_akhir = $_POST['tanggal_akhir'];
-            $status1 = $_POST['status1'];
-            $status2 = $_POST['status2'];
-            $surat = $_POST['surat'];
-            $catatan = $_POST['catatan'];
-            
-            
-            $d_user->set_no_id($no_id);
-            $d_user->set_kode_unit($kdkppn);
-            
-            $d_user->set_nama_usr_awal($nama1);
-            $d_user->set_nip_usr_awal($nip1);
-            $d_user->set_email_usr_awal($email1);
-            $d_user->set_posisi_user_awal($posisi1);
-            
-            $d_user->set_nama_usr_pengganti($nama2);
-            $d_user->set_nip_usr_pengganti($nip2);
-            $d_user->set_email_usr_pengganti($email2);
-            $d_user->set_posisi_user_pengganti($posisi2);
-            
-            $d_user->set_tanggal_awal($tanggal_awal);
-            $d_user->set_tanggal_akhir($tanggal_akhir);
-            $d_user->set_surat($surat);
-            $d_user->set_status_setup_awal($status1);
-            $d_user->set_status_setup_akhir($status2);
-            $d_user->set_catatan($catatan);
-            
-            if (!$d_user->update_d_user()) {
-                $this->view->d_ubah = $d_user;
-                $this->view->error = $d_user->get_error();
-                $this->view->data = $d_user->get_d_user();
-                $this->view->render('kppn/gantiUserSpan');
-            }
-        }
     }
     
     public function kontrakProses($kdkppn=null) {
