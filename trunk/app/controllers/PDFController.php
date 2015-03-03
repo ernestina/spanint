@@ -262,14 +262,16 @@ class PDFController extends BaseController {
             $filter[$no++] = " OUTPUT =  '" . $kdoutput . "'";
         }
 
-        if ($kdakun != 'null' AND $kf == '2') {
-            $filter[$no++] = " AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun1 . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun1 . "') 
-			AND AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '" . $kdakun . "')";
+		if ($kdakun != 'null' AND $kf == '2') {
+            $filter[$no++] = " AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun . "') 
+			AND AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE CHILD_FROM IS NOT NULL AND VALUE <> '" . $kdakun . "')";
+            $this->view->account_code = $akun;
         } elseif ($kdakun != 'null' AND $kf == '1') {
-            $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun1 . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun1 . "') 
-			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE VALUE != '" . $kdakun . "')";
+            $filter[$no++] = " A.AKUN BETWEEN  (SELECT MIN(CHILD_FROM)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun . "') AND (SELECT MAX(CHILD_TO)  FROM T_AKUN_CONTROL WHERE VALUE = '" . $kdakun . "') 
+			AND A.AKUN NOT IN(SELECT CHILD_FROM FROM T_AKUN_CONTROL WHERE  CHILD_FROM IS NOT NULL and VALUE <> '" . $kdakun . "')";
+            $this->view->account_code = $akun;
         }
-        
+
         
         if (Session::get('role') == KANWIL) {
             $d_kppn_list = new DataUser($this->registry);
