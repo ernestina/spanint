@@ -196,7 +196,7 @@ class DataKarwasUP {
                 . $this->_table4 . " 
 				WHERE 
 				1=1 
-				
+				AND SISA <> 0
 				"
 
         ;
@@ -237,7 +237,7 @@ class DataKarwasUP {
 				WHERE 
 				1=1 
 				AND A.SATKER_CODE = B.KDSATKER
-				
+				AND A.SISA <> 0
 				"
 
         ;
@@ -409,7 +409,7 @@ class DataKarwasUP {
                 . $this->_table4 . " 
 				WHERE 
 				1=1 
-				
+				AND SISA <> 0
 				"
 
         ;
@@ -440,7 +440,7 @@ class DataKarwasUP {
 				WHERE 
 				1=1 
 				AND A.SATKER_CODE = B.KDSATKER
-				
+				AND SISA <> 0
 				"
 
         ;
