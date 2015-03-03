@@ -145,7 +145,7 @@ if (isset($this->d_nip2)) {
                 <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-headphones"></span> Update Data</h4>
 
             </div>
-<!--test--> <?php  echo $value->get_no_id();?>
+<!--test--> <?php  //echo $value->get_no_id();?>
             
             <form id="filter-form" method="POST" action="pergantianUser" enctype="multipart/form-data">
 
@@ -230,7 +230,7 @@ if (isset($this->d_nip2)) {
                     <input class="form-control" type="text" name="surat" id="surat0" size="18" value="<?php echo $value->get_surat()?>">
                     
                     <label class="isian">Tanggal: </label>
-                    <div class="input-daterange input-group" id="datepicker0" style="width: 100%">
+                    <div class="input-daterange input-group" id="datepicker" style="width: 100%">
                         <input class="form-control" type="text" class="tanggal" name="tanggal_awal" id="tanggal_1" value="<?php echo $value->get_tanggal_awal(); ?>">
                         <span class="input-group-addon">s.d.</span>
                         <input class="form-control" type="text" class="tanggal" name="tanggal_akhir" id="tanggal_2" value="<?php echo $value->get_tanggal_akhir(); ?>">
@@ -634,6 +634,90 @@ if (isset($this->d_nip2)) {
                 $('#warning-all').fadeOut(200);
             }
         });
+        
+        $('#kdkppn0').change(function() {
+            if (document.getElementById('kdkppn0').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#nip_1').keyup(function() {
+            if (document.getElementById('nip_1').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#nip_2').keyup(function() {
+            if (document.getElementById('nip_2').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#nama_1').keyup(function() {
+            if (document.getElementById('nama_1').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#nama_2').keyup(function() {
+            if (document.getElementById('nama_2').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#email_1').keyup(function() {
+            if (document.getElementById('email_1').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#email_2').keyup(function() {
+            if (document.getElementById('email_2').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#status_1').change(function() {
+            if (document.getElementById('status_1').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#status_2').change(function() {
+            if (document.getElementById('status_2').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#posisi_1').change(function() {
+            if (document.getElementById('posisi_1').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#posisi_2').change(function() {
+            if (document.getElementById('posisi_2').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#tanggal_1').change(function() {
+            if (document.getElementById('tanggal_1').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#tanggal_2').change(function() {
+            if (document.getElementById('tanggal_2').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
+        
+        $('#surat0').keyup(function() {
+            if (document.getElementById('surat0').value != '') {
+                $('#warning0').fadeOut(200);
+            }
+        });
 
     }
 
@@ -683,6 +767,58 @@ if (isset($this->d_nip2)) {
             if(v_tgl_awal > v_tgl_akhir){
                 $('#warning-all').html('Tanggal awal gak boleh lebih dari tanggal akhir');
                 $('#warning-all').fadeIn(200);
+                return false;
+            }
+        }
+
+    }
+    
+    function cek_upload2() {
+        
+        var v_nip1 = document.getElementById('nip_1').value;
+        var v_nip2 = document.getElementById('nip_2').value;
+        var v_nama1 = document.getElementById('nama_1').value;
+        var v_nama2 = document.getElementById('nama_2').value;
+        var v_email1 = document.getElementById('email_1').value;
+        var v_email2 = document.getElementById('email_2').value;
+        var v_posisi1 = document.getElementById('posisi_1').value;
+        var v_posisi2 = document.getElementById('posisi_2').value;
+        var v_tanggal_awal = document.getElementById('tanggal_1').value;
+        var v_tanggal_akhir = document.getElementById('tanggal_2').value;
+        var v_status1 = document.getElementById('status_1').value;
+        var v_status2 = document.getElementById('status_2').value;
+        var v_surat = document.getElementById('surat0').value;
+        var v_kdkppn = document.getElementById('kdkppn0').value;
+        
+
+        var pattern = '^[0-9]+$';
+        
+        if (v_kdkppn == '' || v_nip1 == '' || v_nip2 == '' || v_nama1 == '' || v_nama2 == '' || v_email1 == '' || v_email2 == '' || v_posisi1 == '' || v_posisi2 == '' || v_tanggal_awal == '' || v_tanggal_akhir == '' || v_status1 == '' || v_status2 == '' || v_surat == '') {
+            
+            $('#warning0').html('Isi semua parameter, cuy');
+            $('#warning0').fadeIn(200);
+            return false;
+            
+        }
+        
+        if ((v_nip1 != '' && v_nip1.length != 18) || (v_nip2 != '' && v_nip2.length != 18)) {
+            $('#warning0').html('NIP harus 18 digit, dong!');
+            $('#warning0').fadeIn(200);
+            return false;
+
+        }
+
+        if (v_nip1 != '' && !v_nip1.match(pattern)) {
+            var wsp2d = 'NIP harus dalam bentuk angka!';
+            $('#warning0').html(wsp2d);
+            $('#warning0').fadeIn(200);
+            return false;
+        }
+
+        if (v_tgl_awal != '' && v_tgl_akhir != ''){
+            if(v_tgl_awal > v_tgl_akhir){
+                $('#warning0').html('Tanggal awal gak boleh lebih dari tanggal akhir');
+                $('#warning0').fadeIn(200);
                 return false;
             }
         }
