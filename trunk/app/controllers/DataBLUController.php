@@ -311,7 +311,7 @@ class DataBLUController extends BaseController {
 
         $d_log->tambah_log("Sukses");
 
-        $this->view->render('BLU/RealisasiBelanjaBLU');
+        $this->view->render('blu/RealisasiBelanjaBLU');
     }
 	
     //author by jhon
