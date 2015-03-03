@@ -96,7 +96,7 @@ class DataBLU {
         }
 
 
-        $sql .= " ORDER BY SATKER, KDKPPN ASC";
+        $sql .= " ORDER BY SATKER ASC";
         //var_dump ($sql);
 
         $result = $this->db->select($sql);
