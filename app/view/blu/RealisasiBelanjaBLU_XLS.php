@@ -70,13 +70,13 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "BA-Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "BA");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Kode Satker");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Rumpun");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Nama Satker");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Keterangan");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Rumpun");
 //p6
 $objPHPExcel->getActiveSheet()->setCellValue('F4', "Pagu Pegawai");
 //p7
@@ -288,8 +288,8 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
-
+$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+$objPHPExcel->getActiveSheet()->getStyle('C5:C1000')->getNumberFormat()->setFormatCode('000000');
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);

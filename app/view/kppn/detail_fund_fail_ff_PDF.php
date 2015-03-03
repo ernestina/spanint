@@ -168,6 +168,9 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 				$tot_encumbrance+=$value->get_obligation();
 				$tot_blokir+=$value->get_block_amount();
 				$tot_actual+=$value->get_actual_amt();
+				
+            }
+			
 				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
 				$this->SetFillColor(200, 200, 200);
@@ -190,27 +193,10 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format($tot_actual), 1, 0, 'R', true);
 				$this->Cell($ukuran_kolom_jenis_belanja1, $h, number_format(0 - $tot_encumbrance - $tot_blokir - $tot_actual), 1, 1, 'R', true);
 				$this->Ln(3);
-				
-            }
            
         }
     }
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-
-
-    
 
 }
 
