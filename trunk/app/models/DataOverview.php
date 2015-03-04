@@ -579,8 +579,8 @@ class DataOverview {
                 $data->set_open($val['JUMLAH']);
             } else if ($val['STATUS'] == 'CLOSED') {
                 $data->set_closed($val['JUMLAH']);
-            } else if ($val['STATUS'] == 'CANCELLED') {
-                $data->set_cancelled($val['JUMLAH']);
+            } else if ($val['STATUS'] == 'CANCELED') {
+                $data->set_canceled($val['JUMLAH']);
             }
         }
         
