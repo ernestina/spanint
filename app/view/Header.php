@@ -74,6 +74,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
                             <div class="collapse">
                                 <ul>
+                                    <li><a href="<?php echo URL; ?>dashboard/overviewAdmin">Overview</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboard/harian">SP2D &amp; LHP</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboardPenerbitan">Penerbitan SP2D</a></li>
                                 </ul>
@@ -241,6 +242,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
                             <div class="collapse">
                                 <ul>
+                                    <li><a href="<?php echo URL; ?>dashboard/overviewKanwil">Overview</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboard/harian">SP2D &amp; LHP</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboardPenerbitan">Penerbitan SP2D</a></li>
                                 </ul>
@@ -397,6 +399,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
                             <div class="collapse">
                                 <ul>
+                                    <li><a href="<?php echo URL; ?>dashboard/overviewKPPN">Overview</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboard/harian">SP2D &amp; LHP - Hari Ini</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboard/mingguan">SP2D &amp; LHP - 7 Hari</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboard/bulanan">SP2D &amp; LHP - 30 Hari</a></li>
@@ -579,6 +582,7 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
                             <div class="collapse">
                                 <ul>
+                                    <li><a href="<?php echo URL; ?>dashboard/overviewSatker">Overview</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboard/mingguan">SP2D - 7 Hari</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboard/bulanan">SP2D - 30 Hari</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboard/triwulanan">SP2D - 90 Hari</a></li>
@@ -881,6 +885,15 @@
                     <ul>
 
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dashboard/overviewKL">Overview</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Informasi DIPA</h4>
                             <div class="collapse">
                                 <ul>
@@ -971,6 +984,15 @@
                     <ul>
 
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Dashboard</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>dashboard/overviewES1">Overview</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Informasi DIPA</h4>
                             <div class="collapse">
                                 <ul>

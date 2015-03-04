@@ -3,6 +3,8 @@
 class DataOverview {
     
     private $db;
+
+    private $_unit;
     
     private $_ba;
     private $_realisasi;
@@ -48,6 +50,16 @@ class DataOverview {
 
     private $_penerimaan_41;
     private $_penerimaan_42;
+
+    private $_lhp_completed;
+    private $_lhp_validated;
+    private $_lhp_error;
+    private $_lhp_etc;
+
+    private $_vol_lhp_completed;
+    private $_vol_lhp_validated;
+    private $_vol_lhp_error;
+    private $_vol_lhp_etc;
     
     private $_table1 = 'PROSES_REVISI';
     private $_table2 = 'T_SATKER';
@@ -80,6 +92,141 @@ class DataOverview {
     }
 
     //Details
+
+    public function fetchRealisasiPaguBelanjaPerUnitAll($mode, $filter=null) {
+        
+        if ($mode == 1) {
+
+            $guide = 'SATKER';
+
+        } else if ($mode == 2) {
+
+            $guide = 'KPPN';
+
+        } else if ($mode == 3) {
+
+            $guide = 'KANWIL';
+
+        }
+
+        $sql = "SELECT " . $guide .",  SUM(A.ACTUAL_AMT) REALISASI, 
+                SUM(A.BUDGET_AMT) PAGU
+                FROM "
+                . $this->_table3 . " A
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                AND NVL(A.ACTUAL_AMT,0) > 0 AND NVL(A.BUDGET_AMT,0) > 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= ' GROUP BY ' . $guide;
+
+        $sql .= ' ORDER BY ' . $guide;
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+
+        $d_data = array();
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+
+            $data->set_unit($val[$guide]);        
+            $data->set_realisasi($val['REALISASI']);
+            $data->set_pagu($val['PAGU']);
+
+            $d_data[] = $data;
+
+        }
+        
+        return $d_data;
+        
+    }
+
+    public function fetchRealisasiPaguBelanjaPerUnit($mode, $sort, $filter=null) {
+        
+        if ($mode == 1) {
+
+            $guide = 'SATKER';
+
+        } else if ($mode == 2) {
+
+            $guide = 'KPPN';
+
+        } else if ($mode == 3) {
+
+            $guide = 'KANWIL';
+
+        }
+
+        $sql = "SELECT * FROM (SELECT " . $guide .",  SUM(A.ACTUAL_AMT) REALISASI, 
+                SUM(A.BUDGET_AMT) PAGU
+                FROM "
+                . $this->_table3 . " A
+                WHERE A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                AND NVL(A.ACTUAL_AMT,0) > 0 AND NVL(A.BUDGET_AMT,0) > 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= ' GROUP BY ' . $guide;
+
+        if ($sort == 1) {
+
+            $sql .= ' ORDER BY (SUM(A.ACTUAL_AMT)/SUM(A.BUDGET_AMT)) DESC) WHERE ROWNUM < 11';
+
+        } else {
+
+            $sql .= ' ORDER BY (SUM(A.ACTUAL_AMT)/SUM(A.BUDGET_AMT)) ASC) WHERE ROWNUM < 11';
+
+        }
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+
+        $d_data = array();
+
+        $i = 0;
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+
+            $data->set_unit($val[$guide]);        
+            $data->set_realisasi($val['REALISASI']);
+            $data->set_pagu($val['PAGU']);
+
+            $d_data[] = $data;
+
+        }
+        
+        return $d_data;
+        
+    }
 
     public function get_realisasi_numbers_dash_filter($filter=null) {
         
@@ -221,6 +368,66 @@ class DataOverview {
 
             $data[] = $d_data;
         }
+        return $data;
+    }
+
+    //LHP
+
+    public function get_lhp_rekap($hari, $unitfilter = null) {
+        $data = array();
+        for ($i = 0; $i < $hari; $i++) {
+
+            if (!isset($unitfilter)) {
+                if ($hari == 1) {
+                    $sql = "select to_char(tanggal, 'DD-MM-YYYY') tanggal, jumlah, nominal, status from spgr_mpn_dashboard where kppn = '" . Session::get('id_user') . "' and tanggal=(select max(tanggal) from spgr_mpn_dashboard where kppn = '" . Session::get('id_user') . "')";
+                } else {
+                    $sql = "select to_char(tanggal, 'DD-MM-YYYY') tanggal, jumlah, nominal, status from spgr_mpn_dashboard where kppn = '" . Session::get('id_user') . "' and tanggal = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')";
+                }
+            } else {
+                if ($hari == 1) {
+                    $sql = "select to_char(tanggal, 'DD-MM-YYYY') tanggal, jumlah, nominal, status from spgr_mpn_dashboard where " . $unitfilter . " and tanggal=(select max(tanggal) from spgr_mpn_dashboard where " . $unitfilter . ")";
+                } else {
+                    $sql = "select to_char(tanggal, 'DD-MM-YYYY') tanggal, jumlah, nominal, status from spgr_mpn_dashboard where " . $unitfilter . " and tanggal = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')";
+                }
+            }
+
+            //echo($sql);
+
+            $result = $this->db->select($sql);
+            $d_data = new $this($this->registry);
+            //var_dump($result);
+
+            $d_data->set_tgl_lhp(0);
+            $d_data->set_lhp_completed(0);
+            $d_data->set_vol_lhp_completed(0);
+            $d_data->set_lhp_validated(0);
+            $d_data->set_vol_lhp_validated(0);
+            $d_data->set_lhp_error(0);
+            $d_data->set_vol_lhp_error(0);
+            $d_data->set_lhp_etc(0);
+            $d_data->set_vol_lhp_etc(0);
+
+            foreach ($result as $val) {
+                $d_data->set_tgl_lhp($val['TANGGAL']);
+                if ($val['STATUS'] == 'Completed') {
+                    $d_data->set_lhp_completed($d_data->get_lhp_completed() + $val['JUMLAH']);
+                    $d_data->set_vol_lhp_completed($d_data->get_vol_lhp_completed() + $val['NOMINAL']);
+                } else if ($val['STATUS'] == 'Validated') {
+                    $d_data->set_lhp_validated($d_data->get_lhp_validated() + $val['JUMLAH']);
+                    $d_data->set_vol_lhp_validated($d_data->get_vol_lhp_validated() + $val['NOMINAL']);
+                } else if ($val['STATUS'] == 'Error') {
+                    $d_data->set_lhp_error($d_data->get_lhp_error() + $val['JUMLAH']);
+                    $d_data->set_vol_lhp_error($d_data->get_vol_lhp_error() + $val['NOMINAL']);
+                } else {
+                    $d_data->set_lhp_etc($d_data->get_lhp_etc() + $val['JUMLAH']);
+                    $d_data->set_vol_lhp_etc($d_data->get_vol_lhp_etc() + $val['NOMINAL']);
+                }
+            }
+            $data[$i] = $d_data;
+        }
+
+        //var_dump($data);
+
         return $data;
     }
 
@@ -1115,6 +1322,46 @@ class DataOverview {
         $this->_penerimaan_42 = $penerimaan_42;
     }
 
+    public function set_lhp_completed($lhp_completed) {
+        $this->_lhp_completed = $lhp_completed;
+    }
+
+    public function set_vol_lhp_completed($vol_lhp_completed) {
+        $this->_vol_lhp_completed = $vol_lhp_completed;
+    }
+
+    public function set_lhp_validated($lhp_validated) {
+        $this->_lhp_validated = $lhp_validated;
+    }
+
+    public function set_vol_lhp_validated($vol_lhp_validated) {
+        $this->_vol_lhp_validated = $vol_lhp_validated;
+    }
+
+    public function set_lhp_error($lhp_error) {
+        $this->_lhp_error = $lhp_error;
+    }
+
+    public function set_vol_lhp_error($vol_lhp_error) {
+        $this->_vol_lhp_error = $vol_lhp_error;
+    }
+
+    public function set_lhp_etc($lhp_etc) {
+        $this->_lhp_etc = $lhp_etc;
+    }
+
+    public function set_vol_lhp_etc($vol_lhp_etc) {
+        $this->_vol_lhp_etc = $vol_lhp_etc;
+    }
+
+    public function set_tgl_lhp($tgl_lhp) {
+        $this->_tgl_lhp = $tgl_lhp;
+    }
+
+    public function set_unit($unit) {
+        $this->_unit = $unit;
+    }
+
     //Get
     
     public function get_ba() {
@@ -1283,6 +1530,46 @@ class DataOverview {
 
     public function get_penerimaan_42() {
         return $this->_penerimaan_42;
+    }
+
+    public function get_lhp_completed() {
+        return $this->_lhp_completed;
+    }
+
+    public function get_vol_lhp_completed() {
+        return $this->_vol_lhp_completed;
+    }
+
+    public function get_lhp_validated() {
+        return $this->_lhp_validated;
+    }
+
+    public function get_vol_lhp_validated() {
+        return $this->_vol_lhp_validated;
+    }
+
+    public function get_lhp_error() {
+        return $this->_lhp_error;
+    }
+
+    public function get_vol_lhp_error() {
+        return $this->_vol_lhp_error;
+    }
+
+    public function get_lhp_etc() {
+        return $this->_lhp_etc;
+    }
+
+    public function get_vol_lhp_etc() {
+        return $this->_vol_lhp_etc;
+    }
+
+    public function get_tgl_lhp() {
+        return $this->_tgl_lhp;
+    }
+
+    public function get_unit() {
+        return $this->_unit;
     }
     
     public function __destruct() {
