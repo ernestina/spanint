@@ -313,6 +313,16 @@
 
                                 <?php } ?>
 
+                            <?php } else { ?>
+
+                                <div class="notification-item notification-neutral">
+
+                                    <div class="notification-icon"><span class="glyphicon glyphicon-info-sign"></span></div>
+
+                                    <div class="notification-text">Notifikasi saat ini belum tersedia. Silahkan cek lagi di lain waktu!</div>
+
+                                </div>
+
                             <?php } ?>
 
                         </div>

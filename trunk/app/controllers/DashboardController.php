@@ -73,8 +73,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_pagu_59() > 0) {
-            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_59() / $detailRealisasi[0]->get_pagu_59() * 1000) / 10);
+          if ($detailRealisasi[0]->get_pagu_61() > 0) {
+            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_61() / $detailRealisasi[0]->get_pagu_61() * 1000) / 10);
           } else {
             $mainchartData[] = 0;
           }
@@ -154,8 +154,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_belanja_59() != null) {
-            $mainchartData[] = round($detailRealisasi[0]->get_belanja_59() / 10000000000) / 100;
+          if ($detailRealisasi[0]->get_belanja_61() != null) {
+            $mainchartData[] = round($detailRealisasi[0]->get_belanja_61() / 10000000000) / 100;
           } else {
             $mainchartData[] = 0;
           }
@@ -190,6 +190,78 @@ class DashboardController extends BaseController {
               ),
 
             'categories' => array('Pegawai', 'Barang', 'Modal', 'Bunga', 'Subsidi', 'Hibah', 'BanSos', 'Lain-lain', 'Transfer', 'Pajak', 'PNBP')
+
+          );
+
+        } else if ($mode == 3) {
+
+          $filtermain = array();
+
+          $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,1);
+
+          $mainchartData = array();
+          $mainchartLabel = array();
+
+          foreach ($realisasiPerUnit as $unitData) { 
+
+            $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+            $mainchartLabel[] = $unitData->get_unit();
+
+          }
+
+          $main_tile = (object) array(
+
+            'type' => 'bar',
+            'stacked' => true,
+            'title' => 'Persentase Realisasi Belanja Tertinggi per Satker',
+
+            'datasets' => array(
+
+                (object) array(
+
+                  'name' => 'Persentase Realisasi',
+                  'values' => $mainchartData
+
+                  )
+
+              ),
+
+            'categories' => $mainchartLabel
+
+          );
+
+        } else if ($mode == 4) {
+
+          $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,2);
+
+          $mainchartData = array();
+          $mainchartLabel = array();
+
+          foreach ($realisasiPerUnit as $unitData) { 
+
+            $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+            $mainchartLabel[] = $unitData->get_unit();
+
+          }
+
+          $main_tile = (object) array(
+
+            'type' => 'bar',
+            'stacked' => true,
+            'title' => 'Persentase Realisasi Belanja Terendah per Satker',
+
+            'datasets' => array(
+
+                (object) array(
+
+                  'name' => 'Persentase Realisasi',
+                  'values' => $mainchartData
+
+                  )
+
+              ),
+
+            'categories' => $mainchartLabel
 
           );
 
@@ -276,6 +348,8 @@ class DashboardController extends BaseController {
         $this->view->switchers = array();
         $this->view->switchers[] = 'Persentase Realisasi Belanja Berdasarkan Jenis Belanja';
         $this->view->switchers[] = 'Nominal Realisasi Penerimaan & Belanja Berdasarkan Jenis';
+        $this->view->switchers[] = 'Persentase Realisasi Belanja Tertinggi per Satker';
+        $this->view->switchers[] = 'Persentase Realisasi Belanja Terendah per Satker';
 
         $this->view->baseURL = URL . 'dashboard/overviewAdmin/';
         
@@ -298,10 +372,15 @@ class DashboardController extends BaseController {
         $filter3 = array();
         $filter3[] = "A.SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE KANWIL_DJPB = '" . Session::get('kd_satker') . "') ";
 
+        $filter5 = array();
+        $filter5[] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL =  '" . substr(Session::get('kd_satker'),1,2) . "') ";
+
         $belanjaHariIni = $fetch->fetchRealisasiPaguBelanja($filter1);
         $penerimaanHariIni = $fetch->sumRealisasiPenerimaan($filter1);
         $spmHariIni = $fetch->fetchStatusAntrianSPM($filter2);
         $kontrakHariIni =  $fetch->fetchStatusRealisasiKontrak($filter3);
+        $returHariIni = $fetch->fetchStatusRetur($filter5);
+        $lhpHariIni = $fetch->get_lhp_rekap(1, " KANWIL = '" . substr(Session::get('kd_satker'),1,2) . "' ");
 
         if (!isset($mode) || ($mode == 1)) {
 
@@ -360,8 +439,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_pagu_59() > 0) {
-            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_59() / $detailRealisasi[0]->get_pagu_59() * 1000) / 10);
+          if ($detailRealisasi[0]->get_pagu_61() > 0) {
+            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_61() / $detailRealisasi[0]->get_pagu_61() * 1000) / 10);
           } else {
             $mainchartData[] = 0;
           }
@@ -444,8 +523,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_belanja_59() != null) {
-            $mainchartData[] = round($detailRealisasi[0]->get_belanja_59() / 10000000000) / 100;
+          if ($detailRealisasi[0]->get_belanja_61() != null) {
+            $mainchartData[] = round($detailRealisasi[0]->get_belanja_61() / 10000000000) / 100;
           } else {
             $mainchartData[] = 0;
           }
@@ -480,6 +559,120 @@ class DashboardController extends BaseController {
               ),
 
             'categories' => array('Pegawai', 'Barang', 'Modal', 'Bunga', 'Subsidi', 'Hibah', 'BanSos', 'Lain-lain', 'Transfer', 'Pajak', 'PNBP')
+
+          );
+
+        }  else if ($mode == 3) {
+
+          $filtermain = array();
+          $filtermain[] = "KANWIL = '" . substr(Session::get('kd_satker'),1,2) . "' ";
+
+          $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,1,$filtermain);
+
+          $mainchartData = array();
+          $mainchartLabel = array();
+
+          foreach ($realisasiPerUnit as $unitData) { 
+
+            $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+            $mainchartLabel[] = $unitData->get_unit();
+
+          }
+
+          $main_tile = (object) array(
+
+            'type' => 'bar',
+            'stacked' => true,
+            'title' => 'Persentase Realisasi Belanja Tertinggi per Satker',
+
+            'datasets' => array(
+
+                (object) array(
+
+                  'name' => 'Persentase Realisasi',
+                  'values' => $mainchartData
+
+                  )
+
+              ),
+
+            'categories' => $mainchartLabel
+
+          );
+
+        } else if ($mode == 4) {
+
+          $filtermain = array();
+          $filtermain[] = "KANWIL = '" . substr(Session::get('kd_satker'),1,2) . "' ";
+
+          $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,2,$filtermain);
+
+          $mainchartData = array();
+          $mainchartLabel = array();
+
+          foreach ($realisasiPerUnit as $unitData) { 
+
+            $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+            $mainchartLabel[] = $unitData->get_unit();
+
+          }
+
+          $main_tile = (object) array(
+
+            'type' => 'bar',
+            'stacked' => true,
+            'title' => 'Persentase Realisasi Belanja Terendah per Satker',
+
+            'datasets' => array(
+
+                (object) array(
+
+                  'name' => 'Persentase Realisasi',
+                  'values' => $mainchartData
+
+                  )
+
+              ),
+
+            'categories' => $mainchartLabel
+
+          );
+
+        } else if ($mode == 5) {
+
+          $filtermain = array();
+          $filtermain[] = "KANWIL = '" . substr(Session::get('kd_satker'),1,2) . "' ";
+
+          $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnitAll(2,$filtermain);
+
+          $mainchartData = array();
+          $mainchartLabel = array();
+
+          foreach ($realisasiPerUnit as $unitData) { 
+
+            $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+            $mainchartLabel[] = $unitData->get_unit();
+
+          }
+
+          $main_tile = (object) array(
+
+            'type' => 'bar',
+            'stacked' => true,
+            'title' => 'Persentase Realisasi Belanja per KPPN',
+
+            'datasets' => array(
+
+                (object) array(
+
+                  'name' => 'Persentase Realisasi',
+                  'values' => $mainchartData
+
+                  )
+
+              ),
+
+            'categories' => $mainchartLabel
 
           );
 
@@ -527,6 +720,32 @@ class DashboardController extends BaseController {
 
                 (object) array(
 
+                    'type' => 'pie',
+                    'title' => 'Retur SP2D',
+                    'datasets' => array(
+
+                        (object) array(
+
+                          'name' => 'Sudah Proses',
+                          'value' => $returHariIni->get_retur_sudah_proses()
+
+                          ),
+
+                        (object) array(
+
+                          'name' => 'Belum Proses',
+                          'value' => $returHariIni->get_retur_belum_proses()
+
+                          )
+
+                      ),
+
+                    'colors' => array('#409ACA', '#F6CE40')
+
+                  ),
+
+                (object) array(
+
                     'type' => 'gauge',
                     'title' => 'Realisasi Belanja',
                     'subtitle' => round($belanjaHariIni->get_realisasi() / 100000000000) / 10 . ' Triliun (' . round($belanjaHariIni->get_realisasi() / $belanjaHariIni->get_pagu() * 1000) / 10 . ' %) <br/>Dari Pagu Belanja ' . round($belanjaHariIni->get_pagu() / 100000000000) / 10 .' Triliun ',
@@ -553,6 +772,46 @@ class DashboardController extends BaseController {
                     'value' => round($kontrakHariIni->get_pencairan() / 100000000000) / 10,
                     'max_value' => round($kontrakHariIni->get_nilai_kontrak() / 100000000000) / 10
 
+                  ),
+
+                (object) array(
+
+                    'type' => 'pie',
+                    'title' => 'Status LHP (' . $lhpHariIni[0]->get_tgl_lhp() . ')',
+                    'datasets' => array(
+
+                        (object) array(
+
+                          'name' => 'Selesai',
+                          'value' => $lhpHariIni[0]->get_lhp_completed()
+
+                          ),
+
+                        (object) array(
+
+                          'name' => 'Divalidasi',
+                          'value' => $lhpHariIni[0]->get_lhp_validated()
+
+                          ),
+
+                        (object) array(
+
+                          'name' => 'Error',
+                          'value' => $lhpHariIni[0]->get_lhp_error()
+
+                          ),
+
+                        (object) array(
+
+                          'name' => 'Lainnya',
+                          'value' => $lhpHariIni[0]->get_lhp_etc()
+
+                          )
+
+                      ),
+
+                    'colors' => array('#409ACA', '#F6CE40', '#FF6666', '#C995E2')
+
                   )
 
               ),
@@ -568,6 +827,9 @@ class DashboardController extends BaseController {
         $this->view->switchers = array();
         $this->view->switchers[] = 'Persentase Realisasi Belanja Berdasarkan Jenis Belanja';
         $this->view->switchers[] = 'Nominal Realisasi Penerimaan & Belanja Berdasarkan Jenis';
+        $this->view->switchers[] = 'Persentase Realisasi Belanja Tertinggi per Satker';
+        $this->view->switchers[] = 'Persentase Realisasi Belanja Terendah per Satker';
+        $this->view->switchers[] = 'Persentase Realisasi Belanja per KPPN';
 
         $this->view->baseURL = URL . 'dashboard/overviewKanwil/';
 
@@ -588,10 +850,15 @@ class DashboardController extends BaseController {
         $filter3 = array();
         $filter3[] = "A.SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE KPPN = '" . Session::get('kd_satker') . "') ";
 
+        $filter5 = array();
+        $filter5[] = "KDKPPN = '" . Session::get('kd_satker') . "'";
+
         $belanjaHariIni = $fetch->fetchRealisasiPaguBelanja($filter1);
         $penerimaanHariIni = $fetch->sumRealisasiPenerimaan($filter1);
         $spmHariIni = $fetch->fetchStatusAntrianSPM($filter2);
         $kontrakHariIni =  $fetch->fetchStatusRealisasiKontrak($filter3);
+        $returHariIni = $fetch->fetchStatusRetur($filter5);
+        $lhpHariIni = $fetch->get_lhp_rekap(1);
 
         if (!isset($mode) || ($mode == 1)) {
 
@@ -650,8 +917,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_pagu_59() > 0) {
-            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_59() / $detailRealisasi[0]->get_pagu_59() * 1000) / 10);
+          if ($detailRealisasi[0]->get_pagu_61() > 0) {
+            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_61() / $detailRealisasi[0]->get_pagu_61() * 1000) / 10);
           } else {
             $mainchartData[] = 0;
           }
@@ -734,8 +1001,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_belanja_59() != null) {
-            $mainchartData[] = round($detailRealisasi[0]->get_belanja_59() / 10000000) / 100;
+          if ($detailRealisasi[0]->get_belanja_61() != null) {
+            $mainchartData[] = round($detailRealisasi[0]->get_belanja_61() / 10000000) / 100;
           } else {
             $mainchartData[] = 0;
           }
@@ -770,6 +1037,82 @@ class DashboardController extends BaseController {
               ),
 
             'categories' => array('Pegawai', 'Barang', 'Modal', 'Bunga', 'Subsidi', 'Hibah', 'BanSos', 'Lain-lain', 'Transfer', 'Pajak', 'PNBP')
+
+          );
+
+        } else if ($mode == 3) {
+
+          $filtermain = array();
+          $filtermain[] = "KPPN = '" . Session::get('kd_satker') . "' ";
+
+          $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,1,$filtermain);
+
+          $mainchartData = array();
+          $mainchartLabel = array();
+
+          foreach ($realisasiPerUnit as $unitData) { 
+
+            $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+            $mainchartLabel[] = $unitData->get_unit();
+
+          }
+
+          $main_tile = (object) array(
+
+            'type' => 'bar',
+            'stacked' => true,
+            'title' => 'Persentase Realisasi Belanja Tertinggi per Satker',
+
+            'datasets' => array(
+
+                (object) array(
+
+                  'name' => 'Persentase Realisasi',
+                  'values' => $mainchartData
+
+                  )
+
+              ),
+
+            'categories' => $mainchartLabel
+
+          );
+
+        } else if ($mode == 4) {
+
+          $filtermain = array();
+          $filtermain[] = "KPPN = '" . Session::get('kd_satker') . "' ";
+
+          $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,2,$filtermain);
+
+          $mainchartData = array();
+          $mainchartLabel = array();
+
+          foreach ($realisasiPerUnit as $unitData) { 
+
+            $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+            $mainchartLabel[] = $unitData->get_unit();
+
+          }
+
+          $main_tile = (object) array(
+
+            'type' => 'bar',
+            'stacked' => true,
+            'title' => 'Persentase Realisasi Belanja Terendah per Satker',
+
+            'datasets' => array(
+
+                (object) array(
+
+                  'name' => 'Persentase Realisasi',
+                  'values' => $mainchartData
+
+                  )
+
+              ),
+
+            'categories' => $mainchartLabel
 
           );
 
@@ -817,6 +1160,32 @@ class DashboardController extends BaseController {
 
                 (object) array(
 
+                    'type' => 'pie',
+                    'title' => 'Retur SP2D',
+                    'datasets' => array(
+
+                        (object) array(
+
+                          'name' => 'Sudah Proses',
+                          'value' => $returHariIni->get_retur_sudah_proses()
+
+                          ),
+
+                        (object) array(
+
+                          'name' => 'Belum Proses',
+                          'value' => $returHariIni->get_retur_belum_proses()
+
+                          )
+
+                      ),
+
+                    'colors' => array('#409ACA', '#F6CE40')
+
+                  ),
+
+                (object) array(
+
                     'type' => 'gauge',
                     'title' => 'Realisasi Belanja',
                     'subtitle' => round($belanjaHariIni->get_realisasi() / 100000000000) / 10 . ' Triliun (' . round($belanjaHariIni->get_realisasi() / $belanjaHariIni->get_pagu() * 1000) / 10 . ' %) <br/>Dari Pagu Belanja ' . round($belanjaHariIni->get_pagu() / 100000000000) / 10 .' Triliun ',
@@ -843,6 +1212,46 @@ class DashboardController extends BaseController {
                     'value' => round($kontrakHariIni->get_pencairan() / 100000000000) / 10,
                     'max_value' => round($kontrakHariIni->get_nilai_kontrak() / 100000000000) / 10
 
+                  ),
+
+                (object) array(
+
+                    'type' => 'pie',
+                    'title' => 'Status LHP (' . $lhpHariIni[0]->get_tgl_lhp() . ')',
+                    'datasets' => array(
+
+                        (object) array(
+
+                          'name' => 'Selesai',
+                          'value' => $lhpHariIni[0]->get_lhp_completed()
+
+                          ),
+
+                        (object) array(
+
+                          'name' => 'Divalidasi',
+                          'value' => $lhpHariIni[0]->get_lhp_validated()
+
+                          ),
+
+                        (object) array(
+
+                          'name' => 'Error',
+                          'value' => $lhpHariIni[0]->get_lhp_error()
+
+                          ),
+
+                        (object) array(
+
+                          'name' => 'Lainnya',
+                          'value' => $lhpHariIni[0]->get_lhp_etc()
+
+                          )
+
+                      ),
+
+                    'colors' => array('#409ACA', '#F6CE40', '#FF6666', '#C995E2')
+
                   )
 
               ),
@@ -858,6 +1267,8 @@ class DashboardController extends BaseController {
         $this->view->switchers = array();
         $this->view->switchers[] = 'Persentase Realisasi Belanja Berdasarkan Jenis Belanja';
         $this->view->switchers[] = 'Nominal Realisasi Penerimaan & Belanja Berdasarkan Jenis';
+        $this->view->switchers[] = 'Persentase Realisasi Belanja Tertinggi per Satker';
+        $this->view->switchers[] = 'Persentase Realisasi Belanja Terendah per Satker';
 
         $this->view->baseURL = URL . 'dashboard/overviewKPPN/';
 
@@ -940,8 +1351,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_pagu_59() > 0) {
-            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_59() / $detailRealisasi[0]->get_pagu_59() * 1000) / 10);
+          if ($detailRealisasi[0]->get_pagu_61() > 0) {
+            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_61() / $detailRealisasi[0]->get_pagu_61() * 1000) / 10);
           } else {
             $mainchartData[] = 0;
           }
@@ -1024,8 +1435,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_belanja_59() != null) {
-            $mainchartData[] = round($detailRealisasi[0]->get_belanja_59() / 10000000000) / 100;
+          if ($detailRealisasi[0]->get_belanja_61() != null) {
+            $mainchartData[] = round($detailRealisasi[0]->get_belanja_61() / 10000000000) / 100;
           } else {
             $mainchartData[] = 0;
           }
@@ -1228,8 +1639,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_pagu_59() > 0) {
-            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_59() / $detailRealisasi[0]->get_pagu_59() * 1000) / 10);
+          if ($detailRealisasi[0]->get_pagu_61() > 0) {
+            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_61() / $detailRealisasi[0]->get_pagu_61() * 1000) / 10);
           } else {
             $mainchartData[] = 0;
           }
@@ -1312,8 +1723,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_belanja_59() != null) {
-            $mainchartData[] = round($detailRealisasi[0]->get_belanja_59() / 10000000) / 100;
+          if ($detailRealisasi[0]->get_belanja_61() != null) {
+            $mainchartData[] = round($detailRealisasi[0]->get_belanja_61() / 10000000) / 100;
           } else {
             $mainchartData[] = 0;
           }
@@ -1532,8 +1943,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_pagu_59() > 0) {
-            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_59() / $detailRealisasi[0]->get_pagu_59() * 1000) / 10);
+          if ($detailRealisasi[0]->get_pagu_61() > 0) {
+            $mainchartData[] = (round($detailRealisasi[0]->get_belanja_61() / $detailRealisasi[0]->get_pagu_61() * 1000) / 10);
           } else {
             $mainchartData[] = 0;
           }
@@ -1616,8 +2027,8 @@ class DashboardController extends BaseController {
             $mainchartData[] = 0;
           }
 
-          if ($detailRealisasi[0]->get_belanja_59() != null) {
-            $mainchartData[] = round($detailRealisasi[0]->get_belanja_59() / 10000000) / 100;
+          if ($detailRealisasi[0]->get_belanja_61() != null) {
+            $mainchartData[] = round($detailRealisasi[0]->get_belanja_61() / 10000000) / 100;
           } else {
             $mainchartData[] = 0;
           }
