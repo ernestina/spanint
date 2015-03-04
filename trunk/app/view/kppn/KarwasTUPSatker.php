@@ -195,7 +195,7 @@ if (Session::get('role') == KPPN || Session::get('role') == KL || Session::get('
 
                             }
 							
-							if ($value->get_invoice_date() <= 5) {
+							if ($value->get_invoice_date() <= 5 and $value->get_description() != 'TERLAMBAT') {
 
                                 $style = ' style="background: #FFFF00" ';
 

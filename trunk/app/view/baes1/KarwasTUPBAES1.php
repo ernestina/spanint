@@ -165,6 +165,12 @@
                                 $style = ' style="background: #FFC2C2" ';
 
                             }
+							
+							if ($value->get_invoice_date() <= 5 and $value->get_description() != 'TERLAMBAT' ) {
+
+                                $style = ' style="background: #FFFF00" ';
+
+                            }
 
 
                             echo "<tr>	";
@@ -260,6 +266,69 @@
                 </div>
 
             </form>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- Keterangan -->
+<div class="main-window-segment vertical-padded">
+    <div class="container-fluid">
+        
+        <div class="row">
+            
+            <div class="col-lg-12 col-md-6 col-sm-12" style="text-align: right;">
+                
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter1"><span class="glyphicon glyphicon-book"></span>&nbsp; Keterangan</button>     
+                
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+<div class="modal fade" id="modal-app-filter1" tabindex="-1" role="dialog" aria-labelledby="app-filter-label1" aria-hidden="true">
+        
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label1"><span class="glyphicon glyphicon-book"></span>&nbsp; Keterangan</h4>
+
+            </div>
+            
+                <div class="modal-body">
+                    
+                    <table class="table table-bordered" style="font-size: 90%;">
+                    <tr>
+                        <th width="100px" >Warna</th>
+                        <th width="100px" >Keterangan</th>
+                        
+                    </tr>
+                    <tr>
+                        <td bgcolor='#FFC2C2'></td>
+                        <td>Pertanggungjawaban TUP Terlambat</td>
+                        
+                    </tr>
+                    <tr>
+                        <td bgcolor='#FFFF00'></td>
+                        <td>Batas Pertanggungjawaban TUP Tinggal Kurang Dari 5 Hari</td>
+                        
+                    </tr>                    
+                    </table>
+                    
+                </div>
+
+                <div class="modal-footer">
+                     <button type="button" class="btn btn-default" style="width: 100%" data-dismiss="modal">Tutup</button>
+                </div>
+
+            
 
         </div>
 
