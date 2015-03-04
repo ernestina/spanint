@@ -367,7 +367,7 @@ class DashboardController extends BaseController {
         $filter1[] = "SATKER IN (SELECT KDSATKER FROM T_SATKER WHERE KANWIL_DJPB = '" . Session::get('kd_satker') . "') ";
 
         $filter2 = array();
-        $filter2[] = "substr(INVOICE_NUM,8, 6) IN (SELECT KDSATKER FROM T_SATKER WHERE KANWIL_DJPB = '" . Session::get('kd_satker') . "') ";
+        $filter2[] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . substr(Session::get('kd_satker'),1,2) . "') ";
 
         $filter3 = array();
         $filter3[] = "A.SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE KANWIL_DJPB = '" . Session::get('kd_satker') . "') ";
