@@ -47,7 +47,6 @@ $akses['DataBLU'] = array(
  */
 $akses['PDFBLU'] = array(
     '__construct',
-    'index',
     'KarwasBLU_PDF',
     'DaftarSP3_PDF',
     'DataRealisasiBLU_PDF',

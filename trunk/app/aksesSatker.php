@@ -181,7 +181,6 @@ $akses['DataBPNSatker'] = array(
  */
 $akses['PDFSatker'] = array(
     '__construct',
-    'index',
     'cekSupplier_PDF',
     'daftarsp2d_PDF',
     'Detail_Fund_fail_kd_PDF',

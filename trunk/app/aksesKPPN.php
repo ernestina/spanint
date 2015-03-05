@@ -309,7 +309,6 @@ $akses['DataMpnBiKPPN'] = array(
  */
 $akses['PDFKPPN'] = array(
     '__construct',
-    'index',
     'DataRealisasiBA_PDF',
     'cekSupplier_PDF',
     'daftarsp2d_PDF',

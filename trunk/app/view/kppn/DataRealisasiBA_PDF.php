@@ -286,44 +286,44 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 	if ($tot_pagu_51==0){
 		$per_51='0.00%';
 	}else{
-		$per_51="(".number_format($tot_51/$tot_pagu_51*100)."%)";
+		$per_51="(".number_format($tot_51/$tot_pagu_51*100,2)."%)";
 	}
 	if ($tot_pagu_52==0){
 		$per_52='0.00%';
 	}else{
-		$per_52="(".number_format($tot_52/$tot_pagu_52*100)."%)";
+		$per_52="(".number_format($tot_52/$tot_pagu_52*100,2)."%)";
 	}
 	if ($tot_pagu_53==0){
 		$per_53='0.00%';
 	}else{
-		$per_53="(".number_format($tot_53/$tot_pagu_53*100)."%)";
+		$per_53="(".number_format($tot_53/$tot_pagu_53*100,2)."%)";
 	}
 	if ($tot_pagu_54==0){
 		$per_54='0.00%';
 	}else{
-		$per_54="(".number_format($tot_54/$tot_pagu_54*100)."%)";
+		$per_54="(".number_format($tot_54/$tot_pagu_54*100,2)."%)";
 	}
 	if ($tot_pagu_55==0){
 		$per_55='0.00%';
 	}else{
-		$per_55="(".number_format($tot_55/$tot_pagu_55*100)."%)";
+		$per_55="(".number_format($tot_55/$tot_pagu_55*100,2)."%)";
 	}
 	if ($tot_pagu_56==0){
 		$per_56='0.00%';
 	}else{
-		$per_56="(".number_format($tot_56/$tot_pagu_56*100)."%)";
+		$per_56="(".number_format($tot_56/$tot_pagu_56*100,2)."%)";
 	}
 	if ($tot_pagu_58==0){
 		$per_58='0.00%';
 	}else{
-		$per_58="(".number_format($tot_58/$tot_pagu_58*100)."%)";
+		$per_58="(".number_format($tot_58/$tot_pagu_58*100,2)."%)";
 	}
 	if ($tot_pagu_61==0){
 		$per_61='0.00%';
 	}else{
-		$per_61="(".number_format($tot_61/$tot_pagu_61*100)."%)";
+		$per_61="(".number_format($tot_61/$tot_pagu_61*100,2)."%)";
 	}
-		$per_pr="(".number_format($tot_real/$tot_pagu*100)."%)";
+		$per_pr="(".number_format($tot_real/$tot_pagu*100,2)."%)";
 
         $py1 = $this->GetY();
         $px2 = $px1;

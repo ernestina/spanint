@@ -13,11 +13,9 @@
 				//--------------------------------------
 				//Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
 				if (Session::get('role') == ADMIN  || Session::get('role') == DJA  || Session::get('role') == KANWIL) {
-					if( isset($this->d_nama_kppn) || isset($this->satker_code1)){
-						if (isset($this->d_nama_kppn)) {
-							foreach ($this->d_nama_kppn as $kppn) {
-								$kdkppn = $kppn->get_kd_satker();
-							}
+					if( isset($this->d_kd_kppn) || isset($this->satker_code)  || isset($this->ba_code)){
+						if (isset($this->d_kd_kppn)) {
+							$kdkppn = $this->d_kd_kppn;
 						} else {
 							$kdkppn = 'null';
 						}
@@ -26,6 +24,11 @@
 						} else {
 							$kdsatker = 'null';
 						}
+						if (isset($this->ba_code)) {
+							$kdba =$this->ba_code;
+						} else {
+							$kdba = 'null';
+						}
 						
 					?>
             
@@ -33,8 +36,8 @@
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                     </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker; ?>/XLS">EXCEL</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdba; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdba; ?>/XLS">EXCEL</a></li>
                           </ul>
                 </div>
             
@@ -44,20 +47,25 @@
 				
 				if (Session::get('role') == KPPN) {
 				
-						$kdkppn = Session::get('id_user');
-						if (isset($this->satker_code)) {
-							$kdsatker = $this->satker_code;
-						} else {
-							$kdsatker = 'null';
-						}						
+					$kdkppn = Session::get('id_user');
+					if (isset($this->satker_code)) {
+						$kdsatker = $this->satker_code;
+					} else {
+						$kdsatker = 'null';
+					}
+					if (isset($this->ba_code)) {
+						$kdba =$this->ba_code;
+					} else {
+						$kdba = 'null';
+					}						
 						?>
             
                 <div class="btn-group-sm">
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                     </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker; ?>/XLS">EXCEL</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdba; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DataRealisasi_PDF/<?php echo $kdkppn . "/" . $kdsatker . "/" . $kdba; ?>/XLS">EXCEL</a></li>
                           </ul>
                 </div>
 						<?php

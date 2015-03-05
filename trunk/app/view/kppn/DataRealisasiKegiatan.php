@@ -26,8 +26,8 @@
                 <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                 </button>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBAES1_BAES1_PDF/<?php echo $kdkegiatan; ?>/PDF">PDF</a></li>
-                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatanBAES1_BAES1_PDF/<?php echo $kdkegiatan; ?>/XLS">EXCEL</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatan_PDF/<?php echo $kdkegiatan; ?>/PDF">PDF</a></li>
+                        <li><a href="<?php echo URL; ?>PDF/DataRealisasiKegiatan_PDF/<?php echo $kdkegiatan; ?>/XLS">EXCEL</a></li>
                       </ul>
             </div>
             

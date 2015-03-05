@@ -364,7 +364,6 @@ $akses['BaEs1Admin'] = array(
  */
 $akses['PDFAdmin'] = array(
     '__construct',
-    'index',
     'DataRealisasiBA_PDF',
     'cekSupplier_PDF',
     'daftarsp2d_PDF',

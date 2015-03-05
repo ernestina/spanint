@@ -73,10 +73,18 @@ $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 $objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode Satker");
 //p3
 $objPHPExcel->getActiveSheet()->setCellValue('C4', "Nama Satker");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "KPPN");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "No. DIPA");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('F4', "Total Pagu Belanja");
+//p3
+$objPHPExcel->getActiveSheet()->setCellValue('G4', "Total Pagu Pendapatan");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Tanggal Posting Revisi");
+$objPHPExcel->getActiveSheet()->setCellValue('H4', "Tanggal Posting Revisi");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "No. Revisi Terakhir");
+$objPHPExcel->getActiveSheet()->setCellValue('I4', "No. Revisi Terakhir");
 
 //Data
 if (count($this->data) == 0) {
@@ -91,8 +99,12 @@ if (count($this->data) == 0) {
 	$nil['p1']=$no;
 	$nil['p2']=$value->get_kdsatker();
 	$nil['p3']=$value->get_nmsatker();
-	$nil['p4']=$value->get_tgl_rev();
-	$nil['p5']=$value->get_rev();
+	$nil['p4']=$value->get_kppn();
+	$nil['p5']=$value->get_dipa_no();
+	$nil['p6']=$value->get_total_pagu_belanja();
+	$nil['p7']=$value->get_total_pagu_pendapatan();
+	$nil['p8']=$value->get_tgl_rev();
+	$nil['p9']=$value->get_rev();
 	array_push($dataArray,$nil);
 
 	}
@@ -113,7 +125,8 @@ $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_
 
 
 $objPHPExcel->getActiveSheet()->getStyle('A5:AQ1000')->getNumberFormat()->setFormatCode('0');
-//$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000');
+$objPHPExcel->getActiveSheet()->getStyle('B5:B1000')->getNumberFormat()->setFormatCode('000000');
+$objPHPExcel->getActiveSheet()->getStyle('D5:D1000')->getNumberFormat()->setFormatCode('000');
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet

@@ -77,7 +77,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		$kolom1=20;
 		$kolom2=53;
 		$kolom3=60;
-		$kolom_grandtotal=$kolom1+$kolom2+$kolom3;
+		$kolom_grandtotal=$kolom1+$kolom2+$kolom3+$kolom3;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -86,6 +86,8 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell($kolom2, $h, 'BA-Satker', 1, 0, 'C', true);
         $this->SetX($left += $kolom2);
         $this->Cell($kolom3, $h, 'Nama Satker', 1, 0, 'C', true);
+        $this->SetX($left += $kolom3);
+		$this->Cell($kolom3, $h, 'KPPN', 1, 0, 'C', true);
         $this->SetX($left += $kolom3);
         $this->Cell($kolom2, $h, 'Ket', 1, 0, 'C', true);
         $px1 = $this->GetX();
@@ -119,8 +121,9 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array($kolom1,$kolom2,$kolom3,$kolom2,$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa));
-        $this->SetAligns(array('C', 'C', 'L', 'L','R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
+        $this->SetWidths(array($kolom1,$kolom2,$kolom3,$kolom3,
+		$kolom2,$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa));
+        $this->SetAligns(array('C', 'C', 'L', 'C', 'L','R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 
         if (count($this->data) == 0) {
             $this->Row(
@@ -128,6 +131,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
                         'N I H I L',
                         '',
                         '',
+						'',
                         '',
                         '',
                         '',
@@ -217,6 +221,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
                         array($no++,
                             strtoupper($value->get_ba()). '-' .strtoupper($value->get_satker()),
 							strtoupper($value->get_dipa()),
+							strtoupper($value->get_kppn()),
 							'PAGU'."\n".'REALISASI'."\n".'PERSENTASE'."\n".'SISA',
                             number_format($value->get_pagu_51())."\n".number_format($value->get_belanja_51())."\n".$nil_51."\n".number_format($value->get_pagu_51()-$value->get_belanja_51()),
                             number_format($value->get_pagu_52())."\n".number_format($value->get_belanja_52())."\n".$nil_52."\n".number_format($value->get_pagu_52()-$value->get_belanja_52()),

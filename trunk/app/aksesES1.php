@@ -89,7 +89,6 @@ $akses['dataSPMES1'] = array(
  */
 $akses['PDFES1'] = array(
     '__construct',
-    'index',
     'DataRealisasiAkunES1_BAES1_PDF',
     'DataRealisasiAkunBA_BAES1_PDF',
     'DataRealisasiKewenanganBAES1_BAES1_PDF',

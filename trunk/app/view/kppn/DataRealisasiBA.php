@@ -28,6 +28,11 @@
             }else{
 				$kdkppn ='null';
 			} 
+			if (isset($this->lokasi)) {
+                $kdlokasi = $this->lokasi;
+            }else{
+				$kdlokasi ='null';
+			} 
 			
 			?>
             
@@ -35,8 +40,8 @@
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                     </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>/XLS">EXCEL</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn . "/" . $kdlokasi; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn . "/" . $kdlokasi; ?>/XLS">EXCEL</a></li>
                           </ul>
             </div>
             
@@ -46,14 +51,19 @@
         if (Session::get('role') == KPPN) {
             
                     $kdkppn = Session::get('id_user');
+					if (isset($this->lokasi)) {
+						$kdlokasi = $this->lokasi;
+					}else{
+						$kdlokasi ='null';
+					}
 			?>
             
                 <div class="btn-group-sm">
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                     </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn; ?>/XLS">EXCEL</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn . "/" . $kdlokasi; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/DataRealisasiBA_PDF/<?php echo $kdkppn . "/" . $kdlokasi; ?>/XLS">EXCEL</a></li>
                           </ul>
                 </div>
 			<?php

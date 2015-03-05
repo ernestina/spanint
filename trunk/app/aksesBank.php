@@ -43,7 +43,6 @@ $akses['DataDropingBank'] = array(
  */
 $akses['PDFBank'] = array(
     '__construct',
-    'index',
 	'detailDroping_PDF',
 	'detailSPAN_PDF',
     '__destruct'
