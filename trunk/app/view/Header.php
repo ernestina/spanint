@@ -244,7 +244,7 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dashboard/overviewKanwil">Overview</a></li>
                                     <li><a href="<?php echo URL; ?>home/dashboard/harian">SP2D &amp; LHP</a></li>
-                                    <li><a href="<?php echo URL; ?>home/dashboardPenerbitan">Penerbitan SP2D</a></li>
+                                    <!--li><a href="<?php echo URL; ?>home/dashboardPenerbitan">Penerbitan SP2D</a></li-->
                                 </ul>
                             </div>
                         </li>
@@ -257,7 +257,7 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Modul Penganggaran</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Informasi DIPA</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
@@ -270,8 +270,30 @@
                                 </ul>
                             </div>
                         </li>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Realisasi Belanja</h4>
+                            <div class="collapse">
+                                <ul>
+                                    
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
+									<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiKegiatan">Pagu dan Realisasi Belanja per Program-Kegiatan</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Pagu dan Realisasi Belanja per Jenis Kewenangan</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Pagu dan Realisasi Belanja per Sumber Dana</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Pagu dan Realisasi Belanja per Wilayah</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
+                                </ul>
+                            </div>
+                        </li>
 						
-						
+						<li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Data Realisasi Penerimaan</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
+                        
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
+                                </ul>
+                            </div>
+                        </li>
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul Pembayaran</h4>
                             <div class="collapse">
@@ -292,24 +314,26 @@
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul Penerimaan</h4>
                             <div class="collapse">
-                                <ul><li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP per KPPN</a></li>
+                                <ul><!--li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP per KPPN</a></li-->
+									<li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarianBulan">Monitoring Status LHP per Bulan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring Imbalan Jasa Perbankan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring Perhitungan Fihak Ketiga</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker Penerimaan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun Penerimaan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">Daftar NTPN Terindikasi Ganda</a></li>
+									
                                 </ul>
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul Kas</h4>
+                        <!--li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul Kas</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
                                 </ul>
                             </div>
-                        </li>
+                        </li-->
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                             <div class="collapse">
@@ -327,7 +351,7 @@
                             </div>
                         </li>
 
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-gift"></span>&nbsp;&nbsp;Gaji</h4>
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-gift"></span>&nbsp;&nbsp;Monitoring SP2D Gaji</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataKppn/sp2dGajiDobel">Terindikasi Dobel</a></li>
@@ -339,29 +363,8 @@
                             </div>
                         </li>
 						
-						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Realisasi</h4>
-                            <div class="collapse">
-                                <ul>
-                                    
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
-									<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiKegiatan">Pagu dan Realisasi Belanja per Program-Kegiatan</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Pagu dan Realisasi Belanja per Jenis Kewenangan</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Pagu dan Realisasi Belanja per Sumber Dana</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Pagu dan Realisasi Belanja per Wilayah</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
-                                </ul>
-                            </div>
-                        </li>
-						<li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Data Realisasi Penerimaan</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
-                        
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
-                                </ul>
-                            </div>
-                        </li>
+						
+						
 						
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
@@ -409,9 +412,9 @@
 
                     <ul>
 
-                                <!--<li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+                                <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
                                 
-                                <li class="subnav"><h4><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Persiapan Rollout</h4>
+                                <!--li class="subnav"><h4><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Persiapan Rollout</h4>
                                     <div class="collapse">
                                         <ul>
                                             <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Download Data Pagu</a></li>
