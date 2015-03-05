@@ -311,7 +311,7 @@ class DataOverview {
 
         }
 
-        $sql = "SELECT * FROM (SELECT " . $guide .",  SUM(A.ACTUAL_AMT) REALISASI, 
+        $sql = "SELECT * FROM (SELECT * FROM (SELECT " . $guide .",  SUM(A.ACTUAL_AMT) REALISASI, 
                 SUM(A.BUDGET_AMT) PAGU
                 FROM "
                 . $this->_table3 . " A
@@ -320,7 +320,6 @@ class DataOverview {
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
                 AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
-                AND NVL(A.ACTUAL_AMT,0) > 0 AND NVL(A.BUDGET_AMT,0) > 0
                 "
         ;
         
@@ -336,11 +335,11 @@ class DataOverview {
 
         if ($sort == 1) {
 
-            $sql .= ' ORDER BY (SUM(A.ACTUAL_AMT)/SUM(A.BUDGET_AMT)) DESC) WHERE ROWNUM < 11';
+            $sql .= ' ) WHERE NVL(PAGU,0) > 0 AND NVL(REALISASI,0) > 0 ORDER BY REALISASI/PAGU DESC) WHERE ROWNUM < 11';
 
         } else {
 
-            $sql .= ' ORDER BY (SUM(A.ACTUAL_AMT)/SUM(A.BUDGET_AMT)) ASC) WHERE ROWNUM < 11';
+            $sql .= ' ) WHERE NVL(PAGU,0) > 0 AND NVL(REALISASI,0) > 0 ORDER BY REALISASI/PAGU ASC) WHERE ROWNUM < 11';
 
         }
 
@@ -525,7 +524,7 @@ class DataOverview {
                 }
             } else {
                 if ($hari == 1) {
-                    $sql = "select to_char(tanggal, 'DD-MM-YYYY') tanggal, jumlah, nominal, status from spgr_mpn_dashboard where " . $unitfilter . " and tanggal=(select max(tanggal) from spgr_mpn_dashboard where " . $unitfilter . ")";
+                    $sql = "select to_char(tanggal, 'DD-MM-YYYY') tanggal, jumlah, nominal, status from spgr_mpn_dashboard where " . $unitfilter . " and tanggal=(select * from (select * from (select tanggal from spgr_mpn_dashboard where " . $unitfilter . " order by tanggal desc) where rownum < 3 order by tanggal asc) where rownum < 2)";
                 } else {
                     $sql = "select to_char(tanggal, 'DD-MM-YYYY') tanggal, jumlah, nominal, status from spgr_mpn_dashboard where " . $unitfilter . " and tanggal = to_date('" . date("Ymd", time() - ($i * 24 * 60 * 60)) . "','yyyymmdd')";
                 }
