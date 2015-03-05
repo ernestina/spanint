@@ -60,6 +60,15 @@ class DataOverview {
     private $_vol_lhp_validated;
     private $_vol_lhp_error;
     private $_vol_lhp_etc;
+
+    private $_gaji;
+    private $_non_gaji;
+    private $_lainnya;
+    private $_retur;
+    private $_void;
+
+    private $_nama_unit;
+    private $_kode_unit;
     
     private $_table1 = 'PROSES_REVISI';
     private $_table2 = 'T_SATKER';
@@ -73,6 +82,7 @@ class DataOverview {
     private $_table10 = 'RETUR_SPAN_V';
     private $_table11 = 'T_KPPN';
     private $_table12 = 'KARWAS_TUP_V';
+    private $_table13 = 'AP_CHECKS_ALL_V';
     
     public $registry;
     
@@ -91,7 +101,137 @@ class DataOverview {
         
     }
 
+    //Helpers
+
+    public function fetchNamaUnit($mode, $references) {
+
+        if ($mode == 1) { //Satker
+
+            $sql = "SELECT KDSATKER KODE_UNIT, NMSATKER NAMA_UNIT FROM " . $this->_table2 . " WHERE KDSATKER IN (";
+
+        } else if ($mode == 2) { //KPPN
+
+            $sql = "SELECT KDKPPN KODE_UNIT, NMKPPN NAMA_UNIT FROM T_KPPN WHERE KDKPPN IN (";
+
+        } else if ($mode == 3) { //Kanwil
+
+            $sql = "SELECT KDKANWIL KODE_UNIT, NMKANWIL NAMA_UNIT FROM T_KANWIL WHERE KDKANWIL IN (";
+
+        } else if ($mode == 4) { //ES1
+
+            $sql = "SELECT KDES1 KODE_UNIT, NMES1 NAMA_UNIT FROM T_ESELON1 WHERE KDES1 IN (";
+
+        } else { //BA
+
+            $sql = "SELECT KDBA KODE_UNIT, NMBA NAMA_UNIT FROM T_BA WHERE KDBA IN (";
+
+        }
+
+        foreach ($references as $rid=>$reference) {
+
+            if ($rid > 0) { $sql .= ", "; }
+
+            $sql .= "'" . $reference . "'";
+
+        }
+
+        $sql .= ")";
+
+        $result = $this->db->select($sql);
+
+        $d_data = array();
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+
+            $data->set_kode_unit($val['KODE_UNIT']);        
+            $data->set_nama_unit($val['NAMA_UNIT']);
+
+            $d_data[] = $data;
+
+        }
+        
+        return $d_data;
+
+    }
+
     //Details
+
+    public function fetchRealisasiPaguBelanjaPerUnitBAES1($mode, $sort, $filter=null) {
+        
+        if ($mode == 1) {
+
+            $guide = 'B.KDSATKER';
+
+        } else if ($mode == 2) {
+
+            $guide = 'B.BAES1';
+
+        } else if ($mode == 3) {
+
+            $guide = 'B.BA';
+
+        }
+
+        $sql = "SELECT * FROM (SELECT " . $guide .",  SUM(A.ACTUAL_AMT) REALISASI, 
+                SUM(A.BUDGET_AMT) PAGU
+                FROM "
+                . $this->_table3 . " A, "
+                . $this->_table2. " B 
+                WHERE A.SATKER = B.KDSATKER
+                AND A.BUDGET_TYPE = '2'
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                AND NVL(A.ACTUAL_AMT,0) > 0 AND NVL(A.BUDGET_AMT,0) > 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= ' GROUP BY ' . $guide;
+
+        if ($sort == 1) {
+
+            $sql .= ' ORDER BY (SUM(A.ACTUAL_AMT)/SUM(A.BUDGET_AMT)) DESC) WHERE ROWNUM < 11';
+
+        } else {
+
+            $sql .= ' ORDER BY (SUM(A.ACTUAL_AMT)/SUM(A.BUDGET_AMT)) ASC) WHERE ROWNUM < 11';
+
+        }
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+
+        $d_data = array();
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+
+            //echo(substr($guide,2,99));
+
+            $data->set_unit($val[substr($guide,2,99)]);        
+            $data->set_realisasi($val['REALISASI']);
+            $data->set_pagu($val['PAGU']);
+
+            $d_data[] = $data;
+
+        }
+        
+        return $d_data;
+        
+    }
 
     public function fetchRealisasiPaguBelanjaPerUnitAll($mode, $filter=null) {
         
@@ -432,6 +572,48 @@ class DataOverview {
     }
 
     //SP2D
+
+    public function fetchRekapSP2DTahunIni($filter = null) {
+        
+        $sql = "select status_lookup_code, jenis_sp2d, count(check_number) jumlah from (select distinct(check_number), status_lookup_code, jenis_sp2d, amount, segment1 from (select kdkppn, check_number, status_lookup_code, jenis_sp2d, amount, exchange_rate, check_date, segment1 from " . $this->_table13 . " where TO_CHAR(CHECK_DATE,'YYYY') = '" . Session::get('ta') . "') where 1=1 "; 
+
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= ") group by status_lookup_code, jenis_sp2d";
+
+        //echo($sql);
+        $result = $this->db->select($sql);
+        //var_dump($result);
+        $d_data = new $this($this->registry);
+
+        $d_data->set_void(0);
+        $d_data->set_gaji(0);
+        $d_data->set_non_gaji(0);
+        $d_data->set_retur(0);
+        $d_data->set_lainnya(0);
+
+        foreach ($result as $val) {
+            if ($val['STATUS_LOOKUP_CODE'] == 'VOIDED') {
+                $d_data->set_void($d_data->get_void() + $val['JUMLAH']);
+            } else {
+                if ($val['JENIS_SP2D'] == 'GAJI') {
+                    $d_data->set_gaji($d_data->get_gaji() + $val['JUMLAH']);
+                } else if ($val['JENIS_SP2D'] == 'NON GAJI') {
+                    $d_data->set_non_gaji($d_data->get_non_gaji() + $val['JUMLAH']);
+                } else if ($val['JENIS_SP2D'] == 'RETUR') {
+                    $d_data->set_retur($d_data->get_retur() + $val['JUMLAH']);
+                } else {
+                    $d_data->set_lainnya($d_data->get_lainnya() + $val['JUMLAH']);
+                }
+            }
+        }
+        //var_dump($data);
+        return $d_data;
+    }
 
     public function fetchStatusRetur($filter=null) {
 
@@ -1362,6 +1544,34 @@ class DataOverview {
         $this->_unit = $unit;
     }
 
+    public function set_gaji($gaji) {
+        $this->_gaji = $gaji;
+    }
+
+    public function set_non_gaji($non_gaji) {
+        $this->_non_gaji = $non_gaji;
+    }
+
+    public function set_retur($retur) {
+        $this->_retur = $retur;
+    }
+
+    public function set_void($void) {
+        $this->_void = $void;
+    }
+
+    public function set_lainnya($lainnya) {
+        $this->_lainnya = $lainnya;
+    }
+
+    public function set_kode_unit($kode_unit) {
+        $this->_kode_unit = $kode_unit;
+    }
+
+    public function set_nama_unit($nama_unit) {
+        $this->_nama_unit = $nama_unit;
+    }
+
     //Get
     
     public function get_ba() {
@@ -1570,6 +1780,34 @@ class DataOverview {
 
     public function get_unit() {
         return $this->_unit;
+    }
+
+    public function get_gaji() {
+        return $this->_gaji;
+    }
+
+    public function get_non_gaji() {
+        return $this->_non_gaji;
+    }
+
+    public function get_retur() {
+        return $this->_retur;
+    }
+
+    public function get_void() {
+        return $this->_void;
+    }
+
+    public function get_lainnya() {
+        return $this->_lainnya;
+    }
+
+    public function get_kode_unit() {
+        return $this->_kode_unit;
+    }
+
+    public function get_nama_unit() {
+        return $this->_nama_unit;
     }
     
     public function __destruct() {
