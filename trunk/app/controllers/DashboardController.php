@@ -228,7 +228,7 @@ class DashboardController extends BaseController {
 
             'legends' => (object) array(
 
-                'labels' => array($mainchartData[0] . ' Miliar', $mainchartData[1] . ' Miliar', $mainchartData[2] . ' Miliar', $mainchartData[3] . ' Miliar', $mainchartData[4] . ' Miliar', $mainchartData[5] . ' Miliar', $mainchartData[6] . ' Miliar', $mainchartData[7] . ' Miliar', $mainchartData[8] . ' Miliar', $mainchartData2[9] . ' Miliar', $mainchartData2[10] . ' Miliar'),
+                'labels' => array($mainchartData[0] . ' Triliun', $mainchartData[1] . ' Triliun', $mainchartData[2] . ' Triliun', $mainchartData[3] . ' Triliun', $mainchartData[4] . ' Triliun', $mainchartData[5] . ' Triliun', $mainchartData[6] . ' Triliun', $mainchartData[7] . ' Triliun', $mainchartData[8] . ' Triliun', $mainchartData2[9] . ' Triliun', $mainchartData2[10] . ' Triliun'),
                 'colors' => array('#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#1f77b4', '#1f77b4')
 
               ),
@@ -596,33 +596,39 @@ class DashboardController extends BaseController {
         
     }
 
-    public function overviewKanwil($mode=null) {
+    public function overviewKanwil($mode, $unit=null) {
 
         $fetch = new DataOverview($this->registry);
 
+        if (!isset($unit)) {
+
+          $unit = Session::get('kd_satker');
+
+        }
+
         $filter1 = array();
-        $filter1[] = "SATKER IN (SELECT KDSATKER FROM T_SATKER WHERE KANWIL_DJPB = '" . Session::get('kd_satker') . "') ";
+        $filter1[] = "SATKER IN (SELECT KDSATKER FROM T_SATKER WHERE KANWIL_DJPB = '" . $unit . "') ";
 
         $filter2 = array();
-        $filter2[] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . substr(Session::get('kd_satker'),1,2) . "') ";
+        $filter2[] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL = '" . substr($unit,1,2) . "') ";
 
         $filter3 = array();
-        $filter3[] = "A.SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE KANWIL_DJPB = '" . Session::get('kd_satker') . "') ";
+        $filter3[] = "A.SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE KANWIL_DJPB = '" . $unit . "') ";
 
         $filter5 = array();
-        $filter5[] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL =  '" . substr(Session::get('kd_satker'),1,2) . "') ";
+        $filter5[] = "KDKPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL =  '" . substr($unit,1,2) . "') ";
 
         $belanjaHariIni = $fetch->fetchRealisasiPaguBelanja($filter1);
         $penerimaanHariIni = $fetch->sumRealisasiPenerimaan($filter1);
         $kontrakHariIni =  $fetch->fetchStatusRealisasiKontrak($filter3);
         $returHariIni = $fetch->fetchStatusRetur($filter5);
-        $lhpHariIni = $fetch->get_lhp_rekap(1, " KANWIL = '" . substr(Session::get('kd_satker'),1,2) . "' ");
+        $lhpHariIni = $fetch->get_lhp_rekap(1, " KANWIL = '" . substr($unit,1,2) . "' ");
         $sp2dHariIni = $fetch->fetchRekapSP2DTahunIni($filter2);
 
         if (!isset($mode) || ($mode == 1)) {
 
           $filter5 = array();
-          $filter5[] = "B.KANWIL_DJPB = '" . Session::get('kd_satker') . "'";
+          $filter5[] = "B.KANWIL_DJPB = '" . $unit . "'";
 
           $detailRealisasi = $fetch->get_realisasi_dash_filter($filter5);
 
@@ -712,7 +718,7 @@ class DashboardController extends BaseController {
         } else if ($mode == 2) {
 
           $filter5 = array();
-          $filter5[] = "B.KANWIL_DJPB = '" . Session::get('kd_satker') . "'";
+          $filter5[] = "B.KANWIL_DJPB = '" . $unit . "'";
 
           $detailRealisasi = $fetch->get_realisasi_numbers_dash_filter($filter5);
 
@@ -834,7 +840,7 @@ class DashboardController extends BaseController {
 
             'legends' => (object) array(
 
-                'labels' => array($mainchartData[0] . ' Miliar', $mainchartData[1] . ' Miliar', $mainchartData[2] . ' Miliar', $mainchartData[3] . ' Miliar', $mainchartData[4] . ' Miliar', $mainchartData[5] . ' Miliar', $mainchartData[6] . ' Miliar', $mainchartData[7] . ' Miliar', $mainchartData[8] . ' Miliar', $mainchartData2[9] . ' Miliar', $mainchartData2[10] . ' Miliar'),
+                'labels' => array($mainchartData[0] . ' Triliun', $mainchartData[1] . ' Triliun', $mainchartData[2] . ' Triliun', $mainchartData[3] . ' Triliun', $mainchartData[4] . ' Triliun', $mainchartData[5] . ' Triliun', $mainchartData[6] . ' Triliun', $mainchartData[7] . ' Triliun', $mainchartData[8] . ' Triliun', $mainchartData2[9] . ' Triliun', $mainchartData2[10] . ' Triliun'),
                 'colors' => array('#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#1f77b4', '#1f77b4')
 
               ),
@@ -846,7 +852,7 @@ class DashboardController extends BaseController {
         }  else if ($mode == 3) {
 
           $filtermain = array();
-          $filtermain[] = "KANWIL = '" . substr(Session::get('kd_satker'),1,2) . "' ";
+          $filtermain[] = "KANWIL = '" . substr($unit,1,2) . "' ";
 
           $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,1,$filtermain);
 
@@ -911,7 +917,7 @@ class DashboardController extends BaseController {
         } else if ($mode == 4) {
 
           $filtermain = array();
-          $filtermain[] = "KANWIL = '" . substr(Session::get('kd_satker'),1,2) . "' ";
+          $filtermain[] = "KANWIL = '" . substr($unit,1,2) . "' ";
 
           $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,2,$filtermain);
 
@@ -976,7 +982,7 @@ class DashboardController extends BaseController {
         } else if ($mode == 5) {
 
           $filtermain = array();
-          $filtermain[] = "KANWIL = '" . substr(Session::get('kd_satker'),1,2) . "' ";
+          $filtermain[] = "KANWIL = '" . substr($unit,1,2) . "' ";
 
           $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnitAll(2,$filtermain);
 
@@ -1035,6 +1041,21 @@ class DashboardController extends BaseController {
                 'colors' => $mainchartColor
 
               )
+
+          );
+
+        } else if ($mode == 6) {
+
+          $rekapUnit = $fetch->get_sp2d_rekap_tabel($unit,$lhpHariIni[0]->get_tgl_lhp());
+
+          //var_dump($legendLabels);
+
+          $main_tile = (object) array(
+
+            'type' => 'table-legacy-summary',
+            'title' => 'Rekapitulasi Status SPM, SP2D, dan LHP KPPN (Hari Ini)',
+
+            'summary_rows' => $rekapUnit
 
           );
 
@@ -1198,7 +1219,7 @@ class DashboardController extends BaseController {
 
           );
         
-        //echo(json_encode($this->view->content));
+        //echo(json_encode($this->view->content->main_tile));
 
         $this->view->switchers = array();
         $this->view->switchers[] = 'Persentase Realisasi Belanja Berdasarkan Jenis Belanja';
@@ -1206,6 +1227,7 @@ class DashboardController extends BaseController {
         $this->view->switchers[] = 'Persentase Realisasi Belanja Tertinggi per Satker';
         $this->view->switchers[] = 'Persentase Realisasi Belanja Terendah per Satker';
         $this->view->switchers[] = 'Persentase Realisasi Belanja per KPPN';
+        $this->view->switchers[] = 'Rekapitulasi Status SPM, SP2D, dan LHP KPPN (Hari Ini)';
 
         $this->view->baseURL = URL . 'dashboard/overviewKanwil/';
 
@@ -1213,36 +1235,42 @@ class DashboardController extends BaseController {
         
     }
 
-    public function overviewKPPN($mode=null) {
+    public function overviewKPPN($mode, $unit=null) {
 
         $fetch = new DataOverview($this->registry);
 
+        if (!isset($unit)) {
+
+          $unit = Session::get('kd_satker');
+
+        }
+
         $filter1 = array();
-        $filter1[] = "SATKER IN (SELECT KDSATKER FROM T_SATKER WHERE KPPN = '" . Session::get('kd_satker') . "') ";
+        $filter1[] = "SATKER IN (SELECT KDSATKER FROM T_SATKER WHERE KPPN = '" . $unit . "') ";
 
         $filter2 = array();
-        $filter2[] = "substr(INVOICE_NUM,8, 6) IN (SELECT KDSATKER FROM T_SATKER WHERE KPPN = '" . Session::get('kd_satker') . "') ";
+        $filter2[] = "substr(INVOICE_NUM,8, 6) IN (SELECT KDSATKER FROM T_SATKER WHERE KPPN = '" . $unit . "') ";
 
         $filter3 = array();
-        $filter3[] = "A.SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE KPPN = '" . Session::get('kd_satker') . "') ";
+        $filter3[] = "A.SEGMENT1 IN (SELECT KDSATKER FROM T_SATKER WHERE KPPN = '" . $unit . "') ";
 
         $filter5 = array();
-        $filter5[] = "KDKPPN = '" . Session::get('kd_satker') . "'";
+        $filter5[] = "KDKPPN = '" . $unit . "'";
 
         $belanjaHariIni = $fetch->fetchRealisasiPaguBelanja($filter1);
         $penerimaanHariIni = $fetch->sumRealisasiPenerimaan($filter1);
         $kontrakHariIni =  $fetch->fetchStatusRealisasiKontrak($filter3);
         $returHariIni = $fetch->fetchStatusRetur($filter5);
-        $lhpHariIni = $fetch->get_lhp_rekap(1);
+        $lhpHariIni = $fetch->get_lhp_rekap(1, "KPPN = '" . $unit ."' ");
 
         $filter6 = array();
-        $filter6[] = "KDKPPN = '" . Session::get('kd_satker') . "' ";
+        $filter6[] = "KDKPPN = '" . $unit . "' ";
         $sp2dHariIni = $fetch->fetchRekapSP2DTahunIni($filter6);
 
         if (!isset($mode) || ($mode == 1)) {
 
           $filter5 = array();
-          $filter5[] = "B.KPPN = '" . Session::get('kd_satker') . "'";
+          $filter5[] = "B.KPPN = '" . $unit . "'";
 
           $detailRealisasi = $fetch->get_realisasi_dash_filter($filter5);
 
@@ -1332,7 +1360,7 @@ class DashboardController extends BaseController {
         } else if ($mode == 2) {
 
           $filter5 = array();
-          $filter5[] = "B.KPPN = '" . Session::get('kd_satker') . "'";
+          $filter5[] = "B.KPPN = '" . $unit . "'";
 
           $detailRealisasi = $fetch->get_realisasi_numbers_dash_filter($filter5);
 
@@ -1466,7 +1494,7 @@ class DashboardController extends BaseController {
         } else if ($mode == 3) {
 
           $filtermain = array();
-          $filtermain[] = "KPPN = '" . Session::get('kd_satker') . "' ";
+          $filtermain[] = "KPPN = '" . $unit . "' ";
 
           $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,1,$filtermain);
 
@@ -1531,7 +1559,7 @@ class DashboardController extends BaseController {
         } else if ($mode == 4) {
 
           $filtermain = array();
-          $filtermain[] = "KPPN = '" . Session::get('kd_satker') . "' ";
+          $filtermain[] = "KPPN = '" . $unit . "' ";
 
           $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnit(1,2,$filtermain);
 
@@ -1598,6 +1626,7 @@ class DashboardController extends BaseController {
         $this->view->content = (object) array(
 
             'title' => 'Dashboard',
+            'subtitle' => 'KPPN ' . $unit,
             'type' => 'overview-default',
 
             'status_tiles' => array(
@@ -2003,7 +2032,7 @@ class DashboardController extends BaseController {
 
             'legends' => (object) array(
 
-                'labels' => array($mainchartData[0] . ' Miliar', $mainchartData[1] . ' Miliar', $mainchartData[2] . ' Miliar', $mainchartData[3] . ' Miliar', $mainchartData[4] . ' Miliar', $mainchartData[5] . ' Miliar', $mainchartData[6] . ' Miliar', $mainchartData[7] . ' Miliar', $mainchartData[8] . ' Miliar', $mainchartData2[9] . ' Miliar', $mainchartData2[10] . ' Miliar'),
+                'labels' => array($mainchartData[0] . ' Triliun', $mainchartData[1] . ' Triliun', $mainchartData[2] . ' Triliun', $mainchartData[3] . ' Triliun', $mainchartData[4] . ' Triliun', $mainchartData[5] . ' Triliun', $mainchartData[6] . ' Triliun', $mainchartData[7] . ' Triliun', $mainchartData[8] . ' Triliun', $mainchartData2[9] . ' Triliun', $mainchartData2[10] . ' Triliun'),
                 'colors' => array('#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#1f77b4', '#1f77b4')
 
               ),

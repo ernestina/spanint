@@ -9,53 +9,16 @@
 
             <div class="col-lg-8 col-md-6 col-sm-12">
 
-                <h2><?php echo $this->content->title; ?></h2>
+                <h2 style="margin-bottom: none; padding-bottom: none;"><?php echo $this->content->title; ?></h2><h4 style="margin-bottom: none; padding-bottom: none;"><?php echo $this->content->subtitle; ?></h4>
 
             </div>
             
             <div class="hidden-xs hidden-sm col-lg-4 col-md-6 col-sm-12 top-padded align-right">
 
-                <?php if (isset($this->content->parameters)) { ?>
-
-                    <?php foreach ($this->content->parameters as $parameter) { ?>
-
-                        <div class="header-parameters">
-                            
-                            <div class="parameter-name"><?php if (!isset($parameter->name) || ($parameter->name == '')) { echo '&nbsp;'; } else { echo $parameter->name; } ?></div>
-                            <div class="parameter-value"><?php echo $parameter->value; ?></div>
-
-                        </div>
-
-                    <?php } ?>
-
-                <?php } else { ?>
-
-                    <?php echo $this->content->subtitle; ?>
-
-                <?php } ?>
-
             </div>
             
             <div class="hidden-md hidden-lg col-sm-12 top-padded">
 
-                <?php if (isset($this->content->parameters)) { ?>
-
-                    <?php foreach ($this->content->parameters as $parameter) { ?>
-
-                        <div class="header-parameters">
-                            
-                            <div class="parameter-name"><?php if (!isset($parameter->name) || ($parameter->name == '')) { echo '&nbsp;'; } else { echo $parameter->name; } ?></div>
-                            <div class="parameter-value"><?php echo $parameter->value; ?></div>
-
-                        </div>
-
-                    <?php } ?>
-
-                <?php } else { ?>
-
-                    <?php echo $this->content->subtitle; ?>
-
-                <?php } ?>
 
             </div>
             
@@ -242,34 +205,186 @@
 
                             <div class="container-fluid">
 
-                                <div class="row top-padded-little">
-
-                                    <div id="mainChart" class="col-md-12">
-
-                                        <div id="main-chart" style="width: 100%; margin-top: 10px"> </div>
-
-                                    </div>
-
-                                </div>
-
-                                <?php if (isset($this->content->main_tile->legends)) { ?>
+                                <?php if (($this->content->main_tile->type != 'table-legacy-summary') && ($this->content->main_tile->type != 'table-legacy-unit')) { ?>
 
                                     <div class="row top-padded-little">
 
-                                        <div class="col-xs-12 top-padded-little"><div style="border-top: 1px solid #e5e5e5"></div></div>
+                                        <div id="mainChart" class="col-md-12">
 
-                                        <?php foreach ($this->content->main_tile->legends->labels as $lid=>$label) { ?>
+                                            <div id="main-chart" style="width: 100%; margin-top: 10px"> </div>
 
-                                            <div class="col-md-6 legend-item top-padded-little">
-                                                
-                                                <div class="container-fluid">        
-                                                    <div class="col-xs-3 legend-box" style="text-align: center; color: #fff; background: <?php echo $this->content->main_tile->legends->colors[$lid]; ?>"><?php echo $this->content->main_tile->categories[$lid]; ?></div>
-                                                    <div class="col-xs-9 legend-box"><?php echo $label; ?></div>
+                                        </div>
+
+                                    </div>
+
+                                    <?php if (isset($this->content->main_tile->legends)) { ?>
+
+                                        <div class="row top-padded-little">
+
+                                            <div class="col-xs-12 top-padded-little"><div style="border-top: 1px solid #e5e5e5"></div></div>
+
+                                            <?php foreach ($this->content->main_tile->legends->labels as $lid=>$label) { ?>
+
+                                                <div class="col-md-6 legend-item top-padded-little">
+                                                    
+                                                    <div class="container-fluid">        
+                                                        <div class="col-xs-3 legend-box" style="text-align: center; color: #fff; background: <?php echo $this->content->main_tile->legends->colors[$lid]; ?>"><?php echo $this->content->main_tile->categories[$lid]; ?></div>
+                                                        <div class="col-xs-9 legend-box"><?php echo $label; ?></div>
+                                                    </div>
+
                                                 </div>
 
-                                            </div>
+                                            <?php } ?>
 
-                                        <?php } ?>
+                                        </div>
+
+                                    <?php } ?>
+
+                                <?php } else if ($this->content->main_tile->type == 'table-legacy-summary') { ?>
+
+                                    <div class="row top-padded-little">
+
+                                        <div id="main-table-container" class="col-md-12" style="font-size: 11px">
+
+                                            <table class="dashtable">
+
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2" style="text-align: center;">No.</th>
+                                                        <th rowspan="2" style="text-align: left;">Unit</th>
+                                                        <th rowspan="2">SPM dalam Proses</th>
+                                                        <th colspan="5">Penerbitan SP2D</th>
+                                                        <th colspan="2">Retur SP2D</th>
+                                                        <th colspan="5">Status LHP</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Gaji</th>
+                                                        <th>Non Gaji</th>
+                                                        <th>Lainnya</th>
+                                                        <th>Void</th>
+                                                        <th>Total</th>
+                                                        <th>Sudah Proses</th>
+                                                        <th>Belum Proses</th>
+                                                        <th>Completed</th>
+                                                        <th>Validated</th>
+                                                        <th>Lainnya</th>
+                                                        <th>Error</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <?php if (empty($this->content->main_tile->summary_rows)) { ?>
+
+                                                        <td colspan=15 class="align-center">Tidak ada data.</td>
+
+                                                    <?php } else { ?>
+
+                                                        <?php
+
+                                                            $total_pos_spm = 0;
+                                                            
+                                                            $total_gaji = 0;
+                                                            $total_non_gaji = 0;
+                                                            $total_lainnya = 0;
+                                                            $total_void = 0;
+                                                    
+                                                            $total_retur_sudah_proses = 0;
+                                                            $total_retur_belum_proses = 0;
+
+                                                            $total_lhp_completed = 0;     
+                                                            $total_lhp_validated = 0;
+                                                            $total_lhp_error = 0;
+                                                            $total_lhp_etc = 0;
+                                                    
+                                                            $rows = 1;
+
+                                                        ?>
+
+                                                        <?php foreach ($this->content->main_tile->summary_rows as $value) { ?>
+
+                                                            <?php
+                                                            
+                                                                $total_pos_spm += $value->get_spm_dalam_proses();
+                                                            
+                                                                $total_gaji += $value->get_gaji();
+                                                                $total_non_gaji += $value->get_non_gaji();
+                                                                $total_lainnya += $value->get_lainnya();
+                                                                $total_void += $value->get_void();
+                                                            
+                                                                $total_retur_sudah_proses += $value->get_retur_sudah_proses();
+                                                                $total_retur_belum_proses += $value->get_retur_belum_proses();
+                                                            
+                                                                $total_lhp_completed += $value->get_lhp_completed();     
+                                                                $total_lhp_validated += $value->get_lhp_validated();
+                                                                $total_lhp_error += $value->get_lhp_error();
+                                                                $total_lhp_etc += $value->get_lhp_etc();
+
+                                                                $overtotal = 0 + $value->get_spm_dalam_proses() + $value->get_gaji() + $value->get_non_gaji() + $value->get_lainnya() + $value->get_void() + $value->get_retur_sudah_proses() + $value->get_retur_belum_proses() + $value->get_lhp_completed() + $value->get_lhp_validated() + $value->get_lhp_error() + $value->get_lhp_etc();
+
+                                                            ?>
+
+                                                            <?php if ($overtotal > 0 || substr($value->get_kode_unit(), 0 , 1) != 'K') { ?>
+
+                                                                <tr>
+                                                                    <td class="align-center"><?php echo $rows++; ?></td>
+                                                                    <td><a href="<?php echo URL; ?>dashboard/overviewKPPN/1/<?php echo $value->get_kode_unit(); ?>"><?php echo $value->get_nama_unit1(); ?></a></td>
+
+                                                                    <td class="align-center"><?php echo number_format($value->get_spm_dalam_proses());  ?></td> 
+
+                                                                    <td class="align-center"><?php echo number_format($value->get_gaji()); ?></td> 
+                                                                    <td class="align-center"><?php echo number_format($value->get_non_gaji()); ?></td> 
+                                                                    <td class="align-center"><?php echo number_format($value->get_lainnya()); ?></td>
+                                                                    <td class="align-center"><?php echo number_format($value->get_void()); ?></td> 
+                                                                    <td class="align-center"><?php echo number_format(($value->get_gaji() + $value->get_non_gaji() + $value->get_lainnya() + $value->get_void())); ?></td> 
+
+                                                                    <td class="align-center"><?php echo number_format($value->get_retur_sudah_proses()); ?></td> 
+                                                                    <td class="align-center"><?php echo number_format($value->get_retur_belum_proses()); ?></td>
+
+                                                                    <td class="align-center"><?php echo number_format($value->get_lhp_completed()); ?></td>
+                                                                    <td class="align-center"><?php echo number_format($value->get_lhp_validated()); ?></td>
+                                                                    <td class="align-center"><?php echo number_format($value->get_lhp_etc()); ?></td>
+                                                                    <td class="align-center"><?php echo number_format($value->get_lhp_error()); ?></td>
+                                                                    <td class="align-center"><?php echo number_format(($value->get_lhp_completed() + $value->get_lhp_validated() + $value->get_lhp_etc() + $value->get_lhp_error())); ?></td>
+                                                                </tr>
+
+                                                            <?php } ?>
+
+                                                        <?php } ?>
+                                                    
+                                                </tbody>
+
+                                                <tfoot>
+
+                                                     <tr>
+                                                        <td colspan=2 >Total</td>
+
+                                                        <td class="align-center"><?php echo number_format($total_pos_spm); ?></td> 
+
+                                                        <td class="align-center"><?php echo number_format($total_gaji); ?></td> 
+                                                        <td class="align-center"><?php echo number_format($total_non_gaji); ?></td> 
+                                                        <td class="align-center"><?php echo number_format($total_lainnya); ?></td>
+                                                        <td class="align-center"><?php echo number_format($total_void); ?></td> 
+                                                        <td class="align-center"><?php echo number_format(($total_gaji + $total_non_gaji + $total_lainnya + $total_void)); ?></td> 
+
+                                                        <td class="align-center"><?php echo number_format($total_retur_sudah_proses); ?></td> 
+                                                        <td class="align-center"><?php echo number_format($total_retur_belum_proses); ?></td>
+
+                                                        <td class="align-center"><?php echo number_format($total_lhp_completed); ?></td>
+                                                        <td class="align-center"><?php echo number_format($total_lhp_validated); ?></td>
+                                                        <td class="align-center"><?php echo number_format($total_lhp_etc); ?></td>
+                                                        <td class="align-center"><?php echo number_format($total_lhp_error); ?></td>
+                                                        <td class="align-center"><?php echo number_format(($total_lhp_completed + $total_lhp_validated + $total_lhp_etc + $total_lhp_error)); ?></td>
+                                                    </tr>
+                                                    
+                                                </tfoot>
+
+                                                <?php } ?>
+                                                
+                                            </table>
+
+                                        </div>
 
                                     </div>
 

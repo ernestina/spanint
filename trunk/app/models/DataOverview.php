@@ -68,7 +68,10 @@ class DataOverview {
     private $_void;
 
     private $_nama_unit;
+    private $_nama_unit1;
     private $_kode_unit;
+
+    private $_spm_dalam_proses;
     
     private $_table1 = 'PROSES_REVISI';
     private $_table2 = 'T_SATKER';
@@ -157,6 +160,254 @@ class DataOverview {
     }
 
     //Details
+
+    public function get_sp2d_rekap_tabel($unit = null, $tanggal_lhp = null) {
+        if (!isset($unit)) {
+            $sql = "select      check_date,
+                                kdkanwil,
+                                status_lookup_code, 
+                                jenis_sp2d, 
+                                count(check_number) jumlah
+                    from        (select distinct ap_checks_all_v.check_number, 
+                                        ap_checks_all_v.status_lookup_code, 
+                                        ap_checks_all_v.jenis_sp2d, 
+                                        ap_checks_all_v.amount, 
+                                        ap_checks_all_v.exchange_rate, 
+                                        ap_checks_all_v.check_date, 
+                                        ap_checks_all_v.segment1,
+                                        ap_checks_all_v.kdkppn,
+                                        t_kppn.kdkanwil kdkanwil
+                                from    ap_checks_all_v left join t_kppn
+                                on      ap_checks_all_v.kdkppn = t_kppn.kdkppn 
+                                where   ap_checks_all_v.amount >= 0
+                                and     ap_checks_all_v.check_date=to_date('" . date("Ymd") ."', 'yyyymmdd')) 
+                    group by    check_date, 
+                                kdkanwil,
+                                status_lookup_code, 
+                                jenis_sp2d 
+                    order by    check_date desc, 
+                                kdkanwil asc";
+        } else {
+            $sql = "select      check_date,
+                                kdkppn,
+                                status_lookup_code, 
+                                jenis_sp2d, 
+                                count(check_number) jumlah
+                    from        (select distinct check_number, 
+                                        status_lookup_code, 
+                                        jenis_sp2d, 
+                                        amount, 
+                                        exchange_rate, 
+                                        check_date, 
+                                        segment1,
+                                        kdkppn
+                                from    ap_checks_all_v
+                                where   kdkppn in (select kdkppn from t_kppn where kdkanwil = '" . substr($unit, 1, 2) . "')
+                                and     amount >= 0
+                                and     ap_checks_all_v.check_date=to_date('" . date("Ymd") ."', 'yyyymmdd')) 
+                    group by    check_date, 
+                                kdkppn,
+                                status_lookup_code, 
+                                jenis_sp2d 
+                    order by    check_date desc, 
+                                kdkppn asc";        
+        }
+        
+        if (!isset($unit)) {
+            $sql2 = "select     t_kppn.kdkanwil, 
+                                retur_span_v.status_retur,
+                                count(retur_span_v.status_retur) jumlah
+                    from        retur_span_v
+                    left join   t_kppn 
+                    on          retur_span_v.kdkppn=t_kppn.kdkppn
+                    group by    kdkanwil, status_retur
+                    order by    kdkanwil asc";
+        } else {
+            $sql2 = "select     kdkppn, 
+                                status_retur,
+                                count(status_retur) jumlah
+                    from        retur_span_v
+                    where       kdkppn in (select kdkppn from t_kppn where kdkanwil = '" . substr($unit, 1, 2) . "')
+                    group by    kdkppn, status_retur
+                    order by    kdkppn asc";
+        }
+        
+        if (!isset($unit)) {
+            $sql3 = "select     kdkanwil, nmkanwil from t_kanwil where kdkanwil != '00'";
+        } else {
+            $sql3 = "select     kdkppn, nmkppn from t_kppn where kdkanwil = '" . substr($unit, 1, 2) ."'";
+        }
+        
+        if (!isset($unit)) {
+            $sql4 = "select     t_kppn.kdkanwil,
+                                sum(jumlah) jumlah 
+                    from        rekap_spm_dashboard 
+                    left join   t_kppn 
+                    on          rekap_spm_dashboard.kdkppn=t_kppn.kdkppn
+                    group by    kdkanwil
+                    order by    kdkanwil asc";
+        } else {
+            $sql4 = "select     kdkppn,
+                                jumlah 
+                    from        rekap_spm_dashboard 
+                    order by    kdkppn";
+        }
+        
+        if (!isset($unit)) {
+            $sql5 = "select     kanwil,
+                                status,
+                                sum(jumlah) jumlah
+                    from        spgr_mpn_dashboard
+                    where       tanggal = to_date('" . $tanggal_lhp . "','dd-mm-yyyy')
+                    group by    kanwil, status
+                    order by    kanwil, status";
+        } else {
+            $sql5 = "select     kppn,
+                                status,
+                                sum(jumlah) jumlah
+                    from        spgr_mpn_dashboard
+                    where       tanggal = to_date('" . $tanggal_lhp . "','dd-mm-yyyy')
+                    group by    kppn, status
+                    order by    kppn, status";
+        }
+        
+        //echo($sql);
+        //echo($sql5);
+        
+        $return = array();
+        
+        $result3 = $this->db->select($sql3);
+        
+        foreach ($result3 as $val) {
+            
+            $d_data = new $this($this->registry);
+                        
+            if (!isset($unit)) { $d_data->set_kode_unit("K" . $val["KDKANWIL"]); } else { $d_data->set_kode_unit($val["KDKPPN"]); }
+            if (!isset($unit)) { $d_data->set_nama_unit1("KANWIL " . $val["NMKANWIL"]); } else { $d_data->set_nama_unit1("KPPN " . $val["NMKPPN"]); }
+            
+            $d_data->set_void(0);
+            $d_data->set_gaji(0);
+            $d_data->set_non_gaji(0);
+            $d_data->set_lainnya(0);
+            $d_data->set_retur_sudah_proses(0);
+            $d_data->set_retur_belum_proses(0);
+            $d_data->set_spm_dalam_proses(0);
+            $d_data->set_lhp_completed(0);
+            $d_data->set_lhp_validated(0);
+            $d_data->set_lhp_error(0);
+            $d_data->set_lhp_etc(0);
+
+            $return[] = $d_data;
+            
+        }
+        
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+            $already_added = false;
+            
+            
+            if (!isset($unit)) { $kolomunit = "K" . $val["KDKANWIL"]; } else { $kolomunit = $val["KDKPPN"]; }
+            
+            foreach ($return as $ret) {                
+                if ($ret->get_kode_unit() == $kolomunit) {
+                    $already_added = true;
+                    
+                    if ($val["STATUS_LOOKUP_CODE"] == "VOIDED") {
+                        $ret->set_void($ret->get_void() + $val["JUMLAH"]);
+                    } else {
+                        if ($val["JENIS_SP2D"] == "GAJI") { $ret->set_gaji($ret->get_gaji() + $val["JUMLAH"]); }
+                        else if ($val["JENIS_SP2D"] == "NON GAJI") { $ret->set_non_gaji($ret->get_non_gaji() + $val["JUMLAH"]); }
+                        else { $ret->set_lainnya($ret->get_lainnya() + $val["JUMLAH"]); }
+                    }
+                }
+            }
+        }
+        
+        $result2 = $this->db->select($sql2);
+        
+        //echo($sql2);
+        
+        foreach ($result2 as $val) {
+        
+            foreach ($return as $ret) {
+                if (!isset($unit)) {
+                    $kodeunit = substr($ret->get_kode_unit(), 1, 2);
+                } else {
+                    $kodeunit = $ret->get_kode_unit();
+                }
+                
+                if (!isset($unit)) { $kolomunit = $val["KDKANWIL"]; } else { $kolomunit = $val["KDKPPN"]; }
+                if ($kodeunit == $kolomunit) {
+                    
+                    if ($val["STATUS_RETUR"] == "SUDAH PROSES") {
+                        $ret->set_retur_sudah_proses($ret->get_retur_sudah_proses() + $val["JUMLAH"]);
+                    } else {
+                        $ret->set_retur_belum_proses($ret->get_retur_belum_proses() + $val["JUMLAH"]);
+                    }
+                    
+                    break;
+                }
+            }
+            
+        }
+        
+        $result4 = $this->db->select($sql4);
+        
+        foreach ($result4 as $val) {
+        
+            foreach ($return as $ret) {
+                if (!isset($unit)) {
+                    $kodeunit = substr($ret->get_kode_unit(), 1, 2);
+                } else {
+                    $kodeunit = $ret->get_kode_unit();
+                }
+                
+                if (!isset($unit)) { $kolomunit = $val["KDKANWIL"]; } else { $kolomunit = $val["KDKPPN"]; }
+                if ($kodeunit == $kolomunit) {
+                    
+                    $ret->set_spm_dalam_proses($ret->get_spm_dalam_proses() + $val["JUMLAH"]);
+                    
+                    break;
+                }
+            }
+            
+        }
+        
+        $result5 = $this->db->select($sql5);
+        
+        foreach ($result5 as $val) {
+        
+            foreach ($return as $ret) {
+                if (!isset($unit)) {
+                    $kodeunit = substr($ret->get_kode_unit(), 1, 2);
+                } else {
+                    $kodeunit = $ret->get_kode_unit();
+                }
+                
+                if (!isset($unit)) { $kolomunit = $val["KANWIL"]; } else { $kolomunit = $val["KPPN"]; }
+                if ($kodeunit == $kolomunit) {
+                    
+                    if ($val['STATUS'] == 'Completed') {
+                        $ret->set_lhp_completed($ret->get_lhp_completed() + $val['JUMLAH']);
+                    } else if ($val['STATUS'] == 'Validated') {
+                        $ret->set_lhp_validated($ret->get_lhp_validated() + $val['JUMLAH']);
+                    } else if ($val['STATUS'] == 'Error') {
+                        $ret->set_lhp_error($ret->get_lhp_error() + $val['JUMLAH']);
+                    } else {
+                        $ret->set_lhp_etc($ret->get_lhp_etc() + $val['JUMLAH']);
+                    }
+                    
+                    break;
+                }
+            }
+            
+        }
+        
+        //var_dump($return);
+        
+        return $return;                
+    }
 
     public function fetchRealisasiPaguBelanjaPerUnitBAES1($mode, $sort, $filter=null) {
         
@@ -1571,6 +1822,14 @@ class DataOverview {
         $this->_nama_unit = $nama_unit;
     }
 
+    public function set_nama_unit1($nama_unit1) {
+        $this->_nama_unit1 = $nama_unit1;
+    }
+
+    public function set_spm_dalam_proses($spm_dalam_proses) {
+        $this->_spm_dalam_proses = $spm_dalam_proses;
+    }
+
     //Get
     
     public function get_ba() {
@@ -1807,6 +2066,14 @@ class DataOverview {
 
     public function get_nama_unit() {
         return $this->_nama_unit;
+    }
+
+    public function get_nama_unit1() {
+        return $this->_nama_unit1;
+    }
+
+    public function get_spm_dalam_proses() {
+        return $this->_spm_dalam_proses;
     }
     
     public function __destruct() {
