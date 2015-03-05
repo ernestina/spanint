@@ -127,7 +127,6 @@ $akses['DataPMRTPKN'] = array(
  */
 $akses['PDFPKN'] = array(
     '__construct',
-    'index',
     'detailDroping_PDF',
     'monitoringDroping_PDF',
     'monitoringPelimpahan_PDF',

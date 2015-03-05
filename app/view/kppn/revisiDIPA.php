@@ -26,7 +26,12 @@
     } else {	
 		$kdsatker =Session::get('kd_satker');
     }
-
+	if (isset($this->revisi)) {
+        $kdrevisi = $this->revisi;
+       
+    } else {
+        $kdrevisi = 'null';
+    }
     if (isset($this->output_code)) {
         $kdoutput = $this->output_code;
         $kdoutput = rtrim($kdoutput);
@@ -55,8 +60,8 @@
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                     </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/RevisiDipa_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/RevisiDipa_PDF/<?php echo $kdsatker . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS">EXCEL</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/RevisiDipa_PDF/<?php echo $kdsatker . "/" . $kdrevisi . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/RevisiDipa_PDF/<?php echo $kdsatker . "/" . $kdrevisi . "/" . $kdakun . "/" . $kdoutput . "/" . $kdprogram . "/" . $kdtgl_awal . "/" . $kdtgl_akhir; ?>/XLS">EXCEL</a></li>
                           </ul>
         </div>
 

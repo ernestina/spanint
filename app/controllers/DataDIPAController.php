@@ -804,7 +804,7 @@ class DataDIPAController extends BaseController {
             }
 			if ($_POST['KodeBA'] != '') {
                 $filter[$no++] = "SUBSTR(A.PROGRAM,1,3) = '" . $_POST['KodeBA'] . "'";
-                //$this->view->satker_code = $_POST['KodeBA'];
+                $this->view->ba_code = $_POST['KodeBA'];
             }
             $this->view->data = $d_spm1->get_realisasi_fa_global_filter($filter);
 			$this->view->data2 = $d_spm1->get_nama_BA($_POST['kdkppn']);

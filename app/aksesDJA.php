@@ -101,7 +101,6 @@ $akses['PanduanDJA'] = array(
  */
 $akses['PDFDJA'] = array(
     '__construct',
-    'index',
     'DataRealisasi_PDF',
     'DataRealisasiBA_PDF',
     'DataRealisasiTransfer_PDF',

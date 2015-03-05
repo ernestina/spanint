@@ -70,7 +70,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		$border = 0;
         $h = 40;
         
-        $this->SetFont('Arial', 'B', 9);
+        $this->SetFont('Arial', 'B', 7);
         $ukuran_kolom_pagu_total_sisa = 70;
         $ukuran_kolom_jenis_belanja = 75;
 		$ukuran_kolom_jenis_belanja1=$ukuran_kolom_jenis_belanja*9;
@@ -83,7 +83,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $left = $this->GetX();
         $this->Cell($kolom1, $h, 'No', 1, 0, 'C', true);
         $this->SetX($left += $kolom1);
-        $this->Cell($kolom3, $h, 'Jenis Kewenangan', 1, 0, 'C', true);
+        $this->Cell($kolom3, $h, 'Kode|Jenis Kegiatan', 1, 0, 'C', true);
         $this->SetX($left += $kolom3);
         $this->Cell($kolom2, $h, 'Keterangan', 1, 0, 'C', true);
         $this->SetX($left += $kolom2);
@@ -116,7 +116,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Total', 1, 1, 'C', true);
         $this->Ln(3);
 
-        $this->SetFont('Arial', '', 7);
+        $this->SetFont('Arial', '', 6);
         $this->SetWidths(array($kolom1, $kolom3, $kolom2,$ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja, $ukuran_kolom_jenis_belanja,$ukuran_kolom_jenis_belanja, $ukuran_kolom_pagu_total_sisa));
         $this->SetAligns(array('C', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
         if (count($this->data) == 0) {
@@ -186,7 +186,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 			
                 $this->Row(
                         array($no++,
-                            $value->get_ba()." ".strtoupper($value->get_nmba()),
+                            $value->get_ba()." | ".strtoupper($value->get_nmba()),
                             'PAGU'."\n".'REALISASI'."\n".'PERSENTASE'."\n".'SISA',
                             number_format($value->get_pagu_51())."\n".number_format($value->get_belanja_51())."\n".$nil_51."\n".number_format($value->get_pagu_51()-$value->get_belanja_51()),
                             number_format($value->get_pagu_52())."\n".number_format($value->get_belanja_52())."\n".$nil_52."\n".number_format($value->get_pagu_52()-$value->get_belanja_52()),

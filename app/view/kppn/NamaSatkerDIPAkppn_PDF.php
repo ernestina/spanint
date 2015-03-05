@@ -70,7 +70,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $ukuran_kolom_satker = 75;
         $ukuran_kolom_akun = 40;
         $ukuran_kolom_dana = 200;
-        $ukuran_kolom_deskripsi = 160;
+        $ukuran_kolom_deskripsi = 180;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
@@ -78,8 +78,16 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->SetX($left += 30);
         $this->Cell($ukuran_kolom_pagu_total_sisa, $h, 'Kode Satker', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
-        $this->Cell($ukuran_kolom_dana, $h, 'Nama Satker', 1, 0, 'C', true);
-        $this->SetX($left += $ukuran_kolom_dana);
+        $this->Cell($ukuran_kolom_deskripsi, $h, 'Nama Satker', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_deskripsi);
+		        $this->Cell($ukuran_kolom_akun, $h, 'KPPN', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_akun);
+		        $this->Cell($ukuran_kolom_pagu_total, $h, 'No. DIPA', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_pagu_total);
+		        $this->Cell($ukuran_kolom_pagu_total, $h, 'Total Pagu Belanja', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_pagu_total);
+		        $this->Cell($ukuran_kolom_pagu_total, $h, 'Total Pagu Pendapatan', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom_pagu_total);
         $this->Cell($ukuran_kolom_pagu_total, $h, 'Tanggal Posting Revisi', 1, 0, 'C', true);
         $px1 = $this->GetX();
         $this->SetX($left += $ukuran_kolom_pagu_total_sisa);
@@ -92,15 +100,25 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 
         $this->SetFont('Arial', '', 7);
         $this->SetWidths(array(30, $ukuran_kolom_pagu_total_sisa,
-		$ukuran_kolom_dana, $ukuran_kolom_pagu_total,
+		$ukuran_kolom_deskripsi,$ukuran_kolom_akun,
+		$ukuran_kolom_pagu_total,$ukuran_kolom_pagu_total,
+		$ukuran_kolom_pagu_total, $ukuran_kolom_pagu_total,
 		$ukuran_kolom_satker));
-        $this->SetAligns(array('C', 'C', 'L', 'C', 'C'));
+        $this->SetAligns(array('C', 'C',
+		'L', 'C',
+		'C', 'R',
+		'R', 'C',
+		'C'));
        
 	   if (count($this->data) == 0) {
 			$this->Row(
                     array('',
                         'N I H I L',
                         '',
+                        '',
+						'',
+                        '',
+						'',
                         '',
                         ''
                     )
@@ -116,6 +134,10 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 						array($no++,
 							$value->get_kdsatker(),
 							$value->get_nmsatker(),
+							$value->get_kppn(),
+							$value->get_dipa_no(),
+							number_format($value->get_total_pagu_belanja()),
+							number_format($value->get_total_pagu_pendapatan()),
 							$value->get_tgl_rev(),
 							$value->get_rev()
 						)
@@ -186,7 +208,7 @@ $options = array(
     'filename' => $nmfile, //nama file penyimpanan, kosongkan jika output ke browser   
     'destinationfile' => 'D', //I=inline browser (default), F=local file, D=download
     'paper_size' => 'A4', //paper size: F4, A3, A4, A5, Letter, Legal
-    'orientation' => 'P' //orientation: P=portrait, L=landscape
+    'orientation' => 'L' //orientation: P=portrait, L=landscape
 );
 $tabel = new FPDF_AutoWrapTable($data, $options, $kdtgl_awal, $kdtgl_akhir, $nm_kppn);
 $tabel->printPDF();

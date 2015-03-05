@@ -18,7 +18,7 @@
                 //----------------------------------------------------
                 //Development History.Revisi : 0 Kegiatan :1.mencetak hasil filter ke dalam pdf Dibuat oleh : Rifan Abdul Rachman Tanggal dibuat : 18-07-2014  File yang diubah : monitoringUser.php  
                 if (Session::get('role') == ADMIN || Session::get('role') == DJA || Session::get('role') == KANWIL) {
-                    if (isset($this->d_nama_kppn) || isset($this->d_kd_satker) || isset($this->d_nm_satker) || isset($this->d_kd_revisi)) {
+                    if (isset($this->d_nama_kppn) || isset($this->kdsatker) || isset($this->nmsatker) || isset($this->d_kd_revisi)) {
                         if (isset($this->d_nama_kppn)) {
                             foreach ($this->d_nama_kppn as $kppn) {
                                 $kdkppn = $kppn->get_kd_satker();
@@ -26,17 +26,17 @@
                         } else {
                             $kdkppn = 'null';
                         }
-                        if (isset($this->d_kd_satker)) {
-                            $kdsatker = $this->d_kd_satker;
-                        } else {
-                            $kdsatker = 'null';
-                        }
+						if (isset($this->kdsatker)) {
+							$kdsatker = $this->kdsatker;
+						} else {
+							$kdsatker = 'null';
+						}
 
-                        if (isset($this->d_nm_satker)) {
-                            $nmsatker = $this->d_nm_satker;
-                        } else {
-                            $nmsatker = 'null';
-                        }
+						if (isset($this->nmsatker)) {
+							$nmsatker = $this->nmsatker;
+						} else {
+							$nmsatker = 'null';
+						}
 
                         if (isset($this->d_kd_revisi)) {
                             $kdrevisi = $this->d_kd_revisi;
@@ -66,17 +66,17 @@
                     } else {
                         $kdkppn = Session::get('id_user');
                     }
-                    if (isset($this->d_kd_satker)) {
-                        $kdsatker = $this->d_kd_satker;
-                    } else {
-                        $kdsatker = 'null';
-                    }
+					if (isset($this->kdsatker)) {
+						$kdsatker = $this->kdsatker;
+					} else {
+						$kdsatker = 'null';
+					}
 
-                    if (isset($this->d_nm_satker)) {
-                        $nmsatker = $this->d_nm_satker;
-                    } else {
-                        $nmsatker = 'null';
-                    }
+					if (isset($this->nmsatker)) {
+						$nmsatker = $this->nmsatker;
+					} else {
+						$nmsatker = 'null';
+					}
 
                     if (isset($this->d_kd_revisi)) {
                         $kdrevisi = $this->d_kd_revisi;
