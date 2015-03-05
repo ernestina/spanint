@@ -460,7 +460,7 @@ function generateChart() {
 
             bar: {
                 width: {
-                    ratio: 0.8
+                    ratio: 0.4
                 }
             }
 
@@ -670,7 +670,7 @@ function generateChart() {
 
                 bar: {
                     width: {
-                        ratio: 0.8
+                        ratio: 0.4
                     }
                 },
 
