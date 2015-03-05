@@ -362,6 +362,7 @@ class DataRealisasiES1 {
 				AND A.SATKER =B.KDSATKER			
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(AKUN,1,1) = '4'
+				AND BUDGET_TYPE = '2'
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
 				";
@@ -418,6 +419,7 @@ class DataRealisasiES1 {
 				AND A.SATKER =B.KDSATKER			
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(AKUN,1,1) = '4'
+				AND BUDGET_TYPE = '2'
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
 				";
