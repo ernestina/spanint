@@ -186,6 +186,7 @@ $registry->auth->add_access('dataRetur','kanwil',$akses['DataReturKanwil']);
 $registry->auth->add_access('dataBPN','kanwil',$akses['DataBPNKanwil']);
 $registry->auth->add_access('dataMpnBi','kanwil',$akses['DataMpnBiKanwil']);
 $registry->auth->add_access('dataPDR','kanwil',$akses['DataPDRKanwil']);
+$registry->auth->add_access('BA_ES1','kanwil',$akses['BA_ES1Kanwil']);
 
 //level dja
 $registry->auth->add_access('auth','dja',$akses['AuthDJA']);

@@ -83,6 +83,9 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == SATKER) {
             $filter[$no++] = "B.KDSATKER = '" . Session::get('kd_satker') . "'";
         }
+		if (Session::get('role') == KANWIL) {
+            $filter[$no++] = "SUBSTR(B.KANWIL_DJPB,2,2) = '" . Session::get('id_user') . "'";
+        }
         if ($eselon1 != null) {
             $filter[$no++] = "B.BAES1 = '" . $eselon1 . "'";
             $this->view->eselon1 = $eselon1;
@@ -103,8 +106,12 @@ class BA_ES1Controller extends BaseController {
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
-        $this->view->data = $d_spm1->get_ba_pendapatan_filter($filter);
-
+		if(Session::get('role') == KANWIL) {
+			$this->view->data = $d_spm1->get_kanwil_pendapatan_filter($filter);
+		}
+		else {
+			$this->view->data = $d_spm1->get_ba_pendapatan_filter($filter);		
+		}
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiPenerimaan');
@@ -158,7 +165,9 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == ES1) {
             $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
         }
-
+		if (Session::get('role') == KANWIL) {
+            $filter[$no++] = "SUBSTR(B.KANWIL_DJPB,2,2) = '" . Session::get('id_user') . "'";
+        }
 
         if (isset($_POST['submit_file'])) {
 
@@ -178,11 +187,15 @@ class BA_ES1Controller extends BaseController {
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
-
-        $d_spm = new DataNamaSatker($this->registry);
-        $this->view->data1 = $d_spm->get_es1_dipa_filter();
-        $this->view->data = $d_spm1->get_kl_per_es1satker_pendapatan_filter($filter);
-
+		
+		if(Session::get('role') == KANWIL) {
+			$this->view->data = $d_spm1->get_kanwil_per_es1satker_pendapatan_filter($filter);
+		}
+		else {					
+			$d_spm = new DataNamaSatker($this->registry);
+			$this->view->data1 = $d_spm->get_es1_dipa_filter();
+			$this->view->data = $d_spm1->get_kl_per_es1satker_pendapatan_filter($filter);
+		}
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/DataRealisasiPenerimaanSatkerES1');
@@ -264,7 +277,9 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == ES1) {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         }
-
+		if (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KANWIL = '" . Session::get('id_user') . "'";
+        }
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kdlokasi'] != '') {
@@ -448,6 +463,9 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == ES1) {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         }
+		if (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KANWIL = '" . Session::get('id_user') . "'";
+        }
 
         if (isset($_POST['submit_file'])) {
 
@@ -481,6 +499,9 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == ES1) {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         }
+		if (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KANWIL = '" . Session::get('id_user') . "'";
+        }
 
         if (isset($_POST['submit_file'])) {
 
@@ -513,6 +534,9 @@ class BA_ES1Controller extends BaseController {
         }
         if (Session::get('role') == ES1) {
             $filter[$no++] = "SUBSTR(A.PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        }
+		if (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KANWIL = '" . Session::get('id_user') . "'";
         }
 
         if ($wilayah != '') {

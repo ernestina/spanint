@@ -53,6 +53,23 @@ $akses['DataPDRKanwil'] = array(
 );
 
 /*
+ * akses MENU BAES1
+ */
+/*
+ * akses MENU BAES1
+ */
+$akses['BA_ES1Kanwil'] = array(
+    '__construct',
+    'DataRealisasiKewenanganBAES1',
+    'DataRealisasiSumberDanaBAES1',
+	'DataRealisasiWilayahBAES1',
+	'DataRealisasiKabupatenBAES1',
+	'DataRealisasiPenerimaanBA',
+	'DataRealisasiPenerimaanPerSatkerES1',
+    '__destruct'
+);
+
+/*
  * akses modul DataDIPA User
  */
 $akses['DataDIPAKanwil'] = array(
@@ -79,6 +96,7 @@ $akses['DataDIPAKanwil'] = array(
     'DetailRevisi_PDF',
     'RealisasiFA_1_minus_51',
     'RealisasiFA_1_minus',
+	'DataRealisasiKegiatan',
     '__destruct'
 );
 

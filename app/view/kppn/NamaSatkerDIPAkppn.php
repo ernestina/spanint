@@ -154,6 +154,10 @@
                 <th class="align-center">No.</th>
                 <th class='align-center'>Kode Satker</th>
                 <th>Nama Satker</th>
+				<th>KPPN</th>
+				<th>No. DIPA</th>
+				<th>Total Pagu <br>Belanja </th>
+				<th>Total Pagu <br>Pendapatan </th>
                 <th class="align-center">Tanggal Posting Revisi</th>
                 <th class="align-center">No. Revisi Terakhir</th>
                 <!--th>KPPN</th-->
@@ -171,9 +175,12 @@
                         echo "<tr>	";
                         echo "<td class='align-center'>" . $no++ . "</td>";
                         //echo "<td>" . $value->get_kppn() . "</td>";
-                        echo "<td class='align-center'><a href=" . URL . "dataDIPA/RevisiDipa/" . $value->get_kdsatker() . " >" . $value->get_kdsatker() . "</a></td>";
-                        //echo "<td>" . $value->get_kdsatker() . "</td>";
+                        echo "<td class='align-center'><a href=" . URL . "dataDIPA/RevisiDipa/" . $value->get_kdsatker() . "/" . $value->get_rev() . " >" . $value->get_kdsatker() . "</a></td>";                        
                         echo "<td class='ratakiri'>" . $value->get_nmsatker() . "</td>";
+						echo "<td class='align-center'>" . $value->get_kppn() . "</td>";
+						echo "<td class='align-left'>" .$value->get_dipa_no(). "</td>";
+						echo "<td class='align-right'>" .number_format($value->get_total_pagu_belanja()). "</td>";
+						echo "<td class='align-right'>" .number_format($value->get_total_pagu_pendapatan()). "</td>";
                         echo "<td class='align-center'>" . $value->get_tgl_rev() . "</td>";
                         echo "<td class='align-center'>" . $value->get_rev() . "</td>";
                         //echo "<td class='ratakanan'>" . $value->get_total_sp2d() . "</td>";
@@ -209,7 +216,7 @@
                         <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
                         <label class="isian">Kode KPPN: </label>
                         <select class="form-control" type="text" name="kdkppn" id="kdkppn">
-                            <option value='' selected>- pilih -</option>
+                        <option value='' selected>- Semua KPPN -</option>  
     <?php
     foreach ($this->kppn_list as $value1) {
         if ($kode_kppn == $value1->get_kd_d_kppn()) {
