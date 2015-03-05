@@ -9,7 +9,21 @@
                 <h2><?php echo $this->page_title; ?></h2>
             </div>
             
+            <div class="col-lg-1 col-md-2 col-sm-12 top-padded"></div>
             <div class="col-lg-1 col-md-2 col-sm-12 top-padded">
+                <div class="btn-group-sm">
+                        <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
+                        </button>
+                              <ul class="dropdown-menu" role="menu">
+                                <?php if (isset($this->pdf_url)) { ?>
+                                <li><a href="<?php echo ($this->pdf_url); }?>">PDF</a></li>
+                                <?php if (isset($this->xls_url)) { ?>  
+                                <li><a href="<?php echo ($this->xls_url); }?>">EXCEL</a></li>
+                              </ul>
+                </div>
+            </div>
+            
+            <!--div class="col-lg-1 col-md-2 col-sm-12 top-padded">
                 <?php if (isset($this->xls_url)) { ?>
                 <a href="<?php echo ($this->xls_url); ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> XLS</a>
                 <?php } ?>
@@ -19,7 +33,7 @@
                 <?php if (isset($this->pdf_url)) { ?>
                 <a href="<?php echo ($this->pdf_url); ?>" style="width: 100%" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> PDF</a>
                 <?php } ?>
-            </div>
+            </div-->
 
             <div class="col-lg-1 col-md-2 col-sm-12 top-padded">
                 <?php if (isset($this->filters)) { ?>
