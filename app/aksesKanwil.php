@@ -66,6 +66,15 @@ $akses['BA_ES1Kanwil'] = array(
 	'DataRealisasiKabupatenBAES1',
 	'DataRealisasiPenerimaanBA',
 	'DataRealisasiPenerimaanPerSatkerES1',
+        'DataRealisasiKegiatanBA',
+    'DataRealisasiOutputBA',
+    'DataFaBaPerJenbel',
+    'DataFaBaPerSdana',
+    'DataFaBaSatEs1',
+    'DataFaEs1PerSat',
+    'DataFaEs1SatJenbel',
+    'DataFaEs1SatSdana',
+    'DetailEncumbrances',
     '__destruct'
 );
 

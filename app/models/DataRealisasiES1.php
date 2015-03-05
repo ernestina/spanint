@@ -547,11 +547,12 @@ class DataRealisasiES1 {
 
    public function get_ba_persates1_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT SUBSTR(program,1,5) KODE_KEGIATAN, C.nmes1 NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
+        $sql = "SELECT SUBSTR(program,1,5) KODE_KEGIATAN, C.nmes1||' '||d.nmba NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
 				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
                                 FROM "
                 . $this->_table1 . " A LEFT JOIN  "
                 . $this->_table4 . " C ON SUBSTR(A.program,1,5)=C.kdes1 LEFT JOIN "
+                . $this->_table2 . " D ON SUBSTR(A.program,1,3)=D.KDBA LEFT JOIN "
                 . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' 
@@ -562,7 +563,7 @@ class DataRealisasiES1 {
         foreach ($filter as $filter1) {
             $sql .= " AND " . $filter1;
         }
-        $sql .= " GROUP BY SUBSTR(program,1,5), C.nmes1";
+        $sql .= " GROUP BY SUBSTR(program,1,5), C.nmes1,d.nmba";
         $sql .=" union all 
                 SELECT SUBSTR(program,1,5)||'-'||satker KODE_KEGIATAN, C.nmsatker NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
 				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
