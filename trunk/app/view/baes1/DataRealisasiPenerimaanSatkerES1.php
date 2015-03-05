@@ -189,7 +189,7 @@
 
                 <div class="modal-body">
 
-<?php if (isset($this->data)) { ?>
+<?php if (isset($this->data) and Session::get('role') != KANWIL) { ?>
                         <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
                         <label class="isian">Eselon 1: </label>
                         <select class="form-control" type="text" name="eselon1" id="eselon1">
