@@ -84,7 +84,7 @@
                 <th rowspan=2 width="10px" class='mid'>No.</th>
                 <!--th>KPPN</th-->
                 <!--th>Tanggal</th-->
-                <!--th rowspan=2 class='mid'>Kode BA</th-->
+                <th rowspan=2 class='mid'>Kode Program</th>
                 <th rowspan=2 class='mid' width='150px'> Kode|Jenis Kegiatan </th>
                 <th rowspan=2 class='mid'> Keterangan </th>
                 <th  colspan=9 class='mid'>Jenis Belanja</th>
@@ -118,6 +118,7 @@
                     foreach ($this->data as $value) {
                         echo "<tr>	";
                         echo "<td rowspan=2>" . $no++ . "</td>";
+						echo "<td rowspan=2 class='ratakiri'>" . $value->get_dipa(). "</td>";
                         echo "<td rowspan=2 class='ratakiri'>" . $value->get_ba()." | ". $value->get_nmba() . "</td>";
                         echo "<td align='left'> PAGU <br> REALISASI </td>";
                         echo "<td align='right'>" . number_format($value->get_pagu_51()) ."<br>". number_format($value->get_belanja_51()). "<br>";
@@ -262,7 +263,7 @@
         <tfoot>
            
 			<tr>
-                    <td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
+                    <td colspan='3' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
 					<td class='ratakiri'>PAGU <br> REALISASI</td>                 
 					<td class='ratakanan'><?php echo number_format($tot_pagu_51); ?><br><?php echo number_format($tot_51); ?><br><?php if ($tot_pagu_51==0){echo '(0.00%)';} else {echo "("  .number_format($tot_51/$tot_pagu_51*100,2). "%)";}?> </td>
                     <td class='ratakanan'><?php echo number_format($tot_pagu_52); ?><br><?php echo number_format($tot_52); ?><br><?php if ($tot_pagu_52==0){echo '(0.00%)';} else {echo "("  .number_format($tot_52/$tot_pagu_52*100,2). "%)";}?> </td>

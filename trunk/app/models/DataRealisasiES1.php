@@ -157,7 +157,7 @@ class DataRealisasiES1 {
 				FROM "
                 . $this->_table1 . " A, "
                 . $this->_table5 . " C , 
-				( SELECT DISTINCT KDSATKER, BA, BAES1 FROM " . $this->_table8 . " ) B  				
+				( SELECT DISTINCT KDSATKER, BA, KANWIL_DJPB, BAES1 FROM " . $this->_table8 . " ) B  				
 				WHERE 1=1 
 				AND A.AKUN =C.FLEX_VALUE			
 				AND A.SUMMARY_FLAG = 'N' 
@@ -177,6 +177,57 @@ class DataRealisasiES1 {
 					ON A.SATKER = D.SATKER
 					AND A.AKUN = D.AKUN ";
 		 $sql .= " GROUP BY A.AKUN,  A.DESCRIPTION,  A.KDBA ";
+
+        $sql .= " ORDER BY A.AKUN ";
+
+
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);
+            $d_data->set_kdkegiatan($val['AKUN']);
+            $d_data->set_nmkegiatan($val['DESCRIPTION']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
+            $d_data->set_nm_satker($val['NMBA']);
+			$d_data->set_dana($val['POTONGAN']);
+			$d_data->set_bank($val['SETORAN']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_kanwil_pendapatan_filter($filter) {
+        Session::get('id_user');
+        $sql = " SELECT A.AKUN, A.DESCRIPTION, SUM(PAGU) PAGU	,SUM(D.TOTAL) POTONGAN, SUM(REALISASI) - NVL(SUM(D.TOTAL),0) SETORAN, SUM(REALISASI) REALISASI
+		FROM (
+		SELECT A.SATKER, A.AKUN, C.DESCRIPTION, SUM(BUDGET_AMT) PAGU
+		,  SUM(ACTUAL_AMT) * -1 REALISASI, B.BA KDBA
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table5 . " C , 
+				( SELECT DISTINCT KDSATKER, BA, KANWIL_DJPB, BAES1 FROM " . $this->_table8 . " ) B  				
+				WHERE 1=1 
+				AND A.AKUN =C.FLEX_VALUE			
+				AND A.SUMMARY_FLAG = 'N' 
+				AND SUBSTR(A.AKUN,1,1) = '4'
+				AND BUDGET_TYPE = '2'
+				AND A.SATKER = B.KDSATKER								
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				
+				";
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " GROUP BY A.AKUN, C.DESCRIPTION, B.BA, A.SATKER )A  ";
+		$sql .= " LEFT JOIN
+					( SELECT DISTINCT AKUN, SATKER, SUM(NILAI_ORI)TOTAL FROM SPPM_BPN WHERE SUBSTR(JENDOK_EXIS,1,1) NOT IN ('3','4','5','6') AND BUDGET = '2' GROUP BY AKUN, SATKER ) D
+					ON A.SATKER = D.SATKER
+					AND A.AKUN = D.AKUN ";
+		 $sql .= " GROUP BY A.AKUN,  A.DESCRIPTION ";
 
         $sql .= " ORDER BY A.AKUN ";
 
@@ -236,6 +287,8 @@ class DataRealisasiES1 {
         }
         return $data;
     }
+	
+	
     
 	public function get_ba_per_es1_pendapatan_filter($filter) {
         Session::get('id_user');
@@ -305,6 +358,62 @@ class DataRealisasiES1 {
 				FROM "
                 . $this->_table1 . " A, 
                 ( SELECT DISTINCT NMSATKER, KDSATKER, BA, BAES1 FROM " . $this->_table8 . " ) B 				
+				WHERE 1=1 
+				AND A.SATKER =B.KDSATKER			
+				AND A.SUMMARY_FLAG = 'N' 
+				AND SUBSTR(AKUN,1,1) = '4'
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				
+				";
+        $no = 0;
+        foreach ($filter as $filter2) {
+            $sql .= " AND " . $filter2;
+        }
+        $sql .= " GROUP BY BAES1, A.SATKER, B.NMSATKER ";
+        $sql .= " ORDER BY KODE ";
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);
+            $d_data->set_kdkegiatan($val['KODE']);
+            $d_data->set_nmkegiatan($val['NAMA']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
+            
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_kanwil_per_es1satker_pendapatan_filter($filter) {
+        Session::get('id_user');
+        $sql = "SELECT BA KODE, C.NMBA NAMA, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI 
+				FROM "
+                . $this->_table1 . " A, "
+                . $this->_table2 . " C, 
+				( SELECT DISTINCT KDSATKER, BA,KANWIL_DJPB, BAES1 FROM " . $this->_table8 . " ) B  	
+				WHERE 1=1 
+							
+				AND A.SUMMARY_FLAG = 'N' 
+				AND SUBSTR(AKUN,1,1) = '4'
+				AND A.SATKER = B.KDSATKER
+				AND BUDGET_TYPE = '2'
+				AND C.KDBA = B.BA
+				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
+				
+				";
+        $no = 0;
+        foreach ($filter as $filter1) {
+            $sql .= " AND " . $filter1;
+        }
+        $sql .= " GROUP BY BA, C.NMBA ";
+		$sql .= " UNION ALL ";
+		$sql .= "SELECT BAES1 || '-' || A.SATKER KODE, UPPER(B.NMSATKER) NAMA, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT)* -1 REALISASI 
+				FROM "
+                . $this->_table1 . " A, 
+                ( SELECT DISTINCT NMSATKER, KDSATKER, BA, KANWIL_DJPB, BAES1 FROM " . $this->_table8 . " ) B 				
 				WHERE 1=1 
 				AND A.SATKER =B.KDSATKER			
 				AND A.SUMMARY_FLAG = 'N' 

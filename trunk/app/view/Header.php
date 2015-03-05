@@ -266,12 +266,12 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus_51">Monitoring Pagu Minus Belanja Pegawai</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus">Monitoring Pagu Minus Non Belanja Pegawai</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
+                                    
                                 </ul>
                             </div>
                         </li>
+						
+						
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Modul Pembayaran</h4>
                             <div class="collapse">
@@ -338,6 +338,31 @@
                                 </ul>
                             </div>
                         </li>
+						
+						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Realisasi</h4>
+                            <div class="collapse">
+                                <ul>
+                                    
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
+									<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiKegiatan">Pagu dan Realisasi Belanja per Program-Kegiatan</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Pagu dan Realisasi Belanja per Jenis Kewenangan</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Pagu dan Realisasi Belanja per Sumber Dana</a></li>
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Pagu dan Realisasi Belanja per Wilayah</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
+                                </ul>
+                            </div>
+                        </li>
+						<li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Data Realisasi Penerimaan</h4>
+                            <div class="collapse">
+                                <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
+                        
+									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
+                                </ul>
+                            </div>
+                        </li>
+						
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">

@@ -125,17 +125,21 @@ class DataNamaSatker {
 
     public function get_satker_dipa_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT *
+        $sql = "SELECT DISTINCT A.NMSATKER,A.KPPN_CODE, A.KDSATKER, A.REV, A.TANGGAL_POSTING_REVISI,  B.BAES1, A.DIPA_NO, SUM(A.PAGU_PENDAPATAN) * -1 PAGU_PENDAPATAN, SUM(A.PAGU_BELANJA) PAGU_BELANJA
 				FROM "
-                . $this->_table4 . 						
-				" WHERE 1=1 ";
+                . $this->_table4 . " A, 
+				T_SATKER B 
+				 WHERE 1=1
+				AND A.KDSATKER = B.KDSATKER
+				AND A.KPPN_CODE = B.KPPN
+				";
 
         $no = 0;
         foreach ($filter as $filter) {
             $sql .= " AND " . $filter;
         }
-
-        $sql .= " ORDER BY kppn_code,rev desc";
+		$sql .= " GROUP BY A.NMSATKER,A.KPPN_CODE, A.KDSATKER, A.REV, A.TANGGAL_POSTING_REVISI,  B.BAES1, A.DIPA_NO";
+        $sql .= " ORDER BY A.KPPN_CODE, A.REV, A.KDSATKER";
         //var_dump ($sql);
 
         $result = $this->db->select($sql);
@@ -144,9 +148,14 @@ class DataNamaSatker {
             $d_data = new $this($this->registry);
             $d_data->set_kdsatker($val['KDSATKER']);
             $d_data->set_nmsatker($val['NMSATKER']);
+			$d_data->set_nmes1($val['NMES1']);
+			$d_data->set_nmba($val['NMBA']);
             $d_data->set_kppn($val['KPPN_CODE']);
             $d_data->set_rev($val['REV']);
             $d_data->set_tgl_rev($val['TANGGAL_POSTING_REVISI']);
+			$d_data->set_dipa_no($val['DIPA_NO']);
+			$d_data->set_total_pagu_belanja($val['PAGU_BELANJA']);
+			$d_data->set_total_pagu_pendapatan($val['PAGU_PENDAPATAN']);
             $data[] = $d_data;
         }
         return $data;
