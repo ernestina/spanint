@@ -207,7 +207,7 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
-                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
 
                                 </ul>
                             </div>
@@ -262,35 +262,50 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>dataDIPA/nmsatker">Informasi Revisi DIPA</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi">Daftar DIPA dalam Proses Revisi</a></li>
-                                    <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Sisa Pagu Belanja Realisasi dan Pencadangan</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail">Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus_51">Monitoring Pagu Minus Belanja Pegawai</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1_minus">Monitoring Pagu Minus Non Belanja Pegawai</a></li>
-                                    
+
                                 </ul>
                             </div>
                         </li>
-						<li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Realisasi Belanja</h4>
+                        
+                          <li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Ketersediaan Dana <br> <i>Fund Available</i></h4>
                             <div class="collapse">
                                 <ul>
-                                    
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaSatEs1">Per Satker </a></li>
+                                    <!--<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Kegiatan</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputBA">Per Output</a></li>-->
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerJenbel">Per Jenis Belanja</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaPerSdana">Per Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaEs1SatJenbel">Per Satker - Jenis Belanja</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaEs1SatSdana">Per Satker - Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/nmsatker1">Per Akun</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Data Realisasi Belanja</h4>
+                            <div class="collapse">
+                                <ul>
+
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja per Satker</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiBA">Pagu dan Realisasi Belanja per BA</a></li>
-									<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiKegiatan">Pagu dan Realisasi Belanja per Program-Kegiatan</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Pagu dan Realisasi Belanja per Jenis Kewenangan</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Pagu dan Realisasi Belanja per Sumber Dana</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Pagu dan Realisasi Belanja per Wilayah</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiKegiatan">Pagu dan Realisasi Belanja per Program-Kegiatan</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Pagu dan Realisasi Belanja per Jenis Kewenangan</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Pagu dan Realisasi Belanja per Sumber Dana</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiWilayahBAES1">Pagu dan Realisasi Belanja per Wilayah</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasiTransfer">Realisasi Belanja Transfer Daerah</a></li>
                                 </ul>
                             </div>
                         </li>
-						
-						<li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Data Realisasi Penerimaan</h4>
+
+                        <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Data Realisasi Penerimaan</h4>
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
-                        
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
+
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -315,25 +330,25 @@
                         <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Modul Penerimaan</h4>
                             <div class="collapse">
                                 <ul><!--li><a href="<?php echo URL; ?>dataGR/grStatusHarian">Monitoring Status LHP per KPPN</a></li-->
-									<li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/grStatusHarianBulan">Monitoring Status LHP per Bulan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_IJP">Monitoring Imbalan Jasa Perbankan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/GR_PFK">Monitoring Perhitungan Fihak Ketiga</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/SuspendSatkerPenerimaan">Suspend Satker Penerimaan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/SuspendAkunPenerimaan">Suspend Akun Penerimaan</a></li>
                                     <li><a href="<?php echo URL; ?>dataGR/NTPNGanda">Daftar NTPN Terindikasi Ganda</a></li>
-									
+
                                 </ul>
                             </div>
                         </li>
 
-                        <!--li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul Kas</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
-                                </ul>
-                            </div>
-                        </li-->
+                            <!--li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;Modul Kas</h4>
+                                <div class="collapse">
+                                    <ul>
+                                        <li><a href="<?php echo URL; ?>dataPelimpahan/monitoringPelimpahan"></i>Monitoring Pelimpahan</a></li>
+                                    </ul>
+                                </div>
+                            </li-->
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                             <div class="collapse">
@@ -362,10 +377,10 @@
                                 </ul>
                             </div>
                         </li>
-						
-						
-						
-						
+
+
+
+
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
                             <div class="collapse">
@@ -385,7 +400,7 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
-                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
 
                                 </ul>
                             </div>
@@ -412,17 +427,17 @@
 
                     <ul>
 
-                                <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
-                                
-                                <!--li class="subnav"><h4><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Persiapan Rollout</h4>
-                                    <div class="collapse">
-                                        <ul>
-                                            <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Download Data Pagu</a></li>
-                                            <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Download Data Realisasi</a></li>
-                                            <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Download Aplikasi Rekonsiliasi</a></li>
-                                        </ul>
-                                    </div>
-                                </li>-->
+                        <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
+
+    <!--li class="subnav"><h4><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Persiapan Rollout</h4>
+        <div class="collapse">
+            <ul>
+                <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadPagu">Download Data Pagu</a></li>
+                <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadRealisasi">Download Data Realisasi</a></li>
+                <li><a href="<?php echo URL; ?>dataPersiapanRollout/downloadToolRekonsiliasi">Download Aplikasi Rekonsiliasi</a></li>
+            </ul>
+        </div>
+    </li>-->
 
                         <li class="nav"><h4><a href="<?php echo URL; ?>home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Beranda</a></h4></li>
 
@@ -514,16 +529,16 @@
                             </div>
                         </li>
 
-                        
-                        <?php if(Session::get('kd_satker') == 140) { ?>
-                        <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;NOD</h4>
-                            <div class="collapse">
-                                <ul>
-                                    <li><a href="<?php echo URL; ?>dataNOD/daftarNOD"></i>Monitoring NOD</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <?php }  ?>
+
+                        <?php if (Session::get('kd_satker') == 140) { ?>
+                            <li class="subnav"><h4><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;NOD</h4>
+                                <div class="collapse">
+                                    <ul>
+                                        <li><a href="<?php echo URL; ?>dataNOD/daftarNOD"></i>Monitoring NOD</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        <?php } ?>
 
                         <li class="subnav"><h4><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Bank</h4>
                             <div class="collapse">
@@ -571,7 +586,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
                             <div class="collapse">
                                 <ul>
@@ -580,7 +595,7 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
-                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
 
                                 </ul>
                             </div>
@@ -627,11 +642,11 @@
                                     <li><a href="<?php echo URL; ?>dataDIPA/ProsesRevisi/<?php Session::get('kd_satker'); ?>"></i>Daftar DIPA dalam Proses Revisi</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/RealisasiFA_1/<?php Session::get('kd_satker'); ?>"></i>Sisa Pagu</a></li>
                                     <li><a href="<?php echo URL; ?>dataDIPA/Fund_fail/<?php Session::get('kd_satker'); ?>"></i>Penolakan Revisi Karena Menyebabkan Pagu Minus</a></li>
-									<li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataDIPA/DataRealisasi">Pagu dan Realisasi Belanja</a></li>
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Ketersediaan Dana  <br><i>(Fund Available)</i></h4>
                             <div class="collapse">
                                 <ul>
@@ -642,7 +657,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Modul Komitmen</h4>
                             <div class="collapse">
                                 <ul>
@@ -670,7 +685,7 @@
                                     <li><a href="<?php echo URL; ?>dataGR/KonfirmasiPenerimaan">Konfirmasi Penerimaan</a></li>
                                     <li><a href="<?php echo URL; ?>dataBPN/dataBPN">Monitoring Potongan SPM (Satker Pembayar)</a></li>
                                     <li><a href="<?php echo URL; ?>dataBPN/dataBPNSatker">Monitoring Potongan SPM (Satker Penerima)</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -683,7 +698,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
                             <div class="collapse">
                                 <ul>
@@ -691,20 +706,20 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
-                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
 
                                 </ul>
                             </div>
                         </li>
 
-                            <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
-                                <div class="collapse">
-                                    <ul>
-                                        <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                        <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
-                                    </ul>
-                                </div>
-                            </li-->
+                                <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                                    <div class="collapse">
+                                        <ul>
+                                            <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                                            <li><a href="<?php echo URL; ?>panduan/PanduanUAT">Dokumen UAT</a></li>
+                                        </ul>
+                                    </div>
+                                </li-->
 
                     </ul>
 
@@ -759,7 +774,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
                             <div class="collapse">
                                 <ul>
@@ -767,7 +782,7 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
-                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
 
                                 </ul>
                             </div>
@@ -810,7 +825,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
                             <div class="collapse">
                                 <ul>
@@ -819,7 +834,7 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
-                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
 
                                 </ul>
                             </div>
@@ -867,19 +882,19 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
-                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
 
                                 </ul>
                             </div>
                         </li>
 
-                            <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
-                                <div class="collapse">
-                                    <ul>
-                                        <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
-                                    </ul>
-                                </div>
-                            </li-->
+                                <!--li class="subnav"><h4><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Panduan</h4>
+                                    <div class="collapse">
+                                        <ul>
+                                            <li><a href="<?php echo URL; ?>panduan/lihatPanduan1">Panduan Simpan ke Excel</a></li>
+                                        </ul>
+                                    </div>
+                                </li-->
 
                     </ul>
 
@@ -941,8 +956,8 @@
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunBA">Eselon 1 Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Satker Per Jenis Belanja</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBAES1">Kegiatan per Jenis Belanja </a></li>
-									
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Kewenangan per Jenis Belanja </a></li>
+
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1">Kewenangan per Jenis Belanja </a></li>
 
 
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiSumberDanaBAES1">Sumber Dana per Jenis Belanja</a></li>
@@ -975,8 +990,8 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/RekapSp2dBAES1">Rekap SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataUPBAES1">Informasi Uang Persediaan Satker</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/KarwasTUPBaes1">Informasi Tambahan Uang Persediaan Satker</a></li>									
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataUPBAES1">Informasi Uang Persediaan Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/KarwasTUPBaes1">Informasi Tambahan Uang Persediaan Satker</a></li>									
                                 </ul>
                             </div>
                         </li>
@@ -985,11 +1000,11 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerES1">Realisasi Pendapatan Per Eselon 1</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
                             <div class="collapse">
                                 <ul>
@@ -997,7 +1012,7 @@
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
-                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
 
                                 </ul>
                             </div>
@@ -1036,7 +1051,7 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiAkunES1">Satker Per Jenis Belanja</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBAES1">Kegiatan per Jenis Belanja </a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBAES1">Kegiatan per Jenis Belanja </a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKewenanganBAES1"> Kewenangan Per Jenis Belanja</a></li>
 
 
@@ -1065,8 +1080,8 @@
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/RekapSp2dBAES1">Rekap SP2D</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/nmsatkerBAES1">Daftar SP2D Per satker</a></li>   
-									<li><a href="<?php echo URL; ?>BA_ES1/DataUPBAES1">Informasi Uang Persediaan Satker</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/KarwasTUPBaes1">Informasi Tambahan Uang Persediaan Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataUPBAES1">Informasi Uang Persediaan Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/KarwasTUPBaes1">Informasi Tambahan Uang Persediaan Satker</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -1074,19 +1089,19 @@
                             <div class="collapse">
                                 <ul>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan</a></li>
-									<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
                                 </ul>
                             </div>
                         </li>
-                        
+
                         <li class="subnav"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Referensi</h4>
                             <div class="collapse">
                                 <ul>
-                                        <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refAkun">Akun</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refKppn">KPPN</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refSdana">Sumber Dana</a></li>
                                     <li><a href="<?php echo URL; ?>dataPDR/refLokasi">Lokasi</a></li>
-                                     <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
+                                    <li><a href="<?php echo URL; ?>dataPDR/refSatker">Satuan Kerja</a></li>
 
                                 </ul>
                             </div>
