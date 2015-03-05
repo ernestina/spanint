@@ -1,5 +1,4 @@
 <?php
-//require('fpdf.php');
 
 class PDF_Rotate extends FPDF
 {
@@ -37,14 +36,13 @@ function _endpage()
 
 	function Header()
 	{
-		//var_dump($this->options);
 		//Put the watermark
 		$this->SetFont('Arial','B',80);
 		$this->SetTextColor(224,224,224);
 		 if ($this->options['orientation'] == "L") {
-			$this->RotatedText(300,300,'OMSPAN',0);
+			//$this->RotatedText(300,300,'OMSPAN',0);
         } else {
-			$this->RotatedText(150,400,'OMSPAN',0);
+			//$this->RotatedText(150,400,'OMSPAN',0);
         }
 	}
 
