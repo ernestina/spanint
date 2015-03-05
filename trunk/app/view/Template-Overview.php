@@ -123,8 +123,12 @@
 
                                             <?php foreach ($status_tile->datasets as $stdid=>$stdataset) { ?>
 
-                                                <p><span class="status-pie-bullet" style="background: <?php echo $status_tile->colors[$stdid]; ?>"></span>&nbsp;&nbsp;<?php echo $stdataset->name; ?> <?php if ($stdataset->value <> 0) { echo '(' . $stdataset->value . ')'; } ?></p>
+                                                <?php if ($stdataset->value <> 0) { ?>
 
+                                                    <p><span class="status-pie-bullet" style="background: <?php echo $status_tile->colors[$stdid]; ?>"></span>&nbsp;&nbsp;<?php echo $stdataset->name; ?> <?php if ($stdataset->value <> 0) { echo '(' . $stdataset->value . ')'; } ?></p>
+
+                                                <?php } ?>
+                                            
                                             <?php } ?>
 
                                         <?php } else { ?>
@@ -248,24 +252,28 @@
 
                                 </div>
 
-                                <!--div class="row top-padded-little">
+                                <?php if (isset($this->content->main_tile->legends)) { ?>
 
-                                    <div class="col-md-12">
+                                    <div class="row top-padded-little">
 
-                                        <div id="main-tile-legend">
-                                            
-                                            <div class="legend-item">
+                                        <div class="col-xs-12 top-padded-little"><div style="border-top: 1px solid #e5e5e5"></div></div>
+
+                                        <?php foreach ($this->content->main_tile->legends->labels as $lid=>$label) { ?>
+
+                                            <div class="col-md-6 legend-item top-padded-little">
                                                 
-                                                <div class="legend-label"></div>
-                                                <div class="legend-info"></div>
+                                                <div class="container-fluid">        
+                                                    <div class="col-xs-3 legend-box" style="text-align: center; color: #fff; background: <?php echo $this->content->main_tile->legends->colors[$lid]; ?>"><?php echo $this->content->main_tile->categories[$lid]; ?></div>
+                                                    <div class="col-xs-9 legend-box"><?php echo $label; ?></div>
+                                                </div>
 
                                             </div>
 
-                                        </div>
+                                        <?php } ?>
 
                                     </div>
 
-                                </div-->
+                                <?php } ?>
 
                             </div>
 
