@@ -50,7 +50,10 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == SATKER) {
             $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
+        } elseif (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
         }
+     
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -316,98 +319,61 @@ class BA_ES1Controller extends BaseController {
         //detil encumbrance ba
         if (Session::get('role') == KL) {
             $filter[$no++] = " SUBSTR(B.SEGMENT4,1,3) =  '" . Session::get('kd_baes1') . "'";
-            if ($detil == 'eselon') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'satker') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||B.SEGMENT1 =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'kegiatan') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT5,1,4) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'output') {
-                $filter[$no++] = " B.SEGMENT5 =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'jenbel') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'sdana') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'es1jenbel') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'es1sdana') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-        }
-
-        //detil encumbrance level eselon1
-        if (Session::get('role') == ES1) {
-            $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . Session::get('kd_baes1') . "'";
-
-            if ($detil == 'satker') {
-                $filter[$no++] = " B.SEGMENT1 =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'kegiatan') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT5,1,4) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'output') {
-                $filter[$no++] = " B.SEGMENT5 =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'jenbel') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'sdana') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'satjenbel') {
-                $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'satsdana') {
-                $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-        }
-
-        //detil encumbrance level eselon1
-        if (Session::get('role') == SATKER) {
+        }elseif (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == KANWIL) {
+            $filter[$no++] = "B.SEGMENT2 IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
+        }elseif (Session::get('role') == SATKER) {
             $filter[$no++] = " B.SEGMENT1) =  '" . Session::get('kd_satker') . "'";
-
-            if ($detil == 'kegiatan') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT5,1,4) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'output') {
-                $filter[$no++] = " B.SEGMENT5 =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'jenbel') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
-            if ($detil == 'sdana') {
-                $filter[$no++] = " SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
-                $this->view->kd_code_id = $code_id;
-            }
         }
-        //var_dump($d_spm->get_hist_spm_filter());
+        
+        if ($detil == 'eselon') {
+            $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5) =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
+        }
+        elseif ($detil == 'satker') {
+            if (Session::get('role') == ES1) {
+            $filter[$no++] = " B.SEGMENT1 =  '" . $code_id . "'"; 
+            }else{
+            $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||B.SEGMENT1 =  '" . $code_id . "'"; 
+            }
+            $this->view->kd_code_id = $code_id;
+        }
+        elseif ($detil == 'kegiatan') {
+            $filter[$no++] = " SUBSTR(B.SEGMENT5,1,4) =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
+        }
+        elseif ($detil == 'output') {
+            $filter[$no++] = " B.SEGMENT5 =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
+        }
+        elseif ($detil == 'jenbel') {
+            $filter[$no++] = " SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
+        }
+        elseif ($detil == 'sdana') {
+            $filter[$no++] = " SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
+        }
+        elseif ($detil == 'es1jenbel') {
+            $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
+        }
+        elseif ($detil == 'es1sdana') {
+            $filter[$no++] = " SUBSTR(B.SEGMENT4,1,5)||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
+        }
+        elseif ($detil == 'satjenbel') {
+            $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT3,1,2) =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
+        }
+        elseif ($detil == 'satsdana') {
+            $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
+        }
+        
         $this->view->data = $d_spm1->get_encumbrances_baes1($filter);
-
+    
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/encumbrances');
@@ -852,8 +818,9 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == SATKER) {
             $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
+        } elseif (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
         }
-
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
@@ -931,7 +898,10 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == ES1) {
             $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
         }
+        
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         $this->view->data = $d_spm1->get_ba_persates1_filter($filter);
@@ -971,6 +941,8 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == SATKER) {
             $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
+        } elseif (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
         }
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -1013,6 +985,8 @@ class BA_ES1Controller extends BaseController {
             $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == SATKER) {
             $filter[$no++] = "SATKER = '" . Session::get('kd_satker') . "'";
+        } elseif (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
         }
 
         $d_last_update = new DataLastUpdate($this->registry);
@@ -1123,8 +1097,12 @@ class BA_ES1Controller extends BaseController {
             }
         }
 
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
-
+        if (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
+        }
+        
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         $this->view->data = $d_spm1->get_es1_persat_filter($filter);
@@ -1160,8 +1138,11 @@ class BA_ES1Controller extends BaseController {
           $this->view->nmkegiatan = $_POST['nama'];
           }
           } */
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
-
+        if (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
+        }
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
@@ -1197,8 +1178,11 @@ class BA_ES1Controller extends BaseController {
           $this->view->nmkegiatan = $_POST['nama'];
           }
           } */
-        $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
-
+        if (Session::get('role') == ES1) {
+            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+        } elseif (Session::get('role') == KANWIL) {
+            $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
+        }
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
