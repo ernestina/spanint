@@ -229,11 +229,11 @@ class DashboardController extends BaseController {
             'legends' => (object) array(
 
                 'labels' => array($mainchartData[0] . ' Miliar', $mainchartData[1] . ' Miliar', $mainchartData[2] . ' Miliar', $mainchartData[3] . ' Miliar', $mainchartData[4] . ' Miliar', $mainchartData[5] . ' Miliar', $mainchartData[6] . ' Miliar', $mainchartData[7] . ' Miliar', $mainchartData[8] . ' Miliar', $mainchartData2[9] . ' Miliar', $mainchartData2[10] . ' Miliar'),
-                'colors' => array('#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#1f77b4', '#1f77b4')
+                'colors' => array('#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#1f77b4', '#1f77b4')
 
               ),
 
-            'colors' => array('#f6ce40', '#1f77b4')
+            'colors' => array('#ff6666', '#1f77b4')
 
           );
           
@@ -835,11 +835,11 @@ class DashboardController extends BaseController {
             'legends' => (object) array(
 
                 'labels' => array($mainchartData[0] . ' Miliar', $mainchartData[1] . ' Miliar', $mainchartData[2] . ' Miliar', $mainchartData[3] . ' Miliar', $mainchartData[4] . ' Miliar', $mainchartData[5] . ' Miliar', $mainchartData[6] . ' Miliar', $mainchartData[7] . ' Miliar', $mainchartData[8] . ' Miliar', $mainchartData2[9] . ' Miliar', $mainchartData2[10] . ' Miliar'),
-                'colors' => array('#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#f6ce40', '#1f77b4', '#1f77b4')
+                'colors' => array('#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#1f77b4', '#1f77b4')
 
               ),
 
-            'colors' => array('#f6ce40', '#1f77b4')
+            'colors' => array('#ff6666', '#1f77b4')
 
           );
 
