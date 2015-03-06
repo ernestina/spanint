@@ -138,7 +138,8 @@
                             echo 'style="background:#FFC2C2"';
                         }
                         if (substr($value->get_kdkegiatan(), 6, 1) != null) {
-                            echo "<td class='align-right'><a href=" . URL . "BA_ES1/DetailEncumbrances/" . $value->get_kdkegiatan() . "/" . $this->detil ;
+                            $judulkontrak=urlencode($value->get_nmkegiatan());
+                            echo "<td class='align-right'><a href=" . URL."BA_ES1/DetailEncumbrances/" . $value->get_kdkegiatan() . "/" . $judulkontrak."/". $this->detil;
                         }
                         echo '>' . number_format($value->get_obligation()) . "</td> ";
                         echo '<td align="right"';
