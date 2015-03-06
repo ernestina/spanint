@@ -37,9 +37,9 @@
                     </ul>
                 </div>						
 
-<?php
+                <?php
 //------------------------------
-?>
+                ?>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
                 <button type="button" style="width: 100%" class="btn btn-default" data-toggle="modal" data-target="#modal-app-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
@@ -49,9 +49,9 @@
         <div class="row" style="padding-top: 10px">
 
             <div class="col-md-6 col-sm-12">
-<?php
-echo Session::get('user');
-?>
+                <?php
+                echo Session::get('user');
+                ?>
                 <br>Tanggal : s.d <?php
                 echo (date('d-m-Y'));
                 ?>
@@ -90,52 +90,52 @@ echo Session::get('user');
             </tr>
         </thead>
         <tbody class='ratatengah'>
-<?php
-$no = 1;
-$tot_pagu = 0;
-$tot_real = 0;
-$tot_kontrak = 0;
-$tot_block = 0;
-$tot_balance = 0;
+            <?php
+            $no = 1;
+            $tot_pagu = 0;
+            $tot_real = 0;
+            $tot_kontrak = 0;
+            $tot_block = 0;
+            $tot_balance = 0;
 
-if (isset($this->data)) {
-    if (empty($this->data)) {
-        echo '<td colspan=12 align="center">Tidak ada data.</td>';
-    } else {
-        foreach ($this->data as $value) {
-            echo "<tr>	";
-            echo "<td>" . $no++ . "</td>";
-            echo "<td align='left'>" . $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan() . "</td>";
-            echo "<td align='right'>" . number_format($value->get_budget_amt()) . "</td> ";
-            echo "<td align='right'>" . number_format($value->get_actual_amt()) .
-            "</td> ";
-            echo "<td align='right'>";
-            if ($value->get_budget_amt() == 0) {
-                echo "0.00%";
+            if (isset($this->data)) {
+                if (empty($this->data)) {
+                    echo '<td colspan=12 align="center">Tidak ada data.</td>';
+                } else {
+                    foreach ($this->data as $value) {
+                        echo "<tr>	";
+                        echo "<td>" . $no++ . "</td>";
+                        echo "<td align='left'>" . $value->get_kdkegiatan() . " | " . $value->get_nmkegiatan() . "</td>";
+                        echo "<td align='right'>" . number_format($value->get_budget_amt()) . "</td> ";
+                        echo "<td align='right'>" . number_format($value->get_actual_amt()) .
+                        "</td> ";
+                        echo "<td align='right'>";
+                        if ($value->get_budget_amt() == 0) {
+                            echo "0.00%";
+                        } else {
+                            echo number_format(($value->get_actual_amt() / $value->get_budget_amt()) * 100, 2) . "%";
+                            "</td> ";
+                        }
+                        $judulkontrak = urlencode($value->get_nmkegiatan());
+                        echo "<td class='align-right'><a href=" . URL . "BA_ES1/DetailEncumbrances/" . $value->get_kdkegiatan() . "/" . $judulkontrak . "/" . $this->detil . ">" . number_format($value->get_obligation()) . "</td>";
+                        echo "<td align='right'>" . number_format($value->get_block_amount()) . "</td> ";
+                        echo "<td align='right'>" . number_format($value->get_balancing_amt()) . "</td> ";
+                        echo "</tr>	";
+
+                        $tot_pagu+=$value->get_budget_amt();
+                        $tot_real+=$value->get_actual_amt();
+                        $tot_kontrak += $value->get_obligation();
+                        $tot_block += $value->get_block_amount();
+                        $tot_balance += $value->get_balancing_amt();
+                    }
+                    echo "<tr>";
+                    echo "</tr>";
+                }
             } else {
-                echo number_format(($value->get_actual_amt() / $value->get_budget_amt()) * 100, 2) . "%";
-                "</td> ";
+
+                echo '<td colspan=12 id="filter-first" align="center">Masukkan filter terlebih dahulu.</td>';
             }
-            //echo "<td align='right'>" . number_format($value->get_obligation()) . "</td> ";
-            echo "<td class='align-right'><a href=" . URL . "BA_ES1/DetailEncumbrances/" . $value->get_kdkegiatan() . "/" . $this->detil . ">" . number_format($value->get_obligation()) . "</td>";
-            echo "<td align='right'>" . number_format($value->get_block_amount()) . "</td> ";
-            echo "<td align='right'>" . number_format($value->get_balancing_amt()) . "</td> ";
-            echo "</tr>	";
-
-            $tot_pagu+=$value->get_budget_amt();
-            $tot_real+=$value->get_actual_amt();
-            $tot_kontrak += $value->get_obligation();
-            $tot_block += $value->get_block_amount();
-            $tot_balance += $value->get_balancing_amt();
-        }
-        echo "<tr>";
-        echo "</tr>";
-    }
-} else {
-
-    echo '<td colspan=12 id="filter-first" align="center">Masukkan filter terlebih dahulu.</td>';
-}
-?>
+            ?>
         </tbody>
         <tfoot>
 
@@ -143,11 +143,13 @@ if (isset($this->data)) {
                 <td colspan='2' rowspan=2 class='ratatengah'><b>GRAND TOTAL<b></td>
                             <td align='right'><b> <?php echo number_format($tot_pagu); ?> </b> </td>
                             <td align='right'><b> <?php echo number_format($tot_real); ?> </b></td>
-                            <td align='right'><b> <?php if ($tot_pagu == 0) {
-                echo '0.00%';
-            } else {
-                echo number_format($tot_real / $tot_pagu * 100, 2) . '%';
-            } ?> </b></td>
+                            <td align='right'><b> <?php
+                                    if ($tot_pagu == 0) {
+                                        echo '0.00%';
+                                    } else {
+                                        echo number_format($tot_real / $tot_pagu * 100, 2) . '%';
+                                    }
+                                    ?> </b></td>
                             <td align='right'><b> <?php echo number_format($tot_kontrak); ?> </b></td>
                             <td align='right'><b> <?php echo number_format($tot_block); ?> </b></td>
                             <td align='right'><b> <?php echo number_format($tot_balance); ?> </b></td>
@@ -177,13 +179,17 @@ if (isset($this->data)) {
                                                 <div id="wkdkppn" class="alert alert-danger" style="display:none;"></div>
 
                                                 <label class="isian"><?php echo $this->kodes; ?> </label>
-                                                <input class="form-control" type="text" name="kode" id="kode" value="<?php if (isset($this->kode)) {
-                echo $this->kode;
-            } ?>">
+                                                <input class="form-control" type="text" name="kode" id="kode" value="<?php
+                                                if (isset($this->kode)) {
+                                                    echo $this->kode;
+                                                }
+                                    ?>">
                                                 <label class="isian" >Nama : </label>
-                                                <input class="form-control" type="text" name="nama" id="nama" value="<?php if (isset($this->kode)) {
-                echo $this->nama;
-            } ?>">
+                                                <input class="form-control" type="text" name="nama" id="nama" value="<?php
+                                                if (isset($this->kode)) {
+                                                    echo $this->nama;
+                                                }
+                                    ?>">
 
                                             </div>
 

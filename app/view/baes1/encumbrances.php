@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Detail Rincian Pencadangan Dana Kontrak</h2>
+                <h2>Daftar Kontrak pada <?php echo $this->judul;?></h2>
             </div>
             
             

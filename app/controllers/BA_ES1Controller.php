@@ -301,7 +301,7 @@ class BA_ES1Controller extends BaseController {
         $this->view->render('baes1/DataRealisasiKewenaganBAES1');
     }
 
-    public function DetailEncumbrances($code_id = null, $detil) {
+    public function DetailEncumbrances($code_id = null,$judul=null, $detil) {
         $d_spm1 = new encumbrances($this->registry);
         $filter = array();
         $no = 0;
@@ -373,7 +373,7 @@ class BA_ES1Controller extends BaseController {
         }
         
         $this->view->data = $d_spm1->get_encumbrances_baes1($filter);
-    
+        $this->view->judul=urldecode($judul);
         $d_log->tambah_log("Sukses");
 
         $this->view->render('baes1/encumbrances');
