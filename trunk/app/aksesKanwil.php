@@ -360,6 +360,7 @@ $akses['PDFKanwil'] = array(
     'DataFaEs1PerSat_BAES1_PDF',
     'DataFaEs1SatJenbel_BAES1_PDF',
     'DataFaEs1SatSdana_BAES1_PDF',
+	'DataFaPerBA_BAES1_PDF',
     'DetailEncumbrances_PDF',
 	'DetailEncumbrances_BAES1_PDF',
     '__destruct'

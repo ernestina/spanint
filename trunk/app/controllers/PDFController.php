@@ -8012,8 +8012,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 
     }
 	
-	//belum dikerjakan
-	    public function DetailEncumbrances_BAES1_PDF($code_id = null,$detil,$ck=null) {
+	    public function DetailEncumbrances_BAES1_PDF($code_id = null,$judul,$detil,$ck=null) {
         $d_spm1 = new encumbrances($this->registry);
         $filter = array();
         $no = 0;
@@ -8081,10 +8080,13 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         elseif ($detil == 'satsdana') {
             $filter[$no++] = " B.SEGMENT1||'-'||SUBSTR(B.SEGMENT6,1,1) =  '" . $code_id . "'";
             $this->view->kd_code_id = $code_id;
+        }elseif ($detil == 'ba') {
+            $filter[$no++] = "SUBSTR(B.SEGMENT4,1,3) =  '" . $code_id . "'";
+            $this->view->kd_code_id = $code_id;
         }
         
         $this->view->data = $d_spm1->get_encumbrances_baes1($filter);
-
+		$this->view->judul = urldecode($judul);
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
@@ -8144,7 +8146,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         }
         //-------------------------
 		//------------------------------------------------------------
-		$judul1='Detail Rincian Pencadangan Dana Kontrak';
+		$judul1='Daftar Kontrak '.$judul;
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('baes1/encumbrances_BAES1_PDF');
@@ -10466,6 +10468,102 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//------------------------------------------------------------
 
 		$d_log->tambah_log("Sukses");
+    }
+	
+	//06-03-2015
+	public function DataFaPerBA_BAES1_PDF($kdkegiatan=null,$nmkegiatan=null,$ck=null) {
+        $d_spm1 = new DataRealisasiES1($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+		if ($kdkegiatan != 'null') {
+			$filter[$no++] = "SUBSTR(program,1,3) like '%" . $kdkegiatan . "%'";
+		}
+		if ($nmkegiatan != 'null') {
+			$filter[$no++] = " upper(nmba) like upper('%" . $nmkegiatan . "%')";
+			$this->view->nmkegiatan = $_POST['nama'];
+		}
+        
+
+        $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
+
+        $d_last_update = new DataLastUpdate($this->registry);
+        $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
+
+        $this->view->data = $d_spm1->get_fa_perba_filter($filter);
+		//-------------------------
+
+		if (Session::get('role') == ADMIN) {
+		$kdbaes1=Session::get('kd_satker');
+            if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn2($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			$kdbaes1=Session::get('kd_satker');
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();		
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }	
+		}elseif (Session::get('role') == ES1) {
+		$kdbaes1=Session::get('kd_satker');
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		}elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+			$kdkppn=Session::get('kd_satker');
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        }  else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+		//-------------------------
+
+		$this->view->kdjk='Kode | Nama Bagian Anggaran';
+		//------------------------------------------------------------
+		$judul1='Pagu Dana Per Bagian Anggaran';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('baes1/DataRealisasiKegiatan_BAES1_PDF');
+		}elseif($ck=='XLS'){
+			$this->view->load('baes1/DataRealisasiKegiatan_BAES1_XLS');
+		}
+		//----------------------------------------
+        $d_log->tambah_log("Sukses");
     }
 	
 

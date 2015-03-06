@@ -70,7 +70,8 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Kode | Nama Kegiatan/Nama Output");
+$kdjk=$this->kdjk;
+$objPHPExcel->getActiveSheet()->setCellValue('B4',$kdjk);
 //p3
 $objPHPExcel->getActiveSheet()->setCellValue('C4', "Pagu");
 //p4
