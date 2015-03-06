@@ -75,6 +75,7 @@ $akses['BA_ES1Kanwil'] = array(
     'DataFaEs1SatJenbel',
     'DataFaEs1SatSdana',
     'DetailEncumbrances',
+    'DataFaPerBA',
     '__destruct'
 );
 

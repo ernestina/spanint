@@ -273,6 +273,7 @@
                           <li class="subnav"><h4><span class="glyphicon glyphicon-gbp"></span>&nbsp;&nbsp;Data Ketersediaan Dana <br> <i>Fund Available</i></h4>
                             <div class="collapse">
                                 <ul>
+                                    <li><a href="<?php echo URL; ?>BA_ES1/DataFaPerBA">Per Bagian Anggaran </a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataFaBaSatEs1">Per Satker </a></li>
                                     <!--<li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiKegiatanBA">Per Kegiatan</a></li>
                                     <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiOutputBA">Per Output</a></li>-->
