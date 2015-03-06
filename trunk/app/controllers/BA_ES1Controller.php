@@ -1272,8 +1272,6 @@ class BA_ES1Controller extends BaseController {
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
-
-
         if (isset($_POST['submit_file'])) {
 
             if ($_POST['kode'] != '') {
