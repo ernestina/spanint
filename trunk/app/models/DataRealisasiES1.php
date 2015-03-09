@@ -162,7 +162,7 @@ class DataRealisasiES1 {
 				AND A.AKUN =C.FLEX_VALUE			
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(A.AKUN,1,1) = '4'
-				AND BUDGET_TYPE = '2'
+				AND BUDGET_TYPE IN ('2','7')
 				AND A.SATKER = B.KDSATKER								
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
@@ -260,7 +260,7 @@ class DataRealisasiES1 {
 				AND A.SATKER =C.KDSATKER			
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(AKUN,1,1) = '4'
-				AND BUDGET_TYPE = '2'
+				AND BUDGET_TYPE IN ('2','7')
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
 				";
@@ -302,7 +302,7 @@ class DataRealisasiES1 {
 				AND B.BAES1 =C.KDES1	
 				AND A.SATKER = B.KDSATKER				
 				AND A.SUMMARY_FLAG = 'N' 
-				AND BUDGET_TYPE = '2'
+				AND BUDGET_TYPE IN ('2','7')
 				AND SUBSTR(AKUN,1,1) = '4'
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
@@ -343,7 +343,7 @@ class DataRealisasiES1 {
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(AKUN,1,1) = '4'
 				AND A.SATKER = B.KDSATKER
-				AND BUDGET_TYPE = '2'
+				AND BUDGET_TYPE IN ('2','7')
 				AND C.KDES1 = B.BAES1
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
@@ -362,7 +362,7 @@ class DataRealisasiES1 {
 				AND A.SATKER =B.KDSATKER			
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(AKUN,1,1) = '4'
-				AND BUDGET_TYPE = '2'
+				AND BUDGET_TYPE IN ('2','7')
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
 				";
@@ -400,7 +400,7 @@ class DataRealisasiES1 {
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(AKUN,1,1) = '4'
 				AND A.SATKER = B.KDSATKER
-				AND BUDGET_TYPE = '2'
+				AND BUDGET_TYPE IN ('2','7')
 				AND C.KDBA = B.BA
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
@@ -419,7 +419,7 @@ class DataRealisasiES1 {
 				AND A.SATKER =B.KDSATKER			
 				AND A.SUMMARY_FLAG = 'N' 
 				AND SUBSTR(AKUN,1,1) = '4'
-				AND BUDGET_TYPE = '2'
+				AND BUDGET_TYPE IN ('2','7')
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) <> 0
 				
 				";
@@ -547,12 +547,11 @@ class DataRealisasiES1 {
 
    public function get_ba_persates1_filter($filter) {
         Session::get('id_user');
-        $sql = "SELECT SUBSTR(program,1,5) KODE_KEGIATAN, C.nmes1||' '||d.nmba NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
+        $sql = "SELECT SUBSTR(program,1,5) KODE_KEGIATAN, C.nmes1 NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
 				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
                                 FROM "
                 . $this->_table1 . " A LEFT JOIN  "
                 . $this->_table4 . " C ON SUBSTR(A.program,1,5)=C.kdes1 LEFT JOIN "
-                . $this->_table2 . " D ON SUBSTR(A.program,1,3)=D.KDBA LEFT JOIN "
                 . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
 				WHERE 1=1 AND 
 				A.BUDGET_TYPE='2' 
@@ -563,7 +562,7 @@ class DataRealisasiES1 {
         foreach ($filter as $filter1) {
             $sql .= " AND " . $filter1;
         }
-        $sql .= " GROUP BY SUBSTR(program,1,5), C.nmes1,d.nmba";
+        $sql .= " GROUP BY SUBSTR(program,1,5), C.nmes1";
         $sql .=" union all 
                 SELECT SUBSTR(program,1,5)||'-'||satker KODE_KEGIATAN, C.nmsatker NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
 				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
@@ -889,7 +888,7 @@ class DataRealisasiES1 {
         return $data;
     }
 
-    public function get_fa_es1_persatsdana_filter($filter) {
+        public function get_fa_es1_persatsdana_filter($filter) {
         Session::get('id_user');
         $sql = "SELECT satker KODE_KEGIATAN, C.nmsatker NMKEGIATAN, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
 				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
@@ -925,45 +924,6 @@ class DataRealisasiES1 {
         }
         $sql .= " GROUP BY satker,SUBSTR(A.dana,1,1), C.deskripsi";
         $sql .= " ORDER BY kode_kegiatan ";
-
-        //var_dump($sql);
-        $result = $this->db->select($sql);
-        $data = array();
-        foreach ($result as $val) {
-            $d_data = new $this($this->registry);
-            $d_data->set_satker($val['KDBA']);
-            $d_data->set_kdkegiatan($val['KODE_KEGIATAN']);
-            $d_data->set_nmkegiatan($val['NMKEGIATAN']);
-            $d_data->set_budget_amt($val['PAGU']);
-            $d_data->set_actual_amt($val['REALISASI']);
-            $d_data->set_nm_satker($val['NMBA']);
-            $d_data->set_obligation($val['OBLIGATION']);
-            $d_data->set_block_amount($val['BLOCK_AMOUNT']);
-            $d_data->set_balancing_amt($val['BALANCING_AMT']);
-            $data[] = $d_data;
-        }
-        return $data;
-    }
-    
-    public function get_fa_perba_filter($filter) {
-        Session::get('id_user');
-        $sql = "SELECT SUBSTR(program,1,3) KODE_KEGIATAN, C.Nmba nmkegiatan, SUM(BUDGET_AMT) PAGU, SUM(ACTUAL_AMT) REALISASI,
-				SUM(OBLIGATION) OBLIGATION, SUM(BLOCK_AMOUNT+nvl(B.JMLBLOCK,0)) BLOCK_AMOUNT, SUM(BALANCING_AMT-nvl(B.JMLBLOCK,0)) BALANCING_AMT
-                                FROM "
-                . $this->_table1 . " A LEFT JOIN  "
-                . $this->_table2 . " C ON SUBSTR(A.program,1,3)=C.kdba LEFT JOIN "
-                . $this->_table7 . " B ON  A.CODE_COMBINATION_ID=B.CCID 
-				WHERE 1=1 AND 
-				A.BUDGET_TYPE='2' 
-				AND A.SUMMARY_FLAG = 'N' 
-				AND SUBSTR(A.AKUN,1,1) IN ('5','6')
-				AND NVL(A.BUDGET_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) + NVL(A.ACTUAL_AMT,0) > 0
-                                ";
-        foreach ($filter as $filter) {
-            $sql .= " AND " . $filter;
-        }
-        $sql .= " GROUP BY SUBSTR(program,1,3), C.nmba";
-        $sql .= " ORDER BY SUBSTR(program,1,3) ";
 
         //var_dump($sql);
         $result = $this->db->select($sql);
