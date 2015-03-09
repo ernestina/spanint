@@ -160,7 +160,8 @@ function _endpage()
 				$kdtgl_akhir = $tgl2 . '-' . $bln2 . '-' . $thn2;
 				$this->Cell(0, 20, 'Dari tanggal:' . $kdtgl_awal . ' s/d ' . $kdtgl_akhir, 0, 0, 'C', false);		
 			} else {
-					$this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);			 
+					//$this->Cell(0, 20, 'Sampai Dengan  ' . date('d-m-Y'), 0, 0, 'C', false);
+					$this->Cell(0, 20, '', 0, 0, 'C', false);					
 			} 
 
 			
