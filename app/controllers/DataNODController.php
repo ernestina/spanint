@@ -34,7 +34,7 @@ class DataNODController extends BaseController {
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
         }
 
-        //if (isset($_POST['submit_file'])) {
+        if (isset($_POST['submit_file'])) {
         
             if ($_POST['wa_number'] != '') {
                 $filter[$no++] = "WA_NUMBER  = '".$_POST['wa_number']."'";
@@ -63,8 +63,12 @@ class DataNODController extends BaseController {
                 $filter[$no++] = "TO_DATE(BOOK_DATE,'YYYYMMDD') BETWEEN TO_DATE('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "' ,'YYYYMMDD') AND TO_DATE( '" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD') ";
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
-            }
-        //}
+            } 
+        } else {
+           $filter[$no++] = "TO_DATE(BOOK_DATE,'YYYYMMDD') BETWEEN TO_DATE('" . date('Ymd') . "' ,'YYYYMMDD') AND TO_DATE( '" . date('Ymd') . "','YYYYMMDD') ";
+            $this->view->d_tgl_awal = date('d-m-Y');
+            $this->view->d_tgl_akhir = date('d-m-Y'); 
+        }
         
         $this->view->data = $d_nod->get_nod_filter($filter);
 
