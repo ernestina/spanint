@@ -473,7 +473,7 @@ class DataOverview {
                 . $this->_table3 . " A, "
                 . $this->_table2. " B 
                 WHERE A.SATKER = B.KDSATKER
-                AND A.BUDGET_TYPE = '2'
+                AND A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -548,7 +548,7 @@ class DataOverview {
                 SUM(A.BUDGET_AMT) PAGU
                 FROM "
                 . $this->_table3 . " A
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -610,7 +610,7 @@ class DataOverview {
                 SUM(A.BUDGET_AMT) PAGU
                 FROM "
                 . $this->_table3 . " A
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -680,7 +680,7 @@ class DataOverview {
                 . $this->_table3 . " a,"
                 . $this->_table2 . " b 
                 where 1=1
-                and a.budget_type = '2' 
+                and a.budget_type in ('2', '7') 
                 and a.satker=b.kdsatker 
                 and a.kppn=b.kppn
                 AND SUBSTR(a.akun,1,1) in ('4','5','6')
@@ -753,7 +753,7 @@ class DataOverview {
                 . $this->_table3 . " a,"
                 . $this->_table2 . " b 
                 where 1=1
-                and a.budget_type = '2' 
+                and a.budget_type in ('2', '7') 
                 and a.satker=b.kdsatker 
                 and a.kppn=b.kppn
                 AND SUBSTR(a.akun,1,1) in ('5','6')
@@ -1072,7 +1072,7 @@ class DataOverview {
                 SUM(A.BUDGET_AMT) PAGU
                 FROM "
                 . $this->_table3 . " A
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -1110,7 +1110,7 @@ class DataOverview {
         $sql = "SELECT SUM(A.ACTUAL_AMT) REALISASI
                 FROM "
                 . $this->_table3 . " A
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('4')
                 AND A.SUMMARY_FLAG = 'N'
@@ -1143,7 +1143,7 @@ class DataOverview {
         $sql = "SELECT SUM(A.ACTUAL_AMT) REALISASI
 				FROM "
                 . $this->_table3 . " A
-				WHERE A.BUDGET_TYPE = '2'
+				WHERE A.BUDGET_TYPE IN ('2', '7')
 				AND SUBSTR(A.BANK,1,1)  <= '9'
 				AND SUBSTR(A.AKUN,1,1) IN ('5','6')
 				AND A.SUMMARY_FLAG = 'N'
@@ -1177,7 +1177,7 @@ class DataOverview {
                 SUM(A.BUDGET_AMT) PAGU
 				FROM "
                 . $this->_table3 . " A
-				WHERE A.BUDGET_TYPE = '2'
+				WHERE A.BUDGET_TYPE IN ('2', '7')
 				AND SUBSTR(A.BANK,1,1)  <= '9'
 				AND SUBSTR(A.AKUN,1,1) IN ('5','6')
 				AND A.SUMMARY_FLAG = 'N'
@@ -1244,7 +1244,7 @@ class DataOverview {
                 WHERE 
                 SUBSTR(A.AKUN,1,1) IN ('6')
                 AND SUBSTR(PROGRAM,1,5) = '99905'
-                AND A.BUDGET_TYPE = '2' 
+                AND A.BUDGET_TYPE IN ('2', '7')
                 AND A.SATKER=B.KDSATKER
                 AND A.LOKASI=C.KDLOKASI
 				"
@@ -1277,7 +1277,7 @@ class DataOverview {
                 B.NMBA,
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI
                 FROM " . $this->_table3 . " A JOIN " . $this->_table4 . " B ON SUBSTR(A.PROGRAM,1,3)=B.KDBA
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -1324,7 +1324,7 @@ class DataOverview {
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
                 SUM(NVL(A.BUDGET_AMT,0)) PAGU
                 FROM " . $this->_table3 . " A JOIN " . $this->_table4 . " B ON SUBSTR(A.PROGRAM,1,3)=B.KDBA
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -1369,7 +1369,7 @@ class DataOverview {
                 B.NMBA,
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI
                 FROM " . $this->_table3 . " A JOIN " . $this->_table4 . " B ON SUBSTR(A.PROGRAM,1,3)=B.KDBA
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -1414,7 +1414,7 @@ class DataOverview {
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
                 SUM(NVL(A.BUDGET_AMT,0)) PAGU
                 FROM " . $this->_table3 . " A JOIN " . $this->_table4 . " B ON SUBSTR(A.PROGRAM,1,3)=B.KDBA
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -1456,7 +1456,7 @@ class DataOverview {
                 B.NMSATKER,
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI
                 FROM " . $this->_table3 . " A JOIN " . $this->_table2 . " B ON A.SATKER=B.KDSATKER
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -1502,7 +1502,7 @@ class DataOverview {
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
                 SUM(NVL(A.BUDGET_AMT,0)) PAGU
                 FROM " . $this->_table3 . " A JOIN " . $this->_table2 . " B ON A.SATKER=B.KDSATKER
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -1546,7 +1546,7 @@ class DataOverview {
                 B.NMSATKER,
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI
                 FROM " . $this->_table3 . " A JOIN " . $this->_table2 . " B ON A.SATKER=B.KDSATKER
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
@@ -1592,7 +1592,7 @@ class DataOverview {
                 SUM(NVL(A.ACTUAL_AMT,0)) REALISASI,
                 SUM(NVL(A.BUDGET_AMT,0)) PAGU
                 FROM " . $this->_table3 . " A JOIN " . $this->_table2 . " B ON A.SATKER=B.KDSATKER
-                WHERE A.BUDGET_TYPE = '2'
+                WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
                 AND SUBSTR(A.AKUN,1,1) IN ('5','6')
                 AND A.SUMMARY_FLAG = 'N'
