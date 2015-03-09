@@ -132,25 +132,33 @@
 
             <?php 
 
-            if (count($this->content->status_tiles) == 6) {
+            if (!isset($this->content->disable_notifications)) {
 
-                $stmainclasses = 'col-lg-8 col-md-6 col-sm-12';
-                $stnotfclasses = 'col-lg-4 col-md-6 col-sm-12';
+                if (count($this->content->status_tiles) == 6) {
 
-            } else if (count($this->content->status_tiles) == 4) {
+                    $stmainclasses = 'col-lg-8 col-md-6 col-sm-12';
+                    $stnotfclasses = 'col-lg-4 col-md-6 col-sm-12';
 
-                $stmainclasses = 'col-lg-9 col-md-6 col-sm-12';
-                $stnotfclasses = 'col-lg-3 col-md-6 col-sm-12';
+                } else if (count($this->content->status_tiles) == 4) {
 
-            } else if (count($this->content->status_tiles) == 3) {
+                    $stmainclasses = 'col-lg-9 col-md-6 col-sm-12';
+                    $stnotfclasses = 'col-lg-3 col-md-6 col-sm-12';
 
-                $stmainclasses = 'col-lg-8 col-md-6 col-sm-12';
-                $stnotfclasses = 'col-lg-4 col-md-6 col-sm-12';
+                } else if (count($this->content->status_tiles) == 3) {
+
+                    $stmainclasses = 'col-lg-8 col-md-6 col-sm-12';
+                    $stnotfclasses = 'col-lg-4 col-md-6 col-sm-12';
+
+                } else {
+
+                    $stmainclasses = 'col-lg-9 col-md-6 col-sm-12';
+                    $stnotfclasses = 'col-lg-3 col-md-6 col-sm-12';
+
+                }
 
             } else {
 
-                $stmainclasses = 'col-lg-9 col-md-6 col-sm-12';
-                $stnotfclasses = 'col-lg-3 col-md-6 col-sm-12';
+                $stmainclasses = 'col-sm-12';
 
             }
 
@@ -209,11 +217,29 @@
 
                                     <div class="row top-padded-little">
 
-                                        <div id="mainChart" class="col-md-12">
+                                         <?php if (isset($this->content->main_tile->secondary_datasets)) { ?>
+
+                                        <div id="mainChart" class="col-lg-6">
 
                                             <div id="main-chart" style="width: 100%; margin-top: 10px"> </div>
 
                                         </div>
+
+                                        <div id="mainChartSecondary" class="col-lg-6">
+
+                                            <div id="main-chart-secondary" style="width: 100%; margin-top: 10px"> </div>
+
+                                        </div>
+
+                                         <?php } else { ?>
+
+                                         <div id="mainChart" class="col-md-12">
+
+                                            <div id="main-chart" style="width: 100%; margin-top: 10px"> </div>
+
+                                        </div>
+
+                                        <?php } ?>
 
                                     </div>
 
@@ -403,6 +429,8 @@
 
                 </div>
 
+                <?php if (!isset($this->content->disable_notifications)) { ?>
+
                 <div class="<?php echo $stnotfclasses; ?>">
 
                     <div id="notification-tile">
@@ -458,6 +486,8 @@
                     </div>
 
                 </div>
+
+                <?php } ?>
 
             </div>
 
@@ -585,6 +615,80 @@ function generateChart() {
             }
 
         });
+
+    <?php } else if ($this->content->main_tile->type == 'line') { ?>
+
+        var chart = c3.generate({
+
+            bindto: '#main-chart',
+
+            data: {
+                columns: [
+
+                    <?php foreach ($this->content->main_tile->datasets as $mcid=>$mcdataset) { ?>
+
+                        <?php if ($mcid > 0) { echo ','; } ?>
+
+                        [
+
+                            <?php if (isset($mcdataset->name)) { echo "'" . $mcdataset->name . "', "; } ?>
+
+                            <?php foreach ($mcdataset->values as $mcdv=>$mcdatasetvalue) { ?>
+
+                                <?php if ($mcdv > 0) { echo ','; } ?>
+
+                                <?php echo $mcdatasetvalue; ?>
+
+                            <?php } ?>
+
+                        ]
+
+                    <?php } ?>
+
+                ],
+
+                type: 'line'
+            }
+
+        });
+
+        <?php if (isset($this->content->main_tile->secondary_datasets)) { ?>
+
+            var chartsec = c3.generate({
+
+            bindto: '#main-chart-secondary',
+
+            data: {
+                columns: [
+
+                    <?php foreach ($this->content->main_tile->secondary_datasets as $mcsid=>$mcsdataset) { ?>
+
+                        <?php if ($mcsid > 0) { echo ','; } ?>
+
+                        [
+
+                            <?php if (isset($mcsdataset->name)) { echo "'" . $mcsdataset->name . "', "; } ?>
+
+                            <?php foreach ($mcsdataset->values as $mcsdv=>$mcsdatasetvalue) { ?>
+
+                                <?php if ($mcsdv > 0) { echo ','; } ?>
+
+                                <?php echo $mcsdatasetvalue; ?>
+
+                            <?php } ?>
+
+                        ]
+
+                    <?php } ?>
+
+                ],
+
+                type: 'line'
+            }
+
+        });
+
+        <?php } ?>
 
     <?php } ?>
 

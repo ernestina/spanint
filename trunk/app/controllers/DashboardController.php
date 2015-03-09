@@ -10,6 +10,391 @@ class DashboardController extends BaseController {
         
     }
 
+    public function overviewMenkeu($mode=null) {
+
+      $fetch = new DataOverview($this->registry);
+
+      $belanjaPerpres = $fetch->getAPBNBelanja();
+      $penerimaanPerpres = $fetch->getAPBNPenerimaan();
+      $pembiayaanPerpres = $fetch->getAPBNPembiayaan();
+
+      $dipaHariIni = $fetch->sumDIPABelanja();
+      $pembiayaanHariIni = $fetch->sumRealisasiPembiayaan();
+      $belanjaHariIni = $fetch->sumRealisasiBelanja();
+      $penerimaanHariIni = $fetch->sumRealisasiPenerimaan();
+
+      $kontrakHariIni =  $fetch->fetchStatusRealisasiKontrak();
+
+      if (!isset($mode) || ($mode == 1)) {
+
+        $belanjaPerpresTahunLalu = $fetch->getAPBNBelanjaTAYL();
+
+        $lineBelanjaTahunIni = $fetch->fetchLineBelanja(Session::get('ta'));
+        $lineBelanjaTahunLalu = $fetch->fetchLineBelanja(intval(Session::get('ta')) - 1);
+
+        $mainchartData = array();
+        $mainchartData2 = array();
+
+        foreach ($lineBelanjaTahunIni as $lid=>$lineBelanja) {
+
+          $mainchartData[] = round($lineBelanja->get_realisasi() / intval($belanjaPerpres) * 1000) / 10;
+          $mainchartData2[] = round($lineBelanjaTahunLalu[$lid]->get_realisasi() / intval($belanjaPerpresTahunLalu) * 1000) / 10;
+
+        }
+
+        $main_tile = (object) array(
+
+          'type' => 'line',
+          'stacked' => true,
+          'title' => 'Perkembangan Realisasi Belanja',
+
+          'datasets' => array(
+
+              (object) array(
+
+                'name' => 'Persentase Realisasi Belanja (Tahun Ini)',
+                'values' => $mainchartData
+
+                ),
+              (object) array(
+
+                'name' => 'Persentase Realisasi Penerimaan (Tahun Lalu)',
+                'values' => $mainchartData2
+
+                )
+
+            ),
+
+          'colors' => array('#ff6666', '#1f77b4')
+
+        );
+
+      }  else if ($mode == 2) {
+
+        $detailRealisasi = $fetch->get_realisasi_numbers_dash_filter();
+
+        $mainchartData = array();
+        $mainchartData2 = array();
+
+        if ($detailRealisasi[0]->get_belanja_51() != null) {
+          $mainchartData[] = round($detailRealisasi[0]->get_belanja_51() / 10000000000) / 100;
+          $mainchartData2[] = 0;
+        } else {
+          $mainchartData[] = 0;
+          $mainchartData2[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_belanja_52() != null) {
+          $mainchartData[] = round($detailRealisasi[0]->get_belanja_52() / 10000000000) / 100;
+          $mainchartData2[] = 0;
+        } else {
+          $mainchartData[] = 0;
+          $mainchartData2[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_belanja_53() != null) {
+          $mainchartData[] = round($detailRealisasi[0]->get_belanja_53() / 10000000000) / 100;
+          $mainchartData2[] = 0;
+        } else {
+          $mainchartData[] = 0;
+          $mainchartData2[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_belanja_54() != null) {
+          $mainchartData[] = round($detailRealisasi[0]->get_belanja_54() / 10000000000) / 100;
+          $mainchartData2[] = 0;
+        } else {
+          $mainchartData[] = 0;
+          $mainchartData2[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_belanja_55() != null) {
+          $mainchartData[] = round($detailRealisasi[0]->get_belanja_55() / 10000000000) / 100;
+          $mainchartData2[] = 0;
+        } else {
+          $mainchartData[] = 0;
+          $mainchartData2[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_belanja_56() != null) {
+          $mainchartData[] = round($detailRealisasi[0]->get_belanja_56() / 10000000000) / 100;
+          $mainchartData2[] = 0;
+        } else {
+          $mainchartData[] = 0;
+          $mainchartData2[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_belanja_57() != null) {
+          $mainchartData[] = round($detailRealisasi[0]->get_belanja_57() / 10000000000) / 100;
+          $mainchartData2[] = 0;
+        } else {
+          $mainchartData[] = 0;
+          $mainchartData2[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_belanja_58() != null) {
+          $mainchartData[] = round($detailRealisasi[0]->get_belanja_58() / 10000000000) / 100;
+          $mainchartData2[] = 0;
+        } else {
+          $mainchartData[] = 0;
+          $mainchartData2[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_belanja_61() != null) {
+          $mainchartData[] = round($detailRealisasi[0]->get_belanja_61() / 10000000000) / 100;
+          $mainchartData2[] = 0;
+        } else {
+          $mainchartData[] = 0;
+          $mainchartData2[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_penerimaan_41() != null) {
+          $mainchartData2[] = round($detailRealisasi[0]->get_penerimaan_41()  * -1 / 10000000000) / 100;
+          $mainchartData[] = 0;
+        } else {
+          $mainchartData2[] = 0;
+          $mainchartData[] = 0;
+        }
+
+        if ($detailRealisasi[0]->get_penerimaan_42() != null) {
+          $mainchartData2[] = round($detailRealisasi[0]->get_penerimaan_42()  * -1 / 10000000000) / 100;
+          $mainchartData[] = 0;
+        } else {
+          $mainchartData2[] = 0;
+          $mainchartData[] = 0;
+        }
+
+        $main_tile = (object) array(
+
+          'type' => 'bar',
+          'stacked' => true,
+          'title' => 'Nominal Realisasi Penerimaan & Belanja Berdasarkan Jenis',
+
+          'datasets' => array(
+
+              (object) array(
+
+                'name' => 'Realisasi Belanja (dalam Triliun Rupiah)',
+                'values' => $mainchartData
+
+                ),
+              (object) array(
+
+                'name' => 'Realisasi Penerimaan (dalam Triliun Rupiah)',
+                'values' => $mainchartData2
+
+                )
+
+            ),
+
+          'categories' => array('Pegawai', 'Barang', 'Modal', 'Bunga', 'Subsidi', 'Hibah', 'BanSos', 'Lain-lain', 'Transfer', 'Pajak', 'PNBP'),
+
+          'legends' => (object) array(
+
+              'labels' => array($mainchartData[0] . ' Triliun', $mainchartData[1] . ' Triliun', $mainchartData[2] . ' Triliun', $mainchartData[3] . ' Triliun', $mainchartData[4] . ' Triliun', $mainchartData[5] . ' Triliun', $mainchartData[6] . ' Triliun', $mainchartData[7] . ' Triliun', $mainchartData[8] . ' Triliun', $mainchartData2[9] . ' Triliun', $mainchartData2[10] . ' Triliun'),
+              'colors' => array('#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#ff6666', '#1f77b4', '#1f77b4')
+
+            ),
+
+          'colors' => array('#ff6666', '#1f77b4')
+
+        );
+        
+      } else if ($mode == 3) {
+
+        $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnitBAES1(3,1);
+
+        $mainchartData = array();
+        $mainchartLabel = array();
+        $mainchartColor = array();
+        $mainchartLegend = array();
+
+        foreach ($realisasiPerUnit as $unitData) { 
+
+          $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+          $mainchartLabel[] = $unitData->get_unit();
+          $mainchartColor[] = '#1f77b4';
+
+        }
+
+        $legendLabels = $fetch->fetchNamaUnit(5, $mainchartLabel);
+
+        foreach ($mainchartLabel as $lid=>$label) {
+
+          foreach ($legendLabels as $legend) {
+
+            if ($label == $legend->get_kode_unit()) {
+
+              $mainchartLegend[$lid] = $legend->get_nama_unit();
+
+            }
+
+          }
+
+        }
+
+        //var_dump($legendLabels);
+
+        $main_tile = (object) array(
+
+          'type' => 'bar',
+          'stacked' => true,
+          'title' => 'Persentase Realisasi Belanja per K/L',
+
+          'datasets' => array(
+
+              (object) array(
+
+                'name' => 'Persentase Realisasi',
+                'values' => $mainchartData
+
+                )
+
+            ),
+
+          'categories' => $mainchartLabel,
+          'legends' => (object) array(
+
+              'labels' => $mainchartLegend,
+              'colors' => $mainchartColor
+
+            )
+
+        );
+
+      } else if ($mode == 4) {
+
+        $realisasiPerUnit = $fetch->fetchRealisasiPaguBelanjaPerUnitBAES1(3,2);
+
+        $mainchartData = array();
+        $mainchartLabel = array();
+        $mainchartColor = array();
+        $mainchartLegend = array();
+
+        foreach ($realisasiPerUnit as $unitData) { 
+
+          $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+          $mainchartLabel[] = $unitData->get_unit();
+          $mainchartColor[] = '#1f77b4';
+
+        }
+
+        $legendLabels = $fetch->fetchNamaUnit(5, $mainchartLabel);
+
+        foreach ($mainchartLabel as $lid=>$label) {
+
+          foreach ($legendLabels as $legend) {
+
+            if ($label == $legend->get_kode_unit()) {
+
+              $mainchartLegend[$lid] = $legend->get_nama_unit();
+
+            }
+
+          }
+
+        }
+
+        //var_dump($legendLabels);
+
+        $main_tile = (object) array(
+
+          'type' => 'bar',
+          'stacked' => true,
+          'title' => 'Persentase Realisasi Penerimaan per K/L',
+
+          'datasets' => array(
+
+              (object) array(
+
+                'name' => 'Persentase Realisasi',
+                'values' => $mainchartData
+
+                )
+
+            ),
+
+          'categories' => $mainchartLabel,
+          'legends' => (object) array(
+
+              'labels' => $mainchartLegend,
+              'colors' => $mainchartColor
+
+            )
+
+        );
+
+      }
+
+      $this->view->content = (object) array(
+
+          'title' => 'Dashboard',
+          'type' => 'overview-default',
+
+          'status_tiles' => array(
+
+              (object) array(
+
+                  'type' => 'gauge',
+                  'title' => 'DIPA Belanja',
+                  'subtitle' => round($dipaHariIni / 100000000000) / 10 . ' Triliun (' . round($dipaHariIni / $belanjaPerpres * 1000) / 10 . ' %) <br/>Dari Perpres ' . round($belanjaPerpres / 100000000000) / 10 .' Triliun ',
+                  'value' => round($dipaHariIni / 100000000000) / 10,
+                  'max_value' => round($belanjaPerpres / 100000000000) / 10
+
+                ),
+
+              (object) array(
+
+                  'type' => 'gauge',
+                  'title' => 'Realisasi Belanja',
+                  'subtitle' => round($belanjaHariIni / 100000000000) / 10 . ' Triliun (' . round($belanjaHariIni / $belanjaPerpres * 1000) / 10 . ' %) <br/>Dari Anggaran Belanja ' . round($belanjaPerpres / 100000000000) / 10 .' Triliun ',
+                  'value' => round($belanjaHariIni / 100000000000) / 10,
+                  'max_value' => round($belanjaPerpres / 100000000000) / 10
+
+                ),
+
+              (object) array(
+
+                  'type' => 'gauge',
+                  'title' => 'Realisasi Penerimaan',
+                  'subtitle' => round($penerimaanHariIni / 100000000000) / 10 . ' Triliun (' . round($penerimaanHariIni / $penerimaanPerpres * 1000) / 10 . ' %) <br/>Dari Anggaran Penerimaan ' . round($penerimaanPerpres / 100000000000) / 10 .' Triliun ',
+                  'value' => round($penerimaanHariIni / 100000000000) / 10,
+                  'max_value' => round($penerimaanPerpres / 100000000000) / 10
+
+                ),
+
+              (object) array(
+
+                  'type' => 'gauge',
+                  'title' => 'Realisasi Pembiayaan',
+                  'subtitle' => round($pembiayaanHariIni / 100000000000) / 10 . ' Triliun (' . round($pembiayaanHariIni / $pembiayaanPerpres * 1000) / 10 . ' %) <br/>Dari Anggaran Pembiayaan ' . round($pembiayaanPerpres / 100000000000) / 10 .' Triliun ',
+                  'value' => round($pembiayaanHariIni / 100000000000) / 10,
+                  'max_value' => round($pembiayaanPerpres / 100000000000) / 10
+
+                )
+
+            ),
+
+          'main_tile' => $main_tile,
+
+          'disable_notifications' => true
+
+        );
+
+      $this->view->switchers = array();
+      $this->view->switchers[] = 'Perkembangan Realisasi Belanja dan Penerimaan';
+      $this->view->switchers[] = 'Persentase Realisasi Belanja dan Penerimaan per Jenis';
+      $this->view->switchers[] = 'Persentase Realisasi Belanja per K/L';
+      $this->view->switchers[] = 'Persentase Realisasi Penerimaan per K/L';
+
+      $this->view->baseURL = URL . 'dashboard/overviewAdmin/';
+      
+      //echo(json_encode($this->view->content));
+
+      $this->view->render('Template-Overview');
+
+    }
+
     public function overviewAdmin($mode=null) {
 
         $fetch = new DataOverview($this->registry);

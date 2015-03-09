@@ -18,6 +18,7 @@ $akses['HomeMenkeu'] = array(
 $akses['DashboardMenkeu'] = array(
         '__construct',
         'index',
+        'overviewMenkeu',
         'overviewAdmin',
         'overviewKanwil',
         'overviewKPPN',
