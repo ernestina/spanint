@@ -41,14 +41,14 @@ class DataNODController extends BaseController {
                 $this->view->d_wa_number = $_POST['wa_number'];
             } 
 
-            if ($_POST['sp4hln_number'] != '') {
-                $filter[$no++] = "SP4HLN_NUMBER  = '".$_POST['sp4hln_number']."'";
-                $this->view->d_sp4hln_number = $_POST['sp4hln_number'];
-            } 
-
             if ($_POST['register_number'] != '') {
                 $filter[$no++] = "REGISTER_NUMBER  = '".$_POST['register_number']."'";
                 $this->view->d_register_number = $_POST['register_number'];
+            } 
+
+            if ($_POST['apdpl_number'] != '') {
+                $filter[$no++] = "APDPL_NUMBER  = '".$_POST['apdpl_number']."'";
+                $this->view->d_apdpl_number = $_POST['apdpl_number'];
             } 
 
             if ($_POST['type'] != '') {

@@ -206,14 +206,14 @@
                    echo $this->d_wa_number;
                } ?>">
                     <br/>
-                    <label class="isian">SP4HLN_NUMBER: </label>
-                    <input class="form-control" type="text" name="sp4hln_number" id="sp4hln_number" value="<?php if (isset($this->d_sp4hln_number)) {
-                   echo $this->d_sp4hln_number;
-               } ?>">
-                    <br/>
                     <label class="isian">REGISTER_NUMBER: </label>
                     <input class="form-control" type="text" name="register_number" id="register_number" value="<?php if (isset($this->d_register_number)) {
                    echo $this->d_register_number;
+               } ?>">
+                    <br/>
+                    <label class="isian">APDPL_NUMBER: </label>
+                    <input class="form-control" type="text" name="apdpl_number" id="apdpl_number" value="<?php if (isset($this->d_apdpl_number)) {
+                   echo $this->d_apdpl_number;
                } ?>">
                     <br>
                     <div id='wtype' class='alert alert-danger' style='display:none;'></div>
