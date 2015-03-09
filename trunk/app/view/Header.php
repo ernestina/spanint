@@ -55,7 +55,9 @@
                 elseif (Session::get('role') == BANK): require_once('header/HeaderBank.php'); 
                 elseif (Session::get('role') == KL): require_once('header/HeaderKL.php'); 
                 elseif (Session::get('role') == ES1): require_once('header/HeaderES1.php');      
-                elseif (Session::get('role') == UMADMIN): require_once('header/HeaderUmadmin.php');                                 elseif (Session::get('role') == MENKEU): require_once('header/HeaderMenkeu.php');                                   endif; 
+                elseif (Session::get('role') == UMADMIN): require_once('header/HeaderUmadmin.php');    
+                elseif (Session::get('role') == MENKEU): require_once('header/HeaderMenkeu.php');      
+                endif; 
                 ?>
             </div>
 

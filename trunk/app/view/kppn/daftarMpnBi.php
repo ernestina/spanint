@@ -121,8 +121,8 @@
             <tr>
                 <th rowspan="2">No</th>
                 <th rowspan="2">Tanggal</th>
-                <th colspan="2">KPPN Induk</th>
-                <th colspan="2">KPPN Anak</th>
+                <th colspan="2">KPPN KBI</th>
+                <th colspan="2">KPPN Non KBI</th>
             </tr>
             <tr>
                 <th >Transaksi</th>
@@ -145,12 +145,16 @@
                 <?php } else { ?>
             
                     <?php 
+                        $trn_kbi = 0;
+                        $rph_kbi = 0;
+                        $trn_non_kbi = 0;
+                        $rph_non_kbi = 0;
 						foreach ($this->data as $value) {
                         if($this->d_kd_kppn == '183'){ $this->d_kd_kppn = "PNR";} ?>
                         
                         <tr>
                             <td ><?php echo $no++; ?></td>
-                            <td class="align-left"><?php echo $value->get_tanggal_gl(); ?></td>
+                            <td class="align-center"><?php echo $value->get_tanggal_gl(); ?></td>
                             
                             <?php if ($value->get_trn_kbi()==0) { echo "<td>".number_format($value->get_trn_kbi())."</td>";} 
                                   else { echo "<td > <a href=" . URL . "dataGR/detailLhpRekap/" . date('Ymd', strtotime($value->get_tanggal_gl())) . "/".$this->d_kd_kppn." >" . number_format($value->get_trn_kbi()) . "</a>";} ?></td>
@@ -159,7 +163,12 @@
                             <td class="align-right"><?php echo number_format($value->get_rph_non_kbi()); ?></td>
                         </tr>
             
-            <?php }
+            <?php       
+                        $trn_kbi += $value->get_trn_kbi();
+                        $rph_kbi += $value->get_rph_kbi();
+                        $trn_non_kbi += $value->get_trn_non_kbi();
+                        $rph_non_kbi += $value->get_rph_non_kbi();
+                        }
                 } ?>
             
             <?php } else { ?>
@@ -169,6 +178,15 @@
             <?php } ?>
             
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan='2' class='ratatengah'><b>GRAND TOTAL<b></td>
+                <td class='ratatengah'><?php echo number_format($trn_kbi); ?></td>
+                <td class='ratakanan'><?php echo number_format($rph_kbi); ?></td>
+                <td class='ratatengah'><?php echo number_format($trn_non_kbi); ?></td>
+                <td class='ratakanan'><?php echo number_format($rph_non_kbi); ?></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
