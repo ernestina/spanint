@@ -329,7 +329,12 @@
 
                                                                 <tr>
                                                                     <td class="align-center"><?php echo $rows++; ?></td>
+
+                                                                    <?php if (substr($value->get_kode_unit(), 0 , 1) == 'K') { ?>
+                                                                    <td><a href="<?php echo URL; ?>dashboard/overviewKanwil/1/<?php echo $value->get_kode_unit(); ?>"><?php echo $value->get_nama_unit1(); ?></a></td>
+                                                                    <?php } else { ?>
                                                                     <td><a href="<?php echo URL; ?>dashboard/overviewKPPN/1/<?php echo $value->get_kode_unit(); ?>"><?php echo $value->get_nama_unit1(); ?></a></td>
+                                                                    <?php } ?>
 
                                                                     <td class="align-center"><?php echo number_format($value->get_spm_dalam_proses());  ?></td> 
 
@@ -466,7 +471,7 @@
 
 $('#switcher').change(function() {
 
-    window.location.assign('<?php echo $this->baseURL; ?>' + $(this).val() + '')
+    window.location.assign('<?php echo $this->baseURL; ?>' + $(this).val() + '/<?php echo $this->extraURL; ?>')
 
 });
 

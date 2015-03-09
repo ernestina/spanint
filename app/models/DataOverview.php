@@ -106,6 +106,48 @@ class DataOverview {
 
     //Helpers
 
+    public function getNamaUnit($mode, $code) {
+
+        if ($mode == 1) { //Satker
+
+            $sql = "SELECT KDSATKER KODE_UNIT, NMSATKER NAMA_UNIT FROM " . $this->_table2 . " WHERE KDSATKER ='";
+
+        } else if ($mode == 2) { //KPPN
+
+            $sql = "SELECT KDKPPN KODE_UNIT, NMKPPN NAMA_UNIT FROM T_KPPN WHERE KDKPPN ='";
+
+        } else if ($mode == 3) { //Kanwil
+
+            $sql = "SELECT KDKANWIL KODE_UNIT, NMKANWIL NAMA_UNIT FROM T_KANWIL WHERE KDKANWIL ='";
+
+        } else if ($mode == 4) { //ES1
+
+            $sql = "SELECT KDES1 KODE_UNIT, NMES1 NAMA_UNIT FROM T_ESELON1 WHERE KDES1 ='";
+
+        } else { //BA
+
+            $sql = "SELECT KDBA KODE_UNIT, NMBA NAMA_UNIT FROM T_BA WHERE KDBA ='";
+
+        }
+
+        $sql .= $code."'";
+
+        //echo($sql);
+
+        $result = $this->db->select($sql);
+
+        $ret = '';
+        
+        foreach ($result as $val) {
+
+            $ret = $val['NAMA_UNIT'];
+
+        }
+        
+        return $ret;
+
+    }
+
     public function fetchNamaUnit($mode, $references) {
 
         if ($mode == 1) { //Satker
@@ -479,6 +521,8 @@ class DataOverview {
             $d_data[] = $data;
 
         }
+
+        var_dump($d_data);
         
         return $d_data;
         

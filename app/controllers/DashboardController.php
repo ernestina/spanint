@@ -486,6 +486,21 @@ class DashboardController extends BaseController {
 
           );
 
+        } else if ($mode == 7) {
+
+          $rekapUnit = $fetch->get_sp2d_rekap_tabel();
+
+          //var_dump($legendLabels);
+
+          $main_tile = (object) array(
+
+            'type' => 'table-legacy-summary',
+            'title' => 'Rekapitulasi Status SPM, SP2D, dan LHP Kanwil (Hari Ini)',
+
+            'summary_rows' => $rekapUnit
+
+          );
+
         }
 
         $this->view->content = (object) array(
@@ -587,6 +602,7 @@ class DashboardController extends BaseController {
         $this->view->switchers[] = 'Persentase Realisasi Belanja Terendah per Satker';
         $this->view->switchers[] = 'Persentase Realisasi Belanja Tertinggi per K/L';
         $this->view->switchers[] = 'Persentase Realisasi Belanja Terendah per K/L';
+        $this->view->switchers[] = 'Rekapitulasi Status SPM, SP2D, dan LHP Kanwil (Hari Ini)';
 
         $this->view->baseURL = URL . 'dashboard/overviewAdmin/';
         
@@ -603,6 +619,12 @@ class DashboardController extends BaseController {
         if (!isset($unit)) {
 
           $unit = Session::get('kd_satker');
+          $this->view->extraURL = '';
+
+        } else {
+
+          $namaUnit = $fetch->getNamaUnit(3,substr($unit,1,2));
+          $this->view->extraURL = $unit;
 
         }
 
@@ -1064,6 +1086,7 @@ class DashboardController extends BaseController {
         $this->view->content = (object) array(
 
             'title' => 'Dashboard',
+            'subtitle' => 'KANWIL ' . $namaUnit,
             'type' => 'overview-default',
 
             'status_tiles' => array(
@@ -1242,7 +1265,11 @@ class DashboardController extends BaseController {
         if (!isset($unit)) {
 
           $unit = Session::get('kd_satker');
+          $this->view->extraURL = '';
 
+        } else {
+          $this->view->extraURL = $unit;
+          $namaUnit = $fetch->getNamaUnit(2,$unit);
         }
 
         $filter1 = array();
@@ -1626,7 +1653,7 @@ class DashboardController extends BaseController {
         $this->view->content = (object) array(
 
             'title' => 'Dashboard',
-            'subtitle' => 'KPPN ' . $unit,
+            'subtitle' => 'KPPN ' . $namaUnit,
             'type' => 'overview-default',
 
             'status_tiles' => array(
