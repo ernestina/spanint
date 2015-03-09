@@ -47,6 +47,9 @@ class Wewenang {
             case '12':
                 $sts = 'ES1';
                 break;
+            case '13':
+                $sts = 'Menkeu';
+                break;
         }
 
         return $sts;
@@ -91,6 +94,9 @@ class Wewenang {
                 break;
             case 'ES1':
                 $sts = '12';
+                break;
+            case 'Menkeu':
+                $sts = '13';
                 break;
         }
         return $sts;

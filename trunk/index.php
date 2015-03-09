@@ -37,6 +37,7 @@ define('BANK','bank');
 define('KL','kl');
 define('ES1','es1');
 define('UMADMIN','umadmin');
+define('MENKEU','menkeu');
 
 $path = array(
     ROOT.'/libs/',
@@ -76,9 +77,15 @@ $registry->auth->add_roles('bank'); //bank
 $registry->auth->add_roles('kl'); //blu
 $registry->auth->add_roles('es1'); //bank
 $registry->auth->add_roles('umadmin'); //bank
+$registry->auth->add_roles('menkeu'); //bank
 $registry->auth->add_roles('guest'); //guest
 
 //menambahkan akses ke level user
+//menkeu (pesenan p.doni - dashboard only)
+$registry->auth->add_access('auth','menkeu',$akses['AuthMenkeu']);
+$registry->auth->add_access('home','menkeu',$akses['HomeMenkeu']);
+$registry->auth->add_access('dashboard','menkeu',$akses['DashboardMenkeu']);
+
 //level admin
 $registry->auth->add_access('auth','admin',$akses['AuthAdmin']);
 $registry->auth->add_access('home','admin',$akses['HomeAdmin']);
