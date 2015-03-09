@@ -67,6 +67,9 @@ class AuthController extends BaseController {
                 case 13:
                     $role = 'umadmin';
                     break;
+                case 14:
+                    $role = 'menkeu';
+                    break;
                 default:
                     $role = 'guest';
             }
