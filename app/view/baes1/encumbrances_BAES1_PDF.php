@@ -68,27 +68,34 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		$border = 0;
         $h = 40;
         $this->SetFont('Arial', 'B', 7);
-        $ukuran_kolom_dana = 100;
+        $ukuran_kolom_dana = 97;
+		$ukuran_kolom1 = 30;
+		$ukuran_kolom2 = 70;
+		$ukuran_kolom3 = 60;
+		$ukuran_kolom4 = $ukuran_kolom1+$ukuran_kolom2+
+		$ukuran_kolom3+$ukuran_kolom2+
+		$ukuran_kolom3+$ukuran_kolom_dana+
+		$ukuran_kolom_dana+$ukuran_kolom_dana+
+		$ukuran_kolom_dana
+		;
 
         $this->SetFillColor(200, 200, 200);
         $left = $this->GetX();
-        $this->Cell(30, $h, 'No', 1, 0, 'C', true);
-        $this->SetX($left += 30);
-        $this->Cell(40, $h, 'Nomor PO', 1, 0, 'C', true);
-        $this->SetX($left += 40);
-        $this->Cell(50, $h, 'CAN', 1, 0, 'C', true);
-        $this->SetX($left += 50);
-        $this->Cell(50, $h, 'Status', 1, 0, 'C', true);
-        $this->SetX($left += 50);
-        $this->Cell(60, $h, 'Tanggal Approve', 1, 0, 'C', true);
-        $this->SetX($left += 60);
+        $this->Cell($ukuran_kolom1, $h, 'No', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom1);
+        $this->Cell($ukuran_kolom2, $h, 'Satker', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom2);
+        $this->Cell($ukuran_kolom3, $h, 'Nomor PO', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom3);
+        $this->Cell($ukuran_kolom2, $h, 'CAN', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom2);
+        $this->Cell($ukuran_kolom3, $h, 'Tanggal Approve', 1, 0, 'C', true);
+        $this->SetX($left += $ukuran_kolom3);
         $this->Cell($ukuran_kolom_dana, $h, 'Nomor Kontrak', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_dana);
         $this->Cell($ukuran_kolom_dana, $h, 'Uraian Kontrak', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_dana);
-        $this->Cell(60, $h, 'Termin Ke-', 1, 0, 'C', true);
-        $this->SetX($left += 60);
-        $this->Cell($ukuran_kolom_dana, $h, 'Nilai Termin', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_dana, $h, 'Nilai Kontrak', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_dana);
         $this->Cell($ukuran_kolom_dana, $h, 'Nilai Realisasi', 1, 0, 'C', true);
         $px1 = $this->GetX();
@@ -102,9 +109,9 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->Ln(3);
 
         $this->SetFont('Arial', '', 7);
-        $this->SetWidths(array(30,40,50,50,60, $ukuran_kolom_dana,$ukuran_kolom_dana,60,
+        $this->SetWidths(array($ukuran_kolom1,$ukuran_kolom2,$ukuran_kolom3,$ukuran_kolom2,$ukuran_kolom3, $ukuran_kolom_dana,$ukuran_kolom_dana,
 		$ukuran_kolom_dana, $ukuran_kolom_dana, $ukuran_kolom_dana));
-        $this->SetAligns(array('C', 'R','R', 'R', 'C', 'L','L', 'R','R', 'R', 'R', 'R'));
+        $this->SetAligns(array('C', 'C','C', 'R', 'C', 'L','L', 'R','R', 'R', 'R', 'R'));
 
         if (count($this->data) == 0) {
             $this->Row(
@@ -127,13 +134,12 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
             foreach ($this->data as $value) {
                 $this->Row(
                         array($no++,
+							$value->get_status(),
                             $value->get_segment1(),
                             $value->get_attribute11(),
-                            $value->get_status(),
                             $value->get_app_date(),
                             $value->get_attribute1(),
                             $value->get_comments(),
-                            $value->get_description(),
                             number_format($value->get_encumbered_amount()),
                             number_format($value->get_billed_amount()),
                             number_format($value->get_sisa_encumbrence()),
@@ -150,8 +156,8 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 				$px2 = $px1;
 				$py2 = $py1;
 				$this->SetXY($px2, $py2);
-				$this->Cell(690, $h, 'TOTAL', 1, 0, 'R', true);
-				$this->SetX($px2 += 690);
+				$this->Cell($ukuran_kolom4, $h, 'TOTAL', 1, 0, 'R', true);
+				$this->SetX($px2 += $ukuran_kolom4);
 				$py3 = $this->GetY();
 				$this->Cell($ukuran_kolom_dana, $h, number_format($tot1), 1, 1, 'R', true);
 				$this->Ln(3);

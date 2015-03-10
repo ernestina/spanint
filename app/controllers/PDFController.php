@@ -3254,8 +3254,8 @@ class PDFController extends BaseController {
             }
         }
         if ($kdtgl_awal != 'null' OR $kdtgl_akhir != 'null') {
-            $filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (" . date('Ymd', strtotime($kdtgl_awal)) . ",'YYYYMMDD') 
-									AND TO_DATE (" . date('Ymd', strtotime($kdtgl_akhir)) . ",'YYYYMMDD')  ";
+            $filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE ('" . date('Ymd', strtotime($kdtgl_awal)) . "','YYYYMMDD') 
+									AND TO_DATE ('" . date('Ymd', strtotime($kdtgl_akhir)) . "','YYYYMMDD')  ";
             $tglawal = array("$kdtgl_awal");
             $tglakhir = array("$kdtgl_akhir");
 
@@ -7467,15 +7467,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -7517,6 +7526,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
+				$this->view->nm_kppn = 'null';
                 $this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
@@ -7588,15 +7598,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-			$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -7638,6 +7657,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
+				$this->view->nm_kppn = 'null';
                 $this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
@@ -7683,15 +7703,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-			$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -7733,7 +7762,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -7765,18 +7795,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
-        /* if (Session::get('role') == KL) {
-            $filter[$no++] = "B.BA = '" . Session::get('kd_baes1') . "'";
-        }
-        if (Session::get('role') == ES1) {
-            $filter[$no++] = "B.BAES1 = '" . Session::get('kd_baes1') . "'";
-        }
-		if (Session::get('role') == KANWIL) {
-            $filter[$no++] = "SUBSTR(B.KANWIL_DJPB,2,2) = '" . Session::get('id_user') . "'";
-        } */
-
-
-
+        
             if ($kdsatker != 'null') {
                 $filter[$no++] = "B.KDSATKER = '" . $kdsatker . "'";
                
@@ -7816,15 +7835,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 				//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-			$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -7866,6 +7894,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
+				$this->view->nm_kppn = 'null';
                 $this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
@@ -7912,15 +7941,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -7962,7 +8000,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -8009,15 +8048,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -8059,7 +8107,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -8110,15 +8159,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -8160,7 +8218,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -8258,15 +8317,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -8308,7 +8376,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -8362,15 +8431,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -8412,7 +8490,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -8461,15 +8540,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -8511,7 +8599,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -8532,7 +8621,6 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		$d_log->tambah_log("Sukses");
     }
 	
-	//--belum dikerja----------
 	
 	public function DataRealisasiSumberDanaBAES1_BAES1_PDF($kdlokasi=null,$ck=null) {
         $d_spm1 = new DataRealisasi($this->registry);
@@ -8560,15 +8648,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -8610,7 +8707,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -8662,15 +8760,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -8712,7 +8819,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -8775,15 +8883,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -8797,7 +8914,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn2 = 'null';
             }	
 		}elseif (Session::get('role') == ES1) {
-		$kdbaes1=Session::get('kd_satker');
+			$kdbaes1=Session::get('kd_satker');
 			if ($kdbaes1 != 'null') {
 				//KL
                 $d_kppn = new DataUser($this->registry);
@@ -8825,7 +8942,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -8891,15 +9009,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 //-------------------------
 		
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -8942,7 +9069,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -9001,10 +9129,6 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$filter[$no++] =  "B.BAES1 = '" . Session::get('kd_baes1')."'";			
 		}
 		
-       /*  if ($satker != 'null') {
-            $filter[$no++] = " A.SATKER_CODE =  '" . $satker . "'";
-            $this->view->satker_code = $satker;
-        } */
 
             if ($kdkppn != 'null') {
                 $filter[$no++] = "A.KPPN_CODE = '" . $kdkppn . "'";
@@ -9029,15 +9153,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -9079,6 +9212,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
+				$this->view->nm_kppn = 'null';
                 $this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
@@ -9135,15 +9269,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -9185,7 +9328,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -9244,15 +9388,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -9294,7 +9447,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -9364,15 +9518,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -9414,7 +9577,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -9475,15 +9639,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -9525,7 +9698,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -9565,8 +9739,9 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nmkegiatan = $nmkegiatan;
             }
         
-
-        $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+			if (Session::get('role') == KL) {
+				$filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
+			}
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -9574,15 +9749,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -9624,7 +9808,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -9673,15 +9858,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -9723,7 +9917,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -9749,7 +9944,6 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log = new DataLog($this->registry);
         $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
 
-        if (isset($_POST['submit_file'])) {
 
             if ($kdkegiatan != 'null') {
                 $filter[$no++] = "substr(akun,1,2) like '%" . $kdkegiatan . "%'";
@@ -9760,7 +9954,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $filter[$no++] = " upper(nmakun) like upper('%" . $nmkegiatan . "%')";
                 //$this->view->nmkegiatan = $_POST['nama'];
             }
-        }
+        
 
 		if (Session::get('role') == KL) {
             $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
@@ -9777,15 +9971,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -9827,7 +10030,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -9882,15 +10086,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -9932,7 +10145,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -9974,15 +10188,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -10024,6 +10247,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
+				$this->view->nm_kppn = 'null';
                 $this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
@@ -10067,15 +10291,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -10117,6 +10350,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
+				$this->view->nm_kppn = 'null';
                 $this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
@@ -10169,15 +10403,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -10219,6 +10462,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
+				$this->view->nm_kppn = 'null';
                 $this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
@@ -10267,15 +10511,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -10317,7 +10570,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -10363,15 +10617,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -10413,7 +10676,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -10466,15 +10730,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		        //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -10516,7 +10789,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -10569,15 +10843,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		        //-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -10619,7 +10902,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }
@@ -10655,8 +10939,9 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 			$this->view->nmkegiatan = $_POST['nama'];
 		}
         
-
-        $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
+		if (Session::get('role') == KANWIL) {
+			$filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
+		}
 
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
@@ -10665,15 +10950,24 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		//-------------------------
 
 		if (Session::get('role') == ADMIN) {
-		$kdbaes1=Session::get('kd_satker');
-            if ($kdbaes1 != 'null') {
-                $d_kppn = new DataUser($this->registry);
-                $d_kppn->get_d_user_kppn2($kdbaes1);
-                foreach ($d_kppn->get_d_user_kppn2($kdbaes1) as $kppn) {
-                    $this->view->nm_kppn2 = $kppn->get_nama_user1();
-                }
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
             } else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
             }
         }elseif (Session::get('role') == KL) {
 			$kdbaes1=Session::get('kd_satker');
@@ -10715,7 +11009,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
                 $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
             }
         }  else {
-                $this->view->nm_kppn2 = 'null';
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
 				$this->view->nm_kppn3 = 'null';
 
         }

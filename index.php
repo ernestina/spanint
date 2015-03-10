@@ -247,8 +247,9 @@ $registry->auth->add_access('userSpan','umadmin',$akses['DataUMAdmin']);
 //levelguest
 $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
 
-
+//menkeu
 $registry->auth->add_access('BA_ES1','menkeu',$akses['BaEs1Menkeu']);
+$registry->auth->add_access('PDF','menkeu',$akses['PDFMENKEU']);
 
 $registry->exception = new ClassException();
 $registry->bootstrap = new Bootstrap($registry);

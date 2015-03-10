@@ -87,13 +87,23 @@ $akses['dataSPMES1'] = array(
 /*
  * akses modul PDF
  */
+ 
+ 
+ 
 $akses['PDFES1'] = array(
     '__construct',
+	'daftarsp2d_PDF',
+	'DataFaEs1SatSdana_BAES1_PDF',
+	'DataFaBaPerJenbel_BAES1_PDF',
+    'DataFaBaPerSdana_BAES1_PDF',
+    'DataFaEs1PerSat_BAES1_PDF',
+    'DataFaEs1SatJenbel_BAES1_PDF',
     'DataRealisasiAkunES1_BAES1_PDF',
     'DataRealisasiAkunBA_BAES1_PDF',
     'DataRealisasiKewenanganBAES1_BAES1_PDF',
     'DataRealisasiSumberDanaBAES1_BAES1_PDF',
     'DataRealisasiWilayahBAES1_BAES1_PDF',
+	'DataRealisasiKabupatenBAES1_BAES1_PDF',
     'DataRealisasiKegiatanES1_BAES1_PDF',
 	'DataRealisasiKegiatanBAES1_BAES1_PDF',
     'DataRealisasiKegiatanBA_BAES1_PDF',
@@ -102,32 +112,24 @@ $akses['PDFES1'] = array(
 	'DataRealisasiPenerimaanBA_BAES1_PDF',
 	'DataRealisasiPenerimaanPerES1_BAES1_PDF',
 	'DataRealisasiPenerimaanPerSatkerES1_PDF',
+	'DataUPBAES1_PDF',
+	'DetailEncumbrances_BAES1_PDF',
 	'detailrekapsp2dBAES1_BAES1_PDF',
 	'DetailRevisi_PDF',
-	'DataFaEs1SatSdana_BAES1_PDF',
-	 'DataFaBaPerJenbel_BAES1_PDF',
-    'DataFaBaPerSdana_BAES1_PDF',
-    'DataFaEs1PerSat_BAES1_PDF',
-    'DataFaEs1SatJenbel_BAES1_PDF',
+	'KarwasTUPBaes1_PDF',
     'nmsatker_BAES1_PDF',
+	'nmsatkerBAES1_BAES1_PDF',
     'ProsesRevisi_BAES1_PDF',
-    'nmsatkerBAES1_BAES1_PDF',
     'RekapSp2dBAES1_BAES1_PDF',
 	'RevisiDipa_PDF',	
-	'nmsatkerBAES1_BAES1_PDF',
-	'DataRealisasiKabupatenBAES1_BAES1_PDF',
 	'registerDJPU_PDF',
 	'refAkun_PDF',
 	'refKppn_PDF',	
 	'refSdana_PDF',
 	'refLokasi_PDF',
 	'refSatker_PDF',
-	'DetailEncumbrances_BAES1_PDF',
-	'DataUPBAES1_PDF',
-	'KarwasTUPBaes1_PDF',
-	'daftarsp2d_PDF',
-	'UPSatker_PDF',
 	'TUPSatker_PDF',
+	'UPSatker_PDF',
     '__destruct'
 );
 
