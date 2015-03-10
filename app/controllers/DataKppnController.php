@@ -242,8 +242,8 @@ class DataKppnController extends BaseController {
                 $this->view->d_bank = $_POST['bank'];
             }
             if ($_POST['tgl_awal'] != '' AND $_POST['tgl_akhir'] != '') {
-                $filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE (" . date('Ymd', strtotime($_POST['tgl_awal'])) . ",'YYYYMMDD') 
-									AND TO_DATE (" . date('Ymd', strtotime($_POST['tgl_akhir'])) . ",'YYYYMMDD')  ";
+                $filter[$no++] = "PAYMENT_DATE BETWEEN TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_awal'])) . "','YYYYMMDD') 
+									AND TO_DATE ('" . date('Ymd', strtotime($_POST['tgl_akhir'])) . "','YYYYMMDD')  ";
                 $this->view->d_tgl_awal = $_POST['tgl_awal'];
                 $this->view->d_tgl_akhir = $_POST['tgl_akhir'];
             }

@@ -204,6 +204,7 @@ if(isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
                             }
                             ?>
                         </select>
+                    <br>
 <?php } ?>
 
 
@@ -227,9 +228,10 @@ if(isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
     echo "selected";
 } ?>>SEMUA BANK</option>
                     </select>
+                    
+                    <br>
                     <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Tanggal: </label>
-                    
                     <div class="input-daterange input-group" id="datepicker" style="width: 100%">
                         <input class="form-control" type="text" class="tanggal" name="tgl_awal" id="tgl_awal" value="<?php if (isset($this->d_tgl_awal)){echo $this->d_tgl_awal;}?>">
                         <span class="input-group-addon">s.d.</span>
