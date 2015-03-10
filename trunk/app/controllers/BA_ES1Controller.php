@@ -847,9 +847,10 @@ class BA_ES1Controller extends BaseController {
                 $this->view->nmkegiatan = $_POST['nama'];
             }
         }
-
+        
+        if (Session::get('role') == KL) {
         $filter[$no++] = "SUBSTR(PROGRAM,1,3) = '" . Session::get('kd_baes1') . "'";
-
+        }
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
         $this->view->data = $d_spm1->get_ba_per_es1_filter($filter);
@@ -1283,9 +1284,10 @@ class BA_ES1Controller extends BaseController {
                 $this->view->nmkegiatan = $_POST['nama'];
             }
         }
-
+        
+        if (Session::get('role') == KANWIL) {
         $filter[$no++] = "KPPN IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
-
+        }
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
