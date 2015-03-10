@@ -265,6 +265,18 @@
 
                                     </div>
 
+                                    <?php if (isset($this->content->main_tile->disclaimer)) { ?>
+
+                                        <div class="row top-padded-little">
+
+                                            <div class="col-xs-12 top-padded-little">
+                                            <div style="border-top: 1px solid #e5e5e5"><?php echo $this->content->main_tile->disclaimer; ?></div>
+                                            </div>
+
+                                        </div>
+
+                                    <?php } ?>
+
                                     <?php if (isset($this->content->main_tile->legends)) { ?>
 
                                         <div class="row top-padded-little">
@@ -1119,7 +1131,9 @@ function arrangePage() {
 
     });
 
-    if ($('#notification-tile').innerWidth() < $('#main-tile').innerWidth()) {
+    console.log($('#notification-tile').innerWidth() + ' ' + $('#main-tile').innerWidth());
+
+    if (($('#notification-tile').innerWidth() < $('#main-tile').innerWidth()) && ($('#notification-tile').innerWidth() != null)) {
 
         rotateChart = false;
 
@@ -1153,9 +1167,22 @@ function arrangePage() {
         $('#main-chart').css('min-height', '400px');
         $('#main-chart-secondary').css('min-height', '400px');
 
+        <?php if (isset($this->content->main_tile->rotate_height)) { ?>
+
+            $('#main-chart').css('min-height', '<?php echo $this->content->main_tile->rotate_height; ?>px');
+        $('#main-chart-secondary').css('min-height', '<?php echo $this->content->main_tile->rotate_height; ?>px');
+
+        <?php } ?>
+
         $('.status-tile-canvas').each(function() {
 
             $(this).attr('height', '100');
+
+        });
+
+        $('.status-tile').each(function() {
+
+            $(this).css('height', 'auto');
 
         });
 
