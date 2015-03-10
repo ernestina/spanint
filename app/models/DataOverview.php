@@ -208,17 +208,54 @@ class DataOverview {
 
     //Details
 
+    public function fetchLineBelanjaPerBA() {
+
+        $sql = "SELECT * FROM (SELECT " . $guide .",  SUM(A.ACTUAL_AMT) REALISASI, 
+                SUM(A.BUDGET_AMT) PAGU
+                FROM "
+                . $this->_table3 . " A, "
+                . $this->_table2. " B 
+                WHERE A.SATKER = B.KDSATKER
+                AND A.BUDGET_TYPE IN ('2', '7')
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                AND NVL(A.ACTUAL_AMT,0) > 0 AND NVL(A.BUDGET_AMT,0) > 0";
+
+        $result = $this->db->select($sql);
+
+        $d_data = array();
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+
+            $data->set_unit($val['BA']);        
+            $data->set_realisasi($val['REALISASI']);
+            $data->set_pagu($val['PAGU']);
+
+            $d_data[] = $data;
+
+        }
+        
+        return $d_data;
+
+    }
+
     public function fetchLineBelanja($ta, $unit=null) {
 
         if (!isset($unit)) { $unit = '000'; }
 
-        $sql = "select period_name, realisasi from dash_periodik where period_year = '" . $ta . "' and ba = '" . $unit ."' and akun in ('5', '6')";
+        $sql = "select sum (realisasi) jumlah, period_name from dash_periodik where akun in ('5', '6') and period_year = '" . $ta . "' group by period_name";
 
         //echo ($sql);
 
         $result = $this->db->select($sql);
 
         $d_data = array();
+
+        $sum = 0;
         
         foreach ($result as $val) {
 
@@ -248,14 +285,85 @@ class DataOverview {
                 $id = 10;
             } else if ($val['PERIOD_NAME'] == 'DEC-' . substr($ta,2,2)) {
                 $id = 11;
+            } else {
+                $id = 12;
             }
 
-            $data = new $this($this->registry);
-   
-            $data->set_period_name($val['PERIOD_NAME']);
-            $data->set_realisasi($val['REALISASI']);
+            if ($id < 12) {
 
-            $d_data[$id] = $data;
+                $data = new $this($this->registry);
+       
+                $data->set_period_name($val['PERIOD_NAME']);
+                $data->set_realisasi($sum + $val['JUMLAH']);
+
+                $d_data[$id] = $data;
+
+            }
+
+        }
+
+        //var_dump($d_data);
+        
+        return $d_data;
+
+    }
+
+    public function fetchLinePenerimaan($ta, $unit=null) {
+
+        if (!isset($unit)) { $unit = '000'; }
+
+        $sql = "select sum (realisasi) jumlah, period_name from dash_periodik where akun in ('4') and period_year = '" . $ta . "' group by period_name";
+        
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+
+        $d_data = array();
+
+        $sum = 0;
+        
+        foreach ($result as $val) {
+
+            $id = 0;
+
+            if ($val['PERIOD_NAME'] == 'JAN-' . substr($ta,2,2)) {
+                $id = 0;
+            } else if ($val['PERIOD_NAME'] == 'FEB-' . substr($ta,2,2)) {
+                $id = 1;
+            } else if ($val['PERIOD_NAME'] == 'MAR-' . substr($ta,2,2)) {
+                $id = 2;
+            } else if ($val['PERIOD_NAME'] == 'APR-' . substr($ta,2,2)) {
+                $id = 3;
+            } else if ($val['PERIOD_NAME'] == 'MAY-' . substr($ta,2,2)) {
+                $id = 4;
+            } else if ($val['PERIOD_NAME'] == 'JUN-' . substr($ta,2,2)) {
+                $id = 5;
+            } else if ($val['PERIOD_NAME'] == 'JUL-' . substr($ta,2,2)) {
+                $id = 6;
+            } else if ($val['PERIOD_NAME'] == 'AUG-' . substr($ta,2,2)) {
+                $id = 7;
+            } else if ($val['PERIOD_NAME'] == 'SEP-' . substr($ta,2,2)) {
+                $id = 8;
+            } else if ($val['PERIOD_NAME'] == 'OCT-' . substr($ta,2,2)) {
+                $id = 9;
+            } else if ($val['PERIOD_NAME'] == 'NOV-' . substr($ta,2,2)) {
+                $id = 10;
+            } else if ($val['PERIOD_NAME'] == 'DEC-' . substr($ta,2,2)) {
+                $id = 11;
+            } else {
+                $id = 12;
+            }
+
+            if ($id < 12) {
+
+                $data = new $this($this->registry);
+       
+                $data->set_period_name($val['PERIOD_NAME']);
+                $data->set_realisasi($sum + $val['JUMLAH']);
+
+                $d_data[$id] = $data;
+
+            }
 
         }
 
@@ -513,6 +621,73 @@ class DataOverview {
         return $return;                
     }
 
+    public function fetchRealisasiPaguBelanjaPerUnitBAES1All($mode, $filter=null) {
+        
+        if ($mode == 1) {
+
+            $guide = 'B.KDSATKER';
+
+        } else if ($mode == 2) {
+
+            $guide = 'B.BAES1';
+
+        } else if ($mode == 3) {
+
+            $guide = 'B.BA';
+
+        }
+
+        $sql = "SELECT " . $guide .",  SUM(A.ACTUAL_AMT) REALISASI, 
+                SUM(A.BUDGET_AMT) PAGU
+                FROM "
+                . $this->_table3 . " A, "
+                . $this->_table2. " B 
+                WHERE A.SATKER = B.KDSATKER
+                AND A.BUDGET_TYPE IN ('2', '7')
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                AND NVL(A.ACTUAL_AMT,0) > 0 AND NVL(A.BUDGET_AMT,0) > 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= ' GROUP BY ' . $guide . ' ORDER BY ' . $guide;
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+
+        $d_data = array();
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+
+            //echo(substr($guide,2,99));
+
+            $data->set_unit($val[substr($guide,2,99)]);        
+            $data->set_realisasi($val['REALISASI']);
+            $data->set_pagu($val['PAGU']);
+
+            $d_data[] = $data;
+
+        }
+
+        //var_dump($d_data);
+        
+        return $d_data;
+        
+    }
+
     public function fetchRealisasiPaguBelanjaPerUnitBAES1($mode, $sort, $filter=null) {
         
         if ($mode == 1) {
@@ -722,6 +897,68 @@ class DataOverview {
         
         return $d_data;
         
+    }
+
+    public function get_realisasi_numbers_dash_menkeu_filter($filter=null) {
+        
+        $sql = "select sum(decode(substr(a.akun,1,2),'51',a.actual_amt,0)) belanja_51
+                , sum(decode(substr(a.akun,1,2),'52',a.actual_amt,0)) belanja_52
+                , sum(decode(substr(a.akun,1,2),'53',a.actual_amt,0)) belanja_53
+                , sum(decode(substr(a.akun,1,2),'54',a.actual_amt,0)) belanja_54
+                , sum(decode(substr(a.akun,1,2),'55',a.actual_amt,0)) belanja_55
+                , sum(decode(substr(a.akun,1,2),'56',a.actual_amt,0)) belanja_56
+                , sum(decode(substr(a.akun,1,2),'57',a.actual_amt,0)) belanja_57
+                , sum(decode(substr(a.akun,1,2),'58',a.actual_amt,0)) belanja_58
+                , sum(decode(substr(a.akun,1,2),'59',a.actual_amt,0)) belanja_59
+                , sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
+                , sum(decode(substr(a.akun,1,2),'41',a.actual_amt,0)) penerimaan_41
+                , sum(decode(substr(a.akun,1,2),'42',a.actual_amt,0)) penerimaan_42
+                FROM "
+                . $this->_table3 . " a
+                where 1=1
+                and a.budget_type in ('2', '7') 
+                AND SUBSTR(a.akun,1,1) in ('4','5','6')
+                and nvl(a.budget_amt,0) + nvl(a.actual_amt,0) + nvl(a.encumbrance_amt,0) <> 0
+                
+                "
+        ;
+        
+        $no = 0;
+
+        if (isset($filter)) {
+
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+
+        }
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+
+            $d_data->set_belanja_51($val['BELANJA_51']);
+            $d_data->set_belanja_52($val['BELANJA_52']);
+            $d_data->set_belanja_53($val['BELANJA_53']);
+            $d_data->set_belanja_54($val['BELANJA_54']);
+            $d_data->set_belanja_55($val['BELANJA_55']);
+            $d_data->set_belanja_56($val['BELANJA_56']);
+            $d_data->set_belanja_57($val['BELANJA_57']);
+            $d_data->set_belanja_58($val['BELANJA_58']);
+            $d_data->set_belanja_59($val['BELANJA_59']);
+            $d_data->set_belanja_61($val['BELANJA_61']);
+
+            $d_data->set_penerimaan_41($val['PENERIMAAN_41']);
+            $d_data->set_penerimaan_42($val['PENERIMAAN_42']);
+
+            $data[] = $d_data;
+        }
+
+        return $data;
+
     }
 
     public function get_realisasi_numbers_dash_filter($filter=null) {
@@ -1128,6 +1365,89 @@ class DataOverview {
     
     //Anggaran
 
+    //MENKEU
+
+    public function sumRealisasiBelanjaMenkeu($filter=null) {
+
+        $sql = "SELECT SUM(REALISASI) JUMLAH, PERIOD_NAME FROM DASH_PERIODIK WHERE AKUN IN ('5', '6') AND PERIOD_YEAR = '2015' ";
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= "GROUP BY PERIOD_NAME ORDER BY SUM(REALISASI) DESC";
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+            $data = $val['JUMLAH'];
+            break;
+        }
+        
+        return $data;
+
+    }
+
+    public function sumRealisasiPenerimaanMenkeu($filter=null) {
+
+        $sql = "SELECT SUM(REALISASI) JUMLAH, PERIOD_NAME FROM DASH_PERIODIK WHERE AKUN IN ('4') AND PERIOD_YEAR = '2015' ";
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= "GROUP BY PERIOD_NAME ORDER BY SUM(REALISASI) ASC";
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+            $data = $val['JUMLAH'] * -1;
+            break;
+        }
+        
+        return $data;
+
+    }
+
+    public function sumRealisasiPembiayaanMenkeu($filter=null) {
+
+        $sql = "SELECT SUM(REALISASI) JUMLAH, PERIOD_NAME FROM DASH_PERIODIK WHERE AKUN IN ('7') AND PERIOD_YEAR = '2015' ";
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= "GROUP BY PERIOD_NAME ORDER BY SUM(REALISASI) ASC";
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+            $data = $val['JUMLAH'] * -1;
+            break;
+        }
+        
+        return $data;
+
+    }
+
     public function fetchRealisasiPaguBelanja($filter=null) {
         
         $sql = "SELECT SUM(A.ACTUAL_AMT) REALISASI, 
@@ -1250,6 +1570,31 @@ class DataOverview {
         
     }
 
+    public function getAPBNPenerimaanTAYL($filter=null) {
+        
+        $sql = "select sum(jumlah) jumlah from apbn where tahun = '" . (Session::get('ta') - 1) . "' and ba = '000' and akun  = '4'"
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+            $data = $val['JUMLAH'];
+        }
+        
+        return $data;
+        
+    }
+
     public function getAPBNBelanjaTAYL($filter=null) {
         
         $sql = "select sum(jumlah) jumlah from apbn where tahun = '" . (Session::get('ta') - 1) . "' and ba = '000' and akun in ('5', '6')"
@@ -1333,14 +1678,45 @@ class DataOverview {
         
     }
 
-    public function sumRealisasiPembiayaan($filter=null) {
+    public function sumPaguBelanjaBunga($filter=null) {
+        
+        $sql = "SELECT SUM(A.BUDGET_AMT) PAGU
+                FROM "
+                . $this->_table3 . " A
+                WHERE A.BUDGET_TYPE IN ('2', '7')
+                AND SUBSTR(A.AKUN,0,2) = '54'
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+            $data = $val['PAGU'];
+        }
+        
+        return $data;
+        
+    }
+
+    public function sumRealisasiBelanjaBunga($filter=null) {
         
         $sql = "SELECT SUM(A.ACTUAL_AMT) REALISASI
                 FROM "
                 . $this->_table3 . " A
                 WHERE A.BUDGET_TYPE IN ('2', '7')
-                AND SUBSTR(A.BANK,1,1)  <= '9'
-                AND SUBSTR(A.AKUN,1,1) = '7'
+                AND SUBSTR(A.AKUN,0,2) = '54'
                 AND A.SUMMARY_FLAG = 'N'
                 AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
                 "
@@ -1365,6 +1741,38 @@ class DataOverview {
         return $data;
         
     }
+
+    public function sumRealisasiPembiayaan($filter=null) {
+        
+        $sql = "SELECT SUM(A.ACTUAL_AMT) REALISASI
+                FROM "
+                . $this->_table3 . " A
+                WHERE A.BUDGET_TYPE IN ('2', '7')
+                AND SUBSTR(A.AKUN,0,1) = '7'
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+            $data = $val['REALISASI'];
+        }
+        
+        return $data;
+        
+    }
     
     public function sumRealisasiBelanja($filter=null) {
         
@@ -1373,7 +1781,7 @@ class DataOverview {
                 . $this->_table3 . " A
 				WHERE A.BUDGET_TYPE IN ('2', '7')
 				AND SUBSTR(A.BANK,1,1)  <= '9'
-				AND SUBSTR(A.AKUN,1,1) IN ('5','6')
+				AND SUBSTR(A.AKUN,0,1) IN ('5','6')
 				AND A.SUMMARY_FLAG = 'N'
 				AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
 				"
@@ -1407,7 +1815,7 @@ class DataOverview {
                 . $this->_table3 . " A
                 WHERE A.BUDGET_TYPE IN ('2', '7')
                 AND SUBSTR(A.BANK,1,1)  <= '9'
-                AND SUBSTR(A.AKUN,1,1) = '7'
+                AND SUBSTR(A.AKUN,0,1) = '7'
                 AND A.SUMMARY_FLAG = 'N'
                 AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0
                 "

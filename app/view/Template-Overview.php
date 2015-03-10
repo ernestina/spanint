@@ -513,9 +513,25 @@ function generateChart() {
 
     <?php if ($this->content->main_tile->type == 'bar') { ?>
 
+        <?php if (isset($this->content->main_tile->tooltips)) { ?>
+
+            var tooltipLabels = {};
+
+            <?php foreach ($this->content->main_tile->tooltips as $mtoolid=>$mtooltip) { ?>
+
+                tooltipLabels[<?php echo $mtoolid; ?>] = '<?php echo $mtooltip; ?>';
+
+            <?php } ?>
+
+        <?php } ?>
+
         var chart = c3.generate({
 
             bindto: '#main-chart',
+
+            padding: {
+                bottom: 30
+            },
 
             data: {
                 columns: [
@@ -608,6 +624,24 @@ function generateChart() {
 
             <?php } ?>
 
+            <?php if (isset($this->content->main_tile->tooltips)) { ?>
+
+            tooltip: {
+                format: {
+                    title: function (d) { return tooltipLabels[d]; }
+                }
+            },
+
+            <?php } ?>
+
+            <?php if (isset($this->content->main_tile->disable_legend)) { ?>
+
+            legend: {
+                show: false
+            },
+
+            <?php } ?>
+
             bar: {
                 width: {
                     ratio: 0.4
@@ -647,8 +681,33 @@ function generateChart() {
 
                 ],
 
-                type: 'line'
+                type: 'area'
             }
+
+            <?php if (isset($this->content->main_tile->categories)) { ?>
+            ,
+
+            axis: {
+
+                x: {
+                    type: 'category',
+                    categories: [
+
+                        <?php foreach ($this->content->main_tile->categories as $mcatid=>$mcategory) { ?>
+
+                            <?php if ($mcatid > 0) { echo ','; } ?>
+
+                            <?php echo "'" . $mcategory . "'" ?>
+
+                        <?php } ?>
+
+                    ]
+                }
+
+                
+            }
+
+            <?php } ?>
 
         });
 
@@ -683,8 +742,33 @@ function generateChart() {
 
                 ],
 
-                type: 'line'
+                type: 'area'
             }
+
+            <?php if (isset($this->content->main_tile->categories)) { ?>
+            ,
+
+            axis: {
+
+                x: {
+                    type: 'category',
+                    categories: [
+
+                        <?php foreach ($this->content->main_tile->categories as $mcatid=>$mcategory) { ?>
+
+                            <?php if ($mcatid > 0) { echo ','; } ?>
+
+                            <?php echo "'" . $mcategory . "'" ?>
+
+                        <?php } ?>
+
+                    ]
+                }
+
+                
+            }
+
+            <?php } ?>
 
         });
 
@@ -957,6 +1041,7 @@ function arrangePage() {
         rotateChart = false;
 
         $('#main-chart').css('min-height', '250px');
+        $('#main-chart-secondary').css('min-height', '250px');
 
         max_status_tile_height = 0;
 
@@ -983,6 +1068,7 @@ function arrangePage() {
         rotateChart = true;
 
         $('#main-chart').css('min-height', '400px');
+        $('#main-chart-secondary').css('min-height', '400px');
 
         $('.status-tile-canvas').each(function() {
 
