@@ -70,13 +70,13 @@ $objPHPExcel->getActiveSheet()->getStyle('A3:AZ1000')->getFont()->setSize(11);
 //p1
 $objPHPExcel->getActiveSheet()->setCellValue('A4', "No");
 //p2
-$objPHPExcel->getActiveSheet()->setCellValue('B4', "Transaksi(KPPN Induk)");
+$objPHPExcel->getActiveSheet()->setCellValue('B4', "Transaksi(KPPN KBI)");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nilai(KPPN Induk)");
+$objPHPExcel->getActiveSheet()->setCellValue('C4', "Nilai(KPPN KBI)");
 //p4
-$objPHPExcel->getActiveSheet()->setCellValue('D4', "Transaksi(KPPN Anak)");
+$objPHPExcel->getActiveSheet()->setCellValue('D4', "Transaksi(KPPN Non KBI)");
 //p5
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Nilai(KPPN Anak)");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Nilai(KPPN Non KBI)");
 
 
 //Data

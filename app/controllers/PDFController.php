@@ -11659,7 +11659,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
     }
 	
 	//DataNODController
-	    public function daftarNOD_PDF($kdwanumber=null,$kdsp4hln=null,
+	    public function daftarNOD_PDF($kdwanumber=null,$kdapdplnumber=null,
 		$kdregister=null,$kdtype=null,$kdtglawal=null,
 		$kdtglakhir=null,$ck=null) {
         $d_nod = new DataNOD($this->registry);
@@ -11673,22 +11673,23 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
             $filter[$no++] = "KDKPPN = '" . Session::get('id_user') . "'";
         }
 
-        //if (isset($_POST['submit_file'])) {
         
             if ($kdwanumber != 'null') {
                 $filter[$no++] = "WA_NUMBER  = '".$kdwanumber."'";
             } 
 
-            if ($kdsp4hln != 'null') {
-                $filter[$no++] = "SP4HLN_NUMBER  = '".$kdsp4hln."'";
-            } 
-
             if ($kdregister != 'null') {
                 $filter[$no++] = "REGISTER_NUMBER  = '".$kdregister."'";
+            }
+
+            if ($kdapdplnumber != 'null') {
+                $filter[$no++] = "APDPL_NUMBER  = '".$kdapdplnumber."'";
+                $this->view->d_apdpl_number = $_POST['apdpl_number'];
             } 
+			
 
             if ($kdtype != 'null') {
-                if ($_POST['type'] != 'SEMUA') {
+                if ($kdtype != 'SEMUA') {
                     $filter[$no++] = "TYPE = '" . $kdtype . "'";
                 }
             }
@@ -11696,8 +11697,11 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
             if ($kdtglawal != 'null' AND $kdtglakhir != 'null') {
                 
                 $filter[$no++] = "TO_DATE(BOOK_DATE,'YYYYMMDD') BETWEEN TO_DATE('" . date('Ymd', strtotime($kdtglawal)) . "' ,'YYYYMMDD') AND TO_DATE( '" . date('Ymd', strtotime($kdtglakhir)) . "','YYYYMMDD') ";
-            }
-        //}
+            }else {
+           $filter[$no++] = "TO_DATE(BOOK_DATE,'YYYYMMDD') BETWEEN TO_DATE('" . date('Ymd') . "' ,'YYYYMMDD') AND TO_DATE( '" . date('Ymd') . "','YYYYMMDD') ";
+            $this->view->d_tgl_awal = date('d-m-Y');
+            $this->view->d_tgl_akhir = date('d-m-Y'); 
+        }
         
         $this->view->data = $d_nod->get_nod_filter($filter);
 

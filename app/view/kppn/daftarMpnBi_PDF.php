@@ -95,7 +95,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $ukuran_kolom_5b = 50;
 		$ukuran_kolom_6b = 50;
         $ukuran_kolom_b = $ukuran_kolom_1b + $ukuran_kolom_2b;
-		$kolom_grandtotal1=$kolom1+$kolom2+$ukuran_kolom_1a;
+		$kolom_grandtotal1=$kolom1+$kolom2;
 		
 		$kolom_grandtotal2=$ukuran_kolom_5a+$ukuran_kolom_6a+$ukuran_kolom_1b+$ukuran_kolom_2b+
 		$ukuran_kolom_3b+$ukuran_kolom_4b;
@@ -110,7 +110,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		$this->Cell($kolom2, $h, 'Tanggal', 1, 0, 'C', true);
 		$this->SetX($left += $kolom2);
 		  $px1 = $this->GetX();
-        $this->Cell($ukuran_kolom_a, $h / 2, 'KPPN Induk', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_a, $h / 2, 'KPPN KBI', 1, 0, 'C', true);
        
 		$py1 = $this->GetY();
         $px2 = $px1;
@@ -123,7 +123,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $py3 = $this->GetY();
         $this->SetY($py3 -= 20);
         $this->SetX($left += $ukuran_kolom_a);
-        $this->Cell($ukuran_kolom_b, $h / 2, 'KPPN Anak', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_b, $h / 2, 'KPPN Non KBI', 1, 0, 'C', true);
         $py1 = $this->GetY();
         $px2 = $px1 + $ukuran_kolom_a;
         $py2 = $py1 + 20;
@@ -156,6 +156,10 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 		}else{
 			$no = 1;
 			$this->SetFillColor(255);
+			$trn_kbi = 0;
+			$rph_kbi = 0;
+			$trn_non_kbi = 0;
+			$rph_non_kbi = 0;
 			foreach ($this->data as $value) {
 				$this->Row(
 						array($no++,
@@ -166,8 +170,12 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 							number_format($value->get_rph_non_kbi()),
 							
 				));
-				$terima += $value->get_rph_kbi();
-				$limpah += $value->get_rph_non_kbi();
+				$rph_kbi += $value->get_rph_kbi();
+				$rph_non_kbi += $value->get_rph_non_kbi();
+				$trn_kbi += $value->get_trn_kbi();
+				$trn_non_kbi += $value->get_trn_non_kbi();
+
+				
 			}
 				$this->SetFont('Arial', 'B', 7);
 				$h = 20;
@@ -180,16 +188,18 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 				$px2 = $px1;
 				$py2 = $py1;
 				$this->SetXY($px2, $py2);
-				$this->Cell($ukuran_kolom_2a, $h, number_format($terima), 1, 0, 'R', true);
+				$this->Cell($ukuran_kolom_1a, $h, number_format($trn_kbi), 1, 0, 'C', true);
+				$this->SetX($px2 += $ukuran_kolom_1a);
+				$this->Cell($ukuran_kolom_2a, $h, number_format($rph_kbi), 1, 0, 'R', true);
 				$this->SetX($px2 += $ukuran_kolom_2a);
 				$px1 = $this->GetX();
 				$py1 = $this->GetY();
 				$px2 = $px1;
 				$py2 = $py1;
 				$this->SetXY($px2, $py2);
-				$this->Cell($ukuran_kolom_1b, $h, '', 1, 0, 'R', true);
+				$this->Cell($ukuran_kolom_1b, $h, number_format($trn_non_kbi), 1, 0, 'C', true);
 				$this->SetX($px2 += $ukuran_kolom_1b);
-				$this->Cell($ukuran_kolom_2b, $h, number_format($limpah), 1, 1, 'R', true);
+				$this->Cell($ukuran_kolom_2b, $h, number_format($rph_non_kbi), 1, 1, 'R', true);
 				$this->Ln(3);
 		
 		}
