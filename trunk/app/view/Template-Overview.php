@@ -270,7 +270,7 @@
                                         <div class="row top-padded-little">
 
                                             <div class="col-xs-12 top-padded-little">
-                                            <div style="border-top: 1px solid #e5e5e5"><?php echo $this->content->main_tile->disclaimer; ?></div>
+                                            <div style="border: 1px solid #e5e5e5; padding: 5px; text-align: center"><span class="glyphicon glyphicon-info-sign"></span> &nbsp;<?php echo $this->content->main_tile->disclaimer; ?></div>
                                             </div>
 
                                         </div>
@@ -1131,9 +1131,9 @@ function arrangePage() {
 
     });
 
-    console.log($('#notification-tile').innerWidth() + ' ' + $('#main-tile').innerWidth());
+    console.log($('.status-tile').innerWidth() + ' ' + $('#main-tile').innerWidth());
 
-    if (($('#notification-tile').innerWidth() < $('#main-tile').innerWidth()) && ($('#notification-tile').innerWidth() != null)) {
+    if ($('.status-tile').innerWidth() < $('#main-tile').innerWidth()) {
 
         rotateChart = false;
 

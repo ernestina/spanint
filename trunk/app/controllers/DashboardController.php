@@ -317,7 +317,7 @@ class DashboardController extends BaseController {
 
           } else {
 
-            $disclaimer = 'Realisasi untuk BA999 (Bendahara Umum Negara) sebesar ' . (round($unitData->get_realisasi() / 10000000000) / 100) . ' (' . round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10 . ' %)';
+            $disclaimer = 'Realisasi untuk BA999 (Bendahara Umum Negara) sebesar ' . (round($unitData->get_realisasi() / 10000000000) / 100) . ' Triliun (' . round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10 . ' %)';
 
           }
 
