@@ -2,23 +2,24 @@
 <div class="main-window-segment" style="padding-top: none; padding-bottom: 20px;">
     <div class="container-fluid">
         <div class="row">
+
+            <div class="col-lg-10 col-md-6 col-sm-12">
+                <h2>Daftar Invoice Hasil Konversi Yang Belum Diproses di SPAN</h2>
             <?php
 			if (isset($this->data1) ); {
 				if (empty($this->data)) {
-                    echo '<td colspan=11 align="center">Tidak ada data.</td>';
-				}
-				else{
+                    echo '<h4>Tidak ada data.</h4>';
+                }else{
 					foreach ($this->data1 as $value) {
                         $jml_invoice=$value->get_jml_invoice();
 						$jml_pmrt=$value->get_jml_pmrt();
-						$jml_nil_invoice=$value->get_jml_nilai_inv();
-					}
+						$jml_nil_invoice=$value->get_jml_nilai_inv();?>
+                       <h4>Jumlah Invoice : <?php echo $jml_invoice ?>  || Jumlah PMRT : <?php echo $jml_pmrt ?> || Total Nilai Invoice : <?php echo number_format($jml_nil_invoice) ?> </h4> 
+					<?php }
 				}
 			}
 			?>
-            <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Daftar Invoice Hasil Konversi Yang Belum Diproses di SPAN</h2>
-				<h4>Jumlah Invoice : <?php echo $jml_invoice ?>  || Jumlah PMRT : <?php echo $jml_pmrt ?> || Total Nilai Invoice : <?php echo number_format($jml_nil_invoice) ?> </h4>
+				
 				
             </div>
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -115,7 +116,10 @@
 				<th>Jenis SPM</th>
                 <th>Nama File</th>
                 <th>Nama File ZIP</th> 
-				<th>Durasi</th> 
+				<th>Durasi</th>
+                <?php if(Session::get('role') == ADMIN) {?>
+                <th>Hapus</th>
+                <?php }?>
                                 
             </tr>
         </thead>
@@ -129,7 +133,7 @@
                 } else {
                     foreach ($this->data as $value) {
                         echo "<tr>	";
-                        echo "<td>" . $no++ . "</td>";
+                        echo "<td>" . $no . "</td>";
 						echo "<td>" . $value->get_kppn() . "</td>";
 						echo "<td>" . $value->get_satker() . "</td>";
                         echo "<td>" . $value->get_invoice_num() .  "</td>";
@@ -139,8 +143,46 @@
 						echo "<td>" . $value->get_jendok() . "</td>";						
                         echo "<td>" . $value->get_file_name() . "</td>";
                         echo "<td>" . $value->get_file_name_zip() . "</td>";                       
-                        echo "<td>" . $value->get_durasi() . " (hari) </td>";                     
-                        echo "</tr>	";
+                        echo "<td>" . $value->get_durasi() . " (hari) </td>"; 
+                        if(Session::get('role') == ADMIN){ ?>
+                            <td ><a class='btn btn-default' data-toggle='modal' data-target='#modal-app-update<?php echo $no;?>' name='upd_flag'><span class='glyphicon glyphicon-pencil'></span></a></span></a></td>
+
+                        </tr>
+
+<!--Update (delete_flag) Data-->
+<div class="modal fade" id="modal-app-update<?php echo $no++;?>" tabindex="-1" role="dialog" aria-labelledby="app-filter-label" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">   <span aria-hidden="true">&times;</span><span class="sr-only">Tutup</span></button>
+                <h4 class="modal-title" id="app-filter-label"><span class="glyphicon glyphicon-headphones"></span> Delete file</h4>
+
+            </div>
+            <form id="filter-form" method="POST" action="Konversi" enctype="multipart/form-data">
+                <input type="hidden" name="file_name" id="file_name" value="<?php echo $value->get_file_name(); ?>">
+                <div class="modal-body">
+<!--test--> Anda yakin akan menghapus file <?php  echo $value->get_file_name(); //echo $value->get_delete_flag();?> ?
+                </div> <!--end modal body-->
+
+                    <div class="modal-footer">
+                    <button type="submit" name="update_flag" class="btn btn-primary" style="width: 100%" onClick="return cek_upload2()">Saya yakin!!</button>
+                </div>
+
+            </form>
+            
+            
+
+        </div>
+
+    </div>
+
+</div>
+
+
+                    <?php }
                     }
                 }
             } else {
@@ -149,7 +191,8 @@
             ?>
         </tbody>
     </table>
-</div>
+</div> <!--end table-->
+
 <?php if (isset($this->kppn_list)) { ?>
 
 <!-- Filter -->
