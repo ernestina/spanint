@@ -17,6 +17,16 @@
         </div>
     </li>
 
+    <li class="subnav"><h4><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Informasi Pendapatan</h4>
+        <div class="collapse">
+            <ul>
+                <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanBA">Realisasi Pendapatan Per Akun</a></li>
+                <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerES1">Realisasi Pendapatan Per Eselon 1</a></li>
+                <li><a href="<?php echo URL; ?>BA_ES1/DataRealisasiPenerimaanPerSatkerES1">Realisasi Pendapatan Per Satker</a></li>
+            </ul>
+        </div>
+    </li>
+
     <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
         <div class="collapse">
             <ul>

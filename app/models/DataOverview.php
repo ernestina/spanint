@@ -621,6 +621,134 @@ class DataOverview {
         return $return;                
     }
 
+    public function fetchRealisasiPenerimaanPajakPerUnitBAES1All($mode, $filter=null) {
+        
+        if ($mode == 1) {
+
+            $guide = 'B.KDSATKER';
+
+        } else if ($mode == 2) {
+
+            $guide = 'B.BAES1';
+
+        } else if ($mode == 3) {
+
+            $guide = 'B.BA';
+
+        }
+
+        $sql = "SELECT " . $guide .",  SUM(A.ACTUAL_AMT) REALISASI
+                FROM "
+                . $this->_table3 . " A, "
+                . $this->_table2. " B 
+                WHERE A.SATKER = B.KDSATKER
+                AND A.BUDGET_TYPE IN ('2', '7')
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,2) = '41'
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) <> 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= ' GROUP BY ' . $guide . ' ORDER BY ' . $guide;
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+
+        $d_data = array();
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+
+            //echo(substr($guide,2,99));
+
+            $data->set_unit($val[substr($guide,2,99)]);        
+            $data->set_realisasi($val['REALISASI'] * -1);
+
+            $d_data[] = $data;
+
+        }
+
+        //var_dump($d_data);
+        
+        return $d_data;
+        
+    }
+
+    public function fetchRealisasiPenerimaanPNBPPerUnitBAES1All($mode, $filter=null) {
+        
+        if ($mode == 1) {
+
+            $guide = 'B.KDSATKER';
+
+        } else if ($mode == 2) {
+
+            $guide = 'B.BAES1';
+
+        } else if ($mode == 3) {
+
+            $guide = 'B.BA';
+
+        }
+
+        $sql = "SELECT " . $guide .",  SUM(A.ACTUAL_AMT) REALISASI
+                FROM "
+                . $this->_table3 . " A, "
+                . $this->_table2. " B 
+                WHERE A.SATKER = B.KDSATKER
+                AND A.BUDGET_TYPE IN ('2', '7')
+                AND SUBSTR(A.BANK,1,1)  <= '9'
+                AND SUBSTR(A.AKUN,1,2) = '42'
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) <> 0
+                "
+        ;
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        $sql .= ' GROUP BY ' . $guide . ' ORDER BY ' . $guide;
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+
+        $d_data = array();
+        
+        foreach ($result as $val) {
+
+            $data = new $this($this->registry);
+
+            //echo(substr($guide,2,99));
+
+            $data->set_unit($val[substr($guide,2,99)]);        
+            $data->set_realisasi($val['REALISASI'] * -1);
+
+            $d_data[] = $data;
+
+        }
+
+        //var_dump($d_data);
+        
+        return $d_data;
+        
+    }
+
     public function fetchRealisasiPaguBelanjaPerUnitBAES1All($mode, $filter=null) {
         
         if ($mode == 1) {
@@ -1366,6 +1494,36 @@ class DataOverview {
     //Anggaran
 
     //MENKEU
+
+    public function sumPengembalianPenerimaanMenkeu($filter=null) {
+
+        $sql = "SELECT SUM(A.ACTUAL_AMT) REALISASI
+                FROM "
+                . $this->_table3 . " A
+                WHERE A.BUDGET_TYPE IN ('2', '7')
+                AND SUBSTR(A.AKUN,0,1)  = '4'
+                AND A.SUMMARY_FLAG = 'N'
+                AND NVL(A.BUDGET_AMT,0) + NVL(A.ACTUAL_AMT,0) + NVL(A.ENCUMBRANCE_AMT,0) > 0";
+        
+        $no = 0;
+        
+        if (isset($filter)) {
+            foreach ($filter as $filter) {
+                $sql .= " AND " . $filter;
+            }
+        }
+
+        //echo ($sql);
+
+        $result = $this->db->select($sql);
+        
+        foreach ($result as $val) {
+            $data = $val['REALISASI'];
+        }
+        
+        return $data;
+
+    }
 
     public function sumRealisasiBelanjaMenkeu($filter=null) {
 

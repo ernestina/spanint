@@ -143,12 +143,12 @@
             
                         <tr>
                            
-                            <td class="align-left"><?php echo $value->get_deskripsi(); ?></td>
-                            <td><?php echo $value->get_apbn(); ?></td>
-                            <td class="align-center"><?php echo $value->get_realisasi_bun(); ?></td>
-                            <td><?php echo $value->get_realisasi_kppn(); ?></td>
-                            <td class="align-center"><?php echo $value->get_jumlah(); ?></td>
-                            <td><?php if	($value->get_apbn() == 0) { 
+                            <td class="align-left"><pre><?php echo $value->get_deskripsi(); ?></pre></td>
+                            <td class="align-right"><?php echo number_format($value->get_apbn()); ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_realisasi_bun()); ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_realisasi_kppn()); ?></td>
+                            <td class="align-right"><?php echo number_format($value->get_jumlah()); ?></td>
+                            <td class="align-center"><?php if	($value->get_apbn() == 0) { 
 							echo '0.00%';
 							} 
 						else { echo 
