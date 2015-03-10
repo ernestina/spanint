@@ -202,6 +202,7 @@
                             }
                             ?>
                         </select>
+                        <br>
 <?php } ?>
 
                     <div id="wbank" class="alert alert-danger" style="display:none;"></div>
@@ -224,6 +225,7 @@
     echo "selected";
 } ?>>SEMUA BANK</option>
                     </select>
+                    <br>
                     <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Tanggal: </label>
                     

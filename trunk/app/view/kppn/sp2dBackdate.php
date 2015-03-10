@@ -203,6 +203,7 @@ if(isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
                             }
                             ?>
                         </select>
+                        <br>
 <?php } ?>
 
                     <div id="wbank" class="alert alert-danger" style="display:none;"></div>
@@ -225,6 +226,7 @@ if(isset($this->d_bank) || isset($this->d_tgl_awal) || isset($this->d_tgl_akhir)
     echo "selected";
 } ?>>SEMUA BANK</option>
                     </select>
+                    <br>
                     <div id="wtgl" class="alert alert-danger" style="display:none;"></div>
                     <label class="isian">Tanggal: </label>
                     
