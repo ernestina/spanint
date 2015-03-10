@@ -249,6 +249,7 @@ $registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
 
 //menkeu
 $registry->auth->add_access('BA_ES1','menkeu',$akses['BaEs1Menkeu']);
+$registry->auth->add_access('DataLRA','menkeu',$akses['DataLRAMenkeu']);
 $registry->auth->add_access('PDF','menkeu',$akses['PDFMENKEU']);
 
 $registry->exception = new ClassException();

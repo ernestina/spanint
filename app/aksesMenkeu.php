@@ -26,6 +26,12 @@ $akses['DashboardMenkeu'] = array(
         '__destruct'
 );
 
+$akses['DataLRAMenkeu'] = array(
+        '__construct',
+        'DataLRA',
+        '__destruct'
+);
+
 
 /*
  * akses modul BA_ES1
