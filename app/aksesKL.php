@@ -70,6 +70,7 @@ $akses['BaEs1KL'] = array(
 	'DetailEncumbrances',
 	'DataUPBAES1',
 	'KarwasTUPBaes1',
+    'DataFaPerBA',
     '__destruct'
 );
 
