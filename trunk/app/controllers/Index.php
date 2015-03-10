@@ -36,7 +36,7 @@ class Index extends BaseController {
         } elseif (Session::get('role') == UMADMIN) {
             header('location:' . URL . 'home');
         } elseif (Session::get('role') == MENKEU) {
-            header('location:' . URL . 'dashboard/overviewAdmin');
+            header('location:' . URL . 'dashboard/overviewMenkeu');
         } else {
             header('location:' . URL . 'auth/login');
         }
