@@ -12043,6 +12043,98 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_log->tambah_log("Sukses");
 
     }
+	
+	//DataLRAController
+	public function DataLRA_BAES1_PDF($ck=null) {
+        $d_spm1 = new DataLRA($this->registry);
+        $filter = array();
+        $no = 0;
+        //untuk mencatat log user
+        $d_log = new DataLog($this->registry);
+        $d_log->set_activity_time_start(date("d-m-Y h:i:s"));
+
+		$this->view->data = $d_spm1->get_lra_apbn($filter);
+		  //-------------------------
+
+		if (Session::get('role') == ADMIN) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == MENKEU) {
+			if ($kdkppn != 'null') {
+				$d_kppn = new DataUser($this->registry);
+				$d_kppn->get_d_user_kppn($kdkppn);
+				foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+					$this->view->nm_kppn = $kppn->get_nama_user();
+				}
+            } else {
+                $this->view->nm_kppn = 'null';
+            }
+        }elseif (Session::get('role') == KL) {
+			$kdbaes1=Session::get('kd_satker');
+			if ($kdbaes1 != 'null') {
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();		
+                }
+            } else {
+                $this->view->nm_kppn2 = 'null';
+            }	
+		}elseif (Session::get('role') == ES1) {
+		$kdbaes1=Session::get('kd_satker');
+			if ($kdbaes1 != 'null') {
+				//KL
+                $d_kppn = new DataUser($this->registry);
+                $d_kppn->get_d_user_kppn($kdbaes1);
+                foreach ($d_kppn->get_d_user_kppn($kdbaes1) as $kppn) {
+                    $this->view->nm_kppn2 = $kppn->get_nama_user();
+                }
+				//ES1
+				$kppn1='KL'.substr($kdbaes1,1,3);
+				$d_kppn1 = new DataUser($this->registry);
+				$d_kppn1->get_d_user_kppn2($kppn1);
+                foreach ($d_kppn1->get_d_user_kppn2($kppn1) as $kppn1) {
+                    $this->view->nm_kppn3 = $kppn1->get_nama_user1();
+                }
+				
+            } else {
+                $this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+            }
+		}elseif (Session::get('role') == KANWIL) {
+            $d_kppn = new DataUser($this->registry);
+			
+            $d_kppn->get_d_user_kppn($kdkppn);
+            foreach ($d_kppn->get_d_user_kppn($kdkppn) as $kppn) {
+                $this->view->nm_kppn = Session::get('user') . ' - ' . $kppn->get_nama_user();
+            }
+        }  else {
+                $this->view->nm_kppn = 'null';
+				$this->view->nm_kppn2 = 'null';
+				$this->view->nm_kppn3 = 'null';
+
+        }
+        //-------------------------
+		$this->view->kdjk='Kode | Nama Eselon 1 / Satker';
+		//------------------------------------------------------------
+		$judul1='Realisasi APBN';
+		$this->view->judul1=$judul1;
+		if($ck=='PDF'){
+			$this->view->load('baes1/LRA_BAES1_PDF');
+		}elseif($ck=='XLS'){
+			$this->view->load('baes1/LRA_BAES1_XLS');
+		}
+		//------------------------------------------------------------
+
+        $this->view->render('baes1/LRA');
+    }
 
 
 

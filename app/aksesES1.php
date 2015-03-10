@@ -130,6 +130,7 @@ $akses['PDFES1'] = array(
 	'refSatker_PDF',
 	'TUPSatker_PDF',
 	'UPSatker_PDF',
+	'DataLRA_BAES1_PDF',
     '__destruct'
 );
 
