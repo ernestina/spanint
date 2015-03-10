@@ -228,7 +228,9 @@ class DashboardController extends BaseController {
 
           'categories' => array('Pegawai', 'Barang', 'Modal', 'Bunga', 'Subsidi', 'Hibah', 'BanSos', 'Lain-lain', 'Transfer', 'Pajak', 'PNBP'),
 
-          'colors' => array('#ff6666', '#1f77b4')
+          'colors' => array('#ff6666', '#1f77b4'),
+
+          'rotate_height' => 500
 
         );
         
@@ -288,7 +290,8 @@ class DashboardController extends BaseController {
 
           'categories' => $mainchartLabel,
           'tooltips' => $mainchartLegend,
-          'tooltip_extras' => $mainchartExtras
+          'tooltip_extras' => $mainchartExtras,
+          'rotate_height' => 1200
 
         );
 
@@ -311,6 +314,10 @@ class DashboardController extends BaseController {
             $mainchartData[] = round($unitData->get_realisasi() / 10000000000) / 100;
             $mainchartExtras[0][] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10 . ' %';
             $mainchartLabel[] = $unitData->get_unit();
+
+          } else {
+
+            $disclaimer = 'Realisasi untuk BA999 (Bendahara Umum Negara) sebesar ' . (round($unitData->get_realisasi() / 10000000000) / 100) . ' (' . round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10 . ' %)';
 
           }
 
@@ -351,7 +358,9 @@ class DashboardController extends BaseController {
 
           'categories' => $mainchartLabel,
           'tooltips' => $mainchartLegend,
-          'tooltip_extras' => $mainchartExtras
+          'tooltip_extras' => $mainchartExtras,
+          'disclaimer' => $disclaimer,
+          'rotate_height' => 1200
 
         );
 
@@ -414,7 +423,8 @@ class DashboardController extends BaseController {
             ),
 
           'categories' => $mainchartLabel,
-          'tooltips' => $mainchartLegend
+          'tooltips' => $mainchartLegend,
+          'rotate_height' => 1200
 
         );
 
