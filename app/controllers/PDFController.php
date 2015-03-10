@@ -1957,6 +1957,10 @@ class PDFController extends BaseController {
         } else {
             $filter[$no++] = "KPPN = '" . Session::get('id_user') . "'";
         }
+        $this->view->data = $d_spm1->get_gr_pfk_filter($filter, $kdbulan);
+		//------------------------------------------------------------
+		$judul1='Monitoring PFK Bulan '.$kdbulan;
+		$this->view->judul1=$judul1;
 
         //-------------------------
         if (Session::get('role') == SATKER) {
@@ -1988,10 +1992,6 @@ class PDFController extends BaseController {
         //-------------------------
 
 
-        $this->view->data = $d_spm1->get_gr_pfk_filter($filter, $kdbulan);
-		//------------------------------------------------------------
-		$judul1='Monitoring PFK Bulan '.$kdbulan;
-		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('kppn/GR_PFK_GLOBAL_PDF');
 		}elseif($ck=='XLS'){
