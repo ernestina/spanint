@@ -772,7 +772,7 @@ class DataRealisasi {
 				, sum(decode(substr(a.akun,1,1),'6',a.actual_amt,0)) belanja_61
 				, sum(ENCUMBRANCE_AMT) encumbrance 
 				FROM "
-                . $this->_table1 . " a left join"
+                . $this->_table1 . " a left join "
                 . $this->_table9 . " b 
 				on SUBSTR(a.OUTPUT,1,4) = b.KDKEGIATAN
 				where 1=1
