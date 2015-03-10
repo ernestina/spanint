@@ -16,10 +16,10 @@
 				} else {
 					$kdwanumber = 'null';
 				}
-				if (isset($this->d_sp4hln_number)) {
-					$kdsp4hln = $this->d_sp4hln_number;
+				if (isset($this->d_apdpl_number)) {
+					$kdapdplnumber = $this->d_apdpl_number;
 				} else {
-					$kdsp4hln = 'null';
+					$kdapdplnumber = 'null';
 				}
 
 				if (isset($this->d_register_number)) {
@@ -51,8 +51,8 @@
                     <button type="button" class="btn btn-default dropdown-toggle fullwidth" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-print"></span>&nbsp; Cetak <span class="caret"></span>
                     </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo URL; ?>PDF/daftarNOD_PDF/<?php echo $kdwanumber . "/" . $kdsp4hln . "/" . $kdregister . "/" . $kdtype . "/" . $kdtglawal . "/" . $kdtglakhir; ?>/PDF">PDF</a></li>
-                            <li><a href="<?php echo URL; ?>PDF/daftarNOD_PDF/<?php echo $kdwanumber . "/" . $kdsp4hln . "/" . $kdregister . "/" . $kdtype . "/" . $kdtglawal . "/" . $kdtglakhir; ?>/XLS">EXCEL</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/daftarNOD_PDF/<?php echo $kdwanumber . "/" . $kdapdplnumber . "/" . $kdregister . "/" . $kdtype . "/" . $kdtglawal . "/" . $kdtglakhir; ?>/PDF">PDF</a></li>
+                            <li><a href="<?php echo URL; ?>PDF/daftarNOD_PDF/<?php echo $kdwanumber . "/" . $kdapdplnumber . "/" . $kdregister . "/" . $kdtype . "/" . $kdtglawal . "/" . $kdtglakhir; ?>/XLS">EXCEL</a></li>
                           </ul>
                 </div>
 					
