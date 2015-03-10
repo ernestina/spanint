@@ -136,6 +136,7 @@ $akses['PDFKL'] = array(
 	'RevisiDipa_PDF',
 	'TUPSatker_PDF',
 	'UPSatker_PDF',
+	'DataLRA_BAES1_PDF',
     '__destruct'
 );
 
