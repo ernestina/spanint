@@ -71,6 +71,22 @@ $akses['BaEs1Menkeu'] = array(
 );
 
 /*
+ * akses Pelaporan
+ */
+$akses['PelaporanMenkeu'] = array(
+    '__construct',
+    'downloadLaporanKPPN',
+    'downloadLaporanKPPN2',
+    'downloadLaporanPKNBM',
+    'downloadLaporanPKNBB',
+    'lihatLaporan',
+    'listLaporanPKN',
+    'listLaporanKPPN',
+    'listLaporanSingle',
+    '__destruct'
+);
+
+/*
  * akses modul PDF
  */
 $akses['PDFMENKEU'] = array(

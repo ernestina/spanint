@@ -16,3 +16,12 @@
             </ul>
         </div>
     </li>
+
+    <li class="subnav"><h4><span class="glyphicon glyphicon-download"></span>&nbsp;&nbsp;Unduh Pelaporan SPAN</h4>
+        <div class="collapse">
+            <ul>
+                <li><a href="<?php echo URL; ?>pelaporan/listLaporanPKN/BukuMerah">Laporan Buku Merah</a></li>
+                <li><a href="<?php echo URL; ?>pelaporan/listLaporanPKN/BukuBiru">Laporan Buku Biru</a></li>
+            </ul>
+        </div>
+    </li>

@@ -244,13 +244,14 @@ $registry->auth->add_access('auth','umadmin',$akses['AuthUmAdmin']);
 $registry->auth->add_access('home','umadmin',$akses['HomeUmAdmin']);
 $registry->auth->add_access('userSpan','umadmin',$akses['DataUMAdmin']);
 
-//levelguest
-$registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
-
 //menkeu
 $registry->auth->add_access('BA_ES1','menkeu',$akses['BaEs1Menkeu']);
 $registry->auth->add_access('DataLRA','menkeu',$akses['DataLRAMenkeu']);
 $registry->auth->add_access('PDF','menkeu',$akses['PDFMENKEU']);
+$registry->auth->add_access('pelaporan','menkeu',$akses['PelaporanMenkeu']);
+
+//levelguest
+$registry->auth->add_access('auth','guest',$akses['AuthAdmin']);
 
 $registry->exception = new ClassException();
 $registry->bootstrap = new Bootstrap($registry);
