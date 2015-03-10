@@ -22,6 +22,7 @@ class DataADKKonversi {
     private $_jml_invoice;
     private $_jml_pmrt;
     private $_jml_nilai_inv;
+    private $_delete_flag;
     private $_table = 'SPAN_PMRT';
 	private $_table1 = 'T_JENDOK';
     public $registry;
@@ -43,7 +44,7 @@ class DataADKKonversi {
     public function get_adk_konversi($filter, $kppn) {		
         Session::get('id_user');				
         $sql = "SELECT SPAN_PMRT.INVOICE_NUM, NETT_AMOUNT INVOICE_AMOUNT, INVOICE_DATE, SUBSTR(PMRT_FILE_NAME,3,29) PMRT_FILE_NAME,  STATUS_UPLOAD, ZIP_FILE_NAME,
-				SUBSTR (ZIP_FILE_NAME,8,8) UPLOAD_DATE, KD_SATKER, SPAN_PMRT.DURASI, KDKPPN, URAIAN
+				SUBSTR (ZIP_FILE_NAME,8,8) UPLOAD_DATE, KD_SATKER, SPAN_PMRT.DURASI, KDKPPN, URAIAN, DELETE_FLAG
 				FROM "
                 . $this->_table . "  , "
 				. $this->_table1 . " , 
@@ -94,6 +95,7 @@ class DataADKKonversi {
             $d_data->set_jml_invoice($val['JML_INVOICE']);
             $d_data->set_jml_pmrt($val['JML_PMRT']);
             $d_data->set_jml_nilai_inv($val['JML_NILAI_INV']);
+            $d_data->set_delete_flag($val['DELETE_FLAG']);
             $data[] = $d_data;
         }
         return $data;
@@ -130,6 +132,20 @@ class DataADKKonversi {
             $data[] = $d_data;
         }
         return $data;
+    }
+    
+    public function update_flag() {
+        //'file_name' => $this->get_file_name(),
+        $data = array(
+            'delete_flag' => $this->get_delete_flag(),
+        );
+        //var_dump($this->get_delete_flag());
+        //var_dump($this->get_file_name());
+        if (!is_array($data)) {
+            return false;
+        }
+        $where = " PMRT_FILE_NAME='R_" . $this->get_file_name() . "'";
+        return $this->db->update($this->_table, $data, $where);
     }
     /*
      * setter
@@ -168,7 +184,11 @@ class DataADKKonversi {
     public function set_durasi($durasi) {
         $this->_durasi = $durasi;
     }
-	
+    
+    public function set_delete_flag($delete_flag) {
+        $this->_delete_flag = $delete_flag;
+    }    
+    
 	public function set_kppn($kppn) {
         $this->_kppn = $kppn;
     }
@@ -251,6 +271,10 @@ class DataADKKonversi {
 
     public function get_jml_nilai_inv() {
         return $this->_jml_nilai_inv;
+    }
+    
+    public function get_delete_flag() {
+        return $this->_delete_flag;
     }
 
     public function get_table() {

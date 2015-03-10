@@ -1029,6 +1029,23 @@ class DataSPMController extends BaseController {
             $d_kppn_list = new DataUser($this->registry);
             $this->view->kppn_list = $d_kppn_list->get_kppn_kanwil();
         }
+        
+        if (isset($_POST['update_flag'])) {
+            
+            $file_name = $_POST['file_name'];
+            $delete_flag = 1;
+            //var_dump($_POST['file_name']);
+            
+            $d_spm1->set_file_name($file_name);
+            $d_spm1->set_delete_flag($delete_flag);
+            
+            if (!$d_spm1->update_flag()) {
+                $this->view->update_flag = $d_spm1;
+                //$this->view->error = $d_user->get_error();
+                $this->view->data = $d_spm1->update_flag();
+                $this->view->render('kppn/KonversiSPM');
+            }
+        }
 		
 		
 		$d_last_update = new DataLastUpdate($this->registry);
