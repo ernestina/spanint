@@ -15,6 +15,8 @@
             
             <div class="hidden-xs hidden-sm col-lg-4 col-md-6 col-sm-12 top-padded align-right">
 
+                <a class="btn btn-default" href="<?php echo URL; ?>DataLRA/DataLRA"><span class="glyphicon glyphicon-th-list"></span> &nbsp;I-Account</a>
+
             </div>
             
             <div class="hidden-md hidden-lg col-sm-12 top-padded">
@@ -111,6 +113,26 @@
                     </div>
 
                 <?php } ?>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<?php } ?>
+
+<?php if (isset($this->content->disclaimer)) { ?>
+
+    <div class="main-window-segment sub-segment">
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-xs-12 ">
+                <div class="align-center base-tile" style="font-weight: bold;"><span class="glyphicon glyphicon-info-sign"></span> <?php echo $this->content->disclaimer; ?></div>
+                </div>
 
             </div>
 
@@ -506,6 +528,7 @@ $('#switcher').change(function() {
 });
 
 rotateChart = false;
+toolIndex = 0;
 
 function generateChart() {
 
@@ -520,6 +543,24 @@ function generateChart() {
             <?php foreach ($this->content->main_tile->tooltips as $mtoolid=>$mtooltip) { ?>
 
                 tooltipLabels[<?php echo $mtoolid; ?>] = '<?php echo $mtooltip; ?>';
+
+            <?php } ?>
+
+        <?php } ?>
+
+        <?php if (isset($this->content->main_tile->tooltip_extras)) { ?>
+
+            var tooltipExtras = new Array();
+
+            <?php foreach ($this->content->main_tile->tooltip_extras as $ttxid=>$ttxtras) { ?>
+
+                tooltipExtras[<?php echo $ttxid; ?>] = new Array();
+
+                <?php foreach ($ttxtras as $ttxtrasvalid=>$ttxtrasvalues) { ?>
+
+                    tooltipExtras[<?php echo $ttxid; ?>][<?php echo $ttxtrasvalid; ?>] = '<?php echo $ttxtrasvalues; ?>';
+
+                <?php } ?>
 
             <?php } ?>
 
@@ -628,7 +669,49 @@ function generateChart() {
 
             tooltip: {
                 format: {
-                    title: function (d) { return tooltipLabels[d]; }
+                    title: function (d) { toolIndex = d; return tooltipLabels[d]; }
+
+                    <?php if (isset($this->content->main_tile->tooltip_extras)) { ?>
+
+                    ,
+
+                    value: function (value, index, d) { 
+                        
+                        <?php foreach ($this->content->main_tile->tooltip_extras as $ttxid=>$ttxtras) { ?>
+
+                            if (d == '<?php echo $this->content->main_tile->datasets[$ttxid]->name; ?>') {
+
+                                return value + ' (' + tooltipExtras[<?php echo $ttxid;?>][toolIndex] + ')';
+
+                            }
+
+
+                        <?php } ?>
+
+                    }
+
+                    <?php } ?>
+                }
+            },
+
+            <?php } else if (isset($this->content->main_tile->tooltip_extras)) { ?>
+
+            tooltip: {
+                format: {
+                    title: function (value, d) { toolIndex = d; return value; },
+                    value: function (value, index, d) { 
+
+                        <?php foreach ($this->content->main_tile->tooltip_extras as $ttxid=>$ttxtras) { ?>
+
+                            if (d == '<?php echo $this->content->main_tile->datasets[$ttxid]->name; ?>') {
+
+                                return value + ' (' + tooltipExtras[<?php echo $ttxid;?>][toolIndex] + ')';
+
+                            }
+
+                        <?php } ?>
+
+                    }
                 }
             },
 

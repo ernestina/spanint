@@ -28,6 +28,8 @@ class DashboardController extends BaseController {
       $belanjaBungaHariIni = $fetch->sumRealisasiBelanjaBunga();
       $belanjaBungaDIPA = $fetch->sumPaguBelanjaBunga();
 
+      $pengembalianPenerimaanHariIni = $fetch->sumPengembalianPenerimaanMenkeu();
+
       if (!isset($mode) || ($mode == 1)) {
 
         $belanjaPerpresTahunLalu = $fetch->getAPBNBelanjaTAYL();
@@ -237,29 +239,33 @@ class DashboardController extends BaseController {
         $mainchartData = array();
         $mainchartLabel = array();
         $mainchartLegend = array();
+        $mainchartExtras = array();
+
+        $mainchartExtras[0] = array();
 
         foreach ($realisasiPerUnit as $unitData) { 
 
           $mainchartData[] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10;
+          $mainchartExtras[0][] = round($unitData->get_realisasi() / 10000000000) / 100 . ' Triliun';
           $mainchartLabel[] = $unitData->get_unit();
 
         }
 
         $legendLabels = $fetch->fetchNamaUnit(5, $mainchartLabel);
 
-          foreach ($mainchartLabel as $lid=>$label) {
+        foreach ($mainchartLabel as $lid=>$label) {
 
-            foreach ($legendLabels as $legend) {
+          foreach ($legendLabels as $legend) {
 
-              if ($label == $legend->get_kode_unit()) {
+            if ($label == $legend->get_kode_unit()) {
 
-                $mainchartLegend[$lid] = $legend->get_nama_unit();
-
-              }
+              $mainchartLegend[$lid] = $legend->get_nama_unit();
 
             }
 
           }
+
+        }
 
         //var_dump($legendLabels);
 
@@ -281,7 +287,8 @@ class DashboardController extends BaseController {
             ),
 
           'categories' => $mainchartLabel,
-          'tooltips' => $mainchartLegend
+          'tooltips' => $mainchartLegend,
+          'tooltip_extras' => $mainchartExtras
 
         );
 
@@ -291,19 +298,39 @@ class DashboardController extends BaseController {
 
         $mainchartData = array();
         $mainchartLabel = array();
+        $mainchartLegend = array();
+
+        $mainchartExtras = array();
+
+        $mainchartExtras[0] = array();
 
         foreach ($realisasiPerUnit as $unitData) { 
 
           if ($unitData->get_unit() != '999') {
 
             $mainchartData[] = round($unitData->get_realisasi() / 10000000000) / 100;
+            $mainchartExtras[0][] = round($unitData->get_realisasi() / $unitData->get_pagu() * 1000) / 10 . ' %';
             $mainchartLabel[] = $unitData->get_unit();
 
           }
 
         }
 
-        //var_dump($legendLabels);
+        $legendLabels = $fetch->fetchNamaUnit(5, $mainchartLabel);
+
+        foreach ($mainchartLabel as $lid=>$label) {
+
+          foreach ($legendLabels as $legend) {
+
+            if ($label == $legend->get_kode_unit()) {
+
+              $mainchartLegend[$lid] = $legend->get_nama_unit();
+
+            }
+
+          }
+
+        }
 
         $main_tile = (object) array(
 
@@ -322,7 +349,72 @@ class DashboardController extends BaseController {
 
             ),
 
-          'categories' => $mainchartLabel
+          'categories' => $mainchartLabel,
+          'tooltips' => $mainchartLegend,
+          'tooltip_extras' => $mainchartExtras
+
+        );
+
+      } else if ($mode == 5) {
+
+        $realisasiPerUnitPajak = $fetch->fetchRealisasiPenerimaanPajakPerUnitBAES1All(3);
+        $realisasiPerUnitPNBP = $fetch->fetchRealisasiPenerimaanPNBPPerUnitBAES1All(3);
+
+        $mainchartData = array();
+        $mainchartData2 = array();
+        $mainchartLabel = array();
+        $mainchartLegend = array();
+
+        foreach ($realisasiPerUnitPajak as $uid=>$unitData) { 
+
+          $mainchartData[] = round($unitData->get_realisasi() / 10000000000) / 100;
+          $mainchartData2[] = round($realisasiPerUnitPNBP[$uid]->get_realisasi() / 10000000000) / 100;
+          $mainchartLabel[] = $unitData->get_unit();
+
+        }
+
+        $legendLabels = $fetch->fetchNamaUnit(5, $mainchartLabel);
+
+        foreach ($mainchartLabel as $lid=>$label) {
+
+          foreach ($legendLabels as $legend) {
+
+            if ($label == $legend->get_kode_unit()) {
+
+              $mainchartLegend[$lid] = $legend->get_nama_unit();
+
+            }
+
+          }
+
+        }
+
+        $main_tile = (object) array(
+
+          'type' => 'bar',
+          'stacked' => true,
+          'title' => 'Nominal Realisasi Penerimaan per K/L',
+
+          'datasets' => array(
+
+              (object) array(
+
+                'name' => 'Nominal Realisasi Pajak (dalam Triliun Rupiah)',
+                'values' => $mainchartData
+
+                ),
+
+              (object) array(
+
+                'name' => 'Nominal Realisasi PNBP (dalam Triliun Rupiah)',
+                'values' => $mainchartData2
+
+                )
+
+            ),
+
+          'categories' => $mainchartLabel,
+          'tooltips' => $mainchartLegend
 
         );
 
@@ -332,6 +424,8 @@ class DashboardController extends BaseController {
 
           'title' => 'Dashboard',
           'type' => 'overview-default',
+
+          'disclaimer' => 'Data pagu diambil berdasarkan UU APBN / UU APBN-P beserta Peraturan Presiden terkait.',
 
           'status_tiles' => array(
 
@@ -359,7 +453,7 @@ class DashboardController extends BaseController {
 
                   'type' => 'gauge',
                   'title' => 'Realisasi Penerimaan',
-                  'subtitle' => round($penerimaanHariIni / 100000000000) / 10 . ' Triliun (' . round($penerimaanHariIni / $penerimaanPerpres * 1000) / 10 . ' %) <br/>Dari Anggaran Penerimaan ' . round($penerimaanPerpres / 100000000000) / 10 .' Triliun ',
+                  'subtitle' => round($penerimaanHariIni / 100000000000) / 10 . ' Triliun (' . round($penerimaanHariIni / $penerimaanPerpres * 1000) / 10 . ' %) <br/>Dari Anggaran Penerimaan ' . round($penerimaanPerpres / 100000000000) / 10 .' Triliun <br/>Setelah dikurangi pengembalian penerimaan ' . round($pengembalianPenerimaanHariIni / 100000000000) / 10 . ' Triliun',
                   'value' => round($penerimaanHariIni / 100000000000) / 10,
                   'max_value' => round($penerimaanPerpres / 100000000000) / 10
 
@@ -408,6 +502,8 @@ class DashboardController extends BaseController {
       $this->view->switchers[] = 'Nominal Realisasi Belanja dan Penerimaan per Jenis';
       $this->view->switchers[] = 'Persentase Realisasi Belanja per K/L';
       $this->view->switchers[] = 'Nominal Realisasi Belanja per K/L';
+
+      $this->view->switchers[] = 'Nominal Realisasi Penerimaan per K/L';
 
       $this->view->baseURL = URL . 'dashboard/overviewMenkeu/';
       
