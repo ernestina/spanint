@@ -714,7 +714,7 @@ class DataDIPAController extends BaseController {
             }
 
             if ($_POST['kdsatker'] != '') {
-                $filter[$no++] = "KDSATKER = '" . $_POST['kdsatker'] . "'";
+                $filter[$no++] = "A.KDSATKER = '" . $_POST['kdsatker'] . "'";
                 $this->view->d_kd_satker = $_POST['kdsatker'];
             }
             if ($_POST['nmsatker'] != '') {
