@@ -101,7 +101,7 @@
                 <th class='mid'>Kode Akun| Jenis Pendapatan</th>
                 <th class='mid'>Pagu </th>
 				<th class='mid'>Setoran MPN </th>
-				<th class='mid'>Potongan SPM </th>
+				<th class='mid'>Potongan SPM dan Pengembalian</th>
                 <th class='mid'>Realisasi</th>
                 <th class='mid'>Persentase<br>Realisasi</th>
             </tr>
