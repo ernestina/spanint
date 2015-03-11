@@ -127,8 +127,8 @@ class DataNamaSatker {
         Session::get('id_user');
         $sql = "SELECT DISTINCT A.NMSATKER,A.KPPN_CODE, A.KDSATKER, A.REV, A.TANGGAL_POSTING_REVISI,  B.BAES1, A.DIPA_NO, SUM(A.PAGU_PENDAPATAN) * -1 PAGU_PENDAPATAN, SUM(A.PAGU_BELANJA) PAGU_BELANJA
 				FROM "
-                . $this->_table4 . " A, 
-				T_SATKER B 
+                . $this->_table4 . " A," 
+				. $this->_table1 . " B 
 				 WHERE 1=1
 				AND A.KDSATKER = B.KDSATKER
 				AND A.KPPN_CODE = B.KPPN
@@ -165,8 +165,8 @@ class DataNamaSatker {
         Session::get('id_user');
         $sql = "SELECT DISTINCT A.NMSATKER, A.KDSATKER, A.REV, A.TANGGAL_POSTING_REVISI, C.NMES1, D.NMBA, B.BAES1, A.DIPA_NO, SUM(A.PAGU_PENDAPATAN) * -1 PAGU_PENDAPATAN, SUM(A.PAGU_BELANJA) PAGU_BELANJA
 				FROM "
-                . $this->_table4 . " A, 
-				T_SATKER B ,
+                . $this->_table4 . " A," 
+				. $this->_table1 . " B ,
 				T_ESELON1 C,
 				T_BA D
 				 WHERE 1=1
@@ -204,8 +204,8 @@ class DataNamaSatker {
 	
 	public function get_es1_dipa_filter() {
         Session::get('id_user');
-        $sql = "SELECT DISTINCT A.KDES1, A.NMES1 FROM 
-				T_SATKER B,
+        $sql = "SELECT DISTINCT A.KDES1, A.NMES1 FROM "
+				. $this->_table1 . " B,
 				T_ESELON1 A
 				 WHERE B.BAES1 = A.KDES1
 				 and B.BA = '" . Session::get('kd_baes1').

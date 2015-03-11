@@ -331,7 +331,7 @@ class BA_ES1Controller extends BaseController {
         if (Session::get('role') == KL) {
             $filter[$no++] = " SUBSTR(B.SEGMENT4,1,3) =  '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == ES1) {
-            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+            $filter[$no++] = "SUBSTR(B.SEGMENT4,1,5) = '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == KANWIL) {
             $filter[$no++] = "B.SEGMENT2 IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
         } elseif (Session::get('role') == SATKER) {
