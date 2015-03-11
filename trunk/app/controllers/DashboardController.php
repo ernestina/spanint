@@ -432,7 +432,7 @@ class DashboardController extends BaseController {
 
       $this->view->content = (object) array(
 
-          'title' => 'Dashboard',
+          'title' => 'Dashboard Realisasi APBN',
           'type' => 'overview-default',
 
           'disclaimer' => 'Data pagu diambil berdasarkan UU APBN / UU APBN-P beserta Peraturan Presiden terkait.',
