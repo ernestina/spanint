@@ -54,8 +54,8 @@ class DataLRA {
             $d_data = new $this($this->registry);
 			$d_data->set_deskripsi($val['DESCRIPTION']);
             $d_data->set_apbn($val['APBN']);
-            $d_data->set_realisasi_bun($val['REALISASI_BUN']);
-            $d_data->set_realisasi_kppn($val['REALISASI_KPP']);
+            $d_data->set_realisasi_bun($val['REALIASI_BUN']);
+            $d_data->set_realisasi_kppn($val['REALIASI_KPP']);
             $d_data->set_jumlah($val['JUMALAH']);     
             $data[] = $d_data;
         }
