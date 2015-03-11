@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Realisasi Pendapatan Per Eselon 1</h2>
+                <h2>Realisasi Pendapatan Per <?php if(Session::get('role') == MENKEU) {?> Kementerian/Lembaga <?php } else { ?>Eselon 1 <?php } ?></h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -46,9 +46,9 @@
             
             <div class="col-md-6 col-sm-12">
                 <?php
-               
+               if (Session::get('role') != MENKEU) {
 				echo Session::get('user');
-                ?>
+                }?>
                 <br>Tanggal : s.d <?php
                 echo (date('d-m-Y'));
                 ?>

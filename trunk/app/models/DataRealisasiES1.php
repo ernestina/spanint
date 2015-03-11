@@ -199,6 +199,48 @@ class DataRealisasiES1 {
         return $data;
     }
 	
+	public function get_ba_pendapatan_menkeu($filter) {
+        Session::get('id_user');
+        $sql = " SELECT 
+					A.AKUN,
+					C.DESCRIPTION,
+					SUM(CASE WHEN JE_SOURCE IN ('Payables','Manual') THEN RPHREAL *-1 ELSE 0 END) POTONGAN,
+					SUM(CASE WHEN JE_SOURCE IN ('Receivables','Conversion') THEN RPHREAL *-1 ELSE 0 END) SETORAN,
+					SUM(RPHREAL *-1) REALISASI
+						FROM
+					GL_JE_LINES A,
+					T_AKUN C,
+					(SELECT DISTINCT KDSATKER, CASE WHEN KDSATKER LIKE 'Z%' THEN 'ZZZ' ELSE BA END BA FROM T_SATKER) B
+					WHERE A.AKUN = C.FLEX_VALUE (+)
+					AND SUBSTR(A.AKUN,1,1) = '4'
+					AND A.KDSATKER = B.KDSATKER(+)					
+				";
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " GROUP BY A.AKUN, C.DESCRIPTION ";
+        $sql .= " ORDER BY A.AKUN ";
+
+
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);
+            $d_data->set_kdkegiatan($val['AKUN']);
+            $d_data->set_nmkegiatan($val['DESCRIPTION']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
+            $d_data->set_nm_satker($val['NMBA']);
+			$d_data->set_dana($val['POTONGAN']);
+			$d_data->set_bank($val['SETORAN']);
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
 	public function get_kanwil_pendapatan_filter($filter) {
         Session::get('id_user');
         $sql = " SELECT A.AKUN, A.DESCRIPTION, SUM(PAGU) PAGU	,SUM(D.TOTAL) POTONGAN, SUM(REALISASI) - NVL(SUM(D.TOTAL),0) SETORAN, SUM(REALISASI) REALISASI
@@ -313,6 +355,45 @@ class DataRealisasiES1 {
         }
         $sql .= " GROUP BY B.BAES1, C.NMES1 ";
         $sql .= " ORDER BY B.BAES1 ";
+
+
+        //var_dump($sql);
+        $result = $this->db->select($sql);
+        $data = array();
+        foreach ($result as $val) {
+            $d_data = new $this($this->registry);
+            $d_data->set_satker($val['KDBA']);
+            $d_data->set_kdkegiatan($val['KDES1']);
+            $d_data->set_nmkegiatan($val['NMES1']);
+            $d_data->set_budget_amt($val['PAGU']);
+            $d_data->set_actual_amt($val['REALISASI']);
+            
+            $data[] = $d_data;
+        }
+        return $data;
+    }
+	
+	public function get_ba_per_kl_pendapatan_filter($filter) {
+        Session::get('id_user');
+        $sql = "SELECT 
+					B.BA KDES1,
+					C.NMBA NMES1,
+					SUM(RPHREAL *-1) REALISASI
+					FROM
+					GL_JE_LINES A,
+					(SELECT DISTINCT KDSATKER, CASE WHEN KDSATKER LIKE 'Z%' THEN 'ZZZ' ELSE BA END BA FROM T_SATKER) B,
+					T_BA C
+					WHERE A.KDSATKER = B.KDSATKER(+)
+					AND B.BA = C.KDBA(+)
+					AND SUBSTR(A.AKUN,1,1) = '4'
+					
+				";
+        $no = 0;
+        foreach ($filter as $filter) {
+            $sql .= " AND " . $filter;
+        }
+        $sql .= " GROUP BY B.BA, C.NMBA ";
+        $sql .= " ORDER BY B.BA ";
 
 
         //var_dump($sql);

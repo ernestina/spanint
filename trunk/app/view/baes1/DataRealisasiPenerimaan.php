@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Realisasi Pendapatan</h2>
+                <h2>Realisasi Pendapatan <?php if(Session::get('role') == MENKEU) {?> Nasional <?php } ?> </h2> 
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -66,10 +66,10 @@
             <div class="col-md-6 col-sm-12">
                 <?php
                
-				
+				if (Session::get('role') != MENKEU) {
 				if (isset ($this->eselon1)) { echo " KODE ESELON1 : " . $this->eselon1;}
 				else {echo Session::get('user');};
-                ?>
+                }?>
                 <br>Tanggal : s.d <?php
                 echo (date('d-m-Y'));
                 ?>
