@@ -1019,7 +1019,7 @@ class PDFController extends BaseController {
         }
 
         if ($kdsatker != 'null') {
-            $filter[$no++] = "KDSATKER = '" . $kdsatker . "'";
+            $filter[$no++] = "A.KDSATKER = '" . $kdsatker . "'";
         }
         if ($nmsatker != 'null') {
             $filter[$no++] = " UPPER(NMSATKER) LIKE UPPER('%" . $nmsatker . "%')";
@@ -7570,8 +7570,12 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         }		
 		
        if ($eselon1 != 'null') {
-            $filter[$no++] = "B.BAES1 = '" . $eselon1 . "'";
-            $this->view->eselon1 = $eselon1;
+            if(Session::get('role') == MENKEU) {
+				$filter[$no++] = "B.BA = '" . $eselon1 . "'";
+			
+			}else { $filter[$no++] = "B.BAES1 = '" . $eselon1 . "'";
+            }
+			$this->view->eselon1 = $eselon1;
         }
         if ($satker != 'null') {
             $filter[$no++] = "B.KDSATKER = '" . $satker . "'";
@@ -7584,6 +7588,8 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
 		}
 		if(Session::get('role') == KANWIL) {
 			$this->view->data = $d_spm1->get_kanwil_pendapatan_filter($filter);
+		}elseif (Session::get('role') == MENKEU) {
+			 $this->view->data = $d_spm1->get_ba_pendapatan_menkeu($filter);		
 		}
 		else {
 			$this->view->data = $d_spm1->get_ba_pendapatan_filter($filter);		
@@ -7665,7 +7671,12 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         //-------------------------
 
 		//------------------------------------------------------------
-		$judul1='Realisasi Pendapatan';
+		
+		if(Session::get('role') == MENKEU) {
+			$judul1='Realisasi Pendapatan Nasional'; 
+		}else{
+			$judul1='Realisasi Pendapatan'; 
+		}
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('baes1/DataRealisasiPenerimaan_BAES1_PDF');
@@ -7772,9 +7783,19 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         $d_last_update = new DataLastUpdate($this->registry);
         $this->view->last_update = $d_last_update->get_last_updatenya($d_spm1->get_table1());
 
-        $this->view->data = $d_spm1->get_ba_per_es1_pendapatan_filter($filter);
+        if (Session::get('role') == MENKEU) {
+				$this->view->data = $d_spm1->get_ba_per_kl_pendapatan_filter($filter);
+        }
+		else {
+				$this->view->data = $d_spm1->get_ba_per_es1_pendapatan_filter($filter);
+		}
 //------------------------------------------------------------
-		$judul1='Realisasi Pendapatan Per Eselon 1';
+		if(Session::get('role') == MENKEU) { 
+			$judul1='Realisasi Pendapatan Per Kementerian/Lembaga';
+		} else { 
+			$judul1='Realisasi Pendapatan Per Eselon 1';
+		}
+				
 		$this->view->judul1=$judul1;
 		if($ck=='PDF'){
 			$this->view->load('baes1/DataRealisasiPenerimaanES1_BAES1_PDF');
@@ -8257,7 +8278,7 @@ public function KarwasTUPSatker_PDF($kdkppn = null, $kdsatker = null, $kdsmbdana
         if (Session::get('role') == KL) {
             $filter[$no++] = " SUBSTR(B.SEGMENT4,1,3) =  '" . Session::get('kd_baes1') . "'";
         }elseif (Session::get('role') == ES1) {
-            $filter[$no++] = "SUBSTR(PROGRAM,1,5) = '" . Session::get('kd_baes1') . "'";
+            $filter[$no++] = "SUBSTR(B.SEGMENT4,1,5) = '" . Session::get('kd_baes1') . "'";
         } elseif (Session::get('role') == KANWIL) {
             $filter[$no++] = "B.SEGMENT2 IN (SELECT KDKPPN FROM T_KPPN WHERE KDKANWIL= '" . Session::get('id_user') . "')";
         }elseif (Session::get('role') == SATKER) {

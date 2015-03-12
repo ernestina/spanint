@@ -83,7 +83,7 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
         $this->SetX($left += $ukuran_kolom_dana);
         $this->Cell($ukuran_kolom_dana, $h, 'Setoran MPN', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_dana);
-        $this->Cell($ukuran_kolom_dana, $h, 'Potongan SPM', 1, 0, 'C', true);
+        $this->Cell($ukuran_kolom_dana, $h, 'Potongan SPM dan Pengembalian', 1, 0, 'C', true);
         $this->SetX($left += $ukuran_kolom_dana);
         $this->Cell($ukuran_kolom_akun, $h, 'Realisasi', 1, 0, 'C', true);
         $px1 = $this->GetX();

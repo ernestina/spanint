@@ -154,6 +154,32 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 			$trn_non_kbi = 0;
 			$rph_non_kbi = 0;
 			foreach ($this->data as $value) {
+				if	($value->get_apbn() < 0) { 
+					$nil1="(".number_format($value->get_apbn()).")";
+				} else { 
+					$nil1=number_format($value->get_apbn());
+					
+				}
+				if	($value->get_realisasi_bun() < 0) { 
+					$nil2="(".number_format($value->get_realisasi_bun()).")";
+				} else { 
+					$nil2=number_format($value->get_realisasi_bun());
+					
+				}
+				
+				if	($value->get_realisasi_kppn() < 0) { 
+					$nil3="(".number_format($value->get_realisasi_kppn()).")";
+				} else { 
+					$nil3=number_format($value->get_realisasi_kppn());
+					
+				}
+				if	($value->get_jumlah() < 0) { 
+					$nil4="(".number_format($value->get_jumlah()).")";
+				} else { 
+					$nil4=number_format($value->get_jumlah());
+					
+				}
+				
 				if	($value->get_apbn() == 0) { 
 					$nil='0.00%';
 				} else { 
@@ -163,10 +189,10 @@ class FPDF_AutoWrapTable extends PDF_Rotate {
 				$this->Row(
 						array(
 							$value->get_deskripsi(),
-							number_format($value->get_apbn()),
-							number_format($value->get_realisasi_bun()),
-							number_format($value->get_realisasi_kppn()),
-							number_format($value->get_jumlah()),
+							$nil1,
+							$nil2,
+							$nil3,
+							$nil4,
 							$nil));
 				/* $rph_apbn += $value->get_apbn();
 				$rph_non_kbi += $value->get_realisasi_bun();
