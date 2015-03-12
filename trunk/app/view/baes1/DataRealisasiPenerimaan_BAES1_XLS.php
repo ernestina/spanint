@@ -76,7 +76,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('C4', "Pagu");
 //p3
 $objPHPExcel->getActiveSheet()->setCellValue('D4', "Setoran MPN");
 //p3
-$objPHPExcel->getActiveSheet()->setCellValue('E4', "Potongan SPM");
+$objPHPExcel->getActiveSheet()->setCellValue('E4', "Potongan SPM dan Pengembalian");
 //p4
 $objPHPExcel->getActiveSheet()->setCellValue('F4', "Realisasi");
 //p5
