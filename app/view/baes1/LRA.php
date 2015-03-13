@@ -157,7 +157,8 @@
                             <td class="align-right"><?php echo format_currency(number_format($value->get_realisasi_bun())); ?></td>
                             <td class="align-right"><?php echo format_currency(number_format($value->get_realisasi_kppn())); ?></td>
                             <td class="align-right"><?php echo format_currency(number_format($value->get_jumlah())); ?></td>
-							<td class="align-right"><?php echo $value->get_persentase(); ?></td>
+                            <?php $pers = (float)$value->get_persentase(); ?>
+							<td class="align-right"><?php echo $pers; ?></td>
                             <!--td class="align-center"><?php //if	($value->get_apbn() == 0) { 
 							//echo '0.00%';
 							//} 
