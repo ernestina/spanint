@@ -13,6 +13,7 @@ class DataLRA {
     private $_realisasi_bun;
     private $_realisasi_kppn;
     private $_jumlah;
+	private $_persentase;
     private $_table1 = 'LRA_APBN';
     
     public $registry;
@@ -56,7 +57,8 @@ class DataLRA {
             $d_data->set_apbn($val['APBN']);
             $d_data->set_realisasi_bun($val['REALIASI_BUN']);
             $d_data->set_realisasi_kppn($val['REALIASI_KPP']);
-            $d_data->set_jumlah($val['JUMALAH']);     
+            $d_data->set_jumlah($val['JUMALAH']); 
+			$d_data->set_persentase($val['PERSENTASE']);			
             $data[] = $d_data;
         }
         return $data;
@@ -86,7 +88,10 @@ class DataLRA {
     public function set_jumlah($jumlah) {
         $this->_jumlah = $jumlah;
     }
-
+	
+	public function set_persentase($persentase) {
+        $this->_persentase = $persentase;
+    }
     /*
      * getter
      */
@@ -110,6 +115,11 @@ class DataLRA {
     public function get_jumlah() {
         return $this->_jumlah;
     }
+	
+	public function get_persentase() {
+        return $this->_persentase;
+    }
+	
     public function get_table1() {
         return $this->_table1;
     }
