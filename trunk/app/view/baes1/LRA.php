@@ -8,7 +8,7 @@
         <div class="row">
             
             <div class="col-lg-10 col-md-6 col-sm-12">
-                <h2>Realisasi APBN</h2>
+                <h2>I Account APBN</h2>
             </div>
             
             <div class="col-lg-1 col-md-3 col-sm-12" style="padding-top: 20px;">
@@ -139,21 +139,31 @@
             
                 <?php } else { ?>
             
-                    <?php foreach ($this->data as $value) { ?>
+                    <?php 					
+					// *fungsion bikin kurung buat negatif
+								function format_currency($amount) {
+									if($amount < 0)
+										return str_replace("-", "","(".$amount.")");
+
+									else return $amount;
+								}
+					
+					foreach ($this->data as $value) { ?>
             
                         <tr>
                            
                             <td class="align-left"><pre><?php echo $value->get_deskripsi(); ?></pre></td>
-                            <td class="align-right"><?php echo number_format($value->get_apbn()); ?></td>
-                            <td class="align-right"><?php echo number_format($value->get_realisasi_bun()); ?></td>
-                            <td class="align-right"><?php echo number_format($value->get_realisasi_kppn()); ?></td>
-                            <td class="align-right"><?php echo number_format($value->get_jumlah()); ?></td>
-                            <td class="align-center"><?php if	($value->get_apbn() == 0) { 
-							echo '0.00%';
-							} 
-						else { echo 
-						"(". number_format($value->get_jumlah()/$value->get_apbn()*100,2)."%)";
-						} ; ?></td>
+                            <td class="align-right"><?php echo format_currency(number_format($value->get_apbn())); ?></td>
+                            <td class="align-right"><?php echo format_currency(number_format($value->get_realisasi_bun())); ?></td>
+                            <td class="align-right"><?php echo format_currency(number_format($value->get_realisasi_kppn())); ?></td>
+                            <td class="align-right"><?php echo format_currency(number_format($value->get_jumlah())); ?></td>
+							<td class="align-right"><?php echo $value->get_persentase(); ?></td>
+                            <!--td class="align-center"><?php //if	($value->get_apbn() == 0) { 
+							//echo '0.00%';
+							//} 
+						//else { echo 
+						//"(". number_format($value->get_jumlah()/$value->get_apbn()*100,2)."%)";
+						//} ; ?></td-->
                         </tr>
 
                     <?php } ?>
