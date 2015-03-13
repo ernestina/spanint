@@ -56,7 +56,7 @@ class DataRealisasiES1 {
             $this->_table1 = 'GL_BALANCES_V_TL';
             $this->_table8 = 't_satker_tl';
         }
-        $this->_table7="SELECT * FROM BLOCK_REVISI WHERE PERIOD_YEAR=".Session::get('ta');
+        $this->_table7="(SELECT * FROM BLOCK_REVISI WHERE PERIOD_YEAR=".Session::get('ta').")";
     }
 
     /*
